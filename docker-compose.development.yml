@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+  editor_api:
+    command: npm run dev
+    volumes:
+      - ./editorApi/src:/usr/src/app/src
+
+  editor_db:
+    ports:
+      - 27017:27017

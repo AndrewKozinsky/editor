@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  editor_api:
+    build: ./editorApi
+    command: npm run start
+    restart: unless-stopped
+    ports:
+    - 3001:3001
+    environment:
+      - PORT=3001
+      - MONGO_URL=mongodb://editor_db:27017/editor_db
+    depends_on:
+      - editor_db
+
+  editor_db:
+    image: mongo:latest
+    volumes:
+      - editor_db:/data/db
+
+volumes:
+  editor_db:
