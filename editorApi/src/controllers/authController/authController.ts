@@ -1,16 +1,17 @@
 import {Request, Response, NextFunction} from 'express'
 // const jwt = require('jsonwebtoken')
+import * as crypto from 'crypto'
 // const {promisify} = require('util')
-const crypto = require('crypto')
 // const User = require('../mongooseModels/user')
-import { catchAsync } from '../utils/catchAsync'
-import UserModel from '../models/user';
+import { catchAsync } from '../../utils/errors/catchAsync'
+import UserModel from '../../models/user';
 // const AppError = require('../utils/appError')
-// const Email = require('../utils/email/email')
-// const { createSendToken, sendResponseWithAuthToken } = require('./authToken')
-// const config = require('../config')
-import { IUser } from '../models/user'
-
+import { Email } from '../../utils/email/email'
+import { createSendToken, sendResponseWithAuthToken } from '../authToken'
+import { IUser } from '../../models/user'
+import {config} from '../../config/config';
+import { copyObjWithoutSomeProps } from '../../utils/misc';
+import { sendingUserDataType } from './authControllerTypes';
 
 
 // Функция отдающая данные по переданному токене. Токен передаётся в куках.
@@ -26,7 +27,7 @@ import { IUser } from '../models/user'
     if(!token) return sendErrorResponse(res)
 
     // Расшифрую JWT и получу payload
-    const decoded = await promisify( jwt.verify )(token, config.jwt_secret)
+    const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получить пользователя
     const currentUser = await User.findById(decoded.id)
@@ -77,7 +78,7 @@ import { IUser } from '../models/user'
     }
 
     // Расшифрую JWT и получу payload
-    const decoded = await promisify( jwt.verify )(token, config.jwt_secret);
+    const decoded = await promisify( jwt.verify )(token, config.jwtSecret);
 
     // Получить пользователя
     const currentUser = await User.findById(decoded.id).select('+password')
@@ -103,43 +104,29 @@ import { IUser } from '../models/user'
 })*/
 
 
-/**
- * Обработчик регистрации пользователя
- */
-export const signUp = catchAsync<any>(async (req: Request, res: Response, next: NextFunction) => {
+/** Обработчик регистрации пользователя */
+export const signUp = catchAsync<void>(async (req: Request, res: Response, next: NextFunction) => {
 
     // Токен подтверждения почты
     const emailConfirmToken: string = crypto.randomBytes(32).toString('hex')
 
     // Создать нового пользователя
     const newUser = await UserModel.create({
-        name: req.body.name,
-        // email: req.body.email,
-        // emailConfirmToken: emailConfirmToken,
-        // password: req.body.password,
-        // passwordConfirm: req.body.passwordConfirm
+        email: req.body.email,
+        emailConfirmToken: emailConfirmToken,
+        password: req.body.password,
+        passwordConfirm: req.body.passwordConfirm,
+        lang: <string>req.get('Accept-Language') || 'eng'
     })
 
     // Отправлю письмо с подтверждением почты
-    // await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
-
-    // Убрать пароль и токен подтверждения почты.
-    // newUser.password = undefined;
-    // newUser.emailConfirmToken = undefined;
-    // newUser.__v = undefined;
+    await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
 
     // Создать объект ответа с токеном пользователя
-    // const resWithToken = createSendToken(newUser, res)
+    const resWithToken = createSendToken(newUser._id, res)
 
     // Отправить данные пользователя
-    // sendResponseWithAuthToken(newUser, resWithToken)
-
-    res.json({
-        user: newUser
-    })
-
-
-    return 5
+    sendResponseWithAuthToken(newUser, resWithToken)
 })
 
 
@@ -324,20 +311,20 @@ export const signUp = catchAsync<any>(async (req: Request, res: Response, next: 
  * @param {String} confirmToken — токен подтверждения почты
  * @returns {Promise<void>}
  */
-/*async function sendEmailAddressConfirmLetter(req, email, confirmToken) {
-    // В requestFromClient содержится булево значение сделан ли запрос из браузера.
-    // Если из браузера, то послать письмо на адрес на клиентской части
-    // Если не из браузера, то послать письмо на адрес API
-    const confirmUrl = req.headers.origin + `/api/v1/users/confirmEmail/${confirmToken}`
+async function sendEmailAddressConfirmLetter(req: Request, email: string, confirmToken: string) {
+    // Получение домена в зависимости от режима работы
+    const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 
-    // Создать новое письмо.
-    // В конструктор передаётся почта пользователя и URL сайта вида http://todo.local
-    const userEmail = new Email(email, req.headers.origin)
+    // Адрес подтверждения почты (домен + адрес API)
+    let confirmUrl = domain + `/api/users/confirmEmail/${confirmToken}`
+
+    // Создать новое письмо...
+    // В конструктор передаётся почта пользователя и URL сайта вида https://editorium.net
+    const userEmail = new Email(email, domain)
 
     // Послать письмо для подтверждения почты
     userEmail.sendConfirmLetter(confirmUrl).then(() => {})
-}*/
-// exports.sendEmailAddressConfirmLetter = sendEmailAddressConfirmLetter
+}
 
 
 /*function createRedirectPage(type) {

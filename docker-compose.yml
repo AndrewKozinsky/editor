@@ -1,22 +1,43 @@
 version: "3.9"
 
 services:
+
+  # API редактора
   editor_api:
     build: ./editorApi
     command: npm run start
     restart: unless-stopped
-    ports:
-    - 3001:3001
     environment:
+      - MODE=production
       - PORT=3001
       - MONGO_URL=mongodb://editor_db:27017/editor_db
     depends_on:
       - editor_db
+    networks:
+      - editorium-network
 
+  # БД редактора
   editor_db:
     image: mongo:latest
     volumes:
       - editor_db:/data/db
+    networks:
+      - editorium-network
+
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
+    depends_on:
+      - editor_api
+    networks:
+      - editorium-network
 
 volumes:
   editor_db:
+
+networks:
+  editorium-network:
+    driver: bridge

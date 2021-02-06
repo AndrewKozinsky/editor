@@ -1,18 +1,20 @@
 import * as express from 'express'
-import { Application } from 'express'
-//const path = require('path')
-//const cookieParser = require('cookie-parser')
-import * as bodyParser from 'body-parser';
-//const rateLimit = require('express-rate-limit')
+import { Application, Request, Response } from 'express'
+import * as path from 'path'
+import * as bodyParser from 'body-parser'
+const cookieParser = require('cookie-parser')
 import userRouter from './routes/userRouter'
+//const rateLimit = require('express-rate-limit')
 //const myNotesRouter = require('./routes/myNotesRouter')
-//const AppError = require('./utils/appError')
-//const globalErrorHandler = require('./controllers/errorController')
+import { AppError } from './utils/errors/appError'
+import { globalErrorHandler } from './controllers/errorController'
+import { addLanguage } from './middlewares/commonMiddlewares'
 
 
 const app: Application = express()
 
-//app.use(cookieParser())
+// Разбор кук
+app.use(cookieParser())
 // Разбор тела запроса
 app.use(bodyParser.json())
 
@@ -27,26 +29,29 @@ app.use(bodyParser.json())
 })
 app.use('/', rater)*/
 
-app.get("/test", function (req, res) {
+app.use(express.static(path.join(__dirname, 'staticFiles')))
+
+// Установка в req.headers.lang английского языка если язык не передан
+app.use(addLanguage)
+
+app.get("/api/", function (req: Request, res: Response) {
     res.send("Our api server is working correctly.")
 })
 
 // Маршруты API
-app.use('/api/v1/users/', userRouter);
-
+app.use('/api/users/', userRouter);
 
 // Статические файлы на сервере.
-//app.use(express.static(path.join(__dirname, 'static-files')))
-
+app.use(express.static(path.join(__dirname, 'staticFiles')))
 
 // Обработка несуществующего маршрута
-/*app.all("*", (req, res, next) => {
+app.all("*", (req, res, next) => {
     next(
         new AppError(`Can't find ${req.originalUrl} on the server!`, 404)
     )
-})*/
+})
 
 // Глобальный обработчик ошибок
-//app.use(globalErrorHandler)
+app.use(globalErrorHandler)
 
 export default app

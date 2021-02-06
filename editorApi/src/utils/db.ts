@@ -1,14 +1,17 @@
 import * as mongoose from 'mongoose'
-import { db } from '../configuration'
+import { config } from '../config/config'
 
-export function connectDb() {
+
+/**
+ * Функция соединяющаяся с базой данных
+ */
+export function connectDb(): mongoose.Connection {
     const params = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true
     }
 
-    mongoose.connect(db, params)
-
+    mongoose.connect(config.db, params)
     return mongoose.connection
 }

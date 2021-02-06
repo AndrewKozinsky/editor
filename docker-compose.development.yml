@@ -1,11 +1,18 @@
 version: "3.9"
 
 services:
+
   editor_api:
     command: npm run dev
+    environment:
+      - MODE=development
     volumes:
       - ./editorApi/src:/usr/src/app/src
 
   editor_db:
     ports:
       - 27017:27017
+
+  nginx:
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/conf.d/default.conf

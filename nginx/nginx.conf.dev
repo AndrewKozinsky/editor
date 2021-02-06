@@ -1,0 +1,9 @@
+server {
+    listen 80;
+
+    server_name editorium.dev;
+
+    location /api {
+        proxy_pass http://editor_api:3001;
+    }
+}
