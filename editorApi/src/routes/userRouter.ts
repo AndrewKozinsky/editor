@@ -23,7 +23,7 @@ router.route('/logout').get(authController.protect, authController.logOut)
 router.post('/forgotPassword', authController.forgotPassword)
 
 // Сброс пароля
-// router.patch('/resetPassword/:token', authController.resetPassword)
+router.patch('/resetPassword/:token', authController.resetPassword)
 
 // router.route('/myEmail')
 //     .put(authController.protect, userController.changeMyEmail)

@@ -13,7 +13,7 @@ import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
 import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
 
 
-// Функция отдающая данные по переданному токене. Токен передаётся в куках.
+// Функция отдающая данные по переданному токену. Токен передаётся в куках.
 /*exports.getTokenInfo = async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     let token
 
@@ -119,13 +119,13 @@ export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Res
         lang: <string>req.get('Editor-Language') || 'eng'
     })
 
-    // Отправлю письмо с подтверждением почты
+    // Отправление письма с подтверждением почты
     await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
 
-    // Создать объект ответа с токеном пользователя
+    // Создание объекта ответа с токеном пользователя
     const resWithToken = createSendToken(newUser._id, res)
 
-    // Отправить данные пользователя
+    // Отправить данные пользователю
     sendResponseWithAuthToken(newUser, resWithToken)
 })
 
@@ -290,7 +290,7 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
     // Не удалось послать письмо со сбросом пароля...
     catch (err) {
         // Бросить ошибку
-        next(
+        return next(
             new AppError('{{authController.forgotPasswordCanNotSendEmail}}', 500)
         )
     }
@@ -298,29 +298,42 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
 
 
 // Функция меняет пароль взамен забытого
-/*exports.resetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
-    // Зашифрую пароль потому что в БД он хранится зашифрованным
+export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    // Если не передали пароль или подтверждение пароля, или если они не равны, то бросить ошибку
+    if ((!req.body.password || !req.body.passwordConfirm) || (req.body.password !== req.body.passwordConfirm)) {
+        return next(
+            new AppError('{{authController.resetPasswordPasswordIsNotProvided}}', 400)
+        )
+    }
+
+    // Зашифровать токен потому что в БД он хранится зашифрованным
     const hashedToken = crypto
         .createHash('sha256')
         .update(req.params.token)
         .digest('hex')
 
     // Найду пользователя по токену смены пароля
-    const user = await UserModel.findOne({
+    let user: IUser | null = await UserModel.findOne({
         passwordResetToken: hashedToken,
-        passwordResetExpires: {$gt: Date.now()}
     })
 
+    // Если срок годности токена сброса просрочен, то обнулить переменную user
+    if (user && user.passwordResetExpires) {
+        if (Date.now() >= +user.passwordResetExpires) {
+            user = null
+        }
+    }
+
     // Бросить ошибку если пользователь не найден.
-    if(!user) {
-        next(
-            new AppError('Token is invalid or has expired', 400)
+    if (!user) {
+        return next(
+            new AppError('{{authController.resetPasswordTokenIsInvalid}}', 400)
         )
     }
 
     // Пользователь найден...
-
-    // Задам новый пароль и уберу данные для смены пароля
+    // Задание нового пароля и удаление данных для смены пароля
     user.password = req.body.password
     user.passwordConfirm = req.body.passwordConfirm
     user.passwordResetToken = undefined
@@ -329,12 +342,12 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
     // Сохранить данные пользователя
     await user.save()
 
-    // Создать объект ответа с токеном пользователя
+    // Создание объекта ответа с токеном пользователя
     const resWithToken = createSendToken(user._id, res)
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
-})*/
+})
 
 
 /**

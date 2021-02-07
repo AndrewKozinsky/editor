@@ -89,6 +89,15 @@ export const messages: messagesType = {
             eng: 'Email has been sent!',
             rus: 'Письмо со ссылкой на сброс пароля было отправлено.'
         },
+        // resetPassword
+        resetPasswordPasswordIsNotProvided: {
+            eng: 'Password or Confirm Password is not provided',
+            rus: 'Не передан пароль или подтверждение пароля.'
+        },
+        resetPasswordTokenIsInvalid: {
+            eng: 'Token is invalid or has expired',
+            rus: 'Токен сброса пароля неверный или просроченный.'
+        },
     }
 }
 
