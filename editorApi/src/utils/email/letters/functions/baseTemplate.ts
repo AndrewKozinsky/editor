@@ -1,7 +1,14 @@
-export function baseTemplate(host: string, content: string) {
+// import { config } from '../../../../config/config'
+
+export function baseTemplate(host: string, content: string, lang: string) {
 
     // Адрес логотипа
     const logoSrc = host + '/api/common/editorium-small-logo.svg'
+
+    // Текст про отписку
+    let questionText = lang === 'rus'
+        ? `Напишите на <a href="mailto:andkozinsky@gmail.com">andkozinsky@gmail.com</a> если появятся вопросы.`
+        : `Write an email to <a href="mailto:andkozinsky@gmail.com">andkozinsky@gmail.com</a> if you have a question.`
 
     return `
         <!DOCTYPE html>
@@ -60,23 +67,23 @@ export function baseTemplate(host: string, content: string) {
         </head>
         <body>
         
-        <div class="page-wrapper">
-            <div class="header-wrapper">
-                <a href="">
-                    <img src="${logoSrc}" alt="Editorium logo">
-                </a>
+            <div class="page-wrapper">
+                <div class="header-wrapper">
+                    <a href="">
+                        <img src="${logoSrc}" alt="Editorium logo">
+                    </a>
+                </div>
+                <div class="hr"></div>
+                <div class="content">
+                    ${content}
+                </div>
+                <div class="hr"></div>
+                <div class="footer-wrapper">
+                    <p class="footer-text">
+                        ${questionText}
+                    </p>
+                </div>
             </div>
-            <div class="hr"></div>
-            <div class="content">
-                ${content}
-            </div>
-            <div class="hr"></div>
-            <div class="footer-wrapper">
-                <p class="footer-text">
-                    Write an email to <a href="mailto:andkozinsky@gmail.com">andkozinsky@gmail.com</a> if you have a question.
-                </p>
-            </div>
-        </div>
         
         </body>
         </html>`

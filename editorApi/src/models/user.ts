@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose'
 import { Schema, Document } from 'mongoose'
 const validator = require('validator')
 import * as bcrypt from 'bcryptjs'
+const crypto = require('crypto')
 
 
 export interface IUser extends Document {
@@ -17,6 +18,7 @@ export interface IUser extends Document {
 
     correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>,
     changedPasswordAfter(JWTTimestamp: number): Promise<boolean>,
+    createPasswordResetToken(): string
 }
 
 const UserSchema: Schema = new Schema({
@@ -52,11 +54,11 @@ const UserSchema: Schema = new Schema({
             message: '{{user.passwordConfirmValidate}}'
         }
     },
-    // Когда был изменён пароль
+    // Дата когда был изменён пароль
     passwordChangedAt: Date,
     // Токен сброса пароля
     passwordResetToken: String,
-    // Срок когда токен сброса пароля будет недействителен
+    // Дата когда токен сброса пароля будет недействителен
     passwordResetExpires: Date,
     // Язык итерфейса
     lang: {
@@ -78,13 +80,15 @@ UserSchema.pre('save', async function(this: IUser, next) {
 })
 
 // При изменении пароля записать дату изменения
-/*UserSchema.pre('save', function (this: IUser, next) {
+UserSchema.pre('save', function (this: IUser, next) {
     if(!this.isModified('password') || this.isNew)
         return next();
 
-    this.passwordChangedAt = +Date.now() - 1000
+    const newDate = new Date()
+    newDate.setMinutes(-1)
+    this.passwordChangedAt = newDate
     next()
-})*/
+})
 
 
 // Функция проверяющая идентичность паролей
@@ -109,18 +113,23 @@ UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: n
 }
 
 // Метод создающий токен сброса пароля
-/*UserSchema.methods.createPasswordResetToken = function (this: IUser) {
+UserSchema.methods.createPasswordResetToken = function (this: IUser) {
+    // Будет сгенерирована строка вида 2d860d2bb4d2d0184e99e80fac9390ab55bd72a0b545bdf06c34ae9a87cc6d2b
     const resetToken = crypto.randomBytes(32).toString('hex')
 
+    // Поставить зашифрованный токен сброса пароля в данные пользователя
     this.passwordResetToken = crypto
         .createHash('sha256')
         .update(resetToken)
         .digest('hex')
 
-    this.passwordResetExpires = Date.now() + 10 * 60 * 1000
+    // Поставить, что пароль можно сбросить в течение 10 минут
+    const newDate = new Date()
+    newDate.setMinutes(10)
+    this.passwordResetExpires = newDate
 
-    return resetToken;
-}*/
+    return resetToken
+}
 
 
 const UserModel = mongoose.model<IUser>('User', UserSchema)

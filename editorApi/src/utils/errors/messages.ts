@@ -41,6 +41,7 @@ export const messages: messagesType = {
     },
     // Контроллер авторизации
     authController: {
+        // confirmEmail
         confirmEmailUserNotFound: {
             eng: 'Wrong email confirmation token was sent.',
             rus: 'Передан неверный токен подтверждения почты.'
@@ -49,6 +50,7 @@ export const messages: messagesType = {
             eng: 'Email is confirmed!',
             rus: 'Передан неверный токен подтверждения почты.'
         },
+        // login
         loginNoEmailOrPassword: {
             eng: 'Please provide email and password.',
             rus: 'Не передана почта или пароль'
@@ -61,6 +63,7 @@ export const messages: messagesType = {
             eng: 'Please, confirm your email.',
             rus: 'Пожалуйста, подтвердите почту перед тем, как войти'
         },
+        // protect
         protectNoToken: {
             eng: 'You are not logged in! Please log in to to get access',
             rus: 'Авторизуйтесь чтобы просматривать эти данные.'
@@ -72,7 +75,20 @@ export const messages: messagesType = {
         protectPasswordChanged: {
             eng: 'User recently changed password! Please log in again.',
             rus: 'Пользователя недавно изменил пароль. Снова авторизуйтесь.'
-        }
+        },
+        // forgotPassword
+        forgotPasswordNoUser: {
+            eng: 'There is no user with this email address.',
+            rus: 'Не найдено пользователя с такой почтой.'
+        },
+        forgotPasswordCanNotSendEmail: {
+            eng: 'There was an error sending the email. Try again later.',
+            rus: 'Не удалось отправить письмо. Попробуйте позже.'
+        },
+        forgotPasswordEmailHasBeenSent: {
+            eng: 'Email has been sent!',
+            rus: 'Письмо со ссылкой на сброс пароля было отправлено.'
+        },
     }
 }
 

@@ -239,34 +239,40 @@ export const logOut = (req: ExtendedRequestType, res: Response, next: NextFuncti
 
 
 // Функция создаёт токен сброса пароля, ставит в ссылку изменения пароля и отправляет на почту пользователя.
-/*exports.forgotPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
-    // Получу данные пользователя по переданной почте
-    const user = await UserModel.findOne({email: req.body.email})
+    // Получить данные пользователя по переданной почте
+    const user: IUser | null = await UserModel.findOne({ email: req.body.email })
 
-    // Вернуть ошибку если пользователя не найдено
+    // Вернуть ошибку если пользователь не найден
     if(!user) {
         return next(
-            new AppError('There is no user with this email address', 404)
+            new AppError('{{authController.forgotPasswordNoUser}}', 404)
         )
     }
 
     // Пользователь найден...
 
     // Создать токен сброса и записать его в свойство passwordResetToken в объект с данными найденного пользователя
-    // По этому токену я определю какому пользователю нужно сбрасывать пароль.
+    // По этому токену определяется по какому пользователю нужно сбрасывать пароль.
     const resetToken = user.createPasswordResetToken()
 
-    // Адрес страницы где нужно написать новый пароль
-    const resetUrl = req.headers.origin + `/reset-password/${resetToken}`
+    // Домен сервиса
+    const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 
-    // Попробовать послать пользователю письмо со сбросом пароля
+    // Адрес страницы где нужно написать новый пароль
+    const resetUrl = domain + `/reset-password/${resetToken}`
+
+    // Язык
+    const lang = <string>req.get('Editor-Language')
+
+    // Послать пользователю письмо со сбросом пароля
     try {
         // Создать письмо
-        const userEmail = new Email(user.email, req.headers.origin)
+        const userEmail = new Email(user.email, domain, lang)
 
         // Отправить письмо со сбросом пароля
-        await userEmail.sendResetPasswordLetter(resetUrl)
+        await userEmail.sendForgotPasswordLetter(resetUrl)
 
         // Сохранить обновлённые данные пользователя
         await user.save({
@@ -277,18 +283,18 @@ export const logOut = (req: ExtendedRequestType, res: Response, next: NextFuncti
         res.status(200).json({
             status: 'success',
             data: {
-                message: 'Email has been sent!'
+                message: getMessageDependingOnTheLang('{{authController.forgotPasswordEmailHasBeenSent}}', lang)
             }
         })
     }
-        // Если не удалось послать письмо со сбросом пароля
+    // Не удалось послать письмо со сбросом пароля...
     catch (err) {
-        // Обросить ошибку
+        // Бросить ошибку
         next(
-            new AppError('There was an error sending the email. Try again later', 500)
+            new AppError('{{authController.forgotPasswordCanNotSendEmail}}', 500)
         )
     }
-})*/
+})
 
 
 // Функция меняет пароль взамен забытого
@@ -345,9 +351,12 @@ async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: st
     // Адрес подтверждения почты (домен + адрес API)
     let confirmUrl = domain + `/api/users/confirmEmail/${confirmToken}`
 
+    // Язык
+    const lang = <string>req.get('Editor-Language')
+
     // Создать новое письмо...
     // В конструктор передаётся почта пользователя и URL сайта вида https://editorium.net
-    const userEmail = new Email(email, domain)
+    const userEmail = new Email(email, domain, lang)
 
     // Послать письмо для подтверждения почты
     userEmail.sendConfirmLetter(confirmUrl).then(() => {})

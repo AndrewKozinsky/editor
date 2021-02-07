@@ -8,31 +8,38 @@ export class Email {
     to: string
     from: string
     host: string
+    lang: string
 
-    constructor(email: string, host: string) {
+    constructor(email: string, host: string, lang: string) {
         this.to = email // На какой адрес отправлять письмо
         this.from = config.emailFrom // От кого письмо
         this.host = host // Домен сайта
+        this.lang = lang // Язык письма
     }
 
     // Функция отправляет письмо с просьбой подтвердить почтовый адрес
     async sendConfirmLetter(confirmUrl: string) {
         // Тема письма
-        const subject = 'Confirm your email for registration at Editorium.net'
+        const subject = this.lang === 'rus'
+            ? 'Подтвердите вашу почту для регистрации на Editorium.net'
+            : 'Confirm your email for registration at Editorium.net'
 
         // Создать html и текстовую версию письма
-        const [html, text] = new EmailTemplate(this.host).createConfirmLetter(confirmUrl)
+        const [html, text] = new EmailTemplate(this.host).createConfirmLetter(confirmUrl, this.lang)
 
         // Послать письмо
         this.send(subject, html, text)
     }
 
     // Функция отправляет письмо со ссылкой на сброс пароля
-    /*async sendResetPasswordLetter(resetUrl) {
-        const subject = 'Your password reset token (valid for 10 minutes)'
-        const [html, text] = new EmailTemplate(this.host).createResetPasswordLetter(resetUrl)
+    async sendForgotPasswordLetter(resetUrl: string) {
+        const subject = this.lang === 'rus'
+            ? 'Ссылка на страницу сброса пароля от Editorium.net'
+            : 'Your password reset token (valid for 10 minutes)'
+
+        const [html, text] = new EmailTemplate(this.host).createForgotPasswordLetter(resetUrl, this.lang)
         this.send(subject, html, text)
-    }*/
+    }
 
     // Общая функция отправки письма.
     // В зависимости от режима сервера отправляет письма либо на mailtrap.io либо на реальный адрес
