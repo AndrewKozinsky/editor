@@ -1,17 +1,17 @@
 import {Router} from 'express'
-import * as userController from '../controllers/authController/authController'
+import * as authController from '../controllers/authController/authController'
 
 
 const router = Router()
 
 // Регистрация пользователя
-router.post('/signup', userController.signUp)
+router.post('/signup', authController.signUp)
+
+// Подтверждение почты пользователя
+router.get('/confirmEmail/:token', authController.confirmEmail)
 
 // Получение данных токена
 // router.post('/getTokenInfo', authController.getTokenInfo)
-
-// Подтверждение почты пользователя
-// router.get('/confirmEmail/:token', authController.confirmEmail)
 
 // Вход пользователя
 // router.post('/login', authController.logIn)

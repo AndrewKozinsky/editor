@@ -2,16 +2,15 @@ import {Request, Response, NextFunction} from 'express'
 // const jwt = require('jsonwebtoken')
 import * as crypto from 'crypto'
 // const {promisify} = require('util')
-// const User = require('../mongooseModels/user')
 import { catchAsync } from '../../utils/errors/catchAsync'
 import UserModel from '../../models/user';
-// const AppError = require('../utils/appError')
+import { AppError } from '../../utils/errors/appError'
 import { Email } from '../../utils/email/email'
 import { createSendToken, sendResponseWithAuthToken } from '../authToken'
 import { IUser } from '../../models/user'
-import {config} from '../../config/config';
-import { copyObjWithoutSomeProps } from '../../utils/misc';
-import { sendingUserDataType } from './authControllerTypes';
+import {config} from '../../config/config'
+import { sendingUserDataType } from './authControllerTypes'
+import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
 
 
 // Функция отдающая данные по переданному токене. Токен передаётся в куках.
@@ -30,7 +29,7 @@ import { sendingUserDataType } from './authControllerTypes';
     const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получить пользователя
-    const currentUser = await User.findById(decoded.id)
+    const currentUser = await UserModel.findById(decoded.id)
 
     // Если пользователь не найден, то вернуть ошибочный ответ
     if(!currentUser) return sendErrorResponse(res)
@@ -81,7 +80,7 @@ import { sendingUserDataType } from './authControllerTypes';
     const decoded = await promisify( jwt.verify )(token, config.jwtSecret);
 
     // Получить пользователя
-    const currentUser = await User.findById(decoded.id).select('+password')
+    const currentUser = await UserModel.findById(decoded.id).select('+password')
 
     // Проверить существование пользователя
     if(!currentUser) {
@@ -116,7 +115,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
         emailConfirmToken: emailConfirmToken,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
-        lang: <string>req.get('Accept-Language') || 'eng'
+        lang: <string>req.get('Editor-Language') || 'eng'
     })
 
     // Отправлю письмо с подтверждением почты
@@ -131,33 +130,59 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
 
 
 // Обработчик подтверждения почты пользователя
-/*exports.confirmEmail = catchAsync(async (req, res, next) => {
+export const confirmEmail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
 
-    // Найду пользователя с таким же токеном подтверждения почты
-    const user = await User.findOneAndUpdate(
-        {emailConfirmToken: req.params.token},
-        {emailConfirmToken: undefined},
-        {new: true}
+    // Найти пользователя с таким же токеном подтверждения почты
+    // и удалить свойство emailConfirmToken потому что почта подтверждена.
+    const user: IUser | null = await UserModel.findOneAndUpdate(
+        { emailConfirmToken: req.params.token },
+        { emailConfirmToken: undefined }, // Как изменить объект
+        { new: true } // Вернуть объект после изменения свойства
     )
 
-    // Если пользователь не найден, то отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
-    // что пользователь уже подтвердил свою почту или такого пользователя не существует.
+    // Язык пользователя и тип запроса
+    const lang = <string>req.headers['Editor-Language'] // eng или rus
+    const reqSource = <string>req.headers['Editor-Request-Source'] // api или browser
+
+    // Если пользователь не найден...
     if(!user) {
-        return res.status(200).send(createRedirectPage('emailIsNotConfirmed'))
+        // Если запрос сделан через Postman
+        if (reqSource === 'api') {
+            // Бросить ошибку
+            return next(
+                new AppError(getMessageDependingOnTheLang('{{authController.confirmEmailUserNotFound}}', lang), 400)
+            )
+        }
+        // Если запрос сделан из браузера
+        else {
+            // Отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
+            // что пользователь уже подтвердил свою почту или такого пользователя не существует.
+            return res.status(200).send(createRedirectPage('emailIsNotConfirmed', lang))
+        }
     }
 
     // Пользователь найден...
 
-    // Уберу свойство emailConfirmToken у объекта с данными пользователя
-    delete user.emailConfirmToken
-
     // Создать объект ответа с токеном пользователя
-    const resWithToken = createSendToken(user, res)
+    const resWithToken = createSendToken(user._id, res)
 
-    // Отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
-    // что пользователь успешно подтвердил свою почту.
-    resWithToken.status(200).send(createRedirectPage('emailIsConfirmed'))
-})*/
+    // Если запрос сделан через Postman
+    if (reqSource === 'api') {
+        // Послать положительный ответ
+        res.status(200).json({
+            status: 'success',
+            data: {
+                message: getMessageDependingOnTheLang('{{authController.confirmEmailIsConfirmed}}', lang)
+            }
+        })
+    }
+    // Если запрос сделан из браузера
+    else if (reqSource === 'browser') {
+        // Отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
+        // что пользователь успешно подтвердил свою почту.
+        resWithToken.status(200).send(createRedirectPage('emailIsConfirmed', lang))
+    }
+})
 
 
 // Вход пользователя
@@ -174,7 +199,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
     }
 
     // Получу данные пользователя
-    const user = await User.findOne({email}).select('+password -__v')
+    const user = await UserModel.findOne({email}).select('+password -__v')
 
     // Если пользователь не найден или пароли не совпадают, то бросить ошибку.
     if(!user || !await user.correctPassword(password, user.password)) {
@@ -192,7 +217,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
     }
 
     // Создать объект ответа с токеном пользователя
-    const resWithToken = createSendToken(user, res)
+    const resWithToken = createSendToken(user._id, res)
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
@@ -215,7 +240,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
 /*exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     // Получу данные пользователя по переданной почте
-    const user = await User.findOne({email: req.body.email})
+    const user = await UserModel.findOne({email: req.body.email})
 
     // Вернуть ошибку если пользователя не найдено
     if(!user) {
@@ -273,7 +298,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
         .digest('hex')
 
     // Найду пользователя по токену смены пароля
-    const user = await User.findOne({
+    const user = await UserModel.findOne({
         passwordResetToken: hashedToken,
         passwordResetExpires: {$gt: Date.now()}
     })
@@ -297,7 +322,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
     await user.save()
 
     // Создать объект ответа с токеном пользователя
-    const resWithToken = createSendToken(user, res)
+    const resWithToken = createSendToken(user._id, res)
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
@@ -326,8 +351,11 @@ async function sendEmailAddressConfirmLetter(req: Request, email: string, confir
     userEmail.sendConfirmLetter(confirmUrl).then(() => {})
 }
 
-
-/*function createRedirectPage(type) {
+/**
+ * Функция возвращает разметку страницу где написана переадресацию на другую страницу
+ * @param {String} type — тип показываемой страницы
+ */
+function createRedirectPage(type: string, lang: string) {
     return `<!DOCTYPE html>
         <html lang="en">
         <head>
@@ -336,8 +364,8 @@ async function sendEmailAddressConfirmLetter(req: Request, email: string, confir
         </head>
         <body>
             <script>
-                window.location = "/message?type=${type}"
+                window.location = "/message?type=${type}&lang=${lang}"
             </script>
         </body>
         </html>`
-}*/
+}

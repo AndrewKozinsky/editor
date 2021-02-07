@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose'
 import { Schema, Document } from 'mongoose'
 const validator = require('validator')
+import * as bcrypt from 'bcryptjs'
 
 
 export interface IUser extends Document {
@@ -8,7 +9,7 @@ export interface IUser extends Document {
     email: string,
     emailConfirmToken?: string,
     password: string,
-    passwordConfirm: string,
+    passwordConfirm?: string,
     passwordChangedAt?: Date,
     passwordResetToken?: string,
     passwordResetExpires?: Date,
@@ -62,19 +63,19 @@ const UserSchema: Schema = new Schema({
 })
 
 // Перед сохранением пользователя зашифровать пароль
-UserSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function(this: IUser, next) {
     // Завершить функцию если не обновляют пароль
-    // if(!this.isModified('password')) return next()
+    if(!this.isModified('password')) return next()
 
     // Зашифровать пароль
-    // this.password = await bcrypt.hash(this.password, 12)
+    this.password = await bcrypt.hash(this.password, 12)
 
     // Удалить поле с подтверждением пароля
-    // this.passwordConfirm = undefined
+    this.passwordConfirm = undefined
 })
 
 // При изменении пароля записать дату изменения
-/*UserSchema.pre('save', function (next) {
+/*UserSchema.pre('save', function (this: IUser, next) {
     if(!this.isModified('password') || this.isNew)
         return next();
 
@@ -90,7 +91,7 @@ UserSchema.pre('save', async function(next) {
 
 // Функция проверяет изменился ли пароль пользователя позже, чем переданное время.
 // true обозначает, что изменился позже переданного времени
-/*UserSchema.methods.changedPasswordAfter = function (JWTTimestamp) {
+/*UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp) {
 
     if(this.passwordChangedAt) {
         const changedTimestamp = parseInt(
@@ -105,7 +106,7 @@ UserSchema.pre('save', async function(next) {
 }*/
 
 // Метод создающий токен сброса пароля
-/*UserSchema.methods.createPasswordResetToken = function () {
+/*UserSchema.methods.createPasswordResetToken = function (this: IUser) {
     const resetToken = crypto.randomBytes(32).toString('hex')
 
     this.passwordResetToken = crypto

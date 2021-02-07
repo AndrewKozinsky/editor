@@ -8,7 +8,7 @@ import userRouter from './routes/userRouter'
 //const myNotesRouter = require('./routes/myNotesRouter')
 import { AppError } from './utils/errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
-import { addLanguage } from './middlewares/commonMiddlewares'
+import { addExtraHeaders } from './middlewares/commonMiddlewares'
 
 
 const app: Application = express()
@@ -32,7 +32,7 @@ app.use('/', rater)*/
 app.use(express.static(path.join(__dirname, 'staticFiles')))
 
 // Установка в req.headers.lang английского языка если язык не передан
-app.use(addLanguage)
+app.use(addExtraHeaders)
 
 app.get("/api/", function (req: Request, res: Response) {
     res.send("Our api server is working correctly.")

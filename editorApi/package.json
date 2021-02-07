@@ -8,7 +8,6 @@
     "dev": "nodemon",
     "compile": "tsc --build",
     "execute": "node build/server.js",
-
     "debug": "npm run compile && npm run debug-execute",
     "debug-execute": "ndb build/server.js"
   },
@@ -20,6 +19,7 @@
   "author": "Andrew Kozinsky <andkozinsky@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
@@ -29,6 +29,7 @@
     "validator": "^13.5.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
     "@types/body-parser": "^1.19.0",
     "@types/express": "^4.17.9",
     "@types/jsonwebtoken": "^8.5.0",

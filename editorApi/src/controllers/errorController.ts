@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express'
 import { config } from '../config/config'
-import { getErrorTextDependingOnTheLang } from '../utils/errors/errorsTexts'
+import { getMessageDependingOnTheLang } from '../utils/errors/messages'
 
 
 type ErrorType = {
@@ -28,8 +28,8 @@ export function globalErrorHandler (err: any, req: Request, res: Response, next:
     }
 
     // Вместо шаблонных ошибок в тексте ошибок поставить настоящие ошибки в зависимости от языка
-    const lang = req.get('Accept-Language') || 'eng'
-    error.message = getErrorTextDependingOnTheLang(err.message, lang)
+    const lang = <string>req.headers['Editor-Language']
+    error.message = getMessageDependingOnTheLang(err.message, lang)
 
     // Если значение поля должно быть уникальным, но ввели дублирующие значения.
     if(error.code === 11000) error = handleDuplicateFieldsBD(error, lang);
