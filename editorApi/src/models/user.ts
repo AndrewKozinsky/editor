@@ -14,6 +14,9 @@ export interface IUser extends Document {
     passwordResetToken?: string,
     passwordResetExpires?: Date,
     lang: string
+
+    correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>,
+    changedPasswordAfter(JWTTimestamp: number): Promise<boolean>,
 }
 
 const UserSchema: Schema = new Schema({
@@ -85,25 +88,25 @@ UserSchema.pre('save', async function(this: IUser, next) {
 
 
 // Функция проверяющая идентичность паролей
-/*UserSchema.methods.correctPassword = async (candidatePassword, userPassword) => {
+UserSchema.methods.correctPassword = async (candidatePassword: string, userPassword: string) => {
     return await bcrypt.compare(candidatePassword, userPassword)
-}*/
+}
+
 
 // Функция проверяет изменился ли пароль пользователя позже, чем переданное время.
 // true обозначает, что изменился позже переданного времени
-/*UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp) {
+UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: number) {
 
     if(this.passwordChangedAt) {
-        const changedTimestamp = parseInt(
-            this.passwordChangedAt.getTime() / 1000,
-            10
-        );
+        const changedTimestamp = Math.round(
+            this.passwordChangedAt.getTime() / 1000
+        )
 
         return JWTTimestamp < changedTimestamp
     }
 
     return false
-}*/
+}
 
 // Метод создающий токен сброса пароля
 /*UserSchema.methods.createPasswordResetToken = function (this: IUser) {

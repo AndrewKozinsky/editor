@@ -10,15 +10,14 @@ router.post('/signup', authController.signUp)
 // Подтверждение почты пользователя
 router.get('/confirmEmail/:token', authController.confirmEmail)
 
-// Получение данных токена
-// router.post('/getTokenInfo', authController.getTokenInfo)
-
 // Вход пользователя
-// router.post('/login', authController.logIn)
+router.post('/login', authController.logIn)
 
 // Выход пользователя
-// router.route('/logOut')
-//     .get(authController.protect, authController.logOut)
+router.route('/logout').get(authController.protect, authController.logOut)
+
+// Получение данных токена
+// router.post('/getTokenInfo', authController.getTokenInfo)
 
 // Отправка письма со ссылкой на сброс пароля
 // router.post('/forgotPassword', authController.forgotPassword)

@@ -1,7 +1,7 @@
-import {Request, Response, NextFunction} from 'express'
-// const jwt = require('jsonwebtoken')
+import { Response, NextFunction } from 'express'
+const jwt = require('jsonwebtoken')
 import * as crypto from 'crypto'
-// const {promisify} = require('util')
+import {promisify} from 'util'
 import { catchAsync } from '../../utils/errors/catchAsync'
 import UserModel from '../../models/user';
 import { AppError } from '../../utils/errors/appError'
@@ -9,12 +9,12 @@ import { Email } from '../../utils/email/email'
 import { createSendToken, sendResponseWithAuthToken } from '../authToken'
 import { IUser } from '../../models/user'
 import {config} from '../../config/config'
-import { sendingUserDataType } from './authControllerTypes'
 import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
+import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
 
 
 // Функция отдающая данные по переданному токене. Токен передаётся в куках.
-/*exports.getTokenInfo = async (req, res, next) => {
+/*exports.getTokenInfo = async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     let token
 
     // Получу токен из кук
@@ -60,9 +60,10 @@ import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
 // Функция защищающая маршрут от неавторизованных пользователей.
 // Если пользователь отправил токен, то программа запускает следующий middleware.
 // Если не отправил, то выбрасывает ошибку.
-/*exports.protect = catchAsync(async (req, res, next) => {
-    let token;
+export const protect = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+    let token: string | undefined
 
+    // Получение токена
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1]
     } else if(req.cookies && req.cookies.authToken) {
@@ -72,27 +73,27 @@ import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
     // Если токен не передан, то бросить ошибку
     if(!token) {
         return next(
-            new AppError('You are not logged in! Please log in to to get access', 401)
+            new AppError('{{authController.protectNoToken}}', 401)
         )
     }
 
-    // Расшифрую JWT и получу payload
-    const decoded = await promisify( jwt.verify )(token, config.jwtSecret);
+    // Расшифровка JWT и получение payload
+    const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
 
-    // Получить пользователя
-    const currentUser = await UserModel.findById(decoded.id).select('+password')
+    // Получение пользователя
+    const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
 
-    // Проверить существование пользователя
+    // Проверка существования пользователя
     if(!currentUser) {
         return next(
-            new AppError('The user belonging to this token does not longer exists.', 401)
+            new AppError('{{authController.protectNoUser}}', 401)
         )
     }
 
-    // Проверю что пароль не изменён
+    // Проверить что пароль не изменён
     if(currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
-            new AppError('User recently changed password! Please log in again.', 401)
+            new AppError('{{authController.protectPasswordChanged}}', 401)
         )
     }
 
@@ -100,11 +101,11 @@ import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
     req.user = currentUser
 
     next()
-})*/
+})
 
 
 /** Обработчик регистрации пользователя */
-export const signUp = catchAsync<void>(async (req: Request, res: Response, next: NextFunction) => {
+export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Токен подтверждения почты
     const emailConfirmToken: string = crypto.randomBytes(32).toString('hex')
@@ -130,7 +131,7 @@ export const signUp = catchAsync<void>(async (req: Request, res: Response, next:
 
 
 // Обработчик подтверждения почты пользователя
-export const confirmEmail = catchAsync(async (req: Request, res: Response, next: NextFunction) => {
+export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Найти пользователя с таким же токеном подтверждения почты
     // и удалить свойство emailConfirmToken потому что почта подтверждена.
@@ -150,7 +151,7 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
         if (reqSource === 'api') {
             // Бросить ошибку
             return next(
-                new AppError(getMessageDependingOnTheLang('{{authController.confirmEmailUserNotFound}}', lang), 400)
+                new AppError('{{authController.confirmEmailUserNotFound}}', 400)
             )
         }
         // Если запрос сделан из браузера
@@ -186,25 +187,26 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
 
 
 // Вход пользователя
-/*exports.logIn = catchAsync(async (req, res, next) => {
+export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
-    // Получу почту и пароль из тела запроса
-    let {email, password} = req.body;
+    // Почта и пароль из тела запроса
+    const email: string = req.body.email
+    const password: string = req.body.password
 
-    // Если почту или пароль не передали, то попросить их ввести и завершить функцию
+    // Если почту или пароль не передали, то попросить ввести и завершить функцию
     if(!email || !password) {
         return next(
-            new AppError('Please provide email and password.', 400)
+            new AppError('{{authController.loginNoEmailOrPassword}}', 400)
         )
     }
 
-    // Получу данные пользователя
-    const user = await UserModel.findOne({email}).select('+password -__v')
+    // Получение данных пользователя с паролем и без __v
+    const user: IUser | null = await UserModel.findOne({email}).select('+password -__v')
 
     // Если пользователь не найден или пароли не совпадают, то бросить ошибку.
     if(!user || !await user.correctPassword(password, user.password)) {
         return next(
-            new AppError('Incorrect email or password', 400)
+            new AppError('{{authController.loginWrongEmailOrPassword}}', 400)
         )
     }
 
@@ -212,7 +214,7 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
     // то значит пользователь еще не подтвердил почту. Попросить чтобы подтвердил.
     if(user.emailConfirmToken) {
         return next(
-            new AppError('Please, confirm your email.', 403)
+            new AppError('{{authController.loginConfirmEmail}}', 403)
         )
     }
 
@@ -221,10 +223,10 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
-})*/
+})
 
-// Выход пользователя
-/*exports.logOut = (req, res, next) => {
+// Выход пользователя (защищённый маршрут)
+export const logOut = (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     res.cookie('authToken', 'loggedout', {
         expires: new Date(Date.now() + 2 * 1000),
         httpOnly: true
@@ -233,11 +235,11 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
     res.status(200).json({
         status: 'success'
     })
-}*/
+}
 
 
 // Функция создаёт токен сброса пароля, ставит в ссылку изменения пароля и отправляет на почту пользователя.
-/*exports.forgotPassword = catchAsync(async (req, res, next) => {
+/*exports.forgotPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Получу данные пользователя по переданной почте
     const user = await UserModel.findOne({email: req.body.email})
@@ -290,7 +292,7 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
 
 
 // Функция меняет пароль взамен забытого
-/*exports.resetPassword = catchAsync(async (req, res, next) => {
+/*exports.resetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Зашифрую пароль потому что в БД он хранится зашифрованным
     const hashedToken = crypto
         .createHash('sha256')
@@ -336,7 +338,7 @@ export const confirmEmail = catchAsync(async (req: Request, res: Response, next:
  * @param {String} confirmToken — токен подтверждения почты
  * @returns {Promise<void>}
  */
-async function sendEmailAddressConfirmLetter(req: Request, email: string, confirmToken: string) {
+async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: string, confirmToken: string) {
     // Получение домена в зависимости от режима работы
     const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 

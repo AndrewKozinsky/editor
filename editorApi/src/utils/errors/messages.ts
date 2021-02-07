@@ -48,6 +48,30 @@ export const messages: messagesType = {
         confirmEmailIsConfirmed: {
             eng: 'Email is confirmed!',
             rus: 'Передан неверный токен подтверждения почты.'
+        },
+        loginNoEmailOrPassword: {
+            eng: 'Please provide email and password.',
+            rus: 'Не передана почта или пароль'
+        },
+        loginWrongEmailOrPassword: {
+            eng: 'Incorrect email or password',
+            rus: 'Неверная почта или пароль'
+        },
+        loginConfirmEmail: {
+            eng: 'Please, confirm your email.',
+            rus: 'Пожалуйста, подтвердите почту перед тем, как войти'
+        },
+        protectNoToken: {
+            eng: 'You are not logged in! Please log in to to get access',
+            rus: 'Авторизуйтесь чтобы просматривать эти данные.'
+        },
+        protectNoUser: {
+            eng: 'The user belonging to this token does not longer exists.',
+            rus: 'Пользователя с таким токеном не существует.'
+        },
+        protectPasswordChanged: {
+            eng: 'User recently changed password! Please log in again.',
+            rus: 'Пользователя недавно изменил пароль. Снова авторизуйтесь.'
         }
     }
 }
