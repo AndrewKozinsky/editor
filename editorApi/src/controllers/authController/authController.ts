@@ -116,7 +116,7 @@ export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Res
         emailConfirmToken: emailConfirmToken,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
-        lang: <string>req.get('Editor-Language') || 'eng'
+        language: <string>req.get('Editor-Language') || 'eng'
     })
 
     // Отправление письма с подтверждением почты

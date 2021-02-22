@@ -7,6 +7,7 @@ services:
     build: ./editorApi
     command: npm run start
     restart: unless-stopped
+    container_name: editor-api
     environment:
       - MODE=production
       - PORT=3001
@@ -19,19 +20,34 @@ services:
   # БД редактора
   editor_db:
     image: mongo:latest
+    container_name: editor-db
     volumes:
       - editor_db:/data/db
     networks:
       - editorium-network
 
+  # Клиентская часть редактора
+  editor:
+    build:
+      context: ./editor
+      dockerfile: Dockerfile.prod
+    container_name: editor
+    command: serve -s build -l 3000
+    restart: unless-stopped
+    networks:
+      - editorium-network
+
+  # Nginx
   nginx:
     image: nginx:stable-alpine
+    container_name: editor-nginx
     ports:
       - "80:80"
     volumes:
       - ./nginx/nginx.conf.prod:/etc/nginx/conf.d/nginx.conf
     depends_on:
       - editor_api
+      - editor
     networks:
       - editorium-network
 
