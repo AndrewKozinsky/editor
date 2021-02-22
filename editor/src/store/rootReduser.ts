@@ -1,11 +1,12 @@
 // Core
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 // Reducers
-import {settingsReducer} from './settings/settings';
+import { userReducer } from './user/userReducer';
 
+// Корневой редьюсер
 export const rootReducer = combineReducers({
-    settings:  settingsReducer
+    user:  userReducer
 })
 
 export type AppState = ReturnType<typeof rootReducer>

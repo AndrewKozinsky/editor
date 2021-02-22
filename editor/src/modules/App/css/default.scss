@@ -1,36 +1,35 @@
-//@import "variables";
+@import "variables";
 
 :root {
-    //font-size: 10px;
+    font-size: 10px;
 }
 
-/*@font-face {
+@font-face {
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Regular.woff2") format("woff2");
     font-weight: normal;
-}*/
-/*@font-face {
+}
+@font-face {
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Bold.woff2") format("woff2");
     font-weight: bold;
-}*/
+}
 
-/*body {
+body {
     font-family: 'SF UI Display', sans-serif;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
+    color: $text-color;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}*/
+}
 
-/*:global(#root) {
+#root {
     display: flex;
-    justify-content: stretch;
-
     min-height: 100vh;
     box-sizing: border-box;
-    padding: 12px 50px 30px 50px;
-}*/
+}
+
 
 /*
 a {
