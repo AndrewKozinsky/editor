@@ -1,5 +1,5 @@
-import {port} from './configuration'
-import {connectDb} from './utils/db'
+import { config } from './config/config'
+import { connectDb } from './utils/db'
 import app from './app'
 
 
@@ -12,18 +12,18 @@ process.on('uncaughtException', err => {
 
 // Соединение с базой данных
 connectDb()
-    .on('error', console.log)
+    .on('error', () => console.log('Error'))
     .on('disconnected', connectDb)
     .once('open', startServer)
 
 /**
  * Функция запускает сервер
  */
-function startServer() {
+function startServer(): void {
 
     // Прослушивание порта на сервере
-    const server = app.listen(port, (): void => {
-        console.log(`⚡️ Server is running at http:localhost/:${port}`)
+    const server = app.listen(config.port, (): void => {
+        console.log(`⚡️ Server is running at http:localhost/:${config.port}`)
     })
 
     // Выключение сервера при ошибке типа unhandledRejection

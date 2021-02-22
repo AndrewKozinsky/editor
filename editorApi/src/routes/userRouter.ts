@@ -1,30 +1,29 @@
 import {Router} from 'express'
-import * as userController from '../controllers/authController'
+import * as authController from '../controllers/authController/authController'
 
 
 const router = Router()
 
 // Регистрация пользователя
-router.post('/signup', userController.signUp)
+router.post('/signup', authController.signUp)
+
+// Подтверждение почты пользователя
+router.get('/confirmEmail/:token', authController.confirmEmail)
+
+// Вход пользователя
+router.post('/login', authController.logIn)
+
+// Выход пользователя
+router.route('/logout').get(authController.protect, authController.logOut)
 
 // Получение данных токена
 // router.post('/getTokenInfo', authController.getTokenInfo)
 
-// Подтверждение почты пользователя
-// router.get('/confirmEmail/:token', authController.confirmEmail)
-
-// Вход пользователя
-// router.post('/login', authController.logIn)
-
-// Выход пользователя
-// router.route('/logOut')
-//     .get(authController.protect, authController.logOut)
-
 // Отправка письма со ссылкой на сброс пароля
-// router.post('/forgotPassword', authController.forgotPassword)
+router.post('/forgotPassword', authController.forgotPassword)
 
 // Сброс пароля
-// router.patch('/resetPassword/:token', authController.resetPassword)
+router.patch('/resetPassword/:token', authController.resetPassword)
 
 // router.route('/myEmail')
 //     .put(authController.protect, userController.changeMyEmail)

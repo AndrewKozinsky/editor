@@ -1,3 +1,11 @@
 import {Request, Response, NextFunction} from 'express'
+import {IUser} from '../models/user'
 
-export type RouteFn = (req: Request, res: Response, next?: NextFunction) => void
+// Объект с данными токена
+export type JWTDecodedType = {
+    id: string, iat: number, exp: number
+}
+
+export interface ExtendedRequestType extends Request {
+    user?: IUser
+}

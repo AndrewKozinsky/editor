@@ -20,7 +20,7 @@ export function catchAsync<T>(fn: CatchAsyncFnType<T>): CatchAsyncReturnType<T> 
 
 
 /*
-// Пример работающего кода
+// Пример работающего кода. ПОТОМ НУЖНО УДАЛИТЬ.
 type catchAsyncFnType<T> = (req: T, res: T) => Promise<T>
 type catchAsyncReturnType<T> = (req: T, res: T) => void
 
