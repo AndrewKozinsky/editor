@@ -17,7 +17,7 @@ router.post('/login', authController.logIn)
 router.route('/logout').get(authController.protect, authController.logOut)
 
 // Получение данных токена
-// router.post('/getTokenInfo', authController.getTokenInfo)
+router.post('/getTokenData', authController.getTokenData)
 
 // Отправка письма со ссылкой на сброс пароля
 router.post('/forgotPassword', authController.forgotPassword)

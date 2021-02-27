@@ -41,6 +41,11 @@ export const messages: messagesType = {
     },
     // Контроллер авторизации
     authController: {
+        // getTokenData
+        getTokenDataNoCorrectToken: {
+            eng: 'Authorization token is either not transferred or is invalid.',
+            rus: 'Токен авторизации или не передан или неправилен.'
+        },
         // confirmEmail
         confirmEmailUserNotFound: {
             eng: 'Wrong email confirmation token was sent.',

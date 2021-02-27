@@ -1,6 +1,6 @@
 // Types
 import {
-    AuthTokenStatus,
+    AuthTokenStatusType,
     SetAuthTokenStatusActionType,
     USER_SET_AUTH_TOKEN_STATUS
     // ErrorHttpAction,
@@ -28,7 +28,7 @@ import {
 }*/
 
 
-export function setAuthTokenStatus(payload: AuthTokenStatus): SetAuthTokenStatusActionType {
+export function setAuthTokenStatus(payload: AuthTokenStatusType): SetAuthTokenStatusActionType {
     return {
         type: USER_SET_AUTH_TOKEN_STATUS,
         payload,

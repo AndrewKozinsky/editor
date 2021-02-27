@@ -14,29 +14,29 @@ import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
 
 
 // Функция отдающая данные по переданному токену. Токен передаётся в куках.
-/*exports.getTokenInfo = async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+export const getTokenData = async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     let token
 
-    // Получу токен из кук
+    // Получение токена из кук
     if(req.cookies && req.cookies.authToken) {
         token = req.cookies.authToken
     }
 
     // Если токен не передан, то возвратить ошибочный ответ
-    if(!token) return sendErrorResponse(res)
+    if(!token) return sendErrorResponse(next)
 
-    // Расшифрую JWT и получу payload
+    // Расшифровать JWT и получить payload
     const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получить пользователя
     const currentUser = await UserModel.findById(decoded.id)
 
     // Если пользователь не найден, то вернуть ошибочный ответ
-    if(!currentUser) return sendErrorResponse(res)
+    if(!currentUser) return sendErrorResponse(next)
 
     // Если пароль изменён с последнего захода, то вернуть ошибочный ответ
     if(currentUser.changedPasswordAfter(decoded.iat)) {
-        return sendErrorResponse(res)
+        return sendErrorResponse(next)
     }
 
     // Если все проверки прошли мимо, то вернуть положительный ответ вместе с данными пользователя
@@ -49,12 +49,12 @@ import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
     })
 
     // Функция возвращающая ошибочный ответ
-    function sendErrorResponse(res) {
-        res.status(200).json({
-            status: 'error'
-        })
+    function sendErrorResponse(next: NextFunction) {
+        return next(
+            new AppError('{{authController.getTokenDataNoCorrectToken}}', 401)
+        )
     }
-}*/
+}
 
 
 // Функция защищающая маршрут от неавторизованных пользователей.

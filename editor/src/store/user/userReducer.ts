@@ -1,15 +1,15 @@
 import {
     // Типы значений
-    AuthTokenStatus,
+    AuthTokenStatusType,
     // Типы типов
     USER_SET_AUTH_TOKEN_STATUS,
     // Типы экшенов
+    UserActionTypes,
     SetAuthTokenStatusActionType,
-    UserActionTypes
 } from "./userTypes"
 
 export type UserReducerType = {
-    authTokenStatus: AuthTokenStatus
+    authTokenStatus: AuthTokenStatusType
 }
 
 // Изначальные значения
@@ -30,7 +30,7 @@ function setAuthTokenStatus(state: UserReducerType, action: SetAuthTokenStatusAc
 }
 
 // Редьюсер Store.user
-export function userReducer( state = initialState, action: UserActionTypes ): UserReducerType {
+export default function userReducer( state = initialState, action: UserActionTypes ): UserReducerType {
     switch (action.type) {
         case USER_SET_AUTH_TOKEN_STATUS:
             return setAuthTokenStatus(state, action)

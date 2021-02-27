@@ -2,10 +2,12 @@
 
 const addresses = {
     // Получение токена пользователя
-    getUserToken: 'users/getTokenInfo'
+    getUserToken: 'users/getTokenData'
 }
 
-const url = new Proxy(addresses, {
+// Оборачивание объекта addresses чтобы при запросе
+// к началу каждого адреса добавлялась приставка /api/.
+const apiUrls = new Proxy(addresses, {
     get(url, prop: PropertyKey): string {
         if (url[prop]) {
             return '/api/' + url[prop]
@@ -16,4 +18,4 @@ const url = new Proxy(addresses, {
     }
 })
 
-export default url
+export default apiUrls
