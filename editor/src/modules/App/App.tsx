@@ -22,8 +22,15 @@ function App(): ReactElement {
     // TODO В каждом запрове нужно отправлять заголовок Editor-Language.
     // TODO Замени <div className='main-page'> на компонент, которым будешь оборачивать формы авторизации.
 
-    // Проинициализировать приложение возвратить статус сделано ли это
+    // Проинициализировать приложение и возвратить статус сделано ли это
     const isInitialized = useInit()
+
+    // Код для теста
+    /*return (
+        <div className='app'>
+            <Loader />
+        </div>
+    )*/
 
     return (
         <Router>

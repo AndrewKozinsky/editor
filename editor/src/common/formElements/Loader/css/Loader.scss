@@ -1,0 +1,26 @@
+@import "./../../../../modules/App/css/variables";
+
+.loader-wrapper {
+    width: 30px;
+    height: 30px;
+}
+
+.animate-loader {
+    animation: spin 1.25s linear infinite;
+
+    circle {
+        stroke: $text-color;
+        opacity: .75;
+    }
+
+    path {
+        fill: white;
+        opacity: .75;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
