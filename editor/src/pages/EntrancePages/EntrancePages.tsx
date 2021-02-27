@@ -16,7 +16,7 @@ function EntrancePages() {
     // const dispatch = useDispatch()
 
     // Получу статус токена авторизации
-    // const {authTokenStatus} = useSelector(state => state.user)
+    // const {authTokenStatus} = useSelector((store: AppState) => state.user)
 
     // Если authTokenStatus равен нулю, то не понятно есть ли в браузере токен и верен ли он. Поэтому проверю.
     /*if(authTokenStatus === 0) {

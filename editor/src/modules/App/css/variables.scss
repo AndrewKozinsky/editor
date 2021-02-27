@@ -1,12 +1,13 @@
-// Цвета
-$text-color: rgb(30, 30, 30);
-//$link-color: rgb(0, 122, 255);
-//$visited-link-color: $link-color;
-//$important-color: rgb(255, 51, 51);   // Цвет важных элементов
 
-//$color-1: rgb(240, 240, 240); // Фон кнопки
-//$color-2: rgb(242, 248, 255); // Цвет поля ввода при фокусе
+// ЦВЕТА
+// Базовый цвет
+$base-color: rgb(30, 30, 30);
+
+// Цвет основного текста
+$text-color: $base-color;
+// Цвет фона
+$bg-color: lighten($base-color, 90%);
 
 
-// Закругления
+// ЗАКРУГЛЕНИЯ
 $radius: 2px;

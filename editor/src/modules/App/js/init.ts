@@ -63,7 +63,7 @@ function useGetAndSetEditorSettings() {
 
 
     // Статус токена
-    const { authTokenStatus } = useSelector<AppState, UserReducerType>(store => store.user)
+    const { authTokenStatus } = useSelector((store: AppState) => store.user)
 }
 
 
@@ -79,7 +79,7 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
     const dispatch = useDispatch()
 
     // Получение статуса токена из Хранилища
-    const { authTokenStatus } = useSelector<AppState, UserReducerType>(store => store.user)
+    const { authTokenStatus } = useSelector((store: AppState) => store.user)
 
     // Токен пользователя и функция для его запроса
     const { userToken, doFetch } = useGetUserToken()

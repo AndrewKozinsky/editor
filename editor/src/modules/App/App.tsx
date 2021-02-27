@@ -3,55 +3,76 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
+    Redirect,
+    useLocation,
 } from "react-router-dom"
 
+// Компоненты
+import Loader from '../../common/misc/Loader/Loader'
+
 // Страницы
-import MainPage from '../../pages/MainPage/MainPage'
+import EditorPage from '../../pages/EditorPage/EditorPage'
 import EntrancePages from '../../pages/EntrancePages/EntrancePages'
 
 // JS и CSS
 import { useInit } from './js/init'
+import {
+    useGetAppClasses,
+    useGetRedirectPageAddress
+} from './js/functions'
 import './css/reset.css'
 import './css/default.scss'
 import './css/app.scss'
-import Loader from '../../common/formElements/Loader/Loader';
+
+
 
 
 /** Компонент всего приложения */
 function App(): ReactElement {
-    // TODO В каждом запрове нужно отправлять заголовок Editor-Language.
-    // TODO Замени <div className='main-page'> на компонент, которым будешь оборачивать формы авторизации.
+    // TODO Реализуй тёмную тему.
+    // TODO Поставь Storybook.
+    // TODO В каждом запросе нужно отправлять заголовок Editor-Language.
 
     // Проинициализировать приложение и возвратить статус сделано ли это
     const isInitialized = useInit()
 
-    // Код для теста
-    /*return (
-        <div className='app'>
-            <Loader />
-        </div>
-    )*/
+    // Получение адреса на который нужно переадресовать пользователя
+    // если пользователь незарегистрирован или зарегистрирован
+    const redirectPageAddress = useGetRedirectPageAddress()
+
+    // Классы обёртки компонента
+    const appClasses = useGetAppClasses()
+
+    // Показать загрузчик если приложение еще не инициализировалось
+    if (!isInitialized) return <div className={appClasses}><Loader /></div>
+
+    // Если есть адрес переадресации, то перебросить на другую страницу
+    if (redirectPageAddress) {
+        return (
+            <Router>
+                <Redirect to={redirectPageAddress} />
+            </Router>
+        )
+    }
 
     return (
         <Router>
-            <div className='app'>
-                {!isInitialized && <Loader />}
-                {isInitialized &&
-                    <Switch>
-                        <Route path='/' exact>
-                            <MainPage />
-                        </Route>
-                        <Route path='/(reg|enter|forgot-password)'>
-                            <EntrancePages />
-                        </Route>
-                        <Route path='/reset-password/:token'>
-                            <EntrancePages />
-                        </Route>
-                    </Switch>
-                }
+            <div className={appClasses}>
+                <Switch>
+                    <Route path='/' exact>
+                        <EditorPage />
+                    </Route>
+                    <Route path='/(reg|enter|forgot-password)'>
+                        <EntrancePages />
+                    </Route>
+                    <Route path='/reset-password/:token'>
+                        <EntrancePages />
+                    </Route>
+                </Switch>
             </div>
         </Router>
     )
 }
+
 
 export default App

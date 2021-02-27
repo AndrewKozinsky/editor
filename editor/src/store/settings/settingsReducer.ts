@@ -34,6 +34,9 @@ const initialState: SettingsReducerType = {
 
 // Установка языка интерфейса
 function setEditorLanguage(state: SettingsReducerType, action: SetEditorLanguageActionType): SettingsReducerType {
+    // Поставить язык в LocalStorage
+    localStorage.setItem('editorLanguage', action.payload)
+
     return {
         ...state,
         editorLanguage: action.payload
@@ -42,14 +45,20 @@ function setEditorLanguage(state: SettingsReducerType, action: SetEditorLanguage
 
 // Установка темы интерфейса
 function setEditorTheme(state: SettingsReducerType, action: SetEditorThemeActionType): SettingsReducerType {
+    // Поставить тему в LocalStorage
+    localStorage.setItem('editorTheme', action.payload)
+
     return {
         ...state,
         editorTheme: action.payload
     }
 }
 
-// Установка размера интерфейса
+// Установка размера элементов интерфейса
 function setEditorSize(state: SettingsReducerType, action: SetEditorSizeActionType): SettingsReducerType {
+    // Поставить размер элементов интерфейса в LocalStorage
+    localStorage.setItem('editorSize', action.payload)
+
     return {
         ...state,
         editorSize: action.payload

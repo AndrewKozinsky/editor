@@ -1,20 +1,20 @@
 import React, { ReactElement } from 'react'
-import { useSelector } from 'react-redux'
-import { Redirect } from 'react-router-dom'
-import Loader from '../../common/formElements/Loader/Loader'
-import { AppState } from '../../store/rootReduser'
-import { UserReducerType } from '../../store/user/userReducer'
+// import { useSelector } from 'react-redux'
+// import { Redirect } from 'react-router-dom'
+// import Loader from '../../common/misc/Loader/Loader'
+// import { AppState } from '../../store/rootReduser'
+// import { UserReducerType } from '../../store/user/userReducer'
 // import { useSetTokenStatus } from './js/functions'
-import './css/MainPage.scss'
+import './css/EditorPage.scss'
 
 /**
  * Главная страница приложения. В зависимости от наличия авторизации
  * переадресовывает или на страницу входа или в редактор.
  */
-function MainPage(): ReactElement {
+export default function EditorPage(): ReactElement {
 
     // Статус токена
-    // const { authTokenStatus } = useSelector<AppState, UserReducerType>(store => store.user)
+    // const { authTokenStatus } = useSelector((store: AppState) => store.user)
 
 
     // ставить статус токена, считывать цветовую тему, размер интерфейса, язык и так далее.
@@ -39,7 +39,5 @@ function MainPage(): ReactElement {
 
     // Есть правильный токен. Перенаправить на страницу заметок.
     // return <Redirect to='/editor' />
-    return <p>MainPage</p>
+    return <p>EditorPage</p>
 }
-
-export default MainPage

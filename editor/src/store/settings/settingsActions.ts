@@ -29,7 +29,7 @@ export function setEditorTheme(payload: EditorThemeType): SetEditorThemeActionTy
     }
 }
 
-// Установка размера интерфейса
+// Установка размера элементов интерфейса
 export function setEditorSize(payload: EditorSizeType): SetEditorSizeActionType {
     return {
         type: SETTINGS_SET_EDITOR_SIZE,

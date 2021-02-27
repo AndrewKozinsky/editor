@@ -1,4 +1,4 @@
-//@import "variables";
+@import "variables";
 
 .app {
     display: flex;
@@ -8,5 +8,7 @@
     min-width: 500px;
     height: 100vh;
 
+    color: $text-color;
+    background-color: $bg-color;
     margin: 0 auto;
 }
