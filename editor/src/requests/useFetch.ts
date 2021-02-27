@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
+import {useSelector} from 'react-redux';
+import { AppState } from '../store/rootReduser';
 
+
+// Тип параметров запроса
 type OptionsType = {
-    method: string
+    method: string,
+    headers?: {[key: string]: string},
+    [key: string]: undefined | string | {}
 }
 
 /** Хук загружающий данные с сервера
@@ -19,6 +25,9 @@ export function useFetch<T>(url: string, options: OptionsType) {
     // Значение ошибки
     const [error, setError] = useState(false)
 
+    // Язык интерфейса
+    const editorLanguage = useSelector((store: AppState) => store.settings.editorLanguage)
+
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {
         setIsLoading(true)
@@ -28,8 +37,11 @@ export function useFetch<T>(url: string, options: OptionsType) {
         // Если загрузка не требуется, то ничего не делать
         if (!isLoading) return
 
+        // Добавление заголовка языка интерфейса
+        const extraOptions = setLanguageHeader(options, editorLanguage)
+
         try {
-            fetch(url, options)
+            fetch(url, extraOptions)
                 .then(rowData => rowData.json())
                 .then(jsonData => {
                     setIsLoading(false)
@@ -48,4 +60,13 @@ export function useFetch<T>(url: string, options: OptionsType) {
         error,
         doFetch
     }
+}
+
+/**
+ * Функция добавляет в объект параметров запроса заголовок Editor-Language с языком
+ * @param {Object} optionsObj — объект параметров запроса
+ * @param {String} lang — язык интерфейса пользователя
+ */
+function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
+    return {...optionsObj, headers: {...optionsObj.headers, 'Editor-Language': lang}}
 }

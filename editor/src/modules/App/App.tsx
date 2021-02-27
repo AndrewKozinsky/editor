@@ -3,8 +3,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect,
-    useLocation,
+    Redirect
 } from "react-router-dom"
 
 // Компоненты
@@ -30,7 +29,6 @@ import './css/app.scss'
 /** Компонент всего приложения */
 function App(): ReactElement {
     // TODO Реализуй тёмную тему.
-    // TODO Поставь Storybook.
     // TODO В каждом запросе нужно отправлять заголовок Editor-Language.
 
     // Проинициализировать приложение и возвратить статус сделано ли это
@@ -48,11 +46,7 @@ function App(): ReactElement {
 
     // Если есть адрес переадресации, то перебросить на другую страницу
     if (redirectPageAddress) {
-        return (
-            <Router>
-                <Redirect to={redirectPageAddress} />
-            </Router>
-        )
+        return <Router><Redirect to={redirectPageAddress} /></Router>
     }
 
     return (
