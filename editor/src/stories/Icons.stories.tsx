@@ -4,14 +4,13 @@ import React from 'react'
 import {Story, Meta} from '@storybook/react/types-6-0'
 
 import SvgIcon, { SvgIconPropType } from '../common/icons/SvgIcon';
-import {Header} from './Header';
 
 export default {
-    title: 'Example/SvgIcon',
+    title: 'Icons/SvgIcon',
     component: SvgIcon,
 } as Meta;
 
-const Template: Story<SvgIconPropType> = (args) => <SvgIcon type='logo' {...args} />;
+const Template: Story<SvgIconPropType> = (args) => <SvgIcon {...args} />;
 
 export const Logo = Template.bind({});
 Logo.args = {

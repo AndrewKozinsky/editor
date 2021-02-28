@@ -5,7 +5,7 @@ import {Story, Meta} from '@storybook/react/types-6-0';
 import Loader from '../common/misc/Loader/Loader';
 
 export default {
-    title: 'Example/Loader',
+    title: 'Misc/Loader',
     component: Loader,
 } as Meta;
 

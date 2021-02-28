@@ -1,6 +1,6 @@
 import React from 'react'
-// import {useDispatch, useSelector} from "react-redux"
-// import {Switch, Route, Redirect} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
+import EnterForm from '../../modules/auth/EnterForm/EnterForm'
 // import {setAuthTokenStatus} from "../../store/actions"
 // import TopNavigation from "./components/topNavEntrance"
 // import AuthSplitContainer from "./components/authSplitContainer"
@@ -9,8 +9,7 @@ import React from 'react'
 // import ForgotPasswordForm from "./components/forgotPasswordForm"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
-import AuthFormWrapper from '../../modules/auth/AuthFormWrapper';
-import SvgIcon from '../../common/icons/SvgIcon';
+import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
 import './css/EntrancePages.scss'
 
 
@@ -18,26 +17,25 @@ function EntrancePages() {
     return (
         <div className='entrance-pages-wrapper'>
             <AuthFormWrapper>
-                <SvgIcon type='logo' />
-                <p>AuthFormWrapper 3</p>
+                <Switch>
+                    {/*<Route path='/reg'>
+                        <RegForm />
+                    </Route>*/}
+                    <Route path='/enter'>
+                        <EnterForm />
+                    </Route>
+                    {/*<Route path='/forgot-password'>
+                        <ForgotPasswordForm />
+                    </Route>*/}
+                    {/*<Route path='/reset-password/:token'>
+                        <ResetPasswordForm />
+                    </Route>*/}
+                </Switch>
             </AuthFormWrapper>
         </div>
     )
 }
 
-/*<Switch>
-    <Route path='/reg'>
-        <RegForm />
-    </Route>
-    <Route path='/enter'>
-        <EnterForm />
-    </Route>
-    <Route path='/forgot-password'>
-        <ForgotPasswordForm />
-    </Route>
-    <Route path='/reset-password/:token'>
-        <ResetPasswordForm />
-    </Route>
-</Switch>*/
+
 
 export default EntrancePages

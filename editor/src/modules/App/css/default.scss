@@ -30,8 +30,8 @@ body {
 }
 
 
-/*
 a {
+    color: $link-color;
     text-decoration: none;
     border-bottom: 1px solid rgba( $link-color, .3 );
 
@@ -47,4 +47,14 @@ a {
             border-bottom-color: rgba( $visited-link-color, .5 );
         }
     }
-}*/
+
+    &[disable] {
+        color: desaturate($link-color, 90%);
+        cursor: default;
+        border-bottom-color: rgba( desaturate($link-color, 90%), .1 );
+
+        &:hover {
+            border-bottom-color: rgba( desaturate($link-color, 90%), .1 );
+        }
+    }
+}

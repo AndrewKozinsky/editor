@@ -1,0 +1,16 @@
+@import "../../../App/css/variables";
+
+$class: page-menu;
+
+.#{$class} {
+
+}
+
+.#{$class}__ul {
+
+}
+
+.#{$class}__li {
+    display: inline-block;
+    margin-right: 15px;
+}
