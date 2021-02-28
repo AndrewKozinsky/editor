@@ -1,16 +1,20 @@
 
-// ЦВЕТА
+// БАЗОВЫЕ ЦВЕТА
 // Базовый цвет
-$base-color: rgb(238, 239, 243);
+$base-color: rgb(238, 240, 243);
 // Акцентный увет
-$accent-color: rgb(0, 118, 255);
+$accent-color: rgb(0, 122, 255);
 
+// ЦВЕТА ТЕКСТА
 // Цвет основного текста
-$text-color: darken($base-color, 90%);
+$text-color: darken($base-color, 85%);
 // Цвет ссылки
 $link-color: $accent-color;
 // Цвет посещённой ссылки
 $visited-link-color: desaturate($accent-color, 30%);
+
+// ЦВЕТА ЭЛЕМЕНТОВ
+$base-color-5: darken($base-color, 11%);
 
 // Основной цвет значка
 $icon-color: darken($base-color, 78%);

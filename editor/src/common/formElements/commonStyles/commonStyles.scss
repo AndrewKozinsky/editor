@@ -1,0 +1,6 @@
+@import "../../../modules/App/css/variables";
+
+// Стиль элемента с фокусом
+@mixin focus() {
+    box-shadow: 0 0 0 1px rgba($accent-color, .9);
+}

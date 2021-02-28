@@ -1,10 +1,11 @@
 import React from 'react'
+import {useSelector} from 'react-redux';
 import Header from '../../textBlocks/Header/Header'
 import AuthFormMenu from '../AuthFormMenu/AuthFormMenu'
 import messages from '../messages'
-import '../AuthFormStyles/AuthFormStyles.scss'
-import {useSelector} from 'react-redux';
 import {AppState} from '../../../store/rootReduser';
+import Button from '../../../common/formElements/Button/Button'
+import '../AuthFormStyles/AuthFormStyles.scss'
 
 
 /** Форма входа в сервис */
@@ -22,6 +23,7 @@ function EnterForm() {
             <div className={`${authFormCls}__header-wrapper`}>
                 <Header text={messages.enterForm.formHeader[lang]} type='h1' />
             </div>
+            <Button text='Регистрация' />
         </div>
     )
 }

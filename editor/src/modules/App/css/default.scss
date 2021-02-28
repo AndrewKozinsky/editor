@@ -7,18 +7,24 @@
 @font-face {
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Regular.woff2") format("woff2");
-    font-weight: normal;
+    font-weight: 400;
+}
+@font-face {
+    font-family: "SF UI Display";
+    src: url("../fonts/SFUIDisplay-Medium.woff2") format("woff2");
+    font-weight: 500;
 }
 @font-face {
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Bold.woff2") format("woff2");
-    font-weight: bold;
+    font-weight: 700;
 }
 
 body {
     font-family: 'SF UI Display', sans-serif;
     font-size: 1.4rem;
     line-height: 1.8rem;
+    font-weight: 500;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -49,12 +55,12 @@ a {
     }
 
     &[disable] {
-        color: desaturate($link-color, 90%);
+        color: desaturate($link-color, 93%);
         cursor: default;
-        border-bottom-color: rgba( desaturate($link-color, 90%), .1 );
+        border-bottom-color: rgba( desaturate($link-color, 93%), .1 );
 
         &:hover {
-            border-bottom-color: rgba( desaturate($link-color, 90%), .1 );
+            border-bottom-color: rgba( desaturate($link-color, 93%), .1 );
         }
     }
 }
