@@ -1,13 +1,19 @@
 
 // ЦВЕТА
 // Базовый цвет
-$base-color: rgb(30, 30, 30);
+$base-color: rgb(238, 239, 243);
 
 // Цвет основного текста
-$text-color: $base-color;
+$text-color: darken($base-color, 90%);
+
+// Основной цвет значка
+$icon-color: darken($base-color, 70%);
+
 // Цвет фона
-$bg-color: lighten($base-color, 90%);
+$bg-color: $base-color;
+$bg-color-2: darken($base-color, 10%);
 
 
 // ЗАКРУГЛЕНИЯ
 $radius: 2px;
+$radius-2: 4px;

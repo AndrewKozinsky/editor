@@ -9,47 +9,35 @@ import React from 'react'
 // import ForgotPasswordForm from "./components/forgotPasswordForm"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
-// import s from './css/EntrancePages.module.scss'
+import AuthFormWrapper from '../../modules/auth/AuthFormWrapper';
+import SvgIcon from '../../common/icons/SvgIcon';
+import './css/EntrancePages.scss'
 
 
 function EntrancePages() {
-    // const dispatch = useDispatch()
-
-    // Получу статус токена авторизации
-    // const {authTokenStatus} = useSelector((store: AppState) => state.user)
-
-    // Если authTokenStatus равен нулю, то не понятно есть ли в браузере токен и верен ли он. Поэтому проверю.
-    /*if(authTokenStatus === 0) {
-        checkToken().then((status) => {
-            dispatch( setAuthTokenStatus(status) )
-        })
-    }*/
-
-    // Если токен действителен или в Хранилище есть имя пользователя, то сделать переадресацию на страницу заметок.
-    // if(authTokenStatus === 2) return <Redirect to='/notes'/>
-
-    /*return (
-        <div className={s.wrapper}>
-            <TopNavigation />
-            <AuthSplitContainer>
-                <Switch>
-                    <Route path='/reg'>
-                        <RegForm />
-                    </Route>
-                    <Route path='/enter'>
-                        <EnterForm />
-                    </Route>
-                    <Route path='/forgot-password'>
-                        <ForgotPasswordForm />
-                    </Route>
-                    <Route path='/reset-password/:token'>
-                        <ResetPasswordForm />
-                    </Route>
-                </Switch>
-            </AuthSplitContainer>
+    return (
+        <div className='entrance-pages-wrapper'>
+            <AuthFormWrapper>
+                <SvgIcon type='logo' />
+                <p>AuthFormWrapper 3</p>
+            </AuthFormWrapper>
         </div>
-    )*/
-    return <p>EntrancePages</p>
+    )
 }
+
+/*<Switch>
+    <Route path='/reg'>
+        <RegForm />
+    </Route>
+    <Route path='/enter'>
+        <EnterForm />
+    </Route>
+    <Route path='/forgot-password'>
+        <ForgotPasswordForm />
+    </Route>
+    <Route path='/reset-password/:token'>
+        <ResetPasswordForm />
+    </Route>
+</Switch>*/
 
 export default EntrancePages

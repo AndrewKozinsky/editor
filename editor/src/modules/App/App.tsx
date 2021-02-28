@@ -56,10 +56,7 @@ function App(): ReactElement {
                     <Route path='/' exact>
                         <EditorPage />
                     </Route>
-                    <Route path='/(reg|enter|forgot-password)'>
-                        <EntrancePages />
-                    </Route>
-                    <Route path='/reset-password/:token'>
+                    <Route path='/'>
                         <EntrancePages />
                     </Route>
                 </Switch>

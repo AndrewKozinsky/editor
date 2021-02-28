@@ -1,0 +1,11 @@
+@import "../../../modules/App/css/variables";
+
+
+.auth-form-wrapper {
+    width: 410px;
+    box-sizing: border-box;
+    background-color: $bg-color;
+
+    padding: 4rem 6rem;
+    border-radius: $radius-2;
+}
