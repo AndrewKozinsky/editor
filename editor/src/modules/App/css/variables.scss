@@ -1,29 +1,61 @@
 
-// БАЗОВЫЕ ЦВЕТА
-// Базовый цвет
-$base-color: rgb(238, 240, 243);
-// Акцентный увет
-$accent-color: rgb(0, 122, 255);
+:root {
+    // БАЗОВЫЕ ЦВЕТА
+    // Части базового цвета
+    --base-h-part: 240; // Цветовой оттенок
+    --base-s-part: 8%; // Насыщенность (тускло -> ярко)
+    --base-l-part: 92%; // Светимость (темно -> светло)
 
-// ЦВЕТА ТЕКСТА
-// Цвет основного текста
-$text-color: darken($base-color, 85%);
-// Цвет ссылки
-$link-color: $accent-color;
-// Цвет посещённой ссылки
-$visited-link-color: desaturate($accent-color, 30%);
+    // Базовый цвет
+    --base-color: hsl(var(--base-h-part), var(--base-s-part), var(--base-l-part));
 
-// ЦВЕТА ЭЛЕМЕНТОВ
-$button-color: darken($base-color, 11%);
+    // Части акцентного цвета
+    --accent-h-part: 211;
+    --accent-s-part: 100%;
+    --accent-l-part: 50%;
 
-// Основной цвет значка
-$icon-color: darken($base-color, 78%);
-
-// Цвет фона
-$bg-color: $base-color;
-$bg-color-2: darken($base-color, 10%);
+    // Акцентный цвет
+    --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
 
 
-// ЗАКРУГЛЕНИЯ
-$radius: 2px;
-$radius-2: 4px;
+    // ЦВЕТА ТЕКСТА
+    // Цвет основного текста
+    --text-color: hsl(var(--base-h-part), var(--base-s-part), 15%);
+
+
+    // ЦВЕТА ССЫЛОК
+    // Цвет ссылки
+    --link-color: var(--accent-color);
+    // Цвет посещённой ссылки
+    --visited-link-color: hsl(calc(var(--accent-h-part) + 20), var(--accent-s-part), 55%);
+
+
+    // ЦВЕТА ЭЛЕМЕНТОВ
+    // Цвет кнопки
+    --button-color: hsl(var(--base-h-part), var(--base-s-part), 83%);
+    // Наведение на кнопку
+    --button-color-hover: hsl(var(--base-h-part), var(--base-s-part), 80%);
+
+
+    // ЗНАЧКИ
+    // Основной цвет значка
+    --icon-color: hsl(var(--base-h-part), var(--base-s-part), 22%);
+
+
+    // ЦВЕТА ФОНА
+    // Цвет фона
+    --bg-color: var(--base-color);
+    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 85%);
+
+
+    // РАЗНОЕ
+    // Цвет наведения
+    --focus-color: hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), .9);
+}
+
+
+:root {
+    // ЗАКРУГЛЕНИЯ
+    --radius: 2px;
+    --radius-2: 4px;
+}

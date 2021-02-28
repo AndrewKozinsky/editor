@@ -1,10 +1,10 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
 import {
     Link,
     useRouteMatch
 } from "react-router-dom"
 import './css/AuthFormMenu.scss'
-import {useSelector} from 'react-redux'
 import {AppState} from '../../../store/rootReduser'
 import messages from '../messages'
 
@@ -64,7 +64,10 @@ function MenuLink(props: MenuLinkPropType) {
     let match = useRouteMatch({
         path: to,
         exact: true
-    });
+    })
 
-    return <Link to={to} disable={match}>{label}</Link>
+    const classes: string[] = []
+    if (match) classes.push(`${CN}--disabled-link`)
+
+    return <Link to={to} className={classes}>{label}</Link>
 }

@@ -9,7 +9,7 @@
     animation: spin 1.25s linear infinite;
 
     circle {
-        stroke: $text-color;
+        stroke: var(--text-color);
         opacity: .75;
     }
 

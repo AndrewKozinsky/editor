@@ -6,7 +6,7 @@ $class: btn;
 .#{$class} {
     cursor: pointer;
     border: none;
-    border-radius: $radius-2;
+    border-radius: var(--radius-2);
     transition: background-color .2s;
 
     &:hover {
@@ -39,9 +39,10 @@ $class: btn;
 // Цвет кнопки.
 // base (стандартный цвет), accent (акцентный цвет)
 .#{$class}--base-color {
-    background-color: $button-color;
+    background-color: var(--button-color);
+    transition: background-color .2s;
 
     &:hover {
-        background-color: darken($button-color, 4%);
+        background-color: var(--button-color-hover);
     }
 }

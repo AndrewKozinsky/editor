@@ -2,5 +2,5 @@
 
 // Стиль элемента с фокусом
 @mixin focus() {
-    box-shadow: 0 0 0 1px rgba($accent-color, .9);
+    box-shadow: 0 0 0 1px var(--focus-color);
 }

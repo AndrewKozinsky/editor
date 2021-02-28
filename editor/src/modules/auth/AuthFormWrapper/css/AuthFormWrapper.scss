@@ -5,10 +5,10 @@ $class: auth-form-wrapper;
 .#{$class} {
     width: 410px;
     box-sizing: border-box;
-    background-color: $bg-color;
+    background-color: var(--bg-color);
 
     padding: 4rem 6rem;
-    border-radius: $radius-2;
+    border-radius: var(--radius-2);
 }
 
 .#{$class}__logo-wrapper {
