@@ -39,9 +39,9 @@ $class: btn;
 // Цвет кнопки.
 // base (стандартный цвет), accent (акцентный цвет)
 .#{$class}--base-color {
-    background-color: $base-color-5;
+    background-color: $button-color;
 
     &:hover {
-        background-color: darken($base-color-5, 4%);
+        background-color: darken($button-color, 4%);
     }
 }
