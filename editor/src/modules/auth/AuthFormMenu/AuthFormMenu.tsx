@@ -1,18 +1,18 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+/*import {
     Link,
     useRouteMatch
 } from "react-router-dom"
 import './css/AuthFormMenu.scss'
-import {AppState} from '../../../store/rootReduser'
-import messages from '../messages'
+import {AppState} from '../../../store/rootReducer'
+import messages from '../messages'*/
 
 
 // Корневой класс
-const CN = 'page-menu'
+// const CN = 'page-menu'
 
-function AuthFormMenu() {
+/*function AuthFormMenu() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -41,18 +41,19 @@ function AuthFormMenu() {
             </ul>
         </nav>
     );
-}
+}*/
 
-export default AuthFormMenu
+// export default AuthFormMenu
 
 
 
-type MenuLinkPropType = {
+/*type MenuLinkPropType = {
     to: string
     label: string
-}
+}*/
 
 /** Компонент ссылки меню */
+/*
 function MenuLink(props: MenuLinkPropType) {
 
     const {
@@ -70,4 +71,4 @@ function MenuLink(props: MenuLinkPropType) {
     if (match) classes.push(`${CN}--disabled-link`)
 
     return <Link to={to} className={classes}>{label}</Link>
-}
+}*/

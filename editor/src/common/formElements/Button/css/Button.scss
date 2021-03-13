@@ -1,9 +1,9 @@
-@import "../../../../modules/App/css/variables";
-@import "../../../../common/formElements/commonStyles/commonStyles";
+//@import "../../../../modules/App/css/variables";
+//@import "../../../../common/formElements/commonStyles/commonStyles";
 
-$class: btn;
+//$class: btn;
 
-.#{$class} {
+/*.#{$class} {
     cursor: pointer;
     border: none;
     border-radius: var(--radius-2);
@@ -17,32 +17,33 @@ $class: btn;
         // Включение стандартной фокусировки
         @include focus
     }
-}
+}*/
 
 
 // Размер кнопки.
 // small (маленькая), middle (стандартного размера), big (большая)
-.#{$class}--middle-size {
+/*.#{$class}--middle-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: 4px 11px;
-}
+}*/
 
 
 // Тип кнопки.
 // standard (стандартная кнопка), onlyIcon (только значёк).
-.#{$class}--standard {
+/*.#{$class}--standard {
 
-}
+}*/
 
 
 // Цвет кнопки.
 // base (стандартный цвет), accent (акцентный цвет)
-.#{$class}--base-color {
+/*.#{$class}--base-color {
+    color: var(--text-color);
     background-color: var(--button-color);
     transition: background-color .2s;
 
     &:hover {
         background-color: var(--button-color-hover);
     }
-}
+}*/

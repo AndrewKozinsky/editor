@@ -1,5 +1,6 @@
-import {createStore} from 'redux'
-import { rootReducer } from './rootReduser'
+// @ts-ignore
+import { createStore } from 'redux'
+import { rootReducer } from './rootReducer'
 
 
 export default createStore(

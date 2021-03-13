@@ -1,14 +1,14 @@
-import React from 'react'
-import './css/Header.scss'
+// import React from 'react'
+// import './css/Header.scss'
 
 
-export type HeaderPropType = {
+/*export type HeaderPropType = {
     text: string,
     type: string
-}
+}*/
 
 /** Заголовок форм авторизации и аутентификации */
-function Header(props: HeaderPropType) {
+/*function Header(props: HeaderPropType) {
 
     const {
         text, // Текст заголовка
@@ -22,6 +22,6 @@ function Header(props: HeaderPropType) {
             { text }
         </h1>
     )
-}
+}*/
 
-export default Header
+// export default Header

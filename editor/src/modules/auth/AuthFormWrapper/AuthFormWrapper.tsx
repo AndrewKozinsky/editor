@@ -1,14 +1,14 @@
-import React, {ReactNode} from 'react'
-import SvgIcon from '../../../common/icons/SvgIcon'
-import './css/AuthFormWrapper.scss'
+// import React, {ReactNode} from 'react'
+// import SvgIcon from '../../../common/icons/SvgIcon'
+// import './css/AuthFormWrapper.scss'
 
 
-type PropType = {
+/*type PropType = {
     children: ReactNode
-}
+}*/
 
 /** Обёртка форм регистрации, входа пользователя и сброса пароля */
-function AuthFormWrapper(props: PropType) {
+/*function AuthFormWrapper(props: PropType) {
     const CN = 'auth-form-wrapper'
 
     return (
@@ -19,6 +19,6 @@ function AuthFormWrapper(props: PropType) {
             {props.children}
         </section>
     )
-}
+}*/
 
-export default AuthFormWrapper
+// export default AuthFormWrapper

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 
 /**
  * Функция возращает атрибуты с размерами значка в SVG.

@@ -4,8 +4,6 @@ import * as path from 'path'
 import * as bodyParser from 'body-parser'
 const cookieParser = require('cookie-parser')
 import userRouter from './routes/userRouter'
-//const rateLimit = require('express-rate-limit')
-//const myNotesRouter = require('./routes/myNotesRouter')
 import { AppError } from './utils/errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
 import { addExtraHeaders } from './middlewares/commonMiddlewares'
@@ -34,12 +32,12 @@ app.use(express.static(path.join(__dirname, 'staticFiles')))
 // Установка в req.headers.lang английского языка если язык не передан
 app.use(addExtraHeaders)
 
-app.get("/api/", function (req: Request, res: Response) {
+app.get("/", function (req: Request, res: Response) {
     res.send("Our api server is working correctly.")
 })
 
 // Маршруты API
-app.use('/api/users/', userRouter);
+app.use('/users/', userRouter);
 
 // Статические файлы на сервере.
 app.use(express.static(path.join(__dirname, 'staticFiles')))

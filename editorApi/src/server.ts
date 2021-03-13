@@ -23,7 +23,7 @@ function startServer(): void {
 
     // Прослушивание порта на сервере
     const server = app.listen(config.port, (): void => {
-        console.log(`⚡️ Server is running at http:localhost/:${config.port}`)
+        console.log(`⚡️ API server is running`)
     })
 
     // Выключение сервера при ошибке типа unhandledRejection

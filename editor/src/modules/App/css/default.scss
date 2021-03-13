@@ -1,8 +1,9 @@
-@import "variables";
+//@import "variables";
 
 :root {
     font-size: 10px;
 }
+
 
 @font-face {
     font-family: "SF UI Display";
@@ -34,7 +35,6 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
 }
-
 
 a {
     color: var(--link-color);

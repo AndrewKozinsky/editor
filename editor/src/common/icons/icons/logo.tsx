@@ -1,3 +1,5 @@
+import React from 'react'
+
 export default function Logo() {
     return (
         <g transform="translate(0.000000, 2.823242)">

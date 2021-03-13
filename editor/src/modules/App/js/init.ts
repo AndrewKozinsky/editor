@@ -1,14 +1,14 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from '../../../store/rootReduser'
-import {UserReducerType} from '../../../store/user/userReducer'
+import {AppState} from 'store/rootReducer'
+// import {UserReducerType} from '../../../store/user/userReducer'
 import {useGetUserToken} from '../../../requests/authRequests'
-import {setAuthTokenStatus} from '../../../store/user/userActions'
+import {setAuthTokenStatus} from 'store/user/userActions'
 import {
     setEditorLanguage,
     setEditorTheme,
     setEditorSize
-} from '../../../store/settings/settingsActions'
+} from 'store/settings/settingsActions'
 
 /** Хук инициализирующий приложение */
 export function useInit() {
@@ -44,15 +44,15 @@ function useGetAndSetEditorSettings() {
         // Если каких-то значений нет, то в LocalStorage поставить стандартные значения
         if (!language) {
             language = 'eng' // eng или rus
-            localStorage.setItem('editorLanguage', 'eng')
+            localStorage.setItem('editorLanguage', language)
         }
         if (!theme) {
             theme = 'light' // light или dark
-            localStorage.setItem('editorTheme', 'light')
+            localStorage.setItem('editorTheme', theme)
         }
         if (!size) {
             size = 'standard' // standard или big
-            localStorage.setItem('editorSize', 'standard')
+            localStorage.setItem('editorSize', size)
         }
 
         // Поставить значения в Хранилище
@@ -60,10 +60,6 @@ function useGetAndSetEditorSettings() {
         dispatch( setEditorTheme(theme) )
         dispatch( setEditorSize(size) )
     }, [])
-
-
-    // Статус токена
-    const { authTokenStatus } = useSelector((store: AppState) => store.user)
 }
 
 

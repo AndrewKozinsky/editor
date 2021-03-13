@@ -1,17 +1,17 @@
-import React, { ReactElement } from 'react'
+// import React, { ReactElement } from 'react'
 // import { useSelector } from 'react-redux'
 // import { Redirect } from 'react-router-dom'
 // import Loader from '../../common/misc/Loader/Loader'
-// import { AppState } from '../../store/rootReduser'
+// import { AppState } from '../../store/rootReducer'
 // import { UserReducerType } from '../../store/user/userReducer'
 // import { useSetTokenStatus } from './js/functions'
-import './css/EditorPage.scss'
+// import './css/EditorPage.scss'
 
 /**
  * Главная страница приложения. В зависимости от наличия авторизации
  * переадресовывает или на страницу входа или в редактор.
  */
-export default function EditorPage(): ReactElement {
+// export default function EditorPage(): ReactElement {
 
     // Статус токена
     // const { authTokenStatus } = useSelector((store: AppState) => store.user)
@@ -39,5 +39,5 @@ export default function EditorPage(): ReactElement {
 
     // Есть правильный токен. Перенаправить на страницу заметок.
     // return <Redirect to='/editor' />
-    return <p>EditorPage</p>
-}
+    // return <p>EditorPage</p>
+// }

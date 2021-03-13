@@ -1,9 +1,8 @@
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import {
-    useEffect,
-    useState
-} from 'react'
-import {AppState} from '../../../store/rootReduser'
+import { AppState } from 'store/rootReducer'
+// @ts-ignore
+import { useHistory } from 'react-router-dom'
 
 
 /** Хук возвращает классы обёртки компонента App */
@@ -19,15 +18,11 @@ export function useGetAppClasses() {
 }
 
 
-/** Хук возвращает адрес на который нужно переадресации если пользователя нужно
- * перебросить на другую страницу */
-export function useGetRedirectPageAddress() {
-    // Возвращаемый адрес страницы
-    const [redirectPage, setRedirectPage] = useState<null | string>(null)
+export function useRedirectPage() {
+    let history = useHistory()
 
-    // Статус токена авторизации пользователя
+    // Статус токена авторизации пользователя. Значения: 0, 1 или 2.
     const { authTokenStatus } = useSelector((store: AppState) => store.user)
-
 
     // При изменении authTokenStatus
     useEffect(function () {
@@ -36,13 +31,13 @@ export function useGetRedirectPageAddress() {
 
         // Текущий адрес
         const pathname = window.location.pathname
+        debugger
 
         // Если нахожусь на главной странице (странице редактора)
         // и у пользователя нет правильного токена авторизации то отправить на страницу входа
-        if (pathname === '/' && authTokenStatus === 1) setRedirectPage('/enter')
+        if (pathname === '/editor/' && authTokenStatus === 1) {
+            // перебросить на другую страницу
+            history.push('/enter');
+        }
     }, [authTokenStatus])
-
-
-    return redirectPage
 }
-
