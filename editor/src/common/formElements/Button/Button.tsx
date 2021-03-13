@@ -1,9 +1,9 @@
-// import React, {ReactElement, ReactNode} from 'react'
-// import {makeCN} from '../../../utils/StringUtils'
-// import './css/Button.scss'
+import React from 'react'
+import {makeCN} from '../../../utils/StringUtils'
+import './css/Button.scss'
 
 
-/*export type ButtonPropType = {
+export type ButtonPropType = {
     size?: string
     type?: string
     color?: string
@@ -11,9 +11,9 @@
     text?: string
     // isDisabled?: boolean
     // isLoading?: boolean
-}*/
+}
 
-/*function Button(props: ButtonPropType) {
+function Button(props: ButtonPropType) {
 
     const {
         size = 'middle', // Размер кнопки. Варианты: small (маленькая), middle (стандартного размера), big (большая)
@@ -57,6 +57,6 @@
     return (
         <button className={makeCN(classes)}>{btnText}</button>
     )
-}*/
+}
 
-// export default Button
+export default Button

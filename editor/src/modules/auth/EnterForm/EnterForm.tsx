@@ -1,15 +1,15 @@
-// import React from 'react'
-// import {useSelector} from 'react-redux';
-// import Header from '../../textBlocks/Header/Header'
-// import AuthFormMenu from '../AuthFormMenu/AuthFormMenu'
-// import messages from '../messages'
-// import {AppState} from '../../../store/rootReducer';
-// import Button from '../../../common/formElements/Button/Button'
-// import '../AuthFormStyles/AuthFormStyles.scss'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import Header from '../../textBlocks/Header/Header'
+import AuthFormMenu from '../AuthFormMenu/AuthFormMenu'
+import messages from '../messages'
+import { AppState } from 'store/rootReducer';
+import Button from 'common/formElements/Button/Button'
+import '../AuthFormStyles/AuthFormStyles.scss'
 
 
 /** Форма входа в сервис */
-/*function EnterForm() {
+function EnterForm() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -26,6 +26,6 @@
             <Button text='Регистрация' />
         </div>
     )
-}*/
+}
 
-// export default EnterForm;
+export default EnterForm

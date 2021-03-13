@@ -6,8 +6,8 @@ import { Switch, Route } from 'react-router-dom'
 import Loader from 'common/misc/Loader/Loader'
 
 // Страницы
-// import EditorPage from '../../pages/EditorPage/EditorPage'
-// import EntrancePages from '../../pages/EntrancePages/EntrancePages'
+import EditorPage from 'pages/EditorPage/EditorPage'
+import EntrancePages from 'pages/EntrancePages/EntrancePages'
 
 // JS и CSS
 import { useInit } from './js/init'
@@ -24,8 +24,6 @@ import './css/app.scss'
 /** Компонент всего приложения */
 function App(): ReactElement {
     // TODO Разберись как получить process.env потому что от этого зависит адрес запроса.
-    // TODO Сделай карты кода.
-    // TODO Разберись почему не работает отладчик.
     // TODO Все обёртки замени на компоненты-обёртки
     // TODO Сделай меню общим компонентом, добавь на страницу.
     // TODO Разделители в форме должны быть общим компонентом. Добавь на страницу.
@@ -36,7 +34,6 @@ function App(): ReactElement {
     // Переадресовать пользователя на другую страницу в зависимости от того
     // пользователь незарегистрирован или зарегистрирован
     useRedirectPage()
-
     // Классы обёртки компонента
     const appClasses = useGetAppClasses()
 
@@ -47,12 +44,10 @@ function App(): ReactElement {
         <div className={appClasses}>
             <Switch>
                 <Route path='/' exact>
-                    {/*<EditorPage />*/}
-                    EditorPage
+                    <EditorPage />
                 </Route>
                 <Route path='/enter'>
-                    {/*<EntrancePages />*/}
-                    EntrancePages
+                    <EntrancePages />
                 </Route>
                 <Route path="*">
                     <p>404</p>

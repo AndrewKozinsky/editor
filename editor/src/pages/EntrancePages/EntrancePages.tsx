@@ -1,43 +1,44 @@
-// import React from 'react'
-// import {Switch, Route, Redirect} from 'react-router-dom'
+import React from 'react'
+// @ts-ignore
+import {Switch, Route, Redirect} from 'react-router-dom'
 // import EnterForm from '../../modules/auth/EnterForm/EnterForm'
 // import {setAuthTokenStatus} from "../../store/actions"
 // import TopNavigation from "./components/topNavEntrance"
 // import AuthSplitContainer from "./components/authSplitContainer"
 // import RegForm from "./components/regForm"
-// import EnterForm from "./components/enterForm"
+import EnterForm from "modules/auth/EnterForm/EnterForm"
 // import ForgotPasswordForm from "./components/forgotPasswordForm"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
-// import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
+import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
 // import './css/EntrancePages.scss'
-// import ChangeThemeButton from '../../common/misc/ChangeThemeButton/ChangeThemeButton'
+import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
 
 
-/*function EntrancePages() {
+function EntrancePages() {
     return (
         <div className='entrance-pages-wrapper'>
             <ChangeThemeButton />
             <AuthFormWrapper>
                 <Switch>
-                    {/!*<Route path='/reg'>
+                    {/*<Route path='/reg'>
                         <RegForm />
-                    </Route>*!/}
+                    </Route>*/}
                     <Route path='/enter'>
                         <EnterForm />
                     </Route>
-                    {/!*<Route path='/forgot-password'>
+                    {/*<Route path='/forgot-password'>
                         <ForgotPasswordForm />
-                    </Route>*!/}
-                    {/!*<Route path='/reset-password/:token'>
+                    </Route>*/}
+                    {/*<Route path='/reset-password/:token'>
                         <ResetPasswordForm />
-                    </Route>*!/}
+                    </Route>*/}
                 </Switch>
             </AuthFormWrapper>
         </div>
     )
-}*/
+}
 
 
 
-// export default EntrancePages
+export default EntrancePages

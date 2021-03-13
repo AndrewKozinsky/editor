@@ -5,7 +5,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = function(env) {
     // Режим разработки?
-    const isDev = env.mode === 'development'
+    const isDev = env.mode !== 'production'
+    
+    console.log('-------------------------------------------')
+    console.log(isDev)
+    console.log('-------------------------------------------')
     
     return {
         entry: './src/index.tsx',

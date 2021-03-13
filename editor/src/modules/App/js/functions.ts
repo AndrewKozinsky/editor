@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 // @ts-ignore
@@ -31,7 +31,6 @@ export function useRedirectPage() {
 
         // Текущий адрес
         const pathname = window.location.pathname
-        debugger
 
         // Если нахожусь на главной странице (странице редактора)
         // и у пользователя нет правильного токена авторизации то отправить на страницу входа

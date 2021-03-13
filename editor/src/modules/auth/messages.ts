@@ -1,13 +1,13 @@
 
-/*type messagesType = {
+type messagesType = {
     [key: string]: {
         [key: string]: {
             [key: string]: string
         }
     }
-}*/
+}
 
-/*const messages: messagesType = {
+const messages: messagesType = {
     // Меню форм
     menu: {
         // Пункт «Регистрация»
@@ -34,6 +34,6 @@
             rus: 'Вход'
         }
     }
-}*/
+}
 
-// export default messages
+export default messages
