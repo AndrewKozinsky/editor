@@ -1,0 +1,27 @@
+$class: notice;
+
+.#{$class} {
+    display: flex;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+
+.#{$class}--standard {
+    color: var(--text-color);
+}
+.#{$class}--error {
+    color: hsl(354, 100, 44);
+}
+.#{$class}--success {
+    color: hsl(134, 61, 40);
+}
+
+.#{$class}__icon {
+    flex-shrink: 0;
+    width: 2.5rem;
+    margin-top: 0.3rem;
+}
+
+.#{$class}__paragraph {
+
+}

@@ -24,7 +24,7 @@ $class: text-input;
     &::placeholder {
         font-size: 1.3rem;
         line-height: 1.6rem;
-        color: var(--button-color-hover);
+        color: var(--text-placeholder-color);
     }
 
     &:focus {

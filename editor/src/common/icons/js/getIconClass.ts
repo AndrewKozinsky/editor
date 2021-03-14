@@ -9,6 +9,6 @@ export function getIconClass(type: string): string {
         case 'logo':
             // Базовый цвет значков
             return 'base-svg-logo'
-        default: return 'base-svg-logo'
+        default: return ''
     }
 }

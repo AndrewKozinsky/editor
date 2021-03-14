@@ -7,6 +7,8 @@ import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import messages from '../messages'
+import messagesWithJSX from '../messagesWithJSX'
+import Notice from 'common/Notice/Notice'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
 
@@ -32,16 +34,27 @@ function EnterForm() {
             <Wrapper>
                 <TextInput
                     label={messages.enterForm.emailField[lang]}
+                    type='email'
                     size='middle'
                     placeholder={messages.enterForm.emailPlaceholder[lang]}
                     autoFocus
                 />
             </Wrapper>
             <Wrapper t={15}>
-                <TextInput label={messages.enterForm.passwordField[lang]} size='middle' />
+                <TextInput
+                    type='password'
+                    label={messages.enterForm.passwordField[lang]}
+                    size='middle'
+                />
             </Wrapper>
             <Wrapper t={20} align={'right'}>
                 <Button text={messages.enterForm.submitBtnText[lang]} />
+            </Wrapper>
+            <Wrapper t={30}>
+                <Notice>{messagesWithJSX.enterForm.newUser[lang]}</Notice>
+            </Wrapper>
+            <Wrapper t={10}>
+                <Notice>{messagesWithJSX.enterForm.forgotPassword[lang]}</Notice>
             </Wrapper>
         </div>
     )

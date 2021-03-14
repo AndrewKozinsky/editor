@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 // @ts-ignore
 import { Link, useRouteMatch } from 'react-router-dom'
 import {AppState} from 'src/store/rootReducer'
-import messages from 'modules/auth/messages'
+import messages from 'src/modules/auth/messages'
 import './css/Menu.scss'
 
 

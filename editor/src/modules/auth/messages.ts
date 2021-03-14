@@ -34,7 +34,7 @@ const messages: messagesType = {
             rus: 'Вход'
         },
         emailField: {
-            eng: 'E-Mail *',
+            eng: 'E-mail *',
             rus: 'Электронная почта *'
         },
         emailPlaceholder: {
@@ -46,7 +46,7 @@ const messages: messagesType = {
             rus: 'Пароль *'
         },
         submitBtnText: {
-            eng: 'Sign In',
+            eng: 'Sign in',
             rus: 'Войти'
         },
     }

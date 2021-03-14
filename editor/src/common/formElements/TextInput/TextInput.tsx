@@ -1,9 +1,11 @@
 import React from 'react'
 import './css/TextInput.scss'
-import {makeCN} from '../../../utils/StringUtils';
+import { makeCN } from 'utils/StringUtils'
+import Notice from 'common/Notice/Notice'
 
 
 type TextInputPropType = {
+    type?: 'text' | 'email' | 'password' // Подпись текстового поля
     label?: string // Подпись текстового поля
     size?: 'small' | 'middle' // Размер поля
     placeholder?: string, // Заполнитель
@@ -15,6 +17,7 @@ type TextInputPropType = {
 function TextInput(props: TextInputPropType) {
 
     const {
+        type = 'text', // Тип поля. Варианты: text, email
         size = 'small', // Размер поля. Варианты: small (маленькое), middle (среднего размера)
         placeholder, // Заполнитель
         autoFocus = false, // Нужно ли ставить фокус при загрузке
@@ -31,7 +34,7 @@ function TextInput(props: TextInputPropType) {
     return (
         <div>
             <Label {...props} />
-            <input type='text' className={makeCN(classes)} placeholder={placeholder} autoFocus={autoFocus} />
+            <input type={type} className={makeCN(classes)} placeholder={placeholder} autoFocus={autoFocus} />
         </div>
     )
 }

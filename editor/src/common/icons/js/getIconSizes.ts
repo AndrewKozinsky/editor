@@ -15,6 +15,14 @@ export function getIconSizes(type: string) {
                 height: "18px",
                 viewBox: "0 0 84 18"
             }
+        case 'errorTriangle':
+        case 'successCircle':
+            // Базовый цвет значков
+            return {
+                width: "13px",
+                height: "13px",
+                viewBox: "0 0 13 13"
+            }
         default: return {}
     }
 }

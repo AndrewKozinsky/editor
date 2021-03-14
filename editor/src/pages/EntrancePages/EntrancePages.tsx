@@ -11,7 +11,7 @@ import EnterForm from "modules/auth/EnterForm/EnterForm"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
 import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
-// import './css/EntrancePages.scss'
+import './css/EntrancePages.scss'
 import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
 
 

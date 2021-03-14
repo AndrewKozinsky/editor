@@ -5,5 +5,8 @@
  * @param {Array} classesArr
  */
 export function makeCN(classesArr: string[]) {
-    return classesArr.join(' ')
+    // Сформировать новый массив классов без пустых значений
+    const filteredClassesArr = classesArr.filter(cls => cls !== '')
+
+    return filteredClassesArr.join(' ')
 }
