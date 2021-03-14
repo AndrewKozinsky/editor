@@ -1,8 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-// import {UserReducerType} from '../../../store/user/userReducer'
-import {useGetUserToken} from '../../../requests/authRequests'
+import {useGetUserToken} from 'requests/authRequests'
 import {setAuthTokenStatus} from 'store/user/userActions'
 import {
     setEditorLanguage,
@@ -13,11 +12,11 @@ import {
 /** Хук инициализирующий приложение */
 export function useInit() {
 
-    // Поставить настройки редактора в Хранилище
-    useGetAndSetEditorSettings()
-
     // Проинициализировано ли приложение
     const [isInitialized, setIsInitialized] = useState(false)
+
+    // Поставить настройки редактора в Хранилище
+    useGetAndSetEditorSettings()
 
     // Установка статуса токена пользователя если он неизвестен
     useSetTokenStatus(setIsInitialized)
@@ -68,7 +67,7 @@ function useGetAndSetEditorSettings() {
  * Изначально токен статуса авторизации пользователя равен нулю.
  * Это значит не известно есть ли токен в куках и правилен ли он.
  * Поэтому делается запрос на сервер для его проверки. И в зависимости от этого статус становится
- * или 1 (токена нет или он недействительный) или 2 (токен правильный)
+ * или 1 (токена нет или он неверный) или 2 (токен правильный)
  */
 export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => void) {
 
@@ -90,7 +89,7 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
     useEffect(function () {
         if (!userToken) return
 
-        // Статус токена пользователя: 1 или 2
+        // Если ответ успешен, то поставить 2, в противном случае токена нет, поэтому 1
         const userTokenStatus = userToken.status === 'success' ? 2 : 1
 
         // Установка статуса токена в Хранилище

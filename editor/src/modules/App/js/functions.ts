@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
+import {makeCN} from 'utils/StringUtils'
 
 
 /** Хук возвращает классы обёртки компонента App */
@@ -11,10 +12,15 @@ export function useGetAppClasses() {
     const editorTheme = useSelector((store: AppState) => store.settings.editorTheme)
 
     // Составить
-    let classes = 'app'
-    if (editorTheme === 'dark') classes += ' dark-theme'
+    let classes = ['app']
+    if (editorTheme === 'dark') classes.push('dark-theme')
 
-    return classes
+    // Текущий адрес
+    const pathname = window.location.pathname
+    // Если нахожусь не на странице редактора, то поставить более тёмный фон
+    if (pathname !== '/editor/') classes.push('app__second-bg')
+
+    return makeCN(classes)
 }
 
 

@@ -1,6 +1,7 @@
 // Тестовый стиль
 *{
     transition: background-color .7s, color .7s, fill .7s !important;
+    transition-delay: 0s !important;
 }
 
 :root {
@@ -40,6 +41,9 @@
     // Наведение на кнопку
     --button-color-hover: hsl(var(--base-h-part), var(--base-s-part), 80%);
 
+    // Текстовое поле
+    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 100%);
+
 
     // ЗНАЧКИ
     // Основной цвет значка
@@ -67,7 +71,7 @@
     // Части базового цвета
     //--base-h-part: 240; // Цветовой оттенок
     //--base-s-part: 8%; // Насыщенность (тускло -> ярко)
-    --base-l-part: 10%; // Светимость (темно -> светло)
+    --base-l-part: 12%; // Светимость (темно -> светло)
 
     // Базовый цвет
     --base-color: hsl(var(--base-h-part), var(--base-s-part), var(--base-l-part));
@@ -84,6 +88,9 @@
     // Наведение на кнопку
     --button-color-hover: hsl(var(--base-h-part), var(--base-s-part), 20%);
 
+    // Текстовое поле
+    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 0%);
+
 
     // ЗНАЧКИ
     // Основной цвет значка
@@ -93,5 +100,5 @@
     // ЦВЕТА ФОНА
     // Цвет фона: первый и второй
     --bg-color: var(--base-color);
-    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 16%);
+    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 17%);
 }

@@ -1,5 +1,7 @@
 
-.app {
+$class: app;
+
+.#{$class} {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,4 +12,8 @@
     color: var(--text-color);
     background-color: var(--bg-color);
     margin: 0 auto;
+}
+
+.#{$class}__second-bg {
+    background-color: var(--bg-color-2);
 }

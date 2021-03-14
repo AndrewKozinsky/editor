@@ -32,7 +32,23 @@ const messages: messagesType = {
         formHeader: {
             eng: 'Log in',
             rus: 'Вход'
-        }
+        },
+        emailField: {
+            eng: 'E-Mail *',
+            rus: 'Электронная почта *'
+        },
+        emailPlaceholder: {
+            eng: 'For example: mail@gmail.com',
+            rus: 'Например: mail@gmail.com'
+        },
+        passwordField: {
+            eng: 'Password *',
+            rus: 'Пароль *'
+        },
+        submitBtnText: {
+            eng: 'Sign In',
+            rus: 'Войти'
+        },
     }
 }
 

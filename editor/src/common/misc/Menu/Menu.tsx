@@ -2,15 +2,16 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 // @ts-ignore
 import { Link, useRouteMatch } from 'react-router-dom'
-import {AppState} from 'store/rootReducer'
-import messages from '../messages'
-import './css/AuthFormMenu.scss'
+import {AppState} from 'src/store/rootReducer'
+import messages from 'modules/auth/messages'
+import './css/Menu.scss'
 
 
 // Корневой класс
-const CN = 'page-menu'
+const CN = 'menu'
 
-function AuthFormMenu() {
+/** Компонент меню. Сейчас используется на форме входа. */
+function Menu() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -38,12 +39,10 @@ function AuthFormMenu() {
                 </li>
             </ul>
         </nav>
-    );
-
-    return <p>AuthFormMenu</p>
+    )
 }
 
-export default AuthFormMenu
+export default Menu
 
 
 

@@ -4,9 +4,9 @@ import './css/Loader.scss'
 function Loader() {
     return (
         <div className='loader-wrapper'>
-            <svg className="animate-loader" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-                <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+            <svg className="animate-loader" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 34 34">
+                <circle strokeWidth="2" cx="17" cy="17" r="16"></circle>
+                <path d="M17,6.03961325e-14 L17,2 L17,2 C8.71572875,2 2,8.71572875 2,17 C2,17.336312 2.011068,17.670039 2.03285964,18.0008365 L0.0289642667,18.0007012 C0.00974382409,17.6695881 0,17.3359319 0,17 C0,7.61115925 7.61115925,6.03961325e-14 17,6.03961325e-14 Z" fillRule="nonzero"></path>
             </svg>
         </div>
     )

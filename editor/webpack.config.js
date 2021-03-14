@@ -7,10 +7,6 @@ module.exports = function(env) {
     // Режим разработки?
     const isDev = env.mode !== 'production'
     
-    console.log('-------------------------------------------')
-    console.log(isDev)
-    console.log('-------------------------------------------')
-    
     return {
         entry: './src/index.tsx',
         mode: isDev ? 'development' : 'production',
@@ -124,7 +120,7 @@ function getPlugins(isDev) {
 // Функция возращающая объект с настройками HtmlWebpackPlugin
 function getHtmlConfig() {
     return {
-        title: 'Editorium editor',
+        title: 'Editorium',
         template: './static/template.html',
         favicon: './static/favicon2x.png'
     }

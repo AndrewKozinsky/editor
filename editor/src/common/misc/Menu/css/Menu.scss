@@ -1,5 +1,5 @@
 
-$class: page-menu;
+$class: menu;
 
 .#{$class} {
 
@@ -12,6 +12,9 @@ $class: page-menu;
 .#{$class}__li {
     display: inline-block;
     margin-right: 15px;
+}
+.#{$class}__li:last-child {
+    margin-right: 0;
 }
 
 .#{$class}--disabled-link {

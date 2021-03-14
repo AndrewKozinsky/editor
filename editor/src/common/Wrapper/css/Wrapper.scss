@@ -1,0 +1,32 @@
+
+$class: margin;
+
+.#{$class} {
+
+}
+
+// Классы дающие выравнивание
+.#{$class}__align-center {
+    display: flex;
+    justify-content: center;
+}
+.#{$class}__align-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+// Классы дающие верний оступ
+.#{$class}__t15 {
+    margin-top: 1.5rem;
+}
+.#{$class}__t20 {
+    margin-top: 2rem;
+}
+
+// Классы дающие нижний оступ
+.#{$class}__b10 {
+    margin-bottom: 1rem;
+}
+.#{$class}__b25 {
+    margin-bottom: 2.5rem;
+}

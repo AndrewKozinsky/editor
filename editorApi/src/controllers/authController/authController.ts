@@ -26,7 +26,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     if(!token) return sendErrorResponse(next)
 
     // Расшифровать JWT и получить payload
-    const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
+        const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получить пользователя
     const currentUser = await UserModel.findById(decoded.id)

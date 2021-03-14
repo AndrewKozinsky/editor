@@ -1,0 +1,46 @@
+@import "common/formElements/commonStyles/commonStyles";
+
+.text-input-label {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+
+    margin-bottom: 0.6rem;
+}
+
+
+$class: text-input;
+
+.#{$class} {
+    display: block;
+    width: 100%;
+    color: var(--text-color);
+    box-sizing: border-box;
+
+    background-color: var(--text-input-color);
+    border: none;
+    border-radius: var(--radius);
+
+    &::placeholder {
+        font-size: 1.3rem;
+        line-height: 1.6rem;
+        color: var(--button-color-hover);
+    }
+
+    &:focus {
+        // Включение стандартной фокусировки
+        @include focus
+    }
+}
+
+// Размер поля.
+.#{$class}--small-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: .4rem 0.8rem;
+}
+.#{$class}--middle-size {
+    font-size: 1.7rem;
+    line-height: 2.1rem;
+    padding: .6rem 1rem;
+}

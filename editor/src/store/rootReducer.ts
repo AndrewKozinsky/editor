@@ -1,4 +1,5 @@
 // Core
+// @ts-ignore
 import { combineReducers } from 'redux'
 
 // Reducers

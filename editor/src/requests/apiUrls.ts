@@ -12,7 +12,7 @@ const apiUrls = new Proxy(addresses, {
         // @ts-ignore
         if (url[prop]) {
             // @ts-ignore
-            return 'http://editorium.local' + '/api/' + url[prop]
+            return '/api/' + url[prop]
         }
         // @ts-ignore
         const x: never = null
