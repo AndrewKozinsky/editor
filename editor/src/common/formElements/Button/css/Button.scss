@@ -16,6 +16,11 @@ $class: btn;
         // Включение стандартной фокусировки
         @include focus
     }
+
+    &:disabled {
+        opacity: .5;
+        cursor: default;
+    }
 }
 
 
@@ -30,7 +35,7 @@ $class: btn;
 
 // Тип кнопки.
 // standard (стандартная кнопка), onlyIcon (только значёк).
-.#{$class}--standard {
+.#{$class}--standard-view {
 
 }
 

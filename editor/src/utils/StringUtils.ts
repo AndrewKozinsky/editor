@@ -1,3 +1,4 @@
+// ФУНКЦИИ ДЛЯ РАБОТЫ СО СТРОКАМИ
 
 /**
  * Функция принимает массив строк и формирует из них
@@ -9,4 +10,13 @@ export function makeCN(classesArr: string[]) {
     const filteredClassesArr = classesArr.filter(cls => cls !== '')
 
     return filteredClassesArr.join(' ')
+}
+
+
+/**
+ * Функция возвращает случайный идентификатор
+ */
+export function getRandomId() {
+    const randomNum = Math.random() * 100000
+    return 'id' + Math.round(randomNum)
 }

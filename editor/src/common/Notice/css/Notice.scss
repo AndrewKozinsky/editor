@@ -17,9 +17,9 @@ $class: notice;
 }
 
 .#{$class}__icon {
-    flex-shrink: 0;
-    width: 2.5rem;
+    min-width: 13px;
     margin-top: 0.3rem;
+    margin-right: 4px;
 }
 
 .#{$class}__paragraph {

@@ -1,12 +1,11 @@
 import React from 'react'
 // @ts-ignore
 import {Switch, Route, Redirect} from 'react-router-dom'
-// import EnterForm from '../../modules/auth/EnterForm/EnterForm'
 // import {setAuthTokenStatus} from "../../store/actions"
 // import TopNavigation from "./components/topNavEntrance"
 // import AuthSplitContainer from "./components/authSplitContainer"
 // import RegForm from "./components/regForm"
-import EnterForm from "modules/auth/EnterForm/EnterForm"
+import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 // import ForgotPasswordForm from "./components/forgotPasswordForm"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
@@ -25,7 +24,7 @@ function EntrancePages() {
                         <RegForm />
                     </Route>*/}
                     <Route path='/enter'>
-                        <EnterForm />
+                        <EnterFormBlock />
                     </Route>
                     {/*<Route path='/forgot-password'>
                         <ForgotPasswordForm />

@@ -27,6 +27,7 @@ const Wrapper = (props: WrapperPropType) => {
     if (align === 'right')  cls.push(CN + '__align-right')
 
     // Добавление класса дающего верхний оступ
+    if (t === 5) cls.push(CN + '__t5')
     if (t === 10) cls.push(CN + '__t10')
     if (t === 15) cls.push(CN + '__t15')
     if (t === 20) cls.push(CN + '__t20')

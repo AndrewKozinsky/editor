@@ -16,6 +16,9 @@ $class: margin;
 }
 
 // Классы дающие верний оступ
+.#{$class}__t5 {
+    margin-top: .6rem;
+}
 .#{$class}__t10 {
     margin-top: 1rem;
 }

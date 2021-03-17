@@ -1,34 +1,41 @@
 import React from 'react'
-import {makeCN} from '../../../utils/StringUtils'
+import {makeCN} from 'utils/StringUtils'
 import './css/Button.scss'
 
 
 export type ButtonPropType = {
+    type?: 'button' |  'submit' |  'reset'
     size?: string
-    type?: string
+    view?: 'standard' | 'onlyIcon'
     color?: string
     // icon?: string
     text?: string
-    // isDisabled?: boolean
+    isDisabled?: boolean
     // isLoading?: boolean
 }
 
 function Button(props: ButtonPropType) {
 
     const {
+        type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         size = 'middle', // Размер кнопки. Варианты: small (маленькая), middle (стандартного размера), big (большая)
-        type = 'standard', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
+        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         // icon, // Тип значка
         text, // Текст на кнопке
-        // isDisabled, // Заблокирована ли кнопка
+        isDisabled = false, // Заблокирована ли кнопка
         // isLoading, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
 
     // Текст кнопки
     let btnText: null | string = null
-    if (type !== 'onlyIcon' && text) btnText = text
+    if (view !== 'onlyIcon' && text) btnText = text
+
+    const btnAttrs = {
+        type,
+        disabled: isDisabled
+    }
 
     // Классы кнопки
     const CN = 'btn'
@@ -41,10 +48,10 @@ function Button(props: ButtonPropType) {
         classes.push(`${CN}--middle-size`)
     }
 
-    // Тип кнопки.
+    // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).
-    if (type === 'standard') {
-        classes.push(`${CN}--standard-type`)
+    if (view === 'standard') {
+        classes.push(`${CN}--standard-view`)
     }
 
     // Цвет кнопки.
@@ -53,9 +60,11 @@ function Button(props: ButtonPropType) {
         classes.push(`${CN}--base-color`)
     }
 
+    btnAttrs.className = makeCN(classes)
+
 
     return (
-        <button className={makeCN(classes)}>{btnText}</button>
+        <button {...btnAttrs}>{btnText}</button>
     )
 }
 

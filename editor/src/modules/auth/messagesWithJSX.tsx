@@ -12,7 +12,7 @@ type messagesWithJSXType = {
 
 const messagesWithJSX: messagesWithJSXType = {
 
-    // Форма EnterForm
+    // Форма EnterFormBlock
     enterForm: {
         newUser: {
             eng: <>New User? <Link to='/reg'>Sign up</Link>.</>,

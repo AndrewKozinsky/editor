@@ -26,7 +26,7 @@ const messages: messagesType = {
             rus: 'Сброс пароля'
         },
     },
-    // Форма EnterForm
+    // Форма EnterFormBlock
     enterForm: {
         // Заголовок формы входа
         formHeader: {
@@ -41,9 +41,29 @@ const messages: messagesType = {
             eng: 'For example: mail@gmail.com',
             rus: 'Например: mail@gmail.com'
         },
+        emailErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        emailErrInvalid: {
+            eng: 'Invalid email address',
+            rus: 'Почта написана неправильно'
+        },
         passwordField: {
             eng: 'Password *',
             rus: 'Пароль *'
+        },
+        passwordErrToShort: {
+            eng: 'Must be 5 characters or more',
+            rus: 'Минимально можно ввести 5 символов'
+        },
+        passwordErrToLong: {
+            eng: 'Must be 15 characters or less',
+            rus: 'Максимум можно ввести 15 символов'
+        },
+        passwordErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
         },
         submitBtnText: {
             eng: 'Sign in',
