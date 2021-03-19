@@ -17,11 +17,22 @@ export function getIconSizes(type: string) {
             }
         case 'errorTriangle':
         case 'successCircle':
-            // Базовый цвет значков
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
+            }
+        case 'selectInputSmallArrows':
+            return {
+                width: "8px",
+                height: "14px",
+                viewBox: "0 0 8 14"
+            }
+        case 'selectInputMiddleArrows':
+            return {
+                width: "10px",
+                height: "17px",
+                viewBox: "0 0 10 17"
             }
         default: return {}
     }

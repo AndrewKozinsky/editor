@@ -6,12 +6,14 @@ import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
+import Select from 'common/formElements/Select/Select'
+import Notice from 'common/Notice/Notice'
 import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
-import Notice from 'common/Notice/Notice'
 // @ts-ignore
-import {Formik, FormikHelpers, FormikProps, Form, Field, FieldProps, useFormik,} from 'formik'
+import { useFormik } from 'formik'
 import {initialValues, validateForm, onFormSubmit, formValuesType} from './js/formResources'
+import { OptionsType } from '../../../common/formElements/Select/SelectTypes'
 // import { GetFormikFormFuncType } from 'types/formikTypes'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
@@ -26,10 +28,17 @@ function EnterFormBlock() {
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: validateForm(lang),
-        onSubmit: onFormSubmit,
-        isInitialValid: false,
+        validateOnBlur: false,
+        onSubmit: onFormSubmit
     })
-    console.log(formik)
+
+    const optionsSet: OptionsType = [
+        { value: 'Выберите героя', disabled: true },
+        { value: 'Чебурашка' },
+        { value: 'Крокодил Гена' },
+        { value: 'Шапокляк' },
+        { value: 'Крыса Лариса' }
+    ]
 
     return (
         <div>
@@ -69,11 +78,34 @@ function EnterFormBlock() {
                         error={formik.errors.password}
                     />
                 </Wrapper>
+                <Wrapper t={15}>
+                    <Select
+                        label='Герои'
+                        name='heroes'
+                        value={formik.values.password}
+                        options={optionsSet}
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Select
+                        name="heroes"
+                        value={formik.values.password}
+                        options={optionsSet}
+                        size='middle'
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    Флаги
+                </Wrapper>
+                <Wrapper t={15}>
+                    Переключатели
+                </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
                         text={messages.enterForm.submitBtnText[lang]}
-                        isDisabled={true}
                     />
                 </Wrapper>
             </form>

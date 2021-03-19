@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react'
 import {makeCN} from 'utils/StringUtils'
-import './css/Wrapper.scss'
+import './Wrapper.scss'
 
 
 type WrapperPropType = {

@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
-import './css/TextInput.scss'
-import {getRandomId, makeCN } from 'utils/StringUtils'
+import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
+import './TextInput.scss'
+import { getClasses } from './functions'
+import { ObjStringKeyAnyVal } from 'types/miscTypes'
 
 
-type TextInputPropType = {
+export type TextInputPropType = {
     label?: string // Подпись текстового поля
     type?: 'text' | 'email' | 'password' // Подпись текстового поля
     name: string, // Аттрибут name текстового поля
@@ -29,7 +31,7 @@ function TextInput(props: TextInputPropType) {
         name,          // Аттрибут name текстового поля
         value,          // Аттрибут value текстового поля
         autocomplete = '', // Значение автозаполнения поля
-        size = 'small', // Размер поля. Варианты: small (маленькое), middle (среднего размера)
+        size = 'small', // Размер поля: small (маленькое), middle (среднего размера)
         placeholder,    // Текстозаполнитель
         autoFocus = false, // Нужно ли ставить фокус при загрузке
         onChange, // Обработчик изменения поля
@@ -39,21 +41,12 @@ function TextInput(props: TextInputPropType) {
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
 
-
-    // Классы
-    const CN = 'text-input'
-    const classes = [CN]
-
-    // Размер поля ввода.
-    if (size === 'small') classes.push(`${CN}--small-size`)
-    if (size === 'middle') classes.push(`${CN}--middle-size`)
-
     // Аттрибуты поля
-    const inputAttribs: {[key: string]: any} = {
+    const inputAttribs: ObjStringKeyAnyVal = {
         type: type,
         name: name,
         value: value,
-        className: makeCN(classes),
+        className: getClasses(props),
         onChange: onChange,
         onBlur: onBlur,
     }
@@ -84,7 +77,7 @@ function Label(props: LabelInt) {
         id
     } = props
 
-    const CN = 'text-input-label'
+    const CN = 'select-input-label'
 
     if (!label) return null
     return <label className={CN} htmlFor={id}>{label}</label>

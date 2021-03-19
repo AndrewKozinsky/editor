@@ -1,6 +1,8 @@
 import Logo from '../icons/logo'
 import ErrorTriangle from '../icons/errorTriangle'
 import SuccessCircle from '../icons/successCircle'
+import SelectInputSmallArrows from '../icons/selectInputSmallArrows';
+import SelectInputMiddleArrows from '../icons/selectInputMiddleArrows';
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -15,6 +17,10 @@ export function getIcon(type: string) {
             return ErrorTriangle
         case 'successCircle':
             return SuccessCircle
+        case 'selectInputSmallArrows':
+            return SelectInputSmallArrows
+        case 'selectInputMiddleArrows':
+            return SelectInputMiddleArrows
         default: return Logo
     }
 }

@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
-import './css/AuthFormWrapper.scss'
+import './AuthFormWrapper.scss'
 
 
 type PropType = {

@@ -9,6 +9,9 @@ export function getIconClass(type: string): string {
         case 'logo':
             // Базовый цвет значков
             return 'base-svg-logo'
+        case 'selectInputSmallArrows':
+        case 'selectInputMiddleArrows':
+            return 'select-input-arrows'
         default: return ''
     }
 }

@@ -10,7 +10,7 @@ import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
 import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
-import './css/EntrancePages.scss'
+import './EntrancePages.scss'
 import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
 
 

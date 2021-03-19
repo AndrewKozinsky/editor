@@ -1,7 +1,7 @@
 import React, {ReactElement, ReactNode} from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
 import {makeCN} from 'utils/StringUtils'
-import './css/Notice.scss'
+import './Notice.scss'
 
 
 const CN = 'notice'

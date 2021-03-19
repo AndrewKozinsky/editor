@@ -2,18 +2,20 @@ import React from 'react'
 // @ts-ignore
 import * as Yup from 'yup'
 import messages from '../../messages'
-import {FormikActionsType} from 'types/formikTypes';
+import {FormikActionsType} from 'src/types/miscTypes';
 
 
 export type formValuesType = {
     email: string
     password: string
+    heroes: string
 }
 
 // Начальные значения
 export const initialValues: formValuesType = {
     email: '',
-    password: ''
+    password: '',
+    heroes: ''
 }
 
 // Проверка формы
@@ -23,16 +25,16 @@ export function validateForm(lang: 'eng' | 'rus') {
             .email(messages.enterForm.emailErrInvalid[lang])
             .required(messages.enterForm.emailErrRequired[lang]),
         password: Yup.string()
-            .min(6, messages.enterForm.passwordErrToShort[lang])
-            .max(15, messages.enterForm.passwordErrToLong[lang])
+            // .min(6, messages.enterForm.passwordErrToShort[lang])
+            // .max(15, messages.enterForm.passwordErrToLong[lang])
             .required(messages.enterForm.passwordErrRequired[lang])
     })
 }
 
 export function onFormSubmit(values: formValuesType, actions: FormikActionsType) {
     // console.log(66555)
-    // console.log(values)
-    console.log(actions)
+    console.log(values)
+    // console.log(actions)
     // console.log({values, actions});
     // alert(JSON.stringify(values, null, 2));
     // actions.setSubmitting(false);

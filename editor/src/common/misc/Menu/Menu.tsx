@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import { Link, useRouteMatch } from 'react-router-dom'
 import {AppState} from 'src/store/rootReducer'
 import messages from 'src/modules/auth/messages'
-import './css/Menu.scss'
+import './Menu.scss'
 
 
 // Корневой класс

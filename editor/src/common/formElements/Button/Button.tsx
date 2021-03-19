@@ -1,16 +1,17 @@
 import React from 'react'
-import {makeCN} from 'utils/StringUtils'
-import './css/Button.scss'
+import { getClasses } from './functions'
+import './Button.scss'
+import './functions'
 
 
 export type ButtonPropType = {
     type?: 'button' |  'submit' |  'reset'
-    size?: string
+    size?: 'small' | 'middle' | 'big'
     view?: 'standard' | 'onlyIcon'
     color?: string
     // icon?: string
     text?: string
-    isDisabled?: boolean
+    disabled?: boolean
     // isLoading?: boolean
 }
 
@@ -23,7 +24,7 @@ function Button(props: ButtonPropType) {
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         // icon, // Тип значка
         text, // Текст на кнопке
-        isDisabled = false, // Заблокирована ли кнопка
+        disabled = false, // Заблокирована ли кнопка
         // isLoading, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
@@ -34,33 +35,9 @@ function Button(props: ButtonPropType) {
 
     const btnAttrs = {
         type,
-        disabled: isDisabled
+        className: getClasses(props),
+        disabled: disabled
     }
-
-    // Классы кнопки
-    const CN = 'btn'
-    const classes = [CN]
-
-
-    // Размер кнопки.
-    // small (маленькая), middle (стандартного размера), big (большая)
-    if (size === 'middle') {
-        classes.push(`${CN}--middle-size`)
-    }
-
-    // Вид кнопки.
-    // standard (стандартная кнопка), onlyIcon (только значёк).
-    if (view === 'standard') {
-        classes.push(`${CN}--standard-view`)
-    }
-
-    // Цвет кнопки.
-    // base (стандартный цвет), accent (акцентный цвет)
-    if (color === 'base') {
-        classes.push(`${CN}--base-color`)
-    }
-
-    btnAttrs.className = makeCN(classes)
 
 
     return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/Header.scss'
+import './Header.scss'
 
 
 export type HeaderPropType = {
