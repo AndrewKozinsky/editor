@@ -8,7 +8,8 @@ export type formValuesType = {
     email: string
     password: string
     heroes: string,
-    numberOfGuests: number
+    numberOfGuests: number,
+    color: string
 }
 
 // Начальные значения
@@ -16,7 +17,8 @@ export const initialValues: formValuesType = {
     email: '',
     password: '',
     heroes: '',
-    numberOfGuests: 1
+    numberOfGuests: 1,
+    color: ''
 }
 
 // Проверка формы

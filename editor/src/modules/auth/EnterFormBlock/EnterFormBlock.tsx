@@ -15,6 +15,7 @@ import messagesWithJSX from '../messagesWithJSX'
 // @ts-ignore
 import { useFormik } from 'formik'
 import {initialValues, validateForm, onFormSubmit, formValuesType} from './js/formResources'
+import Radio from '../../../common/formElements/Radio/Radio'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
 
@@ -146,7 +147,31 @@ function EnterFormBlock() {
                     />
                 </Wrapper>
                 <Wrapper t={15}>
-                    Переключатели
+                    <Radio
+                        label='Red'
+                        name="color"
+                        value='red'
+                        size='small'
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Radio
+                        label='Green'
+                        name="color"
+                        value='green'
+                        size='middle'
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Radio
+                        label='Blue'
+                        name="color"
+                        value='blue'
+                        size='big'
+                        onChange={formik.handleChange}
+                    />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button

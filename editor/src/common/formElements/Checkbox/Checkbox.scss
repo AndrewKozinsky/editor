@@ -14,7 +14,6 @@ $class: checkbox;
 // Вид label в зависимости от размера
 .#{$class}-label {
     position: relative;
-    color: var(--text-color);
     user-select: none;
     cursor: pointer;
 }
@@ -68,10 +67,10 @@ $class: checkbox;
     }
 }
 
-// Неотмеченный before
 .#{$class}-label::before {
     transition: background-color .1s;
 }
+// Неотмеченный before
 .#{$class}-input:not(checked) + .#{$class}-label::before {
     background-color: var(--button-color-hover);
 }
