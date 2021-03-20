@@ -2,7 +2,6 @@ import React from 'react'
 import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
-import {OptionsType } from './SelectTypes'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
 
 
@@ -13,7 +12,7 @@ import { ObjStringKeyAnyVal } from 'types/miscTypes'
  */
 export function getWrapperClasses(selectProps: SelectPropType, isFocus: boolean) {
     const {
-        size = 'small' // Размер поля: small (маленькое), middle (среднего размера)
+        size = 'small' // Размер поля: small (маленькое), middle (среднего размера), big
     } = selectProps
 
     // Классы обёртки
@@ -23,6 +22,7 @@ export function getWrapperClasses(selectProps: SelectPropType, isFocus: boolean)
     // Размер обёртки списка.
     if (size === 'small')  classes.push(`${CN}--small-size`)
     if (size === 'middle') classes.push(`${CN}--middle-size`)
+    if (size === 'big') classes.push(`${CN}--big-size`)
 
     // Если есть фокусировка
     if (isFocus)  classes.push(`${CN}--focus`)
@@ -47,6 +47,7 @@ export function getClasses(selectProps: SelectPropType) {
     // Размер выпадающего списка.
     if (size === 'small') classes.push(`${CN}--small-size`)
     if (size === 'middle') classes.push(`${CN}--middle-size`)
+    if (size === 'big') classes.push(`${CN}--big-size`)
 
     return makeCN(classes)
 }
@@ -65,6 +66,7 @@ export function getArrowIcon(selectProps: SelectPropType): null | JSX.Element {
     // Размер выпадающего списка.
     if (size === 'small') return <SvgIcon type='selectInputSmallArrows' />
     if (size === 'middle') return <SvgIcon type='selectInputMiddleArrows' />
+    if (size === 'big') return <SvgIcon type='selectInputBigArrows' />
 
     return null
 }

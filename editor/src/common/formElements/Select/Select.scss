@@ -33,6 +33,11 @@ $wrapper-class: select-input-wrapper;
         width: 20px;
     }
 }
+.#{$wrapper-class}--big-size {
+    .#{$wrapper-class}__tip {
+        width: 22px;
+    }
+}
 
 // Класс добавляемый к обёртке при фокусировке на выпадающем списке
 .#{$wrapper-class}--focus {
@@ -45,17 +50,6 @@ $wrapper-class: select-input-wrapper;
     svg {
         stroke: white;
     }
-}
-
-// ---------------------------------------------------------------
-
-// Подпись выпадающего списка
-.select-input-label {
-    display: block;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-
-    margin-bottom: 0.6rem;
 }
 
 // ---------------------------------------------------------------
@@ -77,10 +71,15 @@ $select-class: select-input;
 .#{$select-class}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
-    padding: .4rem 0.6rem;
+    padding: .4rem 0.7rem;
 }
 .#{$select-class}--middle-size {
-    font-size: 1.7rem;
-    line-height: 2.1rem;
-    padding: .6rem 1rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: .5rem 0.9rem;
+}
+.#{$select-class}--big-size {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    padding: .7rem 1.1rem;
 }

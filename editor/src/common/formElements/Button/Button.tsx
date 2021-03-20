@@ -6,7 +6,7 @@ import './functions'
 
 export type ButtonPropType = {
     type?: 'button' |  'submit' |  'reset'
-    size?: 'small' | 'middle' | 'big'
+    size?: 'tiny' | 'small' | 'middle' | 'big'
     view?: 'standard' | 'onlyIcon'
     color?: string
     // icon?: string
@@ -19,7 +19,7 @@ function Button(props: ButtonPropType) {
 
     const {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
-        size = 'middle', // Размер кнопки. Варианты: small (маленькая), middle (стандартного размера), big (большая)
+        size = 'small', // Размер кнопки: tiny (крошечная), small (маленькая), middle (средняя), big (большая)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         // icon, // Тип значка

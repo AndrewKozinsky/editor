@@ -5,6 +5,7 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import './TextInput.scss'
 import { getClasses } from './functions'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
+import Label from '../Label/Label';
 
 
 export type TextInputPropType = {
@@ -14,7 +15,7 @@ export type TextInputPropType = {
     value: string, // Аттрибут name текстового поля
     autocomplete?: '' | 'username' | 'current-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
-    size?: 'small' | 'middle' // Размер поля
+    size?: 'small' | 'middle' | 'big' // Размер поля
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
     onChange: () => void, // Обработчик изменения поля
@@ -27,6 +28,7 @@ export type TextInputPropType = {
 function TextInput(props: TextInputPropType) {
 
     const {
+        label, // Подпись текстового поля
         type = 'text', // Тип поля. Варианты: text, email
         name,          // Аттрибут name текстового поля
         value,          // Аттрибут value текстового поля
@@ -58,29 +60,11 @@ function TextInput(props: TextInputPropType) {
 
     return (
         <div>
-            <Label {...props}  id={id} />
+            <Label label={label}  id={id} />
             <input {...inputAttribs} id={id} />
             <Error {...props} />
         </div>
     )
-}
-
-
-interface LabelInt extends TextInputPropType {
-    id: string
-}
-
-/** Подпись текстового компонента */
-function Label(props: LabelInt) {
-    const {
-        label, // Подпись текстового поля
-        id
-    } = props
-
-    const CN = 'select-input-label'
-
-    if (!label) return null
-    return <label className={CN} htmlFor={id}>{label}</label>
 }
 
 

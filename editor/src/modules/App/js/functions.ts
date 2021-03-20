@@ -18,7 +18,7 @@ export function useGetAppClasses() {
     // Текущий адрес
     const pathname = window.location.pathname
     // Если нахожусь не на странице редактора, то поставить более тёмный фон
-    if (pathname !== '/editor/') classes.push('app__second-bg')
+    if (pathname !== '/editor/') classes.push('app--second-bg')
 
     return makeCN(classes)
 }
@@ -42,7 +42,7 @@ export function useRedirectPage() {
         // и у пользователя нет правильного токена авторизации то отправить на страницу входа
         if (pathname === '/editor/' && authTokenStatus === 1) {
             // перебросить на другую страницу
-            history.push('/enter');
+            history.push('/enter')
         }
     }, [authTokenStatus])
 }

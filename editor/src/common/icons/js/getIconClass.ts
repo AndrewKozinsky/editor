@@ -11,6 +11,7 @@ export function getIconClass(type: string): string {
             return 'base-svg-logo'
         case 'selectInputSmallArrows':
         case 'selectInputMiddleArrows':
+        case 'selectInputBigArrows':
             return 'select-input-arrows'
         default: return ''
     }

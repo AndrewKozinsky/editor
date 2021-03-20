@@ -34,6 +34,12 @@ export function getIconSizes(type: string) {
                 height: "17px",
                 viewBox: "0 0 10 17"
             }
+        case 'selectInputBigArrows':
+            return {
+                width: "10px",
+                height: "20px",
+                viewBox: "0 0 10 20"
+            }
         default: return {}
     }
 }

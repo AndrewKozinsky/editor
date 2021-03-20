@@ -1,0 +1,11 @@
+
+$class: label;
+
+// Обёртка выпадающего списка
+.#{$class} {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+
+    margin-bottom: 0.6rem;
+}

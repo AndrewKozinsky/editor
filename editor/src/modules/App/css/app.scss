@@ -14,6 +14,6 @@ $class: app;
     margin: 0 auto;
 }
 
-.#{$class}__second-bg {
+.#{$class}--second-bg {
     background-color: var(--bg-color-2);
 }

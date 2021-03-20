@@ -7,7 +7,7 @@ import { ButtonPropType } from './Button'
  */
 export function getClasses(buttonProps: ButtonPropType) {
     const {
-        size = 'middle', // Размер поля: small (маленькое), middle (среднего размера)
+        size = 'small', // Размер кнопки: tiny (крошечная), small (маленькая), middle (средняя), big (большая)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
     } = buttonProps
@@ -17,22 +17,19 @@ export function getClasses(buttonProps: ButtonPropType) {
     const classes = [CN]
 
     // Размер кнопки.
-    // small (маленькая), middle (стандартного размера), big (большая)
-    if (size === 'middle') {
-        classes.push(`${CN}--middle-size`)
-    }
+    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
+    if (size === 'tiny') classes.push(`${CN}--tiny-size`)
+    if (size === 'small') classes.push(`${CN}--small-size`)
+    if (size === 'middle') classes.push(`${CN}--middle-size`)
+    if (size === 'big') classes.push(`${CN}--big-size`)
 
     // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).
-    if (view === 'standard') {
-        classes.push(`${CN}--standard-view`)
-    }
+    if (view === 'standard') classes.push(`${CN}--standard-view`)
 
     // Цвет кнопки.
     // base (стандартный цвет), accent (акцентный цвет)
-    if (color === 'base') {
-        classes.push(`${CN}--base-color`)
-    }
+    if (color === 'base') classes.push(`${CN}--base-color`)
 
     return makeCN(classes)
 }

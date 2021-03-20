@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import './Select.scss'
 import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './functions'
 import { OptionsType } from './SelectTypes'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils';
+import './Select.scss'
+import Label from '../Label/Label';
 
 
 
@@ -12,7 +13,7 @@ export type SelectPropType = {
     name: string // Имя выпадающего списка
     value?: string // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    size?: 'small' | 'middle', // Размер поля
+    size?: 'small' | 'middle' | 'big', // Размер поля
     onChange: () => void, // Обработчик выбора пункта
 }
 
@@ -24,7 +25,7 @@ function Select(props: SelectPropType) {
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
-        size = 'small', // Размер поля: small (маленькое), middle (среднего размера)
+        size = 'small', // Размер поля: small (маленькое), middle (среднего размера), big
         onChange // Обработчик выбора пункта
     } = props
 
@@ -50,7 +51,7 @@ function Select(props: SelectPropType) {
 
     return (
         <>
-            <Label {...props}  id={id} />
+            <Label label={label}  id={id} />
             <div className={getWrapperClasses(props, isFocus)}>
                 <select {...inputAttribs} >
                     {getOptions(props)}
@@ -59,24 +60,6 @@ function Select(props: SelectPropType) {
             </div>
         </>
     )
-}
-
-
-interface LabelInt extends SelectPropType {
-    id: string
-}
-
-/** Подпись выпадающего списка */
-function Label(props: LabelInt) {
-    const {
-        label, // Подпись текстового поля
-        id // id выпадающего списка
-    } = props
-
-    const CN = 'text-input-label'
-
-    if (!label) return null
-    return <label className={CN} htmlFor={id}>{label}</label>
 }
 
 

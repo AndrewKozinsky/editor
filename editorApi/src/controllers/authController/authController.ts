@@ -3,13 +3,13 @@ const jwt = require('jsonwebtoken')
 import * as crypto from 'crypto'
 import {promisify} from 'util'
 import { catchAsync } from '../../utils/errors/catchAsync'
-import UserModel from '../../models/user';
+import UserModel from '../../models/user'
 import { AppError } from '../../utils/errors/appError'
 import { Email } from '../../utils/email/email'
 import { createSendToken, sendResponseWithAuthToken } from '../authToken'
 import { IUser } from '../../models/user'
 import {config} from '../../config/config'
-import {getMessageDependingOnTheLang} from '../../utils/errors/messages';
+import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
 import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
 
 

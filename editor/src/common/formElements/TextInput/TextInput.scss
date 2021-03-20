@@ -40,7 +40,12 @@ $class: text-input;
     padding: .4rem 0.8rem;
 }
 .#{$class}--middle-size {
-    font-size: 1.7rem;
-    line-height: 2.1rem;
-    padding: .6rem 1rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: .5rem 0.9rem;
+}
+.#{$class}--big-size {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    padding: .7rem 1.1rem;
 }

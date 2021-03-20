@@ -8,13 +8,13 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import Select from 'common/formElements/Select/Select'
 import Notice from 'common/Notice/Notice'
+import { OptionsType } from 'common/formElements/Select/SelectTypes'
+import Checkbox from 'common/formElements/Checkbox/Checkbox'
 import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
 // @ts-ignore
 import { useFormik } from 'formik'
 import {initialValues, validateForm, onFormSubmit, formValuesType} from './js/formResources'
-import { OptionsType } from '../../../common/formElements/Select/SelectTypes'
-// import { GetFormikFormFuncType } from 'types/formikTypes'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
 
@@ -53,11 +53,11 @@ function EnterFormBlock() {
                 <Wrapper>
                     <TextInput
                         label={messages.enterForm.emailField[lang]}
-                        type='email'
+                        // type='email'
                         name="email"
                         value={formik.values.email}
                         autocomplete={'username'}
-                        size='middle'
+                        size='small'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
                         autoFocus
                         onChange={formik.handleChange}
@@ -68,11 +68,24 @@ function EnterFormBlock() {
                 <Wrapper t={15}>
                     <TextInput
                         label={messages.enterForm.passwordField[lang]}
-                        type='password'
+                        // type='password'
                         name="password"
                         value={formik.values.password}
                         autocomplete={'current-password'}
                         size='middle'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        error={formik.errors.password}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <TextInput
+                        label={messages.enterForm.passwordField[lang]}
+                        // type='password'
+                        name="password"
+                        value={formik.values.password}
+                        autocomplete={'current-password'}
+                        size='big'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         error={formik.errors.password}
@@ -84,6 +97,7 @@ function EnterFormBlock() {
                         name='heroes'
                         value={formik.values.password}
                         options={optionsSet}
+                        size='small'
                         onChange={formik.handleChange}
                     />
                 </Wrapper>
@@ -97,7 +111,39 @@ function EnterFormBlock() {
                     />
                 </Wrapper>
                 <Wrapper t={15}>
-                    Флаги
+                    <Select
+                        name="heroes"
+                        value={formik.values.password}
+                        options={optionsSet}
+                        size='big'
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Checkbox
+                        label='1'
+                        name="numberOfGuests"
+                        value={11}
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Checkbox
+                        label='2'
+                        name="numberOfGuests"
+                        value={22}
+                        size='middle'
+                        onChange={formik.handleChange}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <Checkbox
+                        label='3'
+                        name="numberOfGuests"
+                        value={33}
+                        size='big'
+                        onChange={formik.handleChange}
+                    />
                 </Wrapper>
                 <Wrapper t={15}>
                     Переключатели
@@ -107,6 +153,18 @@ function EnterFormBlock() {
                         type='submit'
                         text={messages.enterForm.submitBtnText[lang]}
                     />
+                </Wrapper>
+                <Wrapper t={10}>
+                    <Button size={'tiny'} text='Hello, Dolly' />
+                </Wrapper>
+                <Wrapper t={10}>
+                    <Button size={'small'} text='Hello, Dolly' />
+                </Wrapper>
+                <Wrapper t={10}>
+                    <Button size={'middle'} text='Hello, Dolly' />
+                </Wrapper>
+                <Wrapper t={10}>
+                    <Button size={'big'} text='Hello, Dolly' />
                 </Wrapper>
             </form>
 

@@ -3,7 +3,7 @@ import {getIcon} from './js/getIcon'
 import { getIconClass } from './js/getIconClass'
 import { getIconSizes } from './js/getIconSizes'
 import './css/SvgIcon.scss'
-import {makeCN} from '../../utils/StringUtils';
+import {makeCN} from 'utils/StringUtils';
 
 
 export type SvgIconPropType = {

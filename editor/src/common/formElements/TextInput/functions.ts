@@ -17,6 +17,7 @@ export function getClasses(selectProps: TextInputPropType) {
     // Размер поля ввода.
     if (size === 'small') classes.push(`${CN}--small-size`)
     if (size === 'middle') classes.push(`${CN}--middle-size`)
+    if (size === 'big') classes.push(`${CN}--big-size`)
 
     return makeCN(classes)
 }
