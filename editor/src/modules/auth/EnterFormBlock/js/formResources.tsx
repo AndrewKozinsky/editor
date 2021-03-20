@@ -1,7 +1,22 @@
 import React from 'react'
 // @ts-ignore
 import * as Yup from 'yup'
-import messages from '../../messages'
+import {MenuItems, MenuPropType } from 'common/misc/Menu/Menu'
+import messages from 'modules/auth/messages'
+import { EditorLanguageType } from 'store/settings/settingsTypes'
+
+
+/**
+ * Функция возвращает массив данных для генерации меню
+ * @param {String} lang — язык интерфейса
+ */
+export function getMenuItems(lang: EditorLanguageType): MenuItems {
+    return [
+        { to: '/reg', label: messages.menu.reg[lang] },
+        { to: '/enter', label: messages.menu.enter[lang] },
+        { to: '/reset-password', label: messages.menu.reset[lang] }
+    ]
+}
 
 
 export type formValuesType = {
@@ -44,3 +59,4 @@ export function onFormSubmit(values: formValuesType, actions: any) {
     // alert(JSON.stringify(values, null, 2));
     // actions.setSubmitting(false);
 }
+

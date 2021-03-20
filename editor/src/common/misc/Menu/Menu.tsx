@@ -1,42 +1,45 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 // @ts-ignore
 import { Link, useRouteMatch } from 'react-router-dom'
-import {AppState} from 'src/store/rootReducer'
-import messages from 'src/modules/auth/messages'
+import {useGetComponentSize} from 'utils/MiscUtils'
+import {EditorSizeType} from 'store/settings/settingsTypes'
+import { getLiClasses } from './Menu-func'
 import './Menu.scss'
 
 
 // Корневой класс
 const CN = 'menu'
 
-/** Компонент меню. Сейчас используется на форме входа. */
-function Menu() {
+// Тип props у компонента Menu
+export type MenuPropType = {
+    size?: EditorSizeType,
+    items: {to: string, label: string}[]
+}
+// Тип массива данных для генерации пунктов меню
+export type MenuItems = {to: string, label: string}[]
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+/** Компонент меню. Сейчас используется на форме входа. */
+function Menu(props: MenuPropType) {
+
+    const {
+        items
+    } = props
+
+    // Размер элемента: tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
+
+    const $items = items.map(item => {
+        return (
+            <li className={getLiClasses(size)}>
+                <MenuLink to={item.to} label={item.label} />
+            </li>
+        )
+    })
 
     return (
         <nav className={CN}>
             <ul className={`${CN}__ul`}>
-                <li className={`${CN}__li`}>
-                    <MenuLink
-                        to='/reg'
-                        label={messages.menu.reg[lang]}
-                    />
-                </li>
-                <li className={`${CN}__li`}>
-                    <MenuLink
-                        to='/enter'
-                        label={messages.menu.enter[lang]}
-                    />
-                </li>
-                <li className={`${CN}__li`}>
-                    <MenuLink
-                        to='/reset-password'
-                        label={messages.menu.reset[lang]}
-                    />
-                </li>
+                {$items}
             </ul>
         </nav>
     )

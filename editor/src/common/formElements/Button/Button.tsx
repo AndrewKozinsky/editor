@@ -2,13 +2,15 @@ import React from 'react'
 import { getClasses } from './functions'
 import './Button.scss'
 import './functions'
+import { useGetComponentSize } from '../../../utils/MiscUtils'
+import { EditorSizeType } from '../../../store/settings/settingsTypes'
 
 
 export type ButtonPropType = {
-    type?: 'button' |  'submit' |  'reset'
-    size?: 'tiny' | 'small' | 'middle' | 'big'
+    type?: 'button' | 'submit' | 'reset'
+    size?: EditorSizeType
     view?: 'standard' | 'onlyIcon'
-    color?: string
+    color?: 'base' | 'accent'
     // icon?: string
     text?: string
     disabled?: boolean
@@ -19,7 +21,6 @@ function Button(props: ButtonPropType) {
 
     const {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
-        size = 'small', // Размер кнопки: tiny (крошечная), small (маленькая), middle (средняя), big (большая)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         // icon, // Тип значка
@@ -28,6 +29,8 @@ function Button(props: ButtonPropType) {
         // isLoading, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     // Текст кнопки
     let btnText: null | string = null
@@ -35,7 +38,7 @@ function Button(props: ButtonPropType) {
 
     const btnAttrs = {
         type,
-        className: getClasses(props),
+        className: getClasses(props, size),
         disabled: disabled
     }
 

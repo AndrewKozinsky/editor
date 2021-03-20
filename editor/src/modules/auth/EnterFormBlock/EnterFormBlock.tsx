@@ -14,7 +14,7 @@ import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
 // @ts-ignore
 import { useFormik } from 'formik'
-import {initialValues, validateForm, onFormSubmit, formValuesType} from './js/formResources'
+import {initialValues, validateForm, onFormSubmit, formValuesType, getMenuItems} from './js/formResources'
 import Radio from '../../../common/formElements/Radio/Radio'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
@@ -44,7 +44,7 @@ function EnterFormBlock() {
     return (
         <div>
             <Wrapper b={25}>
-                <Menu/>
+                <Menu items={getMenuItems(lang)}/>
             </Wrapper>
             <Wrapper b={10}>
                 <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
@@ -58,7 +58,7 @@ function EnterFormBlock() {
                         name="email"
                         value={formik.values.email}
                         autocomplete={'username'}
-                        size='small'
+                        // size='small'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
                         autoFocus
                         onChange={formik.handleChange}
@@ -73,20 +73,7 @@ function EnterFormBlock() {
                         name="password"
                         value={formik.values.password}
                         autocomplete={'current-password'}
-                        size='middle'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors.password}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <TextInput
-                        label={messages.enterForm.passwordField[lang]}
-                        // type='password'
-                        name="password"
-                        value={formik.values.password}
-                        autocomplete={'current-password'}
-                        size='big'
+                        // size='middle'
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         error={formik.errors.password}
@@ -98,25 +85,7 @@ function EnterFormBlock() {
                         name='heroes'
                         value={formik.values.password}
                         options={optionsSet}
-                        size='small'
-                        onChange={formik.handleChange}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <Select
-                        name="heroes"
-                        value={formik.values.password}
-                        options={optionsSet}
-                        size='middle'
-                        onChange={formik.handleChange}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <Select
-                        name="heroes"
-                        value={formik.values.password}
-                        options={optionsSet}
-                        size='big'
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
                 </Wrapper>
@@ -125,24 +94,21 @@ function EnterFormBlock() {
                         label='1'
                         name="numberOfGuests"
                         value={11}
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
-                </Wrapper>
-                <Wrapper t={15}>
                     <Checkbox
                         label='2'
                         name="numberOfGuests"
                         value={22}
-                        size='middle'
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
-                </Wrapper>
-                <Wrapper t={15}>
                     <Checkbox
                         label='3'
                         name="numberOfGuests"
                         value={33}
-                        size='big'
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
                 </Wrapper>
@@ -151,45 +117,23 @@ function EnterFormBlock() {
                         label='Red'
                         name="color"
                         value='red'
-                        size='small'
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
-                </Wrapper>
-                <Wrapper t={15}>
                     <Radio
                         label='Green'
                         name="color"
                         value='green'
-                        size='middle'
-                        onChange={formik.handleChange}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <Radio
-                        label='Blue'
-                        name="color"
-                        value='blue'
-                        size='big'
+                        // size='middle'
                         onChange={formik.handleChange}
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
+                        // size={'middle'}
                         text={messages.enterForm.submitBtnText[lang]}
                     />
-                </Wrapper>
-                <Wrapper t={10}>
-                    <Button size={'tiny'} text='Hello, Dolly' />
-                </Wrapper>
-                <Wrapper t={10}>
-                    <Button size={'small'} text='Hello, Dolly' />
-                </Wrapper>
-                <Wrapper t={10}>
-                    <Button size={'middle'} text='Hello, Dolly' />
-                </Wrapper>
-                <Wrapper t={10}>
-                    <Button size={'big'} text='Hello, Dolly' />
                 </Wrapper>
             </form>
 

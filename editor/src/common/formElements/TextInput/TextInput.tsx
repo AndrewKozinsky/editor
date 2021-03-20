@@ -6,6 +6,8 @@ import './TextInput.scss'
 import { getClasses } from './functions'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import Label from '../Label/Label';
+import { EditorSizeType } from 'store/settings/settingsTypes'
+import {useGetComponentSize} from '../../../utils/MiscUtils';
 
 
 export type TextInputPropType = {
@@ -15,7 +17,7 @@ export type TextInputPropType = {
     value: string, // Аттрибут name текстового поля
     autocomplete?: '' | 'username' | 'current-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
-    size?: 'small' | 'middle' | 'big' // Размер поля
+    size?: EditorSizeType // Размер поля
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
     onChange: () => void, // Обработчик изменения поля
@@ -33,12 +35,14 @@ function TextInput(props: TextInputPropType) {
         name,          // Аттрибут name текстового поля
         value,          // Аттрибут value текстового поля
         autocomplete = '', // Значение автозаполнения поля
-        size = 'small', // Размер поля: small (маленькое), middle (среднего размера)
         placeholder,    // Текстозаполнитель
         autoFocus = false, // Нужно ли ставить фокус при загрузке
         onChange, // Обработчик изменения поля
         onBlur, // Обработчик потерей полем фокуса
     } = props
+
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
@@ -48,7 +52,7 @@ function TextInput(props: TextInputPropType) {
         type: type,
         name: name,
         value: value,
-        className: getClasses(props),
+        className: getClasses(size),
         onChange: onChange,
         onBlur: onBlur,
     }

@@ -1,13 +1,14 @@
 import {makeCN} from 'utils/StringUtils'
 import { ButtonPropType } from './Button'
+import { EditorSizeType } from 'store/settings/settingsTypes'
 
 /**
  * Функция возвращает классы выпадающего списка
  * @param {Object} buttonProps — props переданные в текстовое поле
+ * @param size — размер элемента.
  */
-export function getClasses(buttonProps: ButtonPropType) {
+export function getClasses(buttonProps: ButtonPropType, size: EditorSizeType) {
     const {
-        size = 'small', // Размер кнопки: tiny (крошечная), small (маленькая), middle (средняя), big (большая)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
     } = buttonProps
@@ -18,10 +19,7 @@ export function getClasses(buttonProps: ButtonPropType) {
 
     // Размер кнопки.
     // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    if (size === 'tiny') classes.push(`${CN}--tiny-size`)
-    if (size === 'small') classes.push(`${CN}--small-size`)
-    if (size === 'middle') classes.push(`${CN}--middle-size`)
-    if (size === 'big') classes.push(`${CN}--big-size`)
+    classes.push(`${CN}--${size}-size`)
 
     // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).

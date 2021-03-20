@@ -8,6 +8,7 @@ import {
     setEditorTheme,
     setEditorSize
 } from 'store/settings/settingsActions'
+import {EditorLanguageType, EditorSizeType, EditorThemeType} from '../../../store/settings/settingsTypes';
 
 /** Хук инициализирующий приложение */
 export function useInit() {
@@ -36,21 +37,21 @@ function useGetAndSetEditorSettings() {
     // При отрисовке компонента...
     useEffect(function () {
         // Получить из LocalStorage язык интерфейса, тему и размер элементов
-        let language = localStorage.getItem('editorLanguage')
-        let theme = localStorage.getItem('editorTheme')
-        let size = localStorage.getItem('editorSize')
+        let language = <EditorLanguageType | null>localStorage.getItem('editorLanguage')
+        let theme = <EditorThemeType | null>localStorage.getItem('editorTheme')
+        let size = <EditorSizeType | null>localStorage.getItem('editorSize')
 
         // Если каких-то значений нет, то в LocalStorage поставить стандартные значения
         if (!language) {
-            language = 'eng' // eng или rus
+            language = 'eng' // Язык интерфейса: eng или rus
             localStorage.setItem('editorLanguage', language)
         }
         if (!theme) {
-            theme = 'light' // light или dark
+            theme = 'light' // Размер интерфейса: small, middle или big
             localStorage.setItem('editorTheme', theme)
         }
         if (!size) {
-            size = 'standard' // standard или big
+            size = 'small' // Тема интерфейса: light или dark
             localStorage.setItem('editorSize', size)
         }
 

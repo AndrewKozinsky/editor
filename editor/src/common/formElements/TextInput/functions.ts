@@ -1,23 +1,19 @@
 import {makeCN} from 'utils/StringUtils'
 import { TextInputPropType } from './TextInput'
+import {EditorSizeType} from '../../../store/settings/settingsTypes';
 
 /**
  * Функция возвращает классы выпадающего списка
- * @param {Object} selectProps — props переданные в текстовое поле
+ * @param size — размер элемента.
  */
-export function getClasses(selectProps: TextInputPropType) {
-    const {
-        size = 'small', // Размер поля: small (маленькое), middle (среднего размера)
-    } = selectProps
+export function getClasses(size: EditorSizeType) {
 
     // Классы
     const CN = 'text-input'
     const classes = [CN]
 
     // Размер поля ввода.
-    if (size === 'small') classes.push(`${CN}--small-size`)
-    if (size === 'middle') classes.push(`${CN}--middle-size`)
-    if (size === 'big') classes.push(`${CN}--big-size`)
+    classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
 }

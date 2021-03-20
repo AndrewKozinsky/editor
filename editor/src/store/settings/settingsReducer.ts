@@ -28,8 +28,8 @@ const initialState: SettingsReducerType = {
     editorLanguage: 'eng',
     // Тема интерфейса: light или dark
     editorTheme: 'light',
-    // Размер интерфейса: standard или big
-    editorSize: 'standard'
+    // Размер интерфейса: small, middle или big
+    editorSize: 'big'
 }
 
 // Установка языка интерфейса

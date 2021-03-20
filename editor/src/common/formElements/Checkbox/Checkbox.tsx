@@ -3,13 +3,15 @@ import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './js/gettingClasses'
 import './Checkbox.scss'
+import { EditorSizeType } from '../../../store/settings/settingsTypes'
+import {useGetComponentSize} from '../../../utils/MiscUtils';
 
 
 export type CheckboxPropType = {
     label: string // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
-    size?: 'small' | 'middle' | 'big', // Размер поля
+    size?: EditorSizeType, // Размер поля
     onChange: () => void // Обработчик выбора пункта
 }
 
@@ -20,9 +22,11 @@ function Checkbox(props: CheckboxPropType) {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
-        size = 'small', // Размер поля: small (маленькое), middle (среднего размера), big
         onChange // Обработчик выбора пункта
     } = props
+
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     // id для связи подписи и флага
     const [id] = useState(getRandomId())
@@ -40,7 +44,7 @@ function Checkbox(props: CheckboxPropType) {
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyVal = {
         htmlFor: id,
-        className: getLabelClasses(props),
+        className: getLabelClasses(size),
     }
 
     return (

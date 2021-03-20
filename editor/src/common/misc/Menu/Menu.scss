@@ -11,11 +11,27 @@ $class: menu;
 
 .#{$class}__li {
     display: inline-block;
-    margin-right: 15px;
 }
 .#{$class}__li:last-child {
     margin-right: 0;
 }
+.#{$class}__li--small-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    margin-right: 15px;
+}
+.#{$class}__li--middle-size {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    margin-right: 17px;
+}
+.#{$class}__li--big-size {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    margin-right: 20px;
+}
+
+
 
 .#{$class}--disabled-link {
     color: hsl(var(--base-h-part), calc(var(--base-s-part) - 10%), 55%);

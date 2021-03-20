@@ -5,6 +5,7 @@ import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils';
 import './Select.scss'
 import Label from '../Label/Label';
+import {useGetComponentSize} from '../../../utils/MiscUtils';
 
 
 
@@ -25,9 +26,11 @@ function Select(props: SelectPropType) {
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
-        size = 'small', // Размер поля: small (маленькое), middle (среднего размера), big
         onChange // Обработчик выбора пункта
     } = props
+
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     // Находится ли выпадающий список под фокусом
     const [isFocus, setIsFocus] = useState(false)
@@ -38,7 +41,7 @@ function Select(props: SelectPropType) {
     // Атрибуты поля
     const inputAttribs: ObjStringKeyAnyVal = {
         name,
-        className: getClasses(props),
+        className: getClasses(size),
         onFocus: () => setIsFocus(true),
         onBlur: () => setIsFocus(false),
         onChange,
@@ -52,11 +55,11 @@ function Select(props: SelectPropType) {
     return (
         <>
             <Label label={label}  id={id} />
-            <div className={getWrapperClasses(props, isFocus)}>
+            <div className={getWrapperClasses(size, isFocus)}>
                 <select {...inputAttribs} >
                     {getOptions(props)}
                 </select>
-                <div className='select-input-wrapper__tip'>{getArrowIcon(props)}</div>
+                <div className='select-input-wrapper__tip'>{getArrowIcon(size)}</div>
             </div>
         </>
     )

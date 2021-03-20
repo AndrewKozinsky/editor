@@ -1,11 +1,11 @@
 
 // Типы значений
 // Язык интерфейса
-export type EditorLanguageType = string
+export type EditorLanguageType = 'eng' | 'rus'
 // Тема интерфейса
-export type EditorThemeType = string
+export type EditorThemeType = 'light' | 'dark'
 // Размер интерфейса
-export type EditorSizeType = string
+export type EditorSizeType = 'tiny' | 'small' | 'middle' | 'big'
 
 // Типы типа и тип экшена
 // Установка языка интерфейса

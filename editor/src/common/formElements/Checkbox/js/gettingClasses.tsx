@@ -1,24 +1,20 @@
 import React from 'react'
 import { CheckboxPropType } from '../Checkbox'
 import {makeCN} from 'src/utils/StringUtils'
+import {EditorSizeType} from '../../../../store/settings/settingsTypes';
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.
- * @param {Object} checkboxProps — props переданные во флаг.
+ * @param size — размер элемента.
  */
-export function getLabelClasses(checkboxProps: CheckboxPropType) {
-    const {
-        size = 'small' // Размер поля: small (маленькое), middle (среднего размера), big
-    } = checkboxProps
+export function getLabelClasses(size: EditorSizeType) {
 
     // Классы обёртки
     const CN = 'checkbox-label'
     const classes = [CN]
 
     // Размер обёртки списка.
-    if (size === 'small')  classes.push(`${CN}--small-size`)
-    if (size === 'middle')  classes.push(`${CN}--middle-size`)
-    if (size === 'big') classes.push(`${CN}--big-size`)
+    classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
 }

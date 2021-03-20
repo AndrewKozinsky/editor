@@ -3,26 +3,22 @@ import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
+import {EditorSizeType} from '../../../store/settings/settingsTypes';
 
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.
- * @param {Object} selectProps — props переданные в выпадающий список.
+ * @param size — размер элемента.
  * @param {Boolean} isFocus — находится ли <select> в фокусе.
  */
-export function getWrapperClasses(selectProps: SelectPropType, isFocus: boolean) {
-    const {
-        size = 'small' // Размер поля: small (маленькое), middle (среднего размера), big
-    } = selectProps
+export function getWrapperClasses(size: EditorSizeType, isFocus: boolean) {
 
     // Классы обёртки
     const CN = 'select-input-wrapper'
     const classes = [CN]
 
     // Размер обёртки списка.
-    if (size === 'small')  classes.push(`${CN}--small-size`)
-    if (size === 'middle') classes.push(`${CN}--middle-size`)
-    if (size === 'big') classes.push(`${CN}--big-size`)
+    classes.push(`${CN}--${size}-size`)
 
     // Если есть фокусировка
     if (isFocus)  classes.push(`${CN}--focus`)
@@ -33,21 +29,16 @@ export function getWrapperClasses(selectProps: SelectPropType, isFocus: boolean)
 
 /**
  * Функция возвращает классы выпадающего списка
- * @param {Object} selectProps — props переданные в выпадающий список
+ * @param size — размер элемента.
  */
-export function getClasses(selectProps: SelectPropType) {
-    const {
-        size = 'small' // Размер поля: small (маленькое), middle (среднего размера)
-    } = selectProps
+export function getClasses(size: EditorSizeType) {
 
     // Классы
     const CN = 'select-input'
     const classes = [CN]
 
     // Размер выпадающего списка.
-    if (size === 'small') classes.push(`${CN}--small-size`)
-    if (size === 'middle') classes.push(`${CN}--middle-size`)
-    if (size === 'big') classes.push(`${CN}--big-size`)
+    classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
 }
@@ -56,12 +47,9 @@ export function getClasses(selectProps: SelectPropType) {
 /**
  * Функция возращает значёк со стрелочками, который есть в выпадающем списке справа.
  * Будет возвращён разный размер значка в зависимости от переданного размера самого выпадающего списка
- * @param {Object} selectProps параметры переданные в компонент выпадающего списка.
+ * @param size: EditorSizeType
  */
-export function getArrowIcon(selectProps: SelectPropType): null | JSX.Element {
-    const {
-        size = 'small' // Размер поля: small (маленькое), middle (среднего размера)
-    } = selectProps
+export function getArrowIcon(size: EditorSizeType): null | JSX.Element {
 
     // Размер выпадающего списка.
     if (size === 'small') return <SvgIcon type='selectInputSmallArrows' />
