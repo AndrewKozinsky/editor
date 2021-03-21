@@ -3,7 +3,7 @@ import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
 import './TextInput.scss'
-import { getClasses } from './functions'
+import { getClasses } from './TextInput-func'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import Label from '../Label/Label';
 import { EditorSizeType } from 'store/settings/settingsTypes'

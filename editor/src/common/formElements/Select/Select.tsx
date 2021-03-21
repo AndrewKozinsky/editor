@@ -1,11 +1,12 @@
 import React, {useState} from 'react'
-import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './functions'
+import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './Select-func'
 import { OptionsType } from './SelectTypes'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
-import {getRandomId} from 'utils/StringUtils';
+import {getRandomId} from 'utils/StringUtils'
+import Label from '../Label/Label'
+import {useGetComponentSize} from 'utils/MiscUtils';
 import './Select.scss'
-import Label from '../Label/Label';
-import {useGetComponentSize} from '../../../utils/MiscUtils';
+import {EditorSizeType} from '../../../store/settings/settingsTypes';
 
 
 
@@ -14,7 +15,7 @@ export type SelectPropType = {
     name: string // Имя выпадающего списка
     value?: string // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    size?: 'small' | 'middle' | 'big', // Размер поля
+    size?: EditorSizeType, // Размер поля
     onChange: () => void, // Обработчик выбора пункта
 }
 

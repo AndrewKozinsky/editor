@@ -1,44 +1,32 @@
 import React, {ReactNode} from 'react'
 import {makeCN} from 'utils/StringUtils'
 import './Wrapper.scss'
+import {EditorSizeType} from 'store/settings/settingsTypes'
+import {useGetComponentSize} from '../../utils/MiscUtils';
+import {getWrapperClasses} from './Wrapper-func';
 
 
-type WrapperPropType = {
-    children: ReactNode,
-    align?: 'right' | 'center'
-    t?: number,
-    b?: number
+export type WrapperPropType = {
+    children: ReactNode, // Дети компонента
+    align?: 'right' | 'center' // Выравнивание
+    t?: 5 | 10 | 15 | 20 | 30, // Отступ сверху
+    b?: 10 | 25 // Отступ снизу
+    size?: EditorSizeType // Размер элемента
 }
+
+
 
 /** Компонент дающий отступ оборачиваемому элементу */
 const Wrapper = (props: WrapperPropType) => {
     const {
         children, // Дети компонента
-        align,
-        t,        // Отступ сверху
-        b         // Отступ снизу
     } = props
 
-    const CN = 'margin'
-    let cls = [CN]
-
-    // Добавление класса дающую выравнивание
-    if (align === 'center') cls.push(CN + '__align-center')
-    if (align === 'right')  cls.push(CN + '__align-right')
-
-    // Добавление класса дающего верхний оступ
-    if (t === 5) cls.push(CN + '__t5')
-    if (t === 10) cls.push(CN + '__t10')
-    if (t === 15) cls.push(CN + '__t15')
-    if (t === 20) cls.push(CN + '__t20')
-    if (t === 30) cls.push(CN + '__t30')
-
-    // Добавление класса дающего нижний оступ
-    if (b === 10) cls.push(CN + '__b10')
-    if (b === 25) cls.push(CN + '__b25')
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     return (
-        <div className={makeCN(cls)}>
+        <div className={getWrapperClasses(props, size)}>
             {children}
         </div>
     )

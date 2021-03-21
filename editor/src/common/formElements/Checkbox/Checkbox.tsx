@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
-import { getLabelClasses } from './js/gettingClasses'
+import { getLabelClasses } from './Checkbox-func'
 import './Checkbox.scss'
 import { EditorSizeType } from '../../../store/settings/settingsTypes'
 import {useGetComponentSize} from '../../../utils/MiscUtils';

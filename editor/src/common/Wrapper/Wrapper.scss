@@ -6,36 +6,85 @@ $class: margin;
 }
 
 // Классы дающие выравнивание
-.#{$class}__align-center {
+.#{$class}--align-center {
     display: flex;
     justify-content: center;
 }
-.#{$class}__align-right {
+.#{$class}--align-right {
     display: flex;
     justify-content: flex-end;
 }
 
+
 // Классы дающие верний оступ
-.#{$class}__t5 {
+.#{$class}--t5.#{$class}--small-size {
     margin-top: .6rem;
 }
-.#{$class}__t10 {
-    margin-top: 1rem;
+.#{$class}--t5.#{$class}--middle-size {
+    margin-top: .7rem;
 }
-.#{$class}__t15 {
-    margin-top: 1.5rem;
-}
-.#{$class}__t20 {
-    margin-top: 2rem;
-}
-.#{$class}__t30 {
-    margin-top: 3rem;
+.#{$class}--t5.#{$class}--big-size {
+    margin-top: .8rem;
 }
 
+.#{$class}--t10.#{$class}--small-size {
+    margin-top: 1rem;
+}
+.#{$class}--t10.#{$class}--middle-size {
+    margin-top: 1.1rem;
+}
+.#{$class}--t10.#{$class}--big-size {
+    margin-top: 1.2rem;
+}
+
+.#{$class}--t15.#{$class}--small-size {
+    margin-top: 1.5rem;
+}
+.#{$class}--t15.#{$class}--middle-size {
+    margin-top: 1.7rem;
+}
+.#{$class}--t15.#{$class}--big-size {
+    margin-top: 1.8rem;
+}
+
+.#{$class}--t20.#{$class}--small-size {
+    margin-top: 2rem;
+}
+.#{$class}--t20.#{$class}--middle-size {
+    margin-top: 2.2rem;
+}
+.#{$class}--t20.#{$class}--big-size {
+    margin-top: 2.4rem;
+}
+
+.#{$class}--t30.#{$class}--small-size {
+    margin-top: 3rem;
+}
+.#{$class}--t30.#{$class}--middle-size {
+    margin-top: 3.3rem;
+}
+.#{$class}--t30.#{$class}--big-size {
+    margin-top: 3.5rem;
+}
+
+
 // Классы дающие нижний оступ
-.#{$class}__b10 {
+.#{$class}--b10.#{$class}--small-size {
     margin-bottom: 1rem;
 }
-.#{$class}__b25 {
+.#{$class}--b10.#{$class}--middle-size {
+    margin-bottom: 1.1rem;
+}
+.#{$class}--b10.#{$class}--big-size {
+    margin-bottom: 1.2rem;
+}
+
+.#{$class}--b25.#{$class}--small-size {
     margin-bottom: 2.5rem;
+}
+.#{$class}--b25.#{$class}--middle-size {
+    margin-bottom: 2.7rem;
+}
+.#{$class}--b25.#{$class}--big-size {
+    margin-bottom: 2.8rem;
 }

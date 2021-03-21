@@ -1,9 +1,8 @@
 import React from 'react'
-import { getClasses } from './functions'
+import { useGetComponentSize } from 'utils/MiscUtils'
+import { EditorSizeType } from 'store/settings/settingsTypes'
+import { getButtonClasses } from './Button-func'
 import './Button.scss'
-import './functions'
-import { useGetComponentSize } from '../../../utils/MiscUtils'
-import { EditorSizeType } from '../../../store/settings/settingsTypes'
 
 
 export type ButtonPropType = {
@@ -38,7 +37,7 @@ function Button(props: ButtonPropType) {
 
     const btnAttrs = {
         type,
-        className: getClasses(props, size),
+        className: getButtonClasses(props, size),
         disabled: disabled
     }
 

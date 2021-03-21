@@ -59,4 +59,11 @@ a {
     &:hover {
         border-bottom-color: hsla( var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), 0.5 );
     }
+
+    &:focus {
+        outline-color: var(--accent-h-part);
+        outline-style: dotted;
+        outline-offset: 4px;
+        outline-width: 1px;
+    }
 }

@@ -28,10 +28,10 @@ function Menu(props: MenuPropType) {
     // Размер элемента: tiny (крошечный), small (маленький), middle (средний), big (большой)
     const size = useGetComponentSize(props.size)
 
-    const $items = items.map(item => {
+    const $items = items.map((item, i) => {
         return (
-            <li className={getLiClasses(size)}>
-                <MenuLink to={item.to} label={item.label} />
+            <li className={getLiClasses(size)} key={i}>
+                <MenuLink to={item.to} label={item.label} key={i} />
             </li>
         )
     })

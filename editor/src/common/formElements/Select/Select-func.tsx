@@ -1,9 +1,9 @@
 import React from 'react'
+import {EditorSizeType} from 'store/settings/settingsTypes';
 import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
 import { ObjStringKeyAnyVal } from 'types/miscTypes'
-import {EditorSizeType} from '../../../store/settings/settingsTypes';
 
 
 /**

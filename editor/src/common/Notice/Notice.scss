@@ -1,11 +1,11 @@
 $class: notice;
 
+// Обёртка уведомления
 .#{$class} {
     display: flex;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
 }
 
+// Цвета текста уведомления
 .#{$class}--standard {
     color: var(--text-color);
 }
@@ -16,12 +16,28 @@ $class: notice;
     color: hsl(134, 61, 40);
 }
 
+// Размеры текста уведомления
+.#{$class}--small-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+.#{$class}--middle-size {
+    font-size: 1.6rem;
+    line-height: 2.1rem;
+}
+.#{$class}--big-size {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+}
+
+// Значёк
 .#{$class}__icon {
     min-width: 13px;
     margin-top: 0.3rem;
     margin-right: 4px;
 }
 
+// Абзац сообщения
 .#{$class}__paragraph {
 
 }

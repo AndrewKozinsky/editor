@@ -2,12 +2,17 @@ import React, {ReactElement, ReactNode} from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
 import {makeCN} from 'utils/StringUtils'
 import './Notice.scss'
+import {EditorSizeType} from 'store/settings/settingsTypes'
+import {useGetComponentSize} from '../../utils/MiscUtils';
+import {getClasses} from '../formElements/Button/Button-func';
+import {getNoticeWrapperClasses} from './Notice-func';
 
 
 const CN = 'notice'
 
-type NoticePropType = {
-    type?: 'standard' | 'error' | 'success'
+export type NoticePropType = {
+    type?: 'standard' | 'error' | 'success' // Тип сообщения: standard (обычный текст), error (ошибка), success (успех)
+    size?: EditorSizeType
     children?: ReactNode
 }
 
@@ -21,17 +26,14 @@ function Notice(props: NoticePropType) {
         children
     } = props
 
-    // Классы обёртки
-    const wrapperCls = [CN]
-    if (type === 'standard') wrapperCls.push(CN + '--standard')
-    if (type === 'error') wrapperCls.push(CN + '--error')
-    if (type === 'success') wrapperCls.push(CN + '--success')
+    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    const size = useGetComponentSize(props.size)
 
     // Классы абзаца с текстом
     const paragraphCls = [CN + '__paragraph']
 
     return (
-        <div className={makeCN(wrapperCls)}>
+        <div className={getNoticeWrapperClasses(props, size)}>
             <Sign {...props} />
             <p className={makeCN(paragraphCls)}>{children}</p>
         </div>

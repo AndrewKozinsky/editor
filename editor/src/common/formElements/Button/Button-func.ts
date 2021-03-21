@@ -7,7 +7,7 @@ import { EditorSizeType } from 'store/settings/settingsTypes'
  * @param {Object} buttonProps — props переданные в текстовое поле
  * @param size — размер элемента.
  */
-export function getClasses(buttonProps: ButtonPropType, size: EditorSizeType) {
+export function getButtonClasses(buttonProps: ButtonPropType, size: EditorSizeType) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)

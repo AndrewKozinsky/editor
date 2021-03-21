@@ -1,7 +1,5 @@
-import React from 'react'
-import { CheckboxPropType } from '../Checkbox'
 import {makeCN} from 'src/utils/StringUtils'
-import {EditorSizeType} from '../../../../store/settings/settingsTypes';
+import {EditorSizeType} from 'src/store/settings/settingsTypes'
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.

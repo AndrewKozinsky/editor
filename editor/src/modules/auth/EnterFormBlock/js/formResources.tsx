@@ -1,13 +1,13 @@
 import React from 'react'
 // @ts-ignore
 import * as Yup from 'yup'
-import {MenuItems, MenuPropType } from 'common/misc/Menu/Menu'
+import { MenuItems } from 'common/misc/Menu/Menu'
 import messages from 'modules/auth/messages'
 import { EditorLanguageType } from 'store/settings/settingsTypes'
 
 
 /**
- * Функция возвращает массив данных для генерации меню
+ * Функция возвращает массив данных для генерации меню выше формы
  * @param {String} lang — язык интерфейса
  */
 export function getMenuItems(lang: EditorLanguageType): MenuItems {

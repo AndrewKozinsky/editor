@@ -1,6 +1,6 @@
 import React from 'react'
-import { makeCN } from 'utils/StringUtils'
-import { EditorSizeType } from 'store/settings/settingsTypes';
+import { makeCN } from 'src/utils/StringUtils'
+import { EditorSizeType } from 'src/store/settings/settingsTypes';
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.
