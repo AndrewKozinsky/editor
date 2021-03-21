@@ -3,8 +3,6 @@
 
 $class: checkbox;
 
-// ---------------------------------------------------------------------------
-
 // Оригинальный флаг
 .#{$class}-input {
     position: absolute;
@@ -47,6 +45,8 @@ $class: checkbox;
         width: 14px;
         height: 14px;
         left: -19px;
+    }
+    &::before {
         top: 1px;
     }
 }
@@ -55,6 +55,8 @@ $class: checkbox;
         width: 17px;
         height: 17px;
         left: -24px;
+    }
+    &::before {
         top: 1px;
     }
 }
@@ -63,30 +65,27 @@ $class: checkbox;
         width: 20px;
         height: 20px;
         left: -28px;
+    }
+    &::before {
         top: 1px;
     }
 }
 
-.#{$class}-label::before {
-    transition: background-color .1s;
-}
 // Неотмеченный before
-.#{$class}-input:not(checked) + .#{$class}-label::before {
+.#{$class}-label::before {
     background-color: var(--button-color-hover);
+    transition: background-color .13s;
 }
 // Отмеченный before
 .#{$class}-input:checked + .#{$class}-label::before {
     background-color: var(--accent-color);
 }
 
-.#{$class}-label::after {
-    transition: top .1s, opacity .1s;
-}
-
 // Неотмеченный after
-.#{$class}-input:not(checked) + .#{$class}-label::after {
-    opacity: 0;
+.#{$class}-label::after {
     top: -2px;
+    opacity: 0;
+    transition: top .1s, opacity .1s;
 }
 // Отмеченный after
 .#{$class}-input:checked + .#{$class}-label::after {
@@ -95,13 +94,13 @@ $class: checkbox;
 }
 
 // Галка отмеченного after
-.#{$class}-input:checked + .#{$class}-label--small-size:after {
+.#{$class}-label--small-size:after {
     background-image: url('data:image/svg+xml;utf8,<svg width="14px" height="14px" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline stroke="rgb(0, 52, 108)" stroke-width="1.6" opacity="0.2" points="4 9 6 11 11 5"></polyline><polyline stroke="white" stroke-width="1.5" points="3.5 7.5 6 9.97900391 10.5 3.97900391"></polyline></g></svg>');
 }
-.#{$class}-input:checked + .#{$class}-label--middle-size:after {
+.#{$class}-label--middle-size:after {
     background-image: url('data:image/svg+xml;utf8,<svg width="17px" height="17px" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline stroke="rgb(0, 52, 108)" stroke-width="1.6" opacity="0.2" points="4.5 10.5 7.5 13.5 13 6.5"></polyline><polyline stroke="white" stroke-width="1.7" points="4.25 9.10714286 7.28571429 12.1173619 12.75 4.8316476"></polyline></g></svg>');
 }
-.#{$class}-input:checked + .#{$class}-label--big-size:after {
+.#{$class}-label--big-size:after {
     background-image: url('data:image/svg+xml;utf8,<svg width="20px" height="20px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g  stroke-width="2" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline stroke="rgb(0, 52, 108)" opacity="0.2" points="5.5 12.5 8.5 15.5 15 7.5"></polyline><polyline id="Path-2" stroke="white" points="5 10.7142857 8.57142857 14.2557199 15 5.68429129"></polyline></g></svg>');
 }
 

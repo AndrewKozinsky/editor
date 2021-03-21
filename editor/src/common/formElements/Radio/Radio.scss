@@ -37,15 +37,16 @@ $class: radio;
         content: '';
         position: absolute;
         border-radius: 50%;
-        transition: background-color .12s, opacity .12s;
     }
     &:before {
         top: 0;
         left: 0;
+        transition: background-color .2s;
     }
     &:after {
         background-color: white;
         box-shadow: 0 1.5px 0 rgba(0, 52, 108, .2);
+        transition: opacity .1s, transform .1s;
     }
 }
 
@@ -70,29 +71,31 @@ $class: radio;
 .#{$class}-label--small-size::after {
     width: 5px;
     height: 5px;
-    left: -14px;
-    top: 5px;
+    left: -16px;
+    top: 2.5px;
+    margin: 2px 0 0 2px;
 }
 .#{$class}-label--middle-size::after {
     width: 6px;
     height: 6px;
-    left: -18px;
-    top: 6px;
+    left: -15px;
+    top: 9px;
+    margin: -3px 0 0 -3px;
 }
 .#{$class}-label--big-size::after {
     width: 7px;
     height: 7px;
-    left: -21px;
-    top: 7px;
+    left: -28px;
+    top: 3px;
+    margin: 4px 0 0 7px;
+    opacity: 0;
+    transform: scale(0);
 }
 
 // Неотмеченный before
 .#{$class}-input:not(checked) + .#{$class}-label {
     &::before {
         background-color: var(--button-color-hover);
-    }
-    &::after {
-        opacity: 0;
     }
 }
 // Отмеченный before
@@ -102,6 +105,7 @@ $class: radio;
     }
     &::after {
         opacity: 1;
+        transform: scale(1);
     }
 }
 
