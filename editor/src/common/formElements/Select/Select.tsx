@@ -1,19 +1,20 @@
 import React, {useState} from 'react'
 import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './Select-func'
 import { OptionsType } from './SelectTypes'
-import { ObjStringKeyAnyVal } from 'types/miscTypes'
-import {getRandomId} from 'utils/StringUtils'
+import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
-import {useGetComponentSize} from 'utils/MiscUtils';
+import {useGetComponentSize} from 'utils/MiscUtils'
+import {EditorSizeType} from 'store/settings/settingsTypes'
 import './Select.scss'
-import {EditorSizeType} from '../../../store/settings/settingsTypes';
 
 
 
 export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     name: string // Имя выпадающего списка
-    value?: string // Выбранное значение выпадающего списка
+    value?: string | string[] // Выбранное значение выпадающего списка
+    defaultValue?: string | string[], // Значение поля ввода по умолчанию
     options: OptionsType // Массив для генерации тегов <option>
     size?: EditorSizeType, // Размер поля
     onChange: () => void, // Обработчик выбора пункта
@@ -26,6 +27,7 @@ function Select(props: SelectPropType) {
         label, // Подпись выпадающего списка
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
+        defaultValue,
         options, // Массив для генерации тегов <option>
         onChange // Обработчик выбора пункта
     } = props
@@ -40,7 +42,7 @@ function Select(props: SelectPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты поля
-    const inputAttribs: ObjStringKeyAnyVal = {
+    const inputAttribs: ObjStringKeyAnyValType = {
         name,
         className: getClasses(size),
         onFocus: () => setIsFocus(true),
@@ -49,6 +51,7 @@ function Select(props: SelectPropType) {
     }
 
     if (value) inputAttribs.label = value
+    if (defaultValue) inputAttribs.defaultValue = defaultValue
     // Если есть подпись, то добавить id чтобы связать подпись и выпадающий список
     if (label) inputAttribs.id = id
 

@@ -72,7 +72,7 @@
     // Части базового цвета
     //--base-h-part: 240; // Цветовой оттенок
     //--base-s-part: 8%; // Насыщенность (тускло -> ярко)
-    --base-l-part: 12%; // Светимость (темно -> светло)
+    --base-l-part: 14%; // Светимость (темно -> светло)
 
     // Базовый цвет
     --base-color: hsl(var(--base-h-part), var(--base-s-part), var(--base-l-part));
@@ -80,28 +80,28 @@
 
     // ЦВЕТА ТЕКСТА
     // Цвет основного текста
-    --text-color: hsl(var(--base-h-part), var(--base-s-part), 80%);
+    --text-color: hsl(var(--base-h-part), var(--base-s-part), 90%);
     // Цвет текстозаполнителя
-    --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 36%);
+    --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 40%);
 
 
     // ЦВЕТА ЭЛЕМЕНТОВ
     // Цвет кнопки
-    --button-color: hsl(var(--base-h-part), var(--base-s-part), 21%);
+    --button-color: hsl(var(--base-h-part), var(--base-s-part), 23%);
     // Наведение на кнопку
-    --button-color-hover: hsl(var(--base-h-part), var(--base-s-part), 25%);
+    --button-color-hover: hsl(var(--base-h-part), var(--base-s-part), 26%);
 
     // Текстовое поле
-    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 0%);
+    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 4%);
 
 
     // ЗНАЧКИ
     // Основной цвет значка
-    --icon-color: hsl(var(--base-h-part), var(--base-s-part), 78%);
+    --icon-color: hsl(var(--base-h-part), var(--base-s-part), 85%);
 
 
     // ЦВЕТА ФОНА
     // Цвет фона: первый и второй
     --bg-color: var(--base-color);
-    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 17%);
+    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 19%);
 }

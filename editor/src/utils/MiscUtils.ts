@@ -1,8 +1,8 @@
-import { ObjStringKeyAnyVal } from "../types/miscTypes";
+import { ObjStringKeyAnyValType } from "../types/miscTypes"
 import {useSelector} from 'react-redux';
 import store from 'store/store';
 import {AppState} from '../store/rootReducer';
-import {EditorSizeType} from '../store/settings/settingsTypes';
+import {EditorSizeType} from '../store/settings/settingsTypes'
 
 
 /**

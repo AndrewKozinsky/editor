@@ -75,6 +75,7 @@ function getResolve() {
         alias: {
             src: path.resolve(__dirname, './src/'),
             common: path.resolve(__dirname, './src/common'),
+            libs: path.resolve(__dirname, './src/libs'),
             modules: path.resolve(__dirname, './src/modules'),
             pages: path.resolve(__dirname, './src/pages'),
             requests: path.resolve(__dirname, './src/requests'),

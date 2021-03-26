@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { ObjStringKeyAnyVal } from 'types/miscTypes'
+import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './Checkbox-func'
 import './Checkbox.scss'
-import { EditorSizeType } from '../../../store/settings/settingsTypes'
-import {useGetComponentSize} from '../../../utils/MiscUtils';
+import { EditorSizeType } from 'store/settings/settingsTypes'
+import {useGetComponentSize} from 'utils/MiscUtils'
 
 
 export type CheckboxPropType = {
     label: string // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
+    defaultChecked?: boolean // Отмечено ли поле по умолчанию
     size?: EditorSizeType, // Размер поля
     onChange: () => void // Обработчик выбора пункта
 }
@@ -22,6 +23,7 @@ function Checkbox(props: CheckboxPropType) {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
+        defaultChecked, // Отмечено ли поле по умолчанию
         onChange // Обработчик выбора пункта
     } = props
 
@@ -32,7 +34,7 @@ function Checkbox(props: CheckboxPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты флага
-    const inputAttribs: ObjStringKeyAnyVal = {
+    const inputAttribs: ObjStringKeyAnyValType = {
         type: 'checkbox',
         name,
         value,
@@ -40,9 +42,10 @@ function Checkbox(props: CheckboxPropType) {
         className: 'checkbox-input',
         onChange,
     }
+    if (defaultChecked) inputAttribs.defaultChecked = true
 
     // Атрибуты label
-    const labelAttribs: ObjStringKeyAnyVal = {
+    const labelAttribs: ObjStringKeyAnyValType = {
         htmlFor: id,
         className: getLabelClasses(size),
     }

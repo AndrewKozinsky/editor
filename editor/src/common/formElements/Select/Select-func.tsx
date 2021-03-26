@@ -3,7 +3,7 @@ import {EditorSizeType} from 'store/settings/settingsTypes';
 import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
-import { ObjStringKeyAnyVal } from 'types/miscTypes'
+import { ObjStringKeyAnyValType } from 'types/miscTypes'
 
 
 /**
@@ -74,7 +74,7 @@ export function getOptions(selectProps: SelectPropType) {
     return options.map(function (option, i) {
 
         // Атрибуты <option>
-        const optionAttrs: ObjStringKeyAnyVal = {
+        const optionAttrs: ObjStringKeyAnyValType = {
             value: option.value,
             key: i
         }

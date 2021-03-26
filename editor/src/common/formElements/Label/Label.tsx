@@ -1,6 +1,7 @@
 import React from 'react'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 import { useGetComponentSize } from 'utils/MiscUtils'
+import { ObjStringKeyStringValType } from '../../../types/miscTypes'
 import { getLabelClasses } from './Label-func'
 import './Label.scss'
 
@@ -21,15 +22,14 @@ function Label(props: LabelPropType) {
     // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
     const size = useGetComponentSize(props.size)
 
-    if (!label || !id) return null
-    return (
-        <label
-            className={getLabelClasses(size)}
-            htmlFor={id}
-        >
-            {label}
-        </label>
-    )
+    if (!label) return null
+
+    // Атрибуты label
+    const labelAttrs: ObjStringKeyStringValType = {}
+    labelAttrs.className = getLabelClasses(size)
+    if (id) labelAttrs.htmlFor = id
+
+    return <label {...labelAttrs}>{label}</label>
 }
 
 

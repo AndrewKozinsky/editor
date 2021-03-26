@@ -12,10 +12,11 @@ import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import Checkbox from 'common/formElements/Checkbox/Checkbox'
 import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
-// @ts-ignore
-import { useFormik } from 'formik'
-import {initialValues, validateForm, onFormSubmit, formValuesType, getMenuItems} from './js/formResources'
-import Radio from '../../../common/formElements/Radio/Radio'
+import { formConfig } from './js/formResources'
+import Radio from 'common/formElements/Radio/Radio'
+import { getMenuItems } from '../menuItems'
+import useFormHandler from 'libs/formHandler/useFormHandler'
+import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
 // Удали если не потребуется
 // import '../AuthFormStyles/AuthFormStyles.scss'
 
@@ -26,19 +27,14 @@ function EnterFormBlock() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    const formik = useFormik({
-        initialValues: initialValues,
-        validationSchema: validateForm(lang),
-        validateOnBlur: false,
-        onSubmit: onFormSubmit
-    })
+    const fh = useFormHandler(formConfig, 'enter')
 
     const optionsSet: OptionsType = [
-        { value: 'Выберите героя', disabled: true },
-        { value: 'Чебурашка' },
-        { value: 'Крокодил Гена' },
-        { value: 'Шапокляк' },
-        { value: 'Крыса Лариса' }
+        { value: 'choose', label: 'Выберите героя', disabled: true },
+        { value: 'Che', label: 'Чебурашка' },
+        { value: 'Gena', label: 'Крокодил Гена' },
+        { value: 'Shapoklyak', label: 'Шапокляк' },
+        { value: 'Lara', label: 'Крыса Лариса' }
     ]
 
     return (
@@ -50,88 +46,70 @@ function EnterFormBlock() {
                 <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
             </Wrapper>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form name='enter'>
                 <Wrapper>
                     <TextInput
-                        label={messages.enterForm.emailField[lang]}
-                        // type='email'
-                        name="email"
-                        value={formik.values.email}
-                        autocomplete={'username'}
-                        // size='small'
+                        label={ messages.enterForm.emailField[lang] }
+                        name='email'
+                        // value={fh.email.value}
+                        value='Andrew'
+                        autocomplete='username'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
                         autoFocus
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors.email}
+                        onChange={() => {}}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
                     <TextInput
-                        label={messages.enterForm.passwordField[lang]}
-                        // type='password'
-                        name="password"
-                        value={formik.values.password}
-                        autocomplete={'current-password'}
-                        // size='middle'
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                        error={formik.errors.password}
+                        label={ messages.enterForm.passwordField[lang] }
+                        name='password'
+                        // value={fh.password.value}
+                        value='pass'
+                        autocomplete='current-password'
+                        onChange={() => {}}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
                     <Select
                         label='Герои'
                         name='heroes'
-                        value={formik.values.password}
+                        defaultValue={'Shapoklyak'}
                         options={optionsSet}
-                        // size='middle'
-                        onChange={formik.handleChange}
+                        onChange={() => {}}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
-                    <Checkbox
-                        label='1'
-                        name="numberOfGuests"
-                        value={11}
-                        // size='middle'
-                        onChange={formik.handleChange}
-                    />
-                    <Checkbox
-                        label='2'
-                        name="numberOfGuests"
-                        value={22}
-                        // size='middle'
-                        onChange={formik.handleChange}
-                    />
-                    <Checkbox
-                        label='3'
-                        name="numberOfGuests"
-                        value={33}
-                        // size='middle'
-                        onChange={formik.handleChange}
+                    <FieldGroup
+                        label='Блюда'
+                        inputType='checkbox'
+                        groupName='dishes'
+                        onChange={() => {}}
+                        inputsArr={
+                        [
+                            { value: 'pancakes', label: 'Блины', defaultChecked: true },
+                            { value: 'jam', label: 'Повидло' }
+                        ]
+                    }
                     />
                 </Wrapper>
                 <Wrapper t={15}>
-                    <Radio
-                        label='Red'
-                        name="color"
-                        value='red'
-                        // size='middle'
-                        onChange={formik.handleChange}
-                    />
-                    <Radio
-                        label='Green'
-                        name="color"
-                        value='green'
-                        // size='middle'
-                        onChange={formik.handleChange}
+                    <FieldGroup
+                        label='Цвета'
+                        inputType='radio'
+                        groupName='color'
+                        onChange={() => {}}
+                        inputsArr={
+                        [
+                            { value: 'red', label: 'Red' },
+                            { value: 'green', label: 'Green', defaultChecked: true },
+                            { value: 'blue', label: 'Blue' },
+                        ]
+                    }
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
-                        // size={'middle'}
                         text={messages.enterForm.submitBtnText[lang]}
                     />
                 </Wrapper>

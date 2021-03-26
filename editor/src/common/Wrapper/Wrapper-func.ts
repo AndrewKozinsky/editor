@@ -24,10 +24,10 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, size: EditorSiz
     if (align === 'right')  classes.push(CN + '--align-right')
 
     // Добавление класса дающего верхний оступ
-    classes.push(CN + '--t' + t)
+    if (t) classes.push(CN + '--t' + t)
 
     // Добавление класса дающего нижний оступ
-    classes.push(CN + '--b' + b)
+    if (b) classes.push(CN + '--b' + b)
 
     // Размер отступа.
     // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
