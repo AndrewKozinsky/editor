@@ -51,31 +51,22 @@ function EnterFormBlock() {
                     <TextInput
                         label={ messages.enterForm.emailField[lang] }
                         name='email'
-                        // value={fh.email.value}
-                        value='Andrew'
+                        value={fh.fields.email.value[0]}
+                        // value='Andrew'
                         autocomplete='username'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
                         autoFocus
-                        onChange={() => {}}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <TextInput
-                        label={ messages.enterForm.passwordField[lang] }
-                        name='password'
-                        // value={fh.password.value}
-                        value='pass'
-                        autocomplete='current-password'
-                        onChange={() => {}}
+                        onChange={fh.changeHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
                     <Select
                         label='Герои'
                         name='heroes'
-                        defaultValue={'Shapoklyak'}
+                        value={fh.fields.heroes.value[0]}
+                        // value='Gena'
                         options={optionsSet}
-                        onChange={() => {}}
+                        onChange={fh.changeHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -83,11 +74,14 @@ function EnterFormBlock() {
                         label='Блюда'
                         inputType='checkbox'
                         groupName='dishes'
-                        onChange={() => {}}
+                        value={fh.fields.dishes.value}
+                        // checkedValues={['jam']}
+                        onChange={fh.changeHandler}
                         inputsArr={
                         [
-                            { value: 'pancakes', label: 'Блины', defaultChecked: true },
-                            { value: 'jam', label: 'Повидло' }
+                            { value: 'pancakes', label: 'Блины' },
+                            { value: 'jam', label: 'Повидло' },
+                            { value: 'tea', label: 'Чай' }
                         ]
                     }
                     />
@@ -97,11 +91,13 @@ function EnterFormBlock() {
                         label='Цвета'
                         inputType='radio'
                         groupName='color'
-                        onChange={() => {}}
+                        value={fh.fields.color.value}
+                        // value='red'
+                        onChange={fh.changeHandler}
                         inputsArr={
                         [
                             { value: 'red', label: 'Red' },
-                            { value: 'green', label: 'Green', defaultChecked: true },
+                            { value: 'green', label: 'Green' },
                             { value: 'blue', label: 'Blue' },
                         ]
                     }

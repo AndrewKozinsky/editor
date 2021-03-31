@@ -1,26 +1,24 @@
 import React from 'react'
 // @ts-ignore
 import * as Yup from 'yup'
-import { EditorLanguageType } from 'store/settings/settingsTypes'
 import { formConfigType } from 'libs/formHandler/types'
 
 
+// Объект настройки useFormHandler
 export const formConfig: formConfigType = {
+    // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
     fields: {
         email: {
-            initialValue: 'Привет, Москва'
-        },
-        password: {
-
+            initialValue: ['Привет, Москва']
         },
         heroes: {
-            checkedValues: ['Gena']
+            initialValue: ['Gena']
         },
         dishes: {
-            checkedValues: ['jam']
+            initialValue: ['jam', 'pancakes']
         },
         color: {
-            checkedValues: ['red', 'blue']
+            initialValue: ['green']
         }
     }
 }

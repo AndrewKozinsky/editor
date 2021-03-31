@@ -8,20 +8,20 @@ import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getTextInputClasses } from './TextInput-func'
 import './TextInput.scss'
+import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
 
 
 export type TextInputPropType = {
     label?: string // Подпись текстового поля
     type?: 'text' | 'email' | 'password' // Подпись текстового поля
     name: string, // Аттрибут name текстового поля
-    value: string, // Значение поля ввода
-    defaultValue?: string, // Значение поля ввода по умолчанию
+    value: string, // Аттрибут name текстового поля
     autocomplete?: '' | 'username' | 'current-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
     size?: EditorSizeType // Размер поля
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
-    onChange: () => void, // Обработчик изменения поля
+    onChange: typeof inputChangeHandler, // Обработчик изменения поля
     onBlur?: () => void, // Обработчик потерей полем фокуса
     error?: string, // Текст ошибки
 }
@@ -35,7 +35,6 @@ function TextInput(props: TextInputPropType) {
         type = 'text', // Тип поля. Варианты: text, email
         name,          // Аттрибут name текстового поля
         value,
-        defaultValue, // Значение поля ввода по умолчанию
         autocomplete = '', // Значение автозаполнения поля
         placeholder,    // Текстозаполнитель
         autoFocus = false, // Нужно ли ставить фокус при загрузке
@@ -59,7 +58,6 @@ function TextInput(props: TextInputPropType) {
         onBlur: onBlur,
     }
 
-    if (defaultValue) inputAttribs.defaultValue = defaultValue
     if (autocomplete) inputAttribs.autoComplete = autocomplete
     if (placeholder) inputAttribs.placeholder = placeholder
     if (autoFocus) inputAttribs.autoFocus = autoFocus

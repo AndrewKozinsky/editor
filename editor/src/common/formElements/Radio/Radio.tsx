@@ -5,15 +5,16 @@ import { EditorSizeType } from 'store/settings/settingsTypes'
 import { getLabelClasses } from './Radio-func'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import './Radio.scss'
+import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
 
 
 export type RadioPropType = {
     label: string // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
-    defaultChecked?: boolean // Отмечено ли поле по умолчанию
+    checked?: boolean // Отмечено ли поле
     size?: EditorSizeType, // Размер поля
-    onChange: () => void // Обработчик выбора пункта
+    onChange: typeof inputChangeHandler // Обработчик выбора пункта
 }
 
 /* Компонент выпадающего списка */
@@ -23,7 +24,7 @@ function Radio(props: RadioPropType) {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
-        defaultChecked, // Отмечено ли поле по умолчанию
+        checked, // Отмечено ли поле
         onChange // Обработчик выбора пункта
     } = props
 
@@ -42,7 +43,7 @@ function Radio(props: RadioPropType) {
         className: 'radio-input',
         onChange,
     }
-    if (defaultChecked) inputAttribs.defaultChecked = true
+    inputAttribs.checked = checked
 
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyValType = {

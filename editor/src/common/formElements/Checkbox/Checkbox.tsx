@@ -5,15 +5,16 @@ import { getLabelClasses } from './Checkbox-func'
 import './Checkbox.scss'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
+import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
 
 
 export type CheckboxPropType = {
     label: string // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
-    defaultChecked?: boolean // Отмечено ли поле по умолчанию
+    checked?: boolean // Отмечено ли поле
     size?: EditorSizeType, // Размер поля
-    onChange: () => void // Обработчик выбора пункта
+    onChange: typeof inputChangeHandler // Обработчик выбора пункта
 }
 
 /* Компонент выпадающего списка */
@@ -23,7 +24,7 @@ function Checkbox(props: CheckboxPropType) {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
-        defaultChecked, // Отмечено ли поле по умолчанию
+        checked, // Отмечено ли поле
         onChange // Обработчик выбора пункта
     } = props
 
@@ -42,7 +43,7 @@ function Checkbox(props: CheckboxPropType) {
         className: 'checkbox-input',
         onChange,
     }
-    if (defaultChecked) inputAttribs.defaultChecked = true
+    inputAttribs.checked = checked
 
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyValType = {

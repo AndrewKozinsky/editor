@@ -7,6 +7,7 @@ import Label from '../Label/Label'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import {EditorSizeType} from 'store/settings/settingsTypes'
 import './Select.scss'
+import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
 
 
 
@@ -14,10 +15,9 @@ export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
-    defaultValue?: string | string[], // Значение поля ввода по умолчанию
     options: OptionsType // Массив для генерации тегов <option>
     size?: EditorSizeType, // Размер поля
-    onChange: () => void, // Обработчик выбора пункта
+    onChange: typeof inputChangeHandler, // Обработчик выбора пункта
 }
 
 /* Компонент выпадающего списка */
@@ -27,7 +27,6 @@ function Select(props: SelectPropType) {
         label, // Подпись выпадающего списка
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
-        defaultValue,
         options, // Массив для генерации тегов <option>
         onChange // Обработчик выбора пункта
     } = props
@@ -50,8 +49,7 @@ function Select(props: SelectPropType) {
         onChange,
     }
 
-    if (value) inputAttribs.label = value
-    if (defaultValue) inputAttribs.defaultValue = defaultValue
+    if (value) inputAttribs.value = value
     // Если есть подпись, то добавить id чтобы связать подпись и выпадающий список
     if (label) inputAttribs.id = id
 
@@ -60,7 +58,7 @@ function Select(props: SelectPropType) {
         <>
             <Label label={label}  id={id} />
             <div className={getWrapperClasses(size, isFocus)}>
-                <select {...inputAttribs} >
+                <select {...inputAttribs}>
                     {getOptions(props)}
                 </select>
                 <div className='select-input-wrapper__tip'>{getArrowIcon(size)}</div>
