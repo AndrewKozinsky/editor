@@ -17,8 +17,6 @@ import Radio from 'common/formElements/Radio/Radio'
 import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
-// Удали если не потребуется
-// import '../AuthFormStyles/AuthFormStyles.scss'
 
 
 /** Форма входа в сервис */
@@ -46,17 +44,20 @@ function EnterFormBlock() {
                 <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
             </Wrapper>
 
+            {/* ЧТО ЕСЛИ ВСЕ ТИПЫ ОБРАБОТЧИКОВ СОБЫТИЙ ПОСТАВИТЬ НА FORM? */}
+            {/* ТОГДА НЕ БУДЕТ НЕОБХОДИМОСТИ СТАВИТЬ ИХ В КАЖДОЕ ПОЛЕ */}
             <form name='enter'>
                 <Wrapper>
                     <TextInput
                         label={ messages.enterForm.emailField[lang] }
                         name='email'
                         value={fh.fields.email.value[0]}
-                        // value='Andrew'
                         autocomplete='username'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
                         autoFocus
-                        onChange={fh.changeHandler}
+                        onChange={fh.onChangeHandler}
+                        onBlur={fh.onBlurHandler}
+                        onKeyDown={fh.onKeyDownHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -64,9 +65,9 @@ function EnterFormBlock() {
                         label='Герои'
                         name='heroes'
                         value={fh.fields.heroes.value[0]}
-                        // value='Gena'
                         options={optionsSet}
-                        onChange={fh.changeHandler}
+                        onChange={fh.onChangeHandler}
+                        onBlur={fh.onBlurHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -75,8 +76,8 @@ function EnterFormBlock() {
                         inputType='checkbox'
                         groupName='dishes'
                         value={fh.fields.dishes.value}
-                        // checkedValues={['jam']}
-                        onChange={fh.changeHandler}
+                        onChange={fh.onChangeHandler}
+                        onBlur={fh.onBlurHandler}
                         inputsArr={
                         [
                             { value: 'pancakes', label: 'Блины' },
@@ -92,8 +93,8 @@ function EnterFormBlock() {
                         inputType='radio'
                         groupName='color'
                         value={fh.fields.color.value}
-                        // value='red'
-                        onChange={fh.changeHandler}
+                        onChange={fh.onChangeHandler}
+                        onBlur={fh.onBlurHandler}
                         inputsArr={
                         [
                             { value: 'red', label: 'Red' },

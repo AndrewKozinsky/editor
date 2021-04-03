@@ -10,9 +10,14 @@ export type formConfigType = {
         [key: string]: {
             // Изначальное значение поля. Например: ['andkozinsky@gmail.com']
             initialValue?: ValueType,
+            // Тут нужно сделать точные перечисления имеющихся событий с вопросительным знаком.
+            check?: {
+                [key: string]: (formDetails: FormDetailsToCheckFnType) => void
+            } | null
         }
     }
 }
+
 
 
 
@@ -22,14 +27,15 @@ export type StateType = {
     // Объект с данными по полям
     fields: FieldsObjType
 }
-/*{
+/*let stateExample = {
     // Пример объекта Состояния
     fields: {
         // Поле с именем email
         email: {
             fieldType: 'text',
             valueType: 'one',
-            value: ['andkozinsky@gmail.com']
+            value: ['andkozinsky@gmail.com'],
+            error: 'Поле не заполнено'
         }
     }
 }*/
@@ -46,6 +52,7 @@ export type FieldObjType = {
     valueCount: ValueCountType
     // Значение поля если это текстовое поле или null если другой тип
     value: ValueType
+    error?: FieldErrorType
 }
 
 
@@ -59,19 +66,34 @@ export type ValueType = string[]
 
 
 // ВОЗВРАЩАЕМЫЙ ОБЪЕКТ useFormHandler ---------------------------
-
+// Объект возвращаемый useFormHandler
 export type UseFormHandlerReturnType = {
     // Значения полей (обновляемые)
     fields: ReturnFieldsType,
-    changeHandler: (e: React.FormEvent<HTMLSelectElement>) => void,
+    onChangeHandler: (e: React.BaseSyntheticEvent) => void,
+    onBlurHandler: (e: React.BaseSyntheticEvent) => void,
+    onKeyDownHandler: (e: React.BaseSyntheticEvent) => void,
 }
 
+// Объект полей возвращаемый useFormHandler
 export type ReturnFieldsType = {
     [key: string]: {
         value: ValueType
+        error: FieldErrorType
     }
 }
 
+// Объект с деталями формы передаваемый в обработчик ошибок
+export type FormDetailsToCheckFnType = {
+    // Значение текущего поля
+    fieldValue: ValueType
+    setError: SetErrorFnType
+}
 
 // ПРОЧИЕ ТИПЫ --------------------------------------------------
+// Установщик Состояния useFormHandler
 export type SetFormStateType = (formState: StateType) => void
+// Функция устанавливающая объект ошибки поля
+export type SetErrorFnType = (err: FieldErrorType) => void
+// Объект ошибки поля
+export type FieldErrorType = any

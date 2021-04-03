@@ -8,7 +8,7 @@ import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getTextInputClasses } from './TextInput-func'
 import './TextInput.scss'
-import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
+import inputChangeHandler from 'libs/formHandler/functions/inputChangeHandler';
 
 
 export type TextInputPropType = {
@@ -22,7 +22,8 @@ export type TextInputPropType = {
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
     onChange: typeof inputChangeHandler, // Обработчик изменения поля
-    onBlur?: () => void, // Обработчик потерей полем фокуса
+    onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
+    onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки
 }
 
@@ -40,6 +41,7 @@ function TextInput(props: TextInputPropType) {
         autoFocus = false, // Нужно ли ставить фокус при загрузке
         onChange, // Обработчик изменения поля
         onBlur, // Обработчик потерей полем фокуса
+        onKeyDown, // Обработчик нажатия клавиши
     } = props
 
     // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
@@ -55,12 +57,13 @@ function TextInput(props: TextInputPropType) {
         value,
         className: getTextInputClasses(size),
         onChange: onChange,
-        onBlur: onBlur,
     }
 
     if (autocomplete) inputAttribs.autoComplete = autocomplete
     if (placeholder) inputAttribs.placeholder = placeholder
     if (autoFocus) inputAttribs.autoFocus = autoFocus
+    if (onBlur) inputAttribs.onBlur = onBlur
+    if (onKeyDown) inputAttribs.onKeyDown = onKeyDown
 
 
     return (

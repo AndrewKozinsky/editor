@@ -29,6 +29,7 @@ export type FieldGroupPropType = {
     inputsArr: InputDataType[]
     value: ValueType
     onChange: typeof inputChangeHandler
+    onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
 function FieldGroup(props: FieldGroupPropType) {
@@ -39,7 +40,8 @@ function FieldGroup(props: FieldGroupPropType) {
         groupName,
         inputsArr,
         value,
-        onChange
+        onChange,
+        onBlur
     } = props
 
     const $label = label ? <Label label={label} /> : null
@@ -53,63 +55,22 @@ function FieldGroup(props: FieldGroupPropType) {
             {$label}
             <InputsWrapper>
                 {inputsArr.map((inputData, i) => {
-                    const isChecked = !!(value.find(val => val === inputData.value))
 
-                    return (
-                        <Component
-                            value={inputData.value}
-                            label={inputData.label}
-                            name={groupName}
-                            checked={isChecked}
-                            key={i}
-                            onChange={onChange}
-                        />
-                    )
+                    const attrs = {
+                        value: inputData.value,
+                        label: inputData.label,
+                        name: groupName,
+                        checked: !!(value.find(val => val === inputData.value)),
+                        key: i,
+                        onChange,
+                        onBlur
+                    }
+
+                    return <Component {...attrs} />
                 })}
             </InputsWrapper>
         </>
     )
-
-    /*if (inputType === 'radio') {
-        return (
-            <>
-                {$label}
-                <InputsWrapper>
-                    {inputsArr.map((inputData, i) => {
-                        return (
-                            <Radio
-                                value={inputData.value}
-                                label={inputData.label}
-                                name={groupName}
-                                key={i}
-                                onChange={onChange}
-                            />
-                        )
-                    })}
-                </InputsWrapper>
-            </>
-        )
-    }*/
-    /*else if (inputType === 'checkbox') {
-        return (
-            <>
-                {$label}
-                <InputsWrapper>
-                    {inputsArr.map((inputData, i) => {
-                        return (
-                            <Checkbox
-                                value={inputData.value}
-                                label={inputData.label}
-                                name={groupName}
-                                key={i}
-                                onChange={onChange}
-                            />
-                        )
-                    })}
-                </InputsWrapper>
-            </>
-        )
-    }*/
 }
 
 export default FieldGroup

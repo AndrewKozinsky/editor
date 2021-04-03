@@ -15,6 +15,7 @@ export type RadioPropType = {
     checked?: boolean // Отмечено ли поле
     size?: EditorSizeType, // Размер поля
     onChange: typeof inputChangeHandler // Обработчик выбора пункта
+    onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
 /* Компонент выпадающего списка */
@@ -25,7 +26,8 @@ function Radio(props: RadioPropType) {
         name, // Имя группы флагов
         value, // Значение флага
         checked, // Отмечено ли поле
-        onChange // Обработчик выбора пункта
+        onChange, // Обработчик выбора пункта
+        onBlur, // Обработчик потерей полем фокуса
     } = props
 
     // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
@@ -40,10 +42,11 @@ function Radio(props: RadioPropType) {
         name,
         value,
         id,
+        checked,
         className: 'radio-input',
         onChange,
     }
-    inputAttribs.checked = checked
+    if (onBlur) inputAttribs.onBlur = onBlur
 
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyValType = {

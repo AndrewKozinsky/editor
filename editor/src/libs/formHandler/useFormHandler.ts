@@ -6,6 +6,11 @@ import {formConfigType, StateType, UseFormHandlerReturnType } from './types'
 import useGetForm from './functions/useGetForm'
 
 
+/**
+ *
+ * @param {Object} formConfig — объект настройки useFormHandler
+ * @param {String} formName — имя формы
+ */
 export default function useFormHandler(formConfig: formConfigType, formName: string): UseFormHandlerReturnType {
 
     const [formState, setFormState] = useState<StateType>(getInitialState(formConfig))
@@ -17,7 +22,7 @@ export default function useFormHandler(formConfig: formConfigType, formName: str
     useSupplementFieldData(formState, setFormState, $form)
     // console.log(formState)
 
-    return createReturnObj(formState, setFormState)
+    return createReturnObj(formState, setFormState, formConfig)
 }
 
 

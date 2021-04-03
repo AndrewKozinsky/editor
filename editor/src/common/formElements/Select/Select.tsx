@@ -18,6 +18,7 @@ export type SelectPropType = {
     options: OptionsType // Массив для генерации тегов <option>
     size?: EditorSizeType, // Размер поля
     onChange: typeof inputChangeHandler, // Обработчик выбора пункта
+    onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
 /* Компонент выпадающего списка */
@@ -28,7 +29,8 @@ function Select(props: SelectPropType) {
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
-        onChange // Обработчик выбора пункта
+        onChange, // Обработчик выбора пункта
+        onBlur, // Обработчик потерей полем фокуса
     } = props
 
     // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
@@ -45,7 +47,12 @@ function Select(props: SelectPropType) {
         name,
         className: getClasses(size),
         onFocus: () => setIsFocus(true),
-        onBlur: () => setIsFocus(false),
+        onBlur: (e: React.BaseSyntheticEvent) => {
+            // Поставить статус сфокусированности в Состояние
+            setIsFocus(false)
+            // Если передали обработчик потерей фокуса, то запустить
+            if (onBlur) onBlur(e)
+        },
         onChange,
     }
 

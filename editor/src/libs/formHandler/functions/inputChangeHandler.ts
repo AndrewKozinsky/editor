@@ -4,11 +4,12 @@ import {FieldObjType, SetFormStateType, StateType} from '../types'
 export default function inputChangeHandler(
     e: React.BaseSyntheticEvent, formState: StateType, setFormState: SetFormStateType
 ) {
-    // debugger
-    // const inputName = e.target.name
+    // Значение поля
     const inputValue = e.target.value
 
+    // Данные поля из Состояния
     const inputData = formState.fields[e.target.name]
+    // Получение нового значения поля
     const newValue = getNewValue(inputData, inputValue)
 
     // @ts-ignore
@@ -17,10 +18,14 @@ export default function inputChangeHandler(
 }
 
 function getNewValue(inputData: FieldObjType, newValue: string) {
-    if (inputData.fieldType === 'text' || inputData.fieldType === 'radio') {
+    if (
+        inputData.fieldType === 'text' ||
+        inputData.fieldType === 'radio' ||
+        inputData.fieldType === 'select' && inputData.valueCount === 'one'
+    ) {
         return [newValue]
     }
-    if (inputData.fieldType === 'checkbox' || inputData.fieldType === 'select') {
+    else {
         const isPassedValueExists = inputData.value.find(val => val === newValue)
 
         let valuesNewArr = [...inputData.value]
@@ -33,11 +38,3 @@ function getNewValue(inputData: FieldObjType, newValue: string) {
         return valuesNewArr
     }
 }
-
-
-/*
-function inputChangeHandler(e: React.BaseSyntheticEvent) {
-    e.preventDefault()
-}*/
-// FormEvent<HTMLFormElement>
-// e: React.FormEvent<HTMLSelectElement>
