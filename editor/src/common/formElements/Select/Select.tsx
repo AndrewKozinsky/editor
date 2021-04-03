@@ -7,8 +7,6 @@ import Label from '../Label/Label'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import {EditorSizeType} from 'store/settings/settingsTypes'
 import './Select.scss'
-import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
-
 
 
 export type SelectPropType = {
@@ -17,7 +15,7 @@ export type SelectPropType = {
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
     size?: EditorSizeType, // Размер поля
-    onChange: typeof inputChangeHandler, // Обработчик выбора пункта
+    onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 

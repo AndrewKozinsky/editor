@@ -3,6 +3,7 @@ import { useGetComponentSize } from 'utils/MiscUtils'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 import { getButtonClasses } from './Button-func'
 import './Button.scss'
+import {ObjStringKeyAnyValType} from '../../../types/miscTypes';
 
 
 export type ButtonPropType = {
@@ -12,6 +13,7 @@ export type ButtonPropType = {
     color?: 'base' | 'accent'
     // icon?: string
     text?: string
+    name?: string
     disabled?: boolean
     // isLoading?: boolean
 }
@@ -24,6 +26,7 @@ function Button(props: ButtonPropType) {
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         // icon, // Тип значка
         text, // Текст на кнопке
+        name, // Атрибут name кнопки
         disabled = false, // Заблокирована ли кнопка
         // isLoading, // Нужно ли на кнопке рисовать загрузчик
     } = props
@@ -35,11 +38,12 @@ function Button(props: ButtonPropType) {
     let btnText: null | string = null
     if (view !== 'onlyIcon' && text) btnText = text
 
-    const btnAttrs = {
+    const btnAttrs: ObjStringKeyAnyValType = {
         type,
         className: getButtonClasses(props, size),
         disabled: disabled
     }
+    if (name) btnAttrs.name = name
 
 
     return (

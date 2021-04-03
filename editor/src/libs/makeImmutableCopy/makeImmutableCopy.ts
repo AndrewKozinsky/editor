@@ -1,21 +1,22 @@
+
 /**
  * Функция создаёт неизменяемую (immutable) копию переданных данных и заменяет один объект на переданный.
  * @param {Object || Array} mainData — объект или массив где внутри есть объект, который должен быть скопирован.
- * @param {Object || Array} target — объект или массив, который должен быть скопирован.
+ * @param {Object || Array} originalData — объект или массив, который должен быть скопирован.
  * @param {Object || Array} changedData — изменённый объект или массив
  * @param {Object || Array} [newData] — в процессе работы функция создаёт объект или массив с копией. Это служебный аргумент. Сюда передавать ничего не нужно.
  * @returns {Object || Array} — функция возвращает неизменяемую копию из аргумента mainData.
  */
-export default function makeImmutableObj(mainData, target, changedData, newData) {
+export default function makeImmutableObj(mainData: any, originalData: any, changedData: any, newData?: any) {
 
-    // Если mainData равен target, тогда вернуть изменённый объект
-    if(mainData === target) {
+    // Если mainData равен originalData, тогда вернуть изменённый объект
+    if(mainData === originalData) {
         return changedData;
     }
 
 
     // Есть в mainData нет целевого объекта, то вернуть переданный mainData
-    if(!isDataHasTargetData(mainData, target)) return mainData;
+    if(!isDataHasOriginalData(mainData, originalData)) return mainData;
 
 
     // В mainData есть целевой объект...
@@ -33,7 +34,7 @@ export default function makeImmutableObj(mainData, target, changedData, newData)
             let elem = newData[i];
 
             // Если в структуре элемента массива есть целевой объект
-            newData[i] = makeImmutableObj(elem, target, changedData, newData)
+            newData[i] = makeImmutableObj(elem, originalData, changedData, newData)
         }
     }
 
@@ -50,7 +51,7 @@ export default function makeImmutableObj(mainData, target, changedData, newData)
             let elem = mainData[key];
 
             // Тогда заменить его на копию
-            newData[key] = makeImmutableObj(elem, target, changedData, newData)
+            newData[key] = makeImmutableObj(elem, originalData, changedData, newData)
         }
     }
 
@@ -63,13 +64,13 @@ export default function makeImmutableObj(mainData, target, changedData, newData)
 /**
  * Функция проверяет есть ли в данных другие данные
  * @param {Object || Array} currentData — объект или массив где нужно найти другой объект.
- * @param {Object || Array} target — объект/массив, который может быть в currentData.
- * @returns {Boolean} — возвращает булево значение есть ли в currentData объект targetData.
+ * @param {Object || Array} originalData — объект/массив, который может быть в currentData.
+ * @returns {Boolean} — возвращает булево значение есть ли в currentData объект originalData.
  */
-function isDataHasTargetData(currentData, target) {
+function isDataHasOriginalData(currentData: any, originalData: any) {
 
     // Если текущий объект равен целевому объекту, то вернуть правду
-    if(currentData === target) return true;
+    if(currentData === originalData) return true;
 
 
     // Если это массив
@@ -79,7 +80,7 @@ function isDataHasTargetData(currentData, target) {
         for(let i = 0; i < currentData.length; i++) {
 
             // ... и передать элемент на проверку.
-            if(isDataHasTargetData(currentData[i], target)) {
+            if(isDataHasOriginalData(currentData[i], originalData)) {
                 return true
             }
         }
@@ -93,7 +94,7 @@ function isDataHasTargetData(currentData, target) {
         for(let key in currentData) {
 
             // ... и передать значение свойства на проверку.
-            if(isDataHasTargetData(currentData[key], target)) {
+            if(isDataHasOriginalData(currentData[key], originalData)) {
                 return true
             }
         }

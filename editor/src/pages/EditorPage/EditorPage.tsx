@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react'
 // import Loader from '../../common/misc/Loader/Loader'
 // import { AppState } from '../../store/rootReducer'
 // import { UserReducerType } from '../../store/user/userReducer'
-// import { useSetTokenStatus } from './js/functions'
+// import { useSetTokenStatus } from './js/return-funcs'
 // import './css/EditorPage.scss'
 
 /** Главная страница приложения. */

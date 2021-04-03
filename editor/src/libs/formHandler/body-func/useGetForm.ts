@@ -1,13 +1,12 @@
 import {useEffect, useState} from 'react'
-
-export type FormType = null | HTMLFormElement
+import FHTypes from '../types'
 
 /**
  * Хук получает имя формы, находит в DOM и возвращает ссылку на неё.
  * @param {String} formName — имя формы
  */
-export default function useGetForm(formName: string): FormType {
-
+export default function useGetForm(formName: string): FHTypes.$form {
+    // Ссылка на форму
     const [$form, set$form] = useState(null)
 
     useEffect(function () {

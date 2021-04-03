@@ -8,7 +8,6 @@ import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getTextInputClasses } from './TextInput-func'
 import './TextInput.scss'
-import inputChangeHandler from 'libs/formHandler/functions/inputChangeHandler';
 
 
 export type TextInputPropType = {
@@ -21,7 +20,7 @@ export type TextInputPropType = {
     size?: EditorSizeType // Размер поля
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
-    onChange: typeof inputChangeHandler, // Обработчик изменения поля
+    onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки

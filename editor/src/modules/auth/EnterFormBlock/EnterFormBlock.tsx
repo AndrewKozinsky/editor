@@ -9,11 +9,9 @@ import TextInput from 'common/formElements/TextInput/TextInput'
 import Select from 'common/formElements/Select/Select'
 import Notice from 'common/Notice/Notice'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import Checkbox from 'common/formElements/Checkbox/Checkbox'
 import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
 import { formConfig } from './js/formResources'
-import Radio from 'common/formElements/Radio/Radio'
 import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
@@ -25,6 +23,7 @@ function EnterFormBlock() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
+    // FormHandler
     const fh = useFormHandler(formConfig, 'enter')
 
     const optionsSet: OptionsType = [
@@ -44,20 +43,17 @@ function EnterFormBlock() {
                 <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
             </Wrapper>
 
-            {/* ЧТО ЕСЛИ ВСЕ ТИПЫ ОБРАБОТЧИКОВ СОБЫТИЙ ПОСТАВИТЬ НА FORM? */}
-            {/* ТОГДА НЕ БУДЕТ НЕОБХОДИМОСТИ СТАВИТЬ ИХ В КАЖДОЕ ПОЛЕ */}
-            <form name='enter'>
+            <form name='enter' {...fh.formHandlers}>
                 <Wrapper>
                     <TextInput
                         label={ messages.enterForm.emailField[lang] }
                         name='email'
                         value={fh.fields.email.value[0]}
+                        onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
                         placeholder={messages.enterForm.emailPlaceholder[lang]}
+                        error={fh.fields.email.data.error}
                         autoFocus
-                        onChange={fh.onChangeHandler}
-                        onBlur={fh.onBlurHandler}
-                        onKeyDown={fh.onKeyDownHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -65,9 +61,8 @@ function EnterFormBlock() {
                         label='Герои'
                         name='heroes'
                         value={fh.fields.heroes.value[0]}
+                        onChange={fh.onChangeFieldHandler}
                         options={optionsSet}
-                        onChange={fh.onChangeHandler}
-                        onBlur={fh.onBlurHandler}
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -76,15 +71,14 @@ function EnterFormBlock() {
                         inputType='checkbox'
                         groupName='dishes'
                         value={fh.fields.dishes.value}
-                        onChange={fh.onChangeHandler}
-                        onBlur={fh.onBlurHandler}
+                        onChange={fh.onChangeFieldHandler}
                         inputsArr={
-                        [
-                            { value: 'pancakes', label: 'Блины' },
-                            { value: 'jam', label: 'Повидло' },
-                            { value: 'tea', label: 'Чай' }
-                        ]
-                    }
+                            [
+                                { value: 'pancakes', label: 'Блины' },
+                                { value: 'jam', label: 'Повидло' },
+                                { value: 'tea', label: 'Чай' }
+                            ]
+                        }
                     />
                 </Wrapper>
                 <Wrapper t={15}>
@@ -93,21 +87,21 @@ function EnterFormBlock() {
                         inputType='radio'
                         groupName='color'
                         value={fh.fields.color.value}
-                        onChange={fh.onChangeHandler}
-                        onBlur={fh.onBlurHandler}
+                        onChange={fh.onChangeFieldHandler}
                         inputsArr={
-                        [
-                            { value: 'red', label: 'Red' },
-                            { value: 'green', label: 'Green' },
-                            { value: 'blue', label: 'Blue' },
-                        ]
-                    }
+                            [
+                                { value: 'red', label: 'Red' },
+                                { value: 'green', label: 'Green' },
+                                { value: 'blue', label: 'Blue' },
+                            ]
+                        }
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
                         text={messages.enterForm.submitBtnText[lang]}
+                        name='submit'
                     />
                 </Wrapper>
             </form>

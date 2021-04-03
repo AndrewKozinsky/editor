@@ -5,7 +5,6 @@ import { getLabelClasses } from './Checkbox-func'
 import './Checkbox.scss'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
-import inputChangeHandler from '../../../libs/formHandler/functions/inputChangeHandler';
 
 
 export type CheckboxPropType = {
@@ -14,7 +13,7 @@ export type CheckboxPropType = {
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
     size?: EditorSizeType, // Размер поля
-    onChange: typeof inputChangeHandler // Обработчик выбора пункта
+    onChange?: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 

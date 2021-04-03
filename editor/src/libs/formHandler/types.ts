@@ -1,99 +1,139 @@
-import React, { FormEvent } from 'react'
+import React from 'react'
+
+// Типы FormHandler
+namespace FHTypes {
+
+    // ОБЪЕКТ КОНФИГУРАЦИИ ------------------------------------------
+    // Тип объекта конфигурации useFormHandler передаваемый пользователем
+    export type FormConfig = {
+        // Объект с данными по полям
+        fields: {
+            // Имя поля. Например email
+            [key: string]: {
+                // Изначальное значение поля. Например: ['andkozinsky@gmail.com'].
+                // Для кнопки это передавать не нужно.
+                initialValue?: FieldValue,
+                // Изначальные данные поля. Например { error: null }
+                initialData?: FieldData
+                // Обработчики браузерных событий
+                change?: ((formDetails: FormDetails) => void)
+                blur?: ((formDetails: FormDetails) => void)
+                submit?: ((formDetails: FormDetails) => void)
+                // Обработчик события изменения Состояния формы
+                stateChange?: ((formDetails: FormDetails) => void)
+            }
+        }
+    }
 
 
-// ОБЪЕКТ КОНФИГУРАЦИИ ------------------------------------------
-// Тип объекта конфигурации useFormHandler передаваемый пользователем
-export type formConfigType = {
-    // Объект с данными по полям
-    fields: {
+
+    // СОСТОЯНИЕ useFormHandler -------------------------------------
+    export type FormState = {
+        // Объект с данными по полям
+        fields: FieldsObj
+    }
+    export type FieldsObj = {
         // Имя поля. Например email
+        [key: string]: FieldObj
+    }
+    export type FieldObj = {
+        // Значение поля
+        value: FieldValue
+        // Тип поля: text, select, checkbox, radio
+        fieldType: FieldType
+        // Сколько значений может быть у поля: one (одно) или many (несколько). Это зависит от типа поля.
+        valueCount: ValueCount
+        data?: FieldData
+    }
+    // Значение поля
+    export type FieldValue = string[]
+    // Тип данных поля
+    export type FieldData = any
+    // Тип поля
+    export type FieldType = 'text' | 'select' | 'checkbox' | 'radio' | 'button'
+    // Сколько значений может быть у поля: нисколько (кнопка), одно или несколько
+    export type ValueCount = 'zero' | 'one' | 'many'
+
+
+
+
+    // ОБЪЕКТ ВОЗВРАЩАЕМЫЙ ХУКОМ useFormHandler ---------------------------
+    // Объект возвращаемый useFormHandler
+    export type ReturnObj = {
+        // Значения полей (обновляемые)
+        fields: ReturnFields,
+        onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void,
+        formHandlers: {
+            onChange: (e: React.BaseSyntheticEvent) => void,
+            onBlur: (e: React.BaseSyntheticEvent) => void,
+        }
+    }
+
+    // Объект полей возвращаемый useFormHandler
+    export type ReturnFields = {
         [key: string]: {
-            // Изначальное значение поля. Например: ['andkozinsky@gmail.com']
-            initialValue?: ValueType,
-            // Тут нужно сделать точные перечисления имеющихся событий с вопросительным знаком.
-            check?: {
-                [key: string]: (formDetails: FormDetailsToCheckFnType) => void
-            } | null
+            value: FieldValue
+            data: FieldData
         }
     }
-}
 
+    // Функция устанавливающая любые данные поля
+    // export type SetDataFn = (newData: FieldData, fieldName: string) => void
 
-
-
-// СОСТОЯНИЕ useFormHandler -------------------------------------
-
-export type StateType = {
-    // Объект с данными по полям
-    fields: FieldsObjType
-}
-/*let stateExample = {
-    // Пример объекта Состояния
-    fields: {
-        // Поле с именем email
-        email: {
-            fieldType: 'text',
-            valueType: 'one',
-            value: ['andkozinsky@gmail.com'],
-            error: 'Поле не заполнено'
+    // Объект с деталями формы для манипулирования полями формы
+    export type FormDetails = {
+        // Состояние формы
+        formState: NickFormState
+        // Функция устанавливающая значение поля
+        setFieldValue: ChangeFieldStateFn,
+        // Функция устанавливающая данные в поле
+        setFieldData: ChangeFieldStateFn
+    }
+    // Объект с данными о полях без служебных свойств
+    export type NickFormState = {
+        [key: string]: {
+            value: FieldValue,
+            data: FieldData
         }
     }
-}*/
+    // Функция изменяющая состояние поля: значение или данные
+    export type ChangeFieldStateFn = (
+        newData: FHTypes.FieldValue | FHTypes.FieldData,
+        fieldName: string
+    ) => void
 
-export type FieldsObjType = {
-    // Имя поля. Например email
-    [key: string]: FieldObjType
-}
+    // Объект с деталями формы передаваемый при событии изменения Состояния формы
+    /*export type FormDetailsToHandleStateChange = {
+        // Состояние формы
+        formState: NickFormState
+        // Функция устанавливающая значение поля
+        setFieldValue: StateChangeHandlerSetDataFn,
+        // Функция устанавливающая данные в поле
+        setFieldData: StateChangeHandlerSetDataFn
+    }*/
 
-export type FieldObjType = {
-    // Тип поля: text, select, checkbox, radio
-    fieldType: FieldTypeType
-    // Сколько значений может быть у поля: one (одно) или many (несколько). Это зависит от типа поля.
-    valueCount: ValueCountType
-    // Значение поля если это текстовое поле или null если другой тип
-    value: ValueType
-    error?: FieldErrorType
-}
-
-
-// Тип поля
-export type FieldTypeType = 'text' | 'select' | 'checkbox' | 'radio'
-// Сколько значений может быть у поля: одно или несколько
-export type ValueCountType = 'one' | 'many'
-// Значение поля
-export type ValueType = string[]
+    // Функция изменяющая состояние поля: значение или данные
+    /*export type StateChangeHandlerSetDataFn = (
+        newData: FHTypes.FieldValue | FHTypes.FieldData,
+        fieldName: string
+    ) => void*/
 
 
 
-// ВОЗВРАЩАЕМЫЙ ОБЪЕКТ useFormHandler ---------------------------
-// Объект возвращаемый useFormHandler
-export type UseFormHandlerReturnType = {
-    // Значения полей (обновляемые)
-    fields: ReturnFieldsType,
-    onChangeHandler: (e: React.BaseSyntheticEvent) => void,
-    onBlurHandler: (e: React.BaseSyntheticEvent) => void,
-    onKeyDownHandler: (e: React.BaseSyntheticEvent) => void,
-}
-
-// Объект полей возвращаемый useFormHandler
-export type ReturnFieldsType = {
-    [key: string]: {
-        value: ValueType
-        error: FieldErrorType
+    // ПРОЧИЕ ТИПЫ --------------------------------------------------
+    // Установщик Состояния useFormHandler
+    export type SetFormState = (formState: FormState) => void
+    // Элемент формы
+    export type $form = null | HTMLFormElement
+    // События формы, которые разрешено использовать
+    export type FormEventsNames = 'change' | 'blur'
+    // Состояние объекта браузерного события
+    export type BrowserEventState = {
+        eventName: null | FormEventsNames,
+        fieldName: string
     }
+    // Функция ставящая новое значение константы canRunStateChangeHandler
+    export type SetCanRunStateChangeHandler = (arg: boolean) => void
 }
 
-// Объект с деталями формы передаваемый в обработчик ошибок
-export type FormDetailsToCheckFnType = {
-    // Значение текущего поля
-    fieldValue: ValueType
-    setError: SetErrorFnType
-}
-
-// ПРОЧИЕ ТИПЫ --------------------------------------------------
-// Установщик Состояния useFormHandler
-export type SetFormStateType = (formState: StateType) => void
-// Функция устанавливающая объект ошибки поля
-export type SetErrorFnType = (err: FieldErrorType) => void
-// Объект ошибки поля
-export type FieldErrorType = any
+export default FHTypes
