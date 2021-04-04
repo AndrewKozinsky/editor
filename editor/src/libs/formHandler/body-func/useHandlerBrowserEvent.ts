@@ -1,6 +1,7 @@
 import makeImmutableObj from 'src/libs/makeImmutableCopy/makeImmutableCopy'
 import getNickFormState from '../return-func/getNickFormState'
 import FHTypes from '../types'
+import React from 'react';
 
 
 /**
@@ -9,25 +10,56 @@ import FHTypes from '../types'
  * @param {Object} formConfig — конфигурацию формы переданная программистом
  * @param {Object} formState — состояние формы
  * @param {Function} setFormState — установка состояния формы
+ * @param {Function} setBrowserEvent — функция устанавливающая объект с данными о произошедшем событии
  */
-export default function useHandleBrowserEvent(
+export default function useHandlerBrowserEvent(
     browserEvent: FHTypes.BrowserEventState,
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
-    setFormState: FHTypes.SetFormState
+    setFormState: FHTypes.SetFormState,
+    setBrowserEvent: FHTypes.SetBrowserEvent // Следует использовать FHTypes.SetBrowserEvent, но это даёт ошибку
 ) {
+
     // Имя поля и имя произошедшего события
     const {fieldName, eventName} = browserEvent
+    // Завершить если не указано имя поля или оно не существует
     if (!fieldName) return
 
+    // Если событием является отправка формы
+    if (eventName === 'submit') {
+
+        // ... то перебрать все поля и запустить обработчики события submit
+        for (let fieldName in formConfig.fields) {
+            // Текущее поле
+            const field = formConfig.fields[fieldName]
+
+            // Если в поле есть подписка на событие изменения Состояния формы
+            if (field.submit) {
+
+                // Объект передаваемый в функцию запускаемую после обновления Состояния формы
+                const formDetails: FHTypes.FormDetails = {
+                    // Данные по всем полям без лишних сведений
+                    formState: getNickFormState(formState),
+                    // Метод устанавливающий новое значение поля
+                    setFieldValue: getSetFieldData(formState, setFormState, 'value'),
+                    // Метод устанавливающий новые данные поля
+                    setFieldData: getSetFieldData(formState, setFormState, 'data'),
+                }
+
+                // Запуск функции, которая должна запускаться после определённого события
+                // @ts-ignore
+                field.submit(formDetails)
+            }
+        }
+    }
 
     // Если в formConfig у поля есть обработка определённого события...
     // @ts-ignore
-    if (formConfig.fields[fieldName][eventName]) {
+    else if (formConfig.fields[fieldName][eventName]) {
 
         // Объект передаваемый в функцию устанавливающую данные поля
         const setDataFnArgs: FHTypes.FormDetails = {
-            // Состояние формы
+            // Данные по всем полям без лишних сведений
             formState: getNickFormState(formState),
             // Метод устанавливающий новое значение поля
             setFieldValue: getSetFieldData(formState, setFormState, 'value'),
@@ -39,6 +71,9 @@ export default function useHandleBrowserEvent(
         // @ts-ignore
         formConfig.fields[fieldName][eventName](setDataFnArgs)
     }
+
+    // Поставить отсутствие события. Позже продумай нужно ли делать это действие.
+    setBrowserEvent( {eventName: null, fieldName: ''} )
 }
 
 

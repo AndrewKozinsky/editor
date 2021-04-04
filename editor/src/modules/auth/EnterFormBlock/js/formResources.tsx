@@ -15,6 +15,8 @@ export const formConfig: FHTypes.FormConfig = {
             },
             change: function (formDetails: FHTypes.FormDetails) {
 
+            },
+            submit(formDetails) {
                 const fieldValue = formDetails.formState.email.value
                 const setFieldData = formDetails.setFieldData
 
@@ -25,7 +27,7 @@ export const formConfig: FHTypes.FormConfig = {
                 } else {
                     setFieldData({error: null}, 'email')
                 }
-            },
+            }
         },
         heroes: {
             initialValue: ['Gena']
@@ -37,9 +39,25 @@ export const formConfig: FHTypes.FormConfig = {
             initialValue: ['green']
         },
         submit: {
-            stateChange: function (formDetails: FHTypes.FormDetails) {
-                // formDetails.setFieldData({error:  Math.round(Math.random() * 100) }, 'email')
+            /*stateChange: function (formDetails: FHTypes.FormDetails) {
+                formDetails.setFieldData({error:  Math.round(Math.random() * 100) }, 'email')
+            }*/
+        }
+    },
+    // Пользовательская функция проверки правильности формы
+    checkForm(formState) {
+        let isCorrect = true
+
+        for(let fieldName in formState) {
+            if (formState[fieldName].data && formState[fieldName].data.error) {
+                isCorrect = false
             }
         }
+
+        return isCorrect
+    },
+    // Пользовательская функция запускаемая при отправке формы когда все поля верные
+    submitForm(formDetails) {
+        console.log('ОТПРАВКА')
     }
 }

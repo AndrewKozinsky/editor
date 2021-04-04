@@ -23,6 +23,10 @@ namespace FHTypes {
                 stateChange?: ((formDetails: FormDetails) => void)
             }
         }
+        // Пользовательская функция проверки правильности формы
+        checkForm(formState: NickFormState): boolean
+        // Пользовательская функция запускаемая при отправке формы когда все поля верные
+        submitForm(formDetails: SubmitFormDetails): void
     }
 
 
@@ -65,7 +69,8 @@ namespace FHTypes {
         onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void,
         formHandlers: {
             onChange: (e: React.BaseSyntheticEvent) => void,
-            onBlur: (e: React.BaseSyntheticEvent) => void,
+            onBlur:   (e: React.BaseSyntheticEvent) => void,
+            onSubmit: (e: React.BaseSyntheticEvent) => void,
         }
     }
 
@@ -76,9 +81,6 @@ namespace FHTypes {
             data: FieldData
         }
     }
-
-    // Функция устанавливающая любые данные поля
-    // export type SetDataFn = (newData: FieldData, fieldName: string) => void
 
     // Объект с деталями формы для манипулирования полями формы
     export type FormDetails = {
@@ -102,21 +104,18 @@ namespace FHTypes {
         fieldName: string
     ) => void
 
-    // Объект с деталями формы передаваемый при событии изменения Состояния формы
-    /*export type FormDetailsToHandleStateChange = {
-        // Состояние формы
-        formState: NickFormState
-        // Функция устанавливающая значение поля
-        setFieldValue: StateChangeHandlerSetDataFn,
-        // Функция устанавливающая данные в поле
-        setFieldData: StateChangeHandlerSetDataFn
-    }*/
 
-    // Функция изменяющая состояние поля: значение или данные
-    /*export type StateChangeHandlerSetDataFn = (
-        newData: FHTypes.FieldValue | FHTypes.FieldData,
-        fieldName: string
-    ) => void*/
+
+    // ОТПРАВКА ФОРМЫ ------------------------------------------------
+    // Объект со значениями полей для отправки
+    export type FieldsValuesSubmitObj = {
+        [key: string]: string | string[]
+    }
+    // Первый аргумент передаваемый в пользовательскую функцию
+    // запускаемая при отправке формы когда все поля верные
+    export type SubmitFormDetails = {
+        fieldsValues: FieldsValuesSubmitObj
+    }
 
 
 
@@ -126,7 +125,7 @@ namespace FHTypes {
     // Элемент формы
     export type $form = null | HTMLFormElement
     // События формы, которые разрешено использовать
-    export type FormEventsNames = 'change' | 'blur'
+    export type FormEventsNames = 'change' | 'blur' | 'submit'
     // Состояние объекта браузерного события
     export type BrowserEventState = {
         eventName: null | FormEventsNames,
@@ -134,6 +133,7 @@ namespace FHTypes {
     }
     // Функция ставящая новое значение константы canRunStateChangeHandler
     export type SetCanRunStateChangeHandler = (arg: boolean) => void
+    export type SetBrowserEvent = (arg: BrowserEventState) => void
 }
 
 export default FHTypes

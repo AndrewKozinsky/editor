@@ -13,11 +13,8 @@ export default function useBrowserEvent() {
     )
 
     // Функция ставит в lastEvent новые данные
-    function changeBrowserEvent(e: React.BaseSyntheticEvent, eventName: null | FHTypes.FormEventsNames) {
-        setBrowserEvent({
-            eventName,
-            fieldName: e.target.name
-        })
+    function changeBrowserEvent(eventDetails: FHTypes.BrowserEventState) {
+        setBrowserEvent(eventDetails)
     }
 
     return {

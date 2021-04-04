@@ -3,11 +3,12 @@ import getInitialState from './body-func/getInitialState'
 import useGetForm from './body-func/useGetForm'
 import useSupplementFieldData from './body-func/useSupplementFieldData'
 import useBrowserEvent from './body-func/useBrowserEvent'
-import useHandleBrowserEvent from './body-func/useHandleBrowserEvent'
+import useHandlerBrowserEvent from './body-func/useHandlerBrowserEvent'
 import getFields from './return-func/getFields'
 import inputChangeHandler from './return-func/inputChangeHandler'
 import FHTypes from "./types"
 import stateChangeHandler from './body-func/stateChangeHandler'
+import useSubmitForm from './return-func/useSubmitForm'
 
 
 /**
@@ -19,6 +20,12 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
 
     // Состояние формы
     const [formState, setFormState] = useState<FHTypes.FormState>(getInitialState(formConfig))
+
+    // Можно ли запускать обработчик изменения объекта состояния
+    const [canRunStateChangeHandler, setCanRunStateChangeHandler] = useState(true)
+
+    // Можно ли запускать отправку формы
+    const setCanRunSubmitHandler = useSubmitForm(formConfig, formState)
 
     // Ссылка на форму
     const $form = useGetForm(formName)
@@ -32,11 +39,10 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
     // При изменении объекта браузерного события
     useEffect(() => {
         // Обработка браузерного события
-        useHandleBrowserEvent(browserEvent, formConfig, formState, setFormState)
+        useHandlerBrowserEvent(browserEvent, formConfig, formState, setFormState, setBrowserEvent)
     }, [browserEvent])
 
-    // Можно ли запускать обработчик изменения объекта состояния
-    const [canRunStateChangeHandler, setCanRunStateChangeHandler] = useState(true)
+
 
     // При изменении объекта Состояния формы
     useEffect(() => {
@@ -60,10 +66,21 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
         // Установка данных о последнем событии при его наступлении
         formHandlers: {
             onChange: useCallback((e: React.BaseSyntheticEvent) => {
-                setBrowserEvent(e, 'change')
+                setBrowserEvent({eventName: 'change', fieldName: e.target.name})
             }, [browserEvent]),
             onBlur: useCallback((e: React.BaseSyntheticEvent) => {
-                setBrowserEvent(e, 'blur')
+                setBrowserEvent({eventName: 'blur', fieldName: e.target.name})
+            }, [browserEvent]),
+            onSubmit: useCallback((e: React.BaseSyntheticEvent) => {
+                // Запретить стандартную отправку формы
+                e.preventDefault()
+
+                // Проверить поля, которые нужно проверять при отправке
+                setBrowserEvent({eventName: 'submit', fieldName: e.target.name})
+
+                // Поставить что можно начинать процедуру отправки формы
+                setTimeout(() => setCanRunSubmitHandler(true), 0)
+
             }, [browserEvent]),
         }
     }
