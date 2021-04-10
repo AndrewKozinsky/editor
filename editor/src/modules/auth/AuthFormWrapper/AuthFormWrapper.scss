@@ -1,6 +1,6 @@
-$class: auth-form-wrapper;
+$CN: auth-form-wrapper;
 
-.#{$class} {
+.#{$CN} {
     width: 410px;
     box-sizing: border-box;
     background-color: var(--bg-color);
@@ -9,6 +9,6 @@ $class: auth-form-wrapper;
     border-radius: var(--radius-2);
 }
 
-.#{$class}__logo-wrapper {
+.#{$CN}__logo-wrapper {
     margin-bottom: 1.5rem;
 }

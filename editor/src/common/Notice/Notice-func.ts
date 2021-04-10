@@ -4,6 +4,7 @@ import { NoticePropType } from './Notice'
 
 /**
  * Функция возвращает классы выпадающего списка
+ * @param props —
  * @param size — размер элемента.
  */
 export function getNoticeWrapperClasses(props: NoticePropType, size: EditorSizeType) {

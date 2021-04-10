@@ -1,31 +1,31 @@
 
-$class: menu;
+$CN: menu;
 
-.#{$class} {
-
-}
-
-.#{$class}__ul {
+.#{$CN} {
 
 }
 
-.#{$class}__li {
+.#{$CN}__ul {
+
+}
+
+.#{$CN}__li {
     display: inline-block;
 }
-.#{$class}__li:last-child {
+.#{$CN}__li:last-child {
     margin-right: 0;
 }
-.#{$class}__li--small-size {
+.#{$CN}__li--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     margin-right: 14px;
 }
-.#{$class}__li--middle-size {
+.#{$CN}__li--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     margin-right: 16px;
 }
-.#{$class}__li--big-size {
+.#{$CN}__li--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     margin-right: 18px;
@@ -33,7 +33,7 @@ $class: menu;
 
 
 
-.#{$class}--disabled-link {
+.#{$CN}--disabled-link {
     color: hsl(var(--base-h-part), calc(var(--base-s-part) - 10%), 55%);
     cursor: default;
     border-bottom-color: transparent;

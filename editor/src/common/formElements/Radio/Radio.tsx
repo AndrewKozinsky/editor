@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import {EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
 import { getLabelClasses } from './Radio-func'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import './Radio.scss'
@@ -12,7 +12,7 @@ export type RadioPropType = {
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
-    size?: EditorSizeType, // Размер поля
+    relativeSize?: EditorSizeMultiplyType, // Размер поля
     onChange?: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
@@ -29,8 +29,8 @@ function Radio(props: RadioPropType) {
         onBlur, // Обработчик потерей полем фокуса
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
-    const size = useGetComponentSize(props.size)
+    // Размер компонента относительно размера всего интерфейса
+    const relativeSize = useGetComponentSize(props.relativeSize)
 
     // id для связи подписи и флага
     const [id] = useState(getRandomId())
@@ -50,7 +50,7 @@ function Radio(props: RadioPropType) {
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyValType = {
         htmlFor: id,
-        className: getLabelClasses(size),
+        className: getLabelClasses(relativeSize),
     }
 
     return (

@@ -1,20 +1,20 @@
 
-$class: header;
+$CN: header;
 
-.#{$class} {
+.#{$CN} {
     color: var(--text-color);
     font-weight: bold;
 }
 
-.#{$class}--h1-small-size {
+.#{$CN}--h1-small-size {
     font-size: 2.6rem;
     line-height: 3.6rem;
 }
-.#{$class}--h1-middle-size {
+.#{$CN}--h1-middle-size {
     font-size: 3rem;
     line-height: 4rem;
 }
-.#{$class}--h1-big-size {
+.#{$CN}--h1-big-size {
     font-size: 3.4rem;
     line-height: 4.2rem;
 }

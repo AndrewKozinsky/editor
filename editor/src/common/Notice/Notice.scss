@@ -1,43 +1,43 @@
-$class: notice;
+$CN: notice;
 
 // Обёртка уведомления
-.#{$class} {
+.#{$CN} {
     display: flex;
 }
 
 // Цвета текста уведомления
-.#{$class}--standard {
+.#{$CN}--standard {
     color: var(--text-color);
 }
-.#{$class}--error {
+.#{$CN}--error {
     color: hsl(354, 100, 44);
 }
-.#{$class}--success {
+.#{$CN}--success {
     color: hsl(134, 61, 40);
 }
 
 // Размеры текста уведомления
-.#{$class}--small-size {
+.#{$CN}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
 }
-.#{$class}--middle-size {
+.#{$CN}--middle-size {
     font-size: 1.6rem;
     line-height: 2.1rem;
 }
-.#{$class}--big-size {
+.#{$CN}--big-size {
     font-size: 1.8rem;
     line-height: 2.4rem;
 }
 
 // Значёк
-.#{$class}__icon {
+.#{$CN}__icon {
     min-width: 13px;
     margin-top: 0.3rem;
     margin-right: 4px;
 }
 
 // Абзац сообщения
-.#{$class}__paragraph {
+.#{$CN}__paragraph {
 
 }

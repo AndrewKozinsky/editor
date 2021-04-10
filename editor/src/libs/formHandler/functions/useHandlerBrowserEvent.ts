@@ -1,5 +1,6 @@
 import FHTypes from '../types'
 import {getSetFieldData, getSetFieldValue, getSetFormData } from './formStateSettersAndGetters'
+import {log} from 'util';
 
 
 /**
@@ -8,21 +9,26 @@ import {getSetFieldData, getSetFieldValue, getSetFormData } from './formStateSet
  * @param {Object} formConfig — конфигурацию формы переданная программистом
  * @param {Object} formState — состояние формы
  * @param {Function} setFormState — установка состояния формы
+ * @param {Function} setBrowserEvent — установка
  */
 export function handleBrowserEvent(
     browserEvent: FHTypes.BrowserEventState,
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
-    setFormState: FHTypes.SetFormState
+    setFormState: FHTypes.SetFormState,
+    setBrowserEvent: (browserEvent: FHTypes.BrowserEventState) => void
 ) {
     // Имя поля и имя произошедшего события
     const {fieldName, eventName} = browserEvent
 
+    // Не обрабатывать пустые события
+    if (!eventName) return
+
     // Если событием является отправка формы
     if (eventName === 'submit') {
-
         // ... то перебрать все поля и запустить обработчики события submit
         for (let fieldName in formConfig.fields) {
+
             // Текущее поле
             const field = formConfig.fields[fieldName]
 
@@ -47,6 +53,8 @@ export function handleBrowserEvent(
         // Запуск функции, которая должна запускаться после определённого события
         formConfig.fields[fieldName][eventName](formDetails)
     }
+
+    setBrowserEvent({browserEvent: null, eventName: null})
 }
 
 

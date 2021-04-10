@@ -64,7 +64,9 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
 
     // Если тег input, то возвратить checkbox, radio или text
     if (tagName === 'input') {
-        return <FHTypes.FieldType>$thisInput.type
+        if ($thisInput.type === 'checkbox') return 'checkbox'
+        if ($thisInput.type === 'radio') return 'radio'
+        return 'text'
     }
     // Если тег button, то возвратить button
     else if (tagName === 'button') {

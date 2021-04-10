@@ -53,17 +53,17 @@ const messages: messagesType = {
             eng: 'Password *',
             rus: 'Пароль *'
         },
+        passwordErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
         passwordErrToShort: {
-            eng: 'Must be 5 characters or more',
-            rus: 'Минимально можно ввести 5 символов'
+            eng: 'Must be 4 characters or more',
+            rus: 'Минимально можно ввести 4 символа'
         },
         passwordErrToLong: {
             eng: 'Must be 15 characters or less',
             rus: 'Максимум можно ввести 15 символов'
-        },
-        passwordErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
         },
         submitBtnText: {
             eng: 'Sign in',

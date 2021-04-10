@@ -6,6 +6,8 @@ export type EditorLanguageType = 'eng' | 'rus'
 export type EditorThemeType = 'light' | 'dark'
 // Размер интерфейса
 export type EditorSizeType = 'tiny' | 'small' | 'middle' | 'big'
+// Размер элемента относительно размера элементов интрерфейса
+export type EditorSizeMultiplyType = -3 | -2 | -1 | 1 | 2 | 3
 
 // Типы типа и тип экшена
 // Установка языка интерфейса

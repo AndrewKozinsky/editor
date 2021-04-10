@@ -9,9 +9,9 @@
 }
 
 
-$class: text-input;
+$CN: text-input;
 
-.#{$class} {
+.#{$CN} {
     display: block;
     width: 100%;
     color: var(--text-color);
@@ -34,17 +34,17 @@ $class: text-input;
 }
 
 // Размер поля.
-.#{$class}--small-size {
+.#{$CN}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: .4rem 0.8rem;
 }
-.#{$class}--middle-size {
+.#{$CN}--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     padding: .5rem 0.9rem;
 }
-.#{$class}--big-size {
+.#{$CN}--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     padding: .7rem 1.1rem;

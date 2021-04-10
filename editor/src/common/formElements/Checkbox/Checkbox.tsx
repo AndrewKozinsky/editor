@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './Checkbox-func'
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import {EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import './Checkbox.scss'
 
@@ -12,7 +12,7 @@ export type CheckboxPropType = {
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
-    size?: EditorSizeType, // Размер поля
+    size?: EditorSizeMultiplyType, // Размер поля
     onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
@@ -29,7 +29,7 @@ function Checkbox(props: CheckboxPropType) {
         onBlur, // Обработчик потерей полем фокуса
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
+    // Размер компонента относительно размера всего интерфейса
     const size = useGetComponentSize(props.size)
 
     // id для связи подписи и флага

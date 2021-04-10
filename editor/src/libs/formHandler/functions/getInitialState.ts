@@ -11,7 +11,7 @@ export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes
     let fields: FHTypes.FieldsStateObj = {}
     // Данные о форме
     let form: FHTypes.FormStateObj = {
-        data: null
+        data: formConfig.form.initialData || null
     }
 
     // Проход по полям формы из объекта конфигурации для наполнения fields данными о полях

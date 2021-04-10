@@ -5,7 +5,7 @@ import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
 import {useGetComponentSize} from 'utils/MiscUtils'
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
 import './Select.scss'
 
 
@@ -14,7 +14,7 @@ export type SelectPropType = {
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    size?: EditorSizeType, // Размер поля
+    relativeSize?: EditorSizeMultiplyType, // Размер поля
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
@@ -31,8 +31,8 @@ function Select(props: SelectPropType) {
         onBlur, // Обработчик потерей полем фокуса
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
-    const size = useGetComponentSize(props.size)
+    // Размер компонента относительно размера всего интерфейса
+    const relativeSize = useGetComponentSize(props.relativeSize)
 
     // Находится ли выпадающий список под фокусом
     const [isFocus, setIsFocus] = useState(false)
@@ -43,7 +43,7 @@ function Select(props: SelectPropType) {
     // Атрибуты поля
     const inputAttribs: ObjStringKeyAnyValType = {
         name,
-        className: getClasses(size),
+        className: getClasses(relativeSize),
         onFocus: () => setIsFocus(true),
         onBlur: (e: React.BaseSyntheticEvent) => {
             // Поставить статус сфокусированности в Состояние
@@ -62,11 +62,11 @@ function Select(props: SelectPropType) {
     return (
         <>
             <Label label={label}  id={id} />
-            <div className={getWrapperClasses(size, isFocus)}>
+            <div className={getWrapperClasses(relativeSize, isFocus)}>
                 <select {...inputAttribs}>
                     {getOptions(props)}
                 </select>
-                <div className='select-input-wrapper__tip'>{getArrowIcon(size)}</div>
+                <div className='select-input-wrapper__tip'>{getArrowIcon(relativeSize)}</div>
             </div>
         </>
     )

@@ -6,15 +6,12 @@ import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
-import Select from 'common/formElements/Select/Select'
 import Notice from 'common/Notice/Notice'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import messages from '../messages'
 import messagesWithJSX from '../messagesWithJSX'
-import formConfig from './js/formResources'
+import getFormConfig from './formResources'
 import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
-import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
 
 
 /** Форма входа в сервис */
@@ -24,15 +21,7 @@ function EnterFormBlock() {
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(formConfig, 'enter')
-
-    const optionsSet: OptionsType = [
-        { value: 'choose', label: 'Выберите героя', disabled: true },
-        { value: 'Che', label: 'Чебурашка' },
-        { value: 'Gena', label: 'Крокодил Гена' },
-        { value: 'Shapoklyak', label: 'Шапокляк' },
-        { value: 'Lara', label: 'Крыса Лариса' }
-    ]
+    const fh = useFormHandler(getFormConfig(lang), 'enter')
 
     return (
         <div>
@@ -40,7 +29,7 @@ function EnterFormBlock() {
                 <Menu items={getMenuItems(lang)}/>
             </Wrapper>
             <Wrapper b={10}>
-                <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
+                <Header text={messages.enterForm.formHeader[lang]} type='h1' relativeSize={1}/>
             </Wrapper>
 
             <form name='enter' {...fh.formHandlers}>
@@ -48,6 +37,7 @@ function EnterFormBlock() {
                     <TextInput
                         label={ messages.enterForm.emailField[lang] }
                         name='email'
+                        relativeSize={2}
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
@@ -57,44 +47,15 @@ function EnterFormBlock() {
                     />
                 </Wrapper>
                 <Wrapper t={15}>
-                    <Select
-                        label='Герои'
-                        name='heroes'
-                        value={fh.fields.heroes.value[0]}
+                    <TextInput
+                        label={ messages.enterForm.passwordField[lang] }
+                        name='password'
+                        relativeSize={2}
+                        // type='password'
+                        value={fh.fields.password.value[0]}
                         onChange={fh.onChangeFieldHandler}
-                        options={optionsSet}
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <FieldGroup
-                        label='Блюда'
-                        inputType='checkbox'
-                        groupName='dishes'
-                        value={fh.fields.dishes.value}
-                        onChange={fh.onChangeFieldHandler}
-                        inputsArr={
-                            [
-                                { value: 'pancakes', label: 'Блины' },
-                                { value: 'jam', label: 'Повидло' },
-                                { value: 'tea', label: 'Чай' }
-                            ]
-                        }
-                    />
-                </Wrapper>
-                <Wrapper t={15}>
-                    <FieldGroup
-                        label='Цвета'
-                        inputType='radio'
-                        groupName='color'
-                        value={fh.fields.color.value}
-                        onChange={fh.onChangeFieldHandler}
-                        inputsArr={
-                            [
-                                { value: 'red', label: 'Red' },
-                                { value: 'green', label: 'Green' },
-                                { value: 'blue', label: 'Blue' },
-                            ]
-                        }
+                        autocomplete='current-password'
+                        error={fh.fields.password.data.error}
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
@@ -102,6 +63,7 @@ function EnterFormBlock() {
                         type='submit'
                         text={messages.enterForm.submitBtnText[lang]}
                         name='submit'
+                        relativeSize={1}
                     />
                 </Wrapper>
             </form>

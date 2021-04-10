@@ -1,8 +1,8 @@
 @import "../commonStyles/commonStyles";
 
-$class: btn;
+$CN: btn;
 
-.#{$class} {
+.#{$CN} {
     cursor: pointer;
     border: none;
     border-radius: var(--radius-2);
@@ -25,22 +25,22 @@ $class: btn;
 
 
 // Размер кнопки.
-.#{$class}--tiny-size {
+.#{$CN}--tiny-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: 1px 6px;
 }
-.#{$class}--small-size {
+.#{$CN}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: 4px 11px;
 }
-.#{$class}--middle-size {
+.#{$CN}--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     padding: 5px 14px;
 }
-.#{$class}--big-size {
+.#{$CN}--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     padding: 7px 16px;
@@ -49,14 +49,14 @@ $class: btn;
 
 // Тип кнопки.
 // standard (стандартная кнопка), onlyIcon (только значёк).
-.#{$class}--standard-view {
+.#{$CN}--standard-view {
 
 }
 
 
 // Цвет кнопки.
 // base (стандартный цвет), accent (акцентный цвет)
-.#{$class}--base-color {
+.#{$CN}--base-color {
     color: var(--text-color);
     background-color: var(--button-color);
     transition: background-color .2s;

@@ -1,7 +1,6 @@
 import React, {ReactNode} from 'react'
-import {makeCN} from 'utils/StringUtils'
 import './Wrapper.scss'
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
 import {useGetComponentSize} from '../../utils/MiscUtils';
 import {getWrapperClasses} from './Wrapper-func';
 
@@ -11,7 +10,7 @@ export type WrapperPropType = {
     align?: 'right' | 'center' // Выравнивание
     t?: 5 | 10 | 15 | 20 | 30, // Отступ сверху
     b?: 10 | 25 // Отступ снизу
-    size?: EditorSizeType // Размер элемента
+    relativeSize?: EditorSizeMultiplyType // Размер элемента
 }
 
 
@@ -22,11 +21,11 @@ const Wrapper = (props: WrapperPropType) => {
         children, // Дети компонента
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
-    const size = useGetComponentSize(props.size)
+    // Размер компонента относительно размера всего интерфейса
+    const relativeSize = useGetComponentSize(props.relativeSize)
 
     return (
-        <div className={getWrapperClasses(props, size)}>
+        <div className={getWrapperClasses(props, relativeSize)}>
             {children}
         </div>
     )

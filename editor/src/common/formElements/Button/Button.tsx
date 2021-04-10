@@ -1,14 +1,14 @@
 import React from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import { EditorSizeMultiplyType } from 'store/settings/settingsTypes'
 import { getButtonClasses } from './Button-func'
-import './Button.scss'
 import {ObjStringKeyAnyValType} from '../../../types/miscTypes';
+import './Button.scss'
 
 
 export type ButtonPropType = {
     type?: 'button' | 'submit' | 'reset'
-    size?: EditorSizeType
+    relativeSize?: EditorSizeMultiplyType
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
     // icon?: string
@@ -31,8 +31,8 @@ function Button(props: ButtonPropType) {
         // isLoading, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
-    const size = useGetComponentSize(props.size)
+    // Размер компонента относительно размера всего интерфейса
+    const relativeSize = useGetComponentSize(props.relativeSize)
 
     // Текст кнопки
     let btnText: null | string = null
@@ -40,7 +40,7 @@ function Button(props: ButtonPropType) {
 
     const btnAttrs: ObjStringKeyAnyValType = {
         type,
-        className: getButtonClasses(props, size),
+        className: getButtonClasses(props, relativeSize),
         disabled: disabled
     }
     if (name) btnAttrs.name = name

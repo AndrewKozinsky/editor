@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.scss'
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getHeaderClasses } from './Header-func'
 
@@ -8,7 +8,7 @@ import { getHeaderClasses } from './Header-func'
 export type HeaderPropType = {
     text: string
     type: 'h1' // Тип заголовка: он задаёт тег заголовка и размер текста
-    size?: EditorSizeType
+    relativeSize?: EditorSizeMultiplyType
 }
 
 /** Заголовок форм авторизации и аутентификации */
@@ -19,11 +19,11 @@ function Header(props: HeaderPropType) {
         type // Тип заголовка: h1. Позже будут добавлены другие типы
     } = props
 
-    // Размер элемента': tiny (крошечный), small (маленький), middle (средний), big (большой)
-    const size = useGetComponentSize(props.size)
+    // Размер компонента относительно размера всего интерфейса
+    const relativeSize = useGetComponentSize(props.relativeSize)
 
     return (
-        <h1 className={getHeaderClasses(props, size)}>
+        <h1 className={getHeaderClasses(props, relativeSize)}>
             { text }
         </h1>
     )

@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useEffect} from 'react'
+import {useState, useCallback, useEffect} from 'react'
 import getInitialState from './functions/getInitialState'
 import useGetForm from './functions/useGetForm'
 import useSupplementFieldData from './functions/useSupplementFieldData'
@@ -28,11 +28,11 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
     useSupplementFieldData(formState, setFormState, $form)
 
     // При наступлении браузерного события в browserEvent записываются данные об этом.
-    const {browserEvent, setBrowserEvent} = useBrowserEvent($form)
+    const { browserEvent, setBrowserEvent } = useBrowserEvent($form)
 
     // Обработка браузерного события
     useEffect(() => {
-        handleBrowserEvent(browserEvent, formConfig, formState, setFormState)
+        handleBrowserEvent(browserEvent, formConfig, formState, setFormState, setBrowserEvent)
     }, [browserEvent])
 
     // При изменении Состояния формы у полей запускать код реагирующий на это событие
@@ -63,7 +63,10 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
                 // Запретить стандартную отправку формы
                 e.preventDefault()
 
-                // Поставить что можно начинать процедуру отправки формы
+                // Обработать отправку формы у полей
+                setBrowserEvent({browserEvent: e, eventName: 'submit'})
+
+                // Начать отправку формы через 10 мс.
                 setTimeout(() => setCanRunSubmitHandler(true), 10)
             }, [browserEvent]),
         },

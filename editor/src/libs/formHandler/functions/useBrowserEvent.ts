@@ -13,15 +13,8 @@ export default function useBrowserEvent($form: FHTypes.$form) {
         { browserEvent: null, eventName: null, fieldName: '' }
     )
 
-    // Функция ставит в lastEvent новые данные
-    function changeBrowserEvent(eventDetails: FHTypes.BrowserEventState) {
-        if (!$form) return
-        if (!eventDetails.browserEvent || !eventDetails.eventName) return
-        setBrowserEvent(eventDetails)
-    }
-
     return {
         browserEvent,
-        setBrowserEvent: changeBrowserEvent
+        setBrowserEvent
     }
 }

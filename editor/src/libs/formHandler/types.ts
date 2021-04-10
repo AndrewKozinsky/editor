@@ -31,6 +31,8 @@ namespace FHTypes {
             }
         },
         form: {
+            // Изначальные данные формы. Например { submitCounter: 0 }
+            initialData?: AnyData
             // При изменении Состояния формы будет запускаться функция описанная в свойстве stateChange
             stateChange?: ConfigEventHandler
             // Пользовательская функция запускаемая при сбросе формы
@@ -40,7 +42,7 @@ namespace FHTypes {
         }
     }
     // Обработчик события поля
-    type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => Promise<void>
+    type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => void
     // Обработчик события формы
     type ConfigEventHandler = (formDetails: FormDetailsInSubmitHandler) => void
 

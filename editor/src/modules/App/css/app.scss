@@ -1,7 +1,7 @@
 
-$class: app;
+$CN: app;
 
-.#{$class} {
+.#{$CN} {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,6 +14,6 @@ $class: app;
     margin: 0 auto;
 }
 
-.#{$class}--second-bg {
+.#{$CN}--second-bg {
     background-color: var(--bg-color-2);
 }
