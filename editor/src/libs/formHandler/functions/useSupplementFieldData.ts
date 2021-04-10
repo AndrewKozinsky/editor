@@ -30,7 +30,7 @@ export default function useSupplementFieldData(
             // Тип поля: text, select, checkbox, radio или button
             const fieldType = getFieldType( $formInputs[key] )
 
-            // Сколько значений поле будет возращать: zero, one или many
+            // Сколько значений будет возращать поле: zero, one или many
             const valueCount = getValueCount( $formInputs[key], fieldType )
 
             // Формирование объекта с данными поля
@@ -40,6 +40,7 @@ export default function useSupplementFieldData(
                 valueCount
             }
         }
+
         // Установка объекта с данными поля в Состояние формы
         setFormState(newFormState)
 
@@ -52,6 +53,7 @@ export default function useSupplementFieldData(
  */
 function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
 
+    // Текущее поле
     let $thisInput = $input
     // Если передана группа полей ввода (флаги или переключатели), то взять первый элемент
     // @ts-ignore
@@ -60,7 +62,7 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
     // Название тега
     const tagName = $thisInput.tagName.toLowerCase()
 
-    // Если тег input, то возвратить checkbox или radio
+    // Если тег input, то возвратить checkbox, radio или text
     if (tagName === 'input') {
         return <FHTypes.FieldType>$thisInput.type
     }

@@ -18,7 +18,7 @@ import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
 
 
 /** Форма входа в сервис */
-function EnterFormBlock() {
+function ExampleForm() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -116,4 +116,4 @@ function EnterFormBlock() {
     )
 }
 
-export default EnterFormBlock
+export default ExampleForm

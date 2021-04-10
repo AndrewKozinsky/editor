@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './Checkbox-func'
-import './Checkbox.scss'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
+import './Checkbox.scss'
 
 
 export type CheckboxPropType = {
@@ -13,7 +13,7 @@ export type CheckboxPropType = {
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
     size?: EditorSizeType, // Размер поля
-    onChange?: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
+    onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
@@ -43,7 +43,7 @@ function Checkbox(props: CheckboxPropType) {
         id,
         checked,
         className: 'checkbox-input',
-        onChange,
+        onChange
     }
     if (onBlur) inputAttribs.onBlur = onBlur
 

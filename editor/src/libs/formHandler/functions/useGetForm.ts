@@ -7,7 +7,7 @@ import FHTypes from '../types'
  */
 export default function useGetForm(formName: string): FHTypes.$form {
     // Ссылка на форму
-    const [$form, set$form] = useState(null)
+    const [$form, set$form] = useState<null | FHTypes.$form>(null)
 
     useEffect(function () {
         if (formName) {

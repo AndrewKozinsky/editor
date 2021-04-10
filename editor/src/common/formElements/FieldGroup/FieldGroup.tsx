@@ -10,7 +10,6 @@ import {useGetComponentSize} from '../../../utils/MiscUtils';
 import {EditorSizeType} from '../../../store/settings/settingsTypes'
 import { getFieldGroupClasses } from './FieldGroup-func'
 import './FieldGroup.scss'
-import {ObjStringKeyAnyValType} from '../../../types/miscTypes';
 
 /**
  * Компонент FieldGroup в зависимости от переданного объекта отрисовывает элементы поля ввода формы: текстовое поле, флаги, переключатели, выпадающий список.
@@ -26,8 +25,8 @@ export type FieldGroupPropType = {
     inputType: 'radio' | 'checkbox'
     groupName: string
     inputsArr: InputDataType[]
-    value: FHTypes.Value
-    onChange?: (e: React.BaseSyntheticEvent) => void
+    value: FHTypes.FieldValue
+    onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 

@@ -11,128 +11,178 @@ namespace FHTypes {
             // Имя поля. Например email
             [key: string]: {
                 // Изначальное значение поля. Например: ['andkozinsky@gmail.com'].
-                // Для кнопки это передавать не нужно.
                 initialValue?: FieldValue,
                 // Изначальные данные поля. Например { error: null }
-                initialData?: FieldData
+                initialData?: AnyData
                 // Обработчики браузерных событий
-                change?: ((formDetails: FormDetails) => void)
-                blur?: ((formDetails: FormDetails) => void)
-                submit?: ((formDetails: FormDetails) => void)
-                // Обработчик события изменения Состояния формы
-                stateChange?: ((formDetails: FormDetails) => void)
+                change?: ConfigFieldEventHandler
+                keydown?: ConfigFieldEventHandler
+                keypress?: ConfigFieldEventHandler
+                keyup?: ConfigFieldEventHandler
+                focus?: ConfigFieldEventHandler
+                blur?: ConfigFieldEventHandler
+                click?: ConfigFieldEventHandler
+                mouseenter?: ConfigFieldEventHandler
+                mouseleave?: ConfigFieldEventHandler
+                reset?: ConfigFieldEventHandler
+                submit?: ConfigFieldEventHandler
+                // Обработчик изменения Состояния формы
+                statechange?: ConfigFieldEventHandler
             }
+        },
+        form: {
+            // При изменении Состояния формы будет запускаться функция описанная в свойстве stateChange
+            stateChange?: ConfigEventHandler
+            // Пользовательская функция запускаемая при сбросе формы
+            reset?: ConfigEventHandler
+            // Пользовательская функция запускаемая при отправке формы когда все поля верные
+            submit: ConfigEventHandler
         }
-        // Пользовательская функция проверки правильности формы
-        checkForm(formState: NickFormState): boolean
-        // Пользовательская функция запускаемая при отправке формы когда все поля верные
-        submitForm(formDetails: SubmitFormDetails): void
+    }
+    // Обработчик события поля
+    type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => Promise<void>
+    // Обработчик события формы
+    type ConfigEventHandler = (formDetails: FormDetailsInSubmitHandler) => void
+
+    // Объект передаваемый в обработчик возникновения события поля и формы
+    export type FormDetailsInEventHandler = {
+        // Объект события браузера
+        browserEvent: null | React.BaseSyntheticEvent,
+        // Состояние формы.
+        state: FormState
+        // Функция изменяющая значение поля с заданным именем.
+        setFieldValue: SetFieldValue
+        // Функция изменяющая данные поля с заданным именем.
+        setFieldData: SetFieldData
+        // Функция изменяющая данные формы.
+        setFormData: SetFormData
+        // Функция сбрасывающая данные всех полей на значения по умолчанию.
+        // resetForm: () => void
     }
 
+    // Функция изменяющая значение поля
+    export type SetFieldValue = (
+        fieldValue: FieldValue,
+        fieldName: string
+    ) => void
+    // Функция изменяющая данные поля
+    export type SetFieldData = (
+        fieldData: AnyData,
+        fieldName: string
+    ) => void
+    // Функция изменяющая данные формы
+    export type SetFormData = (
+        formData: AnyData,
+    ) => void
+
+    // Значение поля
+    export type FieldValue = string[]
+    // Тип данных поля
+    export type AnyData = any
+
+    // Объект передаваемый в пользовательский обработчик отправки формы
+    export type FormDetailsInSubmitHandler = {
+        // Состояние формы.
+        state: FormState
+        // Функция изменяющая значение поля с заданным именем.
+        setFieldValue: SetFieldValue
+        // Функция устанавливающий новые данные поля
+        setFieldData: SetFieldData
+        // Функция изменяющая данные формы.
+        setFormData: SetFormData
+        // Значения полей для отправки на сервер
+        readyFieldValues: ReadyFieldsValues
+        // Функция сбрасывающая данные всех полей на значения по умолчанию.
+        // resetForm: () => void
+    }
+    // Значения полей для отправки на сервер
+    export type ReadyFieldsValues = {
+        // Имя поля. Например email
+        [key: string]: string | string[]
+    }
 
 
     // СОСТОЯНИЕ useFormHandler -------------------------------------
     export type FormState = {
         // Объект с данными по полям
-        fields: FieldsObj
+        fields: FieldsStateObj
+        form: FormStateObj
     }
-    export type FieldsObj = {
+    export type FieldsStateObj = {
         // Имя поля. Например email
-        [key: string]: FieldObj
+        [key: string]: FieldStateObj
     }
-    export type FieldObj = {
-        // Значение поля
+    export type FieldStateObj = {
+        // Ссылка на элемент поля.
+        $field?: HTMLInputElement,
+        // Значение поля.
         value: FieldValue
         // Тип поля: text, select, checkbox, radio
         fieldType: FieldType
-        // Сколько значений может быть у поля: one (одно) или many (несколько). Это зависит от типа поля.
+        // Сколько значений может быть у поля: zero (ни одного (если это кнопка)), one (одно) или many (несколько). Это зависит от типа поля.
         valueCount: ValueCount
-        data?: FieldData
+        // Любые данные поля.
+        data: AnyData
     }
-    // Значение поля
-    export type FieldValue = string[]
-    // Тип данных поля
-    export type FieldData = any
+
     // Тип поля
     export type FieldType = 'text' | 'select' | 'checkbox' | 'radio' | 'button'
     // Сколько значений может быть у поля: нисколько (кнопка), одно или несколько
     export type ValueCount = 'zero' | 'one' | 'many'
 
+    export type FormStateObj = {
+        // Ссылка на элемент формы.
+        $form?: $form
+        // Данные формы заполняемые пользователем
+        data: AnyData
+    }
 
 
 
     // ОБЪЕКТ ВОЗВРАЩАЕМЫЙ ХУКОМ useFormHandler ---------------------------
     // Объект возвращаемый useFormHandler
     export type ReturnObj = {
-        // Значения полей (обновляемые)
-        fields: ReturnFields,
-        onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void,
+        // Обработчики добавляемые на <form>
         formHandlers: {
-            onChange: (e: React.BaseSyntheticEvent) => void,
-            onBlur:   (e: React.BaseSyntheticEvent) => void,
-            onSubmit: (e: React.BaseSyntheticEvent) => void,
-        }
+            onKeyUp:      BrowserEventHandler
+            onFocus:      BrowserEventHandler
+            onBlur:       BrowserEventHandler
+            onClick:      BrowserEventHandler
+            onReset:      BrowserEventHandler
+            onSubmit:     BrowserEventHandler
+        },
+        // Обработчик изменения поля добавляемый каждому полю
+        onChangeFieldHandler: BrowserEventHandler
+        fields: ReturnFieldsObj,
+        // Любые данные касаемые формы.
+        form: AnyData
     }
-
-    // Объект полей возвращаемый useFormHandler
-    export type ReturnFields = {
+    export type ReturnFieldsObj = {
+        // Имя поля. Например email
         [key: string]: {
+            // Значение поля.
             value: FieldValue
-            data: FieldData
+            data: AnyData
         }
     }
-
-    // Объект с деталями формы для манипулирования полями формы
-    export type FormDetails = {
-        // Состояние формы
-        formState: NickFormState
-        // Функция устанавливающая значение поля
-        setFieldValue: ChangeFieldStateFn,
-        // Функция устанавливающая данные в поле
-        setFieldData: ChangeFieldStateFn
-    }
-    // Объект с данными о полях без служебных свойств
-    export type NickFormState = {
-        [key: string]: {
-            value: FieldValue,
-            data: FieldData
-        }
-    }
-    // Функция изменяющая состояние поля: значение или данные
-    export type ChangeFieldStateFn = (
-        newData: FHTypes.FieldValue | FHTypes.FieldData,
-        fieldName: string
-    ) => void
-
-
-
-    // ОТПРАВКА ФОРМЫ ------------------------------------------------
-    // Объект со значениями полей для отправки
-    export type FieldsValuesSubmitObj = {
-        [key: string]: string | string[]
-    }
-    // Первый аргумент передаваемый в пользовательскую функцию
-    // запускаемая при отправке формы когда все поля верные
-    export type SubmitFormDetails = {
-        fieldsValues: FieldsValuesSubmitObj
-    }
-
+    // Функция-обработчик браузерного события
+    export type BrowserEventHandler = (e: React.BaseSyntheticEvent) => void
 
 
     // ПРОЧИЕ ТИПЫ --------------------------------------------------
     // Установщик Состояния useFormHandler
     export type SetFormState = (formState: FormState) => void
     // Элемент формы
-    export type $form = null | HTMLFormElement
+    export type $form = HTMLFormElement
     // События формы, которые разрешено использовать
-    export type FormEventsNames = 'change' | 'blur' | 'submit'
+    export type FormEventsNames = 'keyup' | 'focus' | 'blur' | 'click' | 'reset' | 'submit'
     // Состояние объекта браузерного события
     export type BrowserEventState = {
+        browserEvent: null | React.BaseSyntheticEvent,
         eventName: null | FormEventsNames,
-        fieldName: string
+        fieldName?: null | string
     }
-    // Функция ставящая новое значение константы canRunStateChangeHandler
-    export type SetCanRunStateChangeHandler = (arg: boolean) => void
+    // Функция ставящая новые данные браузерного события
     export type SetBrowserEvent = (arg: BrowserEventState) => void
 }
 

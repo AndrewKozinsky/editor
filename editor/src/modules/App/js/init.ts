@@ -8,7 +8,7 @@ import {
     setEditorTheme,
     setEditorSize
 } from 'store/settings/settingsActions'
-import {EditorLanguageType, EditorSizeType, EditorThemeType} from '../../../store/settings/settingsTypes';
+import {EditorLanguageType, EditorSizeType, EditorThemeType} from 'store/settings/settingsTypes'
 
 /** Хук инициализирующий приложение */
 export function useInit() {

@@ -1,11 +1,10 @@
-import React, {ReactElement, ReactNode} from 'react'
+import React, {ReactNode} from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
-import {makeCN} from 'utils/StringUtils'
-import './Notice.scss'
 import {EditorSizeType} from 'store/settings/settingsTypes'
-import {useGetComponentSize} from '../../utils/MiscUtils';
-import {getClasses} from '../formElements/Button/Button-func';
-import {getNoticeWrapperClasses} from './Notice-func';
+import {makeCN} from 'utils/StringUtils'
+import {useGetComponentSize} from 'utils/MiscUtils'
+import {getNoticeWrapperClasses} from './Notice-func'
+import './Notice.scss'
 
 
 const CN = 'notice'

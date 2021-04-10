@@ -7,25 +7,26 @@ import FHTypes from '../types'
  */
 export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {
 
-    // При первоначальной инициализации поставить только значения полей
     // Данные о полях формы
-    let fields: FHTypes.FieldsObj = {}
+    let fields: FHTypes.FieldsStateObj = {}
+    // Данные о форме
+    let form: FHTypes.FormStateObj = {
+        data: null
+    }
 
-    // Проход по полям формы для наполнения fields данными о полях
+    // Проход по полям формы из объекта конфигурации для наполнения fields данными о полях
     for (let key in formConfig.fields) {
         fields[key] = {
             value: formConfig.fields[key].initialValue,
             // Эти значения временные чтобы TS не ругался
             fieldType: 'radio',
             valueCount: 'one',
-        }
-
-        if (formConfig.fields[key].initialData) {
-            fields[key].data = formConfig.fields[key].initialData
+            data: formConfig.fields[key].initialData || null
         }
     }
 
     return {
-        fields
+        fields,
+        form
     }
 }

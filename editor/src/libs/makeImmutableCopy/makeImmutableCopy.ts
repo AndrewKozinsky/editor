@@ -11,12 +11,12 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
 
     // Если mainData равен originalData, тогда вернуть изменённый объект
     if(mainData === originalData) {
-        return changedData;
+        return changedData
     }
 
 
     // Есть в mainData нет целевого объекта, то вернуть переданный mainData
-    if(!isDataHasOriginalData(mainData, originalData)) return mainData;
+    if(!isDataHasOriginalData(mainData, originalData)) return mainData
 
 
     // В mainData есть целевой объект...
@@ -26,12 +26,12 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
     if(toString.call(mainData) === "[object Array]") {
 
         // Скопировать массив и вставить как значение возвращаемого объекта
-        newData = mainData.concat();
+        newData = mainData.concat()
 
         // Перебрать элементы массива
         for(let i = 0; i < newData.length; i++) {
             // Перебираемый элемент
-            let elem = newData[i];
+            let elem = newData[i]
 
             // Если в структуре элемента массива есть целевой объект
             newData[i] = makeImmutableObj(elem, originalData, changedData, newData)
@@ -43,12 +43,12 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
     if(toString.call(mainData) === "[object Object]") {
 
         // Скопировать объект и вставить как значение возвращаемого объекта
-        newData = Object.assign({}, mainData);
+        newData = Object.assign({}, mainData)
 
         // Перебрать все элементы объекта
         for(let key in mainData) {
             // Перебираемый элемент
-            let elem = mainData[key];
+            let elem = mainData[key]
 
             // Тогда заменить его на копию
             newData[key] = makeImmutableObj(elem, originalData, changedData, newData)

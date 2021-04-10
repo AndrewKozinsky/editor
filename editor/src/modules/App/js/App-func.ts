@@ -11,7 +11,7 @@ export function useGetAppClasses() {
     // Получение текущей темы интерфейса
     const editorTheme = useSelector((store: AppState) => store.settings.editorTheme)
 
-    // Составить
+    // Составление классов приложения
     let classes = ['app']
     if (editorTheme === 'dark') classes.push('dark-theme')
 
@@ -24,6 +24,7 @@ export function useGetAppClasses() {
 }
 
 
+/** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */
 export function useRedirectPage() {
     let history = useHistory()
 
