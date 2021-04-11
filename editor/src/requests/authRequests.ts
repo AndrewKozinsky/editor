@@ -1,4 +1,4 @@
-import {useFetch} from './useFetch'
+import {useFetch} from './fetch'
 import apiUrls from './apiUrls'
 
 type GetTokenDataServerResponse = {

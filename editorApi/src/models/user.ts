@@ -61,7 +61,7 @@ const UserSchema: Schema = new Schema({
     // Дата когда токен сброса пароля будет недействителен
     passwordResetExpires: Date,
     // Язык итерфейса
-    lang: {
+    language: {
         type: String,
         required: [ true, '{{user.langRequired}}' ]
     },

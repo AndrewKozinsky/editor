@@ -140,6 +140,7 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
         { emailConfirmToken: undefined }, // Как изменить объект
         { new: true } // Вернуть объект после изменения свойства
     )
+    console.log(user)
 
     // Язык пользователя и тип запроса
     const lang = <string>req.headers['Editor-Language'] // eng или rus
@@ -188,6 +189,8 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
 
 // Вход пользователя
 export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    console.log(req.body)
 
     // Почта и пароль из тела запроса
     const email: string = req.body.email

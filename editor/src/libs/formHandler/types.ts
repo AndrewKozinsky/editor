@@ -16,14 +16,9 @@ namespace FHTypes {
                 initialData?: AnyData
                 // Обработчики браузерных событий
                 change?: ConfigFieldEventHandler
-                keydown?: ConfigFieldEventHandler
-                keypress?: ConfigFieldEventHandler
-                keyup?: ConfigFieldEventHandler
                 focus?: ConfigFieldEventHandler
                 blur?: ConfigFieldEventHandler
                 click?: ConfigFieldEventHandler
-                mouseenter?: ConfigFieldEventHandler
-                mouseleave?: ConfigFieldEventHandler
                 reset?: ConfigFieldEventHandler
                 submit?: ConfigFieldEventHandler
                 // Обработчик изменения Состояния формы
@@ -33,7 +28,8 @@ namespace FHTypes {
         form: {
             // Изначальные данные формы. Например { submitCounter: 0 }
             initialData?: AnyData
-            // При изменении Состояния формы будет запускаться функция описанная в свойстве stateChange
+            // Функция запускаемая при изменении Состояния формы
+            // Например она требуется чтобы определись когда кнопка отправки должна быть заблокирована
             stateChange?: ConfigEventHandler
             // Пользовательская функция запускаемая при сбросе формы
             reset?: ConfigEventHandler
@@ -42,7 +38,7 @@ namespace FHTypes {
         }
     }
     // Обработчик события поля
-    type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => void
+    type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => FormState
     // Обработчик события формы
     type ConfigEventHandler = (formDetails: FormDetailsInSubmitHandler) => void
 
@@ -64,28 +60,39 @@ namespace FHTypes {
 
     // Функция изменяющая значение поля
     export type SetFieldValue = (
+        formState: FormState,
         fieldValue: FieldValue,
-        fieldName: string
-    ) => void
+        fieldName?: string
+    ) => FormState
+
     // Функция изменяющая данные поля
     export type SetFieldData = (
+        formState: FormState,
         fieldData: AnyData,
-        fieldName: string
-    ) => void
+        fieldName?: string
+    ) => FormState
+
     // Функция изменяющая данные формы
     export type SetFormData = (
+        formState: FormState,
         formData: AnyData,
-    ) => void
+    ) => FormState
+
+    // Установщик Состояния useFormHandler
+    export type SetFormState = (formState: FormState) => void
+
 
     // Значение поля
     export type FieldValue = string[]
-    // Тип данных поля
+    // Данные любого типа (для данных поля и формы)
     export type AnyData = any
 
     // Объект передаваемый в пользовательский обработчик отправки формы
     export type FormDetailsInSubmitHandler = {
         // Состояние формы.
         state: FormState
+        // Функция устанавливающая новое Состояние формы
+        setFormState: SetFormState
         // Функция изменяющая значение поля с заданным именем.
         setFieldValue: SetFieldValue
         // Функция устанавливающий новые данные поля
@@ -146,7 +153,6 @@ namespace FHTypes {
     export type ReturnObj = {
         // Обработчики добавляемые на <form>
         formHandlers: {
-            onKeyUp:      BrowserEventHandler
             onFocus:      BrowserEventHandler
             onBlur:       BrowserEventHandler
             onClick:      BrowserEventHandler
@@ -172,12 +178,10 @@ namespace FHTypes {
 
 
     // ПРОЧИЕ ТИПЫ --------------------------------------------------
-    // Установщик Состояния useFormHandler
-    export type SetFormState = (formState: FormState) => void
     // Элемент формы
     export type $form = HTMLFormElement
     // События формы, которые разрешено использовать
-    export type FormEventsNames = 'keyup' | 'focus' | 'blur' | 'click' | 'reset' | 'submit'
+    export type FormEventsNames = 'change' | 'focus' | 'blur' | 'click' | 'reset' | 'submit'
     // Состояние объекта браузерного события
     export type BrowserEventState = {
         browserEvent: null | React.BaseSyntheticEvent,
@@ -185,7 +189,7 @@ namespace FHTypes {
         fieldName?: null | string
     }
     // Функция ставящая новые данные браузерного события
-    export type SetBrowserEvent = (arg: BrowserEventState) => void
+    // export type SetBrowserEvent = (arg: BrowserEventState) => void
 }
 
 export default FHTypes

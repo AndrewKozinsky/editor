@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 // @ts-ignore
 // import * as Yup from 'yup'
-import FHTypes from "libs/formHandler/types";
+// import FHTypes from "libs/formHandler/types";
 
 
 // Объект настройки useFormHandler
-const formConfig: FHTypes.FormConfig = {
+/*const formConfig: FHTypes.FormConfig = {
     // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
     fields: {
         email: {
@@ -13,10 +13,10 @@ const formConfig: FHTypes.FormConfig = {
             initialData: {
                 error: null
             },
-            /*change: function (formDetails) {
+            /!*change: function (formDetails) {
 
-            },*/
-            /*submit: function(formDetails) {
+            },*!/
+            /!*submit: function(formDetails) {
                 // const fieldValue = formDetails.formState.email.value
                 // const setFieldData = formDetails.setFieldData
 
@@ -27,7 +27,7 @@ const formConfig: FHTypes.FormConfig = {
                 } else {
                     setFieldData({error: null}, 'email')
                 }*!/
-            }*/
+            }*!/
         },
         heroes: {
             initialValue: ['Gena']
@@ -40,14 +40,14 @@ const formConfig: FHTypes.FormConfig = {
         },
     },
     form: {
-        /*stateChange: function (formDetails) {
+        /!*stateChange: function (formDetails) {
             // formDetails.setFieldData({error:  Math.round(Math.random() * 100) }, 'email')
-        },*/
+        },*!/
         // Пользовательская функция запускаемая при отправке формы когда все поля верные
         submit(formDetails) {
             console.log('ОТПРАВКА')
         }
     }
-}
+}*/
 
-export default formConfig
+// export default formConfig

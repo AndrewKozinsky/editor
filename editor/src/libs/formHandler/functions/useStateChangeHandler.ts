@@ -1,8 +1,14 @@
 import FHTypes from '../types'
 import {useEffect, useState} from 'react';
-import {getFormDetails} from './useHandlerBrowserEvent'
+import {getFormDetails} from './useHandlerBrowserEvent';
 
 
+/**
+ * Обработчик изменения Состояния формы. Он запускает обработчики этого события описанные в полях
+ * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formState — состояние формы
+ * @param {Function} setFormState — установка состояния формы
+ */
 export default function useStateChangeHandler(
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
@@ -18,7 +24,7 @@ export default function useStateChangeHandler(
 
         // Запретить вызов обработчика изменения Состояния чтобы не получилось циклического изменения состояния
         setCanRunStateChangeHandler(false)
-        // Позволить вызов обработчика изменения Состояния через небольшое время
+        // Позволить вызов обработчика изменения Состояния через некоторое время
         setTimeout(() => {setCanRunStateChangeHandler(true)}, 50)
 
         // Запустить функции обрабатывающие событие stateChange, описанные в полях
@@ -48,9 +54,13 @@ function stateChangeHandler(
         if (field.statechange) {
 
             // Объект передаваемый в функцию запускаемую после обновления Состояния формы
-            const formDetails = getFormDetails(null, formState, setFormState)
+            const formDetails = getFormDetails(null, formState)
+
             // Запуск функции, которая должна запускаться после обновления Состояния формы
-            field.statechange(formDetails)
+            const newFormState = field.statechange(formDetails)
+
+            // Установка нового состояния формы
+            setFormState(newFormState)
         }
     }
 }

@@ -44,9 +44,6 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
     return {
         // Обработчики формы
         formHandlers: {
-            onKeyUp:      useCallback((e) => {
-                setBrowserEvent({browserEvent: e, eventName: 'keyup', fieldName: e.target.name})
-            }, [browserEvent]),
             onFocus:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'focus', fieldName: e.target.name})
             }, [browserEvent]),
@@ -63,11 +60,8 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
                 // Запретить стандартную отправку формы
                 e.preventDefault()
 
-                // Обработать отправку формы у полей
-                setBrowserEvent({browserEvent: e, eventName: 'submit'})
-
-                // Начать отправку формы через 10 мс.
-                setTimeout(() => setCanRunSubmitHandler(true), 10)
+                // Начать отправку формы
+                setCanRunSubmitHandler(true)
             }, [browserEvent]),
         },
         // Обработчик изменения поля
@@ -79,4 +73,3 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
         form: null
     }
 }
-

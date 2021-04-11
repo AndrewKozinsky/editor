@@ -27,8 +27,11 @@ export default function useSupplementFieldData(
         // Перебрать поля объекта Состояния
         for (let key in newFormState.fields) {
 
+            // Ссылка на текущее поле формы
+            const $field = $formInputs[key]
+
             // Тип поля: text, select, checkbox, radio или button
-            const fieldType = getFieldType( $formInputs[key] )
+            const fieldType = getFieldType( $field )
 
             // Сколько значений будет возращать поле: zero, one или many
             const valueCount = getValueCount( $formInputs[key], fieldType )
@@ -36,10 +39,14 @@ export default function useSupplementFieldData(
             // Формирование объекта с данными поля
             newFormState.fields[key] = {
                 ...newFormState.fields[key],
+                $field,
                 fieldType,
                 valueCount
             }
         }
+
+        // Установка ссылки на элемент формы
+        newFormState.form.$form = $form
 
         // Установка объекта с данными поля в Состояние формы
         setFormState(newFormState)
@@ -65,7 +72,7 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
     // Если тег input, то возвратить checkbox, radio или text
     if (tagName === 'input') {
         if ($thisInput.type === 'checkbox') return 'checkbox'
-        if ($thisInput.type === 'radio') return 'radio'
+        else if ($thisInput.type === 'radio') return 'radio'
         return 'text'
     }
     // Если тег button, то возвратить button

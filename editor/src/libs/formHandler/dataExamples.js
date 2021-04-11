@@ -1,7 +1,7 @@
 
 
 // Объект настройки useFormHandler
-const formConfig = {
+/*const formConfig = {
     // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
     fields: {
         // Имя поля
@@ -34,7 +34,7 @@ const formConfig = {
             }
         },
         // Еще одно поле где описаны детали его обработки
-        heroes: {/*...*/},
+        heroes: {/!*...*!/},
         // Для кнопки так же можно прописать события. Но это будет сокращённый набор:
         // focus, blur, click, mouseenter, mouseleave, reset, submit
         submit_btn: {
@@ -55,7 +55,7 @@ const formConfig = {
             console.log('ОТПРАВКА')
         }
     }
-}
+}*/
 
 /*
 В функции-обработчики событий поля и формы добавляется объект formDetails со следующими свойствами:
@@ -80,7 +80,7 @@ resetForm() — функция сбрасывающая данные всех п
 
 
 // Объект Состояния формы
-const formState = {
+/*const formState = {
     fields: {
         // Данные поля с именем email.
         email: {
@@ -98,20 +98,20 @@ const formState = {
             isDataSupplied: true
         },
         // Данные другого поля
-        heroes: {/*...*/},
+        heroes: {/!*...*!/},
     },
     form: {
         // Ссылка на элемент формы. Один поставлен как заглушка данных.
         $form: 1,
         // Данные формы заполняемые пользователем
-        data: {/*...*/}
+        data: {/!*...*!/}
     }
-}
+}*/
 
 
 
 // Возвращаемый объект
-const returnObj = {
+/*const returnObj = {
     // Обработчики добавляемые на <form>
     formHandlers: {
         onKeyPress:   (e) => {},
@@ -135,8 +135,8 @@ const returnObj = {
             data: {error: 'Почта в неверном формате'},
         },
         // Данные другого поля
-        heroes: {/*...*/},
+        heroes: {/!*...*!/},
     },
     // Любые данные касаемые формы. Для формирования объект подойдут события stateChange, reset и submit.
-    form: {/*...*/}
-}
+    form: {/!*...*!/}
+}*/

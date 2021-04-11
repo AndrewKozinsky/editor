@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux';
-import { AppState } from 'store/rootReducer';
+import {useSelector} from 'react-redux'
+import { AppState } from 'store/rootReducer'
+import {EditorLanguageType} from '../store/settings/settingsTypes';
 
 
 // Тип параметров запроса
@@ -37,7 +38,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
         // Если загрузка не требуется, то ничего не делать
         if (!isLoading) return
 
-        // Добавление заголовка языка интерфейса
+        // Добавление заголовка языка интерфейса в параметры запроса
         const extraOptions = setLanguageHeader(options, editorLanguage)
 
         try {
@@ -60,6 +61,32 @@ export function useFetch<T>(url: string, options: OptionsType) {
         error,
         doFetch
     }
+}
+
+/** Функция загружающая данные с сервера
+ * @param {String} url — строка c адресом запроса
+ * @param {Object} options — параметры запроса
+ * @param {String} lang — язык интерфейса
+ */
+export async function makeFetch(url: string, options: OptionsType, lang: EditorLanguageType) {
+
+    // Добавление заголовка языка интерфейса в параметры запроса
+    const extraOptions = setLanguageHeader(options, lang)
+
+    try {
+        const rowData = await fetch(url, extraOptions)
+        return await rowData.json()
+    }
+    catch (err) {
+        let message = `Couldn't get data.`
+        if (lang === 'rus') message = 'Не удалось получить данные.'
+
+        return {
+            status: 'fail',
+            "data": message
+        }
+    }
+
 }
 
 /**

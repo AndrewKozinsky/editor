@@ -2,7 +2,9 @@
 
 const addresses = {
     // Получение токена пользователя
-    getUserToken: 'users/getTokenData'
+    getUserToken: 'users/getTokenData',
+    // Вход пользователя. В ответ сервер отправляет токен авторизации.
+    login: 'users/login'
 }
 
 // Оборачивание объекта addresses чтобы при запросе

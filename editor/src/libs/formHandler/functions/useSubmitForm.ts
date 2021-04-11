@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-import FHTypes from '../types'
 import {getSetFieldData, getSetFieldValue, getSetFormData} from './formStateSettersAndGetters';
+import FHTypes from '../types'
 
 /**
  * Обработчик отправки формы
@@ -19,7 +19,6 @@ export default function useSubmitForm(
     // При изменения значения можно ли запускать отправку формы
     useEffect(function () {
         if (!canRunSubmitHandler) return
-
         // Запретить отправку формы
         setCanRunSubmitHandler(false)
 
@@ -41,19 +40,20 @@ export function getFormDetails(
     return {
         // Состояние формы.
         state: formState,
+        // Функция устанавливающая новое Состояние формы
+        setFormState: setFormState,
         // Функция устанавливающая новое значение поля
-        setFieldValue: getSetFieldValue(formState, setFormState),
+        setFieldValue: getSetFieldValue(),
         // Функция устанавливающая новые данные поля
-        setFieldData: getSetFieldData(formState, setFormState),
+        setFieldData: getSetFieldData(),
         // Функция изменяющая данные формы.
-        setFormData: getSetFormData(formState, setFormState),
+        setFormData: getSetFormData,
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
         // resetForm: () => void
     }
 }
-
 
 
 /**

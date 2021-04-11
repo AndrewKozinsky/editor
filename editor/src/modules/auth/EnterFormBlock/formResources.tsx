@@ -2,9 +2,11 @@ import React from 'react'
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
-import {isFormValid, setErrorToFieldData } from 'utils/FormHandlerUtils'
 import messages from '../messages'
 import { EditorLanguageType } from 'store/settings/settingsTypes'
+import { checkFieldAndReturnFormState } from 'utils/FormHandlerUtils'
+import { makeFetch } from '../../../requests/fetch'
+import apiUrls from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
@@ -20,12 +22,9 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 blur(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        // checkEmail(formDetails, lang)
+                        return setErrorToEmailField(formDetails, lang)
                     }
-                },
-                submit(formDetails) {
-                    checkEmail(formDetails, lang)
-                },
+                }
             },
             password: {
                 initialValue: [''],
@@ -35,12 +34,9 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 blur(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        // checkPassword(formDetails, lang)
+                        return setErrorToPasswordField(formDetails, lang)
                     }
-                },
-                submit(formDetails) {
-                    checkPassword(formDetails, lang)
-                },
+                }
             },
         },
         form: {
@@ -52,20 +48,53 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 // formDetails.setFieldData({error:  Math.round(Math.random() * 100) }, 'email')
             },*/
             // Пользовательская функция запускаемая при отправке формы
-            submit(formDetails) {
+            submit: async function(formDetails) {
                 // Данные формы
                 const formData = formDetails.state.form.data
 
-                // Увеличить счётчик попыток отправки формы
-                formDetails.setFormData({
-                    ...formData,
+                // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
+                let newFormState = formDetails.setFormData(formDetails.state, {
+                    ...formDetails.state.form.data,
                     submitCounter: formData.submitCounter + 1
                 })
 
-                // Ничего не делать если поля формы заполнены неверно
-                if(!isFormValid(formDetails.state)) return
+                // Правильно ли заполнена форма
+                let isFormValid = true
 
-                console.log('ОТПРАВКА')
+                // Проверка всех полей формы
+                for(let fieldName in formDetails.state.fields) {
+                    // Значение перебираемого поля
+                    const fieldValue = formDetails.state.fields[fieldName].value[0]
+
+                    // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
+                    try {
+                        getSchema(fieldName, lang).validateSync({[fieldName]: fieldValue})
+                        newFormState = formDetails.setFieldData(newFormState, {error: null}, fieldName)
+                    } catch (err) {
+                        isFormValid = false
+                        newFormState = formDetails.setFieldData(newFormState, {error: err.message}, fieldName)
+                    }
+                }
+
+                // Поставить новое Состояние формы с поставленными или убранными ошибками
+                formDetails.setFormState(newFormState)
+
+                // Ничего не делать если поля формы заполнены неверно
+                if(!isFormValid) return
+
+                // console.log(JSON.stringify(formDetails.readyFieldValues))
+                // Форма заполнена верно. Отправить данные на сервер...
+                const options = {
+                    method: 'POST',
+                    body: JSON.stringify(formDetails.readyFieldValues)
+                }
+                const response = await makeFetch(apiUrls.login, options, lang)
+                console.log(response)
+
+                // console.log('SENDING...')
+
+                // Отправка данных на сервер для входа пользователя
+                // sendToServerLogInUserData(formDetails.readyFieldValues, lang)
             }
         }
     }
@@ -73,30 +102,46 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
 
 
 /**
+ * Функция возвращает схему Yup для поля с переданным именем
+ * @param {Array} fieldName — имя поля
+ * @param {String} lang — язык интерфейса
+ */
+function getSchema(fieldName: string, lang: EditorLanguageType): any {
+
+    const schemas = {
+        email: yup.object({
+            email: yup.string()
+                .required(messages.enterForm.emailErrRequired[lang])
+                .email(messages.enterForm.emailErrInvalid[lang])
+        }),
+        password: yup.object({
+            password: yup.string()
+                .required(messages.enterForm.passwordErrRequired[lang])
+                .min(4, messages.enterForm.passwordErrToShort[lang])
+                .max(15, messages.enterForm.passwordErrToLong[lang])
+        })
+    }
+
+    // @ts-ignore
+    return schemas[fieldName]
+}
+
+/**
  * Функция проверяющая поле email
  * @param {Object} formDetails — объект передаваемый в функцию устанавливающую данные поля
  * @param {String} lang — язык интерфейса
  */
-function checkEmail(formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType) {
+function setErrorToEmailField(
+    formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType
+): FHTypes.FormState
+{
     const fieldValue = formDetails.state.fields['email'].value[0]
 
-    let schema = yup.object({
-        email: yup.string()
-            .required(messages.enterForm.emailErrRequired[lang])
-            .email(messages.enterForm.emailErrInvalid[lang])
-    });
-
-    schema.validate({email: fieldValue})
-        // Поставить в данные поля что ошибки нет
-        .then(() => setErrorToFieldData(formDetails, 'email', null))
-        // Поставить в данные поля текст ошибки
-        .catch((err: Error) => setErrorToFieldData(formDetails, 'email', err.message))
-
-    // УДАЛИТЬ!!!
-    /*setTimeout(() => {
-        setErrorToFieldData(formDetails, 'email', 'err.message')
-    })*/
-
+    // Проверить значение поля по переданной схеме, записать или убрать ошибку поля
+    // и вернуть новое Состояние формы
+    return checkFieldAndReturnFormState(
+        getSchema('email', lang), 'email', fieldValue, formDetails.state, formDetails.setFieldData
+    )
 }
 
 /**
@@ -104,20 +149,32 @@ function checkEmail(formDetails: FHTypes.FormDetailsInEventHandler, lang: Editor
  * @param {Object} formDetails — объект передаваемый в функцию устанавливающую данные поля
  * @param {String} lang — язык интерфейса
  */
-function checkPassword(formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType) {
+function setErrorToPasswordField(
+    formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType
+): FHTypes.FormState
+{
     const fieldValue = formDetails.state.fields['password'].value[0]
 
-    let schema = yup.object({
-        password: yup.string()
-            .required(messages.enterForm.passwordErrRequired[lang])
-            .min(4, messages.enterForm.passwordErrToShort[lang])
-            .max(15, messages.enterForm.passwordErrToLong[lang])
-    });
-
-    // Проверять только если форму отправляли как минимум 1 раз
-    schema.validate({password: fieldValue})
-        // Поставить в данные поля что ошибки нет
-        .then(() => setErrorToFieldData(formDetails, 'password', null))
-        // Поставить в данные поля текст ошибки
-        .catch((err: Error) => setErrorToFieldData(formDetails, 'password', err.message))
+    // Проверить значение поля по переданной схеме, записать или убрать ошибку поля
+    // и вернуть новое Состояние формы
+    return checkFieldAndReturnFormState(
+        getSchema('password', lang), 'password', fieldValue, formDetails.state, formDetails.setFieldData
+    )
 }
+
+
+/**
+ * Функция делает запрос на вход пользователя
+ * @param readyFieldValues
+ */
+/*
+export async function sendToServerLogInUserData(readyFieldValues: FHTypes.ReadyFieldsValues, lang: EditorLanguageType) {
+
+    // const response = await makeFetch('url', {method: 'POST'}, lang)
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    /!*const {data: userToken, doFetch} =
+        useFetch<GetTokenDataServerResponse>(apiUrls.getUserToken, options)*!/
+
+    // return { userToken, doFetch }
+}*/

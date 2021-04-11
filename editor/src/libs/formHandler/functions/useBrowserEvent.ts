@@ -3,9 +3,9 @@ import FHTypes from '../types'
 
 
 /**
- * Хук возвращает объект со свойствами lastEvent и setLastEvent
- * В lastEvent находится объект где описано имя случившегося события и поле где оно произошло.
- * В setLastEvent находится функция изменяющая объект lastEvent
+ * Хук возвращает объект со свойствами browserEvent и setBrowserEvent
+ * В browserEvent находится объект где описано имя случившегося события и поле где оно произошло.
+ * В setBrowserEvent находится функция изменяющая объект browserEvent
  * Это нужно чтобы при обновлении eventName запускался бы обработчик этого события у поля.
  */
 export default function useBrowserEvent($form: FHTypes.$form) {

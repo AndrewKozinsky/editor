@@ -2,7 +2,7 @@ import FHTypes from '../types'
 
 
 /**
- * Функция создаёт первоначальное объект Состояния формы
+ * Функция создаёт первоначальный объект Состояния формы
  * @param formConfig
  */
 export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {

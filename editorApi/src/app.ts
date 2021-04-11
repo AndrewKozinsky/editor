@@ -16,8 +16,7 @@ app.use(cookieParser())
 // Разбор тела запроса
 app.use(bodyParser.json())
 
-// Сделаю чтобы в свойство body объекта запроса заносились данные присланные в теле запроса
-//app.use(express.json({limit: '10kb'}))
+app.use(express.json({limit: '10kb'}))
 
 // Ограничение количества запросов
 /*const rater = rateLimit({
@@ -31,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'staticFiles')))
 
 // Установка в req.headers.lang английского языка если язык не передан
 app.use(addExtraHeaders)
+
 
 app.get("/", function (req: Request, res: Response) {
     res.send("Our api server is working correctly.")

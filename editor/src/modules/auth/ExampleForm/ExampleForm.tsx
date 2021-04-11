@@ -1,24 +1,24 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Select from 'common/formElements/Select/Select'
-import Notice from 'common/Notice/Notice'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import messages from '../messages'
-import messagesWithJSX from '../messagesWithJSX'
-import formConfig from './js/formResources'
-import { getMenuItems } from '../menuItems'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Select from 'common/formElements/Select/Select'
+// import Notice from 'common/Notice/Notice'
+// import { OptionsType } from 'common/formElements/Select/SelectTypes'
+// import messages from '../messages'
+// import messagesWithJSX from '../messagesWithJSX'
+// import formConfig from './js/formResources'
+// import { getMenuItems } from '../menuItems'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import FieldGroup from 'src/common/formElements/FieldGroup/FieldGroup'
 
 
 /** Форма входа в сервис */
-function ExampleForm() {
+/*function ExampleForm() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -114,6 +114,6 @@ function ExampleForm() {
             </Wrapper>
         </div>
     )
-}
+}*/
 
-export default ExampleForm
+// export default ExampleForm

@@ -36,7 +36,7 @@ export const messages: messagesType = {
         },
         langRequired: {
             eng: 'Please provide your language.',
-            rus: 'Укажите язык интерфейса.'
+            rus: '  Укажите язык интерфейса.'
         }
     },
     // Контроллер авторизации
@@ -53,7 +53,7 @@ export const messages: messagesType = {
         },
         confirmEmailIsConfirmed: {
             eng: 'Email is confirmed!',
-            rus: 'Передан неверный токен подтверждения почты.'
+            rus: 'Почта подтверждена.'
         },
         // login
         loginNoEmailOrPassword: {

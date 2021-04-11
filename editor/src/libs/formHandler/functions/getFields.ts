@@ -18,5 +18,3 @@ export default function getFields(formState: FHTypes.FormState): FHTypes.ReturnF
 
     return fields
 }
-
-
