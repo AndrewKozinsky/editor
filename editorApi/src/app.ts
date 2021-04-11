@@ -14,9 +14,12 @@ const app: Application = express()
 // Разбор кук
 app.use(cookieParser())
 // Разбор тела запроса
+// app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json())
 
 app.use(express.json({limit: '10kb'}))
+
+
 
 // Ограничение количества запросов
 /*const rater = rateLimit({

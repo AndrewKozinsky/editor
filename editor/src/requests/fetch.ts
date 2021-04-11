@@ -95,5 +95,13 @@ export async function makeFetch(url: string, options: OptionsType, lang: EditorL
  * @param {String} lang — язык интерфейса пользователя
  */
 function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
-    return {...optionsObj, headers: {...optionsObj.headers, 'Editor-Language': lang}}
+    return {
+        ...optionsObj,
+        headers: {
+            ...optionsObj.headers,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Editor-Language': lang
+        }
+    }
 }

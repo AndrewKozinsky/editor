@@ -82,7 +82,6 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 // Ничего не делать если поля формы заполнены неверно
                 if(!isFormValid) return
 
-                // console.log(JSON.stringify(formDetails.readyFieldValues))
                 // Форма заполнена верно. Отправить данные на сервер...
                 const options = {
                     method: 'POST',

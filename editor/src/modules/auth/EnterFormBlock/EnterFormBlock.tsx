@@ -32,7 +32,7 @@ function EnterFormBlock() {
                 <Header text={messages.enterForm.formHeader[lang]} type='h1' relativeSize={1}/>
             </Wrapper>
 
-            <form name='enter' {...fh.formHandlers}>
+            <form name='enter' {...fh.formHandlers} method='POST'>
                 <Wrapper>
                     <TextInput
                         label={ messages.enterForm.emailField[lang] }
