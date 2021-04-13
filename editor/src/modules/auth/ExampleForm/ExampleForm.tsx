@@ -40,18 +40,18 @@
                 <Menu items={getMenuItems(lang)}/>
             </Wrapper>
             <Wrapper b={10}>
-                <Header text={messages.enterForm.formHeader[lang]} type='h1'/>
+                <Header text={messages.EnterForm.formHeader[lang]} type='h1'/>
             </Wrapper>
 
             <form name='enter' {...fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.enterForm.emailField[lang] }
+                        label={ messages.EnterForm.emailField[lang] }
                         name='email'
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
-                        placeholder={messages.enterForm.emailPlaceholder[lang]}
+                        placeholder={messages.EnterForm.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         autoFocus
                     />
@@ -100,7 +100,7 @@
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
-                        text={messages.enterForm.submitBtnText[lang]}
+                        text={messages.EnterForm.submitBtnText[lang]}
                         name='submit'
                     />
                 </Wrapper>

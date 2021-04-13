@@ -26,13 +26,13 @@ function Notice(props: NoticePropType) {
     } = props
 
     // Размер компонента относительно размера всего интерфейса
-    const relativeSize = useGetComponentSize(props.relativeSize)
+    const size = useGetComponentSize(props.relativeSize)
 
     // Классы абзаца с текстом
     const paragraphCls = [CN + '__paragraph']
 
     return (
-        <div className={getNoticeWrapperClasses(props, relativeSize)}>
+        <div className={getNoticeWrapperClasses(props, size)}>
             <Sign {...props} />
             <p className={makeCN(paragraphCls)}>{children}</p>
         </div>

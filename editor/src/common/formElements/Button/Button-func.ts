@@ -3,9 +3,9 @@ import { ButtonPropType } from './Button'
 import { EditorSizeType } from 'store/settings/settingsTypes'
 
 /**
- * Функция возвращает классы выпадающего списка
- * @param {Object} buttonProps — props переданные в текстовое поле
- * @param size — размер элемента.
+ * Функция возвращает классы кнопки
+ * @param {Object} buttonProps — props переданные в кнопку
+ * @param {String} size — размер элемента.
  */
 export function getButtonClasses(buttonProps: ButtonPropType, size: EditorSizeType) {
     const {
@@ -28,6 +28,24 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: EditorSizeTy
     // Цвет кнопки.
     // base (стандартный цвет), accent (акцентный цвет)
     if (color === 'base') classes.push(`${CN}--base-color`)
+
+    return makeCN(classes)
+}
+
+
+/**
+ * Функция возвращает классы загрузчика кнопки
+ * @param {String} size — размер загрузчика
+ */
+export function getButtonLoaderClasses(size: EditorSizeType) {
+
+    // Классы кнопки
+    const CN = 'btn-loader'
+    const classes = [CN]
+
+    // Размер загрузчика.
+    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
+    classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
 }

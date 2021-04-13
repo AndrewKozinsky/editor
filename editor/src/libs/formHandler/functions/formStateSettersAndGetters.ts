@@ -41,7 +41,7 @@ export function getSetFieldData(defaultFieldName?: string) {
  * @param {Object} formState — состояние формы
  * @param {Object} newData — устанавливаемые данные поля
  */
-export function getSetFormData(formState: FHTypes.FormState, newData: FHTypes.AnyData) {
+export function setFormData(formState: FHTypes.FormState, newData: FHTypes.AnyData) {
     const form = formState.form
     const newForm = {...form, data: newData}
 

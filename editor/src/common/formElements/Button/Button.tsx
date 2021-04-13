@@ -1,9 +1,10 @@
 import React from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
-import { EditorSizeMultiplyType } from 'store/settings/settingsTypes'
-import { getButtonClasses } from './Button-func'
+import { EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
+import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
 import {ObjStringKeyAnyValType} from '../../../types/miscTypes';
 import './Button.scss'
+import Loader from '../../misc/Loader/Loader';
 
 
 export type ButtonPropType = {
@@ -15,12 +16,13 @@ export type ButtonPropType = {
     text?: string
     name?: string
     disabled?: boolean
-    // isLoading?: boolean
+    loading?: boolean
 }
 
+/** Компонент кнопки */
 function Button(props: ButtonPropType) {
 
-    const {
+    let {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -28,27 +30,50 @@ function Button(props: ButtonPropType) {
         text, // Текст на кнопке
         name, // Атрибут name кнопки
         disabled = false, // Заблокирована ли кнопка
-        // isLoading, // Нужно ли на кнопке рисовать загрузчик
+        loading = false, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
     // Размер компонента относительно размера всего интерфейса
-    const relativeSize = useGetComponentSize(props.relativeSize)
+    const size = useGetComponentSize(props.relativeSize)
 
     // Текст кнопки
     let btnText: null | string = null
     if (view !== 'onlyIcon' && text) btnText = text
 
+    // Если включена загрузка, то заблокировать кнопку
+    if (loading) disabled = true
+
     const btnAttrs: ObjStringKeyAnyValType = {
         type,
-        className: getButtonClasses(props, relativeSize),
+        className: getButtonClasses(props, size),
         disabled: disabled
     }
     if (name) btnAttrs.name = name
 
 
     return (
-        <button {...btnAttrs}>{btnText}</button>
+        <button {...btnAttrs}>
+            <ButtonLoader loading={loading} size={size}/>{btnText}
+        </button>
     )
 }
 
 export default Button
+
+
+type ButtonLoaderPropType = {
+    loading?: boolean // Нужно ли отрисовывать загрузчик
+    size: EditorSizeType
+}
+
+/** Компонент загрузчика кнопки */
+function ButtonLoader(props: ButtonLoaderPropType) {
+
+    const {
+        loading = false,
+        size
+    } = props
+
+    if (!loading) return null
+    return <Loader className={getButtonLoaderClasses(size)} />
+}

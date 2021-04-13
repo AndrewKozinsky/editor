@@ -64,4 +64,41 @@ $CN: btn;
     &:hover {
         background-color: var(--button-color-hover);
     }
+
+    &:disabled:hover {
+        background-color: var(--button-color);
+    }
+}
+
+
+// Загрузчик
+$loaderCN: btn-loader;
+
+.#{$loaderCN} {
+    display: inline-block;
+}
+
+.#{$loaderCN}--tiny-size {
+    width: 12px;
+    height: 12px;
+    vertical-align: -1px;
+    margin-right: 3px;
+}
+.#{$loaderCN}--small-size {
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+.#{$loaderCN}--middle-size {
+    width: 17px;
+    height: 17px;
+    vertical-align: -3px;
+    margin-right: 5px;
+}
+.#{$loaderCN}--big-size {
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+    margin-right: 6px;
 }

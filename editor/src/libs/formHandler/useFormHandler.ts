@@ -44,6 +44,9 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
     return {
         // Обработчики формы
         formHandlers: {
+            onChange:     useCallback((e) => {
+                setBrowserEvent({browserEvent: e, eventName: 'change', fieldName: e.target.name})
+            }, [browserEvent]),
             onFocus:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'focus', fieldName: e.target.name})
             }, [browserEvent]),
@@ -70,6 +73,6 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
         }, [formState]),
         // Данные о полях
         fields: getFields(formState),
-        form: null
+        form: formState.form.data
     }
 }

@@ -153,6 +153,7 @@ namespace FHTypes {
     export type ReturnObj = {
         // Обработчики добавляемые на <form>
         formHandlers: {
+            onChange:     BrowserEventHandler
             onFocus:      BrowserEventHandler
             onBlur:       BrowserEventHandler
             onClick:      BrowserEventHandler

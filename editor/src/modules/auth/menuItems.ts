@@ -8,8 +8,8 @@ import messages from './messages';
  */
 export function getMenuItems(lang: EditorLanguageType): MenuItems {
     return [
-        { to: '/reg', label: messages.menu.reg[lang] },
-        { to: '/enter', label: messages.menu.enter[lang] },
-        { to: '/reset-password', label: messages.menu.reset[lang] }
+        { to: '/reg', label: messages.Menu.reg[lang] },
+        { to: '/enter', label: messages.Menu.enter[lang] },
+        { to: '/reset-password', label: messages.Menu.reset[lang] }
     ]
 }

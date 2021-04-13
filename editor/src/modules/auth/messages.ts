@@ -9,7 +9,7 @@ type messagesType = {
 
 const messages: messagesType = {
     // Меню форм
-    menu: {
+    Menu: {
         // Пункт «Регистрация»
         reg: {
             eng: 'Sign in',
@@ -27,7 +27,7 @@ const messages: messagesType = {
         },
     },
     // Форма EnterFormBlock
-    enterForm: {
+    EnterForm: {
         // Заголовок формы входа
         formHeader: {
             eng: 'Log in',
@@ -68,6 +68,10 @@ const messages: messagesType = {
         submitBtnText: {
             eng: 'Sign in',
             rus: 'Войти'
+        },
+        sendAnotherLetter: {
+            eng: 'Send another letter',
+            rus: 'Послать письмо еще раз'
         },
     }
 }

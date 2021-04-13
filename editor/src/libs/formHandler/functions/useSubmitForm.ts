@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import {getSetFieldData, getSetFieldValue, getSetFormData} from './formStateSettersAndGetters';
+import {getSetFieldData, getSetFieldValue, setFormData} from './formStateSettersAndGetters';
 import FHTypes from '../types'
 
 /**
@@ -47,7 +47,7 @@ export function getFormDetails(
         // Функция устанавливающая новые данные поля
         setFieldData: getSetFieldData(),
         // Функция изменяющая данные формы.
-        setFormData: getSetFormData,
+        setFormData: setFormData,
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
         // Функция сбрасывающая данные всех полей на значения по умолчанию.

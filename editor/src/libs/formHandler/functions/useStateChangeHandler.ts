@@ -1,6 +1,7 @@
 import FHTypes from '../types'
 import {useEffect, useState} from 'react';
 import {getFormDetails} from './useHandlerBrowserEvent';
+import {getFormDetails as getChangeFormDetails} from './useSubmitForm'
 
 
 /**
@@ -54,7 +55,7 @@ function stateChangeHandler(
         if (field.statechange) {
 
             // Объект передаваемый в функцию запускаемую после обновления Состояния формы
-            const formDetails = getFormDetails(null, formState)
+            const formDetails = getFormDetails(null, formState, fieldName)
 
             // Запуск функции, которая должна запускаться после обновления Состояния формы
             const newFormState = field.statechange(formDetails)
@@ -62,5 +63,14 @@ function stateChangeHandler(
             // Установка нового состояния формы
             setFormState(newFormState)
         }
+    }
+
+    // Запустить метод stateChange объекта конфигурации если он есть
+    if (formConfig.form.stateChange) {
+        // Объект передаваемый в обработчик изменения Состояния формы
+        const formDetails = getChangeFormDetails(formState, setFormState)
+
+        // Запуск обработчика изменения состояния формы
+        formConfig.form.stateChange(formDetails)
     }
 }

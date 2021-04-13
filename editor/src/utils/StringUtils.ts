@@ -7,7 +7,9 @@
  */
 export function makeCN(classesArr: string[]) {
     // Сформировать новый массив классов без пустых значений
-    const filteredClassesArr = classesArr.filter(cls => cls !== '')
+    const filteredClassesArr = classesArr.filter(cls => {
+        return (cls && cls !== '')
+    })
 
     return filteredClassesArr.join(' ')
 }
@@ -19,4 +21,12 @@ export function makeCN(classesArr: string[]) {
 export function getRandomId() {
     const randomNum = Math.random() * 100000
     return 'id' + Math.round(randomNum)
+}
+
+/**
+ * Функция принимает почту и возвращает домен
+ * @param {String} email — почта
+ */
+export function getDomainFromEmail(email: string) {
+    return email.split('@')[1]
 }

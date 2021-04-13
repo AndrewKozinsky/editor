@@ -48,7 +48,7 @@ app.use(express.static(path.join(__dirname, 'staticFiles')))
 // Обработка несуществующего маршрута
 app.all("*", (req, res, next) => {
     next(
-        new AppError(`Can't find ${req.originalUrl} on the server!`, 404)
+        new AppError(null, `Can't find ${req.originalUrl} on the server!`, 404)
     )
 })
 

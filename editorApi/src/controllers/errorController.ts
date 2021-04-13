@@ -7,6 +7,7 @@ type ErrorType = {
     statusCode: number
     status: string // fail или error
     isOperational: boolean
+    field: null | string
     message: string
     code?: number
     keyValue: {string: string}
@@ -21,6 +22,7 @@ export function globalErrorHandler (err: any, req: Request, res: Response, next:
         statusCode: err.statusCode || 500, // Если нет кода ошибки, то значит это ошибка сервера, поэтому 500.
         status: err.status || 'error', // Если нет статуса ошибки, то значит это ошибка сервера, поэтому error.
         isOperational: Boolean(err.isOperational), // Булево значение является ли это ошибкой пользователя
+        field: err.field, // Имя поля формы где написаны неправильные данные
         message: err.message, // Текст ошибки
         code: err.code,
         keyValue: err.keyValue,
@@ -56,6 +58,7 @@ function sendErrorDev(err: ErrorType, res: Response) {
                 // Булево значение эксплуатационная ли это ошибка.
                 // То есть произошла ли она по вине пользователя. Если не эсплуатационная, то ошибка произошла из-за неправильной работы кода.
                 isOperational: err.isOperational,
+                field: err.field, // Имя поля формы где написаны неправильные данные
                 message: err.message,  // Текст ошибки
                 code: err.code
             }
@@ -72,6 +75,7 @@ function sendErrorProd(err: ErrorType, res: Response) {
                 status: err.status,   // fail или error
                 error: {
                     statusCode: err.statusCode,
+                    field: err.field, // Имя поля формы где написаны неправильные данные
                     message: err.message, // Сообщение об ошибке
                 }
             })

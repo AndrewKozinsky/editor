@@ -51,7 +51,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     // Функция возвращающая ошибочный ответ
     function sendErrorResponse(next: NextFunction) {
         return next(
-            new AppError('{{authController.getTokenDataNoCorrectToken}}', 401)
+            new AppError(null, '{{authController.getTokenDataNoCorrectToken}}', 401)
         )
     }
 }
@@ -73,7 +73,7 @@ export const protect = catchAsync(async (req: ExtendedRequestType, res: Response
     // Если токен не передан, то бросить ошибку
     if(!token) {
         return next(
-            new AppError('{{authController.protectNoToken}}', 401)
+            new AppError(null, '{{authController.protectNoToken}}', 401)
         )
     }
 
@@ -86,14 +86,14 @@ export const protect = catchAsync(async (req: ExtendedRequestType, res: Response
     // Проверка существования пользователя
     if(!currentUser) {
         return next(
-            new AppError('{{authController.protectNoUser}}', 401)
+            new AppError(null, '{{authController.protectNoUser}}', 401)
         )
     }
 
     // Проверить что пароль не изменён
     if(currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
-            new AppError('{{authController.protectPasswordChanged}}', 401)
+            new AppError(null, '{{authController.protectPasswordChanged}}', 401)
         )
     }
 
@@ -152,7 +152,7 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
         if (reqSource === 'api') {
             // Бросить ошибку
             return next(
-                new AppError('{{authController.confirmEmailUserNotFound}}', 400)
+                new AppError(null, '{{authController.confirmEmailUserNotFound}}', 400)
             )
         }
         // Если запрос сделан из браузера
@@ -190,8 +190,6 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
 // Вход пользователя
 export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
-    console.log(req.body)
-
     // Почта и пароль из тела запроса
     const email: string = req.body.email
     const password: string = req.body.password
@@ -199,7 +197,7 @@ export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, 
     // Если почту или пароль не передали, то попросить ввести и завершить функцию
     if(!email || !password) {
         return next(
-            new AppError('{{authController.loginNoEmailOrPassword}}', 400)
+            new AppError(null, '{{authController.loginNoEmailOrPassword}}', 400)
         )
     }
 
@@ -209,7 +207,7 @@ export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, 
     // Если пользователь не найден или пароли не совпадают, то бросить ошибку.
     if(!user || !await user.correctPassword(password, user.password)) {
         return next(
-            new AppError('{{authController.loginWrongEmailOrPassword}}', 400)
+            new AppError(null, '{{authController.loginWrongEmailOrPassword}}', 400)
         )
     }
 
@@ -217,7 +215,7 @@ export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, 
     // то значит пользователь еще не подтвердил почту. Попросить чтобы подтвердил.
     if(user.emailConfirmToken) {
         return next(
-            new AppError('{{authController.loginConfirmEmail}}', 403)
+            new AppError(null, '{{authController.loginConfirmEmail}}', 403)
         )
     }
 
@@ -250,7 +248,7 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
     // Вернуть ошибку если пользователь не найден
     if(!user) {
         return next(
-            new AppError('{{authController.forgotPasswordNoUser}}', 404)
+            new AppError(null, '{{authController.forgotPasswordNoUser}}', 404)
         )
     }
 
@@ -294,7 +292,7 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
     catch (err) {
         // Бросить ошибку
         return next(
-            new AppError('{{authController.forgotPasswordCanNotSendEmail}}', 500)
+            new AppError(null, '{{authController.forgotPasswordCanNotSendEmail}}', 500)
         )
     }
 })
@@ -306,7 +304,7 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
     // Если не передали пароль или подтверждение пароля, или если они не равны, то бросить ошибку
     if ((!req.body.password || !req.body.passwordConfirm) || (req.body.password !== req.body.passwordConfirm)) {
         return next(
-            new AppError('{{authController.resetPasswordPasswordIsNotProvided}}', 400)
+            new AppError(null, '{{authController.resetPasswordPasswordIsNotProvided}}', 400)
         )
     }
 
@@ -331,7 +329,7 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
     // Бросить ошибку если пользователь не найден.
     if (!user) {
         return next(
-            new AppError('{{authController.resetPasswordTokenIsInvalid}}', 400)
+            new AppError(null, '{{authController.resetPasswordTokenIsInvalid}}', 400)
         )
     }
 
