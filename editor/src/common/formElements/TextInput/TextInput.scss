@@ -1,13 +1,5 @@
 @import "../commonStyles/commonStyles";
 
-.text-input-label {
-    display: block;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-
-    margin-bottom: 0.6rem;
-}
-
 
 $CN: text-input;
 
@@ -20,6 +12,7 @@ $CN: text-input;
     background-color: var(--text-input-color);
     border: none;
     border-radius: var(--radius);
+    transition: opacity .3s;
 
     &::placeholder {
         font-size: 1.3rem;
@@ -30,6 +23,10 @@ $CN: text-input;
     &:focus {
         // Включение стандартной фокусировки
         @include focus
+    }
+
+    &:disabled {
+        opacity: .5;
     }
 }
 

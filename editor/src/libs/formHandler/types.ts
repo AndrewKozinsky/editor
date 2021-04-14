@@ -152,19 +152,20 @@ namespace FHTypes {
     // Объект возвращаемый useFormHandler
     export type ReturnObj = {
         // Обработчики добавляемые на <form>
-        formHandlers: {
-            onChange:     BrowserEventHandler
-            onFocus:      BrowserEventHandler
-            onBlur:       BrowserEventHandler
-            onClick:      BrowserEventHandler
-            onReset:      BrowserEventHandler
-            onSubmit:     BrowserEventHandler
-        },
+        formHandlers: FormHandlers,
         // Обработчик изменения поля добавляемый каждому полю
         onChangeFieldHandler: BrowserEventHandler
         fields: ReturnFieldsObj,
         // Любые данные касаемые формы.
         form: AnyData
+    }
+    export type FormHandlers = {
+        onChange:     BrowserEventHandler
+        onFocus:      BrowserEventHandler
+        onBlur:       BrowserEventHandler
+        onClick:      BrowserEventHandler
+        onReset:      BrowserEventHandler
+        onSubmit:     BrowserEventHandler
     }
     export type ReturnFieldsObj = {
         // Имя поля. Например email

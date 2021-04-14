@@ -26,6 +26,7 @@ export type FieldGroupPropType = {
     groupName: string
     inputsArr: InputDataType[]
     value: FHTypes.FieldValue
+    disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
@@ -38,6 +39,7 @@ function FieldGroup(props: FieldGroupPropType) {
         groupName,
         inputsArr,
         value,
+        disabled = false, // Заблокировано ли поле
         onChange,
         onBlur
     } = props
@@ -59,6 +61,7 @@ function FieldGroup(props: FieldGroupPropType) {
                         label: inputData.label,
                         name: groupName,
                         checked: !!(value.find(val => val === inputData.value)),
+                        disabled,
                         key: i,
                         onChange,
                         onBlur

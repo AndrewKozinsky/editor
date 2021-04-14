@@ -1,5 +1,5 @@
-import FHTypes from '../types';
-import makeImmutableObj from '../../makeImmutableCopy/makeImmutableCopy';
+import FHTypes from '../types'
+import makeImmutableObj from '../../makeImmutableCopy/makeImmutableCopy'
 
 /**
  * Функция ставящая в объект Состояния формы значение поля

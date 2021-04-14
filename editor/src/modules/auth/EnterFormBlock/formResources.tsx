@@ -17,7 +17,8 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
             email: {
                 initialValue: [''],
                 initialData: {
-                    error: null
+                    error: null,
+                    disabled: false
                 },
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
@@ -29,7 +30,8 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
             password: {
                 initialValue: [''],
                 initialData: {
-                    error: null
+                    error: null,
+                    disabled: false
                 },
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
@@ -38,6 +40,12 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                     }
                 }
             },
+            submit: {
+                initialValue: [''],
+                initialData: {
+                    loading: false
+                }
+            }
         },
         form: {
             initialData: {
@@ -51,7 +59,7 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 confirmEmail: '',
                 // Верно ли заполнена форма.
                 // Статус обновляется после первой отправки при каждом изменении полей формы.
-                isFormValid: true
+                isFormValid: true,
             },
             stateChange: function (formDetails) {
                 // Ничего не делать если форму еще не отправляли
@@ -93,7 +101,7 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
                 let newFormState = formDetails.setFormData(formDetails.state, {
-                    ...formDetails.state.form.data,
+                    ...formData,
                     submitCounter: formData.submitCounter + 1
                 })
 
@@ -101,9 +109,14 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 let isFormValid = true
 
                 // Проверка всех полей формы
-                for(let fieldName in formDetails.state.fields) {
+                for(let fieldName in newFormState.fields) {
+                    const field = newFormState.fields[fieldName]
+
+                    // Игнорировать кнопки
+                    if (field.fieldType === 'button') continue
+
                     // Значение перебираемого поля
-                    const fieldValue = formDetails.state.fields[fieldName].value[0]
+                    const fieldValue = field.value[0]
 
                     // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
                     try {
@@ -115,20 +128,31 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                     }
                 }
 
-                // Поставить новое Состояние формы с поставленными или убранными ошибками
+                // Поставить загрузку на кнопку отправки
+                newFormState = setSubmitLoadingStatus(newFormState, formDetails.setFieldData, true)
+
+                // Поставить новое Состояние формы
                 formDetails.setFormState(newFormState)
 
+                // Если поля формы заполнены неверно...
+                if(!isFormValid) {
+                    // Остановить загрузку на кнопке отправки
+                    newFormState = setSubmitLoadingStatus(newFormState, formDetails.setFieldData, false)
+                    // Поставить новое Состояние формы
+                    formDetails.setFormState(newFormState)
 
-                // Ничего не делать если поля формы заполнены неверно
-                if(!isFormValid) return
+                    // Завершить дальнейшее выполнение
+                    return
+                }
+
 
                 // Форма заполнена верно. Отправить данные на сервер...
                 const options = {
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                const response = await makeFetch(apiUrls.login, options, lang)
-                console.log(response)
+                // const response = await makeFetch(apiUrls.login, options, lang)
+                // console.log(response)
 
             }
         }
@@ -163,7 +187,7 @@ function getSchema(fieldName: string, lang: EditorLanguageType): any {
 
 /**
  * Функция проверяющая поле email
- * @param {Object} formDetails — объект передаваемый в функцию устанавливающую данные поля
+ * @param {Object} formDetails — объект с методами манипулирования Состояния формы
  * @param {String} lang — язык интерфейса
  */
 function setErrorToEmailField(
@@ -181,7 +205,7 @@ function setErrorToEmailField(
 
 /**
  * Функция проверяющая поле password
- * @param {Object} formDetails — объект передаваемый в функцию устанавливающую данные поля
+ * @param {Object} formDetails — объект с методами манипулирования Состояния формы
  * @param {String} lang — язык интерфейса
  */
 function setErrorToPasswordField(
@@ -194,5 +218,22 @@ function setErrorToPasswordField(
     // и вернуть новое Состояние формы
     return checkFieldAndReturnFormState(
         getSchema('password', lang), 'password', fieldValue, formDetails.state, formDetails.setFieldData
+    )
+}
+
+/**
+ * Функция устанавливает статус загрузки на кнопке отправки: идёт ли загрузка или нет.
+ * @param {Object} newFormState — объект Состояния формы
+ * @param {Object} setFieldData — функция устанавливающая данные поля
+ * @param {Boolean} loadingStatus — статус загрузки
+ */
+function setSubmitLoadingStatus(newFormState: FHTypes.FormState, setFieldData: FHTypes.SetFieldData, loadingStatus: boolean) {
+    return setFieldData(
+        newFormState,
+        {
+            ...newFormState.fields.submit.data,
+            loading: loadingStatus
+        },
+        'submit'
     )
 }

@@ -4,6 +4,7 @@ import {AppState} from 'store/rootReducer'
 import Header from 'common/textBlocks/Header/Header'
 import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
+import Form from 'common/formElements/Form/Form'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import Notice from 'common/Notice/Notice'
@@ -13,7 +14,7 @@ import getFormConfig from './formResources'
 import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import CommonError from '../CommonError/CommonError'
-import FHTypes from '../../../libs/formHandler/types'
+import FHTypes from 'libs/formHandler/types'
 
 
 /** Форма входа в сервис */
@@ -24,11 +25,12 @@ export default function EnterFormBlock() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(lang), 'enter')
+    // console.log(fh.fields.submit.data.loading)
 
     // Показывать или сообщением подтвердить почту или форму
     const content = fh.form.showConfirmLetter
         ? <ConfirmLetterMessage visible email={fh.form.confirmEmail} />
-        : <Form fh={fh} />
+        : <ThisForm fh={fh} />
 
     return (
         <div>
@@ -44,24 +46,23 @@ export default function EnterFormBlock() {
 }
 
 
-type FormPropType = {
+type ThisFormPropType = {
     fh?: FHTypes.ReturnObj // Видно ли сообщение
 }
 
 /** Форма входа пользователя */
-function Form(props: FormPropType) {
+function ThisForm(props: ThisFormPropType) {
 
     const {
         fh
     } = props
-    // console.log(fh.form.isFormValid)
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     return (
         <>
-            <form name='enter' {...fh.formHandlers} method='POST'>
+            <Form name='enter' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
                         label={ messages.EnterForm.emailField[lang] }
@@ -72,6 +73,7 @@ function Form(props: FormPropType) {
                         autocomplete='username'
                         placeholder={messages.EnterForm.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
+                        disabled={fh.fields.email.data.disabled}
                         autoFocus
                     />
                 </Wrapper>
@@ -85,6 +87,7 @@ function Form(props: FormPropType) {
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='current-password'
                         error={fh.fields.password.data.error}
+                        disabled={fh.fields.password.data.disabled}
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
@@ -94,10 +97,11 @@ function Form(props: FormPropType) {
                         name='submit'
                         relativeSize={1}
                         disabled={!fh.form.isFormValid}
+                        loading={fh.fields.submit.data.loading}
                     />
                 </Wrapper>
                 <CommonError error={fh.form.commonError} />
-            </form>
+            </Form>
 
             <Wrapper t={30}>
                 {/*@ts-ignore*/}

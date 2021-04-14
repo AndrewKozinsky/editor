@@ -65,6 +65,11 @@ $select-class: select-input;
     background-color: var(--button-color);
     border: none;
     border-radius: var(--radius);
+    transition: opacity .3s;
+
+    &:disabled {
+        opacity: .5;
+    }
 }
 
 // Размер поля.

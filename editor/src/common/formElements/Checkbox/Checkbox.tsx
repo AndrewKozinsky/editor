@@ -12,7 +12,8 @@ export type CheckboxPropType = {
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
-    size?: EditorSizeMultiplyType, // Размер поля
+    relativeSize?: EditorSizeMultiplyType, // Размер поля
+    disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
@@ -24,13 +25,14 @@ function Checkbox(props: CheckboxPropType) {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
+        disabled = false, // Заблокировано ли поле
         checked, // Отмечено ли поле
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
     } = props
 
     // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(props.size)
+    const size = useGetComponentSize(props.relativeSize)
 
     // id для связи подписи и флага
     const [id] = useState(getRandomId())
@@ -46,6 +48,7 @@ function Checkbox(props: CheckboxPropType) {
         onChange
     }
     if (onBlur) inputAttribs.onBlur = onBlur
+    if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
     const labelAttribs: ObjStringKeyAnyValType = {

@@ -14,6 +14,7 @@ $CN: checkbox;
     position: relative;
     user-select: none;
     cursor: pointer;
+    transition: opacity .3s;
 }
 .#{$CN}-label--small-size {
     font-size: 1.4rem;
@@ -108,4 +109,9 @@ $CN: checkbox;
 .#{$CN}-input:focus + .#{$CN}-label:before {
     // Включение стандартной фокусировки
     @include focus
+}
+
+// Заблокированное поле
+.#{$CN}-input:disabled + .#{$CN}-label {
+    opacity: .5;
 }

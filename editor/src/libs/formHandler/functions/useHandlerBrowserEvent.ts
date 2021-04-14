@@ -1,5 +1,5 @@
 import FHTypes from '../types'
-import {getSetFieldData, getSetFieldValue, getSetFormData } from './formStateSettersAndGetters'
+import {getSetFieldData, getSetFieldValue, setFormData } from './formStateSettersAndGetters'
 
 
 /**
@@ -55,7 +55,7 @@ export function getFormDetails(
         // Метод устанавливающий новые данные поля и возвращающий обновлённое Состояние формы
         setFieldData: getSetFieldData(fieldName),
         // Функция изменяющая данные формы и возвращающая обновлённое Состояние формы
-        setFormData: getSetFormData,
+        setFormData: setFormData,
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
         // resetForm: () => void
     }

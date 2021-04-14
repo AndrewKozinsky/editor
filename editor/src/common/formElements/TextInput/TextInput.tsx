@@ -24,6 +24,7 @@ export type TextInputPropType = {
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки
+    disabled?: boolean // Заблокировано ли поле
 }
 
 
@@ -37,6 +38,8 @@ function TextInput(props: TextInputPropType) {
         value,
         autocomplete = '', // Значение автозаполнения поля
         placeholder,    // Текстозаполнитель
+        relativeSize,
+        disabled = false, // Заблокировано ли поле
         autoFocus = false, // Нужно ли ставить фокус при загрузке
         onChange, // Обработчик изменения поля
         onBlur, // Обработчик потерей полем фокуса
@@ -44,7 +47,7 @@ function TextInput(props: TextInputPropType) {
     } = props
 
     // Размер компонента относительно размера всего интерфейса
-    const relativeSize = useGetComponentSize(props.relativeSize)
+    const size = useGetComponentSize(relativeSize)
 
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
@@ -54,7 +57,7 @@ function TextInput(props: TextInputPropType) {
         type: type,
         name,
         value,
-        className: getTextInputClasses(relativeSize),
+        className: getTextInputClasses(size),
         onChange: onChange,
     }
 
@@ -67,8 +70,8 @@ function TextInput(props: TextInputPropType) {
 
     return (
         <div>
-            <Label label={label}  id={id} />
-            <input {...inputAttribs} id={id} />
+            <Label label={label} disabled={disabled} id={id} />
+            <input {...inputAttribs} disabled={disabled} id={id} />
             <Error {...props} />
         </div>
     )

@@ -14,6 +14,7 @@ $CN: radio;
     position: relative;
     user-select: none;
     cursor: pointer;
+    transition: opacity .3s;
 }
 .#{$CN}-label--small-size {
     font-size: 1.4rem;
@@ -114,4 +115,9 @@ $CN: radio;
 .#{$CN}-input:focus + .#{$CN}-label:before {
     // Стандартная фокусировка
     @include focus
+}
+
+// Заблокированное поле
+.#{$CN}-input:disabled + .#{$CN}-label {
+    opacity: .5;
 }

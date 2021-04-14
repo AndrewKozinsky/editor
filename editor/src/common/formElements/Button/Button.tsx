@@ -2,9 +2,11 @@ import React from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
 import { EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
 import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
-import {ObjStringKeyAnyValType} from '../../../types/miscTypes';
+import {ObjStringKeyAnyValType} from '../../../types/miscTypes'
+import Loader from '../../misc/Loader/Loader'
 import './Button.scss'
-import Loader from '../../misc/Loader/Loader';
+import {useSelector} from 'react-redux';
+import {AppState} from '../../../store/rootReducer';
 
 
 export type ButtonPropType = {
@@ -33,12 +35,21 @@ function Button(props: ButtonPropType) {
         loading = false, // Нужно ли на кнопке рисовать загрузчик
     } = props
 
+    // Язык интерфейса
+    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+
     // Размер компонента относительно размера всего интерфейса
     const size = useGetComponentSize(props.relativeSize)
 
     // Текст кнопки
     let btnText: null | string = null
     if (view !== 'onlyIcon' && text) btnText = text
+
+    // При загрузке поменять текст кнопки
+    if (btnText && loading) {
+        if (lang === 'eng') btnText = 'Sending...'
+        if (lang === 'rus') btnText = 'Отправка...'
+    }
 
     // Если включена загрузка, то заблокировать кнопку
     if (loading) disabled = true
@@ -53,7 +64,8 @@ function Button(props: ButtonPropType) {
 
     return (
         <button {...btnAttrs}>
-            <ButtonLoader loading={loading} size={size}/>{btnText}
+            <ButtonLoader loading={loading} size={size}/>
+            {btnText}
         </button>
     )
 }
