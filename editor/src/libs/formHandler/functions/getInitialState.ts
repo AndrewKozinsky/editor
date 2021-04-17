@@ -3,7 +3,7 @@ import FHTypes from '../types'
 
 /**
  * Функция создаёт первоначальный объект Состояния формы
- * @param formConfig
+ * @param {Object} formConfig — конфигурацию формы переданная программистом
  */
 export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {
 
@@ -11,7 +11,7 @@ export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes
     let fields: FHTypes.FieldsStateObj = {}
     // Данные о форме
     let form: FHTypes.FormStateObj = {
-        data: formConfig.form.initialData || null
+        data: formConfig.form.initialData || {}
     }
 
     // Проход по полям формы из объекта конфигурации для наполнения fields данными о полях
@@ -21,7 +21,7 @@ export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes
             // Эти значения временные чтобы TS не ругался
             fieldType: 'radio',
             valueCount: 'one',
-            data: formConfig.fields[key].initialData || null
+            data: formConfig.fields[key].initialData || {}
         }
     }
 

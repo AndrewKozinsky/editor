@@ -13,7 +13,7 @@ namespace FHTypes {
                 // Изначальное значение поля. Например: ['andkozinsky@gmail.com'].
                 initialValue?: FieldValue,
                 // Изначальные данные поля. Например { error: null }
-                initialData?: AnyData
+                initialData?: FieldData
                 // Обработчики браузерных событий
                 change?: ConfigFieldEventHandler
                 focus?: ConfigFieldEventHandler
@@ -27,20 +27,20 @@ namespace FHTypes {
         },
         form: {
             // Изначальные данные формы. Например { submitCounter: 0 }
-            initialData?: AnyData
+            initialData?: FieldData
             // Функция запускаемая при изменении Состояния формы
             // Например она требуется чтобы определись когда кнопка отправки должна быть заблокирована
-            stateChange?: ConfigEventHandler
+            stateChange?: ConfigFormEventHandler
             // Пользовательская функция запускаемая при сбросе формы
-            reset?: ConfigEventHandler
+            reset?: ConfigFormEventHandler
             // Пользовательская функция запускаемая при отправке формы когда все поля верные
-            submit: ConfigEventHandler
+            submit: ConfigFormEventHandler
         }
     }
     // Обработчик события поля
     type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => FormState
     // Обработчик события формы
-    type ConfigEventHandler = (formDetails: FormDetailsInSubmitHandler) => void
+    type ConfigFormEventHandler = (formDetails: FormDetailsInSubmitHandler) => void
 
     // Объект передаваемый в обработчик возникновения события поля и формы
     export type FormDetailsInEventHandler = {
@@ -52,8 +52,12 @@ namespace FHTypes {
         setFieldValue: SetFieldValue
         // Функция изменяющая данные поля с заданным именем.
         setFieldData: SetFieldData
+        // Функция изменяющая свойство в данных заданного поля
+        setFieldDataPropValue: SetFieldDataPropValue
         // Функция изменяющая данные формы.
         setFormData: SetFormData
+        // Функция изменяющая свойство в данных формы
+        setFormDataPropValue: SetFormDataPropValue
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
         // resetForm: () => void
     }
@@ -72,10 +76,25 @@ namespace FHTypes {
         fieldName?: string
     ) => FormState
 
+    // Функция изменяющая свойство в данных заданного поля
+    export type SetFieldDataPropValue = (
+        formState: FormState,
+        dataPropName: string,
+        dataPropValue: AnyData,
+        fieldName: string,
+    ) => FormState
+
     // Функция изменяющая данные формы
     export type SetFormData = (
         formState: FormState,
         formData: AnyData,
+    ) => FormState
+
+    // Функция изменяющая свойство в данных формы
+    export type SetFormDataPropValue = (
+        formState: FormState,
+        dataPropName: string,
+        dataPropValue: AnyData
     ) => FormState
 
     // Установщик Состояния useFormHandler
@@ -84,6 +103,8 @@ namespace FHTypes {
 
     // Значение поля
     export type FieldValue = string[]
+    // Данные поля или формы
+    export type FieldData = {[key: string]: any}
     // Данные любого типа (для данных поля и формы)
     export type AnyData = any
 
@@ -93,12 +114,16 @@ namespace FHTypes {
         state: FormState
         // Функция устанавливающая новое Состояние формы
         setFormState: SetFormState
-        // Функция изменяющая значение поля с заданным именем.
+        // Функция устанавливающая новое значение поля
         setFieldValue: SetFieldValue
-        // Функция устанавливающий новые данные поля
+        // Функция устанавливающая новые данные поля с заданным именем.
         setFieldData: SetFieldData
+        // Функция устанавливающая значение свойства в данных поля
+        setFieldDataPropValue: SetFieldDataPropValue
         // Функция изменяющая данные формы.
         setFormData: SetFormData
+        // Функция изменяющая данные формы.
+        setFormDataPropValue: SetFormDataPropValue
         // Значения полей для отправки на сервер
         readyFieldValues: ReadyFieldsValues
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
@@ -131,7 +156,7 @@ namespace FHTypes {
         // Сколько значений может быть у поля: zero (ни одного (если это кнопка)), one (одно) или many (несколько). Это зависит от типа поля.
         valueCount: ValueCount
         // Любые данные поля.
-        data: AnyData
+        data: FieldData
     }
 
     // Тип поля
@@ -143,7 +168,7 @@ namespace FHTypes {
         // Ссылка на элемент формы.
         $form?: $form
         // Данные формы заполняемые пользователем
-        data: AnyData
+        data: FieldData
     }
 
 
@@ -157,7 +182,7 @@ namespace FHTypes {
         onChangeFieldHandler: BrowserEventHandler
         fields: ReturnFieldsObj,
         // Любые данные касаемые формы.
-        form: AnyData
+        form: FieldData
     }
     export type FormHandlers = {
         onChange:     BrowserEventHandler
@@ -172,7 +197,7 @@ namespace FHTypes {
         [key: string]: {
             // Значение поля.
             value: FieldValue
-            data: AnyData
+            data: FieldData
         }
     }
     // Функция-обработчик браузерного события
@@ -190,8 +215,6 @@ namespace FHTypes {
         eventName: null | FormEventsNames,
         fieldName?: null | string
     }
-    // Функция ставящая новые данные браузерного события
-    // export type SetBrowserEvent = (arg: BrowserEventState) => void
 }
 
 export default FHTypes

@@ -4,7 +4,13 @@ const addresses = {
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
-    login: 'users/login'
+    login: 'users/login',
+    // Подтверждение почты
+    /*confirmEmail: (confirmEmailToken: string) => {
+        return 'users/confirmEmail'
+    },*/
+    // Отправка письма со ссылкой на подтверждение почты
+    sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
 }
 
 // Оборачивание объекта addresses чтобы при запросе

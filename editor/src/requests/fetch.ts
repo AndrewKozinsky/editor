@@ -68,7 +68,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
  * @param {Object} options — параметры запроса
  * @param {String} lang — язык интерфейса
  */
-export async function makeFetch(url: string, options: OptionsType, lang: EditorLanguageType) {
+export async function makeFetch(url: string, options: OptionsType, lang: EditorLanguageType = 'eng') {
 
     // Добавление заголовка языка интерфейса в параметры запроса
     const extraOptions = setLanguageHeader(options, lang)

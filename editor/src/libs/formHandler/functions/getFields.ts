@@ -3,7 +3,7 @@ import FHTypes from '../types'
 
 /**
  * Функция возращает данные по полям
- * @param {Object} formState
+ * @param {Object} formState — объект Состояния формы
  */
 export default function getFields(formState: FHTypes.FormState): FHTypes.ReturnFieldsObj {
     // Формирование объекта с данными о полях

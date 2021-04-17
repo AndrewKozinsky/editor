@@ -140,7 +140,7 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
         { emailConfirmToken: undefined }, // Как изменить объект
         { new: true } // Вернуть объект после изменения свойства
     )
-    console.log(user)
+    // console.log(user)
 
     // Язык пользователя и тип запроса
     const lang = <string>req.headers['Editor-Language'] // eng или rus
@@ -224,6 +224,37 @@ export const logIn = catchAsync(async (req: ExtendedRequestType, res: Response, 
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
+})
+
+/** Обработчик повторной отправки письма с подтверждением почты */
+export const sendAnotherConfirmLetter = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    // Получение переданной в body почты
+    const email: string = req.body.email
+
+    // Поиск пользователя с такой почтой
+    const user: IUser | null = await UserModel.findOne({email})
+
+    // Если пользователь не найден, то возратить ошибку
+    if (!user) {
+        return next(
+            new AppError(null, '{{authController.sendAnotherConfirmLetterUserNotFound}}', 400)
+        )
+    }
+
+    // Если пользователь уже подтвердил почту
+    if (!user.emailConfirmToken) {
+        return next(
+            new AppError(null, '{{authController.sendAnotherConfirmLetterUserHasConfirmedEmail}}', 400)
+        )
+    }
+
+    // Отправление письма с подтверждением почты
+    await sendEmailAddressConfirmLetter(req, req.body.email, user.emailConfirmToken)
+
+    res.status(200).json({
+        status: 'success'
+    })
 })
 
 // Выход пользователя (защищённый маршрут)

@@ -4,7 +4,7 @@ import FHTypes from '../types'
 
 /**
  * Функция дополняет значения полей формы.
- * @param {Object} formState — объект состояния useFormHandler
+ * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция устанавливающая новое Состояние useFormHandler
  * @param {Element} $form — ссылка на элемент формы
  */
@@ -17,8 +17,7 @@ export default function useSupplementFieldData(
         if (!$form) return
 
         // Получение элементов полей формы
-        // @ts-ignore
-        const $formInputs: HTMLFormElement = $form.elements
+        const $formInputs: HTMLFormControlsCollection = $form.elements
 
         // Скопировать объект Состояния useFormHandler
         const newFormState = {...formState}
@@ -28,12 +27,14 @@ export default function useSupplementFieldData(
         for (let key in newFormState.fields) {
 
             // Ссылка на текущее поле формы
+            // @ts-ignore
             const $field = $formInputs[key]
 
             // Тип поля: text, select, checkbox, radio или button
             const fieldType = getFieldType( $field )
 
             // Сколько значений будет возращать поле: zero, one или many
+            // @ts-ignore
             const valueCount = getValueCount( $formInputs[key], fieldType )
 
             // Формирование объекта с данными поля

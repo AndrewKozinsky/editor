@@ -1,14 +1,14 @@
 import FHTypes from '../types'
 import {useEffect, useState} from 'react';
 import {getFormDetails} from './useHandlerBrowserEvent';
-import {getFormDetails as getChangeFormDetails} from './useSubmitForm'
+import {getSubmitFormDetails} from './useSubmitForm'
 
 
 /**
  * Обработчик изменения Состояния формы. Он запускает обработчики этого события описанные в полях
  * @param {Object} formConfig — конфигурацию формы переданная программистом
  * @param {Object} formState — состояние формы
- * @param {Function} setFormState — установка состояния формы
+ * @param {Function} setFormState — функция изменяющая Состояние формы
  */
 export default function useStateChangeHandler(
     formConfig: FHTypes.FormConfig,
@@ -20,7 +20,7 @@ export default function useStateChangeHandler(
 
     // При изменении Состояния формы
     useEffect(() => {
-        // Ничего не делать если нельзя запустить обработчик изменения объекта состояния
+        // Ничего не делать если нельзя запустить обработчик изменения объекта Состояния
         if (!canRunStateChangeHandler) return
 
         // Запретить вызов обработчика изменения Состояния чтобы не получилось циклического изменения состояния
@@ -35,9 +35,9 @@ export default function useStateChangeHandler(
 
 /**
  * Функция запускаемая при изменении Состояния формы
- * @param {Object} formConfig — объект конфигурации
+ * @param {Object} formConfig — конфигурацию формы переданная программистом
  * @param {Object} formState — объект Состояния формы
- * @param {Function} setFormState — функция устанавливающая новое состояние формы
+ * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setCanRunStateChangeHandler — функция устанавливающая можно ли запускать обработчик изменения Состояния
  */
 function stateChangeHandler(
@@ -68,7 +68,7 @@ function stateChangeHandler(
     // Запустить метод stateChange объекта конфигурации если он есть
     if (formConfig.form.stateChange) {
         // Объект передаваемый в обработчик изменения Состояния формы
-        const formDetails = getChangeFormDetails(formState, setFormState)
+        const formDetails = getSubmitFormDetails(formState, setFormState)
 
         // Запуск обработчика изменения состояния формы
         formConfig.form.stateChange(formDetails)

@@ -13,6 +13,9 @@ router.get('/confirmEmail/:token', authController.confirmEmail)
 // Вход пользователя
 router.post('/login', authController.logIn)
 
+// Отправка еще одного письма со ссылкой на подтверждение почты
+router.post('/sendAnotherConfirmLetter', authController.sendAnotherConfirmLetter)
+
 // Выход пользователя
 router.route('/logout').get(authController.protect, authController.logOut)
 

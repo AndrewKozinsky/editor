@@ -1,12 +1,12 @@
 import React from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
 import { EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
-import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
-import {ObjStringKeyAnyValType} from '../../../types/miscTypes'
-import Loader from '../../misc/Loader/Loader'
+import {ObjStringKeyAnyValType} from 'types/miscTypes'
+import Loader from 'common/misc/Loader/Loader'
 import './Button.scss'
-import {useSelector} from 'react-redux';
-import {AppState} from '../../../store/rootReducer';
+import {useSelector} from 'react-redux'
+import {AppState} from 'store/rootReducer'
+import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
 
 
 export type ButtonPropType = {
@@ -19,6 +19,7 @@ export type ButtonPropType = {
     name?: string
     disabled?: boolean
     loading?: boolean
+    onClick?: (...args: any[]) => void
 }
 
 /** Компонент кнопки */
@@ -33,6 +34,7 @@ function Button(props: ButtonPropType) {
         name, // Атрибут name кнопки
         disabled = false, // Заблокирована ли кнопка
         loading = false, // Нужно ли на кнопке рисовать загрузчик
+        onClick
     } = props
 
     // Язык интерфейса
@@ -60,6 +62,7 @@ function Button(props: ButtonPropType) {
         disabled: disabled
     }
     if (name) btnAttrs.name = name
+    if (onClick) btnAttrs.onClick = onClick
 
 
     return (

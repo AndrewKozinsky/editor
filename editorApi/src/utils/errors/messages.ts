@@ -103,6 +103,15 @@ export const messages: messagesType = {
             eng: 'Token is invalid or has expired',
             rus: 'Токен сброса пароля неверный или просроченный.'
         },
+        // sendAnotherConfirmLetter
+        sendAnotherConfirmLetterUserNotFound: {
+            eng: 'User with such mail was not found',
+            rus: 'Пользователь с такой почтой не найден.'
+        },
+        sendAnotherConfirmLetterUserHasConfirmedEmail: {
+            eng: 'User has already confirmed mail',
+            rus: 'Пользователь уже подтвердил почту.'
+        },
     }
 }
 

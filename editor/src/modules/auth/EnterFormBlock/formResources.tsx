@@ -4,13 +4,12 @@ import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
 import messages from '../messages'
 import { EditorLanguageType } from 'store/settings/settingsTypes'
-import { checkFieldAndReturnFormState } from 'utils/FormHandlerUtils'
-import { makeFetch } from '../../../requests/fetch'
+import { makeFetch } from 'requests/fetch'
 import apiUrls from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormConfig {
+export default function getFormConfig(lang: EditorLanguageType, history: any): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -23,7 +22,7 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return setErrorToEmailField(formDetails, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
                     }
                 }
             },
@@ -36,14 +35,15 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return setErrorToPasswordField(formDetails, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
                     }
                 }
             },
             submit: {
                 initialValue: [''],
                 initialData: {
-                    loading: false
+                    loading: false,
+                    disabled: false
                 }
             }
         },
@@ -55,105 +55,83 @@ export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormCon
                 commonError: null,
                 // Нужно ли показывать сообщение о необходимости подтвердить почту
                 showConfirmLetter: false,
-                // Почта пользователя, которую нужно подтвердить
+                // Почта пользователя, которую нужно подтвердить если это еще не сделано
                 confirmEmail: '',
-                // Верно ли заполнена форма.
-                // Статус обновляется после первой отправки при каждом изменении полей формы.
-                isFormValid: true,
-            },
-            stateChange: function (formDetails) {
-                // Ничего не делать если форму еще не отправляли
-                if (formDetails.state.form.data.submitCounter === 0) return
-
-                // Если форму уже отправляли, то блокировать кнопку отправки если в форме есть ошибки
-                // Правильно ли заполнена форма
-                let isFormValid = true
-
-                // Проверка всех полей формы
-                for(let fieldName in formDetails.state.fields) {
-                    // Значение перебираемого поля
-                    const fieldValue = formDetails.state.fields[fieldName].value[0]
-
-                    // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
-                    try {
-                        getSchema(fieldName, lang).validateSync({[fieldName]: fieldValue})
-                    } catch (err) {
-                        isFormValid = false
-                    }
-                }
-
-                // Формирование нового Состояния формы
-                let newFormState = formDetails.setFormData(
-                    formDetails.state,
-                    {
-                        ...formDetails.state.form.data,
-                        isFormValid
-                    }
-                )
-
-                // Поставить новое Состояние формы с поставленными или убранными ошибками
-                formDetails.setFormState(newFormState)
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
-                // Данные формы
-                const formData = formDetails.state.form.data
+
+                // Проверить форму и поставить/убрать ошибки
+                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                let newFormState = formDetails.setFormData(formDetails.state, {
-                    ...formData,
-                    submitCounter: formData.submitCounter + 1
-                })
+                formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
 
-                // Правильно ли заполнена форма
-                let isFormValid = true
+                // Первое поле, где есть ошибка
+                let $firstWrongField = getFirstInvalidField(formState)
 
-                // Проверка всех полей формы
-                for(let fieldName in newFormState.fields) {
-                    const field = newFormState.fields[fieldName]
+                // Заблокировать все поля. Кнопке отправки поставить блокировку и загрузку
+                formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, true)
 
-                    // Игнорировать кнопки
-                    if (field.fieldType === 'button') continue
-
-                    // Значение перебираемого поля
-                    const fieldValue = field.value[0]
-
-                    // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
-                    try {
-                        getSchema(fieldName, lang).validateSync({[fieldName]: fieldValue})
-                        newFormState = formDetails.setFieldData(newFormState, {error: null}, fieldName)
-                    } catch (err) {
-                        isFormValid = false
-                        newFormState = formDetails.setFieldData(newFormState, {error: err.message}, fieldName)
-                    }
-                }
-
-                // Поставить загрузку на кнопку отправки
-                newFormState = setSubmitLoadingStatus(newFormState, formDetails.setFieldData, true)
-
-                // Поставить новое Состояние формы
-                formDetails.setFormState(newFormState)
 
                 // Если поля формы заполнены неверно...
-                if(!isFormValid) {
-                    // Остановить загрузку на кнопке отправки
-                    newFormState = setSubmitLoadingStatus(newFormState, formDetails.setFieldData, false)
+                if($firstWrongField) {
+                    // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
+                    formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+
+                    // Поставить фокус на первое поле где есть ошибка
+                    $firstWrongField.focus()
+
                     // Поставить новое Состояние формы
-                    formDetails.setFormState(newFormState)
+                    formDetails.setFormState(formState)
 
                     // Завершить дальнейшее выполнение
                     return
                 }
 
+                // Поставить новое Состояние формы
+                formDetails.setFormState(formState)
 
                 // Форма заполнена верно. Отправить данные на сервер...
                 const options = {
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                // const response = await makeFetch(apiUrls.login, options, lang)
+                const response = await makeFetch(apiUrls.login, options, lang)
                 // console.log(response)
 
+                // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
+                formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+
+                // Если ввели неправильные данные
+                if (response.status === 'fail') {
+                    if (response.errors.statusCode === 400) {
+                        // Блокировать кнопку отправки
+                        formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
+
+                        // Показать общее сообщение об этом. Оно будет показано ниже формы
+                        formState = formDetails.setFormDataPropValue(
+                            formState, 'commonError', messages.EnterForm.sentWrongData[lang]
+                        )
+
+                        // Поставить фокус на поле с почтой
+                        formState.fields.email.$field.focus()
+                    }
+                    else if (response.errors.statusCode === 403) {
+                        // Поставить в свойство confirmEmail почту, которую должен подтвердить пользователь
+                        formState = formDetails.setFormDataPropValue(
+                            formState, 'confirmEmail', formState.fields.email.value[0]
+                        )
+                    }
+
+                    // Поставить новое Состояние формы
+                    formDetails.setFormState(formState)
+                }
+                // Если ввели правильные данные
+                else if (response.status === 'success') {
+                    // Перебросить на страницу редактора
+                    history.push('/')
+                }
             }
         }
     }
@@ -185,55 +163,96 @@ function getSchema(fieldName: string, lang: EditorLanguageType): any {
     return schemas[fieldName]
 }
 
-/**
- * Функция проверяющая поле email
- * @param {Object} formDetails — объект с методами манипулирования Состояния формы
- * @param {String} lang — язык интерфейса
- */
-function setErrorToEmailField(
-    formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType
-): FHTypes.FormState
-{
-    const fieldValue = formDetails.state.fields['email'].value[0]
 
-    // Проверить значение поля по переданной схеме, записать или убрать ошибку поля
-    // и вернуть новое Состояние формы
-    return checkFieldAndReturnFormState(
-        getSchema('email', lang), 'email', fieldValue, formDetails.state, formDetails.setFieldData
-    )
+/**
+ * Функция проверяющая форму при изменении полей ввода
+ * @param {Object} formState — объект Состояния формы
+ * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
+ * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
+ * @param lang
+ */
+function validateForm(
+    formState: FHTypes.FormState,
+    setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
+    setFormDataPropValue: FHTypes.SetFormDataPropValue,
+    lang: EditorLanguageType
+): FHTypes.FormState {
+
+    // Правильно ли заполнена форма
+    let isFormValid = true
+
+    // Проверка всех полей формы
+    for(let fieldName in formState.fields) {
+        const field = formState.fields[fieldName]
+
+        // Игнорировать кнопки
+        if (field.fieldType === 'button') continue
+
+        // Значение перебираемого поля
+        const fieldValue = field.value[0]
+
+        // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
+        try {
+            getSchema(fieldName, lang).validateSync({[fieldName]: fieldValue})
+            formState = setFieldDataPropValue(formState, 'error', null, fieldName)
+        } catch (err) {
+            isFormValid = false
+            formState = setFieldDataPropValue(formState, 'error', err.message, fieldName)
+        }
+    }
+
+    // Если поля формы заполнены верно...
+    if(isFormValid) {
+        // Разблокировать кнопку отправки
+        formState = setFieldDataPropValue(formState, 'disabled', false, 'submit')
+    }
+    // Если в форме допущены ошибки...
+    else {
+        // Заблокировать кнопку отправки
+        formState = setFieldDataPropValue(formState, 'disabled', true, 'submit')
+    }
+
+    // Убрать сообщение об общей ошибке в нижней части формы.
+    return setFormDataPropValue( formState, 'commonError', null )
 }
 
-/**
- * Функция проверяющая поле password
- * @param {Object} formDetails — объект с методами манипулирования Состояния формы
- * @param {String} lang — язык интерфейса
- */
-function setErrorToPasswordField(
-    formDetails: FHTypes.FormDetailsInEventHandler, lang: EditorLanguageType
-): FHTypes.FormState
-{
-    const fieldValue = formDetails.state.fields['password'].value[0]
 
-    // Проверить значение поля по переданной схеме, записать или убрать ошибку поля
-    // и вернуть новое Состояние формы
-    return checkFieldAndReturnFormState(
-        getSchema('password', lang), 'password', fieldValue, formDetails.state, formDetails.setFieldData
-    )
+/**
+ * Функция возвращает ссылку на элемент первого поля с ошибкой
+ * @param {Object} formState — объект с Состоянием формы
+ */
+function getFirstInvalidField(formState: FHTypes.FormState) {
+
+    // Первое поле, где есть ошибка
+    let $firstWrongField: null | HTMLInputElement = null
+
+    // Перебор всех полей чтобы найти поле с первой ошибкой
+    for(let fieldName in formState.fields) {
+        const field = formState.fields[fieldName]
+
+        if (field.data.error) {
+            $firstWrongField = field.$field
+            break
+        }
+    }
+
+    return $firstWrongField
 }
 
+
 /**
- * Функция устанавливает статус загрузки на кнопке отправки: идёт ли загрузка или нет.
- * @param {Object} newFormState — объект Состояния формы
- * @param {Object} setFieldData — функция устанавливающая данные поля
- * @param {Boolean} loadingStatus — статус загрузки
+ * Функция ставит блокирует или разблокирует поля и кнопку отправки перед/после отправки
+ * @param {Object} formState — объект с Состоянием формы
+ * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
+ * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setSubmitLoadingStatus(newFormState: FHTypes.FormState, setFieldData: FHTypes.SetFieldData, loadingStatus: boolean) {
-    return setFieldData(
-        newFormState,
-        {
-            ...newFormState.fields.submit.data,
-            loading: loadingStatus
-        },
-        'submit'
-    )
+function setLoadingStatusToForm(
+    formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
+) {
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'email')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'password')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
+    formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
+
+    return formState
 }

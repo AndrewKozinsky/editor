@@ -1,13 +1,13 @@
 import FHTypes from '../types'
-import {getSetFieldData, getSetFieldValue, setFormData } from './formStateSettersAndGetters'
+import {getSetFieldData, getSetFieldDataPropValue, getSetFieldValue, setFormData, setFormDataPropValue } from './formStateSettersAndGetters'
 
 
 /**
  * Функция запускаемая после браузерного события
  * @param {Object} browserEvent — объект с данными о произошедшем событии
  * @param {Object} formConfig — конфигурацию формы переданная программистом
- * @param {Object} formState — состояние формы
- * @param {Function} setFormState — установка состояния формы
+ * @param {Object} formState — объект Состояния формы
+ * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setBrowserEvent — установка
  */
 export function handleBrowserEvent(
@@ -36,10 +36,17 @@ export function handleBrowserEvent(
         if (newFormState) setFormState(newFormState)
     }
 
+    // Обнулить событие чтобы в случае повторного возникновения события
+    // с таким же именем сработал бы обработчик
     setBrowserEvent({browserEvent: null, eventName: null})
 }
 
-
+/**
+ * Функция возращает объект, который передаётся в пользовательский обработчик браузерного события
+ * @param {Object} browserEvent — данные о событии
+ * @param {Object} formState — объект События формы
+ * @param {String} fieldName — имя поля где призошло событие
+ */
 export function getFormDetails(
     browserEvent: null | FHTypes.BrowserEventState,
     formState: FHTypes.FormState,
@@ -50,12 +57,16 @@ export function getFormDetails(
         browserEvent: browserEvent.browserEvent || null,
         // Состояние формы.
         state: formState,
-        // Метод устанавливающий новое значение поля и возвращающий обновлённое Состояние формы
+        // Функция изменяющая значение поля с заданным именем.
         setFieldValue: getSetFieldValue(fieldName),
-        // Метод устанавливающий новые данные поля и возвращающий обновлённое Состояние формы
+        // Функция изменяющая данные поля с заданным именем и возвращающая обновлённое Состояние формы
         setFieldData: getSetFieldData(fieldName),
+        // Функция изменяющая свойство в данных заданного поля
+        setFieldDataPropValue: getSetFieldDataPropValue(fieldName),
         // Функция изменяющая данные формы и возвращающая обновлённое Состояние формы
         setFormData: setFormData,
+        // Функция изменяющая свойство в данных формы
+        setFormDataPropValue: setFormDataPropValue,
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
         // resetForm: () => void
     }

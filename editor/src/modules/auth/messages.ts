@@ -73,6 +73,18 @@ const messages: messagesType = {
             eng: 'Send another letter',
             rus: 'Послать письмо еще раз'
         },
+        sentWrongData: {
+            eng: 'Incorrect email or password',
+            rus: 'Неправильная почта и пароль.'
+        },
+        failedToSendAnotherConfirmationLetter: {
+            eng: 'Failed to send another email with a mail confirmation link. Try again after a while.',
+            rus: 'Не удалось отправить еще одно письмо со ссылкой на подтверждение почты. Попробуйте еще раз через некоторое время.'
+        },
+        confirmationLetterWasSent: {
+            eng: 'An email has been sent to you with a link to confirm your email. Confirm your email and then log in again.',
+            rus: 'На вашу почту отправлено письмо со ссылкой на подтверждение почты. Подтвердите почту и затем зайдите в систему еще раз.'
+        },
     }
 }
 

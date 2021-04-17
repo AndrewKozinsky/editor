@@ -1,12 +1,19 @@
 import {useEffect, useState} from 'react'
-import {getSetFieldData, getSetFieldValue, setFormData} from './formStateSettersAndGetters';
+import {
+    getSetFieldData,
+    getSetFieldDataPropValue,
+    getSetFieldValue,
+    setFormData,
+    setFormDataPropValue
+} from './formStateSettersAndGetters'
 import FHTypes from '../types'
+
 
 /**
  * Обработчик отправки формы
- * @param formConfig
- * @param formState
- * @param setFormState
+ * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formState — объект Состояния формы
+ * @param {Function} setFormState — функция изменяющая Состояние формы
  */
 export default function useSubmitForm(
     formConfig: FHTypes.FormConfig,
@@ -23,17 +30,17 @@ export default function useSubmitForm(
         setCanRunSubmitHandler(false)
 
         // Объект передаваемый в обработчик отправки формы
-        const formDetails = getFormDetails(formState, setFormState)
+        const submitFormDetails = getSubmitFormDetails(formState, setFormState)
 
         // Запустить пользовательскую функцию отправки формы
-        formConfig.form.submit(formDetails)
+        formConfig.form.submit(submitFormDetails)
     }, [canRunSubmitHandler])
 
     return setCanRunSubmitHandler
 }
 
 
-export function getFormDetails(
+export function getSubmitFormDetails(
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState,
 ): FHTypes.FormDetailsInSubmitHandler {
@@ -44,10 +51,14 @@ export function getFormDetails(
         setFormState: setFormState,
         // Функция устанавливающая новое значение поля
         setFieldValue: getSetFieldValue(),
-        // Функция устанавливающая новые данные поля
+        // Функция устанавливающая новые данные поля с заданным именем.
         setFieldData: getSetFieldData(),
+        // Функция устанавливающая значение свойства в данных поля
+        setFieldDataPropValue: getSetFieldDataPropValue(),
         // Функция изменяющая данные формы.
         setFormData: setFormData,
+        // Функция изменяющая данные формы.
+        setFormDataPropValue: setFormDataPropValue,
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
         // Функция сбрасывающая данные всех полей на значения по умолчанию.
@@ -58,7 +69,7 @@ export function getFormDetails(
 
 /**
  * Функция подготавливает объект со значениями полей для отправки на сервер
- * @param {Object} formState — Состояние формы
+ * @param {Object} formState — объект Состояния формы
  */
 function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFieldsValues {
     let fieldsValuesSubmitObj: FHTypes.ReadyFieldsValues = {}

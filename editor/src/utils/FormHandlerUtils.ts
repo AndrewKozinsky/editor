@@ -9,7 +9,8 @@ import FHTypes from '../libs/formHandler/types';
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldData — установшик Состояния формы
  */
-export function checkFieldAndReturnFormState(
+// НЕИСПОЛЬЗУЕМАЯ ФУНКЦИЯ
+/*export function checkFieldAndReturnFormState(
     schema: any, fieldName: string, fieldValue: string, formState: FHTypes.FormState, setFieldData: FHTypes.SetFieldData
 ) {
     try {
@@ -18,7 +19,7 @@ export function checkFieldAndReturnFormState(
     } catch (err) {
         return setFieldData(formState, {error: err.message})
     }
-}
+}*/
 
 // НЕИСПОЛЬЗУЕМАЯ ФУНКЦИЯ
 /**

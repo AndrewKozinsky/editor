@@ -15,20 +15,24 @@ import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import CommonError from '../CommonError/CommonError'
 import FHTypes from 'libs/formHandler/types'
+// @ts-ignore
+import { useHistory } from 'react-router-dom'
+import { useGetSendAnotherConfirmLetter } from './EnterFormBlock-func'
 
 
 /** Форма входа в сервис */
 export default function EnterFormBlock() {
 
+    let history = useHistory()
+
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'enter')
-    // console.log(fh.fields.submit.data.loading)
+    const fh = useFormHandler(getFormConfig(lang, history), 'enter')
 
     // Показывать или сообщением подтвердить почту или форму
-    const content = fh.form.showConfirmLetter
+    const content = fh.form.confirmEmail
         ? <ConfirmLetterMessage visible email={fh.form.confirmEmail} />
         : <ThisForm fh={fh} />
 
@@ -69,6 +73,7 @@ function ThisForm(props: ThisFormPropType) {
                         name='email'
                         relativeSize={2}
                         value={fh.fields.email.value[0]}
+                        // value='andkozinskiy@yandex.ru'
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
                         placeholder={messages.EnterForm.emailPlaceholder[lang]}
@@ -84,6 +89,7 @@ function ThisForm(props: ThisFormPropType) {
                         relativeSize={2}
                         type='password'
                         value={fh.fields.password.value[0]}
+                        // value='1111'
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='current-password'
                         error={fh.fields.password.data.error}
@@ -96,7 +102,7 @@ function ThisForm(props: ThisFormPropType) {
                         text={messages.EnterForm.submitBtnText[lang]}
                         name='submit'
                         relativeSize={1}
-                        disabled={!fh.form.isFormValid}
+                        disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}
                     />
                 </Wrapper>
@@ -132,6 +138,10 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
+    // Обработчик щелчка по кнопке
+    const { isLoading, success, error, doFetch } = useGetSendAnotherConfirmLetter(email)
+
+    // Если не нужно показывать компонент
     if (!visible) return null
 
     return (
@@ -140,11 +150,23 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
                 {/*@ts-ignore*/}
                 {messagesWithJSX.EnterForm.confirmRegistrationLetter(email)[lang]}
             </Notice>
-            <Wrapper t={10}>
+            {!success && <Wrapper t={10}>
                 <Button
                     text={messages.EnterForm.sendAnotherLetter[lang]}
+                    loading={isLoading}
+                    onClick={doFetch}
                 />
-            </Wrapper>
+            </Wrapper>}
+            {error && <Wrapper t={10}>
+                <Notice type='error'>
+                    {messages.EnterForm.failedToSendAnotherConfirmationLetter[lang]}
+                </Notice>
+            </Wrapper>}
+            {success && <Wrapper t={10}>
+                <Notice type='success'>
+                    {messages.EnterForm.confirmationLetterWasSent[lang]}
+                </Notice>
+            </Wrapper>}
         </>
     )
 }
