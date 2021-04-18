@@ -53,7 +53,9 @@ function App(): ReactElement {
     const appClasses = useGetAppClasses()
 
     // Показать загрузчик если приложение еще не инициализировалось
-    if (!isInitialized) return <div className={appClasses}><Loader /></div>
+    if (!isInitialized) {
+        return <div className={appClasses}><Loader /></div>
+    }
 
     return (
         <div className={appClasses}>
@@ -61,7 +63,7 @@ function App(): ReactElement {
                 <Route path='/' exact>
                     <EditorPage />
                 </Route>
-                <Route path='/enter'>
+                <Route path={['/enter', '/reg', '/reset']}>
                     <EntrancePages />
                 </Route>
                 <Route path="*">

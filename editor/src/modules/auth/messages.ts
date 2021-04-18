@@ -66,7 +66,7 @@ const messages: messagesType = {
             rus: 'Максимум можно ввести 15 символов'
         },
         submitBtnText: {
-            eng: 'Sign in',
+            eng: 'Log in',
             rus: 'Войти'
         },
         sendAnotherLetter: {
@@ -84,6 +84,62 @@ const messages: messagesType = {
         confirmationLetterWasSent: {
             eng: 'An email has been sent to you with a link to confirm your email. Confirm your email and then log in again.',
             rus: 'На вашу почту отправлено письмо со ссылкой на подтверждение почты. Подтвердите почту и затем зайдите в систему еще раз.'
+        },
+    },
+    // Форма RegFormBlock
+    RegForm: {
+        // Заголовок формы регистрации
+        formHeader: {
+            eng: 'Sign in',
+            rus: 'Регистрация'
+        },
+        emailField: {
+            eng: 'E-mail *',
+            rus: 'Электронная почта *'
+        },
+        emailPlaceholder: {
+            eng: 'For example: mail@gmail.com',
+            rus: 'Например: mail@gmail.com'
+        },
+        emailErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        emailErrInvalid: {
+            eng: 'Invalid email address',
+            rus: 'Почта написана неправильно'
+        },
+        passwordField: {
+            eng: 'Password *',
+            rus: 'Пароль *'
+        },
+        passwordErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        passwordErrToShort: {
+            eng: 'Must be 4 characters or more',
+            rus: 'Минимально можно ввести 4 символа'
+        },
+        passwordErrToLong: {
+            eng: 'Must be 15 characters or less',
+            rus: 'Максимум можно ввести 15 символов'
+        },
+        passwordConfirmField: {
+            eng: 'Repeat password *',
+            rus: 'Повторите пароль *'
+        },
+        passwordsMustMatch: {
+            eng: 'Passwords must match',
+            rus: 'Пароли должны совпадать'
+        },
+        submitBtnText: {
+            eng: 'Sign in',
+            rus: 'Войти'
+        },
+        somethingWentWrong: {
+            eng: 'Something went wrong',
+            rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
         },
     }
 }

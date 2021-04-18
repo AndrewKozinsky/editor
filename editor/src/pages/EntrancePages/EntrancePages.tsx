@@ -10,8 +10,9 @@ import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 // import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
 import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
-import './EntrancePages.scss'
 import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
+import RegFormBlock from '../../modules/auth/RegFormBlock/RegFormBlock'
+import './EntrancePages.scss'
 
 
 function EntrancePages() {
@@ -20,11 +21,14 @@ function EntrancePages() {
             <ChangeThemeButton />
             <AuthFormWrapper>
                 <Switch>
-                    {/*<Route path='/reg'>
-                        <RegForm />
-                    </Route>*/}
+                    <Route path='/reg'>
+                        <RegFormBlock />
+                    </Route>
                     <Route path='/enter'>
                         <EnterFormBlock />
+                    </Route>
+                    <Route path='/reset'>
+                        <p>Reset password</p>
                     </Route>
                     {/*<Route path='/forgot-password'>
                         <ForgotPasswordForm />

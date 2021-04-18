@@ -10,6 +10,6 @@ export function getMenuItems(lang: EditorLanguageType): MenuItems {
     return [
         { to: '/reg', label: messages.Menu.reg[lang] },
         { to: '/enter', label: messages.Menu.enter[lang] },
-        { to: '/reset-password', label: messages.Menu.reset[lang] }
+        { to: '/reset', label: messages.Menu.reset[lang] }
     ]
 }

@@ -1,10 +1,12 @@
 
 
 const addresses = {
+    // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
     login: 'users/login',
+    signup: 'users/signup',
     // Подтверждение почты
     /*confirmEmail: (confirmEmailToken: string) => {
         return 'users/confirmEmail'

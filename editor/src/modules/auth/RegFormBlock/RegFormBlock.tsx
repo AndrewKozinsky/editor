@@ -15,25 +15,20 @@ import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import CommonError from '../CommonError/CommonError'
 import FHTypes from 'libs/formHandler/types'
-// @ts-ignore
-import { useHistory } from 'react-router-dom'
-import { useGetSendAnotherConfirmLetter } from './EnterFormBlock-func'
 
 
 /** Форма входа в сервис */
-export default function EnterFormBlock() {
-
-    let history = useHistory()
+export default function RegFormBlock() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang, history), 'enter')
+    const fh = useFormHandler(getFormConfig(lang), 'reg')
 
-    // Показывать или сообщением подтвердить почту или форму
-    const content = fh.form.confirmEmail
-        ? <ConfirmLetterMessage visible email={fh.form.confirmEmail} />
+    // Показывать или сообщение об успешной регистрации или форму
+    const content = fh.form.letterWasSentTo
+        ? <LetterWasSent email={fh.form.letterWasSentTo} />
         : <ThisForm fh={fh} />
 
     return (
@@ -42,7 +37,7 @@ export default function EnterFormBlock() {
                 <Menu items={getMenuItems(lang)}/>
             </Wrapper>
             <Wrapper b={10}>
-                <Header text={messages.EnterForm.formHeader[lang]} type='h1' relativeSize={1}/>
+                <Header text={messages.RegForm.formHeader[lang]} type='h1' relativeSize={1}/>
             </Wrapper>
             {content}
         </div>
@@ -66,16 +61,16 @@ function ThisForm(props: ThisFormPropType) {
 
     return (
         <>
-            <Form name='enter' formHandlers={fh.formHandlers}>
+            <Form name='reg' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.EnterForm.emailField[lang] }
+                        label={ messages.RegForm.emailField[lang] }
                         name='email'
                         relativeSize={2}
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
-                        placeholder={messages.EnterForm.emailPlaceholder[lang]}
+                        placeholder={messages.RegForm.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}
                         autoFocus
@@ -83,21 +78,34 @@ function ThisForm(props: ThisFormPropType) {
                 </Wrapper>
                 <Wrapper t={15}>
                     <TextInput
-                        label={ messages.EnterForm.passwordField[lang] }
+                        label={ messages.RegForm.passwordField[lang] }
                         name='password'
                         relativeSize={2}
                         type='password'
                         value={fh.fields.password.value[0]}
                         onChange={fh.onChangeFieldHandler}
-                        autocomplete='current-password'
+                        autocomplete='new-password'
                         error={fh.fields.password.data.error}
                         disabled={fh.fields.password.data.disabled}
+                    />
+                </Wrapper>
+                <Wrapper t={15}>
+                    <TextInput
+                        label={ messages.RegForm.passwordConfirmField[lang] }
+                        name='passwordConfirm'
+                        relativeSize={2}
+                        type='password'
+                        value={fh.fields.passwordConfirm.value[0]}
+                        onChange={fh.onChangeFieldHandler}
+                        autocomplete='new-password'
+                        error={fh.fields.passwordConfirm.data.error}
+                        disabled={fh.fields.passwordConfirm.data.disabled}
                     />
                 </Wrapper>
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
-                        text={messages.EnterForm.submitBtnText[lang]}
+                        text={messages.RegForm.submitBtnText[lang]}
                         name='submit'
                         relativeSize={1}
                         disabled={fh.fields.submit.data.disabled}
@@ -109,62 +117,37 @@ function ThisForm(props: ThisFormPropType) {
 
             <Wrapper t={30}>
                 {/*@ts-ignore*/}
-                <Notice>{messagesWithJSX.EnterForm.newUser[lang]}</Notice>
+                <Notice>{messagesWithJSX.RegForm.legal[lang]}</Notice>
             </Wrapper>
-            <Wrapper t={10}>
+            <Wrapper t={30}>
                 {/*@ts-ignore*/}
-                <Notice>{messagesWithJSX.EnterForm.forgotPassword[lang]}</Notice>
+                <Notice>{messagesWithJSX.RegForm.doYouHaveAccount[lang]}</Notice>
             </Wrapper>
         </>
     )
 }
 
 
-type ConfirmLetterMessagePropType = {
-    visible?: boolean // Видно ли сообщение
+type LetterWasSentPropType = {
     email: string // Почта пользователя, которую нужно подтвердить
 }
 
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
-function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
+function LetterWasSent(props: LetterWasSentPropType) {
 
     const {
-        visible = false,
         email
     } = props
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    // Обработчик щелчка по кнопке
-    const { isLoading, success, error, doFetch } = useGetSendAnotherConfirmLetter(email)
-
-    // Если не нужно показывать компонент
-    if (!visible) return null
-
     return (
         <>
             <Notice>
                 {/*@ts-ignore*/}
-                {messagesWithJSX.EnterForm.confirmRegistrationLetter(email)[lang]}
+                {messagesWithJSX.RegForm.confirmRegistrationLetter(email)[lang]}
             </Notice>
-            {!success && <Wrapper t={10}>
-                <Button
-                    text={messages.EnterForm.sendAnotherLetter[lang]}
-                    loading={isLoading}
-                    onClick={doFetch}
-                />
-            </Wrapper>}
-            {error && <Wrapper t={10}>
-                <Notice type='error'>
-                    {messages.EnterForm.failedToSendAnotherConfirmationLetter[lang]}
-                </Notice>
-            </Wrapper>}
-            {success && <Wrapper t={10}>
-                <Notice type='success'>
-                    {messages.EnterForm.confirmationLetterWasSent[lang]}
-                </Notice>
-            </Wrapper>}
         </>
     )
 }

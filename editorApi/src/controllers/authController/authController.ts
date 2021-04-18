@@ -110,7 +110,7 @@ export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Res
     // Токен подтверждения почты
     const emailConfirmToken: string = crypto.randomBytes(32).toString('hex')
 
-    // Создать нового пользователя
+    // Создание нового пользователя
     const newUser = await UserModel.create({
         email: req.body.email,
         emailConfirmToken: emailConfirmToken,
@@ -293,7 +293,7 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
     const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 
     // Адрес страницы где нужно написать новый пароль
-    const resetUrl = domain + `/reset-password/${resetToken}`
+    const resetUrl = domain + `/reset/${resetToken}`
 
     // Язык
     const lang = <string>req.get('Editor-Language')

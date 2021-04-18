@@ -15,7 +15,7 @@ export type TextInputPropType = {
     type?: 'text' | 'email' | 'password' // Подпись текстового поля
     name: string, // Аттрибут name текстового поля
     value: string, // Аттрибут name текстового поля
-    autocomplete?: '' | 'username' | 'current-password', // Значение автозаполнения поля
+    autocomplete?: '' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
     relativeSize?: EditorSizeMultiplyType // Размер поля
     placeholder?: string, // Текстозаполнитель

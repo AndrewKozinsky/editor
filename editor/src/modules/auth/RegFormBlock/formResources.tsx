@@ -9,7 +9,7 @@ import apiUrls from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: EditorLanguageType, history: any): FHTypes.FormConfig {
+export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -39,8 +39,20 @@ export default function getFormConfig(lang: EditorLanguageType, history: any): F
                     }
                 }
             },
-            submit: {
+            passwordConfirm: {
                 initialValue: [''],
+                initialData: {
+                    error: null,
+                    disabled: false
+                },
+                change(formDetails) {
+                    // Проверять только если форму отправляли как минимум 1 раз
+                    if (formDetails.state.form.data.submitCounter > 0) {
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                    }
+                }
+            },
+            submit: {
                 initialData: {
                     loading: false,
                     disabled: false
@@ -53,10 +65,10 @@ export default function getFormConfig(lang: EditorLanguageType, history: any): F
                 submitCounter: 0,
                 // Текст обшей ошибки формы не привязанной к конкретному полю
                 commonError: null,
-                // Нужно ли показывать сообщение о необходимости подтвердить почту
-                showConfirmLetter: false,
-                // Почта пользователя, которую нужно подтвердить если это еще не сделано
-                confirmEmail: '',
+                // Нужно ли показывать сообщение об отправленном на почту письме
+                letterWasSentTo: false,
+                // Почта пользователя, на которую зарегистрировали учётную запись
+                userEmail: '',
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
@@ -97,40 +109,28 @@ export default function getFormConfig(lang: EditorLanguageType, history: any): F
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                const response = await makeFetch(apiUrls.login, options, lang)
+                const response = await makeFetch(apiUrls.signup, options, lang)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
 
-                // Если ввели неправильные данные
-                if (response.status === 'fail') {
-                    if (response.errors.statusCode === 400) {
-                        // Блокировать кнопку отправки
-                        formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
-
-                        // Показать общее сообщение об этом. Оно будет показано ниже формы
-                        formState = formDetails.setFormDataPropValue(
-                            formState, 'commonError', messages.EnterForm.sentWrongData[lang]
-                        )
-
-                        // Поставить фокус на поле с почтой
-                        formState.fields.email.$field.focus()
-                    }
-                    else if (response.errors.statusCode === 403) {
-                        // Поставить в свойство confirmEmail почту, которую должен подтвердить пользователь
-                        formState = formDetails.setFormDataPropValue(
-                            formState, 'confirmEmail', formState.fields.email.value[0]
-                        )
-                    }
-
-                    // Поставить новое Состояние формы
-                    formDetails.setFormState(formState)
-                }
                 // Если ввели правильные данные
-                else if (response.status === 'success') {
-                    // Перебросить на страницу редактора
-                    history.push('/')
+                if (response.status === 'success') {
+                    // Показать сообщение что необходимо подтвердить почту
+                    formState = formDetails.setFormDataPropValue(
+                        formState, 'letterWasSentTo', response.data.user.email
+                    )
                 }
+                // Если ввели неправильные данные
+                else {
+                    // Показать общее сообщение. Оно будет показано ниже формы
+                    formState = formDetails.setFormDataPropValue(
+                        formState, 'commonError', messages.RegForm.somethingWentWrong[lang]
+                    )
+                }
+
+                // Поставить новое Состояние формы
+                formDetails.setFormState(formState)
             }
         }
     }
@@ -139,19 +139,22 @@ export default function getFormConfig(lang: EditorLanguageType, history: any): F
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
+ * @param {Array} fields — данные о полях формы
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: EditorLanguageType): any {
+function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: EditorLanguageType): any {
 
     const schemas = {
         email: yup.string()
-            .required(messages.EnterForm.emailErrRequired[lang])
-            .email(messages.EnterForm.emailErrInvalid[lang]),
+            .required(messages.RegForm.emailErrRequired[lang])
+            .email(messages.RegForm.emailErrInvalid[lang]),
         password: yup.string()
-            .required(messages.EnterForm.passwordErrRequired[lang])
-            .min(4, messages.EnterForm.passwordErrToShort[lang])
-            .max(15, messages.EnterForm.passwordErrToLong[lang])
+            .required(messages.RegForm.passwordErrRequired[lang])
+            .min(4, messages.RegForm.passwordErrToShort[lang])
+            .max(15, messages.RegForm.passwordErrToLong[lang]),
+        passwordConfirm: yup.string()
+            .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
     }
 
     // @ts-ignore
@@ -188,7 +191,7 @@ function validateForm(
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(fieldName, lang).validateSync(fieldValue)
+            getSchema(formState.fields, fieldName, lang).validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -246,6 +249,7 @@ function setLoadingStatusToForm(
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'email')
     formState = setFieldDataPropValue(formState, 'disabled', status, 'password')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'passwordConfirm')
     formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
