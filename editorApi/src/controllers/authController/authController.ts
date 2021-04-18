@@ -271,7 +271,7 @@ export const logOut = (req: ExtendedRequestType, res: Response, next: NextFuncti
 
 
 // Функция создаёт токен сброса пароля, ставит в ссылку изменения пароля и отправляет на почту пользователя.
-export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Получить данные пользователя по переданной почте
     const user: IUser | null = await UserModel.findOne({ email: req.body.email })
@@ -315,7 +315,8 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
         res.status(200).json({
             status: 'success',
             data: {
-                message: getMessageDependingOnTheLang('{{authController.forgotPasswordEmailHasBeenSent}}', lang)
+                message: getMessageDependingOnTheLang('{{authController.forgotPasswordEmailHasBeenSent}}', lang),
+                email: user.email
             }
         })
     }
@@ -330,7 +331,7 @@ export const forgotPassword = catchAsync(async (req: ExtendedRequestType, res: R
 
 
 // Функция меняет пароль взамен забытого
-export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+export const changeResetPassword = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Если не передали пароль или подтверждение пароля, или если они не равны, то бросить ошибку
     if ((!req.body.password || !req.body.passwordConfirm) || (req.body.password !== req.body.passwordConfirm)) {
@@ -410,6 +411,7 @@ async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: st
 /**
  * Функция возвращает разметку страницу где написана переадресацию на другую страницу
  * @param {String} type — тип показываемой страницы
+ * @param {String} lang — язык интерфейса
  */
 function createRedirectPage(type: string, lang: string) {
     return `<!DOCTYPE html>

@@ -141,6 +141,39 @@ const messages: messagesType = {
             eng: 'Something went wrong',
             rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
         },
+    },
+    // Форма ResetFormBlock
+    ResetForm: {
+        // Заголовок формы сброса пароля
+        formHeader: {
+            eng: 'Reset password',
+            rus: 'Сброс пароля'
+        },
+        emailField: {
+            eng: 'E-mail *',
+            rus: 'Электронная почта *'
+        },
+        emailPlaceholder: {
+            eng: 'For example: mail@gmail.com',
+            rus: 'Например: mail@gmail.com'
+        },
+        submitBtnText: {
+            eng: 'Sign in',
+            rus: 'Войти'
+        },
+        somethingWentWrong: {
+            eng: 'Something went wrong',
+            rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
+        },
+    },
+    // Форма ChangeResetPasswordFormBlock
+    ChangeResetPasswordForm: {
+        // Заголовок формы ввода нового пароля
+        formHeader: {
+            eng: 'Password change',
+            rus: 'Смена пароля'
+        },
+
     }
 }
 

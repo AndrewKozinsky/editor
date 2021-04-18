@@ -23,10 +23,10 @@ router.route('/logout').get(authController.protect, authController.logOut)
 router.post('/getTokenData', authController.getTokenData)
 
 // Отправка письма со ссылкой на сброс пароля
-router.post('/forgotPassword', authController.forgotPassword)
+router.post('/resetPassword', authController.resetPassword)
 
 // Сброс пароля
-router.patch('/resetPassword/:token', authController.resetPassword)
+router.patch('/resetPassword/:token', authController.changeResetPassword)
 
 // router.route('/myEmail')
 //     .put(authController.protect, userController.changeMyEmail)

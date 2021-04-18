@@ -1,18 +1,16 @@
 import React from 'react'
 // @ts-ignore
-import {Switch, Route, Redirect} from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 // import {setAuthTokenStatus} from "../../store/actions"
-// import TopNavigation from "./components/topNavEntrance"
 // import AuthSplitContainer from "./components/authSplitContainer"
-// import RegForm from "./components/regForm"
 import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
-// import ForgotPasswordForm from "./components/forgotPasswordForm"
-// import ResetPasswordForm from "./components/resetPasswordForm"
 // import {checkToken} from '../../utils/checkToken'
 import AuthFormWrapper from '../../modules/auth/AuthFormWrapper/AuthFormWrapper'
 import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
-import RegFormBlock from '../../modules/auth/RegFormBlock/RegFormBlock'
+import RegFormBlock from 'modules/auth/RegFormBlock/RegFormBlock'
 import './EntrancePages.scss'
+import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
+import ChangeResetPasswordFormBlock from '../../modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 
 
 function EntrancePages() {
@@ -27,15 +25,12 @@ function EntrancePages() {
                     <Route path='/enter'>
                         <EnterFormBlock />
                     </Route>
-                    <Route path='/reset'>
-                        <p>Reset password</p>
+                    <Route path='/reset-password'>
+                        <ResetFormBlock />
                     </Route>
-                    {/*<Route path='/forgot-password'>
-                        <ForgotPasswordForm />
-                    </Route>*/}
-                    {/*<Route path='/reset-password/:token'>
-                        <ResetPasswordForm />
-                    </Route>*/}
+                    <Route path='/change-reset-password/:token'>
+                        <ChangeResetPasswordFormBlock />
+                    </Route>
                 </Switch>
             </AuthFormWrapper>
         </div>

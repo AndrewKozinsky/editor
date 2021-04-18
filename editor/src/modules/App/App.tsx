@@ -63,8 +63,11 @@ function App(): ReactElement {
                 <Route path='/' exact>
                     <EditorPage />
                 </Route>
-                <Route path={['/enter', '/reg', '/reset']}>
+                <Route path={['/enter', '/reg', '/reset-password', '/change-reset-password/:token']}>
                     <EntrancePages />
+                </Route>
+                <Route path='/change-reset-password/:token'>
+                    <p>GGG</p>
                 </Route>
                 <Route path="*">
                     <p>404</p>

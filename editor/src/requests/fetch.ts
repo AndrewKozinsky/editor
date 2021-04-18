@@ -80,6 +80,7 @@ export async function makeFetch(url: string, options: OptionsType, lang: EditorL
     catch (err) {
         let message = `Couldn't get data.`
         if (lang === 'rus') message = 'Не удалось получить данные.'
+        throw new Error(message)
 
         return {
             status: 'fail',

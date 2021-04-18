@@ -74,7 +74,7 @@ function ThisForm(props: ThisFormPropType) {
                         relativeSize={2}
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
-                        autocomplete='username'
+                        autocomplete='email'
                         placeholder={messages.EnterForm.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}

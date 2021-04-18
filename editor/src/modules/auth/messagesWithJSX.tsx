@@ -23,8 +23,8 @@ const messagesWithJSX: messagesWithJSXType = {
             rus: <>Новый пользователь? <Link to='/reg'>Зарегистрируйтесь</Link>.</>
         },
         forgotPassword: {
-            eng: <>Can't remember your password? <Link to='/reset'>Reset it</Link>.</>,
-            rus: <>Не помните пароль? <Link to='/reset'>Сбросьте</Link>.</>
+            eng: <>Can't remember your password? <Link to='reset-password'>Reset it</Link>.</>,
+            rus: <>Не помните пароль? <Link to='reset-password'>Сбросьте</Link>.</>
         },
         confirmRegistrationLetter: (email: string) => {
             const domain = 'https://' + getDomainFromEmail(email)
@@ -52,6 +52,24 @@ const messagesWithJSX: messagesWithJSXType = {
         legal: {
             eng: <>By registering on this site I accept <a href='https://google.com' target='_blank'>the terms of use</a> and consent to the newsletter, the <a href='https://google.com' target='_blank'>processing of personal data</a> and agree to <a href='https://google.com' target='_blank'>the privacy policy</a>.</>,
             rus: <>Регистрируясь на этом сайте я принимаю <a href='https://google.com' target='_blank'>условия использования</a> и даю согласие на рассылку, <a href='https://google.com' target='_blank'>обработку персональных данных</a> и соглашаюсь c <a href='https://google.com' target='_blank'>политикой конфиденциальности</a>.</>
+        },
+    },
+    // Форма ResetFormBlock
+    ResetForm: {
+        retypePasswordLetter: (email: string) => {
+            const domain = 'https://' + getDomainFromEmail(email)
+
+            return {
+                eng: <>An <a href={domain}>email</a> was sent to you with a link to reset your password.</>,
+                rus: <>На <a href={domain}>почту</a> выслано письмо со ссылкой на страницу сброса пароля.</>
+            }
+        },
+    },
+    // Форма ChangeResetPasswordFormBlock
+    ChangeResetPasswordForm: {
+        passwordChanged: {
+            eng: <>Password has been changed. Log in to <Link to='/'>the editor</Link>.</>,
+            rus: <>Пароль изменён. Войти <Link to='/'>в редактор</Link>.</>
         },
     }
 }

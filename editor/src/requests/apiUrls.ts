@@ -7,6 +7,7 @@ const addresses = {
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
     login: 'users/login',
     signup: 'users/signup',
+    resetPassword: 'users/resetPassword',
     // Подтверждение почты
     /*confirmEmail: (confirmEmailToken: string) => {
         return 'users/confirmEmail'

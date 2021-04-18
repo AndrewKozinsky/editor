@@ -35,7 +35,7 @@ export class Email {
     async sendForgotPasswordLetter(resetUrl: string) {
         const subject = this.lang === 'rus'
             ? 'Ссылка на страницу сброса пароля от Editorium.net'
-            : 'Your password reset token (valid for 10 minutes)'
+            : 'Your reset password token (valid for 10 minutes)'
 
         const [html, text] = new EmailTemplate(this.host).createForgotPasswordLetter(resetUrl, this.lang)
         this.send(subject, html, text)
