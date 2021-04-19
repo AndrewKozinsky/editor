@@ -1,6 +1,6 @@
 import {useSelector} from 'react-redux';
 import {AppState} from '../store/rootReducer';
-import {EditorSizeMultiplyType, EditorSizeType} from '../store/settings/settingsTypes'
+import StoreSettingsTypes from '../store/settings/settingsTypes'
 
 
 /**
@@ -9,7 +9,7 @@ import {EditorSizeMultiplyType, EditorSizeType} from '../store/settings/settings
  * @param relativeSize — размер, переданный в компонент.
  * Возможно в компонент ничего не передадут если хотят чтобы компонент был размером установленным в интерфейсе по умолчанию.
  */
-export function useGetComponentSize(relativeSize?: EditorSizeMultiplyType): EditorSizeType {
+export function useGetComponentSize(relativeSize?: StoreSettingsTypes.EditorSizeMultiply): StoreSettingsTypes.EditorSize {
     // Размер элементов интерфейса из Хранилища
     const editorSize = useSelector((store: AppState) => store.settings.editorSize)
 
@@ -26,9 +26,9 @@ export function useGetComponentSize(relativeSize?: EditorSizeMultiplyType): Edit
  * нужно увеличить или уменьшить размер элементов
  * @param {String} editorSize — текущий размер интерфейса
  */
-function getSize(relativeSize: EditorSizeMultiplyType, editorSize: EditorSizeType): EditorSizeType {
+function getSize(relativeSize: StoreSettingsTypes.EditorSizeMultiply, editorSize: StoreSettingsTypes.EditorSize): StoreSettingsTypes.EditorSize {
     // Массив доступных размеров интерфейса
-    const editorSizes: EditorSizeType[] = ['tiny', 'small', 'middle', 'big']
+    const editorSizes: StoreSettingsTypes.EditorSize[] = ['tiny', 'small', 'middle', 'big']
 
     // Индекс текущего размера интерфейса
     const editorSizeEdx = editorSizes.findIndex(size => size === editorSize)

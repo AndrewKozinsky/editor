@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
-import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {makeCN} from 'utils/StringUtils'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import {getNoticeWrapperClasses} from './Notice-func'
@@ -11,7 +11,7 @@ const CN = 'notice'
 
 export type NoticePropType = {
     type?: 'standard' | 'error' | 'success' // Тип сообщения: standard (обычный текст), error (ошибка), success (успех)
-    relativeSize?: EditorSizeMultiplyType
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     children?: ReactNode
 }
 

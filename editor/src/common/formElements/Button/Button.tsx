@@ -1,17 +1,17 @@
 import React from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
-import { EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {ObjStringKeyAnyValType} from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
-import './Button.scss'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
+import './Button.scss'
 
 
 export type ButtonPropType = {
     type?: 'button' | 'submit' | 'reset'
-    relativeSize?: EditorSizeMultiplyType
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
     // icon?: string
@@ -78,7 +78,7 @@ export default Button
 
 type ButtonLoaderPropType = {
     loading?: boolean // Нужно ли отрисовывать загрузчик
-    size: EditorSizeType
+    size: StoreSettingsTypes.EditorSize
 }
 
 /** Компонент загрузчика кнопки */

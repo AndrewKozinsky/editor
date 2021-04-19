@@ -1,5 +1,5 @@
 import {ButtonPropType} from '../formElements/Button/Button';
-import {EditorSizeType} from '../../store/settings/settingsTypes';
+import StoreSettingsTypes from '../../store/settings/settingsTypes';
 import {makeCN} from '../../utils/StringUtils';
 import {WrapperPropType} from './Wrapper';
 
@@ -8,7 +8,7 @@ import {WrapperPropType} from './Wrapper';
  * @param {Object} wrapperProps — props переданные в обёртку
  * @param size — размер элемента.
  */
-export function getWrapperClasses(wrapperProps: WrapperPropType, size: EditorSizeType) {
+export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSettingsTypes.EditorSize) {
     const {
         align,
         t,        // Отступ сверху

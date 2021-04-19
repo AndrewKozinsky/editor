@@ -1,13 +1,13 @@
 import {makeCN} from 'utils/StringUtils'
 import { ButtonPropType } from './Button'
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 /**
  * Функция возвращает классы кнопки
  * @param {Object} buttonProps — props переданные в кнопку
  * @param {String} size — размер элемента.
  */
-export function getButtonClasses(buttonProps: ButtonPropType, size: EditorSizeType) {
+export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -37,7 +37,7 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: EditorSizeTy
  * Функция возвращает классы загрузчика кнопки
  * @param {String} size — размер загрузчика
  */
-export function getButtonLoaderClasses(size: EditorSizeType) {
+export function getButtonLoaderClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы кнопки
     const CN = 'btn-loader'

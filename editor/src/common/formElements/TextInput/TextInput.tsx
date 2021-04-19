@@ -4,7 +4,7 @@ import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import Label from '../Label/Label';
-import {EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getTextInputClasses } from './TextInput-func'
 import './TextInput.scss'
@@ -17,7 +17,7 @@ export type TextInputPropType = {
     value: string, // Аттрибут name текстового поля
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
-    relativeSize?: EditorSizeMultiplyType // Размер поля
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
     placeholder?: string, // Текстозаполнитель
     autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля

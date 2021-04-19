@@ -1,14 +1,15 @@
 import React, {ReactElement} from 'react'
 // @ts-ignore
-import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 // Компоненты
 import Loader from 'common/misc/Loader/Loader'
+import NotFound from '../NotFound/NotFound'
 
 // Страницы
 import EditorPage from 'pages/EditorPage/EditorPage'
-import EntrancePages from 'pages/EntrancePages/EntrancePages'
 
+import EntrancePages from 'pages/EntrancePages/EntrancePages'
 // JS и CSS
 import { useInit } from './js/init'
 import { useGetAppClasses, useRedirectPage } from './js/App-func'
@@ -16,7 +17,6 @@ import './css/reset.css'
 import './css/variables.scss'
 import './css/default.scss'
 import './css/app.scss'
-import NotFound from '../NotFound/NotFound'
 
 
 /** Компонент всего приложения */
@@ -31,8 +31,6 @@ function App(): ReactElement {
     // TODO Как сделаешь все формы слей изменения с мастером
     // TODO Не забывай что текстовые поля должны соответствовать предполагаемому количеству вводимых символов. Если будет только три символа, то поле не должно быть на всю ширину.
     // TODO Некоторые типы ошибок на сервере остались закомментированы. Поправь это.
-    // TODO Думаю все типы группы user и settings в Хранилище нужно поставить в именованное пространство как это было сделано с FormHandler-ом.
-    // TODO Сделай страницу 404 по макету.
     // TODO Мне кажется будет прикольно сделать анимированное появление box-shadow при фокусе на поле ввода. Но наскоком у меня это сделать не получилось. Очевидно нужно оборачивать все поля в обёртку и задавать уже ей необходимые стили и плавные переходы.
     // TODO Может сделать трёхмерную анимацию появления редактора и скрытия окна регистрации?
     // Shift + F6 // Переименовывание всех переменных разом
@@ -47,8 +45,6 @@ function App(): ReactElement {
     // Переадресовать пользователя на другую страницу в зависимости от того
     // пользователь незарегистрирован или зарегистрирован
     useRedirectPage()
-
-    let { path, url } = useRouteMatch();
 
     // Классы обёртки компонента
     const appClasses = useGetAppClasses()

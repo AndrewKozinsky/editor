@@ -1,13 +1,10 @@
 import React, {ReactNode} from 'react'
 import Radio, { RadioPropType } from '../Radio/Radio'
-import Select, { SelectPropType } from '../Select/Select'
-import TextInput, { TextInputPropType } from '../TextInput/TextInput'
 import Checkbox, {CheckboxPropType} from '../Checkbox/Checkbox'
 import FHTypes from 'libs/formHandler/types'
 import Label from '../Label/Label'
-import {getTextInputClasses} from '../TextInput/TextInput-func';
 import {useGetComponentSize} from '../../../utils/MiscUtils';
-import {EditorSizeMultiplyType, EditorSizeType} from '../../../store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getFieldGroupClasses } from './FieldGroup-func'
 import './FieldGroup.scss'
 
@@ -79,7 +76,7 @@ export default FieldGroup
 
 
 export type InputsWrapperType = {
-    size?: EditorSizeMultiplyType // Размер поля
+    size?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
     children: ReactNode
 }
 

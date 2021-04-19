@@ -1,25 +1,9 @@
-import {
-    // Типы значений
-    EditorLanguageType,
-    EditorThemeType,
-    EditorSizeType,
-
-    // Типы типов
-    SETTINGS_SET_EDITOR_LANGUAGE,
-    SETTINGS_SET_EDITOR_THEME,
-    SETTINGS_SET_EDITOR_SIZE,
-
-    // Типы экшенов
-    SettingsActionTypes,
-    SetEditorLanguageActionType,
-    SetEditorThemeActionType,
-    SetEditorSizeActionType
-} from "./settingsTypes"
+import StoreSettingsTypes from "./settingsTypes"
 
 export type SettingsReducerType = {
-    editorLanguage: EditorLanguageType
-    editorTheme: EditorThemeType
-    editorSize: EditorSizeType
+    editorLanguage: StoreSettingsTypes.EditorLanguage
+    editorTheme: StoreSettingsTypes.EditorTheme
+    editorSize: StoreSettingsTypes.EditorSize
 }
 
 // Изначальные значения
@@ -33,7 +17,7 @@ const initialState: SettingsReducerType = {
 }
 
 // Установка языка интерфейса
-function setEditorLanguage(state: SettingsReducerType, action: SetEditorLanguageActionType): SettingsReducerType {
+function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
     // Поставить язык в LocalStorage
     localStorage.setItem('editorLanguage', action.payload)
 
@@ -44,7 +28,7 @@ function setEditorLanguage(state: SettingsReducerType, action: SetEditorLanguage
 }
 
 // Установка темы интерфейса
-function setEditorTheme(state: SettingsReducerType, action: SetEditorThemeActionType): SettingsReducerType {
+function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
     // Поставить тему в LocalStorage
     localStorage.setItem('editorTheme', action.payload)
 
@@ -55,7 +39,7 @@ function setEditorTheme(state: SettingsReducerType, action: SetEditorThemeAction
 }
 
 // Установка размера элементов интерфейса
-function setEditorSize(state: SettingsReducerType, action: SetEditorSizeActionType): SettingsReducerType {
+function setEditorSize(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorSizeAction): SettingsReducerType {
     // Поставить размер элементов интерфейса в LocalStorage
     localStorage.setItem('editorSize', action.payload)
 
@@ -66,14 +50,14 @@ function setEditorSize(state: SettingsReducerType, action: SetEditorSizeActionTy
 }
 
 // Редьюсер Store.settings
-export default function settingsReducer(state = initialState, action: SettingsActionTypes ): SettingsReducerType {
+export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
 
     switch (action.type) {
-        case SETTINGS_SET_EDITOR_LANGUAGE:
+        case StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE:
             return setEditorLanguage(state, action)
-        case SETTINGS_SET_EDITOR_THEME:
+        case StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME:
             return setEditorTheme(state, action)
-        case SETTINGS_SET_EDITOR_SIZE:
+        case StoreSettingsTypes.SETTINGS_SET_EDITOR_SIZE:
             return setEditorSize(state, action)
         default:
             // @ts-ignore

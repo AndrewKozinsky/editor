@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 import { setEditorTheme } from 'store/settings/settingsActions'
-import { EditorThemeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 
 // Кнопка меняющая цветовую тему интерфейса
@@ -13,7 +13,7 @@ function ChangeThemeButton() {
     const editorTheme = useSelector((store: AppState) => store.settings.editorTheme)
 
     // Какая схема будет при нажатии на кнопку
-    let nextTheme: EditorThemeType = editorTheme === 'light' ? 'dark' : 'light'
+    let nextTheme: StoreSettingsTypes.EditorTheme = editorTheme === 'light' ? 'dark' : 'light'
 
     function onBtnClick() {
         dispatch(setEditorTheme(nextTheme))

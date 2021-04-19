@@ -1,6 +1,6 @@
 import React from 'react'
 import './Header.scss'
-import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
 import { getHeaderClasses } from './Header-func'
 
@@ -8,7 +8,7 @@ import { getHeaderClasses } from './Header-func'
 export type HeaderPropType = {
     text: string
     type: 'h1' // Тип заголовка: он задаёт тег заголовка и размер текста
-    relativeSize?: EditorSizeMultiplyType
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply
 }
 
 /** Заголовок форм авторизации и аутентификации */

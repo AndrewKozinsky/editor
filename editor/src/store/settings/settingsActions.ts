@@ -1,38 +1,26 @@
 // Types
-import {
-    EditorLanguageType,
-    EditorThemeType,
-    EditorSizeType,
-
-    SetEditorLanguageActionType,
-    SetEditorThemeActionType,
-    SetEditorSizeActionType,
-
-    SETTINGS_SET_EDITOR_LANGUAGE,
-    SETTINGS_SET_EDITOR_THEME,
-    SETTINGS_SET_EDITOR_SIZE,
-} from './settingsTypes'
+import StoreSettingsTypes from './settingsTypes'
 
 // Установка языка интерфейса
-export function setEditorLanguage(payload: EditorLanguageType): SetEditorLanguageActionType {
+export function setEditorLanguage(payload: StoreSettingsTypes.EditorLanguage): StoreSettingsTypes.SetEditorLanguageAction {
     return {
-        type: SETTINGS_SET_EDITOR_LANGUAGE,
+        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE,
         payload,
     }
 }
 
 // Установка темы интерфейса
-export function setEditorTheme(payload: EditorThemeType): SetEditorThemeActionType {
+export function setEditorTheme(payload: StoreSettingsTypes.EditorTheme): StoreSettingsTypes.SetEditorThemeAction {
     return {
-        type: SETTINGS_SET_EDITOR_THEME,
+        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME,
         payload,
     }
 }
 
 // Установка размера элементов интерфейса
-export function setEditorSize(payload: EditorSizeType): SetEditorSizeActionType {
+export function setEditorSize(payload: StoreSettingsTypes.EditorSize): StoreSettingsTypes.SetEditorSizeAction {
     return {
-        type: SETTINGS_SET_EDITOR_SIZE,
+        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_SIZE,
         payload,
     }
 }

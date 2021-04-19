@@ -1,4 +1,4 @@
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeCN } from 'utils/StringUtils'
 
 /**
@@ -6,7 +6,7 @@ import { makeCN } from 'utils/StringUtils'
  * @param {String} size — размер элемента.
  * @param {Boolean} disabled — заблокировано ли поле где есть эта подпись
  */
-export function getLabelClasses(size: EditorSizeType, disabled?: boolean) {
+export function getLabelClasses(size: StoreSettingsTypes.EditorSize, disabled?: boolean) {
 
     // Классы кнопки
     const CN = 'label'

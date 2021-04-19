@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { AppState } from 'store/rootReducer'
-import {EditorLanguageType} from '../store/settings/settingsTypes';
+import StoreSettingsTypes from '../store/settings/settingsTypes';
 
 
 // Тип параметров запроса
@@ -68,7 +68,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
  * @param {Object} options — параметры запроса
  * @param {String} lang — язык интерфейса
  */
-export async function makeFetch(url: string, options: OptionsType, lang: EditorLanguageType = 'eng') {
+export async function makeFetch(url: string, options: OptionsType, lang: StoreSettingsTypes.EditorLanguage = 'eng') {
 
     // Добавление заголовка языка интерфейса в параметры запроса
     const extraOptions = setLanguageHeader(options, lang)

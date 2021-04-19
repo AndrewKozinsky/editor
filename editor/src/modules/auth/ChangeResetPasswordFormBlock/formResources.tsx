@@ -3,13 +3,13 @@ import React from 'react'
 // import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
 // import messages from '../messages'
-import { EditorLanguageType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 // import { makeFetch } from 'requests/fetch'
 // import apiUrls from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: EditorLanguageType): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {

@@ -1,4 +1,4 @@
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {makeCN} from 'utils/StringUtils'
 import { HeaderPropType } from './Header'
 
@@ -7,7 +7,7 @@ import { HeaderPropType } from './Header'
  * @param {Object} headerProps — props переданные в компонент заголовка
  * @param size — размер элемента.
  */
-export function getHeaderClasses(headerProps: HeaderPropType, size: EditorSizeType) {
+export function getHeaderClasses(headerProps: HeaderPropType, size: StoreSettingsTypes.EditorSize) {
 
     const {
         type // Тип заголовка: он задаёт тег заголовка и размер текста

@@ -1,6 +1,6 @@
 import React, {ReactNode} from 'react'
 import './Wrapper.scss'
-import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {useGetComponentSize} from '../../utils/MiscUtils';
 import {getWrapperClasses} from './Wrapper-func';
 
@@ -10,7 +10,7 @@ export type WrapperPropType = {
     align?: 'right' | 'center' // Выравнивание
     t?: 5 | 10 | 15 | 20 | 30, // Отступ сверху
     b?: 10 | 25 // Отступ снизу
-    relativeSize?: EditorSizeMultiplyType // Размер элемента
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер элемента
 }
 
 

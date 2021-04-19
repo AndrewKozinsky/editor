@@ -1,4 +1,4 @@
-import { EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeCN } from 'utils/StringUtils'
 import { NoticePropType } from './Notice'
 
@@ -7,7 +7,7 @@ import { NoticePropType } from './Notice'
  * @param props —
  * @param size — размер элемента.
  */
-export function getNoticeWrapperClasses(props: NoticePropType, size: EditorSizeType) {
+export function getNoticeWrapperClasses(props: NoticePropType, size: StoreSettingsTypes.EditorSize) {
 
     const {
         type

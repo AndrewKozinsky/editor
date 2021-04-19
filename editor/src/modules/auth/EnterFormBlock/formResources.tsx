@@ -3,13 +3,13 @@ import React from 'react'
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
 import messages from '../messages'
-import { EditorLanguageType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import apiUrls from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: EditorLanguageType, history: any): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -142,7 +142,7 @@ export default function getFormConfig(lang: EditorLanguageType, history: any): F
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: EditorLanguageType): any {
+function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
 
     const schemas = {
         email: yup.string()
@@ -170,7 +170,7 @@ function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: EditorLanguageType
+    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма

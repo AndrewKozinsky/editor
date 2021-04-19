@@ -1,5 +1,5 @@
 import React from 'react'
-import {EditorSizeType} from 'store/settings/settingsTypes';
+import StoreSettingsTypes from 'store/settings/settingsTypes';
 import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
@@ -11,7 +11,7 @@ import { ObjStringKeyAnyValType } from 'types/miscTypes'
  * @param size — размер элемента.
  * @param {Boolean} isFocus — находится ли <select> в фокусе.
  */
-export function getWrapperClasses(size: EditorSizeType, isFocus: boolean) {
+export function getWrapperClasses(size: StoreSettingsTypes.EditorSize, isFocus: boolean) {
 
     // Классы обёртки
     const CN = 'select-input-wrapper'
@@ -31,7 +31,7 @@ export function getWrapperClasses(size: EditorSizeType, isFocus: boolean) {
  * Функция возвращает классы выпадающего списка
  * @param size — размер элемента.
  */
-export function getClasses(size: EditorSizeType) {
+export function getClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы
     const CN = 'select-input'
@@ -49,7 +49,7 @@ export function getClasses(size: EditorSizeType) {
  * Будет возвращён разный размер значка в зависимости от переданного размера самого выпадающего списка
  * @param size: EditorSizeType
  */
-export function getArrowIcon(size: EditorSizeType): null | JSX.Element {
+export function getArrowIcon(size: StoreSettingsTypes.EditorSize): null | JSX.Element {
 
     // Размер выпадающего списка.
     if (size === 'small') return <SvgIcon type='selectInputSmallArrows' />

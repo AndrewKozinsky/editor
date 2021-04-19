@@ -1,13 +1,9 @@
 // Types
-import {
-    AuthTokenStatusType,
-    SetAuthTokenStatusActionType,
-    USER_SET_AUTH_TOKEN_STATUS
-} from './userTypes'
+import StoreUserTypes from './userTypes'
 
-export function setAuthTokenStatus(payload: AuthTokenStatusType): SetAuthTokenStatusActionType {
+export function setAuthTokenStatus(payload: StoreUserTypes.AuthTokenStatusType): StoreUserTypes.SetAuthTokenStatusActionType {
     return {
-        type: USER_SET_AUTH_TOKEN_STATUS,
+        type: StoreUserTypes.USER_SET_AUTH_TOKEN_STATUS,
         payload,
     }
 }

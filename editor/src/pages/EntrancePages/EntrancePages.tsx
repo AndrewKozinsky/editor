@@ -1,7 +1,6 @@
 import React from 'react'
 // @ts-ignore
 import { Switch, Route } from 'react-router-dom'
-// import {setAuthTokenStatus} from "../../store/actions"
 // import AuthSplitContainer from "./components/authSplitContainer"
 import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 // import {checkToken} from '../../utils/checkToken'

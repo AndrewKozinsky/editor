@@ -1,11 +1,11 @@
 import {makeCN} from 'utils/StringUtils'
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 /**
  * Функция возвращает классы выпадающего списка
  * @param size — размер элемента.
  */
-export function getTextInputClasses(size: EditorSizeType) {
+export function getTextInputClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы
     const CN = 'text-input'

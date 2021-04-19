@@ -1,11 +1,11 @@
 import {makeCN} from 'src/utils/StringUtils'
-import {EditorSizeType} from 'src/store/settings/settingsTypes'
+import StoreSettingsTypes from 'src/store/settings/settingsTypes'
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.
  * @param size — размер элемента.
  */
-export function getLabelClasses(size: EditorSizeType) {
+export function getLabelClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы обёртки
     const CN = 'checkbox-label'

@@ -1,5 +1,5 @@
 import React from 'react'
-import {EditorSizeMultiplyType, EditorSizeType } from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { useGetComponentSize } from 'utils/MiscUtils'
 import { ObjStringKeyStringValType } from '../../../types/miscTypes'
 import { getLabelClasses } from './Label-func'
@@ -9,7 +9,7 @@ import './Label.scss'
 type LabelPropType = {
     label?: string // Подпись
     id?: string // id для связи подписи с другим элементом. id будет задаваться как атрибут for.
-    size?: EditorSizeMultiplyType
+    size?: StoreSettingsTypes.EditorSizeMultiply
     disabled?: boolean // Заблокировано ли поле
 }
 

@@ -1,15 +1,7 @@
-import {
-    // Типы значений
-    AuthTokenStatusType,
-    // Типы типов
-    USER_SET_AUTH_TOKEN_STATUS,
-    // Типы экшенов
-    UserActionTypes,
-    SetAuthTokenStatusActionType,
-} from "./userTypes"
+import StoreUserTypes from "./userTypes"
 
 export type UserReducerType = {
-    authTokenStatus: AuthTokenStatusType
+    authTokenStatus: StoreUserTypes.AuthTokenStatusType
 }
 
 // Изначальные значения
@@ -22,7 +14,7 @@ const initialState: UserReducerType = {
 }
 
 // Установка статуса токена авторизации
-function setAuthTokenStatus(state: UserReducerType, action: SetAuthTokenStatusActionType): UserReducerType {
+function setAuthTokenStatus(state: UserReducerType, action: StoreUserTypes.SetAuthTokenStatusActionType): UserReducerType {
     return {
         ...state,
         authTokenStatus: action.payload
@@ -30,9 +22,9 @@ function setAuthTokenStatus(state: UserReducerType, action: SetAuthTokenStatusAc
 }
 
 // Редьюсер Store.user
-export default function userReducer( state = initialState, action: UserActionTypes ): UserReducerType {
+export default function userReducer( state = initialState, action: StoreUserTypes.UserActionTypes ): UserReducerType {
     switch (action.type) {
-        case USER_SET_AUTH_TOKEN_STATUS:
+        case StoreUserTypes.USER_SET_AUTH_TOKEN_STATUS:
             return setAuthTokenStatus(state, action)
         default:
             // @ts-ignore

@@ -2,7 +2,7 @@ import React from 'react'
 // @ts-ignore
 import { Link, useRouteMatch } from 'react-router-dom'
 import {useGetComponentSize} from 'utils/MiscUtils'
-import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getLiClasses } from './Menu-func'
 import './Menu.scss'
 
@@ -12,7 +12,7 @@ const CN = 'menu'
 
 // Тип props у компонента Menu
 export type MenuPropType = {
-    size?: EditorSizeMultiplyType,
+    size?: StoreSettingsTypes.EditorSizeMultiply,
     items: {to: string, label: string}[]
 }
 // Тип массива данных для генерации пунктов меню

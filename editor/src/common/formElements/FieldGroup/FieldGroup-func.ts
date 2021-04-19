@@ -1,11 +1,11 @@
-import {EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {makeCN} from 'utils/StringUtils'
 
 /**
  * Функция возвращает классы обёртки полей ввода
  * @param size — размер элемента.
  */
-export function getFieldGroupClasses(size: EditorSizeType) {
+export function getFieldGroupClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы
     const CN = 'field-wrapper'

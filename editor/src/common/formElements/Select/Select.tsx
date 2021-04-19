@@ -5,7 +5,7 @@ import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
 import {useGetComponentSize} from 'utils/MiscUtils'
-import {EditorSizeMultiplyType, EditorSizeType} from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import './Select.scss'
 
 
@@ -14,7 +14,7 @@ export type SelectPropType = {
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    relativeSize?: EditorSizeMultiplyType, // Размер поля
+    relativeSize?: StoreSettingsTypes.EditorSizeMultiply, // Размер поля
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     disabled?: boolean // Заблокировано ли поле
