@@ -22,6 +22,7 @@ module.exports = function(env) {
         devServer: getDevServerSettings(),
         plugins: getPlugins(isDev),
         output: {
+            // publicPath: '/editor',
             path: path.resolve(__dirname, 'dist'),
             filename: 'main.js',
             assetModuleFilename: 'images/[hash][ext][query]'
@@ -94,6 +95,7 @@ function getDevServerSettings() {
         host: '0.0.0.0',
         disableHostCheck: true,
         historyApiFallback: true,
+        hot: true
     }
 }
 

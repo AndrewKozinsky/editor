@@ -16,9 +16,13 @@ export function useGetAppClasses() {
     if (editorTheme === 'dark') classes.push('dark-theme')
 
     // Текущий адрес
-    const pathname = window.location.pathname
-    // Если нахожусь не на странице редактора, то поставить более тёмный фон
-    if (pathname !== '/editor/') classes.push('app--second-bg')
+    const pathname = window.location.pathname // Напр.: /editor/enter
+
+    // Если нахожусь на страницах с формами, то поставить более тёмный фон
+    const formPages = ['/enter', '/reg', '/reset-password', '/change-reset-password/:token']
+    if (formPages.includes(pathname.slice(7))) {
+        classes.push('app--second-bg')
+    }
 
     return makeCN(classes)
 }

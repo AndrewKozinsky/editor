@@ -12,9 +12,9 @@ http {
             proxy_pass http://editor_api:3001;
             rewrite ^\/api\/(.*) /$1 break;
         }
-        location /editor/ {
+        location /editor {
             proxy_pass http://editor:3000/;
-            #rewrite ^\/editor\/(.*) /$1 break;
+            rewrite ^\/editor\/(.*) /$1 break;
         }
     }
 }
