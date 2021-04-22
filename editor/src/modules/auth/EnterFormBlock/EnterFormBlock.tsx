@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import Header from 'common/textBlocks/Header/Header'
 import Menu from 'common/misc/Menu/Menu'
@@ -22,14 +22,14 @@ import { useGetSendAnotherConfirmLetter } from './EnterFormBlock-func'
 
 /** Форма входа в сервис */
 export default function EnterFormBlock() {
-
-    let history = useHistory()
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang, history), 'enter')
+    const fh = useFormHandler(getFormConfig(lang, history, dispatch), 'enter')
 
     // Показывать или сообщением подтвердить почту или форму
     const content = fh.form.confirmEmail
@@ -78,7 +78,7 @@ function ThisForm(props: ThisFormPropType) {
                         placeholder={messages.EnterForm.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}
-                        autoFocus
+                        autoFocus={500}
                     />
                 </Wrapper>
                 <Wrapper t={15}>

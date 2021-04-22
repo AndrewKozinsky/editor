@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
@@ -6,7 +6,7 @@ import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import Label from '../Label/Label';
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
-import { getTextInputClasses } from './TextInput-func'
+import {getTextInputClasses, useSetFocus} from './TextInput-func'
 import './TextInput.scss'
 
 
@@ -19,7 +19,7 @@ export type TextInputPropType = {
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
     placeholder?: string, // Текстозаполнитель
-    autoFocus?: boolean, // Нужно ли ставить фокус при загрузке
+    autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
@@ -46,6 +46,12 @@ function TextInput(props: TextInputPropType) {
         onKeyDown, // Обработчик нажатия клавиши
     } = props
 
+    // Ссылка на элемент
+    const inputRef = useRef(null)
+
+    // Установка фокусировки при необходомости
+    useSetFocus(inputRef, autoFocus)
+
     // Размер компонента относительно размера всего интерфейса
     const size = useGetComponentSize(relativeSize)
 
@@ -63,7 +69,6 @@ function TextInput(props: TextInputPropType) {
 
     if (autocomplete) inputAttribs.autoComplete = autocomplete
     if (placeholder) inputAttribs.placeholder = placeholder
-    if (autoFocus) inputAttribs.autoFocus = autoFocus
     if (onBlur) inputAttribs.onBlur = onBlur
     if (onKeyDown) inputAttribs.onKeyDown = onKeyDown
 
@@ -71,7 +76,7 @@ function TextInput(props: TextInputPropType) {
     return (
         <div>
             <Label label={label} disabled={disabled} id={id} />
-            <input {...inputAttribs} disabled={disabled} id={id} />
+            <input {...inputAttribs} disabled={disabled} id={id} ref={inputRef} />
             <Error {...props} />
         </div>
     )

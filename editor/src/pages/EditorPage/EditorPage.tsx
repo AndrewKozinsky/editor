@@ -1,12 +1,19 @@
 import React, { ReactElement } from 'react'
-// import { useSelector } from 'react-redux'
-// import Loader from '../../common/misc/Loader/Loader'
-// import { AppState } from '../../store/rootReducer'
-// import { UserReducerType } from '../../store/user/userReducer'
-// import { useSetTokenStatus } from './js/return-funcs'
-// import './css/EditorPage.scss'
+import { useGetPageClasses } from './EditorPage-func'
+import './EditorPage.scss'
+
 
 /** Главная страница приложения. */
 export default function EditorPage(): ReactElement {
-    return <p>EditorPage</p>
+
+    const CN = 'editor-page'
+    const {classes, isVisible} = useGetPageClasses(CN)
+
+    if (!isVisible) return null
+
+    return (
+        <div className={classes}>
+            <span>EditorPage</span>
+        </div>
+    )
 }

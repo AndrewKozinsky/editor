@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 // @ts-ignore
 import { Link } from 'react-router-dom'
-import { getDomainFromEmail } from '../../utils/StringUtils'
+import { getDomainFromEmail } from 'utils/StringUtils'
 
 
 type messagesWithJSXType = {

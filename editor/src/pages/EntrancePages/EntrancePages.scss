@@ -1,6 +1,15 @@
 
-.entrance-pages-wrapper {
+$CN: entrance-pages-wrapper;
+
+.#{$CN} {
+    position: absolute;
     max-height: 100vh;
-    background-color: var(--bg-color-2);
     overflow: auto;
+
+    transition: opacity .2s, transform .2s;
+    transition-timing-function: cubic-bezier(.07,.73,.65,1);
+}
+.#{$CN}--scale-up {
+    opacity: 0;
+    transform: scale(1.14);
 }

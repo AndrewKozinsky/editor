@@ -1,15 +1,18 @@
 import React from 'react'
 // @ts-ignore
+import { Dispatch } from 'redux'
+// @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
 import messages from '../messages'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import apiUrls from 'requests/apiUrls'
+import actions from 'store/rootAction';
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any, dispatch: Dispatch): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -128,6 +131,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 }
                 // Если ввели правильные данные
                 else if (response.status === 'success') {
+                    // Поставить токен авторизации в Хранилище
+                    dispatch(actions.user.setAuthTokenStatus(2))
+
                     // Перебросить на страницу редактора
                     history.push('/')
                 }

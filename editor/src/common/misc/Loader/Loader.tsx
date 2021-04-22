@@ -1,6 +1,6 @@
 import React from 'react'
 import './Loader.scss'
-import {makeCN} from '../../../utils/StringUtils';
+import {makeCN} from 'utils/StringUtils'
 
 
 type LoaderPropType = {

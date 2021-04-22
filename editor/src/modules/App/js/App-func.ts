@@ -40,17 +40,18 @@ export function useRedirectPage() {
     // При изменении authTokenStatus или адреса страницы...
     useEffect(function () {
 
-        // Ничего не делать если authTokenStatus равен нулю
-        if (!authTokenStatus) return
+        // Ничего не делать если сервер еще не проверил токен входа
+        if (authTokenStatus === 0) return
 
         // Текущий адрес
         const pathname = window.location.pathname
 
-        // Если нахожусь на странице редактора и у пользователя нет правильного токена авторизации
-        // то отправить на страницу входа
+        // Если нахожусь на странице редактора и у пользователя нет правильного токена авторизации...
         if (pathname === '/editor/' && authTokenStatus === 1) {
-            // перебросить на другую страницу
+            // то перебросить на страницу страницу
             history.push('/enter')
         }
     }, [authTokenStatus, location.pathname])
 }
+
+

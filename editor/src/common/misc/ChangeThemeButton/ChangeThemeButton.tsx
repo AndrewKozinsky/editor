@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
-import { setEditorTheme } from 'store/settings/settingsActions'
+import settingsActions from 'store/settings/settingsActions'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 
@@ -16,7 +16,7 @@ function ChangeThemeButton() {
     let nextTheme: StoreSettingsTypes.EditorTheme = editorTheme === 'light' ? 'dark' : 'light'
 
     function onBtnClick() {
-        dispatch(setEditorTheme(nextTheme))
+        dispatch(settingsActions.setEditorTheme(nextTheme))
     }
 
     const fixed: 'fixed' = 'fixed'

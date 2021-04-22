@@ -1,26 +1,47 @@
 // Types
 import StoreSettingsTypes from './settingsTypes'
 
-// Установка языка интерфейса
-export function setEditorLanguage(payload: StoreSettingsTypes.EditorLanguage): StoreSettingsTypes.SetEditorLanguageAction {
-    return {
-        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE,
-        payload,
+const settingsActions = {
+
+    // Установка языка интерфейса
+    setEditorLanguage(payload: StoreSettingsTypes.EditorLanguage): StoreSettingsTypes.SetEditorLanguageAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE,
+            payload,
+        }
+    },
+
+    // Установка темы интерфейса
+    setEditorTheme(payload: StoreSettingsTypes.EditorTheme): StoreSettingsTypes.SetEditorThemeAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME,
+            payload,
+        }
+    },
+
+    // Установка размера элементов интерфейса
+    setEditorSize(payload: StoreSettingsTypes.EditorSize): StoreSettingsTypes.SetEditorSizeAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_SIZE,
+            payload,
+        }
+    },
+
+    // Установка должна быть показана формы входа, редактор или переход между ними
+    setEntryAndEditorViewState(payload: StoreSettingsTypes.EntryAndEditorViewState): StoreSettingsTypes.SetEntryAndEditorViewStateAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_ENTRY_AND_EDITOR_VIEW_STATE,
+            payload,
+        }
+    },
+
+    // Установка адреса последней страницы
+    setLastAddress(payload: string): StoreSettingsTypes.SetLastAddressAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_LAST_ADDRESS,
+            payload,
+        }
     }
 }
 
-// Установка темы интерфейса
-export function setEditorTheme(payload: StoreSettingsTypes.EditorTheme): StoreSettingsTypes.SetEditorThemeAction {
-    return {
-        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME,
-        payload,
-    }
-}
-
-// Установка размера элементов интерфейса
-export function setEditorSize(payload: StoreSettingsTypes.EditorSize): StoreSettingsTypes.SetEditorSizeAction {
-    return {
-        type: StoreSettingsTypes.SETTINGS_SET_EDITOR_SIZE,
-        payload,
-    }
-}
+export default settingsActions

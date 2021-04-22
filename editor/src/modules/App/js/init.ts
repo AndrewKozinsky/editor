@@ -2,12 +2,8 @@ import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import {useGetUserToken} from 'requests/authRequests'
-import {setAuthTokenStatus} from 'store/user/userActions'
-import {
-    setEditorLanguage,
-    setEditorTheme,
-    setEditorSize
-} from 'store/settings/settingsActions'
+import userActions from 'store/user/userActions'
+import settingsActions from 'store/settings/settingsActions'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 /** Хук инициализирующий приложение */
@@ -56,9 +52,9 @@ function useGetAndSetEditorSettings() {
         }
 
         // Поставить значения в Хранилище
-        dispatch( setEditorLanguage(language) )
-        dispatch( setEditorTheme(theme) )
-        dispatch( setEditorSize(size) )
+        dispatch( settingsActions.setEditorLanguage(language) )
+        dispatch( settingsActions.setEditorTheme(theme) )
+        dispatch( settingsActions.setEditorSize(size) )
     }, [])
 }
 
@@ -94,7 +90,7 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
         const userTokenStatus = userToken.status === 'success' ? 2 : 1
 
         // Установка статуса токена в Хранилище
-        dispatch( setAuthTokenStatus(userTokenStatus) )
+        dispatch( userActions.setAuthTokenStatus(userTokenStatus) )
 
     }, [userToken])
 
