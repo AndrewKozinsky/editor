@@ -157,11 +157,11 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
 
     const schemas = {
         token: yup.string()
-            .required(messages.ChangeResetPasswordForm.tokenErrRequired[lang]),
+            .required(messages.Common.requiredField[lang]),
         password: yup.string()
-            .required(messages.ChangeResetPasswordForm.passwordErrRequired[lang])
-            .min(6, messages.ChangeResetPasswordForm.passwordErrToShort[lang])
-            .max(50, messages.ChangeResetPasswordForm.passwordErrToLong[lang]),
+            .required(messages.Common.requiredField[lang])
+            .min(6, messages.Common.passwordToShort[lang])
+            .max(50, messages.Common.passwordToLong[lang]),
         passwordConfirm: yup.string()
             .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
     }

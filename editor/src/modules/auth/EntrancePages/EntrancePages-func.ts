@@ -1,12 +1,12 @@
 // @ts-ignore
 import { useLocation, useHistory } from 'react-router-dom'
-import {makeCN} from 'utils/StringUtils'
+import {makeCN} from 'src/utils/StringUtils'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {useGetUserToken} from 'requests/authRequests'
-import userActions from 'store/user/userActions'
-import actions from '../../store/rootAction';
+import {AppState} from 'src/store/rootReducer'
+import {useGetUserToken} from 'src/requests/authRequests'
+import userActions from 'src/store/user/userActions'
+import actions from '../../../store/rootAction';
 
 /**
  * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
@@ -16,15 +16,21 @@ import actions from '../../store/rootAction';
  */
 export function useGetWrapperClasses(CN: string) {
 
+    // Статус токена авторизации
+    const { authTokenStatus } = useSelector((store: AppState) => store.user)
+
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
 
     const [classes, setClasses] = useState<string[]>([CN])
     const [isVisible, setIsVisible] = useState(false)
+    // console.log(isVisible)
 
     useEffect(function () {
-
-        if (entryAndEditorViewState === 'editor') {
+        if (authTokenStatus === 0) {
+            setIsVisible(false)
+        }
+        else if (entryAndEditorViewState === 'editor') {
             setIsVisible(false)
             setClasses([CN, `${CN}--scale-up`])
         }

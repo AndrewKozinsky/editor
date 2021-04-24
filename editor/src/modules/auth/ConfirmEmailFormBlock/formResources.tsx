@@ -126,7 +126,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
  */
 function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
     const schemas = {
-        token: yup.string().required(messages.ConfirmEmailForm.tokenErrRequired[lang])
+        token: yup.string().required(messages.Common.requiredField[lang])
     }
 
     // @ts-ignore

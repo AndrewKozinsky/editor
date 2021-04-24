@@ -1,9 +1,12 @@
 import {useSelector} from 'react-redux';
-import {AppState} from 'store/rootReducer'
-import {makeCN} from 'utils/StringUtils'
-import {useEffect, useState} from 'react';
-import actions from '../../store/rootAction';
+import {AppState} from 'src/store/rootReducer'
+import {makeCN} from 'src/utils/StringUtils'
+import {useEffect, useState} from 'react'
 
+/**
+ * Функция возращает классы главной обёртки редактора
+ * @param CN
+ */
 export function useGetPageClasses(CN: string) {
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)

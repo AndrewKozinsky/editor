@@ -1,17 +1,15 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 // @ts-ignore
 import { Switch, Route, useLocation } from 'react-router-dom'
-import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
-import AuthFormWrapper from 'modules/auth/AuthFormWrapper/AuthFormWrapper'
-import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
-import RegFormBlock from 'modules/auth/RegFormBlock/RegFormBlock'
-import ConfirmEmailFormBlock from 'modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
-import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
-import ChangeResetPasswordFormBlock from 'modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
+import EnterFormBlock from "src/modules/auth/EnterFormBlock/EnterFormBlock"
+import AuthFormWrapper from 'src/modules/auth/AuthFormWrapper/AuthFormWrapper'
+import ChangeThemeButton from 'src/common/misc/ChangeThemeButton/ChangeThemeButton'
+import RegFormBlock from 'src/modules/auth/RegFormBlock/RegFormBlock'
+import ConfirmEmailFormBlock from 'src/modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
+import ResetFormBlock from 'src/modules/auth/ResetFormBlock/ResetFormBlock'
+import ChangeResetPasswordFormBlock from 'src/modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
 import './EntrancePages.scss'
-import {useSelector} from 'react-redux';
-import {AppState} from '../../store/rootReducer';
 
 
 function EntrancePages() {
@@ -24,6 +22,7 @@ function EntrancePages() {
     const {classes, isVisible} = useGetWrapperClasses(CN)
 
     if (!isVisible) return null
+
 
     return (
         <div className={classes}>

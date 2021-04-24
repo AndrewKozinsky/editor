@@ -119,7 +119,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
 
     const schemas = {
         email: yup.string()
-            .required(messages.EnterForm.emailErrRequired[lang])
+            .required(messages.Common.requiredField[lang])
             .email(messages.EnterForm.emailErrInvalid[lang])
     }
 

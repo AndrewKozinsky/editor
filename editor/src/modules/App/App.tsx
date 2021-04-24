@@ -7,9 +7,9 @@ import Loader from 'common/misc/Loader/Loader'
 import NotFound from '../NotFound/NotFound'
 
 // Страницы
-import EditorPage from 'pages/EditorPage/EditorPage'
+import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 
-import EntrancePages from 'pages/EntrancePages/EntrancePages'
+import EntrancePages from 'modules/auth/EntrancePages/EntrancePages'
 // JS и CSS
 import { useInit } from './js/init'
 import { useGetAppClasses, useRedirectPage } from './js/App-func'
@@ -21,12 +21,6 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 function App(): ReactElement {
-    // TODO Можно сделать общие сообщения об ошибках. Например про обязательное поле или пароли. Чтобы не писать один и тот же текст несколько раз.
-    // TODO Считаю папку pages нужно ликвидировать. Она избыточна. Подумай как лучше сформировать структуру папок.
-    // TODO Как сделаешь все формы собери программу для публикации и проверь в других браузерах.
-    // TODO Как сделаешь все формы слей изменения с Мастером
-
-
     // TODO Сделай textarea в TextInput
     // TODO Сделай вкладки в редакторе
     // TODO Сделай обёртки для флагов и переключателей куда можно передать название группы и расположение полей.
@@ -63,7 +57,7 @@ function App(): ReactElement {
         <div className={appClasses}>
             <Switch>
                 <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
-                    <EditorPage />
+                    <EditorMain />
                     <EntrancePages />
                 </Route>
                 <Route path="*">

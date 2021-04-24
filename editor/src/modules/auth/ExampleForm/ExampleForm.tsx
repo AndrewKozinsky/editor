@@ -51,7 +51,7 @@
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
-                        placeholder={messages.EnterForm.emailPlaceholder[lang]}
+                        placeholder={messages.Common.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         autoFocus
                     />

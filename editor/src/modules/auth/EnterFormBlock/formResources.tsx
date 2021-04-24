@@ -154,12 +154,12 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
 
     const schemas = {
         email: yup.string()
-            .required(messages.EnterForm.emailErrRequired[lang])
+            .required(messages.Common.requiredField[lang])
             .email(messages.EnterForm.emailErrInvalid[lang]),
         password: yup.string()
-            .required(messages.EnterForm.passwordErrRequired[lang])
-            .min(6, messages.EnterForm.passwordErrToShort[lang])
-            .max(50, messages.EnterForm.passwordErrToLong[lang])
+            .required(messages.Common.requiredField[lang])
+            .min(6, messages.Common.passwordToShort[lang])
+            .max(50, messages.Common.passwordToLong[lang])
     }
 
     // @ts-ignore

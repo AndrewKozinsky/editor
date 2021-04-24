@@ -1,12 +1,12 @@
 import React, { ReactElement } from 'react'
-import { useGetPageClasses } from './EditorPage-func'
-import './EditorPage.scss'
+import { useGetPageClasses } from './EditorMain-func'
+import './EditorMain.scss'
 
 
 /** Главная страница приложения. */
-export default function EditorPage(): ReactElement {
+export default function EditorMain(): ReactElement {
 
-    const CN = 'editor-page'
+    const CN = 'editor-main'
     const {classes, isVisible} = useGetPageClasses(CN)
 
     if (!isVisible) return null

@@ -16,7 +16,6 @@ $CN: text-input;
 
     &::placeholder {
         font-size: 1.3rem;
-        line-height: 1.6rem;
         color: var(--text-placeholder-color);
     }
 
@@ -35,14 +34,26 @@ $CN: text-input;
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: .4rem 0.8rem;
+
+    &::placeholder {
+        line-height: 1.7rem;
+    }
 }
 .#{$CN}--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     padding: .5rem 0.9rem;
+
+    &::placeholder {
+        line-height: 2rem;
+    }
 }
 .#{$CN}--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     padding: .7rem 1.1rem;
+
+    &::placeholder {
+        line-height: 2.2rem;
+    }
 }

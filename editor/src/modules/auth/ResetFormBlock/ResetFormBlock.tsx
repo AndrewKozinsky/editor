@@ -70,7 +70,7 @@ function ThisForm(props: ThisFormPropType) {
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='email'
-                        placeholder={messages.ResetForm.emailPlaceholder[lang]}
+                        placeholder={messages.Common.emailPlaceholder[lang]}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}
                         autoFocus

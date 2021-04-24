@@ -12,7 +12,8 @@ namespace StoreSettingsTypes {
     export type EditorSizeMultiply = -3 | -2 | -1 | 1 | 2 | 3
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
-    export type EntryAndEditorViewState = 'entry' | 'toEntry' | 'toEditor' | 'editor'
+    // null сообщает, что еще не известно что должно быть показано и определится позже на основе открытой странице
+    export type EntryAndEditorViewState = null | 'entry' | 'toEntry' | 'toEditor' | 'editor'
 
     // Типы типа и тип экшена
     // Установка языка интерфейса

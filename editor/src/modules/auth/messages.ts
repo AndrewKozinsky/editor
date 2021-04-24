@@ -37,14 +37,6 @@ const messages: messagesType = {
             eng: 'E-mail *',
             rus: 'Электронная почта *'
         },
-        emailPlaceholder: {
-            eng: 'For example: mail@gmail.com',
-            rus: 'Например: mail@gmail.com'
-        },
-        emailErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
         emailErrInvalid: {
             eng: 'Invalid email address',
             rus: 'Почта написана неправильно'
@@ -52,18 +44,6 @@ const messages: messagesType = {
         passwordField: {
             eng: 'Password *',
             rus: 'Пароль *'
-        },
-        passwordErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
-        passwordErrToShort: {
-            eng: 'Must be 6 characters or more',
-            rus: 'Минимально нужно ввести 6 символов'
-        },
-        passwordErrToLong: {
-            eng: 'Must be 50 characters or less',
-            rus: 'Максимум можно ввести 50 символов'
         },
         submitBtnText: {
             eng: 'Log in',
@@ -97,14 +77,6 @@ const messages: messagesType = {
             eng: 'E-mail *',
             rus: 'Электронная почта *'
         },
-        emailPlaceholder: {
-            eng: 'For example: mail@gmail.com',
-            rus: 'Например: mail@gmail.com'
-        },
-        emailErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
         emailErrInvalid: {
             eng: 'Invalid email address',
             rus: 'Почта написана неправильно'
@@ -112,18 +84,6 @@ const messages: messagesType = {
         passwordField: {
             eng: 'Password *',
             rus: 'Пароль *'
-        },
-        passwordErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
-        passwordErrToShort: {
-            eng: 'Must be 6 characters or more',
-            rus: 'Минимально нужно ввести 6 символов'
-        },
-        passwordErrToLong: {
-            eng: 'Must be 50 characters or less',
-            rus: 'Максимум можно ввести 50 символов'
         },
         passwordConfirmField: {
             eng: 'Repeat password *',
@@ -153,17 +113,13 @@ const messages: messagesType = {
             eng: 'E-mail *',
             rus: 'Электронная почта *'
         },
-        emailPlaceholder: {
-            eng: 'For example: mail@gmail.com',
-            rus: 'Например: mail@gmail.com'
-        },
         submitBtnText: {
             eng: 'Sign in',
             rus: 'Войти'
         },
         somethingWentWrong: {
             eng: 'Something went wrong',
-            rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
+            rus: 'Произошла непредвиденная ошибка. Форма не отправлена.'
         },
     },
     // Форма ChangeResetPasswordFormBlock
@@ -189,27 +145,10 @@ const messages: messagesType = {
             eng: 'Change password',
             rus: 'Изменить пароль'
         },
-        tokenErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
-        passwordErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
-        passwordErrToShort: {
-            eng: 'Must be 6 characters or more',
-            rus: 'Минимально нужно ввести 6 символов'
-        },
-        passwordErrToLong: {
-            eng: 'Must be 50 characters or less',
-            rus: 'Максимум можно ввести 50 символов'
-        },
         passwordsMustMatch: {
             eng: 'Passwords must match',
             rus: 'Пароли должны совпадать'
         },
-
     },
     // Форма ConfirmEmailFormBlock
     ConfirmEmailForm: {
@@ -226,10 +165,6 @@ const messages: messagesType = {
             eng: 'Confirm email',
             rus: 'Подтвердить почту'
         },
-        tokenErrRequired: {
-            eng: 'Required',
-            rus: 'Обязательное поле'
-        },
         tokenIsInvalid: {
             eng: 'This token is invalid',
             rus: 'Вы ввели неправильный токен'
@@ -237,6 +172,24 @@ const messages: messagesType = {
         tokenIsWrong: {
             eng: 'Token is invalid or has expired',
             rus: 'Токен неправильный или с истёкшим сроком действия'
+        },
+    },
+    Common: {
+        emailPlaceholder: {
+            eng: 'For example: mail@gmail.com',
+            rus: 'Например: mail@gmail.com'
+        },
+        requiredField: {
+            eng: 'Required field',
+            rus: 'Обязательное поле'
+        },
+        passwordToShort: {
+            eng: 'Must be 6 characters or more',
+            rus: 'Минимально нужно ввести 6 символов'
+        },
+        passwordToLong: {
+            eng: 'Must be 50 characters or less',
+            rus: 'Максимум можно ввести 50 символов'
         },
     }
 }

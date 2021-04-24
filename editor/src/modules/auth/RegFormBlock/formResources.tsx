@@ -149,12 +149,12 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
 
     const schemas = {
         email: yup.string()
-            .required(messages.RegForm.emailErrRequired[lang])
+            .required(messages.Common.requiredField[lang])
             .email(messages.RegForm.emailErrInvalid[lang]),
         password: yup.string()
-            .required(messages.RegForm.passwordErrRequired[lang])
-            .min(6, messages.RegForm.passwordErrToShort[lang])
-            .max(50, messages.RegForm.passwordErrToLong[lang]),
+            .required(messages.Common.requiredField[lang])
+            .min(6, messages.Common.passwordToShort[lang])
+            .max(50, messages.Common.passwordToLong[lang]),
         passwordConfirm: yup.string()
             .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
     }
