@@ -126,6 +126,7 @@ export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Res
     const resWithToken = createSendToken(newUser._id, res)
 
     // Отправить данные пользователю
+    // ВОЗМОЖНО ПРИ РЕГИСТРАЦИИ НЕ НУЖНО ОТПРАВЛЯТЬ ТОКЕН ПОТОМУ ЧТО ПОЧТА ЕЩЕ НЕ ПОДТВЕРЖДЕНА
     sendResponseWithAuthToken(newUser, resWithToken)
 })
 
@@ -394,9 +395,6 @@ async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: st
     // Получение домена в зависимости от режима работы
     const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 
-    // Адрес подтверждения почты (домен + адрес API)
-    let confirmUrl = domain + `/api/users/confirmEmail/${confirmToken}`
-
     // Язык
     const lang = <string>req.get('Editor-Language')
 
@@ -405,7 +403,7 @@ async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: st
     const userEmail = new Email(email, domain, lang)
 
     // Послать письмо для подтверждения почты
-    userEmail.sendConfirmLetter(confirmUrl).then(() => {})
+    userEmail.sendConfirmLetter(confirmToken).then(() => {})
 }
 
 /**

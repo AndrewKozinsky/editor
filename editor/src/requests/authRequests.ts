@@ -1,5 +1,5 @@
 import {useFetch} from './fetch'
-import apiUrls from './apiUrls'
+import getApiUrl from './apiUrls'
 
 type GetTokenDataServerResponse = {
     status: string
@@ -13,7 +13,7 @@ export function useGetUserToken() {
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: userToken, doFetch} =
-        useFetch<GetTokenDataServerResponse>(apiUrls.getUserToken, options)
+        useFetch<GetTokenDataServerResponse>(getApiUrl('getUserToken'), options)
 
     return { userToken, doFetch }
 }

@@ -174,6 +174,30 @@ const messages: messagesType = {
             rus: 'Смена пароля'
         },
 
+    },
+    // Форма ConfirmEmailFormBlock
+    ConfirmEmailForm: {
+        // Заголовок формы подтверждения почты
+        formHeader: {
+            eng: 'Email confirm',
+            rus: 'Подтверждение почты'
+        },
+        tokenField: {
+            eng: 'Token',
+            rus: 'Токен'
+        },
+        submitBtnText: {
+            eng: 'Confirm email',
+            rus: 'Подтвердить почту'
+        },
+        tokenErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        tokenIsInvalid: {
+            eng: 'This token is invalid',
+            rus: 'Вы ввели неправильный токен'
+        },
     }
 }
 

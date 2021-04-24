@@ -1,6 +1,7 @@
+import { ObjStringKeyAnyValType } from "../types/miscTypes"
 
 
-const addresses = {
+const addresses: ObjStringKeyAnyValType = {
     // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
@@ -9,26 +10,28 @@ const addresses = {
     signup: 'users/signup',
     resetPassword: 'users/resetPassword',
     // Подтверждение почты
-    /*confirmEmail: (confirmEmailToken: string) => {
-        return 'users/confirmEmail'
-    },*/
+    confirmEmail: function (confirmEmailToken: string) {
+        return 'users/confirmEmail/' + confirmEmailToken
+    },
     // Отправка письма со ссылкой на подтверждение почты
     sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
 }
 
+
 // Оборачивание объекта addresses чтобы при запросе
 // к началу каждого адреса добавлялась приставка /api/.
-const apiUrls = new Proxy(addresses, {
-    get(url, prop: PropertyKey): string {
-        // @ts-ignore
-        if (url[prop]) {
-            // @ts-ignore
-            return '/api/' + url[prop]
+function getApiUrl(url: string, ...args: any[]): string {
+    if (addresses[url]) {
+        if (typeof addresses[url] === 'string') {
+            return '/api/' + addresses[url]
         }
-        // @ts-ignore
-        const x: never = null
-        return ''
+        else {
+            return '/api/' + addresses[url](...args)
+        }
     }
-})
 
-export default apiUrls
+    // @ts-ignore
+    const x: never = null
+}
+
+export default getApiUrl

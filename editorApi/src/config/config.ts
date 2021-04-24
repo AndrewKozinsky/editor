@@ -29,7 +29,7 @@ export const config: ConfigType = {
     // Домен опубликованного сервиса
     publishedSiteURL: 'https://editorium.net',
     // Домен разрабатываемого сервиса
-    devSiteURL: 'https://editorium.local',
+    devSiteURL: 'http://editorium.local',
 
     // Из какого адреса будут приходить письма от сервиса
     emailFrom: 'mail@andrewkozinsky.ru',

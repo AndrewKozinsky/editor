@@ -18,14 +18,14 @@ export class Email {
     }
 
     // Функция отправляет письмо с просьбой подтвердить почтовый адрес
-    async sendConfirmLetter(confirmUrl: string) {
+    async sendConfirmLetter(token: string) {
         // Тема письма
         const subject = this.lang === 'rus'
             ? 'Подтвердите вашу почту для регистрации на Editorium.net'
             : 'Confirm your email for registration at Editorium.net'
 
         // Создать html и текстовую версию письма
-        const [html, text] = new EmailTemplate(this.host).createConfirmLetter(confirmUrl, this.lang)
+        const [html, text] = new EmailTemplate(this.host).createConfirmLetter(token, this.lang)
 
         // Послать письмо
         this.send(subject, html, text)
@@ -80,7 +80,7 @@ export class Email {
         await transport.sendMail(mailOptions)
     }
 
-    // Функция отправляющая письма на реальный адрес пользователя
+    // Функция отправляющая письма на настоящий адрес пользователя
     sendRealEmail(subject: string, html: string, text: string) {
         // const userId = config.sendpulse_api_user_id
         // const secret = config.sendpulse_api_secret

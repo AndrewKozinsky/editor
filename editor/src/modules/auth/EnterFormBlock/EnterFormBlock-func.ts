@@ -1,5 +1,5 @@
 import { useFetch } from 'requests/fetch'
-import apiUrls from 'requests/apiUrls'
+import getApiUrl from 'requests/apiUrls'
 import {useEffect, useState} from 'react';
 
 // Тип данных отправляемый сервером
@@ -22,7 +22,7 @@ export function useGetSendAnotherConfirmLetter(email: string) {
     }
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const { isLoading, data, error, doFetch } = useFetch<SendAnotherConfirmLetterResponse>(apiUrls.sendAnotherConfirmLetter, options)
+    const { isLoading, data, error, doFetch } = useFetch<SendAnotherConfirmLetterResponse>(getApiUrl('sendAnotherConfirmLetter'), options)
 
     // При получении данных с сервера...
     useEffect(function () {

@@ -5,6 +5,7 @@ import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 import AuthFormWrapper from 'modules/auth/AuthFormWrapper/AuthFormWrapper'
 import ChangeThemeButton from 'common/misc/ChangeThemeButton/ChangeThemeButton'
 import RegFormBlock from 'modules/auth/RegFormBlock/RegFormBlock'
+import ConfirmEmailFormBlock from 'modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
 import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
 import ChangeResetPasswordFormBlock from 'modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
@@ -32,12 +33,15 @@ function EntrancePages() {
                     <Route path='/reg'>
                         <RegFormBlock />
                     </Route>
-                    <Route path='/reset-password'>
+                    <Route path='/confirm-email'>
+                        <ConfirmEmailFormBlock />
+                    </Route>
+                    {/*<Route path='/reset-password'>
                         <ResetFormBlock />
-                    </Route>
-                    <Route path='/change-reset-password/:token'>
+                    </Route>*/}
+                    {/*<Route path='/change-reset-password'>
                         <ChangeResetPasswordFormBlock />
-                    </Route>
+                    </Route>*/}
                     <Route path='*'>
                         <EnterFormBlock />
                     </Route>

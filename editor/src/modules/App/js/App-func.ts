@@ -19,7 +19,7 @@ export function useGetAppClasses() {
     const pathname = window.location.pathname // Напр.: /editor/enter
 
     // Если нахожусь на страницах с формами, то поставить более тёмный фон
-    const formPages = ['/enter', '/reg', '/reset-password', '/change-reset-password/:token']
+    const formPages = ['/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']
     if (formPages.includes(pathname.slice(7))) {
         classes.push('app--second-bg')
     }

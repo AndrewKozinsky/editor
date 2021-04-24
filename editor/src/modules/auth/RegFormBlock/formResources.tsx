@@ -5,7 +5,7 @@ import FHTypes from 'src/libs/formHandler/types'
 import messages from '../messages'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
-import apiUrls from 'requests/apiUrls'
+import getApiUrl from 'requests/apiUrls'
 
 
 // Объект настройки useFormHandler
@@ -109,7 +109,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                const response = await makeFetch(apiUrls.signup, options, lang)
+                const response = await makeFetch(getApiUrl('signup'), options, lang)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
