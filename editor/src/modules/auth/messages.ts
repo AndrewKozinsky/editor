@@ -173,6 +173,42 @@ const messages: messagesType = {
             eng: 'Password change',
             rus: 'Смена пароля'
         },
+        tokenField: {
+            eng: 'Token *',
+            rus: 'Токен *'
+        },
+        passwordField: {
+            eng: 'Password *',
+            rus: 'Пароль *'
+        },
+        passwordConfirmField: {
+            eng: 'Repeat password *',
+            rus: 'Повторите пароль *'
+        },
+        submitBtnText: {
+            eng: 'Change password',
+            rus: 'Изменить пароль'
+        },
+        tokenErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        passwordErrRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        passwordErrToShort: {
+            eng: 'Must be 4 characters or more',
+            rus: 'Минимально можно ввести 4 символа'
+        },
+        passwordErrToLong: {
+            eng: 'Must be 15 characters or less',
+            rus: 'Максимум можно ввести 15 символов'
+        },
+        passwordsMustMatch: {
+            eng: 'Passwords must match',
+            rus: 'Пароли должны совпадать'
+        },
 
     },
     // Форма ConfirmEmailFormBlock
@@ -197,6 +233,10 @@ const messages: messagesType = {
         tokenIsInvalid: {
             eng: 'This token is invalid',
             rus: 'Вы ввели неправильный токен'
+        },
+        tokenIsWrong: {
+            eng: 'Token is invalid or has expired',
+            rus: 'Токен неправильный или с истёкшим сроком действия'
         },
     }
 }

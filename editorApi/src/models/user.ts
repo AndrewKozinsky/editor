@@ -85,7 +85,8 @@ UserSchema.pre('save', function (this: IUser, next) {
         return next();
 
     const newDate = new Date()
-    newDate.setMinutes(-1)
+    newDate.setMinutes(newDate.getMinutes() - 1)
+
     this.passwordChangedAt = newDate
     next()
 })
@@ -125,7 +126,7 @@ UserSchema.methods.createPasswordResetToken = function (this: IUser) {
 
     // Поставить, что пароль можно сбросить в течение 10 минут
     const newDate = new Date()
-    newDate.setMinutes(10)
+    newDate.setMinutes(newDate.getMinutes() + 10)
     this.passwordResetExpires = newDate
 
     return resetToken

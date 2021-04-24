@@ -28,16 +28,16 @@ export class EmailTemplate {
     }
 
     // Функция создаёт шаблон письма со ссылкой на сброс пароля
-    createForgotPasswordLetter(resetUrl: string, lang: string) {
-        const letterContent = forgotPasswordLetterContentTemplate(resetUrl, lang)
+    createForgotPasswordLetter(resetToken: string, lang: string) {
+        const letterContent = forgotPasswordLetterContentTemplate(this.host, resetToken, lang)
 
         // Получить каркас письма и вставить в него содержимое
         const htmlTemplate = baseTemplate(this.host, letterContent, lang)
 
         // Текстовая версия письма
         const textContent = lang === 'rus'
-            ? `Был сделан запрос на сброс пароля. Пожалуйста, перейдите по этому адресу чтобы подтвердить сброс и вписать новый пароль.: ${resetUrl}. Если вы не делали запрос на сброс пароля, то проигнорируйте это письмо.`
-            : `Reset password request was made. Please click on this address to reset your password and provide the new one: ${resetUrl}. If you didn't forget your password, please ignore this email.`
+            ? `Был сделан запрос на сброс пароля. Перейдите по адресу ${this.host}/editor/change-reset-password чтобы подтвердить сброс и вписать новый пароль. Будет открыта форма куда введите токен сброса: ${resetToken}. Если вы не делали запрос на сброс пароля, то проигнорируйте это письмо.`
+            : `A password reset request has been made. Go to ${this.host}/editor/change-reset-password to confirm the reset and enter a new password. A form will open where you enter the reset token: ${resetToken}. If you did not request a password reset, ignore this email.`
 
         return [htmlTemplate, textContent]
     }

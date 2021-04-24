@@ -22,6 +22,7 @@ import './css/app.scss'
 /** Компонент всего приложения */
 function App(): ReactElement {
     // TODO Поправь картинки в письмах.
+    // TODO Можно сделать общие сообщения об ошибках. Например про обязательное поле или пароли.
     // TODO Когда всё сделаешь закомментируй код и проверь все размеры и проследи чтобы значки были в своих папких. Хотя может и не нужно трогать значки.
     // TODO Проследи чтобы размеры во Wrapper соответствовали шагу в 15%.
     // TODO Думаю общими значками должны считаться только те значки, которые действительно используются в нескольких местах. Если значёк используется в одном месте, то и храни его в папке этого компонента.
@@ -63,7 +64,7 @@ function App(): ReactElement {
     return (
         <div className={appClasses}>
             <Switch>
-                <Route path={['/', '/enter', '/reg', '/reset-password', '/confirm-email']} exact>
+                <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
                     <EditorPage />
                     <EntrancePages />
                 </Route>

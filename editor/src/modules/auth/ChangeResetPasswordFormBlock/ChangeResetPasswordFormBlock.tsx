@@ -24,10 +24,10 @@ export default function ChangeResetPasswordFormBlock() {
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'changeReset')
+    const fh = useFormHandler(getFormConfig(lang), 'changeResetPassword')
 
     // Показывать или сообщением что пароль изменён или форму
-    const content = fh.form.passwordChanged
+    const content = fh.form.passwordHasChangedMessage
         ? <PasswordChangedMessage />
         : <ThisForm fh={fh} />
 
@@ -61,24 +61,22 @@ function ThisForm(props: ThisFormPropType) {
 
     return (
         <>
-            <Form name='reg' formHandlers={fh.formHandlers}>
-                {/*<Wrapper>
+            <Form name='changeResetPassword' formHandlers={fh.formHandlers}>
+                <Wrapper>
                     <TextInput
-                        label={ messages.RegForm.emailField[lang] }
-                        name='email'
+                        label={ messages.ChangeResetPasswordForm.tokenField[lang] }
+                        name='token'
                         relativeSize={2}
-                        value={fh.fields.email.value[0]}
+                        value={fh.fields.token.value[0]}
                         onChange={fh.onChangeFieldHandler}
-                        autocomplete='username'
-                        placeholder={messages.RegForm.emailPlaceholder[lang]}
-                        error={fh.fields.email.data.error}
-                        disabled={fh.fields.email.data.disabled}
+                        error={fh.fields.token.data.error}
+                        disabled={fh.fields.token.data.disabled}
                         autoFocus
                     />
-                </Wrapper>*/}
-                {/*<Wrapper t={15}>
+                </Wrapper>
+                <Wrapper t={15}>
                     <TextInput
-                        label={ messages.RegForm.passwordField[lang] }
+                        label={ messages.ChangeResetPasswordForm.passwordField[lang] }
                         name='password'
                         relativeSize={2}
                         type='password'
@@ -88,10 +86,10 @@ function ThisForm(props: ThisFormPropType) {
                         error={fh.fields.password.data.error}
                         disabled={fh.fields.password.data.disabled}
                     />
-                </Wrapper>*/}
-                {/*<Wrapper t={15}>
+                </Wrapper>
+                <Wrapper t={15}>
                     <TextInput
-                        label={ messages.RegForm.passwordConfirmField[lang] }
+                        label={ messages.ChangeResetPasswordForm.passwordConfirmField[lang] }
                         name='passwordConfirm'
                         relativeSize={2}
                         type='password'
@@ -101,26 +99,18 @@ function ThisForm(props: ThisFormPropType) {
                         error={fh.fields.passwordConfirm.data.error}
                         disabled={fh.fields.passwordConfirm.data.disabled}
                     />
-                </Wrapper>*/}
-                {/*<Wrapper t={20} align={'right'}>
+                </Wrapper>
+                <Wrapper t={20} align={'right'}>
                     <Button
-                        type='submit'
-                        text={messages.RegForm.submitBtnText[lang]}
+                        text={messages.ChangeResetPasswordForm.submitBtnText[lang]}
                         name='submit'
                         relativeSize={1}
+                        type='submit'
                         disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}
                     />
-                </Wrapper>*/}
-                {/*<CommonError error={fh.form.commonError} />*/}
+                </Wrapper>
             </Form>
-
-            {/*<Wrapper t={30}>
-                <Notice>{messagesWithJSX.RegForm.legal[lang]}</Notice>
-            </Wrapper>
-            <Wrapper t={30}>
-                <Notice>{messagesWithJSX.RegForm.doYouHaveAccount[lang]}</Notice>
-            </Wrapper>*/}
         </>
     )
 }

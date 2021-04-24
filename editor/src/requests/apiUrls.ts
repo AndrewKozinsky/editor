@@ -7,14 +7,20 @@ const addresses: ObjStringKeyAnyValType = {
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
     login: 'users/login',
+    // Регистрация
     signup: 'users/signup',
-    resetPassword: 'users/resetPassword',
+    // Отправка письма со ссылкой на подтверждение почты
+    sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
     // Подтверждение почты
     confirmEmail: function (confirmEmailToken: string) {
         return 'users/confirmEmail/' + confirmEmailToken
     },
-    // Отправка письма со ссылкой на подтверждение почты
-    sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
+    // Сброс пароля
+    resetPassword: 'users/resetPassword',
+    // Отправка нового пароля вместо сброшенного
+    changeResetPassword: function (resetPasswordToken: string) {
+        return 'users/resetPassword/' + resetPasswordToken
+    },
 }
 
 

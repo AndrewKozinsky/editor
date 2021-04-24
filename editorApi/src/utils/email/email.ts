@@ -32,12 +32,12 @@ export class Email {
     }
 
     // Функция отправляет письмо со ссылкой на сброс пароля
-    async sendForgotPasswordLetter(resetUrl: string) {
+    async sendForgotPasswordLetter(resetToken: string) {
         const subject = this.lang === 'rus'
             ? 'Ссылка на страницу сброса пароля от Editorium.net'
             : 'Your reset password token (valid for 10 minutes)'
 
-        const [html, text] = new EmailTemplate(this.host).createForgotPasswordLetter(resetUrl, this.lang)
+        const [html, text] = new EmailTemplate(this.host).createForgotPasswordLetter(resetToken, this.lang)
         this.send(subject, html, text)
     }
 

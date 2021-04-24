@@ -293,9 +293,6 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
     // Домен сервиса
     const domain = config.workMode === 'development' ? config.devSiteURL : config.publishedSiteURL
 
-    // Адрес страницы где нужно написать новый пароль
-    const resetUrl = domain + `/reset/${resetToken}`
-
     // Язык
     const lang = <string>req.get('Editor-Language')
 
@@ -305,7 +302,7 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
         const userEmail = new Email(user.email, domain, lang)
 
         // Отправить письмо со сбросом пароля
-        await userEmail.sendForgotPasswordLetter(resetUrl)
+        await userEmail.sendForgotPasswordLetter(resetToken)
 
         // Сохранить обновлённые данные пользователя
         await user.save({

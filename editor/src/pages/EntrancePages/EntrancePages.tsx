@@ -36,12 +36,12 @@ function EntrancePages() {
                     <Route path='/confirm-email'>
                         <ConfirmEmailFormBlock />
                     </Route>
-                    {/*<Route path='/reset-password'>
+                    <Route path='/reset-password'>
                         <ResetFormBlock />
-                    </Route>*/}
-                    {/*<Route path='/change-reset-password'>
+                    </Route>
+                    <Route path='/change-reset-password'>
                         <ChangeResetPasswordFormBlock />
-                    </Route>*/}
+                    </Route>
                     <Route path='*'>
                         <EnterFormBlock />
                     </Route>
