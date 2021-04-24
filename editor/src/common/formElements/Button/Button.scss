@@ -1,0 +1,104 @@
+@import "../commonStyles/commonStyles";
+
+$CN: btn;
+
+.#{$CN} {
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-2);
+    transition: background-color .2s;
+
+    &:hover {
+        transition: background-color .1s;
+    }
+
+    &:focus {
+        // Включение стандартной фокусировки
+        @include focus
+    }
+
+    &:disabled {
+        opacity: .5;
+        cursor: default;
+    }
+}
+
+
+// Размер кнопки.
+.#{$CN}--tiny-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: 1px 6px;
+}
+.#{$CN}--small-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: 4px 11px;
+}
+.#{$CN}--middle-size {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    padding: 5px 14px;
+}
+.#{$CN}--big-size {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    padding: 7px 16px;
+}
+
+
+// Тип кнопки.
+// standard (стандартная кнопка), onlyIcon (только значёк).
+.#{$CN}--standard-view {
+
+}
+
+
+// Цвет кнопки.
+// base (стандартный цвет), accent (акцентный цвет)
+.#{$CN}--base-color {
+    color: var(--text-color);
+    background-color: var(--button-color);
+    transition: background-color .2s;
+
+    &:hover {
+        background-color: var(--button-color-hover);
+    }
+
+    &:disabled:hover {
+        background-color: var(--button-color);
+    }
+}
+
+
+// Загрузчик
+$loaderCN: btn-loader;
+
+.#{$loaderCN} {
+    display: inline-block;
+}
+
+.#{$loaderCN}--tiny-size {
+    width: 12px;
+    height: 12px;
+    vertical-align: -1px;
+    margin-right: 3px;
+}
+.#{$loaderCN}--small-size {
+    width: 14px;
+    height: 14px;
+    vertical-align: -2px;
+    margin-right: 4px;
+}
+.#{$loaderCN}--middle-size {
+    width: 17px;
+    height: 17px;
+    vertical-align: -3px;
+    margin-right: 5px;
+}
+.#{$loaderCN}--big-size {
+    width: 18px;
+    height: 18px;
+    vertical-align: -3px;
+    margin-right: 6px;
+}

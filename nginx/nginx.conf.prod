@@ -1,12 +1,20 @@
-server {
-    listen 80;
+events {}
 
-    server_name editorium.net;
+http {
+    include mime.types;
 
-    location /api {
-        proxy_pass http://editor_api:3001;
-    }
-    location / {
-        proxy_pass http://editor:3000;
+    server {
+        listen 80;
+        server_name editorium.net;
+        root /sites;
+
+        location /api {
+            proxy_pass http://editor_api:3001;
+            rewrite ^\/api\/(.*) /$1 break;
+        }
+        location /editor {
+            proxy_pass http://editor:3000/;
+            rewrite ^\/editor\/(.*) /$1 break;
+        }
     }
 }

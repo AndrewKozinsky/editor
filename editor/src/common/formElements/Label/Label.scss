@@ -1,0 +1,25 @@
+
+$CN: label;
+
+// label
+.#{$CN} {
+    display: block;
+    margin-bottom: 0.6rem;
+}
+
+.#{$CN}--small-size {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+.#{$CN}--middle-size {
+    font-size: 1.5rem;
+    line-height: 1.9rem;
+}
+.#{$CN}--big-size {
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.#{$CN}--disabled {
+    opacity: .5;
+}

@@ -1,0 +1,97 @@
+import React, {ReactNode} from 'react'
+import Radio, { RadioPropType } from '../Radio/Radio'
+import Checkbox, {CheckboxPropType} from '../Checkbox/Checkbox'
+import FHTypes from 'libs/formHandler/types'
+import Label from '../Label/Label'
+import {useGetComponentSize} from '../../../utils/MiscUtils';
+import StoreSettingsTypes from 'store/settings/settingsTypes'
+import { getFieldGroupClasses } from './FieldGroup-func'
+import './FieldGroup.scss'
+
+/**
+ * Компонент FieldGroup в зависимости от переданного объекта отрисовывает элементы поля ввода формы: текстовое поле, флаги, переключатели, выпадающий список.
+ * Дополнительно разрешает противоречия в типах передаваемых данных. Везде в свойство value передаётся или строка или массив строк.
+ * А сами компоненты ожидают строку. Поэтому FieldGroup переводит этот тип в строковый.
+ * Если в value передаётся массив строк, то это обозначает
+ */
+
+type InputDataType = { label: string, value: string }
+
+export type FieldGroupPropType = {
+    label?: string
+    inputType: 'radio' | 'checkbox'
+    groupName: string
+    inputsArr: InputDataType[]
+    value: FHTypes.FieldValue
+    disabled?: boolean // Заблокировано ли поле
+    onChange: (e: React.BaseSyntheticEvent) => void
+    onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
+}
+
+function FieldGroup(props: FieldGroupPropType) {
+
+    const {
+        label,
+        inputType,
+        groupName,
+        inputsArr,
+        value,
+        disabled = false, // Заблокировано ли поле
+        onChange,
+        onBlur
+    } = props
+
+    const $label = label ? <Label label={label} /> : null
+
+    // Получение типа поля: переключатель или флаг
+    let Component = Radio
+    if (inputType == 'checkbox') Component = Checkbox
+
+    return (
+        <>
+            {$label}
+            <InputsWrapper>
+                {inputsArr.map((inputData, i) => {
+
+                    const attrs = {
+                        value: inputData.value,
+                        label: inputData.label,
+                        name: groupName,
+                        checked: !!(value.find(val => val === inputData.value)),
+                        disabled,
+                        key: i,
+                        onChange,
+                        onBlur
+                    }
+
+                    return <Component {...attrs} />
+                })}
+            </InputsWrapper>
+        </>
+    )
+}
+
+export default FieldGroup
+
+
+
+export type InputsWrapperType = {
+    size?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
+    children: ReactNode
+}
+
+function InputsWrapper(props: InputsWrapperType) {
+    const {
+        children
+    } = props
+
+
+    // Размер компонента относительно размера всего интерфейса
+    const size = useGetComponentSize(props.size)
+    // Классы обёртки
+    const cls = getFieldGroupClasses(size)
+
+    return (
+        <div className={cls}>{children}</div>
+    )
+}

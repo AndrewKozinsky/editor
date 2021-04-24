@@ -13,17 +13,23 @@ router.get('/confirmEmail/:token', authController.confirmEmail)
 // Вход пользователя
 router.post('/login', authController.logIn)
 
+// Отправка еще одного письма со ссылкой на подтверждение почты
+router.post('/sendAnotherConfirmLetter', authController.sendAnotherConfirmLetter)
+
 // Выход пользователя
 router.route('/logout').get(authController.protect, authController.logOut)
 
 // Получение данных токена
-// router.post('/getTokenInfo', authController.getTokenInfo)
+router.post('/getTokenData', authController.getTokenData)
 
 // Отправка письма со ссылкой на сброс пароля
-router.post('/forgotPassword', authController.forgotPassword)
+router.post('/resetPassword', authController.resetPassword)
 
 // Сброс пароля
-router.patch('/resetPassword/:token', authController.resetPassword)
+router.patch('/resetPassword/:token', authController.changeResetPassword)
+
+
+
 
 // router.route('/myEmail')
 //     .put(authController.protect, userController.changeMyEmail)

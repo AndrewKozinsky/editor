@@ -3,7 +3,7 @@
 export function baseTemplate(host: string, content: string, lang: string) {
 
     // Адрес логотипа
-    const logoSrc = host + '/api/common/editorium-small-logo.svg'
+    const logoSrc = host + '/api/v1/common/editorium-small-logo.svg'
 
     // Текст про отписку
     let questionText = lang === 'rus'

@@ -40,7 +40,8 @@ const UserSchema: Schema = new Schema({
     password: {
         type: String,
         required: [true, '{{user.passwordRequired}}'],
-        minLength: [4, '{{user.passwordMinLength}}'],
+        minLength: [6, '{{user.passwordMinLength}}'],
+        maxLength: [50, '{{user.passwordMaxLength}}'],
         select: false
     },
     // Подтверждение пароля при регистрации и смене пароля
@@ -61,7 +62,7 @@ const UserSchema: Schema = new Schema({
     // Дата когда токен сброса пароля будет недействителен
     passwordResetExpires: Date,
     // Язык итерфейса
-    lang: {
+    language: {
         type: String,
         required: [ true, '{{user.langRequired}}' ]
     },
@@ -85,7 +86,8 @@ UserSchema.pre('save', function (this: IUser, next) {
         return next();
 
     const newDate = new Date()
-    newDate.setMinutes(-1)
+    newDate.setMinutes(newDate.getMinutes() - 1)
+
     this.passwordChangedAt = newDate
     next()
 })
@@ -125,7 +127,7 @@ UserSchema.methods.createPasswordResetToken = function (this: IUser) {
 
     // Поставить, что пароль можно сбросить в течение 10 минут
     const newDate = new Date()
-    newDate.setMinutes(10)
+    newDate.setMinutes(newDate.getMinutes() + 10)
     this.passwordResetExpires = newDate
 
     return resetToken

@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+  # В лекции сказали в версии для публикации не должно быть внешний томов.
+  # Весь код должен лежать внутри.
+
+  # Nginx
+  nginx:
+    build: ./nginx
+    container_name: editor-nginx
+    depends_on:
+      - editor
+      - editor_api
+      - editor_db
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf.prod:/etc/nginx/nginx.conf
+    networks:
+      - editorium-network
+
+
+  # Клиентская часть редактора
+  editor:
+    build:
+      context: ./editor
+      dockerfile: Dockerfile.prod
+    container_name: editor-editor
+    command: serve /app/dist -l 3000
+    environment:
+      - SITE_URL=editorium.net
+    restart: unless-stopped
+    volumes:
+      - ./editor/src:/app/src
+    networks:
+      - editorium-network
+
+
+  # API редактора
+  editor_api:
+    build: ./editorApi
+    container_name: editor-api
+    command: npm run start
+    restart: unless-stopped
+    environment:
+      - MODE=production
+      - PORT=3001
+      - MONGO_URL=mongodb://editor_db:27017/editor_db
+    depends_on:
+      - editor_db
+    networks:
+      - editorium-network
+    volumes:
+      - ./editorApi/src:/app/src
+
+
+  # БД редактора
+  editor_db:
+    image: mongo:latest
+    container_name: editor-db
+    ports:
+      - 27017:27017
+    volumes:
+      - editor_db:/data/db
+    networks:
+      - editorium-network
+
+
+volumes:
+  editor_db:
+
+networks:
+  editorium-network:
+    driver: bridge

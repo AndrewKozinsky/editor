@@ -1,13 +1,13 @@
 
-export function forgotPasswordLetterContentTemplate(resetUrl: string, lang: string) {
+export function forgotPasswordLetterContentTemplate(host: string, resetToken: string, lang: string) {
 
     // Если нужно отправить письмо на русском языке
     if (lang === 'rus') {
         return `<p class="paragraph">
-            Был сделан запрос на сброс пароля. Пожалуйста, щелкните по этой кнопке чтобы подтвердить сброс и вписать новый пароль.
+            Был сделан запрос на сброс пароля. Пожалуйста, щелкните по этой кнопке чтобы подтвердить сброс и вписать новый пароль. Будет открыта форма куда введите токен сброса: <b>${resetToken}</b>
         </p>
         <div class="button-link-wrapper">
-            <a href="${resetUrl}" class="button-link">
+            <a href="${host}/editor/change-reset-password" class="button-link">
                 Сбросить пароль
             </a>
         </div>
@@ -18,10 +18,10 @@ export function forgotPasswordLetterContentTemplate(resetUrl: string, lang: stri
     // В противном случае отправить письмо на английском языке
     else {
         return `<p class="paragraph">
-            Reset password request was made. Please click on this button to reset your password and provide the new one.
+            A password reset request has been made. Please click this button to confirm the reset and enter a new password. A form will open where you enter the reset token: <b>${resetToken}</b>
         </p>
         <div class="button-link-wrapper">
-            <a href="${resetUrl}" class="button-link">
+            <a href="${host}/editor/change-reset-password" class="button-link">
                 Reset my password
             </a>
         </div>

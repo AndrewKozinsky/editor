@@ -1,0 +1,74 @@
+version: "3.9"
+
+services:
+
+  # Nginx
+  nginx:
+    build: ./nginx
+    container_name: editor-nginx
+    depends_on:
+      - editor
+      - editor_api
+      - editor_db
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
+    networks:
+      - editorium-network
+
+
+  # Клиентская часть редактора
+  editor:
+    build:
+      context: ./editor
+      dockerfile: Dockerfile.dev
+    container_name: editor-editor
+    command: npm run dev
+    environment:
+      - SITE_URL=editorium.local
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./editor/src:/app/src
+    networks:
+      - editorium-network
+
+
+  # API редактора
+  editor_api:
+    build: ./editorApi
+    container_name: editor-api
+    command: npm run dev
+    restart: unless-stopped
+    environment:
+      - MODE=development
+      - PORT=3001
+      - MONGO_URL=mongodb://editor_db:27017/editor_db
+    depends_on:
+      - editor_db
+    networks:
+      - editorium-network
+    volumes:
+      - ./editorApi/src:/app/src
+
+
+  # БД редактора
+  editor_db:
+    image: mongo:latest
+    container_name: editor-db
+    ports:
+      - 27017:27017
+    volumes:
+      - editor_db:/data/db
+    networks:
+      - editorium-network
+
+
+volumes:
+  editor_db:
+
+networks:
+  editorium-network:
+    driver: bridge

@@ -24,7 +24,11 @@ export const messages: messagesType = {
         },
         passwordMinLength: {
             eng: 'Password should be at least four characters.',
-            rus: 'Пароль должен быть не короче 4 символов.'
+            rus: 'Пароль должен быть не короче 6 символов.'
+        },
+        passwordMaxLength: {
+            eng: 'Password must not be longer than 50 characters.',
+            rus: 'Пароль должен быть не длиннее 50 символов.'
         },
         passwordConfirmRequired: {
             eng: 'Please confirm your password.',
@@ -36,11 +40,16 @@ export const messages: messagesType = {
         },
         langRequired: {
             eng: 'Please provide your language.',
-            rus: 'Укажите язык интерфейса.'
+            rus: '  Укажите язык интерфейса.'
         }
     },
     // Контроллер авторизации
     authController: {
+        // getTokenData
+        getTokenDataNoCorrectToken: {
+            eng: 'Authorization token is either not transferred or is invalid.',
+            rus: 'Токен авторизации или не передан или неправилен.'
+        },
         // confirmEmail
         confirmEmailUserNotFound: {
             eng: 'Wrong email confirmation token was sent.',
@@ -48,7 +57,7 @@ export const messages: messagesType = {
         },
         confirmEmailIsConfirmed: {
             eng: 'Email is confirmed!',
-            rus: 'Передан неверный токен подтверждения почты.'
+            rus: 'Почта подтверждена.'
         },
         // login
         loginNoEmailOrPassword: {
@@ -97,6 +106,15 @@ export const messages: messagesType = {
         resetPasswordTokenIsInvalid: {
             eng: 'Token is invalid or has expired',
             rus: 'Токен сброса пароля неверный или просроченный.'
+        },
+        // sendAnotherConfirmLetter
+        sendAnotherConfirmLetterUserNotFound: {
+            eng: 'User with such mail was not found',
+            rus: 'Пользователь с такой почтой не найден.'
+        },
+        sendAnotherConfirmLetterUserHasConfirmedEmail: {
+            eng: 'User has already confirmed mail',
+            rus: 'Пользователь уже подтвердил почту.'
         },
     }
 }
