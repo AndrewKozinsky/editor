@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import Header from 'common/textBlocks/Header/Header'
 import Menu from 'common/misc/Menu/Menu'
@@ -19,12 +19,13 @@ import messagesWithJSX from '../messagesWithJSX'
 
 /** Форма входа в сервис */
 export default function ChangeResetPasswordFormBlock() {
+    const dispatch = useDispatch()
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'changeResetPassword')
+    const fh = useFormHandler(getFormConfig(lang, dispatch), 'changeResetPassword')
 
     // Показывать или сообщением что пароль изменён или форму
     const content = fh.form.passwordHasChangedMessage

@@ -24,7 +24,11 @@ export const messages: messagesType = {
         },
         passwordMinLength: {
             eng: 'Password should be at least four characters.',
-            rus: 'Пароль должен быть не короче 4 символов.'
+            rus: 'Пароль должен быть не короче 6 символов.'
+        },
+        passwordMaxLength: {
+            eng: 'Password must not be longer than 50 characters.',
+            rus: 'Пароль должен быть не длиннее 50 символов.'
         },
         passwordConfirmRequired: {
             eng: 'Please confirm your password.',

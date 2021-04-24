@@ -8,6 +8,7 @@ type ErrorType = {
     status: string // fail или error
     isOperational: boolean
     field: null | string
+    name?: string
     message: string
     code?: number
     keyValue: {string: string}
@@ -36,8 +37,8 @@ export function globalErrorHandler (err: any, req: Request, res: Response, next:
     // Если значение поля должно быть уникальным, но ввели дублирующие значения.
     if(error.code === 11000) error = handleDuplicateFieldsBD(error, lang);
     if(error.errors) error = handleValidationErrorBD(error);
-    // if(error.name === 'JsonWebTokenError') handleJWTError(error)
-    // if(error.name === 'TokenExpiredError') handleJWTExpiredError(error)
+    if(error.name === 'JsonWebTokenError') handleJWTError(error)
+    if(error.name === 'TokenExpiredError') handleJWTExpiredError(error)
 
     if(config.workMode === 'development') {
         sendErrorDev(error, res)
@@ -131,16 +132,15 @@ function handleValidationErrorBD(err: ErrorType) {
 }
 
 // Ошибка в JWT
-/*function handleJWTError(err) {
+function handleJWTError(err: ErrorType) {
     err.statusCode = 401
     err.message = 'Invalid token. Please log in again.'
     return err
-}*/
+}
 
 // В JWT истёк срок действия
-/*
-function handleJWTExpiredError(err) {
+function handleJWTExpiredError(err: ErrorType) {
     err.statusCode = 401
     err.message = 'Your token has expired. Please log in again.'
     return err
-}*/
+}

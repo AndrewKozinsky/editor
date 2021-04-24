@@ -58,12 +58,12 @@ const messages: messagesType = {
             rus: 'Обязательное поле'
         },
         passwordErrToShort: {
-            eng: 'Must be 4 characters or more',
-            rus: 'Минимально можно ввести 4 символа'
+            eng: 'Must be 6 characters or more',
+            rus: 'Минимально нужно ввести 6 символов'
         },
         passwordErrToLong: {
-            eng: 'Must be 15 characters or less',
-            rus: 'Максимум можно ввести 15 символов'
+            eng: 'Must be 50 characters or less',
+            rus: 'Максимум можно ввести 50 символов'
         },
         submitBtnText: {
             eng: 'Log in',
@@ -118,12 +118,12 @@ const messages: messagesType = {
             rus: 'Обязательное поле'
         },
         passwordErrToShort: {
-            eng: 'Must be 4 characters or more',
-            rus: 'Минимально можно ввести 4 символа'
+            eng: 'Must be 6 characters or more',
+            rus: 'Минимально нужно ввести 6 символов'
         },
         passwordErrToLong: {
-            eng: 'Must be 15 characters or less',
-            rus: 'Максимум можно ввести 15 символов'
+            eng: 'Must be 50 characters or less',
+            rus: 'Максимум можно ввести 50 символов'
         },
         passwordConfirmField: {
             eng: 'Repeat password *',
@@ -198,12 +198,12 @@ const messages: messagesType = {
             rus: 'Обязательное поле'
         },
         passwordErrToShort: {
-            eng: 'Must be 4 characters or more',
-            rus: 'Минимально можно ввести 4 символа'
+            eng: 'Must be 6 characters or more',
+            rus: 'Минимально нужно ввести 6 символов'
         },
         passwordErrToLong: {
-            eng: 'Must be 15 characters or less',
-            rus: 'Максимум можно ввести 15 символов'
+            eng: 'Must be 50 characters or less',
+            rus: 'Максимум можно ввести 50 символов'
         },
         passwordsMustMatch: {
             eng: 'Passwords must match',

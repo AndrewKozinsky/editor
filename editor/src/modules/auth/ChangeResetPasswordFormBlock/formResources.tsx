@@ -6,10 +6,13 @@ import messages from '../messages'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
+import actions from 'store/rootAction'
+// @ts-ignore
+import {Dispatch} from 'redux';
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: Dispatch): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -85,6 +88,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+                    // Заблокировать кнопку отправки
+                    formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
                     // Поставить фокус на первое поле где есть ошибка
                     $firstWrongField.focus()
@@ -110,7 +115,6 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 const response = await makeFetch(getApiUrl(
                     'changeResetPassword', formDetails.state.fields.token.value[0]), options, lang
                 )
-                console.log(response)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
@@ -121,6 +125,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                     formState = formDetails.setFormDataPropValue(
                         formState, 'passwordHasChangedMessage', true
                     )
+
+                    // Поставить токен авторизации в Хранилище
+                    dispatch(actions.user.setAuthTokenStatus(2))
                 }
                 // Если ввели неправильные данные
                 else {
@@ -153,8 +160,8 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
             .required(messages.ChangeResetPasswordForm.tokenErrRequired[lang]),
         password: yup.string()
             .required(messages.ChangeResetPasswordForm.passwordErrRequired[lang])
-            .min(4, messages.ChangeResetPasswordForm.passwordErrToShort[lang])
-            .max(15, messages.ChangeResetPasswordForm.passwordErrToLong[lang]),
+            .min(6, messages.ChangeResetPasswordForm.passwordErrToShort[lang])
+            .max(50, messages.ChangeResetPasswordForm.passwordErrToLong[lang]),
         passwordConfirm: yup.string()
             .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
     }

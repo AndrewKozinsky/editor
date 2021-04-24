@@ -90,6 +90,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+                    // Заблокировать кнопку отправки
+                    formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
                     // Поставить фокус на первое поле где есть ошибка
                     $firstWrongField.focus()
@@ -151,8 +153,8 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
             .email(messages.RegForm.emailErrInvalid[lang]),
         password: yup.string()
             .required(messages.RegForm.passwordErrRequired[lang])
-            .min(4, messages.RegForm.passwordErrToShort[lang])
-            .max(15, messages.RegForm.passwordErrToLong[lang]),
+            .min(6, messages.RegForm.passwordErrToShort[lang])
+            .max(50, messages.RegForm.passwordErrToLong[lang]),
         passwordConfirm: yup.string()
             .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
     }

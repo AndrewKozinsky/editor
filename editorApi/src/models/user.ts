@@ -40,7 +40,8 @@ const UserSchema: Schema = new Schema({
     password: {
         type: String,
         required: [true, '{{user.passwordRequired}}'],
-        minLength: [4, '{{user.passwordMinLength}}'],
+        minLength: [6, '{{user.passwordMinLength}}'],
+        maxLength: [50, '{{user.passwordMaxLength}}'],
         select: false
     },
     // Подтверждение пароля при регистрации и смене пароля

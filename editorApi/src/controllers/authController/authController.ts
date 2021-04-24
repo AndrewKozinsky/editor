@@ -26,7 +26,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     if(!token) return sendErrorResponse(next)
 
     // Расшифровать JWT и получить payload
-        const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
+    const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получить пользователя
     const currentUser = await UserModel.findById(decoded.id)
@@ -61,46 +61,46 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
 // Если пользователь отправил токен, то программа запускает следующий middleware.
 // Если не отправил, то выбрасывает ошибку.
 export const protect = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
-    let token: string | undefined
+    // let token: string | undefined
 
     // Получение токена
-    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    /*if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
         token = req.headers.authorization.split(' ')[1]
     } else if(req.cookies && req.cookies.authToken) {
         token = req.cookies.authToken
-    }
+    }*/
 
     // Если токен не передан, то бросить ошибку
-    if(!token) {
+    /*if(!token) {
         return next(
             new AppError(null, '{{authController.protectNoToken}}', 401)
         )
-    }
+    }*/
 
     // Расшифровка JWT и получение payload
-    const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
+    // const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получение пользователя
-    const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
+    // const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
 
     // Проверка существования пользователя
-    if(!currentUser) {
+    /*if(!currentUser) {
         return next(
             new AppError(null, '{{authController.protectNoUser}}', 401)
         )
-    }
+    }*/
 
     // Проверить что пароль не изменён
-    if(currentUser.changedPasswordAfter(decoded.iat)) {
+    /*if(currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
             new AppError(null, '{{authController.protectPasswordChanged}}', 401)
         )
-    }
+    }*/
 
     // Поставить в req.user данные пользователя
-    req.user = currentUser
+    // req.user = currentUser
 
-    next()
+    // next()
 })
 
 
@@ -122,12 +122,16 @@ export const signUp = catchAsync<void>(async (req: ExtendedRequestType, res: Res
     // Отправление письма с подтверждением почты
     await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
 
-    // Создание объекта ответа с токеном пользователя
-    const resWithToken = createSendToken(newUser._id, res)
-
     // Отправить данные пользователю
-    // ВОЗМОЖНО ПРИ РЕГИСТРАЦИИ НЕ НУЖНО ОТПРАВЛЯТЬ ТОКЕН ПОТОМУ ЧТО ПОЧТА ЕЩЕ НЕ ПОДТВЕРЖДЕНА
-    sendResponseWithAuthToken(newUser, resWithToken)
+    res.status(200).json({
+        status: 'success',
+        data: {
+            user: {
+                name: newUser.name,
+                email: newUser.email
+            }
+        }
+    })
 })
 
 
@@ -141,50 +145,25 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
         { emailConfirmToken: undefined }, // Как изменить объект
         { new: true } // Вернуть объект после изменения свойства
     )
-    // console.log(user)
 
     // Язык пользователя и тип запроса
-    const lang = <string>req.headers['Editor-Language'] // eng или rus
+    // const lang = <string>req.headers['Editor-Language'] // eng или rus
     const reqSource = <string>req.headers['Editor-Request-Source'] // api или browser
 
     // Если пользователь не найден...
     if(!user) {
-        // Если запрос сделан через Postman
-        if (reqSource === 'api') {
-            // Бросить ошибку
-            return next(
-                new AppError(null, '{{authController.confirmEmailUserNotFound}}', 400)
-            )
-        }
-        // Если запрос сделан из браузера
-        else {
-            // Отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
-            // что пользователь уже подтвердил свою почту или такого пользователя не существует.
-            return res.status(200).send(createRedirectPage('emailIsNotConfirmed', lang))
-        }
+        // Бросить ошибку
+        return next(
+            new AppError(null, '{{authController.confirmEmailUserNotFound}}', 400)
+        )
     }
 
     // Пользователь найден...
-
     // Создать объект ответа с токеном пользователя
     const resWithToken = createSendToken(user._id, res)
 
-    // Если запрос сделан через Postman
-    if (reqSource === 'api') {
-        // Послать положительный ответ
-        res.status(200).json({
-            status: 'success',
-            data: {
-                message: getMessageDependingOnTheLang('{{authController.confirmEmailIsConfirmed}}', lang)
-            }
-        })
-    }
-    // Если запрос сделан из браузера
-    else if (reqSource === 'browser') {
-        // Отправить страницу перебрасывающую пользователя на страницу где ему сообщат,
-        // что пользователь успешно подтвердил свою почту.
-        resWithToken.status(200).send(createRedirectPage('emailIsConfirmed', lang))
-    }
+    // Отправить данные пользователя
+    sendResponseWithAuthToken(user, resWithToken)
 })
 
 
@@ -401,24 +380,4 @@ async function sendEmailAddressConfirmLetter(req: ExtendedRequestType, email: st
 
     // Послать письмо для подтверждения почты
     userEmail.sendConfirmLetter(confirmToken).then(() => {})
-}
-
-/**
- * Функция возвращает разметку страницу где написана переадресацию на другую страницу
- * @param {String} type — тип показываемой страницы
- * @param {String} lang — язык интерфейса
- */
-function createRedirectPage(type: string, lang: string) {
-    return `<!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <title>Title</title>
-        </head>
-        <body>
-            <script>
-                window.location = "/message?type=${type}&lang=${lang}"
-            </script>
-        </body>
-        </html>`
 }

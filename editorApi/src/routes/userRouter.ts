@@ -28,6 +28,9 @@ router.post('/resetPassword', authController.resetPassword)
 // Сброс пароля
 router.patch('/resetPassword/:token', authController.changeResetPassword)
 
+
+
+
 // router.route('/myEmail')
 //     .put(authController.protect, userController.changeMyEmail)
 

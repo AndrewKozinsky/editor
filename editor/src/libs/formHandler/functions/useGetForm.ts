@@ -12,7 +12,7 @@ export default function useGetForm(formName: string): FHTypes.$form {
     useEffect(function () {
         if (formName) {
             // @ts-ignore
-            set$form( document.forms[formName] )
+            if (document.forms[formName]) set$form( document.forms[formName] )
         }
     }, [])
 

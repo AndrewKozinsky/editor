@@ -61,6 +61,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+                    // Заблокировать кнопку отправки
+                    formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
                     // Поставить фокус на первое поле где есть ошибка
                     $firstWrongField.focus()

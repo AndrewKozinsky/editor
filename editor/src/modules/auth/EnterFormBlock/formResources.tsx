@@ -81,6 +81,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
+                    // Заблокировать кнопку отправки
+                    formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
                     // Поставить фокус на первое поле где есть ошибка
                     $firstWrongField.focus()
@@ -156,8 +158,8 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
             .email(messages.EnterForm.emailErrInvalid[lang]),
         password: yup.string()
             .required(messages.EnterForm.passwordErrRequired[lang])
-            .min(4, messages.EnterForm.passwordErrToShort[lang])
-            .max(15, messages.EnterForm.passwordErrToLong[lang])
+            .min(6, messages.EnterForm.passwordErrToShort[lang])
+            .max(50, messages.EnterForm.passwordErrToLong[lang])
     }
 
     // @ts-ignore

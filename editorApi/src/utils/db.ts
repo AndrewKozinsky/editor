@@ -3,7 +3,7 @@ import { config } from '../config/config'
 
 
 /**
- * Функция соединяющаяся с базой данных
+ * Функция соединяющая с базой данных
  */
 export function connectDb(): mongoose.Connection {
     const params = {
