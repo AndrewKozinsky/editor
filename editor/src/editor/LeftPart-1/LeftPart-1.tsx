@@ -1,19 +1,26 @@
 import React from 'react'
+import NameSection from '../wrappers/NameSection/NameSection'
+import './LeftPart-1.scss'
+
 
 type LeftPart1PropType = {
-    display?: boolean
+    display?: boolean // Показывать ли компонент
 }
 
 function LeftPart1(props: LeftPart1PropType) {
     const {
-        display // Показывать ли обёртку
+        display // Показывать ли компонент
     } = props
+
+    const CN = 'left-part-1'
 
     if (!display) return null
 
     return (
-        <div>
-            <p>LeftPart1</p>
+        <div className={CN}>
+            <NameSection header='Сайты'>
+
+            </NameSection>
         </div>
     )
 }

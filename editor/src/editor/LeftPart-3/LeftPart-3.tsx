@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import './LeftPart-3.scss'
 
 type LeftPart3PropType = {
     display?: boolean
@@ -9,10 +10,12 @@ function LeftPart3(props: LeftPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
+    const CN = 'left-part-3'
+
     if (!display) return null
 
     return (
-        <div>
+        <div className={CN}>
             <p>LeftPart3</p>
         </div>
     )

@@ -1,8 +1,8 @@
 import React, {ReactNode} from 'react'
-import './Wrapper.scss'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {useGetComponentSize} from '../../utils/MiscUtils';
-import {getWrapperClasses} from './Wrapper-func';
+import {useGetComponentSize} from 'utils/MiscUtils'
+import {getWrapperClasses} from './Wrapper-func'
+import './Wrapper.scss'
 
 
 export type WrapperPropType = {
