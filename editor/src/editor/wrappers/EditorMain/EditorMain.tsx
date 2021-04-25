@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
-import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
 import { useGetPageClasses } from './EditorMain-func'
+import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
+import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs';
 import './EditorMain.scss'
 
 
@@ -18,10 +19,10 @@ export default function EditorMain(): ReactElement {
         <div className={classes}>
             <div className={`${CN}__left`}>
                 <SectionsTabs />
-                <p>LeftTabContent</p>
+                <EditorPartProvider position='left' />
             </div>
             <div className={`${CN}__right`}>
-                <p>RightTabContent</p>
+                <EditorPartProvider position='right' />
             </div>
         </div>
     )
