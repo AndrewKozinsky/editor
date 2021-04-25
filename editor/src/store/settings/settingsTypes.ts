@@ -14,6 +14,8 @@ namespace StoreSettingsTypes {
     // плавный пехоход к редактору (toEditor), редактор(editor)
     // null сообщает, что еще не известно что должно быть показано и определится позже на основе открытой странице
     export type EntryAndEditorViewState = null | 'entry' | 'toEntry' | 'toEditor' | 'editor'
+    // Номер открытой вкладки
+    export type MainTab = number // 0 | 1 | 2
 
     // Типы типа и тип экшена
     // Установка языка интерфейса
@@ -51,12 +53,20 @@ namespace StoreSettingsTypes {
         payload: string
     }
 
+    // Установка номера последней вкладки
+    export const SETTINGS_SET_MAIN_TAB = 'SETTINGS_SET_MAIN_TAB'
+    export type SetMainTabAction = {
+        type: typeof SETTINGS_SET_MAIN_TAB
+        payload: MainTab
+    }
+
     export type SettingsAction =
         | SetEditorLanguageAction
         | SetEditorThemeAction
         | SetEditorSizeAction
         | SetEntryAndEditorViewStateAction
         | SetLastAddressAction
+        | SetMainTabAction
 }
 
 export default StoreSettingsTypes

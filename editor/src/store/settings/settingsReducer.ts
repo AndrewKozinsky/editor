@@ -6,6 +6,7 @@ export type SettingsReducerType = {
     editorSize: StoreSettingsTypes.EditorSize
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
+    mainTab: StoreSettingsTypes.MainTab
 }
 
 // Изначальные значения
@@ -15,13 +16,15 @@ const initialState: SettingsReducerType = {
     // Тема интерфейса: light или dark
     editorTheme: 'light',
     // Размер интерфейса: small, middle или big
-    editorSize: 'big',
+    editorSize: 'small',
     // Компоненты форм входа и редактор всегда отрисовываются. Эта настройка задаёт какой компонент должен при отрисовке возвращать null.
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
     entryAndEditorViewState: null,
     // Адрес последней страницы на которой был пользователь. Отсчёт ведётся от страницы редактора. Напр.: /enter
-    lastAddress: ''
+    lastAddress: '',
+    // Номер открытой вкладки
+    mainTab: 0,
 }
 
 // Установка языка интерфейса
@@ -73,6 +76,14 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
     }
 }
 
+// Установка адрема последней страницы
+function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
+    return {
+        ...state,
+        mainTab: action.payload
+    }
+}
+
 
 // Редьюсер Store.settings
 export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
@@ -88,6 +99,8 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             return setEntryAndEditorViewState(state, action)
         case StoreSettingsTypes.SETTINGS_SET_LAST_ADDRESS:
             return setLastAddress(state, action)
+        case StoreSettingsTypes.SETTINGS_SET_MAIN_TAB:
+            return setMainTab(state, action)
         default:
             // @ts-ignore
             const x: never = null

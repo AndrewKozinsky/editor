@@ -41,7 +41,15 @@ const settingsActions = {
             type: StoreSettingsTypes.SETTINGS_SET_LAST_ADDRESS,
             payload,
         }
-    }
+    },
+
+    // Установка номера последней вкладки
+    setMainTab(payload: StoreSettingsTypes.MainTab): StoreSettingsTypes.SetMainTabAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_MAIN_TAB,
+            payload,
+        }
+    },
 }
 
 export default settingsActions
