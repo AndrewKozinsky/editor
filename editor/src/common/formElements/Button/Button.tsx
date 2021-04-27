@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
 import './Button.scss'
+import SvgIcon from '../../icons/SvgIcon';
 
 
 export type ButtonPropType = {
@@ -14,7 +15,7 @@ export type ButtonPropType = {
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
-    // icon?: string
+    icon?: string
     text?: string
     name?: string
     disabled?: boolean
@@ -29,13 +30,15 @@ function Button(props: ButtonPropType) {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
-        // icon, // Тип значка
+        icon, // Тип значка
         text, // Текст на кнопке
         name, // Атрибут name кнопки
         disabled = false, // Заблокирована ли кнопка
         loading = false, // Нужно ли на кнопке рисовать загрузчик
         onClick
     } = props
+
+    const CN = 'btn'
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -64,9 +67,12 @@ function Button(props: ButtonPropType) {
     if (name) btnAttrs.name = name
     if (onClick) btnAttrs.onClick = onClick
 
+    let $icon = null
+    if (icon) $icon = <SvgIcon type={icon} className={`${CN}__icon ${CN}__icon-${size}-size`} />
 
     return (
         <button {...btnAttrs}>
+            {$icon}
             <ButtonLoader loading={loading} size={size}/>
             {btnText}
         </button>

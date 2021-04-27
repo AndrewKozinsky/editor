@@ -2,8 +2,10 @@ import React from 'react'
 import {getIcon} from './js/getIcon'
 import { getIconClass } from './js/getIconClass'
 import { getIconSizes } from './js/getIconSizes'
+import {makeCN} from 'utils/StringUtils'
+import { useSelector } from 'react-redux'
+import { AppState } from 'store/rootReducer'
 import './css/SvgIcon.scss'
-import {makeCN} from 'utils/StringUtils';
 
 
 export type SvgIconPropType = {
@@ -20,15 +22,17 @@ function SvgIcon(props: SvgIconPropType) {
         ...anotherProps // Остальные переданные свойства
     } = props
 
+    // Размер интерфейса
+    const editorSize = useSelector((store: AppState) => store.settings.editorSize)
 
     // Значёк
-    const Icon = getIcon(type)
+    const Icon = getIcon(type, editorSize)
     // Основной класс SVG
     const iconClass = getIconClass(type)
     // Добавление дополнительного класса SVG
     const iconClasses = [iconClass, className]
     // Размеры
-    const iconSizes = getIconSizes(type)
+    const iconSizes = getIconSizes(type, editorSize)
 
 
     return (

@@ -1,5 +1,9 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { AppState } from 'store/rootReducer'
+import messages from '../messages'
 import NameSection from '../wrappers/NameSection/NameSection'
+import Button from 'common/formElements/Button/Button'
 import './LeftPart-1.scss'
 
 
@@ -7,10 +11,13 @@ type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
 }
 
-function LeftPart1(props: LeftPart1PropType) {
+export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
+
+    // Язык интерфейса
+    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     const CN = 'left-part-1'
 
@@ -18,11 +25,9 @@ function LeftPart1(props: LeftPart1PropType) {
 
     return (
         <div className={CN}>
-            <NameSection header='Сайты'>
-
+            <NameSection header={messages.SitesPanel.header[lang]}>
+                <Button text={messages.SitesPanel.newSiteBtn[lang]} icon='btnSignTrash' />
             </NameSection>
         </div>
     )
 }
-
-export default LeftPart1;

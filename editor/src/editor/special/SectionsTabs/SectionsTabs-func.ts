@@ -3,9 +3,9 @@ import {useEffect, useState} from 'react'
 import {Dispatch} from 'redux'
 import { useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
+import actions from 'store/rootAction'
 import { MainTabDataType } from '../MainTab/MainTab'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import actions from '../../../store/rootAction';
 
 /** Хук возвращает данные для генерирования вкладок разделов */
 export function useGetTabData(): MainTabDataType[] {
@@ -47,7 +47,7 @@ function getTabData(
         return {
             num: i + 1,
             title: titles[i][lang],
-            iconType: getIconType(i, size),
+            iconType: getIconType(i),
             active: i === activeTabNum,
             position: <'top'|'left'>'top',
             onClick: () => dispatch(actions.settings.setMainTab(i))
@@ -58,28 +58,15 @@ function getTabData(
 /**
  * Функция возвращает тип значка вкладки в зависимости от индекса вкладки и размера интерфейса
  * @param {Number} index — индекс вкладки
- * @param {String} size — размер интерфейса
  */
-function getIconType(index: number, size: StoreSettingsTypes.EditorSize) {
-    const iconsTypes: {[key: string]: string}[] = [
-        {
-            small: 'mainTabMaterialsSmall',
-            middle: 'mainTabMaterialsMiddle',
-            big: 'mainTabMaterialsBig',
-        },
-        {
-            small: 'mainTabEditorSmall',
-            middle: 'mainTabEditorMiddle',
-            big: 'mainTabEditorBig',
-        },
-        {
-            small: 'mainTabSettingsSmall',
-            middle: 'mainTabSettingsMiddle',
-            big: 'mainTabSettingsBig',
-        },
+function getIconType(index: number) {
+    const iconsTypes = [
+        'mainTabMaterials',
+        'mainTabEditor',
+        'mainTabSettings'
     ]
 
-    return iconsTypes[index][size]
+    return iconsTypes[index]
 }
 
 // Массив с подсказками вкладок

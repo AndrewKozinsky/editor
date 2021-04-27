@@ -12,3 +12,8 @@ $CN: main-tab;
 .#{$CN}-bg-color-2 {
     fill: var(--bg-color);
 }
+
+.#{$CN}-btn-icon {
+    opacity: .85;
+    fill: var(--icon-color);
+}
