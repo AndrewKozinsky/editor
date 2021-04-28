@@ -10,7 +10,6 @@ type messagesType = {
 const messages: messagesType = {
     // Панель «Сайты»
     SitesPanel: {
-        // Пункт «Регистрация»
         header: {
             eng: 'Sites',
             rus: 'Сайты'
@@ -18,6 +17,21 @@ const messages: messagesType = {
         newSiteBtn: {
             eng: 'New site',
             rus: 'Новый сайт'
+        },
+    },
+    // Панель «Настройки»
+    SettingsPanel: {
+        header: {
+            eng: 'Settings',
+            rus: 'Настройки'
+        },
+        leftMenuItemUser: {
+            eng: 'User',
+            rus: 'Пользователь'
+        },
+        leftMenuItemEditor: {
+            eng: 'Editor',
+            rus: 'Редактор'
         },
     },
 }

@@ -56,8 +56,11 @@ function Button(props: ButtonPropType) {
         if (lang === 'rus') btnText = 'Отправка...'
     }
 
-    // Если включена загрузка, то заблокировать кнопку
-    if (loading) disabled = true
+    // Если включена загрузка, то заблокировать кнопку и убрать значёк
+    if (loading) {
+        disabled = true
+        icon = undefined
+    }
 
     const btnAttrs: ObjStringKeyAnyValType = {
         type,

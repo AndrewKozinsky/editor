@@ -78,6 +78,9 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
 
 // Установка адрема последней страницы
 function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
+    // Поставить язык в LocalStorage
+    localStorage.setItem('editorTab', action.payload.toString())
+
     return {
         ...state,
         mainTab: action.payload
