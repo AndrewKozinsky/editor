@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import Button from 'common/formElements/Button/Button'
@@ -13,17 +13,16 @@ import useHandleConfirmChangingEmailModal from './confirmEmailModal'
 
 
 export default function EmailForm() {
-
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+
+    // FormHandler
+    const fh = useFormHandler(getFormConfig(lang), 'email')
 
     // В openModal будет функция открывающая модальное окно с подтверждением изменения почты
     // В самом хуке обрабатывается утвердительный ответ на подтверждение изменения почты
     // isSuccessMessageOpen булево значение показывать ли сообщение об успешном изменении почты
-    const { setIsModalOpen, isSuccessMessageOpen } = useHandleConfirmChangingEmailModal()
-
-    // FormHandler
-    const fh = useFormHandler(getFormConfig(lang, setIsModalOpen), 'email')
+    const { isSuccessMessageOpen } = useHandleConfirmChangingEmailModal(fh)
 
     return (
         <>
@@ -54,7 +53,7 @@ export default function EmailForm() {
             </Form>
             {isSuccessMessageOpen && <Wrapper t={15}>
                 <Notice type='success'>
-                    messages.UserDataSection.emailHasChanged[lang]
+                    {messages.UserDataSection.emailHasChanged[lang]}
                 </Notice>
             </Wrapper>}
         </>

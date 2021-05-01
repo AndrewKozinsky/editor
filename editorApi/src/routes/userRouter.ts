@@ -28,11 +28,8 @@ router.post('/resetPassword', authController.resetPassword)
 // Сброс пароля
 router.patch('/resetPassword/:token', authController.changeResetPassword)
 
-
-
-
-// router.route('/myEmail')
-//     .put(authController.protect, userController.changeMyEmail)
+// Изменение почты пользователя
+router.route('/changeEmail').put(authController.protect, authController.changeEmail)
 
 // router.route('/me')
     // Получение данных пользователя

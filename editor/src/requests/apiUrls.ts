@@ -15,6 +15,8 @@ const addresses: ObjStringKeyAnyValType = {
     confirmEmail: function (confirmEmailToken: string) {
         return 'users/confirmEmail/' + confirmEmailToken
     },
+    // Изменение почты
+    changeEmail: 'users/changeEmail',
     // Сброс пароля
     resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного

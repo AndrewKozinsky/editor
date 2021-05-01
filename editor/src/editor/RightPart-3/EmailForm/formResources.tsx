@@ -1,4 +1,6 @@
 import React from 'react'
+//@ts-ignore
+import {Dispatch} from 'redux'
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
@@ -11,13 +13,13 @@ import store from '../../../store/store'
 
 // Объект настройки useFormHandler
 export default function getFormConfig(
-    lang: StoreSettingsTypes.EditorLanguage, setIsModalOpen: (isOpen: boolean) => void
+    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
             email: {
-                initialValue: [''],
+                initialValue: [store.getState().user.email],
                 initialData: {
                     error: null,
                     disabled: false
@@ -40,6 +42,9 @@ export default function getFormConfig(
             initialData: {
                 // Сколько раз пытались отправить форму
                 submitCounter: 0,
+                // Правильно ли заполнена форма. Если правильно,
+                // то код выше покажет модальное окно подтверждения изменения почты.
+                formIsValid: false
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
@@ -53,14 +58,15 @@ export default function getFormConfig(
                 // Первое поле, где есть ошибка
                 let $firstWrongField = getFirstInvalidField(formState)
 
-                // Поставить новое Состояние формы
-                formDetails.setFormState(formState)
-
                 // Если поля формы заполнены верно...
                 if(!$firstWrongField) {
-                    // Открыть модальное окно с вопросом действительно ли пользователь хочет поменять почту
-                    setIsModalOpen(true)
+                    // Поставить свойство, что форма заполнена верно
+                    // чтобы код выше открыл модальное окно с подтверждением смены почты.
+                    formState = formDetails.setFormDataPropValue(formState, 'formIsValid', true)
                 }
+
+                // Поставить новое Состояние формы
+                formDetails.setFormState(formState)
             }
         }
     }

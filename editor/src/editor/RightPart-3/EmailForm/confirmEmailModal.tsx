@@ -6,10 +6,14 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Button from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
 import messages from '../messages'
-import {useGetUserToken} from '../../../requests/authRequests';
+import {useChangeEmail } from 'requests/authRequests'
 
 
-export default function useHandleConfirmChangingEmailModal() {
+/**
+ * Хук регулирует показ модального окно подтверждения показа почты и изменяет почту на переданную
+ * @param {Object} fh — объект отдаваемый FormHandler-ом.
+ */
+export default function useHandleConfirmChangingEmailModal(fh: any) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -20,11 +24,25 @@ export default function useHandleConfirmChangingEmailModal() {
     // Должно ли быть показано сообщение об успешном изменении почты
     const [isSuccessMessageOpen, setIsSuccessMessageOpen] = useState(false)
 
+    // Если форму можно отправлять
+    useEffect(function () {
+        if (fh.form.formIsValid) {
+            setIsModalOpen(true)
+        }
+    }, [fh.form.formIsValid])
+
+
     // Следить за моментом когда был запрос на открытие окна
     useEffect(function () {
         if (isModalOpen) {
-            // Открыть окно
-            dispatch(actions.modal.openModal(<ModalContent />))
+            // Открыть окно подтверждения изменения почтового адреса
+            dispatch(actions.modal.openModal(
+                <ModalContent
+                    newEmail={fh.fields.email.value[0]}
+                    setIsSuccessMessageOpen={setIsSuccessMessageOpen}
+                />
+                )
+            )
         }
 
         // Если модальное окно закрыли, то и тут поменять статус
@@ -33,18 +51,47 @@ export default function useHandleConfirmChangingEmailModal() {
     }, [isModalOpen])
 
     return {
-        setIsModalOpen,
         isSuccessMessageOpen
     }
 }
 
 
-function ModalContent() {
+type ModalContentPropType = {
+    newEmail: string
+    setIsSuccessMessageOpen: (isSuccessMessageOpen: boolean) => void
+}
+
+function ModalContent(props: ModalContentPropType) {
+    const {
+        newEmail,
+        setIsSuccessMessageOpen
+    } = props
+
+    const dispatch = useDispatch()
+
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    // Токен пользователя и функция для его запроса
-    const { userToken, doFetch } = useGetUserToken()
+    // Запрос на изменение почты
+    const { response, doFetch } = useChangeEmail(newEmail)
+
+    useEffect(function () {
+        // Ничего не делать если почта пока не изменена
+        if (!response || response.status !== 'success') return
+
+        // Закрыть модальное окно
+        dispatch(actions.modal.closeModal())
+
+        setTimeout(function () {
+            // Поставить сообщение, что почта изменена
+            setIsSuccessMessageOpen(true)
+        }, 500)
+
+        setTimeout(function () {
+            // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
+            dispatch(actions.user.setAuthTokenStatus(1))
+        }, 8000)
+    }, [response])
 
     return (
         <>
@@ -54,7 +101,11 @@ function ModalContent() {
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button text={messages.UserDataSection.cancelBtn[lang]} />
-                <Button text={messages.UserDataSection.changeBtn[lang]} color='accent' />
+                <Button
+                    text={messages.UserDataSection.changeBtn[lang]}
+                    color='accent'
+                    onClick={doFetch}
+                />
             </Wrapper>
         </>
     )

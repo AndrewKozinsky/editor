@@ -30,8 +30,8 @@ const messages: messagesType = {
             rus: 'Например: smirnov@gmail.com'
         },
         submitBtnText: {
-            eng: 'Change',
-            rus: 'Изменить'
+            eng: 'Save',
+            rus: 'Сохранить'
         },
         requiredField: {
             eng: 'Required field',

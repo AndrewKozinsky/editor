@@ -19,14 +19,14 @@ export function useGetUserToken() {
 }
 
 // Функция меняет почту, на которую зарегистрирована учётная запись пользователя
-export function useChangeEmail() {
+export function useChangeEmail(newEmail: string) {
 
     // Параметры запроса
-    const options = { method: 'POST' }
+    const options = { method: 'PUT', body: JSON.stringify({email: newEmail})}
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: userToken, doFetch} =
-        useFetch<GetTokenDataServerResponse>(getApiUrl('getUserToken'), options)
+    const {data: response, doFetch} =
+        useFetch<GetTokenDataServerResponse>(getApiUrl('changeEmail'), options)
 
-    return { userToken, doFetch }
+    return { response, doFetch }
 }
