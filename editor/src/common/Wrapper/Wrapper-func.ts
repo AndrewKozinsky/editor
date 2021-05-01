@@ -7,8 +7,9 @@ import {WrapperPropType} from './Wrapper';
  * Функция возвращает классы выпадающего списка
  * @param {Object} wrapperProps — props переданные в обёртку
  * @param size — размер элемента.
+ * @param gap — отступ между элементами внутри компонента.
  */
-export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSettingsTypes.EditorSize) {
+export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSettingsTypes.EditorSize, gap?: number) {
     const {
         align,
         t,        // Отступ сверху
@@ -28,6 +29,9 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSett
 
     // Добавление класса дающего нижний оступ
     if (b) classes.push(CN + '--b' + b)
+
+    // Добавление класса дающего отступ между элементами внутри обёртки
+    if (gap) classes.push(CN + '--gap' + gap)
 
     // Размер отступа.
     // tiny (крошечная), small (маленькая), middle (средняя), big (большая)

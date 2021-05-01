@@ -264,6 +264,28 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 viewBox: "0 0 19 19"
             }
         },
+        btnSignClose: {
+            tiny: {
+                width: "13px",
+                height: "13px",
+                viewBox: "0 0 13 13"
+            },
+            small: {
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            },
+            middle: {
+                width: "17px",
+                height: "17px",
+                viewBox: "0 0 17 17"
+            },
+            big: {
+                width: "19px",
+                height: "19px",
+                viewBox: "0 0 19 19"
+            }
+        },
     }
 
     //@ts-ignore

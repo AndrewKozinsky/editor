@@ -18,13 +18,14 @@ export type TextInputPropType = {
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
+    maxWidth?: 250 // Максимальная ширина поля
     placeholder?: string, // Текстозаполнитель
-    autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки
     disabled?: boolean // Заблокировано ли поле
+    autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
 }
 
 
@@ -39,11 +40,12 @@ function TextInput(props: TextInputPropType) {
         autocomplete = '', // Значение автозаполнения поля
         placeholder,    // Текстозаполнитель
         relativeSize,
+        maxWidth, // Максимальная ширина поля
         disabled = false, // Заблокировано ли поле
-        autoFocus = false, // Нужно ли ставить фокус при загрузке
         onChange, // Обработчик изменения поля
         onBlur, // Обработчик потерей полем фокуса
         onKeyDown, // Обработчик нажатия клавиши
+        autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
 
     // Ссылка на элемент
@@ -63,7 +65,7 @@ function TextInput(props: TextInputPropType) {
         type: type,
         name,
         value,
-        className: getTextInputClasses(size),
+        className: getTextInputClasses(size, maxWidth),
         onChange: onChange,
     }
 

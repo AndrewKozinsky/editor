@@ -33,6 +33,8 @@ import BtnSignFolderMiddle from '../icons/btnSignFolderMiddle';
 import BtnSignTrashBig from '../icons/btnSignTrashBig';
 import BtnSignJsonSmall from '../icons/btnSignJsonSmall';
 import StoreSettingsTypes from 'store/settings/settingsTypes';
+import {ReactNode} from 'react';
+import BtnSignCloseSmall from '../icons/btnSignCloseSmall'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -41,7 +43,15 @@ import StoreSettingsTypes from 'store/settings/settingsTypes';
  */
 export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'small') {
 
-    const components = {
+    type componentsType = {
+        [key: string]: {
+            small: ReactNode,
+            middle?: ReactNode,
+            big?: ReactNode
+        }
+    }
+
+    const components: componentsType = {
         // Логотип редактора
         logo: {
             small: Logo
@@ -115,12 +125,17 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
             middle: BtnSignJsonMiddle,
             big: BtnSignJsonBig
         },
+        btnSignClose: {
+            small: BtnSignCloseSmall
+        },
     }
 
     //@ts-ignore
     if (components[type][size]) {
+        //@ts-ignore
         return components[type][size]
     } else {
+        //@ts-ignore
         return components[type]['small']
     }
 }

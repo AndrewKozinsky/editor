@@ -8,24 +8,28 @@ import './Wrapper.scss'
 export type WrapperPropType = {
     children: ReactNode, // Дети компонента
     align?: 'right' | 'center' // Выравнивание
-    t?: 5 | 10 | 15 | 20 | 30, // Отступ сверху
-    b?: 10 | 25 // Отступ снизу
+    t?: TType // Отступ сверху
+    b?: BType // Отступ снизу
+    gap?: GapType // Отступы между элементами внутри обёртки
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер элемента
 }
 
-
+export type TType = 5 | 10 | 15 | 20 | 30
+export type BType = 10 | 15 | 25
+export type GapType = 10
 
 /** Компонент дающий отступ оборачиваемому элементу */
 const Wrapper = (props: WrapperPropType) => {
     const {
         children, // Дети компонента
+        gap
     } = props
 
     // Размер компонента относительно размера всего интерфейса
     const relativeSize = useGetComponentSize(props.relativeSize)
 
     return (
-        <div className={getWrapperClasses(props, relativeSize)}>
+        <div className={getWrapperClasses(props, relativeSize, gap)}>
             {children}
         </div>
     )

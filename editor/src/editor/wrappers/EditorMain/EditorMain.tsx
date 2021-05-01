@@ -1,7 +1,8 @@
 import React, { ReactElement } from 'react'
 import { useGetPageClasses } from './EditorMain-func'
 import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
-import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs';
+import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
+import Modal from 'editor/special/Modal/Modal'
 import './EditorMain.scss'
 
 
@@ -16,14 +17,17 @@ export default function EditorMain(): ReactElement {
     if (!isVisible) return null
 
     return (
-        <div className={classes}>
-            <div className={`${CN}__left`}>
-                <SectionsTabs />
-                <EditorPartProvider position='left' />
+        <>
+            <div className={classes}>
+                <div className={`${CN}__left`}>
+                    <SectionsTabs />
+                    <EditorPartProvider position='left' />
+                </div>
+                <div className={`${CN}__right`}>
+                    <EditorPartProvider position='right' />
+                </div>
             </div>
-            <div className={`${CN}__right`}>
-                <EditorPartProvider position='right' />
-            </div>
-        </div>
+            <Modal />
+        </>
     )
 }

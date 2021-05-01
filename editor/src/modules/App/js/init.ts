@@ -91,15 +91,18 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
     // При обновлении значения данных по токену...
     useEffect(function () {
         if (!userToken) return
-
         // Если ответ успешен, то поставить 2, в противном случае токена нет, поэтому 1
         const userTokenStatus = userToken.status === 'success' ? 2 : 1
 
         // Установка статуса токена в Хранилище
         dispatch( userActions.setAuthTokenStatus(userTokenStatus) )
 
+        // Если успешно зашли, то поставить в Хранилище почту пользователя
+        if (userToken.status === 'success') {
+            //@ts-ignore
+            dispatch( userActions.setEmail(userToken.data.email) )
+        }
     }, [userToken])
-
 
     // При изменении статуса токена
     useEffect(function () {

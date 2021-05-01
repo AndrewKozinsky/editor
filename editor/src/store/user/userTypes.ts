@@ -3,17 +3,26 @@
 namespace StoreUserTypes {
     // Типы значений
     export type AuthTokenStatusType = number
+    export type EmailType = string
 
     // Типы типа и тип экшена
     // Установка статуса токена авторизации
-    export const USER_SET_AUTH_TOKEN_STATUS = 'USER_SET_AUTH_TOKEN_STATUS'
-
+    export const SET_AUTH_TOKEN_STATUS = 'SET_AUTH_TOKEN_STATUS'
     export type SetAuthTokenStatusActionType = {
-        type: typeof USER_SET_AUTH_TOKEN_STATUS;
+        type: typeof SET_AUTH_TOKEN_STATUS;
         payload: AuthTokenStatusType;
     }
 
-    export type UserActionTypes = SetAuthTokenStatusActionType
+    // Установка почты пользователя
+    export const SET_EMAIL = 'SET_EMAIL'
+    export type SetEmailActionType = {
+        type: typeof SET_EMAIL;
+        payload: EmailType;
+    }
+
+    export type UserActionTypes =
+        SetAuthTokenStatusActionType |
+        SetEmailActionType
 }
 
 export default StoreUserTypes

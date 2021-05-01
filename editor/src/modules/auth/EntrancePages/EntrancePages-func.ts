@@ -1,12 +1,10 @@
-// @ts-ignore
-import { useLocation, useHistory } from 'react-router-dom'
-import {makeCN} from 'src/utils/StringUtils'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {useGetUserToken} from 'src/requests/authRequests'
-import userActions from 'src/store/user/userActions'
-import actions from '../../../store/rootAction';
+// @ts-ignore
+import { useHistory } from 'react-router-dom'
+import {makeCN} from 'src/utils/StringUtils'
+import {AppState} from 'store/rootReducer'
+import actions from 'store/rootAction';
 
 /**
  * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
@@ -24,7 +22,6 @@ export function useGetWrapperClasses(CN: string) {
 
     const [classes, setClasses] = useState<string[]>([CN])
     const [isVisible, setIsVisible] = useState(false)
-    // console.log(isVisible)
 
     useEffect(function () {
         if (authTokenStatus === 0) {
@@ -104,7 +101,6 @@ export function useViewStateChanger() {
                 dispatch( actions.settings.setEntryAndEditorViewState('entry') )
             }, 500)
         }
-
 
         // Поставить текущий адрес в Хранилище в качестве последнего
         dispatch( actions.settings.setLastAddress(address) )

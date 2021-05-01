@@ -1,36 +1,44 @@
-import { ItemsListPropType } from 'common/ItemsList/ItemsList'
-import {useSelector} from 'react-redux';
-import {AppState} from '../../store/rootReducer';
-import {useEffect, useState} from 'react';
-import StoreSettingsTypes from '../../store/settings/settingsTypes';
-import messages from '../messages';
+//@ts-ignore
+import {Dispatch} from 'redux'
+import {useDispatch, useSelector} from 'react-redux'
+import { ItemsListPropType, ItemType } from 'src/common/ItemsList/ItemsList'
+import {AppState} from 'src/store/rootReducer'
+import StoreSettingsTypes from 'src/store/settings/settingsTypes'
+import messages from '../messages'
+import actions from 'src/store/rootAction'
 
+/** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
 export function useGetSettingsItemsListProps(): ItemsListPropType {
+    const dispatch = useDispatch()
+
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+    // Активная вкладка панели настроек
+    const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
 
-    // Это значение нужно брать из Хранилища
-    const activeItemId = 0
-
-    // const [props, setProps] = useState<ItemsListPropType>(getItemsListProps(lang, activeItemId))
-
-    /*useEffect(function () {
-
-    }, [lang])*/
-
-    return getItemsListProps(lang, activeItemId)
+    // Сформировать и вернуть объект с атрибутами списка пунктов панели «Настройки»
+    return {
+        items: getItemsListProps(dispatch, lang), // Список пунктов
+        activeItemId: activeTab // id активного пункта
+    }
 }
 
-function getItemsListProps(lang: StoreSettingsTypes.EditorLanguage, activeItemId: number): ItemsListPropType {
-
-    const items = [
-        {id: 0, name: messages.SettingsPanel.leftMenuItemUser[lang]},
-        {id: 1, name: messages.SettingsPanel.leftMenuItemEditor[lang]}
+/**
+ * Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки»
+ * @param {Object} dispatch
+ * @param {String} lang
+ */
+function getItemsListProps(dispatch: Dispatch, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
+    return [
+        {
+            id: 'user',
+            name: messages.SettingsPanel.leftMenuItemUser[lang],
+            onClick: () => dispatch( actions.settings.setSettingsPanelTab('user') )
+        },
+        {
+            id: 'editor',
+            name: messages.SettingsPanel.leftMenuItemEditor[lang],
+            onClick: () => dispatch( actions.settings.setSettingsPanelTab('editor') )
+        }
     ]
-
-    return {
-        items: items, // Список пунктов
-        activeItemId, // id выбранного пункта
-        onClick: () => {}
-    }
 }

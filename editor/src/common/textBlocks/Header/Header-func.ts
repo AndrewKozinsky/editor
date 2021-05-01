@@ -4,14 +4,10 @@ import { HeaderPropType } from './Header'
 
 /**
  * Функция возвращает классы выпадающего списка
- * @param {Object} headerProps — props переданные в компонент заголовка
+ * @param {String} type — тип заголовка. Он задаёт размер текста
  * @param size — размер элемента.
  */
-export function getHeaderClasses(headerProps: HeaderPropType, size: StoreSettingsTypes.EditorSize) {
-
-    const {
-        type // Тип заголовка: он задаёт тег заголовка и размер текста
-    } = headerProps
+export function getHeaderClasses(type: string, size: StoreSettingsTypes.EditorSize) {
 
     // Классы
     const CN = 'header'
@@ -19,8 +15,8 @@ export function getHeaderClasses(headerProps: HeaderPropType, size: StoreSetting
 
     // Размер заголовка.
     // Получится строка вида
-    // header--h1-small-size или header--h1-middle-size
-    if (type === 'h1') classes.push(`${CN}--h1-${size}-size`)
+    // header--h1-small-size или header--h2-middle-size
+    classes.push(`${CN}--${type}-${size}-size`)
 
     return makeCN(classes)
 }

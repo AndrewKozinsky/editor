@@ -28,7 +28,7 @@ $CN: btn;
 .#{$CN}--tiny-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
-    padding: 1px 6px;
+    padding: 1px 7px 1px 5px;
 }
 .#{$CN}--small-size {
     font-size: 1.4rem;
@@ -69,6 +69,10 @@ $CN: btn;
         background-color: var(--button-color);
     }
 }
+.#{$CN}--accent-color {
+    color: white;
+    background-color: var(--accent-color);
+}
 
 
 // Загрузчик
@@ -106,6 +110,10 @@ $loaderCN: btn-loader;
 
 // Значёк
 .#{$CN}__icon {}
+.#{$CN}__icon-tiny-size {
+    margin-right: .2rem;
+    margin-bottom: -2px;
+}
 .#{$CN}__icon-small-size {
     margin-right: .4rem;
     margin-bottom: -2px;

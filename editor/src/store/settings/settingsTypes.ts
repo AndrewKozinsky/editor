@@ -16,6 +16,8 @@ namespace StoreSettingsTypes {
     export type EntryAndEditorViewState = null | 'entry' | 'toEntry' | 'toEditor' | 'editor'
     // Номер открытой вкладки
     export type MainTab = number // 0 | 1 | 2
+    // Активная вкладка панели «Настройки»: user или editor
+    export type SettingsPanelTab = 'user' | 'editor'
 
     // Типы типа и тип экшена
     // Установка языка интерфейса
@@ -60,6 +62,14 @@ namespace StoreSettingsTypes {
         payload: MainTab
     }
 
+    // Установка активной вкладки панели «Настройки»
+    export const SETTINGS_SET_SETTINGS_PANEL_TAB = 'SETTINGS_SET_SETTINGS_PANEL_TAB'
+    export type SetSettingsPanelTabAction = {
+        type: typeof SETTINGS_SET_SETTINGS_PANEL_TAB
+        payload: SettingsPanelTab
+    }
+
+
     export type SettingsAction =
         | SetEditorLanguageAction
         | SetEditorThemeAction
@@ -67,6 +77,7 @@ namespace StoreSettingsTypes {
         | SetEntryAndEditorViewStateAction
         | SetLastAddressAction
         | SetMainTabAction
+        | SetSettingsPanelTabAction
 }
 
 export default StoreSettingsTypes

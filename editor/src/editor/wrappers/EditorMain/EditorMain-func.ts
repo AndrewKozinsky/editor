@@ -16,6 +16,9 @@ export function useGetPageClasses(CN: string) {
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
 
+    // Открыто ли модальное окно
+    const isModalOpen = useSelector((store: AppState) => store.modal.isOpen)
+
     const [classes, setClasses] = useState<string[]>( getClasses(CN, editorSize) )
     const [isVisible, setIsVisible] = useState(false)
 
@@ -23,19 +26,25 @@ export function useGetPageClasses(CN: string) {
 
         // Классы редактора: нормальный вид и отдалённый от зрителя
         const normalClasses = getClasses(CN, editorSize)
-        const scaleDownClasses = getClasses(CN, editorSize, true)
+        const scaleDownClasses = getClasses(CN, editorSize, 'scaleDown')
+        const scaleDownTransparencyClasses = getClasses(CN, editorSize, 'scaleDownTransparent')
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
         // или он вообще не будет отрисовываться.
         // Если нужно показать редактор
-        if (entryAndEditorViewState === 'editor') {
+        // Если открыто модальное окно
+        if (entryAndEditorViewState === 'editor' && isModalOpen) {
+            setIsVisible(true)
+            setClasses( scaleDownClasses )
+        }
+        else if (entryAndEditorViewState === 'editor') {
             setIsVisible(true)
             setClasses( normalClasses )
         }
         // Если нужно показать плавный переход от форм входа к редактору
         else if (entryAndEditorViewState === 'toEditor') {
             setIsVisible(true)
-            setClasses( scaleDownClasses )
+            setClasses( scaleDownTransparencyClasses )
             setTimeout(function () {
                 setClasses( normalClasses )
             }, 10)
@@ -45,20 +54,20 @@ export function useGetPageClasses(CN: string) {
             setIsVisible(true)
             setClasses( normalClasses )
             setTimeout(function () {
-                setClasses( scaleDownClasses )
+                setClasses( scaleDownTransparencyClasses )
             }, 10)
         }
         // Если нужно показать редактор
         else if (entryAndEditorViewState === 'entry') {
             setIsVisible(false)
-            setClasses( scaleDownClasses )
+            setClasses( scaleDownTransparencyClasses )
         }
         // В противном случае ничего не отрисовывать
         else {
             setIsVisible(false)
-            setClasses( scaleDownClasses )
+            setClasses( scaleDownTransparencyClasses )
         }
-    }, [entryAndEditorViewState])
+    }, [entryAndEditorViewState, isModalOpen])
 
     return {
         classes: makeCN(classes),
@@ -70,12 +79,19 @@ export function useGetPageClasses(CN: string) {
  * Функция возращает классы главной обёртки редактора в зависимости от различных значений:
  * @param {String} CN — главный класс обёртки редактора
  * @param {String} editorSize — размер интерфейса
- * @param {Boolean} addScaleDownClass — должен ли редактор быть отдалён от зрителя
+ * @param {String} scaleDownType — тип дополнительного класса:
+ * scaleDown — редактор отдалён от зрителя
+ * scaleDownTransparent — редактор отдалён от зрителя и прозрачен
  */
-function getClasses(CN: string, editorSize?: StoreSettingsTypes.EditorSize, addScaleDownClass: boolean = false) {
+function getClasses(
+    CN: string,
+    editorSize?: StoreSettingsTypes.EditorSize,
+    scaleDownType?: 'scaleDown' | 'scaleDownTransparent'
+) {
     const classes = [CN, `${CN}--${editorSize}-size`]
 
-    if (addScaleDownClass) classes.push(`${CN}--scale-down`)
+    if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
+    if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)
 
     return classes
 }

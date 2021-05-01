@@ -57,3 +57,14 @@ $CN: text-input;
         line-height: 2.2rem;
     }
 }
+
+// Задание максимальной ширины
+.#{$CN}--maxWidth-250-small {
+    max-width: 250px;
+}
+.#{$CN}--maxWidth-250-middle {
+    max-width: 288px;
+}
+.#{$CN}--maxWidth-250-big {
+    max-width: 325px;
+}

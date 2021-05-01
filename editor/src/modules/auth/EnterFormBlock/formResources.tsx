@@ -104,6 +104,12 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 }
                 const response = await makeFetch(getApiUrl('login'), options, lang)
 
+                // Если успешно зашли, то поставить в Хранилище почту пользователя
+                if (response.status === 'success') {
+                    //@ts-ignore
+                    dispatch( actions.user.setEmail(response.data.user.email) )
+                }
+
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
 

@@ -5,8 +5,9 @@ import {useEffect} from 'react';
 /**
  * Функция возвращает классы выпадающего списка
  * @param size — размер элемента.
+ * @param maxWidth — максимальная ширина поля.
  */
-export function getTextInputClasses(size: StoreSettingsTypes.EditorSize) {
+export function getTextInputClasses(size: StoreSettingsTypes.EditorSize, maxWidth?: 250) {
 
     // Классы
     const CN = 'text-input'
@@ -14,6 +15,11 @@ export function getTextInputClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Размер поля ввода.
     classes.push(`${CN}--${size}-size`)
+
+    // Добавление максимальной ширины при необходимости
+    if (maxWidth) {
+        classes.push(`${CN}--maxWidth-${maxWidth}-${size}`)
+    }
 
     return makeCN(classes)
 }

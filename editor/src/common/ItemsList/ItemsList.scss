@@ -16,11 +16,11 @@ $item: #{$CN}__item;
     background-color: transparent;
     border: none;
     border-radius: var(--radius);
-    transition: background-color .2s;
+    transition: background-color .1s;
 
     &:hover {
         background-color: var(--bg-color-2);
-        transition: background-color .2s;
+        transition: background-color .1s;
     }
 
     &:focus {
@@ -54,6 +54,7 @@ $item: #{$CN}__item;
 // Активная кнопка
 .#{$item}--active {
     color: white;
+    cursor: default;
     background-color: var(--accent-color);
 
     &:hover {

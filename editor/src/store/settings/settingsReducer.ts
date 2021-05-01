@@ -7,6 +7,7 @@ export type SettingsReducerType = {
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
     mainTab: StoreSettingsTypes.MainTab
+    settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
 }
 
 // Изначальные значения
@@ -25,6 +26,8 @@ const initialState: SettingsReducerType = {
     lastAddress: '',
     // Номер открытой вкладки
     mainTab: 0,
+    // Активная вкладка панели «Настройки»: user или editor
+    settingsPanelTab: 'user'
 }
 
 // Установка языка интерфейса
@@ -86,6 +89,13 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
         mainTab: action.payload
     }
 }
+// Установка адрема последней страницы
+function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
+    return {
+        ...state,
+        settingsPanelTab: action.payload
+    }
+}
 
 
 // Редьюсер Store.settings
@@ -104,6 +114,8 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             return setLastAddress(state, action)
         case StoreSettingsTypes.SETTINGS_SET_MAIN_TAB:
             return setMainTab(state, action)
+        case StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB:
+            return setSettingsPanelTab(state, action)
         default:
             // @ts-ignore
             const x: never = null

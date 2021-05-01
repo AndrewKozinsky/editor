@@ -1,11 +1,11 @@
 import React from 'react'
 import messages from '../messages'
 import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
+import {AppState} from 'src/store/rootReducer'
 import NameSection from '../wrappers/NameSection/NameSection'
-import ItemsList from 'common/ItemsList/ItemsList'
-import './LeftPart-3.scss'
+import ItemsList from 'src/common/ItemsList/ItemsList'
 import { useGetSettingsItemsListProps } from './LeftPart-3-func'
+import './LeftPart-3.scss'
 
 
 type LeftPart3PropType = {

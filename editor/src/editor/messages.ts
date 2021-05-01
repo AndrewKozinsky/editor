@@ -33,7 +33,7 @@ const messages: messagesType = {
             eng: 'Editor',
             rus: 'Редактор'
         },
-    },
+    }
 }
 
 export default messages

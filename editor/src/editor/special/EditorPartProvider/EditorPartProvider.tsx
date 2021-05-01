@@ -5,7 +5,7 @@ import LeftPart2 from '../../LeftPart-2/LeftPart-2'
 import LeftPart3 from '../../LeftPart-3/LeftPart-3'
 import RightPart1 from '../../RightPart-1/RightPart-1'
 import RightPart2 from '../../RightPart-2/RightPart-2'
-import RightPart3 from '../../RightPart-3/RightPart-3'
+import RightPart3 from '../../RightPart-3/RightPart-3/RightPart-3'
 import {AppState} from '../../../store/rootReducer'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 

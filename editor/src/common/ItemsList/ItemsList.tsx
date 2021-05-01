@@ -3,23 +3,22 @@ import { useGetItemClasses } from './ItemsList-func'
 import './ItemsList.scss'
 
 
-type ItemType = {
-    id: number
+export type ItemType = {
+    id: string
     name: string
+    onClick: () => void // Функция запускаемая при щелчке по пункту
 }
 
 export type ItemsListPropType = {
     items: ItemType[], // Список пунктов
-    activeItemId: number // id выбранного пункта
-    onClick: () => void // Функция запускаемая при щелчке по пункту
+    activeItemId: string // id выбранного пункта
 }
 
 export default function ItemsList(props: ItemsListPropType) {
 
     const {
         items,
-        activeItemId,
-        onClick
+        activeItemId
     } = props
 
     return (
@@ -27,9 +26,9 @@ export default function ItemsList(props: ItemsListPropType) {
             {
                 items.map(item => {
                     if (item.id === activeItemId) {
-                        return <Item item={item} onClick={onClick} key={item.id} isActive />
+                        return <Item item={item} key={item.id} isActive />
                     } else {
-                        return <Item item={item} onClick={onClick} key={item.id} />
+                        return <Item item={item} key={item.id} />
                     }
                 })
             }
@@ -39,23 +38,23 @@ export default function ItemsList(props: ItemsListPropType) {
 
 
 type ItemPropType = {
-    item: ItemType,
-    isActive?: boolean
-    onClick: () => void
+    item: ItemType, // Данные пункта
+    isActive?: boolean // Активен ли пункт
 }
 
+/** Кнопка списка */
 function Item(props: ItemPropType) {
 
     const {
         item,
         isActive,
-        onClick
     } = props
 
+    // Формирование классов кнопки
     const classes = useGetItemClasses(isActive)
 
     return (
-        <button className={classes} onClick={onClick}>
+        <button className={classes} onClick={item.onClick}>
             {item.name}
         </button>
     )
