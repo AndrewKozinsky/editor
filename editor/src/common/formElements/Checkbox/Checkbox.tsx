@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {ReactElement, useState} from 'react'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './Checkbox-func'
@@ -8,7 +8,7 @@ import './Checkbox.scss'
 
 
 export type CheckboxPropType = {
-    label: string // Подпись флага
+    label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле

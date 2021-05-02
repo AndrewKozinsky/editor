@@ -137,7 +137,55 @@ const messages: messagesType = {
             eng: 'Must be 50 characters or less',
             rus: 'Максимум можно ввести 50 символов'
         },
-    }
+    },
+    // Содержимое вкладки «Редактор»
+    EditorTabContent: {
+        header: {
+            eng: 'Editor',
+            rus: 'Редактор'
+        },
+    },
+    // Секция «Язык»
+    LanguageSection: {
+        langRadiosHeader: {
+            eng: 'Language',
+            rus: 'Язык'
+        }
+    },
+    // Секция «Цветовая тема»
+    ThemeSection: {
+        themeRadiosHeader: {
+            eng: 'Color theme',
+            rus: 'Цветовая схема'
+        },
+        lightLabel: {
+            eng: 'Light',
+            rus: 'Светлая'
+        },
+        darkLabel: {
+            eng: 'Dark',
+            rus: 'Тёмная'
+        },
+    },
+    // Секция «Размер интерфейса»
+    SizeSection: {
+        sizeRadiosHeader: {
+            eng: 'Size',
+            rus: 'Размер'
+        },
+        smallLabel: {
+            eng: 'Small',
+            rus: 'Маленький'
+        },
+        middleLabel: {
+            eng: 'Middle',
+            rus: 'Средний'
+        },
+        bigLabel: {
+            eng: 'Big',
+            rus: 'Большой'
+        },
+    },
 }
 
 export default messages

@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react'
+import React, {ReactElement, ReactNode} from 'react'
 import Radio, { RadioPropType } from '../Radio/Radio'
 import Checkbox, {CheckboxPropType} from '../Checkbox/Checkbox'
 import FHTypes from 'libs/formHandler/types'
@@ -7,6 +7,7 @@ import {useGetComponentSize} from '../../../utils/MiscUtils';
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getFieldGroupClasses } from './FieldGroup-func'
 import './FieldGroup.scss'
+import {GapType} from '../../Wrapper/Wrapper';
 
 /**
  * Компонент FieldGroup в зависимости от переданного объекта отрисовывает элементы поля ввода формы: текстовое поле, флаги, переключатели, выпадающий список.
@@ -15,7 +16,7 @@ import './FieldGroup.scss'
  * Если в value передаётся массив строк, то это обозначает
  */
 
-type InputDataType = { label: string, value: string }
+type InputDataType = { label: string | ReactElement, value: string }
 
 export type FieldGroupPropType = {
     label?: string
@@ -23,12 +24,13 @@ export type FieldGroupPropType = {
     groupName: string
     inputsArr: InputDataType[]
     value: FHTypes.FieldValue
+    gap?: 20 // Отступы между элементами внутри обёртки
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
-function FieldGroup(props: FieldGroupPropType) {
+export default function FieldGroup(props: FieldGroupPropType) {
 
     const {
         label,
@@ -36,12 +38,13 @@ function FieldGroup(props: FieldGroupPropType) {
         groupName,
         inputsArr,
         value,
+        gap,
         disabled = false, // Заблокировано ли поле
         onChange,
         onBlur
     } = props
 
-    const $label = label ? <Label label={label} /> : null
+    const $label = label ? <Label label={label} bold /> : null
 
     // Получение типа поля: переключатель или флаг
     let Component = Radio
@@ -50,7 +53,7 @@ function FieldGroup(props: FieldGroupPropType) {
     return (
         <>
             {$label}
-            <InputsWrapper>
+            <InputsWrapper gap={gap}>
                 {inputsArr.map((inputData, i) => {
 
                     const attrs = {
@@ -71,17 +74,17 @@ function FieldGroup(props: FieldGroupPropType) {
     )
 }
 
-export default FieldGroup
-
 
 
 export type InputsWrapperType = {
     size?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
+    gap: number,
     children: ReactNode
 }
 
 function InputsWrapper(props: InputsWrapperType) {
     const {
+        gap,
         children
     } = props
 
@@ -89,7 +92,7 @@ function InputsWrapper(props: InputsWrapperType) {
     // Размер компонента относительно размера всего интерфейса
     const size = useGetComponentSize(props.size)
     // Классы обёртки
-    const cls = getFieldGroupClasses(size)
+    const cls = getFieldGroupClasses(size, gap)
 
     return (
         <div className={cls}>{children}</div>

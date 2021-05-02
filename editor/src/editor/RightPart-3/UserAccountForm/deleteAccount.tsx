@@ -43,7 +43,7 @@ function ModalContent() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    // Запрос на изменение почты
+    // Запрос на удаление учётной записи
     const {response, doFetch} = useDeleteAccount()
 
     useEffect(function () {
@@ -69,7 +69,10 @@ function ModalContent() {
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
-                <Button text={messages.UserAccountSection.cancelBtn[lang]}/>
+                <Button
+                    text={messages.UserAccountSection.cancelBtn[lang]}
+                    onClick={() => dispatch(actions.modal.closeModal())}
+                />
                 <Button
                     text={messages.UserAccountSection.deleteBtn[lang]}
                     color='accent'

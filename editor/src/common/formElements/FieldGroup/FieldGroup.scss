@@ -16,3 +16,17 @@ $CN: field-wrapper;
 .#{$CN}--big-size {
     grid-gap: 11px;
 }
+
+// Класс дающий отступ между элементами обёртки
+.#{$CN}--gap20 {
+    display: flex;
+}
+.#{$CN}--gap20.#{$CN}--small-size {
+    gap: 20px;
+}
+.#{$CN}--gap20.#{$CN}--middle-size {
+    gap: 24px;
+}
+.#{$CN}--gap20.#{$CN}--big-size {
+    gap: 26px;
+}

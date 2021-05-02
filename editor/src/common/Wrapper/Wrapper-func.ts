@@ -6,8 +6,8 @@ import {WrapperPropType} from './Wrapper';
 /**
  * Функция возвращает классы выпадающего списка
  * @param {Object} wrapperProps — props переданные в обёртку
- * @param size — размер элемента.
- * @param gap — отступ между элементами внутри компонента.
+ * @param {String} size — размер элемента.
+ * @param {Number} gap — отступ между элементами внутри компонента.
  */
 export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSettingsTypes.EditorSize, gap?: number) {
     const {

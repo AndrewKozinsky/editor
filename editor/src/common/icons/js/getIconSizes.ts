@@ -44,6 +44,12 @@ import MainTabSettingsSmall from '../icons/mainTabSettingsSmall';
 import MainTabSettingsMiddle from '../icons/mainTabSettingsMiddle';
 import MainTabSettingsBig from '../icons/mainTabSettingsBig';
 import MainTabRoundScion from '../icons/mainTabRoundScion';
+import EditorLightThemeSmall from '../icons/editorLightThemeSmall';
+import EditorLightThemeMiddle from '../icons/editorLightThemeMiddle';
+import EditorLightThemeBig from '../icons/editorLightThemeBig';
+import EditorDarkThemeSmall from '../icons/editorDarkThemeSmall';
+import EditorDarkThemeMiddle from '../icons/editorDarkThemeMiddle';
+import EditorDarkThemeBig from '../icons/editorDarkThemeBig';
 
 /**
  * Функция возращает атрибуты с размерами значка в SVG.
@@ -303,8 +309,43 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 viewBox: "0 0 17 19"
             }
         },
-    }
 
+        // Тема интерфейса
+        editorLightTheme: {
+            small: {
+                width: "76px",
+                height: "76px",
+                viewBox: "0 0 76 76"
+            },
+            middle: {
+                width: "87px",
+                height: "87px",
+                viewBox: "0 0 87 87"
+            },
+            big: {
+                width: "99px",
+                height: "99px",
+                viewBox: "0 0 99 99"
+            },
+        },
+        editorDarkTheme: {
+            small: {
+                width: "76px",
+                height: "76px",
+                viewBox: "0 0 76 76"
+            },
+            middle: {
+                width: "87px",
+                height: "87px",
+                viewBox: "0 0 87 87"
+            },
+            big: {
+                width: "99px",
+                height: "99px",
+                viewBox: "0 0 99 99"
+            },
+        },
+    }
     //@ts-ignore
     return sizes[type][size]
 }

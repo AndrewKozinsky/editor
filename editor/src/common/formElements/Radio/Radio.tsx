@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {ReactElement, useState} from 'react'
 import { ObjStringKeyAnyValType } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
@@ -8,7 +8,7 @@ import './Radio.scss'
 
 
 export type RadioPropType = {
-    label: string // Подпись флага
+    label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле

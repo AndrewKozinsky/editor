@@ -11,6 +11,7 @@ $item: #{$CN}__item;
 .#{$item} {
     display: block;
     width: 100%;
+    color: var(--text-color);
     text-align: left;
     cursor: pointer;
     background-color: transparent;

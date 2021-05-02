@@ -1,12 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import {getIcon} from './js/getIcon'
 import { getIconClass } from './js/getIconClass'
 import { getIconSizes } from './js/getIconSizes'
 import {makeCN} from 'utils/StringUtils'
-import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import './css/SvgIcon.scss'
-import StoreSettingsTypes from '../../store/settings/settingsTypes';
 
 
 export type SvgIconPropType = {

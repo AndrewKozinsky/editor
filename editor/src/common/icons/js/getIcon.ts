@@ -38,6 +38,12 @@ import BtnSignCloseSmall from '../icons/btnSignCloseSmall'
 import BtnSignExitSmall from '../icons/btnSignExitSmall';
 import BtnSignExitMiddle from '../icons/btnSignExitMiddle';
 import BtnSignExitBig from '../icons/btnSignExitBig';
+import EditorLightThemeSmall from '../icons/editorLightThemeSmall'
+import EditorLightThemeMiddle from '../icons/editorLightThemeMiddle'
+import EditorLightThemeBig from '../icons/editorLightThemeBig';
+import EditorDarkThemeSmall from '../icons/editorDarkThemeSmall'
+import EditorDarkThemeMiddle from '../icons/editorDarkThemeMiddle';
+import EditorDarkThemeBig from '../icons/editorDarkThemeBig'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -135,6 +141,17 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
             small: BtnSignExitSmall,
             middle: BtnSignExitMiddle,
             big: BtnSignExitBig
+        },
+        // Тема интерфейса
+        editorLightTheme: {
+            small: EditorLightThemeSmall,
+            middle: EditorLightThemeMiddle,
+            big: EditorLightThemeBig
+        },
+        editorDarkTheme: {
+            small: EditorDarkThemeSmall,
+            middle: EditorDarkThemeMiddle,
+            big: EditorDarkThemeBig
         },
     }
 
