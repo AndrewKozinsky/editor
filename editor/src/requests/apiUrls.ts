@@ -17,12 +17,16 @@ const addresses: ObjStringKeyAnyValType = {
     },
     // Изменение почты
     changeEmail: 'users/changeEmail',
+    // Изменение пароля
+    changePassword: 'users/changePassword',
     // Сброс пароля
     resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного
     changeResetPassword: function (resetPasswordToken: string) {
         return 'users/resetPassword/' + resetPasswordToken
     },
+    // Текущий пользователь
+    me: 'users/me',
 }
 
 

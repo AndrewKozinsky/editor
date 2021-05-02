@@ -126,6 +126,11 @@ export const messages: messagesType = {
             eng: 'Existing email was passed. Write new one to change existing one.',
             rus: 'Передана существующая почта. Передайте другую чтобы её изменить.'
         },
+        // changePassword
+        changePasswordCurrentPasswordIsWrong: {
+            eng: 'Your current password is wrong',
+            rus: 'Передан неправильный текущий пароль.'
+        },
     },
 }
 

@@ -1,10 +1,11 @@
+import {ReactNode} from 'react'
 import Logo from '../icons/logo'
 import ErrorTriangle from '../icons/errorTriangle'
 import SuccessCircle from '../icons/successCircle'
 import SelectInputSmallArrows from '../icons/selectInputSmallArrows'
 import SelectInputMiddleArrows from '../icons/selectInputMiddleArrows'
 import SelectInputBigArrows from '../icons/selectInputBigArrows'
-import MainTabMaterialsSmall from '../icons/mainTabMaterialsSmall';
+import MainTabMaterialsSmall from '../icons/mainTabMaterialsSmall'
 import MainTabMaterialsMiddle from '../icons/mainTabMaterialsMiddle'
 import MainTabMaterialsBig from '../icons/mainTabMaterialsBig'
 import MainTabEditorSmall from '../icons/mainTabEditorSmall'
@@ -14,27 +15,29 @@ import MainTabSettingsSmall from '../icons/mainTabSettingsSmall'
 import MainTabSettingsMiddle from '../icons/mainTabSettingsMiddle'
 import MainTabSettingsBig from '../icons/mainTabSettingsBig'
 import MainTabRoundScion from '../icons/mainTabRoundScion'
-import BtnSignSaveSmall from '../icons/btnSignSaveSmall';
+import BtnSignSaveSmall from '../icons/btnSignSaveSmall'
 import BtnSignSaveMiddle from '../icons/btnSignSaveMiddle'
 import BtnSignSaveBig from '../icons/btnSignSaveBig'
 import BtnSignFolderSmall from '../icons/btnSignFolderSmall'
 import BtnSignFolderBig from '../icons/btnSignFolderBig'
 import BtnSignTrashSmall from '../icons/btnSignTrashSmall'
 import BtnSignTrashMiddle from '../icons/btnSignTrashMiddle'
-import BtnSignCodeMiddle from '../icons/btnSignCodeMiddle';
-import BtnSignAddMiddle from '../icons/btnSignAddMiddle';
-import BtnSignJsonMiddle from '../icons/btnSignJsonMiddle';
-import BtnSignAddSmall from '../icons/btnSignAddSmall';
-import BtnSignAddBig from '../icons/btnSignAddBig';
-import BtnSignJsonBig from '../icons/btnSignJsonBig';
-import BtnSignCodeSmall from '../icons/btnSignCodeSmall';
-import BtnSignCodeBig from '../icons/btnSignCodeBig';
-import BtnSignFolderMiddle from '../icons/btnSignFolderMiddle';
-import BtnSignTrashBig from '../icons/btnSignTrashBig';
-import BtnSignJsonSmall from '../icons/btnSignJsonSmall';
-import StoreSettingsTypes from 'store/settings/settingsTypes';
-import {ReactNode} from 'react';
+import BtnSignCodeMiddle from '../icons/btnSignCodeMiddle'
+import BtnSignAddMiddle from '../icons/btnSignAddMiddle'
+import BtnSignJsonMiddle from '../icons/btnSignJsonMiddle'
+import BtnSignAddSmall from '../icons/btnSignAddSmall'
+import BtnSignAddBig from '../icons/btnSignAddBig'
+import BtnSignJsonBig from '../icons/btnSignJsonBig'
+import BtnSignCodeSmall from '../icons/btnSignCodeSmall'
+import BtnSignCodeBig from '../icons/btnSignCodeBig'
+import BtnSignFolderMiddle from '../icons/btnSignFolderMiddle'
+import BtnSignTrashBig from '../icons/btnSignTrashBig'
+import BtnSignJsonSmall from '../icons/btnSignJsonSmall'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import BtnSignCloseSmall from '../icons/btnSignCloseSmall'
+import BtnSignExitSmall from '../icons/btnSignExitSmall';
+import BtnSignExitMiddle from '../icons/btnSignExitMiddle';
+import BtnSignExitBig from '../icons/btnSignExitBig';
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -127,6 +130,11 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
         },
         btnSignClose: {
             small: BtnSignCloseSmall
+        },
+        btnSignExit: {
+            small: BtnSignExitSmall,
+            middle: BtnSignExitMiddle,
+            big: BtnSignExitBig
         },
     }
 

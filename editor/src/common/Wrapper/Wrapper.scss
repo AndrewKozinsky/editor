@@ -1,5 +1,5 @@
 
-$CN: margin;
+$CN: wrapper;
 
 .#{$CN} {
 
@@ -101,6 +101,9 @@ $CN: margin;
 
 
 // Класс дающий отступ между элементами обёртки
+.#{$CN}--gap10 {
+    display: flex;
+}
 .#{$CN}--gap10.#{$CN}--small-size {
     gap: 10px;
 }

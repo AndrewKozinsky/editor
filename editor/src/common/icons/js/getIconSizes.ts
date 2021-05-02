@@ -286,6 +286,23 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 viewBox: "0 0 19 19"
             }
         },
+        btnSignExit: {
+            small: {
+                width: "13px",
+                height: "15px",
+                viewBox: "0 0 13 15"
+            },
+            middle: {
+                width: "15px",
+                height: "17px",
+                viewBox: "0 0 15 17"
+            },
+            big: {
+                width: "17px",
+                height: "19px",
+                viewBox: "0 0 17 19"
+            }
+        },
     }
 
     //@ts-ignore

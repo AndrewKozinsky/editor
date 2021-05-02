@@ -17,7 +17,7 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSett
     } = wrapperProps
 
 
-    const CN = 'margin'
+    const CN = 'wrapper'
     let classes = [CN]
 
     // Добавление класса дающую выравнивание

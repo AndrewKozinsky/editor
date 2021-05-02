@@ -52,6 +52,7 @@ export function getIconClass(type: string): string {
         case 'btnSignAdd':
         case 'btnSignJson':
         case 'btnSignClose':
+        case 'btnSignExit':
             return `${CN}-btn-icon`
 
         default: return ''

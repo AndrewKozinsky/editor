@@ -30,8 +30,8 @@ const messages: messagesType = {
             rus: 'Например: smirnov@gmail.com'
         },
         submitBtnText: {
-            eng: 'Save',
-            rus: 'Сохранить'
+            eng: 'Change email',
+            rus: 'Изменить почту'
         },
         requiredField: {
             eng: 'Required field',
@@ -68,12 +68,74 @@ const messages: messagesType = {
             eng: 'Change password',
             rus: 'Изменение пароля'
         },
+        currentPasswordField: {
+            eng: 'Current password',
+            rus: 'Текущий пароль'
+        },
+        newPasswordField: {
+            eng: 'New password',
+            rus: 'Новый пароль'
+        },
+        newPasswordAgainField: {
+            eng: 'Retype new password',
+            rus: 'Повторите новый пароль'
+        },
+        submitBtnText: {
+            eng: 'Change password',
+            rus: 'Изменить пароль'
+        },
+        passwordsMustMatch: {
+            eng: 'Passwords must match',
+            rus: 'Пароли должны совпадать'
+        },
+        passwordHasChanged: {
+            eng: 'Password has changed.',
+            rus: 'Пароль изменён.'
+        },
+        cancelBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        changeBtn: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
     },
     // Секция «Учетная запись»
     UserAccountSection: {
         header: {
             eng: 'User account',
             rus: 'Учетная запись'
+        },
+        cancelBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteBtn: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        logOutBtn: {
+            eng: 'Log Out',
+            rus: 'Выйти'
+        },
+        confirmModalText: {
+            eng: 'If you delete your account, all articles created in the editor will also be deleted. Articles on your site will not be affected. Delete this account?',
+            rus: 'С удалением учётной записи будут удалены и все статьи созданные в редакторе. Статьи на вашем сайте затронуты не будут. Удалить учётную запись?'
+        },
+    },
+    Common: {
+        requiredField: {
+            eng: 'Required field',
+            rus: 'Обязательное поле'
+        },
+        passwordToShort: {
+            eng: 'Must be 6 characters or more',
+            rus: 'Минимально нужно ввести 6 символов'
+        },
+        passwordToLong: {
+            eng: 'Must be 50 characters or less',
+            rus: 'Максимум можно ввести 50 символов'
         },
     }
 }

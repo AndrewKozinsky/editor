@@ -16,7 +16,7 @@ export type ButtonPropType = {
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
-    icon?: 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose'
+    icon?: 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit'
     text?: string
     name?: string
     loading?: boolean

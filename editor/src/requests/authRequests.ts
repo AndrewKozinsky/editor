@@ -30,3 +30,16 @@ export function useChangeEmail(newEmail: string) {
 
     return { response, doFetch }
 }
+
+// Функция удаляет учётная запись пользователя
+export function useDeleteAccount() {
+
+    // Параметры запроса
+    const options = { method: 'DELETE'}
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    const {data: response, doFetch} =
+        useFetch<GetTokenDataServerResponse>(getApiUrl('me'), options)
+
+    return { response, doFetch }
+}

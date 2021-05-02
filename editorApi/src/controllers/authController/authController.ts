@@ -351,7 +351,7 @@ export const changeResetPassword = catchAsync(async (req: ExtendedRequestType, r
     sendResponseWithAuthToken(user, resWithToken)
 })
 
-/** Обработчик регистрации пользователя */
+/** Обработчик изменения почтового адреса */
 export const changeEmail = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Получу новую почту
@@ -398,6 +398,59 @@ export const changeEmail = catchAsync<void>(async (req: ExtendedRequestType, res
         data: {
             user
         }
+    })
+})
+
+
+/** Обработчик изменения пароля */
+export const changePassword = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    // Получу данные текущего пользователя вместе с паролем.
+    const user = await UserModel.findById(req.user?.id).select('+password')
+    // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
+    if (!user) return
+
+    // Если пользователь ввёл неверный текущий пароль, то бросить ошибку
+    if(!await user.correctPassword(req.body.passwordCurrent, user.password)) {
+        return next(
+            new AppError('passwordCurrent', '{{authController.changePasswordCurrentPasswordIsWrong}}', 401)
+        )
+    }
+
+    // Поставить новый пароль в данные пользователя
+    user.password = req.body.newPassword
+    user.passwordConfirm = req.body.newPasswordAgain
+
+    // Соханить пароль в базе данных
+    await user.save()
+
+    // Создание объекта ответа с токеном пользователя
+    const resWithToken = createSendToken(user._id, res)
+
+    // Отправить данные пользователя
+    sendResponseWithAuthToken(user, resWithToken)
+})
+
+
+/** Удаление пользователя */
+export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+// Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
+    if (!req.user) return
+
+    // Удалить пользователя из БД
+    await UserModel.findByIdAndDelete(
+        req.user.id
+    )
+
+    // Обнулить куку авторизации
+    res.cookie('authToken', 'loggedout', {
+        expires: new Date(Date.now() + 2 * 1000),
+        httpOnly: true
+    })
+
+    // Отправить пустой ответ
+    res.status(200).json({
+        status: 'success'
     })
 })
 
