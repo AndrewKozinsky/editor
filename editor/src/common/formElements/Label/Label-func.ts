@@ -5,8 +5,9 @@ import { makeCN } from 'utils/StringUtils'
  * Функция возвращает классы выпадающего списка
  * @param {String} size — размер элемента.
  * @param {Boolean} disabled — заблокировано ли поле где есть эта подпись
+ * @param {Boolean} bold — должен ли текст быть жирным
  */
-export function getLabelClasses(size: StoreSettingsTypes.EditorSize, disabled?: boolean) {
+export function getLabelClasses(size: StoreSettingsTypes.EditorSize, disabled?: boolean, bold?: boolean) {
 
     // Классы кнопки
     const CN = 'label'
@@ -18,6 +19,9 @@ export function getLabelClasses(size: StoreSettingsTypes.EditorSize, disabled?: 
 
     // Если поле заблокировано
     if (disabled) classes.push(`${CN}--disabled`)
+
+    // Если текст должен быть жирным
+    if (bold) classes.push(`${CN}--bold`)
 
     return makeCN(classes)
 }

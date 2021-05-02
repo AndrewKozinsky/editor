@@ -116,7 +116,22 @@ export const messages: messagesType = {
             eng: 'User has already confirmed mail',
             rus: 'Пользователь уже подтвердил почту.'
         },
-    }
+        // changeEmail
+        changeEmailNoEmail: {
+            eng: 'Email is not provided',
+            rus: 'Не передана почта.'
+        },
+        // changeEmail
+        changeEmailNewEmailISEqualToCurrent: {
+            eng: 'Existing email was passed. Write new one to change existing one.',
+            rus: 'Передана существующая почта. Передайте другую чтобы её изменить.'
+        },
+        // changePassword
+        changePasswordCurrentPasswordIsWrong: {
+            eng: 'Your current password is wrong',
+            rus: 'Передан неправильный текущий пароль.'
+        },
+    },
 }
 
 

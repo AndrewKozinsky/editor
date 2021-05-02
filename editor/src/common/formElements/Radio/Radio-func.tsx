@@ -3,7 +3,7 @@ import { makeCN } from 'src/utils/StringUtils'
 import StoreSettingsTypes from 'src/store/settings/settingsTypes';
 
 /**
- * Функция возвращает классы обёртки выпадающего списка.
+ * Функция возвращает классы обёртки подписи переключателей.
  * @param size — размер элемента.
  */
 export function getLabelClasses(size: StoreSettingsTypes.EditorSize) {

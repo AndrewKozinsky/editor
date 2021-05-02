@@ -28,23 +28,18 @@ router.post('/resetPassword', authController.resetPassword)
 // Сброс пароля
 router.patch('/resetPassword/:token', authController.changeResetPassword)
 
-
-
-
-// router.route('/myEmail')
-//     .put(authController.protect, userController.changeMyEmail)
-
-// router.route('/me')
-    // Получение данных пользователя
-    // .get(authController.protect, userController.getMe)
-    // Обновление данных пользователя
-    // .patch(authController.protect, userController.updateMe)
-    // Удаление пользователя
-    // .delete(authController.protect, userController.deleteMe)
+// Изменение почты пользователя
+router.route('/changeEmail').put(authController.protect, authController.changeEmail)
 
 // Изменение пароля
-// router.route('/myPassword')
-//     .patch(authController.protect, userController.updateMyPassword)
+router.route('/changePassword')
+    .patch(authController.protect, authController.changePassword)
+
+router.route('/me')
+    // Удаление пользователя
+    .delete(authController.protect, authController.deleteMe)
+
+
 
 
 export default router

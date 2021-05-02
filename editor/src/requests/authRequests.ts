@@ -17,3 +17,29 @@ export function useGetUserToken() {
 
     return { userToken, doFetch }
 }
+
+// Функция меняет почту, на которую зарегистрирована учётная запись пользователя
+export function useChangeEmail(newEmail: string) {
+
+    // Параметры запроса
+    const options = { method: 'PUT', body: JSON.stringify({email: newEmail})}
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    const {data: response, doFetch} =
+        useFetch<GetTokenDataServerResponse>(getApiUrl('changeEmail'), options)
+
+    return { response, doFetch }
+}
+
+// Функция удаляет учётная запись пользователя
+export function useDeleteAccount() {
+
+    // Параметры запроса
+    const options = { method: 'DELETE'}
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    const {data: response, doFetch} =
+        useFetch<GetTokenDataServerResponse>(getApiUrl('me'), options)
+
+    return { response, doFetch }
+}

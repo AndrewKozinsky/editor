@@ -1,6 +1,8 @@
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppState} from '../store/rootReducer';
 import StoreSettingsTypes from '../store/settings/settingsTypes'
+import actions from '../store/rootAction';
+import {ReactElement} from 'react';
 
 
 /**
@@ -44,5 +46,24 @@ function getSize(relativeSize: StoreSettingsTypes.EditorSizeMultiply, editorSize
     }
     else {
         return editorSizes[nextEditorSizeIdx]
+    }
+}
+
+
+/** Хук возвращает функцию открывающую модальное окно */
+export function useGetModalOpenHandler() {
+    const dispatch = useDispatch()
+
+    return function (content: ReactElement) {
+        dispatch(actions.modal.openModal(content))
+    }
+}
+
+/** Хук возвращает функцию закрывающую модальное окно */
+export function useGetModalCloseHandler() {
+    const dispatch = useDispatch()
+
+    return function () {
+        dispatch(actions.modal.closeModal())
     }
 }

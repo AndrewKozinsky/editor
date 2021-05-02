@@ -1,8 +1,19 @@
 
-.base-svg-logo {
+$CN: main-tab;
+
+.#{$CN}-icon-color-fill {
     fill: var(--icon-color);
 }
 
-.select-input-arrows {
+.#{$CN}-icon-color-stroke {
     stroke: var(--icon-color);
+}
+
+.#{$CN}-bg-color-2 {
+    fill: var(--bg-color);
+}
+
+.#{$CN}-btn-icon {
+    opacity: .85;
+    fill: var(--icon-color);
 }

@@ -1,5 +1,5 @@
 
-$CN: margin;
+$CN: wrapper;
 
 .#{$CN} {
 
@@ -79,6 +79,16 @@ $CN: margin;
     margin-bottom: 1.3rem;
 }
 
+.#{$CN}--b15.#{$CN}--small-size {
+    margin-bottom: 1.5rem;
+}
+.#{$CN}--b15.#{$CN}--middle-size {
+    margin-bottom: 1.7rem;
+}
+.#{$CN}--b15.#{$CN}--big-size {
+    margin-bottom: 2rem;
+}
+
 .#{$CN}--b25.#{$CN}--small-size {
     margin-bottom: 2.5rem;
 }
@@ -87,4 +97,19 @@ $CN: margin;
 }
 .#{$CN}--b25.#{$CN}--big-size {
     margin-bottom: 3.3rem;
+}
+
+
+// Класс дающий отступ между элементами обёртки
+.#{$CN}--gap10 {
+    display: flex;
+}
+.#{$CN}--gap10.#{$CN}--small-size {
+    gap: 10px;
+}
+.#{$CN}--gap10.#{$CN}--middle-size {
+    gap: 12px;
+}
+.#{$CN}--gap10.#{$CN}--big-size {
+    gap: 13px;
 }

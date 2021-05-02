@@ -32,12 +32,13 @@ function useGetAndSetEditorSettings() {
 
     // При отрисовке компонента...
     useEffect(function () {
-        // Получить из LocalStorage язык интерфейса, тему и размер элементов
+        // Получить из LocalStorage язык интерфейса, тему, размер элементов и открытую вкладку
         let language = <StoreSettingsTypes.EditorLanguage | null>localStorage.getItem('editorLanguage')
         let theme = <StoreSettingsTypes.EditorTheme | null>localStorage.getItem('editorTheme')
         let size = <StoreSettingsTypes.EditorSize | null>localStorage.getItem('editorSize')
+        let tab = <StoreSettingsTypes.MainTab | null>+localStorage.getItem('editorTab')
 
-        // Если каких-то значений нет, то в LocalStorage поставить стандартные значения
+        // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
             language = 'eng' // Язык интерфейса: eng или rus
             localStorage.setItem('editorLanguage', language)
@@ -50,11 +51,16 @@ function useGetAndSetEditorSettings() {
             size = 'small' // Тема интерфейса: light или dark
             localStorage.setItem('editorSize', size)
         }
+        if (!tab) {
+            tab = 0 // Первая вкладка
+            localStorage.setItem('editorTab', tab.toString())
+        }
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setEditorSize(size) )
+        dispatch( settingsActions.setMainTab(tab) )
     }, [])
 }
 
@@ -92,8 +98,12 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
         // Установка статуса токена в Хранилище
         dispatch( userActions.setAuthTokenStatus(userTokenStatus) )
 
+        // Если успешно зашли, то поставить в Хранилище почту пользователя
+        if (userToken.status === 'success') {
+            //@ts-ignore
+            dispatch( userActions.setEmail(userToken.data.email) )
+        }
     }, [userToken])
-
 
     // При изменении статуса токена
     useEffect(function () {

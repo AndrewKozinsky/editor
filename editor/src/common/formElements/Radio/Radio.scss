@@ -1,4 +1,4 @@
-@import "../commonStyles/commonStyles";
+@import "../../commonStyles/commonStyles";
 
 
 $CN: radio;
@@ -40,7 +40,7 @@ $CN: radio;
         border-radius: 50%;
     }
     &:before {
-        top: 0;
+        top: 1px;
         left: 0;
         transition: background-color .2s;
     }
@@ -74,21 +74,21 @@ $CN: radio;
     width: 5px;
     height: 5px;
     left: -16px;
-    top: 3.5px;
+    top: 4px;
     margin: 2px 0 0 2px;
 }
 .#{$CN}-label--middle-size::after {
     width: 6px;
     height: 6px;
     left: -15px;
-    top: 9px;
+    top: 10px;
     margin: -3px 0 0 -3px;
 }
 .#{$CN}-label--big-size::after {
     width: 7px;
     height: 7px;
     left: -28px;
-    top: 3px;
+    top: 4px;
     margin: 4px 0 0 7px;
     opacity: 0;
 

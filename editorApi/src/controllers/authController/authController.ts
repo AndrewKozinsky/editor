@@ -39,6 +39,11 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
         return sendErrorResponse(next)
     }
 
+    // Если почта не подтверждена, то вернуть ошибочный ответ
+    if(currentUser.emailConfirmToken) {
+        return sendErrorResponse(next)
+    }
+
     // Если все проверки прошли мимо, то вернуть положительный ответ вместе с данными пользователя
     res.status(200).json({
         status: 'success',
@@ -61,46 +66,38 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
 // Если пользователь отправил токен, то программа запускает следующий middleware.
 // Если не отправил, то выбрасывает ошибку.
 export const protect = catchAsync(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
-    // let token: string | undefined
-
-    // Получение токена
-    /*if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
-        token = req.headers.authorization.split(' ')[1]
-    } else if(req.cookies && req.cookies.authToken) {
-        token = req.cookies.authToken
-    }*/
+    let token: string | undefined = req.cookies.authToken
 
     // Если токен не передан, то бросить ошибку
-    /*if(!token) {
+    if(!token) {
         return next(
             new AppError(null, '{{authController.protectNoToken}}', 401)
         )
-    }*/
+    }
 
     // Расшифровка JWT и получение payload
-    // const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
+    const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получение пользователя
-    // const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
+    const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
 
-    // Проверка существования пользователя
-    /*if(!currentUser) {
+    // Бросить ошибку если пользователь не существует
+    if(!currentUser) {
         return next(
             new AppError(null, '{{authController.protectNoUser}}', 401)
         )
-    }*/
+    }
 
     // Проверить что пароль не изменён
-    /*if(currentUser.changedPasswordAfter(decoded.iat)) {
+    if(currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
             new AppError(null, '{{authController.protectPasswordChanged}}', 401)
         )
-    }*/
+    }
 
-    // Поставить в req.user данные пользователя
-    // req.user = currentUser
-
-    // next()
+    // Поставить в req.user данные пользователя и запустить следующий обработчик
+    req.user = currentUser
+    next()
 })
 
 
@@ -146,13 +143,8 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
         { new: true } // Вернуть объект после изменения свойства
     )
 
-    // Язык пользователя и тип запроса
-    // const lang = <string>req.headers['Editor-Language'] // eng или rus
-    const reqSource = <string>req.headers['Editor-Request-Source'] // api или browser
-
-    // Если пользователь не найден...
+    // Если пользователь не найден, то бросить ошибку
     if(!user) {
-        // Бросить ошибку
         return next(
             new AppError(null, '{{authController.confirmEmailUserNotFound}}', 400)
         )
@@ -357,6 +349,109 @@ export const changeResetPassword = catchAsync(async (req: ExtendedRequestType, r
 
     // Отправить данные пользователя
     sendResponseWithAuthToken(user, resWithToken)
+})
+
+/** Обработчик изменения почтового адреса */
+export const changeEmail = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    // Получу новую почту
+    const newEmail = req.body.email
+
+    // Если почту не передали, то бросить ошибку
+    if(!newEmail) {
+        return next(
+            new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
+        )
+    }
+
+    // Если передали такую же почту, то отправить ошибку
+    if(req.user && newEmail === req.user.email) {
+        return next(
+            new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
+        )
+    }
+
+    // Создам токен подтверждения почты
+    const emailConfirmToken = crypto.randomBytes(32).toString('hex');
+
+    // Найду текущего пользователя и обновлю его почту
+    const user = await UserModel.findOneAndUpdate(
+        {email: req.user?.email},
+        {
+            email: newEmail,
+            emailConfirmToken: emailConfirmToken,
+        },
+        {new: true}
+    ).select('-_id -emailConfirmToken -__v -passwordChangedAt')
+
+    // Отправление письма с подтверждением почты
+    await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
+
+    // Удалю куку авторизации
+    res.cookie('authToken', 'loggedout', {
+        expires: new Date(Date.now() + 2 * 1000),
+        httpOnly: true
+    })
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            user
+        }
+    })
+})
+
+
+/** Обработчик изменения пароля */
+export const changePassword = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+
+    // Получу данные текущего пользователя вместе с паролем.
+    const user = await UserModel.findById(req.user?.id).select('+password')
+    // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
+    if (!user) return
+
+    // Если пользователь ввёл неверный текущий пароль, то бросить ошибку
+    if(!await user.correctPassword(req.body.passwordCurrent, user.password)) {
+        return next(
+            new AppError('passwordCurrent', '{{authController.changePasswordCurrentPasswordIsWrong}}', 401)
+        )
+    }
+
+    // Поставить новый пароль в данные пользователя
+    user.password = req.body.newPassword
+    user.passwordConfirm = req.body.newPasswordAgain
+
+    // Соханить пароль в базе данных
+    await user.save()
+
+    // Создание объекта ответа с токеном пользователя
+    const resWithToken = createSendToken(user._id, res)
+
+    // Отправить данные пользователя
+    sendResponseWithAuthToken(user, resWithToken)
+})
+
+
+/** Удаление пользователя */
+export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+// Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
+    if (!req.user) return
+
+    // Удалить пользователя из БД
+    await UserModel.findByIdAndDelete(
+        req.user.id
+    )
+
+    // Обнулить куку авторизации
+    res.cookie('authToken', 'loggedout', {
+        expires: new Date(Date.now() + 2 * 1000),
+        httpOnly: true
+    })
+
+    // Отправить пустой ответ
+    res.status(200).json({
+        status: 'success'
+    })
 })
 
 
