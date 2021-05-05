@@ -9,7 +9,6 @@ import './MainTab.scss'
 
 
 export type MainTabDataType = {
-    num?: number // Номер вкладки
     title?: string // Подсказка при наведении на вкладку
     iconType: string // Тип значка
     active?: boolean // Выделена ли вкладка
@@ -25,7 +24,6 @@ type MainTabPropType = {
 export default function MainTab(props: MainTabPropType) {
 
     const {
-        num,
         title = null,
         iconType,
         active = false,

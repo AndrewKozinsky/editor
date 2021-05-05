@@ -1,5 +1,5 @@
 
-$CN: main-tab;
+$CN: icon;
 
 .#{$CN}-icon-color-fill {
     fill: var(--icon-color);
@@ -16,4 +16,8 @@ $CN: main-tab;
 .#{$CN}-btn-icon {
     opacity: .85;
     fill: var(--icon-color);
+}
+
+.#{$CN}-white-btn-icon {
+    fill: white;
 }

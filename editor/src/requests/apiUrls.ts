@@ -27,6 +27,10 @@ const addresses: ObjStringKeyAnyValType = {
     },
     // Текущий пользователь
     me: 'users/me',
+
+    // САЙТЫ
+    // Сайты
+    sites: 'sites',
 }
 
 

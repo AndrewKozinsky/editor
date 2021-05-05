@@ -43,12 +43,12 @@ function ModalContent() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    // Запрос на удаление учётной записи
-    const {response, doFetch} = useDeleteAccount()
+    // Запрос на удаление пользователя
+    const {response: deleteResponse, doFetch: deleteUser} = useDeleteAccount()
 
     useEffect(function () {
         // Ничего не делать если статус не равен success
-        if (!response || response.status !== 'success') return
+        if (!deleteResponse || deleteResponse.status !== 'success') return
 
         // Закрыть модальное окно
         dispatch(actions.modal.closeModal())
@@ -60,7 +60,7 @@ function ModalContent() {
             // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
             dispatch(actions.user.setAuthTokenStatus(1))
         }, 1000)
-    }, [response])
+    }, [deleteUser])
 
     return (
         <>
@@ -76,7 +76,7 @@ function ModalContent() {
                 <Button
                     text={messages.UserAccountSection.deleteBtn[lang]}
                     color='accent'
-                    onClick={doFetch}
+                    onClick={deleteUser}
                 />
             </Wrapper>
         </>

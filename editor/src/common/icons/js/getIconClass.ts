@@ -21,14 +21,20 @@ import BtnSignJsonBig from '../icons/btnSignJsonBig';
  * Функция возращает класс который нужно применить к SVG со значком.
  * В зависимости от типа значка будут возвращены разные названия классов
  * @param {String} type — тип значка.
+ * @param {String} specialClass — класс, который нужно задать значку.
  */
-export function getIconClass(type: string): string {
-    const CN = 'main-tab'
+export function getIconClass(type: string, specialClass?: string): string {
+    const CN = 'icon'
+
+    // Если указан спецкласс, то возратить его
+    if (specialClass) return CN + specialClass
 
     switch (type) {
+        // Базовый цвет значков
         case 'logo':
-            // Базовый цвет значков
             return `${CN}-icon-color-fill`
+
+        // Тёмная обводка
         case 'selectInputSmallArrows':
         case 'selectInputMiddleArrows':
         case 'selectInputBigArrows':
@@ -38,6 +44,11 @@ export function getIconClass(type: string): string {
         case 'mainTabMaterials':
         case 'mainTabEditor':
         case 'mainTabSettings':
+        // Значки на вкладках сайта
+        case 'siteTabSite':
+        case 'siteTabPlugins':
+        case 'siteTabComponents':
+        case 'siteTabArticle':
             return `${CN}-icon-color-fill`
 
         // Закругляемая часть в кнопки вкладки

@@ -44,6 +44,18 @@ import EditorLightThemeBig from '../icons/editorLightThemeBig';
 import EditorDarkThemeSmall from '../icons/editorDarkThemeSmall'
 import EditorDarkThemeMiddle from '../icons/editorDarkThemeMiddle';
 import EditorDarkThemeBig from '../icons/editorDarkThemeBig'
+import SiteTabSiteSmall from '../icons/siteTabSiteSmall'
+import SiteTabSiteMiddle from '../icons/siteTabSiteMiddle'
+import SiteTabSiteBig from '../icons/siteTabSiteBig'
+import SiteTabPluginsSmall from '../icons/siteTabPluginsSmall'
+import SiteTabPluginsMiddle from '../icons/siteTabPluginsMiddle';
+import SiteTabPluginsBig from '../icons/siteTabPluginsBig';
+import SiteTabComponentsMiddle from '../icons/siteTabComponentsMiddle';
+import SiteTabComponentsBig from '../icons/siteTabComponentsBig';
+import SiteTabArticleSmall from '../icons/siteTabArticleSmall';
+import SiteTabArticleBig from '../icons/siteTabArticleBig'
+import SiteTabComponentsSmall from '../icons/siteTabComponentsSmall'
+import SiteTabArticleMiddle from '../icons/siteTabArticleMiddle'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -99,6 +111,29 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
             middle: MainTabSettingsMiddle,
             big: MainTabSettingsBig,
         },
+
+        // Значки на вкладках сайта
+        siteTabSite: {
+            small: SiteTabSiteSmall,
+            middle: SiteTabSiteMiddle,
+            big: SiteTabSiteBig
+        },
+        siteTabPlugins: {
+            small: SiteTabPluginsSmall,
+            middle: SiteTabPluginsMiddle,
+            big: SiteTabPluginsBig
+        },
+        siteTabComponents: {
+            small: SiteTabComponentsSmall,
+            middle: SiteTabComponentsMiddle,
+            big: SiteTabComponentsBig
+        },
+        siteTabArticle: {
+            small: SiteTabArticleSmall,
+            middle: SiteTabArticleMiddle,
+            big: SiteTabArticleBig
+        },
+
         // Закругляемая часть в кнопки вкладки
         mainTabRoundScion: {
             small: MainTabRoundScion

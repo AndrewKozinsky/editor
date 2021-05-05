@@ -1,7 +1,7 @@
 import {Response} from 'express'
 import * as jwt from 'jsonwebtoken'
-import { config } from '../config/config'
-import {IUser} from '../models/user';
+import { config } from '../../config/config'
+import {IUser} from '../../models/user';
 
 /**
  * Функция возвращает ответ с токеном авторизации

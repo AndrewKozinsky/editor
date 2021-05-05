@@ -25,13 +25,13 @@ export default function SettingsUserTabContent() {
                 </NameSection>
             </Wrapper>
 
-            <Wrapper t={30}>
+            <Wrapper t={25}>
                 <NameSection header={messages.ChangePasswordSection.header[lang]} type={2}>
                     <ChangePasswordForm />
                 </NameSection>
             </Wrapper>
 
-            <Wrapper t={30}>
+            <Wrapper t={25}>
                 <NameSection header={messages.UserAccountSection.header[lang]} type={2}>
                     <UserAccountForm />
                 </NameSection>

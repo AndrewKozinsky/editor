@@ -27,6 +27,7 @@ $CN: editor-main;
 .#{$CN}__left {
     display: flex;
     flex-direction: column;
+    border-right: 1px solid var(--button-color-hover);
 
     // Вкладки
     & > *:first-child {

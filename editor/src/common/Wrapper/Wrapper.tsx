@@ -14,7 +14,7 @@ export type WrapperPropType = {
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер элемента
 }
 
-export type TType = 5 | 10 | 15 | 20 | 30
+export type TType = 5 | 10 | 15 | 20 | 25 | 30
 export type BType = 10 | 15 | 25
 export type GapType = 10
 

@@ -65,7 +65,7 @@ function parseAssets() {
 
 // Функция возвращает значение параметра devtools
 function getDevTool(isDev) {
-    return isDev ? 'inline-source-map' : false
+    return isDev ? 'eval' : false
 }
 
 // Функция возвращает объект для свойства resolve

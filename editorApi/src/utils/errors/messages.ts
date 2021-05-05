@@ -43,6 +43,21 @@ export const messages: messagesType = {
             rus: '  Укажите язык интерфейса.'
         }
     },
+    // Модель Site
+    site: {
+        nameRequired: {
+            eng: 'Please provide a site name.',
+            rus: 'Укажите название сайта.'
+        },
+        uniqueNameRequired: {
+            eng: 'The name of the site must be unique.',
+            rus: 'Название сайта должно быть уникальным.'
+        },
+        userIdRequired: {
+            eng: 'Specify the id of the user who created the site.',
+            rus: 'Укажите id пользователя который создал сайт.'
+        },
+    },
     // Контроллер авторизации
     authController: {
         // getTokenData

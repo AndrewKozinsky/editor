@@ -3,6 +3,7 @@
 $CN: btn;
 
 .#{$CN} {
+    text-align: left;
     cursor: pointer;
     border: none;
     border-radius: var(--radius-2);
@@ -125,4 +126,11 @@ $loaderCN: btn-loader;
 .#{$CN}__icon-big-size {
     margin-right: .7rem;
     margin-bottom: -3px;
+}
+
+
+// Если кнопка должна быть блочным элементом на всю ширину
+.#{$CN}--block {
+    display: block;
+    width: 100%;
 }

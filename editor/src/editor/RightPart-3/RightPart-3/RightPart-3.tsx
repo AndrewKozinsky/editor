@@ -18,12 +18,11 @@ function RightPart3(props: RightPart3PropType) {
     // Активная вкладка панели настроек
     const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
 
-    const CN = 'left-part-3'
-
-    if (!display) return null
+    const CN = 'right-part-3'
+    const style = display ? {} : {display: 'none'}
 
     return (
-        <div className={CN}>
+        <div className={CN} style={style}>
             {activeTab === 'user' && <SettingsUserTabContent />}
             {activeTab === 'editor' && <SettingsEditorTabContent />}
         </div>

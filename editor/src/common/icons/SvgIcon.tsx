@@ -12,6 +12,9 @@ import './css/SvgIcon.scss'
 export type SvgIconPropType = {
     type: string // Тип значка
     size?: StoreSettingsTypes.EditorSize // Размер значка
+    // Класс, который нужно задать значку. Указывается без корневого названия.
+    // Если не указан, то класс определяется по типу значка
+    specialClass?: string
     className?: string // Дополнительный класс для значка
 }
 
@@ -21,6 +24,7 @@ function SvgIcon(props: SvgIconPropType) {
     let {
         type, // Тип значка
         size, // Размер значка
+        specialClass,
         className = '', // Дополнительный класс для значка
         ...anotherProps // Остальные переданные свойства
     } = props
@@ -33,7 +37,7 @@ function SvgIcon(props: SvgIconPropType) {
     // Значёк
     const Icon = getIcon(type, size)
     // Основной класс SVG
-    const iconClass = getIconClass(type)
+    let iconClass = getIconClass(type, specialClass)
     // Добавление дополнительного класса SVG
     const iconClasses = [iconClass, className]
     // Размеры

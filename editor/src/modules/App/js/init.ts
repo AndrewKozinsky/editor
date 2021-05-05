@@ -5,6 +5,8 @@ import {useGetUserToken} from 'requests/authRequests'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
+import StoreSitesTypes from '../../../store/site/sitesTypes';
+import sitesActions from '../../../store/site/sitesActions';
 
 /** Хук инициализирующий приложение */
 export function useInit() {
@@ -32,11 +34,14 @@ function useGetAndSetEditorSettings() {
 
     // При отрисовке компонента...
     useEffect(function () {
-        // Получить из LocalStorage язык интерфейса, тему, размер элементов и открытую вкладку
-        let language = <StoreSettingsTypes.EditorLanguage | null>localStorage.getItem('editorLanguage')
-        let theme = <StoreSettingsTypes.EditorTheme | null>localStorage.getItem('editorTheme')
-        let size = <StoreSettingsTypes.EditorSize | null>localStorage.getItem('editorSize')
-        let tab = <StoreSettingsTypes.MainTab | null>+localStorage.getItem('editorTab')
+        // Получить из LocalStorage
+        let language = <StoreSettingsTypes.EditorLanguage | null>localStorage.getItem('editorLanguage') // Язык интерфейса
+        let theme = <StoreSettingsTypes.EditorTheme | null>localStorage.getItem('editorTheme') // Тема
+        let size = <StoreSettingsTypes.EditorSize | null>localStorage.getItem('editorSize') // Размер элементов
+        let mainTab = <StoreSettingsTypes.MainTab | null>+localStorage.getItem('editorTab') // id главной вкладки
+        let siteId = <StoreSitesTypes.CurrentSiteId | null>localStorage.getItem('editorSiteId') // id сайта
+        let settingsTabId = <StoreSettingsTypes.SettingsPanelTab | null>localStorage.getItem('editorSettingsTabId') // id вкладки в Настройках
+        let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Настройках
 
         // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
@@ -51,16 +56,31 @@ function useGetAndSetEditorSettings() {
             size = 'small' // Тема интерфейса: light или dark
             localStorage.setItem('editorSize', size)
         }
-        if (!tab) {
-            tab = 0 // Первая вкладка
-            localStorage.setItem('editorTab', tab.toString())
+        if (!mainTab) {
+            mainTab = 0 // Первая вкладка
+            localStorage.setItem('editorTab', mainTab.toString())
+        }
+        if (!siteId) {
+            siteId = '' // Первая вкладка
+            localStorage.setItem('editorSettingsTabId', siteId)
+        }
+        if (!settingsTabId) {
+            settingsTabId = 'user' // Первая вкладка
+            localStorage.setItem('editorSettingsTabId', settingsTabId)
+        }
+        if (!sitePartTab) {
+            sitePartTab = 0 // Первая вкладка
+            localStorage.setItem('editorSitePartTab', sitePartTab.toString())
         }
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setEditorSize(size) )
-        dispatch( settingsActions.setMainTab(tab) )
+        dispatch( settingsActions.setMainTab(mainTab) )
+        dispatch( sitesActions.setCurrentSiteId(siteId) )
+        dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
+        dispatch( sitesActions.setRightMainTab(sitePartTab) )
     }, [])
 }
 

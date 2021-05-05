@@ -9,10 +9,11 @@ function LeftPart2(props: LeftPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
-    if (!display) return null
+    const CN = 'left-part-2'
+    const style = display ? {} : {display: 'none'}
 
     return (
-        <div>
+        <div className={CN} style={style}>
             <p>LeftPart2</p>
         </div>
     )

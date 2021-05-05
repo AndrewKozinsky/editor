@@ -24,12 +24,11 @@ function LeftPart3(props: LeftPart3PropType) {
     const itemsListProps = useGetSettingsItemsListProps()
 
     const CN = 'left-part-3'
-
-    if (!display) return null
+    const style = display ? {} : {display: 'none'}
 
 
     return (
-        <div className={CN}>
+        <div className={CN} style={style}>
             <NameSection header={messages.SettingsPanel.header[lang]}>
                 <ItemsList {...itemsListProps}/>
             </NameSection>

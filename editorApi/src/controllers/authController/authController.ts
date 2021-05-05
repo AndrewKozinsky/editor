@@ -6,11 +6,13 @@ import { catchAsync } from '../../utils/errors/catchAsync'
 import UserModel from '../../models/user'
 import { AppError } from '../../utils/errors/appError'
 import { Email } from '../../utils/email/email'
-import { createSendToken, sendResponseWithAuthToken } from '../authToken'
+import { createSendToken, sendResponseWithAuthToken } from './authToken'
 import { IUser } from '../../models/user'
 import {config} from '../../config/config'
 import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
 import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
+import * as siteController from '../siteController/siteController';
+import SiteModel from '../../models/site';
 
 
 // Функция отдающая данные по переданному токену. Токен передаётся в куках.
@@ -441,6 +443,12 @@ export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: R
     await UserModel.findByIdAndDelete(
         req.user.id
     )
+
+    // Удалить все сайты созданные пользователем
+    const deleted = await SiteModel.deleteMany({ userId: req.user.id })
+
+    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ПОДКЛЮЧЕНИЕ ВНЕШНИХ ФАЙЛОВ,
+    // ШАБЛОНЫ КОМПОНЕНТОВ, СТАТЬИ
 
     // Обнулить куку авторизации
     res.cookie('authToken', 'loggedout', {

@@ -4,6 +4,7 @@ import * as path from 'path'
 import * as bodyParser from 'body-parser'
 const cookieParser = require('cookie-parser')
 import userRouter from './routes/userRouter'
+import siteRouter from './routes/siteRouter'
 import { AppError } from './utils/errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
 import { addExtraHeaders } from './middlewares/commonMiddlewares'
@@ -40,7 +41,8 @@ app.get("/", function (req: Request, res: Response) {
 })
 
 // Маршруты API
-app.use('/users/', userRouter);
+app.use('/users/', userRouter)
+app.use('/sites/', siteRouter)
 
 // Статические файлы на сервере.
 app.use(express.static(path.join(__dirname, 'staticFiles')))

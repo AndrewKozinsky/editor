@@ -1,14 +1,15 @@
+import {useEffect} from 'react'
 import {makeCN} from 'utils/StringUtils'
 import { ButtonPropType } from './Button'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {useEffect} from 'react';
 
 /**
  * Функция возвращает классы кнопки
  * @param {Object} buttonProps — props переданные в кнопку
  * @param {String} size — размер элемента.
+ * @param {Boolean} block — должна ли кнопка быть блочным элементом на всю ширину
  */
-export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize) {
+export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize, block: boolean) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -30,6 +31,9 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSetting
     // base (стандартный цвет), accent (акцентный цвет)
     if (color === 'base') classes.push(`${CN}--base-color`)
     if (color === 'accent') classes.push(`${CN}--accent-color`)
+
+    // Если кнопка должна быть блочным элементом на всю ширину
+    if (block) classes.push(`${CN}--block`)
 
     return makeCN(classes)
 }

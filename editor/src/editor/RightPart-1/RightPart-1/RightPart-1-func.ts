@@ -1,0 +1,7 @@
+//@ts-ignore
+import {Dispatch} from 'redux'
+import {useEffect, useState} from 'react'
+import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+import {useDispatch, useSelector} from 'react-redux'
+import {AppState} from 'store/rootReducer'
+import StoreSettingsTypes from 'store/settings/settingsTypes'

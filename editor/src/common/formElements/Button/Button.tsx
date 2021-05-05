@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {ObjStringKeyAnyValType} from 'types/miscTypes'
+import {ObjStringKeyAnyValType, ObjStringKeyStringValType} from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
@@ -20,6 +20,7 @@ export type ButtonPropType = {
     text?: string
     name?: string
     loading?: boolean
+    block?: boolean // Должна ли кнопка быть блочным элементом на всю ширину
     onClick?: (...args: any[]) => void
     disabled?: boolean
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
@@ -38,6 +39,7 @@ function Button(props: ButtonPropType) {
         name, // Атрибут name кнопки
         disabled = false, // Заблокирована ли кнопка
         loading = false, // Нужно ли на кнопке рисовать загрузчик
+        block = false, // Должна ли кнопка быть блочным элементом на всю ширину
         onClick,
         autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
@@ -74,20 +76,18 @@ function Button(props: ButtonPropType) {
     // Атрибуты кнопки
     const btnAttrs: ObjStringKeyAnyValType = {
         type,
-        className: getButtonClasses(props, size),
+        className: getButtonClasses(props, size, block),
         disabled: disabled,
         ref: buttonRef
     }
     if (name) btnAttrs.name = name
     if (onClick) btnAttrs.onClick = onClick
 
-    // Значёк на кнопке
-    let $icon = null
-    if (icon) $icon = <SvgIcon type={icon} className={`${CN}__icon ${CN}__icon-${size}-size`} />
+
 
     return (
         <button {...btnAttrs}>
-            {$icon}
+            <ButtonIcon iconType={icon} CN={CN} size={size} color={color} />
             <ButtonLoader loading={loading} size={size}/>
             {btnText}
         </button>
@@ -100,6 +100,39 @@ export default Button
 type ButtonLoaderPropType = {
     loading?: boolean // Нужно ли отрисовывать загрузчик
     size: StoreSettingsTypes.EditorSize
+}
+
+
+type ButtonIconPropType = {
+    iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
+    CN: string // Корневой класс кнопки
+    size: StoreSettingsTypes.EditorSize // Размер значка
+    color?: 'base' | 'accent' // Цвет заливки кнопки
+}
+
+function ButtonIcon(props: ButtonIconPropType) {
+
+    const {
+        iconType,
+        CN,
+        size,
+        color
+    } = props
+
+    if (!iconType) return null
+
+    const attrs: ObjStringKeyStringValType = {
+        type: iconType,
+        className: `${CN}__icon ${CN}__icon-${size}-size`
+    }
+    if (color === 'accent') {
+        attrs.specialClass = '-white-btn-icon'
+    }
+
+    //@ts-ignore
+    return <SvgIcon {...attrs}  />
+
+
 }
 
 /** Компонент загрузчика кнопки */

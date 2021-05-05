@@ -159,6 +159,77 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 viewBox: "0 0 51 44"
             }
         },
+
+        // Значки на вкладках сайта
+        siteTabSite: {
+            small: {
+                width: "39px",
+                height: "34px",
+                viewBox: "0 0 39 34"
+            },
+            middle: {
+                width: "45px",
+                height: "39px",
+                viewBox: "0 0 45 39"
+            },
+            big: {
+                width: "51px",
+                height: "44px",
+                viewBox: "0 0 51 44"
+            },
+        },
+        siteTabPlugins: {
+            small: {
+                width: "39px",
+                height: "34px",
+                viewBox: "0 0 39 34"
+            },
+            middle: {
+                width: "45px",
+                height: "39px",
+                viewBox: "0 0 45 39"
+            },
+            big: {
+                width: "51px",
+                height: "44px",
+                viewBox: "0 0 51 44"
+            },
+        },
+        siteTabComponents: {
+            small: {
+                width: "39px",
+                height: "34px",
+                viewBox: "0 0 39 34"
+            },
+            middle: {
+                width: "45px",
+                height: "39px",
+                viewBox: "0 0 45 39"
+            },
+            big: {
+                width: "51px",
+                height: "44px",
+                viewBox: "0 0 51 44"
+            }
+        },
+        siteTabArticle: {
+            small: {
+                width: "39px",
+                height: "34px",
+                viewBox: "0 0 39 34"
+            },
+            middle: {
+                width: "45px",
+                height: "39px",
+                viewBox: "0 0 45 39"
+            },
+            big: {
+                width: "51px",
+                height: "44px",
+                viewBox: "0 0 51 44"
+            }
+        },
+
         // Закругляемая часть в кнопки вкладки
         mainTabRoundScion: {
             small: {

@@ -32,7 +32,7 @@ const initialState: SettingsReducerType = {
 
 // Установка языка интерфейса
 function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
-    // Поставить язык в LocalStorage
+    // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     localStorage.setItem('editorLanguage', action.payload)
 
     return {
@@ -43,7 +43,7 @@ function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsType
 
 // Установка темы интерфейса
 function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
-    // Поставить тему в LocalStorage
+    // Поставить тему в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     localStorage.setItem('editorTheme', action.payload)
 
     return {
@@ -54,7 +54,7 @@ function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.S
 
 // Установка размера элементов интерфейса
 function setEditorSize(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorSizeAction): SettingsReducerType {
-    // Поставить размер элементов интерфейса в LocalStorage
+    // Поставить размер элементов интерфейса в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     localStorage.setItem('editorSize', action.payload)
 
     return {
@@ -71,7 +71,7 @@ function setEntryAndEditorViewState(state: SettingsReducerType, action: StoreSet
     }
 }
 
-// Установка адрема последней страницы
+// Установка адреса последней страницы
 function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.SetLastAddressAction): SettingsReducerType {
     return {
         ...state,
@@ -81,7 +81,7 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
 
 // Установка адрема последней страницы
 function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
-    // Поставить язык в LocalStorage
+    // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     localStorage.setItem('editorTab', action.payload.toString())
 
     return {
@@ -89,8 +89,11 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
         mainTab: action.payload
     }
 }
-// Установка адрема последней страницы
+// Установка id вкладки в Настройках
 function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
+    // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+    localStorage.setItem('editorSettingsTabId', action.payload)
+
     return {
         ...state,
         settingsPanelTab: action.payload

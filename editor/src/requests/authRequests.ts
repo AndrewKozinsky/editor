@@ -18,6 +18,10 @@ export function useGetUserToken() {
     return { userToken, doFetch }
 }
 
+type ChangeEmailServerResponse = {
+    status: string
+}
+
 // Функция меняет почту, на которую зарегистрирована учётная запись пользователя
 export function useChangeEmail(newEmail: string) {
 
@@ -26,9 +30,13 @@ export function useChangeEmail(newEmail: string) {
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: response, doFetch} =
-        useFetch<GetTokenDataServerResponse>(getApiUrl('changeEmail'), options)
+        useFetch<ChangeEmailServerResponse>(getApiUrl('changeEmail'), options)
 
     return { response, doFetch }
+}
+
+type DeleteAccountServerResponse = {
+    status: string
 }
 
 // Функция удаляет учётная запись пользователя
@@ -39,7 +47,30 @@ export function useDeleteAccount() {
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: response, doFetch} =
-        useFetch<GetTokenDataServerResponse>(getApiUrl('me'), options)
+        useFetch<DeleteAccountServerResponse>(getApiUrl('me'), options)
+
+    return { response, doFetch }
+}
+
+type GetSitesServerResponse = {
+    status: 'success',
+    data: {
+        sites: {
+            name: string
+            _id: string
+        }[]
+    }
+}
+
+// Функция получает массив сайтов
+export function useGetSites() {
+
+    // Параметры запроса
+    const options = { method: 'GET'}
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    const {data: response, doFetch} =
+        useFetch<GetSitesServerResponse>(getApiUrl('sites'), options)
 
     return { response, doFetch }
 }
