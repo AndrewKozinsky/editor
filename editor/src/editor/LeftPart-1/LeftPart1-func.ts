@@ -1,6 +1,5 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {useGetSites} from 'requests/authRequests'
 import actions from 'store/rootAction'
 import {ItemsListPropType} from 'common/ItemsList/ItemsList'
 import {AppState} from 'store/rootReducer'
@@ -11,30 +10,11 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 export function useFetchSites() {
     const dispatch = useDispatch()
 
-    // Токен пользователя и функция для его запроса
-    const { response, doFetch } = useGetSites()
-
     // При загрузке компонента...
     useEffect(function () {
-        // Сделать запрос на получение массива сайтов
-        doFetch()
+        // Сделать запрос на получение сайтов и установить в Хранилище
+        dispatch( actions.sites.requestSites() )
     }, [])
-
-    // При получении массива сайтов
-    useEffect(function () {
-        if (!response || response.status !== 'success') return
-
-        // Формированое массива сайтов для установки в Хранилище
-        const preparedSites = response.data.sites.map((site: any) => {
-            return {
-                id: site._id,
-                name: site.name
-            }
-        })
-
-        // Установка сайтов в Хранилище
-        dispatch( actions.sites.setSites(preparedSites) )
-    }, [response])
 }
 
 

@@ -31,6 +31,10 @@ const addresses: ObjStringKeyAnyValType = {
     // САЙТЫ
     // Сайты
     sites: 'sites',
+    // Конкретный сайт
+    site: function (siteId: string) {
+        return 'sites/' + siteId
+    },
 }
 
 

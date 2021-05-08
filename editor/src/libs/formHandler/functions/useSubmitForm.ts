@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import FHTypes from '../types'
 import {
     getSetFieldData,
     getSetFieldDataPropValue,
@@ -6,7 +7,6 @@ import {
     setFormData,
     setFormDataPropValue
 } from './formStateSettersAndGetters'
-import FHTypes from '../types'
 
 
 /**
@@ -61,8 +61,6 @@ export function getSubmitFormDetails(
         setFormDataPropValue: setFormDataPropValue,
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
 }
 

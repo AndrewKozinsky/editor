@@ -6,8 +6,7 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import actions from 'store/rootAction'
-// @ts-ignore
-import {Dispatch} from 'redux';
+import { AppDispatchType } from 'types/miscTypes'
 import messages from '../messages'
 
 

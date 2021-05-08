@@ -63,7 +63,8 @@ type GetSitesServerResponse = {
 }
 
 // Функция получает массив сайтов
-export function useGetSites() {
+// СЧИТАЮ МОЖНО УДАЛИТЬ ЗА НЕНАДОБНОСТЬЮ
+/*export function useGetSites() {
 
     // Параметры запроса
     const options = { method: 'GET'}
@@ -73,4 +74,4 @@ export function useGetSites() {
         useFetch<GetSitesServerResponse>(getApiUrl('sites'), options)
 
     return { response, doFetch }
-}
+}*/

@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
-//@ts-ignore
-import {Dispatch} from 'redux'
+import { AppDispatchType } from 'types/miscTypes'
 import { useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
@@ -38,7 +37,7 @@ export function useGetTabData(): MainTabDataType[] {
 function getTabData(
     size: StoreSettingsTypes.EditorSize,
     lang: StoreSettingsTypes.EditorLanguage,
-    dispatch: Dispatch,
+    dispatch: AppDispatchType,
     activeTabNum: number
 ): MainTabDataType[] {
 

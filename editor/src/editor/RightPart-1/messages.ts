@@ -22,7 +22,15 @@ const messages: messagesType = {
             eng: 'For example: Corporate portal',
             rus: 'Например: Корпоративный портал'
         },
-        submitBtnText: {
+        siteNameInputRequired: {
+            eng: 'Required',
+            rus: 'Обязательное поле'
+        },
+        submitBtnTextNewSite: {
+            eng: 'Create',
+            rus: 'Создать'
+        },
+        submitBtnTextSave: {
             eng: 'Save',
             rus: 'Сохранить'
         },

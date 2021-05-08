@@ -84,7 +84,7 @@ export async function makeFetch(url: string, options: OptionsType, lang: StoreSe
 
         return {
             status: 'fail',
-            "data": message
+            data: message
         }
     }
 

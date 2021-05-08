@@ -7,12 +7,11 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import actions from 'store/rootAction'
-// @ts-ignore
-import {Dispatch} from 'redux';
+import { AppDispatchType } from 'types/miscTypes'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: Dispatch): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: AppDispatchType): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {

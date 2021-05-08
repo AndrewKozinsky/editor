@@ -16,7 +16,9 @@ import useSubmitForm from './functions/useSubmitForm'
  * @param {Object} formConfig — объект настройки useFormHandler
  * @param {String} formName — имя формы
  */
-export default function useFormHandler(formConfig: FHTypes.FormConfig, formName: string): FHTypes.ReturnObj {
+export default function useFormHandler(
+    formConfig: FHTypes.FormConfig, formName: string
+): FHTypes.ReturnObj {
 
     // Состояние формы
     const [formState, setFormState] = useState<FHTypes.FormState>(getInitialState(formConfig))
@@ -56,9 +58,6 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
             onClick:      useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'click', fieldName: e.target.name})
             }, [browserEvent]),
-            onReset:      useCallback((e) => {
-                setBrowserEvent({browserEvent: e, eventName: 'reset'})
-            }, [browserEvent]),
             onSubmit:     useCallback((e) => {
                 // Запретить стандартную отправку формы
                 e.preventDefault()
@@ -71,8 +70,13 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
         onChangeFieldHandler: useCallback((e) => {
             inputChangeHandler(e, formState, setFormState)
         }, [formState]),
+        // Состояние формы
+        formState: formState,
+        // Функция устанавливающая новое Состояние формы
+        setFormState: setFormState,
         // Данные о полях
         fields: getFields(formState),
+        // Данные формы
         form: formState.form.data
     }
 }

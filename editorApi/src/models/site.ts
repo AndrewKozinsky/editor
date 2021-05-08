@@ -12,7 +12,6 @@ const SiteSchema: Schema = new Schema({
     name: {
         type: String,
         required: [true, '{{site.nameRequired}}'],
-        unique: [true, '{{site.uniqueNameRequired}}'],
     },
     // Почта пользователя
     userId: {

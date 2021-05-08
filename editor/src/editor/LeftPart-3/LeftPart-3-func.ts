@@ -1,5 +1,4 @@
-//@ts-ignore
-import {Dispatch} from 'redux'
+import { AppDispatchType } from 'types/miscTypes'
 import {useDispatch, useSelector} from 'react-redux'
 import { ItemsListPropType, ItemType } from 'src/common/ItemsList/ItemsList'
 import {AppState} from 'src/store/rootReducer'
@@ -28,7 +27,7 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
  * @param {Object} dispatch
  * @param {String} lang
  */
-function getItemsListProps(dispatch: Dispatch, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
+function getItemsListProps(dispatch: AppDispatchType, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
     return [
         {
             id: 'user',

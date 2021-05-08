@@ -9,7 +9,7 @@ import Form from 'common/formElements/Form/Form'
 import Hr from 'common/misc/Hr/Hr'
 import getFormConfig from './formResources'
 import messages from '../messages'
-import {useGetSiteName} from './SiteSection-func'
+import { useGetAnotherSite, useGetSubmitButtonText } from './SiteSection-func'
 
 
 type SiteSectionPropType = {
@@ -22,15 +22,16 @@ export default function SiteSection(props: SiteSectionPropType) {
         display // Показывать ли компонент
     } = props
 
-    const dispatch = useDispatch()
-
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
-    const siteName = useGetSiteName()
-
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang, siteName), 'site')
+    const fh = useFormHandler(getFormConfig(lang), 'site')
+    // Изменение данных формы при выделении другого сайта
+    useGetAnotherSite(fh.formState, fh.setFormState)
+
+    // Текст на кнопке отправки
+    const submitButtonText = useGetSubmitButtonText(lang)
 
     const CN = 'site-section'
     const style = display ? {} : {display: 'none'}
@@ -55,7 +56,7 @@ export default function SiteSection(props: SiteSectionPropType) {
                 <Wrapper t={10} align={'right'}>
                     <Button
                         type='submit'
-                        text={messages.SiteSection.submitBtnText[lang]}
+                        text={submitButtonText}
                         name='submit'
                         disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}

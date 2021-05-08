@@ -1,5 +1,11 @@
 import FHTypes from '../types'
-import {getSetFieldData, getSetFieldDataPropValue, getSetFieldValue, setFormData, setFormDataPropValue } from './formStateSettersAndGetters'
+import {
+    getSetFieldData,
+    getSetFieldDataPropValue,
+    getSetFieldValue,
+    setFormData,
+    setFormDataPropValue
+} from './formStateSettersAndGetters'
 
 
 /**
@@ -54,7 +60,7 @@ export function getFormDetails(
 ): FHTypes.FormDetailsInEventHandler {
     return {
         // Объект события
-        browserEvent: browserEvent.browserEvent || null,
+        browserEvent: browserEvent?.browserEvent || null,
         // Состояние формы.
         state: formState,
         // Функция изменяющая значение поля с заданным именем.
@@ -67,7 +73,5 @@ export function getFormDetails(
         setFormData: setFormData,
         // Функция изменяющая свойство в данных формы
         setFormDataPropValue: setFormDataPropValue,
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
 }

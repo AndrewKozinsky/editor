@@ -3,7 +3,8 @@ import FHTypes from '../types'
 
 
 /**
- * Функция дополняет значения полей формы.
+ * Функция дополняет значения полей формы и дописывает им ссылку на поле,
+ * его тип и сколько значений оно может иметь.
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция устанавливающая новое Состояние useFormHandler
  * @param {Element} $form — ссылка на элемент формы
@@ -37,7 +38,7 @@ export default function useSupplementFieldData(
             // @ts-ignore
             const valueCount = getValueCount( $formInputs[key], fieldType )
 
-            // Формирование объекта с данными поля
+            // Дополнение объекта с данными поля
             newFormState.fields[key] = {
                 ...newFormState.fields[key],
                 $field,
@@ -51,7 +52,6 @@ export default function useSupplementFieldData(
 
         // Установка объекта с данными поля в Состояние формы
         setFormState(newFormState)
-
     }, [$form])
 }
 

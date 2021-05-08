@@ -1,5 +1,4 @@
-//@ts-ignore
-import {Dispatch} from 'redux'
+import { AppDispatchType } from 'types/miscTypes'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {MainTabDataType} from 'editor/special/MainTab/MainTab'
@@ -76,7 +75,7 @@ const tabsData = [
 function getTabData(
     size: StoreSettingsTypes.EditorSize,
     lang: StoreSettingsTypes.EditorLanguage,
-    dispatch: Dispatch,
+    dispatch: AppDispatchType,
     rightMainTab: number,
     isTabsDisabled: boolean
 ): MainTabDataType[] {

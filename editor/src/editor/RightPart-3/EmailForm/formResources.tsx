@@ -1,6 +1,5 @@
 import React from 'react'
-//@ts-ignore
-import {Dispatch} from 'redux'
+import { AppDispatchType } from 'types/miscTypes'
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'

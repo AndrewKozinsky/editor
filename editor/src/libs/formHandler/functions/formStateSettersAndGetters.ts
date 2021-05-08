@@ -1,5 +1,5 @@
 import FHTypes from '../types'
-import makeImmutableObj from '../../makeImmutableCopy/makeImmutableCopy'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 /**
  * Функция возвращающая функцию ставящая в объект Состояния формы значение поля
@@ -14,7 +14,7 @@ export function getSetFieldValue(defaultFieldName?: string) {
         const field = formState.fields[fieldName || defaultFieldName]
         const newField = {...field, value: fieldValue}
 
-        return <FHTypes.FormState>makeImmutableObj(formState, field, newField);
+        return <FHTypes.FormState>makeImmutableObj(formState, field, newField)
     }
 }
 
@@ -88,7 +88,6 @@ export function setFormDataPropValue(
     dataPropName: string,
     dataPropValue: FHTypes.AnyData,
 ) {
-
     const form = formState.form
     const newForm = {
         ...form,

@@ -1,6 +1,6 @@
 import React from 'react'
 import FHTypes from '../types'
-import makeImmutableObj from 'src/libs/makeImmutableCopy/makeImmutableCopy'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 /**
  * Обработчик изменения поля формы
