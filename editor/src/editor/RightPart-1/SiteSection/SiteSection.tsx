@@ -9,7 +9,14 @@ import Form from 'common/formElements/Form/Form'
 import Hr from 'common/misc/Hr/Hr'
 import getFormConfig from './formResources'
 import messages from '../messages'
-import { useGetAnotherSite, useGetSubmitButtonText } from './SiteSection-func'
+import {
+    useGetAnotherSite,
+    useGetShowDeleteSiteVisibilityStatus,
+    useGetSubmitButtonText
+} from './SiteSection-func'
+import './SiteSection.scss'
+import useGetDeleteAccount from '../../RightPart-3/UserAccountForm/deleteAccount';
+import useGetDeleteSite from './deleteSite'
 
 
 type SiteSectionPropType = {
@@ -53,16 +60,41 @@ export default function SiteSection(props: SiteSectionPropType) {
                 <Wrapper t={20} align={'right'}>
                     <Hr />
                 </Wrapper>
-                <Wrapper t={10} align={'right'}>
+                <Wrapper t={10} align={'right'} gap={10}>
                     <Button
                         type='submit'
                         text={submitButtonText}
+                        icon={fh.fields.submit.data.icon}
                         name='submit'
                         disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}
                     />
+                    <DeleteSiteButton />
                 </Wrapper>
             </Form>
         </div>
+    )
+}
+
+/** Кнопка удаления сайта */
+function DeleteSiteButton() {
+    // Язык интерфейса
+    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+
+    // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
+    const openDeleteSiteConfirmation = useGetDeleteSite()
+
+    // Нужно ли показывать кнопку удаления сайта
+    const isDeleteSiteButtonVisible = useGetShowDeleteSiteVisibilityStatus()
+    if (!isDeleteSiteButtonVisible) return null
+
+    return (
+        <Button
+            type='button'
+            text={messages.SiteSection.deleteSiteBtnText[lang]}
+            icon='btnSignTrash'
+            onClick={openDeleteSiteConfirmation}
+            // loading={fh.fields.submit.data.loading}
+        />
     )
 }

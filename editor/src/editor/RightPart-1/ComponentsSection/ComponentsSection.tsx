@@ -1,4 +1,6 @@
 import React from 'react'
+import DividedArea from '../DevidedArea/DividedArea'
+import './ComponentsSection.scss'
 
 
 type ComponentsSectionPropType = {
@@ -16,7 +18,10 @@ export default function ComponentsSection(props: ComponentsSectionPropType) {
 
     return (
         <div className={CN} style={style}>
-            ComponentsSection
+            <DividedArea>
+                <p>ComponentsSection</p>
+                <p>2</p>
+            </DividedArea>
         </div>
     )
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import DividedArea from '../DevidedArea/DividedArea'
+import './PluginSection.scss'
 
 
 type PluginSectionPropType = {
@@ -16,7 +18,10 @@ export default function PluginSection(props: PluginSectionPropType) {
 
     return (
         <div className={CN} style={style}>
-            PluginSection
+            <DividedArea>
+                <p>PluginSection</p>
+                <p>2</p>
+            </DividedArea>
         </div>
     )
 }

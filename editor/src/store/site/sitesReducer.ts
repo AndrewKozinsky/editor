@@ -13,7 +13,7 @@ const initialState: SitesReducerType = {
     // Массив сайтов пользователя
     sites: [],
     // id выбранного сайта
-    currentSiteId: '',
+    currentSiteId: null,
     // id открытой вкладки на правой части
     rightMainTab: 0,
 }

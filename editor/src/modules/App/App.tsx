@@ -22,6 +22,7 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App(): ReactElement {
+    // TODO Сделай возможность удалять сайты
     // TODO Добавь useCallback всем хукам где это требуется.
     // TODO Сделай textarea в TextInput
     // TODO Сделай документацию как на https://yastatic.net/s3/frontend/lego/storybook/index.html?path=/story/controls-radiobox-desktop--playground

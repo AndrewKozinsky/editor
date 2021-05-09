@@ -4,9 +4,8 @@ import { AppState } from 'store/rootReducer'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import FHTypes from 'libs/formHandler/types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import StoreSettingsTypes from 'store/settings/settingsTypes';
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 import messages from '../messages'
-import {log} from 'util';
 
 
 /**
@@ -34,6 +33,13 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
 
         // Поставить новое значение поля
         let newFormState: FHTypes.FormState = makeImmutableObj(formState, field, newField)
+
+        // Если выделели новый сайт, то на кнопке отправки поставить значёк Плюс.
+        // Если выделили существующий сайт, то значёк Сохранения.
+        const submitBtn = formState.fields.submit
+        const newSubmitBtn = {...submitBtn}
+        newSubmitBtn.data.icon = 'btnSignAdd'
+        if (site) newSubmitBtn.data.icon = 'btnSignSave'
 
         // В данные формы поставить тип формы:
         // createSite если хотят создать новый сайт
@@ -65,4 +71,21 @@ export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) 
     }, [currentSiteId])
 
     return submitName
+}
+
+/**
+ * Функция возвращает булево значение нужно ли показывать кнопку удаления сайта.
+ * Она видна только если выделен существующий сайт.
+ */
+export function useGetShowDeleteSiteVisibilityStatus() {
+    // id текущего сайта
+    const { currentSiteId } = useSelector((store: AppState) => store.sites)
+    const [isVisible, setIsVisible] = useState(false)
+
+    useEffect(function () {
+        if (!currentSiteId) setIsVisible(false)
+        else setIsVisible(true)
+    }, [currentSiteId])
+
+    return isVisible
 }

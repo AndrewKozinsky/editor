@@ -1,5 +1,7 @@
 import {useFetch} from './fetch'
 import getApiUrl from './apiUrls'
+import { useSelector } from 'react-redux'
+import { AppState } from '../store/rootReducer'
 
 type GetTokenDataServerResponse = {
     status: string
@@ -52,26 +54,22 @@ export function useDeleteAccount() {
     return { response, doFetch }
 }
 
-type GetSitesServerResponse = {
+type DeleteSiteServerResponse = {
     status: 'success',
-    data: {
-        sites: {
-            name: string
-            _id: string
-        }[]
-    }
 }
 
-// Функция получает массив сайтов
-// СЧИТАЮ МОЖНО УДАЛИТЬ ЗА НЕНАДОБНОСТЬЮ
-/*export function useGetSites() {
+// Функция удаляет сайт
+export function useDeleteSite() {
+
+    // id выделенного сайта, который нужно удалить
+    const {currentSiteId} = useSelector((store: AppState) => store.sites)
 
     // Параметры запроса
-    const options = { method: 'GET'}
+    const options = { method: 'DELETE'}
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: response, doFetch} =
-        useFetch<GetSitesServerResponse>(getApiUrl('sites'), options)
+        useFetch<DeleteSiteServerResponse>(getApiUrl('site', currentSiteId), options)
 
     return { response, doFetch }
-}*/
+}

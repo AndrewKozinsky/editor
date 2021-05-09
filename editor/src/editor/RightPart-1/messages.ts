@@ -34,6 +34,22 @@ const messages: messagesType = {
             eng: 'Save',
             rus: 'Сохранить'
         },
+        deleteSiteBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        deleteSiteConfirmationTextInModal: {
+            eng: 'If you delete the site, all of its templates plugins, component templates and articles will also be deleted. Delete the site?',
+            rus: 'При удалении сайта будут удалены и все его шаблоны подключаемых файлов, шаблоны компонентов и статьи. Удалить сайт?'
+        },
+        closeDeleteSiteModalBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteSiteBtnInModal: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
     },
 }
 

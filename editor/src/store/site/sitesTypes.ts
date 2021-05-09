@@ -9,7 +9,7 @@ namespace StoreSitesTypes {
     // Сайты
     export type SitesType = SiteType[]
     // id выбранного сайта
-    export type CurrentSiteId = string
+    export type CurrentSiteId = null | string
     // id открытой вкладки на правой части
     export type RightMainTab = number
 
