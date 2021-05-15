@@ -22,7 +22,11 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App(): ReactElement {
-    // TODO Сделай возможность удалять сайты
+    // TODO Считаю заголовок вкладки на сайтах должен быть статичным и отражать назначение вкладки, а не название открытого материала.
+    // TODO Сделай на вкладке сайта выпадающей список с шаблонами и выбранным шаблоном по умолчанию.
+    // TODO Типы в файле editor/src/types/miscTypes.ts заключи в пространство MiscTypes.
+    // TODO Слово plugins замени на IncFilesTemplate чтобы не было разночтений.
+    // TODO Добавь свойство defaultIncludedFilesTemplateId в модель сайта и реализуй взаимодействие с ним.
     // TODO Добавь useCallback всем хукам где это требуется.
     // TODO Сделай textarea в TextInput
     // TODO Сделай документацию как на https://yastatic.net/s3/frontend/lego/storybook/index.html?path=/story/controls-radiobox-desktop--playground

@@ -14,7 +14,8 @@ $CN: editor-main;
 }
 
 .#{$CN}--small-size {
-    grid-template-columns: 30rem 1fr;
+    //grid-template-columns: 30rem 1fr;
+    grid-template-columns: 18rem 1fr; // Решение на время разработки. Позже поставь старое.
 }
 .#{$CN}--middle-size {
     grid-template-columns: 35rem 1fr;

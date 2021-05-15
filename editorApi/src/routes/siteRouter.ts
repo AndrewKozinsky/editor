@@ -5,6 +5,7 @@ import * as siteController from '../controllers/siteController/siteController'
 
 const router = Router()
 
+// Маршруты для манипулирования сайтами
 router.route('/')
     // Получение всех сайтов
     .get(authController.protect, siteController.getAllSites)

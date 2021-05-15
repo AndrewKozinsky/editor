@@ -8,6 +8,7 @@ import siteRouter from './routes/siteRouter'
 import { AppError } from './utils/errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
 import { addExtraHeaders } from './middlewares/commonMiddlewares'
+import includedFilesTemplateRouter from './routes/includedFilesTemplateRouter'
 
 
 const app: Application = express()
@@ -43,6 +44,7 @@ app.get("/", function (req: Request, res: Response) {
 // Маршруты API
 app.use('/users/', userRouter)
 app.use('/sites/', siteRouter)
+app.use('/includedFilesTemplate/', includedFilesTemplateRouter)
 
 // Статические файлы на сервере.
 app.use(express.static(path.join(__dirname, 'staticFiles')))

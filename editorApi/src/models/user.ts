@@ -21,6 +21,7 @@ export interface IUser extends Document {
     createPasswordResetToken(): string
 }
 
+// Схема с данными пользователя
 const UserSchema: Schema = new Schema({
     // Имя пользователя
     name: {
@@ -135,5 +136,4 @@ UserSchema.methods.createPasswordResetToken = function (this: IUser) {
 
 
 const UserModel = mongoose.model<IUser>('User', UserSchema)
-
 export default UserModel

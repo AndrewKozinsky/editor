@@ -10,7 +10,7 @@ import { createSendToken, sendResponseWithAuthToken } from './authToken'
 import { IUser } from '../../models/user'
 import {config} from '../../config/config'
 import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
-import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
+import {ExtendedRequestType, CommonTypes } from '../../types/commonTypes'
 import * as siteController from '../siteController/siteController';
 import SiteModel from '../../models/site';
 
@@ -78,7 +78,7 @@ export const protect = catchAsync(async (req: ExtendedRequestType, res: Response
     }
 
     // Расшифровка JWT и получение payload
-    const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
+    const decoded: CommonTypes.JWTDecoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получение пользователя
     const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')

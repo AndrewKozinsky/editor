@@ -2,6 +2,7 @@ import { Response, NextFunction } from 'express'
 import { catchAsync } from '../../utils/errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import SiteModel from '../../models/site'
+import IncludedFilesTemplateModel from '../../models/includedFilesTemplate';
 
 
 /** Получение всех сайтов (защищённый маршрут) */
@@ -72,8 +73,10 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
         req.params.siteId
     )
 
-    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ПОДКЛЮЧЕНИЕ ВНЕШНИХ ФАЙЛОВ,
-    // ШАБЛОНЫ КОМПОНЕНТОВ, СТАТЬИ
+    // Удалить шаблоны подключения внешних файлов
+    await IncludedFilesTemplateModel.deleteMany({siteId: req.params.siteId})
+
+    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ШАБЛОНЫ КОМПОНЕНТОВ, СТАТЬИ
 
     // Отправить успешный ответ
     res.status(200).json({

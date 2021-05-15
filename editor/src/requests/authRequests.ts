@@ -73,3 +73,23 @@ export function useDeleteSite() {
 
     return { response, doFetch }
 }
+
+type DeletePluginServerResponse = {
+    status: 'success',
+}
+
+// Функция удаляет шаблон подключаемых файлов
+export function useDeletePlugin() {
+
+    // id выделенного шаблона, который нужно удалить
+    const { currentPluginId } = useSelector((store: AppState) => store.sites.pluginsSection)
+
+    // Параметры запроса
+    const options = { method: 'DELETE'}
+
+    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
+    const {data: response, doFetch} =
+        useFetch<DeletePluginServerResponse>(getApiUrl('plugin', currentPluginId), options)
+
+    return { response, doFetch }
+}

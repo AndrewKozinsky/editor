@@ -7,19 +7,20 @@ export interface ISite extends Document {
     userId: string,
 }
 
+// Схема с данными сайта
 const SiteSchema: Schema = new Schema({
     // Название сайта
     name: {
         type: String,
         required: [true, '{{site.nameRequired}}'],
     },
-    // Почта пользователя
+    // id пользователя
     userId: {
         type: String,
         required: [true, '{{site.userIdRequired}}']
     },
 })
 
-const SiteModel = mongoose.model<ISite>('Site', SiteSchema)
 
+const SiteModel = mongoose.model<ISite>('Site', SiteSchema)
 export default SiteModel

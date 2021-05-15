@@ -14,5 +14,5 @@ $CN: site-divided-area;
     max-width: 50%;
 }
 .#{$CN}__right-part {
-
+    flex-grow: 1;
 }

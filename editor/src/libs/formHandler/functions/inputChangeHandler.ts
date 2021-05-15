@@ -13,11 +13,11 @@ export default function inputChangeHandler(
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState
 ) {
-    // Значение поля
-    const inputValue = e.target.value
-
     // Данные поля из Состояния
     const inputData = formState.fields[e.target.name]
+
+    // Значение поля
+    const inputValue = e.target.value
 
     // Получение нового значения поля
     const newValue = getNewValue(inputData, inputValue)
@@ -41,8 +41,10 @@ function getNewValue(inputData: FHTypes.FieldStateObj, newValue: string) {
         return [newValue]
     }
     else {
+        // Существует ли переданное значение в массиве значений?
         const isPassedValueExists = !!(inputData.value.find(val => val === newValue))
 
+        // Если сущуствует, то удалить, если нет, то добавить переданное значение
         let valuesNewArr = [...inputData.value]
         if (isPassedValueExists) {
             valuesNewArr = valuesNewArr.filter(val => val !== newValue)

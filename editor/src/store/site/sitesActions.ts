@@ -1,6 +1,6 @@
 // Types
 import StoreSitesTypes from './sitesTypes'
-import {AppDispatchType, GetStateType} from 'types/miscTypes'
+import {AppDispatchType, GetStateType, ObjStringKeyStringValType} from 'types/miscTypes'
 import {makeFetch} from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 
@@ -53,6 +53,53 @@ const sitesActions = {
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
+            payload
+        }
+    },
+
+
+
+    // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
+    requestPlugins() {
+        return async function (dispatch: AppDispatchType, getState: GetStateType) {
+            // Параметры запроса
+            const options = { method: 'GET' }
+
+            // Запрос и ответ от сервера
+            const response = await makeFetch(
+                getApiUrl('plugins'), options, getState().settings.editorLanguage
+            )
+
+            if (!response || response.status !== 'success') return
+
+            // Формированое массива шаблонов для установки в Хранилище
+            const preparedPlugins = response.data.templates.map((plugin: any) => {
+                // Формирование возвращаемого объекта с данными шаблона подключаемых файлов
+                return  {
+                    id: plugin._id,
+                    name: plugin.name,
+                    head: plugin.codeInHead?.code || '',
+                    body: plugin.codeBeforeEndBody?.code || ''
+                }
+            })
+
+            // Установка шаблонов подключаемых файлов в Хранилище
+            dispatch( sitesActions.setPlugins(preparedPlugins) )
+        }
+    },
+
+    // Установка массива шаблонов подключаемых файлов
+    setPlugins(payload: StoreSitesTypes.PluginsType): StoreSitesTypes.SetPluginsAction {
+        return {
+            type: StoreSitesTypes.SET_PLUGINS,
+            payload
+        }
+    },
+
+    // Установка id выбранного шаблона подключаемых шаблонов
+    setCurrentPluginsId(payload: StoreSitesTypes.CurrentPluginsId): StoreSitesTypes.SetCurrentPluginsIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_PLUGINS_ID,
             payload
         }
     },

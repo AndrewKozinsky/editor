@@ -54,6 +54,29 @@ export const messages: messagesType = {
             rus: 'Укажите id пользователя который создал сайт.'
         },
     },
+    // Модель IncludedFilesTemplate
+    includedFilesTemplate: {
+        nameRequired: {
+            eng: 'Please provide a template name.',
+            rus: 'Укажите название шаблона.'
+        },
+        userIdRequired: {
+            eng: 'Specify the id of the user who owns the site with this template.',
+            rus: 'Укажите id пользователя которому принадлежит сайт с этим шаблоном.'
+        },
+        siteIdRequired: {
+            eng: 'Specify the id of the site to which this template belongs.',
+            rus: 'Укажите id сайта которому принадлежит этот шаблон.'
+        },
+        codeInHeadCodeMaxLength: {
+            eng: 'The code cannot exceed 65000 characters.',
+            rus: 'Код не может превышать 65000 символов.'
+        },
+        codeBeforeEndBodyCodeMaxLength: {
+            eng: 'The code cannot exceed 65000 characters.',
+            rus: 'Код не может превышать 65000 символов.'
+        },
+    },
     // Контроллер авторизации
     authController: {
         // getTokenData
@@ -141,6 +164,23 @@ export const messages: messagesType = {
         changePasswordCurrentPasswordIsWrong: {
             eng: 'Your current password is wrong',
             rus: 'Передан неправильный текущий пароль.'
+        },
+    },
+    // Контроллер авторизации
+    includedFilesTemplateController: {
+        // Функция createTemplate
+        createTemplateNoName: {
+            eng: 'Template name is not provided',
+            rus: 'Не передано название шаблона'
+        },
+        createTemplateNoSiteId: {
+            eng: 'The id of the site to which the template should belong is not passed',
+            rus: 'Не передан id сайта, к котором должен принадлежать шаблон'
+        },
+        // Функция updateTemplate
+        updateTemplateNotFound: {
+            eng: 'Template not found. The data has not been updated.',
+            rus: 'Шаблон не найден. Данные не обновлены.'
         },
     },
 }

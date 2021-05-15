@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import ArticlesSection from '../ArticlesSection/ArticlesSection'
 import ComponentsSection from '../ComponentsSection/ComponentsSection'
-import PluginSection from '../PluginSection/PluginSection'
+import PluginsSection from '../PluginsSection/PluginsSection/PluginsSection'
 import SiteSection from '../SiteSection/SiteSection'
 import Header from 'common/textBlocks/Header/Header'
 import Wrapper from 'common/Wrapper/Wrapper'
@@ -13,7 +13,7 @@ import './SectionWrapper.scss'
 
 export default function SectionWrapper() {
 
-    // Текст заголовка
+    // Текст заголовка в зависимости от текущей вкладки
     const headerText = useGetHeaderText()
 
     const CN = 'site-right-section-wrapper'
@@ -45,7 +45,7 @@ function SitePartProvider() {
         // Список всех компонентов во всех вкладках
         const components = [
             SiteSection,
-            PluginSection,
+            PluginsSection,
             ComponentsSection,
             ArticlesSection
         ]

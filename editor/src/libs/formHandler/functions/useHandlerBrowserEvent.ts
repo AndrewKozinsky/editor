@@ -26,8 +26,13 @@ export function handleBrowserEvent(
     // Имя поля и имя произошедшего события
     const {fieldName, eventName} = browserEvent
 
+    /*if (eventName === 'click') {
+        console.log(fieldName)
+    }*/
+
+
     // Не обрабатывать пустые события
-    if (!eventName) return
+    if (!eventName || !fieldName) return
 
     // Если в formConfig у поля есть обработка определённого события...
     if (formConfig.fields[fieldName] && formConfig.fields[fieldName][eventName]) {
@@ -44,7 +49,10 @@ export function handleBrowserEvent(
 
     // Обнулить событие чтобы в случае повторного возникновения события
     // с таким же именем сработал бы обработчик
-    setBrowserEvent({browserEvent: null, eventName: null})
+    // setTimeout прописан потому что без него не работают флаги и переключатели
+    setTimeout(() => {
+        setBrowserEvent({browserEvent: null, eventName: null})
+    }, 0)
 }
 
 /**

@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -65,7 +67,9 @@ function parseAssets() {
 
 // Функция возвращает значение параметра devtools
 function getDevTool(isDev) {
-    return isDev ? 'eval' : false
+    // Закомментировал потому что карты собирает другое расширение
+    // return isDev ? 'eval' : false
+    return false
 }
 
 // Функция возвращает объект для свойства resolve
@@ -108,6 +112,7 @@ function getPlugins(isDev) {
             new CleanWebpackPlugin(),
             // Формирование index.html
             new HtmlWebpackPlugin(getHtmlConfig()),
+            new webpack.EvalSourceMapDevToolPlugin({})
         ]
     }
     else {

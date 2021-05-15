@@ -5,8 +5,8 @@ import {useGetUserToken} from 'requests/authRequests'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import StoreSitesTypes from '../../../store/site/sitesTypes';
-import sitesActions from '../../../store/site/sitesActions';
+import StoreSitesTypes from 'store/site/sitesTypes'
+import sitesActions from 'store/site/sitesActions'
 
 /** Хук инициализирующий приложение */
 export function useInit() {
@@ -34,7 +34,7 @@ function useGetAndSetEditorSettings() {
 
     // При отрисовке компонента...
     useEffect(function () {
-        // Получить из LocalStorage
+        // Получение из LocalStorage
         let language = <StoreSettingsTypes.EditorLanguage | null>localStorage.getItem('editorLanguage') // Язык интерфейса
         let theme = <StoreSettingsTypes.EditorTheme | null>localStorage.getItem('editorTheme') // Тема
         let size = <StoreSettingsTypes.EditorSize | null>localStorage.getItem('editorSize') // Размер элементов
@@ -42,6 +42,7 @@ function useGetAndSetEditorSettings() {
         let siteId = <StoreSitesTypes.CurrentSiteId | null>localStorage.getItem('editorSiteId') // id сайта
         let settingsTabId = <StoreSettingsTypes.SettingsPanelTab | null>localStorage.getItem('editorSettingsTabId') // id вкладки в Настройках
         let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Настройках
+        let editorPluginsId = <StoreSitesTypes.CurrentPluginsId | null>localStorage.getItem('editorPluginsId') // id вкладки в Настройках
 
         // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
@@ -72,6 +73,10 @@ function useGetAndSetEditorSettings() {
             sitePartTab = 0 // Первая вкладка
             localStorage.setItem('editorSitePartTab', sitePartTab.toString())
         }
+        if (!editorPluginsId) {
+            editorPluginsId = '' // Первая вкладка
+            localStorage.setItem('editorPluginsId', editorPluginsId)
+        }
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
@@ -81,6 +86,7 @@ function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
+        dispatch( sitesActions.setCurrentPluginsId(editorPluginsId) )
     }, [])
 }
 

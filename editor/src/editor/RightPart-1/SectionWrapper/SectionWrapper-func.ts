@@ -35,6 +35,21 @@ export function useGetHeaderText() {
         // В противном случае вернуть «Новый сайт»
         else return messages.SiteSection.headerNewSite[lang]
     }
+    // Если на первой вкладке, то получить и вернуть название выбранного шаблонов подключаемых файлов
+    else if (rightMainTab === 1) {
+        // id текущего шаблона подключаемых файлов и массив шаблонов подключаемых файлов
+        const {currentPluginId, plugins} = sitesRoot.pluginsSection
+
+        // Найти шаблон с указанным id
+        const template = plugins.find((template: StoreSitesTypes.PluginType) => {
+            return template.id === currentPluginId
+        })
+
+        // Если шаблон найден, то вернуть его имя
+        if (template) return template.name
+        // В противном случае вернуть «Новый шаблон»
+        else return messages.PluginsSection.headerNewPlugin[lang]
+    }
 
     return 'Entitle'
 }

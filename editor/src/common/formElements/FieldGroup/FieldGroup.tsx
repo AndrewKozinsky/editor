@@ -47,8 +47,7 @@ export default function FieldGroup(props: FieldGroupPropType) {
     const $label = label ? <Label label={label} bold /> : null
 
     // Получение типа поля: переключатель или флаг
-    let Component = Radio
-    if (inputType == 'checkbox') Component = Checkbox
+    let Component = (inputType == 'checkbox') ? Checkbox : Radio
 
     return (
         <>
@@ -60,7 +59,7 @@ export default function FieldGroup(props: FieldGroupPropType) {
                         value: inputData.value,
                         label: inputData.label,
                         name: groupName,
-                        checked: !!(value.find(val => val === inputData.value)),
+                        checked: !!value.includes(inputData.value),
                         disabled,
                         key: i,
                         onChange,

@@ -48,23 +48,24 @@ export default function useFormHandler(
         formHandlers: {
             onChange:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'change', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onFocus:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'focus', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onBlur:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'blur', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onClick:      useCallback((e) => {
+                if (!e.target.name) return
                 setBrowserEvent({browserEvent: e, eventName: 'click', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onSubmit:     useCallback((e) => {
                 // Запретить стандартную отправку формы
                 e.preventDefault()
 
                 // Начать отправку формы
                 setCanRunSubmitHandler(true)
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
         },
         // Обработчик изменения поля
         onChangeFieldHandler: useCallback((e) => {

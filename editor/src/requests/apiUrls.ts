@@ -35,6 +35,12 @@ const addresses: ObjStringKeyAnyValType = {
     site: function (siteId: string) {
         return 'sites/' + siteId
     },
+    // Шаблоны подключаемых файлов
+    plugins: 'includedFilesTemplate',
+    // Конкретный шаблон подключаемых файлов
+    plugin: function (pluginId: string) {
+        return 'includedFilesTemplate/' + pluginId
+    },
 }
 
 
