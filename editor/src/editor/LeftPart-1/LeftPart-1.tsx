@@ -9,7 +9,7 @@ import { useFetchSites, useGetNewSiteOnClickHandler, useGetSitesItemsListProps }
 import ItemsList from '../../common/ItemsList/ItemsList';
 import {useGetSettingsItemsListProps} from '../LeftPart-3/LeftPart-3-func';
 import Wrapper from '../../common/Wrapper/Wrapper';
-import { ObjStringKeyAnyValType } from '../../types/miscTypes'
+import { MiscTypes } from '../../types/miscTypes'
 
 
 type LeftPart1PropType = {
@@ -51,7 +51,7 @@ function NewSiteButton() {
     const onClickHandler = useGetNewSiteOnClickHandler()
 
     // Атрибуты кнопки
-    const attrs: ObjStringKeyAnyValType = {
+    const attrs: MiscTypes.ObjStringKeyAnyVal = {
         text: messages.SitesPanel.newSiteBtn[lang],
         icon: 'btnSignAdd',
         block: true,

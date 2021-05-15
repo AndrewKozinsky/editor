@@ -7,14 +7,16 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 
 
 // Хук скачивает с сервера массив шаблонов подключаемых файлов и ставит в Хранилище
-export function useFetchPlugins() {
+export function useFetchIncFilesTemplates() {
     const dispatch = useDispatch()
 
-    // При загрузке компонента...
+    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+
+    // При загрузке компонента и при изменении выбранного сайта...
     useEffect(function () {
         // Запрос на получение шаблонов подключаемых файлов и установка в Хранилище
-        dispatch( actions.sites.requestPlugins() )
-    }, [])
+        dispatch( actions.sites.requestIncFilesTemplates() )
+    }, [currentSiteId])
 }
 
 
@@ -24,18 +26,18 @@ export function useGetTemplatesItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
 
     // id выбранного шаблона подключаемых файлов
-    const {currentPluginId, plugins} = useSelector((store: AppState) => store.sites.pluginsSection)
+    const {currentTemplateId, templates} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
-    // Сформировать и вернуть объект с атрибутами списка пунктов панели «Настройки»
+    // Сформировать и вернуть объект с атрибутами списка шаблонов
     return {
-        items: plugins.map((plugin: StoreSitesTypes.PluginType) => {
+        items: templates.map((template: StoreSitesTypes.IncFilesTemplateType) => {
             return {
-                id: plugin.id,
-                name: plugin.name,
-                onClick: () => dispatch( actions.sites.setCurrentPluginsId(plugin.id) )
+                id: template.id,
+                name: template.name,
+                onClick: () => dispatch( actions.sites.setCurrentIncFilesTemplateId(template.id) )
             }
         }), // Список пунктов
-        activeItemId: currentPluginId // id активного пункта
+        activeItemId: currentTemplateId // id активного пункта
     }
 }
 
@@ -47,6 +49,6 @@ export function useGetNewTemplateOnClickHandler() {
     // чтобы программа понимала, что нужно показать форму создания нового сайта
     return function () {
         // Поставить id шаблона подключаемых файлов. Пустая строка обозначает id нового сайта.
-        dispatch( actions.sites.setCurrentPluginsId('') )
+        dispatch( actions.sites.setCurrentIncFilesTemplateId('') )
     }
 }

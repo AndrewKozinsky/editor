@@ -1,5 +1,5 @@
 import React, {ReactElement, useState} from 'react'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import { getLabelClasses } from './Checkbox-func'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
@@ -38,7 +38,7 @@ function Checkbox(props: CheckboxPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты флага
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         type: 'checkbox',
         name,
         value,
@@ -51,7 +51,7 @@ function Checkbox(props: CheckboxPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: ObjStringKeyAnyValType = {
+    const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
         htmlFor: id,
         className: getLabelClasses(size),
     }

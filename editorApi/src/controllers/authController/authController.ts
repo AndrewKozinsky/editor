@@ -11,7 +11,6 @@ import { IUser } from '../../models/user'
 import {config} from '../../config/config'
 import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
 import {ExtendedRequestType, CommonTypes } from '../../types/commonTypes'
-import * as siteController from '../siteController/siteController';
 import SiteModel from '../../models/site';
 
 
@@ -291,7 +290,7 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
             }
         })
     }
-    // Не удалось послать письмо со сбросом пароля...
+        // Не удалось послать письмо со сбросом пароля...
     catch (err) {
         // Бросить ошибку
         return next(

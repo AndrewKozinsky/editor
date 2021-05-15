@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from 'react'
 import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import Label from '../Label/Label';
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {useGetComponentSize} from 'utils/MiscUtils'
@@ -65,7 +65,7 @@ function TextInput(props: TextInputPropType) {
     const [id] = useState(getRandomId())
 
     // Аттрибуты поля
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         type: type,
         name,
         value,

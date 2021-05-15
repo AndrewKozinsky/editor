@@ -1,17 +1,27 @@
 import { Response, NextFunction } from 'express'
 import { catchAsync } from '../../utils/errors/catchAsync'
-import {CommonTypes, ExtendedRequestType } from '../../types/commonTypes'
-import IncludedFilesTemplateModel from '../../models/includedFilesTemplate'
+import { ExtendedRequestType } from '../../types/commonTypes'
+import IncFilesTemplateModel from '../../models/incFilesTemplate'
 import {AppError} from '../../utils/errors/appError'
 
 
-/** Получение всех шаблонов (защищённый маршрут) */
-export const getAllTemplates = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/** Получение всех шаблонов определённого сайта (защищённый маршрут) */
+export const getSiteTemplates = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
     if (!req.user) return
 
-    // Получение всех шаблонов сайта
-    const templates = await IncludedFilesTemplateModel.find({userId: req.user.id}).select('-__v -userId')
+    // Если не передали id сайта, то возвратить ошибочный ответ
+    if (!req.query.siteId) {
+        return next(
+            new AppError(null, '{{incFilesTemplateController.getTemplateNoSiteId}}', 400)
+        )
+    }
+
+    console.log(req.query)
+
+    // Получение всех шаблонов сайта с переданным id
+    const siteId: string = req.query.siteId.toString()
+    const templates = await IncFilesTemplateModel.find({siteId}).select('-__v -userId')
 
     // Отправить данные пользователю
     res.status(200).json({
@@ -23,6 +33,7 @@ export const getAllTemplates = catchAsync<void>(async (req: ExtendedRequestType,
 })
 
 
+
 /** Создание шаблона (защищённый маршрут) */
 export const createTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
@@ -31,7 +42,7 @@ export const createTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
     // Если не передали имя шаблона, то возвратить ошибочный ответ
     if (!req.body.name) {
         return next(
-            new AppError('name', '{{includedFilesTemplateController.createTemplateNoName}}', 400)
+            new AppError('name', '{{incFilesTemplateController.createTemplateNoName}}', 400)
         )
     }
 
@@ -39,12 +50,12 @@ export const createTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
     // то возвратить ошибочный ответ
     if (!req.body.siteId) {
         return next(
-            new AppError('name', '{{includedFilesTemplateController.createTemplateNoSiteId}}', 400)
+            new AppError('name', '{{incFilesTemplateController.createTemplateNoSiteId}}', 400)
         )
     }
 
     // Создание нового шаблона
-    let newTemplate = await IncludedFilesTemplateModel.create({
+    let newTemplate = await IncFilesTemplateModel.create({
         name: req.body.name,
         userId: req.user.id,
         siteId: req.body.siteId,
@@ -68,7 +79,7 @@ export const createTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
 export const updateTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Найти сайт и обновить его данные
-    const updatedTemplate = await IncludedFilesTemplateModel.findByIdAndUpdate(
+    const updatedTemplate = await IncFilesTemplateModel.findByIdAndUpdate(
         req.params.templateId,
         req.body,
         {new: true}
@@ -77,7 +88,7 @@ export const updateTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
     // Если не найден шаблон, то возвратить ошибочный ответ
     if (!updatedTemplate) {
         return next(
-            new AppError('name', '{{includedFilesTemplateController.updateTemplateNotFound}}', 400)
+            new AppError('name', '{{incFilesTemplateController.updateTemplateNotFound}}', 400)
         )
     }
 
@@ -91,10 +102,11 @@ export const updateTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
 })
 
 
+
 /** Удаление шаблона (защищённый маршрут) */
 export const deleteTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Удалить шаблон из БД
-    await IncludedFilesTemplateModel.findByIdAndDelete(
+    await IncFilesTemplateModel.findByIdAndDelete(
         req.params.templateId
     )
 

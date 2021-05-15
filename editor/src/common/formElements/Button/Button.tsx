@@ -1,7 +1,7 @@
 import React, {useRef} from 'react'
 import { useGetComponentSize } from 'utils/MiscUtils'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {ObjStringKeyAnyValType, ObjStringKeyStringValType} from 'types/miscTypes'
+import {MiscTypes} from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
@@ -74,7 +74,7 @@ function Button(props: ButtonPropType) {
     }
 
     // Атрибуты кнопки
-    const btnAttrs: ObjStringKeyAnyValType = {
+    const btnAttrs: MiscTypes.ObjStringKeyAnyVal = {
         type,
         className: getButtonClasses(props, size, block),
         disabled: disabled,
@@ -121,7 +121,7 @@ function ButtonIcon(props: ButtonIconPropType) {
 
     if (!iconType) return null
 
-    const attrs: ObjStringKeyStringValType = {
+    const attrs: MiscTypes.ObjStringKeyStringVal = {
         type: iconType,
         className: `${CN}__icon ${CN}__icon-${size}-size`
     }

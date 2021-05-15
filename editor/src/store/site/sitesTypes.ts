@@ -14,16 +14,16 @@ namespace StoreSitesTypes {
     export type RightMainTab = number
 
     // Шаблон подключаемых файлов
-    export type PluginType = {
+    export type IncFilesTemplateType = {
         id: string,
         name: string,
         head?: string
         body?: string
     }
     // Массив шаблонов подключаемых файлов
-    export type PluginsType = PluginType[]
+    export type IncFilesTemplatesType = IncFilesTemplateType[]
     // id выбранного шаблона подключаемых файлов
-    export type CurrentPluginsId = null | string
+    export type CurrentIncFilesTemplateId = null | string
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -49,17 +49,17 @@ namespace StoreSitesTypes {
 
 
     // Установка массива шаблонов подключаемых файлов
-    export const SET_PLUGINS = 'SET_PLUGINS'
-    export type SetPluginsAction = {
-        type: typeof SET_PLUGINS
-        payload: PluginsType
+    export const SET_INC_FILES_TEMPLATES = 'SET_INC_FILES_TEMPLATES'
+    export type SetIncFilesTemplatesAction = {
+        type: typeof SET_INC_FILES_TEMPLATES
+        payload: IncFilesTemplatesType
     }
 
     // Установка id выбранного шаблона подключаемых файлов
-    export const SET_CURRENT_PLUGINS_ID = 'SET_CURRENT_PLUGINS_ID'
-    export type SetCurrentPluginsIdAction = {
-        type: typeof SET_CURRENT_PLUGINS_ID
-        payload: CurrentPluginsId
+    export const SET_CURRENT_INC_FILES_TEMPLATE_ID = 'SET_CURRENT_INC_FILES_TEMPLATE_ID'
+    export type SetCurrentIncFilesTemplateIdAction = {
+        type: typeof SET_CURRENT_INC_FILES_TEMPLATE_ID
+        payload: CurrentIncFilesTemplateId
     }
 
 
@@ -67,8 +67,8 @@ namespace StoreSitesTypes {
         | SetSitesAction
         | SetCurrentSiteIdAction
         | SetRightMainTabAction
-        | SetPluginsAction
-        | SetCurrentPluginsIdAction
+        | SetIncFilesTemplatesAction
+        | SetCurrentIncFilesTemplateIdAction
 }
 
 export default StoreSitesTypes

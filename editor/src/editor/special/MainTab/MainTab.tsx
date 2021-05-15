@@ -3,7 +3,7 @@ import SvgIcon from 'common/icons/SvgIcon'
 import { getTabClasses } from './MainTab-func'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import './MainTab-func'
 import './MainTab.scss'
 
@@ -37,7 +37,7 @@ export default function MainTab(props: MainTabPropType) {
     // Размер элементов интерфейса
     const editorSize = useSelector((store: AppState) => store.settings.editorSize)
 
-    const buttonAttrs: ObjStringKeyAnyValType = {
+    const buttonAttrs: MiscTypes.ObjStringKeyAnyVal = {
         title,
         className: getTabClasses(editorSize, active, position),
         onClick

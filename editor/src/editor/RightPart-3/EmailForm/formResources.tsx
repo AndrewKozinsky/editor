@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'

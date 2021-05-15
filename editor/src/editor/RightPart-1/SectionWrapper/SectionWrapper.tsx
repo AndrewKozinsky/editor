@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import ArticlesSection from '../ArticlesSection/ArticlesSection'
 import ComponentsSection from '../ComponentsSection/ComponentsSection'
-import PluginsSection from '../PluginsSection/PluginsSection/PluginsSection'
+import IncFilesTemplateSection from '../IncFilesTemplateSection/IncFilesTemplateSection/IncFilesTemplateSection'
 import SiteSection from '../SiteSection/SiteSection'
 import Header from 'common/textBlocks/Header/Header'
 import Wrapper from 'common/Wrapper/Wrapper'
@@ -45,7 +45,7 @@ function SitePartProvider() {
         // Список всех компонентов во всех вкладках
         const components = [
             SiteSection,
-            PluginsSection,
+            IncFilesTemplateSection,
             ComponentsSection,
             ArticlesSection
         ]

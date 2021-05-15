@@ -66,8 +66,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
             initialData: {
                 // Сколько раз пытались отправить форму
                 submitCounter: 0,
-                // Тип формы: createPlugin (создать новый сайт) или savePlugin (сохранить новое имя сайта)
-                formType: 'createPlugin'
+                // Тип формы: createTemplate (создать новый шаблон) или saveTemplate (сохранить изменения шаблона)
+                formType: 'createTemplate'
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
@@ -107,12 +107,12 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
 
                 // В зависимости от типа формы запущу разные функции сохранения данных
                 // Если нужно создать новый шаблон
-                if (formDetails.state.form.data.formType === 'createPlugin') {
-                    await createNewPlugin(formDetails, lang)
+                if (formDetails.state.form.data.formType === 'createTemplate') {
+                    await createNewTemplate(formDetails, lang)
                 }
                 // Если нужно обновить данные шаблона
                 else {
-                    await updatePlugin(formDetails, lang)
+                    await updateTemplate(formDetails, lang)
                 }
             }
         }
@@ -129,7 +129,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
 
     const schemas = {
         name: yup.string()
-            .required(messages.PluginsSection.pluginNameInputRequired[lang])
+            .required(messages.IncFilesTemplateSection.templateNameInputRequired[lang])
     }
 
     // @ts-ignore
@@ -234,12 +234,12 @@ function setLoadingStatusToForm(
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  * @param {String} lang — язык интерфейса
  */
-async function createNewPlugin(
+async function createNewTemplate(
     formDetails: FHTypes.FormDetailsInSubmitHandler,
     lang: StoreSettingsTypes.EditorLanguage
 ) {
     // Сформировать объект с данными шаблона подключаемых файлов
-    const newPluginData = {
+    const newTemplateData = {
         siteId: store.getState().sites.currentSiteId,
         name: formDetails.readyFieldValues.name,
         codeInHead: {
@@ -253,9 +253,9 @@ async function createNewPlugin(
     // Отправить данные на сервер...
     const options = {
         method: 'POST',
-        body: JSON.stringify(newPluginData)
+        body: JSON.stringify(newTemplateData)
     }
-    const response = await makeFetch(getApiUrl('plugins'), options, lang)
+    const response = await makeFetch(getApiUrl('incFilesTemplates'), options, lang)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -264,14 +264,14 @@ async function createNewPlugin(
     // Если шаблон успешно создан...
     if (response.status === 'success') {
         // Скачать новый список шаблонов и поставить в Хранилище
-        await store.dispatch(actions.sites.requestPlugins())
+        await store.dispatch(actions.sites.requestIncFilesTemplates())
 
         // Найти в Хранилище шаблон с таким же именем и выделить его
-        const newPlugin = store.getState().sites.pluginsSection.plugins.find((plugin: any) => {
-            return plugin.id === response.data.template._id
+        const newTemplate = store.getState().sites.incFilesTemplatesSection.templates.find((template: any) => {
+            return template.id === response.data.template._id
         })
 
-        store.dispatch(actions.sites.setCurrentPluginsId(newPlugin.id))
+        store.dispatch(actions.sites.setCurrentIncFilesTemplateId(newTemplate.id))
     }
 }
 
@@ -281,15 +281,15 @@ async function createNewPlugin(
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  * @param {String} lang — язык интерфейса
  */
-async function updatePlugin(
+async function updateTemplate(
     formDetails: FHTypes.FormDetailsInSubmitHandler,
     lang: StoreSettingsTypes.EditorLanguage
 ) {
     // id выбранного шаблона
-    const {currentPluginId} = store.getState().sites.pluginsSection
+    const {currentTemplateId} = store.getState().sites.incFilesTemplatesSection
 
     // Сформировать объект с данными шаблона подключаемых файлов
-    const pluginData = {
+    const templateData = {
         name: formDetails.readyFieldValues.name,
         codeInHead: {
             code: formDetails.readyFieldValues.head
@@ -302,9 +302,9 @@ async function updatePlugin(
     // Отправить данные на сервер...
     const options = {
         method: 'PATCH',
-        body: JSON.stringify(pluginData)
+        body: JSON.stringify(templateData)
     }
-    const response = await makeFetch(getApiUrl('plugin', currentPluginId), options, lang)
+    const response = await makeFetch(getApiUrl('incFilesTemplate', currentTemplateId), options, lang)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -313,6 +313,6 @@ async function updatePlugin(
     // Если сайт успешно создан...
     if (response.status === 'success') {
         // Скачать новый список шаблонов и поставить в Хранилище
-        await store.dispatch(actions.sites.requestPlugins())
+        await store.dispatch(actions.sites.requestIncFilesTemplates())
     }
 }

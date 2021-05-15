@@ -1,5 +1,5 @@
 import {KeyboardEventHandler, useEffect} from 'react'
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 import actions from 'store/rootAction'
@@ -19,7 +19,7 @@ export default function useSetShortcutsHandler() {
  * @param {Object} e — объект события
  * @param {Object} dispatch — диспетчер
  */
-function setShortcutsHandler(e: KeyboardEvent, dispatch: AppDispatchType) {
+function setShortcutsHandler(e: KeyboardEvent, dispatch: MiscTypes.AppDispatch) {
     const escKey = e.key === "Escape",
         ctrlKey = e.ctrlKey,
         altKey = e.altKey,

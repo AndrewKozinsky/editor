@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react'
+import React, { ReactElement } from 'react'
 // @ts-ignore
 import { Switch, Route } from 'react-router-dom'
 
@@ -8,8 +8,8 @@ import NotFound from '../NotFound/NotFound'
 
 // Страницы
 import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
-
 import EntrancePages from 'modules/auth/EntrancePages/EntrancePages'
+
 // JS и CSS
 import { useInit } from './js/init'
 import { useGetAppClasses, useRedirectPage } from './js/App-func'
@@ -22,13 +22,11 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App(): ReactElement {
+    // TODO При переключении сайтов данные по шаблонам должны скачиваться заново
     // TODO Считаю заголовок вкладки на сайтах должен быть статичным и отражать назначение вкладки, а не название открытого материала.
     // TODO Сделай на вкладке сайта выпадающей список с шаблонами и выбранным шаблоном по умолчанию.
-    // TODO Типы в файле editor/src/types/miscTypes.ts заключи в пространство MiscTypes.
-    // TODO Слово plugins замени на IncFilesTemplate чтобы не было разночтений.
     // TODO Добавь свойство defaultIncludedFilesTemplateId в модель сайта и реализуй взаимодействие с ним.
     // TODO Добавь useCallback всем хукам где это требуется.
-    // TODO Сделай textarea в TextInput
     // TODO Сделай документацию как на https://yastatic.net/s3/frontend/lego/storybook/index.html?path=/story/controls-radiobox-desktop--playground
     // TODO Не забывай что текстовые поля должны соответствовать предполагаемому количеству вводимых символов. Если будет только три символа, то поле не должно быть на всю ширину.
     // TODO Надо бы в базе данных в коллекций сделать даты создания. Это потребуется при сортировке материалов в будущем.

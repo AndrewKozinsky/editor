@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
-import messages from '../../messages';
-import {useDeletePlugin} from 'requests/authRequests'
+import messages from '../../messages'
+import {useDeleteIncFilesTemplate} from 'requests/authRequests'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
@@ -11,7 +11,7 @@ import store from 'store/store'
 
 
 // Хук возвращает функцию удаляющая учётную запись пользователя
-export default function useGetDeletePlugin() {
+export default function useGetDeleteTemplate() {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -45,7 +45,7 @@ function ModalContent() {
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Запрос на удаление пользователя
-    const {response: deleteResponse, doFetch: deleteSite} = useDeletePlugin()
+    const {response: deleteResponse, doFetch: deleteTemplate} = useDeleteIncFilesTemplate()
 
     useEffect(function () {
         // Ничего не делать если статус не равен success
@@ -55,27 +55,27 @@ function ModalContent() {
         dispatch(actions.modal.closeModal())
 
         // Скачать новый список шаблонов и поставить в Хранилище
-        store.dispatch(actions.sites.requestPlugins())
+        store.dispatch(actions.sites.requestIncFilesTemplates())
 
-        // Обнулить id выбранного сайта
-        store.dispatch(actions.sites.setCurrentPluginsId(null))
-    }, [deleteSite])
+        // Обнулить id выбранного шаблона
+        store.dispatch(actions.sites.setCurrentIncFilesTemplateId(null))
+    }, [deleteTemplate])
 
     return (
         <>
-            <p>{messages.PluginsSection.deletePluginConfirmationTextInModal[lang]}</p>
+            <p>{messages.IncFilesTemplateSection.deletePluginConfirmationTextInModal[lang]}</p>
             <Wrapper t={10} align='right'>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button
-                    text={messages.PluginsSection.closeDeletePluginModalBtn[lang]}
+                    text={messages.IncFilesTemplateSection.closeDeletePluginModalBtn[lang]}
                     onClick={() => dispatch(actions.modal.closeModal())}
                 />
                 <Button
-                    text={messages.PluginsSection.deletePluginBtnInModal[lang]}
+                    text={messages.IncFilesTemplateSection.deletePluginBtnInModal[lang]}
                     color='accent'
-                    onClick={deleteSite}
+                    onClick={deleteTemplate}
                 />
             </Wrapper>
         </>

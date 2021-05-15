@@ -42,7 +42,7 @@ function useGetAndSetEditorSettings() {
         let siteId = <StoreSitesTypes.CurrentSiteId | null>localStorage.getItem('editorSiteId') // id сайта
         let settingsTabId = <StoreSettingsTypes.SettingsPanelTab | null>localStorage.getItem('editorSettingsTabId') // id вкладки в Настройках
         let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Настройках
-        let editorPluginsId = <StoreSitesTypes.CurrentPluginsId | null>localStorage.getItem('editorPluginsId') // id вкладки в Настройках
+        let editorPluginsId = <StoreSitesTypes.CurrentIncFilesTemplateId | null>localStorage.getItem('editorPluginsId') // id вкладки в Настройках
 
         // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
@@ -86,7 +86,7 @@ function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
-        dispatch( sitesActions.setCurrentPluginsId(editorPluginsId) )
+        dispatch( sitesActions.setCurrentIncFilesTemplateId(editorPluginsId) )
     }, [])
 }
 

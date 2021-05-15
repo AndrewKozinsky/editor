@@ -1,7 +1,7 @@
-import { ObjStringKeyAnyValType } from "../types/miscTypes"
+import { MiscTypes } from "../types/miscTypes"
 
 
-const addresses: ObjStringKeyAnyValType = {
+const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
@@ -36,10 +36,10 @@ const addresses: ObjStringKeyAnyValType = {
         return 'sites/' + siteId
     },
     // Шаблоны подключаемых файлов
-    plugins: 'includedFilesTemplate',
+    incFilesTemplates: 'incFilesTemplate',
     // Конкретный шаблон подключаемых файлов
-    plugin: function (pluginId: string) {
-        return 'includedFilesTemplate/' + pluginId
+    incFilesTemplate: function (templateId: string) {
+        return 'incFilesTemplate/' + templateId
     },
 }
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import DividedArea from '../DevidedArea/DividedArea'
+import DividedArea from '../DividedArea/DividedArea'
 import './ComponentsSection.scss'
 
 

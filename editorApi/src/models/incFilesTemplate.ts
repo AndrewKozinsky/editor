@@ -2,7 +2,7 @@ import * as mongoose from 'mongoose'
 import { Schema, Document } from 'mongoose'
 
 
-export interface IIncludedFilesTemplate extends Document {
+export interface IIncFilesTemplate extends Document {
     name: string,
     userId: string,
     siteId: string,
@@ -15,29 +15,29 @@ export interface IIncludedFilesTemplate extends Document {
 }
 
 // Схема о подключаемых к сайту файлах CSS, JS и так далее
-const IncludedFilesTemplateSchema: Schema = new Schema({
+const IncFilesTemplateSchema: Schema = new Schema({
     // Название шаблона
     name: {
         type: String,
-        required: [true, '{{includedFilesTemplate.nameRequired}}'],
-        maxLength: [250, '{{includedFilesTemplate.nameMaxLength}}'],
+        required: [true, '{{incFilesTemplate.nameRequired}}'],
+        maxLength: [250, '{{incFilesTemplate.nameMaxLength}}'],
     },
     // id пользователя, кому принадлежит сайт с этим шаблоном
     userId: {
         type: String,
-        required: [true, '{{includedFilesTemplate.userIdRequired}}']
+        required: [true, '{{incFilesTemplate.userIdRequired}}']
     },
     // id сайта шаблона
     siteId: {
         type: String,
-        required: [true, '{{includedFilesTemplate.siteIdRequired}}']
+        required: [true, '{{incFilesTemplate.siteIdRequired}}']
     },
     // Объект с кодом, который нужно подключать в <head>
     codeInHead: {
         // Код, который нужно поместить в <head>
         code: {
             type: String,
-            maxLength: [65000, '{{includedFilesTemplate.codeInHeadCodeMaxLength}}'],
+            maxLength: [65000, '{{incFilesTemplate.codeInHeadCodeMaxLength}}'],
         },
 
     },
@@ -46,11 +46,11 @@ const IncludedFilesTemplateSchema: Schema = new Schema({
         // Код, который нужно поместить перед </body>
         code: {
             type: String,
-            maxLength: [65000, '{{includedFilesTemplate.codeBeforeEndBodyCodeMaxLength}}'],
+            maxLength: [65000, '{{incFilesTemplate.codeBeforeEndBodyCodeMaxLength}}'],
         },
     },
 })
 
 
-const IncludedFilesTemplateModel = mongoose.model<IIncludedFilesTemplate>('IncludedFilesTemplate', IncludedFilesTemplateSchema)
-export default IncludedFilesTemplateModel
+const IncFilesTemplateModel = mongoose.model<IIncFilesTemplate>('IncFilesTemplate', IncFilesTemplateSchema)
+export default IncFilesTemplateModel

@@ -4,12 +4,11 @@ export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
-    pluginsSection: {
-        plugins: StoreSitesTypes.PluginsType,
-        currentPluginId: StoreSitesTypes.CurrentPluginsId,
+    incFilesTemplatesSection: {
+        templates: StoreSitesTypes.IncFilesTemplatesType,
+        currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId,
     }
 }
-
 
 
 // Изначальные значения
@@ -21,11 +20,11 @@ const initialState: SitesReducerType = {
     // id открытой вкладки на правой части
     rightMainTab: 0,
     // Данные по вкладке «Шаблоны подключаемых файлов»
-    pluginsSection: {
+    incFilesTemplatesSection: {
         // Массив шаблонов подключаемых файлов
-        plugins: [],
+        templates: [],
         // id выбранного шаблона подключаемых файлов
-        currentPluginId: null,
+        currentTemplateId: null,
     }
 }
 
@@ -66,19 +65,19 @@ function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRig
 }
 
 
-// Установка массива сайтов
-function setPlugins(state: SitesReducerType, action: StoreSitesTypes.SetPluginsAction): SitesReducerType {
+// Установка массива шаблонов подключаемых файлов
+function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
     return {
         ...state,
-        pluginsSection: {
-            ...state.pluginsSection,
-            plugins: action.payload
+        incFilesTemplatesSection: {
+            ...state.incFilesTemplatesSection,
+            templates: action.payload
         }
     }
 }
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentPluginsId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentPluginsIdAction): SitesReducerType {
+function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
         localStorage.removeItem('editorPluginsId')
@@ -90,9 +89,9 @@ function setCurrentPluginsId(state: SitesReducerType, action: StoreSitesTypes.Se
 
     return {
         ...state,
-        pluginsSection: {
-            ...state.pluginsSection,
-            currentPluginId: action.payload
+        incFilesTemplatesSection: {
+            ...state.incFilesTemplatesSection,
+            currentTemplateId: action.payload
         }
     }
 }
@@ -109,10 +108,10 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
         case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
             return setRightMainTab(state, action)
 
-        case StoreSitesTypes.SET_PLUGINS:
-            return setPlugins(state, action)
-        case StoreSitesTypes.SET_CURRENT_PLUGINS_ID:
-            return setCurrentPluginsId(state, action)
+        case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
+            return setTemplates(state, action)
+        case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
+            return setCurrentIncFilesTemplateId(state, action)
         default:
             // @ts-ignore
             const x: never = null

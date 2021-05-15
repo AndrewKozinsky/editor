@@ -55,7 +55,7 @@ export const messages: messagesType = {
         },
     },
     // Модель IncludedFilesTemplate
-    includedFilesTemplate: {
+    incFilesTemplate: {
         nameRequired: {
             eng: 'Please provide a template name.',
             rus: 'Укажите название шаблона.'
@@ -167,7 +167,12 @@ export const messages: messagesType = {
         },
     },
     // Контроллер авторизации
-    includedFilesTemplateController: {
+    incFilesTemplateController: {
+        // Функция getAllTemplates
+        getTemplateNoSiteId: {
+            eng: 'The id of the site to which the requested templates belong has not been passed in query',
+            rus: 'В запросе не передан id сайта к которому принадлежать запрашиваемые шаблоны'
+        },
         // Функция createTemplate
         createTemplateNoName: {
             eng: 'Template name is not provided',

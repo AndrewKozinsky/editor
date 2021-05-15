@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'src/libs/formHandler/types'
@@ -11,7 +11,7 @@ import actions from 'store/rootAction';
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any, dispatch: AppDispatchType): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any, dispatch: MiscTypes.AppDispatch): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {

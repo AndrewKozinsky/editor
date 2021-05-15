@@ -7,7 +7,7 @@ import RightPart1 from '../../RightPart-1/RightPart-1/RightPart-1'
 import RightPart2 from '../../RightPart-2/RightPart-2'
 import RightPart3 from '../../RightPart-3/RightPart-3/RightPart-3'
 import {AppState} from '../../../store/rootReducer'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 type EditorPartProviderPropType = {
     position: 'left' | 'right'
@@ -30,7 +30,7 @@ export default function EditorPartProvider(props: EditorPartProviderPropType) {
     useEffect(function () {
 
         // Список всех компонентов во всех вкладках
-        const components: ObjStringKeyAnyValType = {
+        const components: MiscTypes.ObjStringKeyAnyVal = {
             left0: LeftPart1,
             left1: LeftPart2,
             left2: LeftPart3,

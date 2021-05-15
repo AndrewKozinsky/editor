@@ -3,7 +3,7 @@ import StoreSettingsTypes from 'store/settings/settingsTypes';
 import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 
 /**
@@ -74,7 +74,7 @@ export function getOptions(selectProps: SelectPropType) {
     return options.map(function (option, i) {
 
         // Атрибуты <option>
-        const optionAttrs: ObjStringKeyAnyValType = {
+        const optionAttrs: MiscTypes.ObjStringKeyAnyVal = {
             value: option.value,
             key: i
         }

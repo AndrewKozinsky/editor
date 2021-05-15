@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './Select-func'
 import { OptionsType } from './SelectTypes'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
 import {useGetComponentSize} from 'utils/MiscUtils'
@@ -44,7 +44,7 @@ function Select(props: SelectPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты поля
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         name,
         className: getClasses(size),
         onFocus: () => setIsFocus(true),

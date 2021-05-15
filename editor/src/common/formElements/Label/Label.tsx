@@ -1,7 +1,7 @@
 import React, {ReactElement} from 'react'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { useGetComponentSize } from 'utils/MiscUtils'
-import { ObjStringKeyStringValType } from '../../../types/miscTypes'
+import { MiscTypes } from '../../../types/miscTypes'
 import { getLabelClasses } from './Label-func'
 import './Label.scss'
 
@@ -29,7 +29,7 @@ function Label(props: LabelPropType) {
     if (!label) return null
 
     // Атрибуты label
-    const labelAttrs: ObjStringKeyStringValType = {}
+    const labelAttrs: MiscTypes.ObjStringKeyStringVal = {}
     // Классы подписи
     labelAttrs.className = getLabelClasses(size, disabled, bold)
     // Добавить атрибут for равный id поля к которому должна быть привязана подпись

@@ -52,7 +52,7 @@ const messages: messagesType = {
         },
     },
     // Содержимое вкладки «Сайты»
-    PluginsSection: {
+    IncFilesTemplateSection: {
         headerNewPlugin: {
             eng: 'New template',
             rus: 'Новый шаблон'
@@ -81,7 +81,7 @@ const messages: messagesType = {
             eng: 'Code added before </body>',
             rus: 'Код добавляемый до </body>'
         },
-        pluginNameInputRequired: {
+        templateNameInputRequired: {
             eng: 'Required',
             rus: 'Обязательное поле'
         },

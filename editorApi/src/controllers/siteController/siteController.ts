@@ -2,7 +2,7 @@ import { Response, NextFunction } from 'express'
 import { catchAsync } from '../../utils/errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import SiteModel from '../../models/site'
-import IncludedFilesTemplateModel from '../../models/includedFilesTemplate';
+import IncludedFilesTemplateModel from '../../models/incFilesTemplate';
 
 
 /** Получение всех сайтов (защищённый маршрут) */

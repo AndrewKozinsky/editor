@@ -1,4 +1,4 @@
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import {useEffect, useState} from 'react'
 import {MainTabDataType} from 'editor/special/MainTab/MainTab'
 import {useDispatch, useSelector} from 'react-redux'

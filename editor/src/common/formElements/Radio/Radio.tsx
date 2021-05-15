@@ -1,5 +1,5 @@
 import React, {ReactElement, useState} from 'react'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getLabelClasses } from './Radio-func'
@@ -39,7 +39,7 @@ function Radio(props: RadioPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты переключателя
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         type: 'radio',
         name,
         value,
@@ -52,7 +52,7 @@ function Radio(props: RadioPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: ObjStringKeyAnyValType = {
+    const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
         htmlFor: id,
         className: getLabelClasses(size),
     }

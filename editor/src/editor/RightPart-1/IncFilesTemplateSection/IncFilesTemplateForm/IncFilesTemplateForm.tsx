@@ -9,16 +9,20 @@ import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
 import Button from 'common/formElements/Button/Button'
 import messages from '../../messages'
-import {useGetAnotherTemplate, useGetDeletePluginVisibilityStatus, useGetSubmitButtonText} from './CurrentPluginsForm-func'
-import useGetDeletePlugin from './deletePlugin'
+import {
+    useGetAnotherTemplate,
+    useGetDeleteTemplateVisibilityStatus,
+    useGetSubmitButtonText
+} from './IncFilesTemplateForm-func'
+import useGetDeleteTemplate from './deleteTemplate'
 
-export default function CurrentPluginsForm() {
+export default function IncFilesTemplateForm() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'plugin')
+    const fh = useFormHandler(getFormConfig(lang), 'incFilesTemplate')
     // Изменение данных формы при выделении другого шаблона подключаемых файлов
     useGetAnotherTemplate(fh.formState, fh.setFormState)
 
@@ -26,21 +30,21 @@ export default function CurrentPluginsForm() {
     const submitButtonText = useGetSubmitButtonText(lang)
 
     return (
-        <Form name='plugin' formHandlers={fh.formHandlers}>
+        <Form name='incFilesTemplate' formHandlers={fh.formHandlers}>
             <Wrapper>
                 <TextInput
-                    label={ messages.PluginsSection.templateNameInput[lang] }
+                    label={ messages.IncFilesTemplateSection.templateNameInput[lang] }
                     name='name'
                     value={fh.fields.name.value[0]}
                     onChange={fh.onChangeFieldHandler}
-                    placeholder={messages.PluginsSection.templateNamePlaceholder[lang]}
+                    placeholder={messages.IncFilesTemplateSection.templateNamePlaceholder[lang]}
                     error={fh.fields.name.data.error}
                     disabled={fh.fields.name.data.disabled}
                 />
             </Wrapper>
             <Wrapper t={15}>
                 <TextInput
-                    label={ messages.PluginsSection.headInput[lang] }
+                    label={ messages.IncFilesTemplateSection.headInput[lang] }
                     inputType='textarea'
                     name='head'
                     value={fh.fields.head.value[0]}
@@ -51,7 +55,7 @@ export default function CurrentPluginsForm() {
             </Wrapper>
             <Wrapper t={15}>
                 <TextInput
-                    label={ messages.PluginsSection.bodyInput[lang] }
+                    label={ messages.IncFilesTemplateSection.bodyInput[lang] }
                     inputType='textarea'
                     name='body'
                     value={fh.fields.body.value[0]}
@@ -72,30 +76,30 @@ export default function CurrentPluginsForm() {
                     disabled={fh.fields.submit.data.disabled}
                     loading={fh.fields.submit.data.loading}
                 />
-                <DeletePluginButton />
+                <DeleteTemplateButton />
             </Wrapper>
         </Form>
     )
 }
 
 /** Кнопка удаления шаблона подключаемых файлов */
-function DeletePluginButton() {
+function DeleteTemplateButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
-    const openDeletePluginConfirmation = useGetDeletePlugin()
+    const openDeleteTemplateConfirmation = useGetDeleteTemplate()
 
     // Нужно ли показывать кнопку удаления сайта
-    const isDeleteSiteButtonVisible = useGetDeletePluginVisibilityStatus()
+    const isDeleteSiteButtonVisible = useGetDeleteTemplateVisibilityStatus()
     if (!isDeleteSiteButtonVisible) return null
 
     return (
         <Button
             type='button'
-            text={messages.PluginsSection.deleteSiteBtnText[lang]}
+            text={messages.IncFilesTemplateSection.deleteSiteBtnText[lang]}
             icon='btnSignTrash'
-            onClick={openDeletePluginConfirmation}
+            onClick={openDeleteTemplateConfirmation}
         />
     )
 }

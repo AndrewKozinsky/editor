@@ -6,7 +6,7 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import actions from 'store/rootAction'
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import messages from '../messages'
 
 

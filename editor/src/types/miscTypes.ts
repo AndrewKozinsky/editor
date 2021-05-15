@@ -1,17 +1,19 @@
 import store from 'store/store'
 import {AppState} from 'store/rootReducer'
 
-/** Тип объекта со строковыми ключами с любым значением */
-export type ObjStringKeyAnyValType = {[key: string]: any}
+export namespace MiscTypes {
+    /** Тип объекта со строковыми ключами с любым значением */
+    export type ObjStringKeyAnyVal = {[key: string]: any}
 
-/** Тип объекта с со строковыми ключами и строковыми значениями */
-export type ObjStringKeyStringValType = {[key: string]: string}
+    /** Тип объекта с со строковыми ключами и строковыми значениями */
+    export type ObjStringKeyStringVal = {[key: string]: string}
 
-/** Тип объекта с любыми строковыми ключами с любым значением */
-export type ReactRefType = null | {current: HTMLElement}
+    /** Тип объекта с любыми строковыми ключами с любым значением */
+    export type ReactRef = null | {current: HTMLElement}
 
-/** Диспетчер Редакса */
-export type AppDispatchType = typeof store.dispatch
+    /** Диспетчер Редакса */
+    export type AppDispatch = typeof store.dispatch
 
-/** Тип аргумента getState для Redux Thunk */
-export type GetStateType = () => AppState
+    /** Тип аргумента getState для Redux Thunk */
+    export type GetState = () => AppState
+}

@@ -1,7 +1,7 @@
 import {Router} from 'express'
 import * as authController from '../controllers/authController/authController'
-import * as includedFilesTemplateController
-    from '../controllers/includedFilesTemplateController/includedFilesTemplateController'
+import * as incFilesTemplateController
+    from '../controllers/incFilesTemplateController/incFilesTemplateController'
 
 
 const router = Router()
@@ -9,15 +9,15 @@ const router = Router()
 // Маршруты для манипулирования шаблонами подключаемых файлов сайта
 router.route('/')
     // Получение всех шаблонов
-    .get(authController.protect, includedFilesTemplateController.getAllTemplates)
+    .get(authController.protect, incFilesTemplateController.getSiteTemplates)
     // Создание шаблона
-    .post(authController.protect, includedFilesTemplateController.createTemplate)
+    .post(authController.protect, incFilesTemplateController.createTemplate)
 
 router.route('/:templateId')
     // Изменение данных шаблона
-    .patch(authController.protect, includedFilesTemplateController.updateTemplate)
+    .patch(authController.protect, incFilesTemplateController.updateTemplate)
     // Удаление шаблона
-    .delete(authController.protect, includedFilesTemplateController.deleteTemplate)
+    .delete(authController.protect, incFilesTemplateController.deleteTemplate)
 
 
 export default router

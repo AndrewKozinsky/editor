@@ -7,11 +7,11 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import actions from 'store/rootAction'
-import { AppDispatchType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: AppDispatchType): FHTypes.FormConfig {
+export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: MiscTypes.AppDispatch): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
