@@ -25,7 +25,8 @@ const sitesActions = {
             const preparedSites = response.data.sites.map((site: any) => {
                 return {
                     id: site._id,
-                    name: site.name
+                    name: site.name,
+                    defaultIncFilesTemplateId: site.defaultIncFilesTemplateId || null
                 }
             })
 
@@ -65,6 +66,10 @@ const sitesActions = {
 
             // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
             const siteId = store.getState().sites.currentSiteId
+
+            // Если не передан id сайта, то обнулить массив шаблонов подключаемых файлов в Хранилище
+            // потому что выбрали новый сайт
+            if (!siteId) dispatch( sitesActions.setTemplates([]) )
 
             // Параметры запроса
             const options = { method: 'GET' }

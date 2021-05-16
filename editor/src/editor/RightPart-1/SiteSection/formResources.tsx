@@ -1,10 +1,10 @@
 // @ts-ignore
 import * as yup from 'yup'
 import FHTypes from 'libs/formHandler/types'
-import messages from '../messages'
 import store from 'store/store'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import actions from 'store/rootAction'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
+import messages from '../messages'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 
@@ -26,6 +26,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                         return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
                     }
                 },
+            },
+            defaultIncFilesTemplateId: {
+                initialValue: [''],
             },
             submit: {
                 initialValue: [''],
@@ -131,8 +134,8 @@ function validateForm(
     for(let fieldName in formState.fields) {
         const field = formState.fields[fieldName]
 
-        // Игнорировать кнопки
-        if (field.fieldType === 'button') continue
+        // Игнорировать кнопки и выпадающие списки
+        if (field.fieldType === 'button' || field.fieldType === 'select') continue
 
         // Значение перебираемого поля
         const fieldValue = field.value[0]
@@ -251,6 +254,7 @@ async function updateSite(
         method: 'PATCH',
         body: JSON.stringify(formDetails.readyFieldValues)
     }
+    // console.log(formDetails.readyFieldValues.defaultIncFilesTemplateId)
     const response = await makeFetch(getApiUrl('site', selectedSiteId), options, lang)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку

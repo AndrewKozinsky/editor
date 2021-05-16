@@ -4,7 +4,9 @@ namespace StoreSitesTypes {
     // Сайт
     export type SiteType = {
         id: string,
-        name: string
+        name: string,
+        // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
+        defaultIncFilesTemplateId: null | string
     }
     // Сайты
     export type SitesType = SiteType[]

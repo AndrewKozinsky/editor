@@ -26,11 +26,6 @@ export function handleBrowserEvent(
     // Имя поля и имя произошедшего события
     const {fieldName, eventName} = browserEvent
 
-    /*if (eventName === 'click') {
-        console.log(fieldName)
-    }*/
-
-
     // Не обрабатывать пустые события
     if (!eventName || !fieldName) return
 
@@ -43,7 +38,7 @@ export function handleBrowserEvent(
         // случившегося на поле. Возвращает новый объект Состояния формы
         const newFormState = formConfig.fields[fieldName][eventName](formDetails)
 
-        // Установка нового состояния формы если что-то прислали
+        // Установка нового состояния формы
         if (newFormState) setFormState(newFormState)
     }
 

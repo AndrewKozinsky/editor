@@ -9,10 +9,9 @@ import FHTypes from '../types'
  * @param {Function} setFormState — функция устанавливающая новое Состояние useFormHandler
  * @param {Element} $form — ссылка на элемент формы
  */
-export default function useSupplementFieldData(
+export default function useSetServiceDataToForm(
     formState: FHTypes.FormState, setFormState: FHTypes.SetFormState, $form: FHTypes.$form
 ) {
-
     useEffect(function () {
         // Завершить функцию если нет ссылки на форму
         if (!$form) return
@@ -30,13 +29,13 @@ export default function useSupplementFieldData(
             // Ссылка на текущее поле формы
             // @ts-ignore
             const $field = $formInputs[key]
+            if (!$field) continue
 
             // Тип поля: text, select, checkbox, radio или button
             const fieldType = getFieldType( $field )
 
             // Сколько значений будет возращать поле: zero, one или many
-            // @ts-ignore
-            const valueCount = getValueCount( $formInputs[key], fieldType )
+            const valueCount = getValueCount( $field, fieldType )
 
             // Дополнение объекта с данными поля
             newFormState.fields[key] = {
@@ -54,6 +53,36 @@ export default function useSupplementFieldData(
         setFormState(newFormState)
     }, [$form])
 }
+
+/**
+ * Если на момент отрисовки формы нет каких-то полей, то в их данных не будет ссылки на элемент,
+ * его тип и количество возможных значений, которые требуются чтобы определить какие значения должны быть возвращены при отправке формы.
+ * Функция вычисляет эти значения и возвращает новый объект с данными поля.
+ * @param {Object} formState — объект состояния формы
+ * @param {String} fieldName — имя поля, у которого нужно поставить ссылку на поле, его тип и количество возможных значений
+ */
+export function setServiceDataToField(
+    formState: FHTypes.FormState, fieldName: string
+) {
+    // Поле формы
+    const $field: HTMLInputElement = formState.form.$form.querySelector(`*[name="${fieldName}"]`)
+    if (!$field) return {...formState.fields[fieldName]}
+
+    // Тип поля: text, select, checkbox, radio или button
+    const fieldType = getFieldType( $field )
+
+    // Сколько значений будет возращать поле: zero, one или many
+    const valueCount = getValueCount( $field, fieldType )
+
+    // Возрат объекта поля с дополненными значениями
+    return {
+        ...formState.fields[fieldName],
+        $field,
+        fieldType,
+        valueCount
+    }
+}
+
 
 /**
  * Функция возращает тип поля: text, select, checkbox, radio или button
@@ -93,7 +122,7 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
  * @param {HTMLFormElement} $input — поле формы
  * @param {String} inputType — тип поля: text, select, checkbox или radio
  */
-function getValueCount($input: HTMLFormElement, inputType: FHTypes.FieldType): FHTypes.ValueCount {
+function getValueCount($input: HTMLInputElement, inputType: FHTypes.FieldType): FHTypes.ValueCount {
 
     if (inputType === 'button'){
         return 'zero'

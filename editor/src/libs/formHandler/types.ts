@@ -153,9 +153,9 @@ namespace FHTypes {
     }
 
     // Тип поля
-    export type FieldType = 'text' | 'select' | 'checkbox' | 'radio' | 'button'
+    export type FieldType = 'unknown' | 'text' | 'select' | 'checkbox' | 'radio' | 'button'
     // Сколько значений может быть у поля: нисколько (кнопка), одно или несколько
-    export type ValueCount = 'zero' | 'one' | 'many'
+    export type ValueCount = 'unknown' | 'zero' | 'one' | 'many'
 
     export type FormStateObj = {
         // Ссылка на элемент формы.

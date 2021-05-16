@@ -2,13 +2,12 @@ import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
+import store from 'store/store'
 import messages from '../messages';
 import {useDeleteSite} from 'requests/authRequests'
-// import messages from '../messages'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
-import store from '../../../store/store';
 
 
 // Хук возвращает функцию удаляющая учётную запись пользователя
@@ -38,7 +37,7 @@ export default function useGetDeleteSite() {
     return () => setIsModalOpen(true)
 }
 
-
+/** Содержимое модального окна */
 function ModalContent() {
     const dispatch = useDispatch()
 

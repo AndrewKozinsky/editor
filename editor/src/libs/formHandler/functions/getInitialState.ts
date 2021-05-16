@@ -11,16 +11,16 @@ export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes
     let fields: FHTypes.FieldsStateObj = {}
     // Данные о форме
     let form: FHTypes.FormStateObj = {
-        data: formConfig.form.initialData || {}
+        data: formConfig.form.initialData || {},
     }
 
     // Проход по полям формы из объекта конфигурации для наполнения fields данными о полях
     for (let key in formConfig.fields) {
         fields[key] = {
             value: formConfig.fields[key].initialValue,
-            // Эти значения временные чтобы TS не ругался
-            fieldType: 'radio',
-            valueCount: 'one',
+            // Поставить неизвестные значения для типа поля и количества возможных значений
+            fieldType: 'unknown',
+            valueCount: 'unknown',
             data: formConfig.fields[key].initialData || {}
         }
     }

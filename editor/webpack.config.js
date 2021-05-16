@@ -67,9 +67,7 @@ function parseAssets() {
 
 // Функция возвращает значение параметра devtools
 function getDevTool(isDev) {
-    // Закомментировал потому что карты собирает другое расширение
-    // return isDev ? 'eval' : false
-    return false
+    return isDev ? 'inline-source-map' : false // eval
 }
 
 // Функция возвращает объект для свойства resolve
@@ -111,8 +109,7 @@ function getPlugins(isDev) {
             // Очиста папки с компилированными файлами перед помещением других
             new CleanWebpackPlugin(),
             // Формирование index.html
-            new HtmlWebpackPlugin(getHtmlConfig()),
-            new webpack.EvalSourceMapDevToolPlugin({})
+            new HtmlWebpackPlugin(getHtmlConfig())
         ]
     }
     else {

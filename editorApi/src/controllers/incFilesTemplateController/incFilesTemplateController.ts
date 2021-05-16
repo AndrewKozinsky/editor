@@ -3,6 +3,7 @@ import { catchAsync } from '../../utils/errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import IncFilesTemplateModel from '../../models/incFilesTemplate'
 import {AppError} from '../../utils/errors/appError'
+import SiteModel from '../../models/site';
 
 
 /** Получение всех шаблонов определённого сайта (защищённый маршрут) */
@@ -16,8 +17,6 @@ export const getSiteTemplates = catchAsync<void>(async (req: ExtendedRequestType
             new AppError(null, '{{incFilesTemplateController.getTemplateNoSiteId}}', 400)
         )
     }
-
-    console.log(req.query)
 
     // Получение всех шаблонов сайта с переданным id
     const siteId: string = req.query.siteId.toString()
@@ -110,8 +109,15 @@ export const deleteTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
         req.params.templateId
     )
 
-    // TODO При удалении проверяй id шаблона в качестве шаблона по умолчанию в сайте, которому он принадлежит.
-    // Если они идентичны, то обнуляй id шаблона по умолчанию в сайте
+    // Проверю в сайтах, не стоит ли id удаляемого шаблона как id шаблона по умолчанию.
+    // Если стоит, то очищу в сайте свойство defaultIncFilesTemplateId
+    const siteWithThisTemplate = await SiteModel.findOne({defaultIncFilesTemplateId: req.params.templateId})
+    if (siteWithThisTemplate) {
+        await SiteModel.findByIdAndUpdate(
+            siteWithThisTemplate._id,
+            {defaultIncFilesTemplateId: null}
+        )
+    }
 
     // Отправить успешный ответ
     res.status(200).json({

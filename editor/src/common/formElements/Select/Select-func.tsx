@@ -4,6 +4,7 @@ import { SelectPropType } from "./Select"
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from '../../icons/SvgIcon'
 import { MiscTypes } from 'types/miscTypes'
+import {OptionsType} from './SelectTypes';
 
 
 /**
@@ -62,13 +63,9 @@ export function getArrowIcon(size: StoreSettingsTypes.EditorSize): null | JSX.El
 
 /**
  * Функция возращает массив тегов <option>
- * @param {Object} selectProps — props переданные в выпадающий список
+ * @param {Array} options — массив пунктов выпадающего списка
  */
-export function getOptions(selectProps: SelectPropType) {
-
-    const {
-        options // Массив объектов с данными по которым будут генерироваться <option>
-    } = selectProps
+export function getOptions(options: OptionsType) {
 
     // Генерация массива тегов <option>
     return options.map(function (option, i) {
@@ -82,6 +79,6 @@ export function getOptions(selectProps: SelectPropType) {
         // Если <option> заблокирован
         if (option.disabled) optionAttrs.disabled = true
 
-        return <option {...optionAttrs}>{option.value}</option>
+        return <option {...optionAttrs}>{option.label}</option>
     })
 }

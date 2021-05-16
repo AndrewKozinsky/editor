@@ -75,7 +75,10 @@ function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFields
     for (let fieldName in formState.fields) {
         const field = formState.fields[fieldName]
 
-        if (field.valueCount === 'one') {
+        if (field.fieldType === 'unknown') {
+            fieldsValuesSubmitObj[fieldName] = null
+        }
+        else if (field.valueCount === 'one') {
             fieldsValuesSubmitObj[fieldName] = field.value[0]
         }
         else if (field.valueCount === 'many') {

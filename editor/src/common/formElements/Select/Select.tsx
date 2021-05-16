@@ -54,7 +54,7 @@ function Select(props: SelectPropType) {
             // Если передали обработчик потерей фокуса, то запустить
             if (onBlur) onBlur(e)
         },
-        onChange,
+        onChange//: (e: any) => console.log(e.target.value),
     }
 
     if (value) inputAttribs.value = value
@@ -68,7 +68,7 @@ function Select(props: SelectPropType) {
             <Label label={label}  id={id} />
             <div className={getWrapperClasses(size, isFocus)}>
                 <select {...inputAttribs}>
-                    {getOptions(props)}
+                    {getOptions(options)}
                 </select>
                 <div className='select-input-wrapper__tip'>{getArrowIcon(size)}</div>
             </div>

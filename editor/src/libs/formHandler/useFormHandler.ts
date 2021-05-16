@@ -1,7 +1,7 @@
 import {useState, useCallback, useEffect} from 'react'
 import getInitialState from './functions/getInitialState'
 import useGetForm from './functions/useGetForm'
-import useSupplementFieldData from './functions/useSupplementFieldData'
+import useSetServiceDataToForm from './functions/useSetServiceDataToForm'
 import useBrowserEvent from './functions/useBrowserEvent'
 import { handleBrowserEvent } from './functions/useHandlerBrowserEvent'
 import getFields from './functions/getFields'
@@ -27,7 +27,7 @@ export default function useFormHandler(
     const $form = useGetForm(formName)
 
     // Уточнение данных о полях при получении ссылки на форму
-    useSupplementFieldData(formState, setFormState, $form)
+    useSetServiceDataToForm(formState, setFormState, $form)
 
     // При наступлении браузерного события в browserEvent записываются данные об этом.
     const { browserEvent, setBrowserEvent } = useBrowserEvent($form)

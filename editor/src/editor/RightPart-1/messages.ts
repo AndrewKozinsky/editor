@@ -26,6 +26,10 @@ const messages: messagesType = {
             eng: 'Required',
             rus: 'Обязательное поле'
         },
+        defaultTemplateInput: {
+            eng: 'The default template of the plug-in files',
+            rus: 'Шаблон подключаемых файлов по умолчанию'
+        },
         submitBtnTextNewSite: {
             eng: 'Create',
             rus: 'Создать'
@@ -49,6 +53,10 @@ const messages: messagesType = {
         deleteSiteBtnInModal: {
             eng: 'Delete',
             rus: 'Удалить'
+        },
+        defaultTemplateSelectNoValue: {
+            eng: 'Not selected',
+            rus: 'Не выбрано'
         },
     },
     // Содержимое вкладки «Сайты»

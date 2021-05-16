@@ -1,6 +1,7 @@
 import React from 'react'
 import FHTypes from '../types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import { setServiceDataToField } from './useSetServiceDataToForm'
 
 /**
  * Обработчик изменения поля формы
@@ -15,15 +16,23 @@ export default function inputChangeHandler(
 ) {
     // Данные поля из Состояния
     const inputData = formState.fields[e.target.name]
+    // debugger
+
+    let inputDataCopy = {...inputData}
+    // Если в данных поля в типе стоит unknown, то данные неполные. Поставить служебную информацию:
+    // ссылки на элемент, его тип и количество возможных значений
+    if (inputDataCopy.fieldType === 'unknown') {
+        inputDataCopy = setServiceDataToField(formState, e.target.name)
+    }
 
     // Значение поля
     const inputValue = e.target.value
 
-    // Получение нового значения поля
-    const newValue = getNewValue(inputData, inputValue)
+    // Получение и установка нового значения поля
+    inputDataCopy.value = getNewValue(inputDataCopy, inputValue)
 
-    // Получения и установка нового Состояния формы
-    let newState: FHTypes.FormState = makeImmutableObj(formState, inputData.value, newValue);
+    // Получение и установка нового Состояния формы
+    let newState: FHTypes.FormState = makeImmutableObj(formState, inputData, inputDataCopy)
     setFormState(newState)
 }
 
@@ -33,7 +42,6 @@ export default function inputChangeHandler(
  * @param {String} newValue — новое значение поля
  */
 function getNewValue(inputData: FHTypes.FieldStateObj, newValue: string) {
-
     if (inputData.valueCount === 'zero') {
         return ['']
     }

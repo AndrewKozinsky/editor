@@ -12,6 +12,7 @@ export type WrapperPropType = {
     b?: BType // Отступ снизу
     gap?: GapType // Отступы между элементами внутри обёртки
     relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер элемента
+    style?: object
 }
 
 export type TType = 5 | 10 | 15 | 20 | 25 | 30
@@ -22,14 +23,15 @@ export type GapType = 10
 const Wrapper = (props: WrapperPropType) => {
     const {
         children, // Дети компонента
-        gap
+        gap,
+        style = {}
     } = props
 
     // Размер компонента относительно размера всего интерфейса
     const relativeSize = useGetComponentSize(props.relativeSize)
 
     return (
-        <div className={getWrapperClasses(props, relativeSize, gap)}>
+        <div className={getWrapperClasses(props, relativeSize, gap)} style={style}>
             {children}
         </div>
     )
