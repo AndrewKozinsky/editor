@@ -107,7 +107,6 @@ function DeleteSiteButton() {
             text={messages.SiteSection.deleteSiteBtnText[lang]}
             icon='btnSignTrash'
             onClick={openDeleteSiteConfirmation}
-            // loading={fh.fields.submit.data.loading}
         />
     )
 }

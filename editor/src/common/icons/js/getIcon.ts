@@ -56,6 +56,19 @@ import SiteTabArticleSmall from '../icons/siteTabArticleSmall';
 import SiteTabArticleBig from '../icons/siteTabArticleBig'
 import SiteTabComponentsSmall from '../icons/siteTabComponentsSmall'
 import SiteTabArticleMiddle from '../icons/siteTabArticleMiddle'
+import FilesTreeTriangleMiddle from '../icons/filesTreeTriangleMiddle'
+import FilesTreeTriangleBig from '../icons/filesTreeTriangleBig';
+import FilesTreeFolderPlusMiddle from '../icons/filesTreeFolderPlusMiddle';
+import FilesTreeFolderBig from '../icons/filesTreeFolderBig';
+import FilesTreePlusMiddle from '../icons/filesTreePlusMiddle';
+import FilesTreeFolderPlusSmall from '../icons/filesTreeFolderPlusSmall';
+import FilesTreeTriangleSmall from '../icons/filesTreeTriangleSmall';
+import FilesTreeFolderMiddle from '../icons/filesTreeFolderMiddle';
+import FilesTreeFolderPlusBig from '../icons/filesTreeFolderPlusBig';
+import FilesTreePlusBig from '../icons/filesTreePlusBig';
+import FilesTreePlusSmall from '../icons/filesTreePlusSmall';
+import FilesTreeFolderSmall from '../icons/filesTreeFolderSmall';
+import FilesTreePlaceMark from '../icons/filesTreePlaceMark';
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -187,6 +200,32 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
             small: EditorDarkThemeSmall,
             middle: EditorDarkThemeMiddle,
             big: EditorDarkThemeBig
+        },
+
+        // Значки на FilesTree
+        filesTreeTriangle: {
+            small: FilesTreeTriangleSmall,
+            middle: FilesTreeTriangleMiddle,
+            big: FilesTreeTriangleBig
+        },
+        filesTreeFolder: {
+            small: FilesTreeFolderSmall,
+            middle: FilesTreeFolderMiddle,
+            big: FilesTreeFolderBig
+        },
+        filesTreeFolderPlus: {
+            small: FilesTreeFolderPlusSmall,
+            middle: FilesTreeFolderPlusMiddle,
+            big: FilesTreeFolderPlusBig
+        },
+        filesTreePlus: {
+            small: FilesTreePlusSmall,
+            middle: FilesTreePlusMiddle,
+            big: FilesTreePlusBig
+        },
+        // Значёк указателя помещения перетаскиваемого элемента
+        filesTreePlaceMark: {
+            small: FilesTreePlaceMark,
         },
     }
 

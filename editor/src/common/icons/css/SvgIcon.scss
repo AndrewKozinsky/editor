@@ -21,3 +21,7 @@ $CN: icon;
 .#{$CN}-white-btn-icon {
     fill: white;
 }
+
+.#{$CN}-accent-fill {
+    fill: var(--accent-color);
+}

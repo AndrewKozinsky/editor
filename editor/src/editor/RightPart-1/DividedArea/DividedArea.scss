@@ -8,11 +8,17 @@ $CN: site-divided-area;
 .#{$CN}__divider {
     width: 1px;
     background-color: var(--bg-color-2);
-    margin: 0 1.5rem;
 }
 .#{$CN}__left-part {
-    max-width: 50%;
+    // TODO Позже восстановить это значение!
+    //max-width: 50%;
+    overflow: auto;
+    padding-right: 1.5rem;
+    //padding-left: 2.5rem;
 }
 .#{$CN}__right-part {
     flex-grow: 1;
+    overflow: auto;
+    //padding-right: 2.5rem;
+    padding-left: 1.5rem;
 }

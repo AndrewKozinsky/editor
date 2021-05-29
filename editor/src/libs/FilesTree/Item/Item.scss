@@ -1,0 +1,185 @@
+@import "common/commonStyles/commonStyles";
+
+$folder: ft-item-folder;
+$file: ft-item-file;
+
+// Общие стили главной обёртки
+.#{$folder}, .#{$file} {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    user-select: none;
+}
+
+// Общие стили внешней обёртки
+.#{$folder}__inner, .#{$file}__inner {
+    position: relative;
+    border-radius: var(--radius);
+}
+
+
+// СТИЛИ ПАПКИ
+.#{$folder}:hover {
+    .#{$folder}__right-part {
+        display: flex;
+    }
+}
+// Заблокированная папка
+/*.#{$folder}--disabled {
+    opacity: .2;
+}*/
+// Призрачная папка
+/*.#{$folder}--ghost {
+    position: absolute;
+    z-index: 1;
+}*/
+
+// Обёртка с деталями папки
+.#{$folder}__inner {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding: 3px 9px 3px 0;
+    border: 1px solid transparent;
+}
+// Атрибут data-ft-hover задаётся обёртке через JS при наведении
+// на определённые области. Поэтому подсветить её.
+.#{$folder}__inner[data-ft-hover] {
+    background-color: var(--bg-color-2);
+}
+// Вид обёртки если над ней завис перетаскиваемый элемент
+.#{$folder}__inner-round-flash {
+    border-color: var(--accent-color);
+}
+
+// Общие стили для всех кнопок
+.#{$folder}__btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: var(--radius-2);
+    transition: background-color .2s;
+
+    &:hover {
+        transition: background-color .1s;
+        background-color: var(--bg-color-2);
+
+        svg {
+            fill: var(--text-color);
+            opacity: 1;
+        }
+    }
+
+    &:focus {
+        // Включение стандартной фокусировки
+        @include focus
+    }
+}
+
+// Кнопка-треугольник
+.#{$folder}__btn-triangle {
+    width: 18px;
+    min-width: 18px;
+    height: 18px;
+}
+// Кнопка-треугольник при открытой папки
+.#{$folder}__btn-triangle--open {
+    transform: rotate(90deg);
+}
+// Кнопка-треугольник не видима если нет вложенных элементов
+.#{$folder}__btn-triangle--invisible {
+    visibility: hidden;
+}
+
+// Значёк папки
+.#{$folder}__folder-sign {
+    width: 15px;
+    min-width: 15px;
+    margin: 2px 5px 0 2px;
+}
+
+// Обёртка правых кнопок
+.#{$folder}__right-part {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    height: 100%;
+    background-color: var(--bg-color);
+    padding: 0 0 0 1px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -30px;
+        width: 30px;
+        background: linear-gradient(90deg, transparent, var(--bg-color));
+    }
+}
+
+// Если навели на главную обёртку, то задать другой фон правой обёртке
+.#{$folder}__inner[data-ft-hover] .#{$folder}__right-part {
+    background-color: var(--bg-color-2);
+
+    &::before {
+        background: linear-gradient(90deg, transparent, var(--bg-color-2));
+    }
+}
+
+// Кнопки создания папки и файла
+.#{$folder}__right-btn {
+    width: 21px;
+    min-width: 21px;
+    height: 21px;
+    margin-top: 2px;
+}
+
+
+// СТИЛИ ФАЙЛА
+.#{$file} {
+    padding-left: 20px;
+
+    &:hover {
+        .#{$file}__inner {
+            background-color: var(--bg-color-2);
+        }
+    }
+}
+.#{$file}__inner {
+    padding: 4px 10px 4px 20px;
+}
+
+// СТРЕЛКА С ОБОЗНАЧЕНИЕМ МЕСТА ПОМЕЩЕНИЯ ПЕРЕТАСКИВАЕМОГО ЭЛЕМЕНТА
+$arrow: ft-place-arrow;
+
+.#{$arrow} {
+    position: absolute;
+    z-index: 2;
+    left: -7px;
+    right: 0;
+    height: 5px;
+}
+.#{$arrow}--before {
+    top: -3px;
+}
+.#{$arrow}--after {
+    bottom: -2px;
+}
+.#{$arrow}__pointer {
+    position: absolute;
+    top: 0;
+}
+.#{$arrow}__line {
+    position: absolute;
+    top: 2px;
+    width: 100%;
+    height: 1px;
+    background-color: var(--accent-color);
+}

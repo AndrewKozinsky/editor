@@ -1,5 +1,7 @@
 import React from 'react'
 import DividedArea from '../DividedArea/DividedArea'
+import FilesTree from 'src/libs/FilesTree/FilesTree/FilesTree'
+import items from './items'
 import './ComponentsSection.scss'
 
 
@@ -19,7 +21,7 @@ export default function ComponentsSection(props: ComponentsSectionPropType) {
     return (
         <div className={CN} style={style}>
             <DividedArea>
-                <p>ComponentsSection</p>
+                <FilesTree items={items} openFolderIds={['4', '5']} />
                 <p>2</p>
             </DividedArea>
         </div>

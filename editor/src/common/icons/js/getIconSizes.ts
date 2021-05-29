@@ -50,6 +50,18 @@ import EditorLightThemeBig from '../icons/editorLightThemeBig';
 import EditorDarkThemeSmall from '../icons/editorDarkThemeSmall';
 import EditorDarkThemeMiddle from '../icons/editorDarkThemeMiddle';
 import EditorDarkThemeBig from '../icons/editorDarkThemeBig';
+import FilesTreeTriangleSmall from '../icons/filesTreeTriangleSmall';
+import FilesTreeTriangleMiddle from '../icons/filesTreeTriangleMiddle';
+import FilesTreeTriangleBig from '../icons/filesTreeTriangleBig';
+import FilesTreeFolderSmall from '../icons/filesTreeFolderSmall';
+import FilesTreeFolderMiddle from '../icons/filesTreeFolderMiddle';
+import FilesTreeFolderBig from '../icons/filesTreeFolderBig';
+import FilesTreeFolderPlusSmall from '../icons/filesTreeFolderPlusSmall';
+import FilesTreeFolderPlusMiddle from '../icons/filesTreeFolderPlusMiddle';
+import FilesTreeFolderPlusBig from '../icons/filesTreeFolderPlusBig';
+import FilesTreePlusSmall from '../icons/filesTreePlusSmall';
+import FilesTreePlusMiddle from '../icons/filesTreePlusMiddle';
+import FilesTreePlusBig from '../icons/filesTreePlusBig';
 
 /**
  * Функция возращает атрибуты с размерами значка в SVG.
@@ -414,6 +426,84 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 width: "99px",
                 height: "99px",
                 viewBox: "0 0 99 99"
+            },
+        },
+
+        // Значки на FilesTree
+        filesTreeTriangle: {
+            small: {
+                width: "10px",
+                height: "10px",
+                viewBox: "0 0 10 10"
+            },
+            middle: {
+                width: "12px",
+                height: "12px",
+                viewBox: "0 0 12 12"
+            },
+            big: {
+                width: "13px",
+                height: "13px",
+                viewBox: "0 0 13 13"
+            },
+        },
+        filesTreeFolder: {
+            small: {
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            },
+            middle: {
+                width: "17px",
+                height: "17px",
+                viewBox: "0 0 17 17"
+            },
+            big: {
+                width: "19px",
+                height: "19px",
+                viewBox: "0 0 19 19"
+            },
+        },
+        filesTreeFolderPlus: {
+            small: {
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            },
+            middle: {
+                width: "17px",
+                height: "17px",
+                viewBox: "0 0 17 17"
+            },
+            big: {
+                width: "19px",
+                height: "19px",
+                viewBox: "0 0 19 19"
+            },
+        },
+        filesTreePlus: {
+            small: {
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            },
+            middle: {
+                width: "17px",
+                height: "17px",
+                viewBox: "0 0 17 17"
+            },
+            big: {
+                width: "19px",
+                height: "19px",
+                viewBox: "0 0 19 19"
+            },
+        },
+        // Значёк указателя помещения перетаскиваемого элемента
+        filesTreePlaceMark: {
+            small: {
+                width: "8px",
+                height: "5px",
+                viewBox: "0 0 8 5"
             },
         },
     }

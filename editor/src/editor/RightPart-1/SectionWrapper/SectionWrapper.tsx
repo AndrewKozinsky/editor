@@ -16,14 +16,17 @@ export default function SectionWrapper() {
     // Текст заголовка в зависимости от текущей вкладки
     const headerText = useGetHeaderText()
 
+    // Корневой класс
     const CN = 'site-right-section-wrapper'
 
     return (
         <div className={CN}>
-            <Header text={headerText} type='h1' />
-            <Wrapper t={10}>
+            <div className={`${CN}__header-wrapper`}>
+                <Header text={headerText} type='h2' />
+            </div>
+            <div className={`${CN}__content-wrapper`}>
                 <SitePartProvider />
-            </Wrapper>
+            </div>
         </div>
     )
 }
@@ -50,7 +53,7 @@ function SitePartProvider() {
             ArticlesSection
         ]
 
-        // Составление массива из трёх элементов. Элемент, который соответствует вкладке задаётся видимость.
+        // Составление массива из трёх элементов. Элементу, который соответствует вкладке, задаётся видимость.
         const parts = components.map((Component, i) => {
             return <Component display={i === rightMainTab} key={i} />
         })

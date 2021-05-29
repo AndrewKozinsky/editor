@@ -16,6 +16,7 @@ import BtnSignAddBig from '../icons/btnSignAddBig';
 import BtnSignJsonSmall from '../icons/btnSignJsonSmall';
 import BtnSignJsonMiddle from '../icons/btnSignJsonMiddle';
 import BtnSignJsonBig from '../icons/btnSignJsonBig';
+import FilesTreePlaceMark from '../icons/filesTreePlaceMark';
 
 /**
  * Функция возращает класс который нужно применить к SVG со значком.
@@ -66,6 +67,15 @@ export function getIconClass(type: string, specialClass?: string): string {
         case 'btnSignExit':
             return `${CN}-btn-icon`
 
+        // Значки в компоненте структуры папок и файлов
+        case 'filesTreeTriangle':
+        case 'filesTreeFolder':
+        case 'filesTreeFolderPlus':
+        case 'filesTreePlus':
+            return `${CN}-btn-icon`
+        // Значёк указателя помещения перетаскиваемого элемента
+        case 'filesTreePlaceMark':
+            return `${CN}-accent-fill`
         default: return ''
     }
 }
