@@ -24,11 +24,9 @@ type SiteSectionPropType = {
     display?: boolean
 }
 
+/**
+ * Блок с формой изменения данных выбранного сайта */
 export default function SiteSection(props: SiteSectionPropType) {
-
-    const {
-        display // Показывать ли компонент
-    } = props
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -45,10 +43,9 @@ export default function SiteSection(props: SiteSectionPropType) {
     const submitButtonText = useGetSubmitButtonText(lang)
 
     const CN = 'site-section'
-    const style = display ? {} : {display: 'none'}
 
     return (
-        <div className={CN} style={style}>
+        <div className={CN}>
             <Form name='site' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput

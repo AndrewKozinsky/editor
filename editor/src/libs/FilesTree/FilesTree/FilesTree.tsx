@@ -31,7 +31,7 @@ export default function FilesTree(props: FilesTreePropType) {
     } = useManageState(props.items, props.openFolderIds)
 
     return (
-        <div style={{width: 260}} data-file-tree='true'>
+        <div data-file-tree='true'>
             <Wrapper b={10}>
                 <Button
                     text={newFolderName}

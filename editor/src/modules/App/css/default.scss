@@ -34,6 +34,11 @@ body {
 * {
     &::-webkit-scrollbar {
         width: .6rem;
+        height: 6px;
+        border-radius: var(--radius-2);
+    }
+    &::-webkit-scrollbar-corner {
+        background-color: var(--button-color);
     }
     &::-webkit-scrollbar-thumb {
         background-color: var(--text-placeholder-color);
@@ -41,6 +46,7 @@ body {
     }
     &::-webkit-scrollbar-track {
         background-color: var(--button-color);
+        border-radius: var(--radius);
     }
 }
 

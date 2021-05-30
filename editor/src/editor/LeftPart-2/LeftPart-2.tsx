@@ -4,6 +4,7 @@ type LeftPart3PropType = {
     display?: boolean
 }
 
+/** Левая часть второй главной вкладки */
 function LeftPart2(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку

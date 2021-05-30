@@ -4,6 +4,7 @@ type RightPart2PropType = {
     display?: boolean
 }
 
+/** Правая часть второй главной вкладки */
 function RightPart2(props: RightPart2PropType) {
     const {
         display // Показывать ли обёртку

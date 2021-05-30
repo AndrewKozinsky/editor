@@ -16,7 +16,7 @@ type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
 }
 
-/** Компонент первой левой панели */
+/** Левая часть первой главной вкладки */
 export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент

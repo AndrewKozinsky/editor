@@ -1,11 +1,11 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {MiscTypes} from 'types/miscTypes'
-import messages from '../../messages'
-import Button from 'common/formElements/Button/Button'
-import Wrapper from 'common/Wrapper/Wrapper'
-import ItemsList from 'common/ItemsList/ItemsList'
+import {AppState} from 'src/store/rootReducer'
+import {MiscTypes} from 'src/types/miscTypes'
+import messages from '../messages'
+import Button from 'src/common/formElements/Button/Button'
+import Wrapper from 'src/common/Wrapper/Wrapper'
+import ItemsList from 'src/common/ItemsList/ItemsList'
 import {useFetchIncFilesTemplates, useGetNewTemplateOnClickHandler, useGetTemplatesItemsListProps} from './IncFilesTemplateList-func'
 
 

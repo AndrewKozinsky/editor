@@ -1,9 +1,9 @@
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import actions from 'store/rootAction'
-import {ItemsListPropType} from 'common/ItemsList/ItemsList'
-import {AppState} from 'store/rootReducer'
-import StoreSitesTypes from 'store/site/sitesTypes'
+import actions from 'src/store/rootAction'
+import {ItemsListPropType} from 'src/common/ItemsList/ItemsList'
+import {AppState} from 'src/store/rootReducer'
+import StoreSitesTypes from 'src/store/site/sitesTypes'
 
 
 // Хук скачивает с сервера массив шаблонов подключаемых файлов и ставит в Хранилище

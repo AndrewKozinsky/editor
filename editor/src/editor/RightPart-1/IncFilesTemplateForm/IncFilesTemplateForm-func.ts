@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import StoreSitesTypes from 'store/site/sitesTypes'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import messages from '../../messages'
+import { AppState } from 'src/store/rootReducer'
+import StoreSitesTypes from 'src/store/site/sitesTypes'
+import FHTypes from 'src/libs/formHandler/types'
+import makeImmutableObj from 'src/libs/makeImmutableCopy/makeImmutableCopy'
+import StoreSettingsTypes from 'src/store/settings/settingsTypes'
+import messages from '../messages'
 
 
 /**

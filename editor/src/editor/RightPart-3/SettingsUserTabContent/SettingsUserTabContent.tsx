@@ -1,13 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Header from 'src/common/textBlocks/Header/Header'
 import Wrapper from 'src/common/Wrapper/Wrapper'
 import { AppState } from 'src/store/rootReducer'
 import NameSection from '../../wrappers/NameSection/NameSection';
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
 import messages from '../messages'
 import UserDataForm from '../EmailForm/EmailForm'
-import UserAccountForm from '../UserAccountForm/UserAccountForm';
+import UserAccountForm from '../UserAccountForm/UserAccountForm'
 
 
 export default function SettingsUserTabContent() {
@@ -17,9 +16,7 @@ export default function SettingsUserTabContent() {
 
     return (
         <div>
-            <Header text={messages.UserTabContent.header[lang]} type='h2' />
-
-            <Wrapper t={10}>
+            <Wrapper>
                 <NameSection header={messages.UserDataSection.header[lang]} type={2}>
                     <UserDataForm />
                 </NameSection>

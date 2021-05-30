@@ -1,12 +1,12 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import messages from '../../messages'
-import store from 'store/store'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import actions from 'store/rootAction'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
+import FHTypes from 'src/libs/formHandler/types'
+import messages from '../messages'
+import store from 'src/store/store'
+import StoreSettingsTypes from 'src/store/settings/settingsTypes'
+import actions from 'src/store/rootAction'
+import { makeFetch } from 'src/requests/fetch'
+import getApiUrl from 'src/requests/apiUrls'
 
 
 // Объект настройки useFormHandler

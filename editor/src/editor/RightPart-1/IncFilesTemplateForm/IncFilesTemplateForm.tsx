@@ -1,14 +1,14 @@
 import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
+import Wrapper from 'src/common/Wrapper/Wrapper'
+import TextInput from 'src/common/formElements/TextInput/TextInput'
+import Hr from 'src/common/misc/Hr/Hr'
+import Form from 'src/common/formElements/Form/Form'
 import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import useFormHandler from 'libs/formHandler/useFormHandler'
+import {AppState} from 'src/store/rootReducer'
+import useFormHandler from 'src/libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
-import Button from 'common/formElements/Button/Button'
-import messages from '../../messages'
+import Button from 'src/common/formElements/Button/Button'
+import messages from '../messages'
 import {
     useGetAnotherTemplate,
     useGetDeleteTemplateVisibilityStatus,
@@ -17,6 +17,9 @@ import {
 import useGetDeleteTemplate from './deleteTemplate'
 
 export default function IncFilesTemplateForm() {
+
+    // id выделенного шаблона подключаемых файлов
+    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -28,6 +31,10 @@ export default function IncFilesTemplateForm() {
 
     // Текст на кнопке отправки
     const submitButtonText = useGetSubmitButtonText(lang)
+
+    // Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,
+    // поэтому ничего не отрисовывать.
+    if (currentTemplateId === null) return null
 
     return (
         <Form name='incFilesTemplate' formHandlers={fh.formHandlers}>

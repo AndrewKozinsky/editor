@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import messages from '../../messages'
-import {useDeleteIncFilesTemplate} from 'requests/authRequests'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import store from 'store/store'
+import {AppState} from 'src/store/rootReducer'
+import actions from 'src/store/rootAction'
+import messages from '../messages'
+import {useDeleteIncFilesTemplate} from 'src/requests/authRequests'
+import Wrapper from 'src/common/Wrapper/Wrapper'
+import Hr from 'src/common/misc/Hr/Hr'
+import Button from 'src/common/formElements/Button/Button'
+import store from 'src/store/store'
 
 
 // Хук возвращает функцию удаляющая учётную запись пользователя
