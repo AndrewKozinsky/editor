@@ -1,10 +1,11 @@
-import { MiscTypes } from 'types/miscTypes'
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+import { MiscTypes } from 'types/miscTypes'
 import {AppState} from 'store/rootReducer'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
+import {MainTabDataType} from 'editor/special/MainTab/MainTab'
 import actions from 'store/rootAction'
+import messages from '../messages';
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
@@ -35,32 +36,20 @@ export function useGetTabData(): MainTabDataType[] {
 // Массив с данными вкладок
 const tabsData = [
     {
-        iconType: 'siteTabSite',
-        title: {
-            eng: 'Site',
-            rus: 'Сайт'
-        }
+        iconType: 'siteTabSite', // тип значка
+        titleIndex: 'sites' // название свойства для получения названия в messages
     },
     {
         iconType: 'siteTabPlugins',
-        title: {
-            eng: 'Templates of plug-in files',
-            rus: 'Шаблоны подключаемых файлов'
-        }
+        titleIndex: 'incFilesTemplates'
     },
     {
         iconType: 'siteTabComponents',
-        title: {
-            eng: 'Component templates',
-            rus: 'Шаблоны компонентов'
-        },
+        titleIndex: 'components',
     },
     {
         iconType: 'siteTabArticle',
-        title: {
-            eng: 'Articles',
-            rus: 'Статьи'
-        },
+        titleIndex: 'articles',
     },
 ]
 
@@ -82,7 +71,7 @@ function getTabData(
     // Сгенеривать данные четырёх вкладок
     return tabsData.map((tabData, i) => {
         return {
-            title: tabData.title[lang],
+            title: messages.Tabs[tabData.titleIndex][lang],
             iconType: tabData.iconType,
             active: i === rightMainTab,
             position: <'top'|'left'>'left',

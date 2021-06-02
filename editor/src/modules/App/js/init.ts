@@ -41,8 +41,9 @@ function useGetAndSetEditorSettings() {
         let mainTab = <StoreSettingsTypes.MainTab | null>+localStorage.getItem('editorTab') // id главной вкладки
         let siteId = <StoreSitesTypes.CurrentSiteId | null>localStorage.getItem('editorSiteId') // id сайта
         let settingsTabId = <StoreSettingsTypes.SettingsPanelTab | null>localStorage.getItem('editorSettingsTabId') // id вкладки в Настройках
-        let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Настройках
-        let editorPluginsId = <StoreSitesTypes.CurrentIncFilesTemplateId | null>localStorage.getItem('editorPluginsId') // id вкладки в Настройках
+        let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Сайтах
+        let editorPluginsId = <StoreSitesTypes.CurrentIncFilesTemplateId | null>localStorage.getItem('editorPluginsId') // id выбранного шаблона подключаемых файлов
+        let editorComponentId = <StoreSitesTypes.CurrentIncFilesTemplateId | null>localStorage.getItem('editorComponentId') // id выбранного шаблона компонента
 
         // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
@@ -69,14 +70,17 @@ function useGetAndSetEditorSettings() {
             settingsTabId = 'user' // Первая вкладка
             localStorage.setItem('editorSettingsTabId', settingsTabId)
         }
-        if (!sitePartTab) {
-            sitePartTab = 0 // Первая вкладка
-            localStorage.setItem('editorSitePartTab', sitePartTab.toString())
-        }
-        if (!editorPluginsId) {
-            editorPluginsId = '' // Первая вкладка
-            localStorage.setItem('editorPluginsId', editorPluginsId)
-        }
+        // Думаю потом закомментированный код можно удалить. И вообще нужно пересмотреть весь код useGetAndSetEditorSettings.
+        /*if (!sitePartTab) {
+            // sitePartTab = 0 // Первая вкладка
+            // localStorage.setItem('editorSitePartTab', sitePartTab.toString())
+        }*/
+        /*if (!editorPluginsId) {
+            // localStorage.setItem('editorPluginsId', editorPluginsId)
+        }*/
+        /*if (!editorComponentId) {
+            editorComponentId = null // Первая вкладка
+        }*/
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
@@ -87,6 +91,7 @@ function useGetAndSetEditorSettings() {
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
         dispatch( sitesActions.setCurrentIncFilesTemplateId(editorPluginsId) )
+        dispatch( sitesActions.setCurrentComponentId(editorComponentId) )
     }, [])
 }
 

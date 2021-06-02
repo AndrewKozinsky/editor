@@ -4,6 +4,7 @@ import {MiscTypes} from 'types/miscTypes'
 import {makeFetch} from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import store from '../store';
+import FilesTreeType from '../../libs/FilesTree/types';
 
 
 const sitesActions = {
@@ -111,6 +112,54 @@ const sitesActions = {
     setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
+            payload
+        }
+    },
+
+    // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
+    requestComponentsOrder() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // id текущего сайта для которого нужно получить порядок шаблонов компонентов
+            const siteId = store.getState().sites.currentSiteId
+
+            // Если не передан id сайта, то обнулить порядок шаблонов компонентов в Хранилище
+            // потому что выбрали новый сайт
+            if (!siteId) dispatch( sitesActions.setComponentsOrder(null) )
+
+            // Параметры запроса
+            const options = { method: 'GET' }
+
+            // Запрос и ответ от сервера
+            const response = await makeFetch(
+                // id сайта передаётся в параметре siteId
+                getApiUrl('componentsOrder', siteId),
+                options, getState().settings.editorLanguage
+            )
+
+            // Обнулить данные по порядку компонентов если запрос был неудачным или данных нет.
+            if (response && response.status === 'success' && response.data.order) {
+                // Поставить в Хранилище присланные данные
+                dispatch( sitesActions.setComponentsOrder(response.data.order.content) )
+            } else {
+                // Поставить в Хранилище отсутствие файлов и шаблонов компонентов
+                dispatch( sitesActions.setComponentsOrder(null) )
+            }
+        }
+    },
+
+    // Установка массива шаблонов подключаемых файлов
+    setComponentsOrder(payload: null | FilesTreeType.Items): StoreSitesTypes.SetComponentsOrderAction {
+        return {
+            type: StoreSitesTypes.SET_COMPONENTS_ORDER,
+            payload
+        }
+    },
+
+    // Установка id выбранного шаблона подключаемых шаблонов
+    setCurrentComponentId(payload: StoreSitesTypes.CurrentComponentId): StoreSitesTypes.SetCurrentComponentIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_COMPONENT_ID,
             payload
         }
     },

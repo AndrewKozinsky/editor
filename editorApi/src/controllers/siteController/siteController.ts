@@ -2,7 +2,9 @@ import { Response, NextFunction } from 'express'
 import { catchAsync } from '../../utils/errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import SiteModel from '../../models/site'
-import IncludedFilesTemplateModel from '../../models/incFilesTemplate';
+import IncFilesTemplateModel from '../../models/incFilesTemplate'
+import ComponentsOrderModel from '../../models/componentsOrder'
+import ComponentModel from '../../models/component'
 
 
 /** Получение всех сайтов (защищённый маршрут) */
@@ -33,6 +35,12 @@ export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     const newSite = await SiteModel.create({
         name: req.body.name,
         userId: req.user.id,
+    })
+
+    // Создание данных по модели ComponentsOrder
+    await ComponentsOrderModel.create({
+        userId: req.user?.id,
+        siteId: newSite._id
     })
 
     // Отправить данные пользователю
@@ -74,9 +82,15 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     )
 
     // Удалить шаблоны подключения внешних файлов
-    await IncludedFilesTemplateModel.deleteMany({siteId: req.params.siteId})
+    await IncFilesTemplateModel.deleteMany({siteId: req.params.siteId})
 
-    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ШАБЛОНЫ КОМПОНЕНТОВ, СТАТЬИ
+    // Удалить порядок шаблонов компонентов
+    await ComponentsOrderModel.deleteMany({siteId: req.params.siteId})
+
+    // Удалить шаблоны компонентов
+    await ComponentModel.deleteMany({siteId: req.params.siteId})
+
+    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ПОРЯДКА СТАТЕЙ И САМИХ СТАТЕЙ
 
     // Отправить успешный ответ
     res.status(200).json({

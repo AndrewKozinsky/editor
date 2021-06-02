@@ -4,7 +4,7 @@ namespace FilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
     export type Item = {
-        id: Id // Идентификатор
+        uuid: UuId // Идентификатор
         type: ItemType // Тип элемента: файл или папка
         // Визуальная отметка куда будет помещён перемещаемый элемент
         placeMark?: PlaceMark
@@ -14,7 +14,10 @@ namespace FilesTreeType {
     }
 
     // id папки или файла
-    export type Id = string
+    export type UuId = string
+
+    // Массив uuid
+    export type UuIdArr = UuId[]
 
     // Тип элемента: файл или папка
     export type ItemType = 'file' | 'folder'
@@ -25,27 +28,37 @@ namespace FilesTreeType {
     // inside — внутрь (только для папки)
     export type PlaceMark = null | 'before' | 'after' | 'inside'
 
-    // id папок, которые должны быть изначально открыты
-    export type OpenFolderIds = string[]
-
-    // Функция открывающая/сворачивающая папку
-    // ДУМАЮ ПОЗЖЕ МОЖНО УДАЛИТЬ
-    // export type ToggleFolderFn = (folderId: string) => void
-
-    // Функция открывающая/сворачивающая папку
-    // ДУМАЮ ПОЗЖЕ МОЖНО УДАЛИТЬ
-    // export type ShowPlaceMarkFn = (itemId: string, position: PlaceMark) => void
-
-    // Функция находит в массиве объект данных с переданным id
-    // ДУМАЮ ПОЗЖЕ МОЖНО УДАЛИТЬ
-    // export type GetItemDataByIdFn = (items: Items, itemId: string) => void
-
-    // Функция помещает указанный элемент в другую часть дерева папок и файлов и обновляет Состояние
-    // ДУМАЮ ПОЗЖЕ МОЖНО УДАЛИТЬ
-    // export type MoveItemToFn = (movedItemId: string, anchorItemId: string, position: PlaceMark) => void
-
     // Функция устанавливающая новые данные в Состояние FilesTree
     export type SetItemsFn = (items: Items) => void
+
+    // Функция устанавливающая uuid активной папки или файла в
+    export type SetActiveItemIdFn = (activeItemId: UuId) => void
+
+    // Функция запускаемая после создания новой папки
+    export type OutAfterAddingNewFileFn = (item: Item) => void
+
+    // Функция запускаемая после щелчка по папке или файлу
+    export type OutSelectItemFn = (item: Item) => void
+
+    // Функция запускаемая после разворачивания/сворачивания папки
+    // На вход получает массив идентификаторов раскрытых папок
+    export type OutCollapseFolderFn = (openUuIdArr: UuIdArr) => void
+
+    // Функция запускаемая после изменения дерева папок и файлов
+    export type OutAfterChangingTreeFn = (items: Items) => void
+
+    // Функция запускаемая после щелчка по папке или файлу
+    export type OutOnItemClick = (item: Item) => void
+
+    export type Out = {
+        newFolderName?: string
+        newFileName?: string
+        afterAddingNewFile: OutAfterAddingNewFileFn
+        selectItem: OutSelectItemFn
+        collapseFolder: OutCollapseFolderFn
+        afterChangingTree: OutAfterChangingTreeFn
+        onItemClick: OutOnItemClick
+    }
 }
 
 export default FilesTreeType

@@ -8,7 +8,6 @@ $file: ft-item-file;
     font-size: 1.4rem;
     line-height: 1.8rem;
     user-select: none;
-    min-width: 180px;
 }
 
 // Общие стили внешней обёртки
@@ -24,21 +23,13 @@ $file: ft-item-file;
         display: flex;
     }
 }
-// Заблокированная папка
-/*.#{$folder}--disabled {
-    opacity: .2;
-}*/
-// Призрачная папка
-/*.#{$folder}--ghost {
-    position: absolute;
-    z-index: 1;
-}*/
 
 // Обёртка с деталями папки
 .#{$folder}__inner {
     position: relative;
     display: flex;
     align-items: flex-start;
+    color: var(--text-color);
     padding: 3px 9px 3px 0;
     border: 1px solid transparent;
 }
@@ -47,7 +38,7 @@ $file: ft-item-file;
 .#{$folder}__inner[data-ft-hover] {
     background-color: var(--bg-color-2);
 }
-// Вид обёртки если над ней завис перетаскиваемый элемент
+// Вид обёртки если перетаскиваемый элемент можно поставить внутрь папки
 .#{$folder}__inner-round-flash {
     border-color: var(--accent-color);
 }
@@ -78,6 +69,11 @@ $file: ft-item-file;
     &:focus {
         // Включение стандартной фокусировки
         @include focus
+    }
+
+    svg {
+        fill: var(--text-color);
+        opacity: 0.85;
     }
 }
 
@@ -142,6 +138,43 @@ $file: ft-item-file;
     margin-top: 2px;
 }
 
+// Выделенная обёртка с деталями папки
+.#{$folder}__inner-active {
+    color: white;
+    background-color: var(--accent-color);
+
+    .#{$folder}__folder-sign {
+        fill: white;
+    }
+
+    .#{$folder}__btn {
+        &:hover {
+            background-color: var(--accent-color-hover);
+            svg { fill: white; }
+        }
+        svg { fill: white; }
+    }
+
+    .#{$folder}__right-part {
+        background-color: var(--accent-color);
+
+        &::before {
+            background: linear-gradient(90deg, transparent, var(--accent-color));
+        }
+    }
+}
+.#{$folder}__inner-active[data-ft-hover] {
+    background-color: var(--accent-color);
+
+    .#{$folder}__right-part {
+        background-color: var(--accent-color);
+
+        &::before {
+            background: linear-gradient(90deg, transparent, var(--accent-color));
+        }
+    }
+}
+
 
 // СТИЛИ ФАЙЛА
 .#{$file} {
@@ -152,9 +185,20 @@ $file: ft-item-file;
             background-color: var(--bg-color-2);
         }
     }
+
+    &:hover {
+        .#{$file}__inner-active {
+            background-color: var(--accent-color);
+        }
+    }
 }
 .#{$file}__inner {
+    color: var(--text-color);
     padding: 4px 10px 4px 20px;
+}
+.#{$file}__inner-active {
+    color: white;
+    background-color: var(--accent-color);
 }
 
 // СТРЕЛКА С ОБОЗНАЧЕНИЕМ МЕСТА ПОМЕЩЕНИЯ ПЕРЕТАСКИВАЕМОГО ЭЛЕМЕНТА

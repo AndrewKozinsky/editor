@@ -1,12 +1,18 @@
 import {useCallback, useEffect, useState} from 'react'
 import FilesTreeType from '../types'
 
-
+/**
+ * Хук возвращает объект со свойством items где хранится массив папок
+ * и файлов и функцию setItems() для изменения этого массива.
+ * @param {Array} initialItems — изначальные данные по папка и файлам
+ * @param {Array} openFolderIds — массив строк с идентификорами папок,
+ * которые должны быть изначально раскрыты
+ */
 export function useManageState(
     initialItems: FilesTreeType.Items,
-    openFolderIds: FilesTreeType.OpenFolderIds,
+    openFolderIds: FilesTreeType.UuIdArr,
 ) {
-    // Массив данных для отрисовки папок и файлов
+    // Массив папок и файлов
     const [items, setItems] = useState<FilesTreeType.Items>([])
 
     useEffect(function () {
@@ -14,10 +20,14 @@ export function useManageState(
 
         // Если папка должна быть открыта, то поставить туда свойство open в true
         // чтобы она отрисовывалась раскрытой
-        const supplementedItems = addOpenPropToFolders(initialItems, openFolderIds)
+        if (openFolderIds && openFolderIds.length) {
+            const supplementedItems = addOpenPropToFolders(initialItems, openFolderIds)
+            setItems( supplementedItems )
+        } else {
+            setItems( initialItems )
+        }
 
-        setItems( supplementedItems )
-    }, [initialItems, openFolderIds])
+    }, [initialItems])
 
     return {
         items,
@@ -34,12 +44,12 @@ export function useManageState(
  * @param {Array} openFolderIds — id папок, которые должны быть изначально открыты
  */
 function addOpenPropToFolders(
-    items: FilesTreeType.Items, openFolderIds: FilesTreeType.OpenFolderIds
+    items: FilesTreeType.Items, openFolderIds: FilesTreeType.UuIdArr
 ): FilesTreeType.Items {
     return items.map(item => {
         const newItem: FilesTreeType.Item = {...item}
 
-        if (newItem.type === 'folder' && openFolderIds.includes(newItem.id)) {
+        if (newItem.type === 'folder' && openFolderIds.includes(newItem.uuid)) {
             newItem.open = true
         }
 

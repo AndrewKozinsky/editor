@@ -9,6 +9,8 @@ import { AppError } from './utils/errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
 import { addExtraHeaders } from './middlewares/commonMiddlewares'
 import incFilesTemplateRouter from './routes/incFilesTemplateRouter'
+import componentsOrderRouter from './routes/componentsOrderRouter'
+import componentRouter from './routes/componentRouter'
 
 
 const app: Application = express()
@@ -45,6 +47,8 @@ app.get("/", function (req: Request, res: Response) {
 app.use('/users/', userRouter)
 app.use('/sites/', siteRouter)
 app.use('/incFilesTemplate/', incFilesTemplateRouter)
+app.use('/componentsOrder/', componentsOrderRouter)
+app.use('/component/', componentRouter)
 
 // Статические файлы на сервере.
 app.use(express.static(path.join(__dirname, 'staticFiles')))

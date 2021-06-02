@@ -1,6 +1,8 @@
 import FilesTreeType from '../types'
 import {
-    hasFolderAnItem, showPlaceMark, moveItemTo
+    hasFolderAnItem,
+    showPlaceMark,
+    moveItemTo
 } from '../FilesTree/manageStateDataFunc'
 
 /**
@@ -41,7 +43,8 @@ export function handleDrag(
     if(!dropPlaceCoords) return
 
     // Подсветить позицию сброса
-    showPlaceMark(setItems, items, dropPlaceCoords.itemId, dropPlaceCoords.place)
+    const newItems = showPlaceMark(items, dropPlaceCoords.itemId, dropPlaceCoords.place)
+    setItems(newItems)
 }
 
 /**
@@ -58,12 +61,14 @@ export function handleDragOver(e: any) {
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
+ * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function handleDragEnd(
     e: any,
     itemData: FilesTreeType.Item,
     items: FilesTreeType.Items,
     setItems: FilesTreeType.SetItemsFn,
+    out: FilesTreeType.Out
 ) {
     e.target.style.opacity = 1
 
@@ -82,7 +87,13 @@ export function handleDragEnd(
     if(!dropPlaceCoords) return
 
     // Обновить состояние списка папок чтобы перетаскиваемый элемент попал в указанное место
-    moveItemTo(itemData.id, dropPlaceCoords.itemId, dropPlaceCoords.place, items, setItems)
+    const newItems = moveItemTo(itemData.uuid, dropPlaceCoords.itemId, dropPlaceCoords.place, items)
+    setItems(newItems)
+
+    // Запустить переданную функцию, которая должна быть запущена после изменения дерева файлов и папок
+    if (out.afterChangingTree) {
+        out.afterChangingTree(newItems)
+    }
 }
 
 
@@ -95,7 +106,7 @@ export function handleDragEnd(
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  */
 function isDropAllowed(
-    itemBelowId: FilesTreeType.Id,
+    itemBelowId: FilesTreeType.UuId,
     itemData: FilesTreeType.Item
 ) {
     // Ничего не делать если не передан id
@@ -118,15 +129,15 @@ function isDropAllowed(
 function getDropPlaceCoords(
     e: any,
     itemBelow: HTMLElement,
-    itemBelowId: FilesTreeType.Id,
+    itemBelowId: FilesTreeType.UuId,
     itemData: FilesTreeType.Item,
-): {itemId: FilesTreeType.Id, place: FilesTreeType.PlaceMark} {
+): {itemId: FilesTreeType.UuId, place: FilesTreeType.PlaceMark} {
     // Расстояние до элемента с верха экрана и высота элемента под курсором
     const itemBelowY = itemBelow.getBoundingClientRect().top
     const itemBelowHeight = itemBelow.getBoundingClientRect().height
 
     // Ничего не делать если курсор находится над перемещаемым элементом
-    if (itemBelowId === itemData.id) return
+    if (itemBelowId === itemData.uuid) return
 
     // Если это папка
     if (itemBelow.dataset.ftFolderItem) {

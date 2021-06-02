@@ -95,7 +95,7 @@ const messages: messagesType = {
         },
         submitBtnText: {
             eng: 'Sign in',
-            rus: 'Войти'
+            rus: 'Зарегистрироваться'
         },
         somethingWentWrong: {
             eng: 'Something went wrong',

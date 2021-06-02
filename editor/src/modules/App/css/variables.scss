@@ -20,6 +20,8 @@
 
     // Акцентный цвет
     --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    // Акцентный цвет при наведении
+    --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 42%);
 
 
     // ЦВЕТА ТЕКСТА

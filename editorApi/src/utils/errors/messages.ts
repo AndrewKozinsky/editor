@@ -54,7 +54,7 @@ export const messages: messagesType = {
             rus: 'Укажите id пользователя который создал сайт.'
         },
     },
-    // Модель IncludedFilesTemplate
+    // Модель IncFilesTemplate
     incFilesTemplate: {
         nameRequired: {
             eng: 'Please provide a template name.',
@@ -171,7 +171,7 @@ export const messages: messagesType = {
         // Функция getAllTemplates
         getTemplateNoSiteId: {
             eng: 'The id of the site to which the requested templates belong has not been passed in query',
-            rus: 'В запросе не передан id сайта к которому принадлежать запрашиваемые шаблоны'
+            rus: 'В запросе не передан id сайта которому принадлежат запрашиваемые шаблоны'
         },
         // Функция createTemplate
         createTemplateNoName: {
@@ -186,6 +186,58 @@ export const messages: messagesType = {
         updateTemplateNotFound: {
             eng: 'Template not found. The data has not been updated.',
             rus: 'Шаблон не найден. Данные не обновлены.'
+        },
+    },
+    // Модель ComponentsOrder
+    componentsOrderModel: {
+        userIdRequired: {
+            eng: 'Specify the user id to which this order of component templates belongs.',
+            rus: 'Укажите id пользователя к которому принадлежит этот порядок шаблонов компонентов.'
+        },
+        siteIdRequired: {
+            eng: 'Specify the id of the site to which this order of component templates belongs.',
+            rus: 'Укажите id сайта которому принадлежит этот порядок шаблонов компонентов.'
+        },
+    },
+    // Контроллер порядка следования папок и файлов шаблонов компонентов
+    componentsOrderController: {
+        // Функция getComponentsOrder
+        getComponentsOrderNoSiteId: {
+            eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
+            rus: 'В запросе не передан id сайта к которому принадлежит порядок шаблонов компонентов'
+        },
+        // Функция updateComponentsOrder
+        updateComponentsOrderOrderNotFound: {
+            eng: 'The order of the component templates is not found. The data has not been updated.',
+            rus: 'Порядок шаблонов компонентов не найден. Данные не обновлены.'
+        },
+    },
+    // Модель Component
+    componentModel: {
+        uuidRequired: {
+            eng: 'Specify the uuid of the component template.',
+            rus: 'Укажите uuid шаблона компонента.'
+        },
+        userIdRequired: {
+            eng: 'Specify the user id to which the component template belongs.',
+            rus: 'Укажите id пользователя к которому принадлежит шаблон компонента.'
+        },
+        siteIdRequired: {
+            eng: 'Specify the id of the site to which this component template belongs.',
+            rus: 'Укажите id сайта которому принадлежит этот шаблон компонента.'
+        },
+    },
+    // Контроллер шаблонов компонентов
+    componentController: {
+        // Функция createComponent
+        getComponentNoSiteId: {
+            eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
+            rus: 'В запросе не передан id сайта к которому принадлежит порядок шаблонов компонентов'
+        },
+        // Функция updateComponent
+        updateComponentComponentNotFound: {
+            eng: 'Component template not found. The data has not been updated.',
+            rus: 'Шаблон компонента не найден. Данные не обновлены.'
         },
     },
 }

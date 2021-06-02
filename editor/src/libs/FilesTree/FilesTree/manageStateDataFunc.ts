@@ -4,8 +4,12 @@ import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import FilesTreeType from '../types'
 
 
-// Функция открывающая/сворачивающая папку
-export function toggleFolder(items: FilesTreeType.Items, folderId: FilesTreeType.Id) {
+/**
+ * Функция разворачивающая/сворачивающая папку.
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {String} folderId — id папки, которую нужно расвернуть/свернуть
+ */
+export function toggleFolder(items: FilesTreeType.Items, folderId: FilesTreeType.UuId) {
     // Получение папки с заданным идентификатором
     const folder = getItemDataById(items, folderId)
     if(!folder) return
@@ -20,14 +24,14 @@ export function toggleFolder(items: FilesTreeType.Items, folderId: FilesTreeType
 
 /**
  * Функция находит в массиве объект данных с переданным id.
- * @param {Array} items — массив данных по папкам и файлам
+ * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} itemId — id папки или файла, которую нужно найти
  */
-export function getItemDataById(items: FilesTreeType.Items, itemId: FilesTreeType.Id): null | FilesTreeType.Item {
+export function getItemDataById(items: FilesTreeType.Items, itemId: FilesTreeType.UuId): null | FilesTreeType.Item {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
-        if (item.id === itemId) {
+        if (item.uuid === itemId) {
             return item
         }
         else if (item.content) {
@@ -44,7 +48,7 @@ export function getItemDataById(items: FilesTreeType.Items, itemId: FilesTreeTyp
  * @param {Object} folderData — данные папки где возможно есть указанный вложенный элемент
  * @param {String} itemId — id элемента, который возможно есть в указанной папке
  */
-export function hasFolderAnItem(folderData: FilesTreeType.Item, itemId: FilesTreeType.Id) {
+export function hasFolderAnItem(folderData: FilesTreeType.Item, itemId: FilesTreeType.UuId) {
     if (folderData.content) {
         return Boolean(
             getItemDataById(folderData.content, itemId)
@@ -55,16 +59,15 @@ export function hasFolderAnItem(folderData: FilesTreeType.Item, itemId: FilesTre
 }
 
 /**
- * Функция показывающая указатель помещения перетаскиваемого элемента
- * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
+ * Функция вставляющая указатель помещения перетаскиваемого элемента
+ * Возвращает новый массив папок и файлов
  * @param {Array} items — массив данных по папкам и файлам
  * @param {String} itemId — id элемента под которым находится курсор
  * @param {String} place — место, которое нужно подсветить. Три варианта: 'after' | 'inside' | 'before'
  */
 export function showPlaceMark(
-    setItems: FilesTreeType.SetItemsFn,
     items: FilesTreeType.Items,
-    itemId: FilesTreeType.Id,
+    itemId: FilesTreeType.UuId,
     place: 'after' | 'inside' | 'before'
 ) {
     // Стереть имеющиеся метки
@@ -77,26 +80,10 @@ export function showPlaceMark(
     // Поставить новое значение свойству placeMark
     const itemCopy = {...item, placeMark: place}
 
-    // Создание и сохранение нового массива элементов
-    const newItems = makeImmutableCopy(itemsCopy, item, itemCopy)
-    setItems(newItems)
+    // Создание и возвращение нового массива элементов
+    return makeImmutableCopy(itemsCopy, item, itemCopy)
 }
 
-/**
- * Функция прячащая указатель помещения перетаскиваемого элемента
- * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
- * @param {Array} items — массив данных по папкам и файлам
- */
-// ПОХОЖЕ ЭТА ФУНКЦИЯ НЕ ТРЕБУЕТСЯ
-/*export function hidePlaceMark(
-    setItems: FilesTreeType.SetItemsFn,
-    items: FilesTreeType.Items,
-) {
-    // Стереть имеющиеся метки
-    const itemsCopy = erasePlaceMarks(items)
-    // Сохранение нового массива элементов
-    setItems(itemsCopy)
-}*/
 
 /**
  * Рекурсивная функция проходит по всем элементам массива items и у каждого элемента
@@ -123,14 +110,12 @@ function erasePlaceMarks(items: FilesTreeType.Items) {
  * @param {String} anchorItemId — id элемента относительно которого будет позиционироваться перемещаемый элемент
  * @param {String} position — позиция перемещаемого элемента относительно якорного
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
  */
 export function moveItemTo(
     movedItemId: string,
     anchorItemId: string,
     position: FilesTreeType.PlaceMark,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn
 ) {
     // Получение данных перемещаемого объекта по его id
     const movedItem = getItemDataById(items, movedItemId)
@@ -142,11 +127,8 @@ export function moveItemTo(
     // Поставить перемещаемый элемент в указанное место и возвратить новый массив
     itemsCopy = addItem(itemsCopy, movedItem, anchorItemId, position)
 
-    // Стереть имеющиеся метки
-    itemsCopy = erasePlaceMarks(itemsCopy)
-
-    // Обновить Состояние
-    setItems(itemsCopy)
+    // Стереть имеющиеся метки и возвратить новый массив папок и файлов
+    return erasePlaceMarks(itemsCopy)
 }
 
 /**
@@ -160,7 +142,7 @@ function deleteItem(items: FilesTreeType.Items, itemId: string) {
     if (!itemsArr) return
 
     // Получить индекс удаляемого элемента в массиве parentArr
-    const itemIdx = itemsArr.findIndex(elem => elem.id === itemId)
+    const itemIdx = itemsArr.findIndex(elem => elem.uuid === itemId)
     if (itemIdx < 0) return
 
     const newItemsArr = [...itemsArr]
@@ -187,7 +169,7 @@ function addItem(
     if (!itemsArr) return
 
     // Получить индекс якорного элемента в массиве parentArr
-    const anchorIdx = itemsArr.findIndex(elem => elem.id === anchorItemId)
+    const anchorIdx = itemsArr.findIndex(elem => elem.uuid === anchorItemId)
     if (anchorIdx < 0) return
 
     if (position === 'before') {
@@ -226,7 +208,7 @@ export function getParentArray(items: FilesTreeType.Items, itemId: string): null
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
-        if (items[i].id === itemId) {
+        if (items[i].uuid === itemId) {
             return items
         }
         else if (item.content) {
@@ -241,14 +223,152 @@ export function getParentArray(items: FilesTreeType.Items, itemId: string): null
 /**
  * Функция создаёт новую пустую папку или файл
  * @param {String} type — тип создаваемого элемента
- * @param {String} name — имя создаваемого элемента
+ * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Array} items — массив папок и файлов
+ * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
  */
-export function createNewItem(type: FilesTreeType.ItemType, name: string) {
+export function createNewItem(
+    type: FilesTreeType.ItemType,
+    out: FilesTreeType.Out,
+    items: FilesTreeType.Items,
+    setActiveItemId: FilesTreeType.SetActiveItemIdFn
+) {
+    // Идентификатор нового элемента. Решил папке давать номера по-порядку,
+    // а для файлов использовать сгенерированный через uuid().
+    let id = type === 'folder'
+        ? getFolderNextId(items)
+        : uuid(items)
+    // console.log(id)
+
+    let name = type === 'folder'
+        ? out.newFolderName
+        : out.newFileName
+
     const newItem: FilesTreeType.Item = {
-        id: uuid(),
+        uuid: id,
         type, // Тип элемента: файл или папка
         name // Имя файла или папки
     }
 
     return newItem
+}
+
+/**
+ * Функция анализирует массив папок и файлов и возвращает следующий id для создаваемой папки
+ * @param {Array} items — массив папок и файлов
+ */
+function getFolderNextId(items: FilesTreeType.Items) {
+    let maxId = 0
+
+    function maxIdFinder(elems: FilesTreeType.Items) {
+        if (!elems || !elems.length) return
+
+        for (let i = 0; i < elems.length; i++) {
+            if (elems[i].type === 'folder' && parseInt(elems[i].uuid) > maxId) {
+                maxId = parseInt(elems[i].uuid)
+
+                if (elems[i].content) {
+                    maxIdFinder(elems[i].content)
+                }
+            }
+        }
+    }
+
+    maxIdFinder(items)
+
+    return (maxId + 1).toString()
+}
+
+/**
+ * Функция готовит массив папок и файлов для сохранения на сервере: убирает лишние детали.
+ * @param {Array} items — массив папок и файлов
+ */
+export function prepareItemsToSaveInServer(items: FilesTreeType.Items) {
+    return items.map(item => {
+        const newItem = {...item}
+        delete newItem.placeMark
+        delete newItem.open
+
+        if (newItem.content) {
+            newItem.content = prepareItemsToSaveInServer(newItem.content)
+        }
+
+        return  newItem
+    })
+}
+
+/**
+ *
+ * @param {String} newItemType — тип нового элемента
+ * @param {Object} folderData — данные папки
+ * @param {Array} items — массив данных по папкам и файлам
+ * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
+ */
+export function addNewItem(
+    newItemType: FilesTreeType.ItemType,
+    folderData: null | FilesTreeType.Item,
+    items: FilesTreeType.Items,
+    out: FilesTreeType.Out,
+    setActiveItemId: FilesTreeType.SetActiveItemIdFn,
+) {
+    let newItem: FilesTreeType.Item
+    let newState: FilesTreeType.Items
+
+    // Если папка передана, то поставить новый элемент внутрь папки
+    if (folderData) {
+        const thisFolderData = getItemDataById(items, folderData.uuid)
+
+        // Скопировать данные папки
+        const folderDataCopy = {...thisFolderData}
+
+        // Раскрыть папку
+        folderDataCopy.open = true
+
+        // Поставить пустой массив content если в папке его нет
+        if (!folderDataCopy.content) {
+            folderDataCopy.content = []
+        }
+
+        // Поставить в него новый элемент
+        newItem = createNewItem(newItemType, out, items, setActiveItemId)
+        folderDataCopy.content.unshift( newItem )
+
+        // Создать новый массив всех папок и файлов с учётом изменений
+        newState = makeImmutableCopy(items, thisFolderData, folderDataCopy)
+    }
+    // Если папка не передана, то поставить новый элемент в корень
+    else {
+        // Скопировать корневой массив
+        newState = [...items]
+
+        // Поставить в корневой массив новый элемент
+        newItem = createNewItem(newItemType, out, items, setActiveItemId)
+        newState.unshift( newItem )
+    }
+
+    // Возвратить созданный элемент и обновлённый массив папок и файлов
+    return {
+        newItem,
+        newState
+    }
+}
+
+/**
+ * Функция возвращает uuid раскрытых папок
+ * @param {Array} items — массив данных по папкам и файлам
+ * @param {Array} arr — массив с uuid открытых папок
+ */
+export function getOpenedFoldersUuid(items: FilesTreeType.Items, arr: FilesTreeType.UuIdArr = []) {
+    items.forEach((item: FilesTreeType.Item) => {
+        if (item.open) {
+            arr.push(item.uuid)
+
+            if (item.content) {
+                getOpenedFoldersUuid(item.content, arr)
+            }
+        }
+    })
+
+    return arr
 }

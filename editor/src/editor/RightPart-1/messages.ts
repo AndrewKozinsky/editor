@@ -8,6 +8,26 @@ type messagesType = {
 }
 
 const messages: messagesType = {
+    // Названия вкладок на первой правой вкладке
+    Tabs: {
+        sites: {
+            eng: 'Sites',
+            rus: 'Сайты'
+        },
+        incFilesTemplates: {
+            eng: 'Templates of plug-in files',
+            rus: 'Шаблоны подключаемых файлов'
+        },
+        components: {
+            eng: 'Component templates',
+            rus: 'Шаблоны компонентов'
+        },
+        articles: {
+            eng: 'Articles',
+            rus: 'Статьи'
+        },
+
+    },
     // Содержимое вкладки «Сайты»
     SiteSection: {
         headerNewSite: {
@@ -59,7 +79,7 @@ const messages: messagesType = {
             rus: 'Не выбрано'
         },
     },
-    // Содержимое вкладки «Сайты»
+    // Содержимое вкладки «Шаблоны подключаемых файлов»
     IncFilesTemplateSection: {
         headerNewPlugin: {
             eng: 'New template',
@@ -116,6 +136,17 @@ const messages: messagesType = {
         deletePluginBtnInModal: {
             eng: 'Delete',
             rus: 'Удалить'
+        },
+    },
+    // Содержимое вкладки «Шаблоны подключаемых файлов»
+    OrderComponentsSection: {
+        createNewFolderBth: {
+            eng: 'New folder',
+            rus: 'Новая папка'
+        },
+        createNewFileBth: {
+            eng: 'New component',
+            rus: 'Новый компонент'
         },
     },
 }

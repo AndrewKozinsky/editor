@@ -1,8 +1,11 @@
 import {SyntheticEvent, useCallback} from 'react'
 import FilesTreeType from '../types'
 import {makeCN} from 'utils/StringUtils'
-import {createNewItem, getItemDataById, getParentArray, toggleFolder } from '../FilesTree/manageStateDataFunc'
-import makeImmutableCopy from '../../makeImmutableCopy/makeImmutableCopy';
+import {
+    addNewItem,
+    getOpenedFoldersUuid,
+    toggleFolder
+} from '../FilesTree/manageStateDataFunc'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -60,12 +63,21 @@ export function getTriangleBtnClasses(CN: string, folderData: FilesTreeType.Item
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
  * @param {String} CN — класс компонента
  * @param {Object} folderData — данные папки
+ * @param {String} activeItemId — Uuid выделенной папки или файла.
  */
-export function getInnerWrapperClasses(CN: string, folderData: FilesTreeType.Item) {
+export function getFolderInnerWrapperClasses(
+    CN: string, folderData: FilesTreeType.Item, activeItemId: FilesTreeType.UuId
+) {
     const classes  = [`${CN}__inner`]
 
+    // Добавить обводку если нужно показать метку inside
     if (folderData.placeMark === 'inside') {
         classes.push(`${CN}__inner-round-flash`)
+    }
+
+    // Добавить дополнительный класс если это выделенная папка
+    if (folderData.uuid === activeItemId) {
+        classes.push(`${CN}__inner-active`)
     }
 
     return makeCN(classes)
@@ -76,14 +88,27 @@ export function getInnerWrapperClasses(CN: string, folderData: FilesTreeType.Ite
  * @param {String} folderId — id папки которую нужно свернуть/развернуть
  * @param {Array} items — массив с данными по папкам и файлам
  * @param {Function} setItems — функция устанавливающая новые данные в массив папок и файлов
+ * @param {Object} out — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
-    folderId: FilesTreeType.Id,
+    folderId: FilesTreeType.UuId,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn
+    setItems: FilesTreeType.SetItemsFn,
+    out: FilesTreeType.Out
 ) {
     return useCallback(function (e) {
+        e.stopPropagation()
+
         const newItems = toggleFolder(items, folderId)
+
+        // Запустить функцию, переданную в аргументах FilesTree,
+        // которая должна запускаться при разворачивании/сворачивании папки
+        // и передать массив открытых папок
+        if (out.collapseFolder) {
+            // Получить uuid раскрытых папок
+            const openedFoldersUuid = getOpenedFoldersUuid(newItems)
+            out.collapseFolder(openedFoldersUuid)
+        }
 
         if (newItems) setItems(newItems)
     }, [items, folderId, setItems])
@@ -96,52 +121,86 @@ export function useGetToggleFolder(
  * @param {Object} folderData — данные папки в которой нужно добавить новую папку или файл
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Function} setItems — функция устанавливающая новые данные в массив папок и файлов
- * @param {String} itemName — название новой папки или файла
+ * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
  */
-export function addNewItem(
+export function createNewItem(
     e: any,
     newItemType: FilesTreeType.ItemType,
     folderData: null | FilesTreeType.Item,
     items: FilesTreeType.Items,
     setItems: FilesTreeType.SetItemsFn,
-    itemName: string
+    out: FilesTreeType.Out,
+    setActiveItemId: FilesTreeType.SetActiveItemIdFn
 ) {
-    // Если папка передана, то поставить новый элемент внутрь папки
-    if (folderData) {
-        const thisFolderData = getItemDataById(items, folderData.id)
+    e.stopPropagation()
 
-        // Скопировать данные папки
-        const folderDataCopy = {...thisFolderData}
+    // Добавить новую папку или файл и возвратить новый элемент и новое Состояние
+    const result = addNewItem(newItemType, folderData, items, out, setActiveItemId)
 
-        // Раскрыть папку
-        folderDataCopy.open = true
-
-        // Поставить пустой массив content если в папке его нет
-        if (!folderDataCopy.content) {
-            folderDataCopy.content = []
+    // Если добавили файл, то запустить переданную функцию,
+    // которая должна быть запущена после добавления файла
+    if(newItemType === 'file') {
+        if (out.afterAddingNewFile) {
+            out.afterAddingNewFile(result.newItem)
         }
 
-        // Поставить в него новый элемент
-        const newItem = createNewItem(newItemType, itemName)
-        folderDataCopy.content.unshift( newItem )
-
-        // Создать новый массив всех папок и файлов с учётом изменений
-        const newItems = makeImmutableCopy(items, thisFolderData, folderDataCopy)
-
-        // Обновить состояние списка папок
-        setItems(newItems)
+        // Если при добавлении файла папка была свёрнута,
+        // то после добавления она автоматически раскрывается, поэтому запущу функцию,
+        // которая должна быть запущена после раскрытия/скрытия папок
+        if (out.collapseFolder) {
+            const openedFoldersUuid = getOpenedFoldersUuid(result.newState)
+            out.collapseFolder(openedFoldersUuid)
+        }
     }
-    // Если папка не передана, то поставить новый элемент в корень
-    else {
-        // Скопировать корневой массив
-        const rootItemsCopy = [...items]
 
-        // Поставить в корневой массив новый элемент
-        const newItem = createNewItem(newItemType, itemName)
-        rootItemsCopy.unshift( newItem )
-
-        // Обновить состояние списка папок
-        setItems(rootItemsCopy)
+    // Запустить функцию, которая должна быть запущена после изменения дерева файлов и папок
+    if (out.afterChangingTree) {
+        out.afterChangingTree(result.newState)
     }
+
+    // Сразу перейти к созданному файлу сделав его текущим
+    setActiveItemId(result.newItem.uuid)
+    // Запустить переданную функцию, которая должна запускаться
+    // когда щёлкают по папке или файлу (делают его текущим)
+    if (out.onItemClick) out.onItemClick(result.newItem)
+
+    // Обновить Состояние списка папок
+    setItems(result.newState)
 }
 
+
+/**
+ * Функция возвращает классы кнопки сворачивания/разворачивания папки.
+ * @param {String} CN — класс компонента
+ * @param {Object} folderData — данные папки
+ * @param {String} activeItemId — Uuid выделенной папки или файла.
+ */
+export function getFileInnerWrapperClasses(
+    CN: string, folderData: FilesTreeType.Item, activeItemId: FilesTreeType.UuId
+) {
+    const classes  = [`${CN}__inner`]
+
+    // Добавить дополнительный класс если это выделенная папка
+    if (folderData.uuid === activeItemId) {
+        classes.push(`${CN}__inner-active`)
+    }
+
+    return makeCN(classes)
+}
+
+
+
+export function useGetOnClickHandler(
+    itemData: FilesTreeType.Item, setActiveItemId: FilesTreeType.SetActiveItemIdFn, out: FilesTreeType.Out
+) {
+    return useCallback(function (e) {
+        // Поставить текущий uuid в качестве активного в местрое Состояние
+        setActiveItemId(itemData.uuid)
+
+        // Запустить функцию переданную в FilesTree в качестве атрибута
+        if (out.onItemClick) {
+            out.onItemClick(itemData)
+        }
+    }, [itemData, setActiveItemId, out])
+}

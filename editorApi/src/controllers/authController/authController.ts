@@ -12,6 +12,9 @@ import {config} from '../../config/config'
 import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
 import {ExtendedRequestType, CommonTypes } from '../../types/commonTypes'
 import SiteModel from '../../models/site';
+import IncFilesTemplateModel from '../../models/incFilesTemplate';
+import ComponentsOrderModel from '../../models/componentsOrder';
+import ComponentModel from '../../models/component';
 
 
 // Функция отдающая данные по переданному токену. Токен передаётся в куках.
@@ -444,10 +447,18 @@ export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: R
     )
 
     // Удалить все сайты созданные пользователем
-    const deleted = await SiteModel.deleteMany({ userId: req.user.id })
+    await SiteModel.deleteMany({ userId: req.user.id })
 
-    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ПОДКЛЮЧЕНИЕ ВНЕШНИХ ФАЙЛОВ,
-    // ШАБЛОНЫ КОМПОНЕНТОВ, СТАТЬИ
+    // Удалить шаблоны подключения внешних файлов
+    await IncFilesTemplateModel.deleteMany({userId: req.user.id})
+
+    // Удалить порядок шаблонов компонентов
+    await ComponentsOrderModel.deleteMany({userId: req.user.id})
+
+    // Удалить шаблоны компонентов
+    await ComponentModel.deleteMany({userId: req.user.id})
+
+    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ПОРЯДОК СТАТЕЙ И САМИ СТАТЬИ
 
     // Обнулить куку авторизации
     res.cookie('authToken', 'loggedout', {

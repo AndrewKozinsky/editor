@@ -67,3 +67,13 @@ export function useGetModalCloseHandler() {
         dispatch(actions.modal.closeModal())
     }
 }
+
+/** Запись в localStorage данных предварительно пропущенных через JSON.stringify */
+export function setInLocalStorage(propName: string, value: any) {
+    localStorage.setItem(propName, JSON.stringify(value))
+}
+/** Получение из localStorage данных предварительно пропущенных через JSON.parse */
+export function getFromLocalStorage(propName: string) {
+    const value = localStorage.getItem(propName)
+    return JSON.parse(value)
+}

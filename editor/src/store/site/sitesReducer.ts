@@ -1,3 +1,4 @@
+import FilesTreeType from 'libs/FilesTree/types'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
@@ -7,6 +8,10 @@ export type SitesReducerType = {
     incFilesTemplatesSection: {
         templates: StoreSitesTypes.IncFilesTemplatesType,
         currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId,
+    },
+    componentsSection: {
+        order: null | FilesTreeType.Items,
+        currentComponentId: StoreSitesTypes.CurrentComponentId,
     }
 }
 
@@ -25,6 +30,13 @@ const initialState: SitesReducerType = {
         templates: [],
         // id выбранного шаблона подключаемых файлов
         currentTemplateId: null,
+    },
+    // Данные по вкладке «Шаблоны компонентов»
+    componentsSection: {
+        // Объект с порядком следования шаблонов компонентов
+        order: null,
+        // id выбранного шаблона компонента
+        currentComponentId: null
     }
 }
 
@@ -96,6 +108,36 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
     }
 }
 
+// Установка порядка следования шаблонов компонентов выбранного сайта
+function setComponentsOrder(state: SitesReducerType, action: StoreSitesTypes.SetComponentsOrderAction): SitesReducerType {
+    return {
+        ...state,
+        componentsSection: {
+            ...state.componentsSection,
+            order: action.payload
+        }
+    }
+}
+
+// Установка id выбранного подключаемых шаблонов
+function setCurrentComponentId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentComponentIdAction): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage id шаблона компоненента потому что не выбран ни один шаблон компонента.
+        localStorage.removeItem('editorComponentId')
+    }
+    else {
+        // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        localStorage.setItem('editorComponentId', action.payload)
+    }
+
+    return {
+        ...state,
+        componentsSection: {
+            ...state.componentsSection,
+            currentComponentId: action.payload
+        }
+    }
+}
 
 // Редьюсер Store.settings
 export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
@@ -112,6 +154,10 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             return setTemplates(state, action)
         case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
             return setCurrentIncFilesTemplateId(state, action)
+        case StoreSitesTypes.SET_COMPONENTS_ORDER:
+            return setComponentsOrder(state, action)
+        case StoreSitesTypes.SET_CURRENT_COMPONENT_ID:
+            return setCurrentComponentId(state, action)
         default:
             // @ts-ignore
             const x: never = null

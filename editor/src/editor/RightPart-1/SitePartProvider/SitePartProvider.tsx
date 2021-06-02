@@ -3,9 +3,10 @@ import {useSelector} from 'react-redux'
 import SiteSection from '../SiteSection/SiteSection'
 import {AppState} from 'store/rootReducer'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
-import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList';
-import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm';
+import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList'
+import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
 import ComponentsList from '../ComponentsList/ComponentsList'
+import messages from '../messages'
 
 
 /**
@@ -13,6 +14,9 @@ import ComponentsList from '../ComponentsList/ComponentsList'
  * в зависимости от выбранной вкладки
  */
 export default function SitePartProvider() {
+
+    // Язык интерфейса
+    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Номер активной вкладки
     const { rightMainTab } = useSelector((store: AppState) => store.sites)
@@ -26,14 +30,14 @@ export default function SitePartProvider() {
         const parts = [0, 1, 2, 3].map((num) => {
             if (num === 0) {
                 return (
-                    <HeaderPage headerText='Сайты' display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={messages.Tabs.sites[lang]} display={num === rightMainTab} key={num}>
                         <SiteSection />
                     </HeaderPage>
                 )
             }
             else if (num === 1) {
                 return (
-                    <HeaderPage headerText='Шаблоны подключаемых файлов' display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={messages.Tabs.incFilesTemplates[lang]} display={num === rightMainTab} key={num}>
                         <>
                             <NewTemplateButton />
                             <TemplatesList />
@@ -44,7 +48,7 @@ export default function SitePartProvider() {
             }
             else if (num === 2) {
                 return (
-                    <HeaderPage headerText='Шаблоны компонентов' display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={messages.Tabs.components[lang]} display={num === rightMainTab} key={num}>
                         <ComponentsList />
                         <p>Шаблоны компонентов</p>
                     </HeaderPage>
@@ -52,7 +56,7 @@ export default function SitePartProvider() {
             }
             else if (num === 3) {
                 return (
-                    <HeaderPage headerText='Статьи' display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={messages.Tabs.articles[lang]} display={num === rightMainTab} key={num}>
                         <p>Статьи</p>
                         <p>Статьи</p>
                     </HeaderPage>
@@ -62,7 +66,7 @@ export default function SitePartProvider() {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [rightMainTab])
+    }, [rightMainTab, lang])
 
     return partComponents
 }

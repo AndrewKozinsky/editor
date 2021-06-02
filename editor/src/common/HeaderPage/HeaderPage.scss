@@ -17,6 +17,7 @@ $CN: header-page;
     flex-grow: 1;
     display: grid;
     grid-template-columns: 40% 1px 60%;
+    grid-template-columns: 80% 1px 60%; // Эту строку потом удалить!
     height: 1px;
 }
 @media all and(min-width: 1000px) {

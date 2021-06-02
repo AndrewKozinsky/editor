@@ -56,7 +56,7 @@ export default function RightPart3(props: RightPart3PropType) {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [activeTab])
+    }, [activeTab, lang])
 
     const CN = 'right-part-3'
     const style = display ? {} : {display: 'none'}
