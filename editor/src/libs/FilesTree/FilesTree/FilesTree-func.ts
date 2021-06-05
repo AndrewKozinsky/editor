@@ -1,5 +1,6 @@
+import {useEffect, useMemo} from 'react'
 import FilesTreeType from '../types'
-import {useMemo} from 'react';
+import { getMaxDeep } from '../StoreManage/manageState'
 
 /**
  * Хук возвращает минимальную ширину обёртки FilesTree в зависимости от количества вложенных элементов
@@ -10,23 +11,4 @@ export function useGetFilesTreeMinWidth(items: FilesTreeType.Items) {
         const maxDeep = getMaxDeep(items)
         return maxDeep * 20 + 180
     }, [items])
-}
-
-function getMaxDeep(items: FilesTreeType.Items) {
-    let maxDeep = 0
-
-    function crawler(items: FilesTreeType.Items, prevDeep = -1) {
-        items.forEach((item: FilesTreeType.Item) => {
-            const currentDeep = prevDeep + 1
-            if (maxDeep < currentDeep) maxDeep = currentDeep
-
-            if (item.content) {
-                crawler(item.content, currentDeep)
-            }
-        })
-    }
-
-    crawler(items)
-
-    return maxDeep
 }

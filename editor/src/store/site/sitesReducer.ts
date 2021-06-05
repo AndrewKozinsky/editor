@@ -6,12 +6,12 @@ export type SitesReducerType = {
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
     incFilesTemplatesSection: {
-        templates: StoreSitesTypes.IncFilesTemplatesType,
-        currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId,
+        templates: StoreSitesTypes.IncFilesTemplatesType
+        currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
     },
     componentsSection: {
-        order: null | FilesTreeType.Items,
-        currentComponentId: StoreSitesTypes.CurrentComponentId,
+        currentCompItemId: StoreSitesTypes.CurrentCompItemId
+        currentCompItemType: StoreSitesTypes.CurrentCompItemType
     }
 }
 
@@ -33,10 +33,9 @@ const initialState: SitesReducerType = {
     },
     // Данные по вкладке «Шаблоны компонентов»
     componentsSection: {
-        // Объект с порядком следования шаблонов компонентов
-        order: null,
         // id выбранного шаблона компонента
-        currentComponentId: null
+        currentCompItemId: null,
+        currentCompItemType: null
     }
 }
 
@@ -108,33 +107,27 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
     }
 }
 
-// Установка порядка следования шаблонов компонентов выбранного сайта
-function setComponentsOrder(state: SitesReducerType, action: StoreSitesTypes.SetComponentsOrderAction): SitesReducerType {
-    return {
-        ...state,
-        componentsSection: {
-            ...state.componentsSection,
-            order: action.payload
-        }
-    }
-}
-
 // Установка id выбранного подключаемых шаблонов
-function setCurrentComponentId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentComponentIdAction): SitesReducerType {
+function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
     if (action.payload === null) {
-        // Удалить из LocalStorage id шаблона компоненента потому что не выбран ни один шаблон компонента.
+        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
         localStorage.removeItem('editorComponentId')
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        localStorage.removeItem('editorComponentType')
     }
     else {
-        // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorComponentId', action.payload)
+        // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        localStorage.setItem('editorComponentId', action.payload.id)
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        localStorage.setItem('editorComponentType', action.payload.type)
     }
 
     return {
         ...state,
         componentsSection: {
             ...state.componentsSection,
-            currentComponentId: action.payload
+            currentCompItemId: action.payload.id,
+            currentCompItemType: action.payload.type,
         }
     }
 }
@@ -154,10 +147,8 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             return setTemplates(state, action)
         case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
             return setCurrentIncFilesTemplateId(state, action)
-        case StoreSitesTypes.SET_COMPONENTS_ORDER:
-            return setComponentsOrder(state, action)
-        case StoreSitesTypes.SET_CURRENT_COMPONENT_ID:
-            return setCurrentComponentId(state, action)
+        case StoreSitesTypes.SET_CURRENT_COMP:
+            return setCurrentComp(state, action)
         default:
             // @ts-ignore
             const x: never = null

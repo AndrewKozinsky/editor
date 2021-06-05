@@ -16,13 +16,12 @@ $CN: header-page;
 .#{$CN}__content-divided {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: 40% 1px 60%;
-    grid-template-columns: 80% 1px 60%; // Эту строку потом удалить!
+    grid-template-columns: 40% 1px 1fr;
     height: 1px;
 }
 @media all and(min-width: 1000px) {
     .#{$CN}__content-divided {
-        grid-template-columns: 400px 1px 60%;
+        grid-template-columns: 400px 1px 1fr;
     }
 }
 .#{$CN}__content-divided-left {

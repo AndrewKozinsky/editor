@@ -73,7 +73,7 @@ export function useGetModalClasses(CN: string, size: StoreSettingsTypes.EditorSi
 
 /**
  * Функция возвращает текст на кнопке закрытия в соответствии с переданным языком
- * @param lang
+ * @param {String} lang — язык интерфейса
  */
 export function getCloseBtnText(lang: StoreSettingsTypes.EditorLanguage) {
     const text = {

@@ -1,10 +1,12 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
+import FHTypes from 'src/libs/formHandler/types'
+import messages from '../../messages'
 import store from 'store/store'
-import actions from 'store/rootAction'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import messages from '../messages'
+import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
+import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import actions from 'store/rootAction'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 
@@ -27,14 +29,11 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                     }
                 },
             },
-            defaultIncFilesTemplateId: {
-                initialValue: [''],
-            },
             submit: {
                 initialValue: [''],
                 initialData: {
                     loading: false,
-                    disabled: false
+                    disabled: false,
                 }
             }
         },
@@ -42,8 +41,6 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
             initialData: {
                 // Сколько раз пытались отправить форму
                 submitCounter: 0,
-                // Тип формы: createSite (создать новый сайт) или saveSite (сохранить новое имя сайта)
-                formType: 'createSite'
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
@@ -52,7 +49,6 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                // console.log(formState)
                 formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
 
                 // Первое поле, где есть ошибка
@@ -82,15 +78,36 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 // Поставить новое Состояние формы
                 formDetails.setFormState(formState)
 
-                // В зависимости от типа формы запущу разные функции сохранения данных
-                // Если нужно создать новый сайт
-                if (formDetails.state.form.data.formType === 'createSite') {
-                    await createNewSite(formDetails, lang)
+
+                // Массив папок и файлов
+                const items = componentsTreeStore.getState()
+                // uuid выбранной папки
+                const currentFolderId = store.getState().sites.componentsSection.currentCompItemId
+                // uuid выбранной папки
+                const currentSiteId = store.getState().sites.currentSiteId
+
+                // Изменить название папки на введённое и обновить Хранилище папок
+
+                let result = filesTreePublicMethods.changeItemName(
+                    items,
+                    currentFolderId,
+                    formDetails.state.fields.name.value[0]
+                )
+
+                // Подготовить массив папок и файлов для сохранения на сервере
+                const itemsCopy = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
+
+                // Отправить данные на сервер...
+                const options = {
+                    method: 'PATCH',
+                    body: JSON.stringify(itemsCopy)
                 }
-                // Если нужно обновить данные сайта
-                else {
-                    await updateSite(formDetails, lang)
-                }
+                const response = await makeFetch(getApiUrl('componentsFolders', currentSiteId), options, lang)
+                console.log(response)
+
+                // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
+                let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
+                formDetails.setFormState(newFormState)
             }
         }
     }
@@ -103,10 +120,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
  * @param {String} lang — язык интерфейса
  */
 function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
-
     const schemas = {
         name: yup.string()
-            .required(messages.SiteSection.siteNameInputRequired[lang])
+            .required(messages.ComponentFolderForm.formNameInputRequired[lang])
     }
 
     // @ts-ignore
@@ -135,15 +151,15 @@ function validateForm(
     for(let fieldName in formState.fields) {
         const field = formState.fields[fieldName]
 
-        // Игнорировать кнопки и выпадающие списки
-        if (field.fieldType === 'button' || field.fieldType === 'select') continue
+        // Игнорировать кнопки
+        if (field.fieldType === 'button') continue
 
         // Значение перебираемого поля
         const fieldValue = field.value[0]
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(fieldName, lang).validateSync(fieldValue)
+            getSchema(fieldName, lang)?.validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -201,70 +217,4 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
-
-
-/**
- * Функция создающая новый сайт
- * @param {Object} formDetails — объект с данными и методами манипулирования формой
- * @param {String} lang — язык интерфейса
- */
-async function createNewSite(
-    formDetails: FHTypes.FormDetailsInSubmitHandler,
-    lang: StoreSettingsTypes.EditorLanguage
-) {
-    // Отправить данные на сервер...
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(formDetails.readyFieldValues)
-    }
-    const response = await makeFetch(getApiUrl('sites'), options, lang)
-
-    // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
-    let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
-    formDetails.setFormState(newFormState)
-
-    // Если сайт успешно создан...
-    if (response.status === 'success') {
-        // Скачать новый список сайтов и поставить в Хранилище
-        await store.dispatch(actions.sites.requestSites())
-
-        // Найти в Хранилище сайт с таким же именем и выделить его
-        const newSite = store.getState().sites.sites.find((site: any) => site.id === response.data.site.id)
-
-        store.dispatch(actions.sites.setCurrentSiteId(newSite.id))
-    }
-}
-
-
-/**
- * Функция редактирующая данные существующего сайта
- * @param {Object} formDetails — объект с данными и методами манипулирования формой
- * @param {String} lang — язык интерфейса
- */
-async function updateSite(
-    formDetails: FHTypes.FormDetailsInSubmitHandler,
-    lang: StoreSettingsTypes.EditorLanguage
-) {
-
-    // id выбранного сайта
-    const selectedSiteId = store.getState().sites.currentSiteId
-
-    // Отправить данные на сервер...
-    const options = {
-        method: 'PATCH',
-        body: JSON.stringify(formDetails.readyFieldValues)
-    }
-    // console.log(formDetails.readyFieldValues.defaultIncFilesTemplateId)
-    const response = await makeFetch(getApiUrl('site', selectedSiteId), options, lang)
-
-    // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
-    let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
-    formDetails.setFormState(newFormState)
-
-    // Если сайт успешно создан...
-    if (response.status === 'success') {
-        // Скачать новый список сайтов и поставить в Хранилище
-        await store.dispatch(actions.sites.requestSites())
-    }
 }

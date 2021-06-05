@@ -72,6 +72,7 @@ export function getIconClass(type: string, specialClass?: string): string {
         case 'filesTreeFolder':
         case 'filesTreeFolderPlus':
         case 'filesTreePlus':
+        case 'filesTreeTrash':
             return `${CN}-btn-icon`
         // Значёк указателя помещения перетаскиваемого элемента
         case 'filesTreePlaceMark':

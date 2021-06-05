@@ -1,16 +1,16 @@
 import {Router} from 'express'
 import * as authController from '../controllers/authController/authController'
-import * as componentsOrderController
-    from '../controllers/componentsOrderController/componentsOrderController'
+import * as componentsFoldersController
+    from '../controllers/componentsFoldersController/componentsFoldersController'
 
 
 const router = Router()
 
 router.route('/:siteId')
     // Получение порядка расположения шаблонов компонентов определённого сайта
-    .get(authController.protect, componentsOrderController.getComponentsOrder)
+    .get(authController.protect, componentsFoldersController.getFolders)
     // Изменение порядка расположения шаблонов компонентов определённого сайта
-    .patch(authController.protect, componentsOrderController.updateComponentsOrder)
+    .put(authController.protect, componentsFoldersController.setFolders)
 
 
 export default router

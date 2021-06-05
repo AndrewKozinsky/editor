@@ -96,7 +96,7 @@ function ModalContent(props: ModalContentPropType) {
     return (
         <>
             <p>{messages.UserDataSection.confirmModalText[lang]}</p>
-            <Wrapper t={10} align='right'>
+            <Wrapper t={10}>
                 <Hr />
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>

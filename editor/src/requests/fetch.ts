@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
 import { AppState } from 'store/rootReducer'
-import StoreSettingsTypes from '../store/settings/settingsTypes';
+import StoreSettingsTypes from '../store/settings/settingsTypes'
 
 
 // Тип параметров запроса
@@ -81,11 +81,6 @@ export async function makeFetch(url: string, options: OptionsType, lang: StoreSe
         let message = `Couldn't get data.`
         if (lang === 'rus') message = 'Не удалось получить данные.'
         throw new Error(message)
-
-        return {
-            status: 'fail',
-            data: message
-        }
     }
 
 }

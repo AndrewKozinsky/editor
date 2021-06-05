@@ -1,9 +1,11 @@
 import FilesTreeType from '../types'
 import {
+    getItemDataById,
+    setItems,
     hasFolderAnItem,
     showPlaceMark,
     moveItemTo
-} from '../FilesTree/manageStateDataFunc'
+} from '../StoreManage/manageState'
 
 /**
  * Обработчик начала перетаскивания
@@ -18,28 +20,26 @@ export function handleDragStart(e: any) {
  * @param {Object} e — объект события
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
  */
 export function handleDrag(
     e: any,
     itemData: FilesTreeType.Item,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn
 ) {
     e.preventDefault()
 
-    // Папки или файл, над которым навис курсор.
+    // Папка или файл, над которым навис курсор.
     let itemBelow = <null | HTMLElement>document.elementFromPoint(e.clientX, e.clientY).closest('[data-ft-item]')
     if (!itemBelow) return
 
     // id папки или файла, над которым навис курсор.
-    const itemBelowId = itemBelow.dataset.ftFolderItem || itemBelow.dataset.ftFileItem
+    const itemBelowId = itemBelow.dataset.ftItem
 
     // Ничего не делать если сброс нельзя делать в этом месте
     if (!isDropAllowed(itemBelowId, itemData)) return
 
     // Определить позицию сброса
-    const dropPlaceCoords = getDropPlaceCoords(e, itemBelow, itemBelowId, itemData)
+    const dropPlaceCoords = getDropPlaceCoords(e, itemBelow, itemBelowId, items, itemData)
     if(!dropPlaceCoords) return
 
     // Подсветить позицию сброса
@@ -60,30 +60,28 @@ export function handleDragOver(e: any) {
  * @param {Object} e — объект события
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Function} setItems — функция устанавливающая новые данные в Состояние FilesTree
- * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function handleDragEnd(
     e: any,
     itemData: FilesTreeType.Item,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn,
-    out: FilesTreeType.Out
+    after: FilesTreeType.After
 ) {
     e.target.style.opacity = 1
 
     // Папки или файл, над которым навис курсор.
-    let itemBelow = <null | HTMLElement>document.elementFromPoint(e.clientX, e.clientY).closest('[data-ft-item]')
-    if (!itemBelow) return
+    let $itemBelow = <null | HTMLElement>document.elementFromPoint(e.clientX, e.clientY).closest('[data-ft-item]')
+    if (!$itemBelow) return
 
     // id папки или файла, над которым навис курсор.
-    const itemBelowId = itemBelow.dataset.ftFolderItem || itemBelow.dataset.ftFileItem
+    const itemBelowId = $itemBelow.dataset.ftItem
 
     // Ничего не делать если сброс нельзя делать в этом месте
     if (!isDropAllowed(itemBelowId, itemData)) return
 
     // Определить позицию сброса
-    const dropPlaceCoords = getDropPlaceCoords(e, itemBelow, itemBelowId, itemData)
+    const dropPlaceCoords = getDropPlaceCoords(e, $itemBelow, itemBelowId, items, itemData)
     if(!dropPlaceCoords) return
 
     // Обновить состояние списка папок чтобы перетаскиваемый элемент попал в указанное место
@@ -91,8 +89,8 @@ export function handleDragEnd(
     setItems(newItems)
 
     // Запустить переданную функцию, которая должна быть запущена после изменения дерева файлов и папок
-    if (out.afterChangingTree) {
-        out.afterChangingTree(newItems)
+    if (after.changingTree) {
+        after.changingTree(newItems)
     }
 }
 
@@ -113,9 +111,7 @@ function isDropAllowed(
     if (!itemBelowId) return false
 
     // Ничего не делать если родительскую папку хотят поместить внутрь дочерней
-    if (hasFolderAnItem(itemData, itemBelowId)) return false
-
-    return true
+    return hasFolderAnItem(itemData, itemBelowId)
 }
 
 /**
@@ -124,12 +120,14 @@ function isDropAllowed(
  * @param {Object} e — объект события
  * @param {HTMLElement} itemBelow — элемент под курсором
  * @param {String} itemBelowId — id элемента под курсором
+ * @param {Array} items — массив данных по папкам и файлам
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  */
 function getDropPlaceCoords(
     e: any,
     itemBelow: HTMLElement,
     itemBelowId: FilesTreeType.UuId,
+    items: FilesTreeType.Items,
     itemData: FilesTreeType.Item,
 ): {itemId: FilesTreeType.UuId, place: FilesTreeType.PlaceMark} {
     // Расстояние до элемента с верха экрана и высота элемента под курсором
@@ -139,8 +137,11 @@ function getDropPlaceCoords(
     // Ничего не делать если курсор находится над перемещаемым элементом
     if (itemBelowId === itemData.uuid) return
 
+    // Данные элемента
+    const itemBelowData = getItemDataById(items, itemBelowId)
+
     // Если это папка
-    if (itemBelow.dataset.ftFolderItem) {
+    if (itemBelowData.type === 'folder') {
         // Если курсор на верхней четверти файла
         if (itemBelowY + (itemBelowHeight / 4) > e.clientY) {
             // Вернуть id элемента и место, куда поставить перемещаемый элемент

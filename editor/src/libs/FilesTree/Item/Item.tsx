@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import FilesTreeType from '../types'
 import {makeCN} from 'utils/StringUtils'
 import SvgIcon from 'common/icons/SvgIcon'
 import {
     createNewItem,
-    getFolderInnerWrapperClasses,
-    getFileInnerWrapperClasses,
+    getInnerWrapperClasses,
     getTriangleBtnClasses,
     useGetToggleFolder,
     useMarkItemElemWhenItHovered,
-    useGetOnClickHandler
+    useGetOnClickHandler,
+    removeItem
 } from './Item-func'
 import {
     handleDragStart,
@@ -20,66 +20,26 @@ import {
 import './Item.scss'
 
 
+const CN = 'ft-item'
+
 type ItemPropType = {
     // Массив всех папок и файлов.
     items: FilesTreeType.Items
-    // Функция устанавливающая новые данные в Состояние FilesTree.
-    setItems: FilesTreeType.SetItemsFn,
     // Данные папки или файла.
     itemData: FilesTreeType.Item
-    // Uuid выделенной папки или файла.
-    activeItemId: FilesTreeType.UuId,
-    // Функция изменяющая uuid выделенной папки или файла.
-    setActiveItemId: FilesTreeType.SetActiveItemIdFn,
     // Уровень вложенности папки или файла.
     offset: number
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
-    out: FilesTreeType.Out
+    after: FilesTreeType.After
 }
 
 /** Папка или файл в структуре папок */
 export default function Item(props: ItemPropType) {
     const {
         items,
-        setItems,
         itemData,
-        activeItemId,
-        setActiveItemId,
         offset,
-        out
-    } = props
-
-    return itemData.type === 'folder'
-        ? <Folder
-            items={items}
-            setItems={setItems}
-            itemData={itemData}
-            activeItemId={activeItemId}
-            setActiveItemId={setActiveItemId}
-            offset={offset}
-            out={out}
-        />
-        : <File
-            items={items}
-            setItems={setItems}
-            itemData={itemData}
-            activeItemId={activeItemId}
-            setActiveItemId={setActiveItemId}
-            offset={offset}
-            out={out}
-        />
-}
-
-/** Компонент папки в дереве папок и файлов */
-function Folder(props: ItemPropType) {
-    const {
-        items,
-        setItems,
-        itemData,
-        activeItemId,
-        setActiveItemId,
-        offset,
-        out
+        after
     } = props
 
     // Обработчик наведения и увода мыши на интерактивные элементы
@@ -87,110 +47,158 @@ function Folder(props: ItemPropType) {
     // Элементы с таким свойством подсвечиваются при наведении
     const markItemElem = useMarkItemElemWhenItHovered()
 
-    // Хук возвращает обработчик щелчка по папке
-    const onItemClickHandler = useGetOnClickHandler(itemData, setActiveItemId, out)
-
-    // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
-    const toggleFolder = useGetToggleFolder(itemData.uuid, items, setItems, out)
-
-    const CN = 'ft-item-folder'
-
-    // Классы кнопки сворачивания папки
-    const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
+    // Хук возвращает обработчик щелчка по элементу
+    const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
 
     // Классы внутренней обёртки
-    const innerWrapperClasses = getFolderInnerWrapperClasses(CN, itemData, activeItemId)
+    const innerWrapperClasses = getInnerWrapperClasses(CN, itemData)
 
     return (
         <div
             style={{paddingLeft: offset * 20}}
             className={CN}
-            data-ft-item='true'
-            data-ft-folder-item={itemData.uuid}
+            data-ft-item={itemData.uuid}
             draggable='true'
             onClick={onItemClickHandler}
             onMouseOver={markItemElem}
             onMouseOut={markItemElem}
             onDragStart={handleDragStart}
-            onDrag={(e: any) => handleDrag(e, itemData, items, setItems)}
+            onDrag={(e: any) => handleDrag(e, itemData, items)}
             onDragOver={handleDragOver}
-            onDragEnd={(e: any) => handleDragEnd(e, itemData, items, setItems, out)}
+            onDragEnd={(e: any) => handleDragEnd(e, itemData, items, after)}
         >
             <div
                 className={innerWrapperClasses}
-                data-ft-inner-folder='true'
+                data-ft-inner='true'
             >
                 <PlaceArrow itemData={itemData} />
-                <button
-                    className={triangleBtnClasses}
-                    onClick={toggleFolder}
-                    data-ft-item-btn='true'
-                >
-                    <SvgIcon type='filesTreeTriangle' />
-                </button>
-                <SvgIcon type='filesTreeFolder' className={`${CN}__folder-sign`} />
+                <Triangle items={items} itemData={itemData} after={after} />
+                <Icon itemData={itemData} />
                 {itemData.name}
                 <div className={`${CN}__right-part`}>
-                    <button
-                        className={`${CN}__btn ${CN}__right-btn`}
-                        data-ft-item-btn='true'
-                        onClick={(e: any) => createNewItem(e, 'folder', itemData, items, setItems, out, setActiveItemId)}
-                    >
-                        <SvgIcon type='filesTreeFolderPlus' />
-                    </button>
-                    <button
-                        className={`${CN}__btn ${CN}__right-btn`}
-                        data-ft-item-btn='true'
-                        onClick={(e: any) => createNewItem(e, 'file', itemData, items, setItems, out, setActiveItemId)}
-                    >
-                        <SvgIcon type='filesTreePlus' />
-                    </button>
+                    <RightButtons items={items} itemData={itemData} after={after} />
                 </div>
             </div>
         </div>
     )
 }
 
+type TrianglePropType = {
+    // Массив всех папок и файлов.
+    items: FilesTreeType.Items
+    // Данные папки или файла.
+    itemData: FilesTreeType.Item
+    // Объект с различными свойствами и методами переданными в параметрах FilesTree.
+    after: FilesTreeType.After
+}
 
-/** Компонент папки в дереве папок и файлов */
-function File(props: ItemPropType) {
+/** Кнопка сворачивания/разворачивания папки. Для файла возвращается пустой элемент. */
+function Triangle(props: TrianglePropType) {
     const {
         items,
-        setItems,
         itemData,
-        offset,
-        activeItemId,
-        setActiveItemId,
-        out
+        after
     } = props
 
-    // Хук возвращает обработчик щелчка по файлу
-    const onItemClickHandler = useGetOnClickHandler(itemData, setActiveItemId, out)
+    // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
+    const toggleFolder = useGetToggleFolder(itemData.uuid, items, after)
 
-    const CN = 'ft-item-file'
+    // Классы кнопки сворачивания папки
+    const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
 
-    // Классы внутренней обёртки
-    const innerWrapperClasses = getFileInnerWrapperClasses(CN, itemData, activeItemId)
+    if (itemData.type === 'file') {
+        return (
+            <div className={triangleBtnClasses} />
+        )
+    }
 
     return (
-        <div
-            style={{paddingLeft: offset * 20}}
-            className={CN}
-            data-ft-item='true'
-            data-ft-file-item={itemData.uuid}
-            onClick={onItemClickHandler}
-            draggable
-            onDragStart={handleDragStart}
-            onDrag={(e: any) => handleDrag(e, itemData, items, setItems)}
-            onDragOver={handleDragOver}
-            onDragEnd={(e: any) => handleDragEnd(e, itemData, items, setItems, out)}
+        <button
+            className={triangleBtnClasses}
+            onClick={toggleFolder}
+            data-ft-item-btn='true'
         >
-            <div className={innerWrapperClasses}>
-                <PlaceArrow itemData={itemData} />
-                {itemData.name}
-            </div>
-        </div>
+            <SvgIcon type='filesTreeTriangle' />
+        </button>
     )
+}
+
+
+type IconPropType = {
+    // Данные папки или файла.
+    itemData: FilesTreeType.Item
+}
+
+/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+function Icon(props: IconPropType) {
+    const {
+        itemData,
+    } = props
+
+    if (itemData.type === 'file') return null
+    return <SvgIcon type='filesTreeFolder' className={`${CN}__folder-sign`} />
+}
+
+
+type RightButtonsPropType = {
+    // Массив всех папок и файлов.
+    items: FilesTreeType.Items
+    // Данные папки или файла.
+    itemData: FilesTreeType.Item
+    // Объект с различными свойствами и методами переданными в параметрах FilesTree.
+    after: FilesTreeType.After
+}
+
+/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+function RightButtons(props: RightButtonsPropType) {
+    const {
+        items,
+        itemData,
+        after,
+    } = props
+
+    const createFile = (
+        <button
+            className={`${CN}__btn ${CN}__right-btn`}
+            data-ft-item-btn='true'
+            onClick={(e: any) => createNewItem(e, 'folder', itemData, items, after)}
+        >
+            <SvgIcon type='filesTreeFolderPlus' />
+        </button>
+    )
+
+    const createFolder = (
+        <button
+            className={`${CN}__btn ${CN}__right-btn`}
+            data-ft-item-btn='true'
+            onClick={(e: any) => createNewItem(e, 'file', itemData, items, after)}
+        >
+            <SvgIcon type='filesTreePlus' />
+        </button>
+    )
+
+    const deleteItem = (
+        <button
+            className={`${CN}__btn ${CN}__right-btn`}
+            data-ft-item-btn='true'
+            onClick={(e: any) => removeItem(e, items, itemData.uuid, after)}
+        >
+            <SvgIcon type='filesTreeTrash' />
+        </button>
+    )
+
+    if (itemData.type === 'file') {
+        return deleteItem
+    }
+    else {
+        return (
+            <>
+                {createFile}
+                {createFolder}
+                {deleteItem}
+            </>
+        )
+    }
 }
 
 

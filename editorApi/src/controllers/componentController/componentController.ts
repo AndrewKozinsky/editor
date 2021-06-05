@@ -1,7 +1,7 @@
 import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../utils/errors/catchAsync'
+import { catchAsync } from '../../errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
-import {AppError} from '../../utils/errors/appError'
+import {AppError} from '../../errors/appError'
 import ComponentModel from '../../models/component'
 
 
@@ -75,7 +75,7 @@ export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType,
     const updatedComponent = await ComponentModel.findOneAndUpdate(
         {uuid: req.params.uuid},
         {code: req.body.code},
-        {new: true}
+        {new: true, useFindAndModify: false}
     ).select('-__v -_id')
 
     // Если шаблон компонента не найден, то возвратить ошибочный ответ

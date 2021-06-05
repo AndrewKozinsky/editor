@@ -14,6 +14,8 @@ export function useFetchIncFilesTemplates() {
 
     // При загрузке компонента и при изменении выбранного сайта...
     useEffect(function () {
+        if (!currentSiteId) return
+
         // Запрос на получение шаблонов подключаемых файлов и установка в Хранилище
         dispatch( actions.sites.requestIncFilesTemplates() )
     }, [currentSiteId])

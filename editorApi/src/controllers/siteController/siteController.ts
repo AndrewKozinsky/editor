@@ -1,9 +1,9 @@
 import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../utils/errors/catchAsync'
+import { catchAsync } from '../../errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import SiteModel from '../../models/site'
 import IncFilesTemplateModel from '../../models/incFilesTemplate'
-import ComponentsOrderModel from '../../models/componentsOrder'
+import ComponentsFoldersModel from '../../models/componentsFolders'
 import ComponentModel from '../../models/component'
 
 
@@ -37,8 +37,8 @@ export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res:
         userId: req.user.id,
     })
 
-    // Создание данных по модели ComponentsOrder
-    await ComponentsOrderModel.create({
+    // Создание данных по модели ComponentsFolders
+    await ComponentsFoldersModel.create({
         userId: req.user?.id,
         siteId: newSite._id
     })
@@ -85,7 +85,7 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     await IncFilesTemplateModel.deleteMany({siteId: req.params.siteId})
 
     // Удалить порядок шаблонов компонентов
-    await ComponentsOrderModel.deleteMany({siteId: req.params.siteId})
+    await ComponentsFoldersModel.deleteMany({siteId: req.params.siteId})
 
     // Удалить шаблоны компонентов
     await ComponentModel.deleteMany({siteId: req.params.siteId})

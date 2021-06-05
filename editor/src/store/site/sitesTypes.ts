@@ -28,7 +28,9 @@ namespace StoreSitesTypes {
     // id выбранного шаблона подключаемых файлов
     export type CurrentIncFilesTemplateId = null | string
     // id выбранного шаблона компонента
-    export type CurrentComponentId = null | FilesTreeType.UuId
+    export type CurrentCompItemId = null | FilesTreeType.UuId
+    // Тип выбранного шаблона компонента (папка или компонент)
+    export type CurrentCompItemType = null | FilesTreeType.ItemType
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -67,18 +69,14 @@ namespace StoreSitesTypes {
         payload: CurrentIncFilesTemplateId
     }
 
-    // Установка порядка шаблонов компонентов выбранного сайта
-    export const SET_COMPONENTS_ORDER = 'SET_COMPONENTS_ORDER'
-    export type SetComponentsOrderAction = {
-        type: typeof SET_COMPONENTS_ORDER
-        payload: null | FilesTreeType.Items
-    }
-
     // Установка id выбранного шаблона компонента
-    export const SET_CURRENT_COMPONENT_ID = 'SET_CURRENT_COMPONENT_ID'
-    export type SetCurrentComponentIdAction = {
-        type: typeof SET_CURRENT_COMPONENT_ID
-        payload: FilesTreeType.UuId
+    export const SET_CURRENT_COMP = 'SET_CURRENT_COMP'
+    export type SetCurrentCompAction = {
+        type: typeof SET_CURRENT_COMP
+        payload: {
+            id: null | FilesTreeType.UuId,
+            type: null | FilesTreeType.ItemType
+        }
     }
 
 
@@ -88,8 +86,7 @@ namespace StoreSitesTypes {
         | SetRightMainTabAction
         | SetIncFilesTemplatesAction
         | SetCurrentIncFilesTemplateIdAction
-        | SetComponentsOrderAction
-        | SetCurrentComponentIdAction
+        | SetCurrentCompAction
 }
 
 export default StoreSitesTypes

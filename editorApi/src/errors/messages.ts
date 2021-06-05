@@ -188,8 +188,8 @@ export const messages: messagesType = {
             rus: 'Шаблон не найден. Данные не обновлены.'
         },
     },
-    // Модель ComponentsOrder
-    componentsOrderModel: {
+    // Модель ComponentsFolders
+    componentsFoldersModel: {
         userIdRequired: {
             eng: 'Specify the user id to which this order of component templates belongs.',
             rus: 'Укажите id пользователя к которому принадлежит этот порядок шаблонов компонентов.'
@@ -200,14 +200,14 @@ export const messages: messagesType = {
         },
     },
     // Контроллер порядка следования папок и файлов шаблонов компонентов
-    componentsOrderController: {
-        // Функция getComponentsOrder
-        getComponentsOrderNoSiteId: {
+    componentsFoldersController: {
+        // Функция getFolders
+        getComponentsFoldersNoSiteId: {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
             rus: 'В запросе не передан id сайта к которому принадлежит порядок шаблонов компонентов'
         },
-        // Функция updateComponentsOrder
-        updateComponentsOrderOrderNotFound: {
+        // Функция updateFolders
+        updateComponentsFoldersFoldersNotFound: {
             eng: 'The order of the component templates is not found. The data has not been updated.',
             rus: 'Порядок шаблонов компонентов не найден. Данные не обновлены.'
         },

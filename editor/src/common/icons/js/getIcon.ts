@@ -69,6 +69,7 @@ import FilesTreePlusBig from '../icons/filesTreePlusBig';
 import FilesTreePlusSmall from '../icons/filesTreePlusSmall';
 import FilesTreeFolderSmall from '../icons/filesTreeFolderSmall';
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark';
+import FilesTreeTrashSmall from '../icons/filesTreeTrashSmall'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -226,6 +227,10 @@ export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'sma
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: {
             small: FilesTreePlaceMark,
+        },
+        // Значёк указателя помещения перетаскиваемого элемента
+        filesTreeTrash: {
+            small: FilesTreeTrashSmall,
         },
     }
 

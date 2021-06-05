@@ -498,6 +498,13 @@ export function getIconSizes(type: string, size: StoreSettingsTypes.EditorSize =
                 viewBox: "0 0 19 19"
             },
         },
+        filesTreeTrash: {
+            small: {
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            }
+        },
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: {
             small: {

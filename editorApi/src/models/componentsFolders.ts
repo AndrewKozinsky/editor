@@ -1,32 +1,31 @@
 import * as mongoose from 'mongoose'
 import { Schema, Document } from 'mongoose'
 
-
-export interface IComponentsOrder extends Document {
+export interface IComponentsFolders extends Document {
     userId: string,
     siteId: string,
-    content?: any[],
+    content?: string,
 }
 
 // Схема порядка следования шаблонов компонентов
-const ComponentsOrderSchema: Schema = new Schema({
+const ComponentsFoldersSchema: Schema = new Schema({
     // id пользователя которому принадлежит документ
     // Требуется для удаления всех документов при удалении пользователя
     userId: {
         type: String,
-        required: [true, '{{componentsOrderModel.userIdRequired}}']
+        required: [true, '{{componentsFoldersModel.userIdRequired}}']
     },
     // id сайта к которому относится шаблон компонента
     siteId: {
         type: String,
-        required: [true, '{{componentsOrderModel.siteIdRequired}}']
+        required: [true, '{{componentsFoldersModel.siteIdRequired}}']
     },
-    // id пользователя, кому принадлежит сайт с этим шаблоном
+    // JSON со структурой папок и файлов
     content: {
-        type: Array,
+        type: String,
     },
 })
 
 
-const ComponentsOrderModel = mongoose.model<IComponentsOrder>('ComponentsOrder', ComponentsOrderSchema)
-export default ComponentsOrderModel
+const ComponentsFoldersModel = mongoose.model<IComponentsFolders>('ComponentsFolders', ComponentsFoldersSchema)
+export default ComponentsFoldersModel

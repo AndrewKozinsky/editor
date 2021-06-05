@@ -1,9 +1,9 @@
 import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../utils/errors/catchAsync'
+import { catchAsync } from '../../errors/catchAsync'
 import { ExtendedRequestType } from '../../types/commonTypes'
 import IncFilesTemplateModel from '../../models/incFilesTemplate'
-import {AppError} from '../../utils/errors/appError'
-import SiteModel from '../../models/site';
+import {AppError} from '../../errors/appError'
+import SiteModel from '../../models/site'
 
 
 /** Получение всех шаблонов определённого сайта (защищённый маршрут) */

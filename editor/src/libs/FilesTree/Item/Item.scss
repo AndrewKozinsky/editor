@@ -1,31 +1,29 @@
 @import "common/commonStyles/commonStyles";
 
-$folder: ft-item-folder;
-$file: ft-item-file;
+$CN: ft-item;
 
-// Общие стили главной обёртки
-.#{$folder}, .#{$file} {
+// Стили главной обёртки
+.#{$CN} {
     font-size: 1.4rem;
     line-height: 1.8rem;
     user-select: none;
 }
+.#{$CN}:hover {
+    .#{$CN}__right-part {
+        display: flex;
+    }
+}
 
-// Общие стили внешней обёртки
-.#{$folder}__inner, .#{$file}__inner {
+
+// Стили внешней обёртки
+.#{$CN}__inner {
     position: relative;
     border-radius: var(--radius);
 }
 
 
-// СТИЛИ ПАПКИ
-.#{$folder}:hover {
-    .#{$folder}__right-part {
-        display: flex;
-    }
-}
-
-// Обёртка с деталями папки
-.#{$folder}__inner {
+// Обёртка с деталями элемента
+.#{$CN}__inner {
     position: relative;
     display: flex;
     align-items: flex-start;
@@ -33,18 +31,24 @@ $file: ft-item-file;
     padding: 3px 9px 3px 0;
     border: 1px solid transparent;
 }
+
 // Атрибут data-ft-hover задаётся обёртке через JS при наведении
 // на определённые области. Поэтому подсветить её.
-.#{$folder}__inner[data-ft-hover] {
+.#{$CN}__inner[data-ft-hover] {
     background-color: var(--bg-color-2);
 }
-// Вид обёртки если перетаскиваемый элемент можно поставить внутрь папки
-.#{$folder}__inner-round-flash {
-    border-color: var(--accent-color);
+// Если навели на главную обёртку, то задать другой фон правой обёртке
+.#{$CN}__inner[data-ft-hover] .#{$CN}__right-part {
+    background-color: var(--bg-color-2);
+
+    &::before {
+        background: linear-gradient(90deg, transparent, var(--bg-color-2));
+    }
 }
 
+
 // Общие стили для всех кнопок
-.#{$folder}__btn {
+.#{$CN}__btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -77,37 +81,44 @@ $file: ft-item-file;
     }
 }
 
+
 // Кнопка-треугольник
-.#{$folder}__btn-triangle {
+.#{$CN}__btn-triangle {
     width: 18px;
     min-width: 18px;
     height: 18px;
 }
 // Кнопка-треугольник при открытой папки
-.#{$folder}__btn-triangle--open {
+.#{$CN}__btn-triangle--open {
     transform: rotate(90deg);
 }
 // Кнопка-треугольник не видима если нет вложенных элементов
-.#{$folder}__btn-triangle--invisible {
+.#{$CN}__btn-triangle--invisible {
     visibility: hidden;
 }
+.#{$CN}__btn-triangle--for-file {
+    width: 20px;
+    min-width: 20px;
+}
+
 
 // Значёк папки
-.#{$folder}__folder-sign {
+.#{$CN}__folder-sign {
     width: 15px;
     min-width: 15px;
     margin: 2px 5px 0 2px;
 }
 
+
 // Обёртка правых кнопок
-.#{$folder}__right-part {
+.#{$CN}__right-part {
     position: absolute;
     top: 0;
     right: 0;
     display: none;
     height: 100%;
     background-color: var(--bg-color);
-    padding: 0 0 0 1px;
+    padding: 0 1px 0 1px;
     border-radius: 0 var(--radius) var(--radius) 0;
 
     &::before {
@@ -121,33 +132,24 @@ $file: ft-item-file;
     }
 }
 
-// Если навели на главную обёртку, то задать другой фон правой обёртке
-.#{$folder}__inner[data-ft-hover] .#{$folder}__right-part {
-    background-color: var(--bg-color-2);
-
-    &::before {
-        background: linear-gradient(90deg, transparent, var(--bg-color-2));
-    }
-}
-
 // Кнопки создания папки и файла
-.#{$folder}__right-btn {
+.#{$CN}__right-btn {
     width: 21px;
     min-width: 21px;
     height: 21px;
     margin-top: 2px;
 }
 
-// Выделенная обёртка с деталями папки
-.#{$folder}__inner-active {
+// Выделенная обёртка с деталями элемента
+.#{$CN}__inner-active {
     color: white;
     background-color: var(--accent-color);
 
-    .#{$folder}__folder-sign {
+    .#{$CN}__folder-sign {
         fill: white;
     }
 
-    .#{$folder}__btn {
+    .#{$CN}__btn {
         &:hover {
             background-color: var(--accent-color-hover);
             svg { fill: white; }
@@ -155,7 +157,7 @@ $file: ft-item-file;
         svg { fill: white; }
     }
 
-    .#{$folder}__right-part {
+    .#{$CN}__right-part {
         background-color: var(--accent-color);
 
         &::before {
@@ -163,10 +165,10 @@ $file: ft-item-file;
         }
     }
 }
-.#{$folder}__inner-active[data-ft-hover] {
+.#{$CN}__inner-active[data-ft-hover] {
     background-color: var(--accent-color);
 
-    .#{$folder}__right-part {
+    .#{$CN}__right-part {
         background-color: var(--accent-color);
 
         &::before {
@@ -175,31 +177,19 @@ $file: ft-item-file;
     }
 }
 
-
-// СТИЛИ ФАЙЛА
-.#{$file} {
-    padding-left: 20px;
-
-    &:hover {
-        .#{$file}__inner {
-            background-color: var(--bg-color-2);
-        }
-    }
-
-    &:hover {
-        .#{$file}__inner-active {
-            background-color: var(--accent-color);
-        }
-    }
+// Вид обёртки если перетаскиваемый элемент можно поставить внутрь папки
+.#{$CN}__inner-round-flash {
+    border-color: var(--accent-color);
 }
-.#{$file}__inner {
-    color: var(--text-color);
-    padding: 4px 10px 4px 20px;
-}
-.#{$file}__inner-active {
-    color: white;
-    background-color: var(--accent-color);
-}
+
+
+
+
+
+
+
+
+
 
 // СТРЕЛКА С ОБОЗНАЧЕНИЕМ МЕСТА ПОМЕЩЕНИЯ ПЕРЕТАСКИВАЕМОГО ЭЛЕМЕНТА
 $arrow: ft-place-arrow;

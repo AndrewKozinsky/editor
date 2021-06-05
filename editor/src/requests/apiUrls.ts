@@ -42,8 +42,8 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'incFilesTemplate/' + templateId
     },
     // Порядок следования шаблонов компонентов
-    componentsOrder: function (siteId: string) {
-        return 'componentsOrder/' + siteId
+    componentsFolders: function (siteId: string) {
+        return 'componentsFolders/' + siteId
     },
     // Шаблон компонента
     component: function (uuid?: string) {
@@ -56,6 +56,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
 // Оборачивание объекта addresses чтобы при запросе
 // к началу каждого адреса добавлялась приставка /api/.
 function getApiUrl(url: string, ...args: any[]): string {
+
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
             return '/api/' + addresses[url]

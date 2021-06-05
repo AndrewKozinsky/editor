@@ -5,11 +5,11 @@ import * as bodyParser from 'body-parser'
 const cookieParser = require('cookie-parser')
 import userRouter from './routes/userRouter'
 import siteRouter from './routes/siteRouter'
-import { AppError } from './utils/errors/appError'
+import { AppError } from './errors/appError'
 import { globalErrorHandler } from './controllers/errorController'
 import { addExtraHeaders } from './middlewares/commonMiddlewares'
 import incFilesTemplateRouter from './routes/incFilesTemplateRouter'
-import componentsOrderRouter from './routes/componentsOrderRouter'
+import componentsFoldersRouter from './routes/componentsFoldersRouter'
 import componentRouter from './routes/componentRouter'
 
 
@@ -47,7 +47,7 @@ app.get("/", function (req: Request, res: Response) {
 app.use('/users/', userRouter)
 app.use('/sites/', siteRouter)
 app.use('/incFilesTemplate/', incFilesTemplateRouter)
-app.use('/componentsOrder/', componentsOrderRouter)
+app.use('/componentsFolders/', componentsFoldersRouter)
 app.use('/component/', componentRouter)
 
 // Статические файлы на сервере.

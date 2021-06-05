@@ -6,7 +6,7 @@ export interface IComponent extends Document {
     uuid: string,
     userId: string,
     siteId: string,
-    code?: null | object,
+    code?: string,
 }
 
 // Схема шаблона компонента
@@ -30,7 +30,7 @@ const ComponentSchema: Schema = new Schema({
     },
     // код шаблона компонента
     code: {
-        type: Object
+        type: String
     },
 })
 

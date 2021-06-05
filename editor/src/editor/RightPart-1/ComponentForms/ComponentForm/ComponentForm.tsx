@@ -1,74 +1,63 @@
 import React from 'react'
+import {useSelector} from 'react-redux'
+import {AppState} from 'src/store/rootReducer'
 import Wrapper from 'src/common/Wrapper/Wrapper'
 import TextInput from 'src/common/formElements/TextInput/TextInput'
 import Hr from 'src/common/misc/Hr/Hr'
 import Form from 'src/common/formElements/Form/Form'
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
 import useFormHandler from 'src/libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
 import Button from 'src/common/formElements/Button/Button'
-import messages from '../messages'
+import messages from '../../messages'
 import {
-    useGetAnotherTemplate,
+    // useGetAnotherTemplate,
     useGetDeleteTemplateVisibilityStatus,
     useGetSubmitButtonText
-} from './IncFilesTemplateForm-func'
+} from './ComponentForm-func'
 import useGetDeleteTemplate from './deleteTemplate'
 
-export default function IncFilesTemplateForm() {
+export default function ComponentForm() {
 
     // id выделенного шаблона подключаемых файлов
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    // const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'incFilesTemplate')
+    const fh = useFormHandler(getFormConfig(lang), 'component')
     // Изменение данных формы при выделении другого шаблона подключаемых файлов
-    useGetAnotherTemplate(fh.formState, fh.setFormState)
+    // useGetAnotherTemplate(fh.formState, fh.setFormState)
 
     // Текст на кнопке отправки
     const submitButtonText = useGetSubmitButtonText(lang)
 
     // Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,
     // поэтому ничего не отрисовывать.
-    if (currentTemplateId === null) return null
+    // if (currentTemplateId === null) return null
 
     return (
-        <Form name='incFilesTemplate' formHandlers={fh.formHandlers}>
+        <Form name='component' formHandlers={fh.formHandlers}>
             <Wrapper>
                 <TextInput
-                    label={ messages.IncFilesTemplateSection.templateNameInput[lang] }
+                    label={messages.ComponentTemplateForm.componentNameInput[lang]}
                     name='name'
                     value={fh.fields.name.value[0]}
                     onChange={fh.onChangeFieldHandler}
-                    placeholder={messages.IncFilesTemplateSection.templateNamePlaceholder[lang]}
+                    placeholder={messages.ComponentTemplateForm.componentNamePlaceholder[lang]}
                     error={fh.fields.name.data.error}
                     disabled={fh.fields.name.data.disabled}
                 />
             </Wrapper>
             <Wrapper t={15}>
                 <TextInput
-                    label={ messages.IncFilesTemplateSection.headInput[lang] }
+                    label={ messages.ComponentTemplateForm.componentCodeInput[lang] }
                     inputType='textarea'
-                    name='head'
-                    value={fh.fields.head.value[0]}
+                    name='code'
+                    value={fh.fields.code.value[0]}
                     onChange={fh.onChangeFieldHandler}
-                    error={fh.fields.head.data.error}
-                    disabled={fh.fields.head.data.disabled}
-                />
-            </Wrapper>
-            <Wrapper t={15}>
-                <TextInput
-                    label={ messages.IncFilesTemplateSection.bodyInput[lang] }
-                    inputType='textarea'
-                    name='body'
-                    value={fh.fields.body.value[0]}
-                    onChange={fh.onChangeFieldHandler}
-                    error={fh.fields.body.data.error}
-                    disabled={fh.fields.body.data.disabled}
+                    error={fh.fields.code.data.error}
+                    disabled={fh.fields.code.data.disabled}
                 />
             </Wrapper>
             <Wrapper t={15}>
@@ -89,7 +78,7 @@ export default function IncFilesTemplateForm() {
     )
 }
 
-/** Кнопка удаления шаблона подключаемых файлов */
+/** Кнопка удаления шаблона компонента */
 function DeleteTemplateButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -104,7 +93,7 @@ function DeleteTemplateButton() {
     return (
         <Button
             type='button'
-            text={messages.IncFilesTemplateSection.deleteSiteBtnText[lang]}
+            text={messages.ComponentTemplateForm.deleteComponentBtnText[lang]}
             icon='btnSignTrash'
             onClick={openDeleteTemplateConfirmation}
         />

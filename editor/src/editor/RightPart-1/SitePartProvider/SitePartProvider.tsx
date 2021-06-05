@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import SiteSection from '../SiteSection/SiteSection'
 import {AppState} from 'store/rootReducer'
@@ -7,13 +7,14 @@ import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFiles
 import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
 import ComponentsList from '../ComponentsList/ComponentsList'
 import messages from '../messages'
+import ComponentsFormProvider from '../ComponentForms/ComponentsFormProvider/ComponentsFormProvider'
 
 
 /**
  * Компонент возвращает компоненты, которые должны быть показаны в правой части выбранного сайта
  * в зависимости от выбранной вкладки
  */
-export default function SitePartProvider() {
+export default function SitePartProvider(): ReactElement {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -22,12 +23,12 @@ export default function SitePartProvider() {
     const { rightMainTab } = useSelector((store: AppState) => store.sites)
 
     // Возвращаемые компоненты
-    const [partComponents, setPartComponents] = useState(<></>)
+    const [partComponents, setPartComponents] = useState<ReactElement>(null)
 
     useEffect(function () {
 
         // Составление массива из четырёх элементов. Элементу, который соответствует вкладке, задаётся видимость.
-        const parts = [0, 1, 2, 3].map((num) => {
+        const parts: ReactNode = [0, 1, 2, 3].map((num) => {
             if (num === 0) {
                 return (
                     <HeaderPage headerText={messages.Tabs.sites[lang]} display={num === rightMainTab} key={num}>
@@ -50,7 +51,7 @@ export default function SitePartProvider() {
                 return (
                     <HeaderPage headerText={messages.Tabs.components[lang]} display={num === rightMainTab} key={num}>
                         <ComponentsList />
-                        <p>Шаблоны компонентов</p>
+                        <ComponentsFormProvider />
                     </HeaderPage>
                 )
             }

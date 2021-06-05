@@ -2,10 +2,13 @@ import {SyntheticEvent, useCallback} from 'react'
 import FilesTreeType from '../types'
 import {makeCN} from 'utils/StringUtils'
 import {
+    setItems,
     addNewItem,
     getOpenedFoldersUuid,
-    toggleFolder
-} from '../FilesTree/manageStateDataFunc'
+    toggleFolder,
+    deleteItem,
+    selectItem
+} from '../StoreManage/manageState'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -20,7 +23,7 @@ export function useMarkItemElemWhenItHovered() {
 
     return useCallback(function (event: SyntheticEvent): void {
         const $target = <HTMLElement>event.target
-        const $folder = $target.closest('[data-ft-item]').querySelector('[data-ft-inner-folder]')
+        const $folder = $target.closest('[data-ft-item]').querySelector('[data-ft-inner]')
 
         if (!$target || !$folder) return
 
@@ -40,78 +43,84 @@ export function useMarkItemElemWhenItHovered() {
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
+ * Если передан файл, то возвращает классы для невидимого элемента.
  * @param {String} CN — класс компонента
- * @param {Object} folderData — данные папки
+ * @param {Object} itemData — данные папки или файла
  */
-export function getTriangleBtnClasses(CN: string, folderData: FilesTreeType.Item) {
-    const classes  = [`${CN}__btn`, `${CN}__btn-triangle`]
+export function getTriangleBtnClasses(CN: string, itemData: FilesTreeType.Item) {
 
-    // Если папка открыта
-    if (folderData.open) {
-        classes.push(`${CN}__btn-triangle--open`)
+    if (itemData.type === 'file') {
+        return `${CN}__btn-triangle--for-file`
     }
+    else if (itemData.type === 'folder') {
+        const classes  = [`${CN}__btn`, `${CN}__btn-triangle`]
 
-    // Если в папке нет данных, то сделать кнопку невидимой
-    if (!folderData.content || !folderData.content.length) {
-        classes.push(`${CN}__btn-triangle--invisible`)
+        // Если папка открыта
+        if (itemData.open) {
+            classes.push(`${CN}__btn-triangle--open`)
+        }
+
+        // Если в папке нет данных, то сделать кнопку невидимой
+        if (!itemData.content || !itemData.content.length) {
+            classes.push(`${CN}__btn-triangle--invisible`)
+        }
+
+        return makeCN(classes)
     }
-
-    return makeCN(classes)
 }
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
  * @param {String} CN — класс компонента
- * @param {Object} folderData — данные папки
- * @param {String} activeItemId — Uuid выделенной папки или файла.
+ * @param {Object} itemData — данные папки
  */
-export function getFolderInnerWrapperClasses(
-    CN: string, folderData: FilesTreeType.Item, activeItemId: FilesTreeType.UuId
+export function getInnerWrapperClasses(
+    CN: string, itemData: FilesTreeType.Item
 ) {
     const classes  = [`${CN}__inner`]
 
     // Добавить обводку если нужно показать метку inside
-    if (folderData.placeMark === 'inside') {
+    if (itemData.placeMark === 'inside') {
         classes.push(`${CN}__inner-round-flash`)
     }
 
     // Добавить дополнительный класс если это выделенная папка
-    if (folderData.uuid === activeItemId) {
+    if (itemData.active) {
         classes.push(`${CN}__inner-active`)
     }
 
     return makeCN(classes)
 }
 
+
 /**
  * Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
  * @param {String} folderId — id папки которую нужно свернуть/развернуть
  * @param {Array} items — массив с данными по папкам и файлам
- * @param {Function} setItems — функция устанавливающая новые данные в массив папок и файлов
- * @param {Object} out — с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
     folderId: FilesTreeType.UuId,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn,
-    out: FilesTreeType.Out
+    after: FilesTreeType.After
 ) {
     return useCallback(function (e) {
         e.stopPropagation()
 
+        // Свернуть/развернуть папку и возвратить новый массив папок и файлов
         const newItems = toggleFolder(items, folderId)
 
         // Запустить функцию, переданную в аргументах FilesTree,
         // которая должна запускаться при разворачивании/сворачивании папки
         // и передать массив открытых папок
-        if (out.collapseFolder) {
+        if (after.collapseFolder) {
             // Получить uuid раскрытых папок
             const openedFoldersUuid = getOpenedFoldersUuid(newItems)
-            out.collapseFolder(openedFoldersUuid)
+            after.collapseFolder(openedFoldersUuid)
         }
 
         if (newItems) setItems(newItems)
-    }, [items, folderId, setItems])
+    }, [items, folderId])
 }
 
 /**
@@ -120,87 +129,102 @@ export function useGetToggleFolder(
  * @param {String} newItemType — тип нового элемента
  * @param {Object} folderData — данные папки в которой нужно добавить новую папку или файл
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Function} setItems — функция устанавливающая новые данные в массив папок и файлов
- * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
- * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function createNewItem(
-    e: any,
+    e: SyntheticEvent,
     newItemType: FilesTreeType.ItemType,
     folderData: null | FilesTreeType.Item,
     items: FilesTreeType.Items,
-    setItems: FilesTreeType.SetItemsFn,
-    out: FilesTreeType.Out,
-    setActiveItemId: FilesTreeType.SetActiveItemIdFn
+    after: FilesTreeType.After,
 ) {
     e.stopPropagation()
 
     // Добавить новую папку или файл и возвратить новый элемент и новое Состояние
-    const result = addNewItem(newItemType, folderData, items, out, setActiveItemId)
+    const result = addNewItem(newItemType, folderData, items, after)
 
-    // Если добавили файл, то запустить переданную функцию,
-    // которая должна быть запущена после добавления файла
+    // Если добавили файл...
     if(newItemType === 'file') {
-        if (out.afterAddingNewFile) {
-            out.afterAddingNewFile(result.newItem)
+        // Запустить функцию, которая должна быть запущена после добавления файла
+        if (after.addingNewItem) {
+            after.addingNewItem(result.newState, result.newItem)
         }
 
         // Если при добавлении файла папка была свёрнута,
         // то после добавления она автоматически раскрывается, поэтому запущу функцию,
         // которая должна быть запущена после раскрытия/скрытия папок
-        if (out.collapseFolder) {
+        if (after.collapseFolder) {
             const openedFoldersUuid = getOpenedFoldersUuid(result.newState)
-            out.collapseFolder(openedFoldersUuid)
+            after.collapseFolder(openedFoldersUuid)
         }
     }
 
-    // Запустить функцию, которая должна быть запущена после изменения дерева файлов и папок
-    if (out.afterChangingTree) {
-        out.afterChangingTree(result.newState)
+    // Запустить функцию, которая должна быть запущена после изменения структуры папок
+    if (after.changingTree) {
+        after.changingTree(result.newState)
     }
 
-    // Сразу перейти к созданному файлу сделав его текущим
-    setActiveItemId(result.newItem.uuid)
-    // Запустить переданную функцию, которая должна запускаться
-    // когда щёлкают по папке или файлу (делают его текущим)
-    if (out.onItemClick) out.onItemClick(result.newItem)
+    // Сделаю новый элемент текущим
+    const {newItem, newItems} = selectItem(result.newState, result.newItem.uuid)
+
+    // Запустить функцию, которая должна быть запущена после выделения элемента
+    if (after.selectItem) {
+        after.selectItem(newItem)
+    }
 
     // Обновить Состояние списка папок
-    setItems(result.newState)
+    setItems(newItems)
+}
+
+/**
+ * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
+ * @param {Object} e — объект события
+ * @param {String} itemId — id папки или файла, которую нужно удалить
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ */
+export function removeItem(
+    e: null | SyntheticEvent,
+    items: FilesTreeType.Items,
+    itemId: FilesTreeType.UuId,
+    after?: FilesTreeType.After,
+) {
+    if (e) e.stopPropagation()
+
+    // Удалить переданный элемент и возвратить новый список папок и файлов
+    const newItems = deleteItem(items, itemId)
+
+    // Запустить функцию, которая должна быть запущена после удаления папки или файла
+    if (after && after.deleteItem) {
+        after.deleteItem(newItems)
+    }
+
+    // Обновить Состояние списка папок
+    setItems(newItems)
 }
 
 
 /**
- * Функция возвращает классы кнопки сворачивания/разворачивания папки.
- * @param {String} CN — класс компонента
- * @param {Object} folderData — данные папки
- * @param {String} activeItemId — Uuid выделенной папки или файла.
+ * Хук возвращает обработчик щелчка по папке или файлу.
+ * В местное состояние ставит uuid этой папки или файла.
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Object} itemData — данные папки или файла.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function getFileInnerWrapperClasses(
-    CN: string, folderData: FilesTreeType.Item, activeItemId: FilesTreeType.UuId
-) {
-    const classes  = [`${CN}__inner`]
-
-    // Добавить дополнительный класс если это выделенная папка
-    if (folderData.uuid === activeItemId) {
-        classes.push(`${CN}__inner-active`)
-    }
-
-    return makeCN(classes)
-}
-
-
-
 export function useGetOnClickHandler(
-    itemData: FilesTreeType.Item, setActiveItemId: FilesTreeType.SetActiveItemIdFn, out: FilesTreeType.Out
+    items: FilesTreeType.Items,
+    itemData: FilesTreeType.Item, after: FilesTreeType.After
 ) {
     return useCallback(function (e) {
-        // Поставить текущий uuid в качестве активного в местрое Состояние
-        setActiveItemId(itemData.uuid)
+        // Поставить текущий uuid в качестве активного
+        const {newItem, newItems} = selectItem(items, itemData.uuid)
 
-        // Запустить функцию переданную в FilesTree в качестве атрибута
-        if (out.onItemClick) {
-            out.onItemClick(itemData)
+        // Запустить функцию, которая должна быть запущена после выделения элемента
+        if (after.selectItem) {
+            after.selectItem(newItem)
         }
-    }, [itemData, setActiveItemId, out])
+
+        // Обновить Состояние списка папок
+        setItems(newItems)
+    }, [itemData, after])
 }

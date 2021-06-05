@@ -138,8 +138,8 @@ const messages: messagesType = {
             rus: 'Удалить'
         },
     },
-    // Содержимое вкладки «Шаблоны подключаемых файлов»
-    OrderComponentsSection: {
+    // Структура папок и файлов шаблонов компонентов
+    FoldersComponentsSection: {
         createNewFolderBth: {
             eng: 'New folder',
             rus: 'Новая папка'
@@ -147,6 +147,64 @@ const messages: messagesType = {
         createNewFileBth: {
             eng: 'New component',
             rus: 'Новый компонент'
+        },
+    },
+    // Форма редактирования выбранной папки шаблона компонента
+    ComponentFolderForm: {
+        folderNameInput: {
+            eng: 'Component name',
+            rus: 'Название компонента'
+        },
+        submitBtnTextSave: {
+            eng: 'Save',
+            rus: 'Сохранить'
+        },
+        deleteFolderBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        formNameInputRequired: {
+            eng: 'The folder name cannot be empty',
+            rus: 'Название папки не может быть пустым'
+        },
+        deleteFolderConfirmationTextInModal: {
+            eng: 'Are you sure you want to delete the folder with the component templates',
+            rus: 'Вы уверены, что хотите удалить папку с шаблонами компонентов?'
+        },
+        closeDeleteFolderModalBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteFolderBtnInModal: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+    },
+    // Форма редактирования выбранного шаблона компонента
+    ComponentTemplateForm: {
+        componentNameInput: {
+            eng: 'Component name',
+            rus: 'Название компонента'
+        },
+        componentNamePlaceholder: {
+            eng: 'Banner, for example',
+            rus: 'Например: Баннер'
+        },
+        componentCodeInput: {
+            eng: 'Markup',
+            rus: 'Разметка'
+        },
+        submitBtnTextNew: {
+            eng: 'Create',
+            rus: 'Создать'
+        },
+        submitBtnTextSave: {
+            eng: 'Save',
+            rus: 'Сохранить'
+        },
+        deleteComponentBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
         },
     },
 }

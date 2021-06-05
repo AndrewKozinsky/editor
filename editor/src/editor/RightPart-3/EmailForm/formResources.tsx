@@ -11,6 +11,7 @@ import store from '../../../store/store'
 
 
 // Объект настройки useFormHandler
+// * @param {String} lang — язык интерфейса
 export default function getFormConfig(
     lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormConfig {

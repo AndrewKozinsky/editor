@@ -1,7 +1,12 @@
 //@ts-ignore
+import {createEvent} from 'effector'
+//@ts-ignore
 import { v4 as uuid } from 'uuid'
 import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import FilesTreeType from '../types'
+
+// Установщик нового Состояния с папками и файлами
+export const setItems = createEvent()
 
 
 /**
@@ -71,7 +76,7 @@ export function showPlaceMark(
     place: 'after' | 'inside' | 'before'
 ) {
     // Стереть имеющиеся метки
-    const itemsCopy = erasePlaceMarks(items)
+    const itemsCopy = erasePropInItems(items, 'placeMark')
 
     // Получение папки/файла с заданным идентификатором
     const item = getItemDataById(itemsCopy, itemId)
@@ -89,14 +94,16 @@ export function showPlaceMark(
  * Рекурсивная функция проходит по всем элементам массива items и у каждого элемента
  * удаляет свойство placeMark где написана позиция на которой должен быть подсвечивающая линия
  * @param {Array} items — массив данных по папкам и файлам
+ * @param {String} propName — имя свойства, значение которого нужно удалить
  */
-function erasePlaceMarks(items: FilesTreeType.Items) {
+function erasePropInItems(items: FilesTreeType.Items, propName: string) {
     return items.map(item => {
         const newItem = {...item}
-        delete newItem.placeMark
+        //@ts-ignore
+        delete newItem[propName]
 
         if (newItem.content) {
-            newItem.content = erasePlaceMarks(newItem.content)
+            newItem.content = erasePropInItems(newItem.content, propName)
         }
 
         return  newItem
@@ -128,7 +135,7 @@ export function moveItemTo(
     itemsCopy = addItem(itemsCopy, movedItem, anchorItemId, position)
 
     // Стереть имеющиеся метки и возвратить новый массив папок и файлов
-    return erasePlaceMarks(itemsCopy)
+    return erasePropInItems(itemsCopy, 'placeMark')
 }
 
 /**
@@ -136,7 +143,7 @@ export function moveItemTo(
  * @param {Array} items — массив папок и файлов
  * @param {String} itemId — id папки или файла, который нужно найти и удалить
  */
-function deleteItem(items: FilesTreeType.Items, itemId: string) {
+export function deleteItem(items: FilesTreeType.Items, itemId: string): FilesTreeType.Items {
     // Найду массив в котором находится удаляемая папка или файл
     let itemsArr = getParentArray(items, itemId)
     if (!itemsArr) return
@@ -204,7 +211,7 @@ function addItem(
  * @param {Array} items — массив папок и файлов
  * @param {String} itemId — id папки или файла у которого нужно найти родительскую папку
  */
-export function getParentArray(items: FilesTreeType.Items, itemId: string): null | FilesTreeType.Items {
+export function getParentArray(items: FilesTreeType.Items, itemId: FilesTreeType.UuId): null | FilesTreeType.Items {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
@@ -223,26 +230,23 @@ export function getParentArray(items: FilesTreeType.Items, itemId: string): null
 /**
  * Функция создаёт новую пустую папку или файл
  * @param {String} type — тип создаваемого элемента
- * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  * @param {Array} items — массив папок и файлов
- * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
  */
 export function createNewItem(
     type: FilesTreeType.ItemType,
-    out: FilesTreeType.Out,
+    after: FilesTreeType.After,
     items: FilesTreeType.Items,
-    setActiveItemId: FilesTreeType.SetActiveItemIdFn
 ) {
     // Идентификатор нового элемента. Решил папке давать номера по-порядку,
     // а для файлов использовать сгенерированный через uuid().
     let id = type === 'folder'
         ? getFolderNextId(items)
         : uuid(items)
-    // console.log(id)
 
     let name = type === 'folder'
-        ? out.newFolderName
-        : out.newFileName
+        ? after.newFolderName
+        : after.newFileName
 
     const newItem: FilesTreeType.Item = {
         uuid: id,
@@ -288,6 +292,7 @@ export function prepareItemsToSaveInServer(items: FilesTreeType.Items) {
         const newItem = {...item}
         delete newItem.placeMark
         delete newItem.open
+        delete newItem.active
 
         if (newItem.content) {
             newItem.content = prepareItemsToSaveInServer(newItem.content)
@@ -298,19 +303,17 @@ export function prepareItemsToSaveInServer(items: FilesTreeType.Items) {
 }
 
 /**
- *
+ * Функция добавляет новую папку или файл в массив папок и файлов
  * @param {String} newItemType — тип нового элемента
  * @param {Object} folderData — данные папки
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Object} out — объект с различными свойствами и методами переданными в параметрах FilesTree.
- * @param {Function} setActiveItemId — функция изменяющая uuid выделенной папки или файла.
+ * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function addNewItem(
     newItemType: FilesTreeType.ItemType,
     folderData: null | FilesTreeType.Item,
     items: FilesTreeType.Items,
-    out: FilesTreeType.Out,
-    setActiveItemId: FilesTreeType.SetActiveItemIdFn,
+    after: FilesTreeType.After,
 ) {
     let newItem: FilesTreeType.Item
     let newState: FilesTreeType.Items
@@ -331,7 +334,7 @@ export function addNewItem(
         }
 
         // Поставить в него новый элемент
-        newItem = createNewItem(newItemType, out, items, setActiveItemId)
+        newItem = createNewItem(newItemType, after, items)
         folderDataCopy.content.unshift( newItem )
 
         // Создать новый массив всех папок и файлов с учётом изменений
@@ -340,10 +343,11 @@ export function addNewItem(
     // Если папка не передана, то поставить новый элемент в корень
     else {
         // Скопировать корневой массив
-        newState = [...items]
+        newState = []
+        if (items) newState = [...items]
 
         // Поставить в корневой массив новый элемент
-        newItem = createNewItem(newItemType, out, items, setActiveItemId)
+        newItem = createNewItem(newItemType, after, items)
         newState.unshift( newItem )
     }
 
@@ -371,4 +375,102 @@ export function getOpenedFoldersUuid(items: FilesTreeType.Items, arr: FilesTreeT
     })
 
     return arr
+}
+
+
+/**
+ * Функция возвращает максимальную глубину вложенности файлов
+ * @param {Array} items — массив с данными по папкам и файлам
+ */
+export function getMaxDeep(items: FilesTreeType.Items) {
+    let maxDeep = 0
+
+    function crawler(items: FilesTreeType.Items, prevDeep = -1) {
+        items.forEach((item: FilesTreeType.Item) => {
+            const currentDeep = prevDeep + 1
+            if (maxDeep < currentDeep) maxDeep = currentDeep
+
+            if (item.content) {
+                crawler(item.content, currentDeep)
+            }
+        })
+    }
+
+    if (items) {
+        crawler(items)
+    }
+
+    return maxDeep
+}
+
+
+/**
+ * Функция получает массив с данными по папкам и файлам
+ * и массив с идентификаторами папок, которые должны быть открыты,
+ * и формирует массив где в данных папок, которые должны быть открыты,
+ * ставит свойство open в true. Возвращает новый массив.
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Array} openFolderIds — id папок, которые должны быть изначально открыты
+ */
+export function addOpenPropToFolders(
+    items: FilesTreeType.Items, openFolderIds: FilesTreeType.UuIdArr
+): FilesTreeType.Items {
+    return items.map(item => {
+        const newItem: FilesTreeType.Item = {...item}
+
+        if (newItem.type === 'folder' && openFolderIds.includes(newItem.uuid)) {
+            newItem.open = true
+        }
+
+        if (newItem.content) {
+            newItem.content = addOpenPropToFolders(item.content, openFolderIds)
+        }
+
+        return newItem
+    })
+}
+
+/**
+ * Функция выделяет элемент с переданным uuid и возвращает новый массив папок и файлов.
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {String} itemId — uuid элемента, который должен быть выбран.
+ */
+export function selectItem(items: FilesTreeType.Items, itemId: FilesTreeType.UuId) {
+    // Уберу свойство active у всех элементов
+    const itemsCopy = erasePropInItems(items, 'active')
+
+    // Найду элемент, который нужно выделить
+    const item = getItemDataById(itemsCopy, itemId)
+
+    // Скопирую и поставлю выделяющее свойство
+    const itemCopy = {...item, active: true}
+
+    // Возвратить созданный элемент и обновлённый массив папок и файлов
+    return {
+        newItem: itemCopy,
+        newItems: makeImmutableCopy(itemsCopy, item, itemCopy)
+    }
+}
+
+/**
+ * Функция выделяет элемент с переданным uuid и возвращает новый массив папок и файлов.
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {String} itemId — id папки или файла, которую нужно выделить
+ * @param {String} newName — новое название папки или файла
+ */
+export function changeName(items: FilesTreeType.Items, itemId: FilesTreeType.UuId, newName: string) {
+    // Скопировать оригинальный массив
+    const itemsCopy = [...items]
+
+    // Найду элемент, у которого нужно изменить имя
+    const item = getItemDataById(itemsCopy, itemId)
+
+    // Скопирую и поставлю переданное имя
+    const itemCopy = {...item, name: newName}
+
+    // Возвратить созданный элемент и обновлённый массив папок и файлов
+    return {
+        newItem: itemCopy,
+        newItems: makeImmutableCopy(itemsCopy, item, itemCopy)
+    }
 }

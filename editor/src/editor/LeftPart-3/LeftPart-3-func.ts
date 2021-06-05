@@ -25,7 +25,7 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
 /**
  * Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки»
  * @param {Object} dispatch
- * @param {String} lang
+ * @param {String} lang — язык интерфейса
  */
 function getItemsListProps(dispatch: MiscTypes.AppDispatch, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
     return [

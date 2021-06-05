@@ -10,6 +10,7 @@ namespace FilesTreeType {
         placeMark?: PlaceMark
         name: string // Имя файла или папки
         open?: boolean // Открыта ли папка (если папка)
+        active?: boolean // Выделен ли элемент
         content?: Items // Содержимое папки (если папка)
     }
 
@@ -28,36 +29,30 @@ namespace FilesTreeType {
     // inside — внутрь (только для папки)
     export type PlaceMark = null | 'before' | 'after' | 'inside'
 
-    // Функция устанавливающая новые данные в Состояние FilesTree
-    export type SetItemsFn = (items: Items) => void
-
-    // Функция устанавливающая uuid активной папки или файла в
-    export type SetActiveItemIdFn = (activeItemId: UuId) => void
-
-    // Функция запускаемая после создания новой папки
-    export type OutAfterAddingNewFileFn = (item: Item) => void
+    // Функция запускаемая после создания новой папки или файла
+    export type AfterAddingNewItemFn = (items: Items, item: Item) => void
 
     // Функция запускаемая после щелчка по папке или файлу
-    export type OutSelectItemFn = (item: Item) => void
+    export type AfterSelectItemFn = (item: Item) => void
 
     // Функция запускаемая после разворачивания/сворачивания папки
     // На вход получает массив идентификаторов раскрытых папок
-    export type OutCollapseFolderFn = (openUuIdArr: UuIdArr) => void
+    export type AfterCollapseFolderFn = (openUuIdArr: UuIdArr) => void
 
     // Функция запускаемая после изменения дерева папок и файлов
-    export type OutAfterChangingTreeFn = (items: Items) => void
+    export type AfterChangingTreeFn = (items: Items) => void
 
-    // Функция запускаемая после щелчка по папке или файлу
-    export type OutOnItemClick = (item: Item) => void
+    // Функция запускаемая после удаления папки или файла
+    export type AfterDeleteItem = (items: Items) => void
 
-    export type Out = {
+    export type After = {
         newFolderName?: string
         newFileName?: string
-        afterAddingNewFile: OutAfterAddingNewFileFn
-        selectItem: OutSelectItemFn
-        collapseFolder: OutCollapseFolderFn
-        afterChangingTree: OutAfterChangingTreeFn
-        onItemClick: OutOnItemClick
+        addingNewItem?: AfterAddingNewItemFn
+        selectItem?: AfterSelectItemFn
+        collapseFolder?: AfterCollapseFolderFn
+        changingTree?: AfterChangingTreeFn
+        deleteItem?: AfterDeleteItem
     }
 }
 
