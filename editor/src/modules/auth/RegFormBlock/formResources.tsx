@@ -111,7 +111,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                const response = await makeFetch(getApiUrl('signup'), options, lang)
+                const response = await makeFetch(getApiUrl('signup'), options)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)

@@ -4,8 +4,9 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Button from 'common/formElements/Button/Button'
 import messages from '../messages'
 import {AppState} from 'store/rootReducer'
-import useGetDeleteAccount from './deleteAccount'
 import useGetLogOut from './logOut'
+import useGetShowModal from 'utils/hooksUtils'
+import { ModalContent } from './deleteAccount'
 
 
 export default function UserAccountForm() {
@@ -14,7 +15,7 @@ export default function UserAccountForm() {
 
     // Хук возвращает функцию открывающую модальное окно
     // с подтверждением удаления учётной записи пользователя
-    const deleteAccount = useGetDeleteAccount()
+    const deleteAccount = useGetShowModal(<ModalContent />)
     // Хук возвращает функцию выводящую пользователя из учётной записи
     const logOut = useGetLogOut()
 

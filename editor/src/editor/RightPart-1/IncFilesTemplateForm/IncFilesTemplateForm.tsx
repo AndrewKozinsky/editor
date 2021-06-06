@@ -14,7 +14,8 @@ import {
     useGetDeleteTemplateVisibilityStatus,
     useGetSubmitButtonText
 } from './IncFilesTemplateForm-func'
-import useGetDeleteTemplate from './deleteTemplate'
+import useGetShowModal from '../../../utils/hooksUtils'
+import { ModalContent } from './deleteTemplate'
 
 export default function IncFilesTemplateForm() {
 
@@ -95,7 +96,7 @@ function DeleteTemplateButton() {
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
-    const openDeleteTemplateConfirmation = useGetDeleteTemplate()
+    const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)
 
     // Нужно ли показывать кнопку удаления сайта
     const isDeleteSiteButtonVisible = useGetDeleteTemplateVisibilityStatus()

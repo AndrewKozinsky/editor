@@ -7,23 +7,23 @@ import { AppState } from 'store/rootReducer'
 import {createStore} from 'effector'
 import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
 import {setItems} from 'libs/FilesTree/StoreManage/manageState'
+import FilesTreeType from 'libs/FilesTree/types'
 import {
     useGetFoldersFromServerAndPutInEffector,
     afterCollapseFolder,
     useGetOnItemClick,
     afterAddingNewItem,
     saveItemsOnServer,
+    afterDeleteItem
 } from './ComponentsList-func'
 import messages from '../messages'
-import FilesTreeType from 'libs/FilesTree/types'
 
 
-
+// Создание Хранилища Эффектора где будут содержаться данные по папкам шаблонов компонентов
 export const componentsTreeStore = createStore<null | FilesTreeType.Items>(null)
+// Добавление экшена изменнеия Хранилища
 componentsTreeStore
-    .on(setItems, (state: null | FilesTreeType.Items, items: null | FilesTreeType.Items) => {
-        return items
-    })
+    .on(setItems, (state: null | FilesTreeType.Items, items: null | FilesTreeType.Items) => items)
 
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
@@ -36,7 +36,7 @@ export default function ComponentsList() {
     // и установка в Эффектор
     useGetFoldersFromServerAndPutInEffector()
 
-    // Порядок из Эффектора
+    // Папки компонентов из Эффектора
     const items = useStore(componentsTreeStore)
 
     // Обработчик щелчка по папке или файлу
@@ -51,7 +51,7 @@ export default function ComponentsList() {
             afterChangingTree={saveItemsOnServer}
             afterCollapseFolder={afterCollapseFolder}
             afterSelectItem={onItemClick}
-            afterDeleteItem={saveItemsOnServer}
+            afterDeleteItem={afterDeleteItem}
         />
     )
 }

@@ -1,6 +1,7 @@
-import FilesTreeType from 'libs/FilesTree/types'
+import FilesTreeType from 'src/libs/FilesTree/types'
 
-const items: FilesTreeType.Items = [
+// Пример данных получаемых компонентов FilesTree
+const itemsDataExample: FilesTreeType.Items = [
     {
         uuid: '1',
         type: 'folder',
@@ -62,7 +63,7 @@ const items: FilesTreeType.Items = [
     },
 ]
 
-export default items
+export default itemsDataExample
 
 
 

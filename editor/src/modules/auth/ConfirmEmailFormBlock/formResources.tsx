@@ -82,7 +82,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 const options = { method: 'GET' }
                 const token = formDetails.state.fields.token.value[0]
                 const response = await makeFetch(
-                    getApiUrl('confirmEmail', token), options, lang
+                    getApiUrl('confirmEmail', token), options
                 )
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку

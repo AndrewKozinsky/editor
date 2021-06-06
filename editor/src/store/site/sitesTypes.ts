@@ -31,6 +31,8 @@ namespace StoreSitesTypes {
     export type CurrentCompItemId = null | FilesTreeType.UuId
     // Тип выбранного шаблона компонента (папка или компонент)
     export type CurrentCompItemType = null | FilesTreeType.ItemType
+    // Строка с кодом выбранного шаблона компонента
+    export type ComponentCode = null | string
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -74,8 +76,9 @@ namespace StoreSitesTypes {
     export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | FilesTreeType.UuId,
+            id: null | FilesTreeType.UuId
             type: null | FilesTreeType.ItemType
+            code?: StoreSitesTypes.ComponentCode
         }
     }
 

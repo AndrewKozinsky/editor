@@ -43,7 +43,7 @@ namespace FilesTreeType {
     export type AfterChangingTreeFn = (items: Items) => void
 
     // Функция запускаемая после удаления папки или файла
-    export type AfterDeleteItem = (items: Items) => void
+    export type AfterDeleteItem = (items: Items, deletedItemUuid: UuId) => void
 
     export type After = {
         newFolderName?: string

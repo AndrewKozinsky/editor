@@ -53,7 +53,10 @@ export function useGetFoldersFromServerAndPutInEffector() {
         let content = JSON.parse(response.data.folders.content)
 
         // Открыть папки, которые должны быть открытыми
-        content = addOpenPropToFolders(content, getOpenedFoldersUuId())
+        const openedFoldersUuIds = getOpenedFoldersUuId()
+        if (openedFoldersUuIds) {
+            content = addOpenPropToFolders(content, openedFoldersUuIds)
+        }
 
         // Выделить элемент, который должен быть выделен
         content = selectItem(content, currentCompItemId).newItems
@@ -80,14 +83,26 @@ export async function saveItemsOnServer(items: FilesTreeType.Items) {
         body: JSON.stringify({content: jsonItems})
     }
 
-    // id выбранного сайта и язык интерфейса
+    // id выбранного сайта
     const siteId = store.getState().sites.currentSiteId
-    const lang = store.getState().settings.editorLanguage
 
     // Сохранить данные на сервере
     await makeFetch(
-        getApiUrl('componentsFolders', siteId), options, lang
+        getApiUrl('componentsFolders', siteId), options
     )
+}
+
+/**
+ * Функция запускаемая после удаления папки или компонента
+ * @param {Array} items — массив данных по папкам и файлам.
+ * @param {String} deletedItemUuid — uuid удалённого элемента
+ */
+export function afterDeleteItem(items: FilesTreeType.Items, deletedItemUuid: FilesTreeType.UuId) {
+    // Обнулить данные выделенного элемента в Хранилище
+    store.dispatch( actions.sites.setCurrentComp(null, null) )
+
+    // Сохранить данные на сервере
+    saveItemsOnServer(items)
 }
 
 /**
@@ -97,7 +112,6 @@ export async function saveItemsOnServer(items: FilesTreeType.Items) {
  */
 export async function afterAddingNewItem(items: FilesTreeType.Items, item: FilesTreeType.Item) {
     const siteId = store.getState().sites.currentSiteId
-    const lang = store.getState().settings.editorLanguage
 
     // Параметры запроса
     const options = {
@@ -111,7 +125,7 @@ export async function afterAddingNewItem(items: FilesTreeType.Items, item: Files
 
     // Сохранить данные на сервере
     await makeFetch(
-        getApiUrl('component'), options, lang
+        getApiUrl('component'), options
     )
 }
 

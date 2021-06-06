@@ -9,7 +9,6 @@ import Form from 'common/formElements/Form/Form'
 import Select from 'common/formElements/Select/Select'
 import Hr from 'common/misc/Hr/Hr'
 import getFormConfig from './formResources'
-import useGetDeleteSite from './deleteSite'
 import messages from '../messages'
 import {
     useGetAnotherSite,
@@ -18,6 +17,8 @@ import {
     useManageTemplatesSelect
 } from './SiteSection-func'
 import './SiteSection.scss'
+import { ModalContent } from './deleteSite'
+import useGetShowModal from 'utils/hooksUtils'
 
 
 type SiteSectionPropType = {
@@ -92,7 +93,7 @@ function DeleteSiteButton() {
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
-    const openDeleteSiteConfirmation = useGetDeleteSite()
+    const openDeleteSiteConfirmation = useGetShowModal(<ModalContent />)
 
     // Нужно ли показывать кнопку удаления сайта
     const isDeleteSiteButtonVisible = useGetDeleteSiteVisibilityStatus()

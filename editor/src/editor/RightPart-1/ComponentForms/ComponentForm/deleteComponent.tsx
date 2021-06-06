@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {ReactElement, useCallback, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
 import {useStore} from 'effector-react'
@@ -7,10 +7,15 @@ import actions from 'store/rootAction'
 import messages from '../../messages'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
-import Button from 'src/common/formElements/Button/Button'
+import Button from 'common/formElements/Button/Button'
 import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {saveItemsOnServer} from '../../ComponentsList/ComponentsList-func'
+import {makeFetch} from 'requests/fetch'
+import getApiUrl from 'requests/apiUrls'
+
+
+
 
 
 export function ModalContent() {
@@ -21,17 +26,26 @@ export function ModalContent() {
 
     // Массив папок и файлов из Хранилища
     const items = useStore(componentsTreeStore)
+
     // uuid выделенной папки
     const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
 
     // Функция удаляющая выделенную папку
-    const deleteFolder = useCallback(function () {
-        // Удалить папку из Хранилища и возвратить новый массив
+    const deleteComponent = useCallback(function () {
+        // Удалить компонент из Хранилища и возвратить новый массив
         const newItems = filesTreePublicMethods.deleteItem(items, currentCompItemId)
         // Сохранить новые данные в Хранилище
         filesTreePublicMethods.setItems(newItems)
         // Сохранить новый массив папок и файлов на сервере
         saveItemsOnServer(newItems)
+
+        // Удалить шаблон компонента на сервере
+        const options = { method: 'DELETE' }
+        const response = makeFetch(
+            // id сайта передаётся в параметре siteId
+            getApiUrl('component', currentCompItemId),
+            options
+        )
 
         // Обнулить свойство указывающее на uuid активного пункта в папках и шаблонах компонентах
         // потому что папка удалена
@@ -43,19 +57,19 @@ export function ModalContent() {
 
     return (
         <>
-            <p>{messages.ComponentFolderForm.deleteFolderConfirmationTextInModal[lang]}</p>
+            <p>{messages.ComponentTemplateForm.deleteComponentConfirmationTextInModal[lang]}</p>
             <Wrapper t={10}>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button
-                    text={messages.ComponentFolderForm.closeDeleteFolderModalBtn[lang]}
+                    text={messages.ComponentTemplateForm.closeDeleteComponentModalBtn[lang]}
                     onClick={() => dispatch(actions.modal.closeModal())}
                 />
                 <Button
-                    text={messages.ComponentFolderForm.deleteFolderBtnInModal[lang]}
+                    text={messages.ComponentTemplateForm.deleteComponentBtnInModal[lang]}
                     color='accent'
-                    onClick={deleteFolder}
+                    onClick={deleteComponent}
                 />
             </Wrapper>
         </>

@@ -9,35 +9,7 @@ import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
 
 
-// Хук возвращает функцию удаляющая учётную запись пользователя
-export default function useGetDeleteAccount() {
-    const dispatch = useDispatch()
-
-    // Открыто ли модальное окно
-    const isOpen = useSelector((store: AppState) => store.modal.isOpen)
-
-    // Должно ли быть открыто модальное окно подтверждения изменения почты
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
-    // Следить за моментом когда был запрос на открытие окна
-    useEffect(function () {
-        if (isModalOpen) {
-            // Открыть окно подтверждения изменения почтового адреса
-            dispatch(actions.modal.openModal(
-                <ModalContent />
-            ))
-        }
-
-        // Если модальное окно закрыли, то и тут поменять статус
-        // потому что без этого я не смогу его открыть более одного раза
-        if (!isOpen && isModalOpen) setIsModalOpen(false)
-    }, [isModalOpen])
-
-    return () => setIsModalOpen(true)
-}
-
-
-function ModalContent() {
+export function ModalContent() {
     const dispatch = useDispatch()
 
     // Язык интерфейса
@@ -65,7 +37,7 @@ function ModalContent() {
     return (
         <>
             <p>{messages.UserAccountSection.confirmModalText[lang]}</p>
-            <Wrapper t={10} align='right'>
+            <Wrapper t={10}>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>

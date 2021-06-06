@@ -196,7 +196,7 @@ export function removeItem(
 
     // Запустить функцию, которая должна быть запущена после удаления папки или файла
     if (after && after.deleteItem) {
-        after.deleteItem(newItems)
+        after.deleteItem(newItems, itemId)
     }
 
     // Обновить Состояние списка папок

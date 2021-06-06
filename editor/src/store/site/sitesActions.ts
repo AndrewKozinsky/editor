@@ -16,9 +16,7 @@ const sitesActions = {
             const options = { method: 'GET'}
 
             // Запрос и ответ от сервера
-            const response = await makeFetch(
-                getApiUrl('sites'), options, getState().settings.editorLanguage
-            )
+            const response = await makeFetch(getApiUrl('sites'), options)
 
             if (!response || response.status !== 'success') return
 
@@ -78,8 +76,7 @@ const sitesActions = {
             // Запрос и ответ от сервера
             const response = await makeFetch(
                 // id сайта передаётся в параметре siteId
-                getApiUrl('incFilesTemplates') + '?' + new URLSearchParams({siteId}),
-                options, getState().settings.editorLanguage
+                getApiUrl('incFilesTemplates') + '?' + new URLSearchParams({siteId}), options
             )
 
             if (!response || response.status !== 'success') return
@@ -108,6 +105,33 @@ const sitesActions = {
         }
     },
 
+    // Загрузка с сервера шаблона компонента и установка в Хранилище
+    requestComponentTemplate() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // uuid выбранного шаблона компонента, данные которого нужно скачать
+            const {currentCompItemId} = store.getState().sites.componentsSection
+
+            // Если uuid компонента не передан, то обнулить данные компонета в Хранилище
+            if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
+
+            // Параметры запроса
+            const options = { method: 'GET' }
+
+            // Запрос и ответ от сервера
+            const response = await makeFetch(
+                // id сайта передаётся в параметре siteId
+                getApiUrl('component', currentCompItemId), options
+            )
+
+            if (!response || response.status !== 'success') return
+            const compData = response.data.component
+
+            // Установка данных шаблона компонента в Хранилище
+            dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData.code) )
+        }
+    },
+
     // Установка id выбранного шаблона подключаемых шаблонов
     setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
         return {
@@ -117,12 +141,17 @@ const sitesActions = {
     },
 
     // Установка id и типа выбранного шаблона компонента
-    setCurrentComp(id: null | FilesTreeType.UuId, type: null | FilesTreeType.ItemType): StoreSitesTypes.SetCurrentCompAction {
+    setCurrentComp(
+        id: null | FilesTreeType.UuId,
+        type: null | FilesTreeType.ItemType,
+        code?: StoreSitesTypes.ComponentCode
+    ): StoreSitesTypes.SetCurrentCompAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP,
             payload: {
                 id,
-                type
+                type,
+                code
             }
         }
     },

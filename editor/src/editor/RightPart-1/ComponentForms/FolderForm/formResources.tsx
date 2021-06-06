@@ -6,7 +6,6 @@ import store from 'store/store'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-// import actions from 'store/rootAction'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 
@@ -78,36 +77,12 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 // Поставить новое Состояние формы
                 formDetails.setFormState(formState)
 
-
-                // Массив папок и файлов
-                const items = componentsTreeStore.getState()
-                // uuid выбранной папки
-                const currentFolderId = store.getState().sites.componentsSection.currentCompItemId
-                // uuid выбранной папки
-                const currentSiteId = store.getState().sites.currentSiteId
-
-                // Изменить название папки на введённое и обновить Хранилище папок
-
-                let result = filesTreePublicMethods.changeItemName(
-                    items,
-                    currentFolderId,
-                    formDetails.state.fields.name.value[0]
-                )
-
-                // Подготовить массив папок и файлов для сохранения на сервере
-                const itemsCopy = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
-
-                // Отправить данные на сервер...
-                const options = {
-                    method: 'PATCH',
-                    body: JSON.stringify(itemsCopy)
-                }
-                const response = await makeFetch(getApiUrl('componentsFolders', currentSiteId), options, lang)
-                console.log(response)
-
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
                 formDetails.setFormState(newFormState)
+
+                // Сохранить папки с компонентами на сервере и обновить их Состояние
+                saveItemsOnServer(formDetails)
             }
         }
     }
@@ -217,4 +192,42 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
+}
+
+
+
+
+/**
+ * Функция сохраняет папки с компонентами на сервере и обновить их Состояние
+ * @param {Object} formDetails — объект с данными и методами манипулирования формой
+ */
+function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+
+    // id текущего сайта
+    const currentSiteId = store.getState().sites.currentSiteId
+
+    // Массив папок и файлов из Хранилища
+    const items = componentsTreeStore.getState()
+
+    // id выбранной папки
+    const {currentCompItemId} = store.getState().sites.componentsSection
+
+    // Изменить название папки на введённое и обновить Хранилище папок
+    let result = filesTreePublicMethods.changeItemName(
+        items,
+        currentCompItemId,
+        formDetails.state.fields.name.value[0]
+    )
+    filesTreePublicMethods.setItems(result.newItems)
+
+    // Подготовить массив папок и файлов для сохранения на сервере
+    const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
+    const jsonItems = JSON.stringify(preparedItems)
+
+    // Отправить данные на сервер...
+    const options = {
+        method: 'PUT',
+        body: JSON.stringify({content: jsonItems})
+    }
+    makeFetch(getApiUrl('componentsFolders', currentSiteId), options)
 }

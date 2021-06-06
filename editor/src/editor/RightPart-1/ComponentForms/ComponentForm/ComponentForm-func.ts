@@ -1,11 +1,13 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
-// import StoreSitesTypes from 'src/store/site/sitesTypes'
-// import FHTypes from 'src/libs/formHandler/types'
-// import makeImmutableObj from 'src/libs/makeImmutableCopy/makeImmutableCopy'
-import StoreSettingsTypes from 'src/store/settings/settingsTypes'
-import messages from '../../messages'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+//@ts-ignore
+import {useStore} from 'effector-react'
+import { AppState } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import FHTypes from 'libs/formHandler/types'
+import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
+import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 
 /**
@@ -13,53 +15,51 @@ import messages from '../../messages'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-/*export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
-    // id текущего шаблона и массив шаблонов
-    const {currentTemplateId, templates} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+export function useGetAnotherComponent(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+    const dispatch = useDispatch()
 
+    // id текущего шаблона компонента
+    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
+
+    // Код шаблона компонента
+    const {currentCompCode} = useSelector((store: AppState) => store.sites.componentsSection)
+
+    // Массив папок и файлов из Хранилища
+    const items = useStore(componentsTreeStore)
+
+    // При выделении другого компонента скачать его данные и поставить в Хранилище
     useEffect(function () {
-        // Найти шаблон с указанным id
-        const template = templates.find((template: StoreSitesTypes.IncFilesTemplateType) => {
-            return template.id === currentTemplateId
-        })
+        // Сделать запрос на данные шаблона компонента на сервер и поставить в Хранилище
+        dispatch( actions.sites.requestComponentTemplate() )
+    }, [currentCompItemId])
 
-        // Поставить новые значения в поля...
-        let newFormState = changeField(formState, 'name', template)
-        newFormState = changeField(newFormState, 'head', template)
-        newFormState = changeField(newFormState, 'body', template)
+    // При изменении uuid или кода шаблона компонента поставить в форму новые данные
+    useEffect(function () {
+        if (!items || !currentCompItemId) return
 
-        // Если выделели новый шаблон, то на кнопке отправки поставить значёк Плюс.
-        // Если выделили существующий, то значёк Сохранения.
-        const submitBtn = formState.fields.submit
-        const newSubmitBtn = {...submitBtn}
-        newSubmitBtn.data.icon = 'btnSignAdd'
-        if (template) newSubmitBtn.data.icon = 'btnSignSave'
+        // Данные компонента из структуры папок
+        const compData = filesTreePublicMethods.getItemById(items, currentCompItemId)
+        if (!compData) return
 
-        // В данные формы поставить актуальный тип формы чтобы знать назначение формы:
-        // createTemplate если хотят создать новый шаблон
-        // или saveTemplate если хотят сохранить новые данные шаблона
-        const newFormData = {
-            ...formState.form.data,
-            formType: template ? 'saveTemplate' : 'createTemplate'
-        }
-
-        newFormState = makeImmutableObj(newFormState, formState.form.data, newFormData)
+        let newFormState = changeField(formState, 'name', compData.name)
+        newFormState = changeField(newFormState, 'code', currentCompCode)
 
         // Поставить новое состояние формы
         setFormState(newFormState)
-    }, [currentTemplateId, templates])
-}*/
+    }, [items, currentCompItemId, currentCompCode])
+}
+
 
 /**
  * Функция формирует новое значение поля формы по переданным данным
  * @param {Object} formState — объект состояния формы
  * @param {String} fieldName — имя изменяемого поля
- * @param {Object} template — данные о шаблоне
+ * @param {Object} value — новое значение поля
  */
-/*function changeField(
+function changeField(
     formState: FHTypes.FormState,
-    fieldName: 'name' | 'head' | 'body',
-    template: null | StoreSitesTypes.IncFilesTemplateType
+    fieldName: 'name' | 'code',
+    value: null | string
 ) {
     // Получение поля формы по имени
     const field = formState.fields[fieldName]
@@ -67,49 +67,11 @@ import messages from '../../messages'
     const newField = {...field}
     // Обнуление ошибки
     newField.data.error = null
-    // Занесение нового значения. Если в template ничего, то поставить пустое значение.
-    const val = template ? template[fieldName] : ''
+
+    // Занесение нового значения.
+    const val = value || ''
     newField.value = [val]
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}*/
-
-/**
- * Хук возвращает название кнопки отправки
- * @param {String} lang — язык интерфейса
- */
-export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) {
-    // id текущего шаблона
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
-    const [submitName, setSubmitName] = useState('')
-
-    useEffect(function () {
-        if (!currentCompItemId) {
-            setSubmitName(messages.ComponentTemplateForm.submitBtnTextNew[lang])
-        }
-        else {
-            setSubmitName(messages.ComponentTemplateForm.submitBtnTextSave[lang])
-        }
-    }, [currentCompItemId])
-
-    return submitName
-}
-
-
-/**
- * Функция возвращает булево значение нужно ли показывать кнопку удаления шаблона компонента.
- * Она видна только если выделен существующий шаблон компонента.
- */
-export function useGetDeleteTemplateVisibilityStatus() {
-    // id текущего шаблона компонента
-    const { currentCompItemId } = useSelector((store: AppState) => store.sites.componentsSection)
-    const [isVisible, setIsVisible] = useState(false)
-
-    useEffect(function () {
-        if (!currentCompItemId) setIsVisible(false)
-        else setIsVisible(true)
-    }, [currentCompItemId])
-
-    return isVisible
 }

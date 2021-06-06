@@ -101,7 +101,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                     method: 'POST',
                     body: JSON.stringify(formDetails.readyFieldValues)
                 }
-                const response = await makeFetch(getApiUrl('login'), options, lang)
+                const response = await makeFetch(getApiUrl('login'), options)
 
                 // Если успешно зашли, то поставить в Хранилище почту пользователя
                 if (response.status === 'success') {

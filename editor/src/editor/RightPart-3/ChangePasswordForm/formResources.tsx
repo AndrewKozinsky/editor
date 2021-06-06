@@ -112,7 +112,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                         newPasswordAgain: formDetails.readyFieldValues.newPasswordAgain
                     })
                 }
-                const response = await makeFetch(getApiUrl('changePassword'), options, lang)
+                const response = await makeFetch(getApiUrl('changePassword'), options)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)

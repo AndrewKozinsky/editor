@@ -255,7 +255,7 @@ async function createNewTemplate(
         method: 'POST',
         body: JSON.stringify(newTemplateData)
     }
-    const response = await makeFetch(getApiUrl('incFilesTemplates'), options, lang)
+    const response = await makeFetch(getApiUrl('incFilesTemplates'), options)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -304,7 +304,7 @@ async function updateTemplate(
         method: 'PATCH',
         body: JSON.stringify(templateData)
     }
-    const response = await makeFetch(getApiUrl('incFilesTemplate', currentTemplateId), options, lang)
+    const response = await makeFetch(getApiUrl('incFilesTemplate', currentTemplateId), options)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)

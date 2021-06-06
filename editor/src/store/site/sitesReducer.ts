@@ -8,10 +8,11 @@ export type SitesReducerType = {
     incFilesTemplatesSection: {
         templates: StoreSitesTypes.IncFilesTemplatesType
         currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
-    },
+    }
     componentsSection: {
         currentCompItemId: StoreSitesTypes.CurrentCompItemId
         currentCompItemType: StoreSitesTypes.CurrentCompItemType
+        currentCompCode: StoreSitesTypes.ComponentCode
     }
 }
 
@@ -33,9 +34,12 @@ const initialState: SitesReducerType = {
     },
     // Данные по вкладке «Шаблоны компонентов»
     componentsSection: {
-        // id выбранного шаблона компонента
+        // uuid выбранного элемента: папка или компонент
         currentCompItemId: null,
-        currentCompItemType: null
+        // тип выбранного элемента: папка или компонент
+        currentCompItemType: null,
+        // Строка с кодом выбранного шаблона компонента
+        currentCompCode: null,
     }
 }
 
@@ -128,6 +132,7 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
             ...state.componentsSection,
             currentCompItemId: action.payload.id,
             currentCompItemType: action.payload.type,
+            currentCompCode: action.payload.code || null,
         }
     }
 }

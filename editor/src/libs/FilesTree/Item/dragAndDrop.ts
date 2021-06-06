@@ -111,7 +111,7 @@ function isDropAllowed(
     if (!itemBelowId) return false
 
     // Ничего не делать если родительскую папку хотят поместить внутрь дочерней
-    return hasFolderAnItem(itemData, itemBelowId)
+    return !(hasFolderAnItem(itemData, itemBelowId))
 }
 
 /**

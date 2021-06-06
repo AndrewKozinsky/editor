@@ -112,7 +112,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                     })
                 }
                 const response = await makeFetch(getApiUrl(
-                    'changeResetPassword', formDetails.state.fields.token.value[0]), options, lang
+                    'changeResetPassword', formDetails.state.fields.token.value[0]), options
                 )
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку

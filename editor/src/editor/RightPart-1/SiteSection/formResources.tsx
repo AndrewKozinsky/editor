@@ -218,7 +218,7 @@ async function createNewSite(
         method: 'POST',
         body: JSON.stringify(formDetails.readyFieldValues)
     }
-    const response = await makeFetch(getApiUrl('sites'), options, lang)
+    const response = await makeFetch(getApiUrl('sites'), options)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -256,7 +256,7 @@ async function updateSite(
         body: JSON.stringify(formDetails.readyFieldValues)
     }
     // console.log(formDetails.readyFieldValues.defaultIncFilesTemplateId)
-    const response = await makeFetch(getApiUrl('site', selectedSiteId), options, lang)
+    const response = await makeFetch(getApiUrl('site', selectedSiteId), options)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)

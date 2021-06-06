@@ -152,8 +152,8 @@ const messages: messagesType = {
     // Форма редактирования выбранной папки шаблона компонента
     ComponentFolderForm: {
         folderNameInput: {
-            eng: 'Component name',
-            rus: 'Название компонента'
+            eng: 'Folder name',
+            rus: 'Название папки'
         },
         submitBtnTextSave: {
             eng: 'Save',
@@ -168,7 +168,7 @@ const messages: messagesType = {
             rus: 'Название папки не может быть пустым'
         },
         deleteFolderConfirmationTextInModal: {
-            eng: 'Are you sure you want to delete the folder with the component templates',
+            eng: 'Are you sure you want to delete the folder with the component templates?',
             rus: 'Вы уверены, что хотите удалить папку с шаблонами компонентов?'
         },
         closeDeleteFolderModalBtn: {
@@ -191,18 +191,30 @@ const messages: messagesType = {
             rus: 'Например: Баннер'
         },
         componentCodeInput: {
-            eng: 'Markup',
-            rus: 'Разметка'
+            eng: 'Component',
+            rus: 'Компонент'
         },
-        submitBtnTextNew: {
-            eng: 'Create',
-            rus: 'Создать'
+        componentNameRequired: {
+            eng: 'The Component name cannot be empty',
+            rus: 'Название компонента не может быть пустым'
         },
-        submitBtnTextSave: {
+        submitBtnText: {
             eng: 'Save',
             rus: 'Сохранить'
         },
         deleteComponentBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        deleteComponentConfirmationTextInModal: {
+            eng: 'Are you sure you want to delete the component template?',
+            rus: 'Вы уверены, что хотите удалить шаблон компонента?'
+        },
+        closeDeleteComponentModalBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteComponentBtnInModal: {
             eng: 'Delete',
             rus: 'Удалить'
         },

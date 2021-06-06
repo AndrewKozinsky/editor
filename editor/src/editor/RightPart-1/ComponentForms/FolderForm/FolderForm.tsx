@@ -10,7 +10,8 @@ import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
 import messages from '../../messages'
 import { useGetAnotherFolderData } from './FolderForm-func'
-import useGetDeleteFolder from './deleteFolder'
+import { ModalContent } from './deleteFolder'
+import useGetShowModal from 'utils/hooksUtils'
 
 export default function FolderForm() {
 
@@ -23,7 +24,7 @@ export default function FolderForm() {
     useGetAnotherFolderData(fh.formState, fh.setFormState)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления папки
-    const openDeleteTemplateConfirmation = useGetDeleteFolder()
+    const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)
 
     return (
         <Form name='folder' formHandlers={fh.formHandlers}>
