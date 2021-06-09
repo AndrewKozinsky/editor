@@ -5,6 +5,8 @@ import SiteModel from '../../models/site'
 import IncFilesTemplateModel from '../../models/incFilesTemplate'
 import ComponentsFoldersModel from '../../models/componentsFolders'
 import ComponentModel from '../../models/component'
+import ArticlesFoldersModel from '../../models/articlesFolders'
+import ArticleModel from '../../models/article'
 
 
 /** Получение всех сайтов (защищённый маршрут) */
@@ -14,7 +16,6 @@ export const getAllSites = catchAsync<void>(async (req: ExtendedRequestType, res
 
     // Получение всех сайтов пользователя
     const sites = await SiteModel.find({userId: req.user.id}).select('-__v -userId')
-
 
     // Отправить данные пользователю
     res.status(200).json({
@@ -39,6 +40,12 @@ export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res:
 
     // Создание данных по модели ComponentsFolders
     await ComponentsFoldersModel.create({
+        userId: req.user?.id,
+        siteId: newSite._id
+    })
+
+    // Создание данных по модели ArticlesFolders
+    await ArticlesFoldersModel.create({
         userId: req.user?.id,
         siteId: newSite._id
     })
@@ -84,13 +91,17 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     // Удалить шаблоны подключения внешних файлов
     await IncFilesTemplateModel.deleteMany({siteId: req.params.siteId})
 
-    // Удалить порядок шаблонов компонентов
+    // Удалить папки шаблонов компонентов
     await ComponentsFoldersModel.deleteMany({siteId: req.params.siteId})
 
     // Удалить шаблоны компонентов
     await ComponentModel.deleteMany({siteId: req.params.siteId})
 
-    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ПОРЯДКА СТАТЕЙ И САМИХ СТАТЕЙ
+    // Удалить папки статей
+    await ArticlesFoldersModel.deleteMany({siteId: req.params.siteId})
+
+    // Удалить статьи
+    await ArticleModel.deleteMany({siteId: req.params.siteId})
 
     // Отправить успешный ответ
     res.status(200).json({

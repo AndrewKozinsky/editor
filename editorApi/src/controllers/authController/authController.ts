@@ -15,6 +15,8 @@ import SiteModel from '../../models/site';
 import IncFilesTemplateModel from '../../models/incFilesTemplate';
 import ComponentsFoldersModel from '../../models/componentsFolders';
 import ComponentModel from '../../models/component';
+import ArticlesFoldersModel from '../../models/articlesFolders';
+import ArticleModel from '../../models/article';
 
 
 // Функция отдающая данные по переданному токену. Токен передаётся в куках.
@@ -452,13 +454,17 @@ export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: R
     // Удалить шаблоны подключения внешних файлов
     await IncFilesTemplateModel.deleteMany({userId: req.user.id})
 
-    // Удалить порядок шаблонов компонентов
+    // Удалить папки шаблонов компонентов
     await ComponentsFoldersModel.deleteMany({userId: req.user.id})
 
     // Удалить шаблоны компонентов
     await ComponentModel.deleteMany({userId: req.user.id})
 
-    // TODO ПОСЛЕ ДОПИШИ УДАЛЕНИЕ ВСЕГО, ЧТО ОТНОСИТСЯ К САЙТУ: ПОРЯДОК СТАТЕЙ И САМИ СТАТЬИ
+    // Удалить все папки статей созданных пользователем
+    await ArticlesFoldersModel.deleteMany({userId: req.params.siteId})
+
+    // Удалить все статьи созданные пользователем
+    await ArticleModel.deleteMany({userId: req.params.siteId})
 
     // Обнулить куку авторизации
     res.cookie('authToken', 'loggedout', {

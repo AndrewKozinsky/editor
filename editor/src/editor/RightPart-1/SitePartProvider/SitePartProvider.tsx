@@ -6,8 +6,12 @@ import HeaderPage from 'common/HeaderPage/HeaderPage'
 import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList'
 import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
 import ComponentsList from '../ComponentsList/ComponentsList'
-import messages from '../messages'
 import ComponentsFormProvider from '../ComponentForms/ComponentsFormProvider/ComponentsFormProvider'
+import ArticlesList from '../ArticlesList/ArticlesList'
+import messages from '../messages'
+import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
+import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
+import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
 
 
 /**
@@ -50,16 +54,16 @@ export default function SitePartProvider(): ReactElement {
             else if (num === 2) {
                 return (
                     <HeaderPage headerText={messages.Tabs.components[lang]} display={num === rightMainTab} key={num}>
-                        <ComponentsList />
-                        <ComponentsFormProvider />
+                        <FoldersList type='components' />
+                        <ComponentFormProvider />
                     </HeaderPage>
                 )
             }
             else if (num === 3) {
                 return (
                     <HeaderPage headerText={messages.Tabs.articles[lang]} display={num === rightMainTab} key={num}>
-                        <p>Статьи</p>
-                        <p>Статьи</p>
+                        <FoldersList type='articles' />
+                        <ArticleFormProvider />
                     </HeaderPage>
                 )
             }

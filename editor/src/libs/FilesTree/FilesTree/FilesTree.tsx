@@ -10,6 +10,8 @@ import {createNewItem} from '../Item/Item-func'
 type FilesTreePropType = {
     // Массив данных списка папок и файлов
     items: null | FilesTreeType.Items
+    // Функция устанавливающая массив папок в Хранилище
+    setItems: FilesTreeType.SetItems
     // Название новой папки (текст на кнопке и название новой папки)
     newFolderName?: string
     // Название нового файла (текст на кнопке и название нового файла)
@@ -47,6 +49,8 @@ export default function FilesTree(props: FilesTreePropType) {
     // Минимальная ширина главной обёртки
     const minWidth = useGetFilesTreeMinWidth(props.items)
 
+    // console.log(props.items)
+
     return (
         <div data-file-tree='true' style={{minWidth: minWidth}}>
             <Wrapper b={10}>
@@ -54,7 +58,7 @@ export default function FilesTree(props: FilesTreePropType) {
                     text={newFolderName}
                     icon='btnSignFolder'
                     onClick={(e: any) => {
-                        createNewItem(e, 'folder', null, props.items, after)
+                        createNewItem(e, 'folder', null, props.items, props.setItems, after)
                     }}
                 />
             </Wrapper>
@@ -63,11 +67,11 @@ export default function FilesTree(props: FilesTreePropType) {
                     text={newFileName}
                     icon='btnSignAdd'
                     onClick={(e: any) => {
-                        createNewItem(e, 'file', null, props.items, after)
+                        createNewItem(e, 'file', null, props.items, props.setItems, after)
                     }}
                 />
             </Wrapper>
-            {generateItems(props.items, props.items, 0, after)}
+            {generateItems(props.items, props.items, props.setItems, 0, after)}
         </div>
     )
 }
@@ -77,12 +81,14 @@ export default function FilesTree(props: FilesTreePropType) {
  * @param {Array} allItems — массив всех данных по папкам и файлам. Он требуется для передачи в компоненты файлов и папок
  * @param {Array} innerItems — массив данных по папкам и файлам, которые генерируются на текущем цикле.
  * Так как функция рекурсивная, то сюда будут поступать разные массивы.
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 function generateItems(
     allItems: FilesTreeType.Items,
     innerItems: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     offset: number,
     after: FilesTreeType.After
 ): ReactNode {
@@ -96,6 +102,7 @@ function generateItems(
             innerItems = generateItems(
                 allItems,
                 itemData.content,
+                setItems,
                 offset + 1,
                 after
             )
@@ -106,6 +113,7 @@ function generateItems(
                 <Item
                     items={allItems}
                     itemData={itemData}
+                    setItems={setItems}
                     offset={offset}
                     after={after}
                 />

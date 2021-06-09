@@ -41,7 +41,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     incFilesTemplate: function (templateId: string) {
         return 'incFilesTemplate/' + templateId
     },
-    // Порядок следования шаблонов компонентов
+    // Папки шаблонов компонентов
     componentsFolders: function (siteId: string) {
         return 'componentsFolders/' + siteId
     },
@@ -49,6 +49,15 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     component: function (uuid?: string) {
         if (uuid) return 'component/' + uuid
         else return 'component/'
+    },
+    // Папки статей
+    articlesFolders: function (siteId: string) {
+        return 'articlesFolders/' + siteId
+    },
+    // Статья
+    article: function (uuid?: string) {
+        if (uuid) return 'article/' + uuid
+        else return 'article/'
     },
 }
 

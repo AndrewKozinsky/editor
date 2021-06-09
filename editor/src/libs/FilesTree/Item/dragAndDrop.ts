@@ -1,7 +1,6 @@
 import FilesTreeType from '../types'
 import {
     getItemDataById,
-    setItems,
     hasFolderAnItem,
     showPlaceMark,
     moveItemTo
@@ -20,11 +19,13 @@ export function handleDragStart(e: any) {
  * @param {Object} e — объект события
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  * @param {Array} items — массив данных по папкам и файлам
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  */
 export function handleDrag(
     e: any,
     itemData: FilesTreeType.Item,
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
 ) {
     e.preventDefault()
 
@@ -60,12 +61,14 @@ export function handleDragOver(e: any) {
  * @param {Object} e — объект события
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  * @param {Array} items — массив данных по папкам и файлам
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function handleDragEnd(
     e: any,
     itemData: FilesTreeType.Item,
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     after: FilesTreeType.After
 ) {
     e.target.style.opacity = 1

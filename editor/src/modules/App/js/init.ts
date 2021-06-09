@@ -44,7 +44,9 @@ function useGetAndSetEditorSettings() {
         let sitePartTab = <StoreSitesTypes.RightMainTab | null>+localStorage.getItem('editorSitePartTab') // id вкладки в Сайтах
         let editorPluginsId = <StoreSitesTypes.CurrentIncFilesTemplateId | null>localStorage.getItem('editorPluginsId') // id выбранного шаблона подключаемых файлов
         let editorComponentId = <StoreSitesTypes.CurrentCompItemId>localStorage.getItem('editorComponentId') // id выбранного шаблона компонента
-        let editorComponentType = <StoreSitesTypes.CurrentCompItemType>localStorage.getItem('editorComponentType') // id выбранного шаблона компонента
+        let editorComponentType = <StoreSitesTypes.CurrentCompItemType>localStorage.getItem('editorComponentType') // тип выбранного элемента: папка или компонент
+        let editorArticleId = <StoreSitesTypes.CurrentArtItemId>localStorage.getItem('editorArticleId') // id выбранной папки или статьи
+        let editorArticleType = <StoreSitesTypes.CurrentArtItemType>localStorage.getItem('editorArticleType') // тип выбранного элемента: папка или статья
 
         // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
         if (!language) {
@@ -94,6 +96,7 @@ function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentIncFilesTemplateId(editorPluginsId) )
         // Данные по выбранному шаблону компонента
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
+        dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])
 }
 

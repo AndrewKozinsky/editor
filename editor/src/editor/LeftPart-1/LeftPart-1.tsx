@@ -6,7 +6,7 @@ import NameSection from '../wrappers/NameSection/NameSection'
 import Button from 'src/common/formElements/Button/Button'
 import './LeftPart-1.scss'
 import { useFetchSites, useGetNewSiteOnClickHandler, useGetSitesItemsListProps } from './LeftPart1-func'
-import ItemsList from '../../common/ItemsList/ItemsList';
+import ItemsList from 'common/ItemsList/ItemsList';
 import {useGetSettingsItemsListProps} from '../LeftPart-3/LeftPart-3-func';
 import Wrapper from '../../common/Wrapper/Wrapper';
 import { MiscTypes } from '../../types/miscTypes'

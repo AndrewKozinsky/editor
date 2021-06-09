@@ -4,9 +4,8 @@ import {useStore} from 'effector-react'
 import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 //@ts-ignore
-import {createStore} from 'effector'
+import {createEvent, createStore} from 'effector'
 import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
-import {setItems} from 'libs/FilesTree/StoreManage/manageState'
 import FilesTreeType from 'libs/FilesTree/types'
 import {
     useGetFoldersFromServerAndPutInEffector,
@@ -18,6 +17,9 @@ import {
 } from './ComponentsList-func'
 import messages from '../messages'
 
+
+// Установщик нового Состояния с папками и файлами
+export const setItems = createEvent()
 
 // Создание Хранилища Эффектора где будут содержаться данные по папкам шаблонов компонентов
 export const componentsTreeStore = createStore<null | FilesTreeType.Items>(null)
@@ -45,6 +47,7 @@ export default function ComponentsList() {
     return (
         <FilesTree
             items={items}
+            setItems={setItems}
             newFolderName={messages.FoldersComponentsSection.createNewFolderBth[lang]}
             newFileName={messages.FoldersComponentsSection.createNewFileBth[lang]}
             afterAddingNewItem={afterAddingNewItem}

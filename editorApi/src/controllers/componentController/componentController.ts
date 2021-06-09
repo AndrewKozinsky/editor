@@ -19,6 +19,13 @@ export const createComponent = catchAsync<void>(async (req: ExtendedRequestType,
         )
     }
 
+    // Если не передали названия компонента, то возвратить ошибочный ответ
+    if (!req.body.name) {
+        return next(
+            new AppError(null, '{{componentController.getComponentNoName}}', 400)
+        )
+    }
+
     const uuid: string = req.body.uuid.toString()
     const siteId: string = req.body.siteId.toString()
 
@@ -27,6 +34,7 @@ export const createComponent = catchAsync<void>(async (req: ExtendedRequestType,
         uuid,
         userId: req.user?.id,
         siteId,
+        name: req.body.name,
         code: req.body.code || null,
     })
 
@@ -38,6 +46,7 @@ export const createComponent = catchAsync<void>(async (req: ExtendedRequestType,
                 id: newComponent._id,
                 uuid: newComponent.uuid,
                 siteId: newComponent.siteId,
+                name: newComponent.name,
                 code: newComponent.code
             }
         }
@@ -74,7 +83,7 @@ export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType,
     // Найти шаблон компонента и обновить его данные
     const updatedComponent = await ComponentModel.findOneAndUpdate(
         {uuid: req.params.uuid},
-        {code: req.body.code},
+        req.body,
         {new: true, useFindAndModify: false}
     ).select('-__v -_id')
 

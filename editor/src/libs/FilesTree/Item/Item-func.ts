@@ -1,8 +1,7 @@
 import {SyntheticEvent, useCallback} from 'react'
-import FilesTreeType from '../types'
+// import FilesTreeType from '../types'
 import {makeCN} from 'utils/StringUtils'
 import {
-    setItems,
     addNewItem,
     getOpenedFoldersUuid,
     toggleFolder,
@@ -97,11 +96,13 @@ export function getInnerWrapperClasses(
  * Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
  * @param {String} folderId — id папки которую нужно свернуть/развернуть
  * @param {Array} items — массив с данными по папкам и файлам
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
     folderId: FilesTreeType.UuId,
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     after: FilesTreeType.After
 ) {
     return useCallback(function (e) {
@@ -123,12 +124,15 @@ export function useGetToggleFolder(
     }, [items, folderId])
 }
 
+import FilesTreeType from '../types';
+
 /**
  * Обработчик щелчка по кнопке добавления нового элемента в массив папок и файлов.
  * @param {Object} e — объект события
  * @param {String} newItemType — тип нового элемента
  * @param {Object} folderData — данные папки в которой нужно добавить новую папку или файл
  * @param {Array} items — массив данных по папкам и файлам
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function createNewItem(
@@ -136,6 +140,7 @@ export function createNewItem(
     newItemType: FilesTreeType.ItemType,
     folderData: null | FilesTreeType.Item,
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     after: FilesTreeType.After,
 ) {
     e.stopPropagation()
@@ -179,13 +184,15 @@ export function createNewItem(
 /**
  * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
  * @param {Object} e — объект события
- * @param {String} itemId — id папки или файла, которую нужно удалить
  * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
+ * @param {String} itemId — id папки или файла, которую нужно удалить
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function removeItem(
     e: null | SyntheticEvent,
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     itemId: FilesTreeType.UuId,
     after?: FilesTreeType.After,
 ) {
@@ -208,11 +215,13 @@ export function removeItem(
  * Хук возвращает обработчик щелчка по папке или файлу.
  * В местное состояние ставит uuid этой папки или файла.
  * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetOnClickHandler(
     items: FilesTreeType.Items,
+    setItems: FilesTreeType.SetItems,
     itemData: FilesTreeType.Item, after: FilesTreeType.After
 ) {
     return useCallback(function (e) {

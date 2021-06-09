@@ -3,11 +3,22 @@ import StoreSitesTypes from './sitesTypes'
 import {MiscTypes} from 'types/miscTypes'
 import {makeFetch} from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
-import store from '../store';
-import FilesTreeType from 'libs/FilesTree/types';
+import store from '../store'
+import FilesTreeType from 'libs/FilesTree/types'
 
 
 const sitesActions = {
+
+    // Установка id текущей основной вкладки справа
+    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+        return {
+            type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
+            payload
+        }
+    },
+
+
+    // САЙТЫ =====================================================================================
 
     // Загрузка сайтов с сервера и установка в Хранилище
     requestSites() {
@@ -50,14 +61,8 @@ const sitesActions = {
         }
     },
 
-    // Установка id текущей основной вкладки справа
-    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
-        return {
-            type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
-            payload
-        }
-    },
 
+    // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
     // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
     requestIncFilesTemplates() {
@@ -105,6 +110,17 @@ const sitesActions = {
         }
     },
 
+    // Установка id выбранного шаблона подключаемых шаблонов
+    setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
+            payload
+        }
+    },
+
+
+    // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
+
     // Загрузка с сервера шаблона компонента и установка в Хранилище
     requestComponentTemplate() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
@@ -127,16 +143,10 @@ const sitesActions = {
             if (!response || response.status !== 'success') return
             const compData = response.data.component
 
-            // Установка данных шаблона компонента в Хранилище
-            dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData.code) )
-        }
-    },
-
-    // Установка id выбранного шаблона подключаемых шаблонов
-    setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
-            payload
+            if (compData) {
+                // Установка данных шаблона компонента в Хранилище
+                dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData.code) )
+            }
         }
     },
 
@@ -148,6 +158,55 @@ const sitesActions = {
     ): StoreSitesTypes.SetCurrentCompAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP,
+            payload: {
+                id,
+                type,
+                code
+            }
+        }
+    },
+
+
+    // СТАТЬИ ======================================================================================
+
+    // Загрузка с сервера шаблона компонента и установка в Хранилище
+    requestArticle() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // uuid выбранного сайта, данные которого нужно скачать
+            const {currentArtItemId} = getState().sites.articlesSection
+
+            // Если uuid статьи не передан, то обнулить данные статьи в Хранилище
+            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
+
+            // Параметры запроса
+            const options = { method: 'GET' }
+
+            // Запрос и ответ от сервера
+            const response = await makeFetch(
+                // id сайта передаётся в параметре siteId
+                getApiUrl('article', currentArtItemId), options
+            )
+
+            if (!response || response.status !== 'success') return
+            const articleData = response.data.article
+
+            if (articleData) {
+                // Установка данных шаблона компонента в Хранилище
+                // console.log(articleData)
+                // dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
+            }
+        }
+    },
+
+    // Установка id и типа выбранного шаблона компонента
+    setCurrentArt(
+        id: null | FilesTreeType.UuId,
+        type: null | FilesTreeType.ItemType,
+        code?: StoreSitesTypes.ArticleCode
+    ): StoreSitesTypes.SetCurrentArtAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_ART,
             payload: {
                 id,
                 type,

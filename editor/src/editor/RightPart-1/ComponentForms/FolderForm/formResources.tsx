@@ -4,7 +4,7 @@ import FHTypes from 'src/libs/formHandler/types'
 import messages from '../../messages'
 import store from 'store/store'
 import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
+import {componentsTreeStore, setItems} from '../../ComponentsList/ComponentsList'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import { makeFetch } from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
@@ -218,7 +218,7 @@ function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
         currentCompItemId,
         formDetails.state.fields.name.value[0]
     )
-    filesTreePublicMethods.setItems(result.newItems)
+    setItems(result.newItems)
 
     // Подготовить массив папок и файлов для сохранения на сервере
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)

@@ -191,8 +191,8 @@ const messages: messagesType = {
             rus: 'Например: Баннер'
         },
         componentCodeInput: {
-            eng: 'Component',
-            rus: 'Компонент'
+            eng: 'Component template code',
+            rus: 'Код шаблона компонента'
         },
         componentNameRequired: {
             eng: 'The Component name cannot be empty',
@@ -215,6 +215,83 @@ const messages: messagesType = {
             rus: 'Отменить'
         },
         deleteComponentBtnInModal: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+    },
+    // Структура папок и файлов статей
+    FoldersArticlesSection: {
+        createNewFolderBth: {
+            eng: 'New folder',
+            rus: 'Новая папка'
+        },
+        createNewFileBth: {
+            eng: 'New article',
+            rus: 'Новая статья'
+        },
+    },
+    // Форма редактирования выбранной папки шаблона компонента
+    ArticlesFolderForm: {
+        folderNameInput: {
+            eng: 'Folder name',
+            rus: 'Название папки'
+        },
+        submitBtnTextSave: {
+            eng: 'Save',
+            rus: 'Сохранить'
+        },
+        deleteFolderBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        formNameInputRequired: {
+            eng: 'The folder name cannot be empty',
+            rus: 'Название папки не может быть пустым'
+        },
+        deleteFolderConfirmationTextInModal: {
+            eng: 'Are you sure you want to delete the folder with articles?',
+            rus: 'Вы уверены, что хотите удалить папку со статьями?'
+        },
+        closeDeleteFolderModalBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteFolderBtnInModal: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+    },
+    // Форма редактирования выбранного шаблона компонента
+    ArticleForm: {
+        articleNameInput: {
+            eng: 'Article name',
+            rus: 'Название статьи'
+        },
+        defaultTemplateInput: {
+            eng: 'The default template of the plug-in files',
+            rus: 'Шаблон подключаемых файлов по умолчанию'
+        },
+        articleNameRequired: {
+            eng: 'The article name cannot be empty',
+            rus: 'Название статьи не может быть пустым'
+        },
+        submitBtnText: {
+            eng: 'Save',
+            rus: 'Сохранить'
+        },
+        deleteArticleBtnText: {
+            eng: 'Delete',
+            rus: 'Удалить'
+        },
+        deleteArticleConfirmationTextInModal: {
+            eng: 'Are you sure you want to delete the article?',
+            rus: 'Вы уверены, что хотите удалить статью?'
+        },
+        closeDeleteArticleModalBtn: {
+            eng: 'Cancel',
+            rus: 'Отменить'
+        },
+        deleteArticleBtnInModal: {
             eng: 'Delete',
             rus: 'Удалить'
         },

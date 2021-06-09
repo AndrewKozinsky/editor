@@ -1,12 +1,7 @@
 //@ts-ignore
-import {createEvent} from 'effector'
-//@ts-ignore
 import { v4 as uuid } from 'uuid'
 import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import FilesTreeType from '../types'
-
-// Установщик нового Состояния с папками и файлами
-export const setItems = createEvent()
 
 
 /**

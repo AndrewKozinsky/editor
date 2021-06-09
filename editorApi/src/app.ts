@@ -11,6 +11,8 @@ import { addExtraHeaders } from './middlewares/commonMiddlewares'
 import incFilesTemplateRouter from './routes/incFilesTemplateRouter'
 import componentsFoldersRouter from './routes/componentsFoldersRouter'
 import componentRouter from './routes/componentRouter'
+import articlesFoldersRouter from './routes/articlesFoldersRouter'
+import articleRouter from './routes/articleRouter'
 
 
 const app: Application = express()
@@ -49,6 +51,8 @@ app.use('/sites/', siteRouter)
 app.use('/incFilesTemplate/', incFilesTemplateRouter)
 app.use('/componentsFolders/', componentsFoldersRouter)
 app.use('/component/', componentRouter)
+app.use('/articlesFolders/', articlesFoldersRouter)
+app.use('/article/', articleRouter)
 
 // Статические файлы на сервере.
 app.use(express.static(path.join(__dirname, 'staticFiles')))

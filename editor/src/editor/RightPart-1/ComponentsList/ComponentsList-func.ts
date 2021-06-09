@@ -7,8 +7,9 @@ import FilesTreeType from 'libs/FilesTree/types'
 import {makeFetch, useFetch} from 'requests/fetch'
 import getApiUrl from 'requests/apiUrls'
 import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-import {addOpenPropToFolders, selectItem, setItems} from 'libs/FilesTree/StoreManage/manageState'
+import {addOpenPropToFolders, selectItem} from 'libs/FilesTree/StoreManage/manageState'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import { setItems } from './ComponentsList'
 
 
 // Тип данных присылаемый с сервера
@@ -23,17 +24,17 @@ type GetComponentsFoldersServerResponse = {
 /** Хук скачивает с сервера порядок шаблонов компонентов и ставит в Хранилище */
 export function useGetFoldersFromServerAndPutInEffector() {
     // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    // const {currentSiteId} = useSelector((store: AppState) => store.sites)
 
     // id папки или компонента, который должнен быть выделен
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
+    // const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: response, doFetch} =
-        useFetch<GetComponentsFoldersServerResponse>(getApiUrl('componentsFolders', currentSiteId), { method: 'GET' })
+    // const {data: response, doFetch} =
+    //     useFetch<GetComponentsFoldersServerResponse>(getApiUrl('componentsFolders', currentSiteId), { method: 'GET' })
 
     // При загрузке компонента и при изменении выбранного сайта...
-    useEffect(function () {
+    /*useEffect(function () {
         // Запрос на получение порядка шаблонов компонентов
         // Если не передан id сайта, то обнулить порядок шаблонов компонентов в Хранилище
         // потому что выбрали новый сайт
@@ -44,9 +45,9 @@ export function useGetFoldersFromServerAndPutInEffector() {
         }
 
         doFetch()
-    }, [currentSiteId, currentCompItemId])
+    }, [currentSiteId, currentCompItemId])*/
 
-    useEffect(function () {
+    /*useEffect(function () {
         if (!response?.data?.folders?.content) return
 
         // Превратить присланный JSON в массив
@@ -63,7 +64,7 @@ export function useGetFoldersFromServerAndPutInEffector() {
 
         // Поставить в Эффектор присланный порядок
         setItems(content)
-    }, [response])
+    }, [response])*/
 }
 
 
@@ -73,23 +74,23 @@ export function useGetFoldersFromServerAndPutInEffector() {
  */
 export async function saveItemsOnServer(items: FilesTreeType.Items) {
     // Подготовить сохраняемый массив папок и файлов
-    const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
+    // const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
 
-    const jsonItems = JSON.stringify(preparedItems)
+    // const jsonItems = JSON.stringify(preparedItems)
 
     // Параметры запроса
-    const options = {
+    /*const options = {
         method: 'PUT',
         body: JSON.stringify({content: jsonItems})
-    }
+    }*/
 
     // id выбранного сайта
-    const siteId = store.getState().sites.currentSiteId
+    // const siteId = store.getState().sites.currentSiteId
 
     // Сохранить данные на сервере
-    await makeFetch(
+    /*await makeFetch(
         getApiUrl('componentsFolders', siteId), options
-    )
+    )*/
 }
 
 /**
@@ -99,10 +100,10 @@ export async function saveItemsOnServer(items: FilesTreeType.Items) {
  */
 export function afterDeleteItem(items: FilesTreeType.Items, deletedItemUuid: FilesTreeType.UuId) {
     // Обнулить данные выделенного элемента в Хранилище
-    store.dispatch( actions.sites.setCurrentComp(null, null) )
+    // store.dispatch( actions.sites.setCurrentComp(null, null) )
 
     // Сохранить данные на сервере
-    saveItemsOnServer(items)
+    // saveItemsOnServer(items)
 }
 
 /**
@@ -111,22 +112,22 @@ export function afterDeleteItem(items: FilesTreeType.Items, deletedItemUuid: Fil
  * @param {Array} items — массив данных по папкам и файлам.
  */
 export async function afterAddingNewItem(items: FilesTreeType.Items, item: FilesTreeType.Item) {
-    const siteId = store.getState().sites.currentSiteId
+    // const siteId = store.getState().sites.currentSiteId
 
     // Параметры запроса
-    const options = {
+    /*const options = {
         method: 'POST',
         body: JSON.stringify({
             uuid: item.uuid,
             siteId: siteId,
             code: item.content
         })
-    }
+    }*/
 
     // Сохранить данные на сервере
-    await makeFetch(
+    /*await makeFetch(
         getApiUrl('component'), options
-    )
+    )*/
 }
 
 /**
@@ -136,13 +137,13 @@ export async function afterAddingNewItem(items: FilesTreeType.Items, item: Files
  * @param {Array} arrUuId — массив uuid раскрытых папок
  */
 export function afterCollapseFolder(arrUuId: FilesTreeType.UuIdArr) {
-    setInLocalStorage('editorComponentsOpenedFolders', arrUuId)
+    // setInLocalStorage('editorComponentsOpenedFolders', arrUuId)
 }
 
 /** Функция получает из localStorage uuid открытых папок и возвращает
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersUuId() {
-    return getFromLocalStorage('editorComponentsOpenedFolders')
+    // return getFromLocalStorage('editorComponentsOpenedFolders')
 }
 
 /** Хук возвращает обработчик щелчка по папке или файлу. */

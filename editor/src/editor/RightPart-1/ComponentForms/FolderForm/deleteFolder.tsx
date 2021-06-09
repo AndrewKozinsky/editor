@@ -8,7 +8,7 @@ import messages from '../../messages'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'src/common/formElements/Button/Button'
-import {componentsTreeStore} from '../../ComponentsList/ComponentsList'
+import {componentsTreeStore, setItems} from '../../ComponentsList/ComponentsList'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {saveItemsOnServer} from '../../ComponentsList/ComponentsList-func'
 
@@ -29,7 +29,7 @@ export function ModalContent() {
         // Удалить папку из Хранилища и возвратить новый массив
         const newItems = filesTreePublicMethods.deleteItem(items, currentCompItemId)
         // Сохранить новые данные в Хранилище
-        filesTreePublicMethods.setItems(newItems)
+        setItems(newItems)
         // Сохранить новый массив папок и файлов на сервере
         saveItemsOnServer(newItems)
 

@@ -14,6 +14,8 @@ namespace FilesTreeType {
         content?: Items // Содержимое папки (если папка)
     }
 
+    export type SetItems = (items: Items) => void
+
     // id папки или файла
     export type UuId = string
 

@@ -14,8 +14,8 @@ import {
 import {
     handleDragStart,
     handleDrag,
-    handleDragEnd,
     handleDragOver,
+    handleDragEnd,
 } from './dragAndDrop'
 import './Item.scss'
 
@@ -25,6 +25,8 @@ const CN = 'ft-item'
 type ItemPropType = {
     // Массив всех папок и файлов.
     items: FilesTreeType.Items
+    // Функция устанавливающая массив папок в Хранилище
+    setItems: FilesTreeType.SetItems
     // Данные папки или файла.
     itemData: FilesTreeType.Item
     // Уровень вложенности папки или файла.
@@ -37,6 +39,7 @@ type ItemPropType = {
 export default function Item(props: ItemPropType) {
     const {
         items,
+        setItems,
         itemData,
         offset,
         after
@@ -48,7 +51,7 @@ export default function Item(props: ItemPropType) {
     const markItemElem = useMarkItemElemWhenItHovered()
 
     // Хук возвращает обработчик щелчка по элементу
-    const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
+    const onItemClickHandler = useGetOnClickHandler(items, setItems, itemData, after)
 
     // Классы внутренней обёртки
     const innerWrapperClasses = getInnerWrapperClasses(CN, itemData)
@@ -63,20 +66,20 @@ export default function Item(props: ItemPropType) {
             onMouseOver={markItemElem}
             onMouseOut={markItemElem}
             onDragStart={handleDragStart}
-            onDrag={(e: any) => handleDrag(e, itemData, items)}
+            onDrag={(e: any) => handleDrag(e, itemData, items, setItems)}
             onDragOver={handleDragOver}
-            onDragEnd={(e: any) => handleDragEnd(e, itemData, items, after)}
+            onDragEnd={(e: any) => handleDragEnd(e, itemData, items, setItems, after)}
         >
             <div
                 className={innerWrapperClasses}
                 data-ft-inner='true'
             >
                 <PlaceArrow itemData={itemData} />
-                <Triangle items={items} itemData={itemData} after={after} />
+                <Triangle items={items} setItems={setItems} itemData={itemData} after={after} />
                 <Icon itemData={itemData} />
                 {itemData.name}
                 <div className={`${CN}__right-part`}>
-                    <RightButtons items={items} itemData={itemData} after={after} />
+                    <RightButtons items={items} setItems={setItems} itemData={itemData} after={after} />
                 </div>
             </div>
         </div>
@@ -86,6 +89,8 @@ export default function Item(props: ItemPropType) {
 type TrianglePropType = {
     // Массив всех папок и файлов.
     items: FilesTreeType.Items
+    // Функция устанавливающая массив папок в Хранилище
+    setItems: FilesTreeType.SetItems
     // Данные папки или файла.
     itemData: FilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
@@ -96,12 +101,13 @@ type TrianglePropType = {
 function Triangle(props: TrianglePropType) {
     const {
         items,
+        setItems,
         itemData,
         after
     } = props
 
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
-    const toggleFolder = useGetToggleFolder(itemData.uuid, items, after)
+    const toggleFolder = useGetToggleFolder(itemData.uuid, items, setItems, after)
 
     // Классы кнопки сворачивания папки
     const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
@@ -132,17 +138,18 @@ type IconPropType = {
 /** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
     const {
-        itemData,
+        itemData
     } = props
 
     if (itemData.type === 'file') return null
     return <SvgIcon type='filesTreeFolder' className={`${CN}__folder-sign`} />
 }
 
-
 type RightButtonsPropType = {
     // Массив всех папок и файлов.
     items: FilesTreeType.Items
+    // Функция устанавливающая массив папок в Хранилище
+    setItems: FilesTreeType.SetItems
     // Данные папки или файла.
     itemData: FilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
@@ -153,6 +160,7 @@ type RightButtonsPropType = {
 function RightButtons(props: RightButtonsPropType) {
     const {
         items,
+        setItems,
         itemData,
         after,
     } = props
@@ -161,7 +169,7 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={`${CN}__btn ${CN}__right-btn`}
             data-ft-item-btn='true'
-            onClick={(e: any) => createNewItem(e, 'folder', itemData, items, after)}
+            onClick={(e: any) => createNewItem(e, 'folder', itemData, items, setItems, after)}
         >
             <SvgIcon type='filesTreeFolderPlus' />
         </button>
@@ -171,7 +179,7 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={`${CN}__btn ${CN}__right-btn`}
             data-ft-item-btn='true'
-            onClick={(e: any) => createNewItem(e, 'file', itemData, items, after)}
+            onClick={(e: any) => createNewItem(e, 'file', itemData, items, setItems, after)}
         >
             <SvgIcon type='filesTreePlus' />
         </button>
@@ -181,7 +189,7 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={`${CN}__btn ${CN}__right-btn`}
             data-ft-item-btn='true'
-            onClick={(e: any) => removeItem(e, items, itemData.uuid, after)}
+            onClick={(e: any) => removeItem(e, items, setItems, itemData.uuid, after)}
         >
             <SvgIcon type='filesTreeTrash' />
         </button>

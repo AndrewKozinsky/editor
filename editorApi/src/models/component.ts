@@ -6,6 +6,7 @@ export interface IComponent extends Document {
     uuid: string,
     userId: string,
     siteId: string,
+    name: string,
     code?: string,
 }
 
@@ -27,6 +28,11 @@ const ComponentSchema: Schema = new Schema({
     siteId: {
         type: String,
         required: [true, '{{componentModel.siteIdRequired}}']
+    },
+    // Название шаблона компонента
+    name: {
+        type: String,
+        required: [true, '{{componentModel.nameRequired}}']
     },
     // код шаблона компонента
     code: {

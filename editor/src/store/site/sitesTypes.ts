@@ -27,12 +27,22 @@ namespace StoreSitesTypes {
     export type IncFilesTemplatesType = IncFilesTemplateType[]
     // id выбранного шаблона подключаемых файлов
     export type CurrentIncFilesTemplateId = null | string
-    // id выбранного шаблона компонента
+
+    // uuid выбранного элемента: папки или компонента
     export type CurrentCompItemId = null | FilesTreeType.UuId
     // Тип выбранного шаблона компонента (папка или компонент)
     export type CurrentCompItemType = null | FilesTreeType.ItemType
     // Строка с кодом выбранного шаблона компонента
     export type ComponentCode = null | string
+
+    // uuid выбранного элемента: папки или статьи
+    export type CurrentArtItemId = null | FilesTreeType.UuId
+    // Тип выбранного элемента (папка или компонент)
+    export type CurrentArtItemType = null | FilesTreeType.ItemType
+    // Имя выбранной статьи
+    export type ArticleName = string
+    // Строка с кодом выбранной статьи
+    export type ArticleCode = null | string
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -82,6 +92,17 @@ namespace StoreSitesTypes {
         }
     }
 
+    // Установка id выбранной папки или статьи
+    export const SET_CURRENT_ART = 'SET_CURRENT_ART'
+    export type SetCurrentArtAction = {
+        type: typeof SET_CURRENT_ART
+        payload: {
+            id: null | FilesTreeType.UuId
+            type: null | FilesTreeType.ItemType
+            code?: StoreSitesTypes.ArticleCode
+        }
+    }
+
 
     export type SitesAction =
         | SetSitesAction
@@ -90,6 +111,7 @@ namespace StoreSitesTypes {
         | SetIncFilesTemplatesAction
         | SetCurrentIncFilesTemplateIdAction
         | SetCurrentCompAction
+        | SetCurrentArtAction
 }
 
 export default StoreSitesTypes

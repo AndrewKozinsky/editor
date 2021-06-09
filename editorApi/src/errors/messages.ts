@@ -226,6 +226,10 @@ export const messages: messagesType = {
             eng: 'Specify the id of the site to which this component template belongs.',
             rus: 'Укажите id сайта которому принадлежит этот шаблон компонента.'
         },
+        nameRequired: {
+            eng: 'Specify the component template name.',
+            rus: 'Укажите название шаблона компонента.'
+        },
     },
     // Контроллер шаблонов компонентов
     componentController: {
@@ -234,8 +238,72 @@ export const messages: messagesType = {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
             rus: 'В запросе не передан id сайта к которому принадлежит порядок шаблонов компонентов'
         },
+        getComponentNoName: {
+            eng: 'There is no component template name in the body.',
+            rus: 'В теле нет названия шаблона компонента.'
+        },
         // Функция updateComponent
         updateComponentComponentNotFound: {
+            eng: 'Component template not found. The data has not been updated.',
+            rus: 'Шаблон компонента не найден. Данные не обновлены.'
+        },
+    },
+    // Модель ArticlesFolders
+    articlesFoldersModel: {
+        userIdRequired: {
+            eng: 'Specify the user id to which this order of articles belongs.',
+            rus: 'Укажите id пользователя к которому принадлежит этот порядок статей.'
+        },
+        siteIdRequired: {
+            eng: 'Specify the id of the site to which this order of articles belongs.',
+            rus: 'Укажите id сайта которому принадлежит этот порядок статей.'
+        },
+    },
+    // Контроллер порядка следования папок со статьями
+    articlesFoldersController: {
+        // Функция getFolders
+        getFoldersNoSiteId: {
+            eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
+            rus: 'В запросе не передан id сайта к которому принадлежит порядок папок со статьями.'
+        },
+        // Функция updateFolders
+        updateArticlesFoldersFoldersNotFound: {
+            eng: 'The order of the article folders was not found. The data has not been updated.',
+            rus: 'Порядок папок статей не найден. Данные не обновлены.'
+        },
+    },
+    // Модель Article
+    articleModel: {
+        uuidRequired: {
+            eng: 'Specify the uuid of the article.',
+            rus: 'Укажите uuid статьи.'
+        },
+        userIdRequired: {
+            eng: 'Specify the user id to which the article belongs.',
+            rus: 'Укажите id пользователя к которому принадлежит статья.'
+        },
+        siteIdRequired: {
+            eng: 'Specify the id of the site to which this article belongs.',
+            rus: 'Укажите id сайта которому принадлежит эта статья.'
+        },
+        nameRequired: {
+            eng: 'Specify the component template name.',
+            rus: 'Укажите название шаблона компонента.'
+        },
+    },
+    // Контроллер статей
+    articleController: {
+        // Функция createComponent
+        getArticleNoSiteId: {
+            eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
+            rus: 'В запросе не передан id сайта к которому принадлежит порядок шаблонов компонентов'
+        },
+        getArticleNoName: {
+            eng: 'There is no article name in the body.',
+            rus: 'В теле нет названия статьи.'
+        },
+        // Функция updateComponent
+        updateArticleArticleNotFound: {
             eng: 'Component template not found. The data has not been updated.',
             rus: 'Шаблон компонента не найден. Данные не обновлены.'
         },

@@ -1,4 +1,3 @@
-import FilesTreeType from 'libs/FilesTree/types'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
@@ -13,6 +12,13 @@ export type SitesReducerType = {
         currentCompItemId: StoreSitesTypes.CurrentCompItemId
         currentCompItemType: StoreSitesTypes.CurrentCompItemType
         currentCompCode: StoreSitesTypes.ComponentCode
+    }
+    articlesSection: {
+        currentArtItemId: StoreSitesTypes.CurrentArtItemId
+        currentArtItemType: StoreSitesTypes.CurrentArtItemType
+        currentArtName: StoreSitesTypes.ArticleName
+        currentArtIncFilesTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
+        currentArtCode: StoreSitesTypes.ArticleCode
     }
 }
 
@@ -34,12 +40,25 @@ const initialState: SitesReducerType = {
     },
     // Данные по вкладке «Шаблоны компонентов»
     componentsSection: {
-        // uuid выбранного элемента: папка или компонент
+        // uuid выбранного элемента: папки или компонента
         currentCompItemId: null,
         // тип выбранного элемента: папка или компонент
         currentCompItemType: null,
         // Строка с кодом выбранного шаблона компонента
         currentCompCode: null,
+    },
+    // Данные по вкладке «Статьи»
+    articlesSection: {
+        // uuid выбранного элемента: папки или статьи
+        currentArtItemId: null,
+        // Тип выбранного элемента: папка или компонент
+        currentArtItemType: null,
+        // Имя выбранной статьи
+        currentArtName: '',
+        // id шаблона подключаемых компонентов у выбранной статьи
+        currentArtIncFilesTemplateId: null,
+        // Строка с кодом выбранной статьи
+        currentArtCode: null,
     }
 }
 
@@ -113,7 +132,7 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
 
 // Установка id выбранного подключаемых шаблонов
 function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
-    if (action.payload === null) {
+    if (action.payload.id === null) {
         // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
         localStorage.removeItem('editorComponentId')
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
@@ -137,6 +156,32 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
     }
 }
 
+// Установка id выбранного подключаемых шаблонов
+function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
+    if (action.payload.id === null) {
+        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
+        localStorage.removeItem('editorArticleId')
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        localStorage.removeItem('editorArticleType')
+    }
+    else {
+        // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        localStorage.setItem('editorArticleId', action.payload.id)
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        localStorage.setItem('editorArticleType', action.payload.type)
+    }
+
+    return {
+        ...state,
+        articlesSection: {
+            ...state.articlesSection,
+            currentArtItemId: action.payload.id,
+            currentArtItemType: action.payload.type,
+            currentArtCode: action.payload.code || null,
+        }
+    }
+}
+
 // Редьюсер Store.settings
 export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
@@ -154,6 +199,8 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             return setCurrentIncFilesTemplateId(state, action)
         case StoreSitesTypes.SET_CURRENT_COMP:
             return setCurrentComp(state, action)
+        case StoreSitesTypes.SET_CURRENT_ART:
+            return setCurrentArt(state, action)
         default:
             // @ts-ignore
             const x: never = null

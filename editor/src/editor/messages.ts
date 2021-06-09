@@ -1,3 +1,4 @@
+import store from '../store/store';
 
 type messagesType = {
     [key: string]: {
@@ -35,5 +36,15 @@ const messages: messagesType = {
         },
     }
 }
+
+/*const handler = {
+    get: (target: typeof messagesOrigin, prop: string) => {
+        const lang = store.getState().settings.editorLanguage
+
+        return target[prop][lang]
+    }
+}*/
+
+// const messages = new Proxy(messagesOrigin, handler)
 
 export default messages
