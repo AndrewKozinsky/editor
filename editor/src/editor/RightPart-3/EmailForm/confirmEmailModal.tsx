@@ -1,19 +1,19 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import actions from 'store/rootAction'
-import { AppState } from 'store/rootReducer'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
-import messages from '../messages'
-import {useChangeEmail } from 'requests/authRequests'
+// import React, {useCallback, useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import actions from 'store/rootAction'
+// import { AppState } from 'store/rootReducer'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import Hr from 'common/misc/Hr/Hr'
+// import messages from '../messages'
+// import {useChangeEmail } from 'requests/authRequests'
 
 
 /**
  * Хук регулирует показ модального окно подтверждения показа почты и изменяет почту на переданную
  * @param {Object} fh — объект отдаваемый FormHandler-ом.
  */
-export default function useHandleConfirmChangingEmailModal(fh: any) {
+/*export default function useHandleConfirmChangingEmailModal(fh: any) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -53,14 +53,15 @@ export default function useHandleConfirmChangingEmailModal(fh: any) {
     return {
         isSuccessMessageOpen
     }
-}
+}*/
 
 
-type ModalContentPropType = {
+/*type ModalContentPropType = {
     newEmail: string
     setIsSuccessMessageOpen: (isSuccessMessageOpen: boolean) => void
-}
+}*/
 
+/*
 function ModalContent(props: ModalContentPropType) {
     const {
         newEmail,
@@ -109,4 +110,4 @@ function ModalContent(props: ModalContentPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

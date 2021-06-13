@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useEffect, useState } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
 import {useStore} from 'effector-react'
-import { AppState } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import FHTypes from 'libs/formHandler/types'
+// import { AppState } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import FHTypes from 'libs/formHandler/types'
 // import {articlesTreeStore} from '../../ArticlesList/ArticlesList'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import StoreSitesTypes from 'store/site/sitesTypes'
+// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { OptionsType } from 'common/formElements/Select/SelectTypes'
+// import StoreSitesTypes from 'store/site/sitesTypes'
 // import messages from '../../messages'
 
 
@@ -18,7 +18,7 @@ import StoreSitesTypes from 'store/site/sitesTypes'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     const dispatch = useDispatch()
 
     // id текущей статьи
@@ -37,21 +37,7 @@ export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState:
 
 
     }, [currentArtItemId])
-
-    // При изменении uuid статьи поставить в форму новые данные
-    // useEffect(function () {
-        // if (!currentArtItemId) return
-
-        // Данные статьи
-        // const artData =
-        // if (!artData) return
-
-        // let newFormState = changeField(formState, 'name', artData.name)
-
-        // Поставить новое состояние формы
-        // setFormState(newFormState)
-    // }, [currentArtItemId])
-}
+}*/
 
 
 /**
@@ -88,19 +74,19 @@ export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState:
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
-export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
+/*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Язык интерфейса
     // const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Массив шаблонов подключаемых файлов
-    /*const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
+    const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
         return store.sites.incFilesTemplatesSection.templates
-    })*/
+    })
 
     const [isVisible, setIsVisible] = useState(false)
     const [selectOptions, setSelectOptions] = useState([])
 
-    /*useEffect(function () {
+    useEffect(function () {
         // Если есть массив шаблонов...
         if (templates?.length) {
 
@@ -134,10 +120,10 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
             }
             fh.setFormState = makeImmutableObj(fh.formState, templatesField, newTemplatesField)
         }
-    }, [templates])*/
+    }, [templates])
 
     return {
         isTemplatesSelectVisible: isVisible,
         selectOptions
     }
-}
+}*/

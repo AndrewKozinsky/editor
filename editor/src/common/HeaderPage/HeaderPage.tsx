@@ -1,14 +1,15 @@
-import React, {ReactElement, ReactNode} from 'react'
-import Header from '../textBlocks/Header/Header'
-import './HeaderPage.scss'
+// import React, {ReactElement} from 'react'
+// import Header from '../textBlocks/Header/Header'
+// import './HeaderPage.scss'
 
 
-type HeaderPagePropType = {
+/*type HeaderPagePropType = {
     headerText: string
     display?: boolean
     children: ReactElement | ReactElement[]
-}
+}*/
 
+/*
 export default function HeaderPage(props: HeaderPagePropType) {
 
     const {
@@ -53,4 +54,4 @@ export default function HeaderPage(props: HeaderPagePropType) {
             {content}
         </div>
     )
-}
+}*/

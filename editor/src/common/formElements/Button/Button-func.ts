@@ -1,15 +1,14 @@
 import {useEffect} from 'react'
 import {makeCN} from 'utils/StringUtils'
 import { ButtonPropType } from './Button'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
+
 
 /**
  * Функция возвращает классы кнопки
  * @param {Object} buttonProps — props переданные в кнопку
- * @param {String} size — размер элемента.
  * @param {Boolean} block — должна ли кнопка быть блочным элементом на всю ширину
  */
-export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize, block: boolean) {
+export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -18,10 +17,6 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSetting
     // Классы кнопки
     const CN = 'btn'
     const classes = [CN]
-
-    // Размер кнопки.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
 
     // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).
@@ -34,24 +29,6 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSetting
 
     // Если кнопка должна быть блочным элементом на всю ширину
     if (block) classes.push(`${CN}--block`)
-
-    return makeCN(classes)
-}
-
-
-/**
- * Функция возвращает классы загрузчика кнопки
- * @param {String} size — размер загрузчика
- */
-export function getButtonLoaderClasses(size: StoreSettingsTypes.EditorSize) {
-
-    // Классы кнопки
-    const CN = 'btn-loader'
-    const classes = [CN]
-
-    // Размер загрузчика.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
 }

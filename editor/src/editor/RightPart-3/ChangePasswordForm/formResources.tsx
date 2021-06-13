@@ -1,17 +1,17 @@
-import React from 'react'
+// import React from 'react'
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import actions from 'store/rootAction'
-import { MiscTypes } from 'types/miscTypes'
-import messages from '../messages'
+// import * as yup from 'yup'
+// import FHTypes from 'src/libs/formHandler/types'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import { makeFetch } from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import actions from 'store/rootAction'
+// import { MiscTypes } from 'types/miscTypes'
+// import messages from '../messages'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -142,7 +142,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -151,24 +151,24 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+/*function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
 
     const schemas = {
         passwordCurrent: yup.string()
-            .required(messages.Common.requiredField[lang])
-            .min(6, messages.Common.passwordToShort[lang])
-            .max(50, messages.Common.passwordToLong[lang]),
+            .required(commonMessages.requiredField[lang])
+            .min(6, commonMessages.passwordToShort[lang])
+            .max(50, commonMessages.passwordToLong[lang]),
         newPassword: yup.string()
-            .required(messages.Common.requiredField[lang])
-            .min(6, messages.Common.passwordToShort[lang])
-            .max(50, messages.Common.passwordToLong[lang]),
+            .required(commonMessages.requiredField[lang])
+            .min(6, commonMessages.passwordToShort[lang])
+            .max(50, commonMessages.passwordToLong[lang]),
         newPasswordAgain: yup.string()
             .oneOf([fields.newPassword.value[0]], messages.ChangePasswordSection.passwordsMustMatch[lang])
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -178,7 +178,7 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  * @param lang
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -220,14 +220,14 @@ function validateForm(
     }
 
     return formState
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -243,7 +243,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -252,7 +252,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'passwordCurrent')
@@ -262,4 +262,4 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/

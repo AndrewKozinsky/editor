@@ -1,11 +1,10 @@
-import { AppState } from 'store/rootReducer'
-import {ButtonPropType} from '../formElements/Button/Button'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {makeCN} from 'utils/StringUtils'
-import {useSelector} from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import {ButtonPropType} from '../formElements/Button/Button'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import {makeCN} from 'utils/StringUtils'
+// import {useSelector} from 'react-redux'
 
-export function useGetItemClasses(isActive: boolean = false): string {
-
+/*export function useGetItemClasses(isActive: boolean = false): string {
     // Размер интерфейса
     const size = useSelector((store: AppState) => store.settings.editorSize)
 
@@ -21,7 +20,7 @@ export function useGetItemClasses(isActive: boolean = false): string {
     if (isActive) classes.push(`${CN}--active`)
 
     return makeCN(classes)
-}
+}*/
 
 
 
@@ -30,6 +29,7 @@ export function useGetItemClasses(isActive: boolean = false): string {
  * @param {Object} buttonProps — props переданные в кнопку
  * @param {String} size — размер элемента.
  */
+/*
 export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize) {
 
-}
+}*/

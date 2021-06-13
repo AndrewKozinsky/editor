@@ -1,39 +1,39 @@
-@import "../../commonStyles/commonStyles";
+//@import "../../commonStyles/commonStyles";
 
 
-$CN: radio;
+//$CN: radio;
 
 // Оригинальный флаг
-.#{$CN}-input {
+/*.#{$CN}-input {
     position: absolute;
     opacity: 0;
-}
+}*/
 
 // Вид label в зависимости от размера
-.#{$CN}-label {
+/*.#{$CN}-label {
     position: relative;
     user-select: none;
     cursor: pointer;
     transition: opacity .3s;
-}
-.#{$CN}-label--small-size {
+}*/
+/*.#{$CN}-label--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     margin-left: 19px;
-}
-.#{$CN}-label--middle-size {
+}*/
+/*.#{$CN}-label--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     margin-left: 24px;
-}
-.#{$CN}-label--big-size {
+}*/
+/*.#{$CN}-label--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     margin-left: 28px;
-}
+}*/
 
 // Общие стили псевдофлагов
-.#{$CN}-label {
+/*.#{$CN}-label {
     &:before, &:after {
         content: '';
         position: absolute;
@@ -50,58 +50,57 @@ $CN: radio;
         transition: opacity .1s, transform .1s;
         transform: scale(0);
     }
-}
+}*/
 
 // Размеры псевдофлага ::before и ::after
-.#{$CN}-label--small-size::before {
+/*.#{$CN}-label--small-size::before {
     width: 15px;
     height: 15px;
     left: -19px;
-}
-.#{$CN}-label--middle-size::before {
+}*/
+/*.#{$CN}-label--middle-size::before {
     width: 18px;
     height: 18px;
     left: -24px;
-}
-.#{$CN}-label--big-size::before {
+}*/
+/*.#{$CN}-label--big-size::before {
     width: 21px;
     height: 21px;
     left: -28px;
-}
+}*/
 
 // Размеры псевдофлага ::after
-.#{$CN}-label--small-size::after {
+/*.#{$CN}-label--small-size::after {
     width: 5px;
     height: 5px;
     left: -16px;
     top: 4px;
     margin: 2px 0 0 2px;
-}
-.#{$CN}-label--middle-size::after {
+}*/
+/*.#{$CN}-label--middle-size::after {
     width: 6px;
     height: 6px;
     left: -15px;
     top: 10px;
     margin: -3px 0 0 -3px;
-}
-.#{$CN}-label--big-size::after {
+}*/
+/*.#{$CN}-label--big-size::after {
     width: 7px;
     height: 7px;
     left: -28px;
     top: 4px;
     margin: 4px 0 0 7px;
     opacity: 0;
-
-}
+}*/
 
 // Неотмеченный before
-.#{$CN}-input:not(checked) + .#{$CN}-label {
+/*.#{$CN}-input:not(checked) + .#{$CN}-label {
     &::before {
         background-color: var(--button-color-hover);
     }
-}
+}*/
 // Отмеченный before
-.#{$CN}-input:checked + .#{$CN}-label {
+/*.#{$CN}-input:checked + .#{$CN}-label {
     &::before {
         background-color: var(--accent-color);
     }
@@ -109,15 +108,16 @@ $CN: radio;
         opacity: 1;
         transform: scale(1);
     }
-}
+}*/
 
 // Фокусировка
-.#{$CN}-input:focus + .#{$CN}-label:before {
+/*.#{$CN}-input:focus + .#{$CN}-label:before {
     // Стандартная фокусировка
     @include focus
-}
+}*/
 
 // Заблокированное поле
+/*
 .#{$CN}-input:disabled + .#{$CN}-label {
     opacity: .5;
-}
+}*/

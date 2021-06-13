@@ -1,9 +1,6 @@
-//@import "variables";
-
 :root {
     font-size: 10px;
 }
-
 
 @font-face {
     font-family: "SF UI Display";
@@ -58,7 +55,7 @@ body {
 }
 
 a {
-    color: var(--link-color);
+    color: var(--accent-color);
     text-decoration: none;
     border-bottom: 1px solid hsla( var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), 0.3 );
 
@@ -67,7 +64,7 @@ a {
     }
 
     &:focus {
-        outline-color: var(--accent-h-part);
+        outline-color: var(--focus-color);
         outline-style: dotted;
         outline-offset: 4px;
         outline-width: 1px;

@@ -1,31 +1,31 @@
-import {useCallback, useEffect} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import store from 'store/store'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import FilesTreeType from 'libs/FilesTree/types'
-import {makeFetch, useFetch} from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-import {addOpenPropToFolders, selectItem} from 'libs/FilesTree/StoreManage/manageState'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import {setCompItems, setArtItems} from '../stores'
-import { FolderType } from '../types'
+// import {useCallback, useEffect} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import store from 'store/store'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import FilesTreeType from 'libs/FilesTree/types'
+// import {makeFetch, useFetch} from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
+// import {addOpenPropToFolders, selectItem} from 'libs/FilesTree/StoreManage/manageState'
+// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import {setCompItems, setArtItems} from '../stores'
+// import { FolderType } from '../types'
 
 // Тип данных по папкам присылаемый с сервера
-type FoldersServerResponse = {
+/*type FoldersServerResponse = {
     data: {
         folders: {
             content: string
         }
     }
-}
+}*/
 
 /**
  * Хук скачивает с сервера папки и ставит в Хранилище
  * @param {String} type — тип папок: с компонентами или со статьями
  */
-export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
+/*export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
     // id текущего сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
 
@@ -65,7 +65,7 @@ export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
         // При получении данных по папкам поставить их в Эффектор
         setItemsToEffector(articlesResponse, type, currentArtItemId, setArtItems)
     }, [articlesResponse])
-}
+}*/
 
 /**
  *
@@ -74,7 +74,7 @@ export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
  * @param {String} currentItemId — uuid элемента, который должен быть выделен
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  */
-function setItemsToEffector(
+/*function setItemsToEffector(
     response: FoldersServerResponse,
     type: FolderType,
     currentItemId: FilesTreeType.UuId,
@@ -96,7 +96,7 @@ function setItemsToEffector(
 
     // Поставить в Эффектор присланный порядок
     setItems(content)
-}
+}*/
 
 
 /**
@@ -104,7 +104,7 @@ function setItemsToEffector(
  * @param {String} type — тип папок: с компонентами или со статьями.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.Items) {
+/*export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.Items) {
     // Подготовить сохраняемый массив папок и файлов
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
 
@@ -126,7 +126,7 @@ export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.I
     else if (type === 'articles') {
         await makeFetch(getApiUrl('articlesFolders', siteId), options)
     }
-}
+}*/
 
 /**
  * Функция запускаемая после удаления папки или компонента
@@ -134,7 +134,7 @@ export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.I
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} deletedItemUuid — uuid удалённого элемента
  */
-export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, deletedItemUuid: FilesTreeType.UuId) {
+/*export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, deletedItemUuid: FilesTreeType.UuId) {
     // Обнулить данные выделенного элемента в Хранилище
     if (type === 'components') {
         store.dispatch( actions.sites.setCurrentComp(null, null) )
@@ -145,7 +145,7 @@ export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, de
 
     // Сохранить данные на сервере
     saveItemsOnServer(type, items)
-}
+}*/
 
 /**
  * Функция запускаемая после добавления новой папки или файла (компонента или статьи)
@@ -153,7 +153,7 @@ export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, de
  * @param {Object} item — данные нового файла.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.Items, item: FilesTreeType.Item) {
+/*export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.Items, item: FilesTreeType.Item) {
     const siteId = store.getState().sites.currentSiteId
 
     // Параметры запроса
@@ -174,7 +174,7 @@ export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.
     else if (type === 'articles') {
         await makeFetch(getApiUrl('article'), options)
     }
-}
+}*/
 
 /**
  * Функция запускаемая после раскрытия/скрытия любой папки.
@@ -183,28 +183,28 @@ export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.
  * @param {String} type — тип папок: с компонентами или со статьями
  * @param {Array} arrUuId — массив uuid раскрытых папок
  */
-export function afterCollapseFolder(type: FolderType, arrUuId: FilesTreeType.UuIdArr) {
+/*export function afterCollapseFolder(type: FolderType, arrUuId: FilesTreeType.UuIdArr) {
     if (type === 'components') {
         setInLocalStorage('editorComponentsOpenedFolders', arrUuId)
     }
     else if (type === 'articles') {
         setInLocalStorage('editorArticlesOpenedFolders', arrUuId)
     }
-}
+}*/
 
 /** Функция получает из localStorage uuid открытых папок и возвращает
  *  чтобы при отрисовке компонента они были открытыми */
-export function getOpenedFoldersUuId(type: FolderType) {
+/*export function getOpenedFoldersUuId(type: FolderType) {
     if (type === 'components') {
         return getFromLocalStorage('editorComponentsOpenedFolders')
     }
     else if (type === 'articles') {
         return getFromLocalStorage('editorArticlesOpenedFolders')
     }
-}
+}*/
 
 /** Хук возвращает обработчик щелчка по папке или файлу. */
-export function useGetOnItemClick(type: FolderType) {
+/*export function useGetOnItemClick(type: FolderType) {
     const dispatch = useDispatch()
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
@@ -216,4 +216,4 @@ export function useGetOnItemClick(type: FolderType) {
             dispatch(actions.sites.setCurrentArt(item.uuid, item.type))
         }
     }, [dispatch])
-}
+}*/

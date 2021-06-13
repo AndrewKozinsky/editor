@@ -7,17 +7,7 @@ $CN: not-found;
 }
 
 .#{$CN}__header {
-    font-weight: bold;
-}
-.#{$CN}__header--small-size {
     font-size: 26px;
     line-height: 36px;
-}
-.#{$CN}__header--middle-size {
-    font-size: 28px;
-    line-height: 38px;
-}
-.#{$CN}__header--big-size {
-    font-size: 30px;
-    line-height: 40px;
+    font-weight: bold;
 }

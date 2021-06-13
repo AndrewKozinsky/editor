@@ -1,8 +1,5 @@
 import React, {ReactNode} from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {makeCN} from 'utils/StringUtils'
-import {useGetComponentSize} from 'utils/MiscUtils'
 import {getNoticeWrapperClasses} from './Notice-func'
 import './Notice.scss'
 
@@ -11,7 +8,6 @@ const CN = 'notice'
 
 export type NoticePropType = {
     type?: 'standard' | 'error' | 'success' // Тип сообщения: standard (обычный текст), error (ошибка), success (успех)
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     children?: ReactNode
 }
 
@@ -19,27 +15,19 @@ export type NoticePropType = {
  * Компонент текстового уведомления.
  * Если передать тип, то это будет или сообщение об ошибке или об успехе.
  */
-function Notice(props: NoticePropType) {
+export default function Notice(props: NoticePropType) {
     const {
         type = 'standard', // Тип сообщения: standard (обычный текст), error (ошибка), success (успех)
         children
     } = props
 
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(props.relativeSize)
-
-    // Классы абзаца с текстом
-    const paragraphCls = [CN + '__paragraph']
-
     return (
-        <div className={getNoticeWrapperClasses(props, size)}>
+        <div className={getNoticeWrapperClasses(props)}>
             <Sign {...props} />
-            <p className={makeCN(paragraphCls)}>{children}</p>
+            <p className={CN + '__paragraph'}>{children}</p>
         </div>
     )
 }
-
-export default Notice
 
 
 /** Значёк левее содержимого */
@@ -49,10 +37,10 @@ function Sign(props: NoticePropType) {
     } = props
 
     if (type === 'error') {
-        return <SvgIcon type='errorTriangle' className={CN + '__icon'} />
+        return <SvgIcon type='errorTriangle' extraClass={CN + '__icon'} />
     }
-    if (type === 'success') {
-        return <SvgIcon type='successCircle' className={CN + '__icon'} />
+    else if (type === 'success') {
+        return <SvgIcon type='successCircle' extraClass={CN + '__icon'} />
     }
 
     return null

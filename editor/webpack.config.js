@@ -80,6 +80,7 @@ function getResolve() {
             common: path.resolve(__dirname, './src/common'),
             editor: path.resolve(__dirname, './src/editor'),
             libs: path.resolve(__dirname, './src/libs'),
+            messages: path.resolve(__dirname, './src/messages'),
             modules: path.resolve(__dirname, './src/modules'),
             pages: path.resolve(__dirname, './src/pages'),
             requests: path.resolve(__dirname, './src/requests'),

@@ -1,16 +1,17 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import {AppState} from 'store/rootReducer'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import messages from '../messages'
-import getFormConfig from './formResources'
-import Notice from 'common/Notice/Notice'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import {AppState} from 'store/rootReducer'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import messages from '../messages'
+// import getFormConfig from './formResources'
+// import Notice from 'common/Notice/Notice'
 
 
+/*
 export default function ChangePasswordForm() {
 
     // Язык интерфейса
@@ -79,4 +80,4 @@ export default function ChangePasswordForm() {
             </Wrapper>}
         </>
     )
-}
+}*/

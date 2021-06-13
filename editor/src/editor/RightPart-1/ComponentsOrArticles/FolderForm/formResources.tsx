@@ -1,22 +1,22 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import messages from '../../messages'
-import store from 'store/store'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import * as yup from 'yup'
+// import FHTypes from 'libs/formHandler/types'
+// import messages from '../../messages'
+// import store from 'store/store'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
 // import {componentsTreeStore, setItems} from '../../ComponentsList/ComponentsList'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import {FolderType} from '../types'
-import {
+// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import { makeFetch } from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import {FolderType} from '../types'
+/*import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'
-import {useSelector} from 'react-redux';
-import {AppState} from '../../../../store/rootReducer';
+} from '../stores'*/
+// import {useSelector} from 'react-redux';
+// import {AppState} from '../../../../store/rootReducer';
 
 
 /**
@@ -24,7 +24,7 @@ import {AppState} from '../../../../store/rootReducer';
  * @param {String} lang — язык интерфейса
  * @param {String} type — тип выбранной папки: с компонентами или со статьями
  */
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, type: FolderType): FHTypes.FormConfig {
+/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, type: FolderType): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -104,7 +104,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, t
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -113,7 +113,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, t
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(type: FolderType, fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+/*function getSchema(type: FolderType, fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
 
     // Сообщение об ошибке про обязательное имя статьи
     let nameRequiredText = messages.ComponentFolderForm.formNameInputRequired[lang]
@@ -125,7 +125,7 @@ function getSchema(type: FolderType, fieldName: string, lang: StoreSettingsTypes
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -136,7 +136,7 @@ function getSchema(type: FolderType, fieldName: string, lang: StoreSettingsTypes
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  * @param lang
  */
-function validateForm(
+/*function validateForm(
     type: FolderType,
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
@@ -177,14 +177,14 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -200,7 +200,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -209,7 +209,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -217,7 +217,7 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/
 
 
 /**
@@ -225,7 +225,7 @@ function setLoadingStatusToForm(
  * @param {String} type — тип выбранной папки: с компонентами или со статьями
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-function saveItemsOnServer( type: FolderType, formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+/*function saveItemsOnServer( type: FolderType, formDetails: FHTypes.FormDetailsInSubmitHandler ) {
 
     // Массив папок и файлов из Хранилища
     let items
@@ -273,4 +273,4 @@ function saveItemsOnServer( type: FolderType, formDetails: FHTypes.FormDetailsIn
     else if (type === 'articles') {
         makeFetch(getApiUrl('articlesFolders', currentSiteId), options)
     }
-}
+}*/

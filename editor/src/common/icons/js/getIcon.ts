@@ -1,245 +1,96 @@
-import {ReactNode} from 'react'
+import {ReactElement, ReactNode} from 'react'
 import Logo from '../icons/logo'
 import ErrorTriangle from '../icons/errorTriangle'
 import SuccessCircle from '../icons/successCircle'
-import SelectInputSmallArrows from '../icons/selectInputSmallArrows'
-import SelectInputMiddleArrows from '../icons/selectInputMiddleArrows'
-import SelectInputBigArrows from '../icons/selectInputBigArrows'
-import MainTabMaterialsSmall from '../icons/mainTabMaterialsSmall'
-import MainTabMaterialsMiddle from '../icons/mainTabMaterialsMiddle'
-import MainTabMaterialsBig from '../icons/mainTabMaterialsBig'
-import MainTabEditorSmall from '../icons/mainTabEditorSmall'
-import MainTabEditorMiddle from '../icons/mainTabEditorMiddle'
-import MainTabEditorBig from '../icons/mainTabEditorBig'
-import MainTabSettingsSmall from '../icons/mainTabSettingsSmall'
-import MainTabSettingsMiddle from '../icons/mainTabSettingsMiddle'
-import MainTabSettingsBig from '../icons/mainTabSettingsBig'
+import SelectInputArrows from '../icons/selectInputArrows'
+import MainTabMaterials from '../icons/mainTabMaterials'
+import MainTabEditor from '../icons/mainTabEditor'
+import MainTabSettings from '../icons/mainTabSettings'
 import MainTabRoundScion from '../icons/mainTabRoundScion'
-import BtnSignSaveSmall from '../icons/btnSignSaveSmall'
-import BtnSignSaveMiddle from '../icons/btnSignSaveMiddle'
-import BtnSignSaveBig from '../icons/btnSignSaveBig'
-import BtnSignFolderSmall from '../icons/btnSignFolderSmall'
-import BtnSignFolderBig from '../icons/btnSignFolderBig'
-import BtnSignTrashSmall from '../icons/btnSignTrashSmall'
-import BtnSignTrashMiddle from '../icons/btnSignTrashMiddle'
-import BtnSignCodeMiddle from '../icons/btnSignCodeMiddle'
-import BtnSignAddMiddle from '../icons/btnSignAddMiddle'
-import BtnSignJsonMiddle from '../icons/btnSignJsonMiddle'
-import BtnSignAddSmall from '../icons/btnSignAddSmall'
-import BtnSignAddBig from '../icons/btnSignAddBig'
-import BtnSignJsonBig from '../icons/btnSignJsonBig'
-import BtnSignCodeSmall from '../icons/btnSignCodeSmall'
-import BtnSignCodeBig from '../icons/btnSignCodeBig'
-import BtnSignFolderMiddle from '../icons/btnSignFolderMiddle'
-import BtnSignTrashBig from '../icons/btnSignTrashBig'
-import BtnSignJsonSmall from '../icons/btnSignJsonSmall'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import BtnSignCloseSmall from '../icons/btnSignCloseSmall'
-import BtnSignExitSmall from '../icons/btnSignExitSmall';
-import BtnSignExitMiddle from '../icons/btnSignExitMiddle';
-import BtnSignExitBig from '../icons/btnSignExitBig';
-import EditorLightThemeSmall from '../icons/editorLightThemeSmall'
-import EditorLightThemeMiddle from '../icons/editorLightThemeMiddle'
-import EditorLightThemeBig from '../icons/editorLightThemeBig';
-import EditorDarkThemeSmall from '../icons/editorDarkThemeSmall'
-import EditorDarkThemeMiddle from '../icons/editorDarkThemeMiddle';
-import EditorDarkThemeBig from '../icons/editorDarkThemeBig'
-import SiteTabSiteSmall from '../icons/siteTabSiteSmall'
-import SiteTabSiteMiddle from '../icons/siteTabSiteMiddle'
-import SiteTabSiteBig from '../icons/siteTabSiteBig'
-import SiteTabPluginsSmall from '../icons/siteTabPluginsSmall'
-import SiteTabPluginsMiddle from '../icons/siteTabPluginsMiddle';
-import SiteTabPluginsBig from '../icons/siteTabPluginsBig';
-import SiteTabComponentsMiddle from '../icons/siteTabComponentsMiddle';
-import SiteTabComponentsBig from '../icons/siteTabComponentsBig';
-import SiteTabArticleSmall from '../icons/siteTabArticleSmall';
-import SiteTabArticleBig from '../icons/siteTabArticleBig'
-import SiteTabComponentsSmall from '../icons/siteTabComponentsSmall'
-import SiteTabArticleMiddle from '../icons/siteTabArticleMiddle'
-import FilesTreeTriangleMiddle from '../icons/filesTreeTriangleMiddle'
-import FilesTreeTriangleBig from '../icons/filesTreeTriangleBig';
-import FilesTreeFolderPlusMiddle from '../icons/filesTreeFolderPlusMiddle';
-import FilesTreeFolderBig from '../icons/filesTreeFolderBig';
-import FilesTreePlusMiddle from '../icons/filesTreePlusMiddle';
-import FilesTreeFolderPlusSmall from '../icons/filesTreeFolderPlusSmall';
-import FilesTreeTriangleSmall from '../icons/filesTreeTriangleSmall';
-import FilesTreeFolderMiddle from '../icons/filesTreeFolderMiddle';
-import FilesTreeFolderPlusBig from '../icons/filesTreeFolderPlusBig';
-import FilesTreePlusBig from '../icons/filesTreePlusBig';
-import FilesTreePlusSmall from '../icons/filesTreePlusSmall';
-import FilesTreeFolderSmall from '../icons/filesTreeFolderSmall';
-import FilesTreePlaceMark from '../icons/filesTreePlaceMark';
-import FilesTreeTrashSmall from '../icons/filesTreeTrashSmall'
+import BtnSignSave from '../icons/btnSignSave'
+import BtnSignFolder from '../icons/btnSignFolder'
+import BtnSignTrash from '../icons/btnSignTrash'
+import BtnSignAdd from '../icons/btnSignAdd'
+import BtnSignCode from '../icons/btnSignCode'
+import BtnSignJson from '../icons/btnSignJson'
+import BtnSignClose from '../icons/btnSignClose'
+import BtnSignExit from '../icons/btnSignExit';
+import EditorLightTheme from '../icons/editorLightTheme'
+import EditorDarkTheme from '../icons/editorDarkTheme'
+import SiteTabSite from '../icons/siteTabSite'
+import SiteTabPlugins from '../icons/siteTabPlugins'
+import SiteTabArticle from '../icons/siteTabArticle'
+import SiteTabComponents from '../icons/siteTabComponents'
+import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
+import FilesTreeTriangle from '../icons/filesTreeTriangle'
+import FilesTreePlus from '../icons/filesTreePlus'
+import FilesTreeFolder from '../icons/filesTreeFolder'
+import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
+import FilesTreeTrash from '../icons/filesTreeTrash'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
  * @param {String} type — тип значка.
- * @param {String} size — размер значка.
  */
-export function getIcon(type: string, size: StoreSettingsTypes.EditorSize = 'small') {
+export function getIcon(type: string): ReactNode {
 
     type componentsType = {
-        [key: string]: {
-            small: ReactNode,
-            middle?: ReactNode,
-            big?: ReactNode
-        }
+        [key: string]: ReactNode
     }
 
     const components: componentsType = {
         // Логотип редактора
-        logo: {
-            small: Logo
-        },
+        logo: Logo,
+
         // Значёк ошибки
-        errorTriangle: {
-            small: ErrorTriangle
-        },
+        errorTriangle: ErrorTriangle,
+
         // Значёк успеха
-        successCircle: {
-            small: SuccessCircle
-        },
+        successCircle: SuccessCircle,
+
         // Галочка выбранного флага
-        selectInputSmallArrows: {
-            small: SelectInputSmallArrows
-        },
-        selectInputMiddleArrows: {
-            small: SelectInputMiddleArrows
-        },
-        selectInputBigArrows: {
-            small: SelectInputBigArrows
-        },
+        selectInputArrows: SelectInputArrows,
+
         // Значки главных вкладок
-        mainTabMaterials: {
-            small: MainTabMaterialsSmall,
-            middle: MainTabMaterialsMiddle,
-            big: MainTabMaterialsBig,
-        },
-        mainTabEditor: {
-            small: MainTabEditorSmall,
-            middle: MainTabEditorMiddle,
-            big: MainTabEditorBig,
-        },
-        mainTabSettings: {
-            small: MainTabSettingsSmall,
-            middle: MainTabSettingsMiddle,
-            big: MainTabSettingsBig,
-        },
+        mainTabMaterials: MainTabMaterials,
+        mainTabEditor: MainTabEditor,
+        mainTabSettings: MainTabSettings,
 
         // Значки на вкладках сайта
-        siteTabSite: {
-            small: SiteTabSiteSmall,
-            middle: SiteTabSiteMiddle,
-            big: SiteTabSiteBig
-        },
-        siteTabPlugins: {
-            small: SiteTabPluginsSmall,
-            middle: SiteTabPluginsMiddle,
-            big: SiteTabPluginsBig
-        },
-        siteTabComponents: {
-            small: SiteTabComponentsSmall,
-            middle: SiteTabComponentsMiddle,
-            big: SiteTabComponentsBig
-        },
-        siteTabArticle: {
-            small: SiteTabArticleSmall,
-            middle: SiteTabArticleMiddle,
-            big: SiteTabArticleBig
-        },
+        siteTabSite: SiteTabSite,
+        siteTabPlugins: SiteTabPlugins,
+        siteTabComponents: SiteTabComponents,
+        siteTabArticle: SiteTabArticle,
 
         // Закругляемая часть в кнопки вкладки
-        mainTabRoundScion: {
-            small: MainTabRoundScion
-        },
+        mainTabRoundScion: MainTabRoundScion,
+
         // Значки на кнопках
-        btnSignSave: {
-            small: BtnSignSaveSmall,
-            middle: BtnSignSaveMiddle,
-            big: BtnSignSaveBig
-        },
-        btnSignFolder: {
-            small: BtnSignFolderSmall,
-            middle: BtnSignFolderMiddle,
-            big: BtnSignFolderBig
-        },
-        btnSignTrash: {
-            small: BtnSignTrashSmall,
-            middle: BtnSignTrashMiddle,
-            big: BtnSignTrashBig
-        },
-        btnSignCode: {
-            small: BtnSignCodeSmall,
-            middle: BtnSignCodeMiddle,
-            big: BtnSignCodeBig
-        },
-        btnSignAdd: {
-            small: BtnSignAddSmall,
-            middle: BtnSignAddMiddle,
-            big: BtnSignAddBig
-        },
-        btnSignJson: {
-            small: BtnSignJsonSmall,
-            middle: BtnSignJsonMiddle,
-            big: BtnSignJsonBig
-        },
-        btnSignClose: {
-            small: BtnSignCloseSmall
-        },
-        btnSignExit: {
-            small: BtnSignExitSmall,
-            middle: BtnSignExitMiddle,
-            big: BtnSignExitBig
-        },
+        btnSignSave: BtnSignSave,
+        btnSignFolder: BtnSignFolder,
+        btnSignTrash: BtnSignTrash,
+        btnSignCode: BtnSignCode,
+        btnSignAdd: BtnSignAdd,
+        btnSignJson: BtnSignJson,
+        btnSignClose: BtnSignClose,
+        btnSignExit: BtnSignExit,
+
         // Тема интерфейса
-        editorLightTheme: {
-            small: EditorLightThemeSmall,
-            middle: EditorLightThemeMiddle,
-            big: EditorLightThemeBig
-        },
-        editorDarkTheme: {
-            small: EditorDarkThemeSmall,
-            middle: EditorDarkThemeMiddle,
-            big: EditorDarkThemeBig
-        },
+        editorLightTheme: EditorLightTheme,
+        editorDarkTheme: EditorDarkTheme,
 
         // Значки на FilesTree
-        filesTreeTriangle: {
-            small: FilesTreeTriangleSmall,
-            middle: FilesTreeTriangleMiddle,
-            big: FilesTreeTriangleBig
-        },
-        filesTreeFolder: {
-            small: FilesTreeFolderSmall,
-            middle: FilesTreeFolderMiddle,
-            big: FilesTreeFolderBig
-        },
-        filesTreeFolderPlus: {
-            small: FilesTreeFolderPlusSmall,
-            middle: FilesTreeFolderPlusMiddle,
-            big: FilesTreeFolderPlusBig
-        },
-        filesTreePlus: {
-            small: FilesTreePlusSmall,
-            middle: FilesTreePlusMiddle,
-            big: FilesTreePlusBig
-        },
+        filesTreeTriangle: FilesTreeTriangle,
+        filesTreeFolder: FilesTreeFolder,
+        filesTreeFolderPlus: FilesTreeFolderPlus,
+        filesTreePlus: FilesTreePlus,
+
         // Значёк указателя помещения перетаскиваемого элемента
-        filesTreePlaceMark: {
-            small: FilesTreePlaceMark,
-        },
+        filesTreePlaceMark: FilesTreePlaceMark,
+
         // Значёк указателя помещения перетаскиваемого элемента
-        filesTreeTrash: {
-            small: FilesTreeTrashSmall,
-        },
+        filesTreeTrash: FilesTreeTrash,
     }
 
-    //@ts-ignore
-    if (components[type][size]) {
-        //@ts-ignore
-        return components[type][size]
-    } else {
-        //@ts-ignore
-        return components[type]['small']
-    }
+    return components[type]
 }

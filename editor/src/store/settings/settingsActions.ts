@@ -19,14 +19,6 @@ const settingsActions = {
         }
     },
 
-    // Установка размера элементов интерфейса
-    setEditorSize(payload: StoreSettingsTypes.EditorSize): StoreSettingsTypes.SetEditorSizeAction {
-        return {
-            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_SIZE,
-            payload
-        }
-    },
-
     // Установка должна быть показана формы входа, редактор или переход между ними
     setEntryAndEditorViewState(payload: StoreSettingsTypes.EntryAndEditorViewState): StoreSettingsTypes.SetEntryAndEditorViewStateAction {
         return {

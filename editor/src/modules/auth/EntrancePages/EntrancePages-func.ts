@@ -2,9 +2,10 @@ import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
-import {makeCN} from 'src/utils/StringUtils'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction';
+import {makeCN} from 'utils/StringUtils'
+
 
 /**
  * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
@@ -12,7 +13,8 @@ import actions from 'store/rootAction';
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
  */
-export function useGetWrapperClasses(CN: string) {
+export function useGetWrapperClasses() {
+    const CN = 'entrance-pages-wrapper'
 
     // Статус токена авторизации
     const { authTokenStatus } = useSelector((store: AppState) => store.user)
@@ -61,7 +63,7 @@ export function useGetWrapperClasses(CN: string) {
     }
 }
 
-
+/** Хук регулирует показ или окна редактора или окон входа в зависимости от различных условий. */
 export function useViewStateChanger() {
     const dispatch = useDispatch()
 
@@ -80,7 +82,7 @@ export function useViewStateChanger() {
         }
         // Если сразу открыли страницу входа
         else if (!lastAddress && address !== '/') {
-            // Поставить, что должены быть открыты формы входа
+            // Поставить, что должны быть открыты формы входа
             dispatch( actions.settings.setEntryAndEditorViewState('entry') )
         }
         // Если с формы входа перешли в редактор

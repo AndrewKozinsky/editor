@@ -1,23 +1,23 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
-import messages from '../messages'
-import NameSection from '../wrappers/NameSection/NameSection'
-import Button from 'src/common/formElements/Button/Button'
-import './LeftPart-1.scss'
-import { useFetchSites, useGetNewSiteOnClickHandler, useGetSitesItemsListProps } from './LeftPart1-func'
-import ItemsList from 'common/ItemsList/ItemsList';
-import {useGetSettingsItemsListProps} from '../LeftPart-3/LeftPart-3-func';
-import Wrapper from '../../common/Wrapper/Wrapper';
-import { MiscTypes } from '../../types/miscTypes'
+// import React from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'src/store/rootReducer'
+// import messages from '../messages'
+// import NameSection from '../wrappers/NameSection/NameSection'
+// import Button from 'src/common/formElements/Button/Button'
+// import './LeftPart-1.scss'
+// import { useFetchSites, useGetNewSiteOnClickHandler, useGetSitesItemsListProps } from './LeftPart1-func'
+// import ItemsList from 'common/ItemsList/ItemsList';
+// import {useGetSettingsItemsListProps} from '../LeftPart-3/LeftPart-3-func';
+// import Wrapper from '../../common/Wrapper/Wrapper';
+// import { MiscTypes } from '../../types/miscTypes'
 
 
-type LeftPart1PropType = {
+/*type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}
+}*/
 
 /** Левая часть первой главной вкладки */
-export default function LeftPart1(props: LeftPart1PropType) {
+/*export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
@@ -37,10 +37,10 @@ export default function LeftPart1(props: LeftPart1PropType) {
             </NameSection>
         </div>
     )
-}
+}*/
 
 /** Компонент кнопки создания нового сайта */
-function NewSiteButton() {
+/*function NewSiteButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
@@ -62,9 +62,10 @@ function NewSiteButton() {
     }
 
     return <Button {...attrs} />
-}
+}*/
 
 /** Компонент списка сайтов */
+/*
 function SitesButtons() {
     // Получить с сервера список сайтов и поставить в Хранилище
     useFetchSites()
@@ -77,4 +78,4 @@ function SitesButtons() {
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}
+}*/

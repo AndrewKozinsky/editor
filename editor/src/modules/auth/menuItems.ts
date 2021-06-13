@@ -1,15 +1,12 @@
-import StoreSettingsTypes from '../../store/settings/settingsTypes';
-import {MenuItems} from '../../common/misc/Menu/Menu';
-import messages from './messages';
+import {MenuItems} from 'common/misc/Menu/Menu'
+import { regMenuMessages } from 'messages/regMenuMessages'
 
-/**
- * Функция возвращает массив данных для генерации меню выше формы
- * @param {String} lang — язык интерфейса
- */
-export function getMenuItems(lang: StoreSettingsTypes.EditorLanguage): MenuItems {
+
+/** Функция возвращает массив данных для генерации меню выше формы */
+export function getMenuItems(): MenuItems {
     return [
-        { to: '/reg', label: messages.Menu.reg[lang] },
-        { to: '/enter', label: messages.Menu.enter[lang] },
-        { to: '/reset-password', label: messages.Menu.reset[lang] }
+        { to: '/reg', label: regMenuMessages.reg },
+        { to: '/enter', label: regMenuMessages.enter },
+        { to: '/reset-password', label: regMenuMessages.reset }
     ]
 }

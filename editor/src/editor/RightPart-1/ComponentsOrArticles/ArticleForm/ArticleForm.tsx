@@ -1,21 +1,21 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Hr from 'common/misc/Hr/Hr'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import messages from '../../messages'
-import Form from 'common/formElements/Form/Form'
-import Select from 'common/formElements/Select/Select';
-import { useManageTemplatesSelect } from './ArticleForm-func'
-import { useGetAnotherArticle } from './ArticleForm-func'
-import { ModalContent } from './deleteComponent'
-import useGetShowModal from 'utils/hooksUtils'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Hr from 'common/misc/Hr/Hr'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import messages from '../../messages'
+// import Form from 'common/formElements/Form/Form'
+// import Select from 'common/formElements/Select/Select';
+// import { useManageTemplatesSelect } from './ArticleForm-func'
+// import { useGetAnotherArticle } from './ArticleForm-func'
+// import { ModalContent } from './deleteComponent'
+// import useGetShowModal from 'utils/hooksUtils'
 
-export default function ArticleForm() {
+/*export default function ArticleForm() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -74,4 +74,4 @@ export default function ArticleForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/

@@ -1,14 +1,14 @@
-import store from '../store/store';
+// import store from '../store/store';
 
-type messagesType = {
+/*type messagesType = {
     [key: string]: {
         [key: string]: {
             [key: string]: string
         }
     }
-}
+}*/
 
-const messages: messagesType = {
+/*const messages: messagesType = {
     // Панель «Сайты»
     SitesPanel: {
         header: {
@@ -35,7 +35,7 @@ const messages: messagesType = {
             rus: 'Редактор'
         },
     }
-}
+}*/
 
 /*const handler = {
     get: (target: typeof messagesOrigin, prop: string) => {
@@ -47,4 +47,4 @@ const messages: messagesType = {
 
 // const messages = new Proxy(messagesOrigin, handler)
 
-export default messages
+// export default messages

@@ -1,30 +1,30 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+// import React, {useCallback} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import {AppState} from 'store/rootReducer'
-import FilesTreeType from 'libs/FilesTree/types';
-import actions from 'store/rootAction'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import messages from '../../messages'
-import {
+// import {useStore} from 'effector-react'
+// import {AppState} from 'store/rootReducer'
+// import FilesTreeType from 'libs/FilesTree/types';
+// import actions from 'store/rootAction'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
+// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import messages from '../../messages'
+/*import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'
-import { FolderType } from '../types'
+} from '../stores'*/
+// import { FolderType } from '../types'
 
 
-type ModalContentPropType = {
+/*type ModalContentPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}
+}*/
 
-export default function ModalContent(props: ModalContentPropType) {
+/*export default function ModalContent(props: ModalContentPropType) {
     const { type } = props
 
     const dispatch = useDispatch()
@@ -106,4 +106,4 @@ export default function ModalContent(props: ModalContentPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

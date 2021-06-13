@@ -1,18 +1,18 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import {AppState} from 'store/rootReducer'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import messages from '../messages'
-import Notice from 'common/Notice/Notice'
-import useHandleConfirmChangingEmailModal from './confirmEmailModal'
+// import React from 'react'
+// import { useSelector } from 'react-redux'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import {AppState} from 'store/rootReducer'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import messages from '../messages'
+// import Notice from 'common/Notice/Notice'
+// import useHandleConfirmChangingEmailModal from './confirmEmailModal'
 
 
-export default function EmailForm() {
+/*export default function EmailForm() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
@@ -58,4 +58,4 @@ export default function EmailForm() {
             </Wrapper>}
         </>
     )
-}
+}*/

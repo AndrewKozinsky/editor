@@ -1,10 +1,10 @@
-$CN: name-section;
+//$CN: name-section;
 
-.#{$CN} {
+/*.#{$CN} {
 
-}
+}*/
 
-.#{$CN}__header {
+/*.#{$CN}__header {
     position: relative;
     font-weight: bold;
 
@@ -16,55 +16,55 @@ $CN: name-section;
         height: 1px;
         background-color: var(--button-color);
     }
-}
+}*/
 
 // Большой компонент
-.#{$CN}__header--type1--small-size {
+/*.#{$CN}__header--type1--small-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     margin-bottom: 0.8rem;
 
     &::before { top: 12px; }
-}
-.#{$CN}__header--type1--middle-size {
+}*/
+/*.#{$CN}__header--type1--middle-size {
     font-size: 2.1rem;
     line-height: 2.5rem;
     margin-bottom: 1rem;
 
     &::before { top: 14px; }
-}
-.#{$CN}__header--type1--big-size {
+}*/
+/*.#{$CN}__header--type1--big-size {
     font-size: 2.3rem;
     line-height: 2.9rem;
     margin-bottom: 1rem;
 
     &::before { top: 16px; }
-}
+}*/
 
 // Мелкий компонент
-.#{$CN}__header--type2--small-size {
+/*.#{$CN}__header--type2--small-size {
     font-size: 1.5rem;
     line-height: 2.1rem;
     margin-bottom: 0.8rem;
 
     &::before { top: 11px; }
-}
-.#{$CN}__header--type2--middle-size {
+}*/
+/*.#{$CN}__header--type2--middle-size {
     font-size: 1.7rem;
     line-height: 2.4rem;
     margin-bottom: 1rem;
 
     &::before { top: 13px; }
-}
-.#{$CN}__header--type2--big-size {
+}*/
+/*.#{$CN}__header--type2--big-size {
     font-size: 2rem;
     line-height: 2.7rem;
     margin-bottom: 1rem;
 
     &::before { top: 15px; }
-}
+}*/
 
-.#{$CN}__header-bg {
+/*.#{$CN}__header-bg {
     position: relative;
     background-color: var(--bg-color);
 
@@ -74,4 +74,4 @@ $CN: name-section;
         width: 5px;
         background-color: dodgerblue;
     }
-}
+}*/

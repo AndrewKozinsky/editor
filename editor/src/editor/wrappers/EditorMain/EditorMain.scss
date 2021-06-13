@@ -4,24 +4,14 @@ $CN: editor-main;
     position: absolute;
     display: grid;
     grid-auto-flow: column;
+    grid-template-columns: 30rem 1fr;
 
     height: 100vh;
     width: 100%;
-    background-color: var(--base-color);
+    background-color: var(--base-color-color);
 
     transition: opacity .2s, transform .2s;
     transition-timing-function: cubic-bezier(.07,.73,.65,1);
-}
-
-.#{$CN}--small-size {
-    //grid-template-columns: 30rem 1fr;
-    grid-template-columns: 18rem 1fr; // Решение на время разработки. Позже поставь старое.
-}
-.#{$CN}--middle-size {
-    grid-template-columns: 35rem 1fr;
-}
-.#{$CN}--big-size {
-    grid-template-columns: 40rem 1fr;
 }
 
 // Левая часть редактора

@@ -1,6 +1,7 @@
-import FilesTreeType from 'src/libs/FilesTree/types'
+// import FilesTreeType from 'src/libs/FilesTree/types'
 
 // Пример данных получаемых компонентов FilesTree
+/*
 const itemsDataExample: FilesTreeType.Items = [
     {
         uuid: '1',
@@ -62,8 +63,9 @@ const itemsDataExample: FilesTreeType.Items = [
         name: 'Мнения'
     },
 ]
+*/
 
-export default itemsDataExample
+// export default itemsDataExample
 
 
 

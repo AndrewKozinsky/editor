@@ -1,11 +1,11 @@
-import React from 'react'
-import { makeCN } from 'src/utils/StringUtils'
-import StoreSettingsTypes from 'src/store/settings/settingsTypes';
+// import React from 'react'
+// import { makeCN } from 'src/utils/StringUtils'
 
 /**
  * Функция возвращает классы обёртки подписи переключателей.
  * @param size — размер элемента.
  */
+/*
 export function getLabelClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы обёртки
@@ -16,4 +16,4 @@ export function getLabelClasses(size: StoreSettingsTypes.EditorSize) {
     classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
-}
+}*/

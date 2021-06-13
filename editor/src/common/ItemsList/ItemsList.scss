@@ -1,14 +1,14 @@
-@import "common/commonStyles/commonStyles";
+//@import "common/commonStyles/commonStyles";
 
-$CN: items-list;
+//$CN: items-list;
 
-.#{$CN} {
+/*.#{$CN} {
 
-}
+}*/
 
-$item: #{$CN}__item;
+//$item: #{$CN}__item;
 
-.#{$item} {
+/*.#{$item} {
     display: block;
     width: 100%;
     color: var(--text-color);
@@ -33,26 +33,27 @@ $item: #{$CN}__item;
         opacity: .5;
         cursor: default;
     }
-}
+}*/
 
 // Размер кнопок
-.#{$item}--small-size {
+/*.#{$item}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
     padding: 4px 11px;
-}
-.#{$item}--middle-size {
+}*/
+/*.#{$item}--middle-size {
     font-size: 1.6rem;
     line-height: 2rem;
     padding: 5px 14px;
-}
-.#{$item}--big-size {
+}*/
+/*.#{$item}--big-size {
     font-size: 1.8rem;
     line-height: 2.2rem;
     padding: 7px 16px;
-}
+}*/
 
 // Активная кнопка
+/*
 .#{$item}--active {
     color: white;
     cursor: default;
@@ -61,4 +62,4 @@ $item: #{$CN}__item;
     &:hover {
         background-color: var(--accent-color);
     }
-}
+}*/

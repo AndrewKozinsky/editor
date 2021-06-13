@@ -1,18 +1,18 @@
-import React, {ReactNode} from 'react'
-import { getHeaderClasses } from './NameSection-func'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import './NameSection.scss'
+// import React, {ReactNode} from 'react'
+// import { getHeaderClasses } from './NameSection-func'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import './NameSection.scss'
 
 
-type NameSectionPropType = {
+/*type NameSectionPropType = {
     type?: number // Размер компонента: 1 (больше) или 2 (меньше)
     header: string // Текст заголовка
     children?: ReactNode // Дети компонента
-}
+}*/
 
 /* Компонент блока с заголовком */
-function NameSection(props: NameSectionPropType) {
+/*function NameSection(props: NameSectionPropType) {
 
     const {
         type = 1,
@@ -36,6 +36,6 @@ function NameSection(props: NameSectionPropType) {
             {children}
         </div>
     )
-}
+}*/
 
-export default NameSection
+// export default NameSection

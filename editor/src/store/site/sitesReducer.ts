@@ -1,3 +1,4 @@
+import {removeFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
@@ -74,11 +75,11 @@ function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesActio
 function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
-        localStorage.removeItem('editorSiteId')
+        removeFromLocalStorage('editorSiteId')
     }
     else {
         // Поставить id сайта в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorSiteId', action.payload)
+        setInLocalStorage('editorSiteId', action.payload)
     }
 
     return {
@@ -90,7 +91,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
 // Установка id текущей основной вкладки справа
 function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    localStorage.setItem('editorSitePartTab', action.payload.toString())
+    setInLocalStorage('editorSitePartTab', action.payload)
 
     return {
         ...state,
@@ -114,11 +115,11 @@ function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFil
 function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        localStorage.removeItem('editorPluginsId')
+        removeFromLocalStorage('editorPluginsId')
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorPluginsId', action.payload)
+        setInLocalStorage('editorPluginsId', action.payload)
     }
 
     return {
@@ -134,15 +135,15 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
 function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
     if (action.payload.id === null) {
         // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
-        localStorage.removeItem('editorComponentId')
+        removeFromLocalStorage('editorComponentId')
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        localStorage.removeItem('editorComponentType')
+        removeFromLocalStorage('editorComponentType')
     }
     else {
         // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorComponentId', action.payload.id)
+        setInLocalStorage('editorComponentId', action.payload.id)
         // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorComponentType', action.payload.type)
+        setInLocalStorage('editorComponentType', action.payload.type)
     }
 
     return {
@@ -160,15 +161,15 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
     if (action.payload.id === null) {
         // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
-        localStorage.removeItem('editorArticleId')
+        removeFromLocalStorage('editorArticleId')
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        localStorage.removeItem('editorArticleType')
+        removeFromLocalStorage('editorArticleType')
     }
     else {
         // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorArticleId', action.payload.id)
+        setInLocalStorage('editorArticleId', action.payload.id)
         // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        localStorage.setItem('editorArticleType', action.payload.type)
+        setInLocalStorage('editorArticleType', action.payload.type)
     }
 
     return {
@@ -197,8 +198,10 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             return setTemplates(state, action)
         case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
             return setCurrentIncFilesTemplateId(state, action)
+
         case StoreSitesTypes.SET_CURRENT_COMP:
             return setCurrentComp(state, action)
+
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
         default:

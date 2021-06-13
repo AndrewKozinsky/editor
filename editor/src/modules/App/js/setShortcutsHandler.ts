@@ -1,7 +1,6 @@
-import {KeyboardEventHandler, useEffect} from 'react'
+import { useEffect} from 'react'
 import { MiscTypes } from 'types/miscTypes'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import store from 'store/store'
 

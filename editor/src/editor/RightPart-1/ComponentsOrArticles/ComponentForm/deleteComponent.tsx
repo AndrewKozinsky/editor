@@ -1,21 +1,21 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+// import React, {useCallback} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import messages from '../../messages'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import {makeFetch} from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import { componentsTreeStore, setCompItems } from '../stores'
-import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
+// import {useStore} from 'effector-react'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import messages from '../../messages'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+// import {makeFetch} from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import { componentsTreeStore, setCompItems } from '../stores'
+// import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
 
 
-export function ModalContent() {
+/*export function ModalContent() {
     const dispatch = useDispatch()
 
     // Язык интерфейса
@@ -68,4 +68,4 @@ export function ModalContent() {
             </Wrapper>
         </>
     )
-}
+}*/

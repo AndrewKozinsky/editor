@@ -1,7 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {makeCN} from 'utils/StringUtils'
 
 
@@ -34,9 +33,8 @@ export function useGetIsModalOpen() {
 /**
  * Функция возвращает классы обёртки модального окна в зависимости от того отрыли ли его или закрыли.
  * @param {String} CN — Название главного класса.
- * @param {String} size — размер элемента.
  */
-export function useGetModalClasses(CN: string, size: StoreSettingsTypes.EditorSize) {
+export function useGetModalClasses(CN: string) {
 
     // Открыто ли модальное окно и его содержимое
     const { isOpen } = useSelector((store: AppState) => store.modal)
@@ -49,9 +47,9 @@ export function useGetModalClasses(CN: string, size: StoreSettingsTypes.EditorSi
     useEffect(function () {
 
         // Классы открытого окна
-        const normalClasses = [CN, `${CN}--${size}-size`]
+        const normalClasses = [CN]
         // Классы увеличенного прозрачного окна
-        const scaleUpClasses = [CN, `${CN}--scale-up`, `${CN}--${size}-size`]
+        const scaleUpClasses = [CN, `${CN}--scale-up`]
 
         if (isOpen) {
             // Первоначально модальное окно должно быть увеличенным
@@ -70,17 +68,3 @@ export function useGetModalClasses(CN: string, size: StoreSettingsTypes.EditorSi
 
     return makeCN(classes)
 }
-
-/**
- * Функция возвращает текст на кнопке закрытия в соответствии с переданным языком
- * @param {String} lang — язык интерфейса
- */
-export function getCloseBtnText(lang: StoreSettingsTypes.EditorLanguage) {
-    const text = {
-        eng: 'Close',
-        rus: 'Закрыть'
-    }
-
-    return text[lang]
-}
-

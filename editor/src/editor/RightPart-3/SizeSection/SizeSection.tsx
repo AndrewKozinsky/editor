@@ -1,12 +1,12 @@
-import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import messages from '../messages'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
+// import React from 'react'
+// import { useDispatch, useSelector} from 'react-redux'
+// import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+// import messages from '../messages'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
 
 
-export default function SizeSection() {
+/*export default function SizeSection() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -30,9 +30,10 @@ export default function SizeSection() {
             }
         />
     )
-}
+}*/
 
 
+/*
 function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 
@@ -41,4 +42,4 @@ function useGetOnChangeHandler() {
 
         dispatch(actions.settings.setEditorSize(value))
     }
-}
+}*/

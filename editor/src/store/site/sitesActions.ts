@@ -1,9 +1,8 @@
-// Types
 import StoreSitesTypes from './sitesTypes'
-import {MiscTypes} from 'types/miscTypes'
-import {makeFetch} from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import store from '../store'
+// import {MiscTypes} from 'types/miscTypes'
+// import {makeFetch} from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import store from '../store'
 import FilesTreeType from 'libs/FilesTree/types'
 
 
@@ -21,7 +20,7 @@ const sitesActions = {
     // САЙТЫ =====================================================================================
 
     // Загрузка сайтов с сервера и установка в Хранилище
-    requestSites() {
+    /*requestSites() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // Параметры запроса
             const options = { method: 'GET'}
@@ -43,7 +42,7 @@ const sitesActions = {
             // Установка сайтов в Хранилище
             dispatch( sitesActions.setSites(preparedSites) )
         }
-    },
+    },*/
 
     // Установка массива сайтов
     setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
@@ -65,7 +64,7 @@ const sitesActions = {
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
     // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
-    requestIncFilesTemplates() {
+    /*requestIncFilesTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
@@ -100,7 +99,7 @@ const sitesActions = {
             // Установка шаблонов подключаемых файлов в Хранилище
             dispatch( sitesActions.setTemplates(preparedTemplates) )
         }
-    },
+    },*/
 
     // Установка массива шаблонов подключаемых файлов
     setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
@@ -122,7 +121,7 @@ const sitesActions = {
     // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    requestComponentTemplate() {
+    /*requestComponentTemplate() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // uuid выбранного шаблона компонента, данные которого нужно скачать
@@ -148,7 +147,7 @@ const sitesActions = {
                 dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData.code) )
             }
         }
-    },
+    },*/
 
     // Установка id и типа выбранного шаблона компонента
     setCurrentComp(
@@ -170,7 +169,7 @@ const sitesActions = {
     // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    requestArticle() {
+    /*requestArticle() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // uuid выбранного сайта, данные которого нужно скачать
@@ -197,7 +196,7 @@ const sitesActions = {
                 // dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
             }
         }
-    },
+    },*/
 
     // Установка id и типа выбранного шаблона компонента
     setCurrentArt(

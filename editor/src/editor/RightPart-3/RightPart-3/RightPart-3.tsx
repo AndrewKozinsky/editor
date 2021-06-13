@@ -1,18 +1,19 @@
-import React, {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import HeaderPage from 'common/HeaderPage/HeaderPage'
-import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
-import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
-import messages from '../messages'
-import './RightPart-3.scss'
+// import React, {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import HeaderPage from 'common/HeaderPage/HeaderPage'
+// import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
+// import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
+// import messages from '../messages'
+// import './RightPart-3.scss'
 
 
-type RightPart3PropType = {
+/*type RightPart3PropType = {
     display?: boolean
-}
+}*/
 
 /** Правая часть третьей главной вкладки */
+/*
 export default function RightPart3(props: RightPart3PropType) {
     const {
         display // Показывать ли обёртку
@@ -66,4 +67,4 @@ export default function RightPart3(props: RightPart3PropType) {
             {partComponents}
         </div>
     )
-}
+}*/

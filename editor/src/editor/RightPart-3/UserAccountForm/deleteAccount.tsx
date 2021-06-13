@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import {useDeleteAccount} from 'requests/authRequests'
-import messages from '../messages'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
+// import React, {useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import {useDeleteAccount} from 'requests/authRequests'
+// import messages from '../messages'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
 
 
-export function ModalContent() {
+/*export function ModalContent() {
     const dispatch = useDispatch()
 
     // Язык интерфейса
@@ -53,4 +53,4 @@ export function ModalContent() {
             </Wrapper>
         </>
     )
-}
+}*/

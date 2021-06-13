@@ -1,14 +1,15 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import messages from '../messages'
-import {AppState} from 'store/rootReducer'
-import useGetLogOut from './logOut'
-import useGetShowModal from 'utils/hooksUtils'
-import { ModalContent } from './deleteAccount'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import messages from '../messages'
+// import {AppState} from 'store/rootReducer'
+// import useGetLogOut from './logOut'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { ModalContent } from './deleteAccount'
 
 
+/*
 export default function UserAccountForm() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -34,4 +35,4 @@ export default function UserAccountForm() {
             />
         </Wrapper>
     )
-}
+}*/

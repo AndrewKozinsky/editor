@@ -1,13 +1,14 @@
 
-import {ReactElement, useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from '../store/rootReducer'
-import actions from '../store/rootAction'
+// import {ReactElement, useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import {AppState} from '../store/rootReducer'
+// import actions from '../store/rootAction'
 
 /**
  * Хук возвращает функцию показывающую модальное окно с переданным содержимым
  * @param modalContent
  */
+/*
 export default function useGetShowModal(modalContent: ReactElement) {
     const dispatch = useDispatch()
 
@@ -32,4 +33,4 @@ export default function useGetShowModal(modalContent: ReactElement) {
     }, [isModalOpen])
 
     return () => setIsModalOpen(true)
-}
+}*/

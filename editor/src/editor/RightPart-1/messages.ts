@@ -1,13 +1,13 @@
 
-type messagesType = {
+/*type messagesType = {
     [key: string]: {
         [key: string]: {
             [key: string]: string
         }
     }
-}
+}*/
 
-const messages: messagesType = {
+/*const messages: messagesType = {
     // Названия вкладок на первой правой вкладке
     Tabs: {
         sites: {
@@ -296,6 +296,6 @@ const messages: messagesType = {
             rus: 'Удалить'
         },
     },
-}
+}*/
 
-export default messages
+// export default messages

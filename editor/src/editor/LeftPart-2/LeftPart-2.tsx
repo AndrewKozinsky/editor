@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 
-type LeftPart3PropType = {
+/*type LeftPart3PropType = {
     display?: boolean
-}
+}*/
 
 /** Левая часть второй главной вкладки */
-function LeftPart2(props: LeftPart3PropType) {
+/*function LeftPart2(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -18,6 +18,6 @@ function LeftPart2(props: LeftPart3PropType) {
             <p>LeftPart2</p>
         </div>
     )
-}
+}*/
 
-export default LeftPart2
+// export default LeftPart2

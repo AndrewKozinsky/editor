@@ -1,13 +1,13 @@
-import React, {Fragment, ReactNode} from 'react'
-import FilesTreeType from '../types'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import { useGetFilesTreeMinWidth } from './FilesTree-func'
-import Item from '../Item/Item'
-import {createNewItem} from '../Item/Item-func'
+// import React, {Fragment, ReactNode} from 'react'
+// import FilesTreeType from '../types'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import { useGetFilesTreeMinWidth } from './FilesTree-func'
+// import Item from '../Item/Item'
+// import {createNewItem} from '../Item/Item-func'
 
 
-type FilesTreePropType = {
+/*type FilesTreePropType = {
     // Массив данных списка папок и файлов
     items: null | FilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -26,10 +26,10 @@ type FilesTreePropType = {
     afterChangingTree?: FilesTreeType.AfterChangingTreeFn
     // Функция запускаемая после удаления папки или файла
     afterDeleteItem?: FilesTreeType.AfterDeleteItem
-}
+}*/
 
 /** Список папок и файлов */
-export default function FilesTree(props: FilesTreePropType) {
+/*export default function FilesTree(props: FilesTreePropType) {
 
     const {
         newFolderName = 'New folder', // Название новой папки
@@ -48,8 +48,6 @@ export default function FilesTree(props: FilesTreePropType) {
 
     // Минимальная ширина главной обёртки
     const minWidth = useGetFilesTreeMinWidth(props.items)
-
-    // console.log(props.items)
 
     return (
         <div data-file-tree='true' style={{minWidth: minWidth}}>
@@ -74,7 +72,7 @@ export default function FilesTree(props: FilesTreePropType) {
             {generateItems(props.items, props.items, props.setItems, 0, after)}
         </div>
     )
-}
+}*/
 
 /**
  * Рекурсивная функция генерирующая разметку дерева файлов
@@ -85,7 +83,7 @@ export default function FilesTree(props: FilesTreePropType) {
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-function generateItems(
+/*function generateItems(
     allItems: FilesTreeType.Items,
     innerItems: FilesTreeType.Items,
     setItems: FilesTreeType.SetItems,
@@ -121,4 +119,4 @@ function generateItems(
             </Fragment>
         )
     })
-}
+}*/

@@ -1,13 +1,12 @@
-import React, {ReactElement, useState} from 'react'
-import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'utils/StringUtils'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { getLabelClasses } from './Radio-func'
-import {useGetComponentSize} from 'utils/MiscUtils'
-import './Radio.scss'
+// import React, {ReactElement, useState} from 'react'
+// import { MiscTypes } from 'types/miscTypes'
+// import { getRandomId } from 'utils/StringUtils'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import { getLabelClasses } from './Radio-func'
+// import './Radio.scss'
 
 
-export type RadioPropType = {
+/*export type RadioPropType = {
     label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
@@ -16,10 +15,10 @@ export type RadioPropType = {
     disabled?: boolean // Заблокировано ли поле
     onChange?: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}
+}*/
 
 /* Компонент выпадающего списка */
-function Radio(props: RadioPropType) {
+/*function Radio(props: RadioPropType) {
 
     const {
         label, // Подпись выпадающего списка
@@ -31,9 +30,6 @@ function Radio(props: RadioPropType) {
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
     } = props
-
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(relativeSize)
 
     // id для связи подписи и флага
     const [id] = useState(getRandomId())
@@ -63,7 +59,7 @@ function Radio(props: RadioPropType) {
             <label {...labelAttribs}>{label}</label>
         </>
     )
-}
+}*/
 
 
-export default Radio
+// export default Radio

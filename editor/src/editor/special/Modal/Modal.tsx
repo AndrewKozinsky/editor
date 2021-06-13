@@ -1,10 +1,11 @@
 import React from 'react'
+import { modalMessages } from 'messages/modalMessages'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-import { useGetModalClasses, getCloseBtnText, useGetIsModalOpen } from './Modal-func'
-import Button from 'common/formElements/Button/Button';
-import Wrapper from 'common/Wrapper/Wrapper';
-import { useGetModalCloseHandler } from 'utils/MiscUtils';
+import { useGetModalClasses, useGetIsModalOpen } from './Modal-func'
+import Button from 'common/formElements/Button/Button'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { useGetModalCloseHandler } from 'utils/MiscUtils'
 import './Modal.scss'
 
 
@@ -13,12 +14,6 @@ export default function Modal() {
 
     // Содержимое модального окна
     const { content } = useSelector((store: AppState) => store.modal)
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
-    // Размер элементов интерфейса из Хранилища
-    const editorSize = useSelector((store: AppState) => store.settings.editorSize)
 
     // Обработчик закрытия модального окна
     const onModalClose = useGetModalCloseHandler()
@@ -29,7 +24,7 @@ export default function Modal() {
     const CN = 'modal'
 
     // Классы обёртки
-    const modalClasses = useGetModalClasses(CN, editorSize)
+    const modalClasses = useGetModalClasses(CN)
 
     // Ничего не отрисовывать если модальное окно закрыто
     if (!isOpen) return null
@@ -39,8 +34,7 @@ export default function Modal() {
             <div className={modalClasses}>
                 <Wrapper align='right' b={15}>
                     <Button
-                        text={getCloseBtnText(lang)}
-                        relativeSize={-1}
+                        text={modalMessages.close}
                         icon='btnSignClose'
                         onClick={onModalClose}
                         autoFocus={250}

@@ -1,33 +1,33 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Select from 'common/formElements/Select/Select'
-import Hr from 'common/misc/Hr/Hr'
-import getFormConfig from './formResources'
-import messages from '../messages'
-import {
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Select from 'common/formElements/Select/Select'
+// import Hr from 'common/misc/Hr/Hr'
+// import getFormConfig from './formResources'
+// import messages from '../messages'
+/*import {
     useGetAnotherSite,
     useGetDeleteSiteVisibilityStatus,
     useGetSubmitButtonText,
     useManageTemplatesSelect
-} from './SiteSection-func'
-import './SiteSection.scss'
-import { ModalContent } from './deleteSite'
-import useGetShowModal from 'utils/hooksUtils'
+} from './SiteSection-func'*/
+// import './SiteSection.scss'
+// import { ModalContent } from './deleteSite'
+// import useGetShowModal from 'utils/hooksUtils'
 
 
-type SiteSectionPropType = {
+/*type SiteSectionPropType = {
     display?: boolean
-}
+}*/
 
 /**
  * Блок с формой изменения данных выбранного сайта */
-export default function SiteSection(props: SiteSectionPropType) {
+/*export default function SiteSection(props: SiteSectionPropType) {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -85,9 +85,10 @@ export default function SiteSection(props: SiteSectionPropType) {
             </Form>
         </div>
     )
-}
+}*/
 
 /** Кнопка удаления сайта */
+/*
 function DeleteSiteButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -108,3 +109,4 @@ function DeleteSiteButton() {
         />
     )
 }
+*/

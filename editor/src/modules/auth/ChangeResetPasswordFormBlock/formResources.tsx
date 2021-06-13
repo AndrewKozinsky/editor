@@ -1,17 +1,17 @@
-import React from 'react'
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
+import FHTypes from 'libs/formHandler/types'
+import store from 'store/store'
 import actions from 'store/rootAction'
-import { MiscTypes } from 'types/miscTypes'
+import { commonMessages } from 'messages/commonMessages'
+import {
+    changeResetPasswordFormMessages
+} from 'messages/changeResetPasswordFormMessages'
+import changeResetPasswordRequest from 'requests/changeResetPasswordRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, dispatch: MiscTypes.AppDispatch): FHTypes.FormConfig {
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -24,7 +24,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(
+                            formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                        )
                     }
                 }
             },
@@ -37,7 +39,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(
+                            formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                        )
                     }
                 }
             },
@@ -50,7 +54,9 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(
+                            formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                        )
                     }
                 }
             },
@@ -71,10 +77,14 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(
+                    formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                )
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
+                formState = formDetails.setFormDataPropValue(
+                    formState, 'submitCounter', formState.form.data.submitCounter + 1
+                )
 
                 // Первое поле, где есть ошибка
                 let $firstWrongField = getFirstInvalidField(formState)
@@ -104,15 +114,11 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                 formDetails.setFormState(formState)
 
                 // Форма заполнена верно. Отправить данные на сервер...
-                const options = {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        password: formDetails.readyFieldValues. password,
-                        passwordConfirm: formDetails.readyFieldValues.passwordConfirm
-                    })
-                }
-                const response = await makeFetch(getApiUrl(
-                    'changeResetPassword', formDetails.state.fields.token.value[0]), options
+
+                const response = await changeResetPasswordRequest(
+                    formDetails.readyFieldValues.password.toString(),
+                    formDetails.readyFieldValues.passwordConfirm.toString(),
+                    formDetails.readyFieldValues.token.toString()
                 )
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
@@ -126,14 +132,14 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
                     )
 
                     // Поставить токен авторизации в Хранилище
-                    dispatch(actions.user.setAuthTokenStatus(2))
+                    store.dispatch(actions.user.setAuthTokenStatus(2))
                 }
                 // Если ввели неправильные данные
                 else {
                     if (response.errors.statusCode === 400) {
                         // В поле токена занести сообщение что он неправильный
                         formState = formDetails.setFieldDataPropValue(
-                            formState, 'error', messages.ConfirmEmailForm.tokenIsWrong[lang], 'token'
+                            formState, 'error', changeResetPasswordFormMessages.tokenIsWrong, 'token'
                         )
                     }
                 }
@@ -150,19 +156,18 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, d
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fields — данные о полях формы
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
 
     const schemas = {
         token: yup.string()
-            .required(messages.Common.requiredField[lang]),
+            .required(commonMessages.requiredField),
         password: yup.string()
-            .required(messages.Common.requiredField[lang])
-            .min(6, messages.Common.passwordToShort[lang])
-            .max(50, messages.Common.passwordToLong[lang]),
+            .required(commonMessages.requiredField)
+            .min(6, commonMessages.passwordToShort)
+            .max(50, commonMessages.passwordToLong),
         passwordConfirm: yup.string()
-            .oneOf([fields.password.value[0]], messages.RegForm.passwordsMustMatch[lang])
+            .oneOf([fields.password.value[0]], changeResetPasswordFormMessages.passwordsMustMatch)
     }
 
     // @ts-ignore
@@ -175,13 +180,11 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: Stor
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
 function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
-    setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
+    setFormDataPropValue: FHTypes.SetFormDataPropValue
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
@@ -199,7 +202,7 @@ function validateForm(
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(formState.fields, fieldName, lang).validateSync(fieldValue)
+            getSchema(formState.fields, fieldName).validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false

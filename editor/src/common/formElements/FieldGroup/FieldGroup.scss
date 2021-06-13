@@ -1,32 +1,33 @@
-$CN: field-wrapper;
+//$CN: field-wrapper;
 
 // Обёртка уведомления
-.#{$CN} {
+/*.#{$CN} {
     display: grid;
     grid-gap: 10px;
-}
+}*/
 
 // Размер поля.
-.#{$CN}--small-size {
+/*.#{$CN}--small-size {
     grid-gap: 6px;
-}
-.#{$CN}--middle-size {
+}*/
+/*.#{$CN}--middle-size {
     grid-gap: 8px;
-}
-.#{$CN}--big-size {
+}*/
+/*.#{$CN}--big-size {
     grid-gap: 11px;
-}
+}*/
 
 // Класс дающий отступ между элементами обёртки
-.#{$CN}--gap20 {
+/*.#{$CN}--gap20 {
     display: flex;
-}
-.#{$CN}--gap20.#{$CN}--small-size {
+}*/
+/*.#{$CN}--gap20.#{$CN}--small-size {
     gap: 20px;
-}
-.#{$CN}--gap20.#{$CN}--middle-size {
+}*/
+/*.#{$CN}--gap20.#{$CN}--middle-size {
     gap: 24px;
-}
+}*/
+/*
 .#{$CN}--gap20.#{$CN}--big-size {
     gap: 26px;
-}
+}*/

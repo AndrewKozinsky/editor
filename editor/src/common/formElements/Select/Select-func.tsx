@@ -1,10 +1,10 @@
-import React from 'react'
-import StoreSettingsTypes from 'store/settings/settingsTypes';
-import { SelectPropType } from "./Select"
-import {makeCN} from 'utils/StringUtils'
-import SvgIcon from '../../icons/SvgIcon'
-import { MiscTypes } from 'types/miscTypes'
-import {OptionsType} from './SelectTypes';
+// import React from 'react'
+// import StoreSettingsTypes from 'store/settings/settingsTypes';
+// import { SelectPropType } from "./Select"
+// import {makeCN} from 'utils/StringUtils'
+// import SvgIcon from '../../icons/SvgIcon'
+// import { MiscTypes } from 'types/miscTypes'
+// import {OptionsType} from './SelectTypes';
 
 
 /**
@@ -12,7 +12,7 @@ import {OptionsType} from './SelectTypes';
  * @param size — размер элемента.
  * @param {Boolean} isFocus — находится ли <select> в фокусе.
  */
-export function getWrapperClasses(size: StoreSettingsTypes.EditorSize, isFocus: boolean) {
+/*export function getWrapperClasses(size: StoreSettingsTypes.EditorSize, isFocus: boolean) {
 
     // Классы обёртки
     const CN = 'select-input-wrapper'
@@ -25,14 +25,14 @@ export function getWrapperClasses(size: StoreSettingsTypes.EditorSize, isFocus: 
     if (isFocus)  classes.push(`${CN}--focus`)
 
     return makeCN(classes)
-}
+}*/
 
 
 /**
  * Функция возвращает классы выпадающего списка
  * @param size — размер элемента.
  */
-export function getClasses(size: StoreSettingsTypes.EditorSize) {
+/*export function getClasses(size: StoreSettingsTypes.EditorSize) {
 
     // Классы
     const CN = 'select-input'
@@ -42,7 +42,7 @@ export function getClasses(size: StoreSettingsTypes.EditorSize) {
     classes.push(`${CN}--${size}-size`)
 
     return makeCN(classes)
-}
+}*/
 
 
 /**
@@ -50,7 +50,7 @@ export function getClasses(size: StoreSettingsTypes.EditorSize) {
  * Будет возвращён разный размер значка в зависимости от переданного размера самого выпадающего списка
  * @param size: EditorSizeType
  */
-export function getArrowIcon(size: StoreSettingsTypes.EditorSize): null | JSX.Element {
+/*export function getArrowIcon(size: StoreSettingsTypes.EditorSize): null | JSX.Element {
 
     // Размер выпадающего списка.
     if (size === 'small') return <SvgIcon type='selectInputSmallArrows' />
@@ -58,13 +58,14 @@ export function getArrowIcon(size: StoreSettingsTypes.EditorSize): null | JSX.El
     if (size === 'big') return <SvgIcon type='selectInputBigArrows' />
 
     return null
-}
+}*/
 
 
 /**
  * Функция возращает массив тегов <option>
  * @param {Array} options — массив пунктов выпадающего списка
  */
+/*
 export function getOptions(options: OptionsType) {
 
     // Генерация массива тегов <option>
@@ -81,4 +82,4 @@ export function getOptions(options: OptionsType) {
 
         return <option {...optionAttrs}>{option.label}</option>
     })
-}
+}*/

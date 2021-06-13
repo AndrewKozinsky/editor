@@ -1,19 +1,14 @@
 import React from 'react'
-import './Loader.scss'
 import {makeCN} from 'utils/StringUtils'
+import './Loader.scss'
 
 
 type LoaderPropType = {
     className?: string // Дополнительный класс обёртки
 }
 
-/**
- * Компонент загрузчика
- * @param props
- * @constructor
- */
-function Loader(props: LoaderPropType) {
-
+/** Компонент загрузчика */
+export default function Loader(props: LoaderPropType) {
     const {
         className
     } = props
@@ -30,6 +25,3 @@ function Loader(props: LoaderPropType) {
         </div>
     )
 }
-
-
-export default Loader

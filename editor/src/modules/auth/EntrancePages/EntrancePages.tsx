@@ -1,32 +1,28 @@
 import React from 'react'
 // @ts-ignore
-import { Switch, Route, useLocation } from 'react-router-dom'
-import EnterFormBlock from "src/modules/auth/EnterFormBlock/EnterFormBlock"
-import AuthFormWrapper from 'src/modules/auth/AuthFormWrapper/AuthFormWrapper'
-import ChangeThemeButton from 'src/common/misc/ChangeThemeButton/ChangeThemeButton'
-import RegFormBlock from 'src/modules/auth/RegFormBlock/RegFormBlock'
-import ConfirmEmailFormBlock from 'src/modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
-import ResetFormBlock from 'src/modules/auth/ResetFormBlock/ResetFormBlock'
-import ChangeResetPasswordFormBlock from 'src/modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
+import { Switch, Route } from 'react-router-dom'
+import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
+import AuthFormWrapper from 'modules/auth/AuthFormWrapper/AuthFormWrapper'
+import RegFormBlock from 'modules/auth/RegFormBlock/RegFormBlock'
+import ConfirmEmailFormBlock from 'modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
+import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
+import ChangeResetPasswordFormBlock from 'modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
 import './EntrancePages.scss'
 
 
-function EntrancePages() {
+export default function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
     useViewStateChanger()
 
     // Классы обёртки
-    const CN = 'entrance-pages-wrapper'
-    const {classes, isVisible} = useGetWrapperClasses(CN)
+    const {classes, isVisible} = useGetWrapperClasses()
 
     if (!isVisible) return null
 
-
     return (
         <div className={classes}>
-            <ChangeThemeButton />
             <AuthFormWrapper>
                 <Switch>
                     <Route path='/reg'>
@@ -49,7 +45,3 @@ function EntrancePages() {
         </div>
     )
 }
-
-
-
-export default EntrancePages

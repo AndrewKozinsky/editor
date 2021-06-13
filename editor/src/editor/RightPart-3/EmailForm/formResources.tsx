@@ -1,18 +1,18 @@
-import React from 'react'
-import { MiscTypes } from 'types/miscTypes'
+// import React from 'react'
+// import { MiscTypes } from 'types/miscTypes'
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import store from '../../../store/store'
+// import * as yup from 'yup'
+// import FHTypes from 'src/libs/formHandler/types'
+// import messages from '../messages'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import { makeFetch } from 'requests/fetch'
+// import getApiUrl from 'requests/apiUrls'
+// import store from '../../../store/store'
 
 
 // Объект настройки useFormHandler
 // * @param {String} lang — язык интерфейса
-export default function getFormConfig(
+/*export default function getFormConfig(
     lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormConfig {
     return {
@@ -70,7 +70,7 @@ export default function getFormConfig(
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -78,7 +78,7 @@ export default function getFormConfig(
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+/*function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
     const schemas = {
         email: yup.string()
             .required(messages.UserDataSection.requiredField[lang])
@@ -91,7 +91,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -101,7 +101,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  * @param lang
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -129,18 +129,18 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на поле email если там есть ошибка
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
     return formState.fields.email.data.error
         ? formState.fields.email.$field
         : null
-}
+}*/
 
 
 /**

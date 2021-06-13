@@ -3,9 +3,7 @@ import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { MiscTypes } from 'types/miscTypes'
-import Label from '../Label/Label';
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {useGetComponentSize} from 'utils/MiscUtils'
+import Label from '../Label/Label'
 import {getTextInputClasses, useSetFocus} from './TextInput-func'
 import './TextInput.scss'
 
@@ -18,7 +16,6 @@ export type TextInputPropType = {
     value: string, // Аттрибут name текстового поля
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
     maxWidth?: 250 // Максимальная ширина поля
     rows?: number // Количество рядов у текстового поля
     placeholder?: string, // Текстозаполнитель
@@ -32,7 +29,7 @@ export type TextInputPropType = {
 
 
 /** Текстовый компонент */
-function TextInput(props: TextInputPropType) {
+export default function TextInput(props: TextInputPropType) {
 
     const {
         label, // Подпись текстового поля
@@ -42,7 +39,6 @@ function TextInput(props: TextInputPropType) {
         value,
         autocomplete = '', // Значение автозаполнения поля
         placeholder,    // Текстозаполнитель
-        relativeSize,
         maxWidth, // Максимальная ширина поля
         rows = 5, // Количество рядов у текстового поля
         disabled = false, // Заблокировано ли поле
@@ -58,9 +54,6 @@ function TextInput(props: TextInputPropType) {
     // Установка фокусировки при необходомости
     useSetFocus(inputRef, autoFocus)
 
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(relativeSize)
-
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
 
@@ -69,7 +62,7 @@ function TextInput(props: TextInputPropType) {
         type: type,
         name,
         value,
-        className: getTextInputClasses(size, maxWidth),
+        className: getTextInputClasses(maxWidth),
         onChange: onChange,
     }
 
@@ -107,6 +100,3 @@ function Error(props: TextInputPropType) {
         </Wrapper>
     )
 }
-
-
-export default TextInput

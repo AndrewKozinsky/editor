@@ -7,6 +7,9 @@ $CN: text-input;
     display: block;
     width: 100%;
     font-family: 'SF UI Display', sans-serif;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: .4rem 0.8rem;
     color: var(--text-color);
     box-sizing: border-box;
 
@@ -17,6 +20,7 @@ $CN: text-input;
 
     &::placeholder {
         font-size: 1.3rem;
+        line-height: 1.7rem;
         color: var(--text-placeholder-color);
     }
 
@@ -30,42 +34,7 @@ $CN: text-input;
     }
 }
 
-// Размер поля.
-.#{$CN}--small-size {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    padding: .4rem 0.8rem;
-
-    &::placeholder {
-        line-height: 1.7rem;
-    }
-}
-.#{$CN}--middle-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    padding: .5rem 0.9rem;
-
-    &::placeholder {
-        line-height: 2rem;
-    }
-}
-.#{$CN}--big-size {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    padding: .7rem 1.1rem;
-
-    &::placeholder {
-        line-height: 2.2rem;
-    }
-}
-
 // Задание максимальной ширины
-.#{$CN}--maxWidth-250-small {
+.#{$CN}--maxWidth-250 {
     max-width: 250px;
-}
-.#{$CN}--maxWidth-250-middle {
-    max-width: 288px;
-}
-.#{$CN}--maxWidth-250-big {
-    max-width: 325px;
 }

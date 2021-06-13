@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import StoreSitesTypes from 'store/site/sitesTypes'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import messages from '../messages'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import StoreSitesTypes from 'store/site/sitesTypes'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import FHTypes from 'libs/formHandler/types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { OptionsType } from 'common/formElements/Select/SelectTypes'
+// import messages from '../messages'
 
 
 /**
@@ -14,7 +14,7 @@ import messages from '../messages'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего сайта и массив сайтов
     const {currentSiteId, sites} = useSelector((store: AppState) => store.sites)
 
@@ -52,7 +52,7 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [currentSiteId, sites])
-}
+}*/
 
 
 /**
@@ -61,7 +61,7 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} site — данные о сайте
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'defaultIncFilesTemplateId',
     site: null | StoreSitesTypes.SiteType
@@ -78,14 +78,14 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/
 
 
 /**
  * Функция возвращает текст на кнопке отправки формы
  * @param lang
  */
-export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) {
+/*export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [submitName, setSubmitName] = useState('')
@@ -100,13 +100,13 @@ export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) 
     }, [currentSiteId])
 
     return submitName
-}
+}*/
 
 /**
  * Функция возвращает булево значение нужно ли показывать кнопку удаления сайта.
  * Она видна только если выделен существующий сайт.
  */
-export function useGetDeleteSiteVisibilityStatus() {
+/*export function useGetDeleteSiteVisibilityStatus() {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [isVisible, setIsVisible] = useState(false)
@@ -117,7 +117,7 @@ export function useGetDeleteSiteVisibilityStatus() {
     }, [currentSiteId])
 
     return isVisible
-}
+}*/
 
 /**
  * Хук контролирует выпадающий список выбора шаблона по умолчанию для всего сайта.
@@ -126,6 +126,7 @@ export function useGetDeleteSiteVisibilityStatus() {
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
+/*
 export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -178,4 +179,4 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
         isVisible,
         selectOptions
     }
-}
+}*/

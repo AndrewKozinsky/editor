@@ -6,10 +6,6 @@ namespace StoreSettingsTypes {
     export type EditorLanguage = 'eng' | 'rus'
     // Тема интерфейса
     export type EditorTheme = 'light' | 'dark'
-    // Размер интерфейса
-    export type EditorSize = 'tiny' | 'small' | 'middle' | 'big'
-    // Размер элемента относительно размера элементов интрерфейса
-    export type EditorSizeMultiply = -3 | -2 | -1 | 1 | 2 | 3
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
     // null сообщает, что еще не известно что должно быть показано и определится позже на основе открытой странице
@@ -32,13 +28,6 @@ namespace StoreSettingsTypes {
     export type SetEditorThemeAction = {
         type: typeof SETTINGS_SET_EDITOR_THEME
         payload: EditorTheme
-    }
-
-    // Установка размера интерфейса
-    export const SETTINGS_SET_EDITOR_SIZE = 'SETTINGS_SET_EDITOR_SIZE'
-    export type SetEditorSizeAction = {
-        type: typeof SETTINGS_SET_EDITOR_SIZE
-        payload: EditorSize
     }
 
     // Установка должны быть показаны формы входа, редактор или переход между ними
@@ -73,7 +62,6 @@ namespace StoreSettingsTypes {
     export type SettingsAction =
         | SetEditorLanguageAction
         | SetEditorThemeAction
-        | SetEditorSizeAction
         | SetEntryAndEditorViewStateAction
         | SetLastAddressAction
         | SetMainTabAction

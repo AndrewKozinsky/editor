@@ -1,16 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import store from 'src/store/store'
-import StoreSettingsTypes from 'src/store/settings/settingsTypes'
-import actions from 'src/store/rootAction'
-import { makeFetch } from 'src/requests/fetch'
-import getApiUrl from 'src/requests/apiUrls'
+// import * as yup from 'yup'
+// import FHTypes from 'src/libs/formHandler/types'
+// import messages from '../messages'
+// import store from 'src/store/store'
+// import actions from 'src/store/rootAction'
+// import { makeFetch } from 'src/requests/fetch'
+// import getApiUrl from 'src/requests/apiUrls'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -117,7 +116,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -125,7 +124,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Array} fieldName — имя поля
  * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+/*function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
 
     const schemas = {
         name: yup.string()
@@ -134,7 +133,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -144,7 +143,7 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  * @param lang
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -184,14 +183,14 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -207,7 +206,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -216,7 +215,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -226,7 +225,7 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/
 
 
 /**
@@ -234,7 +233,7 @@ function setLoadingStatusToForm(
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  * @param {String} lang — язык интерфейса
  */
-async function createNewTemplate(
+/*async function createNewTemplate(
     formDetails: FHTypes.FormDetailsInSubmitHandler,
     lang: StoreSettingsTypes.EditorLanguage
 ) {
@@ -273,7 +272,7 @@ async function createNewTemplate(
 
         store.dispatch(actions.sites.setCurrentIncFilesTemplateId(newTemplate.id))
     }
-}
+}*/
 
 
 /**
@@ -281,7 +280,7 @@ async function createNewTemplate(
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  * @param {String} lang — язык интерфейса
  */
-async function updateTemplate(
+/*async function updateTemplate(
     formDetails: FHTypes.FormDetailsInSubmitHandler,
     lang: StoreSettingsTypes.EditorLanguage
 ) {
@@ -315,4 +314,4 @@ async function updateTemplate(
         // Скачать новый список шаблонов и поставить в Хранилище
         await store.dispatch(actions.sites.requestIncFilesTemplates())
     }
-}
+}*/

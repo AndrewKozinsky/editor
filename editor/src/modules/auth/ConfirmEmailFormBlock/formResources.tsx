@@ -1,17 +1,15 @@
-import React from 'react'
 // @ts-ignore
 import * as yup from 'yup'
-import { MiscTypes } from 'types/miscTypes'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
+import store from 'store/store'
 import actions from 'store/rootAction'
+import FHTypes from 'libs/formHandler/types'
+import { commonMessages } from 'messages/commonMessages'
+import confirmEmailRequest from 'requests/confirmEmailRequest'
+import {confirmEmailMessages} from 'messages/confirmEmailMessages';
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, history: any, dispatch: MiscTypes.AppDispatch): FHTypes.FormConfig {
+export default function getFormConfig(history: any): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -24,7 +22,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -46,7 +44,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
             submit: async function(formDetails) {
 
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
                 formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
@@ -79,11 +77,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 formDetails.setFormState(formState)
 
                 // Форма заполнена верно. Отправить данные на сервер...
-                const options = { method: 'GET' }
                 const token = formDetails.state.fields.token.value[0]
-                const response = await makeFetch(
-                    getApiUrl('confirmEmail', token), options
-                )
+                const response = await confirmEmailRequest(token)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
@@ -93,7 +88,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
 
                     setTimeout(() => {
                         // Поставить токен авторизации в Хранилище
-                        dispatch(actions.user.setAuthTokenStatus(2))
+                        store.dispatch(actions.user.setAuthTokenStatus(2))
 
                         // Перебросить в редактор
                         history.push('/')
@@ -103,7 +98,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
                 else {
                     // Показать сообщение об ошибке поля token.
                     formState = formDetails.setFieldDataPropValue(
-                        formState, 'error', messages.ConfirmEmailForm.tokenIsInvalid[lang], 'token'
+                        formState, 'error', confirmEmailMessages.tokenIsInvalid, 'token'
                     )
                     // Заблокировать кнопку отправки
                     formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
@@ -121,11 +116,10 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage, h
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fieldName: string): any {
     const schemas = {
-        token: yup.string().required(messages.Common.requiredField[lang])
+        token: yup.string().required(commonMessages.requiredField)
     }
 
     // @ts-ignore
@@ -138,20 +132,18 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
 function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
     let isFormValid = true
 
     try {
-        getSchema('token', lang).validateSync(formState.fields.token.value[0])
+        getSchema('token').validateSync(formState.fields.token.value[0])
         formState = setFieldDataPropValue(formState, 'error', null, 'token')
     } catch (err) {
         isFormValid = false

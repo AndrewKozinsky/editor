@@ -1,13 +1,13 @@
 
-type messagesType = {
+/*type messagesType = {
     [key: string]: {
         [key: string]: {
             [key: string]: string
         }
     }
-}
+}*/
 
-const messages: messagesType = {
+/*const messages: messagesType = {
     // Содержимое вкладки «Пользователь»
     UserTabContent: {
         header: {
@@ -186,6 +186,6 @@ const messages: messagesType = {
             rus: 'Большой'
         },
     },
-}
+}*/
 
-export default messages
+// export default messages

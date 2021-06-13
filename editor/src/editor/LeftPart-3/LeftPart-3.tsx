@@ -1,19 +1,19 @@
-import React from 'react'
-import messages from '../messages'
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import NameSection from '../wrappers/NameSection/NameSection'
-import ItemsList from 'src/common/ItemsList/ItemsList'
-import { useGetSettingsItemsListProps } from './LeftPart-3-func'
-import './LeftPart-3.scss'
+// import React from 'react'
+// import messages from '../messages'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import NameSection from '../wrappers/NameSection/NameSection'
+// import ItemsList from 'src/common/ItemsList/ItemsList'
+// import { useGetSettingsItemsListProps } from './LeftPart-3-func'
+// import './LeftPart-3.scss'
 
 
-type LeftPart3PropType = {
+/*type LeftPart3PropType = {
     display?: boolean
-}
+}*/
 
 /** Левая часть третьей главной вкладки */
-function LeftPart3(props: LeftPart3PropType) {
+/*function LeftPart3(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -35,6 +35,6 @@ function LeftPart3(props: LeftPart3PropType) {
             </NameSection>
         </div>
     )
-}
+}*/
 
-export default LeftPart3
+// export default LeftPart3

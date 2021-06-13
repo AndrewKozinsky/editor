@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { MiscTypes } from 'types/miscTypes'
-import {AppState} from 'store/rootReducer'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
-import actions from 'store/rootAction'
-import messages from '../messages';
+// import {useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import { MiscTypes } from 'types/miscTypes'
+// import {AppState} from 'store/rootReducer'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+// import actions from 'store/rootAction'
+// import messages from '../messages';
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
-export function useGetTabData(): MainTabDataType[] {
+/*export function useGetTabData(): MainTabDataType[] {
     const dispatch = useDispatch()
 
     // Язык интерфейса
@@ -31,10 +31,10 @@ export function useGetTabData(): MainTabDataType[] {
     }, [editorSize, lang, rightMainTab, currentSiteId])
 
     return tabsData
-}
+}*/
 
 // Массив с данными вкладок
-const tabsData = [
+/*const tabsData = [
     {
         iconType: 'siteTabSite', // тип значка
         titleIndex: 'sites' // название свойства для получения названия в messages
@@ -51,7 +51,7 @@ const tabsData = [
         iconType: 'siteTabArticle',
         titleIndex: 'articles',
     },
-]
+]*/
 
 /**
  * Функция возвращает данные для генерирования вкладок разделов
@@ -61,7 +61,7 @@ const tabsData = [
  * @param {Number} rightMainTab — номер активной вкладки
  * @param {Boolean} isTabsDisabled — должны ли все вкладки кроме первой быть заблокированы
  */
-function getTabData(
+/*function getTabData(
     size: StoreSettingsTypes.EditorSize,
     lang: StoreSettingsTypes.EditorLanguage,
     dispatch: MiscTypes.AppDispatch,
@@ -79,4 +79,4 @@ function getTabData(
             onClick: () => dispatch(actions.sites.setRightMainTab(i))
         }
     })
-}
+}*/

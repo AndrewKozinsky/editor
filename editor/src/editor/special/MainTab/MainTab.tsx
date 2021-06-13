@@ -1,10 +1,7 @@
 import React from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
 import { getTabClasses } from './MainTab-func'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
 import { MiscTypes } from 'types/miscTypes'
-import './MainTab-func'
 import './MainTab.scss'
 
 
@@ -34,12 +31,9 @@ export default function MainTab(props: MainTabPropType) {
 
     const CN = 'main-tab'
 
-    // Размер элементов интерфейса
-    const editorSize = useSelector((store: AppState) => store.settings.editorSize)
-
     const buttonAttrs: MiscTypes.ObjStringKeyAnyVal = {
         title,
-        className: getTabClasses(editorSize, active, position),
+        className: getTabClasses(active, position),
         onClick
     }
     if (disabled) buttonAttrs.disabled = true
@@ -47,8 +41,8 @@ export default function MainTab(props: MainTabPropType) {
     return (
         <button {...buttonAttrs}>
             <SvgIcon type={iconType} />
-            <SvgIcon type='mainTabRoundScion' className={`${CN}__scion`} />
-            <SvgIcon type='mainTabRoundScion' className={`${CN}__scion`} />
+            <SvgIcon type='mainTabRoundScion' extraClass={`${CN}__scion`} />
+            <SvgIcon type='mainTabRoundScion' extraClass={`${CN}__scion`} />
         </button>
     )
 }

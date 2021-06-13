@@ -1,15 +1,15 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import { AppState } from 'src/store/rootReducer'
-import NameSection from '../../wrappers/NameSection/NameSection';
-import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
-import messages from '../messages'
-import UserDataForm from '../EmailForm/EmailForm'
-import UserAccountForm from '../UserAccountForm/UserAccountForm'
+// import React from 'react'
+// import { useSelector } from 'react-redux'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import { AppState } from 'src/store/rootReducer'
+// import NameSection from '../../wrappers/NameSection/NameSection';
+// import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
+// import messages from '../messages'
+// import UserDataForm from '../EmailForm/EmailForm'
+// import UserAccountForm from '../UserAccountForm/UserAccountForm'
 
 
-export default function SettingsUserTabContent() {
+/*export default function SettingsUserTabContent() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
@@ -35,4 +35,4 @@ export default function SettingsUserTabContent() {
             </Wrapper>
         </div>
     )
-}
+}*/

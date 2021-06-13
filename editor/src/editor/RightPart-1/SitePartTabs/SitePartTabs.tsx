@@ -1,9 +1,10 @@
-import React from 'react'
-import MainTab, {MainTabDataType} from 'editor/special/MainTab/MainTab'
-import { useGetTabData } from './SitePartTabs-func'
-import './SitePartTabs.scss'
+// import React from 'react'
+// import MainTab, {MainTabDataType} from 'editor/special/MainTab/MainTab'
+// import { useGetTabData } from './SitePartTabs-func'
+// import './SitePartTabs.scss'
 
 
+/*
 export default function SitePartTabs() {
     const CN = 'site-part-tabs'
 
@@ -17,4 +18,4 @@ export default function SitePartTabs() {
             })}
         </div>
     )
-}
+}*/

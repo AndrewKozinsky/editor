@@ -1,13 +1,12 @@
-import { MiscTypes } from 'types/miscTypes'
-import {useDispatch, useSelector} from 'react-redux'
-import { ItemsListPropType, ItemType } from 'src/common/ItemsList/ItemsList'
-import {AppState} from 'src/store/rootReducer'
-import StoreSettingsTypes from 'src/store/settings/settingsTypes'
-import messages from '../messages'
-import actions from 'src/store/rootAction'
+// import { MiscTypes } from 'types/miscTypes'
+// import {useDispatch, useSelector} from 'react-redux'
+// import { ItemsListPropType, ItemType } from 'src/common/ItemsList/ItemsList'
+// import {AppState} from 'src/store/rootReducer'
+// import messages from '../messages'
+// import actions from 'src/store/rootAction'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
-export function useGetSettingsItemsListProps(): ItemsListPropType {
+/*export function useGetSettingsItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
 
     // Язык интерфейса
@@ -20,14 +19,14 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
         items: getItemsListProps(dispatch, lang), // Список пунктов
         activeItemId: activeTab // id активного пункта
     }
-}
+}*/
 
 /**
  * Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки»
  * @param {Object} dispatch
  * @param {String} lang — язык интерфейса
  */
-function getItemsListProps(dispatch: MiscTypes.AppDispatch, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
+/*function getItemsListProps(dispatch: MiscTypes.AppDispatch, lang: StoreSettingsTypes.EditorLanguage): ItemType[] {
     return [
         {
             id: 'user',
@@ -40,4 +39,4 @@ function getItemsListProps(dispatch: MiscTypes.AppDispatch, lang: StoreSettingsT
             onClick: () => dispatch( actions.settings.setSettingsPanelTab('editor') )
         }
     ]
-}
+}*/

@@ -1,16 +1,16 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {MiscTypes} from 'src/types/miscTypes'
-import messages from '../messages'
-import Button from 'src/common/formElements/Button/Button'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import ItemsList from 'src/common/ItemsList/ItemsList'
-import {useFetchIncFilesTemplates, useGetNewTemplateOnClickHandler, useGetTemplatesItemsListProps} from './IncFilesTemplateList-func'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import {MiscTypes} from 'src/types/miscTypes'
+// import messages from '../messages'
+// import Button from 'src/common/formElements/Button/Button'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import ItemsList from 'src/common/ItemsList/ItemsList'
+// import {useFetchIncFilesTemplates, useGetNewTemplateOnClickHandler, useGetTemplatesItemsListProps} from './IncFilesTemplateList-func'
 
 
 /** Компонент кнопки создания нового сайта */
-export function NewTemplateButton() {
+/*export function NewTemplateButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
@@ -32,10 +32,10 @@ export function NewTemplateButton() {
     }
 
     return <Button {...attrs} />
-}
+}*/
 
 /** Компонент списка сайтов */
-export function TemplatesList() {
+/*export function TemplatesList() {
     // Получить с сервера список шаблонов подключаемых файлов и поставить в Хранилище
     useFetchIncFilesTemplates()
 
@@ -47,4 +47,4 @@ export function TemplatesList() {
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}
+}*/

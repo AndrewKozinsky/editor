@@ -165,7 +165,6 @@ namespace FHTypes {
     }
 
 
-
     // ОБЪЕКТ ВОЗВРАЩАЕМЫЙ ХУКОМ useFormHandler ---------------------------
     // Объект возвращаемый useFormHandler
     export type ReturnObj = {

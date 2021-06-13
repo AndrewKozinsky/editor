@@ -1,19 +1,16 @@
 import React, {useRef} from 'react'
-import { useGetComponentSize } from 'utils/MiscUtils'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {MiscTypes} from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import {useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-import {getButtonClasses, getButtonLoaderClasses} from './Button-func'
+import {getButtonClasses, useSetFocus} from './Button-func'
+import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
 import './Button.scss'
-import SvgIcon from '../../icons/SvgIcon';
-import {useSetFocus} from '../TextInput/TextInput-func';
 
 
 export type ButtonPropType = {
     type?: 'button' | 'submit' | 'reset'
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
     icon?: 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit'
@@ -28,7 +25,7 @@ export type ButtonPropType = {
 
 
 /** Компонент кнопки */
-function Button(props: ButtonPropType) {
+export default function Button(props: ButtonPropType) {
 
     let {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
@@ -54,9 +51,6 @@ function Button(props: ButtonPropType) {
     // Установка фокусировки при необходомости
     useSetFocus(buttonRef, autoFocus)
 
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(props.relativeSize)
-
     // Текст кнопки
     let btnText: null | string = null
     if (view !== 'onlyIcon' && text) btnText = text
@@ -76,7 +70,7 @@ function Button(props: ButtonPropType) {
     // Атрибуты кнопки
     const btnAttrs: MiscTypes.ObjStringKeyAnyVal = {
         type,
-        className: getButtonClasses(props, size, block),
+        className: getButtonClasses(props, block),
         disabled: disabled,
         ref: buttonRef
     }
@@ -84,55 +78,45 @@ function Button(props: ButtonPropType) {
     if (onClick) btnAttrs.onClick = onClick
 
 
-
     return (
         <button {...btnAttrs}>
-            <ButtonIcon iconType={icon} CN={CN} size={size} color={color} />
-            <ButtonLoader loading={loading} size={size}/>
+            <ButtonIcon iconType={icon} CN={CN} color={color} />
+            <ButtonLoader loading={loading} />
             {btnText}
         </button>
     )
-}
-
-export default Button
-
-
-type ButtonLoaderPropType = {
-    loading?: boolean // Нужно ли отрисовывать загрузчик
-    size: StoreSettingsTypes.EditorSize
 }
 
 
 type ButtonIconPropType = {
     iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
     CN: string // Корневой класс кнопки
-    size: StoreSettingsTypes.EditorSize // Размер значка
     color?: 'base' | 'accent' // Цвет заливки кнопки
 }
 
 function ButtonIcon(props: ButtonIconPropType) {
-
     const {
         iconType,
         CN,
-        size,
         color
     } = props
 
     if (!iconType) return null
 
-    const attrs: MiscTypes.ObjStringKeyStringVal = {
+    const attrs: SvgIconPropType = {
         type: iconType,
-        className: `${CN}__icon ${CN}__icon-${size}-size`
+        extraClass: `${CN}__icon`
     }
     if (color === 'accent') {
-        attrs.specialClass = '-white-btn-icon'
+        attrs.extraClass = '-white-btn-icon'
     }
 
-    //@ts-ignore
     return <SvgIcon {...attrs}  />
+}
 
 
+type ButtonLoaderPropType = {
+    loading?: boolean // Нужно ли отрисовывать загрузчик
 }
 
 /** Компонент загрузчика кнопки */
@@ -140,9 +124,8 @@ function ButtonLoader(props: ButtonLoaderPropType) {
 
     const {
         loading = false,
-        size
     } = props
 
     if (!loading) return null
-    return <Loader className={getButtonLoaderClasses(size)} />
+    return <Loader className='btn-loader' />
 }

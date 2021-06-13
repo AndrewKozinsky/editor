@@ -3,22 +3,20 @@ import SvgIcon from 'common/icons/SvgIcon'
 import './AuthFormWrapper.scss'
 
 
-type PropType = {
+type AuthFormWrapperPropType = {
     children: ReactNode
 }
 
 /** Обёртка форм регистрации, входа пользователя и сброса пароля */
-function AuthFormWrapper(props: PropType) {
+export default function AuthFormWrapper(props: AuthFormWrapperPropType) {
     const CN = 'auth-form-wrapper'
 
     return (
         <section className={CN}>
             <div className={`${CN}__logo-wrapper`}>
-                <SvgIcon type='logo' />
+                <SvgIcon type='logo' baseClass='-color-fill' />
             </div>
             {props.children}
         </section>
     )
 }
-
-export default AuthFormWrapper

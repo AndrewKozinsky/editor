@@ -1,26 +1,26 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import messages from '../../messages'
-import { useGetAnotherFolderData } from './FolderForm-func'
-import ModalContent from './deleteFolder'
-import useGetShowModal from 'utils/hooksUtils'
-import { FolderType } from '../types'
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import messages from '../../messages'
+// import { useGetAnotherFolderData } from './FolderForm-func'
+// import ModalContent from './deleteFolder'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { FolderType } from '../types'
 
 
-type FolderFormPropType = {
+/*type FolderFormPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}
+}*/
 
 /** Компонент формы редактирования папки */
-export default function FolderForm(props: FolderFormPropType) {
+/*export default function FolderForm(props: FolderFormPropType) {
     const { type } = props
 
     // Язык интерфейса
@@ -85,4 +85,4 @@ export default function FolderForm(props: FolderFormPropType) {
             </Wrapper>
         </Form>
     )
-}
+}*/

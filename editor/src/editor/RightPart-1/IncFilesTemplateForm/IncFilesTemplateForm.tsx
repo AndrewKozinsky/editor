@@ -1,23 +1,23 @@
-import React from 'react'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import TextInput from 'src/common/formElements/TextInput/TextInput'
-import Hr from 'src/common/misc/Hr/Hr'
-import Form from 'src/common/formElements/Form/Form'
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import useFormHandler from 'src/libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import Button from 'src/common/formElements/Button/Button'
-import messages from '../messages'
-import {
+// import React from 'react'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import TextInput from 'src/common/formElements/TextInput/TextInput'
+// import Hr from 'src/common/misc/Hr/Hr'
+// import Form from 'src/common/formElements/Form/Form'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import useFormHandler from 'src/libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import Button from 'src/common/formElements/Button/Button'
+// import messages from '../messages'
+/*import {
     useGetAnotherTemplate,
     useGetDeleteTemplateVisibilityStatus,
     useGetSubmitButtonText
-} from './IncFilesTemplateForm-func'
-import useGetShowModal from '../../../utils/hooksUtils'
-import { ModalContent } from './deleteTemplate'
+} from './IncFilesTemplateForm-func'*/
+// import useGetShowModal from '../../../utils/hooksUtils'
+// import { ModalContent } from './deleteTemplate'
 
-export default function IncFilesTemplateForm() {
+/*export default function IncFilesTemplateForm() {
 
     // id выделенного шаблона подключаемых файлов
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
@@ -88,10 +88,10 @@ export default function IncFilesTemplateForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/
 
 /** Кнопка удаления шаблона подключаемых файлов */
-function DeleteTemplateButton() {
+/*function DeleteTemplateButton() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
@@ -110,4 +110,4 @@ function DeleteTemplateButton() {
             onClick={openDeleteTemplateConfirmation}
         />
     )
-}
+}*/

@@ -1,32 +1,33 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
-import messages from '../../messages'
-import { FolderType } from '../types'
-import {
+// import {useStore} from 'effector-react'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
+// import messages from '../../messages'
+// import { FolderType } from '../types'
+/*import {
     useGetFoldersFromServerAndPutInEffector,
     afterCollapseFolder,
     useGetOnItemClick,
     afterAddingNewItem,
     saveItemsOnServer,
     afterDeleteItem
-} from './FoldersList-func'
-import {
+} from './FoldersList-func'*/
+/*import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'
+} from '../stores'*/
 
 
-type FoldersListPropType = {
+/*type FoldersListPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}
+}*/
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
+/*
 export default function FoldersList(props: FoldersListPropType) {
     const { type } = props
 
@@ -69,4 +70,4 @@ export default function FoldersList(props: FoldersListPropType) {
             afterDeleteItem={(items, itemUuid) => afterDeleteItem(type, items, itemUuid)}
         />
     )
-}
+}*/
