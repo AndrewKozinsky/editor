@@ -16,7 +16,7 @@ export default function useSetShortcutsHandler() {
 /**
  * Обработчик нажатий клавиш
  * @param {Object} e — объект события
- * @param {Object} dispatch — диспетчер
+ * @param {Object} dispatch — диспетчер экшенов
  */
 function setShortcutsHandler(e: KeyboardEvent, dispatch: MiscTypes.AppDispatch) {
     const escKey = e.key === "Escape",

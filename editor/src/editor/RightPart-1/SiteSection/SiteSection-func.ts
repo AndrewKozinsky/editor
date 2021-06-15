@@ -1,12 +1,12 @@
-// import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import { AppState } from 'store/rootReducer'
-// import StoreSitesTypes from 'store/site/sitesTypes'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
-// import FHTypes from 'libs/formHandler/types'
-// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-// import { OptionsType } from 'common/formElements/Select/SelectTypes'
-// import messages from '../messages'
+import {useEffect, useState} from 'react'
+import {useSelector} from 'react-redux'
+import { AppState } from 'store/rootReducer'
+import StoreSitesTypes from 'store/site/sitesTypes'
+import FHTypes from 'libs/formHandler/types'
+import { siteSectionMessages } from 'messages/siteSectionMessages'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import { ButtonIconType } from 'common/formElements/Button/Button'
+import { OptionsType } from 'common/formElements/Select/SelectTypes'
 
 
 /**
@@ -14,7 +14,7 @@
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-/*export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего сайта и массив сайтов
     const {currentSiteId, sites} = useSelector((store: AppState) => store.sites)
 
@@ -30,15 +30,6 @@
         let newFormState = changeField(formState, 'name', site)
         newFormState = changeField(newFormState, 'defaultIncFilesTemplateId', site)
 
-        // Если выделели новый сайт, то на кнопке отправки поставить значёк Плюс.
-        // Если выделили существующий сайт, то значёк Сохранения.
-        const submitBtn = formState.fields.submit
-        const newSubmitBtn = {...submitBtn}
-        newSubmitBtn.data.icon = 'btnSignAdd'
-        if (site) newSubmitBtn.data.icon = 'btnSignSave'
-
-        newFormState = makeImmutableObj(newFormState, submitBtn, newSubmitBtn)
-
         // В данные формы поставить тип формы:
         // createSite если хотят создать новый сайт
         // или saveSite если хотят сохранить новое имя сайта
@@ -52,7 +43,7 @@
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [currentSiteId, sites])
-}*/
+}
 
 
 /**
@@ -61,7 +52,7 @@
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} site — данные о сайте
  */
-/*function changeField(
+function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'defaultIncFilesTemplateId',
     site: null | StoreSitesTypes.SiteType
@@ -78,35 +69,39 @@
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}*/
+}
 
 
-/**
- * Функция возвращает текст на кнопке отправки формы
- * @param lang
- */
-/*export function useGetSubmitButtonText(lang: StoreSettingsTypes.EditorLanguage) {
+/** Функция возвращает текст и тип значка на кнопке отправки формы */
+export function useGetSubmitButtonText() {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [submitName, setSubmitName] = useState('')
+    const [submitIconType, setSubmitIconType] = useState<ButtonIconType>('btnSignAdd')
 
     useEffect(function () {
+        // Если выделели новый сайт
         if (!currentSiteId) {
-            setSubmitName(messages.SiteSection.submitBtnTextNewSite[lang])
+            setSubmitName(siteSectionMessages.submitBtnTextNewSite)
+            // На кнопке отправки поставить значёк Плюс.
+            setSubmitIconType('btnSignAdd')
         }
+        // Если выделили существующий сайт.
         else {
-            setSubmitName(messages.SiteSection.submitBtnTextSave[lang])
+            setSubmitName(siteSectionMessages.submitBtnTextSave)
+            // На кнопке отправки поставить значёк Сохранения.
+            setSubmitIconType('btnSignSave')
         }
     }, [currentSiteId])
 
-    return submitName
-}*/
+    return { submitName, submitIconType }
+}
 
 /**
  * Функция возвращает булево значение нужно ли показывать кнопку удаления сайта.
  * Она видна только если выделен существующий сайт.
  */
-/*export function useGetDeleteSiteVisibilityStatus() {
+export function useGetDeleteSiteVisibilityStatus() {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [isVisible, setIsVisible] = useState(false)
@@ -117,7 +112,7 @@
     }, [currentSiteId])
 
     return isVisible
-}*/
+}
 
 /**
  * Хук контролирует выпадающий список выбора шаблона по умолчанию для всего сайта.
@@ -126,10 +121,7 @@
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
-/*
 export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppState) => {
@@ -152,7 +144,7 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
             })
             options.unshift({
                 value: 'none',
-                label: messages.SiteSection.defaultTemplateSelectNoValue[lang]
+                label: siteSectionMessages.defaultTemplateSelectNoValue
             })
 
             // Установка пунктов выпадающего списка
@@ -179,4 +171,4 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
         isVisible,
         selectOptions
     }
-}*/
+}

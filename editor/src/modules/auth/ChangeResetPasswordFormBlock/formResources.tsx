@@ -7,7 +7,7 @@ import { commonMessages } from 'messages/commonMessages'
 import {
     changeResetPasswordFormMessages
 } from 'messages/changeResetPasswordFormMessages'
-import changeResetPasswordRequest from 'requests/changeResetPasswordRequest'
+import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
 
 
 // Объект настройки useFormHandler

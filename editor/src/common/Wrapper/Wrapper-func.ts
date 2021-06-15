@@ -1,4 +1,4 @@
-import {makeCN} from 'src/utils/StringUtils'
+import {makeCN} from 'utils/StringUtils'
 import {WrapperPropType} from './Wrapper'
 
 /**

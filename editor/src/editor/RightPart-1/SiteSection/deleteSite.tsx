@@ -1,22 +1,18 @@
-// import React, {useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import store from 'store/store'
-// import messages from '../messages';
-// import {useDeleteSite} from 'requests/authRequests'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Hr from 'common/misc/Hr/Hr'
-// import Button from 'common/formElements/Button/Button'
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
+import actions from 'store/rootAction'
+import store from 'store/store'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Hr from 'common/misc/Hr/Hr'
+import Button from 'common/formElements/Button/Button'
+import { siteSectionMessages } from 'messages/siteSectionMessages'
+import {useDeleteSite} from 'src/requests/editor/deleteSiteRequest'
 
 
 
 /** Содержимое модального окна */
-/*export function ModalContent() {
+export function ModalContent() {
     const dispatch = useDispatch()
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Запрос на удаление пользователя
     const {response: deleteResponse, doFetch: deleteSite} = useDeleteSite()
@@ -37,21 +33,21 @@
 
     return (
         <>
-            <p>{messages.SiteSection.deleteSiteConfirmationTextInModal[lang]}</p>
+            <p>{siteSectionMessages.deleteSiteConfirmationTextInModal}</p>
             <Wrapper t={10}>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button
-                    text={messages.SiteSection.closeDeleteSiteModalBtn[lang]}
+                    text={siteSectionMessages.closeDeleteSiteModalBtn}
                     onClick={() => dispatch(actions.modal.closeModal())}
                 />
                 <Button
-                    text={messages.SiteSection.deleteSiteBtnInModal[lang]}
+                    text={siteSectionMessages.deleteSiteBtnInModal}
                     color='accent'
                     onClick={deleteSite}
                 />
             </Wrapper>
         </>
     )
-}*/
+}

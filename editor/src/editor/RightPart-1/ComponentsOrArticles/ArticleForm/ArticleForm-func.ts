@@ -1,16 +1,15 @@
-// import { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
 import {useStore} from 'effector-react'
-// import { AppState } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import FHTypes from 'libs/formHandler/types'
+import { AppState } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import FHTypes from 'libs/formHandler/types'
 // import {articlesTreeStore} from '../../ArticlesList/ArticlesList'
 // import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
-// import StoreSitesTypes from 'store/site/sitesTypes'
-// import messages from '../../messages'
+import StoreSitesTypes from 'store/site/sitesTypes'
 
 
 /**
@@ -74,9 +73,7 @@ import {useStore} from 'effector-react'
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
-/*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
-    // Язык интерфейса
-    // const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
 
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
@@ -86,7 +83,7 @@ import {useStore} from 'effector-react'
     const [isVisible, setIsVisible] = useState(false)
     const [selectOptions, setSelectOptions] = useState([])
 
-    useEffect(function () {
+    /*useEffect(function () {
         // Если есть массив шаблонов...
         if (templates?.length) {
 
@@ -99,7 +96,7 @@ import {useStore} from 'effector-react'
             })
             options.unshift({
                 value: 'none',
-                label: messages.SiteSection.defaultTemplateSelectNoValue[lang]
+                label: siteSectionMessages.defaultTemplateSelectNoValue
             })
 
             // Установка пунктов выпадающего списка
@@ -120,10 +117,10 @@ import {useStore} from 'effector-react'
             }
             fh.setFormState = makeImmutableObj(fh.formState, templatesField, newTemplatesField)
         }
-    }, [templates])
+    }, [templates])*/
 
     return {
         isTemplatesSelectVisible: isVisible,
         selectOptions
     }
-}*/
+}

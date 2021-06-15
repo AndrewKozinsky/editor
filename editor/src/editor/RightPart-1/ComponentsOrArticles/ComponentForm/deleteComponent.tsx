@@ -51,17 +51,17 @@
 
     return (
         <>
-            <p>{messages.ComponentTemplateForm.deleteComponentConfirmationTextInModal[lang]}</p>
+            <p>{componentFormMessages.deleteComponentConfirmationTextInModal[lang]}</p>
             <Wrapper t={10}>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button
-                    text={messages.ComponentTemplateForm.closeDeleteComponentModalBtn[lang]}
+                    text={componentFormMessages.closeDeleteComponentModalBtn[lang]}
                     onClick={() => dispatch(actions.modal.closeModal())}
                 />
                 <Button
-                    text={messages.ComponentTemplateForm.deleteComponentBtnInModal[lang]}
+                    text={componentFormMessages.deleteComponentBtnInModal[lang]}
                     color='accent'
                     onClick={deleteComponent}
                 />

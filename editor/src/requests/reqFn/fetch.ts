@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import {useSelector} from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
-import store from 'src/store/store'
+import { AppState } from 'store/rootReducer'
+import store from 'store/store'
 
 
 // Тип параметров запроса

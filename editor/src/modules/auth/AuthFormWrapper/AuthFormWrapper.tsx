@@ -14,7 +14,7 @@ export default function AuthFormWrapper(props: AuthFormWrapperPropType) {
     return (
         <section className={CN}>
             <div className={`${CN}__logo-wrapper`}>
-                <SvgIcon type='logo' baseClass='-color-fill' />
+                <SvgIcon type='logo' baseClass='-black-fill' />
             </div>
             {props.children}
         </section>

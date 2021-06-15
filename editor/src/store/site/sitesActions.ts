@@ -1,9 +1,11 @@
 import StoreSitesTypes from './sitesTypes'
-// import {MiscTypes} from 'types/miscTypes'
+import {MiscTypes} from 'types/miscTypes'
 // import {makeFetch} from 'requests/fetch'
 // import getApiUrl from 'requests/apiUrls'
-// import store from '../store'
+import store from '../store'
 import FilesTreeType from 'libs/FilesTree/types'
+import sitesRequest from 'src/requests/editor/sitesRequest'
+import getIncFilesTemplatesRequest from 'src/requests/editor/getIncFilesTemplatesRequest'
 
 
 const sitesActions = {
@@ -20,13 +22,11 @@ const sitesActions = {
     // САЙТЫ =====================================================================================
 
     // Загрузка сайтов с сервера и установка в Хранилище
-    /*requestSites() {
+    requestSites() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Параметры запроса
-            const options = { method: 'GET'}
 
-            // Запрос и ответ от сервера
-            const response = await makeFetch(getApiUrl('sites'), options)
+            // Запрос на получение списка сайтов
+            const response = await sitesRequest()
 
             if (!response || response.status !== 'success') return
 
@@ -42,7 +42,7 @@ const sitesActions = {
             // Установка сайтов в Хранилище
             dispatch( sitesActions.setSites(preparedSites) )
         }
-    },*/
+    },
 
     // Установка массива сайтов
     setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
@@ -64,7 +64,7 @@ const sitesActions = {
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
     // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
-    /*requestIncFilesTemplates() {
+    requestIncFilesTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
@@ -74,16 +74,10 @@ const sitesActions = {
             // потому что выбрали новый сайт
             if (!siteId) dispatch( sitesActions.setTemplates([]) )
 
-            // Параметры запроса
-            const options = { method: 'GET' }
-
             // Запрос и ответ от сервера
-            const response = await makeFetch(
-                // id сайта передаётся в параметре siteId
-                getApiUrl('incFilesTemplates') + '?' + new URLSearchParams({siteId}), options
-            )
+            const response = await getIncFilesTemplatesRequest(siteId)
 
-            if (!response || response.status !== 'success') return
+            if (response.status !== 'success') return
 
             // Формированое массива шаблонов для установки в Хранилище
             const preparedTemplates = response.data.templates.map((template: any) => {
@@ -99,7 +93,7 @@ const sitesActions = {
             // Установка шаблонов подключаемых файлов в Хранилище
             dispatch( sitesActions.setTemplates(preparedTemplates) )
         }
-    },*/
+    },
 
     // Установка массива шаблонов подключаемых файлов
     setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {

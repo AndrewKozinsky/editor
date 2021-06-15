@@ -1,8 +1,7 @@
-// import {useDispatch} from 'react-redux'
-// import actions from 'store/rootAction'
+import {useDispatch} from 'react-redux'
+import actions from 'store/rootAction'
 
 // Хук возвращает функцию выводящую пользователя из учётной записи
-/*
 export default function useGetLogOut() {
     const dispatch = useDispatch()
 
@@ -13,4 +12,4 @@ export default function useGetLogOut() {
         // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
         dispatch(actions.user.setAuthTokenStatus(1))
     }
-}*/
+}

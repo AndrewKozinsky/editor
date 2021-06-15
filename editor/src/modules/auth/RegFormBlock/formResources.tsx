@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import FHTypes from 'libs/formHandler/types'
 import { commonMessages } from 'messages/commonMessages'
 import { regFormMessages } from 'messages/regFormMessages'
-import regRequest from 'requests/regRequest'
+import regRequest from 'src/requests/user/regRequest'
 
 
 // Объект настройки useFormHandler

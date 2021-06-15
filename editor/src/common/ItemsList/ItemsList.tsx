@@ -1,20 +1,20 @@
-// import React from 'react'
-// import { useGetItemClasses } from './ItemsList-func'
-// import './ItemsList.scss'
+import React from 'react'
+import { useGetItemClasses } from './ItemsList-func'
+import './ItemsList.scss'
 
 
-/*export type ItemType = {
+export type ItemType = {
     id: string
     name: string
     onClick: () => void // Функция запускаемая при щелчке по пункту
-}*/
+}
 
-/*export type ItemsListPropType = {
+export type ItemsListPropType = {
     items: ItemType[], // Список пунктов
     activeItemId: string // id выбранного пункта
-}*/
+}
 
-/*export default function ItemsList(props: ItemsListPropType) {
+export default function ItemsList(props: ItemsListPropType) {
     const {
         items,
         activeItemId
@@ -33,18 +33,16 @@
             }
         </div>
     )
-}*/
+}
 
 
-/*type ItemPropType = {
+type ItemPropType = {
     item: ItemType, // Данные пункта
     isActive?: boolean // Активен ли пункт
-}*/
+}
 
 /** Кнопка списка */
-/*
 function Item(props: ItemPropType) {
-
     const {
         item,
         isActive,
@@ -58,4 +56,4 @@ function Item(props: ItemPropType) {
             {item.name}
         </button>
     )
-}*/
+}

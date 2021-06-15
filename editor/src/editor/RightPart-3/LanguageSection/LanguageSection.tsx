@@ -1,21 +1,22 @@
-// import React from 'react'
-// import { useDispatch, useSelector} from 'react-redux'
-// import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-// import messages from '../messages'
-// import {AppState} from 'store/rootReducer'
-// import actions from 'store/rootAction'
+import React from 'react'
+import { languageSectionMessages } from 'messages/languageSectionMessages'
+import { useDispatch, useSelector} from 'react-redux'
+import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+import {AppState} from 'store/rootReducer'
+import actions from 'store/rootAction'
 
 
-/*export default function LanguageSection() {
+export default function LanguageSection() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
+    // Обработчик выбора другого языка
     const onChangeHandler = useGetOnChangeHandler()
 
     return (
         <FieldGroup
-            label={messages.LanguageSection.langRadiosHeader[lang]}
+            label={languageSectionMessages.langRadiosHeader}
             inputType='radio'
             groupName='language'
             value={[lang]}
@@ -28,10 +29,9 @@
             }
         />
     )
-}*/
+}
 
-
-/*
+/** Хук возвращает функцию-обработчик выбора другого языка */
 function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 
@@ -40,4 +40,4 @@ function useGetOnChangeHandler() {
 
         dispatch(actions.settings.setEditorLanguage(value))
     }
-}*/
+}

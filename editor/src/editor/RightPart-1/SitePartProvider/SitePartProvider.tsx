@@ -1,28 +1,21 @@
-// import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import SiteSection from '../SiteSection/SiteSection'
-// import {AppState} from 'store/rootReducer'
-// import HeaderPage from 'common/HeaderPage/HeaderPage'
-// import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList'
-// import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
-// import ComponentsList from '../ComponentsList/ComponentsList'
-// import ComponentsFormProvider from '../ComponentForms/ComponentsFormProvider/ComponentsFormProvider'
-// import ArticlesList from '../ArticlesList/ArticlesList'
-// import messages from '../messages'
-// import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
-// import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
-// import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
+import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
+import {useSelector} from 'react-redux'
+import SiteSection from '../SiteSection/SiteSection'
+import {AppState} from 'store/rootReducer'
+import HeaderPage from 'common/HeaderPage/HeaderPage'
+import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList'
+import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
+import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
+import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
+import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
+import { rightTabsMessages } from 'messages/rightTabsMessages'
 
 
 /**
  * Компонент возвращает компоненты, которые должны быть показаны в правой части выбранного сайта
  * в зависимости от выбранной вкладки
  */
-/*
 export default function SitePartProvider(): ReactElement {
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Номер активной вкладки
     const { rightMainTab } = useSelector((store: AppState) => store.sites)
@@ -36,14 +29,14 @@ export default function SitePartProvider(): ReactElement {
         const parts: ReactNode = [0, 1, 2, 3].map((num) => {
             if (num === 0) {
                 return (
-                    <HeaderPage headerText={messages.Tabs.sites[lang]} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMessages.sites} display={num === rightMainTab} key={num}>
                         <SiteSection />
                     </HeaderPage>
                 )
             }
             else if (num === 1) {
                 return (
-                    <HeaderPage headerText={messages.Tabs.incFilesTemplates[lang]} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMessages.incFilesTemplates} display={num === rightMainTab} key={num}>
                         <>
                             <NewTemplateButton />
                             <TemplatesList />
@@ -54,7 +47,7 @@ export default function SitePartProvider(): ReactElement {
             }
             else if (num === 2) {
                 return (
-                    <HeaderPage headerText={messages.Tabs.components[lang]} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMessages.components} display={num === rightMainTab} key={num}>
                         <FoldersList type='components' />
                         <ComponentFormProvider />
                     </HeaderPage>
@@ -62,7 +55,7 @@ export default function SitePartProvider(): ReactElement {
             }
             else if (num === 3) {
                 return (
-                    <HeaderPage headerText={messages.Tabs.articles[lang]} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMessages.articles} display={num === rightMainTab} key={num}>
                         <FoldersList type='articles' />
                         <ArticleFormProvider />
                     </HeaderPage>
@@ -72,7 +65,7 @@ export default function SitePartProvider(): ReactElement {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [rightMainTab, lang])
+    }, [rightMainTab])
 
     return partComponents
-}*/
+}

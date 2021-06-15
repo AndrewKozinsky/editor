@@ -69,7 +69,7 @@ export const updateSite = catchAsync<void>(async (req: ExtendedRequestType, res:
         req.params.siteId,
         req.body,
         {new: true}
-    ).select('-_v')
+    ).select('-__v')
 
     // Отправить данные пользователю
     res.status(200).json({

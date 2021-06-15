@@ -1,20 +1,16 @@
 // @ts-ignore
-// import * as yup from 'yup'
+import * as yup from 'yup'
 // import store from 'store/store'
 // import StoreSettingsTypes from 'store/settings/settingsTypes'
-// import FHTypes from 'libs/formHandler/types'
+import FHTypes from 'libs/formHandler/types'
 // import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 // import { makeFetch } from 'requests/fetch'
 // import getApiUrl from 'requests/apiUrls'
 // import {articlesTreeStore, setItems} from '../../ArticlesList/ArticlesList'
-// import messages from '../../messages'
 
 
-/**
- * Объект настройки useFormHandler
- * @param {String} lang — язык интерфейса
- */
-/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+/** Объект настройки useFormHandler */
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -24,12 +20,12 @@
                     error: null,
                     disabled: false
                 },
-                change(formDetails) {
+                /*change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
                         return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
                     }
-                },
+                },*/
             },
             defaultIncFilesTemplateId: {
                 initialValue: [''],
@@ -64,7 +60,7 @@
 
 
                 // Если поля формы заполнены неверно...
-                if($firstWrongField) {
+                /*if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -78,7 +74,7 @@
 
                     // Завершить дальнейшее выполнение
                     return
-                }
+                }*/
 
                 // Поставить новое Состояние формы
                 // formDetails.setFormState(formState)
@@ -94,7 +90,7 @@
             }
         }
     }
-}*/
+}
 
 
 /**
@@ -106,7 +102,7 @@
 
     const schemas = {
         name: yup.string()
-            .required(messages.ArticleForm.articleNameRequired[lang])
+            .required(articleFormMessages.articleNameRequired[lang])
     }
 
     // @ts-ignore

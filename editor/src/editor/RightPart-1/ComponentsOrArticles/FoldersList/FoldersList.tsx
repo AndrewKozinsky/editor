@@ -1,38 +1,33 @@
-// import React from 'react'
+import React from 'react'
 //@ts-ignore
-// import {useStore} from 'effector-react'
-// import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
-// import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
-// import messages from '../../messages'
-// import { FolderType } from '../types'
-/*import {
+import {useStore} from 'effector-react'
+import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
+import { FolderType } from '../types'
+import {
     useGetFoldersFromServerAndPutInEffector,
     afterCollapseFolder,
     useGetOnItemClick,
     afterAddingNewItem,
     saveItemsOnServer,
     afterDeleteItem
-} from './FoldersList-func'*/
-/*import {
+} from './FoldersList-func'
+import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'*/
+} from '../stores'
+import { foldersArticlesSectionMessages } from 'messages/foldersArticlesSectionMessages'
+import { foldersComponentsSectionMessages } from 'messages/foldersComponentsSectionMessages'
 
 
-/*type FoldersListPropType = {
+type FoldersListPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}*/
+}
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
-/*
 export default function FoldersList(props: FoldersListPropType) {
     const { type } = props
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Получение с сервера порядка следования папок и установка в Эффектор
     useGetFoldersFromServerAndPutInEffector(type)
@@ -47,12 +42,12 @@ export default function FoldersList(props: FoldersListPropType) {
     if(type === 'articles') setItems = setArtItems
 
     // Название папки
-    let newFolderName = messages.FoldersComponentsSection.createNewFolderBth[lang]
-    if(type === 'articles') newFolderName = messages.FoldersArticlesSection.createNewFolderBth[lang]
+    let newFolderName = foldersComponentsSectionMessages.createNewFolderBth
+    if(type === 'articles') newFolderName = foldersArticlesSectionMessages.createNewFolderBth
 
     // Название файла
-    let newFileName = messages.FoldersComponentsSection.createNewFileBth[lang]
-    if(type === 'articles') newFileName = messages.FoldersArticlesSection.createNewFileBth[lang]
+    let newFileName = foldersComponentsSectionMessages.createNewFileBth
+    if(type === 'articles') newFileName = foldersArticlesSectionMessages.createNewFileBth
 
     // Обработчик щелчка по папке или файлу
     const onItemClick = useGetOnItemClick(type)
@@ -70,4 +65,4 @@ export default function FoldersList(props: FoldersListPropType) {
             afterDeleteItem={(items, itemUuid) => afterDeleteItem(type, items, itemUuid)}
         />
     )
-}*/
+}

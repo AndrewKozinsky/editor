@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { useGetPageClasses } from './EditorMain-func'
 import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
 import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
-import Modal from 'editor/special/Modal/Modal'
+import Modal from 'modules/Modal/Modal'
 import './EditorMain.scss'
 
 

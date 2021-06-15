@@ -28,7 +28,7 @@ export function useGetModalCloseHandler() {
  * @param {String} propName — имя свойства
  * @param {String} value — значение свойства
  */
-export function setInLocalStorage(propName: string, value: number | string) {
+export function setInLocalStorage(propName: string, value: any) {
     localStorage.setItem(propName, JSON.stringify(value))
 }
 
@@ -40,7 +40,7 @@ export function setInLocalStorage(propName: string, value: number | string) {
  */
 export function getFromLocalStorage(propName: string, defaultValue?: any) {
     let value = localStorage.getItem(propName)
-    if (!value && defaultValue) return defaultValue
+    if (!value && defaultValue !== undefined) return defaultValue
 
     return JSON.parse(value)
 }

@@ -1,17 +1,13 @@
-// import React from 'react'
 // @ts-ignore
-// import * as yup from 'yup'
-// import FHTypes from 'src/libs/formHandler/types'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
-// import { makeFetch } from 'requests/fetch'
-// import getApiUrl from 'requests/apiUrls'
-// import actions from 'store/rootAction'
-// import { MiscTypes } from 'types/miscTypes'
-// import messages from '../messages'
+import * as yup from 'yup'
+import FHTypes from 'src/libs/formHandler/types'
+import { commonMessages } from 'messages/commonMessages'
+import {changePasswordSectionMessages} from 'messages/changePasswordSectionMessages'
+import changePasswordRequest from 'src/requests/user/changePasswordRequest'
 
 
 // Объект настройки useFormHandler
-/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -24,7 +20,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -37,7 +33,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -50,7 +46,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -71,10 +67,14 @@
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(
+                    formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                )
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
+                formState = formDetails.setFormDataPropValue(
+                    formState, 'submitCounter', formState.form.data.submitCounter + 1
+                )
 
                 // Первое поле, где есть ошибка
                 let $firstWrongField = getFirstInvalidField(formState)
@@ -104,15 +104,11 @@
                 formDetails.setFormState(formState)
 
                 // Форма заполнена верно. Отправить данные на сервер...
-                const options = {
-                    method: 'PATCH',
-                    body: JSON.stringify({
-                        passwordCurrent: formDetails.readyFieldValues.passwordCurrent,
-                        newPassword: formDetails.readyFieldValues.newPassword,
-                        newPasswordAgain: formDetails.readyFieldValues.newPasswordAgain
-                    })
-                }
-                const response = await makeFetch(getApiUrl('changePassword'), options)
+                const response = await changePasswordRequest(
+                    formDetails.readyFieldValues.passwordCurrent.toString(),
+                    formDetails.readyFieldValues.newPassword.toString(),
+                    formDetails.readyFieldValues.newPasswordAgain.toString()
+                )
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
@@ -142,33 +138,32 @@
             }
         }
     }
-}*/
+}
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fields — данные о полях формы
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-/*function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
 
     const schemas = {
         passwordCurrent: yup.string()
-            .required(commonMessages.requiredField[lang])
-            .min(6, commonMessages.passwordToShort[lang])
-            .max(50, commonMessages.passwordToLong[lang]),
+            .required(commonMessages.requiredField)
+            .min(6, commonMessages.passwordToShort)
+            .max(50, commonMessages.passwordToLong),
         newPassword: yup.string()
-            .required(commonMessages.requiredField[lang])
-            .min(6, commonMessages.passwordToShort[lang])
-            .max(50, commonMessages.passwordToLong[lang]),
+            .required(commonMessages.requiredField)
+            .min(6, commonMessages.passwordToShort)
+            .max(50, commonMessages.passwordToLong),
         newPasswordAgain: yup.string()
-            .oneOf([fields.newPassword.value[0]], messages.ChangePasswordSection.passwordsMustMatch[lang])
+            .oneOf([fields.newPassword.value[0]], changePasswordSectionMessages.passwordsMustMatch)
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}*/
+}
 
 
 /**
@@ -176,13 +171,11 @@
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
-/*function validateForm(
+function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
-    setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
+    setFormDataPropValue: FHTypes.SetFormDataPropValue
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
@@ -200,7 +193,7 @@
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(formState.fields, fieldName, lang).validateSync(fieldValue)
+            getSchema(formState.fields, fieldName).validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -220,14 +213,14 @@
     }
 
     return formState
-}*/
+}
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-/*function getFirstInvalidField(formState: FHTypes.FormState) {
+function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -243,7 +236,7 @@
     }
 
     return $firstWrongField
-}*/
+}
 
 
 /**
@@ -252,7 +245,7 @@
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-/*function setLoadingStatusToForm(
+function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'passwordCurrent')
@@ -262,4 +255,4 @@
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}*/
+}

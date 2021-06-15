@@ -1,19 +1,15 @@
-// import React, {useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import {useDeleteAccount} from 'requests/authRequests'
-// import messages from '../messages'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Hr from 'common/misc/Hr/Hr'
-// import Button from 'common/formElements/Button/Button'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import actions from 'store/rootAction'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Hr from 'common/misc/Hr/Hr'
+import Button from 'common/formElements/Button/Button'
+import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
+import { useDeleteAccount } from 'src/requests/user/deleteAccountRequest'
 
 
-/*export function ModalContent() {
+export function ModalContent() {
     const dispatch = useDispatch()
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Запрос на удаление пользователя
     const {response: deleteResponse, doFetch: deleteUser} = useDeleteAccount()
@@ -36,21 +32,21 @@
 
     return (
         <>
-            <p>{messages.UserAccountSection.confirmModalText[lang]}</p>
+            <p>{userAccountSectionMessages.confirmModalText}</p>
             <Wrapper t={10}>
                 <Hr/>
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
                 <Button
-                    text={messages.UserAccountSection.cancelBtn[lang]}
+                    text={userAccountSectionMessages.cancelBtn}
                     onClick={() => dispatch(actions.modal.closeModal())}
                 />
                 <Button
-                    text={messages.UserAccountSection.deleteBtn[lang]}
+                    text={userAccountSectionMessages.deleteBtn}
                     color='accent'
                     onClick={deleteUser}
                 />
             </Wrapper>
         </>
     )
-}*/
+}

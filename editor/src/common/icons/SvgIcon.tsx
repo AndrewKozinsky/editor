@@ -1,9 +1,11 @@
 import React from 'react'
 import {getIcon} from './js/getIcon'
 import { getIconSize } from './js/getIconSize'
+import {makeCN} from 'utils/StringUtils';
 import './css/SvgIcon.scss'
 
-type BaseClasses = '-color-fill'
+
+type BaseClasses = '-black-fill' | '-icon-fill' | '-white-fill' | '-icon-stroke'
 
 export type SvgIconPropType = {
     type: string // Тип значка
@@ -25,12 +27,14 @@ export default function SvgIcon(props: SvgIconPropType) {
     // Размеры
     const iconSizes = getIconSize(type)
 
-    // Класс
+    // Классы
+    const CN = 'icon'
     let className = ''
-    if (baseClass) className = baseClass
-    else if (extraClass) className = extraClass
-    if (!baseClass && !extraClass) className = '-color-fill'
 
+    if (!baseClass && !extraClass) className = `${CN}-black-fill`
+    else if (baseClass && !extraClass) className = `${CN}${baseClass}`
+    else if (!baseClass && extraClass) className = extraClass
+    else className = makeCN([`${CN}${baseClass}`, extraClass])
 
     return (
         <svg {...iconSizes} className={className}>

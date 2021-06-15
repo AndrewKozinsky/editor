@@ -1,24 +1,21 @@
-// import React, {ReactElement, useState} from 'react'
-// import { MiscTypes } from 'types/miscTypes'
-// import {getRandomId} from 'utils/StringUtils'
-// import { getLabelClasses } from './Checkbox-func'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
-// import './Checkbox.scss'
+import React, {ReactElement, useState} from 'react'
+import { MiscTypes } from 'types/miscTypes'
+import {getRandomId} from 'utils/StringUtils'
+import './Checkbox.scss'
 
 
-/*export type CheckboxPropType = {
+export type CheckboxPropType = {
     label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply, // Размер поля
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
 /* Компонент выпадающего списка */
-/*function Checkbox(props: CheckboxPropType) {
+export default function Checkbox(props: CheckboxPropType) {
 
     const {
         label, // Подпись выпадающего списка
@@ -49,7 +46,7 @@
     // Атрибуты label
     const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
         htmlFor: id,
-        className: getLabelClasses(size),
+        className: 'checkbox-label',
     }
 
     return (
@@ -58,7 +55,4 @@
             <label {...labelAttribs}>{label}</label>
         </>
     )
-}*/
-
-
-// export default Checkbox
+}

@@ -7,7 +7,8 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getFromLocalStorage } from 'utils/MiscUtils'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
-import { useGetUserToken } from 'src/requests/getUserToken'
+import { useGetUserToken } from 'src/requests/user/getUserToken'
+import {debug} from 'webpack';
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов

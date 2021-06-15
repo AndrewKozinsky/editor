@@ -1,46 +1,31 @@
-//@import "../../commonStyles/commonStyles";
+@import "../../commonStyles/commonStyles";
 
 // ---------------------------------------------------------------
 
-//$wrapper-class: select-input-wrapper;
+$wrapper-class: select-input-wrapper;
 
 // Обёртка выпадающего списка
-/*.#{$wrapper-class} {
+.#{$wrapper-class} {
     position: relative;
     overflow: hidden;
     border-radius: var(--radius);
-}*/
+}
 
-/*.#{$wrapper-class}__tip {
+.#{$wrapper-class}__tip {
     position: absolute;
     top: 0;
     right: 0;
+    width: 16px;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     background-color: var(--text-placeholder-color);
-}*/
-
-/*.#{$wrapper-class}--small-size {
-    .#{$wrapper-class}__tip {
-        width: 16px;
-    }
-}*/
-/*.#{$wrapper-class}--middle-size {
-    .#{$wrapper-class}__tip {
-        width: 20px;
-    }
-}*/
-/*.#{$wrapper-class}--big-size {
-    .#{$wrapper-class}__tip {
-        width: 22px;
-    }
-}*/
+}
 
 // Класс добавляемый к обёртке при фокусировке на выпадающем списке
-/*.#{$wrapper-class}--focus {
+.#{$wrapper-class}--focus {
     @include focus;
 
     .#{$wrapper-class}__tip {
@@ -50,19 +35,22 @@
     svg {
         stroke: white;
     }
-}*/
+}
 
 // ---------------------------------------------------------------
 
-//$select-class: select-input;
+$select-class: select-input;
 
-/*.#{$select-class} {
+.#{$select-class} {
     display: block;
     width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
     color: var(--text-color);
     appearance: none;
 
     background-color: var(--button-color);
+    padding: .4rem 0.7rem;
     border: none;
     border-radius: var(--radius);
     transition: opacity .3s;
@@ -70,21 +58,4 @@
     &:disabled {
         opacity: .5;
     }
-}*/
-
-// Размер поля.
-/*.#{$select-class}--small-size {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    padding: .4rem 0.7rem;
-}*/
-/*.#{$select-class}--middle-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    padding: .5rem 0.9rem;
-}*/
-/*.#{$select-class}--big-size {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    padding: .7rem 1.1rem;
-}*/
+}

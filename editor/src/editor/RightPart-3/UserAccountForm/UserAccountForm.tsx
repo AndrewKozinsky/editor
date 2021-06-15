@@ -1,18 +1,13 @@
-// import React from 'react'
-// import {useSelector} from 'react-redux'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Button from 'common/formElements/Button/Button'
-// import messages from '../messages'
-// import {AppState} from 'store/rootReducer'
-// import useGetLogOut from './logOut'
-// import useGetShowModal from 'utils/hooksUtils'
-// import { ModalContent } from './deleteAccount'
+import React from 'react'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Button from 'common/formElements/Button/Button'
+import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
+import useGetLogOut from './logOut'
+import useGetShowModal from 'utils/hooksUtils'
+import { ModalContent } from './deleteAccount'
 
 
-/*
 export default function UserAccountForm() {
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Хук возвращает функцию открывающую модальное окно
     // с подтверждением удаления учётной записи пользователя
@@ -24,15 +19,15 @@ export default function UserAccountForm() {
     return (
         <Wrapper gap={10}>
             <Button
-                text={messages.UserAccountSection.deleteBtn[lang]}
+                text={userAccountSectionMessages.deleteBtn}
                 icon='btnSignTrash'
                 onClick={deleteAccount}
             />
             <Button
-                text={messages.UserAccountSection.logOutBtn[lang]}
+                text={userAccountSectionMessages.logOutBtn}
                 icon='btnSignExit'
                 onClick={logOut}
             />
         </Wrapper>
     )
-}*/
+}

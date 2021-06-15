@@ -1,36 +1,34 @@
-// import React, {useCallback} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
+import React, {useCallback} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
-// import {useStore} from 'effector-react'
-// import {AppState} from 'store/rootReducer'
-// import FilesTreeType from 'libs/FilesTree/types';
-// import actions from 'store/rootAction'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Hr from 'common/misc/Hr/Hr'
-// import Button from 'common/formElements/Button/Button'
-// import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
-// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-// import messages from '../../messages'
-/*import {
+import {useStore} from 'effector-react'
+import {AppState} from 'store/rootReducer'
+import FilesTreeType from 'libs/FilesTree/types';
+import actions from 'store/rootAction'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Hr from 'common/misc/Hr/Hr'
+import Button from 'common/formElements/Button/Button'
+import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
+import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'*/
-// import { FolderType } from '../types'
+} from '../stores'
+import { FolderType } from '../types'
+import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
+import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 
 
-/*type ModalContentPropType = {
+type ModalContentPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}*/
+}
 
-/*export default function ModalContent(props: ModalContentPropType) {
+export default function ModalContent(props: ModalContentPropType) {
     const { type } = props
 
     const dispatch = useDispatch()
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Массив папок и файлов из Хранилища
     const componentsItems = useStore(componentsTreeStore)
@@ -42,26 +40,21 @@
 
     // Функция удаляющая выделенную папку
     const deleteFolder = useCallback(function () {
-        // Удалить папку из Хранилища и возвратить новый массив
-        let newItems: FilesTreeType.Items
+
         if(type === 'components') {
-            newItems = filesTreePublicMethods.deleteItem(componentsItems, currentCompItemId)
-        } else if(type === 'articles') {
-            newItems = filesTreePublicMethods.deleteItem(articlesItems, currentArtItemId)
-        }
-
-        // Сохранить новые данные в Хранилище
-        if(type === 'components') setCompItems(newItems)
-        else if(type === 'articles') setArtItems(newItems)
-
-        // Сохранить новый массив папок и файлов на сервере
-        saveItemsOnServer(type, newItems)
-
-        // Обнулить свойство указывающее на uuid активного пункта в папках и шаблонах компонентах
-        // потому что папка удалена
-        if(type === 'components') {
+            // Удалить папку из Хранилища и возвратить новый массив
+            const newItems = filesTreePublicMethods.deleteItem(componentsItems, currentCompItemId)
+            // Сохранить новые данные в Хранилище
+            setCompItems(newItems)
+            // Сохранить новый массив папок и файлов на сервере
+            saveItemsOnServer(type, newItems)
+            // Обнулить свойство указывающее на uuid активного пункта в папках и шаблонах компонентах
+            // потому что папка удалена
             dispatch(actions.sites.setCurrentComp(null, null))
         } else if(type === 'articles') {
+            const newItems = filesTreePublicMethods.deleteItem(articlesItems, currentArtItemId)
+            setArtItems(newItems)
+            saveItemsOnServer(type, newItems)
             dispatch(actions.sites.setCurrentArt(null, null))
         }
 
@@ -70,21 +63,21 @@
     }, [])
 
     // Текст сообщения
-    let text = messages.ComponentFolderForm.deleteFolderConfirmationTextInModal[lang]
+    let text = componentFolderFormMessages.deleteFolderConfirmationTextInModal
     if(type === 'articles') {
-        text = messages.ArticlesFolderForm.deleteFolderConfirmationTextInModal[lang]
+        text = articleFolderFormMessages.deleteFolderConfirmationTextInModal
     }
 
     // Текст на кнопке отмены
-    let cancelBtnText = messages.ComponentFolderForm.closeDeleteFolderModalBtn[lang]
+    let cancelBtnText = componentFolderFormMessages.closeDeleteFolderModalBtn
     if(type === 'articles') {
-        cancelBtnText = messages.ArticlesFolderForm.closeDeleteFolderModalBtn[lang]
+        cancelBtnText = articleFolderFormMessages.closeDeleteFolderModalBtn
     }
 
     // Текст на кнопке удаления
-    let deleteBtnText = messages.ComponentFolderForm.deleteFolderBtnInModal[lang]
+    let deleteBtnText = componentFolderFormMessages.deleteFolderBtnInModal
     if(type === 'articles') {
-        deleteBtnText = messages.ArticlesFolderForm.deleteFolderBtnInModal[lang]
+        deleteBtnText = articleFolderFormMessages.deleteFolderBtnInModal
     }
 
     return (
@@ -106,4 +99,4 @@
             </Wrapper>
         </>
     )
-}*/
+}

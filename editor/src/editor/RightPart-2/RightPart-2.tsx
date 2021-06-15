@@ -1,11 +1,11 @@
-// import React from 'react'
+import React from 'react'
 
-/*type RightPart2PropType = {
+type RightPart2PropType = {
     display?: boolean
-}*/
+}
 
 /** Правая часть второй главной вкладки */
-/*function RightPart2(props: RightPart2PropType) {
+export default function RightPart2(props: RightPart2PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -18,6 +18,4 @@
             <p>RightPart2</p>
         </div>
     )
-}*/
-
-// export default RightPart2
+}

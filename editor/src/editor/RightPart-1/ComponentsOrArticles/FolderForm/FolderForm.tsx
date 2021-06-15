@@ -1,55 +1,51 @@
-// import React from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Button from 'common/formElements/Button/Button'
-// import Hr from 'common/misc/Hr/Hr'
-// import Form from 'common/formElements/Form/Form'
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import getFormConfig from './formResources'
-// import messages from '../../messages'
-// import { useGetAnotherFolderData } from './FolderForm-func'
-// import ModalContent from './deleteFolder'
-// import useGetShowModal from 'utils/hooksUtils'
-// import { FolderType } from '../types'
+import React from 'react'
+import Wrapper from 'common/Wrapper/Wrapper'
+import TextInput from 'common/formElements/TextInput/TextInput'
+import Button from 'common/formElements/Button/Button'
+import Hr from 'common/misc/Hr/Hr'
+import Form from 'common/formElements/Form/Form'
+import useFormHandler from 'libs/formHandler/useFormHandler'
+import getFormConfig from './formResources'
+import { useGetAnotherFolderData } from './FolderForm-func'
+import ModalContent from './deleteFolder'
+import useGetShowModal from 'utils/hooksUtils'
+import { FolderType } from '../types'
+import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
+import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 
 
-/*type FolderFormPropType = {
+type FolderFormPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}*/
+}
 
 /** Компонент формы редактирования папки */
-/*export default function FolderForm(props: FolderFormPropType) {
+export default function FolderForm(props: FolderFormPropType) {
     const { type } = props
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang, type), 'folder')
-    // Изменение данных формы при выделении другой папки шаблонов компонентов
+    const fh = useFormHandler(getFormConfig(type), 'folder')
+    // Изменение данных формы при выделении другой папки шаблонов компонентов или статей
     useGetAnotherFolderData(type, fh.formState, fh.setFormState)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления папки
     const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent type={type} />)
 
     // Подпись поля с названием папки
-    let nameInputText = messages.ComponentFolderForm.folderNameInput[lang]
+    let nameInputText = componentFolderFormMessages.folderNameInput
     if(type === 'articles') {
-        nameInputText = messages.ArticlesFolderForm.folderNameInput[lang][lang]
+        nameInputText = articleFolderFormMessages.folderNameInput
     }
 
-    // Подпись кнопке отправки
-    let submitBtnText = messages.ComponentFolderForm.submitBtnTextSave[lang]
+    // Подпись кнопки отправки
+    let submitBtnText = componentFolderFormMessages.submitBtnTextSave
     if(type === 'articles') {
-        submitBtnText = messages.ArticlesFolderForm.submitBtnTextSave[lang]
+        submitBtnText = articleFolderFormMessages.submitBtnTextSave
     }
 
     // Подпись кнопке удаления
-    let deleteBtnText = messages.ComponentFolderForm.deleteFolderBtnText[lang]
+    let deleteBtnText = componentFolderFormMessages.deleteFolderBtnText
     if(type === 'articles') {
-        deleteBtnText = messages.ArticlesFolderForm.deleteFolderBtnText[lang]
+        deleteBtnText = articleFolderFormMessages.deleteFolderBtnText
     }
 
     return (
@@ -85,4 +81,4 @@
             </Wrapper>
         </Form>
     )
-}*/
+}

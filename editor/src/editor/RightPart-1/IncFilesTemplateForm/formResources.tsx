@@ -1,15 +1,15 @@
 // @ts-ignore
-// import * as yup from 'yup'
-// import FHTypes from 'src/libs/formHandler/types'
-// import messages from '../messages'
-// import store from 'src/store/store'
-// import actions from 'src/store/rootAction'
-// import { makeFetch } from 'src/requests/fetch'
-// import getApiUrl from 'src/requests/apiUrls'
+import * as yup from 'yup'
+import FHTypes from 'src/libs/formHandler/types'
+import store from 'store/store'
+import actions from 'store/rootAction'
+import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+import createNewTemplateRequest, { CreateNewTemplateValuesType } from 'src/requests/editor/createNewTemplateRequest'
+import updateTemplateRequest, { UpdateTemplateValuesType } from 'src/requests/editor/updateTemplateRequest'
 
 
 // Объект настройки useFormHandler
-/*export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -22,7 +22,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 },
             },
@@ -35,7 +35,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 },
             },
@@ -48,7 +48,7 @@
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 },
             },
@@ -72,10 +72,14 @@
             submit: async function(formDetails) {
 
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(
+                    formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                )
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
+                formState = formDetails.setFormDataPropValue(
+                    formState, 'submitCounter', formState.form.data.submitCounter + 1
+                )
 
                 // Первое поле, где есть ошибка
                 let $firstWrongField = getFirstInvalidField(formState)
@@ -107,33 +111,32 @@
                 // В зависимости от типа формы запущу разные функции сохранения данных
                 // Если нужно создать новый шаблон
                 if (formDetails.state.form.data.formType === 'createTemplate') {
-                    await createNewTemplate(formDetails, lang)
+                    await createNewTemplate(formDetails)
                 }
                 // Если нужно обновить данные шаблона
                 else {
-                    await updateTemplate(formDetails, lang)
+                    await updateTemplate(formDetails)
                 }
             }
         }
     }
-}*/
+}
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-/*function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fieldName: string): any {
 
     const schemas = {
         name: yup.string()
-            .required(messages.IncFilesTemplateSection.templateNameInputRequired[lang])
+            .required(incFilesTemplateSectionMessages.templateNameInputRequired)
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}*/
+}
 
 
 /**
@@ -141,13 +144,11 @@
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
-/*function validateForm(
+function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
@@ -165,7 +166,7 @@
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(fieldName, lang)?.validateSync(fieldValue)
+            getSchema(fieldName)?.validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -183,14 +184,14 @@
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}*/
+}
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-/*function getFirstInvalidField(formState: FHTypes.FormState) {
+function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -206,7 +207,7 @@
     }
 
     return $firstWrongField
-}*/
+}
 
 
 /**
@@ -215,7 +216,7 @@
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-/*function setLoadingStatusToForm(
+function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -225,36 +226,19 @@
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}*/
+}
 
 
 /**
  * Функция создающая новый шаблон подключаемых файлов
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
- * @param {String} lang — язык интерфейса
  */
-/*async function createNewTemplate(
-    formDetails: FHTypes.FormDetailsInSubmitHandler,
-    lang: StoreSettingsTypes.EditorLanguage
-) {
+async function createNewTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // Сформировать объект с данными шаблона подключаемых файлов
-    const newTemplateData = {
-        siteId: store.getState().sites.currentSiteId,
-        name: formDetails.readyFieldValues.name,
-        codeInHead: {
-            code: formDetails.readyFieldValues.head
-        },
-        codeBeforeEndBody: {
-            code: formDetails.readyFieldValues.body
-        },
-    }
+    const newTemplateData = createNewTemplateData(formDetails.readyFieldValues)
 
     // Отправить данные на сервер...
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(newTemplateData)
-    }
-    const response = await makeFetch(getApiUrl('incFilesTemplates'), options)
+    const response = await createNewTemplateRequest(newTemplateData)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -272,38 +256,38 @@
 
         store.dispatch(actions.sites.setCurrentIncFilesTemplateId(newTemplate.id))
     }
-}*/
+}
+
+function createNewTemplateData(fieldValues: FHTypes.ReadyFieldsValues) {
+    // Сформировать объект с данными шаблона подключаемых файлов
+    const newTemplateData: CreateNewTemplateValuesType = {
+        siteId: store.getState().sites.currentSiteId,
+        name: fieldValues.name.toString(),
+        headCode: fieldValues.head.toString() || null,
+        bodyCode: fieldValues.body.toString() || null
+    }
+
+    return newTemplateData
+}
 
 
 /**
  * Функция редактирующая данные существующего сайта
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
- * @param {String} lang — язык интерфейса
  */
-/*async function updateTemplate(
-    formDetails: FHTypes.FormDetailsInSubmitHandler,
-    lang: StoreSettingsTypes.EditorLanguage
-) {
+async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // id выбранного шаблона
     const {currentTemplateId} = store.getState().sites.incFilesTemplatesSection
 
     // Сформировать объект с данными шаблона подключаемых файлов
-    const templateData = {
-        name: formDetails.readyFieldValues.name,
-        codeInHead: {
-            code: formDetails.readyFieldValues.head
-        },
-        codeBeforeEndBody: {
-            code: formDetails.readyFieldValues.body
-        }
+    const templateData: UpdateTemplateValuesType = {
+        name: formDetails.readyFieldValues.name.toString(),
+        headCode: formDetails.readyFieldValues.head.toString() || null,
+        bodyCode: formDetails.readyFieldValues.body.toString() || null
     }
 
     // Отправить данные на сервер...
-    const options = {
-        method: 'PATCH',
-        body: JSON.stringify(templateData)
-    }
-    const response = await makeFetch(getApiUrl('incFilesTemplate', currentTemplateId), options)
+    const response = await updateTemplateRequest(templateData, currentTemplateId)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -314,4 +298,4 @@
         // Скачать новый список шаблонов и поставить в Хранилище
         await store.dispatch(actions.sites.requestIncFilesTemplates())
     }
-}*/
+}

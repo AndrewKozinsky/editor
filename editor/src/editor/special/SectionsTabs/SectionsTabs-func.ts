@@ -10,7 +10,7 @@ import { MainTabDataType } from '../MainTab/MainTab'
 /** Хук возвращает данные для генерирования вкладок разделов */
 export function useGetTabData(): MainTabDataType[] {
 
-    // Размер элементов интерфейса и номер активной вкладки
+    // Номер активной вкладки
     const { mainTab } = useSelector((store: AppState) => store.settings)
 
     // Возвращаемые функцией данные по вкладкам

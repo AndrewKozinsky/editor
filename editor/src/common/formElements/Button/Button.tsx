@@ -1,5 +1,4 @@
 import React, {useRef} from 'react'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {MiscTypes} from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import {useSelector} from 'react-redux'
@@ -13,7 +12,7 @@ export type ButtonPropType = {
     type?: 'button' | 'submit' | 'reset'
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
-    icon?: 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit'
+    icon?: ButtonIconType
     text?: string
     name?: string
     loading?: boolean
@@ -22,6 +21,8 @@ export type ButtonPropType = {
     disabled?: boolean
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
 }
+
+export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit'
 
 
 /** Компонент кнопки */
@@ -105,10 +106,11 @@ function ButtonIcon(props: ButtonIconPropType) {
 
     const attrs: SvgIconPropType = {
         type: iconType,
+        baseClass: `-icon-fill`,
         extraClass: `${CN}__icon`
     }
     if (color === 'accent') {
-        attrs.extraClass = '-white-btn-icon'
+        attrs.baseClass = '-white-fill'
     }
 
     return <SvgIcon {...attrs}  />
@@ -123,7 +125,7 @@ type ButtonLoaderPropType = {
 function ButtonLoader(props: ButtonLoaderPropType) {
 
     const {
-        loading = false,
+        loading = false
     } = props
 
     if (!loading) return null

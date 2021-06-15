@@ -1,10 +1,8 @@
-// import React from 'react'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import LanguageSection from '../LanguageSection/LanguageSection'
-// import ThemeSection from '../ThemeSection/ThemeSection'
-// import SizeSection from '../SizeSection/SizeSection'
+import React from 'react'
+import Wrapper from 'common/Wrapper/Wrapper'
+import LanguageSection from '../LanguageSection/LanguageSection'
+import ThemeSection from '../ThemeSection/ThemeSection'
 
-/*
 export default function SettingsEditorTabContent() {
     return (
         <div>
@@ -15,10 +13,6 @@ export default function SettingsEditorTabContent() {
             <Wrapper t={20}>
                 <ThemeSection />
             </Wrapper>
-
-            <Wrapper t={20}>
-                <SizeSection />
-            </Wrapper>
         </div>
     )
-}*/
+}

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {makeCN} from 'src/utils/StringUtils'
+import {AppState} from 'store/rootReducer'
+import {makeCN} from 'utils/StringUtils'
 
 
 /**

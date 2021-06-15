@@ -1,31 +1,25 @@
-// import React from 'react'
-// import {useSelector} from 'react-redux'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Button from 'common/formElements/Button/Button'
-// import Form from 'common/formElements/Form/Form'
-// import {AppState} from 'store/rootReducer'
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import messages from '../messages'
-// import getFormConfig from './formResources'
-// import Notice from 'common/Notice/Notice'
+import React from 'react'
+import Wrapper from 'common/Wrapper/Wrapper'
+import TextInput from 'common/formElements/TextInput/TextInput'
+import Button from 'common/formElements/Button/Button'
+import Form from 'common/formElements/Form/Form'
+import Notice from 'common/Notice/Notice'
+import useFormHandler from 'libs/formHandler/useFormHandler'
+import getFormConfig from './formResources'
+import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
 
 
-/*
 export default function ChangePasswordForm() {
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'changePassword')
+    const fh = useFormHandler(getFormConfig(), 'changePassword')
 
     return (
         <>
             <Form name='changePassword' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.ChangePasswordSection.currentPasswordField[lang] }
+                        label={ changePasswordSectionMessages.currentPasswordField }
                         name='passwordCurrent'
                         type='password'
                         maxWidth={250}
@@ -38,7 +32,7 @@ export default function ChangePasswordForm() {
                 </Wrapper>
                 <Wrapper t={10}>
                     <TextInput
-                        label={ messages.ChangePasswordSection.newPasswordField[lang] }
+                        label={ changePasswordSectionMessages.newPasswordField }
                         name='newPassword'
                         type='password'
                         maxWidth={250}
@@ -51,7 +45,7 @@ export default function ChangePasswordForm() {
                 </Wrapper>
                 <Wrapper t={10}>
                     <TextInput
-                        label={ messages.ChangePasswordSection.newPasswordAgainField[lang] }
+                        label={ changePasswordSectionMessages.newPasswordAgainField }
                         name='newPasswordAgain'
                         type='password'
                         maxWidth={250}
@@ -64,7 +58,7 @@ export default function ChangePasswordForm() {
                 </Wrapper>
                 <Wrapper t={10}>
                     <Button
-                        text={messages.ChangePasswordSection.submitBtnText[lang]}
+                        text={changePasswordSectionMessages.submitBtnText}
                         name='submit'
                         type='submit'
                         icon='btnSignSave'
@@ -75,9 +69,9 @@ export default function ChangePasswordForm() {
             </Form>
             {fh.form.passwordHasChanged && <Wrapper t={15}>
                 <Notice type='success'>
-                    {messages.ChangePasswordSection.passwordHasChanged[lang]}
+                    {changePasswordSectionMessages.passwordHasChanged}
                 </Notice>
             </Wrapper>}
         </>
     )
-}*/
+}

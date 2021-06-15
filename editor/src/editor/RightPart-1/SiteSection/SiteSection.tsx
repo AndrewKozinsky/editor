@@ -1,39 +1,29 @@
-// import React from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Button from 'common/formElements/Button/Button'
-// import Form from 'common/formElements/Form/Form'
-// import Select from 'common/formElements/Select/Select'
-// import Hr from 'common/misc/Hr/Hr'
-// import getFormConfig from './formResources'
-// import messages from '../messages'
-/*import {
+import React from 'react'
+import useFormHandler from 'libs/formHandler/useFormHandler'
+import Wrapper from 'common/Wrapper/Wrapper'
+import TextInput from 'common/formElements/TextInput/TextInput'
+import Button from 'common/formElements/Button/Button'
+import Form from 'common/formElements/Form/Form'
+import Select from 'common/formElements/Select/Select'
+import Hr from 'common/misc/Hr/Hr'
+import getFormConfig from './formResources'
+import {
     useGetAnotherSite,
     useGetDeleteSiteVisibilityStatus,
     useGetSubmitButtonText,
     useManageTemplatesSelect
-} from './SiteSection-func'*/
-// import './SiteSection.scss'
-// import { ModalContent } from './deleteSite'
-// import useGetShowModal from 'utils/hooksUtils'
+} from './SiteSection-func'
+import { siteSectionMessages } from 'messages/siteSectionMessages'
+import { ModalContent } from './deleteSite'
+import useGetShowModal from 'utils/hooksUtils'
+import './SiteSection.scss'
 
 
-/*type SiteSectionPropType = {
-    display?: boolean
-}*/
-
-/**
- * Блок с формой изменения данных выбранного сайта */
-/*export default function SiteSection(props: SiteSectionPropType) {
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+/** Блок с формой изменения данных выбранного сайта */
+export default function SiteSection() {
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'site')
+    const fh = useFormHandler(getFormConfig(), 'site')
     // Изменение данных формы при выделении другого сайта
     useGetAnotherSite(fh.formState, fh.setFormState)
 
@@ -41,7 +31,7 @@
     const {isVisible, selectOptions} = useManageTemplatesSelect(fh)
 
     // Текст на кнопке отправки
-    const submitButtonText = useGetSubmitButtonText(lang)
+    const {submitName, submitIconType} = useGetSubmitButtonText()
 
     const CN = 'site-section'
 
@@ -50,18 +40,18 @@
             <Form name='site' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.SiteSection.siteNameInput[lang] }
+                        label={ siteSectionMessages.siteNameInput }
                         name='name'
                         value={fh.fields.name.value[0]}
                         onChange={fh.onChangeFieldHandler}
-                        placeholder={messages.SiteSection.siteNamePlaceholder[lang]}
+                        placeholder={siteSectionMessages.siteNamePlaceholder}
                         error={fh.fields.name.data.error}
                         disabled={fh.fields.name.data.disabled}
                     />
                 </Wrapper>
                 {isVisible && <Wrapper t={15}>
                     <Select
-                        label={ messages.SiteSection.defaultTemplateInput[lang] }
+                        label={ siteSectionMessages.defaultTemplateInput }
                         name='defaultIncFilesTemplateId'
                         value={fh.fields.defaultIncFilesTemplateId.value[0]}
                         onChange={fh.onChangeFieldHandler}
@@ -74,8 +64,8 @@
                 <Wrapper t={10} align={'right'} gap={10}>
                     <Button
                         type='submit'
-                        text={submitButtonText}
-                        icon={fh.fields.submit.data.icon}
+                        text={submitName}
+                        icon={submitIconType}
                         name='submit'
                         disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}
@@ -85,13 +75,10 @@
             </Form>
         </div>
     )
-}*/
+}
 
 /** Кнопка удаления сайта */
-/*
 function DeleteSiteButton() {
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
     const openDeleteSiteConfirmation = useGetShowModal(<ModalContent />)
@@ -103,10 +90,9 @@ function DeleteSiteButton() {
     return (
         <Button
             type='button'
-            text={messages.SiteSection.deleteSiteBtnText[lang]}
+            text={siteSectionMessages.deleteSiteBtnText}
             icon='btnSignTrash'
             onClick={openDeleteSiteConfirmation}
         />
     )
 }
-*/

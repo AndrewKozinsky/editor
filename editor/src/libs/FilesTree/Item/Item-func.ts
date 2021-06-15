@@ -1,13 +1,13 @@
-// import {SyntheticEvent, useCallback} from 'react'
-// import FilesTreeType from '../types'
-// import {makeCN} from 'utils/StringUtils'
-/*import {
+import {SyntheticEvent, useCallback} from 'react'
+import FilesTreeType from '../types'
+import {makeCN} from 'utils/StringUtils'
+import {
     addNewItem,
     getOpenedFoldersUuid,
     toggleFolder,
     deleteItem,
     selectItem
-} from '../StoreManage/manageState'*/
+} from '../StoreManage/manageState'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -18,7 +18,7 @@
     А если навели на кнопки, то у обёртки удаляется атрибут data-ft-hover.
     Для элементов с data-ft-hover в CSS прописан подсвечивающий стиль.
 */
-/*export function useMarkItemElemWhenItHovered() {
+export function useMarkItemElemWhenItHovered() {
 
     return useCallback(function (event: SyntheticEvent): void {
         const $target = <HTMLElement>event.target
@@ -38,7 +38,7 @@
             delete $folder.dataset.ftHover
         }
     }, [])
-}*/
+}
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
@@ -46,7 +46,7 @@
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки или файла
  */
-/*export function getTriangleBtnClasses(CN: string, itemData: FilesTreeType.Item) {
+export function getTriangleBtnClasses(CN: string, itemData: FilesTreeType.Item) {
 
     if (itemData.type === 'file') {
         return `${CN}__btn-triangle--for-file`
@@ -66,14 +66,14 @@
 
         return makeCN(classes)
     }
-}*/
+}
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки
  */
-/*export function getInnerWrapperClasses(
+export function getInnerWrapperClasses(
     CN: string, itemData: FilesTreeType.Item
 ) {
     const classes  = [`${CN}__inner`]
@@ -89,7 +89,7 @@
     }
 
     return makeCN(classes)
-}*/
+}
 
 
 /**
@@ -99,7 +99,7 @@
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetToggleFolder(
+export function useGetToggleFolder(
     folderId: FilesTreeType.UuId,
     items: FilesTreeType.Items,
     setItems: FilesTreeType.SetItems,
@@ -122,9 +122,7 @@
 
         if (newItems) setItems(newItems)
     }, [items, folderId])
-}*/
-
-// import FilesTreeType from '../types';
+}
 
 /**
  * Обработчик щелчка по кнопке добавления нового элемента в массив папок и файлов.
@@ -135,7 +133,7 @@
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function createNewItem(
+export function createNewItem(
     e: SyntheticEvent,
     newItemType: FilesTreeType.ItemType,
     folderData: null | FilesTreeType.Item,
@@ -179,7 +177,7 @@
 
     // Обновить Состояние списка папок
     setItems(newItems)
-}*/
+}
 
 /**
  * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
@@ -189,7 +187,7 @@
  * @param {String} itemId — id папки или файла, которую нужно удалить
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function removeItem(
+export function removeItem(
     e: null | SyntheticEvent,
     items: FilesTreeType.Items,
     setItems: FilesTreeType.SetItems,
@@ -208,7 +206,7 @@
 
     // Обновить Состояние списка папок
     setItems(newItems)
-}*/
+}
 
 
 /**
@@ -219,7 +217,7 @@
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetOnClickHandler(
+export function useGetOnClickHandler(
     items: FilesTreeType.Items,
     setItems: FilesTreeType.SetItems,
     itemData: FilesTreeType.Item, after: FilesTreeType.After
@@ -236,4 +234,4 @@
         // Обновить Состояние списка папок
         setItems(newItems)
     }, [itemData, after])
-}*/
+}

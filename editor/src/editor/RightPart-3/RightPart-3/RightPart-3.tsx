@@ -1,26 +1,23 @@
-// import React, {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'src/store/rootReducer'
-// import HeaderPage from 'common/HeaderPage/HeaderPage'
-// import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
-// import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
-// import messages from '../messages'
-// import './RightPart-3.scss'
+import React, {useEffect, useState} from 'react'
+import {useSelector} from 'react-redux'
+import {AppState} from 'src/store/rootReducer'
+import HeaderPage from 'common/HeaderPage/HeaderPage'
+import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
+import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
+import { userTabContentMessages } from 'messages/userTabContentMessages'
+import { editorTabContentMessages } from 'messages/editorTabContentMessages'
+import './RightPart-3.scss'
 
 
-/*type RightPart3PropType = {
+type RightPart3PropType = {
     display?: boolean
-}*/
+}
 
 /** Правая часть третьей главной вкладки */
-/*
 export default function RightPart3(props: RightPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // Активная вкладка панели настроек
     const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
@@ -34,7 +31,7 @@ export default function RightPart3(props: RightPart3PropType) {
             if (tabName === 'user') {
                 return (
                     <HeaderPage
-                        headerText={messages.UserTabContent.header[lang]}
+                        headerText={userTabContentMessages.header}
                         display={tabName === activeTab}
                         key={tabName}
                     >
@@ -45,7 +42,7 @@ export default function RightPart3(props: RightPart3PropType) {
             else if (tabName === 'editor') {
                 return (
                     <HeaderPage
-                        headerText={messages.EditorTabContent.header[lang]}
+                        headerText={editorTabContentMessages.header}
                         display={tabName === activeTab}
                         key={tabName}
                     >
@@ -57,7 +54,7 @@ export default function RightPart3(props: RightPart3PropType) {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [activeTab, lang])
+    }, [activeTab])
 
     const CN = 'right-part-3'
     const style = display ? {} : {display: 'none'}
@@ -67,4 +64,4 @@ export default function RightPart3(props: RightPart3PropType) {
             {partComponents}
         </div>
     )
-}*/
+}

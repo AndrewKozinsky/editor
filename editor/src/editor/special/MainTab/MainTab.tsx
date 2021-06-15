@@ -40,7 +40,7 @@ export default function MainTab(props: MainTabPropType) {
 
     return (
         <button {...buttonAttrs}>
-            <SvgIcon type={iconType} />
+            <SvgIcon type={iconType} baseClass='-icon-fill' />
             <SvgIcon type='mainTabRoundScion' extraClass={`${CN}__scion`} />
             <SvgIcon type='mainTabRoundScion' extraClass={`${CN}__scion`} />
         </button>

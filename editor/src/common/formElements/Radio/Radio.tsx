@@ -1,31 +1,27 @@
-// import React, {ReactElement, useState} from 'react'
-// import { MiscTypes } from 'types/miscTypes'
-// import { getRandomId } from 'utils/StringUtils'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
-// import { getLabelClasses } from './Radio-func'
-// import './Radio.scss'
+import React, {ReactElement, useState} from 'react'
+import { MiscTypes } from 'types/miscTypes'
+import { getRandomId } from 'utils/StringUtils'
+import './Radio.scss'
 
 
-/*export type RadioPropType = {
+export type RadioPropType = {
     label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply, // Размер поля
     disabled?: boolean // Заблокировано ли поле
-    onChange?: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
+    onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
 /* Компонент выпадающего списка */
-/*function Radio(props: RadioPropType) {
+export default function Radio(props: RadioPropType) {
 
     const {
         label, // Подпись выпадающего списка
         name, // Имя группы флагов
         value, // Значение флага
         checked, // Отмечено ли поле
-        relativeSize,
         disabled = false, // Заблокировано ли поле
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
@@ -50,7 +46,7 @@
     // Атрибуты label
     const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
         htmlFor: id,
-        className: getLabelClasses(size),
+        className: 'radio-label',
     }
 
     return (
@@ -59,7 +55,4 @@
             <label {...labelAttribs}>{label}</label>
         </>
     )
-}*/
-
-
-// export default Radio
+}

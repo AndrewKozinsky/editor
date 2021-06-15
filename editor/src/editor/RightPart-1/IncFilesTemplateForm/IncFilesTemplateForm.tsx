@@ -1,37 +1,35 @@
-// import React from 'react'
-// import Wrapper from 'src/common/Wrapper/Wrapper'
-// import TextInput from 'src/common/formElements/TextInput/TextInput'
-// import Hr from 'src/common/misc/Hr/Hr'
-// import Form from 'src/common/formElements/Form/Form'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'src/store/rootReducer'
-// import useFormHandler from 'src/libs/formHandler/useFormHandler'
-// import getFormConfig from './formResources'
-// import Button from 'src/common/formElements/Button/Button'
-// import messages from '../messages'
-/*import {
+import React from 'react'
+import {useSelector} from 'react-redux'
+import {AppState} from 'store/rootReducer'
+import useGetShowModal from 'utils/hooksUtils'
+import Wrapper from 'common/Wrapper/Wrapper'
+import TextInput from 'common/formElements/TextInput/TextInput'
+import Hr from 'common/misc/Hr/Hr'
+import Form from 'common/formElements/Form/Form'
+import useFormHandler from 'libs/formHandler/useFormHandler'
+import getFormConfig from './formResources'
+import Button from 'common/formElements/Button/Button'
+import {
     useGetAnotherTemplate,
-    useGetDeleteTemplateVisibilityStatus,
     useGetSubmitButtonText
-} from './IncFilesTemplateForm-func'*/
-// import useGetShowModal from '../../../utils/hooksUtils'
-// import { ModalContent } from './deleteTemplate'
+} from './IncFilesTemplateForm-func'
+import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+import { ModalContent } from './deleteTemplate'
 
-/*export default function IncFilesTemplateForm() {
+
+/** Форма создания или редактирования шаблона подключаемых файлов */
+export default function IncFilesTemplateForm() {
 
     // id выделенного шаблона подключаемых файлов
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'incFilesTemplate')
+    const fh = useFormHandler(getFormConfig(), 'incFilesTemplate')
     // Изменение данных формы при выделении другого шаблона подключаемых файлов
     useGetAnotherTemplate(fh.formState, fh.setFormState)
 
-    // Текст на кнопке отправки
-    const submitButtonText = useGetSubmitButtonText(lang)
+    // Текст и значёк на кнопке отправки
+    const { submitName, submitIconType } = useGetSubmitButtonText()
 
     // Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,
     // поэтому ничего не отрисовывать.
@@ -41,18 +39,18 @@
         <Form name='incFilesTemplate' formHandlers={fh.formHandlers}>
             <Wrapper>
                 <TextInput
-                    label={ messages.IncFilesTemplateSection.templateNameInput[lang] }
+                    label={ incFilesTemplateSectionMessages.templateNameInput }
                     name='name'
                     value={fh.fields.name.value[0]}
                     onChange={fh.onChangeFieldHandler}
-                    placeholder={messages.IncFilesTemplateSection.templateNamePlaceholder[lang]}
+                    placeholder={incFilesTemplateSectionMessages.templateNamePlaceholder}
                     error={fh.fields.name.data.error}
                     disabled={fh.fields.name.data.disabled}
                 />
             </Wrapper>
             <Wrapper t={15}>
                 <TextInput
-                    label={ messages.IncFilesTemplateSection.headInput[lang] }
+                    label={incFilesTemplateSectionMessages.headInput }
                     inputType='textarea'
                     name='head'
                     value={fh.fields.head.value[0]}
@@ -63,7 +61,7 @@
             </Wrapper>
             <Wrapper t={15}>
                 <TextInput
-                    label={ messages.IncFilesTemplateSection.bodyInput[lang] }
+                    label={incFilesTemplateSectionMessages.bodyInput}
                     inputType='textarea'
                     name='body'
                     value={fh.fields.body.value[0]}
@@ -78,8 +76,8 @@
             <Wrapper t={10} align={'right'} gap={10}>
                 <Button
                     type='submit'
-                    text={submitButtonText}
-                    icon={fh.fields.submit.data.icon}
+                    text={submitName}
+                    icon={submitIconType}
                     name='submit'
                     disabled={fh.fields.submit.data.disabled}
                     loading={fh.fields.submit.data.loading}
@@ -88,26 +86,25 @@
             </Wrapper>
         </Form>
     )
-}*/
+}
 
 /** Кнопка удаления шаблона подключаемых файлов */
-/*function DeleteTemplateButton() {
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+function DeleteTemplateButton() {
+    // id текущего шаблона
+    const { currentTemplateId } = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)
 
-    // Нужно ли показывать кнопку удаления сайта
-    const isDeleteSiteButtonVisible = useGetDeleteTemplateVisibilityStatus()
-    if (!isDeleteSiteButtonVisible) return null
+    // Если никакой существующий шаблон не выделен, то не отрисовывать эту кноку
+    if (!currentTemplateId) return null
 
     return (
         <Button
             type='button'
-            text={messages.IncFilesTemplateSection.deleteSiteBtnText[lang]}
+            text={incFilesTemplateSectionMessages.deleteSiteBtnText}
             icon='btnSignTrash'
             onClick={openDeleteTemplateConfirmation}
         />
     )
-}*/
+}
