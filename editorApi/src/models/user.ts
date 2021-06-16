@@ -21,6 +21,7 @@ export interface IUser extends Document {
     createPasswordResetToken(): string
 }
 
+// Схема с данными пользователя
 const UserSchema: Schema = new Schema({
     // Имя пользователя
     name: {
@@ -83,7 +84,7 @@ UserSchema.pre('save', async function(this: IUser, next) {
 // При изменении пароля записать дату изменения
 UserSchema.pre('save', function (this: IUser, next) {
     if(!this.isModified('password') || this.isNew)
-        return next();
+        return next()
 
     const newDate = new Date()
     newDate.setMinutes(newDate.getMinutes() - 1)
@@ -135,5 +136,4 @@ UserSchema.methods.createPasswordResetToken = function (this: IUser) {
 
 
 const UserModel = mongoose.model<IUser>('User', UserSchema)
-
 export default UserModel

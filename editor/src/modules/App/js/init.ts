@@ -1,66 +1,43 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
-import {useGetUserToken} from 'requests/authRequests'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-
-/** Хук инициализирующий приложение */
-export function useInit() {
-
-    // Проинициализировано ли приложение
-    const [isInitialized, setIsInitialized] = useState(false)
-
-    // Поставить настройки редактора в Хранилище
-    useGetAndSetEditorSettings()
-
-    // Установка статуса токена пользователя если он неизвестен
-    useSetTokenStatus(setIsInitialized)
-
-    // Возратить проинициализировано ли приложение.
-    return isInitialized
-}
+import { getFromLocalStorage } from 'utils/MiscUtils'
+import sitesActions from 'store/site/sitesActions'
+import { useGetUserToken } from 'requests/user/getUserToken'
 
 
-/**
- * Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов
- * и заносящий это в Хранилище при запуске приложения
- */
-function useGetAndSetEditorSettings() {
+/** Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов
+ *  и заносящий это в Хранилище при запуске приложения */
+export function useGetAndSetEditorSettings() {
     const dispatch = useDispatch()
 
     // При отрисовке компонента...
     useEffect(function () {
-        // Получить из LocalStorage язык интерфейса, тему, размер элементов и открытую вкладку
-        let language = <StoreSettingsTypes.EditorLanguage | null>localStorage.getItem('editorLanguage')
-        let theme = <StoreSettingsTypes.EditorTheme | null>localStorage.getItem('editorTheme')
-        let size = <StoreSettingsTypes.EditorSize | null>localStorage.getItem('editorSize')
-        let tab = <StoreSettingsTypes.MainTab | null>+localStorage.getItem('editorTab')
-
-        // Если каких-то значений нет, то поставить стандартные значения в LocalStorage
-        if (!language) {
-            language = 'eng' // Язык интерфейса: eng или rus
-            localStorage.setItem('editorLanguage', language)
-        }
-        if (!theme) {
-            theme = 'light' // Размер интерфейса: small, middle или big
-            localStorage.setItem('editorTheme', theme)
-        }
-        if (!size) {
-            size = 'small' // Тема интерфейса: light или dark
-            localStorage.setItem('editorSize', size)
-        }
-        if (!tab) {
-            tab = 0 // Первая вкладка
-            localStorage.setItem('editorTab', tab.toString())
-        }
+        // Получение значения из LocalStorage
+        let language = getFromLocalStorage('editorLanguage', 'eng') // Язык интерфейса: eng или rus
+        let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
+        let mainTab = getFromLocalStorage('editorTab', 0) // id главной вкладки
+        let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
+        let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
+        let sitePartTab = getFromLocalStorage('editorSitePartTab') // id вкладки в Сайтах
+        let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
+        let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
+        let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
+        let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
+        let editorArticleType = getFromLocalStorage('editorArticleType', null) // тип выбранного элемента: папка или статья
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
-        dispatch( settingsActions.setEditorSize(size) )
-        dispatch( settingsActions.setMainTab(tab) )
+        dispatch( settingsActions.setMainTab(mainTab) )
+        dispatch( sitesActions.setCurrentSiteId(siteId) )
+        dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
+        dispatch( sitesActions.setRightMainTab(sitePartTab) )
+        dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
+        dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
+        dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])
 }
 
@@ -72,8 +49,7 @@ function useGetAndSetEditorSettings() {
  * Поэтому делается запрос на сервер для его проверки. И в зависимости от этого статус становится
  * или 1 (токена нет или он неверный) или 2 (токен правильный)
  */
-export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => void) {
-
+export function useSetTokenStatus() {
     const dispatch = useDispatch()
 
     // Получение статуса токена из Хранилища
@@ -105,11 +81,17 @@ export function useSetTokenStatus(setIsInitialized: (isInitialized: boolean) => 
         }
     }, [userToken])
 
+    // Проинициализировано ли приложение
+    const [isTokenSet, setIsTokenSet] = useState(false)
+
     // При изменении статуса токена
     useEffect(function () {
         if (!authTokenStatus) return
 
-        // Поставить переменную isInitialized в true чтобы сообщить, что приложение проинициализировано.
-        setIsInitialized(true)
-    }, [authTokenStatus, setIsInitialized])
+        // Поставить переменную isTokenSet в true чтобы сообщить, что приложение проинициализировано.
+        setIsTokenSet(true)
+    }, [authTokenStatus, setIsTokenSet])
+
+    // Возратить проинициализировано ли приложение.
+    return isTokenSet
 }

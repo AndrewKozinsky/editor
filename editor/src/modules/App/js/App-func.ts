@@ -39,7 +39,6 @@ export function useRedirectPage() {
 
     // При изменении authTokenStatus или адреса страницы...
     useEffect(function () {
-
         // Ничего не делать если сервер еще не проверил токен входа
         if (authTokenStatus === 0) return
 
@@ -53,5 +52,3 @@ export function useRedirectPage() {
         }
     }, [authTokenStatus, location.pathname])
 }
-
-

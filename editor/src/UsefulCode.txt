@@ -4,9 +4,6 @@ const dispatch = useDispatch()
 
 // StoreSettingsTypes.EditorLanguage
 
-// Размер интерфейса
-const editorSize = useSelector((store: AppState) => store.settings.editorSize)
-
 // Язык интерфейса
 const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
@@ -21,43 +18,4 @@ $CN: left-part-3;
 .#{$CN}--small-size {
     font-size: 1.4rem;
     line-height: 1.8rem;
-}
-.#{$CN}--middle-size {
-    font-size: 1.5rem;
-    line-height: 1.9rem;
-}
-.#{$CN}--big-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-}
-
-
-/**
- * Функция возвращает классы кнопки
- * @param {Object} buttonProps — props переданные в кнопку
- * @param {String} size — размер элемента.
- */
-export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize) {
-    const {
-        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
-        color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
-    } = buttonProps
-
-    // Классы кнопки
-    const CN = 'btn'
-    const classes = [CN]
-
-    // Размер кнопки.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
-
-    // Вид кнопки.
-    // standard (стандартная кнопка), onlyIcon (только значёк).
-    if (view === 'standard') classes.push(`${CN}--standard-view`)
-
-    // Цвет кнопки.
-    // base (стандартный цвет), accent (акцентный цвет)
-    if (color === 'base') classes.push(`${CN}--base-color`)
-
-    return makeCN(classes)
 }

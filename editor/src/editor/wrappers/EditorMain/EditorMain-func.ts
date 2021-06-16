@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {makeCN} from 'src/utils/StringUtils'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
+import {AppState} from 'store/rootReducer'
+import {makeCN} from 'utils/StringUtils'
+
 
 /**
  * Функция возращает классы главной обёртки редактора и булево значение нужно ли отрисовывать редактор
@@ -10,24 +10,21 @@ import StoreSettingsTypes from 'store/settings/settingsTypes'
  */
 export function useGetPageClasses(CN: string) {
 
-    // Размер элементов интерфейса из Хранилища
-    const editorSize = useSelector((store: AppState) => store.settings.editorSize)
-
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
 
     // Открыто ли модальное окно
     const isModalOpen = useSelector((store: AppState) => store.modal.isOpen)
 
-    const [classes, setClasses] = useState<string[]>( getClasses(CN, editorSize) )
+    const [classes, setClasses] = useState<string[]>( getClasses(CN) )
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(function () {
 
         // Классы редактора: нормальный вид и отдалённый от зрителя
-        const normalClasses = getClasses(CN, editorSize)
-        const scaleDownClasses = getClasses(CN, editorSize, 'scaleDown')
-        const scaleDownTransparencyClasses = getClasses(CN, editorSize, 'scaleDownTransparent')
+        const normalClasses = getClasses(CN)
+        const scaleDownClasses = getClasses(CN, 'scaleDown')
+        const scaleDownTransparencyClasses = getClasses(CN, 'scaleDownTransparent')
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
         // или он вообще не будет отрисовываться.
@@ -78,17 +75,12 @@ export function useGetPageClasses(CN: string) {
 /**
  * Функция возращает классы главной обёртки редактора в зависимости от различных значений:
  * @param {String} CN — главный класс обёртки редактора
- * @param {String} editorSize — размер интерфейса
  * @param {String} scaleDownType — тип дополнительного класса:
  * scaleDown — редактор отдалён от зрителя
  * scaleDownTransparent — редактор отдалён от зрителя и прозрачен
  */
-function getClasses(
-    CN: string,
-    editorSize?: StoreSettingsTypes.EditorSize,
-    scaleDownType?: 'scaleDown' | 'scaleDownTransparent'
-) {
-    const classes = [CN, `${CN}--${editorSize}-size`]
+function getClasses( CN: string, scaleDownType?: 'scaleDown' | 'scaleDownTransparent' ) {
+    const classes = [CN]
 
     if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
     if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)

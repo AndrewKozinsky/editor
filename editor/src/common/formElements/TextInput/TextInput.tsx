@@ -2,23 +2,22 @@ import React, {useEffect, useRef, useState} from 'react'
 import {getRandomId } from 'utils/StringUtils'
 import Notice from 'common/Notice/Notice'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
-import Label from '../Label/Label';
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {useGetComponentSize} from 'utils/MiscUtils'
+import { MiscTypes } from 'types/miscTypes'
+import Label from '../Label/Label'
 import {getTextInputClasses, useSetFocus} from './TextInput-func'
 import './TextInput.scss'
 
 
 export type TextInputPropType = {
     label?: string // Подпись текстового поля
-    type?: 'text' | 'email' | 'password' // Подпись текстового поля
+    inputType?: 'text' | 'textarea' // Тип поля ввода
+    type?: 'text' | 'email' | 'password' // Тип поля
     name: string, // Аттрибут name текстового поля
     value: string, // Аттрибут name текстового поля
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply // Размер поля
     maxWidth?: 250 // Максимальная ширина поля
+    rows?: number // Количество рядов у текстового поля
     placeholder?: string, // Текстозаполнитель
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
@@ -30,17 +29,18 @@ export type TextInputPropType = {
 
 
 /** Текстовый компонент */
-function TextInput(props: TextInputPropType) {
+export default function TextInput(props: TextInputPropType) {
 
     const {
         label, // Подпись текстового поля
+        inputType = 'text', // Тип поля ввода
         type = 'text', // Тип поля. Варианты: text, email
         name,          // Аттрибут name текстового поля
         value,
         autocomplete = '', // Значение автозаполнения поля
         placeholder,    // Текстозаполнитель
-        relativeSize,
         maxWidth, // Максимальная ширина поля
+        rows = 5, // Количество рядов у текстового поля
         disabled = false, // Заблокировано ли поле
         onChange, // Обработчик изменения поля
         onBlur, // Обработчик потерей полем фокуса
@@ -48,24 +48,21 @@ function TextInput(props: TextInputPropType) {
         autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
 
-    // Ссылка на элемент
+    // Ссылка на элемент чтобы при необходимости поставить фокусировку
     const inputRef = useRef(null)
 
     // Установка фокусировки при необходомости
     useSetFocus(inputRef, autoFocus)
 
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(relativeSize)
-
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
 
     // Аттрибуты поля
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         type: type,
         name,
         value,
-        className: getTextInputClasses(size, maxWidth),
+        className: getTextInputClasses(maxWidth),
         onChange: onChange,
     }
 
@@ -78,7 +75,12 @@ function TextInput(props: TextInputPropType) {
     return (
         <div>
             <Label label={label} disabled={disabled} id={id} />
-            <input {...inputAttribs} disabled={disabled} id={id} ref={inputRef} />
+            {inputType === 'text' &&
+                <input {...inputAttribs} disabled={disabled} id={id} ref={inputRef} />
+            }
+            {inputType === 'textarea' &&
+                <textarea {...inputAttribs} disabled={disabled} id={id} ref={inputRef} rows={rows} />
+            }
             <Error {...props} />
         </div>
     )
@@ -98,6 +100,3 @@ function Error(props: TextInputPropType) {
         </Wrapper>
     )
 }
-
-
-export default TextInput

@@ -2,15 +2,21 @@ import { Response, NextFunction } from 'express'
 const jwt = require('jsonwebtoken')
 import * as crypto from 'crypto'
 import {promisify} from 'util'
-import { catchAsync } from '../../utils/errors/catchAsync'
+import { catchAsync } from '../../errors/catchAsync'
 import UserModel from '../../models/user'
-import { AppError } from '../../utils/errors/appError'
+import { AppError } from '../../errors/appError'
 import { Email } from '../../utils/email/email'
-import { createSendToken, sendResponseWithAuthToken } from '../authToken'
+import { createSendToken, sendResponseWithAuthToken } from './authToken'
 import { IUser } from '../../models/user'
 import {config} from '../../config/config'
-import {getMessageDependingOnTheLang} from '../../utils/errors/messages'
-import {ExtendedRequestType, JWTDecodedType } from '../../types/commonTypes'
+import {getMessageDependingOnTheLang} from '../../errors/messages'
+import {ExtendedRequestType, CommonTypes } from '../../types/commonTypes'
+import SiteModel from '../../models/site';
+import IncFilesTemplateModel from '../../models/incFilesTemplate';
+import ComponentsFoldersModel from '../../models/componentsFolders';
+import ComponentModel from '../../models/component';
+import ArticlesFoldersModel from '../../models/articlesFolders';
+import ArticleModel from '../../models/article';
 
 
 // Функция отдающая данные по переданному токену. Токен передаётся в куках.
@@ -76,7 +82,7 @@ export const protect = catchAsync(async (req: ExtendedRequestType, res: Response
     }
 
     // Расшифровка JWT и получение payload
-    const decoded: JWTDecodedType = await promisify( jwt.verify )(token, config.jwtSecret)
+    const decoded: CommonTypes.JWTDecoded = await promisify( jwt.verify )(token, config.jwtSecret)
 
     // Получение пользователя
     const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
@@ -140,7 +146,7 @@ export const confirmEmail = catchAsync(async (req: ExtendedRequestType, res: Res
     const user: IUser | null = await UserModel.findOneAndUpdate(
         { emailConfirmToken: req.params.token },
         { emailConfirmToken: undefined }, // Как изменить объект
-        { new: true } // Вернуть объект после изменения свойства
+        { new: true, useFindAndModify: false } // Вернуть объект после изменения свойства
     )
 
     // Если пользователь не найден, то бросить ошибку
@@ -289,7 +295,7 @@ export const resetPassword = catchAsync(async (req: ExtendedRequestType, res: Re
             }
         })
     }
-    // Не удалось послать письмо со сбросом пароля...
+        // Не удалось послать письмо со сбросом пароля...
     catch (err) {
         // Бросить ошибку
         return next(
@@ -381,7 +387,7 @@ export const changeEmail = catchAsync<void>(async (req: ExtendedRequestType, res
             email: newEmail,
             emailConfirmToken: emailConfirmToken,
         },
-        {new: true}
+        {new: true, useFindAndModify: false}
     ).select('-_id -emailConfirmToken -__v -passwordChangedAt')
 
     // Отправление письма с подтверждением почты
@@ -441,6 +447,24 @@ export const deleteMe = catchAsync<void>(async (req: ExtendedRequestType, res: R
     await UserModel.findByIdAndDelete(
         req.user.id
     )
+
+    // Удалить все сайты созданные пользователем
+    await SiteModel.deleteMany({ userId: req.user.id })
+
+    // Удалить шаблоны подключения внешних файлов
+    await IncFilesTemplateModel.deleteMany({userId: req.user.id})
+
+    // Удалить папки шаблонов компонентов
+    await ComponentsFoldersModel.deleteMany({userId: req.user.id})
+
+    // Удалить шаблоны компонентов
+    await ComponentModel.deleteMany({userId: req.user.id})
+
+    // Удалить все папки статей созданных пользователем
+    await ArticlesFoldersModel.deleteMany({userId: req.params.siteId})
+
+    // Удалить все статьи созданные пользователем
+    await ArticleModel.deleteMany({userId: req.params.siteId})
 
     // Обнулить куку авторизации
     res.cookie('authToken', 'loggedout', {

@@ -1,6 +1,6 @@
 // Тестовый стиль
 * {
-    transition: background-color .7s, background .7s, color .7s, fill .7s, stroke .7s;
+    //transition: background-color .7s, background .7s, color .7s, fill .7s, stroke .7s;
 }
 
 :root {
@@ -20,6 +20,8 @@
 
     // Акцентный цвет
     --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    // Акцентный цвет при наведении
+    --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 42%);
 
 
     // ЦВЕТА ТЕКСТА

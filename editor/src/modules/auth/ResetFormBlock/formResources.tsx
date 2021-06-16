@@ -1,15 +1,13 @@
-import React from 'react'
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
+import FHTypes from 'libs/formHandler/types'
+import { resetFormMessages } from 'messages/resetFormMessages'
+import {commonMessages} from 'messages/commonMessages'
+import resetPasswordRequest from 'requests/user/resetPasswordRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): FHTypes.FormConfig {
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -22,7 +20,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -46,7 +44,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
             submit: async function(formDetails) {
 
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
                 formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
@@ -78,11 +76,8 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 formDetails.setFormState(formState)
 
                 // Форма заполнена верно. Отправить данные на сервер...
-                const options = {
-                    method: 'POST',
-                    body: JSON.stringify(formDetails.readyFieldValues)
-                }
-                const response = await makeFetch(getApiUrl('resetPassword'), options, lang)
+                const emailFieldValue = formDetails.readyFieldValues.email.toString()
+                const response = await resetPasswordRequest(emailFieldValue)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                 formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
@@ -96,7 +91,7 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
                 }
                 // Если ввели неправильные данные
                 else {
-                    let message = response.errors.message || messages.ResetForm.somethingWentWrong[lang]
+                    let message = response.errors.message || resetFormMessages.somethingWentWrong
 
                     // Показать общее сообщение. Оно будет показано ниже формы
                     formState = formDetails.setFormDataPropValue(formState, 'commonError', message)
@@ -113,14 +108,13 @@ export default function getFormConfig(lang: StoreSettingsTypes.EditorLanguage): 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fieldName: string): any {
 
     const schemas = {
         email: yup.string()
-            .required(messages.Common.requiredField[lang])
-            .email(messages.EnterForm.emailErrInvalid[lang])
+            .required(commonMessages.requiredField)
+            .email(commonMessages.emailErrInvalid)
     }
 
     // @ts-ignore
@@ -133,21 +127,18 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
 function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
     let isFormValid = true
 
-
     try {
-        getSchema('email', lang).validateSync(formState.fields.email.value[0])
+        getSchema('email').validateSync(formState.fields.email.value[0])
         formState = setFieldDataPropValue(formState, 'error', null, 'email')
     } catch (err) {
         isFormValid = false

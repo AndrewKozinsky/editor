@@ -3,7 +3,11 @@
 $CN: btn;
 
 .#{$CN} {
+    text-align: left;
     cursor: pointer;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    padding: 4px 11px;
     border: none;
     border-radius: var(--radius-2);
     transition: background-color .2s;
@@ -21,29 +25,6 @@ $CN: btn;
         opacity: .5;
         cursor: default;
     }
-}
-
-
-// Размер кнопки.
-.#{$CN}--tiny-size {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    padding: 1px 7px 1px 5px;
-}
-.#{$CN}--small-size {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    padding: 4px 11px;
-}
-.#{$CN}--middle-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    padding: 5px 14px;
-}
-.#{$CN}--big-size {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    padding: 7px 16px;
 }
 
 
@@ -80,49 +61,21 @@ $loaderCN: btn-loader;
 
 .#{$loaderCN} {
     display: inline-block;
-}
-
-.#{$loaderCN}--tiny-size {
-    width: 12px;
-    height: 12px;
-    vertical-align: -1px;
-    margin-right: 3px;
-}
-.#{$loaderCN}--small-size {
     width: 14px;
     height: 14px;
     vertical-align: -2px;
     margin-right: 4px;
 }
-.#{$loaderCN}--middle-size {
-    width: 17px;
-    height: 17px;
-    vertical-align: -3px;
-    margin-right: 5px;
-}
-.#{$loaderCN}--big-size {
-    width: 18px;
-    height: 18px;
-    vertical-align: -3px;
-    margin-right: 6px;
-}
 
 
 // Значёк
-.#{$CN}__icon {}
-.#{$CN}__icon-tiny-size {
-    margin-right: .2rem;
-    margin-bottom: -2px;
-}
-.#{$CN}__icon-small-size {
+.#{$CN}__icon {
     margin-right: .4rem;
     margin-bottom: -2px;
 }
-.#{$CN}__icon-middle-size {
-    margin-right: .5rem;
-    margin-bottom: -3px;
-}
-.#{$CN}__icon-big-size {
-    margin-right: .7rem;
-    margin-bottom: -3px;
+
+// Если кнопка должна быть блочным элементом на всю ширину
+.#{$CN}--block {
+    display: block;
+    width: 100%;
 }

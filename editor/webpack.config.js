@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 const path = require('path')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -65,7 +67,7 @@ function parseAssets() {
 
 // Функция возвращает значение параметра devtools
 function getDevTool(isDev) {
-    return isDev ? 'inline-source-map' : false
+    return isDev ? 'inline-source-map' : false // eval
 }
 
 // Функция возвращает объект для свойства resolve
@@ -78,6 +80,7 @@ function getResolve() {
             common: path.resolve(__dirname, './src/common'),
             editor: path.resolve(__dirname, './src/editor'),
             libs: path.resolve(__dirname, './src/libs'),
+            messages: path.resolve(__dirname, './src/messages'),
             modules: path.resolve(__dirname, './src/modules'),
             pages: path.resolve(__dirname, './src/pages'),
             requests: path.resolve(__dirname, './src/requests'),
@@ -107,7 +110,7 @@ function getPlugins(isDev) {
             // Очиста папки с компилированными файлами перед помещением других
             new CleanWebpackPlugin(),
             // Формирование index.html
-            new HtmlWebpackPlugin(getHtmlConfig()),
+            new HtmlWebpackPlugin(getHtmlConfig())
         ]
     }
     else {

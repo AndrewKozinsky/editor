@@ -1,10 +1,7 @@
-import {ReactElement} from 'react'
-// Types
 import StoreModalTypes from './modalTypes'
 
 
 const modalActions = {
-
     // Открытие модального окна
     openModal(payload: StoreModalTypes.Content): StoreModalTypes.OpenModalAction {
         return {

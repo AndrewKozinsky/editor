@@ -1,4 +1,3 @@
-
 $CN: header;
 
 .#{$CN} {
@@ -7,29 +6,13 @@ $CN: header;
 }
 
 // Тип h1
-.#{$CN}--h1-small-size {
+.#{$CN}--h1 {
     font-size: 2.6rem;
     line-height: 3.6rem;
-}
-.#{$CN}--h1-middle-size {
-    font-size: 3rem;
-    line-height: 4rem;
-}
-.#{$CN}--h1-big-size {
-    font-size: 3.4rem;
-    line-height: 4.2rem;
 }
 
 // Тип h2
-.#{$CN}--h2-small-size {
+.#{$CN}--h2 {
     font-size: 2.2rem;
     line-height: 2.8rem;
-}
-.#{$CN}--h2-middle-size {
-    font-size: 2.6rem;
-    line-height: 3.2rem;
-}
-.#{$CN}--h2-big-size {
-    font-size: 2.9rem;
-    line-height: 3.6rem;
 }

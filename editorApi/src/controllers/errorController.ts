@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express'
 import { config } from '../config/config'
-import { getMessageDependingOnTheLang } from '../utils/errors/messages'
+import { getMessageDependingOnTheLang } from '../errors/messages'
 
 
 type ErrorType = {

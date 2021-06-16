@@ -17,86 +17,40 @@ $CN: wrapper;
 
 
 // Классы дающие верний оступ
-.#{$CN}--t5.#{$CN}--small-size {
+.#{$CN}--t5 {
     margin-top: .6rem;
 }
-.#{$CN}--t5.#{$CN}--middle-size {
-    margin-top: .7rem;
-}
-.#{$CN}--t5.#{$CN}--big-size {
-    margin-top: .8rem;
-}
 
-.#{$CN}--t10.#{$CN}--small-size {
+.#{$CN}--t10 {
     margin-top: 1rem;
 }
-.#{$CN}--t10.#{$CN}--middle-size {
-    margin-top: 1.2rem;
-}
-.#{$CN}--t10.#{$CN}--big-size {
-    margin-top: 1.3rem;
-}
 
-.#{$CN}--t15.#{$CN}--small-size {
+.#{$CN}--t15 {
     margin-top: 1.5rem;
 }
-.#{$CN}--t15.#{$CN}--middle-size {
-    margin-top: 1.7rem;
-}
-.#{$CN}--t15.#{$CN}--big-size {
+
+.#{$CN}--t20 {
     margin-top: 2rem;
 }
 
-.#{$CN}--t20.#{$CN}--small-size {
-    margin-top: 2rem;
-}
-.#{$CN}--t20.#{$CN}--middle-size {
-    margin-top: 2.3rem;
-}
-.#{$CN}--t20.#{$CN}--big-size {
-    margin-top: 2.6rem;
+.#{$CN}--t25 {
+    margin-top: 2.5rem;
 }
 
-.#{$CN}--t30.#{$CN}--small-size {
+.#{$CN}--t30 {
     margin-top: 3rem;
-}
-.#{$CN}--t30.#{$CN}--middle-size {
-    margin-top: 3.5rem;
-}
-.#{$CN}--t30.#{$CN}--big-size {
-    margin-top: 3.9rem;
 }
 
 
 // Классы дающие нижний оступ
-.#{$CN}--b10.#{$CN}--small-size {
+.#{$CN}--b10 {
     margin-bottom: 1rem;
 }
-.#{$CN}--b10.#{$CN}--middle-size {
-    margin-bottom: 1.2rem;
-}
-.#{$CN}--b10.#{$CN}--big-size {
-    margin-bottom: 1.3rem;
-}
-
-.#{$CN}--b15.#{$CN}--small-size {
+.#{$CN}--b15 {
     margin-bottom: 1.5rem;
 }
-.#{$CN}--b15.#{$CN}--middle-size {
-    margin-bottom: 1.7rem;
-}
-.#{$CN}--b15.#{$CN}--big-size {
-    margin-bottom: 2rem;
-}
-
-.#{$CN}--b25.#{$CN}--small-size {
+.#{$CN}--b25 {
     margin-bottom: 2.5rem;
-}
-.#{$CN}--b25.#{$CN}--middle-size {
-    margin-bottom: 2.9rem;
-}
-.#{$CN}--b25.#{$CN}--big-size {
-    margin-bottom: 3.3rem;
 }
 
 
@@ -104,12 +58,6 @@ $CN: wrapper;
 .#{$CN}--gap10 {
     display: flex;
 }
-.#{$CN}--gap10.#{$CN}--small-size {
+.#{$CN}--gap10 {
     gap: 10px;
-}
-.#{$CN}--gap10.#{$CN}--middle-size {
-    gap: 12px;
-}
-.#{$CN}--gap10.#{$CN}--big-size {
-    gap: 13px;
 }

@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react'
 import FHTypes from 'libs/formHandler/types'
 import './Form.scss'
-import {makeCN} from 'utils/StringUtils'
 
 
 type FormPropType = {
@@ -12,7 +11,6 @@ type FormPropType = {
 
 /** Компонент формы оборачивающий поля */
 export default function Form(props: FormPropType) {
-
     const {
         name,
         formHandlers,
@@ -21,10 +19,9 @@ export default function Form(props: FormPropType) {
 
     // Классы формы
     const CN = 'form'
-    const classes = [CN]
 
     return (
-        <form name={name} {...formHandlers} className={makeCN(classes)}>
+        <form name={name} {...formHandlers} className={CN}>
             {children}
         </form>
     );

@@ -1,20 +1,12 @@
-import React from 'react'
-//@ts-ignore
-import {Dispatch} from 'redux'
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
-import messages from '../messages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import { makeFetch } from 'requests/fetch'
-import getApiUrl from 'requests/apiUrls'
-import store from '../../../store/store'
+import FHTypes from 'libs/formHandler/types'
+import store from 'store/store'
+import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 
 
-// Объект настройки useFormHandler
-export default function getFormConfig(
-    lang: StoreSettingsTypes.EditorLanguage
-): FHTypes.FormConfig {
+/** Объект настройки useFormHandler */
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -27,7 +19,7 @@ export default function getFormConfig(
                 change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
                 }
             },
@@ -50,7 +42,7 @@ export default function getFormConfig(
             submit: async function(formDetails) {
 
                 // Проверить форму и поставить/убрать ошибки
-                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
                 formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
@@ -76,14 +68,13 @@ export default function getFormConfig(
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
+function getSchema(fieldName: string): any {
     const schemas = {
         email: yup.string()
-            .required(messages.UserDataSection.requiredField[lang])
-            .email(messages.UserDataSection.emailErrInvalid[lang])
-            .test('test-name', messages.UserDataSection.newEmailEqualToOldOne[lang],
+            .required(userDataSectionMessages.requiredField)
+            .email(userDataSectionMessages.emailErrInvalid)
+            .test('test-name', userDataSectionMessages.newEmailEqualToOldOne,
                 function(value: string) {
                     return value !== store.getState().user.email
                 })
@@ -99,20 +90,18 @@ function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): 
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param lang
  */
 function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
     let isFormValid = true
 
     try {
-        getSchema('email', lang).validateSync(formState.fields.email.value[0])
+        getSchema('email').validateSync(formState.fields.email.value[0])
         formState = setFieldDataPropValue(formState, 'error', null, 'email')
     } catch (err) {
         isFormValid = false
@@ -141,20 +130,3 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
         ? formState.fields.email.$field
         : null
 }
-
-
-/**
- * Функция блокирует или разблокирует поля и кнопку отправки перед/после отправки
- * @param {Object} formState — объект с Состоянием формы
- * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
- * @param {Boolean} status — блокировать или разблокировать поля
- */
-/*function setLoadingStatusToForm(
-    formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
-) {
-    formState = setFieldDataPropValue(formState, 'disabled', status, 'email')
-    formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
-    formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
-
-    return formState
-}*/

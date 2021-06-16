@@ -1,9 +1,9 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import messages from '../messages';
 import {AppState} from 'store/rootReducer'
-import actions from '../../../store/rootAction';
+import actions from 'store/rootAction'
+import { languageSectionMessages } from 'messages/languageSectionMessages'
 
 
 export default function LanguageSection() {
@@ -11,11 +11,12 @@ export default function LanguageSection() {
     // Язык интерфейса
     const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
+    // Обработчик выбора другого языка
     const onChangeHandler = useGetOnChangeHandler()
 
     return (
         <FieldGroup
-            label={messages.LanguageSection.langRadiosHeader[lang]}
+            label={languageSectionMessages.langRadiosHeader}
             inputType='radio'
             groupName='language'
             value={[lang]}
@@ -30,7 +31,7 @@ export default function LanguageSection() {
     )
 }
 
-
+/** Хук возвращает функцию-обработчик выбора другого языка */
 function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 

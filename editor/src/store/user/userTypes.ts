@@ -1,5 +1,4 @@
 
-
 namespace StoreUserTypes {
     // Типы значений
     export type AuthTokenStatusType = number
@@ -21,8 +20,8 @@ namespace StoreUserTypes {
     }
 
     export type UserActionTypes =
-        SetAuthTokenStatusActionType |
-        SetEmailActionType
+        | SetAuthTokenStatusActionType
+        | SetEmailActionType
 }
 
 export default StoreUserTypes

@@ -1,5 +1,11 @@
 import FHTypes from '../types'
-import {getSetFieldData, getSetFieldDataPropValue, getSetFieldValue, setFormData, setFormDataPropValue } from './formStateSettersAndGetters'
+import {
+    getSetFieldData,
+    getSetFieldDataPropValue,
+    getSetFieldValue,
+    setFormData,
+    setFormDataPropValue
+} from './formStateSettersAndGetters'
 
 
 /**
@@ -21,7 +27,7 @@ export function handleBrowserEvent(
     const {fieldName, eventName} = browserEvent
 
     // Не обрабатывать пустые события
-    if (!eventName) return
+    if (!eventName || !fieldName) return
 
     // Если в formConfig у поля есть обработка определённого события...
     if (formConfig.fields[fieldName] && formConfig.fields[fieldName][eventName]) {
@@ -32,13 +38,16 @@ export function handleBrowserEvent(
         // случившегося на поле. Возвращает новый объект Состояния формы
         const newFormState = formConfig.fields[fieldName][eventName](formDetails)
 
-        // Установка нового состояния формы если что-то прислали
+        // Установка нового состояния формы
         if (newFormState) setFormState(newFormState)
     }
 
     // Обнулить событие чтобы в случае повторного возникновения события
     // с таким же именем сработал бы обработчик
-    setBrowserEvent({browserEvent: null, eventName: null})
+    // setTimeout прописан потому что без него не работают флаги и переключатели
+    setTimeout(() => {
+        setBrowserEvent({browserEvent: null, eventName: null})
+    }, 0)
 }
 
 /**
@@ -54,7 +63,7 @@ export function getFormDetails(
 ): FHTypes.FormDetailsInEventHandler {
     return {
         // Объект события
-        browserEvent: browserEvent.browserEvent || null,
+        browserEvent: browserEvent?.browserEvent || null,
         // Состояние формы.
         state: formState,
         // Функция изменяющая значение поля с заданным именем.
@@ -67,7 +76,5 @@ export function getFormDetails(
         setFormData: setFormData,
         // Функция изменяющая свойство в данных формы
         setFormDataPropValue: setFormDataPropValue,
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
 }

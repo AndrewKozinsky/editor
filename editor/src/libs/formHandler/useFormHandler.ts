@@ -1,14 +1,15 @@
 import {useState, useCallback, useEffect} from 'react'
 import getInitialState from './functions/getInitialState'
 import useGetForm from './functions/useGetForm'
-import useSupplementFieldData from './functions/useSupplementFieldData'
+import useSetServiceDataToForm from './functions/useSetServiceDataToForm'
 import useBrowserEvent from './functions/useBrowserEvent'
 import { handleBrowserEvent } from './functions/useHandlerBrowserEvent'
 import getFields from './functions/getFields'
 import inputChangeHandler from './functions/inputChangeHandler'
-import FHTypes from "./types"
 import useStateChangeHandler from './functions/useStateChangeHandler'
 import useSubmitForm from './functions/useSubmitForm'
+import {getSetFieldValue} from './functions/formStateSettersAndGetters'
+import FHTypes from './types'
 
 
 /**
@@ -16,7 +17,9 @@ import useSubmitForm from './functions/useSubmitForm'
  * @param {Object} formConfig — объект настройки useFormHandler
  * @param {String} formName — имя формы
  */
-export default function useFormHandler(formConfig: FHTypes.FormConfig, formName: string): FHTypes.ReturnObj {
+export default function useFormHandler(
+    formConfig: FHTypes.FormConfig, formName: string
+): FHTypes.ReturnObj {
 
     // Состояние формы
     const [formState, setFormState] = useState<FHTypes.FormState>(getInitialState(formConfig))
@@ -25,7 +28,7 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
     const $form = useGetForm(formName)
 
     // Уточнение данных о полях при получении ссылки на форму
-    useSupplementFieldData(formState, setFormState, $form)
+    useSetServiceDataToForm(formState, setFormState, $form)
 
     // При наступлении браузерного события в browserEvent записываются данные об этом.
     const { browserEvent, setBrowserEvent } = useBrowserEvent($form)
@@ -46,33 +49,38 @@ export default function useFormHandler(formConfig: FHTypes.FormConfig, formName:
         formHandlers: {
             onChange:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'change', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onFocus:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'focus', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onBlur:     useCallback((e) => {
                 setBrowserEvent({browserEvent: e, eventName: 'blur', fieldName: e.target.name})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onClick:      useCallback((e) => {
+                if (!e.target.name) return
                 setBrowserEvent({browserEvent: e, eventName: 'click', fieldName: e.target.name})
-            }, [browserEvent]),
-            onReset:      useCallback((e) => {
-                setBrowserEvent({browserEvent: e, eventName: 'reset'})
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
             onSubmit:     useCallback((e) => {
                 // Запретить стандартную отправку формы
                 e.preventDefault()
 
                 // Начать отправку формы
                 setCanRunSubmitHandler(true)
-            }, [browserEvent]),
+            }, [formState, browserEvent]),
         },
         // Обработчик изменения поля
         onChangeFieldHandler: useCallback((e) => {
             inputChangeHandler(e, formState, setFormState)
         }, [formState]),
+        // Состояние формы
+        formState: formState,
+        // Функция устанавливающая новое Состояние формы
+        setFormState: setFormState,
         // Данные о полях
         fields: getFields(formState),
+        // Установщик нового значения поля
+        setFieldValue: getSetFieldValue(),
+        // Данные формы
         form: formState.form.data
     }
 }

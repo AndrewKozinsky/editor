@@ -2,8 +2,11 @@
 
 $CN: main-tab;
 
+// Стиль кнопки
 .#{$CN} {
     position: relative;
+    width: 4.2rem;
+    height: 3.6rem;
     font-size: 0;
     line-height: 0;
     cursor: pointer;
@@ -11,29 +14,45 @@ $CN: main-tab;
     border: none;
     transition: background-color .1s;
 
-    &:focus::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: var(--focus-color);
-
-        // Приподнять кнопку чтобы был виден подсвечивающий прямоугольник
-        z-index: 1;
-    }
-
     &:disabled {
         opacity: .5;
         cursor: default;
     }
 }
 
-.#{$CN}__scion {
-    display: none;
+// Фокусировка на кнопке
+.#{$CN}:focus::before {
+    content: '';
+    position: absolute;
+    background-color: var(--focus-color);
+
+    // Приподнять кнопку чтобы был виден подсвечивающий прямоугольник
+    z-index: 1;
+}
+// Если кнопка расположена сверху, то сверху кнопки рисовать синий блок
+.#{$CN}--top-position.#{$CN}:focus::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+}
+// Если кнопка расположена сбоку, то слева от кнопки рисовать синий блок
+.#{$CN}--left-position.#{$CN}:focus::before {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
 }
 
+
+// Закруглённые концевые элементы не видны если кнопка не активна
+.#{$CN}__scion {
+    display: none;
+    fill: var(--bg-color);
+}
+
+// Если кнопка активна
 .#{$CN}--active {
     background-color: var(--bg-color);
 
@@ -60,7 +79,6 @@ $CN: main-tab;
 .#{$CN}--left-position {
     .#{$CN}__scion {
         right: 0;
-        fill: tomato;
     }
     .#{$CN}__scion:nth-child(2) {
         top: -3px;
@@ -68,5 +86,6 @@ $CN: main-tab;
     }
     .#{$CN}__scion:nth-child(3) {
         bottom: -3px;
+        transform: scale(-1, -1);
     }
 }

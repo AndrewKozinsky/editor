@@ -15,7 +15,6 @@ export type ItemsListPropType = {
 }
 
 export default function ItemsList(props: ItemsListPropType) {
-
     const {
         items,
         activeItemId
@@ -44,7 +43,6 @@ type ItemPropType = {
 
 /** Кнопка списка */
 function Item(props: ItemPropType) {
-
     const {
         item,
         isActive,

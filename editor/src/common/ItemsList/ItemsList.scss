@@ -11,10 +11,14 @@ $item: #{$CN}__item;
 .#{$item} {
     display: block;
     width: 100%;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
     color: var(--text-color);
     text-align: left;
     cursor: pointer;
     background-color: transparent;
+
+    padding: 4px 11px;
     border: none;
     border-radius: var(--radius);
     transition: background-color .1s;
@@ -35,22 +39,6 @@ $item: #{$CN}__item;
     }
 }
 
-// Размер кнопок
-.#{$item}--small-size {
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    padding: 4px 11px;
-}
-.#{$item}--middle-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    padding: 5px 14px;
-}
-.#{$item}--big-size {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    padding: 7px 16px;
-}
 
 // Активная кнопка
 .#{$item}--active {

@@ -1,19 +1,21 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import actions from 'store/rootAction'
 import { AppState } from 'store/rootReducer'
+import { useChangeEmailRequest } from 'requests/user/changeEmailRequest'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Button from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
-import messages from '../messages'
-import {useChangeEmail } from 'requests/authRequests'
+import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+import FHTypes from 'libs/formHandler/types'
 
 
 /**
- * Хук регулирует показ модального окно подтверждения показа почты и изменяет почту на переданную
+ * Хук регулирует показ модального окно подтверждения изменения почты
+ * и изменяет почту на переданную
  * @param {Object} fh — объект отдаваемый FormHandler-ом.
  */
-export default function useHandleConfirmChangingEmailModal(fh: any) {
+export default function useHandleConfirmChangingEmailModal(fh: FHTypes.ReturnObj) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -26,9 +28,7 @@ export default function useHandleConfirmChangingEmailModal(fh: any) {
 
     // Если форму можно отправлять
     useEffect(function () {
-        if (fh.form.formIsValid) {
-            setIsModalOpen(true)
-        }
+        if (fh.form.formIsValid) setIsModalOpen(true)
     }, [fh.form.formIsValid])
 
 
@@ -69,11 +69,8 @@ function ModalContent(props: ModalContentPropType) {
 
     const dispatch = useDispatch()
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
     // Запрос на изменение почты
-    const { response, doFetch } = useChangeEmail(newEmail)
+    const { response, doFetch } = useChangeEmailRequest(newEmail)
 
     useEffect(function () {
         // Ничего не делать если почта пока не изменена
@@ -95,14 +92,14 @@ function ModalContent(props: ModalContentPropType) {
 
     return (
         <>
-            <p>{messages.UserDataSection.confirmModalText[lang]}</p>
-            <Wrapper t={10} align='right'>
+            <p>{userDataSectionMessages.confirmModalText}</p>
+            <Wrapper t={10}>
                 <Hr />
             </Wrapper>
             <Wrapper t={10} align='right' gap={10}>
-                <Button text={messages.UserDataSection.cancelBtn[lang]} />
+                <Button text={userDataSectionMessages.cancelBtn} />
                 <Button
-                    text={messages.UserDataSection.changeBtn[lang]}
+                    text={userDataSectionMessages.changeBtn}
                     color='accent'
                     onClick={doFetch}
                 />

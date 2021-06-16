@@ -19,7 +19,6 @@ namespace FHTypes {
                 focus?: ConfigFieldEventHandler
                 blur?: ConfigFieldEventHandler
                 click?: ConfigFieldEventHandler
-                reset?: ConfigFieldEventHandler
                 submit?: ConfigFieldEventHandler
                 // Обработчик изменения Состояния формы
                 statechange?: ConfigFieldEventHandler
@@ -31,8 +30,6 @@ namespace FHTypes {
             // Функция запускаемая при изменении Состояния формы
             // Например она требуется чтобы определись когда кнопка отправки должна быть заблокирована
             stateChange?: ConfigFormEventHandler
-            // Пользовательская функция запускаемая при сбросе формы
-            reset?: ConfigFormEventHandler
             // Пользовательская функция запускаемая при отправке формы когда все поля верные
             submit: ConfigFormEventHandler
         }
@@ -58,8 +55,6 @@ namespace FHTypes {
         setFormData: SetFormData
         // Функция изменяющая свойство в данных формы
         setFormDataPropValue: SetFormDataPropValue
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
 
     // Функция изменяющая значение поля
@@ -126,8 +121,6 @@ namespace FHTypes {
         setFormDataPropValue: SetFormDataPropValue
         // Значения полей для отправки на сервер
         readyFieldValues: ReadyFieldsValues
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
     // Значения полей для отправки на сервер
     export type ReadyFieldsValues = {
@@ -160,9 +153,9 @@ namespace FHTypes {
     }
 
     // Тип поля
-    export type FieldType = 'text' | 'select' | 'checkbox' | 'radio' | 'button'
+    export type FieldType = 'unknown' | 'text' | 'select' | 'checkbox' | 'radio' | 'button'
     // Сколько значений может быть у поля: нисколько (кнопка), одно или несколько
-    export type ValueCount = 'zero' | 'one' | 'many'
+    export type ValueCount = 'unknown' | 'zero' | 'one' | 'many'
 
     export type FormStateObj = {
         // Ссылка на элемент формы.
@@ -172,15 +165,19 @@ namespace FHTypes {
     }
 
 
-
     // ОБЪЕКТ ВОЗВРАЩАЕМЫЙ ХУКОМ useFormHandler ---------------------------
     // Объект возвращаемый useFormHandler
     export type ReturnObj = {
         // Обработчики добавляемые на <form>
-        formHandlers: FormHandlers,
+        formHandlers: FormHandlers
         // Обработчик изменения поля добавляемый каждому полю
         onChangeFieldHandler: BrowserEventHandler
+        // Состояние формы
+        formState: FormState
+        // Функция устанавливающая новое Состояние формы
+        setFormState: SetFormState
         fields: ReturnFieldsObj,
+        setFieldValue: SetFieldValue
         // Любые данные касаемые формы.
         form: FieldData
     }
@@ -189,7 +186,6 @@ namespace FHTypes {
         onFocus:      BrowserEventHandler
         onBlur:       BrowserEventHandler
         onClick:      BrowserEventHandler
-        onReset:      BrowserEventHandler
         onSubmit:     BrowserEventHandler
     }
     export type ReturnFieldsObj = {
@@ -208,7 +204,7 @@ namespace FHTypes {
     // Элемент формы
     export type $form = HTMLFormElement
     // События формы, которые разрешено использовать
-    export type FormEventsNames = 'change' | 'focus' | 'blur' | 'click' | 'reset' | 'submit'
+    export type FormEventsNames = 'change' | 'focus' | 'blur' | 'click' | 'submit'
     // Состояние объекта браузерного события
     export type BrowserEventState = {
         browserEvent: null | React.BaseSyntheticEvent,

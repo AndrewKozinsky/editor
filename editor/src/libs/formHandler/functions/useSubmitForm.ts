@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import FHTypes from '../types'
 import {
     getSetFieldData,
     getSetFieldDataPropValue,
@@ -6,7 +7,6 @@ import {
     setFormData,
     setFormDataPropValue
 } from './formStateSettersAndGetters'
-import FHTypes from '../types'
 
 
 /**
@@ -61,8 +61,6 @@ export function getSubmitFormDetails(
         setFormDataPropValue: setFormDataPropValue,
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
-        // Функция сбрасывающая данные всех полей на значения по умолчанию.
-        // resetForm: () => void
     }
 }
 
@@ -77,7 +75,10 @@ function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFields
     for (let fieldName in formState.fields) {
         const field = formState.fields[fieldName]
 
-        if (field.valueCount === 'one') {
+        if (field.fieldType === 'unknown') {
+            fieldsValuesSubmitObj[fieldName] = null
+        }
+        else if (field.valueCount === 'one') {
             fieldsValuesSubmitObj[fieldName] = field.value[0]
         }
         else if (field.valueCount === 'many') {

@@ -1,6 +1,4 @@
 import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
 import Header from 'common/textBlocks/Header/Header'
 import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
@@ -8,23 +6,24 @@ import Form from 'common/formElements/Form/Form'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import Notice from 'common/Notice/Notice'
-import messages from '../messages'
-import messagesWithJSX from '../messagesWithJSX'
 import getFormConfig from './formResources'
 import { getMenuItems } from '../menuItems'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import CommonError from '../CommonError/CommonError'
 import FHTypes from 'libs/formHandler/types'
+import {
+    regFormMessages,
+    regFormJSXMessages,
+    regFormJSXFnMessages
+} from 'messages/regFormMessages'
+import { commonMessages } from 'messages/commonMessages'
 
 
 /** Форма входа в сервис */
 export default function RegFormBlock() {
 
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'reg')
+    const fh = useFormHandler(getFormConfig(), 'reg')
 
     // Показывать или сообщение об успешной регистрации или форму
     const content = fh.form.letterWasSentTo
@@ -34,10 +33,11 @@ export default function RegFormBlock() {
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems(lang)}/>
+                <Menu items={getMenuItems()}/>
             </Wrapper>
             <Wrapper b={10}>
-                <Header text={messages.RegForm.formHeader[lang]} type='h1' relativeSize={1}/>
+                {/*@ts-ignore*/}
+                <Header text={regFormMessages.formHeader} type='h1' />
             </Wrapper>
             {content}
         </div>
@@ -46,31 +46,26 @@ export default function RegFormBlock() {
 
 
 type ThisFormPropType = {
-    fh?: FHTypes.ReturnObj // Видно ли сообщение
+    fh?: FHTypes.ReturnObj // Объектами с данными и методами манипуляцией формой
 }
 
 /** Форма регистрации пользователя */
 function ThisForm(props: ThisFormPropType) {
-
     const {
         fh
     } = props
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     return (
         <>
             <Form name='reg' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.RegForm.emailField[lang] }
+                        label={ regFormMessages.emailField }
                         name='email'
-                        relativeSize={2}
                         value={fh.fields.email.value[0]}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='username'
-                        placeholder={messages.Common.emailPlaceholder[lang]}
+                        placeholder={commonMessages.emailPlaceholder}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}
                         autoFocus
@@ -78,9 +73,8 @@ function ThisForm(props: ThisFormPropType) {
                 </Wrapper>
                 <Wrapper t={15}>
                     <TextInput
-                        label={ messages.RegForm.passwordField[lang] }
+                        label={ regFormMessages.passwordField }
                         name='password'
-                        relativeSize={2}
                         type='password'
                         value={fh.fields.password.value[0]}
                         onChange={fh.onChangeFieldHandler}
@@ -91,9 +85,8 @@ function ThisForm(props: ThisFormPropType) {
                 </Wrapper>
                 <Wrapper t={15}>
                     <TextInput
-                        label={ messages.RegForm.passwordConfirmField[lang] }
+                        label={ regFormMessages.passwordConfirmField }
                         name='passwordConfirm'
-                        relativeSize={2}
                         type='password'
                         value={fh.fields.passwordConfirm.value[0]}
                         onChange={fh.onChangeFieldHandler}
@@ -105,9 +98,8 @@ function ThisForm(props: ThisFormPropType) {
                 <Wrapper t={20} align={'right'}>
                     <Button
                         type='submit'
-                        text={messages.RegForm.submitBtnText[lang]}
+                        text={regFormMessages.submitBtnText}
                         name='submit'
-                        relativeSize={1}
                         disabled={fh.fields.submit.data.disabled}
                         loading={fh.fields.submit.data.loading}
                     />
@@ -116,12 +108,10 @@ function ThisForm(props: ThisFormPropType) {
             </Form>
 
             <Wrapper t={30}>
-                {/*@ts-ignore*/}
-                <Notice>{messagesWithJSX.RegForm.legal[lang]}</Notice>
+                <Notice>{regFormJSXMessages.legal}</Notice>
             </Wrapper>
             <Wrapper t={30}>
-                {/*@ts-ignore*/}
-                <Notice>{messagesWithJSX.RegForm.doYouHaveAccount[lang]}</Notice>
+                <Notice>{regFormJSXMessages.doYouHaveAccount}</Notice>
             </Wrapper>
         </>
     )
@@ -129,23 +119,16 @@ function ThisForm(props: ThisFormPropType) {
 
 
 type LetterWasSentPropType = {
-    email: string // Почта пользователя, которую нужно подтвердить
+    email: string // Почта пользователя, на которую регистрируется учётная запись
 }
 
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
 function LetterWasSent(props: LetterWasSentPropType) {
-
-    const {
-        email
-    } = props
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+    const { email } = props
 
     return (
         <Notice>
-            {/*@ts-ignore*/}
-            {messagesWithJSX.RegForm.confirmRegistrationLetter(email)[lang]}
+            {regFormJSXFnMessages.confirmRegistrationLetter(email)}
         </Notice>
     )
 }

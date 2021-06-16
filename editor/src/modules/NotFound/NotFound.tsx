@@ -1,48 +1,33 @@
 import React from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import messagesWithJSX from './messagesWithJSX'
+import {makeCN} from 'utils/StringUtils'
+import { notFoundJSXMessages } from 'messages/notFoundMessages'
 import './NotFound.scss'
-import {useGetComponentSize} from '../../utils/MiscUtils';
-import {makeCN} from '../../utils/StringUtils';
 
 
-function NotFound() {
-
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
-
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize()
-
+export default function NotFound() {
     // Класс обёртки
     const CN = 'not-found'
 
     // Классы заголовка
-    const headerClasses = [`${CN}__header`, `${CN}__header--${size}-size`]
+    const headerClasses = [`${CN}__header`, `${CN}__header`]
 
     return (
         <div className={CN}>
             <SvgIcon type='logo' />
 
             <Wrapper t={15}>
-                {/*@ts-ignore*/}
-                <h1 className={makeCN(headerClasses)}>{messagesWithJSX.header[lang]}</h1>
+                <h1 className={makeCN(headerClasses)}>{notFoundJSXMessages.header}</h1>
             </Wrapper>
 
             <Wrapper t={15}>
-                {/*@ts-ignore*/}
-                <p>{messagesWithJSX.p1[lang]}</p>
+                <p>{notFoundJSXMessages.p1}</p>
             </Wrapper>
 
             <Wrapper t={5}>
-                {/*@ts-ignore*/}
-                <p>{messagesWithJSX.p2[lang]}</p>
+                <p>{notFoundJSXMessages.p2}</p>
             </Wrapper>
         </div>
-    );
+    )
 }
-
-export default NotFound

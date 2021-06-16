@@ -1,4 +1,3 @@
-// Types
 import StoreUserTypes from './userTypes'
 
 const userActions = {

@@ -3,6 +3,8 @@ $CN: notice;
 // Обёртка уведомления
 .#{$CN} {
     display: flex;
+    font-size: 1.4rem;
+    line-height: 2rem;
 }
 
 // Цвета текста уведомления
@@ -14,20 +16,6 @@ $CN: notice;
 }
 .#{$CN}--success {
     color: hsl(134, 61, 40);
-}
-
-// Размеры текста уведомления
-.#{$CN}--small-size {
-    font-size: 1.4rem;
-    line-height: 2rem;
-}
-.#{$CN}--middle-size {
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-}
-.#{$CN}--big-size {
-    font-size: 1.8rem;
-    line-height: 2.4rem;
 }
 
 // Значёк

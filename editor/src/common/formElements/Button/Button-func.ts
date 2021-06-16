@@ -1,14 +1,14 @@
+import {useEffect} from 'react'
 import {makeCN} from 'utils/StringUtils'
 import { ButtonPropType } from './Button'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {useEffect} from 'react';
+
 
 /**
  * Функция возвращает классы кнопки
  * @param {Object} buttonProps — props переданные в кнопку
- * @param {String} size — размер элемента.
+ * @param {Boolean} block — должна ли кнопка быть блочным элементом на всю ширину
  */
-export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSettingsTypes.EditorSize) {
+export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -17,10 +17,6 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSetting
     // Классы кнопки
     const CN = 'btn'
     const classes = [CN]
-
-    // Размер кнопки.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
 
     // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).
@@ -31,23 +27,8 @@ export function getButtonClasses(buttonProps: ButtonPropType, size: StoreSetting
     if (color === 'base') classes.push(`${CN}--base-color`)
     if (color === 'accent') classes.push(`${CN}--accent-color`)
 
-    return makeCN(classes)
-}
-
-
-/**
- * Функция возвращает классы загрузчика кнопки
- * @param {String} size — размер загрузчика
- */
-export function getButtonLoaderClasses(size: StoreSettingsTypes.EditorSize) {
-
-    // Классы кнопки
-    const CN = 'btn-loader'
-    const classes = [CN]
-
-    // Размер загрузчика.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
+    // Если кнопка должна быть блочным элементом на всю ширину
+    if (block) classes.push(`${CN}--block`)
 
     return makeCN(classes)
 }

@@ -15,26 +15,15 @@ $CN: menu;
 .#{$CN}__li:last-child {
     margin-right: 0;
 }
-.#{$CN}__li--small-size {
+.#{$CN}__li {
     font-size: 1.4rem;
     line-height: 1.8rem;
     margin-right: 14px;
 }
-.#{$CN}__li--middle-size {
-    font-size: 1.6rem;
-    line-height: 2rem;
-    margin-right: 16px;
-}
-.#{$CN}__li--big-size {
-    font-size: 1.8rem;
-    line-height: 2.2rem;
-    margin-right: 18px;
-}
-
 
 
 .#{$CN}--disabled-link {
-    color: hsl(var(--base-h-part), calc(var(--base-s-part) - 10%), 55%);
+    color: hsl(var(--base-h-part), var(--base-s-part), var(--base-color-10));
     cursor: default;
     border-bottom-color: transparent;
 

@@ -1,10 +1,15 @@
 // @ts-ignore
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+// @ts-ignore
+import ReduxThunk from 'redux-thunk'
+// @ts-ignore
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { rootReducer } from './rootReducer'
 
 
 export default createStore(
     rootReducer,
-    // @ts-ignore
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composeWithDevTools(
+        applyMiddleware(ReduxThunk)
+    )
 )

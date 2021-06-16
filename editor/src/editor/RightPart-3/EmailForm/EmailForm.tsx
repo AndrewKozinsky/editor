@@ -1,23 +1,19 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import Wrapper from 'common/Wrapper/Wrapper'
 import TextInput from 'common/formElements/TextInput/TextInput'
 import Button from 'common/formElements/Button/Button'
 import Form from 'common/formElements/Form/Form'
-import {AppState} from 'store/rootReducer'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
-import messages from '../messages'
 import Notice from 'common/Notice/Notice'
 import useHandleConfirmChangingEmailModal from './confirmEmailModal'
+import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 
 
 export default function EmailForm() {
-    // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(lang), 'email')
+    const fh = useFormHandler(getFormConfig(), 'email')
 
     // В openModal будет функция открывающая модальное окно с подтверждением изменения почты
     // В самом хуке обрабатывается утвердительный ответ на подтверждение изменения почты
@@ -29,13 +25,13 @@ export default function EmailForm() {
             <Form name='email' formHandlers={fh.formHandlers}>
                 <Wrapper>
                     <TextInput
-                        label={ messages.UserDataSection.emailField[lang] }
+                        label={ userDataSectionMessages.emailField }
                         name='email'
                         value={fh.fields.email.value[0]}
                         maxWidth={250}
                         onChange={fh.onChangeFieldHandler}
                         autocomplete='email'
-                        placeholder={messages.UserDataSection.emailPlaceholder[lang]}
+                        placeholder={userDataSectionMessages.emailPlaceholder}
                         error={fh.fields.email.data.error}
                         disabled={fh.fields.email.data.disabled}
                     />
@@ -43,7 +39,7 @@ export default function EmailForm() {
                 <Wrapper t={10}>
                     <Button
                         type='submit'
-                        text={messages.UserDataSection.submitBtnText[lang]}
+                        text={userDataSectionMessages.submitBtnText}
                         name='submit'
                         icon='btnSignSave'
                         disabled={fh.fields.submit.data.disabled}
@@ -53,7 +49,7 @@ export default function EmailForm() {
             </Form>
             {isSuccessMessageOpen && <Wrapper t={15}>
                 <Notice type='success'>
-                    {messages.UserDataSection.emailHasChanged[lang]}
+                    {userDataSectionMessages.emailHasChanged}
                 </Notice>
             </Wrapper>}
         </>

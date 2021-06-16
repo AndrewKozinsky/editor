@@ -1,11 +1,10 @@
 import React, {useState} from 'react'
-import {getArrowIcon, getClasses, getOptions, getWrapperClasses} from './Select-func'
+import { getOptions, getWrapperClasses } from './Select-func'
 import { OptionsType } from './SelectTypes'
-import { ObjStringKeyAnyValType } from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
-import {useGetComponentSize} from 'utils/MiscUtils'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
+import SvgIcon from '../../icons/SvgIcon'
 import './Select.scss'
 
 
@@ -14,28 +13,23 @@ export type SelectPropType = {
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    relativeSize?: StoreSettingsTypes.EditorSizeMultiply, // Размер поля
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     disabled?: boolean // Заблокировано ли поле
 }
 
 /* Компонент выпадающего списка */
-function Select(props: SelectPropType) {
+export default function Select(props: SelectPropType) {
 
     const {
         label, // Подпись выпадающего списка
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
-        relativeSize,
         options, // Массив для генерации тегов <option>
         disabled = false, // Заблокировано ли поле
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
     } = props
-
-    // Размер компонента относительно размера всего интерфейса
-    const size = useGetComponentSize(relativeSize)
 
     // Находится ли выпадающий список под фокусом
     const [isFocus, setIsFocus] = useState(false)
@@ -44,9 +38,9 @@ function Select(props: SelectPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты поля
-    const inputAttribs: ObjStringKeyAnyValType = {
+    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         name,
-        className: getClasses(size),
+        className: 'select-input',
         onFocus: () => setIsFocus(true),
         onBlur: (e: React.BaseSyntheticEvent) => {
             // Поставить статус сфокусированности в Состояние
@@ -54,7 +48,7 @@ function Select(props: SelectPropType) {
             // Если передали обработчик потерей фокуса, то запустить
             if (onBlur) onBlur(e)
         },
-        onChange,
+        onChange
     }
 
     if (value) inputAttribs.value = value
@@ -66,15 +60,14 @@ function Select(props: SelectPropType) {
     return (
         <>
             <Label label={label}  id={id} />
-            <div className={getWrapperClasses(size, isFocus)}>
+            <div className={getWrapperClasses(isFocus)}>
                 <select {...inputAttribs}>
-                    {getOptions(props)}
+                    {getOptions(options)}
                 </select>
-                <div className='select-input-wrapper__tip'>{getArrowIcon(size)}</div>
+                <div className='select-input-wrapper__tip'>
+                    <SvgIcon type='selectInputArrows' baseClass='-icon-stroke' />
+                </div>
             </div>
         </>
     )
 }
-
-
-export default Select

@@ -1,15 +1,12 @@
-import {ButtonPropType} from '../formElements/Button/Button';
-import StoreSettingsTypes from '../../store/settings/settingsTypes';
-import {makeCN} from '../../utils/StringUtils';
-import {WrapperPropType} from './Wrapper';
+import {makeCN} from 'utils/StringUtils'
+import {WrapperPropType} from './Wrapper'
 
 /**
- * Функция возвращает классы выпадающего списка
+ * Функция возвращает классы универсальной обёртки
  * @param {Object} wrapperProps — props переданные в обёртку
- * @param {String} size — размер элемента.
  * @param {Number} gap — отступ между элементами внутри компонента.
  */
-export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSettingsTypes.EditorSize, gap?: number) {
+export function getWrapperClasses(wrapperProps: WrapperPropType, gap?: number) {
     const {
         align,
         t,        // Отступ сверху
@@ -32,11 +29,6 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, size: StoreSett
 
     // Добавление класса дающего отступ между элементами внутри обёртки
     if (gap) classes.push(CN + '--gap' + gap)
-
-    // Размер отступа.
-    // tiny (крошечная), small (маленькая), middle (средняя), big (большая)
-    classes.push(`${CN}--${size}-size`)
-
 
     return makeCN(classes)
 }

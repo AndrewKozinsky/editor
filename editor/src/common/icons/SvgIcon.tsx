@@ -1,50 +1,45 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import {getIcon} from './js/getIcon'
-import { getIconClass } from './js/getIconClass'
-import { getIconSizes } from './js/getIconSizes'
+import { getIconSize } from './js/getIconSize'
 import {makeCN} from 'utils/StringUtils'
-import { AppState } from 'store/rootReducer'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import './css/SvgIcon.scss'
 
 
+type BaseClasses = '-black-fill' | '-icon-fill' | '-white-fill' | '-icon-stroke'
+
 export type SvgIconPropType = {
     type: string // Тип значка
-    size?: StoreSettingsTypes.EditorSize // Размер значка
-    className?: string // Дополнительный класс для значка
+    baseClass?: BaseClasses // Класс значка из готового набора классов
+    extraClass?: string // Класс значка если нужного нет в готовом наборе
 }
 
 /** Значёк */
-function SvgIcon(props: SvgIconPropType) {
+export default function SvgIcon(props: SvgIconPropType) {
 
     let {
         type, // Тип значка
-        size, // Размер значка
-        className = '', // Дополнительный класс для значка
-        ...anotherProps // Остальные переданные свойства
+        baseClass, // Класс значка
+        extraClass, // Класс значка
     } = props
 
-    // Размер интерфейса
-    const editorSize = useSelector((store: AppState) => store.settings.editorSize)
-    // Если размер не передали, то взять размер интерфейса
-    if (!size) size = editorSize
-
     // Значёк
-    const Icon = getIcon(type, size)
-    // Основной класс SVG
-    const iconClass = getIconClass(type)
-    // Добавление дополнительного класса SVG
-    const iconClasses = [iconClass, className]
+    const Icon = getIcon(type)
     // Размеры
-    const iconSizes = getIconSizes(type, size)
+    const iconSizes = getIconSize(type)
 
+    // Классы
+    const CN = 'icon'
+    let className = ''
+
+    if (!baseClass && !extraClass) className = `${CN}-black-fill`
+    else if (baseClass && !extraClass) className = `${CN}${baseClass}`
+    else if (!baseClass && extraClass) className = extraClass
+    else className = makeCN([`${CN}${baseClass}`, extraClass])
 
     return (
-        <svg {...iconSizes} className={makeCN(iconClasses)} {...anotherProps}>
+        <svg {...iconSizes} className={className}>
+            {/*@ts-ignore*/}
             <Icon />
         </svg>
-    );
+    )
 }
-
-export default SvgIcon
