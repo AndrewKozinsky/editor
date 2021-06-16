@@ -13,16 +13,3 @@ const obj = {
 }
 
 export const sitesPanelMessages = getMessagesObject(obj)
-
-
-
-
-
-
-
-
-
-
-
-
-

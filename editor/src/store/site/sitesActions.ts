@@ -1,15 +1,14 @@
 import StoreSitesTypes from './sitesTypes'
 import {MiscTypes} from 'types/miscTypes'
-// import {makeFetch} from 'requests/fetch'
-// import getApiUrl from 'requests/apiUrls'
 import store from '../store'
 import FilesTreeType from 'libs/FilesTree/types'
-import sitesRequest from 'src/requests/editor/sitesRequest'
-import getIncFilesTemplatesRequest from 'src/requests/editor/getIncFilesTemplatesRequest'
+import sitesRequest from 'requests/editor/sitesRequest'
+import getIncFilesTemplatesRequest from 'requests/editor/getIncFilesTemplatesRequest'
+import getArticleRequest, {ArticleDataType} from 'requests/editor/getArticleRequest'
+import getComponentRequest, { ComponentDataType } from 'requests/editor/getComponentRequest'
 
 
 const sitesActions = {
-
     // Установка id текущей основной вкладки справа
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         return {
@@ -115,7 +114,7 @@ const sitesActions = {
     // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestComponentTemplate() {
+    requestComponentTemplate() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // uuid выбранного шаблона компонента, данные которого нужно скачать
@@ -124,37 +123,31 @@ const sitesActions = {
             // Если uuid компонента не передан, то обнулить данные компонета в Хранилище
             if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
 
-            // Параметры запроса
-            const options = { method: 'GET' }
-
             // Запрос и ответ от сервера
-            const response = await makeFetch(
-                // id сайта передаётся в параметре siteId
-                getApiUrl('component', currentCompItemId), options
-            )
+            const response = await getComponentRequest(currentCompItemId)
 
-            if (!response || response.status !== 'success') return
+            if (response.status !== 'success') return
             const compData = response.data.component
 
             if (compData) {
                 // Установка данных шаблона компонента в Хранилище
-                dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData.code) )
+                dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData) )
             }
         }
-    },*/
+    },
 
     // Установка id и типа выбранного шаблона компонента
     setCurrentComp(
         id: null | FilesTreeType.UuId,
         type: null | FilesTreeType.ItemType,
-        code?: StoreSitesTypes.ComponentCode
+        compData?: ComponentDataType
     ): StoreSitesTypes.SetCurrentCompAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP,
             payload: {
                 id,
                 type,
-                code
+                compData
             }
         }
     },
@@ -163,47 +156,39 @@ const sitesActions = {
     // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestArticle() {
+    requestArticle() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // uuid выбранного сайта, данные которого нужно скачать
+            // uuid выбранной статьи, данные которой нужно скачать
             const {currentArtItemId} = getState().sites.articlesSection
 
             // Если uuid статьи не передан, то обнулить данные статьи в Хранилище
             if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
 
-            // Параметры запроса
-            const options = { method: 'GET' }
-
             // Запрос и ответ от сервера
-            const response = await makeFetch(
-                // id сайта передаётся в параметре siteId
-                getApiUrl('article', currentArtItemId), options
-            )
+            const response = await getArticleRequest(currentArtItemId)
 
-            if (!response || response.status !== 'success') return
+            if (response.status !== 'success') return
             const articleData = response.data.article
 
             if (articleData) {
-                // Установка данных шаблона компонента в Хранилище
-                // console.log(articleData)
-                // dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
+                dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
             }
         }
-    },*/
+    },
 
     // Установка id и типа выбранного шаблона компонента
     setCurrentArt(
         id: null | FilesTreeType.UuId,
         type: null | FilesTreeType.ItemType,
-        code?: StoreSitesTypes.ArticleCode
+        article?: ArticleDataType
     ): StoreSitesTypes.SetCurrentArtAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART,
             payload: {
                 id,
                 type,
-                code
+                article
             }
         }
     },

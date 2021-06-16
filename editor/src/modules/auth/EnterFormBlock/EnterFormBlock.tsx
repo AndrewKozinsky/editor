@@ -19,7 +19,7 @@ import useFormHandler from 'libs/formHandler/useFormHandler'
 import CommonError from '../CommonError/CommonError'
 import FHTypes from 'libs/formHandler/types'
 import {commonMessages} from 'messages/commonMessages'
-import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
+import { useGetSendConfirmLetter } from 'requests/user/sendConfirmLetterRequest'
 
 
 /** Форма входа в сервис */

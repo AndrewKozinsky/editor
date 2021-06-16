@@ -61,7 +61,6 @@ export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res:
     const article = await ArticleModel
         .findOne({uuid: req.params.uuid})
         .select('-__v -_id -userId')
-    console.log(article)
 
     // Отправить данные пользователю
     res.status(200).json({

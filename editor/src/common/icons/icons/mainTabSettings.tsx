@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function MainTabSettingsSmall() {
+export default function MainTabSettings() {
     return (
         <g fillRule="evenodd">
             <g transform="translate(2, 4)" fillRule="nonzero">

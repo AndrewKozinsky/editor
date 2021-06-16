@@ -3,24 +3,13 @@ import * as yup from 'yup'
 import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import {FolderType} from '../types'
 import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 import putComponentsFoldersRequest from 'requests/editor/putComponentsFoldersRequest'
-import putArticlesFoldersRequest from 'requests/editor/putArticlesFoldersRequest'
-import {
-    componentsTreeStore,
-    articlesTreeStore,
-    setCompItems,
-    setArtItems
-} from '../stores'
+import { componentsTreeStore, setCompItems } from '../stores'
 
 
-/**
- * Объект настройки useFormHandler
- * @param {String} type — тип выбранной папки: с компонентами или со статьями
- */
-export default function getFormConfig(type: FolderType): FHTypes.FormConfig {
+/** Объект настройки useFormHandler */
+export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -34,7 +23,7 @@ export default function getFormConfig(type: FolderType): FHTypes.FormConfig {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
                         return validateForm(
-                            type, formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                            formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
                         )
                     }
                 },
@@ -57,7 +46,8 @@ export default function getFormConfig(type: FolderType): FHTypes.FormConfig {
 
                 // Проверить форму и поставить/убрать ошибки
                 let formState = validateForm(
-                    type, formDetails.state, formDetails.setFieldDataPropValue,
+                    formDetails.state,
+                    formDetails.setFieldDataPropValue,
                     formDetails.setFormDataPropValue
                 )
 
@@ -98,7 +88,7 @@ export default function getFormConfig(type: FolderType): FHTypes.FormConfig {
                 formDetails.setFormState(newFormState)
 
                 // Сохранить папки с компонентами на сервере и обновить их Состояние
-                saveItemsOnServer(type, formDetails)
+                saveItemsOnServer(formDetails)
             }
         }
     }
@@ -107,17 +97,11 @@ export default function getFormConfig(type: FolderType): FHTypes.FormConfig {
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
- * @param {String} type — тип выбранной папки: с компонентами или со статьями
  * @param {Array} fieldName — имя поля
  */
-function getSchema(type: FolderType, fieldName: string): any {
-
-    // Сообщение об ошибке про обязательное имя статьи
-    let nameRequiredText = componentFolderFormMessages.formNameInputRequired
-    if (type === 'articles') nameRequiredText = articleFolderFormMessages.formNameInputRequired
-
+function getSchema(fieldName: string): any {
     const schemas = {
-        name: yup.string().required(nameRequiredText)
+        name: yup.string().required(componentFolderFormMessages.formNameInputRequired)
     }
 
     // @ts-ignore
@@ -127,13 +111,11 @@ function getSchema(type: FolderType, fieldName: string): any {
 
 /**
  * Функция проверяющая форму при изменении полей ввода
- * @param {String} type — тип выбранной папки: с компонентами или со статьями
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
 function validateForm(
-    type: FolderType,
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -154,7 +136,7 @@ function validateForm(
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(type, fieldName)?.validateSync(fieldValue)
+            getSchema(fieldName)?.validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -216,45 +198,27 @@ function setLoadingStatusToForm(
 
 
 /**
- * Функция сохраняет папки с компонентами или статьями на сервере и обновляет их Состояние
- * @param {String} type — тип выбранной папки: с компонентами или со статьями
+ * Функция сохраняет папки с компонентами на сервере и обновляет их Состояние
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function saveItemsOnServer( type: FolderType, formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+async function saveItemsOnServer(formDetails: FHTypes.FormDetailsInSubmitHandler ) {
 
     // Массив папок и файлов из Хранилища
-    let items
-    if (type === 'components') items = componentsTreeStore.getState()
-    if (type === 'articles') items = articlesTreeStore.getState()
+    const items = componentsTreeStore.getState()
 
-    // id выбранной папки у компонентов и статей
+    // id выбранной папки
     const {currentCompItemId} = store.getState().sites.componentsSection
-    const {currentArtItemId} = store.getState().sites.articlesSection
 
     // Изменить название папки на введённое и обновить Хранилище папок
-    let result
     const folderName = formDetails.state.fields.name.value[0]
-    if (type === 'components') {
-        result = filesTreePublicMethods.changeItemName(
-            items, currentCompItemId, folderName
-        )
-        setCompItems(result.newItems)
-    }
-    else if (type === 'articles') {
-        result = filesTreePublicMethods.changeItemName(
-            items, currentArtItemId, folderName
-        )
-        setArtItems(result.newItems)
-    }
+    const result = filesTreePublicMethods.changeItemName(
+        items, currentCompItemId, folderName
+    )
+    setCompItems(result.newItems)
 
     // Подготовить массив папок и файлов для сохранения на сервере
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
     // Сохранить данные на сервере
-    if (type === 'components') {
-        await putComponentsFoldersRequest(preparedItems)
-    }
-    else if (type === 'articles') {
-        await putArticlesFoldersRequest(preparedItems)
-    }
+    await putComponentsFoldersRequest(preparedItems)
 }

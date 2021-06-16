@@ -1,8 +1,7 @@
-import {getMessagesJSXFnObject, getMessagesJSXObject, getMessagesObject} from 'messages/fn/getMessagesObject'
-import {getDomainFromEmail} from 'src/utils/StringUtils'
+import {getMessagesJSXObject, getMessagesObject} from 'messages/fn/getMessagesObject'
 // @ts-ignore
 import { Link } from 'react-router-dom'
-import React from 'react';
+import React from 'react'
 
 // Форма ChangeResetPasswordFormBlock
 const obj = {

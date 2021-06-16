@@ -1,4 +1,4 @@
-import { MiscTypes } from "src/types/miscTypes"
+import { MiscTypes } from 'src/types/miscTypes'
 
 
 const addresses: MiscTypes.ObjStringKeyAnyVal = {

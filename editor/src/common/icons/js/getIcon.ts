@@ -1,4 +1,4 @@
-import {ReactElement, ReactNode} from 'react'
+import { ReactNode } from 'react'
 import Logo from '../icons/logo'
 import ErrorTriangle from '../icons/errorTriangle'
 import SuccessCircle from '../icons/successCircle'
@@ -27,6 +27,7 @@ import FilesTreePlus from '../icons/filesTreePlus'
 import FilesTreeFolder from '../icons/filesTreeFolder'
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
+import BtnSignEdit from '../icons/btnSignEdit'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -74,6 +75,7 @@ export function getIcon(type: string): ReactNode {
         btnSignJson: BtnSignJson,
         btnSignClose: BtnSignClose,
         btnSignExit: BtnSignExit,
+        btnSignEdit: BtnSignEdit,
 
         // Тема интерфейса
         editorLightTheme: EditorLightTheme,

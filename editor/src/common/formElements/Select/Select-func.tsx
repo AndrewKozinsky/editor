@@ -1,7 +1,7 @@
 import React from 'react'
 import {makeCN} from 'utils/StringUtils'
 import { MiscTypes } from 'types/miscTypes'
-import {OptionsType} from './SelectTypes';
+import {OptionsType} from './SelectTypes'
 
 
 /**

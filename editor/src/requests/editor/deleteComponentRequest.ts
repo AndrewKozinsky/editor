@@ -30,10 +30,4 @@ type FailResponse = {
 // Успешный ответ
 type SuccessResponse = {
     status: "success"
-    data: {
-        user: {
-            name: string
-            email: string
-        }
-    }
 }

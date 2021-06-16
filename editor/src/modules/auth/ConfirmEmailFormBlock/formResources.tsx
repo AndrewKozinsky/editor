@@ -4,7 +4,7 @@ import store from 'store/store'
 import actions from 'store/rootAction'
 import FHTypes from 'libs/formHandler/types'
 import { commonMessages } from 'messages/commonMessages'
-import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
+import confirmEmailRequest from 'requests/user/confirmEmailRequest'
 import {confirmEmailMessages} from 'messages/confirmEmailMessages';
 
 

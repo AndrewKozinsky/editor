@@ -41,5 +41,3 @@ const obj = {
 }
 
 export const changePasswordSectionMessages = getMessagesObject(obj)
-
-

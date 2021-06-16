@@ -20,9 +20,6 @@ import { ModalContent } from './deleteTemplate'
 /** Форма создания или редактирования шаблона подключаемых файлов */
 export default function IncFilesTemplateForm() {
 
-    // id выделенного шаблона подключаемых файлов
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
-
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'incFilesTemplate')
     // Изменение данных формы при выделении другого шаблона подключаемых файлов
@@ -30,10 +27,6 @@ export default function IncFilesTemplateForm() {
 
     // Текст и значёк на кнопке отправки
     const { submitName, submitIconType } = useGetSubmitButtonText()
-
-    // Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,
-    // поэтому ничего не отрисовывать.
-    if (currentTemplateId === null) return null
 
     return (
         <Form name='incFilesTemplate' formHandlers={fh.formHandlers}>

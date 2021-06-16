@@ -1,6 +1,6 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
+import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
 import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 

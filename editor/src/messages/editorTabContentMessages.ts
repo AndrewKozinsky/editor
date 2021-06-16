@@ -9,5 +9,3 @@ const obj = {
 }
 
 export const editorTabContentMessages = getMessagesObject(obj)
-
-

@@ -6,9 +6,10 @@ import useBrowserEvent from './functions/useBrowserEvent'
 import { handleBrowserEvent } from './functions/useHandlerBrowserEvent'
 import getFields from './functions/getFields'
 import inputChangeHandler from './functions/inputChangeHandler'
-import FHTypes from "./types"
 import useStateChangeHandler from './functions/useStateChangeHandler'
 import useSubmitForm from './functions/useSubmitForm'
+import {getSetFieldValue} from './functions/formStateSettersAndGetters'
+import FHTypes from './types'
 
 
 /**
@@ -77,6 +78,8 @@ export default function useFormHandler(
         setFormState: setFormState,
         // Данные о полях
         fields: getFields(formState),
+        // Установщик нового значения поля
+        setFieldValue: getSetFieldValue(),
         // Данные формы
         form: formState.form.data
     }

@@ -1,12 +1,15 @@
 // @ts-ignore
 import * as yup from 'yup'
-// import store from 'store/store'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
+import store from 'store/store'
 import FHTypes from 'libs/formHandler/types'
-// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-// import { makeFetch } from 'requests/fetch'
-// import getApiUrl from 'requests/apiUrls'
-// import {articlesTreeStore, setItems} from '../../ArticlesList/ArticlesList'
+import { articleFormMessages } from 'messages/articleFormMessages'
+import { updateArticleNameRequest } from 'requests/editor/updateArticleRequest'
+import putArticlesFoldersRequest from 'requests/editor/putArticlesFoldersRequest'
+import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import {
+    articlesTreeStore,
+    setArtItems
+} from '../stores'
 
 
 /** Объект настройки useFormHandler */
@@ -20,14 +23,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
                     error: null,
                     disabled: false
                 },
-                /*change(formDetails) {
+                change(formDetails) {
                     // Проверять только если форму отправляли как минимум 1 раз
                     if (formDetails.state.form.data.submitCounter > 0) {
-                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                        return validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue)
                     }
-                },*/
+                },
             },
-            defaultIncFilesTemplateId: {
+            incFilesTemplateId: {
                 initialValue: [''],
             },
             submit: {
@@ -47,20 +50,24 @@ export default function getFormConfig(): FHTypes.FormConfig {
             submit: async function(formDetails) {
 
                 // Проверить форму и поставить/убрать ошибки
-                // let formState = validateForm(formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue, lang)
+                let formState = validateForm(
+                    formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
+                )
 
                 // Увеличить счётчик попыток отправки формы и поставить новое Состояние формы в переменную.
-                // formState = formDetails.setFormDataPropValue(formState, 'submitCounter', formState.form.data.submitCounter + 1)
+                formState = formDetails.setFormDataPropValue(
+                    formState, 'submitCounter', formState.form.data.submitCounter + 1
+                )
 
                 // Первое поле, где есть ошибка
-                // let $firstWrongField = getFirstInvalidField(formState)
+                let $firstWrongField = getFirstInvalidField(formState)
 
                 // Заблокировать все поля. Кнопке отправки поставить блокировку и загрузку
-                // formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, true)
+                formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, true)
 
 
                 // Если поля формы заполнены неверно...
-                /*if($firstWrongField) {
+                if($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -74,19 +81,19 @@ export default function getFormConfig(): FHTypes.FormConfig {
 
                     // Завершить дальнейшее выполнение
                     return
-                }*/
+                }
 
                 // Поставить новое Состояние формы
-                // formDetails.setFormState(formState)
+                formDetails.setFormState(formState)
 
                 // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
-                // let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
-                // formDetails.setFormState(newFormState)
+                let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
+                formDetails.setFormState(newFormState)
 
                 // Сохранить статью на сервере
-                // saveArticleOnServer(formDetails)
+                saveArticleOnServer(formDetails)
                 // Сохранить папки со статьями на сервере и обновить их Состояние
-                // saveItemsOnServer(formDetails)
+                saveItemsOnServer(formDetails)
             }
         }
     }
@@ -96,18 +103,16 @@ export default function getFormConfig(): FHTypes.FormConfig {
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
- * @param {String} lang — язык интерфейса
  */
-/*function getSchema(fieldName: string, lang: StoreSettingsTypes.EditorLanguage): any {
-
+function getSchema(fieldName: string): any {
     const schemas = {
         name: yup.string()
-            .required(articleFormMessages.articleNameRequired[lang])
+            .required(articleFormMessages.articleNameRequired)
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}*/
+}
 
 
 /**
@@ -115,13 +120,11 @@ export default function getFormConfig(): FHTypes.FormConfig {
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
- * @param {String} lang — язык интерфейса
  */
-/*function validateForm(
+function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
-    lang: StoreSettingsTypes.EditorLanguage
 ): FHTypes.FormState {
 
     // Правильно ли заполнена форма
@@ -139,7 +142,7 @@ export default function getFormConfig(): FHTypes.FormConfig {
 
         // Попытаться проверить поле. И в зависимости от результата или поставить или обнулить ошибку
         try {
-            getSchema(fieldName, lang)?.validateSync(fieldValue)
+            getSchema(fieldName)?.validateSync(fieldValue)
             formState = setFieldDataPropValue(formState, 'error', null, fieldName)
         } catch (err) {
             isFormValid = false
@@ -157,14 +160,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}*/
+}
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-/*function getFirstInvalidField(formState: FHTypes.FormState) {
+function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -180,7 +183,7 @@ export default function getFormConfig(): FHTypes.FormConfig {
     }
 
     return $firstWrongField
-}*/
+}
 
 
 /**
@@ -189,48 +192,42 @@ export default function getFormConfig(): FHTypes.FormConfig {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-/*function setLoadingStatusToForm(
+function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
-    formState = setFieldDataPropValue(formState, 'disabled', status, 'defaultIncFilesTemplateId')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'incFilesTemplateId')
     formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}*/
+}
 
 
 /**
  * Функция сохраняет статью на сервере
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-/*function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+async function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
     // id выбранной статьи
     const {currentArtItemId} = store.getState().sites.articlesSection
 
-    // Сформировать объект с данными статьи
-    const articleData = {
-        incFilesTemplateId: formDetails.readyFieldValues.defaultIncFilesTemplateId
-    }
+    // Данные полей формы
+    const fields = formDetails.readyFieldValues
+    const articleName = fields.name.toString()
+    let templateId = fields.incFilesTemplateId
+        ? fields.incFilesTemplateId.toString()
+        : null
 
-    // Параметры запроса
-    const options = {
-        method: 'PATCH',
-        body: JSON.stringify(articleData)
-    }
     // Отправить данные на сервер...
-    makeFetch(getApiUrl('article', currentArtItemId), options)
-}*/
+    await updateArticleNameRequest(currentArtItemId, articleName, templateId)
+}
 
 /**
  * Функция сохраняет папки со статьями на сервере и обновить их Состояние
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-/*function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
-    // id текущего сайта
-    const currentSiteId = store.getState().sites.currentSiteId
-
+async function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
     // Массив папок и файлов из Хранилища
     const items = articlesTreeStore.getState()
 
@@ -243,16 +240,11 @@ export default function getFormConfig(): FHTypes.FormConfig {
         currentArtItemId,
         formDetails.state.fields.name.value[0]
     )
-    setItems(result.newItems)
+    setArtItems(result.newItems)
 
     // Подготовить массив папок и файлов для сохранения на сервере
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
-    const jsonItems = JSON.stringify(preparedItems)
 
     // Отправить данные на сервер...
-    const options = {
-        method: 'PUT',
-        body: JSON.stringify({content: jsonItems})
-    }
-    makeFetch(getApiUrl('articlesFolders', currentSiteId), options)
-}*/
+    await putArticlesFoldersRequest(preparedItems)
+}

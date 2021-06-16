@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import {themeSectionMessages} from 'messages/themeSectionMessages';
+import {themeSectionMessages} from 'messages/themeSectionMessages'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
 import SvgIcon from 'common/icons/SvgIcon'

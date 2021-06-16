@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 import ArticleForm from './ArticleForm/ArticleForm'
-import FolderForm from './FolderForm/FolderForm'
+import ArticlesFolderForm from './ArticlesFolderForm/ArticlesFolderForm'
 
 
 /**
@@ -14,7 +14,7 @@ export default function ArticleFormProvider() {
     // Тип выбранного элемента в дереве папок и файлов
     const {currentArtItemType} = useSelector((store: AppState) => store.sites.articlesSection)
 
-    if (currentArtItemType === 'folder') return <FolderForm type='articles' />
+    if (currentArtItemType === 'folder') return <ArticlesFolderForm />
     if (currentArtItemType === 'file') return <ArticleForm />
     return null
 }

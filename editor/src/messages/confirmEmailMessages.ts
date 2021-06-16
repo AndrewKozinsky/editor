@@ -26,5 +26,3 @@ const obj = {
 }
 
 export const confirmEmailMessages = getMessagesObject(obj)
-
-

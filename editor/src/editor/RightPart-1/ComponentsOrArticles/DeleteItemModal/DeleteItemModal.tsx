@@ -15,10 +15,10 @@ import {
 } from '../stores'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-import { articleFormMessages } from 'messages/articleFormMessages'
 import deleteArticleRequest from 'requests/editor/deleteArticleRequest'
+import deleteComponentRequest from 'requests/editor/deleteComponentRequest'
+import { articleFormMessages } from 'messages/articleFormMessages'
 import {componentFormMessages} from 'messages/componentTemplateFormMessages'
-import deleteComponentRequest from '../../../../requests/editor/deleteComponentRequest'
 
 
 type DeleteItemModalPropType = {

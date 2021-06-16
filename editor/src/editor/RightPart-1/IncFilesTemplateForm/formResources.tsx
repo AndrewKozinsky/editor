@@ -1,11 +1,11 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
+import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
 import actions from 'store/rootAction'
 import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-import createNewTemplateRequest, { CreateNewTemplateValuesType } from 'src/requests/editor/createNewTemplateRequest'
-import updateTemplateRequest, { UpdateTemplateValuesType } from 'src/requests/editor/updateTemplateRequest'
+import createNewTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/createNewTemplateRequest'
+import updateTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/updateTemplateRequest'
 
 
 // Объект настройки useFormHandler

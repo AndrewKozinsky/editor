@@ -2,7 +2,7 @@ import FHTypes from '../types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 /**
- * Функция возвращающая функцию ставящая в объект Состояния формы значение поля
+ * Функция возвращающая функцию ставящая в объект Состояния формы новое значение поля
  * Возвращает объект Состояния формы
  * @param {Object} defaultFieldName — имя изменяемого поля
  */

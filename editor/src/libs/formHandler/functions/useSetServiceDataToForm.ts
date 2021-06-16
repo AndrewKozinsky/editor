@@ -13,6 +13,7 @@ export default function useSetServiceDataToForm(
     formState: FHTypes.FormState, setFormState: FHTypes.SetFormState, $form: FHTypes.$form
 ) {
     useEffect(function () {
+
         // Завершить функцию если нет ссылки на форму
         if (!$form) return
 
@@ -61,9 +62,7 @@ export default function useSetServiceDataToForm(
  * @param {Object} formState — объект состояния формы
  * @param {String} fieldName — имя поля, у которого нужно поставить ссылку на поле, его тип и количество возможных значений
  */
-export function setServiceDataToField(
-    formState: FHTypes.FormState, fieldName: string
-) {
+export function setServiceDataToField( formState: FHTypes.FormState, fieldName: string ) {
     // Поле формы
     const $field: HTMLInputElement = formState.form.$form.querySelector(`*[name="${fieldName}"]`)
     if (!$field) return {...formState.fields[fieldName]}

@@ -6,53 +6,28 @@ import Hr from 'common/misc/Hr/Hr'
 import Form from 'common/formElements/Form/Form'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
-import { useGetAnotherFolderData } from './FolderForm-func'
+import { useGetAnotherFolderData } from './ComponentsFolderForm-func'
 import ModalContent from './deleteFolder'
 import useGetShowModal from 'utils/hooksUtils'
-import { FolderType } from '../types'
 import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 
-
-type FolderFormPropType = {
-    type: FolderType // Тип списка папок: компоненты или статьи
-}
 
 /** Компонент формы редактирования папки */
-export default function FolderForm(props: FolderFormPropType) {
-    const { type } = props
+export default function ComponentsFolderForm() {
 
     // FormHandler
-    const fh = useFormHandler(getFormConfig(type), 'folder')
+    const fh = useFormHandler(getFormConfig(), 'folder')
     // Изменение данных формы при выделении другой папки шаблонов компонентов или статей
-    useGetAnotherFolderData(type, fh.formState, fh.setFormState)
+    useGetAnotherFolderData(fh.formState, fh.setFormState)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления папки
-    const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent type={type} />)
-
-    // Подпись поля с названием папки
-    let nameInputText = componentFolderFormMessages.folderNameInput
-    if(type === 'articles') {
-        nameInputText = articleFolderFormMessages.folderNameInput
-    }
-
-    // Подпись кнопки отправки
-    let submitBtnText = componentFolderFormMessages.submitBtnTextSave
-    if(type === 'articles') {
-        submitBtnText = articleFolderFormMessages.submitBtnTextSave
-    }
-
-    // Подпись кнопке удаления
-    let deleteBtnText = componentFolderFormMessages.deleteFolderBtnText
-    if(type === 'articles') {
-        deleteBtnText = articleFolderFormMessages.deleteFolderBtnText
-    }
+    const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)
 
     return (
         <Form name='folder' formHandlers={fh.formHandlers}>
             <Wrapper b={15}>
                 <TextInput
-                    label={nameInputText}
+                    label={componentFolderFormMessages.folderNameInput}
                     name='name'
                     value={fh.fields.name.value[0]}
                     onChange={fh.onChangeFieldHandler}
@@ -66,7 +41,7 @@ export default function FolderForm(props: FolderFormPropType) {
             <Wrapper t={10} align={'right'} gap={10}>
                 <Button
                     type='submit'
-                    text={submitBtnText}
+                    text={componentFolderFormMessages.submitBtnTextSave}
                     icon='btnSignSave'
                     name='submit'
                     disabled={fh.fields.submit.data.disabled}
@@ -74,7 +49,7 @@ export default function FolderForm(props: FolderFormPropType) {
                 />
                 <Button
                     type='button'
-                    text={deleteBtnText}
+                    text={componentFolderFormMessages.deleteFolderBtnText}
                     icon='btnSignTrash'
                     onClick={openDeleteTemplateConfirmation}
                 />

@@ -3,7 +3,7 @@ import * as yup from 'yup'
 import FHTypes from 'libs/formHandler/types'
 import { resetFormMessages } from 'messages/resetFormMessages'
 import {commonMessages} from 'messages/commonMessages'
-import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
+import resetPasswordRequest from 'requests/user/resetPasswordRequest'
 
 
 // Объект настройки useFormHandler

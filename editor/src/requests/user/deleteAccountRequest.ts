@@ -1,5 +1,5 @@
-import {useFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {useFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 // Хук удаляет учётная запись пользователя
 export function useDeleteAccount() {

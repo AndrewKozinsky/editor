@@ -84,7 +84,7 @@ UserSchema.pre('save', async function(this: IUser, next) {
 // При изменении пароля записать дату изменения
 UserSchema.pre('save', function (this: IUser, next) {
     if(!this.isModified('password') || this.isNew)
-        return next();
+        return next()
 
     const newDate = new Date()
     newDate.setMinutes(newDate.getMinutes() - 1)

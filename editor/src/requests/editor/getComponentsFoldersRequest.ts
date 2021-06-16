@@ -1,9 +1,7 @@
-import {makeFetch, useFetch} from 'requests/reqFn/fetch'
+import {useSelector} from 'react-redux'
+import {AppState} from 'store/rootReducer'
+import { useFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import FilesTreeType from 'libs/FilesTree/types'
-import store from 'store/store'
-import {useSelector} from 'react-redux';
-import {AppState} from 'src/store/rootReducer';
 
 
 // Функция удаляет сайт
@@ -26,7 +24,7 @@ export function useGetComponentsFoldersRequest() {
 
 
 // Тип данных с ответом от пользователя
-export type GetComponentsFoldersServerResponse = FailResponse | SuccessResponse
+export type GetComponentsFoldersServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
 type FailResponse = {
@@ -44,7 +42,9 @@ type SuccessResponse = {
     status: "success"
     data: {
         folders: {
-            content: string
+            content: string // "[{\"uuid\":\"1\",\"type\":\"folder\",\"name\":\"New folder\"}...]"
+            siteId: string // "60c89dccfe73df002a1c4fa4"
+            userId: string // "60c626f9fd09180020febc99"
         }
     }
 }

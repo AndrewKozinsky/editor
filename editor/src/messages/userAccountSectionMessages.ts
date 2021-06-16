@@ -25,5 +25,3 @@ const obj = {
 }
 
 export const userAccountSectionMessages = getMessagesObject(obj)
-
-

@@ -1,6 +1,4 @@
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
 import {makeCN} from 'utils/StringUtils'
-// import { HeaderPropType } from './Header'
 
 /**
  * Функция возвращает классы заголовка

@@ -1,11 +1,11 @@
 import {makeFetch} from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import FilesTreeType from 'libs/FilesTree/types'
 import store from 'store/store'
+import FilesTreeType from 'libs/FilesTree/types'
 
 /**
- * Функция отправляет данные для входа пользователя в редактор
- * @param {Array} items — массив папок с компонентами
+ * Функция обновляет данные по папкам статей
+ * @param {Array} items — массив папок со статьями
  */
 export default async function putArticlesFoldersRequest(items: FilesTreeType.Items) {
     // id выбранного сайта
@@ -20,6 +20,7 @@ export default async function putArticlesFoldersRequest(items: FilesTreeType.Ite
     const response: PutComponentsFoldersServerResponse = await makeFetch(
         getApiUrl('articlesFolders', siteId), options
     )
+
     return response
 }
 
@@ -42,10 +43,10 @@ type FailResponse = {
 type SuccessResponse = {
     status: "success"
     data: {
-        site: {
-            defaultIncFilesTemplateId: null | string
-            name: string
-            userId: string
+        folders: {
+            content: string // "[{\"uuid\":\"a93df62a-c4c9-4813-be54-43fcd7602573\",\"type\":\"file\"}...]"
+            siteId: string // "60c89dccfe73df002a1c4fa4"
+            userId: string // "60c626f9fd09180020febc99"
         }
     }
 }

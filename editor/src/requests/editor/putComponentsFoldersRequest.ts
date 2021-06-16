@@ -1,7 +1,7 @@
+import store from 'store/store'
 import {makeFetch} from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import FilesTreeType from 'libs/FilesTree/types'
-import store from 'store/store'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
@@ -20,6 +20,7 @@ export default async function putComponentsFoldersRequest(items: FilesTreeType.I
     const response: PutComponentsFoldersServerResponse = await makeFetch(
         getApiUrl('componentsFolders', siteId), options
     )
+
     return response
 }
 
@@ -42,10 +43,10 @@ type FailResponse = {
 type SuccessResponse = {
     status: "success"
     data: {
-        site: {
-            defaultIncFilesTemplateId: null | string
-            name: string
-            userId: string
+        folders: {
+            content: string // "[{\"uuid\":\"3\",\"type\":\"folder\",\"name\":\"New folder\"}...]"
+            siteId: string // "60c89dccfe73df002a1c4fa4"
+            userId: string // "60c626f9fd09180020febc99"
         }
     }
 }

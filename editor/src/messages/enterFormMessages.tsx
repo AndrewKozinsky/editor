@@ -1,8 +1,12 @@
-import {getMessagesJSXFnObject, getMessagesJSXObject, getMessagesObject} from 'messages/fn/getMessagesObject'
-import {getDomainFromEmail} from 'src/utils/StringUtils'
+import {
+    getMessagesJSXFnObject,
+    getMessagesJSXObject,
+    getMessagesObject
+} from 'messages/fn/getMessagesObject'
+import {getDomainFromEmail} from 'utils/StringUtils'
 import React from 'react'
 // @ts-ignore
-import { Link, useRouteMatch } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 // Форма EnterFormBlock
 const obj = {
@@ -76,6 +80,3 @@ const JSXFnObj = {
 }
 
 export const enterFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)
-
-
-

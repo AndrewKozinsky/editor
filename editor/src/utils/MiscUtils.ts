@@ -1,7 +1,5 @@
 import {ReactElement} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-// import {AppState} from '../store/rootReducer'
-// import StoreSettingsTypes from '../store/settings/settingsTypes'
+import {useDispatch} from 'react-redux'
 import actions from '../store/rootAction'
 
 

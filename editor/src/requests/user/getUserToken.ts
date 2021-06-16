@@ -1,5 +1,5 @@
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import { useFetch } from 'src/requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import { useFetch } from 'requests/reqFn/fetch'
 
 type GetTokenDataServerResponse = {
     status: string

@@ -1,6 +1,6 @@
 import {makeFetch} from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import StoreSitesTypes from 'store/site/sitesTypes';
+import StoreSitesTypes from 'store/site/sitesTypes'
 
 /** Функция удаляет статью выделенную в списке всех статей */
 export default async function deleteArticleRequest(currentArtItemId: StoreSitesTypes.CurrentArtItemId) {
@@ -30,10 +30,4 @@ type FailResponse = {
 // Успешный ответ
 type SuccessResponse = {
     status: "success"
-    data: {
-        user: {
-            name: string
-            email: string
-        }
-    }
 }

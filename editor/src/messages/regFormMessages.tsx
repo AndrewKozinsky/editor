@@ -1,9 +1,13 @@
 import React from 'react'
 //@ts-ignore
-import { getDomainFromEmail } from 'src/utils/StringUtils'
+import { getDomainFromEmail } from 'utils/StringUtils'
 //@ts-ignore
 import { Link } from 'react-router-dom'
-import {getMessagesJSXFnObject, getMessagesJSXObject, getMessagesObject} from 'messages/fn/getMessagesObject'
+import {
+    getMessagesJSXFnObject,
+    getMessagesJSXObject,
+    getMessagesObject
+} from 'messages/fn/getMessagesObject'
 
 
 // Форма RegFormBlock

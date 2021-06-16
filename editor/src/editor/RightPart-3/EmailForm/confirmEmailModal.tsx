@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import actions from 'store/rootAction'
 import { AppState } from 'store/rootReducer'
-import { useChangeEmailRequest } from 'src/requests/user/changeEmailRequest'
+import { useChangeEmailRequest } from 'requests/user/changeEmailRequest'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Button from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
 import { userDataSectionMessages } from 'messages/userDataSectionMessages'
-import FHTypes from 'src/libs/formHandler/types';
+import FHTypes from 'libs/formHandler/types'
 
 
 /**

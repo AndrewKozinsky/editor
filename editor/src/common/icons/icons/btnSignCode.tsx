@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function BtnSignCodeSmall() {
+export default function BtnSignCode() {
     return (
         <g fillRule="evenodd">
             <g transform="translate(0, 2)">

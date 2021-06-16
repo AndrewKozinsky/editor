@@ -23,7 +23,6 @@ export default async function createNewComponentRequest(uuid: string, name: stri
     const response: CreateNewComponentServerResponse = await makeFetch(
         getApiUrl('component'), options
     )
-
     return response
 }
 
@@ -45,9 +44,12 @@ type FailResponse = {
 type SuccessResponse = {
     status: "success"
     data: {
-        user: {
-            name: string
-            email: string
+        component: {
+            code: null | string
+            id: string // "60c969dafe73df002a1c4fba"
+            name: string // "New component"
+            siteId: string // "60c8c3d9fe73df002a1c4fab"
+            uuid: string // "0471e6e2-b917-439c-bb29-e49bfa5343c9"
         }
     }
 }

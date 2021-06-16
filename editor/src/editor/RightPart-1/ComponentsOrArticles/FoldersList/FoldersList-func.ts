@@ -6,8 +6,6 @@ import actions from 'store/rootAction'
 import FilesTreeType from 'libs/FilesTree/types'
 import createNewArticleRequest from 'requests/editor/createNewArticleRequest'
 import createNewComponentRequest from 'requests/editor/createNewComponentRequest'
-// import {makeFetch, useFetch} from 'requests/fetch'
-// import getApiUrl from 'requests/apiUrls'
 import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 import {addOpenPropToFolders, getOpenedFoldersUuid, selectItem} from 'libs/FilesTree/StoreManage/manageState'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
@@ -17,6 +15,8 @@ import putComponentsFoldersRequest from 'requests/editor/putComponentsFoldersReq
 import putArticlesFoldersRequest from 'requests/editor/putArticlesFoldersRequest'
 import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'requests/editor/getComponentsFoldersRequest'
 import { useGetArticlesFoldersRequest } from 'requests/editor/getArticlesFoldersRequest'
+import deleteArticleRequest from 'requests/editor/deleteArticleRequest'
+import deleteComponentRequest from 'requests/editor/deleteComponentRequest'
 
 
 /**
@@ -144,6 +144,14 @@ export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, de
 
     // Сохранить данные на сервере
     saveItemsOnServer(type, items)
+
+    // Удалить компонент или статью на сервере
+    if (type === 'components') {
+        deleteComponentRequest(deletedItemUuid)
+    }
+    else if (type === 'articles') {
+        deleteArticleRequest(deletedItemUuid)
+    }
 }
 
 /**

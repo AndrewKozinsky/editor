@@ -61,6 +61,7 @@ export function getIconSize(type: string) {
         case 'btnSignFolder':
         case 'btnSignAdd':
         case 'btnSignJson':
+        case 'btnSignEdit':
             return {
                 width: "15px",
                 height: "15px",

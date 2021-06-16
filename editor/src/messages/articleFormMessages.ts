@@ -35,6 +35,10 @@ const obj = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    editArticleBtnText: {
+        eng: 'Edit',
+        rus: 'Редактировать'
+    },
 }
 
 export const articleFormMessages = getMessagesObject(obj)

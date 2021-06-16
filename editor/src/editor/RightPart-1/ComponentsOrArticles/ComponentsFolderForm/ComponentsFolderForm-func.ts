@@ -7,38 +7,24 @@ import FHTypes from 'libs/formHandler/types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 import FilesTreeType from 'libs/FilesTree/types'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import {FolderType} from '../types'
-import {
-    componentsTreeStore,
-    articlesTreeStore
-} from '../stores'
-
+import {componentsTreeStore} from '../stores'
 
 
 /**
- * Хук отслеживает выделение другой папки с шаблонами компонентов или статей и изменяет форму чтобы отражать данные выделенной папки
- * @param {String} type — тип папок: с компонентами или со статьями
+ * Хук отслеживает выделение другой папки с шаблонами компонентов и изменяет форму чтобы отражать данные выделенной папки
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherFolderData(
-    type: FolderType, formState: FHTypes.FormState, setFormState: FHTypes.SetFormState
-) {
+export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // Массив папок и файлов из Хранилища
     const componentsItems = useStore(componentsTreeStore)
-    const articlesItems = useStore(articlesTreeStore)
 
-    // id текущей папки у компонентов и статей
+    // id текущей папки у компонентов
     const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
 
     useEffect(function () {
         setNewFolderName(componentsItems, currentCompItemId, formState, setFormState)
     }, [currentCompItemId, componentsItems])
-
-    useEffect(function () {
-        setNewFolderName(articlesItems, currentArtItemId, formState, setFormState)
-    }, [currentArtItemId, articlesItems])
 }
 
 /**

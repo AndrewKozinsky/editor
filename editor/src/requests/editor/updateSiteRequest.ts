@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
@@ -19,6 +19,7 @@ export default async function updateSiteRequest(
         })
     }
     const response: UpdateSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
+
     return response
 }
 
@@ -43,8 +44,9 @@ type SuccessResponse = {
     data: {
         site: {
             defaultIncFilesTemplateId: null | string
-            name: string
-            userId: string
+            name: string // "РУСХИТ"
+            userId: string // "60c626f9fd09180020febc99"
+            _id: string // "60c89dccfe73df002a1c4fa4"
         }
     }
 }

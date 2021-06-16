@@ -61,16 +61,3 @@ const obj = {
 }
 
 export const incFilesTemplateSectionMessages = getMessagesObject(obj)
-
-
-
-
-
-
-
-
-
-
-
-
-

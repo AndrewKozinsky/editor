@@ -1,9 +1,9 @@
 import React from 'react'
-import { languageSectionMessages } from 'messages/languageSectionMessages'
 import { useDispatch, useSelector} from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
+import { languageSectionMessages } from 'messages/languageSectionMessages'
 
 
 export default function LanguageSection() {

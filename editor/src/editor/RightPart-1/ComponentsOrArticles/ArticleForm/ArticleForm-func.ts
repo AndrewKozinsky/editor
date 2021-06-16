@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
 import { AppState } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import FHTypes from 'libs/formHandler/types'
-// import {articlesTreeStore} from '../../ArticlesList/ArticlesList'
-// import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-// import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import StoreSitesTypes from 'store/site/sitesTypes'
+import FHTypes from 'libs/formHandler/types'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import { OptionsType } from 'common/formElements/Select/SelectTypes'
+import { siteSectionMessages } from 'messages/siteSectionMessages'
 
 
 /**
@@ -17,26 +15,49 @@ import StoreSitesTypes from 'store/site/sitesTypes'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-/*export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     const dispatch = useDispatch()
+
+    // Все статьи и id текущего сайта
+    const sites: StoreSitesTypes.SitesType = useSelector((store: AppState) => store.sites.sites)
+    const currentSiteId = useSelector((store: AppState) => store.sites.currentSiteId)
+    // Текущий сайт
+    const currentSite = sites.find(s => s.id === currentSiteId)
 
     // id текущей статьи
     const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
 
     // Данные статьи
-    // const {currentArtCode} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {articlesSection} = useSelector((store: AppState) => store.sites)
 
-
-    // При выделении другой статьи скачать её данные и поставить в Хранилище
+    // При выделении другой статьи...
     useEffect(function () {
-        // Сделать запрос на данные статьи на сервер и поставить в Хранилище
+        // Сделать запрос на данные статьи и поставить в Хранилище
         dispatch( actions.sites.requestArticle() )
-
-
-
-
     }, [currentArtItemId])
-}*/
+
+    // При получении новых данных статьи поставить их в форму
+    useEffect(function () {
+        // Поставить имя
+        let newFormState = changeField(formState, 'name', articlesSection.currentArtName)
+
+        // Если в данных статьи есть id шаблона файлов, то поставить его в качестве значения в выпадающем списке.
+        if (articlesSection.incFilesTemplateId) {
+            newFormState = changeField(newFormState, 'incFilesTemplateId', articlesSection.incFilesTemplateId)
+        }
+        // Если шаблона нет, то поставить id шаблона по умолчанию
+        else if (currentSite && currentSite.defaultIncFilesTemplateId) {
+            newFormState = changeField(newFormState, 'incFilesTemplateId', currentSite.defaultIncFilesTemplateId)
+        }
+        // В остальных случаях ничего не ставить
+        else {
+            newFormState = changeField(newFormState, 'incFilesTemplateId', '')
+        }
+
+        // Поставить новое состояние формы
+        setFormState(newFormState)
+    }, [sites, currentArtItemId, articlesSection])
+}
 
 
 /**
@@ -45,9 +66,9 @@ import StoreSitesTypes from 'store/site/sitesTypes'
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} value — новое значение поля
  */
-/*function changeField(
+function changeField(
     formState: FHTypes.FormState,
-    fieldName: 'name' | 'code',
+    fieldName: 'name' | 'incFilesTemplateId',
     value: null | string
 ) {
     // Получение поля формы по имени
@@ -63,27 +84,28 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}*/
+}
 
 
 /**
- * Хук контролирует выпадающий список выбора шаблона по умолчанию для всего сайта.
+ * Хук контролирует выпадающий список выбора шаблона подключаемых файлов статьи.
  * Возвращает объект со свойствами:
  * showSelect — показывать ли выпадающий список со списком шаблонов,
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
 export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
-
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
         return store.sites.incFilesTemplatesSection.templates
     })
 
-    const [isVisible, setIsVisible] = useState(false)
+    // Видим ли выпадающий список подключаемых файлов
+    const [isSelectVisible, setIsSelectVisible] = useState(false)
+    // Пункты выпадающего списка
     const [selectOptions, setSelectOptions] = useState([])
 
-    /*useEffect(function () {
+    useEffect(function () {
         // Если есть массив шаблонов...
         if (templates?.length) {
 
@@ -94,6 +116,7 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
                     label: template.name
                 }
             })
+            // Вставка пункта без значения
             options.unshift({
                 value: 'none',
                 label: siteSectionMessages.defaultTemplateSelectNoValue
@@ -101,13 +124,14 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
 
             // Установка пунктов выпадающего списка
             setSelectOptions(options)
+
             // Сделать <select> видимым
-            setIsVisible(true)
+            setIsSelectVisible(true)
         }
         // Если нет массива шаблонов...
         else {
             // Скрыть <select>
-            setIsVisible(false)
+            setIsSelectVisible(false)
 
             // Очистить значение выпадающего списка в обработчике форм
             const templatesField = fh.formState.fields.defaultTemplate
@@ -117,10 +141,10 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
             }
             fh.setFormState = makeImmutableObj(fh.formState, templatesField, newTemplatesField)
         }
-    }, [templates])*/
+    }, [templates])
 
     return {
-        isTemplatesSelectVisible: isVisible,
+        isSelectVisible,
         selectOptions
     }
 }

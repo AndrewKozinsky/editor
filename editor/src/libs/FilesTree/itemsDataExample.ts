@@ -1,4 +1,4 @@
-// import FilesTreeType from 'src/libs/FilesTree/types'
+// import FilesTreeType from 'libs/FilesTree/types'
 
 // Пример данных получаемых компонентов FilesTree
 /*

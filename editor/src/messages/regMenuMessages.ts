@@ -19,17 +19,3 @@ const obj = {
 }
 
 export const regMenuMessages = getMessagesObject(obj)
-
-
-
-
-
-
-
-
-
-
-
-
-
-

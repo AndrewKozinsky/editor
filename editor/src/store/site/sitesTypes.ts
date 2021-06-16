@@ -1,4 +1,6 @@
 import FilesTreeType from 'libs/FilesTree/types'
+import {ArticleDataType} from 'requests/editor/getArticleRequest'
+import {ComponentDataType} from 'requests/editor/getComponentRequest'
 
 namespace StoreSitesTypes {
 
@@ -32,8 +34,18 @@ namespace StoreSitesTypes {
     export type CurrentCompItemId = null | FilesTreeType.UuId
     // Тип выбранного шаблона компонента (папка или компонент)
     export type CurrentCompItemType = null | FilesTreeType.ItemType
+    // Имя выбранного компонента
+    export type ComponentName = null | string
     // Строка с кодом выбранного шаблона компонента
     export type ComponentCode = null | string
+
+    // Объект с данными компонента
+    export type ComponentsSection = {
+        currentCompItemId: CurrentCompItemId
+        currentCompItemType: CurrentCompItemType
+        currentCompName: ComponentName
+        currentCompCode: ComponentCode
+    }
 
     // uuid выбранного элемента: папки или статьи
     export type CurrentArtItemId = null | FilesTreeType.UuId
@@ -43,6 +55,15 @@ namespace StoreSitesTypes {
     export type ArticleName = string
     // Строка с кодом выбранной статьи
     export type ArticleCode = null | string
+
+    // Объект с данными статьи
+    export type ArticlesSection = {
+        currentArtItemId: CurrentArtItemId
+        currentArtItemType: CurrentArtItemType
+        currentArtName: ArticleName
+        currentArtCode: ArticleCode,
+        incFilesTemplateId: CurrentIncFilesTemplateId
+    }
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -88,7 +109,7 @@ namespace StoreSitesTypes {
         payload: {
             id: null | FilesTreeType.UuId
             type: null | FilesTreeType.ItemType
-            code?: StoreSitesTypes.ComponentCode
+            compData?: ComponentDataType
         }
     }
 
@@ -99,7 +120,7 @@ namespace StoreSitesTypes {
         payload: {
             id: null | FilesTreeType.UuId
             type: null | FilesTreeType.ItemType
-            code?: StoreSitesTypes.ArticleCode
+            article?: ArticleDataType
         }
     }
 

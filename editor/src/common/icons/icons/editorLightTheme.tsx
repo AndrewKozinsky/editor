@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function EditorLightThemeSmall() {
+export default function EditorLightTheme() {
     return (
         <g>
             <rect fill="rgb(217, 218, 222)" fillRule="nonzero" x="0" y="0" width="76" height="76" rx="4" />

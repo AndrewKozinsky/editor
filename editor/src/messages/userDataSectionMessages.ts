@@ -49,5 +49,3 @@ const obj = {
 }
 
 export const userDataSectionMessages = getMessagesObject(obj)
-
-

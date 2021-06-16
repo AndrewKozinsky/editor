@@ -1,6 +1,6 @@
-import {useFetch, makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react'
+import {useFetch, makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет еще одно письмо для подтверждения почты пользователя

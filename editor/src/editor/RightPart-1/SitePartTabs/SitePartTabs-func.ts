@@ -1,11 +1,9 @@
 import {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-// import { MiscTypes } from 'types/miscTypes'
 import {AppState} from 'store/rootReducer'
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
 import store from 'store/store'
 import actions from 'store/rootAction'
+import {MainTabDataType} from 'editor/special/MainTab/MainTab'
 import { rightTabsMessages } from 'messages/rightTabsMessages'
 
 

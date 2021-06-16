@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /** Функция получает список сайтов пользователя */
 export default async function sitesRequest() {
@@ -11,26 +11,21 @@ export default async function sitesRequest() {
 
 
 // Тип данных с ответом от пользователя
-type SitesRequestServerResponse = any //FailResponse | SuccessResponse
+type SitesRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
 type FailResponse = {
-    // status: "fail"
-    /*errors: {
-        field: null
-        isOperational: true
-        message: string // "Incorrect email or password"
-        statusCode: 400
-    }*/
+    status: "fail"
 }
 
 // Успешный ответ
 type SuccessResponse = {
-    // status: "success"
-    /*data: {
-        user: {
-            name: string
-            email: string
-        }
-    }*/
+    status: "success"
+    data: {
+        sites: {
+            defaultIncFilesTemplateId: null | string
+            name: string // "РУСХИТ"
+            _id: string // "60c89dccfe73df002a1c4fa4"
+        }[]
+    }
 }

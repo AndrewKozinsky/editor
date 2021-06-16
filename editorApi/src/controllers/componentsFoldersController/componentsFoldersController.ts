@@ -34,7 +34,6 @@ export const getFolders = catchAsync<void>(async (req: ExtendedRequestType, res:
  * В запросе должен передаваться JSON вида: {content: [{...}]}
  * */
 export const setFolders = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
-    console.log(req.body)
 
     // Повторно найти объект порядка и обновить его данные
     const updatedFolders = await ComponentsFoldersModel.findOneAndUpdate(
@@ -42,8 +41,6 @@ export const setFolders = catchAsync<void>(async (req: ExtendedRequestType, res:
         {content: req.body.content},
         {new: true, useFindAndModify: false}
     ).select('-__v -_id')
-
-    // console.log(updatedFolders)
 
     // Если порядок не найден, то возвратить ошибочный ответ
     if (!updatedFolders) {

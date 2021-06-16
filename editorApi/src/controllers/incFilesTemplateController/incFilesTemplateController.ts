@@ -82,7 +82,7 @@ export const updateTemplate = catchAsync<void>(async (req: ExtendedRequestType, 
         req.params.templateId,
         req.body,
         {new: true}
-    ).select('-_v')
+    ).select('-__v')
 
     // Если не найден шаблон, то возвратить ошибочный ответ
     if (!updatedTemplate) {

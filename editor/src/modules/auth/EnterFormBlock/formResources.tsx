@@ -4,7 +4,7 @@ import FHTypes from 'libs/formHandler/types'
 import {enterFormMessages} from 'messages/enterFormMessages'
 import actions from 'store/rootAction'
 import store from 'store/store'
-import loginRequest from 'src/requests/user/loginRequest'
+import loginRequest from 'requests/user/loginRequest'
 import {commonMessages} from 'messages/commonMessages';
 
 

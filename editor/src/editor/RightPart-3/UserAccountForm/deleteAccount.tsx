@@ -5,7 +5,7 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
 import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
-import { useDeleteAccount } from 'src/requests/user/deleteAccountRequest'
+import { useDeleteAccount } from 'requests/user/deleteAccountRequest'
 
 
 export function ModalContent() {

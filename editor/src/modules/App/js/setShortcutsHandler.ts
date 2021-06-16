@@ -1,8 +1,8 @@
 import { useEffect} from 'react'
-import { MiscTypes } from 'types/miscTypes'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import store from 'store/store'
+import { MiscTypes } from 'types/miscTypes'
 
 
 export default function useSetShortcutsHandler() {

@@ -1,6 +1,4 @@
 import React from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Button from 'common/formElements/Button/Button'
 import TextInput from 'common/formElements/TextInput/TextInput'
@@ -9,7 +7,7 @@ import Form from 'common/formElements/Form/Form'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
 import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-// import { useGetAnotherComponent } from './ComponentForm-func'
+import { useGetAnotherComponent } from './ComponentForm-func'
 import useGetShowModal from 'utils/hooksUtils'
 import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 
@@ -19,7 +17,7 @@ export default function ComponentForm() {
     const fh = useFormHandler(getFormConfig(), 'component')
 
     // Изменение данных формы при выделении другого шаблона подключаемых файлов
-    // useGetAnotherComponent(fh.formState, fh.setFormState)
+    useGetAnotherComponent(fh.formState, fh.setFormState)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<DeleteItemModal type='component' />)

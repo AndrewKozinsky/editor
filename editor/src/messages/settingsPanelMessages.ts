@@ -17,5 +17,3 @@ const obj = {
 }
 
 export const settingsPanelMessages = getMessagesObject(obj)
-
-

@@ -1,7 +1,7 @@
-import {useFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {useFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 import { useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+import { AppState } from 'store/rootReducer'
 
 // Функция удаляет шаблон подключаемых файлов
 export function useDeleteIncFilesTemplate() {
@@ -22,7 +22,7 @@ export function useDeleteIncFilesTemplate() {
 }
 
 // Тип данных с ответом от пользователя
-type DeleteIncFilesTemplateServerResponse = FailResponse | SuccessResponse
+type DeleteIncFilesTemplateServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
 type FailResponse = {
@@ -38,10 +38,4 @@ type FailResponse = {
 // Успешный ответ
 type SuccessResponse = {
     status: "success"
-    data: {
-        site: {
-            id: string
-            name: string
-        }
-    }
 }

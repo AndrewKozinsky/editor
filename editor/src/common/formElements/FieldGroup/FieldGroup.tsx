@@ -1,6 +1,6 @@
 import React, {ReactElement, ReactNode} from 'react'
-import Radio, { RadioPropType } from '../Radio/Radio'
-import Checkbox, {CheckboxPropType} from '../Checkbox/Checkbox'
+import Radio from '../Radio/Radio'
+import Checkbox from '../Checkbox/Checkbox'
 import FHTypes from 'libs/formHandler/types'
 import Label from '../Label/Label'
 import { getFieldGroupClasses } from './FieldGroup-func'

@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция создаёт новый шаблон подключаемых файлов
@@ -24,7 +24,7 @@ export default async function updateTemplateRequest(values: UpdateTemplateValues
     const response: UpdateTemplateRequestServerResponse = await makeFetch(
         getApiUrl('incFilesTemplate', templateId), options
     )
-
+    console.log(response)
     return response
 }
 
@@ -54,10 +54,16 @@ type SuccessResponse = {
     status: "success"
     data: {
         template: {
-            _id: string
-            name: string
-            head: null | string
-            body: null | string
+            _id: string // "60c9b2438e886a003b669911"
+            userId: string //"60c626f9fd09180020febc99"
+            siteId: string // "60c89dccfe73df002a1c4fa4"
+            name: string // "Шаблон"
+            codeBeforeEndBody: {
+                code: null | string // "</body>"
+            }
+            codeInHead: {
+                code: null | string // "<head>"
+            }
         }
     }
 }

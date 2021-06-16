@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-export default function BtnSignFolderSmall() {
+export default function BtnSignFolder() {
     return (
         <g fillRule="evenodd">
             <path d="M12.6646423,4 L6.66464233,4 L6.66464233,3 C6.66464233,2.44771525 7.11235758,2 7.66464233,2 L14,2 L14,2 L12.6646423,4 Z" opacity="0.5" transform="translate(10.332321, 3) scale(-1, 1) translate(-10.332321, -3)" />

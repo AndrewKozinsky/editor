@@ -1,5 +1,5 @@
-import {useFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {useFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 
 // Функция меняет почту, на которую зарегистрирована учётная запись пользователя
@@ -11,8 +11,6 @@ export function useChangeEmailRequest(newEmail: string) {
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: response, doFetch} =
         useFetch<ChangeEmailServerResponse>(getApiUrl('changeEmail'), options)
-
-    console.log(response)
 
     return { response, doFetch }
 }

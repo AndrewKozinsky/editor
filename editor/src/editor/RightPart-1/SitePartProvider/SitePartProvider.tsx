@@ -19,6 +19,8 @@ export default function SitePartProvider(): ReactElement {
 
     // Номер активной вкладки
     const { rightMainTab } = useSelector((store: AppState) => store.sites)
+    // id выделенного шаблона подключаемых файлов
+    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState<ReactElement>(null)
@@ -41,7 +43,9 @@ export default function SitePartProvider(): ReactElement {
                             <NewTemplateButton />
                             <TemplatesList />
                         </>
-                        <IncFilesTemplateForm />
+                        {/*Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,*/}
+                        {/*поэтому ничего не отрисовывать.*/}
+                        {currentTemplateId !== null && <IncFilesTemplateForm />}
                     </HeaderPage>
                 )
             }
@@ -65,7 +69,7 @@ export default function SitePartProvider(): ReactElement {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [rightMainTab])
+    }, [rightMainTab, currentTemplateId])
 
     return partComponents
 }

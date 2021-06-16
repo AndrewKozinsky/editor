@@ -4,8 +4,8 @@ import { OptionsType } from './SelectTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { getRandomId } from 'utils/StringUtils'
 import Label from '../Label/Label'
-import './Select.scss'
 import SvgIcon from '../../icons/SvgIcon'
+import './Select.scss'
 
 
 export type SelectPropType = {

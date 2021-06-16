@@ -36,7 +36,7 @@ type FailResponse = {
     errors: {
         field: null
         isOperational: true
-        message: string // "Incorrect email or password"
+        message: string
         statusCode: 400
     }
 }
@@ -45,9 +45,11 @@ type FailResponse = {
 type SuccessResponse = {
     status: "success"
     data: {
-        user: {
-            name: string
-            email: string
+        article: {
+            code: null | string
+            id: string // "60c9695cfe73df002a1c4fb7"
+            siteId: string // "60c8c3d9fe73df002a1c4fab"
+            uuid: string // "9ae6a037-b217-4374-bb5e-47ae696ace56"
         }
     }
 }

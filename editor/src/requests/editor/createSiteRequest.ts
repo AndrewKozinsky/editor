@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
@@ -34,8 +34,8 @@ type SuccessResponse = {
     status: "success"
     data: {
         site: {
-            id: "60c6e368fd09180020febc9a",
-            name: "РУСХИТ"
+            id: string // "60c6e368fd09180020febc9a",
+            name: string // "РУСХИТ"
         }
     }
 }

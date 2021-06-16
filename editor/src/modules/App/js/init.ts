@@ -3,12 +3,9 @@ import {useDispatch, useSelector} from 'react-redux'
 import {AppState} from 'store/rootReducer'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import { getFromLocalStorage } from 'utils/MiscUtils'
-// import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
-import { useGetUserToken } from 'src/requests/user/getUserToken'
-import {debug} from 'webpack';
+import { useGetUserToken } from 'requests/user/getUserToken'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов
@@ -25,7 +22,7 @@ export function useGetAndSetEditorSettings() {
         let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
         let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
         let sitePartTab = getFromLocalStorage('editorSitePartTab') // id вкладки в Сайтах
-        let editorPluginsId = getFromLocalStorage('editorPluginsId', null) // id выбранного шаблона подключаемых файлов
+        let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
         let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
         let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
         let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
@@ -38,7 +35,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
-        dispatch( sitesActions.setCurrentIncFilesTemplateId(editorPluginsId) )
+        dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])

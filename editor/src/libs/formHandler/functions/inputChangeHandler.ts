@@ -16,7 +16,6 @@ export default function inputChangeHandler(
 ) {
     // Данные поля из Состояния
     const inputData = formState.fields[e.target.name]
-    // debugger
 
     let inputDataCopy = {...inputData}
     // Если в данных поля в типе стоит unknown, то данные неполные. Поставить служебную информацию:

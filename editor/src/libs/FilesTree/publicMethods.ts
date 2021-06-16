@@ -1,4 +1,3 @@
-import FilesTreeType from './types'
 import {
     changeName,
     deleteItem,
@@ -6,7 +5,7 @@ import {
     prepareItemsToSaveInServer,
     getOpenedFoldersUuid
 } from './StoreManage/manageState'
-import {removeItem} from './Item/Item-func'
+
 
 /** Объект с публичными методами манипулирования Состояния Эффектора массива папок и файлов */
 const filesTreePublicMethods = {

@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Изменение текущего пароля
@@ -19,7 +19,7 @@ export default async function changePasswordRequest(passwordCurrent: string, new
     const response: ChangePasswordRequestServerResponse = await makeFetch(
         getApiUrl('changePassword'), options
     )
-    console.log(response)
+
     return response
 }
 

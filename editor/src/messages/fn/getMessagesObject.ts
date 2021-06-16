@@ -1,5 +1,5 @@
 import {ReactElement} from 'react'
-import store from 'src/store/store'
+import store from 'store/store'
 
 
 export type ObjType = {

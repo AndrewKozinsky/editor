@@ -177,6 +177,7 @@ namespace FHTypes {
         // Функция устанавливающая новое Состояние формы
         setFormState: SetFormState
         fields: ReturnFieldsObj,
+        setFieldValue: SetFieldValue
         // Любые данные касаемые формы.
         form: FieldData
     }

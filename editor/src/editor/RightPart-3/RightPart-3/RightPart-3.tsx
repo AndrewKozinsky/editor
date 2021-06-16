@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
+import {AppState} from 'store/rootReducer'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
 import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
 import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'

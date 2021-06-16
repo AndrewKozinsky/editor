@@ -32,7 +32,7 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
 
         // В данные формы поставить тип формы:
         // createSite если хотят создать новый сайт
-        // или saveSite если хотят сохранить новое имя сайта
+        // или saveSite если хотят сохранить данные существующего сайта
         const newFormData = {
             ...formState.form.data,
             formType: site.name ? 'saveSite' : 'createSite'

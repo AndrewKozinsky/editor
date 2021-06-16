@@ -1,9 +1,9 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'src/libs/formHandler/types'
+import FHTypes from 'libs/formHandler/types'
 import { commonMessages } from 'messages/commonMessages'
 import {changePasswordSectionMessages} from 'messages/changePasswordSectionMessages'
-import changePasswordRequest from 'src/requests/user/changePasswordRequest'
+import changePasswordRequest from 'requests/user/changePasswordRequest'
 
 
 // Объект настройки useFormHandler

@@ -53,16 +53,3 @@ const obj = {
 }
 
 export const siteSectionMessages = getMessagesObject(obj)
-
-
-
-
-
-
-
-
-
-
-
-
-
