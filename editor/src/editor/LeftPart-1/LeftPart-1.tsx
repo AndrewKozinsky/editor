@@ -41,8 +41,6 @@ export default function LeftPart1(props: LeftPart1PropType) {
 
 /** Компонент кнопки создания нового сайта */
 function NewSiteButton() {
-    // Язык интерфейса
-    // const lang = useSelector((store: AppState) => store.settings.editorLanguage)
 
     // id выделенного сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)

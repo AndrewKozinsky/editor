@@ -182,6 +182,51 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
     }
 }
 
+// Component Template item (folder or file) type setting
+function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemTypeAction): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage('editorComponentType')
+    }
+    else {
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage('editorComponentType', action.payload)
+    }
+
+    return {
+        ...state,
+        componentsSection: {
+            ...state.componentsSection,
+            currentCompItemType: action.payload
+        }
+    }
+}
+
+// Component Template item id setting
+function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemIdAction): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage('editorComponentId')
+    }
+    else {
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage('editorComponentId', action.payload)
+    }
+
+    return {
+        ...state,
+        componentsSection: {
+            ...state.componentsSection,
+            currentCompItemId: action.payload
+        }
+    }
+}
+
+
+
+
+
+
 // Установка id выбранного подключаемых шаблонов
 function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
     if (action.payload.id === null) {
@@ -246,6 +291,46 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
     }
 }
 
+// Установка id выбранного подключаемых шаблонов
+function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage('editorArticleType')
+    }
+    else {
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage('editorArticleType', action.payload)
+    }
+
+    return {
+        ...state,
+        articlesSection: {
+            ...state.articlesSection,
+            currentArtItemType: action.payload
+        }
+    }
+}
+
+// Установка id выбранного подключаемых шаблонов
+function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage('editorArticleId')
+    }
+    else {
+        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage('editorArticleId', action.payload)
+    }
+
+    return {
+        ...state,
+        articlesSection: {
+            ...state.articlesSection,
+            currentArtItemId: action.payload
+        }
+    }
+}
+
 // Редьюсер Store.settings
 export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
@@ -265,8 +350,20 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
         case StoreSitesTypes.SET_CURRENT_COMP:
             return setCurrentComp(state, action)
 
+        case StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE:
+            return setCurrentCompItemType(state, action)
+
+        case StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID:
+            return setCurrentCompItemId(state, action)
+
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
+
+        case StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE:
+            return setCurrentArtItemType(state, action)
+
+        case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
+            return setCurrentArtItemId(state, action)
         default:
             // @ts-ignore
             const x: never = null

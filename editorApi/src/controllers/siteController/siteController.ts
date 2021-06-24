@@ -7,7 +7,10 @@ import ComponentsFoldersModel from '../../models/componentsFolders'
 import ComponentModel from '../../models/component'
 import ArticlesFoldersModel from '../../models/articlesFolders'
 import ArticleModel from '../../models/article'
+import {AppError} from '../../errors/appError'
 
+
+// SITES ===============================================================================================================
 
 /** Получение всех сайтов (защищённый маршрут) */
 export const getAllSites = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
@@ -106,5 +109,27 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     // Отправить успешный ответ
     res.status(200).json({
         status: 'success'
+    })
+})
+
+
+// COMPONENTS TEMPLATES ================================================================================================
+
+/** Получение всех шаблонов компонентов сайта (защищённый маршрут) */
+export const getSiteComponents = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+    const siteId = req.params.siteId
+
+    // Получение всех шаблонов компонентов сайта
+    const components = await ComponentModel
+        .find({siteId: req.params.siteId})
+        .select('-__v -_id -userId')
+
+
+    // Отправить успешный ответ
+    res.status(200).json({
+        status: 'success',
+        data: {
+            components
+        }
     })
 })

@@ -14,7 +14,7 @@ import {
 const obj = {
     // Заголовок формы регистрации
     formHeader: {
-        eng: 'Sign in',
+        eng: 'Sign up',
         rus: 'Регистрация'
     },
     emailField: {
@@ -38,7 +38,7 @@ const obj = {
         rus: 'Пароли должны совпадать'
     },
     submitBtnText: {
-        eng: 'Sign in',
+        eng: 'Sign up',
         rus: 'Зарегистрироваться'
     },
     somethingWentWrong: {
@@ -53,7 +53,7 @@ export const regFormMessages = getMessagesObject(obj)
 // Форма RegFormBlock
 const JSXObj = {
     doYouHaveAccount: {
-        eng: <>Already have an account? <Link to='/enter'>Sign in</Link>.</>,
+        eng: <>Already have an account? <Link to='/enter'>Log in</Link>.</>,
         rus: <>Уже есть учётная запись? <Link to='/enter'>Войдите</Link>.</>
     },
     legal: {

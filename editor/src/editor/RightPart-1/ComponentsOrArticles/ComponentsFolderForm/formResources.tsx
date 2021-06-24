@@ -4,7 +4,7 @@ import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
-import putComponentsFoldersRequest from 'requests/editor/putComponentsFoldersRequest'
+import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
 import { componentsTreeStore, setCompItems } from '../stores'
 
 

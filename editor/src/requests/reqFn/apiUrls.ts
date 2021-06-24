@@ -28,6 +28,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Текущий пользователь
     me: 'users/me',
 
+
     // САЙТЫ
     // Сайты
     sites: 'sites',
@@ -35,20 +36,30 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     site: function (siteId: string) {
         return 'sites/' + siteId
     },
-    // Шаблоны подключаемых файлов
-    incFilesTemplates: 'incFilesTemplate',
-    // Конкретный шаблон подключаемых файлов
-    incFilesTemplate: function (templateId: string) {
-        return 'incFilesTemplate/' + templateId
+
+
+    // SITE COMPONENTS
+    // Компоненты сайта
+    siteComponents: function (siteId: string) {
+        return 'sites/' + siteId + '/components'
     },
+
+
+    // SITE INC FILES TEMPLATES
+    // Шаблоны подключаемых файлов
+    incFiles: function (siteId: string, incFilesId?: string) {
+        if (incFilesId) return 'sites/' + siteId + '/incFiles/' + incFilesId
+        else return 'sites/' + siteId + '/incFiles'
+    },
+
     // Папки шаблонов компонентов
     componentsFolders: function (siteId: string) {
         return 'componentsFolders/' + siteId
     },
     // Шаблон компонента
     component: function (uuid?: string) {
-        if (uuid) return 'component/' + uuid
-        else return 'component/'
+        if (uuid) return 'components/' + uuid
+        else return 'components/'
     },
     // Папки статей
     articlesFolders: function (siteId: string) {
@@ -56,8 +67,8 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     },
     // Статья
     article: function (uuid?: string) {
-        if (uuid) return 'article/' + uuid
-        else return 'article/'
+        if (uuid) return 'articles/' + uuid
+        else return 'articles/'
     },
 }
 

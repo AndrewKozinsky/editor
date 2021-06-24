@@ -16,9 +16,8 @@ import { rightTabsMessages } from 'messages/rightTabsMessages'
  * в зависимости от выбранной вкладки
  */
 export default function SitePartProvider(): ReactElement {
-
-    // Номер активной вкладки
-    const { rightMainTab } = useSelector((store: AppState) => store.sites)
+    // Current site id and active tab number
+    const { currentSiteId, rightMainTab } = useSelector((store: AppState) => store.sites)
     // id выделенного шаблона подключаемых файлов
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
@@ -26,7 +25,6 @@ export default function SitePartProvider(): ReactElement {
     const [partComponents, setPartComponents] = useState<ReactElement>(null)
 
     useEffect(function () {
-
         // Составление массива из четырёх элементов. Элементу, который соответствует вкладке, задаётся видимость.
         const parts: ReactNode = [0, 1, 2, 3].map((num) => {
             if (num === 0) {
@@ -69,7 +67,7 @@ export default function SitePartProvider(): ReactElement {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [rightMainTab, currentTemplateId])
+    }, [currentSiteId, rightMainTab, currentTemplateId])
 
     return partComponents
 }

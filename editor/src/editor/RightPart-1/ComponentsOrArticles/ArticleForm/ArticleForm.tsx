@@ -7,7 +7,7 @@ import Form from 'common/formElements/Form/Form'
 import Select from 'common/formElements/Select/Select'
 import useFormHandler from 'libs/formHandler/useFormHandler'
 import getFormConfig from './formResources'
-import { useManageTemplatesSelect } from './ArticleForm-func'
+import {useGetEditArticleBtnHandler, useManageTemplatesSelect } from './ArticleForm-func'
 import { articleFormMessages } from 'messages/articleFormMessages'
 import { useGetAnotherArticle } from './ArticleForm-func'
 import DeleteItemModal from '../../ComponentsOrArticles/DeleteItemModal/DeleteItemModal'
@@ -25,6 +25,9 @@ export default function ArticleForm() {
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<DeleteItemModal type='article' />)
+
+    // Edit Article button handler
+    const onEditArticleBtnHandler = useGetEditArticleBtnHandler()
 
     return (
         <Form name='article' formHandlers={fh.formHandlers}>
@@ -70,7 +73,7 @@ export default function ArticleForm() {
                     color='accent'
                     text={articleFormMessages.editArticleBtnText}
                     icon='btnSignEdit'
-                    onClick={() => {}}
+                    onClick={onEditArticleBtnHandler}
                 />
             </Wrapper>
         </Form>

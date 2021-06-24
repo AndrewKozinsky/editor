@@ -5,8 +5,8 @@ import FHTypes from 'libs/formHandler/types'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {componentsTreeStore, setCompItems} from '../stores'
 import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-import {updateComponentRequest} from 'requests/editor/updateComponentRequest'
-import putComponentsFoldersRequest from 'requests/editor/putComponentsFoldersRequest'
+import {updateComponentRequest} from 'src/requests/editor/components/updateComponentRequest'
+import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
 
 
 /** Объект настройки useFormHandler */

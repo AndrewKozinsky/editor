@@ -3,7 +3,7 @@ import {getMessagesObject} from 'messages/fn/getMessagesObject'
 const obj = {
         // Пункт «Регистрация»
         reg: {
-            eng: 'Sign in',
+            eng: 'Sign up',
             rus: 'Регистрация'
         },
         // Пункт «Вход»

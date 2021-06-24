@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
 import { AppState } from 'store/rootReducer'
@@ -8,6 +8,7 @@ import FHTypes from 'libs/formHandler/types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
+import store from '../../../../store/store'
 
 
 /**
@@ -147,4 +148,17 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
         isSelectVisible,
         selectOptions
     }
+}
+
+// Hook returns edit Article button onClick handler
+export function useGetEditArticleBtnHandler() {
+    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+
+    return useCallback(function () {
+        store.dispatch(actions.article.fillArticle(
+            currentSiteId, currentTemplateId, currentArtItemId
+        ))
+    }, [])
 }

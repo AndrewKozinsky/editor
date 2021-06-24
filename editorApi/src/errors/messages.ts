@@ -169,18 +169,10 @@ export const messages: messagesType = {
     // Контроллер авторизации
     incFilesTemplateController: {
         // Функция getAllTemplates
-        getTemplateNoSiteId: {
-            eng: 'The id of the site to which the requested templates belong has not been passed in query',
-            rus: 'В запросе не передан id сайта которому принадлежат запрашиваемые шаблоны'
-        },
         // Функция createTemplate
         createTemplateNoName: {
             eng: 'Template name is not provided',
             rus: 'Не передано название шаблона'
-        },
-        createTemplateNoSiteId: {
-            eng: 'The id of the site to which the template should belong is not passed',
-            rus: 'Не передан id сайта, к котором должен принадлежать шаблон'
         },
         // Функция updateTemplate
         updateTemplateNotFound: {

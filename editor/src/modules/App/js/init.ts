@@ -21,7 +21,7 @@ export function useGetAndSetEditorSettings() {
         let mainTab = getFromLocalStorage('editorTab', 0) // id главной вкладки
         let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
         let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
-        let sitePartTab = getFromLocalStorage('editorSitePartTab') // id вкладки в Сайтах
+        let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
         let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
         let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
         let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент

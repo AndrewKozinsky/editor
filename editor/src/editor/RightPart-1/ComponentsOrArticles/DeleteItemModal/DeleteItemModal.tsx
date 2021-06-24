@@ -15,8 +15,8 @@ import {
 } from '../stores'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-import deleteArticleRequest from 'requests/editor/deleteArticleRequest'
-import deleteComponentRequest from 'requests/editor/deleteComponentRequest'
+import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
+import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
 import { articleFormMessages } from 'messages/articleFormMessages'
 import {componentFormMessages} from 'messages/componentTemplateFormMessages'
 

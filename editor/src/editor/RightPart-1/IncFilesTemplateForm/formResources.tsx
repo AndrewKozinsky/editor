@@ -1,11 +1,13 @@
 // @ts-ignore
 import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
+import {useSelector} from 'react-redux'
 import store from 'store/store'
 import actions from 'store/rootAction'
+import {AppState} from 'store/rootReducer'
+import FHTypes from 'libs/formHandler/types'
 import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-import createNewTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/createNewTemplateRequest'
-import updateTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/updateTemplateRequest'
+import createIncFilesTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/incFiles/createIncFilesTemplateRequest'
+import updateIncFilesTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/incFiles/updateIncFilesTemplateRequest'
 
 
 // Объект настройки useFormHandler
@@ -70,7 +72,6 @@ export default function getFormConfig(): FHTypes.FormConfig {
             },
             // Пользовательская функция запускаемая при отправке формы
             submit: async function(formDetails) {
-
                 // Проверить форму и поставить/убрать ошибки
                 let formState = validateForm(
                     formDetails.state, formDetails.setFieldDataPropValue, formDetails.setFormDataPropValue
@@ -238,7 +239,7 @@ async function createNewTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler
     const newTemplateData = createNewTemplateData(formDetails.readyFieldValues)
 
     // Отправить данные на сервер...
-    const response = await createNewTemplateRequest(newTemplateData)
+    const response = await createIncFilesTemplateRequest(newTemplateData)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)
@@ -277,7 +278,8 @@ function createNewTemplateData(fieldValues: FHTypes.ReadyFieldsValues) {
  */
 async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // id выбранного шаблона
-    const {currentTemplateId} = store.getState().sites.incFilesTemplatesSection
+    const { currentTemplateId } = store.getState().sites.incFilesTemplatesSection
+    const { currentSiteId } = store.getState().sites
 
     // Сформировать объект с данными шаблона подключаемых файлов
     const templateData: UpdateTemplateValuesType = {
@@ -287,7 +289,7 @@ async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     }
 
     // Отправить данные на сервер...
-    const response = await updateTemplateRequest(templateData, currentTemplateId)
+    const response = await updateIncFilesTemplateRequest(templateData, currentSiteId, currentTemplateId)
 
     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
     let newFormState = setLoadingStatusToForm(formDetails.state, formDetails.setFieldDataPropValue, false)

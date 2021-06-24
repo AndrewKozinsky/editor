@@ -53,7 +53,7 @@ export const createComponent = catchAsync<void>(async (req: ExtendedRequestType,
     })
 })
 
-/** [GET] api/component/:uuid
+/** [GET] api/components/:uuid
  * Получение шаблона компонента (защищённый маршрут)
  */
 export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
@@ -73,7 +73,7 @@ export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, re
 })
 
 
-/** [PATCH] api/component/:uuid
+/** [PATCH] api/components/:uuid
  * Изменение свойства code у шаблона компонента (защищённый маршрут)
  * В body нужно передавать объект вида:
  * {"code": "some_code"}
@@ -104,7 +104,7 @@ export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType,
 })
 
 
-/** [DELETE] api/component/:uuid
+/** [DELETE] api/components/:uuid
  * Удаление шаблона компонента (защищённый маршрут)
  */
 /** Удаление шаблона компонента (защищённый маршрут) */

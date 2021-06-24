@@ -27,13 +27,25 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
 
     // Сформировать и вернуть объект с атрибутами списка пунктов
     return {
+        // Список пунктов
         items: sites.map((site: StoreSitesTypes.SiteType) => {
             return {
                 id: site.id,
                 name: site.name,
-                onClick: () => dispatch( actions.sites.setCurrentSiteId(site.id) )
+                onClick: () => {
+                    dispatch( actions.sites.setCurrentSiteId(site.id) )
+                    // Clear opened article item type (folder or file)
+                    dispatch( actions.sites.setCurrentCompItemType(null) )
+                    // Clear opened article item id (folder or file)
+                    dispatch( actions.sites.setCurrentCompItemId(null) )
+
+                    // Clear opened article item type (folder or file)
+                    dispatch( actions.sites.setCurrentArtItemType(null) )
+                    // Clear opened article item id (folder or file)
+                    dispatch( actions.sites.setCurrentArtItemId(null) )
+                }
             }
-        }), // Список пунктов
+        }),
         activeItemId: currentSiteId // id активного пункта
     }
 }

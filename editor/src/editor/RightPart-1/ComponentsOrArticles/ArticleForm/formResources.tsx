@@ -3,8 +3,8 @@ import * as yup from 'yup'
 import store from 'store/store'
 import FHTypes from 'libs/formHandler/types'
 import { articleFormMessages } from 'messages/articleFormMessages'
-import { updateArticleNameRequest } from 'requests/editor/updateArticleRequest'
-import putArticlesFoldersRequest from 'requests/editor/putArticlesFoldersRequest'
+import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
+import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {
     articlesTreeStore,

@@ -52,7 +52,7 @@ export const createArticle = catchAsync<void>(async (req: ExtendedRequestType, r
     })
 })
 
-/** [GET] api/article/:uuid
+/** [GET] api/articles/:uuid
  * Получение статьи (защищённый маршрут)
  */
 export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
@@ -72,7 +72,7 @@ export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res:
 })
 
 
-/** [PATCH] api/article/:uuid
+/** [PATCH] api/articles/:uuid
  * Изменение свойства code у статьи (защищённый маршрут)
  * В body нужно передавать объект вида:
  * {"code": "some_code"}
@@ -103,7 +103,7 @@ export const updateArticle = catchAsync<void>(async (req: ExtendedRequestType, r
 })
 
 
-/** [DELETE] api/article/:uuid
+/** [DELETE] api/articles/:uuid
  * Удаление шаблона компонента (защищённый маршрут)
  */
 /** Удаление статьи (защищённый маршрут) */

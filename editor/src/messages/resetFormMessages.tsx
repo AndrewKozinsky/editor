@@ -18,8 +18,8 @@ const obj = {
         rus: 'Электронная почта *'
     },
     submitBtnText: {
-        eng: 'Sign in',
-        rus: 'Войти'
+        eng: 'Reset',
+        rus: 'Сбросить'
     },
     somethingWentWrong: {
         eng: 'Something went wrong',

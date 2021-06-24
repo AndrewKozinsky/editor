@@ -4,8 +4,8 @@ import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
 import actions from 'store/rootAction'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
-import createSiteRequest from 'requests/editor/createSiteRequest'
-import updateSiteRequest from 'requests/editor/updateSiteRequest'
+import createSiteRequest from 'src/requests/editor/sites/createSiteRequest'
+import updateSiteRequest from 'src/requests/editor/sites/updateSiteRequest'
 
 
 // Объект настройки useFormHandler

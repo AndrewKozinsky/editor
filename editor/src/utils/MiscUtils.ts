@@ -50,3 +50,48 @@ export function getFromLocalStorage(propName: string, defaultValue?: any) {
 export function removeFromLocalStorage(propName: string) {
     localStorage.removeItem(propName)
 }
+
+export function createDeepCopy<T>(data: T): T {
+
+    let f = function copy(data: T) {
+        switch (toString.call(data)){
+            case "[object Array]":
+                return parseArray(data);
+            case "[object Object]":
+                return parseObj(data);
+            default: return null // Возвращу null чтобы проверяльщик не ругался
+        }
+
+
+        function parseArray(arr: any) {
+            return arr.map((elem: any) => {
+                switch (toString.call(elem)){
+                    case "[object Array]":
+                    case "[object Object]":
+                        return copy(elem);
+                    default: return elem
+                }
+            })
+        }
+
+        function parseObj(obj: any) {
+            let result = {};
+
+            for(let key in obj) {
+                switch (toString.call(obj[key])){
+                    case "[object Array]":
+                    case "[object Object]":
+                        //@ts-ignore
+                        result[key] = copy(obj[key]);
+                        break;
+                    default:
+                        //@ts-ignore
+                        result[key] = obj[key]
+                }
+            }
+            return result;
+        }
+    };
+
+    return f(data);
+}

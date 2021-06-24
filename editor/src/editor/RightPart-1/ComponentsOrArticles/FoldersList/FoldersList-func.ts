@@ -4,19 +4,19 @@ import store from 'store/store'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
 import FilesTreeType from 'libs/FilesTree/types'
-import createNewArticleRequest from 'requests/editor/createNewArticleRequest'
-import createNewComponentRequest from 'requests/editor/createNewComponentRequest'
+import createArticleRequest from 'requests/editor/article/createArticleRequest'
+import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 import {addOpenPropToFolders, getOpenedFoldersUuid, selectItem} from 'libs/FilesTree/StoreManage/manageState'
 import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
 import {setCompItems, setArtItems} from '../stores'
 import { FolderType } from '../types'
-import putComponentsFoldersRequest from 'requests/editor/putComponentsFoldersRequest'
-import putArticlesFoldersRequest from 'requests/editor/putArticlesFoldersRequest'
-import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'requests/editor/getComponentsFoldersRequest'
-import { useGetArticlesFoldersRequest } from 'requests/editor/getArticlesFoldersRequest'
-import deleteArticleRequest from 'requests/editor/deleteArticleRequest'
-import deleteComponentRequest from 'requests/editor/deleteComponentRequest'
+import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
+import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
+import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'src/requests/editor/components/getComponentsFoldersRequest'
+import { useGetArticlesFoldersRequest } from 'src/requests/editor/article/getArticlesFoldersRequest'
+import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
+import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
 
 
 /**
@@ -81,22 +81,27 @@ function setItemsToEffector(
     currentItemId: FilesTreeType.UuId,
     setItems: (items: FilesTreeType.Items) => void
 ) {
-    if (response.status === 'fail' || !response.data.folders.content) return
+    if (response.status === 'fail') return
 
-    // Превратить присланный JSON в массив
-    let content = JSON.parse(response.data.folders.content)
+    if (response.data.folders.content) {
+        // Превратить присланный JSON в массив
+        let content = JSON.parse(response.data.folders.content)
 
-    // Открыть папки, которые должны быть открытыми
-    const openedFoldersUuIds = getOpenedFoldersUuId(type)
-    if (openedFoldersUuIds) {
-        content = addOpenPropToFolders(content, openedFoldersUuIds)
+        // Открыть папки, которые должны быть открытыми
+        const openedFoldersUuIds = getOpenedFoldersUuId(type)
+        if (openedFoldersUuIds) {
+            content = addOpenPropToFolders(content, openedFoldersUuIds)
+        }
+
+        // Выделить элемент, который должен быть выделен
+        content = selectItem(content, currentItemId).newItems
+
+        // Поставить в Эффектор присланный порядок
+        setItems(content)
     }
-
-    // Выделить элемент, который должен быть выделен
-    content = selectItem(content, currentItemId).newItems
-
-    // Поставить в Эффектор присланный порядок
-    setItems(content)
+    else {
+        setItems([])
+    }
 }
 
 
@@ -168,10 +173,10 @@ export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.
 
     // Сохранить данные на сервере
     if (type === 'components') {
-        await createNewComponentRequest(uuid, name, code)
+        await createComponentRequest(uuid, name, code)
     }
     else if (type === 'articles') {
-        await createNewArticleRequest(uuid, name, code)
+        await createArticleRequest(uuid, name, code)
     }
 }
 
