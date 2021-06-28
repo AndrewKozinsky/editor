@@ -1,6 +1,16 @@
 namespace ArticleTypes {
     // Article
-    export type Article = ArticleArrayItem[]
+    export type Article = {
+        // Additional information
+        meta: {
+            // Max component id to understand what component id must be next
+            maxComponentId: number
+        }
+        // Components array
+        components: Components
+    }
+
+    export type Components = ArticleArrayItem[]
     export type ArticleArrayItem = Component | TextComponent
 
     // =================================================================================================================
@@ -98,3 +108,15 @@ namespace ArticleTypes {
 }
 
 export default ArticleTypes
+
+
+export const emptyArticleData: ArticleTypes.Article = {
+    meta: {
+        // Max component id to understand what component id must be next
+        maxComponentId: 0
+    },
+    // Components array
+    components: []
+}
+
+

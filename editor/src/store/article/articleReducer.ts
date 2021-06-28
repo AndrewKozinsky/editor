@@ -1,24 +1,63 @@
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
+import TempCompTypes from './codeType/tempCompCodeType'
 
 export type ArticleReducerType = {
     // Components templates array
     tempComps: null | StoreArticleTypes.TempComps
-    // Article object
-    article: null | ArticleTypes.Article
     // Code with
     incFiles: {
         inHead: null | string
         beforeEndBody: null | string
     }
     $links: StoreArticleTypes.LinksObj
+    // History steps array
+    history: StoreArticleTypes.HistoryItems,
+    // Current history point
+    historyCurrentIdx: number
 }
 
+// Article reducer state example
+/*const stateExample: ArticleReducerType = {
+    tempComps: [{
+        uuid: '3522-6322-7532-6290',
+        name: 'Banner',
+        code: <TempCompTypes.TempComp>{}
+    }],
+    incFiles: {
+        inHead: '<link href="http://s.ru/reset.css">',
+        beforeEndBody: null
+    },
+    $links: {
+        $window:   window,
+        $document: window.document,
+        $head:     window.document.head,
+        $body:     <HTMLBodyElement>window.document.body
+    },
+    history: [
+        {
+            article: <ArticleTypes.Article>{},
+            lastId: 32,
+            hoveredElem: {
+                type: 'element',
+                dataCompId: 5,
+                dataElemId: 2
+            },
+            // Selected component/element coordinates
+            selectedElem: {
+                type: null
+                dataCompId: null,
+                dataElemId: null
+            }
+        },
+        {...}
+    ],
+    historyCurrentIdx: 0
+}*/
 
-// Изначальные значения
+// Inicial values
 const initialState: ArticleReducerType = {
     tempComps: null,
-    article: null,
     incFiles: {
         inHead: null,
         beforeEndBody: null
@@ -28,14 +67,15 @@ const initialState: ArticleReducerType = {
         $document: null,
         $head: null,
         $body: null
-    }
+    },
+    history: [],
+    historyCurrentIdx: 0
 }
 
 // Installing of components array
 function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
 ): ArticleReducerType {
-
     return {
         ...state,
         tempComps: action.payload
@@ -56,7 +96,8 @@ function setIncFilesTemplate(
 function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
     return {
         ...state,
-        article: action.payload
+        history: action.payload,
+        historyCurrentIdx: 0
     }
 }
 
@@ -65,6 +106,44 @@ function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksA
     return {
         ...state,
         $links: action.payload
+    }
+}
+
+// Set ids for hovered or selected component/element
+function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
+    // Get history array and current article idx
+    const {history, historyCurrentIdx} = state
+    // Current article
+    let article = history[historyCurrentIdx]
+
+    // Hovered/selected element coordinates
+    const hoveredElem = {
+        type: action.payload.type,
+        dataCompId: action.payload.dataCompId,
+        dataElemId: action.payload.dataElemId
+    }
+
+    // Update hovered/selected element coordinates in article
+    if (action.payload.actionType === 'hover') {
+        article = {
+            ...article,
+            hoveredElem: hoveredElem
+        }
+    }
+    else if (action.payload.actionType === 'select') {
+        article = {
+            ...article,
+            selectedElem: hoveredElem
+        }
+    }
+
+    // Set the new article to history array
+    const updatedHistoryArr = [...history]
+    updatedHistoryArr[historyCurrentIdx] = article
+
+    return {
+        ...state,
+        history: updatedHistoryArr
     }
 }
 
@@ -83,6 +162,8 @@ export default function articleReducer(
             return setArticle(state, action)
         case StoreArticleTypes.SET_LINKS:
             return setLinks(state, action)
+        case StoreArticleTypes.SET_HOVERED_ELEMENT:
+            return setHoveredElement(state, action)
         default:
             // @ts-ignore
             const x: never = null

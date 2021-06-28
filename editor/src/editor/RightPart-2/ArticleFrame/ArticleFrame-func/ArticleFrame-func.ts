@@ -21,7 +21,10 @@ export function useSetArticleDataInStore() {
     }, [])
 }
 
-// Hook gets links to IFrame window, document, head and body to Store when IFrame rendered
+/**
+ * Hook gets links to IFrame window, document, head and body to Store when IFrame rendered
+ * @param {Object} iFrameRef — reg to iFrame
+ */
 export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
     useEffect(function () {
         if (!iFrameRef.current) return
@@ -37,8 +40,8 @@ export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
     }, [])
 }
 
-// Hook sets <div> in IFrame to put an article in
-export function useSetAdditionalElemsToIFrame() {
+/** Hook sets <div> in IFrame to put an article in */
+export function useSetRootDivToIFrame() {
     const { $links } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
@@ -49,17 +52,19 @@ export function useSetAdditionalElemsToIFrame() {
     }, [$links])
 }
 
-// Hook sets article JSX to IFrame
+/** Hook sets article JSX to IFrame */
 export function useSetArticleToIFrame() {
-    const { $links, article, tempComps } = useSelector((store: AppState) => store.article)
+    const { $links, history, historyCurrentIdx, tempComps } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
-        if (!article) return
+        if (!history.length) return
+
+        const article = history[historyCurrentIdx].article
 
         // Создать JSX новой статьи и поставить в iFrame.
         ReactDOM.render(
             buildArticle(article, tempComps),
             $links.$body.firstChild
-        );
-    }, [article])
+        )
+    }, [history])
 }

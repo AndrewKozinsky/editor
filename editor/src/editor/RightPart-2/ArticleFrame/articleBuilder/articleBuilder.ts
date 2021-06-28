@@ -6,11 +6,11 @@ import { HTMLObjArrType } from './parceComponent/htmlStringToObject';
 import { parseComponent } from './parceComponent/parseComponent'
 
 
-export default function buildArticle(articleData: ArticleTypes.Component[], tempComps: TempCompTypes.TempComp[]): ReactElement {
+export default function buildArticle(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): ReactElement {
 
     // Переберу массив компонентов
-    let componentsArr: HTMLObjArrType.Arr = articleData.map(
-        compObj => parseComponent(compObj, tempComps)
+    let componentsArr: HTMLObjArrType.Arr = articleData.components.map(
+        compObj => parseComponent(<ArticleTypes.Component>compObj, tempComps)
     )
 
     // Создать JSX из html-объекта

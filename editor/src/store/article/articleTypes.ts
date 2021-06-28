@@ -3,6 +3,29 @@ import ArticleTypes from './codeType/articleCodeType'
 
 namespace StoreArticleTypes {
 
+    export type HistoryItems = HistoryItem[]
+
+    export type HistoryItem = {
+        // Articles
+        article: ArticleTypes.Article
+        // Hovered component/element coordinates
+        hoveredElem: {
+            type: HoveredElementType
+            dataCompId: HoveredElementCompId
+            dataElemId: HoveredElementElemId
+        }
+        // Selected component/element coordinates
+        selectedElem: {
+            type: HoveredElementType
+            dataCompId: null | ArticleTypes.DataCompId
+            dataElemId: null | ArticleTypes.DataElemId
+        }
+    }
+
+    export type HoveredElementType = null | 'component' | 'element' | 'textComponent'
+    export type HoveredElementCompId = null | ArticleTypes.DataCompId
+    export type HoveredElementElemId = null | ArticleTypes.DataElemId
+
     // Components
     export type TempComps = TempComp[]
 
@@ -39,7 +62,7 @@ namespace StoreArticleTypes {
     export const SET_ARTICLE = 'SET_ARTICLE'
     export type SetArticleAction = {
         type: typeof SET_ARTICLE
-        payload: ArticleTypes.Article
+        payload: HistoryItems
     }
 
     // Set article object
@@ -64,12 +87,25 @@ namespace StoreArticleTypes {
         }
     }
 
+    // Set links to iFrame elements
+    export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
+    export type SetHoveredElementAction = {
+        type: typeof SET_HOVERED_ELEMENT
+        payload: {
+            actionType: 'hover' | 'select',
+            type: StoreArticleTypes.HoveredElementType,
+            dataCompId: StoreArticleTypes.HoveredElementCompId,
+            dataElemId: StoreArticleTypes.HoveredElementElemId
+        }
+    }
+
 
     export type ArticleAction =
         | SetTempCompAction
-        | SetArticleAction
         | SetIncFilesTemplateAction
+        | SetArticleAction
         | SetLinksAction
+        | SetHoveredElementAction
 }
 
 export default StoreArticleTypes

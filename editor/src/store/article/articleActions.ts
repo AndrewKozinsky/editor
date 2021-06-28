@@ -4,9 +4,9 @@ import { MiscTypes } from 'types/miscTypes'
 import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import StoreArticleTypes from './articleTypes'
-import ArticleTypes from './codeType/articleCodeType'
+import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
 import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
-import {setInLocalStorage} from '../../utils/MiscUtils'
+import {setInLocalStorage} from 'utils/MiscUtils'
 
 
 const articleActions = {
@@ -43,7 +43,6 @@ const articleActions = {
             // Формированое массива компонентов для установки в Хранилище
             const tempComps: StoreArticleTypes.TempComps = response.data.components.map(
                 (compObj: any) => {
-                    // debugger
                     return {
                         uuid: compObj.uuid,
                         name: compObj.name,
@@ -111,18 +110,35 @@ const articleActions = {
             // Convert string to an object
             let parsedArticle: ArticleTypes.Article = JSON6.parse( articleData.code )
             // If parsedArticle is null, then assign empty array to variable to allow work with article
-            if (!parsedArticle) parsedArticle = []
+            if (!parsedArticle) parsedArticle = emptyArticleData
 
             // Set an article to Store
             dispatch( articleActions.setArticle( parsedArticle ))
         }
     },
 
-    // Установка массива шаблонов компонентов
+    // Set article. Action return history array with single article
     setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
         return {
             type: StoreArticleTypes.SET_ARTICLE,
-            payload
+            payload: [
+                {
+                    // Articles
+                    article: payload,
+                    // Hovered component/element coordinates
+                    hoveredElem: {
+                        type: null,
+                        dataCompId: null,
+                        dataElemId: null
+                    },
+                    // Selected component/element coordinates
+                    selectedElem: {
+                        type: null,
+                        dataCompId: null,
+                        dataElemId: null
+                    }
+                }
+            ]
         }
     },
 
@@ -144,7 +160,24 @@ const articleActions = {
         }
     },
 
-
+    /**
+     * Set ids for hovered or selected component/element
+     * @param {String} actionType — is component/element hovered or selected
+     * @param {String} type — component/element type: null | 'component' | 'element' | 'textComponent'
+     * @param {Number} dataCompId — component id
+     * @param {Number} dataElemId — element id (It is null if component/element was hovered)
+     */
+    setHoveredElement(
+        actionType: 'hover' | 'select',
+        type: StoreArticleTypes.HoveredElementType,
+        dataCompId: StoreArticleTypes.HoveredElementCompId,
+        dataElemId: StoreArticleTypes.HoveredElementElemId
+    ) {
+        return {
+            type: StoreArticleTypes.SET_HOVERED_ELEMENT,
+            payload: { actionType, type, dataCompId, dataElemId }
+        }
+    }
 }
 
 export default articleActions

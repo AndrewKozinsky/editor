@@ -29,8 +29,6 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
 
     // If component didn't have elements set additional attributes and return htmlObj
     if (!consistObjs) {
-        // Set type to the root tag
-        htmlObj.attrs['data-em-type'] = 'comp'
         // Set dataCompId (component data id) to the root tag
         htmlObj.attrs['data-em-data-comp-id'] = compData.dataCompId.toString()
         return htmlObj
@@ -43,6 +41,5 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
         insertChildren(consistObj, tempComps)
     }
 
-    console.log(htmlObj)
     return htmlObj
 }

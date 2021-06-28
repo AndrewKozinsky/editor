@@ -5,11 +5,6 @@ import { ConsistObj } from './getConsistObjsArr'
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  */
 export function setExtraAttribs(consistObj: ConsistObj) {
-    // Set type to the root tag
-    consistObj.htmlComp.attrs['data-em-type'] = 'comp'
-    // Set type to the elem tag
-    consistObj.htmlElem.attrs['data-em-type'] = 'elem'
-
     // Set dataCompId (component data id) to the root tag
     consistObj.htmlComp.attrs['data-em-data-comp-id'] = consistObj.dataComp.dataCompId.toString()
     // Set dataCompId (component data id) to the element tag
