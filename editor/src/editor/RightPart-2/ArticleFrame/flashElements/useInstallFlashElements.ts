@@ -38,7 +38,7 @@ function setExtraStyle($head: HTMLHeadElement) {
         height: 100px;
         pointer-events: none;
         box-sizing: content-box;
-        border-radius: 1px;
+        border-radius: 2px;
     }
     
     .em-flash-rect__hover {

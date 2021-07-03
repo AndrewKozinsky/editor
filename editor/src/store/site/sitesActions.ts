@@ -1,11 +1,11 @@
 import StoreSitesTypes from './sitesTypes'
 import {MiscTypes} from 'types/miscTypes'
 import store from '../store'
-import FilesTreeType from 'libs/FilesTree/types'
 import sitesRequest from 'src/requests/editor/sites/sitesRequest'
 import getIncFilesTemplatesRequest from 'src/requests/editor/incFiles/getIncFilesTemplatesRequest'
 import getArticleRequest, {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
 import getComponentRequest, { ComponentDataType } from 'src/requests/editor/components/getComponentRequest'
+import FilesTreeType from '../../types/filesTree'
 
 
 const sitesActions = {

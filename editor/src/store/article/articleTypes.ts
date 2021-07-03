@@ -1,5 +1,7 @@
 import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
+import FilesTreeType from 'libs/DragFilesTree/types'
+import {CreateCompFnReturnType} from '../../editor/RightPart-2/articleManager/insert/insert'
 
 namespace StoreArticleTypes {
 
@@ -9,17 +11,15 @@ namespace StoreArticleTypes {
         // Articles
         article: ArticleTypes.Article
         // Hovered component/element coordinates
-        hoveredElem: {
-            type: HoveredElementType
-            dataCompId: HoveredElementCompId
-            dataElemId: HoveredElementElemId
-        }
+        hoveredElem: HoveredElem
         // Selected component/element coordinates
-        selectedElem: {
-            type: HoveredElementType
-            dataCompId: null | ArticleTypes.DataCompId
-            dataElemId: null | ArticleTypes.DataElemId
-        }
+        selectedElem: HoveredElem
+    }
+
+    export type HoveredElem = {
+        type: HoveredElementType
+        dataCompId: HoveredElementCompId
+        dataElemId: HoveredElementElemId
     }
 
     export type HoveredElementType = null | 'component' | 'element' | 'textComponent'
@@ -49,6 +49,19 @@ namespace StoreArticleTypes {
     export type HeadLink = null | HTMLHeadElement
     export type BodyLink = null | HTMLBodyElement
 
+
+    // =============================================
+
+    // Типы типа и тип экшена
+    // Set components templates array
+    export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
+    export type SetArticleMarksAction = {
+        type: typeof SET_ARTICLE_MARKS
+        payload: {
+            siteId: string,
+            articleUuId: string
+        }
+    }
 
     // Типы типа и тип экшена
     // Set components templates array
@@ -99,13 +112,30 @@ namespace StoreArticleTypes {
         }
     }
 
+    // Set links to iFrame elements
+    export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
+    export type SetTempCompFoldersAction = {
+        type: typeof SET_TEMP_COMP_FOLDERS
+        payload: FilesTreeType.Items
+    }
+
+    //
+    export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
+    export type CreateAndSetHistoryItemAction = {
+        type: typeof CREATE_AND_SET_HISTORY_ITEM
+        payload: CreateCompFnReturnType
+    }
+
 
     export type ArticleAction =
+        | SetArticleMarksAction
         | SetTempCompAction
         | SetIncFilesTemplateAction
         | SetArticleAction
         | SetLinksAction
         | SetHoveredElementAction
+        | SetTempCompFoldersAction
+        | CreateAndSetHistoryItemAction
 }
 
 export default StoreArticleTypes

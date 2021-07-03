@@ -1,8 +1,14 @@
+import articleManager from '../../editor/RightPart-2/articleManager/articleManager'
+import FilesTreeType from '../../types/filesTree'
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import TempCompTypes from './codeType/tempCompCodeType'
 
 export type ArticleReducerType = {
+    articleUuId: null | string
+    articleSiteId: null | string
+    // Components template folders
+    tempCompsFolders: null | FilesTreeType.Items
     // Components templates array
     tempComps: null | StoreArticleTypes.TempComps
     // Code with
@@ -15,6 +21,8 @@ export type ArticleReducerType = {
     history: StoreArticleTypes.HistoryItems,
     // Current history point
     historyCurrentIdx: number
+    // A history step when the article was saved
+    historyStepWhenWasSave: number
 }
 
 // Article reducer state example
@@ -53,10 +61,14 @@ export type ArticleReducerType = {
         {...}
     ],
     historyCurrentIdx: 0
+    historyStepWhenWasSave: 0
 }*/
 
-// Inicial values
+// Initial values
 const initialState: ArticleReducerType = {
+    articleUuId: null,
+    articleSiteId: null,
+    tempCompsFolders: null,
     tempComps: null,
     incFiles: {
         inHead: null,
@@ -69,7 +81,20 @@ const initialState: ArticleReducerType = {
         $body: null
     },
     history: [],
-    historyCurrentIdx: 0
+    historyCurrentIdx: 0,
+    historyStepWhenWasSave: 0
+}
+
+
+// Sets article uuId and article site id
+function setArticleMarks(
+    state: ArticleReducerType, action: StoreArticleTypes.SetArticleMarksAction
+): ArticleReducerType {
+    return {
+        ...state,
+        articleUuId: action.payload.articleUuId,
+        articleSiteId: action.payload.siteId,
+    }
 }
 
 // Installing of components array
@@ -147,6 +172,67 @@ function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.
     }
 }
 
+// Installing an article code
+function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
+    return {
+        ...state,
+        tempCompsFolders: action.payload,
+    }
+}
+
+//
+function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
+
+    const historyArr = createHistoryArr()
+
+    return {
+        ...state,
+        history: historyArr,
+        historyStepWhenWasSave: getSaveStep(),
+        historyCurrentIdx: historyArr.length - 1
+    }
+
+
+    function createHistoryArr() {
+        const historyArrCopy =  [...state.history]
+        historyArrCopy.length = state.historyCurrentIdx + 1
+        historyArrCopy.push(
+            createHistoryItem()
+        )
+
+        return historyArrCopy
+    }
+
+    function createHistoryItem() {
+        const currentHistoryItem = state.history[state.historyCurrentIdx]
+
+        const historyItem: StoreArticleTypes.HistoryItem = {
+            article: createArticle(),
+            hoveredElem: currentHistoryItem.hoveredElem,
+            selectedElem: currentHistoryItem.selectedElem
+        }
+
+        return historyItem
+    }
+
+    function createArticle() {
+        const newArticle = articleManager.createArticle()
+        newArticle.meta.maxComponentId = action.payload.maxCompId
+        newArticle.components = action.payload.components
+
+        return newArticle
+    }
+
+    function getSaveStep() {
+        let newHistoryStepWhenWasSave = state.historyStepWhenWasSave
+        if (newHistoryStepWhenWasSave > state.history.length) {
+            newHistoryStepWhenWasSave = -1
+        }
+
+        return newHistoryStepWhenWasSave
+    }
+}
+
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -154,6 +240,8 @@ export default function articleReducer(
 ): ArticleReducerType {
 
     switch (action.type) {
+        case StoreArticleTypes.SET_ARTICLE_MARKS:
+            return setArticleMarks(state, action)
         case StoreArticleTypes.SET_TEMP_COMPS:
             return setTempComps(state, action)
         case StoreArticleTypes.SET_INC_FILES_TEMPLATE:
@@ -164,6 +252,10 @@ export default function articleReducer(
             return setLinks(state, action)
         case StoreArticleTypes.SET_HOVERED_ELEMENT:
             return setHoveredElement(state, action)
+        case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
+            return setTempCompFolders(state, action)
+        case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
+            return createAndSetHistoryItem(state, action)
         default:
             // @ts-ignore
             const x: never = null

@@ -28,6 +28,7 @@ import FilesTreeFolder from '../icons/filesTreeFolder'
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
 import BtnSignEdit from '../icons/btnSignEdit'
+import FilesTreeTorus from '../icons/filesTreeTorus'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -86,6 +87,7 @@ export function getIcon(type: string): ReactNode {
         filesTreeFolder: FilesTreeFolder,
         filesTreeFolderPlus: FilesTreeFolderPlus,
         filesTreePlus: FilesTreePlus,
+        filesTreeTorus: FilesTreeTorus,
 
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: FilesTreePlaceMark,

@@ -1,6 +1,6 @@
-import FilesTreeType from 'libs/FilesTree/types'
 import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
 import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
+import FilesTreeType from '../../types/filesTree'
 
 namespace StoreSitesTypes {
 

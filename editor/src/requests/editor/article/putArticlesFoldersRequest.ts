@@ -1,7 +1,7 @@
 import {makeFetch} from 'src/requests/reqFn/fetch'
 import getApiUrl from 'src/requests/reqFn/apiUrls'
 import store from 'src/store/store'
-import FilesTreeType from 'src/libs/FilesTree/types'
+import FilesTreeType from '../../../types/filesTree'
 
 /**
  * Функция обновляет данные по папкам статей

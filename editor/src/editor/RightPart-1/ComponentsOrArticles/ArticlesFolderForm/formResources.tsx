@@ -2,7 +2,7 @@
 import * as yup from 'yup'
 import FHTypes from 'libs/formHandler/types'
 import store from 'store/store'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
 import {

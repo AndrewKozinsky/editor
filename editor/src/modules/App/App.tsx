@@ -22,7 +22,7 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App() {
-    // TODO CHECK WORKS USER'S scripts IN iframe RIGHT NOW. IT'S IMPORTANT!!!!!!!!!!!!!!!!
+    // TODO You didn't consider when user types text and element expands. Then flashed rectangle doesn't match element size. Yet it pages was is scrolled flashed rectangle set on a wrong position. Yet flashed rectangle set on a wrong position if pages is scrolled.
     // TODO Можно все запросы связанные с компонентами, которые зависимы от сайта (получение компонентов сайта, удаление компонента сайта и так далее) перенести в контроллер сайта. Так получится логичнее.
     // TODO Надо сделать отдельные файлы с типами присылаемых с сервера данных: сайт, компонент, шаблон файлов, статью и использовать их для типизации запросов.
     // TODO You can plug in Prettier and TSLint

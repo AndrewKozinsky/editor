@@ -8,7 +8,7 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
 import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { componentsTreeStore, setCompItems } from '../stores'
 import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
 

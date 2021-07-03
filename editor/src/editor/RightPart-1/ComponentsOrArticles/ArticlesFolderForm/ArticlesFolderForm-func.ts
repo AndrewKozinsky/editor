@@ -5,8 +5,8 @@ import {useStore} from 'effector-react'
 import { AppState } from 'store/rootReducer'
 import FHTypes from 'libs/formHandler/types'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import FilesTreeType from 'libs/FilesTree/types'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {articlesTreeStore} from '../stores'
 
 
@@ -36,8 +36,8 @@ export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormSta
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
 function setNewFolderName(
-    items: FilesTreeType.Items,
-    currentItemId: FilesTreeType.UuId,
+    items: DragFilesTreeType.Items,
+    currentItemId: DragFilesTreeType.UuId,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState
 ) {
@@ -63,7 +63,7 @@ function setNewFolderName(
 function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name',
-    folder: FilesTreeType.Item
+    folder: DragFilesTreeType.Item
 ) {
     // Получение поля формы по имени
     const field = formState.fields[fieldName]

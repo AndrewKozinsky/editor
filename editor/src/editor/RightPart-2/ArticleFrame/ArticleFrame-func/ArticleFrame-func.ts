@@ -6,7 +6,7 @@ import actions from 'store/rootAction'
 import { AppState } from 'store/rootReducer'
 import {MiscTypes} from 'types/miscTypes'
 import {getFromLocalStorage} from 'utils/MiscUtils'
-import buildArticle from '../articleBuilder/articleBuilder'
+import buildArticle from '../../articleBuilder/articleBuilder'
 
 
 // Hook sets article data in Store when IFrame rendered

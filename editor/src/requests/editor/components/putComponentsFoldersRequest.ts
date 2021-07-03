@@ -1,7 +1,7 @@
 import store from 'src/store/store'
 import {makeFetch} from 'src/requests/reqFn/fetch'
 import getApiUrl from 'src/requests/reqFn/apiUrls'
-import FilesTreeType from 'src/libs/FilesTree/types'
+import FilesTreeType from '../../../types/filesTree'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор

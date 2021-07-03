@@ -13,7 +13,7 @@ import {
     setCompItems,
     setArtItems
 } from '../stores'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
 import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'

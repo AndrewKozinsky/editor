@@ -1,7 +1,7 @@
 import React from 'react'
 //@ts-ignore
 import {useStore} from 'effector-react'
-import FilesTree from 'libs/FilesTree/FilesTree/FilesTree'
+import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
 import { FolderType } from '../types'
 import {
     useGetFoldersFromServerAndPutInEffector,
@@ -55,7 +55,7 @@ export default function FoldersList(props: FoldersListPropType) {
     const onItemClick = useGetOnItemClick(type)
 
     return (
-        <FilesTree
+        <DragFilesTree
             items={items}
             setItems={setItems}
             newFolderName={newFolderName}

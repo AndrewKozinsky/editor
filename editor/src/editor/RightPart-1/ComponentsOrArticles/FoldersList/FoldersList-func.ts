@@ -3,12 +3,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import store from 'store/store'
 import {AppState} from 'store/rootReducer'
 import actions from 'store/rootAction'
-import FilesTreeType from 'libs/FilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-import {addOpenPropToFolders, getOpenedFoldersUuid, selectItem} from 'libs/FilesTree/StoreManage/manageState'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {setCompItems, setArtItems} from '../stores'
 import { FolderType } from '../types'
 import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
@@ -78,8 +78,8 @@ export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
 function setItemsToEffector(
     response: GetComponentsFoldersServerResponse,
     type: FolderType,
-    currentItemId: FilesTreeType.UuId,
-    setItems: (items: FilesTreeType.Items) => void
+    currentItemId: DragFilesTreeType.UuId,
+    setItems: (items: DragFilesTreeType.Items) => void
 ) {
     if (response.status === 'fail') return
 
@@ -110,7 +110,7 @@ function setItemsToEffector(
  * @param {String} type — тип папок: с компонентами или со статьями.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.Items) {
+export async function saveItemsOnServer(type: FolderType, items: DragFilesTreeType.Items) {
     // Подготовить сохраняемый массив папок и файлов
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
 
@@ -129,7 +129,7 @@ export async function saveItemsOnServer(type: FolderType, items: FilesTreeType.I
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} deletedItemUuid — uuid удалённого элемента
  */
-export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, deletedItemUuid: FilesTreeType.UuId) {
+export function afterDeleteItem(type: FolderType, items: DragFilesTreeType.Items, deletedItemUuid: DragFilesTreeType.UuId) {
     // Обнулить данные выделенного элемента в Хранилище
     if (type === 'components') {
         store.dispatch( actions.sites.setCurrentComp(null, null) )
@@ -165,7 +165,7 @@ export function afterDeleteItem(type: FolderType, items: FilesTreeType.Items, de
  * @param {Object} item — данные нового файла.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.Items, item: FilesTreeType.Item) {
+export async function afterAddingNewItem(type: FolderType, items: DragFilesTreeType.Items, item: DragFilesTreeType.Item) {
     // Параметры функции создания шаблона компонента или статьи
     const uuid = item.uuid
     const name = item.name
@@ -187,7 +187,7 @@ export async function afterAddingNewItem(type: FolderType, items: FilesTreeType.
  * @param {String} type — тип папок: с компонентами или со статьями
  * @param {Array} arrUuId — массив uuid раскрытых папок
  */
-export function afterCollapseFolder(type: FolderType, arrUuId: FilesTreeType.UuIdArr) {
+export function afterCollapseFolder(type: FolderType, arrUuId: DragFilesTreeType.UuIdArr) {
     // Массив uuid открытых папок
     const uuids = JSON.stringify(arrUuId)
 
@@ -215,7 +215,7 @@ export function useGetOnItemClick(type: FolderType) {
     const dispatch = useDispatch()
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (item: FilesTreeType.Item) {
+    return useCallback(function (item: DragFilesTreeType.Item) {
         if (type === 'components') {
             dispatch(actions.sites.setCurrentComp(item.uuid, item.type))
         }

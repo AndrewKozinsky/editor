@@ -111,6 +111,7 @@ export function getIconSize(type: string) {
         case 'filesTreeFolderPlus':
         case 'filesTreePlus':
         case 'filesTreeTrash':
+        case 'filesTreeTorus':
             return {
                 width: "15px",
                 height: "15px",

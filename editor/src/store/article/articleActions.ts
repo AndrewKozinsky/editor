@@ -6,7 +6,11 @@ import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
 import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
-import {setInLocalStorage} from 'utils/MiscUtils'
+import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
+import FilesTreeType from 'types/filesTree'
+import articleManager from '../../editor/RightPart-2/articleManager/articleManager'
+import {getFromLocalStorage} from '../../utils/MiscUtils'
+import {CreateCompFnReturnType} from '../../editor/RightPart-2/articleManager/insert/insert'
 
 
 const articleActions = {
@@ -14,21 +18,38 @@ const articleActions = {
     // Наполнение Хранилища данными для отрисовки статьи
     fillArticle(siteId: string, incFilesTemplateId: string, articleUuId?: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const articleDataForLS = {
-                siteId,
-                incFilesId: incFilesTemplateId,
-                articleId: articleUuId
+            const articleMarksFromLS = getFromLocalStorage('article')
+            if (articleMarksFromLS.articleId !== articleUuId) {
+                // Save article data to localStorage to know what kind of article the editor has to open next time
+                articleManager.supplementArtMarksInLocalStorage({
+                    siteId,
+                    incFilesId: incFilesTemplateId,
+                    articleId: articleUuId,
+                    openCompFoldersUuIds: []
+                })
             }
-            setInLocalStorage('article', articleDataForLS)
+
+            dispatch( articleActions.setArticleMarks(siteId, articleUuId) )
 
             // Do request for a site templates components and set it in Store
             dispatch( articleActions.requestSiteComponents(siteId) )
 
-            // Do request for a site files template and set it in Store
+            // Do request for a site files template and set they in Store
             dispatch( articleActions.requestIncFilesTemplate(siteId, incFilesTemplateId) )
 
             // Do request for the article and set it in Store
             dispatch( articleActions.requestArticle(articleUuId) )
+
+            // Do request for component templates array and set they in store
+            dispatch( articleActions.requestTempCompsFolders(siteId) )
+        }
+    },
+
+    // Action sets article uuId and article site id to the Store
+    setArticleMarks(siteId: string, articleUuId: string) {
+        return {
+            type: StoreArticleTypes.SET_ARTICLE_MARKS,
+            payload: { siteId, articleUuId }
         }
     },
 
@@ -142,6 +163,36 @@ const articleActions = {
         }
     },
 
+    // Request to template component folders and set they in Store
+    requestTempCompsFolders(articleSiteId: string) {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Запрос и ответ от сервера
+            const response = await getComponentsFoldersRequest(articleSiteId)
+            if (response.status !== 'success') return
+
+            const foldersString = response.data.folders.content
+            if (!foldersString) return
+
+            // Convert string to an object
+            let parsedFolders: FilesTreeType.Items = JSON6.parse( foldersString )
+
+            // Set component template folders in the Store
+            dispatch( articleActions.setTempCompFolders(parsedFolders) )
+        }
+    },
+
+    /**
+     * Set component template folders is the Store
+     * @param {Array} folders — component template folders array
+     */
+    setTempCompFolders( folders: null | FilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+        return {
+            type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
+            payload: folders
+        }
+    },
+
     // Action sets links to IFrame window, document, head and body to Store
     setLinks(
         $window: StoreArticleTypes.WindowLink,
@@ -177,7 +228,18 @@ const articleActions = {
             type: StoreArticleTypes.SET_HOVERED_ELEMENT,
             payload: { actionType, type, dataCompId, dataElemId }
         }
-    }
+    },
+
+    /**
+     *
+     * @param {Object} itemDetails —
+     */
+    createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
+        return {
+            type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
+            payload: itemDetails
+        }
+    },
 }
 
 export default articleActions

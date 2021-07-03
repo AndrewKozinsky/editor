@@ -1,6 +1,6 @@
 //@ts-ignore
 import {createEvent, createStore} from 'effector'
-import FilesTreeType from 'libs/FilesTree/types'
+import DragFilesTreeType from '../../../libs/DragFilesTree/types'
 
 
 // ---------------------------------------------------------------------------
@@ -9,10 +9,10 @@ import FilesTreeType from 'libs/FilesTree/types'
 export const setCompItems = createEvent()
 
 // Создание Хранилища Эффектора где будут содержаться данные по папкам шаблонов компонентов
-export const componentsTreeStore = createStore<null | FilesTreeType.Items>(null)
+export const componentsTreeStore = createStore<null | DragFilesTreeType.Items>(null)
 // Добавление экшена изменнеия Хранилища
 componentsTreeStore
-    .on(setCompItems, (state: null | FilesTreeType.Items, items: null | FilesTreeType.Items) => items)
+    .on(setCompItems, (state: null | DragFilesTreeType.Items, items: null | DragFilesTreeType.Items) => items)
 
 // ---------------------------------------------------------------------------
 
@@ -20,7 +20,7 @@ componentsTreeStore
 export const setArtItems = createEvent()
 
 // Создание Хранилища Эффектора где будут содержаться данные по папкам шаблонов компонентов
-export const articlesTreeStore = createStore<null | FilesTreeType.Items>(null)
+export const articlesTreeStore = createStore<null | DragFilesTreeType.Items>(null)
 // Добавление экшена изменнеия Хранилища
 articlesTreeStore
-    .on(setArtItems, (state: null | FilesTreeType.Items, items: null | FilesTreeType.Items) => items)
+    .on(setArtItems, (state: null | DragFilesTreeType.Items, items: null | DragFilesTreeType.Items) => items)

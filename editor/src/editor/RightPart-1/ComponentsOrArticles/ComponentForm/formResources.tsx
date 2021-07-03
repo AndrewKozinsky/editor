@@ -2,7 +2,7 @@
 import * as yup from 'yup'
 import store from 'store/store'
 import FHTypes from 'libs/formHandler/types'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {componentsTreeStore, setCompItems} from '../stores'
 import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 import {updateComponentRequest} from 'src/requests/editor/components/updateComponentRequest'

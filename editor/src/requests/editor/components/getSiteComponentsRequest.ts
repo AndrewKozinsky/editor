@@ -1,6 +1,5 @@
 import {makeFetch} from 'src/requests/reqFn/fetch'
 import getApiUrl from 'src/requests/reqFn/apiUrls'
-import FilesTreeType from 'src/libs/FilesTree/types'
 
 
 /** Функция отправляет запрос на получение шаблонов компонентов сайта */

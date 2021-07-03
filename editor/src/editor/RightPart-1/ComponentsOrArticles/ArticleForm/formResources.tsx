@@ -5,7 +5,7 @@ import FHTypes from 'libs/formHandler/types'
 import { articleFormMessages } from 'messages/articleFormMessages'
 import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
 import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {
     articlesTreeStore,
     setArtItems
