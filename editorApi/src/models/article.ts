@@ -9,6 +9,7 @@ export interface IArticle extends Document {
     name: string,
     code?: string,
     incFilesTemplateId?: string,
+    // ADD CREATION TIME
 }
 
 // Схема шаблона компонента

@@ -23,7 +23,7 @@ export function toggleFolder(items: DragFilesTreeType.Items, folderId: DragFiles
 
 
 /**
- * Функция находит в массиве объект данных с переданным id.
+ * Функция находит в массиве объект данных с переданным uuid.
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} itemId — id папки или файла, которую нужно найти
  */

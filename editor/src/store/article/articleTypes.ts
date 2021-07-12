@@ -1,7 +1,7 @@
 import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import FilesTreeType from 'libs/DragFilesTree/types'
-import {CreateCompFnReturnType} from '../../editor/RightPart-2/articleManager/insert/insert'
+import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 namespace StoreArticleTypes {
 
@@ -53,6 +53,12 @@ namespace StoreArticleTypes {
     // =============================================
 
     // Типы типа и тип экшена
+    // Set components templates array
+    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
+    export type ClearArticleAction = {
+        type: typeof CLEAR_ARTICLE
+    }
+
     // Set components templates array
     export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
     export type SetArticleMarksAction = {
@@ -126,8 +132,22 @@ namespace StoreArticleTypes {
         payload: CreateCompFnReturnType
     }
 
+    // Action changes a current history step
+    export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
+    export type MakeHistoryStepAction = {
+        type: typeof MAKE_HISTORY_STEP
+        payload: 'undo' | 'redo'
+    }
+
+    // Action changes a current history step
+    export const SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED = 'SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED'
+    export type SetHistoryStepWhenArticleWasSavedAction = {
+        type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
+    }
+
 
     export type ArticleAction =
+        | ClearArticleAction
         | SetArticleMarksAction
         | SetTempCompAction
         | SetIncFilesTemplateAction
@@ -136,6 +156,8 @@ namespace StoreArticleTypes {
         | SetHoveredElementAction
         | SetTempCompFoldersAction
         | CreateAndSetHistoryItemAction
+        | MakeHistoryStepAction
+        | SetHistoryStepWhenArticleWasSavedAction
 }
 
 export default StoreArticleTypes

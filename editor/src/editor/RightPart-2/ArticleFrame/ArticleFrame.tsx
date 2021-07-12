@@ -1,9 +1,9 @@
 import React, {useRef} from 'react'
 import {
-    useSetRootDivToIFrame,
     useSetArticleDataInStore,
+    useSetIFrameElemsLinks,
+    useSetRootDivToIFrame,
     useSetArticleToIFrame,
-    useSetIFrameElemsLinks
 } from './ArticleFrame-func/ArticleFrame-func'
 import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
 import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
@@ -12,11 +12,15 @@ import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHan
 import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
 import {useChangeFlashElementsPosition} from './flashElements/useChangeFlashElementsPosition'
 import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
+import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
 import './ArticleFrame.scss'
 
 
 export default function ArticleFrame() {
     const windowRef = useRef(null)
+
+    // Clean the iframe if an article was cleaned
+    useCleanIFrame()
 
     // Hook sets article data in Store when IFrame rendered
     useSetArticleDataInStore()

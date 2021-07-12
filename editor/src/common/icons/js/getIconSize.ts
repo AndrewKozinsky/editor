@@ -62,12 +62,15 @@ export function getIconSize(type: string) {
         case 'btnSignAdd':
         case 'btnSignJson':
         case 'btnSignEdit':
+        case 'btnSignCancel':
             return {
                 width: "15px",
                 height: "15px",
                 viewBox: "0 0 15 15"
             }
         case 'btnSignTrash':
+        case 'btnSignUndo':
+        case 'btnSignRedo':
             return {
                 width: "14px",
                 height: "15px",
@@ -112,6 +115,8 @@ export function getIconSize(type: string) {
         case 'filesTreePlus':
         case 'filesTreeTrash':
         case 'filesTreeTorus':
+        case 'filesTreeUp':
+        case 'filesTreeDown':
             return {
                 width: "15px",
                 height: "15px",
@@ -122,6 +127,12 @@ export function getIconSize(type: string) {
                 width: "8px",
                 height: "5px",
                 viewBox: "0 0 8 5"
+            }
+        case 'articleMenu':
+            return {
+                width: "18px",
+                height: "14px",
+                viewBox: "0 0 18 14"
             }
         default: {
             return {}

@@ -1,4 +1,4 @@
-import articleManager from '../../editor/RightPart-2/articleManager/articleManager'
+import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 import FilesTreeType from '../../types/filesTree'
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
@@ -85,6 +85,14 @@ const initialState: ArticleReducerType = {
     historyStepWhenWasSave: 0
 }
 
+function clearArticle(
+    state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
+): ArticleReducerType {
+    // Do not touch the document's links
+    const newState = Object.assign(initialState, {$links: state.$links})
+
+    return newState
+}
 
 // Sets article uuId and article site id
 function setArticleMarks(
@@ -233,6 +241,31 @@ function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticle
     }
 }
 
+// The function changes a current history step
+function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
+    let newStep = state.historyCurrentIdx
+
+    if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
+        newStep--
+    }
+    else if (action.payload === 'redo' && state.historyCurrentIdx + 1 < state.history.length) {
+        newStep++
+    }
+
+    return {
+        ...state,
+        historyCurrentIdx: newStep
+    }
+}
+
+// The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
+function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+    return {
+        ...state,
+        historyStepWhenWasSave: state.historyCurrentIdx
+    }
+}
+
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -240,6 +273,8 @@ export default function articleReducer(
 ): ArticleReducerType {
 
     switch (action.type) {
+        case StoreArticleTypes.CLEAR_ARTICLE:
+            return clearArticle(state, action)
         case StoreArticleTypes.SET_ARTICLE_MARKS:
             return setArticleMarks(state, action)
         case StoreArticleTypes.SET_TEMP_COMPS:
@@ -256,6 +291,10 @@ export default function articleReducer(
             return setTempCompFolders(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
+        case StoreArticleTypes.MAKE_HISTORY_STEP:
+            return makeHistoryStep(state, action)
+        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
+            return setHistoryStepWhenArticleWasSaved(state, action)
         default:
             // @ts-ignore
             const x: never = null

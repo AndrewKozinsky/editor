@@ -1,5 +1,6 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 
 /**
@@ -28,14 +29,16 @@ export async function updateArticleNameRequest(
 /**
  * Функция сохраняет код статьи
  * @param {String} articleId — uuid сохраняемой статьи
- * @param {String} code — код статьи
+ * @param {String} articleCode — код статьи
  */
 export async function updateArticleCodeRequest(
-    articleId: string, code: string
+    articleId: string, articleCode: ArticleTypes.Article
 ) {
+    const articleCodeStr = JSON.stringify(articleCode)
+
     const options = {
         method: 'PATCH',
-        body: JSON.stringify({code})
+        body: JSON.stringify({code: articleCodeStr})
     }
     const response: UpdateSiteRequestServerResponse = await makeFetch(
         getApiUrl('article', articleId), options

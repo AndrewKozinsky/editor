@@ -1,13 +1,13 @@
 import React, {ReactElement} from 'react'
-import { convertToCamelCase } from 'src/utils/StringUtils'
+import { convertToCamelCase } from 'utils/StringUtils'
 import {HTMLObjArrType} from './parceComponent/htmlStringToObject'
 
 /**
- * Функция получает объект со структурой HTML и преобразует его в JSX.
+ * Функция получает массив со структурой HTML и преобразует его в JSX.
  * @param {Object} htmlStructure — объект с разобранной HTML-структурой компонента
  * @param {Number} key — key
  */
-export default function createJsxFromHtmlObj(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement {
+export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement {
     //@ts-ignore
     return htmlStructure.map((htmlObj, i) => {
         // If it is an empty text component set special sign...
@@ -43,7 +43,7 @@ function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
     // @ts-ignore
     let children = (htmlObj.children)
             //@ts-ignore
-            ? createJsxFromHtmlObj(htmlObj.children)
+            ? createJsxFromComponents(htmlObj.children)
             : null
 
     // Верну созданный компонент Реакта

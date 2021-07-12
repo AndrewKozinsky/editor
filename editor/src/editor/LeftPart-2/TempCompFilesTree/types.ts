@@ -7,6 +7,7 @@ namespace TempCompFilesTreeType {
 
     export interface Item extends FilesTreeType.Item {
         // Is Insert inside button allowed
+        afterButtonAllowed?: boolean
         insideButtonAllowed?: boolean
     }
 
@@ -20,8 +21,8 @@ namespace TempCompFilesTreeType {
     // export type ItemType = FilesTreeType.ItemType
 
 
-    export type AfterClickNextBtn = (ItemUuId: UuId) => void
-
+    export type AfterClickBeforeBtn = (ItemUuId: UuId) => void
+    export type AfterClickAfterBtn = (ItemUuId: UuId) => void
     export type AfterClickInsideBtn = (ItemUuId: UuId) => void
 
     // Функция запускаемая после разворачивания/сворачивания папки
@@ -29,7 +30,8 @@ namespace TempCompFilesTreeType {
 
     export type After = {
         afterCollapseFolder: AfterCollapseFolder
-        afterClickNextBtn: AfterClickNextBtn
+        afterClickBeforeBtn: AfterClickBeforeBtn
+        afterClickAfterBtn: AfterClickAfterBtn
         afterClickInsideBtn: AfterClickInsideBtn
     }
 }

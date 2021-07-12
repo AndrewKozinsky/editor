@@ -6,7 +6,8 @@ import actions from 'store/rootAction'
 import { AppState } from 'store/rootReducer'
 import {MiscTypes} from 'types/miscTypes'
 import {getFromLocalStorage} from 'utils/MiscUtils'
-import buildArticle from '../../articleBuilder/articleBuilder'
+import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'
+import {debug} from 'webpack'
 
 
 // Hook sets article data in Store when IFrame rendered
@@ -37,19 +38,19 @@ export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
 
         // Set links to Store
         store.dispatch(actions.article.setLinks( $window, $document, $head, $body ))
-    }, [])
+    }, [iFrameRef.current])
 }
 
 /** Hook sets <div> in IFrame to put an article in */
 export function useSetRootDivToIFrame() {
-    const { $links } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
-        if (!$links.$body) return
+        if (!$links.$body || history.length) return
 
         const rootDiv = document.createElement('div')
         $links.$body.append(rootDiv)
-    }, [$links])
+    }, [$links, history])
 }
 
 /** Hook sets article JSX to IFrame */
@@ -57,14 +58,14 @@ export function useSetArticleToIFrame() {
     const { $links, history, historyCurrentIdx, tempComps } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
-        if (!history.length) return
+        if (!$links.$body || !history.length) return
 
         const article = history[historyCurrentIdx].article
 
         // Создать JSX новой статьи и поставить в iFrame.
         ReactDOM.render(
-            buildArticle(article, tempComps),
+            turnArticleDataToJSX(article, tempComps),
             $links.$body.firstChild
         )
-    }, [history])
+    }, [history, tempComps, historyCurrentIdx])
 }

@@ -8,18 +8,29 @@ import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
 import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
 import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
 import FilesTreeType from 'types/filesTree'
-import articleManager from '../../editor/RightPart-2/articleManager/articleManager'
-import {getFromLocalStorage} from '../../utils/MiscUtils'
-import {CreateCompFnReturnType} from '../../editor/RightPart-2/articleManager/insert/insert'
+import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+import {getFromLocalStorage, removeFromLocalStorage} from 'utils/MiscUtils'
+import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 
 const articleActions = {
 
     // Наполнение Хранилища данными для отрисовки статьи
+    clearArticle() {
+        // Remove marks about article in Local Storage
+        removeFromLocalStorage('article')
+
+        return {
+            type: StoreArticleTypes.CLEAR_ARTICLE
+        }
+    },
+
+    // Наполнение Хранилища данными для отрисовки статьи
     fillArticle(siteId: string, incFilesTemplateId: string, articleUuId?: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const articleMarksFromLS = getFromLocalStorage('article')
-            if (articleMarksFromLS.articleId !== articleUuId) {
+
+            if (articleMarksFromLS?.articleId !== articleUuId) {
                 // Save article data to localStorage to know what kind of article the editor has to open next time
                 articleManager.supplementArtMarksInLocalStorage({
                     siteId,
@@ -67,6 +78,7 @@ const articleActions = {
                     return {
                         uuid: compObj.uuid,
                         name: compObj.name,
+                        // MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6
                         code: JSON6.parse( compObj.code )
                     }
                 }
@@ -129,8 +141,10 @@ const articleActions = {
             if (!articleData) return
 
             // Convert string to an object
+            // MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
             let parsedArticle: ArticleTypes.Article = JSON6.parse( articleData.code )
-            // If parsedArticle is null, then assign empty array to variable to allow work with article
+
+            // If parsedArticle is null, then assign empty array to variable to allow work with an article
             if (!parsedArticle) parsedArticle = emptyArticleData
 
             // Set an article to Store
@@ -138,7 +152,7 @@ const articleActions = {
         }
     },
 
-    // Set article. Action return history array with single article
+    // Set an article after receiving the data. Action return history array with single article
     setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
         return {
             type: StoreArticleTypes.SET_ARTICLE,
@@ -175,6 +189,7 @@ const articleActions = {
             if (!foldersString) return
 
             // Convert string to an object
+            // MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6
             let parsedFolders: FilesTreeType.Items = JSON6.parse( foldersString )
 
             // Set component template folders in the Store
@@ -231,13 +246,31 @@ const articleActions = {
     },
 
     /**
-     *
+     * Action forms a new history item
      * @param {Object} itemDetails —
      */
     createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
         return {
             type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
             payload: itemDetails
+        }
+    },
+
+    /**
+     * Action changes a current history step
+     * @param {String} step — step direction: undo OR redo
+     */
+    makeHistoryStep( step: 'undo' | 'redo' ) {
+        return {
+            type: StoreArticleTypes.MAKE_HISTORY_STEP,
+            payload: step
+        }
+    },
+
+    /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
+    setHistoryStepWhenArticleWasSaved() {
+        return {
+            type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
         }
     },
 }

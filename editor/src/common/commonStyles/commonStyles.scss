@@ -5,3 +5,7 @@
 @mixin focus() {
     box-shadow: 0 0 0 1px var(--focus-color);
 }
+
+@mixin big-shadow() {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .1), 0 2px 50px rgba(0, 0, 0, .2);
+}

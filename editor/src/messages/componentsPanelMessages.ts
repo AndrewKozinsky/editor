@@ -6,10 +6,18 @@ const obj = {
         eng: 'Components',
         rus: 'Компоненты'
     },
+    beforeButton: {
+        eng: 'Insert before component',
+        rus: 'Вставить до компонента'
+    },
+    afterButton: {
+        eng: 'Insert after component',
+        rus: 'Вставить после компонента'
+    },
     insideButton: {
-        eng: 'Inside',
-        rus: 'Внутрь'
-    }
+        eng: 'Insert in element',
+        rus: 'Вставить внутрь элемента'
+    },
 }
 
 export const componentsPanelMessages = getMessagesObject(obj)

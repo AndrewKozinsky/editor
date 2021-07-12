@@ -11,18 +11,20 @@ import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/m
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import {setCompItems, setArtItems} from '../stores'
 import { FolderType } from '../types'
-import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
-import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
+import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
+import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
 import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'src/requests/editor/components/getComponentsFoldersRequest'
-import { useGetArticlesFoldersRequest } from 'src/requests/editor/article/getArticlesFoldersRequest'
-import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
-import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
+import { useGetArticlesFoldersRequest } from 'requests/editor/article/getArticlesFoldersRequest'
+import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
+import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
 /**
  * Хук скачивает с сервера папки и ставит в Хранилище
  * @param {String} type — тип папок: с компонентами или со статьями
  */
+// SET ALL DATA TO REDUX!!!
 export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
     // id текущего сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
@@ -124,7 +126,7 @@ export async function saveItemsOnServer(type: FolderType, items: DragFilesTreeTy
 }
 
 /**
- * Функция запускаемая после удаления папки или компонента
+ * Функция запускаемая после удаления папки с компонентами или статьями
  * @param {String} type — тип папок: с компонентами или со статьями.
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} deletedItemUuid — uuid удалённого элемента
@@ -136,6 +138,12 @@ export function afterDeleteItem(type: FolderType, items: DragFilesTreeType.Items
     }
     else if (type === 'articles') {
         store.dispatch( actions.sites.setCurrentArt(null, null) )
+
+        // If the opened article is not in new items array then it is in the deleted folder,
+        // then clear article editor because the article will be deleted.
+        if ( filesTreePublicMethods.getItemById(items, store.getState().article.articleUuId) ) {
+            store.dispatch( actions.article.clearArticle() )
+        }
     }
 
     // Обновить uuid открытых папок в LocalStorage
@@ -159,6 +167,7 @@ export function afterDeleteItem(type: FolderType, items: DragFilesTreeType.Items
     }
 }
 
+
 /**
  * Функция запускаемая после добавления новой папки или файла (компонента или статьи)
  * @param {String} type — тип папок: с компонентами или со статьями
@@ -169,13 +178,15 @@ export async function afterAddingNewItem(type: FolderType, items: DragFilesTreeT
     // Параметры функции создания шаблона компонента или статьи
     const uuid = item.uuid
     const name = item.name
-    const code = JSON.stringify(item.content)
 
     // Сохранить данные на сервере
     if (type === 'components') {
-        await createComponentRequest(uuid, name, code)
+        await createComponentRequest(uuid, name, 'null')
     }
     else if (type === 'articles') {
+        // Create code of a new article
+        let code = JSON.stringify( articleManager.createArticle() )
+
         await createArticleRequest(uuid, name, code)
     }
 }

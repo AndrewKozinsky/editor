@@ -1,6 +1,6 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import articleManager from '../articleManager'
+import articleManager from './articleManager'
 
 export function createArticle(): ArticleTypes.Article {
     return {
@@ -33,10 +33,10 @@ export function createComponent(
         tempCompId: tempComp.uuid
     }
 
-    const result = createCompElements(tempComp, maxCompId)
-    if (result.compElems) {
-        compData.elems = result.compElems
-        maxCompId = result.maxCompId
+    const elementsFnResult = createCompElements(tempComp, maxCompId)
+    if (elementsFnResult.compElems) {
+        compData.elems = elementsFnResult.compElems
+        maxCompId = elementsFnResult.maxCompId
     }
 
     return {
@@ -45,9 +45,14 @@ export function createComponent(
     }
 }
 
+/**
+ * The function creates elements in a new component
+ * @param {Object} tempComp — a component template
+ * @param {Number} maxCompId — a maximum component id in an article
+ */
 function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number) {
     let newMaxCompId = maxCompId
-    // debugger
+
     if (!tempComp.code.elems?.length) {
         return {
             compElems: null,
@@ -97,6 +102,10 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
     }
 }
 
+/**
+ * The function creates attributes object in a element
+ * @param {Object} tempElem — a template element object
+ */
 function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
     if (!tempElem.attribs?.keys.length) return null
 
@@ -139,12 +148,18 @@ function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.At
     return attribsArr
 }
 
+/**
+ * The function creates an empty text component
+ * @param {Object} tempComp — a component template
+ * @param {Object} tempElem — a template element object
+ * @param {Number} dataCompId — component id
+ */
 function createNewTextComponent(
-    tempComp: TempCompTypes.TempComp, tempElem: TempCompTypes.Elem, compId: number
+    tempComp: TempCompTypes.TempComp, tempElem: TempCompTypes.Elem, dataCompId: number
 ): ArticleTypes.TextComponent {
     return {
         type: 'textComponent',
-        dataCompId: compId,
+        dataCompId: dataCompId,
         tempCompId: tempComp.uuid,
         tempElemId: tempElem.tempElemId,
         children: [

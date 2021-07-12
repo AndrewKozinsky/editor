@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose'
 import { Schema, Document } from 'mongoose'
 
-
+// CALL IT SITE_INC
 export interface IIncFilesTemplate extends Document {
     name: string,
     userId: string,
@@ -12,6 +12,7 @@ export interface IIncFilesTemplate extends Document {
     codeBeforeEndBody?: {
         code?: string
     },
+    // ADD CREATION TIME
 }
 
 // Схема о подключаемых к сайту файлах CSS, JS и так далее

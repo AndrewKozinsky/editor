@@ -4,13 +4,13 @@ import {AppState} from 'store/rootReducer'
 
 /** The hooks sets flash rectangles into IFrame */
 export function useInstallFlashElements() {
-    const { $links } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppState) => store.article)
 
     // Were flash elements installed?
     const [wereInstalled, setWereInstalled] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || wereInstalled) return
+        if (!$links.$body || !history.length || wereInstalled) return
 
         // Set style
         setExtraStyle($links.$head)
@@ -21,7 +21,14 @@ export function useInstallFlashElements() {
 
         // Set the flag that flash elements were installed so as not to do it again
         setWereInstalled(true)
-    }, [$links, wereInstalled])
+    }, [$links, wereInstalled, history])
+
+    useEffect(function () {
+        if (!history.length) {
+            // Set flag that files are not set
+            setWereInstalled(false)
+        }
+    }, [history])
 }
 
 /**
@@ -30,29 +37,7 @@ export function useInstallFlashElements() {
  */
 function setExtraStyle($head: HTMLHeadElement) {
     // Flash rectangles style
-    const style = `
-    .em-flash-rect {
-        display: none;
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        pointer-events: none;
-        box-sizing: content-box;
-        border-radius: 2px;
-    }
-    
-    .em-flash-rect__hover {
-        top: 50px;
-        left: 50px;
-        border: 1px solid rgba(1, 122, 255, 1);
-    }
-    
-    .em-flash-rect__select {
-        top: 250px;
-        left: 250px;
-        border: 2px solid rgba(1, 122, 255);
-    }
-    `
+    const style = `.em-flash-rect {display: none;position: absolute;width: 100px;height: 100px;pointer-events: none;box-sizing: content-box;border-radius: 2px;}.em-flash-rect__hover {top: 50px;left: 50px;border: 1px solid rgba(1, 122, 255, 1);}.em-flash-rect__select {top: 250px;left: 250px;border: 2px solid rgba(1, 122, 255);}`
 
     // Create and set <div> into <body>
     const styleElem = document.createElement('style')

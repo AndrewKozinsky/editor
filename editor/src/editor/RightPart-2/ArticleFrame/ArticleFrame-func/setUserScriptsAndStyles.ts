@@ -1,14 +1,17 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from 'store/rootReducer'
 
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame
 export function useSetUserScriptsAndStylesToIFrame() {
-    const { $links, incFiles } = useSelector((store: AppState) => store.article)
+    const { $links, incFiles, history } = useSelector((store: AppState) => store.article)
+
+    // Were mouse move handler set?
+    const [filesWereSet, setFilesWereSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body) return
+        if (!$links.$body || !history.length || filesWereSet) return
 
         // Set code in <head>
         if (incFiles.inHead) {
@@ -22,9 +25,17 @@ export function useSetUserScriptsAndStylesToIFrame() {
             putNodesToDocument($links.$document, nodes, 'body')
         }
 
-        // ANOTHER WAYS TO MAKE SCRIPT WORKS:
-        // https://stackoverflow.com/questions/50651856/iframe-problems-script-src-not-loaded-at-all
-    }, [$links, incFiles.inHead, incFiles.beforeEndBody])
+        // Set flag that files were set
+        setFilesWereSet(true)
+
+    }, [$links, incFiles, incFiles, history, filesWereSet])
+
+    useEffect(function () {
+        if (!history.length) {
+            // Set flag that files are not set
+            setFilesWereSet(false)
+        }
+    }, [history])
 }
 
 /**

@@ -6,19 +6,19 @@ import {isCursorOnTextComponent, isTextCompAhead} from '../flashElements/useSetM
 
 /** The hook doesn't allow to set focus while user clicks on no text components. */
 export function useRemoveUnwantedFocus() {
-    const { $links } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppState) => store.article)
 
     // Were mouse move handler set?
     const [mouseClickHandlerSet, setMouseClickHandlerSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || mouseClickHandlerSet) return
+        if (!$links.$body || mouseClickHandlerSet || !history.length) return
 
         $links.$document.addEventListener('mousedown', mouseHandler)
 
         // Set flag that handlers were set
         setMouseClickHandlerSet(true)
-    }, [$links, mouseClickHandlerSet])
+    }, [$links, mouseClickHandlerSet, history])
 }
 
 /**

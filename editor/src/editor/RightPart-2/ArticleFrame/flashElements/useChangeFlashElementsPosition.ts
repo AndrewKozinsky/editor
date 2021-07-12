@@ -8,12 +8,12 @@ import {setSizeAndPosition} from './setSizeAndPosition'
  * The hooks creates Observers to watch for a hoverrectcoords and a selectrectcoords element attribute
  */
 export function useChangeFlashElementsPosition() {
-    const { $links } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppState) => store.article)
 
     const [observersHaveBeenSet, setObserversHaveBeenSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || observersHaveBeenSet) return
+        if (!$links.$body || observersHaveBeenSet || !history.length) return
 
         // Links of flashed rectangles
         const hoverRect = $links.$body.querySelector('[data-em-hover-rect]')
@@ -26,7 +26,14 @@ export function useChangeFlashElementsPosition() {
 
         // Set the flag that Observers were set.
         setObserversHaveBeenSet(true)
-    }, [$links, observersHaveBeenSet])
+    }, [$links, observersHaveBeenSet, history])
+
+    useEffect(function () {
+        if (!$links.$body || history.length) return
+
+        // Set the flag that Observers were set.
+        setObserversHaveBeenSet(false)
+    }, [$links, observersHaveBeenSet, history])
 }
 
 /**

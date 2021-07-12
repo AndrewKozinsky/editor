@@ -160,5 +160,5 @@ export function useGetEditArticleBtnHandler() {
         store.dispatch(actions.article.fillArticle(
             currentSiteId, currentTemplateId, currentArtItemId
         ))
-    }, [])
+    }, [currentSiteId, currentTemplateId, currentArtItemId])
 }

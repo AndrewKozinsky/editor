@@ -1,31 +1,7 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import articleManager from '../articleManager';
+import articleManager from './articleManager';
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-
-/**
- * The function check can you insert a component into the target element
- * @param {Array} tempCompArr — components templates array
- * @param {Array} dataCompArr — array of data components
- * @param {String} targetDataCompId — a target data component
- * @param {String} targetDataElemId — a target data element
- */
-export function canComponentPutInElement(
-    this: typeof articleManager,
-    tempCompArr: TempCompTypes.TempComps,
-    dataCompArr: ArticleTypes.Components,
-    targetDataCompId: ArticleTypes.DataCompId,
-    targetDataElemId: ArticleTypes.DataElemId
-) {
-    // Get element template
-    const tempElem = this.getTempElemByDataCompIdAndDataElemId(
-        dataCompArr, targetDataCompId, targetDataElemId, tempCompArr
-    )
-
-    // If element template has text property, that only text component is allowed there.
-    return !tempElem.text
-}
-
 
 
 export type CreateCompFnReturnType = {
@@ -56,16 +32,18 @@ export function createCompAndSetInElem(
     // Get element which I going to set the new component
     const targetElemData = this.getCompElem(article.components, targetDataCompId, targetDataElemId)
 
+    // Create a new components array
     let updatedComponents: ArticleTypes.Components
 
+    // If the target element has a children array, put a new component to it
     if (targetElemData.children) {
         // Set the new component into element children
         const elemChildrenArrCopy = [...targetElemData.children, newCompResult.compData]
         // Get updates components array
         updatedComponents = makeImmutableObj(article.components, targetElemData.children, elemChildrenArrCopy)
     }
+    // If the target element doesn't have a children array, create and put a new component to it
     else {
-        // Set the new component into element children
         const newTargetElemData = {...targetElemData}
         newTargetElemData.children = [newCompResult.compData]
 
@@ -80,17 +58,17 @@ export function createCompAndSetInElem(
 }
 
 
-
-
 /**
- *
- * @param article
- * @param tempCompArr
- * @param tempCompId
- * @param targetDataCompId
+ * The function creates a new component and puts it before or after a passed component
+ * @param {String} place — a place where to put a created component: before or after
+ * @param {Object} article — article object
+ * @param {Array} tempCompArr — components templates array
+ * @param {String} tempCompId — component template uuid
+ * @param {String} targetDataCompId — a target data component id relative with the a new component will be placed
  */
-export function createCompAndSetAfterComp(
+export function createCompAndSetItNearComp(
     this: typeof articleManager,
+    place: 'before' | 'after',
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.UuId,
@@ -100,12 +78,20 @@ export function createCompAndSetAfterComp(
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
     const parentArray = this.getCompParentArray(article.components, targetDataCompId)
 
+    // Get idx of the targetDataCompId in parent array
     const idx = parentArray.findIndex(compData => compData.dataCompId === targetDataCompId)
+
+    // Put the new component before or ofter target component
     let parentArrayCopy = [...parentArray]
-    parentArrayCopy.splice(idx + 1, 0, newCompResult.compData)
+    if (place === 'before') {
+        parentArrayCopy.splice(idx, 0, newCompResult.compData)
+    }
+    else if (place === 'after') {
+        parentArrayCopy.splice(idx + 1, 0, newCompResult.compData)
+    }
 
+    // Create a new components array
     let updatedComponents: ArticleTypes.Components
-
     if (parentArray === article.components) updatedComponents = parentArrayCopy
     else updatedComponents = makeImmutableObj(article.components, parentArray, parentArrayCopy)
 
@@ -115,14 +101,17 @@ export function createCompAndSetAfterComp(
     }
 }
 
+
 /**
- *
- * @param article
- * @param tempCompArr
- * @param tempCompId
+ * The function creates a new component and puts it in the end of the article
+ * @param {String} place — a place where to put a created component
+ * @param {Object} article — article object
+ * @param {Array} tempCompArr — components templates array
+ * @param {String} tempCompId — component template uuid
  */
-export function createCompAndSetInEndOfArticle(
+export function createCompAndSetInRootOfArticle(
     this: typeof articleManager,
+    place: 'begin' | 'end',
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.UuId,
@@ -130,9 +119,14 @@ export function createCompAndSetInEndOfArticle(
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
 
+    // Put the new component in the beginning OR to the end of components array
+    const artCompsArr = [...article.components]
+    if (place === 'begin') artCompsArr.unshift(newCompResult.compData)
+    else if (place === 'end') artCompsArr.push(newCompResult.compData)
+
     return {
-        components: [...article.components, newCompResult.compData],
+
+        components: artCompsArr,
         maxCompId: newCompResult.maxCompId
     }
 }
-

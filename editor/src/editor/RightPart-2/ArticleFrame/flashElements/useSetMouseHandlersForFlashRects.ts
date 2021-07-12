@@ -1,29 +1,45 @@
 import {useEffect, useState} from 'react'
-import store from 'src/store/store'
-import actions from 'src/store/rootAction'
+import store from 'store/store'
+import actions from 'store/rootAction'
 import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import { getElementPadding } from '../../../../utils/domUtils'
+import {AppState} from 'store/rootReducer'
+import { getElementPadding } from 'utils/domUtils'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
  * They save information about component/element under cursor in Store
  */
 export function useSetMouseHandlersForFlashRects() {
-    const { $links } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppState) => store.article)
     // Were mouse move handler set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || mouseMoveHandlerSet) return
+        if (!$links.$body || mouseMoveHandlerSet || !history.length) return
 
         // Set handlers mousemove and mousedown
-        $links.$document.addEventListener('mousemove', (e: MouseEvent) => mouseHandler(e, 'hover'))
-        $links.$document.addEventListener('mousedown', (e: MouseEvent) => mouseHandler(e, 'select'))
+        $links.$document.addEventListener('mousemove', hoverHandler)
+        $links.$document.addEventListener('mousedown', selectHandler)
 
         // Set flag that handlers were set
         setMouseMoveHandlerSet(true)
-    }, [$links, mouseMoveHandlerSet])
+    }, [$links, mouseMoveHandlerSet, history])
+
+    useEffect(function () {
+        if ($links.$document && !history.length) {
+            setMouseMoveHandlerSet(false)
+
+            $links.$document.removeEventListener('mousemove', hoverHandler)
+            $links.$document.removeEventListener('mousedown', selectHandler)
+        }
+    }, [history, $links])
+}
+
+function hoverHandler(e: MouseEvent) {
+    mouseHandler(e, 'hover')
+}
+function selectHandler(e: MouseEvent) {
+    mouseHandler(e, 'select')
 }
 
 /**

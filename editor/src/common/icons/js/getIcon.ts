@@ -29,6 +29,12 @@ import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
 import BtnSignEdit from '../icons/btnSignEdit'
 import FilesTreeTorus from '../icons/filesTreeTorus'
+import FilesTreeUp from '../icons/filesTreeUp'
+import FilesTreeDown from '../icons/filesTreeDown'
+import ArticleMenu from '../icons/articleMenu'
+import BtnSignUndo from '../icons/btnSignUndo'
+import BtnSignRedo from '../icons/btnSignRedo'
+import BtnSignCancel from '../icons/btnSignCancel'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -77,6 +83,9 @@ export function getIcon(type: string): ReactNode {
         btnSignClose: BtnSignClose,
         btnSignExit: BtnSignExit,
         btnSignEdit: BtnSignEdit,
+        btnSignUndo: BtnSignUndo,
+        btnSignRedo: BtnSignRedo,
+        btnSignCancel: BtnSignCancel,
 
         // Тема интерфейса
         editorLightTheme: EditorLightTheme,
@@ -88,12 +97,16 @@ export function getIcon(type: string): ReactNode {
         filesTreeFolderPlus: FilesTreeFolderPlus,
         filesTreePlus: FilesTreePlus,
         filesTreeTorus: FilesTreeTorus,
+        filesTreeUp: FilesTreeUp,
+        filesTreeDown: FilesTreeDown,
 
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: FilesTreePlaceMark,
 
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreeTrash: FilesTreeTrash,
+        // Article menu sign on menu button
+        articleMenu: ArticleMenu,
     }
 
     return components[type]

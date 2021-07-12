@@ -11,9 +11,9 @@ import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 import EntrancePages from 'modules/auth/EntrancePages/EntrancePages'
 
 // JS и CSS
-import {useGetAndSetEditorSettings, useSetTokenStatus} from './js/init'
-import { useGetAppClasses, useRedirectPage } from './js/App-func'
-import useSetShortcutsHandler from './js/setShortcutsHandler'
+import {useGetAndSetEditorSettings, useSetTokenStatus} from './app-fn/init'
+import { useGetAppClasses, useRedirectPage } from './app-fn/App-func'
+import setShortcutsHandler from './shortcuts/shortcutsHandler'
 import './css/reset.css'
 import './css/variables.scss'
 import './css/default.scss'
@@ -22,6 +22,11 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App() {
+    // TODO Don't forgot to use eslint, prettier and stylelint.
+    // TODO MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
+    // TODO If I have two Grid components and I put an image to the second grid's cell it appears in the first.
+    // TODO Use a more specific name instead of id in the article data.
+    // TODO User must pass array of objects with data about including files instead a single string.
     // TODO You didn't consider when user types text and element expands. Then flashed rectangle doesn't match element size. Yet it pages was is scrolled flashed rectangle set on a wrong position. Yet flashed rectangle set on a wrong position if pages is scrolled.
     // TODO Можно все запросы связанные с компонентами, которые зависимы от сайта (получение компонентов сайта, удаление компонента сайта и так далее) перенести в контроллер сайта. Так получится логичнее.
     // TODO Надо сделать отдельные файлы с типами присылаемых с сервера данных: сайт, компонент, шаблон файлов, статью и использовать их для типизации запросов.
@@ -39,6 +44,7 @@ export default function App() {
     // TODO После отправки формы на странице подтверждения почты программа перенаправит на страницу редактора. Но на полсекунды появится форма входа, которая затем растворится. Из-за этого возникает рваная анимация. Еще в Консоле есть ошибка Реакта. Это нужно исправить.
     // TODO Посмотри можно ли useHandleConfirmChangingEmailModal() заменить на универсальную useGetShowModal()
     // TODO Better disable form when data loads: when they submit form or download data because tab switch
+    // https://stackoverflow.com/questions/50651856/iframe-problems-script-src-not-loaded-at-all
 
 
     // TODO ПОСМОТРИ В БУДУЩЕМ-------------------------
@@ -62,7 +68,7 @@ export default function App() {
     const isTokenSet = useSetTokenStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    useSetShortcutsHandler()
+    setShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет

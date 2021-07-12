@@ -9,7 +9,8 @@ type TempCompFilesTreePropType = {
     items: null | TempCompFilesTreeType.Items
     // Функция запускаемая после разворачивания/сворачивания папки
     afterCollapseFolder: TempCompFilesTreeType.AfterCollapseFolder
-    afterClickNextBtn: TempCompFilesTreeType.AfterClickNextBtn
+    afterClickBeforeBtn: TempCompFilesTreeType.AfterClickBeforeBtn
+    afterClickAfterBtn: TempCompFilesTreeType.AfterClickAfterBtn
     afterClickInsideBtn: TempCompFilesTreeType.AfterClickInsideBtn
 }
 
@@ -18,8 +19,9 @@ export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
 
     const after: TempCompFilesTreeType.After = {
         afterCollapseFolder: props.afterCollapseFolder,
-        afterClickNextBtn: props.afterClickNextBtn,
-        afterClickInsideBtn: props.afterClickInsideBtn,
+        afterClickBeforeBtn: props.afterClickBeforeBtn,
+        afterClickAfterBtn: props.afterClickAfterBtn,
+        afterClickInsideBtn: props.afterClickInsideBtn
     }
 
     // Минимальная ширина главной обёртки

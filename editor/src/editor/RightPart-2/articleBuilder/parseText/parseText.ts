@@ -8,7 +8,7 @@ import {parseComponent} from '../parceComponent/parseComponent'
  * The function turns text component data to html-object
  * @param {Object} compData — component data
  * @param {Array} tempComps — an array of component templates
- * @param {String} tempElemId — elem template id
+ * @param {String} tempElemId — element template id
  */
 export function parseText(
     compData: ArticleTypes.TextComponent, tempComps: TempCompTypes.TempComps, tempElemId: TempCompTypes.TempElemId

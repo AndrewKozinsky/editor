@@ -10,7 +10,7 @@ export function useManageEmptyTextSign() {
     const [handlerHasSet, setHandlerHasSet] = useState(false)
 
     useEffect(function () {
-        if (!history.length || handlerHasSet) return
+        if (!$links.$body || !history.length || handlerHasSet) return
 
         // There is need to set tabIndex attribute to get focus event because <body> cannot get focus.
         // I catch focus on contentEditable elements in body

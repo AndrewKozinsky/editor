@@ -32,6 +32,7 @@ export default function FoldersList(props: FoldersListPropType) {
     const { type } = props
 
     // Получение с сервера порядка следования папок и установка в Эффектор
+    // SET ALL DATA TO REDUX!!!
     useGetFoldersFromServerAndPutInEffector(type)
 
     // Папки компонентов из Эффектора

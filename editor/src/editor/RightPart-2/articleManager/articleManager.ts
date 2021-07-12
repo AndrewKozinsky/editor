@@ -1,11 +1,15 @@
 import {
-    canComponentPutInElement,
-    createCompAndSetAfterComp,
+    createCompAndSetItNearComp,
     createCompAndSetInElem,
-    createCompAndSetInEndOfArticle
-} from './insert/insert'
-import {supplementArtMarksInLocalStorage} from './misc/setArticleMarksInLocalStorage'
+    createCompAndSetInRootOfArticle
+} from './insert'
 import {
+    deleteArticle,
+    saveArticle,
+    supplementArtMarksInLocalStorage
+} from './misc'
+import {
+    getCurrentHistoryItem,
     getComponent,
     getCompElem,
     getTempCompByDataCompId,
@@ -13,37 +17,54 @@ import {
     getTemplate,
     getTemplateElement,
     getCompParentArray
-} from './gettingResources/gettingResources'
-import { hooks } from './hooks/hooks'
-import { createArticle, createComponent } from './create/create';
+} from './gettingResources'
+import { hooks } from './hooks'
+import {
+    createArticle,
+    createComponent
+} from './create';
+import {
+    canComponentPutInElement,
+    hasElemNestedElements,
+    canMakeHistoryStep,
+    isArticleSave
+} from "./check"
 
 
 class ArticleManager {
     // GETTING RESOURCES
-    // Find template in templates array
+    // Finds current history item object
+    getCurrentHistoryItem = getCurrentHistoryItem
+    // Finds template in templates array
     getTemplate = getTemplate
-    // Find element template in templates array
+    // Finds element template in templates array
     getTemplateElement = getTemplateElement
-    // Find template in templates array
+    // Finds template in templates array
     getComponent = getComponent
-    // Find element template in templates array
+    // Finds element template in templates array
     getCompElem = getCompElem
-    // Find component template by data component id
+    // Finds component template by data component id
     getTempCompByDataCompId = getTempCompByDataCompId
-    // Find element template by data component id and data element id
+    // Finds element template by data component id and data element id
     getTempElemByDataCompIdAndDataElemId = getTempElemByDataCompIdAndDataElemId
+    // Finds an array in witch component is
     getCompParentArray = getCompParentArray
+
+    // CHECK
+    // The method returns boolean can passed component put in element
+    canComponentPutInElement = canComponentPutInElement
+    hasElemNestedElements = hasElemNestedElements
+    canMakeHistoryStep = canMakeHistoryStep
+    isArticleSave = isArticleSave
 
     // CREATE
     createArticle = createArticle
     createComponent = createComponent
 
     // INSERT
-    // The method returns boolean can passed component put in element
-    canComponentPutInElement = canComponentPutInElement
-    createCompAndSetInEndOfArticle = createCompAndSetInEndOfArticle
+    createCompAndSetInRootOfArticle = createCompAndSetInRootOfArticle
     createCompAndSetInElem = createCompAndSetInElem
-    createCompAndSetAfterComp = createCompAndSetAfterComp
+    createCompAndSetItNearComp = createCompAndSetItNearComp
 
     // HOOKS
     // Object with hooks
@@ -53,6 +74,8 @@ class ArticleManager {
     // The method saves article misc data to localStorage
     // to know what kind of article the editor has to open next time
     supplementArtMarksInLocalStorage = supplementArtMarksInLocalStorage
+    saveArticle = saveArticle
+    deleteArticle = deleteArticle
 }
 
 export default new ArticleManager()

@@ -16,22 +16,12 @@ $CN: temp-comp-ft-item;
     display: flex;
     align-items: flex-start;
     color: var(--text-color);
-    cursor: pointer;
     padding: 4px 10px 4px 0;
-    border-radius: var(--radius);
-}
 
-// Атрибут data-ft-hover задаётся обёртке через JS при наведении
-// на определённые области. Поэтому подсветить её.
-.#{$CN}__inner[data-ft-hover] {
-    background-color: var(--bg-color-2);
-}
-// Если навели на главную обёртку, то задать другой фон правой обёртке
-.#{$CN}__inner[data-ft-hover] .#{$CN}__right-part {
-    background-color: var(--bg-color-2);
-
-    &::before {
-        background: linear-gradient(90deg, transparent, var(--bg-color-2));
+    &:hover {
+        .#{$CN}__right-part {
+            display: flex;
+        }
     }
 }
 
@@ -61,7 +51,7 @@ $CN: temp-comp-ft-item;
 
     &:focus {
         // Включение стандартной фокусировки
-        @include focus
+        @include focus;
     }
 
     svg {
@@ -81,7 +71,7 @@ $CN: temp-comp-ft-item;
 .#{$CN}__btn-triangle--open {
     transform: rotate(90deg);
 }
-// Кнопка-треугольник не видима если нет вложенных элементов
+// Кнопка-треугольник невидима если нет вложенных элементов
 .#{$CN}__btn-triangle--invisible {
     visibility: hidden;
 }
@@ -98,17 +88,39 @@ $CN: temp-comp-ft-item;
     margin: 2px 5px 0 2px;
 }
 
+.#{$CN}__circles {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    width: 93px;
+}
+.#{$CN}__circle {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    margin: auto;
+}
+.#{$CN}__circle--visible {
+    background-color: var(--bg-color-2);
+}
+
+.#{$CN}__item-name {
+    position: relative;
+}
+
 
 // Обёртка правых кнопок
 .#{$CN}__right-part {
     position: absolute;
     top: 0;
     right: 0;
-    display: flex;
-    height: calc(100% - 2px);
-    padding: 1px;
-    border-radius: var(--radius);
-
+    display: none;
+    height: 100%;
+    background-color: var(--bg-color);
+    padding-left: 1px;
 
     &::before {
         content: '';
@@ -121,13 +133,10 @@ $CN: temp-comp-ft-item;
     }
 }
 
-.#{$CN}__inside-btn {
+.#{$CN}__right-btn {
     flex-grow: 1;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-    background-color: var(--bg-color);
-    padding: 1px 10px;
+    padding: 1px 8px;
 }
-.#{$CN}__icon-inside-btn {
-    margin-right: 3px;
+.#{$CN}__right-btn--invisible {
+    visibility: hidden;
 }

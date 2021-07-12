@@ -6,6 +6,7 @@ export interface ISite extends Document {
     name: string,
     userId: string,
     defaultIncFilesTemplateId?: null | string,
+    // ADD CREATION TIME
 }
 
 // Схема с данными сайта

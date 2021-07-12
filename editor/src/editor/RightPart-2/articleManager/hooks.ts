@@ -1,5 +1,5 @@
 import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
+import {AppState} from 'src/store/rootReducer'
 import {useEffect, useState} from 'react'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
@@ -26,7 +26,7 @@ function useGetHistoryItem() {
     return currentItem
 }
 
-/** Hook returns current object article */
+/** Hook returns current article */
 function useGetArticle() {
     const historyItem = useGetHistoryItem()
     const [article, setArticle] = useState<null | ArticleTypes.Article>(null)

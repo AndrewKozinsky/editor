@@ -6,36 +6,6 @@ import {
 } from '../StoreManage/manageState'
 import TempCompFilesTreeType from '../types'
 
-/*
-    Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
-    В обёртке есть интерактивные кнопки.
-    Нужно сделать чтобы всегда подсвечивался только один элемент: или обёртка или кнопки.
-    Так как кнопки находятся в обёртке, то такое поведение нельзя реализовать через CSS.
-    Поэтому при наведении на обёртку задаётся атрибут data-ft-hover.
-    А если навели на кнопки, то у обёртки удаляется атрибут data-ft-hover.
-    Для элементов с data-ft-hover в CSS прописан подсвечивающий стиль.
-*/
-export function useMarkItemElemWhenItHovered() {
-
-    return useCallback(function (event: SyntheticEvent): void {
-        const $target = <HTMLElement>event.target
-        const $folder = $target.closest('[data-ft-item]')
-            .querySelector('[data-ft-inner]') as HTMLElement
-
-        if (!$target || !$folder) return
-
-        // Если на элемент навели и это не кнопка...
-        if(event.type === 'mouseover' && !$target.closest('[data-ft-item-btn]')) {
-            // То поставить обёртке data-ft-hover
-            $folder.dataset.ftHover = 'true'
-        }
-        // В остальных случаях убрать data-ft-hover
-        else {
-            delete $folder.dataset.ftHover
-        }
-    }, [])
-}
-
 
 
 /**
@@ -104,7 +74,7 @@ export function useGetOnClickHandler(
     itemData: TempCompFilesTreeType.Item,
     after: TempCompFilesTreeType.After
 ) {
-    return useCallback(function (e) {
+    return useCallback(function (e: SyntheticEvent) {
         // Toggle folder opening
         if (itemData.type === 'folder') {
             const newItems = toggleFolder(items, itemData.uuid)
@@ -113,9 +83,6 @@ export function useGetOnClickHandler(
             const openedFoldersUuid = getOpenedFoldersUuid(newItems)
 
             after.afterCollapseFolder(newItems, openedFoldersUuid)
-        }
-        else if (itemData.type === 'file') {
-            after.afterClickNextBtn(itemData.uuid)
         }
     }, [itemData, after])
 }

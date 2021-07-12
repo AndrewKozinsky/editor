@@ -8,6 +8,7 @@ export interface IComponent extends Document {
     siteId: string,
     name: string,
     code?: string,
+    // ADD CREATION TIME
 }
 
 // Схема шаблона компонента
