@@ -1,14 +1,14 @@
-import * as mongoose from 'mongoose'
-import { Schema, Document } from 'mongoose'
+// import * as mongoose from 'mongoose'
+// import { Schema, Document } from 'mongoose'
 
-export interface IComponentsFolders extends Document {
+/*export interface IComponentsFolders extends Document {
     userId: string,
     siteId: string,
     content?: string,
-}
+}*/
 
 // Схема порядка следования шаблонов компонентов
-const ComponentsFoldersSchema: Schema = new Schema({
+/*const ComponentsFoldersSchema: Schema = new Schema({
     // id пользователя которому принадлежит документ
     // Требуется для удаления всех документов при удалении пользователя
     userId: {
@@ -24,8 +24,12 @@ const ComponentsFoldersSchema: Schema = new Schema({
     content: {
         type: String,
     },
-})
+    createdAt: {
+        type: Date,
+        required: [ true, '{{user.????????}}' ]
+    },
+})*/
 
 
-const ComponentsFoldersModel = mongoose.model<IComponentsFolders>('ComponentsFolders', ComponentsFoldersSchema)
-export default ComponentsFoldersModel
+// const ComponentsFoldersModel = mongoose.model<IComponentsFolders>('ComponentsFolders', ComponentsFoldersSchema)
+// export default ComponentsFoldersModel

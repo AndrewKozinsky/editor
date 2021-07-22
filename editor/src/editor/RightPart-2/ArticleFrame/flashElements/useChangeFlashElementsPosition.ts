@@ -1,13 +1,13 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {setSizeAndPosition} from './setSizeAndPosition'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import {setSizeAndPosition} from './setSizeAndPosition'
 
 
 /**
  * The hooks creates Observers to watch for a hoverrectcoords and a selectrectcoords element attribute
  */
-export function useChangeFlashElementsPosition() {
+/*export function useChangeFlashElementsPosition() {
     const { $links, history } = useSelector((store: AppState) => store.article)
 
     const [observersHaveBeenSet, setObserversHaveBeenSet] = useState(false)
@@ -34,7 +34,7 @@ export function useChangeFlashElementsPosition() {
         // Set the flag that Observers were set.
         setObserversHaveBeenSet(false)
     }, [$links, observersHaveBeenSet, history])
-}
+}*/
 
 /**
  * The function creates an Observer to watch attributes changing on the body
@@ -43,7 +43,7 @@ export function useChangeFlashElementsPosition() {
  * @param {String} type — type of a flashed rectangle: hover or select
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
-function observeReactCoordsProps($body: HTMLBodyElement, type: 'hover' | 'select', $flashRect: HTMLElement) {
+/*function observeReactCoordsProps($body: HTMLBodyElement, type: 'hover' | 'select', $flashRect: HTMLElement) {
 
     const observer = new MutationObserver((mutationRecords) => {
         // Get string with coordinates of the flashed element in an article
@@ -60,4 +60,4 @@ function observeReactCoordsProps($body: HTMLBodyElement, type: 'hover' | 'select
     observer.observe($body, {
         attributes: true, attributeFilter: [type + 'rectcoords']
     })
-}
+}*/

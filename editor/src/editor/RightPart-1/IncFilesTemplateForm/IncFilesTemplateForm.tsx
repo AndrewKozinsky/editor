@@ -1,24 +1,24 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import useGetShowModal from 'utils/hooksUtils'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import Button from 'common/formElements/Button/Button'
-import {
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import useGetShowModal from 'utils/hooksUtils'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import Button from 'common/formElements/Button/Button'
+/*import {
     useGetAnotherTemplate,
     useGetSubmitButtonText
-} from './IncFilesTemplateForm-func'
-import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-import { ModalContent } from './deleteTemplate'
+} from './IncFilesTemplateForm-func'*/
+// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+// import { ModalContent } from './deleteTemplate'
 
 
 /** Форма создания или редактирования шаблона подключаемых файлов */
-export default function IncFilesTemplateForm() {
+/*export default function IncFilesTemplateForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'incFilesTemplate')
@@ -79,10 +79,10 @@ export default function IncFilesTemplateForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/
 
 /** Кнопка удаления шаблона подключаемых файлов */
-function DeleteTemplateButton() {
+/*function DeleteTemplateButton() {
     // id текущего шаблона
     const { currentTemplateId } = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
@@ -100,4 +100,4 @@ function DeleteTemplateButton() {
             onClick={openDeleteTemplateConfirmation}
         />
     )
-}
+}*/

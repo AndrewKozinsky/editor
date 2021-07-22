@@ -1,4 +1,4 @@
-namespace TempCompTypes {
+/*namespace TempCompTypes {
     export type TempComps = TempComp[]
 
     // Компонент
@@ -129,7 +129,7 @@ namespace TempCompTypes {
     }
 
     export type InputType = 'text' | 'radio' | 'checkbox' | 'select'
-}
+}*/
 
 
-export default TempCompTypes
+// export default TempCompTypes

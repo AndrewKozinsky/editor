@@ -1,12 +1,12 @@
-import {useCallback, useEffect, useState} from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import {useCallback, useEffect, useState} from 'react'
+// import { useSelector, useDispatch } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
 /** The hook returns is the Article menu button visible */
-export function useGetIsButtonVisible() {
+/*export function useGetIsButtonVisible() {
     // Current main tab
     const { mainTab } = useSelector((store: AppState) => store.settings)
     // Open article uuid
@@ -23,13 +23,13 @@ export function useGetIsButtonVisible() {
     }, [mainTab, articleUuId])
 
     return isVisible
-}
+}*/
 
 /**
  * The hook checks if I can make undo or redo history step
  * @param {Object} stepType — step direction: undo OR redo
  */
-export function useIsHistoryBtnDisabled(stepType: 'undo' | 'redo') {
+/*export function useIsHistoryBtnDisabled(stepType: 'undo' | 'redo') {
     const {history, historyCurrentIdx} = useSelector((store: AppState) => store.article)
 
     // Is button disabled
@@ -41,22 +41,22 @@ export function useIsHistoryBtnDisabled(stepType: 'undo' | 'redo') {
     }, [history, historyCurrentIdx])
 
     return isDisabled
-}
+}*/
 
 /**
  * The hook returns the a callback makes undo or redo step of article history
  * @param {Object} stepType — step direction: undo OR redo
  */
-export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
+/*export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
     const dispatch = useDispatch()
 
     return useCallback(function (){
         dispatch(actions.article.makeHistoryStep(stepType))
     }, [])
-}
+}*/
 
 
-export function useIsDataBtnDisabled() {
+/*export function useIsDataBtnDisabled() {
     // Is button disabled
     const [isDisabled, setIsDisabled] = useState(true)
 
@@ -65,12 +65,13 @@ export function useIsDataBtnDisabled() {
     }, [])
 
     return isDisabled
-}
+}*/
 
+/*
 export function useShowData() {
     const dispatch = useDispatch()
 
     return useCallback(function (){
 
     }, [])
-}
+}*/

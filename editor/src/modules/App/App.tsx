@@ -11,8 +11,14 @@ import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 import EntrancePages from 'modules/auth/EntrancePages/EntrancePages'
 
 // JS и CSS
-import {useGetAndSetEditorSettings, useSetTokenStatus} from './app-fn/init'
-import { useGetAppClasses, useRedirectPage } from './app-fn/App-func'
+import {
+    useGetAndSetEditorSettings,
+    useSetTokenStatus
+} from './app-fn/init'
+import {
+    useGetAppClasses,
+    useRedirectPage
+} from './app-fn/App-func'
 import setShortcutsHandler from './shortcuts/shortcutsHandler'
 import './css/reset.css'
 import './css/variables.scss'

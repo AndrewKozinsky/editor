@@ -1,9 +1,9 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import LanguageSection from '../LanguageSection/LanguageSection'
-import ThemeSection from '../ThemeSection/ThemeSection'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import LanguageSection from '../LanguageSection/LanguageSection'
+// import ThemeSection from '../ThemeSection/ThemeSection'
 
-export default function SettingsEditorTabContent() {
+/*export default function SettingsEditorTabContent() {
     return (
         <div>
             <Wrapper>
@@ -15,4 +15,4 @@ export default function SettingsEditorTabContent() {
             </Wrapper>
         </div>
     )
-}
+}*/

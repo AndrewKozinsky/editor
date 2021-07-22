@@ -1,25 +1,25 @@
-import React from 'react'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Notice from 'common/Notice/Notice'
-import getFormConfig from './formResources'
-import { getMenuItems } from '../menuItems'
-import {
+// import React from 'react'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Notice from 'common/Notice/Notice'
+// import getFormConfig from './formResources'
+// import { getMenuItems } from '../menuItems'
+/*import {
     resetFormMessages,
     resetFormJSXFnMessages
-} from 'messages/resetFormMessages'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import CommonError from '../CommonError/CommonError'
-import FHTypes from 'libs/formHandler/types'
-import {commonMessages} from 'messages/commonMessages'
+} from 'messages/resetFormMessages'*/
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import CommonError from '../CommonError/CommonError'
+// import FHTypes from 'libs/formHandler/types'
+// import {commonMessages} from 'messages/commonMessages'
 
 
 /** Форма входа в сервис */
-export default function ResetFormBlock() {
+/*export default function ResetFormBlock() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'reset')
@@ -40,15 +40,15 @@ export default function ResetFormBlock() {
             {content}
         </div>
     )
-}
+}*/
 
 
-type ThisFormPropType = {
+/*type ThisFormPropType = {
     fh?: FHTypes.ReturnObj // Объектами с данными и методами манипуляцией формой
-}
+}*/
 
 /** Форма входа пользователя */
-function ThisForm(props: ThisFormPropType) {
+/*function ThisForm(props: ThisFormPropType) {
 
     const {
         fh
@@ -83,15 +83,15 @@ function ThisForm(props: ThisFormPropType) {
             </Form>
         </>
     )
-}
+}*/
 
 
-type EmailWasSentMessagePropType = {
+/*type EmailWasSentMessagePropType = {
     email: string // Почта пользователя, которую нужно подтвердить
-}
+}*/
 
 /** Сообщение с просьбой перейти к письму и нажать на ссылку для ввода нового пароля */
-function EmailWasSentMessage(props: EmailWasSentMessagePropType) {
+/*function EmailWasSentMessage(props: EmailWasSentMessagePropType) {
     const {
         email
     } = props
@@ -103,4 +103,4 @@ function EmailWasSentMessage(props: EmailWasSentMessagePropType) {
             </Notice>
         </>
     )
-}
+}*/

@@ -1,12 +1,12 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет запрос на получение шаблонов подключаемых файлов определённого сайта
  * @param {String} siteId — id сайта у которого нужно получить шаблоны подключаемых файлов
  * @param {String} templateId — included files template id
  */
-export default async function getIncFilesTemplateRequest(siteId: string, templateId: string) {
+/*export default async function getIncFilesTemplateRequest(siteId: string, templateId: string) {
 
     const options = { method: 'GET' }
     const response: GetIncFilesTemplatesRequestServerResponse = await makeFetch(
@@ -14,14 +14,14 @@ export default async function getIncFilesTemplateRequest(siteId: string, templat
     )
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type GetIncFilesTemplatesRequestServerResponse = FailResponse | SuccessResponse
+// type GetIncFilesTemplatesRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -29,9 +29,10 @@ type FailResponse = {
         message: string // "Incorrect email or password"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -47,4 +48,4 @@ type SuccessResponse = {
             siteId: string // "60ca102ef8cfcc002074b3da"
         }
     }
-}
+}*/

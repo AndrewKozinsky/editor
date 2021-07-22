@@ -1,10 +1,10 @@
-import {useCallback, useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import {useCallback, useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 /** The hook returns boolean if Save article button is disabled */
-export function useIsSaveBtnDisabled() {
+/*export function useIsSaveBtnDisabled() {
     const { historyCurrentIdx, historyStepWhenWasSave } = useSelector((store: AppState) => store.article)
 
     // Is button disabled
@@ -18,13 +18,14 @@ export function useIsSaveBtnDisabled() {
     }, [historyCurrentIdx, historyStepWhenWasSave])
 
     return isDisabled
-}
+}*/
 
 /** The hook returns on Save article button click handler */
+/*
 export function useSaveArticle() {
     const { history, historyCurrentIdx, articleUuId } = useSelector((store: AppState) => store.article)
 
     return useCallback(async function () {
         await articleManager.saveArticle(history, historyCurrentIdx, articleUuId)
     }, [history, historyCurrentIdx, articleUuId])
-}
+}*/

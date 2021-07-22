@@ -1,32 +1,32 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+// import React, {useCallback} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import {
+// import {useStore} from 'effector-react'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+/*import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
-import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
-import { articleFormMessages } from 'messages/articleFormMessages'
-import {componentFormMessages} from 'messages/componentTemplateFormMessages'
+} from '../stores'*/
+// import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+// import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+// import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
+// import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
+// import { articleFormMessages } from 'messages/articleFormMessages'
+// import {componentFormMessages} from 'messages/componentTemplateFormMessages'
 
 
-type DeleteItemModalPropType = {
+/*type DeleteItemModalPropType = {
     type: 'component' | 'article' // Что удалять: Шаблон компонента или статью?
-}
+}*/
 
 /** Модальное окно с формой подтверждения и удаления шаблона компонента или статьи */
-export default function DeleteItemModal(props: DeleteItemModalPropType) {
+/*export default function DeleteItemModal(props: DeleteItemModalPropType) {
     const { type } = props
 
     const dispatch = useDispatch()
@@ -101,4 +101,4 @@ export default function DeleteItemModal(props: DeleteItemModalPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

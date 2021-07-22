@@ -1,9 +1,10 @@
-import { baseTemplate } from './letters/functions/baseTemplate'
-import { confirmLetterContentTemplate } from './letters/functions/confirmLetterContentTemplate'
-const { forgotPasswordLetterContentTemplate } = require('./letters/functions/forgotPasswordLetterContentTemplate')
+// import { baseTemplate } from './letters/functions/baseTemplate'
+// import { confirmLetterContentTemplate } from './letters/functions/confirmLetterContentTemplate'
+// const { forgotPasswordLetterContentTemplate } = require('./letters/functions/forgotPasswordLetterContentTemplate')
 
 // Класс содержит методы для создания разметки писем различных типов.
 // Возвращается текстовую и HTML-версия письма.
+/*
 export class EmailTemplate {
     host: string
 
@@ -41,4 +42,4 @@ export class EmailTemplate {
 
         return [htmlTemplate, textContent]
     }
-}
+}*/

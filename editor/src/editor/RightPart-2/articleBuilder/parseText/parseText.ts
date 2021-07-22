@@ -1,8 +1,8 @@
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import {HTMLObjArrType} from '../parceComponent/htmlStringToObject'
-import articleManager from '../../articleManager/articleManager'
-import {parseComponent} from '../parceComponent/parseComponent'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import {HTMLObjArrType} from '../parceComponent/htmlStringToObject'
+// import articleManager from '../../articleManager/articleManager'
+// import {parseComponent} from '../parceComponent/parseComponent'
 
 /**
  * The function turns text component data to html-object
@@ -10,7 +10,7 @@ import {parseComponent} from '../parceComponent/parseComponent'
  * @param {Array} tempComps — an array of component templates
  * @param {String} tempElemId — element template id
  */
-export function parseText(
+/*export function parseText(
     compData: ArticleTypes.TextComponent, tempComps: TempCompTypes.TempComps, tempElemId: TempCompTypes.TempElemId
 ): HTMLObjArrType.Arr {
     // Get component template and element template by its tmpCompId
@@ -19,7 +19,7 @@ export function parseText(
 
     // Form html-object from text component data and return it
     return getTextParts(compData.children, tempComps, elemTemplate)
-}
+}*/
 
 /**
  * The recursive function turns text component data to html-object
@@ -27,7 +27,7 @@ export function parseText(
  * @param {Array} tempComps — array of components template
  * @param {Object} elemTemplate — element template
  */
-function getTextParts(
+/*function getTextParts(
     children: ArticleTypes.TextChildren, tempComps: TempCompTypes.TempComps, elemTemplate: TempCompTypes.Elem
 ) {
 
@@ -55,21 +55,21 @@ function getTextParts(
             return parseComponent(elemData, tempComps)
         }
     })
-}
+}*/
 
 /**
  * The function returns tag name of the text component
  * @param {Object} elemData — a tag component data
  * @param {Object} elemTemplate — element template
  */
-function getTag(elemData: ArticleTypes.TextChild, elemTemplate: TempCompTypes.Elem) {
+/*function getTag(elemData: ArticleTypes.TextChild, elemTemplate: TempCompTypes.Elem) {
     if (elemData.type !== "textTag") return ''
 
     const tagId = elemData.tag
     const tagObj = elemTemplate.text.tags.find(tagObj => tagObj.id === tagId)
 
     return tagObj.name
-}
+}*/
 
 /**
  * The function returns attributes object
@@ -77,7 +77,7 @@ function getTag(elemData: ArticleTypes.TextChild, elemTemplate: TempCompTypes.El
  * @param {Array} tempComps — an array of component templates
  * @param {Object} elemTemplate — element template
  */
-function getAttrs(elemData: ArticleTypes.TagObject, tempComps: TempCompTypes.TempComps, elemTemplate: TempCompTypes.Elem) {
+/*function getAttrs(elemData: ArticleTypes.TagObject, tempComps: TempCompTypes.TempComps, elemTemplate: TempCompTypes.Elem) {
     // An object with attributes values of some tag
     const readyAttrs: HTMLObjArrType.Attrs = {}
 
@@ -119,7 +119,7 @@ function getAttrs(elemData: ArticleTypes.TagObject, tempComps: TempCompTypes.Tem
     })
 
     return readyAttrs
-}
+}*/
 
 /**
  * The function returns tag's children
@@ -127,7 +127,7 @@ function getAttrs(elemData: ArticleTypes.TagObject, tempComps: TempCompTypes.Tem
  * @param {Array} tempComps — an array of component templates
  * @param {Object} elemTemplate — element template
  */
-function getChildren(children: ArticleTypes.TextChildren, tempComps: TempCompTypes.TempComps, elemTemplate: TempCompTypes.Elem) {
+/*function getChildren(children: ArticleTypes.TextChildren, tempComps: TempCompTypes.TempComps, elemTemplate: TempCompTypes.Elem) {
     if (!children) return
     return getTextParts(children, tempComps, elemTemplate)
-}
+}*/

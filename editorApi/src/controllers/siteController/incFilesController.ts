@@ -1,14 +1,14 @@
-import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../errors/catchAsync'
-import { ExtendedRequestType } from '../../types/commonTypes'
-import SiteModel from '../../models/site'
-import IncFilesTemplateModel from '../../models/incFilesTemplate'
-import {AppError} from '../../errors/appError'
+// import { Response, NextFunction } from 'express'
+// import { catchAsync } from '../../errors/catchAsync'
+// import { ExtendedRequestType } from '../../types/commonTypes'
+// import SiteModel from '../../models/site'
+// import IncFilesTemplateModel from '../../models/incFilesTemplate'
+// import {AppError} from '../../errors/appError'
 
 
 
 /** Get an included files template (protected route) */
-export const getSiteIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const getSiteIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     const siteId = req.params.siteId.toString()
 
     // Get an included files template with passed id
@@ -23,11 +23,11 @@ export const getSiteIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequ
             template
         }
     })
-})
+})*/
 
 
 /** Получение всех шаблонов определённого сайта (защищённый маршрут) */
-export const getSiteIncFilesTemplates = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const getSiteIncFilesTemplates = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     const siteId = req.params.siteId.toString()
 
     // Получение всех шаблонов сайта с переданным id
@@ -40,11 +40,11 @@ export const getSiteIncFilesTemplates = catchAsync<void>(async (req: ExtendedReq
             templates
         }
     })
-})
+})*/
 
 
 /** Создание шаблона (защищённый маршрут) */
-export const createIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const createIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
     if (!req.user) return
@@ -74,11 +74,11 @@ export const createIncFilesTemplate = catchAsync<void>(async (req: ExtendedReque
             template: newTemplate
         }
     })
-})
+})*/
 
 
 /** Изменение данных шаблона (защищённый маршрут) */
-export const updateIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const updateIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Найти сайт и обновить его данные
     const updatedTemplate = await IncFilesTemplateModel.findByIdAndUpdate(
@@ -101,11 +101,11 @@ export const updateIncFilesTemplate = catchAsync<void>(async (req: ExtendedReque
             template: updatedTemplate
         }
     })
-})
-
+})*/
 
 
 /** Удаление шаблона (защищённый маршрут) */
+/*
 export const deleteIncFilesTemplate = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     const siteId = req.params.siteId.toString()
 
@@ -128,4 +128,4 @@ export const deleteIncFilesTemplate = catchAsync<void>(async (req: ExtendedReque
     res.status(200).json({
         status: 'success'
     })
-})
+})*/

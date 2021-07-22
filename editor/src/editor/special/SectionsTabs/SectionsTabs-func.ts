@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react'
-import { useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import { mainTabsMessages } from 'messages/mainTabsMessages'
-import { MainTabDataType } from '../MainTab/MainTab'
+// import {useEffect, useState} from 'react'
+// import { useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import { mainTabsMessages } from 'messages/mainTabsMessages'
+// import { MainTabDataType } from '../MainTab/MainTab'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
-export function useGetTabData(): MainTabDataType[] {
+/*export function useGetTabData(): MainTabDataType[] {
 
     // Номер активной вкладки
     const { mainTab } = useSelector((store: AppState) => store.settings)
@@ -22,13 +22,13 @@ export function useGetTabData(): MainTabDataType[] {
     }, [mainTab])
 
     return tabsData
-}
+}*/
 
 /**
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} activeTabNum — номер активной вкладки
  */
-function getTabData( activeTabNum: number ): MainTabDataType[] {
+/*function getTabData( activeTabNum: number ): MainTabDataType[] {
 
     // Сгенеривать данные трёх вкладок
     return ['mainTabMaterials', 'mainTabEditor', 'mainTabSettings'].map((type, i) => {
@@ -41,4 +41,4 @@ function getTabData( activeTabNum: number ): MainTabDataType[] {
             onClick: () => store.dispatch(actions.settings.setMainTab(i))
         }
     })
-}
+}*/

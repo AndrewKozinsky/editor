@@ -1,11 +1,11 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 /**
  * Функция создаёт новый шаблон подключаемых файлов
  * @param {Object} values — данные для входа
  */
-export default async function createIncFilesTemplateRequest(values: CreateNewTemplateValuesType) {
+/*export default async function createIncFilesTemplateRequest(values: CreateNewTemplateValuesType) {
     const newTemplateData = {
         siteId: values.siteId,
         name: values.name,
@@ -25,21 +25,21 @@ export default async function createIncFilesTemplateRequest(values: CreateNewTem
         getApiUrl('incFiles', values.siteId), options
     )
     return response
-}
+}*/
 
 // Данные для входа передаваемые в loginRequest
-export type CreateNewTemplateValuesType = {
+/*export type CreateNewTemplateValuesType = {
     siteId: string,
     name: string,
     headCode: null | string,
     bodyCode: null | string
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type LoginRequestServerResponse = FailResponse | SuccessResponse
+// type LoginRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -47,9 +47,10 @@ type FailResponse = {
         message: string // "Incorrect email or password"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -68,4 +69,4 @@ type SuccessResponse = {
             }
         }
     }
-}
+}*/

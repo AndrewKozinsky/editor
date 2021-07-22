@@ -1,7 +1,7 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Форма редактирования выбранного шаблона компонента
-const obj = {
+/*const obj = {
     componentNameInput: {
         eng: 'Component name',
         rus: 'Название компонента'
@@ -38,6 +38,6 @@ const obj = {
         eng: 'Delete',
         rus: 'Удалить'
     },
-}
+}*/
 
-export const componentFormMessages = getMessagesObject(obj)
+// export const componentFormMessages = getMessagesObject(obj)

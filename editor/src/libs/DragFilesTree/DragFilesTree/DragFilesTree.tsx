@@ -1,13 +1,13 @@
-import React, {Fragment, ReactNode} from 'react'
-import DragFilesTreeType from '../types'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import { useGetFilesTreeMinWidth } from './DragFilesTree-func'
-import Item from '../Item/Item'
-import {createNewItem} from '../Item/Item-func'
+// import React, {Fragment, ReactNode} from 'react'
+// import DragFilesTreeType from '../types'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import { useGetFilesTreeMinWidth } from './DragFilesTree-func'
+// import Item from '../Item/Item'
+// import {createNewItem} from '../Item/Item-func'
 
 
-type DragFilesTreePropType = {
+/*type DragFilesTreePropType = {
     // Массив данных списка папок и файлов
     items: null | DragFilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -26,10 +26,10 @@ type DragFilesTreePropType = {
     afterChangingTree?: DragFilesTreeType.AfterChangingTreeFn
     // Функция запускаемая после удаления папки или файла
     afterDeleteItem?: DragFilesTreeType.AfterDeleteItem
-}
+}*/
 
 /** Список папок и файлов */
-export default function DragFilesTree(props: DragFilesTreePropType) {
+/*export default function DragFilesTree(props: DragFilesTreePropType) {
 
     const {
         newFolderName = 'New folder', // Название новой папки
@@ -72,7 +72,7 @@ export default function DragFilesTree(props: DragFilesTreePropType) {
             {generateItems(props.items, props.items, props.setItems, 0, after)}
         </div>
     )
-}
+}*/
 
 /**
  * Рекурсивная функция генерирующая разметку дерева файлов
@@ -83,7 +83,7 @@ export default function DragFilesTree(props: DragFilesTreePropType) {
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-function generateItems(
+/*function generateItems(
     allItems: DragFilesTreeType.Items,
     innerItems: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
@@ -119,4 +119,4 @@ function generateItems(
             </Fragment>
         )
     })
-}
+}*/

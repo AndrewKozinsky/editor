@@ -21,30 +21,30 @@ const obj = {
         eng: 'E-mail *',
         rus: 'Электронная почта *'
     },
-    emailErrInvalid: {
+    /*emailErrInvalid: {
         eng: 'Invalid email address',
         rus: 'Почта написана неправильно'
-    },
-    passwordField: {
+    },*/
+    /*passwordField: {
         eng: 'Password *',
         rus: 'Пароль *'
-    },
-    passwordConfirmField: {
+    },*/
+    /*passwordConfirmField: {
         eng: 'Repeat password *',
         rus: 'Повторите пароль *'
-    },
-    passwordsMustMatch: {
+    },*/
+    /*passwordsMustMatch: {
         eng: 'Passwords must match',
         rus: 'Пароли должны совпадать'
-    },
-    submitBtnText: {
+    },*/
+    /*submitBtnText: {
         eng: 'Sign up',
         rus: 'Зарегистрироваться'
-    },
-    somethingWentWrong: {
+    },*/
+    /*somethingWentWrong: {
         eng: 'Something went wrong',
         rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
-    },
+    },*/
 }
 
 export const regFormMessages = getMessagesObject(obj)

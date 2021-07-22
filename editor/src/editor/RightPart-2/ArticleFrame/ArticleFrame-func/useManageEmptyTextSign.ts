@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+// import {useEffect, useState} from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
 
 
 /** Hook manages Empty text sign visibility */
-export function useManageEmptyTextSign() {
+/*export function useManageEmptyTextSign() {
     const { $links, history } = useSelector((store: AppState) => store.article)
     // Did event handler has set?
     const [handlerHasSet, setHandlerHasSet] = useState(false)
@@ -25,13 +25,13 @@ export function useManageEmptyTextSign() {
 
         setHandlerHasSet(true)
     }, [$links, history, handlerHasSet])
-}
+}*/
 
 /**
  * The function set CSS to manage Empty text sign visibility
  * @param {HTMLHeadElement} $head — <head>
  */
-function setExtraStyle($head: HTMLHeadElement) {
+/*function setExtraStyle($head: HTMLHeadElement) {
     const style = `
     empty-text-sign {
         opacity: .4;
@@ -46,13 +46,13 @@ function setExtraStyle($head: HTMLHeadElement) {
     const styleElem = document.createElement('style')
     styleElem.innerText = style
     $head.appendChild(styleElem)
-}
+}*/
 
 /**
  * The function set onFocus/onBlur handlers to <body>
  * @param {Document} $document
  */
-function setHandlers($document: Document) {
+/*function setHandlers($document: Document) {
     // Catch focus on <body> and hide Empty text sign in contentEditable element
     $document.body.addEventListener('focus', function (event) {
         hideTextSignElem(event, $document)
@@ -62,14 +62,14 @@ function setHandlers($document: Document) {
     $document.body.addEventListener('blur', function (event) {
         setVisibleToAllTextSignElems(event, $document)
     }, true)
-}
+}*/
 
 /**
  * The function detects element on which the focus occurred and hides it
  * @param {Event} event — event object
  * @param {Document} $document — document object
  */
-function hideTextSignElem(event: Event, $document: Document) {
+/*function hideTextSignElem(event: Event, $document: Document) {
     // Get contentEditable element on which the focus occurred
     //@ts-ignore
     let $elemWithTextComp = event.target.closest('[data-em-text-data-comp-id]')
@@ -84,14 +84,14 @@ function hideTextSignElem(event: Event, $document: Document) {
 
     // Set focus to contentEditable element because it was inside Empty text sign element
     $emptyTextSign.parentNode.focus()
-}
+}*/
 
 /**
  * The function makes visible all Empty text sign elements
  * @param {Event} event — event object
  * @param {Document} $document — document object
  */
-function setVisibleToAllTextSignElems(event: Event, $document: Document) {
+/*function setVisibleToAllTextSignElems(event: Event, $document: Document) {
     // Get all Empty text sign elements
     const $emptyTextSign = $document.querySelectorAll('empty-text-sign')
     if (!$emptyTextSign) return
@@ -101,4 +101,4 @@ function setVisibleToAllTextSignElems(event: Event, $document: Document) {
         //@ts-ignore
         $sign.style.display = 'inline-block'
     }
-}
+}*/

@@ -1,21 +1,22 @@
-import React, {useRef} from 'react'
-import {
+// import React, {useRef} from 'react'
+/*import {
     useSetArticleDataInStore,
     useSetIFrameElemsLinks,
     useSetRootDivToIFrame,
     useSetArticleToIFrame,
-} from './ArticleFrame-func/ArticleFrame-func'
-import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
-import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
-import {useInstallFlashElements} from './flashElements/useInstallFlashElements'
-import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
-import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
-import {useChangeFlashElementsPosition} from './flashElements/useChangeFlashElementsPosition'
-import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
-import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
-import './ArticleFrame.scss'
+} from './ArticleFrame-func/ArticleFrame-func'*/
+// import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
+// import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
+// import {useInstallFlashElements} from './flashElements/useInstallFlashElements'
+// import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
+// import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
+// import {useChangeFlashElementsPosition} from './flashElements/useChangeFlashElementsPosition'
+// import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
+// import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
+// import './ArticleFrame.scss'
 
 
+/*
 export default function ArticleFrame() {
     const windowRef = useRef(null)
 
@@ -51,4 +52,4 @@ export default function ArticleFrame() {
     useRemoveUnwantedFocus()
 
     return <iframe className="article-frame" ref={windowRef} />
-}
+}*/

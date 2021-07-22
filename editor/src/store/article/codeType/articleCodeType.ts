@@ -1,4 +1,4 @@
-namespace ArticleTypes {
+/*namespace ArticleTypes {
     // Article
     export type Article = {
         // Additional information
@@ -105,18 +105,18 @@ namespace ArticleTypes {
         type: 'text'
         text: string
     }
-}
+}*/
 
-export default ArticleTypes
+// export default ArticleTypes
 
 
-export const emptyArticleData: ArticleTypes.Article = {
+/*export const emptyArticleData: ArticleTypes.Article = {
     meta: {
         // Max component id to understand what component id must be next
         maxComponentId: 0
     },
     // Components array
     components: []
-}
+}*/
 
 

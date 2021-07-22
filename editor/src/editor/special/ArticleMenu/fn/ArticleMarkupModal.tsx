@@ -1,17 +1,17 @@
-import React, {useCallback, useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import { AppState } from 'store/rootReducer'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import {articleMenuMessages} from 'messages/articleMenuMessages'
-import {turnArticleDataToHTML} from 'editor/RightPart-2/articleBuilder/articleBuilder'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import React, {useCallback, useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import { AppState } from 'store/rootReducer'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import {articleMenuMessages} from 'messages/articleMenuMessages'
+// import {turnArticleDataToHTML} from 'editor/RightPart-2/articleBuilder/articleBuilder'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
-export function ArticleMarkupModal() {
+/*export function ArticleMarkupModal() {
     const dispatch = useDispatch()
 
     const {tempComps} = useSelector((store: AppState) => store.article)
@@ -47,5 +47,5 @@ export function ArticleMarkupModal() {
             </Wrapper>
         </>
     )
-}
+}*/
 

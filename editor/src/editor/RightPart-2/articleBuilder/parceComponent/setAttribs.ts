@@ -1,13 +1,13 @@
-import {ConsistObj} from './getConsistObjsArr'
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import { HTMLObjArrType } from './htmlStringToObject'
+// import {ConsistObj} from './getConsistObjsArr'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import { HTMLObjArrType } from './htmlStringToObject'
 
 /**
  * Set the assigned attributes to element
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  */
-export function setAttribs(consistObj: ConsistObj) {
+/*export function setAttribs(consistObj: ConsistObj) {
     // Set attributes
     if (consistObj.tempElem.attribs) {
         for (let attrTemplate of consistObj.tempElem.attribs) {
@@ -15,7 +15,7 @@ export function setAttribs(consistObj: ConsistObj) {
             setAttribToHtmlElem(attrTemplate, consistObj.dataElem, consistObj.htmlElem)
         }
     }
-}
+}*/
 
 /**
  * Set an attribute to element
@@ -23,7 +23,7 @@ export function setAttribs(consistObj: ConsistObj) {
  * @param {Object} dataElem — element data object
  * @param {Object} htmlElem — html-element object
  */
-function setAttribToHtmlElem(attrTemplate: TempCompTypes.ElemAttrib, dataElem: ArticleTypes.ComponentElem, htmlElem: HTMLObjArrType.Tag) {
+/*function setAttribToHtmlElem(attrTemplate: TempCompTypes.ElemAttrib, dataElem: ArticleTypes.ComponentElem, htmlElem: HTMLObjArrType.Tag) {
     const attrName = attrTemplate.name
 
     // Array with the attribute values
@@ -58,4 +58,4 @@ function setAttribToHtmlElem(attrTemplate: TempCompTypes.ElemAttrib, dataElem: A
 
     // Join all attributes values to a string
     htmlElem.attrs[attrName] = attrValue.join(' ')
-}
+}*/

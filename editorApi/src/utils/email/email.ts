@@ -1,24 +1,24 @@
-const nodemailer = require('nodemailer')
+// const nodemailer = require('nodemailer')
 // const sendpulse = require('sendpulse-api')
-import { EmailTemplate } from './emailTemplate'
-import { config } from '../../config/config'
+// import { EmailTemplate } from './emailTemplate'
+// import { config } from '../../config/config'
 
 
 export class Email {
-    to: string
-    from: string
-    host: string
-    lang: string
+    // to: string
+    // from: string
+    // host: string
+    // lang: string
 
-    constructor(email: string, host: string, lang: string) {
+    /*constructor(email: string, host: string, lang: string) {
         this.to = email // На какой адрес отправлять письмо
         this.from = config.emailFrom // От кого письмо
         this.host = host // Домен сайта
         this.lang = lang // Язык письма
-    }
+    }*/
 
     // Функция отправляет письмо с просьбой подтвердить почтовый адрес
-    async sendConfirmLetter(token: string) {
+    /*async sendConfirmLetter(token: string) {
         // Тема письма
         const subject = this.lang === 'rus'
             ? 'Подтвердите вашу почту для регистрации на Editorium.net'
@@ -29,21 +29,21 @@ export class Email {
 
         // Послать письмо
         this.send(subject, html, text)
-    }
+    }*/
 
     // Функция отправляет письмо со ссылкой на сброс пароля
-    async sendForgotPasswordLetter(resetToken: string) {
+    /*async sendForgotPasswordLetter(resetToken: string) {
         const subject = this.lang === 'rus'
             ? 'Ссылка на страницу сброса пароля от Editorium.net'
             : 'Your reset password token (valid for 10 minutes)'
 
         const [html, text] = new EmailTemplate(this.host).createForgotPasswordLetter(resetToken, this.lang)
         this.send(subject, html, text)
-    }
+    }*/
 
     // Общая функция отправки письма.
     // В зависимости от режима сервера отправляет письма либо на mailtrap.io либо на реальный адрес
-    send(subject: string, htmlContent: string, textContent: string) {
+    /*send(subject: string, htmlContent: string, textContent: string) {
 
         // Послать письма разными сервисами в зависимости от режима работы
         if(config.workMode === 'development') {
@@ -52,10 +52,10 @@ export class Email {
         else if(config.workMode === 'production') {
             this.sendRealEmail(subject, htmlContent, textContent)
         }
-    }
+    }*/
 
     // Функция отправляющая письма на mailtrap.io
-    async sendFakeEmail(subject: string, html: string, text: string) {
+    /*async sendFakeEmail(subject: string, html: string, text: string) {
 
         // Define email options
         const mailOptions = {
@@ -78,7 +78,7 @@ export class Email {
 
         // 3) Send email
         await transport.sendMail(mailOptions)
-    }
+    }*/
 
     // Функция отправляющая письма на настоящий адрес пользователя
     sendRealEmail(subject: string, html: string, text: string) {

@@ -1,19 +1,19 @@
 // @ts-ignore
-import JSON6 from 'json-6'
-import { MiscTypes } from 'types/miscTypes'
-import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
-import getArticleRequest from 'requests/editor/article/getArticleRequest'
-import StoreArticleTypes from './articleTypes'
-import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
-import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
-import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
-import FilesTreeType from 'types/filesTree'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-import {getFromLocalStorage, removeFromLocalStorage} from 'utils/MiscUtils'
-import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
+// import JSON6 from 'json-6'
+// import { MiscTypes } from 'types/miscTypes'
+// import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
+// import getArticleRequest from 'requests/editor/article/getArticleRequest'
+// import StoreArticleTypes from './articleTypes'
+// import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
+// import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
+// import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
+// import FilesTreeType from 'types/filesTree'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import {getFromLocalStorage, removeFromLocalStorage} from 'utils/MiscUtils'
+// import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 
-const articleActions = {
+/*const articleActions = {
 
     // Наполнение Хранилища данными для отрисовки статьи
     clearArticle() {
@@ -197,10 +197,10 @@ const articleActions = {
         }
     },
 
-    /**
+    /!**
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
-     */
+     *!/
     setTempCompFolders( folders: null | FilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
@@ -226,13 +226,13 @@ const articleActions = {
         }
     },
 
-    /**
+    /!**
      * Set ids for hovered or selected component/element
      * @param {String} actionType — is component/element hovered or selected
      * @param {String} type — component/element type: null | 'component' | 'element' | 'textComponent'
      * @param {Number} dataCompId — component id
      * @param {Number} dataElemId — element id (It is null if component/element was hovered)
-     */
+     *!/
     setHoveredElement(
         actionType: 'hover' | 'select',
         type: StoreArticleTypes.HoveredElementType,
@@ -245,10 +245,10 @@ const articleActions = {
         }
     },
 
-    /**
+    /!**
      * Action forms a new history item
      * @param {Object} itemDetails —
-     */
+     *!/
     createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
         return {
             type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
@@ -256,10 +256,10 @@ const articleActions = {
         }
     },
 
-    /**
+    /!**
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
-     */
+     *!/
     makeHistoryStep( step: 'undo' | 'redo' ) {
         return {
             type: StoreArticleTypes.MAKE_HISTORY_STEP,
@@ -267,12 +267,12 @@ const articleActions = {
         }
     },
 
-    /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
+    /!** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved *!/
     setHistoryStepWhenArticleWasSaved() {
         return {
             type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
         }
     },
-}
+}*/
 
-export default articleActions
+// export default articleActions

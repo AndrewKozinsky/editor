@@ -1,5 +1,5 @@
 import React from 'react'
-import {makeCN} from 'utils/StringUtils'
+import { makeCN } from 'utils/StringUtils'
 import './Loader.scss'
 
 
@@ -9,9 +9,7 @@ type LoaderPropType = {
 
 /** Компонент загрузчика */
 export default function Loader(props: LoaderPropType) {
-    const {
-        className
-    } = props
+    const { className } = props
 
     // Классы обёртки
     const classes = ['loader-wrapper', className]

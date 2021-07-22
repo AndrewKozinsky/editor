@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
 
 /** The hooks sets flash rectangles into IFrame */
-export function useInstallFlashElements() {
+/*export function useInstallFlashElements() {
     const { $links, history } = useSelector((store: AppState) => store.article)
 
     // Were flash elements installed?
@@ -29,13 +29,13 @@ export function useInstallFlashElements() {
             setWereInstalled(false)
         }
     }, [history])
-}
+}*/
 
 /**
  * The function set CSS to manage Empty text sign visibility
  * @param {HTMLHeadElement} $head — <head>
  */
-function setExtraStyle($head: HTMLHeadElement) {
+/*function setExtraStyle($head: HTMLHeadElement) {
     // Flash rectangles style
     const style = `.em-flash-rect {display: none;position: absolute;width: 100px;height: 100px;pointer-events: none;box-sizing: content-box;border-radius: 2px;}.em-flash-rect__hover {top: 50px;left: 50px;border: 1px solid rgba(1, 122, 255, 1);}.em-flash-rect__select {top: 250px;left: 250px;border: 2px solid rgba(1, 122, 255);}`
 
@@ -43,13 +43,14 @@ function setExtraStyle($head: HTMLHeadElement) {
     const styleElem = document.createElement('style')
     styleElem.innerText = style
     $head.appendChild(styleElem)
-}
+}*/
 
 /**
  * The function creates a flash rectangle element and appends it in the <body>
  * @param {HTMLBodyElement} $body — <body>
  * @param {String} type — flash rectangle type: hover or select
  */
+/*
 function createFlashElement($body: HTMLBodyElement, type: 'hover' | 'select') {
     const flashRect = document.createElement('div')
 
@@ -65,4 +66,4 @@ function createFlashElement($body: HTMLBodyElement, type: 'hover' | 'select') {
 
     // Append a flash rectangle to the <body>
     $body.appendChild(flashRect)
-}
+}*/

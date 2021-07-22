@@ -1,17 +1,17 @@
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {useEffect, useState} from 'react'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import StoreArticleTypes from 'store/article/articleTypes'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import {useEffect, useState} from 'react'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes'
 
-export const hooks = {
+/*export const hooks = {
     getHistoryItem: useGetHistoryItem,
     getArticle: useGetArticle,
     getFlashedElemCoords: useGetFlashedElemCoords
-}
+}*/
 
 /** Hook returns current history item object */
-function useGetHistoryItem() {
+/*function useGetHistoryItem() {
     // Templates component from the Store
     const { history, historyCurrentIdx } = useSelector((store: AppState) => store.article)
     const [currentItem, setCurrentItem] = useState<null | StoreArticleTypes.HistoryItem>(null)
@@ -24,10 +24,10 @@ function useGetHistoryItem() {
     }, [history, historyCurrentIdx])
 
     return currentItem
-}
+}*/
 
 /** Hook returns current article */
-function useGetArticle() {
+/*function useGetArticle() {
     const historyItem = useGetHistoryItem()
     const [article, setArticle] = useState<null | ArticleTypes.Article>(null)
 
@@ -38,16 +38,16 @@ function useGetArticle() {
     }, [historyItem])
 
     return article
-}
+}*/
 
 
-type FlashedElemsCoords = {
+/*type FlashedElemsCoords = {
     hoveredElem: StoreArticleTypes.HoveredElem
     selectedElem: StoreArticleTypes.HoveredElem
-}
+}*/
 
 /** Hook returns object with coordinated hovered and selected component/element */
-function useGetFlashedElemCoords() {
+/*function useGetFlashedElemCoords() {
     const historyItem = useGetHistoryItem()
     const [flashedElemsCoords, setFlashedElemsCoords] = useState<null | FlashedElemsCoords>(null)
 
@@ -61,4 +61,4 @@ function useGetFlashedElemCoords() {
     }, [historyItem])
 
     return flashedElemsCoords
-}
+}*/

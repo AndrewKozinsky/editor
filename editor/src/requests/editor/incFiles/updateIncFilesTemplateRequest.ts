@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 /**
  * Функция обновляет существующий шаблон подключаемых файлов
@@ -7,7 +7,7 @@ import getApiUrl from 'src/requests/reqFn/apiUrls'
  * @param {String} siteId — site id
  * @param {String} templateId — id шаблона подключаемых файлов
  */
-export default async function updateIncFilesTemplateRequest(values: UpdateTemplateValuesType, siteId: string, templateId: string) {
+/*export default async function updateIncFilesTemplateRequest(values: UpdateTemplateValuesType, siteId: string, templateId: string) {
     const templateData = {
         name: values.name,
         codeInHead: {
@@ -27,20 +27,20 @@ export default async function updateIncFilesTemplateRequest(values: UpdateTempla
     )
 
     return response
-}
+}*/
 
 // Данные для входа передаваемые в loginRequest
-export type UpdateTemplateValuesType = {
+/*export type UpdateTemplateValuesType = {
     name: string,
     headCode: null | string,
     bodyCode: null | string
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type UpdateTemplateRequestServerResponse = FailResponse | SuccessResponse
+// type UpdateTemplateRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -48,9 +48,10 @@ type FailResponse = {
         message: string // "Incorrect email or password"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -67,4 +68,4 @@ type SuccessResponse = {
             }
         }
     }
-}
+}*/

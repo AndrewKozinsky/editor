@@ -1,7 +1,7 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Секция «Данные пользователя»
-const obj = {
+/*const obj = {
     header: {
         eng: 'User data',
         rus: 'Данные пользователя'
@@ -46,6 +46,6 @@ const obj = {
         eng: 'Change',
         rus: 'Изменить'
     },
-}
+}*/
 
-export const userDataSectionMessages = getMessagesObject(obj)
+// export const userDataSectionMessages = getMessagesObject(obj)

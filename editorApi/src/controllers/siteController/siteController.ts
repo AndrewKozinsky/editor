@@ -1,19 +1,19 @@
-import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../errors/catchAsync'
-import { ExtendedRequestType } from '../../types/commonTypes'
-import SiteModel from '../../models/site'
-import IncFilesTemplateModel from '../../models/incFilesTemplate'
-import ComponentsFoldersModel from '../../models/componentsFolders'
-import ComponentModel from '../../models/component'
-import ArticlesFoldersModel from '../../models/articlesFolders'
-import ArticleModel from '../../models/article'
-import {AppError} from '../../errors/appError'
+// import { Response, NextFunction } from 'express'
+// import { catchAsync } from '../../errors/catchAsync'
+// import { ExtendedRequestType } from '../../types/commonTypes'
+// import SiteModel from '../../models/site'
+// import IncFilesTemplateModel from '../../models/incFilesTemplate'
+// import ComponentsFoldersModel from '../../models/componentsFolders'
+// import ComponentModel from '../../models/component'
+// import ArticlesFoldersModel from '../../models/articlesFolders'
+// import ArticleModel from '../../models/article'
+// import {AppError} from '../../errors/appError'
 
 
 // SITES ===============================================================================================================
 
 /** Получение всех сайтов (защищённый маршрут) */
-export const getAllSites = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const getAllSites = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
     if (!req.user) return
 
@@ -27,11 +27,11 @@ export const getAllSites = catchAsync<void>(async (req: ExtendedRequestType, res
             sites
         }
     })
-})
+})*/
 
 
 /** Создание сайта (защищённый маршрут) */
-export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Эта проверка требуется только для TS. Сам пользователь будет потому что это защищённый маршрут.
     if (!req.user) return
 
@@ -63,10 +63,11 @@ export const createSite = catchAsync<void>(async (req: ExtendedRequestType, res:
             }
         }
     })
-})
+})*/
+
 
 /** Частичное изменение сайта (защищённый маршрут) */
-export const updateSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const updateSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Найти сайт и обновить его данные
     const updatedSite = await SiteModel.findByIdAndUpdate(
         req.params.siteId,
@@ -81,11 +82,11 @@ export const updateSite = catchAsync<void>(async (req: ExtendedRequestType, res:
             site: updatedSite
         }
     })
-})
+})*/
 
 
 /** Удаление сайта (защищённый маршрут) */
-export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Удалить сайт из БД
     await SiteModel.findByIdAndDelete(
         req.params.siteId
@@ -110,12 +111,13 @@ export const deleteSite = catchAsync<void>(async (req: ExtendedRequestType, res:
     res.status(200).json({
         status: 'success'
     })
-})
+})*/
 
 
 // COMPONENTS TEMPLATES ================================================================================================
 
 /** Получение всех шаблонов компонентов сайта (защищённый маршрут) */
+/*
 export const getSiteComponents = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     const siteId = req.params.siteId
 
@@ -132,4 +134,4 @@ export const getSiteComponents = catchAsync<void>(async (req: ExtendedRequestTyp
             components
         }
     })
-})
+})*/

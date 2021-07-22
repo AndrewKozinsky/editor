@@ -1,12 +1,12 @@
-import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../errors/catchAsync'
-import { ExtendedRequestType } from '../../types/commonTypes'
-import {AppError} from '../../errors/appError'
-import ComponentsFoldersModel from '../../models/componentsFolders';
+// import { Response, NextFunction } from 'express'
+// import { catchAsync } from '../../errors/catchAsync'
+// import { ExtendedRequestType } from '../../types/commonTypes'
+// import {AppError} from '../../errors/appError'
+// import ComponentsFoldersModel from '../../models/componentsFolders';
 
 
 /** Получение порядка расположения шаблонов компонентов определённого сайта (защищённый маршрут) */
-export const getFolders = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const getFolders = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Если не передали id сайта, то возвратить ошибочный ответ
     if (!req.params.siteId) {
@@ -27,12 +27,13 @@ export const getFolders = catchAsync<void>(async (req: ExtendedRequestType, res:
             folders
         }
     })
-})
+})*/
 
 
 /** Изменение свойства content в порядке шаблонов компонентов (защищённый маршрут)
  * В запросе должен передаваться JSON вида: {content: [{...}]}
  * */
+/*
 export const setFolders = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Повторно найти объект порядка и обновить его данные
@@ -56,4 +57,4 @@ export const setFolders = catchAsync<void>(async (req: ExtendedRequestType, res:
             folders: updatedFolders
         }
     })
-})
+})*/

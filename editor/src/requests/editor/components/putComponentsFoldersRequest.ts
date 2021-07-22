@@ -1,13 +1,13 @@
-import store from 'src/store/store'
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import FilesTreeType from '../../../types/filesTree'
+// import store from 'src/store/store'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import FilesTreeType from '../../../types/filesTree'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
  * @param {Array} items — массив папок с компонентами
  */
-export default async function putComponentsFoldersRequest(items: FilesTreeType.Items) {
+/*export default async function putComponentsFoldersRequest(items: FilesTreeType.Items) {
     // id выбранного сайта
     const siteId = store.getState().sites.currentSiteId
 
@@ -22,14 +22,14 @@ export default async function putComponentsFoldersRequest(items: FilesTreeType.I
     )
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type PutComponentsFoldersServerResponse = FailResponse | SuccessResponse
+// type PutComponentsFoldersServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -37,9 +37,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -49,4 +50,4 @@ type SuccessResponse = {
             userId: string // "60c626f9fd09180020febc99"
         }
     }
-}
+}*/

@@ -1,8 +1,8 @@
 //@ts-ignore
 // import { v4 as uuid } from 'uuid'
-import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
-import TempCompFilesTreeType from '../types'
-import FilesTreeType from "types/filesTree"
+// import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import TempCompFilesTreeType from '../types'
+// import FilesTreeType from "types/filesTree"
 
 
 /**
@@ -10,7 +10,7 @@ import FilesTreeType from "types/filesTree"
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} folderId — id папки, которую нужно расвернуть/свернуть
  */
-export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempCompFilesTreeType.UuId) {
+/*export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempCompFilesTreeType.UuId) {
     // Получение папки с заданным идентификатором
     const folder = getItemDataById(items, folderId)
     if(!folder) return
@@ -20,7 +20,7 @@ export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempC
 
     // Создание нового массива папок и файлов
     return makeImmutableCopy(items, folder, folderCopy)
-}
+}*/
 
 
 /**
@@ -28,7 +28,7 @@ export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempC
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} itemId — id папки или файла, которую нужно найти
  */
-export function getItemDataById(items: TempCompFilesTreeType.Items, itemId: TempCompFilesTreeType.UuId): null | TempCompFilesTreeType.Item {
+/*export function getItemDataById(items: TempCompFilesTreeType.Items, itemId: TempCompFilesTreeType.UuId): null | TempCompFilesTreeType.Item {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
@@ -42,14 +42,14 @@ export function getItemDataById(items: TempCompFilesTreeType.Items, itemId: Temp
     }
 
     return null
-}
+}*/
 
 /**
  * Функция возвращает uuid раскрытых папок
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Array} arr — массив с uuid открытых папок (требуется внутри работы функции, в саму функцию передавать не нужно)
  */
-export function getOpenedFoldersUuid(items: TempCompFilesTreeType.Items, arr: TempCompFilesTreeType.UuIdArr = []) {
+/*export function getOpenedFoldersUuid(items: TempCompFilesTreeType.Items, arr: TempCompFilesTreeType.UuIdArr = []) {
     items.forEach((item: TempCompFilesTreeType.Item) => {
         if (item.open) {
             arr.push(item.uuid)
@@ -61,13 +61,14 @@ export function getOpenedFoldersUuid(items: TempCompFilesTreeType.Items, arr: Te
     })
 
     return arr
-}
+}*/
 
 
 /**
  * Функция возвращает максимальную глубину вложенности файлов
  * @param {Array} items — массив с данными по папкам и файлам
  */
+/*
 export function getMaxDeep(items: FilesTreeType.Items) {
     let maxDeep = 0
 
@@ -87,4 +88,4 @@ export function getMaxDeep(items: FilesTreeType.Items) {
     }
 
     return maxDeep
-}
+}*/

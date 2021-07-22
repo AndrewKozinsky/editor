@@ -1,10 +1,10 @@
-import {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+// import {useEffect, useState} from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
 
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame
-export function useSetUserScriptsAndStylesToIFrame() {
+/*export function useSetUserScriptsAndStylesToIFrame() {
     const { $links, incFiles, history } = useSelector((store: AppState) => store.article)
 
     // Were mouse move handler set?
@@ -36,13 +36,13 @@ export function useSetUserScriptsAndStylesToIFrame() {
             setFilesWereSet(false)
         }
     }, [history])
-}
+}*/
 
 /**
  * The function gets string with HTML and turns it into html-elements
  * @param {String} htmlStr — string with html
  */
-function createNodesFromString(htmlStr: string): Element[] {
+/*function createNodesFromString(htmlStr: string): Element[] {
     const div = document.createElement('div')
     div.innerHTML = htmlStr
 
@@ -54,14 +54,14 @@ function createNodesFromString(htmlStr: string): Element[] {
     }
 
     return nodes
-}
+}*/
 
 /**
  * The function gets <script> or <style> element and recreates it in the new element because I can't set node
  * into <head> or <body> without this procedure. It doesn't work. So I must recreate nodes.
  * @param {Element} node — node
  */
-function createNode(node: Element) {
+/*function createNode(node: Element) {
     const newNode = document.createElement(node.tagName.toLowerCase())
 
     for (let attr of node.attributes) {
@@ -70,7 +70,7 @@ function createNode(node: Element) {
     }
 
     return newNode
-}
+}*/
 
 /**
  * The function set <script> or <style> elements into <head> or <body>
@@ -78,10 +78,11 @@ function createNode(node: Element) {
  * @param {NodeListOf} nodes — nodes list
  * @param {String} place — where to put nodes
  */
+/*
 function putNodesToDocument($doc: Document, nodes: Node[], place: 'head' | 'body') {
     const $place = place === 'head' ? $doc.head : $doc.body
 
     for (let node of nodes) {
         $place.appendChild(node)
     }
-}
+}*/

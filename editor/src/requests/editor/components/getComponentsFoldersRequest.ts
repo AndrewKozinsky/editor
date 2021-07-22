@@ -1,12 +1,12 @@
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import {makeFetch, useFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import {makeFetch, useFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 
 // Функция удаляет сайт
 // I DON'T WANT TO USE REQUEST FUNCTIONS WITH SIDE EFFECTS
-export function useGetComponentsFoldersRequest() {
+/*export function useGetComponentsFoldersRequest() {
     // id текущего сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
 
@@ -21,9 +21,9 @@ export function useGetComponentsFoldersRequest() {
         componentsResponse,
         doComponentsFetch
     }
-}
+}*/
 
-export async function getComponentsFoldersRequest(siteId: string) {
+/*export async function getComponentsFoldersRequest(siteId: string) {
     const options = { method: 'GET'}
 
     const response: GetComponentsFoldersServerResponse = await makeFetch(
@@ -31,14 +31,14 @@ export async function getComponentsFoldersRequest(siteId: string) {
     )
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-export type GetComponentsFoldersServerResponse = null | FailResponse | SuccessResponse
+// export type GetComponentsFoldersServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -46,9 +46,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -58,4 +59,4 @@ type SuccessResponse = {
             userId: string // "60c626f9fd09180020febc99"
         }
     }
-}
+}*/

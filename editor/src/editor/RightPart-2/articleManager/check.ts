@@ -1,7 +1,7 @@
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import articleManager from './articleManager';
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import StoreArticleTypes from 'store/article/articleTypes';
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import articleManager from './articleManager';
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes';
 
 /**
  * The function check can you insert a component into the target element
@@ -10,7 +10,7 @@ import StoreArticleTypes from 'store/article/articleTypes';
  * @param {String} targetDataCompId — a target data component id
  * @param {String} targetDataElemId — a target data element id
  */
-export function canComponentPutInElement(
+/*export function canComponentPutInElement(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     dataCompArr: ArticleTypes.Components,
@@ -33,7 +33,7 @@ export function canComponentPutInElement(
     if (tempElem.text) return false
 
     return true
-}
+}*/
 
 
 /**
@@ -42,7 +42,7 @@ export function canComponentPutInElement(
  * @param {String} tempCompId — component template uuid
  * @param {String} tempElemId — element template id
  */
-export function hasElemNestedElements(
+/*export function hasElemNestedElements(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.UuId,
@@ -64,7 +64,7 @@ export function hasElemNestedElements(
     if ($elem.childElementCount) return true
 
     return false
-}
+}*/
 
 
 /**
@@ -73,7 +73,7 @@ export function hasElemNestedElements(
  * @param {Array} historyArr — articles history array
  * @param {Number} currentIdx — current history array index
  */
-export function canMakeHistoryStep(
+/*export function canMakeHistoryStep(
     this: typeof articleManager,
     step: 'undo' | 'redo',
     historyArr: StoreArticleTypes.HistoryItems,
@@ -83,7 +83,7 @@ export function canMakeHistoryStep(
         (step === 'undo' && currentIdx - 1 !== -1) ||
         (step === 'redo' && currentIdx + 1 < historyArr.length)
     )
-}
+}*/
 
 
 /**
@@ -91,10 +91,11 @@ export function canMakeHistoryStep(
  * @param historyStepWhenWasSave
  * @param historyCurrentIdx
  */
+/*
 export function isArticleSave(
     this: typeof articleManager,
     historyStepWhenWasSave: number,
     historyCurrentIdx: number
 ) {
     return historyStepWhenWasSave === historyCurrentIdx
-}
+}*/

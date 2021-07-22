@@ -1,29 +1,29 @@
-import React from 'react'
+// import React from 'react'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Notice from 'common/Notice/Notice'
-import getFormConfig from './formResources'
-import { getMenuItems } from '../menuItems'
-import {
+// import { useHistory } from 'react-router-dom'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Notice from 'common/Notice/Notice'
+// import getFormConfig from './formResources'
+// import { getMenuItems } from '../menuItems'
+/*import {
     enterFormMessages,
     enterFormJSXMessages,
     enterFormJSXFnMessages
-} from 'messages/enterFormMessages'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import CommonError from '../CommonError/CommonError'
-import FHTypes from 'libs/formHandler/types'
-import {commonMessages} from 'messages/commonMessages'
-import { useGetSendConfirmLetter } from 'requests/user/sendConfirmLetterRequest'
+} from 'messages/enterFormMessages'*/
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import CommonError from '../CommonError/CommonError'
+// import FHTypes from 'libs/formHandler/types'
+// import {commonMessages} from 'messages/commonMessages'
+// import { useGetSendConfirmLetter } from 'requests/user/sendConfirmLetterRequest'
 
 
 /** Форма входа в сервис */
-export default function EnterFormBlock() {
+/*export default function EnterFormBlock() {
     const history = useHistory()
 
     // FormHandler
@@ -45,15 +45,15 @@ export default function EnterFormBlock() {
             {content}
         </div>
     )
-}
+}*/
 
 
-type ThisFormPropType = {
+/*type ThisFormPropType = {
     fh?: FHTypes.ReturnObj // Объектами с данными и методами манипуляцией формой
-}
+}*/
 
 /** Форма входа пользователя */
-function ThisForm(props: ThisFormPropType) {
+/*function ThisForm(props: ThisFormPropType) {
     const { fh } = props
 
     return (
@@ -104,16 +104,16 @@ function ThisForm(props: ThisFormPropType) {
             </Wrapper>
         </>
     )
-}
+}*/
 
 
-type ConfirmLetterMessagePropType = {
+/*type ConfirmLetterMessagePropType = {
     visible?: boolean // Видно ли сообщение
     email: string // Почта пользователя, которую нужно подтвердить
-}
+}*/
 
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
-function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
+/*function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     const {
         email
     } = props
@@ -124,7 +124,7 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     return (
         <>
             <Notice>
-                {/*@ts-ignore*/}
+                {/!*@ts-ignore*!/}
                 {enterFormJSXFnMessages.confirmRegistrationLetter(email)}
             </Notice>
             {!success && <Wrapper t={10}>
@@ -146,4 +146,4 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
             </Wrapper>}
         </>
     )
-}
+}*/

@@ -1,11 +1,11 @@
-import {useFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import { useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+// import {useFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'src/store/rootReducer'
 
 
 // Функция удаляет сайт
-export function useDeleteSite() {
+/*export function useDeleteSite() {
 
     // id выделенного сайта, который нужно удалить
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
@@ -18,14 +18,14 @@ export function useDeleteSite() {
         useFetch<DeleteSiteServerResponse>(getApiUrl('site', currentSiteId), options)
 
     return { response, doFetch }
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type DeleteSiteServerResponse = null | FailResponse | SuccessResponse
+// type DeleteSiteServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -33,9 +33,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
-}
+}*/

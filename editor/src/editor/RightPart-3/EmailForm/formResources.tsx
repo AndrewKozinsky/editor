@@ -1,12 +1,12 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import store from 'store/store'
-import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+// import * as yup from 'yup'
+// import FHTypes from 'libs/formHandler/types'
+// import store from 'store/store'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 
 
 /** Объект настройки useFormHandler */
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -62,14 +62,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
     const schemas = {
         email: yup.string()
             .required(userDataSectionMessages.requiredField)
@@ -82,7 +82,7 @@ function getSchema(fieldName: string): any {
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -91,7 +91,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -118,15 +118,16 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на поле email если там есть ошибка
  * @param {Object} formState — объект с Состоянием формы
  */
+/*
 function getFirstInvalidField(formState: FHTypes.FormState) {
     return formState.fields.email.data.error
         ? formState.fields.email.$field
         : null
-}
+}*/

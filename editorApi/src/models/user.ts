@@ -10,12 +10,11 @@ export interface IUser extends Document {
     email: string,
     emailConfirmToken?: string,
     password: string,
-    passwordConfirm?: string,
     passwordChangedAt?: Date,
     passwordResetToken?: string,
     passwordResetExpires?: Date,
     language: string
-    // ADD CREATION TIME
+    createdAt: Date,
 
     correctPassword(candidatePassword: string, userPassword: string): Promise<boolean>,
     changedPasswordAfter(JWTTimestamp: number): Promise<boolean>,
@@ -46,17 +45,6 @@ const UserSchema: Schema = new Schema({
         maxLength: [50, '{{user.passwordMaxLength}}'],
         select: false
     },
-    // Подтверждение пароля при регистрации и смене пароля
-    passwordConfirm: {
-        type: String,
-        required: [ true, '{{user.passwordConfirmRequired}}' ],
-        validate: {
-            validator: function (this: IUser, passwordConfirm: string) {
-                return this.password === passwordConfirm
-            },
-            message: '{{user.passwordConfirmValidate}}'
-        }
-    },
     // Дата когда был изменён пароль
     passwordChangedAt: Date,
     // Токен сброса пароля
@@ -68,6 +56,11 @@ const UserSchema: Schema = new Schema({
         type: String,
         required: [ true, '{{user.langRequired}}' ]
     },
+    // Date when used was created
+    createdAt: {
+        type: Date,
+        required: [ true, '{{user.????????}}' ]
+    },
 })
 
 // Перед сохранением пользователя зашифровать пароль
@@ -76,16 +69,12 @@ UserSchema.pre('save', async function(this: IUser, next) {
     if(!this.isModified('password')) return next()
 
     // Зашифровать пароль
-    this.password = await bcrypt.hash(this.password, 12)
-
-    // Удалить поле с подтверждением пароля
-    this.passwordConfirm = undefined
+    this.password = await bcrypt.hash(this.password, 10)
 })
 
 // При изменении пароля записать дату изменения
 UserSchema.pre('save', function (this: IUser, next) {
-    if(!this.isModified('password') || this.isNew)
-        return next()
+    if (!this.isModified('password') || this.isNew) return next()
 
     const newDate = new Date()
     newDate.setMinutes(newDate.getMinutes() - 1)

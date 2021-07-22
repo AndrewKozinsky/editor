@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import { getElementPadding } from 'utils/domUtils'
+// import {useEffect, useState} from 'react'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import { getElementPadding } from 'utils/domUtils'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
  * They save information about component/element under cursor in Store
  */
-export function useSetMouseHandlersForFlashRects() {
+/*export function useSetMouseHandlersForFlashRects() {
     const { $links, history } = useSelector((store: AppState) => store.article)
     // Were mouse move handler set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
@@ -33,14 +33,14 @@ export function useSetMouseHandlersForFlashRects() {
             $links.$document.removeEventListener('mousedown', selectHandler)
         }
     }, [history, $links])
-}
+}*/
 
-function hoverHandler(e: MouseEvent) {
+/*function hoverHandler(e: MouseEvent) {
     mouseHandler(e, 'hover')
-}
-function selectHandler(e: MouseEvent) {
+}*/
+/*function selectHandler(e: MouseEvent) {
     mouseHandler(e, 'select')
-}
+}*/
 
 /**
  * OnMove and OnClick mouse handler.
@@ -48,7 +48,7 @@ function selectHandler(e: MouseEvent) {
  * @param {Event} event — event object
  * @param {String} actionType — mouse hovers or selects under element
  */
-function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
+/*function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
     // Element under cursor
     const target = event.target as HTMLElement
 
@@ -95,13 +95,13 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
             actionType, nodeType, dataCompId, dataElemId
         ))
     }
-}
+}*/
 
 /**
  * The function returns if a cursor on text component or not
  * @param {HTMLElement} $target — element under a cursor
  */
-export function isTextCompAhead($target: HTMLElement) {
+/*export function isTextCompAhead($target: HTMLElement) {
     let $currentNode = $target
 
     // Finding text component element in the loop
@@ -119,7 +119,7 @@ export function isTextCompAhead($target: HTMLElement) {
     }
 
     return false
-}
+}*/
 
 /**
  * Text component doesn't have own wrapper. That's why it always is inside element.
@@ -128,7 +128,7 @@ export function isTextCompAhead($target: HTMLElement) {
  * @param {Event} event — event object
  * @param {HTMLElement} $target — html-element
  */
-export function isCursorOnTextComponent(event: MouseEvent, $target: HTMLElement) {
+/*export function isCursorOnTextComponent(event: MouseEvent, $target: HTMLElement) {
     // Mouse coordinates
     const mouseX = event.clientX
     const mouseY = event.clientY
@@ -154,4 +154,4 @@ export function isCursorOnTextComponent(event: MouseEvent, $target: HTMLElement)
     )
 
     return !res
-}
+}*/

@@ -3,7 +3,7 @@
  * Function gets string with html code and returns object with html structure
  * @param {String} htmlStr — string with html code
  */
-export default function htmlStringToObject(htmlStr: string): HTMLObjArrType.Arr {
+/*export default function htmlStringToObject(htmlStr: string): HTMLObjArrType.Arr {
     // Turn html-string to HTMLElement
     const parser = new DOMParser()
     const doc = parser.parseFromString(htmlStr, 'text/html')
@@ -11,13 +11,13 @@ export default function htmlStringToObject(htmlStr: string): HTMLObjArrType.Arr 
 
     // Turn HTMLElement to html-object and return it
     return getObjects(elems)
-}
+}*/
 
 /**
  * Function get HTMLElement and turns it to object with html structure
  * @param {NodeListOf} elems — HTMLElements
  */
-function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
+/*function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
     if (!elems.length) return
 
     // Returned array of objects
@@ -41,13 +41,13 @@ function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
     }
 
     return arr
-}
+}*/
 
 /**
  * Function creates object with data describes tag
  * @param {Element} elem — Element
  */
-function getTag(elem: Element): HTMLObjArrType.Tag {
+/*function getTag(elem: Element): HTMLObjArrType.Tag {
      const obj: HTMLObjArrType.Tag = {
         tag: elem.tagName.toLowerCase()
     }
@@ -59,13 +59,13 @@ function getTag(elem: Element): HTMLObjArrType.Tag {
     if (children) obj.children = children
 
     return obj
-}
+}*/
 
 /**
  * Function returns object with tag attributes
  * @param {Element} elem — Element
  */
-function getAttrs(elem: Element) {
+/*function getAttrs(elem: Element) {
     if (!elem.attributes.length) return null
 
     const obj: HTMLObjArrType.Attrs = {}
@@ -78,22 +78,22 @@ function getAttrs(elem: Element) {
     }
 
     return obj
-}
+}*/
 
 /**
  * Function returns children html-objects
  * @param {Element} elem — Element
  */
-function getChildren(elem: Element): HTMLObjArrType.Arr {
+/*function getChildren(elem: Element): HTMLObjArrType.Arr {
     if (!elem.childNodes?.length) return null
     return getObjects(elem.childNodes)
-}
+}*/
 
 /**
  * Function returns text object
  * @param {CharacterData} elem — text node
  */
-function getText(elem: CharacterData): HTMLObjArrType.Text {
+/*function getText(elem: CharacterData): HTMLObjArrType.Text {
     let preparedString = elem.data
     // Remove all multiple spaces
     preparedString = preparedString.replace( /\s\s+/g, ' ' )
@@ -101,12 +101,12 @@ function getText(elem: CharacterData): HTMLObjArrType.Text {
     return {
         text: preparedString
     }
-}
+}*/
 
 
 // =============================================================
 
-export namespace HTMLObjArrType {
+/*export namespace HTMLObjArrType {
     export type Arr = ArrItem[]
 
     export type ArrItem = (Tag | Text)
@@ -123,9 +123,9 @@ export namespace HTMLObjArrType {
         text: string
     }
     export type Attrs = { [key: string]: string }
-}
+}*/
 
-const dataExample: HTMLObjArrType.Arr = [
+/*const dataExample: HTMLObjArrType.Arr = [
     {
         tag: "div",
         attrs: { class: 'grid' },
@@ -152,4 +152,4 @@ const dataExample: HTMLObjArrType.Arr = [
             }
         ]
     }
-]
+]*/

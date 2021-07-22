@@ -1,7 +1,7 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Панель «Настройки»
-const obj = {
+/*const obj = {
     header: {
         eng: 'Settings',
         rus: 'Настройки'
@@ -14,6 +14,6 @@ const obj = {
         eng: 'Editor',
         rus: 'Редактор'
     },
-}
+}*/
 
-export const settingsPanelMessages = getMessagesObject(obj)
+// export const settingsPanelMessages = getMessagesObject(obj)

@@ -1,7 +1,7 @@
-import FilesTreeType from '../../types/filesTree'
+// import FilesTreeType from '../../types/filesTree'
 
 // Типы компонента DragFilesTree
-namespace DragFilesTreeType {
+/*namespace DragFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
@@ -54,6 +54,6 @@ namespace DragFilesTreeType {
         changingTree?: AfterChangingTreeFn
         deleteItem?: AfterDeleteItem
     }
-}
+}*/
 
-export default DragFilesTreeType
+// export default DragFilesTreeType

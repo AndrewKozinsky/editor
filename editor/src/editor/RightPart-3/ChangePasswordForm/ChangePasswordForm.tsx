@@ -1,15 +1,15 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Notice from 'common/Notice/Notice'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Notice from 'common/Notice/Notice'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
 
 
-export default function ChangePasswordForm() {
+/*export default function ChangePasswordForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'changePassword')
@@ -74,4 +74,4 @@ export default function ChangePasswordForm() {
             </Wrapper>}
         </>
     )
-}
+}*/

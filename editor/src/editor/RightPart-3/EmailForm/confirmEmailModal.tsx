@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import actions from 'store/rootAction'
-import { AppState } from 'store/rootReducer'
-import { useChangeEmailRequest } from 'requests/user/changeEmailRequest'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
-import { userDataSectionMessages } from 'messages/userDataSectionMessages'
-import FHTypes from 'libs/formHandler/types'
+// import React, { useEffect, useState } from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import actions from 'store/rootAction'
+// import { AppState } from 'store/rootReducer'
+// import { useChangeEmailRequest } from 'requests/user/changeEmailRequest'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import Hr from 'common/misc/Hr/Hr'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+// import FHTypes from 'libs/formHandler/types'
 
 
 /**
@@ -15,7 +15,7 @@ import FHTypes from 'libs/formHandler/types'
  * и изменяет почту на переданную
  * @param {Object} fh — объект отдаваемый FormHandler-ом.
  */
-export default function useHandleConfirmChangingEmailModal(fh: FHTypes.ReturnObj) {
+/*export default function useHandleConfirmChangingEmailModal(fh: FHTypes.ReturnObj) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -53,15 +53,15 @@ export default function useHandleConfirmChangingEmailModal(fh: FHTypes.ReturnObj
     return {
         isSuccessMessageOpen
     }
-}
+}*/
 
 
-type ModalContentPropType = {
+/*type ModalContentPropType = {
     newEmail: string
     setIsSuccessMessageOpen: (isSuccessMessageOpen: boolean) => void
-}
+}*/
 
-function ModalContent(props: ModalContentPropType) {
+/*function ModalContent(props: ModalContentPropType) {
     const {
         newEmail,
         setIsSuccessMessageOpen
@@ -106,4 +106,4 @@ function ModalContent(props: ModalContentPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

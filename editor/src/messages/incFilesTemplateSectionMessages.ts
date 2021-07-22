@@ -1,7 +1,7 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
+// import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Шаблоны подключаемых файлов»
-const obj = {
+/*const obj = {
     headerNewPlugin: {
         eng: 'New template',
         rus: 'Новый шаблон'
@@ -58,6 +58,6 @@ const obj = {
         eng: 'Delete',
         rus: 'Удалить'
     },
-}
+}*/
 
-export const incFilesTemplateSectionMessages = getMessagesObject(obj)
+// export const incFilesTemplateSectionMessages = getMessagesObject(obj)

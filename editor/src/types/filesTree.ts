@@ -1,6 +1,6 @@
 
 // Core Folders tree structure types
-namespace FilesTreeType {
+/*namespace FilesTreeType {
     // Folders and files array
     export type Items = Item[]
 
@@ -17,6 +17,6 @@ namespace FilesTreeType {
 
     // Item type: folder or file
     export type ItemType = 'file' | 'folder'
-}
+}*/
 
-export default FilesTreeType
+// export default FilesTreeType

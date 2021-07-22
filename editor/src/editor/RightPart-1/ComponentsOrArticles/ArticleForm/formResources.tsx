@@ -1,19 +1,19 @@
 // @ts-ignore
-import * as yup from 'yup'
-import store from 'store/store'
-import FHTypes from 'libs/formHandler/types'
-import { articleFormMessages } from 'messages/articleFormMessages'
-import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
-import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-import {
+// import * as yup from 'yup'
+// import store from 'store/store'
+// import FHTypes from 'libs/formHandler/types'
+// import { articleFormMessages } from 'messages/articleFormMessages'
+// import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
+// import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
+// import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+/*import {
     articlesTreeStore,
     setArtItems
-} from '../stores'
+} from '../stores'*/
 
 
 /** Объект настройки useFormHandler */
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -97,14 +97,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
     const schemas = {
         name: yup.string()
             .required(articleFormMessages.articleNameRequired)
@@ -112,7 +112,7 @@ function getSchema(fieldName: string): any {
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -121,7 +121,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -160,14 +160,14 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -183,7 +183,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -192,7 +192,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -201,14 +201,14 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/
 
 
 /**
  * Функция сохраняет статью на сервере
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+/*async function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
     // id выбранной статьи
     const {currentArtItemId} = store.getState().sites.articlesSection
 
@@ -221,13 +221,13 @@ async function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHand
 
     // Отправить данные на сервер...
     await updateArticleNameRequest(currentArtItemId, articleName, templateId)
-}
+}*/
 
 /**
  * Функция сохраняет папки со статьями на сервере и обновить их Состояние
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
+/*async function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
     // Массив папок и файлов из Хранилища
     const items = articlesTreeStore.getState()
 
@@ -247,4 +247,4 @@ async function saveItemsOnServer( formDetails: FHTypes.FormDetailsInSubmitHandle
 
     // Отправить данные на сервер...
     await putArticlesFoldersRequest(preparedItems)
-}
+}*/

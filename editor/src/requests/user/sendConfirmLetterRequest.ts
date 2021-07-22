@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react'
-import {useFetch, makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {useEffect, useState} from 'react'
+// import {useFetch, makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет еще одно письмо для подтверждения почты пользователя
  * @param {Object} email — Почта пользователя, которую нужно подтвердить
  */
-export default async function sendConfirmLetterRequest(email: string) {
+/*export default async function sendConfirmLetterRequest(email: string) {
     const options = {
         method: 'POST',
         body: JSON.stringify({email: email})
@@ -14,14 +14,14 @@ export default async function sendConfirmLetterRequest(email: string) {
     const response: SendConfirmLetterServerResponse = await makeFetch(getApiUrl('login'), options)
 
     return response
-}
+}*/
 
 
 /**
  * Хук возвращает функцию делающую запрос на отправку еще одного письма с подтверждением почты
  * @param {String} email — почта пользователя, которую нужно подтвердить.
  */
-export function useGetSendConfirmLetter(email: string) {
+/*export function useGetSendConfirmLetter(email: string) {
 
     const [success, setSuccess] = useState(false)
 
@@ -53,14 +53,14 @@ export function useGetSendConfirmLetter(email: string) {
         error, // В процессе запроса возникли ошибки
         doFetch // Функция делающая запрос
     }
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type SendConfirmLetterServerResponse = FailResponse | SuccessResponse
+// type SendConfirmLetterServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -68,9 +68,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -79,4 +80,4 @@ type SuccessResponse = {
             email: string
         }
     }
-}
+}*/

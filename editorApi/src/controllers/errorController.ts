@@ -38,7 +38,7 @@ export function globalErrorHandler (err: any, req: Request, res: Response, next:
     if(error.code === 11000) error = handleDuplicateFieldsBD(error, lang);
     if(error.errors) error = handleValidationErrorBD(error);
     if(error.name === 'JsonWebTokenError') handleJWTError(error)
-    if(error.name === 'TokenExpiredError') handleJWTExpiredError(error)
+    // if(error.name === 'TokenExpiredError') handleJWTExpiredError(error)
 
     if(config.workMode === 'development') {
         sendErrorDev(error, res)
@@ -94,16 +94,6 @@ function sendErrorProd(err: ErrorType, res: Response) {
 }
 
 
-/*function getErrorsMessage(err: any) {
-    let resultStr = ''
-
-    for(let key in err.errors) {
-        resultStr += key + '\n'
-        resultStr += err.errors[key].properties.message + '\n'
-    }
-}*/
-
-
 /**
  * В поле, которое должно быть уникальным, передали повторяющееся значение
  * @param {Object} err — объект с данными ошибки
@@ -121,13 +111,14 @@ function handleDuplicateFieldsBD(err: ErrorType, lang: string): ErrorType {
     return err
 }
 
+
 // Ошибка при проверке поля
 function handleValidationErrorBD(err: ErrorType) {
-    // const errors = Object.values(err.errors).map(el => el.message)
-    // const message = `Invalid input data: ${errors.join('. ')}`
+    const errors = Object.values(err.errors).map(el => el.message)
+    const message = `Invalid input data: ${errors.join('. ')}`
 
     err.statusCode = 400
-    // err.message = message
+    err.message = message
     return err
 }
 
@@ -139,8 +130,9 @@ function handleJWTError(err: ErrorType) {
 }
 
 // В JWT истёк срок действия
+/*
 function handleJWTExpiredError(err: ErrorType) {
     err.statusCode = 401
     err.message = 'Your token has expired. Please log in again.'
     return err
-}
+}*/

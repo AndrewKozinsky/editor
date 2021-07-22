@@ -1,14 +1,14 @@
-import {useCallback, useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import {useCallback, useEffect, useState} from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-import { AppState } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import StoreSitesTypes from 'store/site/sitesTypes'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
-import store from '../../../../store/store'
+// import { AppState } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import StoreSitesTypes from 'store/site/sitesTypes'
+// import FHTypes from 'libs/formHandler/types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { OptionsType } from 'common/formElements/Select/SelectTypes'
+// import { siteSectionMessages } from 'messages/siteSectionMessages'
+// import store from '../../../../store/store'
 
 
 /**
@@ -16,7 +16,7 @@ import store from '../../../../store/store'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     const dispatch = useDispatch()
 
     // Все статьи и id текущего сайта
@@ -58,7 +58,7 @@ export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState:
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [sites, currentArtItemId, articlesSection])
-}
+}*/
 
 
 /**
@@ -67,7 +67,7 @@ export function useGetAnotherArticle(formState: FHTypes.FormState, setFormState:
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} value — новое значение поля
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'incFilesTemplateId',
     value: null | string
@@ -85,7 +85,7 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/
 
 
 /**
@@ -95,7 +95,7 @@ function changeField(
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
-export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
+/*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
         return store.sites.incFilesTemplatesSection.templates
@@ -148,9 +148,10 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
         isSelectVisible,
         selectOptions
     }
-}
+}*/
 
 // Hook returns edit Article button onClick handler
+/*
 export function useGetEditArticleBtnHandler() {
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
@@ -161,4 +162,4 @@ export function useGetEditArticleBtnHandler() {
             currentSiteId, currentTemplateId, currentArtItemId
         ))
     }, [currentSiteId, currentTemplateId, currentArtItemId])
-}
+}*/

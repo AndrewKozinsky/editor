@@ -1,10 +1,10 @@
-import React from 'react'
-import MainTab, {MainTabDataType} from 'editor/special/MainTab/MainTab'
-import { useGetTabData } from './SitePartTabs-func'
-import './SitePartTabs.scss'
+// import React from 'react'
+// import MainTab, {MainTabDataType} from 'editor/special/MainTab/MainTab'
+// import { useGetTabData } from './SitePartTabs-func'
+// import './SitePartTabs.scss'
 
 
-export default function SitePartTabs() {
+/*export default function SitePartTabs() {
     const CN = 'site-part-tabs'
 
     // Данные для генерирования вкладок
@@ -17,4 +17,4 @@ export default function SitePartTabs() {
             })}
         </div>
     )
-}
+}*/

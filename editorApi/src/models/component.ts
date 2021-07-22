@@ -1,18 +1,18 @@
-import * as mongoose from 'mongoose'
-import { Schema, Document } from 'mongoose'
+// import * as mongoose from 'mongoose'
+// import { Schema, Document } from 'mongoose'
 
 
-export interface IComponent extends Document {
+/*export interface IComponent extends Document {
     uuid: string,
     userId: string,
     siteId: string,
     name: string,
     code?: string,
-    // ADD CREATION TIME
-}
+    createdAt: Date,
+}*/
 
 // Схема шаблона компонента
-const ComponentSchema: Schema = new Schema({
+/*const ComponentSchema: Schema = new Schema({
     // собственный id шаблона сгенерированный на клиенте.
     // Требуется для упрощения создания компонентов из дерева папок и шаблонов.
     uuid: {
@@ -39,8 +39,12 @@ const ComponentSchema: Schema = new Schema({
     code: {
         type: String
     },
-})
+    createdAt: {
+        type: Date,
+        required: [ true, '{{user.????????}}' ]
+    },
+})*/
 
 
-const ComponentModel = mongoose.model<IComponent>('Component', ComponentSchema)
-export default ComponentModel
+// const ComponentModel = mongoose.model<IComponent>('Component', ComponentSchema)
+// export default ComponentModel

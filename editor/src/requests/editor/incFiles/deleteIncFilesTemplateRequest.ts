@@ -1,10 +1,10 @@
-import {useFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+// import {useFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
 
 // Функция удаляет шаблон подключаемых файлов
-export function useDeleteIncFilesTemplate() {
+/*export function useDeleteIncFilesTemplate() {
 
     // id выделенного шаблона, который нужно удалить
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
@@ -20,13 +20,13 @@ export function useDeleteIncFilesTemplate() {
         )
 
     return { response, doFetch }
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type DeleteIncFilesTemplateServerResponse = null | FailResponse | SuccessResponse
+// type DeleteIncFilesTemplateServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -34,9 +34,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
-}
+}*/

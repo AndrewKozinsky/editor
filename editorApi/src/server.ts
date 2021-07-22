@@ -16,9 +16,7 @@ connectDb()
     .on('disconnected', connectDb)
     .once('open', startServer)
 
-/**
- * Функция запускает сервер
- */
+/** Функция запускает сервер */
 function startServer(): void {
 
     // Прослушивание порта на сервере

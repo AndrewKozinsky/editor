@@ -1,25 +1,25 @@
-import React from 'react'
-import SvgIcon from 'common/icons/SvgIcon'
-import {
+// import React from 'react'
+// import SvgIcon from 'common/icons/SvgIcon'
+/*import {
     useGetIsButtonVisible,
     useIsDataBtnDisabled,
     useIsHistoryBtnDisabled,
     useMakeHistoryStep,
     useShowData
-} from './ArticleMenu-func'
-import Button from 'common/formElements/Button/Button'
-import {articleMenuMessages} from 'messages/articleMenuMessages'
-import './ArticleMenu.scss'
-import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
-import { useCloseArticle } from './fn/close'
-import useGetShowModal from '../../../utils/hooksUtils'
-import {CloseArticleConfirmModal} from './fn/CloseArticleConfirmModal'
-import {DeleteArticleConfirmModal} from './fn/DeleteArticleConfirmModal'
-import { useIsMarkupBtnDisabled } from './fn/markup'
-import {ArticleMarkupModal} from './fn/ArticleMarkupModal'
+} from './ArticleMenu-func'*/
+// import Button from 'common/formElements/Button/Button'
+// import {articleMenuMessages} from 'messages/articleMenuMessages'
+// import './ArticleMenu.scss'
+// import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
+// import { useCloseArticle } from './fn/close'
+// import useGetShowModal from '../../../utils/hooksUtils'
+// import {CloseArticleConfirmModal} from './fn/CloseArticleConfirmModal'
+// import {DeleteArticleConfirmModal} from './fn/DeleteArticleConfirmModal'
+// import { useIsMarkupBtnDisabled } from './fn/markup'
+// import {ArticleMarkupModal} from './fn/ArticleMarkupModal'
 
 
-export default function ArticleMenuButton() {
+/*export default function ArticleMenuButton() {
     // Is the Article menu button visible
     const isVisible = useGetIsButtonVisible()
 
@@ -33,9 +33,10 @@ export default function ArticleMenuButton() {
             <ArticleMenu />
         </div>
     )
-}
+}*/
 
 
+/*
 function ArticleMenu() {
     const menuCN = 'article-menu'
 
@@ -116,4 +117,4 @@ function ArticleMenu() {
             </div>
         </div>
     )
-}
+}*/

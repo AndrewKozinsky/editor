@@ -29,32 +29,32 @@ export function useGetWrapperClasses() {
         if (authTokenStatus === 0) {
             setIsVisible(false)
         }
-        else if (entryAndEditorViewState === 'editor') {
+        /*else if (entryAndEditorViewState === 'editor') {
             setIsVisible(false)
             setClasses([CN, `${CN}--scale-up`])
-        }
-        else if (entryAndEditorViewState === 'toEditor') {
+        }*/
+        /*else if (entryAndEditorViewState === 'toEditor') {
             setIsVisible(true)
             setClasses([CN])
             setTimeout(function () {
                 setClasses([CN, `${CN}--scale-up`])
             }, 10)
-        }
-        else if (entryAndEditorViewState === 'toEntry') {
+        }*/
+        /*else if (entryAndEditorViewState === 'toEntry') {
             setIsVisible(true)
             setClasses([CN, `${CN}--scale-up`])
             setTimeout(function () {
                 setClasses([CN])
             }, 10)
-        }
+        }*/
         else if (entryAndEditorViewState === 'entry') {
             setIsVisible(true)
             setClasses([CN])
         }
-        else {
+        /*else {
             setIsVisible(false)
             setClasses([CN])
-        }
+        }*/
     }, [entryAndEditorViewState])
 
     return {

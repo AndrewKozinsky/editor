@@ -1,15 +1,15 @@
-import React from 'react'
-import NameSection from '../../wrappers/NameSection/NameSection'
-import {componentsPanelMessages} from 'messages/componentsPanelMessages'
-import TempCompList from '../TempCompList/TempCompList'
-import './LeftPart-2.scss'
+// import React from 'react'
+// import NameSection from '../../wrappers/NameSection/NameSection'
+// import {componentsPanelMessages} from 'messages/componentsPanelMessages'
+// import TempCompList from '../TempCompList/TempCompList'
+// import './LeftPart-2.scss'
 
-type LeftPart3PropType = {
+/*type LeftPart3PropType = {
     display?: boolean
-}
+}*/
 
 /** Левая часть второй главной вкладки */
-export default function LeftPart2(props: LeftPart3PropType) {
+/*export default function LeftPart2(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -29,4 +29,4 @@ export default function LeftPart2(props: LeftPart3PropType) {
             </div>
         </div>
     )
-}
+}*/

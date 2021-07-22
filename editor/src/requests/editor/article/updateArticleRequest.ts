@@ -1,6 +1,6 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 
 /**
@@ -9,7 +9,7 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
  * @param {String} name — название статьи
  * @param {String} incFilesTemplateId — id шаблона подключаемых файлов
  */
-export async function updateArticleNameRequest(
+/*export async function updateArticleNameRequest(
     articleId: string, name: string, incFilesTemplateId: null | string
 ) {
     const options = {
@@ -24,14 +24,14 @@ export async function updateArticleNameRequest(
     )
 
     return response
-}
+}*/
 
 /**
  * Функция сохраняет код статьи
  * @param {String} articleId — uuid сохраняемой статьи
  * @param {String} articleCode — код статьи
  */
-export async function updateArticleCodeRequest(
+/*export async function updateArticleCodeRequest(
     articleId: string, articleCode: ArticleTypes.Article
 ) {
     const articleCodeStr = JSON.stringify(articleCode)
@@ -44,14 +44,14 @@ export async function updateArticleCodeRequest(
         getApiUrl('article', articleId), options
     )
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
+// type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -59,9 +59,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -74,4 +75,4 @@ type SuccessResponse = {
             uuid: string // "a93df62a-c4c9-4813-be54-43fcd7602573"
         }
     }
-}
+}*/

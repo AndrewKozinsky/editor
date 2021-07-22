@@ -1,34 +1,34 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
-import { FolderType } from '../types'
-import {
+// import {useStore} from 'effector-react'
+// import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
+// import { FolderType } from '../types'
+/*import {
     useGetFoldersFromServerAndPutInEffector,
     afterCollapseFolder,
     useGetOnItemClick,
     afterAddingNewItem,
     saveItemsOnServer,
     afterDeleteItem
-} from './FoldersList-func'
-import {
+} from './FoldersList-func'*/
+/*import {
     componentsTreeStore,
     articlesTreeStore,
     setCompItems,
     setArtItems
-} from '../stores'
-import { foldersArticlesSectionMessages } from 'messages/foldersArticlesSectionMessages'
-import { foldersComponentsSectionMessages } from 'messages/foldersComponentsSectionMessages'
-import {useSelector} from 'react-redux'
-import {AppState} from '../../../../store/rootReducer'
+} from '../stores'*/
+// import { foldersArticlesSectionMessages } from 'messages/foldersArticlesSectionMessages'
+// import { foldersComponentsSectionMessages } from 'messages/foldersComponentsSectionMessages'
+// import {useSelector} from 'react-redux'
+// import {AppState} from '../../../../store/rootReducer'
 
 
-type FoldersListPropType = {
+/*type FoldersListPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}
+}*/
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
-export default function FoldersList(props: FoldersListPropType) {
+/*export default function FoldersList(props: FoldersListPropType) {
     const { type } = props
 
     // Получение с сервера порядка следования папок и установка в Эффектор
@@ -68,4 +68,4 @@ export default function FoldersList(props: FoldersListPropType) {
             afterDeleteItem={(items, itemUuid) => afterDeleteItem(type, items, itemUuid)}
         />
     )
-}
+}*/

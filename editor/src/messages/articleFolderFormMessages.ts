@@ -1,8 +1,8 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 
 // Форма редактирования выбранной папки шаблона компонента
-const obj = {
+/*const obj = {
     folderNameInput: {
         eng: 'Folder name',
         rus: 'Название папки'
@@ -31,6 +31,6 @@ const obj = {
         eng: 'Delete',
         rus: 'Удалить'
     },
-}
+}*/
 
-export const articleFolderFormMessages = getMessagesObject(obj)
+// export const articleFolderFormMessages = getMessagesObject(obj)

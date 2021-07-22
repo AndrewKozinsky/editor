@@ -1,23 +1,23 @@
-import React from 'react'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Notice from 'common/Notice/Notice'
-import getFormConfig from './formResources'
-import { getMenuItems } from '../menuItems'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import {
+// import React from 'react'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Notice from 'common/Notice/Notice'
+// import getFormConfig from './formResources'
+// import { getMenuItems } from '../menuItems'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+/*import {
     changeResetPasswordFormMessages,
     changeResetPasswordFormJSXMessages
-} from 'messages/changeResetPasswordFormMessages'
-import FHTypes from 'libs/formHandler/types'
+} from 'messages/changeResetPasswordFormMessages'*/
+// import FHTypes from 'libs/formHandler/types'
 
 
 /** Форма входа в сервис */
-export default function ChangeResetPasswordFormBlock() {
+/*export default function ChangeResetPasswordFormBlock() {
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'changeResetPassword')
 
@@ -37,15 +37,15 @@ export default function ChangeResetPasswordFormBlock() {
             {content}
         </div>
     )
-}
+}*/
 
 
-type ThisFormPropType = {
+/*type ThisFormPropType = {
     fh?: FHTypes.ReturnObj // Объектами с данными и методами манипуляцией формой
-}
+}*/
 
 /** Форма ввода нового пароля пользователя */
-function ThisForm(props: ThisFormPropType) {
+/*function ThisForm(props: ThisFormPropType) {
 
     const {
         fh
@@ -101,14 +101,14 @@ function ThisForm(props: ThisFormPropType) {
             </Form>
         </>
     )
-}
+}*/
 
 
 /** Сообщение об изменённом пароле */
-function PasswordChangedMessage() {
+/*function PasswordChangedMessage() {
     return (
         <Notice>
             {changeResetPasswordFormJSXMessages.passwordChanged}
         </Notice>
     )
-}
+}*/

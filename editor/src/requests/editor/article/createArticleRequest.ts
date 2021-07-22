@@ -1,6 +1,6 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import store from 'src/store/store'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import store from 'src/store/store'
 
 /**
  * Функция создаёт новую статью
@@ -8,7 +8,7 @@ import store from 'src/store/store'
  * @param {String} name — имя шаблона компонента
  * @param {String} code — код шаблона компонента
  */
-export default async function createArticleRequest(uuid: string, name: string, code: null | string) {
+/*export default async function createArticleRequest(uuid: string, name: string, code: null | string) {
     const siteId = store.getState().sites.currentSiteId
 
     const options = {
@@ -25,13 +25,13 @@ export default async function createArticleRequest(uuid: string, name: string, c
     )
 
     return response
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type CreateNewArticleServerResponse = FailResponse | SuccessResponse
+// type CreateNewArticleServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -39,9 +39,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -52,4 +53,4 @@ type SuccessResponse = {
             uuid: string // "9ae6a037-b217-4374-bb5e-47ae696ace56"
         }
     }
-}
+}*/

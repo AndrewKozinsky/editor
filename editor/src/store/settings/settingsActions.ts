@@ -44,12 +44,12 @@ const settingsActions = {
     },
 
     // Установка номера последней вкладки
-    setSettingsPanelTab(payload: StoreSettingsTypes.SettingsPanelTab): StoreSettingsTypes.SetSettingsPanelTabAction {
+    /*setSettingsPanelTab(payload: StoreSettingsTypes.SettingsPanelTab): StoreSettingsTypes.SetSettingsPanelTabAction {
         return {
             type: StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB,
             payload
         }
-    },
+    },*/
 }
 
 export default settingsActions

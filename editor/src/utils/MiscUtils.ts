@@ -1,25 +1,25 @@
-import {ReactElement} from 'react'
-import {useDispatch} from 'react-redux'
-import actions from '../store/rootAction'
+// import {ReactElement} from 'react'
+// import {useDispatch} from 'react-redux'
+// import actions from '../store/rootAction'
 
 
 /** Хук возвращает функцию открывающую модальное окно */
-export function useGetModalOpenHandler() {
+/*export function useGetModalOpenHandler() {
     const dispatch = useDispatch()
 
     return function (content: ReactElement) {
         dispatch(actions.modal.openModal(content))
     }
-}
+}*/
 
 /** Хук возвращает функцию закрывающую модальное окно */
-export function useGetModalCloseHandler() {
+/*export function useGetModalCloseHandler() {
     const dispatch = useDispatch()
 
     return function () {
         dispatch(actions.modal.closeModal())
     }
-}
+}*/
 
 /**
  * Запись в localStorage данных предварительно пропущенных через JSON.stringify
@@ -51,6 +51,10 @@ export function removeFromLocalStorage(propName: string) {
     localStorage.removeItem(propName)
 }
 
+/**
+ * The function create deep copy of object or array
+ * @param {Object | Array} data — copied data
+ */
 export function createDeepCopy<T>(data: T): T {
 
     let f = function copy(data: T) {
@@ -61,7 +65,6 @@ export function createDeepCopy<T>(data: T): T {
                 return parseObj(data);
             default: return null // Возвращу null чтобы проверяльщик не ругался
         }
-
 
         function parseArray(arr: any) {
             return arr.map((elem: any) => {

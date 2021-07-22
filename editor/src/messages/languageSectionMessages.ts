@@ -1,11 +1,11 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Секция «Язык»
-const obj = {
+/*const obj = {
     langRadiosHeader: {
         eng: 'Language',
         rus: 'Язык'
     }
-}
+}*/
 
-export const languageSectionMessages = getMessagesObject(obj)
+// export const languageSectionMessages = getMessagesObject(obj)

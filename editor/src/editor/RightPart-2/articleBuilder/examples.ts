@@ -1,7 +1,7 @@
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
 
-const gridTemplate: TempCompTypes.Code = {
+/*const gridTemplate: TempCompTypes.Code = {
     html: `<div class="grid">
         <div class="grid__inner">
             <div class="grid__cell grid__cell--thin" data-em-id="cell" data-em-group="cell-top">
@@ -44,9 +44,9 @@ const gridTemplate: TempCompTypes.Code = {
             ]
         }
     ]
-}
+}*/
 
-const bannerTemplate: TempCompTypes.Code = {
+/*const bannerTemplate: TempCompTypes.Code = {
     html: `<div class="banner banner--pattern-1" data-em-id="banner" data-em-group="banner-first">
     <div class="banner__container" data-em-id="banner-container" data-em-group="banner-container-first"></div>
 </div>`,
@@ -79,15 +79,15 @@ const bannerTemplate: TempCompTypes.Code = {
             name: 'Banner container'
         }
     ]
-}
+}*/
 
-const imageTemplate: TempCompTypes.Code = {
+/*const imageTemplate: TempCompTypes.Code = {
     html: `<img src="http://andrewkozinsky.ru/foreditor/duck3.jpg"
              style="box-shadow: 0 4px 10px rgba(155, 0, 0, .3); width: 100%; max-width: 290px"
              alt="Описание из шаблона" data-em-id="image">`
-}
+}*/
 
-const paragraphTemplate: TempCompTypes.Code = {
+/*const paragraphTemplate: TempCompTypes.Code = {
     html: `<p class="paragraph" data-em-id="paragraph" data-em-group="paragraph-first"></p>`,
     elems: [
         {
@@ -110,10 +110,11 @@ const paragraphTemplate: TempCompTypes.Code = {
             }
         }
     ]
-}
+}*/
 
 // ================================================
 
+/*
 const artData: ArticleTypes.Article = {
     meta: {
         maxComponentId: 8
@@ -242,4 +243,4 @@ const artData: ArticleTypes.Article = {
             ]
         }
     ]
-}
+}*/

@@ -1,7 +1,7 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Секция «Цветовая тема»
-const obj = {
+/*const obj = {
     themeRadiosHeader: {
         eng: 'Color theme',
         rus: 'Цветовая схема'
@@ -14,6 +14,6 @@ const obj = {
         eng: 'Dark',
         rus: 'Тёмная'
     },
-}
+}*/
 
-export const themeSectionMessages = getMessagesObject(obj)
+// export const themeSectionMessages = getMessagesObject(obj)

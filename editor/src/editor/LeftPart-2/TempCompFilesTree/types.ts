@@ -1,7 +1,7 @@
-import FilesTreeType from 'types/filesTree'
+// import FilesTreeType from 'types/filesTree'
 
 // Типы компонента TempCompFilesTree
-namespace TempCompFilesTreeType {
+/*namespace TempCompFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
@@ -34,6 +34,6 @@ namespace TempCompFilesTreeType {
         afterClickAfterBtn: AfterClickAfterBtn
         afterClickInsideBtn: AfterClickInsideBtn
     }
-}
+}*/
 
-export default TempCompFilesTreeType
+// export default TempCompFilesTreeType

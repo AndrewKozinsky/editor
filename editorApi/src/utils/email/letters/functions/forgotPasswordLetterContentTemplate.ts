@@ -1,4 +1,5 @@
 
+/*
 export function forgotPasswordLetterContentTemplate(host: string, resetToken: string, lang: string) {
 
     // Если нужно отправить письмо на русском языке
@@ -29,4 +30,4 @@ export function forgotPasswordLetterContentTemplate(host: string, resetToken: st
             If you didn't forget your password, please ignore this email.
         </p>`
     }
-}
+}*/

@@ -1,17 +1,17 @@
 // @ts-ignore
-import * as yup from 'yup'
-import {useSelector} from 'react-redux'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import {AppState} from 'store/rootReducer'
-import FHTypes from 'libs/formHandler/types'
-import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-import createIncFilesTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/incFiles/createIncFilesTemplateRequest'
-import updateIncFilesTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/incFiles/updateIncFilesTemplateRequest'
+// import * as yup from 'yup'
+// import {useSelector} from 'react-redux'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import {AppState} from 'store/rootReducer'
+// import FHTypes from 'libs/formHandler/types'
+// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+// import createIncFilesTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/incFiles/createIncFilesTemplateRequest'
+// import updateIncFilesTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/incFiles/updateIncFilesTemplateRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -121,14 +121,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
 
     const schemas = {
         name: yup.string()
@@ -137,7 +137,7 @@ function getSchema(fieldName: string): any {
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -146,7 +146,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -185,14 +185,14 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -208,7 +208,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -217,7 +217,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -227,14 +227,14 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/
 
 
 /**
  * Функция создающая новый шаблон подключаемых файлов
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function createNewTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
+/*async function createNewTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // Сформировать объект с данными шаблона подключаемых файлов
     const newTemplateData = createNewTemplateData(formDetails.readyFieldValues)
 
@@ -257,9 +257,9 @@ async function createNewTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler
 
         store.dispatch(actions.sites.setCurrentIncFilesTemplateId(newTemplate.id))
     }
-}
+}*/
 
-function createNewTemplateData(fieldValues: FHTypes.ReadyFieldsValues) {
+/*function createNewTemplateData(fieldValues: FHTypes.ReadyFieldsValues) {
     // Сформировать объект с данными шаблона подключаемых файлов
     const newTemplateData: CreateNewTemplateValuesType = {
         siteId: store.getState().sites.currentSiteId,
@@ -269,14 +269,14 @@ function createNewTemplateData(fieldValues: FHTypes.ReadyFieldsValues) {
     }
 
     return newTemplateData
-}
+}*/
 
 
 /**
  * Функция редактирующая данные существующего сайта
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
+/*async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // id выбранного шаблона
     const { currentTemplateId } = store.getState().sites.incFilesTemplatesSection
     const { currentSiteId } = store.getState().sites
@@ -300,4 +300,4 @@ async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
         // Скачать новый список шаблонов и поставить в Хранилище
         await store.dispatch(actions.sites.requestIncFilesTemplates())
     }
-}
+}*/

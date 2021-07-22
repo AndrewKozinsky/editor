@@ -1,3 +1,4 @@
+/*
 export function confirmLetterContentTemplate(host: string, token: string, lang: string) {
 
     // Если нужно отправить письмо на русском языке
@@ -28,6 +29,4 @@ export function confirmLetterContentTemplate(host: string, token: string, lang: 
                 If you did not register for this service, please ignore this letter.
             </p>`
     }
-
-
-}
+}*/

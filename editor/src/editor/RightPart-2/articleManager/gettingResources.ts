@@ -1,27 +1,27 @@
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import articleManager from './articleManager'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import StoreArticleTypes from 'store/article/articleTypes'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import articleManager from './articleManager'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
  * The function finds current history item object
  * @param {Array} historyArr — articles history array
  * @param {Number} historyCurrentIdx — current history item index
  */
-export function getCurrentHistoryItem(
+/*export function getCurrentHistoryItem(
     this: typeof articleManager,
     historyArr: StoreArticleTypes.HistoryItems,
     historyCurrentIdx: number
 ): StoreArticleTypes.HistoryItem {
     return historyArr[historyCurrentIdx]
-}
+}*/
 
 /**
  * The function finds component template in templates array
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template uuid
  */
-export function getTemplate(
+/*export function getTemplate(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.UuId
@@ -30,7 +30,7 @@ export function getTemplate(
     return tempCompArr.find((tempComp) => {
         return tempComp.uuid === tempCompId;
     })
-}
+}*/
 
 
 /**
@@ -39,7 +39,7 @@ export function getTemplate(
  * @param {String} tempCompId — component template uuid
  * @param {String} tempElemId — element template uuid
  */
-export function getTemplateElement(
+/*export function getTemplateElement(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.UuId,
@@ -54,14 +54,14 @@ export function getTemplateElement(
     if (!tempElement) return null
 
     return tempElement
-}
+}*/
 
 /**
  * The function finds component data in data components array
  * @param {Array} dataCompArr — array of data components
  * @param {String} dataCompId — a desired component id
  */
-export function getComponent(
+/*export function getComponent(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.DataCompId
@@ -85,7 +85,7 @@ export function getComponent(
             }
         }
     })
-}
+}*/
 
 /**
  * The function finds element data in data components array
@@ -93,7 +93,7 @@ export function getComponent(
  * @param {String} dataCompId — a data component id of the desired element
  * @param {String} dataElemId — a desired element id
  */
-export function getCompElem(
+/*export function getCompElem(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.DataCompId,
@@ -106,7 +106,7 @@ export function getCompElem(
         return component.elems.find(elem => elem.dataElemId === dataElemId)
     }
     return null
-}
+}*/
 
 /**
  * The function find component template by dataCompId
@@ -114,7 +114,7 @@ export function getCompElem(
  * @param {String} dataCompId — a data component id
  * @param {Array} tempCompArr — components templates array
  */
-export function getTempCompByDataCompId(
+/*export function getTempCompByDataCompId(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.DataCompId,
@@ -127,7 +127,7 @@ export function getTempCompByDataCompId(
     const tempCompId = foundedDataComp.tempCompId
 
     return this.getTemplate(tempCompArr, tempCompId)
-}
+}*/
 
 /**
  * The function returns element template by DataCompId and DataElemId
@@ -136,7 +136,7 @@ export function getTempCompByDataCompId(
  * @param {String} dataElemId — data element id which I have to get element template
  * @param {Array} tempCompArr — components templates array
  */
-export function getTempElemByDataCompIdAndDataElemId(
+/*export function getTempElemByDataCompIdAndDataElemId(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.DataCompId,
@@ -158,17 +158,17 @@ export function getTempElemByDataCompIdAndDataElemId(
 
     // Get template element and return it
     return this.getTemplateElement(tempCompArr, foundedDataComp.tempCompId, foundedDataElem.tempElemId)
-}
+}*/
 
 
-type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
+// type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
 
 /**
  * The function finds an array in witch component is
  * @param {Array} dataCompArr — array of data components
  * @param {String} dataCompId — a data component id
  */
-export function getCompParentArray(
+/*export function getCompParentArray(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.DataCompId,
@@ -191,11 +191,10 @@ export function getCompParentArray(
         }
     }
 
-
     return parentArray
-}
+}*/
 
-function findParentArray(
+/*function findParentArray(
     dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.DataCompId
 ): null | ArticleTypes.Components {
     if (!dataComp.elems) return null
@@ -218,4 +217,4 @@ function findParentArray(
             }
         }
     }
-}
+}*/

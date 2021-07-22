@@ -1,9 +1,9 @@
-import TempCompTypes from './codeType/tempCompCodeType'
-import ArticleTypes from './codeType/articleCodeType'
-import FilesTreeType from 'libs/DragFilesTree/types'
-import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
+// import TempCompTypes from './codeType/tempCompCodeType'
+// import ArticleTypes from './codeType/articleCodeType'
+// import FilesTreeType from 'libs/DragFilesTree/types'
+// import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
-namespace StoreArticleTypes {
+/*namespace StoreArticleTypes {
 
     export type HistoryItems = HistoryItem[]
 
@@ -158,6 +158,6 @@ namespace StoreArticleTypes {
         | CreateAndSetHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
-}
+}*/
 
-export default StoreArticleTypes
+// export default StoreArticleTypes

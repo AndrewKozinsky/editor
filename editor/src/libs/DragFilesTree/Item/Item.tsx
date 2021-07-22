@@ -1,8 +1,8 @@
-import React from 'react'
-import DragFilesTreeType from '../types'
-import {makeCN} from 'utils/StringUtils'
-import SvgIcon from 'common/icons/SvgIcon'
-import {
+// import React from 'react'
+// import DragFilesTreeType from '../types'
+// import {makeCN} from 'utils/StringUtils'
+// import SvgIcon from 'common/icons/SvgIcon'
+/*import {
     createNewItem,
     getInnerWrapperClasses,
     getTriangleBtnClasses,
@@ -10,19 +10,19 @@ import {
     useMarkItemElemWhenItHovered,
     useGetOnClickHandler,
     removeItem
-} from './Item-func'
-import {
+} from './Item-func'*/
+/*import {
     handleDragStart,
     handleDrag,
     handleDragOver,
     handleDragEnd,
-} from './dragAndDrop'
-import './Item.scss'
+} from './dragAndDrop'*/
+// import './Item.scss'
 
 
-const CN = 'ft-item'
+// const CN = 'ft-item'
 
-type ItemPropType = {
+/*type ItemPropType = {
     // Массив всех папок и файлов.
     items: DragFilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -33,10 +33,10 @@ type ItemPropType = {
     offset: number
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: DragFilesTreeType.After
-}
+}*/
 
 /** Папка или файл в структуре папок */
-export default function Item(props: ItemPropType) {
+/*export default function Item(props: ItemPropType) {
     const {
         items,
         setItems,
@@ -84,9 +84,9 @@ export default function Item(props: ItemPropType) {
             </div>
         </div>
     )
-}
+}*/
 
-type TrianglePropType = {
+/*type TrianglePropType = {
     // Массив всех папок и файлов.
     items: DragFilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -95,10 +95,10 @@ type TrianglePropType = {
     itemData: DragFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: DragFilesTreeType.After
-}
+}*/
 
 /** Кнопка сворачивания/разворачивания папки. Для файла возвращается пустой элемент. */
-function Triangle(props: TrianglePropType) {
+/*function Triangle(props: TrianglePropType) {
     const {
         items,
         setItems,
@@ -125,25 +125,25 @@ function Triangle(props: TrianglePropType) {
             <SvgIcon type='filesTreeTriangle' />
         </button>
     )
-}
+}*/
 
 
-type IconPropType = {
+/*type IconPropType = {
     // Данные папки или файла.
     itemData: DragFilesTreeType.Item
-}
+}*/
 
 /** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-function Icon(props: IconPropType) {
+/*function Icon(props: IconPropType) {
     const {
         itemData
     } = props
 
     if (itemData.type === 'file') return null
     return <SvgIcon type='filesTreeFolder' extraClass={`${CN}__folder-sign`} />
-}
+}*/
 
-type RightButtonsPropType = {
+/*type RightButtonsPropType = {
     // Массив всех папок и файлов.
     items: DragFilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -152,10 +152,10 @@ type RightButtonsPropType = {
     itemData: DragFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: DragFilesTreeType.After
-}
+}*/
 
 /** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-function RightButtons(props: RightButtonsPropType) {
+/*function RightButtons(props: RightButtonsPropType) {
     const {
         items,
         setItems,
@@ -205,16 +205,16 @@ function RightButtons(props: RightButtonsPropType) {
             </>
         )
     }
-}
+}*/
 
 
-type PlaceArrowPropType = {
+/*type PlaceArrowPropType = {
     // Данные папки или файла
     itemData: DragFilesTreeType.Item
-}
+}*/
 
 /** Полоска указывающая на место, куда будет поставлен перетаскиваемый элемент */
-function PlaceArrow(props: PlaceArrowPropType) {
+/*function PlaceArrow(props: PlaceArrowPropType) {
     const { placeMark } = props.itemData
 
     const CN = 'ft-place-arrow'
@@ -230,4 +230,4 @@ function PlaceArrow(props: PlaceArrowPropType) {
             <div className={`${CN}__line`} />
         </div>
     )
-}
+}*/

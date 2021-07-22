@@ -1,5 +1,4 @@
-// import { config } from '../../../../config/config'
-
+/*
 export function baseTemplate(host: string, content: string, lang: string) {
 
     // Адрес логотипа
@@ -87,4 +86,4 @@ export function baseTemplate(host: string, content: string, lang: string) {
         
         </body>
         </html>`
-}
+}*/

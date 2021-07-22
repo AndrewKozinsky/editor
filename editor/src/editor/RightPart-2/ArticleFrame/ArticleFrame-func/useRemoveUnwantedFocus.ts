@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {isCursorOnTextComponent, isTextCompAhead} from '../flashElements/useSetMouseHandlersForFlashRects'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import {isCursorOnTextComponent, isTextCompAhead} from '../flashElements/useSetMouseHandlersForFlashRects'
 
 
 /** The hook doesn't allow to set focus while user clicks on no text components. */
-export function useRemoveUnwantedFocus() {
+/*export function useRemoveUnwantedFocus() {
     const { $links, history } = useSelector((store: AppState) => store.article)
 
     // Were mouse move handler set?
@@ -19,7 +19,7 @@ export function useRemoveUnwantedFocus() {
         // Set flag that handlers were set
         setMouseClickHandlerSet(true)
     }, [$links, mouseClickHandlerSet, history])
-}
+}*/
 
 /**
  * OnMouseDown handler.
@@ -27,6 +27,7 @@ export function useRemoveUnwantedFocus() {
  * If a click was on a element, it doesn't allow to set focus.
  * @param {Event} event — event object
  */
+/*
 function mouseHandler(event: MouseEvent) {
     // Element under cursor
     const target = event.target as HTMLElement
@@ -46,4 +47,4 @@ function mouseHandler(event: MouseEvent) {
             target.blur()
         }
     }
-}
+}*/

@@ -1,15 +1,15 @@
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import articleManager from './articleManager'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import articleManager from './articleManager'
 
-export function createArticle(): ArticleTypes.Article {
+/*export function createArticle(): ArticleTypes.Article {
     return {
         meta: {
             maxComponentId: 0
         },
         components: []
     }
-}
+}*/
 
 /**
  * The function creates a new component data with passed tempCompId
@@ -17,7 +17,7 @@ export function createArticle(): ArticleTypes.Article {
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template uuid
  */
-export function createComponent(
+/*export function createComponent(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
@@ -43,14 +43,14 @@ export function createComponent(
         compData,
         maxCompId
     }
-}
+}*/
 
 /**
  * The function creates elements in a new component
  * @param {Object} tempComp — a component template
  * @param {Number} maxCompId — a maximum component id in an article
  */
-function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number) {
+/*function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number) {
     let newMaxCompId = maxCompId
 
     if (!tempComp.code.elems?.length) {
@@ -100,13 +100,13 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
         compElems: newElemsArr,
         maxCompId: newMaxCompId
     }
-}
+}*/
 
 /**
  * The function creates attributes object in a element
  * @param {Object} tempElem — a template element object
  */
-function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
+/*function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
     if (!tempElem.attribs?.keys.length) return null
 
     const attribsArr: ArticleTypes.Attribs = []
@@ -146,7 +146,7 @@ function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.At
     }
 
     return attribsArr
-}
+}*/
 
 /**
  * The function creates an empty text component
@@ -154,7 +154,7 @@ function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.At
  * @param {Object} tempElem — a template element object
  * @param {Number} dataCompId — component id
  */
-function createNewTextComponent(
+/*function createNewTextComponent(
     tempComp: TempCompTypes.TempComp, tempElem: TempCompTypes.Elem, dataCompId: number
 ): ArticleTypes.TextComponent {
     return {
@@ -166,4 +166,4 @@ function createNewTextComponent(
             {type: 'text', text: ''}
         ]
     }
-}
+}*/

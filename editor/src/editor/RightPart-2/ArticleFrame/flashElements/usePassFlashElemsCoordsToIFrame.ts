@@ -1,24 +1,24 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import StoreArticleTypes from 'store/article/articleTypes'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import StoreArticleTypes from 'store/article/articleTypes'
 
 // Type with coordinates of a flashed element
-export type CoordsObjType = {
+/*export type CoordsObjType = {
     type: StoreArticleTypes.HoveredElementType
     dataCompId: null | number
     dataElemId: null | number
-}
+}*/
 
 // Initial data with coordinates of a flashed element
-export const coordsInitialObj: CoordsObjType = {
+/*export const coordsInitialObj: CoordsObjType = {
     type: null,
     dataCompId: null,
     dataElemId: null
-}
+}*/
 
 /** The hook gets coordinated of a flashed element from the Store and write its to <body> as a attribute */
-export function usePassFlashElemsCoordsToIFrame() {
+/*export function usePassFlashElemsCoordsToIFrame() {
     const { $links, history, historyCurrentIdx } = useSelector((store: AppState) => store.article)
 
     // Objects witch data is stored. I will update them if data from the Store is different
@@ -60,4 +60,4 @@ export function usePassFlashElemsCoordsToIFrame() {
         const selectCoords = JSON.stringify(selectRectCoords)
         $links.$body.setAttribute('selectrectcoords', selectCoords)
     }, [selectRectCoords])
-}
+}*/

@@ -1,12 +1,12 @@
-import React, {useCallback} from 'react'
-import { useSelector } from 'react-redux'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import {AppState} from 'store/rootReducer'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import React, {useCallback} from 'react'
+// import { useSelector } from 'react-redux'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import {AppState} from 'store/rootReducer'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
-export function useCloseArticle(openConfirmModal: any) {
+/*export function useCloseArticle(openConfirmModal: any) {
     const { historyStepWhenWasSave, historyCurrentIdx } = useSelector((store: AppState) => store.article)
 
     return useCallback(function () {
@@ -22,4 +22,4 @@ export function useCloseArticle(openConfirmModal: any) {
         }
 
     }, [historyStepWhenWasSave, historyCurrentIdx])
-}
+}*/

@@ -1,8 +1,8 @@
-import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../errors/catchAsync'
-import { ExtendedRequestType } from '../../types/commonTypes'
-import {AppError} from '../../errors/appError'
-import ComponentModel from '../../models/component'
+// import { Response, NextFunction } from 'express'
+// import { catchAsync } from '../../errors/catchAsync'
+// import { ExtendedRequestType } from '../../types/commonTypes'
+// import {AppError} from '../../errors/appError'
+// import ComponentModel from '../../models/component'
 
 
 /** [POST] api/component
@@ -10,7 +10,7 @@ import ComponentModel from '../../models/component'
  * В body нужно передавать объект вида:
  * {uuid: 'fu4d573g26gs3455', siteId: "60b45a889edf5b0029eb31eb", code: 'some_code'}
  */
-export const createComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const createComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Если не передали id сайта, то возвратить ошибочный ответ
     if (!req.body.siteId) {
@@ -51,12 +51,12 @@ export const createComponent = catchAsync<void>(async (req: ExtendedRequestType,
             }
         }
     })
-})
+})*/
 
 /** [GET] api/components/:uuid
  * Получение шаблона компонента (защищённый маршрут)
  */
-export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Получение шаблона компонента по переданному id
     const component = await ComponentModel
@@ -70,7 +70,7 @@ export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, re
             component
         }
     })
-})
+})*/
 
 
 /** [PATCH] api/components/:uuid
@@ -78,7 +78,7 @@ export const getComponent = catchAsync<void>(async (req: ExtendedRequestType, re
  * В body нужно передавать объект вида:
  * {"code": "some_code"}
  */
-export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Найти шаблон компонента и обновить его данные
     const updatedComponent = await ComponentModel.findOneAndUpdate(
@@ -101,13 +101,14 @@ export const updateComponent = catchAsync<void>(async (req: ExtendedRequestType,
             component: updatedComponent
         }
     })
-})
+})*/
 
 
 /** [DELETE] api/components/:uuid
  * Удаление шаблона компонента (защищённый маршрут)
  */
 /** Удаление шаблона компонента (защищённый маршрут) */
+/*
 export const deleteComponent = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Удалить шаблон компонента из БД
     await ComponentModel.findOneAndDelete(
@@ -118,4 +119,4 @@ export const deleteComponent = catchAsync<void>(async (req: ExtendedRequestType,
     res.status(200).json({
         status: 'success'
     })
-})
+})*/

@@ -1,13 +1,13 @@
-import {HTMLObjArrType} from './htmlStringToObject'
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-import {createDeepCopy} from 'src/utils/MiscUtils'
+// import {HTMLObjArrType} from './htmlStringToObject'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import {createDeepCopy} from 'src/utils/MiscUtils'
 
 /**
  * Function synchronize the number of elements in html object with number of elements in component data
  * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
-export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+/*export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
     if (!dataComp.elems) return
 
     // Create object like { 'banner-group': [...], 'cell-group': [...] }.
@@ -19,18 +19,18 @@ export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleT
         // Set elems duplicates based on elemGroupObj into htmlObj
         setDuplicateElemWithEmId(htmlObj, elemGroupObj)
     }
-}
+}*/
 
 
-type ElemsGroupsType = ElemsGroupType[]
-type ElemsGroupType = {elemGroup: string, elemId: string, elems: ArticleTypes.ComponentElems}
+// type ElemsGroupsType = ElemsGroupType[]
+// type ElemsGroupType = {elemGroup: string, elemId: string, elems: ArticleTypes.ComponentElems}
 
 /**
  * The function forms array of objects like { 'banner-group': [...], 'cell-group': [...] }.
  * A key is a data element group name (elemGroup property), value is an array of objects with element data
  * @param {Object} dataComp — element data object
  */
-function getCompElemsGroups(dataComp: ArticleTypes.Component) {
+/*function getCompElemsGroups(dataComp: ArticleTypes.Component) {
     const groupsArr: ElemsGroupsType = []
 
     for (let dataElem of dataComp.elems) {
@@ -54,7 +54,7 @@ function getCompElemsGroups(dataComp: ArticleTypes.Component) {
     }
 
     return groupsArr
-}
+}*/
 
 
 /**
@@ -63,7 +63,7 @@ function getCompElemsGroups(dataComp: ArticleTypes.Component) {
  * @param {Number} elemGroupObj — an object like {elemGroup: 'some-group-name', elems: [dataElemObj,...]
  * @returns {*}
  */
-function setDuplicateElemWithEmId(htmlObj: HTMLObjArrType.Tag, elemGroupObj: ElemsGroupType) {
+/*function setDuplicateElemWithEmId(htmlObj: HTMLObjArrType.Tag, elemGroupObj: ElemsGroupType) {
 
     // If there is an attribute data-em-group in root component tag with passed group name...
     if (htmlObj.attrs['data-em-group'] === elemGroupObj.elemGroup && htmlObj.attrs['data-em-id'] === elemGroupObj.elemId) {
@@ -115,4 +115,4 @@ function setDuplicateElemWithEmId(htmlObj: HTMLObjArrType.Tag, elemGroupObj: Ele
             }
         }
     }
-}
+}*/

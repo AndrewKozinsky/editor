@@ -1,8 +1,8 @@
-import * as mongoose from 'mongoose'
-import { Schema, Document } from 'mongoose'
+// import * as mongoose from 'mongoose'
+// import { Schema, Document } from 'mongoose'
 
 // CALL IT SITE_INC
-export interface IIncFilesTemplate extends Document {
+/*export interface IIncFilesTemplate extends Document {
     name: string,
     userId: string,
     siteId: string,
@@ -12,11 +12,11 @@ export interface IIncFilesTemplate extends Document {
     codeBeforeEndBody?: {
         code?: string
     },
-    // ADD CREATION TIME
-}
+    createdAt: Date,
+}*/
 
 // Схема о подключаемых к сайту файлах CSS, JS и так далее
-const IncFilesTemplateSchema: Schema = new Schema({
+/*const IncFilesTemplateSchema: Schema = new Schema({
     // Название шаблона
     name: {
         type: String,
@@ -50,8 +50,12 @@ const IncFilesTemplateSchema: Schema = new Schema({
             maxLength: [65000, '{{incFilesTemplate.codeBeforeEndBodyCodeMaxLength}}'],
         },
     },
-})
+    createdAt: {
+        type: Date,
+        required: [ true, '{{user.????????}}' ]
+    },
+})*/
 
 
-const IncFilesTemplateModel = mongoose.model<IIncFilesTemplate>('IncFilesTemplate', IncFilesTemplateSchema)
-export default IncFilesTemplateModel
+// const IncFilesTemplateModel = mongoose.model<IIncFilesTemplate>('IncFilesTemplate', IncFilesTemplateSchema)
+// export default IncFilesTemplateModel

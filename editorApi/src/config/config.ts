@@ -4,18 +4,18 @@ export type ConfigType = {
     port: number
     db: string
 
-    publishedSiteURL: string
-    devSiteURL: string
+    // publishedSiteURL: string
+    // devSiteURL: string
 
-    emailFrom: string
-    fakeEmailHost: string
-    fakeEmailPort: number
-    fakeEmailUsername: string
-    fakeEmailPassword: string
+    // emailFrom: string
+    // fakeEmailHost: string
+    // fakeEmailPort: number
+    // fakeEmailUsername: string
+    // fakeEmailPassword: string
 
     jwtSecret: string
-    jwtExpiresIn: number
-    jwtExpiresUnit: string
+    // jwtExpiresIn: number
+    // jwtExpiresUnit: string
 }
 
 export const config: ConfigType = {
@@ -27,25 +27,25 @@ export const config: ConfigType = {
     db: String(process.env.MONGO_URL),
 
     // Домен опубликованного сервиса
-    publishedSiteURL: 'https://editorium.net',
+    // publishedSiteURL: 'https://editorium.net',
     // Домен разрабатываемого сервиса
-    devSiteURL: 'http://editorium.local',
+    // devSiteURL: 'http://editorium.local',
 
     // Из какого адреса будут приходить письма от сервиса
-    emailFrom: 'mail@andrewkozinsky.ru',
+    // emailFrom: 'mail@andrewkozinsky.ru',
     // Адрес сервиса для ложных писем
-    fakeEmailHost: 'smtp.mailtrap.io',
+    // fakeEmailHost: 'smtp.mailtrap.io',
     // Номер порта сервиса для ложных писем
-    fakeEmailPort: 25,
+    // fakeEmailPort: 25,
     // Имя пользователя сервиса для ложных писем
-    fakeEmailUsername: 'd025be73c2e110',
+    // fakeEmailUsername: 'd025be73c2e110',
     // Пароль пользователя сервиса для ложных писем
-    fakeEmailPassword: '14ae61d46bc329',
+    // fakeEmailPassword: '14ae61d46bc329',
 
     // JWT
     jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
-    jwtExpiresIn: 90,
-    jwtExpiresUnit: 'd'
+    // jwtExpiresIn: 90,
+    // jwtExpiresUnit: 'd'
 }
 
 

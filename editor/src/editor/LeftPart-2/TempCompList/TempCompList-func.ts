@@ -1,20 +1,20 @@
-import {useCallback, useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import actions from 'store/rootAction'
-import {AppState} from 'store/rootReducer'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import StoreArticleTypes from 'store/article/articleTypes'
-import TempCompFilesTreeType from '../TempCompFilesTree/types'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-import {getFromLocalStorage} from 'utils/MiscUtils'
-import FilesTreeType from 'types/filesTree'
-import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
+// import {useCallback, useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import actions from 'store/rootAction'
+// import {AppState} from 'store/rootReducer'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes'
+// import TempCompFilesTreeType from '../TempCompFilesTree/types'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import {getFromLocalStorage} from 'utils/MiscUtils'
+// import FilesTreeType from 'types/filesTree'
+// import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
 
 
 /** The hooks gets component template folders array from Store, add required properties to items
  *  and returns updated array */
-export function useGetTempCompsFolders() {
+/*export function useGetTempCompsFolders() {
     // Component templates folders
     const { tempCompsFolders } = useSelector((store: AppState) => store.article)
 
@@ -52,7 +52,7 @@ export function useGetTempCompsFolders() {
     }, [tempCompsFolders, tempCompsArr, flashedElemCoords, article])
 
     return folders
-}
+}*/
 
 /**
  * The function pass through folders and component templates structure and adds required properties.
@@ -62,7 +62,7 @@ export function useGetTempCompsFolders() {
  * @param {Array} tempCompsArr — component templates array
  * @param {Object} article — article object
  */
-function prepareFoldersAndItemsStructure(
+/*function prepareFoldersAndItemsStructure(
     tempCompsFolders: FilesTreeType.Items,
     openUuIdArr: null | FilesTreeType.UuIdArr,
     selectedElem: StoreArticleTypes.HoveredElem,
@@ -113,12 +113,11 @@ function prepareFoldersAndItemsStructure(
             return  item
         }
     })
-}
-
+}*/
 
 
 /** The hook returns a function runs after component template folder was threw opened or collapsed */
-export function useGetAfterCollapseFolder() {
+/*export function useGetAfterCollapseFolder() {
     const dispatch = useDispatch()
 
     return useCallback(function (folders: TempCompFilesTreeType.Items, openUuIdArr: FilesTreeType.UuIdArr) {
@@ -130,11 +129,11 @@ export function useGetAfterCollapseFolder() {
             openCompFoldersUuIds: openUuIdArr
         })
     }, [])
-}
+}*/
 
 
 /** The hook returns Next btn click handler  */
-export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
+/*export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const dispatch = useDispatch()
 
     // Current article
@@ -168,11 +167,11 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
         ))
 
     }, [dispatch, article, flashedElemCoords, tempComps])
-}
+}*/
 
 
 /** The hook returns Inside btn click handler  */
-export function useGetOnClickInsideBtn() {
+/*export function useGetOnClickInsideBtn() {
     const dispatch = useDispatch()
 
     // Current article
@@ -199,4 +198,4 @@ export function useGetOnClickInsideBtn() {
         ))
     }, [dispatch, article, flashedElemCoords, tempComps])
 
-}
+}*/

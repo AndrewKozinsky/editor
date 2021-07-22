@@ -1,17 +1,16 @@
-import {useEffect} from 'react'
-import ReactDOM from 'react-dom'
-import { useSelector } from 'react-redux'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import { AppState } from 'store/rootReducer'
-import {MiscTypes} from 'types/miscTypes'
-import {getFromLocalStorage} from 'utils/MiscUtils'
-import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'
-import {debug} from 'webpack'
+// import {useEffect} from 'react'
+// import ReactDOM from 'react-dom'
+// import { useSelector } from 'react-redux'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import { AppState } from 'store/rootReducer'
+// import {MiscTypes} from 'types/miscTypes'
+// import {getFromLocalStorage} from 'utils/MiscUtils'
+// import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'
 
 
 // Hook sets article data in Store when IFrame rendered
-export function useSetArticleDataInStore() {
+/*export function useSetArticleDataInStore() {
     useEffect(function () {
         const articleData = getFromLocalStorage('article')
         if (!articleData) return
@@ -20,13 +19,13 @@ export function useSetArticleDataInStore() {
             articleData.siteId, articleData.incFilesId, articleData.articleId
         ))
     }, [])
-}
+}*/
 
 /**
  * Hook gets links to IFrame window, document, head and body to Store when IFrame rendered
  * @param {Object} iFrameRef — reg to iFrame
  */
-export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
+/*export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
     useEffect(function () {
         if (!iFrameRef.current) return
 
@@ -39,10 +38,10 @@ export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
         // Set links to Store
         store.dispatch(actions.article.setLinks( $window, $document, $head, $body ))
     }, [iFrameRef.current])
-}
+}*/
 
 /** Hook sets <div> in IFrame to put an article in */
-export function useSetRootDivToIFrame() {
+/*export function useSetRootDivToIFrame() {
     const { $links, history } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
@@ -51,10 +50,10 @@ export function useSetRootDivToIFrame() {
         const rootDiv = document.createElement('div')
         $links.$body.append(rootDiv)
     }, [$links, history])
-}
+}*/
 
 /** Hook sets article JSX to IFrame */
-export function useSetArticleToIFrame() {
+/*export function useSetArticleToIFrame() {
     const { $links, history, historyCurrentIdx, tempComps } = useSelector((store: AppState) => store.article)
 
     useEffect(function () {
@@ -68,4 +67,4 @@ export function useSetArticleToIFrame() {
             $links.$body.firstChild
         )
     }, [history, tempComps, historyCurrentIdx])
-}
+}*/

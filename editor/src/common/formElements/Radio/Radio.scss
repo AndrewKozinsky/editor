@@ -1,16 +1,16 @@
-@import "../../commonStyles/commonStyles";
+//@import "../../commonStyles/commonStyles";
 
 
-$CN: radio;
+//$CN: radio;
 
 // Оригинальный флаг
-.#{$CN}-input {
+/*.#{$CN}-input {
     position: absolute;
     opacity: 0;
-}
+}*/
 
 // Вид label в зависимости от размера
-.#{$CN}-label {
+/*.#{$CN}-label {
     position: relative;
     font-size: 1.4rem;
     line-height: 1.8rem;
@@ -18,10 +18,10 @@ $CN: radio;
     cursor: pointer;
     transition: opacity .3s;
     margin-left: 19px;
-}
+}*/
 
 // Общие стили псевдофлагов
-.#{$CN}-label {
+/*.#{$CN}-label {
     &:before, &:after {
         content: '';
         position: absolute;
@@ -45,16 +45,16 @@ $CN: radio;
         transition: opacity .1s, transform .1s;
         transform: scale(0);
     }
-}
+}*/
 
 // Неотмеченный before
-.#{$CN}-input:not(checked) + .#{$CN}-label {
+/*.#{$CN}-input:not(checked) + .#{$CN}-label {
     &::before {
         background-color: var(--button-color-hover);
     }
-}
+}*/
 // Отмеченный before
-.#{$CN}-input:checked + .#{$CN}-label {
+/*.#{$CN}-input:checked + .#{$CN}-label {
     &::before {
         background-color: var(--accent-color);
     }
@@ -62,15 +62,15 @@ $CN: radio;
         opacity: 1;
         transform: scale(1);
     }
-}
+}*/
 
 // Фокусировка
-.#{$CN}-input:focus + .#{$CN}-label:before {
+/*.#{$CN}-input:focus + .#{$CN}-label:before {
     // Стандартная фокусировка
     @include focus
-}
+}*/
 
 // Заблокированное поле
-.#{$CN}-input:disabled + .#{$CN}-label {
+/*.#{$CN}-input:disabled + .#{$CN}-label {
     opacity: .5;
-}
+}*/

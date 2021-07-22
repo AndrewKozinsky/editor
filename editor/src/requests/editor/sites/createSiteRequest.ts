@@ -1,25 +1,25 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
  * @param {String} name — название сайта
  */
-export default async function createSiteRequest(name: string) {
+/*export default async function createSiteRequest(name: string) {
     const options = {
         method: 'POST',
         body: JSON.stringify({name})
     }
     const response: CreateSiteRequestServerResponse = await makeFetch(getApiUrl('sites'), options)
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type CreateSiteRequestServerResponse = FailResponse | SuccessResponse
+// type CreateSiteRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -27,9 +27,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -38,4 +39,4 @@ type SuccessResponse = {
             name: string // "РУСХИТ"
         }
     }
-}
+}*/

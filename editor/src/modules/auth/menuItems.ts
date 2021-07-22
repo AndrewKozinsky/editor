@@ -1,4 +1,4 @@
-import {MenuItems} from 'common/misc/Menu/Menu'
+import { MenuItems } from 'common/misc/Menu/Menu'
 import { regMenuMessages } from 'messages/regMenuMessages'
 
 

@@ -1,5 +1,5 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
@@ -7,7 +7,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
  * @param {String} name — название сайта
  * @param {String} defaultIncFilesTemplateId — id шаблона подключаемых файлов по умолчанию
  */
-export default async function updateSiteRequest(
+/*export default async function updateSiteRequest(
     siteId: string, name: string, defaultIncFilesTemplateId: null | string
 ) {
     const options = {
@@ -21,14 +21,14 @@ export default async function updateSiteRequest(
     const response: UpdateSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
+// type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -36,9 +36,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -49,4 +50,4 @@ type SuccessResponse = {
             _id: string // "60c89dccfe73df002a1c4fa4"
         }
     }
-}
+}*/

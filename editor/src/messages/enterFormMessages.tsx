@@ -1,15 +1,15 @@
-import {
+/*import {
     getMessagesJSXFnObject,
     getMessagesJSXObject,
     getMessagesObject
-} from 'messages/fn/getMessagesObject'
-import {getDomainFromEmail} from 'utils/StringUtils'
-import React from 'react'
+} from 'messages/fn/getMessagesObject'*/
+// import {getDomainFromEmail} from 'utils/StringUtils'
+// import React from 'react'
 // @ts-ignore
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 // Форма EnterFormBlock
-const obj = {
+/*const obj = {
     // Заголовок формы входа
     formHeader: {
         eng: 'Log in',
@@ -47,13 +47,13 @@ const obj = {
         eng: 'An email has been sent to you with a link to confirm your email. Confirm your email and then log in again.',
         rus: 'На вашу почту отправлено письмо со ссылкой на подтверждение почты. Подтвердите почту и затем зайдите в систему еще раз.'
     },
-}
+}*/
 
-export const enterFormMessages = getMessagesObject(obj)
+// export const enterFormMessages = getMessagesObject(obj)
 
 
 // Форма EnterFormBlock
-const JSXObj = {
+/*const JSXObj = {
     newUser: {
         eng: <>New User? <Link to='/reg'>Sign up</Link>.</>,
         rus: <>Новый пользователь? <Link to='/reg'>Зарегистрируйтесь</Link>.</>
@@ -62,13 +62,13 @@ const JSXObj = {
         eng: <>Can't remember your password? <Link to='reset-password'>Reset it</Link>.</>,
         rus: <>Не помните пароль? <Link to='reset-password'>Сбросьте</Link>.</>
     }
-}
+}*/
 
-export const enterFormJSXMessages = getMessagesJSXObject(JSXObj)
+// export const enterFormJSXMessages = getMessagesJSXObject(JSXObj)
 
 
 // Форма EnterFormBlock
-const JSXFnObj = {
+/*const JSXFnObj = {
     confirmRegistrationLetter: (email: string) => {
         const domain = 'https://' + getDomainFromEmail(email)
 
@@ -77,6 +77,6 @@ const JSXFnObj = {
             rus: <>Ранее было выслано <a href={domain}>письмо со ссылкой</a> для подтверждения почтового адреса. Без подтверждения почты сервис работать не будет.</>
         }
     },
-}
+}*/
 
-export const enterFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)
+// export const enterFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)

@@ -1,8 +1,8 @@
-import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
-import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
-import FilesTreeType from '../../types/filesTree'
+// import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
+// import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
+// import FilesTreeType from '../../types/filesTree'
 
-namespace StoreSitesTypes {
+/*namespace StoreSitesTypes {
 
     // Сайт
     export type SiteType = {
@@ -165,6 +165,6 @@ namespace StoreSitesTypes {
         | SetCurrentArtAction
         | SetCurrentArtItemTypeAction
         | SetCurrentArtItemIdAction
-}
+}*/
 
-export default StoreSitesTypes
+// export default StoreSitesTypes

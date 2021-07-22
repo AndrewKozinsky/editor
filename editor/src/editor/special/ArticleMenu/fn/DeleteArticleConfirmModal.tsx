@@ -1,16 +1,16 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import {articleMenuMessages} from 'messages/articleMenuMessages'
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import React, {useCallback} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import {articleMenuMessages} from 'messages/articleMenuMessages'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
-export function DeleteArticleConfirmModal() {
+/*export function DeleteArticleConfirmModal() {
     const dispatch = useDispatch()
     const { articleUuId } = useSelector((store: AppState) => store.article)
     const { currentArtItemId } = useSelector((store: AppState) => store.sites.articlesSection)
@@ -58,5 +58,5 @@ export function DeleteArticleConfirmModal() {
             </Wrapper>
         </>
     )
-}
+}*/
 

@@ -1,10 +1,10 @@
-import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-import FilesTreeType from '../../types/filesTree'
-import StoreArticleTypes from './articleTypes'
-import ArticleTypes from './codeType/articleCodeType'
-import TempCompTypes from './codeType/tempCompCodeType'
+// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+// import FilesTreeType from '../../types/filesTree'
+// import StoreArticleTypes from './articleTypes'
+// import ArticleTypes from './codeType/articleCodeType'
+// import TempCompTypes from './codeType/tempCompCodeType'
 
-export type ArticleReducerType = {
+/*export type ArticleReducerType = {
     articleUuId: null | string
     articleSiteId: null | string
     // Components template folders
@@ -23,7 +23,7 @@ export type ArticleReducerType = {
     historyCurrentIdx: number
     // A history step when the article was saved
     historyStepWhenWasSave: number
-}
+}*/
 
 // Article reducer state example
 /*const stateExample: ArticleReducerType = {
@@ -65,7 +65,7 @@ export type ArticleReducerType = {
 }*/
 
 // Initial values
-const initialState: ArticleReducerType = {
+/*const initialState: ArticleReducerType = {
     articleUuId: null,
     articleSiteId: null,
     tempCompsFolders: null,
@@ -83,19 +83,19 @@ const initialState: ArticleReducerType = {
     history: [],
     historyCurrentIdx: 0,
     historyStepWhenWasSave: 0
-}
+}*/
 
-function clearArticle(
+/*function clearArticle(
     state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
 ): ArticleReducerType {
     // Do not touch the document's links
     const newState = Object.assign(initialState, {$links: state.$links})
 
     return newState
-}
+}*/
 
 // Sets article uuId and article site id
-function setArticleMarks(
+/*function setArticleMarks(
     state: ArticleReducerType, action: StoreArticleTypes.SetArticleMarksAction
 ): ArticleReducerType {
     return {
@@ -103,47 +103,47 @@ function setArticleMarks(
         articleUuId: action.payload.articleUuId,
         articleSiteId: action.payload.siteId,
     }
-}
+}*/
 
 // Installing of components array
-function setTempComps(
+/*function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
 ): ArticleReducerType {
     return {
         ...state,
         tempComps: action.payload
     }
-}
+}*/
 
 // Installing an included files string with code
-function setIncFilesTemplate(
+/*function setIncFilesTemplate(
     state: ArticleReducerType, action: StoreArticleTypes.SetIncFilesTemplateAction
 ): ArticleReducerType {
     return {
         ...state,
         incFiles: action.payload
     }
-}
+}*/
 
 // Installing an article code
-function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
+/*function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
     return {
         ...state,
         history: action.payload,
         historyCurrentIdx: 0
     }
-}
+}*/
 
 // Installing an article code
-function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksAction): ArticleReducerType {
+/*function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksAction): ArticleReducerType {
     return {
         ...state,
         $links: action.payload
     }
-}
+}*/
 
 // Set ids for hovered or selected component/element
-function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
+/*function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
     // Get history array and current article idx
     const {history, historyCurrentIdx} = state
     // Current article
@@ -178,18 +178,18 @@ function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.
         ...state,
         history: updatedHistoryArr
     }
-}
+}*/
 
 // Installing an article code
-function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
+/*function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
     return {
         ...state,
         tempCompsFolders: action.payload,
     }
-}
+}*/
 
 //
-function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
+/*function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
 
     const historyArr = createHistoryArr()
 
@@ -239,10 +239,10 @@ function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticle
 
         return newHistoryStepWhenWasSave
     }
-}
+}*/
 
 // The function changes a current history step
-function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
+/*function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
     let newStep = state.historyCurrentIdx
 
     if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
@@ -256,18 +256,19 @@ function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.Ma
         ...state,
         historyCurrentIdx: newStep
     }
-}
+}*/
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
-function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+/*function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
     return {
         ...state,
         historyStepWhenWasSave: state.historyCurrentIdx
     }
-}
+}*/
 
 
 // Редьюсер Store.article
+/*
 export default function articleReducer(
     state = initialState, action: StoreArticleTypes.ArticleAction
 ): ArticleReducerType {
@@ -300,4 +301,4 @@ export default function articleReducer(
             const x: never = null
             return state
     }
-}
+}*/

@@ -1,5 +1,5 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 
 /**
@@ -8,7 +8,7 @@ import getApiUrl from 'src/requests/reqFn/apiUrls'
  * @param {String} name — название компонента
  * @param {String} code — код компонента
  */
-export async function updateComponentRequest(
+/*export async function updateComponentRequest(
     compItemId: string, name: string, code: null | string
 ) {
     const options = {
@@ -23,14 +23,14 @@ export async function updateComponentRequest(
     )
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type UpdateComponentRequestServerResponse = FailResponse | SuccessResponse
+// type UpdateComponentRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -38,9 +38,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -52,4 +53,4 @@ type SuccessResponse = {
             uuid: string // "7404685d-ced3-4d14-9939-c8c0c6c0f6e3"
         }
     }
-}
+}*/

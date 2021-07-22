@@ -23,28 +23,20 @@ export const messages: messagesType = {
             rus: 'Укажите пароль.'
         },
         passwordMinLength: {
-            eng: 'Password should be at least four characters.',
+            eng: 'Password should be at least 6 characters.',
             rus: 'Пароль должен быть не короче 6 символов.'
         },
         passwordMaxLength: {
             eng: 'Password must not be longer than 50 characters.',
             rus: 'Пароль должен быть не длиннее 50 символов.'
         },
-        passwordConfirmRequired: {
-            eng: 'Please confirm your password.',
-            rus: 'Повторно введите пароль.'
-        },
-        passwordConfirmValidate: {
-            eng: 'Passwords are not equal.',
-            rus: 'Ввели разные пароли.'
-        },
         langRequired: {
             eng: 'Please provide your language.',
-            rus: '  Укажите язык интерфейса.'
+            rus: 'Укажите язык интерфейса.'
         }
     },
     // Модель Site
-    site: {
+    /*site: {
         nameRequired: {
             eng: 'Please provide a site name.',
             rus: 'Укажите название сайта.'
@@ -53,9 +45,9 @@ export const messages: messagesType = {
             eng: 'Specify the id of the user who created the site.',
             rus: 'Укажите id пользователя который создал сайт.'
         },
-    },
+    },*/
     // Модель IncFilesTemplate
-    incFilesTemplate: {
+    /*incFilesTemplate: {
         nameRequired: {
             eng: 'Please provide a template name.',
             rus: 'Укажите название шаблона.'
@@ -76,7 +68,7 @@ export const messages: messagesType = {
             eng: 'The code cannot exceed 65000 characters.',
             rus: 'Код не может превышать 65000 символов.'
         },
-    },
+    },*/
     // Контроллер авторизации
     authController: {
         // getTokenData
@@ -85,89 +77,89 @@ export const messages: messagesType = {
             rus: 'Токен авторизации или не передан или неправилен.'
         },
         // confirmEmail
-        confirmEmailUserNotFound: {
+        /*confirmEmailUserNotFound: {
             eng: 'Wrong email confirmation token was sent.',
             rus: 'Передан неверный токен подтверждения почты.'
-        },
-        confirmEmailIsConfirmed: {
+        },*/
+        /*confirmEmailIsConfirmed: {
             eng: 'Email is confirmed!',
             rus: 'Почта подтверждена.'
-        },
+        },*/
         // login
-        loginNoEmailOrPassword: {
+        /*loginNoEmailOrPassword: {
             eng: 'Please provide email and password.',
             rus: 'Не передана почта или пароль'
-        },
-        loginWrongEmailOrPassword: {
+        },*/
+        /*loginWrongEmailOrPassword: {
             eng: 'Incorrect email or password',
             rus: 'Неверная почта или пароль'
-        },
-        loginConfirmEmail: {
+        },*/
+        /*loginConfirmEmail: {
             eng: 'Please, confirm your email.',
             rus: 'Пожалуйста, подтвердите почту перед тем, как войти'
-        },
+        },*/
         // protect
-        protectNoToken: {
+        /*protectNoToken: {
             eng: 'You are not logged in! Please log in to to get access',
             rus: 'Авторизуйтесь чтобы просматривать эти данные.'
-        },
-        protectNoUser: {
+        },*/
+        /*protectNoUser: {
             eng: 'The user belonging to this token does not longer exists.',
             rus: 'Пользователя с таким токеном не существует.'
-        },
-        protectPasswordChanged: {
+        },*/
+        /*protectPasswordChanged: {
             eng: 'User recently changed password! Please log in again.',
             rus: 'Пользователя недавно изменил пароль. Снова авторизуйтесь.'
-        },
+        },*/
         // forgotPassword
-        forgotPasswordNoUser: {
+        /*forgotPasswordNoUser: {
             eng: 'There is no user with this email address.',
             rus: 'Не найдено пользователя с такой почтой.'
-        },
-        forgotPasswordCanNotSendEmail: {
+        },*/
+        /*forgotPasswordCanNotSendEmail: {
             eng: 'There was an error sending the email. Try again later.',
             rus: 'Не удалось отправить письмо. Попробуйте позже.'
-        },
-        forgotPasswordEmailHasBeenSent: {
+        },*/
+        /*forgotPasswordEmailHasBeenSent: {
             eng: 'Email has been sent!',
             rus: 'Письмо со ссылкой на сброс пароля было отправлено.'
-        },
+        },*/
         // resetPassword
-        resetPasswordPasswordIsNotProvided: {
+        /*resetPasswordPasswordIsNotProvided: {
             eng: 'Password or Confirm Password is not provided',
             rus: 'Не передан пароль или подтверждение пароля.'
-        },
-        resetPasswordTokenIsInvalid: {
+        },*/
+        /*resetPasswordTokenIsInvalid: {
             eng: 'Token is invalid or has expired',
             rus: 'Токен сброса пароля неверный или просроченный.'
-        },
+        },*/
         // sendAnotherConfirmLetter
-        sendAnotherConfirmLetterUserNotFound: {
+        /*sendAnotherConfirmLetterUserNotFound: {
             eng: 'User with such mail was not found',
             rus: 'Пользователь с такой почтой не найден.'
-        },
-        sendAnotherConfirmLetterUserHasConfirmedEmail: {
+        },*/
+        /*sendAnotherConfirmLetterUserHasConfirmedEmail: {
             eng: 'User has already confirmed mail',
             rus: 'Пользователь уже подтвердил почту.'
-        },
+        },*/
         // changeEmail
-        changeEmailNoEmail: {
+        /*changeEmailNoEmail: {
             eng: 'Email is not provided',
             rus: 'Не передана почта.'
-        },
+        },*/
         // changeEmail
-        changeEmailNewEmailISEqualToCurrent: {
+        /*changeEmailNewEmailISEqualToCurrent: {
             eng: 'Existing email was passed. Write new one to change existing one.',
             rus: 'Передана существующая почта. Передайте другую чтобы её изменить.'
-        },
+        },*/
         // changePassword
-        changePasswordCurrentPasswordIsWrong: {
+        /*changePasswordCurrentPasswordIsWrong: {
             eng: 'Your current password is wrong',
             rus: 'Передан неправильный текущий пароль.'
-        },
+        },*/
     },
     // Контроллер авторизации
-    incFilesTemplateController: {
+    /*incFilesTemplateController: {
         // Функция getAllTemplates
         // Функция createTemplate
         createTemplateNoName: {
@@ -179,9 +171,9 @@ export const messages: messagesType = {
             eng: 'Template not found. The data has not been updated.',
             rus: 'Шаблон не найден. Данные не обновлены.'
         },
-    },
+    },*/
     // Модель ComponentsFolders
-    componentsFoldersModel: {
+    /*componentsFoldersModel: {
         userIdRequired: {
             eng: 'Specify the user id to which this order of component templates belongs.',
             rus: 'Укажите id пользователя к которому принадлежит этот порядок шаблонов компонентов.'
@@ -190,9 +182,9 @@ export const messages: messagesType = {
             eng: 'Specify the id of the site to which this order of component templates belongs.',
             rus: 'Укажите id сайта которому принадлежит этот порядок шаблонов компонентов.'
         },
-    },
+    },*/
     // Контроллер порядка следования папок и файлов шаблонов компонентов
-    componentsFoldersController: {
+    /*componentsFoldersController: {
         // Функция getFolders
         getComponentsFoldersNoSiteId: {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
@@ -203,9 +195,9 @@ export const messages: messagesType = {
             eng: 'The order of the component templates is not found. The data has not been updated.',
             rus: 'Порядок шаблонов компонентов не найден. Данные не обновлены.'
         },
-    },
+    },*/
     // Модель Component
-    componentModel: {
+    /*componentModel: {
         uuidRequired: {
             eng: 'Specify the uuid of the component template.',
             rus: 'Укажите uuid шаблона компонента.'
@@ -222,9 +214,9 @@ export const messages: messagesType = {
             eng: 'Specify the component template name.',
             rus: 'Укажите название шаблона компонента.'
         },
-    },
+    },*/
     // Контроллер шаблонов компонентов
-    componentController: {
+    /*componentController: {
         // Функция createComponent
         getComponentNoSiteId: {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
@@ -239,9 +231,9 @@ export const messages: messagesType = {
             eng: 'Component template not found. The data has not been updated.',
             rus: 'Шаблон компонента не найден. Данные не обновлены.'
         },
-    },
+    },*/
     // Модель ArticlesFolders
-    articlesFoldersModel: {
+    /*articlesFoldersModel: {
         userIdRequired: {
             eng: 'Specify the user id to which this order of articles belongs.',
             rus: 'Укажите id пользователя к которому принадлежит этот порядок статей.'
@@ -250,9 +242,9 @@ export const messages: messagesType = {
             eng: 'Specify the id of the site to which this order of articles belongs.',
             rus: 'Укажите id сайта которому принадлежит этот порядок статей.'
         },
-    },
+    },*/
     // Контроллер порядка следования папок со статьями
-    articlesFoldersController: {
+    /*articlesFoldersController: {
         // Функция getFolders
         getFoldersNoSiteId: {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
@@ -263,9 +255,9 @@ export const messages: messagesType = {
             eng: 'The order of the article folders was not found. The data has not been updated.',
             rus: 'Порядок папок статей не найден. Данные не обновлены.'
         },
-    },
+    },*/
     // Модель Article
-    articleModel: {
+    /*articleModel: {
         uuidRequired: {
             eng: 'Specify the uuid of the article.',
             rus: 'Укажите uuid статьи.'
@@ -282,9 +274,9 @@ export const messages: messagesType = {
             eng: 'Specify the component template name.',
             rus: 'Укажите название шаблона компонента.'
         },
-    },
+    },*/
     // Контроллер статей
-    articleController: {
+    /*articleController: {
         // Функция createComponent
         getArticleNoSiteId: {
             eng: 'The request does not pass the id of the site to which the order of the component templates belongs',
@@ -299,7 +291,7 @@ export const messages: messagesType = {
             eng: 'Component template not found. The data has not been updated.',
             rus: 'Шаблон компонента не найден. Данные не обновлены.'
         },
-    },
+    },*/
 }
 
 

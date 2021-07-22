@@ -1,19 +1,19 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import { useGetAnotherFolderData } from './ComponentsFolderForm-func'
-import ModalContent from './deleteFolder'
-import useGetShowModal from 'utils/hooksUtils'
-import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import { useGetAnotherFolderData } from './ComponentsFolderForm-func'
+// import ModalContent from './deleteFolder'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
 
 
 /** Компонент формы редактирования папки */
-export default function ComponentsFolderForm() {
+/*export default function ComponentsFolderForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'folder')
@@ -56,4 +56,4 @@ export default function ComponentsFolderForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/

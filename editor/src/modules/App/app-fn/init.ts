@@ -4,7 +4,7 @@ import {AppState} from 'store/rootReducer'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import { getFromLocalStorage } from 'utils/MiscUtils'
-import sitesActions from 'store/site/sitesActions'
+// import sitesActions from 'store/site/sitesActions'
 import { useGetUserToken } from 'requests/user/getUserToken'
 
 
@@ -19,25 +19,25 @@ export function useGetAndSetEditorSettings() {
         let language = getFromLocalStorage('editorLanguage', 'eng') // Язык интерфейса: eng или rus
         let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
         let mainTab = getFromLocalStorage('editorTab', 0) // id главной вкладки
-        let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
-        let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
-        let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
-        let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
-        let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
-        let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
-        let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
-        let editorArticleType = getFromLocalStorage('editorArticleType', null) // тип выбранного элемента: папка или статья
+        // let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
+        // let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
+        // let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
+        // let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
+        // let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
+        // let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
+        // let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
+        // let editorArticleType = getFromLocalStorage('editorArticleType', null) // тип выбранного элемента: папка или статья
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setMainTab(mainTab) )
-        dispatch( sitesActions.setCurrentSiteId(siteId) )
-        dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
-        dispatch( sitesActions.setRightMainTab(sitePartTab) )
-        dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
-        dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
-        dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
+        // dispatch( sitesActions.setCurrentSiteId(siteId) )
+        // dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
+        // dispatch( sitesActions.setRightMainTab(sitePartTab) )
+        // dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
+        // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
+        // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])
 }
 

@@ -1,26 +1,26 @@
-import React from 'react'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Select from 'common/formElements/Select/Select'
-import Hr from 'common/misc/Hr/Hr'
-import getFormConfig from './formResources'
-import {
+// import React from 'react'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Select from 'common/formElements/Select/Select'
+// import Hr from 'common/misc/Hr/Hr'
+// import getFormConfig from './formResources'
+/*import {
     useGetAnotherSite,
     useGetDeleteSiteVisibilityStatus,
     useGetSubmitButtonText,
     useManageTemplatesSelect
-} from './SiteSection-func'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
-import { ModalContent } from './deleteSite'
-import useGetShowModal from 'utils/hooksUtils'
-import './SiteSection.scss'
+} from './SiteSection-func'*/
+// import { siteSectionMessages } from 'messages/siteSectionMessages'
+// import { ModalContent } from './deleteSite'
+// import useGetShowModal from 'utils/hooksUtils'
+// import './SiteSection.scss'
 
 
 /** Блок с формой изменения данных выбранного сайта */
-export default function SiteSection() {
+/*export default function SiteSection() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'site')
@@ -75,10 +75,10 @@ export default function SiteSection() {
             </Form>
         </div>
     )
-}
+}*/
 
 /** Кнопка удаления сайта */
-function DeleteSiteButton() {
+/*function DeleteSiteButton() {
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
     const openDeleteSiteConfirmation = useGetShowModal(<ModalContent />)
@@ -95,4 +95,4 @@ function DeleteSiteButton() {
             onClick={openDeleteSiteConfirmation}
         />
     )
-}
+}*/

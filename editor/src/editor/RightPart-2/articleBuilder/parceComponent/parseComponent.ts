@@ -1,16 +1,16 @@
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import htmlStringToObject, {HTMLObjArrType} from './htmlStringToObject'
-import articleManager from '../../articleManager/articleManager'
-import { putRepeatedElems } from './putRepeatedElems'
-import { getConsistObjsArr } from './getConsistObjsArr'
-import { changeTagName } from './changeTagName'
-import {setExtraAttribs} from './setExtraAttribs'
-import { setAttribs } from './setAttribs'
-import { insertChildren } from './insertChildren'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import htmlStringToObject, {HTMLObjArrType} from './htmlStringToObject'
+// import articleManager from '../../articleManager/articleManager'
+// import { putRepeatedElems } from './putRepeatedElems'
+// import { getConsistObjsArr } from './getConsistObjsArr'
+// import { changeTagName } from './changeTagName'
+// import {setExtraAttribs} from './setExtraAttribs'
+// import { setAttribs } from './setAttribs'
+// import { insertChildren } from './insertChildren'
 
 
-export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
+/*export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
 
     // Get component template by its tmpCompId
     let template = articleManager.getTemplate(tempComps, compData.tempCompId)
@@ -43,4 +43,4 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     }
 
     return htmlObj
-}
+}*/

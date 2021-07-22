@@ -1,8 +1,8 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 
 // Форма редактирования выбранной папки шаблона компонента
-const obj = {
+/*const obj = {
     undo: {
         eng: 'Undo',
         rus: 'Шаг назад'
@@ -62,6 +62,6 @@ const obj = {
         eng: 'Close',
         rus: 'Закрыть'
     },
-}
+}*/
 
-export const articleMenuMessages = getMessagesObject(obj)
+// export const articleMenuMessages = getMessagesObject(obj)

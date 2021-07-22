@@ -1,7 +1,7 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
+// import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Сайты»
-const obj = {
+/*const obj = {
     headerNewSite: {
         eng: 'New site',
         rus: 'Новый сайт'
@@ -50,6 +50,6 @@ const obj = {
         eng: 'Not selected',
         rus: 'Не выбрано'
     },
-}
+}*/
 
-export const siteSectionMessages = getMessagesObject(obj)
+// export const siteSectionMessages = getMessagesObject(obj)

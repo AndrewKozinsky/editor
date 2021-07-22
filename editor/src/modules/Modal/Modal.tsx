@@ -1,16 +1,16 @@
-import React from 'react'
-import { modalMessages } from 'messages/modalMessages'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import { useGetModalClasses, useGetIsModalOpen } from 'modules/Modal/Modal-func'
-import Button from 'common/formElements/Button/Button'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { useGetModalCloseHandler } from 'utils/MiscUtils'
-import './Modal.scss'
+// import React from 'react'
+// import { modalMessages } from 'messages/modalMessages'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import { useGetModalClasses, useGetIsModalOpen } from 'modules/Modal/Modal-func'
+// import Button from 'common/formElements/Button/Button'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { useGetModalCloseHandler } from 'utils/MiscUtils'
+// import './Modal.scss'
 
 
 /** Модальное окно */
-export default function Modal() {
+/*export default function Modal() {
 
     // Содержимое модального окна
     const { content } = useSelector((store: AppState) => store.modal)
@@ -44,4 +44,4 @@ export default function Modal() {
             </div>
         </div>
     )
-}
+}*/

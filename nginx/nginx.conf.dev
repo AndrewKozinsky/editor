@@ -21,8 +21,8 @@ http {
             proxy_set_header Connection "upgrade";
         }
 
-        location /kia {
-            return 200 'Hello from Kia site';
+        location /test {
+            return 200 'Hello from Test site';
         }
     }
 }

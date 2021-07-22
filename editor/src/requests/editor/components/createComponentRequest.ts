@@ -1,6 +1,6 @@
-import {makeFetch} from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import store from 'src/store/store'
+// import {makeFetch} from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import store from 'src/store/store'
 
 /**
  * Функция создаёт новый шаблон компонента
@@ -8,7 +8,7 @@ import store from 'src/store/store'
  * @param {String} name — имя шаблона компонента
  * @param {String} code — код шаблона компонента
  */
-export default async function createComponentRequest(uuid: string, name: string, code: null | string) {
+/*export default async function createComponentRequest(uuid: string, name: string, code: null | string) {
     const siteId = store.getState().sites.currentSiteId
 
     const options = {
@@ -24,13 +24,13 @@ export default async function createComponentRequest(uuid: string, name: string,
         getApiUrl('component'), options
     )
     return response
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type CreateNewComponentServerResponse = FailResponse | SuccessResponse
+// type CreateNewComponentServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -38,9 +38,10 @@ type FailResponse = {
         message: string // "Incorrect email or password"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -52,4 +53,4 @@ type SuccessResponse = {
             uuid: string // "0471e6e2-b917-439c-bb29-e49bfa5343c9"
         }
     }
-}
+}*/

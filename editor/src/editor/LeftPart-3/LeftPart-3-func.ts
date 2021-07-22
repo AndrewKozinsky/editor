@@ -1,12 +1,12 @@
-import { MiscTypes } from 'types/miscTypes'
-import {useDispatch, useSelector} from 'react-redux'
-import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
-import {AppState} from 'store/rootReducer'
-import { settingsPanelMessages } from 'messages/settingsPanelMessages'
-import actions from 'store/rootAction'
+// import { MiscTypes } from 'types/miscTypes'
+// import {useDispatch, useSelector} from 'react-redux'
+// import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
+// import {AppState} from 'store/rootReducer'
+// import { settingsPanelMessages } from 'messages/settingsPanelMessages'
+// import actions from 'store/rootAction'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
-export function useGetSettingsItemsListProps(): ItemsListPropType {
+/*export function useGetSettingsItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
 
     // Активная вкладка панели настроек
@@ -17,13 +17,13 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
         items: getItemsListProps(dispatch), // Список пунктов
         activeItemId: activeTab // id активного пункта
     }
-}
+}*/
 
 /**
  * Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки»
  * @param {Object} dispatch — диспетчер экшенов
  */
-function getItemsListProps(dispatch: MiscTypes.AppDispatch): ItemType[] {
+/*function getItemsListProps(dispatch: MiscTypes.AppDispatch): ItemType[] {
     return [
         {
             id: 'user',
@@ -36,4 +36,4 @@ function getItemsListProps(dispatch: MiscTypes.AppDispatch): ItemType[] {
             onClick: () => dispatch( actions.settings.setSettingsPanelTab('editor') )
         }
     ]
-}
+}*/

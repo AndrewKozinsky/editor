@@ -1,7 +1,7 @@
 //@ts-ignore
-import { v4 as uuid } from 'uuid'
-import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
-import DragFilesTreeType from '../types'
+// import { v4 as uuid } from 'uuid'
+// import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import DragFilesTreeType from '../types'
 
 
 /**
@@ -9,7 +9,7 @@ import DragFilesTreeType from '../types'
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} folderId — id папки, которую нужно расвернуть/свернуть
  */
-export function toggleFolder(items: DragFilesTreeType.Items, folderId: DragFilesTreeType.UuId) {
+/*export function toggleFolder(items: DragFilesTreeType.Items, folderId: DragFilesTreeType.UuId) {
     // Получение папки с заданным идентификатором
     const folder = getItemDataById(items, folderId)
     if(!folder) return
@@ -19,7 +19,7 @@ export function toggleFolder(items: DragFilesTreeType.Items, folderId: DragFiles
 
     // Создание нового массива папок и файлов
     return makeImmutableCopy(items, folder, folderCopy)
-}
+}*/
 
 
 /**
@@ -27,7 +27,7 @@ export function toggleFolder(items: DragFilesTreeType.Items, folderId: DragFiles
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} itemId — id папки или файла, которую нужно найти
  */
-export function getItemDataById(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId): null | DragFilesTreeType.Item {
+/*export function getItemDataById(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId): null | DragFilesTreeType.Item {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
@@ -41,14 +41,14 @@ export function getItemDataById(items: DragFilesTreeType.Items, itemId: DragFile
     }
 
     return null
-}
+}*/
 
 /**
  * Функция возвращает булево значение имеет ли папка вложенный элемент
  * @param {Object} folderData — данные папки где возможно есть указанный вложенный элемент
  * @param {String} itemId — id элемента, который возможно есть в указанной папке
  */
-export function hasFolderAnItem(folderData: DragFilesTreeType.Item, itemId: DragFilesTreeType.UuId) {
+/*export function hasFolderAnItem(folderData: DragFilesTreeType.Item, itemId: DragFilesTreeType.UuId) {
     if (folderData.content) {
         return Boolean(
             getItemDataById(folderData.content, itemId)
@@ -56,7 +56,7 @@ export function hasFolderAnItem(folderData: DragFilesTreeType.Item, itemId: Drag
     }
 
     return false
-}
+}*/
 
 /**
  * Функция вставляющая указатель помещения перетаскиваемого элемента
@@ -65,7 +65,7 @@ export function hasFolderAnItem(folderData: DragFilesTreeType.Item, itemId: Drag
  * @param {String} itemId — id элемента под которым находится курсор
  * @param {String} place — место, которое нужно подсветить. Три варианта: 'after' | 'inside' | 'before'
  */
-export function showPlaceMark(
+/*export function showPlaceMark(
     items: DragFilesTreeType.Items,
     itemId: DragFilesTreeType.UuId,
     place: 'after' | 'inside' | 'before'
@@ -82,7 +82,7 @@ export function showPlaceMark(
 
     // Создание и возвращение нового массива элементов
     return makeImmutableCopy(itemsCopy, item, itemCopy)
-}
+}*/
 
 
 /**
@@ -91,7 +91,7 @@ export function showPlaceMark(
  * @param {Array} items — массив данных по папкам и файлам
  * @param {String} propName — имя свойства, значение которого нужно удалить
  */
-function erasePropInItems(items: DragFilesTreeType.Items, propName: string) {
+/*function erasePropInItems(items: DragFilesTreeType.Items, propName: string) {
     return items.map(item => {
         const newItem = {...item}
         //@ts-ignore
@@ -103,7 +103,7 @@ function erasePropInItems(items: DragFilesTreeType.Items, propName: string) {
 
         return  newItem
     })
-}
+}*/
 
 
 /**
@@ -113,7 +113,7 @@ function erasePropInItems(items: DragFilesTreeType.Items, propName: string) {
  * @param {String} position — позиция перемещаемого элемента относительно якорного
  * @param {Array} items — массив данных по папкам и файлам
  */
-export function moveItemTo(
+/*export function moveItemTo(
     movedItemId: string,
     anchorItemId: string,
     position: DragFilesTreeType.PlaceMark,
@@ -131,14 +131,14 @@ export function moveItemTo(
 
     // Стереть имеющиеся метки и возвратить новый массив папок и файлов
     return erasePropInItems(itemsCopy, 'placeMark')
-}
+}*/
 
 /**
  * Функция удаляет папку или файл с переданным id из массива папок и файлов и возвращает новый массив
  * @param {Array} items — массив папок и файлов
  * @param {String} itemId — id папки или файла, который нужно найти и удалить
  */
-export function deleteItem(items: DragFilesTreeType.Items, itemId: string): DragFilesTreeType.Items {
+/*export function deleteItem(items: DragFilesTreeType.Items, itemId: string): DragFilesTreeType.Items {
     // Найду массив в котором находится удаляемая папка или файл
     let itemsArr = getParentArray(items, itemId)
     if (!itemsArr) return
@@ -151,7 +151,7 @@ export function deleteItem(items: DragFilesTreeType.Items, itemId: string): Drag
     newItemsArr.splice(itemIdx, 1)
 
     return makeImmutableCopy(items, itemsArr, newItemsArr)
-}
+}*/
 
 /**
  * Функция добавляет папку или файл в указанное место в массиве папок и файлов
@@ -160,7 +160,7 @@ export function deleteItem(items: DragFilesTreeType.Items, itemId: string): Drag
  * @param {String} anchorItemId — id элемента относительно которого будет вставлен новый элемент
  * @param {String} position — в какую позицию относительно якорного элемента поставить новый элемент
  */
-function addItem(
+/*function addItem(
     items: DragFilesTreeType.Items,
     movedItem: DragFilesTreeType.Item,
     anchorItemId: string,
@@ -199,14 +199,14 @@ function addItem(
     }
 
     return items
-}
+}*/
 
 /**
  * Функция возвращает массив, в котором содержится папка или файл с переданным id
  * @param {Array} items — массив папок и файлов
  * @param {String} itemId — id папки или файла у которого нужно найти родительскую папку
  */
-export function getParentArray(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId): null | DragFilesTreeType.Items {
+/*export function getParentArray(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId): null | DragFilesTreeType.Items {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
@@ -220,7 +220,7 @@ export function getParentArray(items: DragFilesTreeType.Items, itemId: DragFiles
     }
 
     return null
-}
+}*/
 
 /**
  * Функция создаёт новую пустую папку или файл
@@ -228,7 +228,7 @@ export function getParentArray(items: DragFilesTreeType.Items, itemId: DragFiles
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  * @param {Array} items — массив папок и файлов
  */
-export function createNewItem(
+/*export function createNewItem(
     type: DragFilesTreeType.ItemType,
     after: DragFilesTreeType.After,
     items: DragFilesTreeType.Items,
@@ -250,13 +250,13 @@ export function createNewItem(
     }
 
     return newItem
-}
+}*/
 
 /**
  * Функция анализирует массив папок и файлов и возвращает следующий id для создаваемой папки
  * @param {Array} items — массив папок и файлов
  */
-function getFolderNextId(items: DragFilesTreeType.Items) {
+/*function getFolderNextId(items: DragFilesTreeType.Items) {
     let maxId = 0
 
     function maxIdFinder(elems: DragFilesTreeType.Items) {
@@ -276,13 +276,13 @@ function getFolderNextId(items: DragFilesTreeType.Items) {
     maxIdFinder(items)
 
     return (maxId + 1).toString()
-}
+}*/
 
 /**
  * Функция готовит массив папок и файлов для сохранения на сервере: убирает лишние детали.
  * @param {Array} items — массив папок и файлов
  */
-export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
+/*export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
     return items.map(item => {
         const newItem = {...item}
         delete newItem.placeMark
@@ -295,7 +295,7 @@ export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
 
         return  newItem
     })
-}
+}*/
 
 /**
  * Функция добавляет новую папку или файл в массив папок и файлов
@@ -304,7 +304,7 @@ export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function addNewItem(
+/*export function addNewItem(
     newItemType: DragFilesTreeType.ItemType,
     folderData: null | DragFilesTreeType.Item,
     items: DragFilesTreeType.Items,
@@ -351,14 +351,14 @@ export function addNewItem(
         newItem,
         newState
     }
-}
+}*/
 
 /**
  * Функция возвращает uuid раскрытых папок
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Array} arr — массив с uuid открытых папок (требуется внутри работы функции, в саму функцию передавать не нужно)
  */
-export function getOpenedFoldersUuid(items: DragFilesTreeType.Items, arr: DragFilesTreeType.UuIdArr = []) {
+/*export function getOpenedFoldersUuid(items: DragFilesTreeType.Items, arr: DragFilesTreeType.UuIdArr = []) {
     items.forEach((item: DragFilesTreeType.Item) => {
         if (item.open) {
             arr.push(item.uuid)
@@ -370,14 +370,14 @@ export function getOpenedFoldersUuid(items: DragFilesTreeType.Items, arr: DragFi
     })
 
     return arr
-}
+}*/
 
 
 /**
  * Функция возвращает максимальную глубину вложенности файлов
  * @param {Array} items — массив с данными по папкам и файлам
  */
-export function getMaxDeep(items: DragFilesTreeType.Items) {
+/*export function getMaxDeep(items: DragFilesTreeType.Items) {
     let maxDeep = 0
 
     function crawler(items: DragFilesTreeType.Items, prevDeep = -1) {
@@ -396,7 +396,7 @@ export function getMaxDeep(items: DragFilesTreeType.Items) {
     }
 
     return maxDeep
-}
+}*/
 
 
 /**
@@ -407,7 +407,7 @@ export function getMaxDeep(items: DragFilesTreeType.Items) {
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {Array} openFolderIds — id папок, которые должны быть изначально открыты
  */
-export function addOpenPropToFolders(
+/*export function addOpenPropToFolders(
     items: DragFilesTreeType.Items, openFolderIds: DragFilesTreeType.UuIdArr
 ): DragFilesTreeType.Items {
     return items.map(item => {
@@ -423,14 +423,14 @@ export function addOpenPropToFolders(
 
         return newItem
     })
-}
+}*/
 
 /**
  * Функция выделяет элемент с переданным uuid и возвращает новый массив папок и файлов.
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} itemId — uuid элемента, который должен быть выбран.
  */
-export function selectItem(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId) {
+/*export function selectItem(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId) {
     // Уберу свойство active у всех элементов
     const itemsCopy = erasePropInItems(items, 'active')
 
@@ -445,7 +445,7 @@ export function selectItem(items: DragFilesTreeType.Items, itemId: DragFilesTree
         newItem: itemCopy,
         newItems: makeImmutableCopy(itemsCopy, item, itemCopy)
     }
-}
+}*/
 
 /**
  * Функция выделяет элемент с переданным uuid и возвращает новый массив папок и файлов.
@@ -453,6 +453,7 @@ export function selectItem(items: DragFilesTreeType.Items, itemId: DragFilesTree
  * @param {String} itemId — id папки или файла, которую нужно выделить
  * @param {String} newName — новое название папки или файла
  */
+/*
 export function changeName(items: DragFilesTreeType.Items, itemId: DragFilesTreeType.UuId, newName: string) {
     // Скопировать оригинальный массив
     const itemsCopy = [...items]
@@ -468,4 +469,4 @@ export function changeName(items: DragFilesTreeType.Items, itemId: DragFilesTree
         newItem: itemCopy,
         newItems: makeImmutableCopy(itemsCopy, item, itemCopy)
     }
-}
+}*/

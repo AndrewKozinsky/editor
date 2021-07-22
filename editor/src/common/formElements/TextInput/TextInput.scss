@@ -1,9 +1,9 @@
-@import "../../commonStyles/commonStyles";
+//@import "../../commonStyles/commonStyles";
 
 
-$CN: text-input;
+//$CN: text-input;
 
-.#{$CN} {
+/*.#{$CN} {
     display: block;
     width: 100%;
     font-family: 'SF UI Display', sans-serif;
@@ -32,9 +32,9 @@ $CN: text-input;
     &:disabled {
         opacity: .5;
     }
-}
+}*/
 
 // Задание максимальной ширины
-.#{$CN}--maxWidth-250 {
+/*.#{$CN}--maxWidth-250 {
     max-width: 250px;
-}
+}*/

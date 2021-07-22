@@ -4,6 +4,7 @@
  * @param {Object} obj — объект, из которого нужно сделать копию
  * @param {Array} excludedProps — массив с названиями свойст, которые не должны быть в новом объекте
  */
+/*
 export function copyObjWithoutSomeProps(obj: {[prop:string]: any}, excludedProps: string[]) {
 
     return Object.assign(
@@ -13,4 +14,4 @@ export function copyObjWithoutSomeProps(obj: {[prop:string]: any}, excludedProps
             else return {}
         })
     )
-}
+}*/

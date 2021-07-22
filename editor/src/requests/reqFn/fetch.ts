@@ -6,9 +6,12 @@ import store from 'store/store'
 
 // Тип параметров запроса
 type OptionsType = {
+    // Request method
     method: string,
+    // Additional headers
     headers?: {[key: string]: string},
-    [key: string]: undefined | string | {}
+    // What is it need for?
+    // [key: string]: undefined | string | {}
 }
 
 /** Хук загружающий данные с сервера
@@ -67,7 +70,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
  * @param {String} url — строка c адресом запроса
  * @param {Object} options — параметры запроса
  */
-export async function makeFetch(url: string, options: OptionsType) {
+/*export async function makeFetch(url: string, options: OptionsType) {
     const lang = store.getState().settings.editorLanguage
 
     // Добавление заголовка языка интерфейса в параметры запроса
@@ -82,7 +85,7 @@ export async function makeFetch(url: string, options: OptionsType) {
         if (lang === 'rus') message = 'Не удалось получить данные.'
         throw new Error(message)
     }
-}
+}*/
 
 /**
  * Функция добавляет в объект параметров запроса заголовок Editor-Language с языком

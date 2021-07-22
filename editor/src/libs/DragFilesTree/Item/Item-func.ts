@@ -1,13 +1,13 @@
-import {SyntheticEvent, useCallback} from 'react'
-import DragFilesTreeType from '../types'
-import {makeCN} from 'utils/StringUtils'
-import {
+// import {SyntheticEvent, useCallback} from 'react'
+// import DragFilesTreeType from '../types'
+// import {makeCN} from 'utils/StringUtils'
+/*import {
     addNewItem,
     getOpenedFoldersUuid,
     toggleFolder,
     deleteItem,
     selectItem
-} from '../StoreManage/manageState'
+} from '../StoreManage/manageState'*/
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -18,7 +18,7 @@ import {
     А если навели на кнопки, то у обёртки удаляется атрибут data-ft-hover.
     Для элементов с data-ft-hover в CSS прописан подсвечивающий стиль.
 */
-export function useMarkItemElemWhenItHovered() {
+/*export function useMarkItemElemWhenItHovered() {
 
     return useCallback(function (event: SyntheticEvent): void {
         const $target = <HTMLElement>event.target
@@ -38,7 +38,7 @@ export function useMarkItemElemWhenItHovered() {
             delete $folder.dataset.ftHover
         }
     }, [])
-}
+}*/
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
@@ -46,7 +46,7 @@ export function useMarkItemElemWhenItHovered() {
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки или файла
  */
-export function getTriangleBtnClasses(CN: string, itemData: DragFilesTreeType.Item) {
+/*export function getTriangleBtnClasses(CN: string, itemData: DragFilesTreeType.Item) {
 
     if (itemData.type === 'file') {
         return `${CN}__btn-triangle--for-file`
@@ -66,14 +66,14 @@ export function getTriangleBtnClasses(CN: string, itemData: DragFilesTreeType.It
 
         return makeCN(classes)
     }
-}
+}*/
 
 /**
  * Функция возвращает классы кнопки сворачивания/разворачивания папки.
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки
  */
-export function getInnerWrapperClasses(
+/*export function getInnerWrapperClasses(
     CN: string, itemData: DragFilesTreeType.Item
 ) {
     const classes  = [`${CN}__inner`]
@@ -89,7 +89,7 @@ export function getInnerWrapperClasses(
     }
 
     return makeCN(classes)
-}
+}*/
 
 
 /**
@@ -99,7 +99,7 @@ export function getInnerWrapperClasses(
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function useGetToggleFolder(
+/*export function useGetToggleFolder(
     folderId: DragFilesTreeType.UuId,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
@@ -122,7 +122,7 @@ export function useGetToggleFolder(
 
         if (newItems) setItems(newItems)
     }, [items, folderId])
-}
+}*/
 
 /**
  * Обработчик щелчка по кнопке добавления нового элемента в массив папок и файлов.
@@ -133,7 +133,7 @@ export function useGetToggleFolder(
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function createNewItem(
+/*export function createNewItem(
     e: SyntheticEvent,
     newItemType: DragFilesTreeType.ItemType,
     folderData: null | DragFilesTreeType.Item,
@@ -177,7 +177,7 @@ export function createNewItem(
 
     // Обновить Состояние списка папок
     setItems(newItems)
-}
+}*/
 
 /**
  * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
@@ -187,7 +187,7 @@ export function createNewItem(
  * @param {String} itemId — id папки или файла, которую нужно удалить
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function removeItem(
+/*export function removeItem(
     e: null | SyntheticEvent,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
@@ -206,7 +206,7 @@ export function removeItem(
 
     // Обновить Состояние списка папок
     setItems(newItems)
-}
+}*/
 
 
 /**
@@ -217,7 +217,7 @@ export function removeItem(
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function useGetOnClickHandler(
+/*export function useGetOnClickHandler(
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     itemData: DragFilesTreeType.Item,
@@ -235,4 +235,4 @@ export function useGetOnClickHandler(
         // Обновить Состояние списка папок
         setItems(newItems)
     }, [itemData, after])
-}
+}*/

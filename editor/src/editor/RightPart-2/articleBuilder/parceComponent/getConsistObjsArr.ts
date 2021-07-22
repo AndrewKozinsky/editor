@@ -1,15 +1,15 @@
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-import {HTMLObjArrType} from './htmlStringToObject'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
+// import {HTMLObjArrType} from './htmlStringToObject'
 
-type ConsistObjsArr = ConsistObj[]
-export type ConsistObj = {
+// type ConsistObjsArr = ConsistObj[]
+/*export type ConsistObj = {
     dataComp: ArticleTypes.Component
     dataElem: ArticleTypes.ComponentElem
     tempElem: TempCompTypes.Elem
     htmlComp: HTMLObjArrType.Tag
     htmlElem?: HTMLObjArrType.Tag
-}
+}*/
 
 /**
  * The function form an array of objects consists of objects with a correspondence between component template, data and html-object
@@ -17,7 +17,7 @@ export type ConsistObj = {
  * @param {Object} compData — component data
  * @param {Object} htmlObj — component html-object
  */
-export function getConsistObjsArr(
+/*export function getConsistObjsArr(
     template: TempCompTypes.TempComp, compData: ArticleTypes.Component, htmlObj: HTMLObjArrType.Tag
 ): null | ConsistObjsArr {
     if (!compData.elems) return null
@@ -33,16 +33,16 @@ export function getConsistObjsArr(
 
         return partObject
     })
-}
+}*/
 
 /**
  * The function finds and returns element template based on an element template id
  * @param {Object} template — component template
  * @param {String} tempElemId — an element template id
  */
-function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tempElemId: TempCompTypes.UuId): TempCompTypes.Elem {
+/*function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tempElemId: TempCompTypes.UuId): TempCompTypes.Elem {
     return template.code.elems.find(tempElem => tempElem.tempElemId === tempElemId)
-}
+}*/
 
 /**
  * The function finds and returns html-element object with passed elemGroup name and tempElemId
@@ -51,7 +51,7 @@ function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tempElemI
  * @param {String} elemGroup — the name of the group to which the element belongs
  * @param {String} tempElemId — element template name
  */
-function getHtmlElem(htmlObj: HTMLObjArrType.Tag, dataElemId: number, elemGroup: string, tempElemId: string): HTMLObjArrType.Tag {
+/*function getHtmlElem(htmlObj: HTMLObjArrType.Tag, dataElemId: number, elemGroup: string, tempElemId: string): HTMLObjArrType.Tag {
 
     let htmlElem: HTMLObjArrType.Tag
     find(htmlObj)
@@ -96,4 +96,4 @@ function getHtmlElem(htmlObj: HTMLObjArrType.Tag, dataElemId: number, elemGroup:
     }
 
     return htmlElem
-}
+}*/

@@ -1,10 +1,10 @@
-import {SyntheticEvent, useCallback} from 'react'
-import {makeCN} from 'utils/StringUtils'
-import {
+// import {SyntheticEvent, useCallback} from 'react'
+// import {makeCN} from 'utils/StringUtils'
+/*import {
     getOpenedFoldersUuid,
     toggleFolder
-} from '../StoreManage/manageState'
-import TempCompFilesTreeType from '../types'
+} from '../StoreManage/manageState'*/
+// import TempCompFilesTreeType from '../types'
 
 
 
@@ -14,7 +14,7 @@ import TempCompFilesTreeType from '../types'
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки или файла
  */
-export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
+/*export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
 
     if (itemData.type === 'file') {
         return `${CN}__btn-triangle--for-file`
@@ -34,7 +34,7 @@ export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeTyp
 
         return makeCN(classes)
     }
-}
+}*/
 
 
 /**
@@ -43,7 +43,7 @@ export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeTyp
  * @param {Array} items — массив с данными по папкам и файлам
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function useGetToggleFolder(
+/*export function useGetToggleFolder(
     folderId: TempCompFilesTreeType.UuId,
     items: TempCompFilesTreeType.Items,
     after: TempCompFilesTreeType.After
@@ -60,7 +60,7 @@ export function useGetToggleFolder(
         after.afterCollapseFolder(newItems, openedFoldersUuid)
 
     }, [items, folderId])
-}
+}*/
 
 /**
  * Хук возвращает обработчик щелчка по папке или файлу.
@@ -69,7 +69,7 @@ export function useGetToggleFolder(
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function useGetOnClickHandler(
+/*export function useGetOnClickHandler(
     items: TempCompFilesTreeType.Items,
     itemData: TempCompFilesTreeType.Item,
     after: TempCompFilesTreeType.After
@@ -85,4 +85,4 @@ export function useGetOnClickHandler(
             after.afterCollapseFolder(newItems, openedFoldersUuid)
         }
     }, [itemData, after])
-}
+}*/

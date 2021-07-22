@@ -1,13 +1,13 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import { resetFormMessages } from 'messages/resetFormMessages'
-import {commonMessages} from 'messages/commonMessages'
-import resetPasswordRequest from 'requests/user/resetPasswordRequest'
+// import * as yup from 'yup'
+// import FHTypes from 'libs/formHandler/types'
+// import { resetFormMessages } from 'messages/resetFormMessages'
+// import {commonMessages} from 'messages/commonMessages'
+// import resetPasswordRequest from 'requests/user/resetPasswordRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -102,14 +102,14 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
 
     const schemas = {
         email: yup.string()
@@ -119,7 +119,7 @@ function getSchema(fieldName: string): any {
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -128,7 +128,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -159,18 +159,18 @@ function validateForm(
 
     // Убрать сообщение об общей ошибке в нижней части формы.
     return setFormDataPropValue( formState, 'commonError', null )
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на поле email если там есть ошибка
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
     return formState.fields.email.data.error
         ? formState.fields.email.$field
         : null
-}
+}*/
 
 
 /**
@@ -179,7 +179,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'email')
@@ -187,4 +187,4 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/

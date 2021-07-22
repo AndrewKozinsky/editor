@@ -1,4 +1,4 @@
-import {
+/*import {
     createCompAndSetItNearComp,
     createCompAndSetInElem,
     createCompAndSetInRootOfArticle
@@ -28,10 +28,10 @@ import {
     hasElemNestedElements,
     canMakeHistoryStep,
     isArticleSave
-} from "./check"
+} from "./check"*/
 
 
-class ArticleManager {
+/*class ArticleManager {
     // GETTING RESOURCES
     // Finds current history item object
     getCurrentHistoryItem = getCurrentHistoryItem
@@ -76,6 +76,6 @@ class ArticleManager {
     supplementArtMarksInLocalStorage = supplementArtMarksInLocalStorage
     saveArticle = saveArticle
     deleteArticle = deleteArticle
-}
+}*/
 
-export default new ArticleManager()
+// export default new ArticleManager()

@@ -1,8 +1,8 @@
-import {ConsistObj} from './getConsistObjsArr'
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
-import { parseComponent } from './parseComponent'
-import { HTMLObjArrType } from './htmlStringToObject'
-import {parseText} from '../parseText/parseText'
+// import {ConsistObj} from './getConsistObjsArr'
+// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import { parseComponent } from './parseComponent'
+// import { HTMLObjArrType } from './htmlStringToObject'
+// import {parseText} from '../parseText/parseText'
 
 
 /**
@@ -10,7 +10,7 @@ import {parseText} from '../parseText/parseText'
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  * @param tempComps
  */
-export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.TempComps) {
+/*export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.TempComps) {
     if (consistObj.dataElem.children?.length) {
 
         const parsedChildren: HTMLObjArrType.Arr = []
@@ -31,4 +31,4 @@ export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.
 
         consistObj.htmlElem.children = parsedChildren
     }
-}
+}*/

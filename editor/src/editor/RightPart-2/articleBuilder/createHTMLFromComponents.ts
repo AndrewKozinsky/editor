@@ -1,10 +1,10 @@
-import {HTMLObjArrType} from './parceComponent/htmlStringToObject'
+// import {HTMLObjArrType} from './parceComponent/htmlStringToObject'
 
 /**
  * The function gets html structure objects array and turns it to HTML-string
  * @param {Array} htmlStructure — html structure objects array
  */
-export default function createHTMLFromComponents(htmlStructure: HTMLObjArrType.Arr): string {
+/*export default function createHTMLFromComponents(htmlStructure: HTMLObjArrType.Arr): string {
 
     return htmlStructure.reduce((summaryHtmlStr, htmlObj) => {
         if ('text' in htmlObj) {
@@ -14,13 +14,13 @@ export default function createHTMLFromComponents(htmlStructure: HTMLObjArrType.A
             return summaryHtmlStr += formHtmlStrFromTagObject(htmlObj)
         }
     }, '')
-}
+}*/
 
 /**
  * The function forms tag, its attributes and children
  * @param {Object} htmlObj — object with html-structure
  */
-function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
+/*function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
 
     const unpairedTags = ['img', 'hr', 'br', 'b', 'i', 'meta', 'input']
 
@@ -31,7 +31,7 @@ function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
     return unpairedTags.includes(tagName)
         ? `<${tagName} ${attribs} />`
         : `<${tagName} ${attribs}>${children}</${htmlObj.tag}>`
-}
+}*/
 
 
 /**
@@ -39,7 +39,7 @@ function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
  * @param {Object} objAttribs — object with html attributes
  * @returns {*} string with html attributes
  */
-function getAttribs(objAttribs: HTMLObjArrType.Attrs): string {
+/*function getAttribs(objAttribs: HTMLObjArrType.Attrs): string {
     let generalArr: string[] = []
 
     const unnecessaryProps = ['data-em-data-elem-id', 'data-em-data-comp-id', 'data-em-group', 'data-em-id', 'data-em-text-data-comp-id']
@@ -51,4 +51,4 @@ function getAttribs(objAttribs: HTMLObjArrType.Attrs): string {
     }
 
     return generalArr.join(' ')
-}
+}*/

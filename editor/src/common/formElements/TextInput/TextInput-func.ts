@@ -1,11 +1,11 @@
-import {useEffect} from 'react'
-import {makeCN} from 'utils/StringUtils'
+// import {useEffect} from 'react'
+// import {makeCN} from 'utils/StringUtils'
 
 /**
  * Функция возвращает классы выпадающего списка
  * @param maxWidth — максимальная ширина поля.
  */
-export function getTextInputClasses(maxWidth?: 250) {
+/*export function getTextInputClasses(maxWidth?: 250) {
     // Классы
     const CN = 'text-input'
     const classes = [CN]
@@ -16,7 +16,7 @@ export function getTextInputClasses(maxWidth?: 250) {
     }
 
     return makeCN(classes)
-}
+}*/
 
 /**
  * Хук при необходимости устанавливает фокус на поле ввода
@@ -24,7 +24,7 @@ export function getTextInputClasses(maxWidth?: 250) {
  * @param {Boolean | Number} autoFocus — или булево значение нужно ли ставить фокусировку или число сообщающее задержку,
  * с которой нужно поставить фокусировку.
  */
-export function useSetFocus(inputRef: any, autoFocus: boolean | number) {
+/*export function useSetFocus(inputRef: any, autoFocus: boolean | number) {
     // Нужно ли ставить фокусировку
     useEffect(function () {
         // Если нужно ставить фокусировку
@@ -36,4 +36,4 @@ export function useSetFocus(inputRef: any, autoFocus: boolean | number) {
             setTimeout(function () { inputRef.current.focus() }, autoFocus)
         }
     }, [])
-}
+}*/

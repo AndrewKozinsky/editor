@@ -1,23 +1,23 @@
-import {Router} from 'express'
-import * as authController from '../controllers/authController/authController'
-import * as componentController
-    from '../controllers/componentController/componentController'
+// import {Router} from 'express'
+// import * as authController from '../controllers/authController/authController'
+// import * as componentController
+//     from '../controllers/componentController/componentController'
 
 
-const router = Router()
+// const router = Router()
 
-router.route('/')
+// router.route('/')
     // Создание шаблона компонента
-    .post(authController.protect, componentController.createComponent)
+    // .post(authController.protect, componentController.createComponent)
 
 // uuid — это свойство uuid в документе компонента
-router.route('/:uuid')
+// router.route('/:uuid')
     // Получение шаблона компонента определённого сайта
-    .get(authController.protect, componentController.getComponent)
+    // .get(authController.protect, componentController.getComponent)
     // Изменение шаблона компонента определённого сайта
-    .patch(authController.protect, componentController.updateComponent)
+    // .patch(authController.protect, componentController.updateComponent)
     // Удаление шаблона компонента определённого сайта
-    .delete(authController.protect, componentController.deleteComponent)
+    // .delete(authController.protect, componentController.deleteComponent)
 
 
-export default router
+// export default router

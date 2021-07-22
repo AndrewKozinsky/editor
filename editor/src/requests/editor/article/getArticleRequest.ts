@@ -1,10 +1,10 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
-import FilesTreeType from 'types/filesTree'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import FilesTreeType from 'types/filesTree'
 
 
 /** Функция получает данные статьи */
-export default async function getArticleRequest(articleUuid: FilesTreeType.UuId) {
+/*export default async function getArticleRequest(articleUuid: FilesTreeType.UuId) {
 
     const options = { method: 'GET' }
     const response: GetArticleRequestServerResponse = await makeFetch(
@@ -12,13 +12,13 @@ export default async function getArticleRequest(articleUuid: FilesTreeType.UuId)
     )
 
     return response
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type GetArticleRequestServerResponse = FailResponse | SuccessResponse
+// type GetArticleRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -26,20 +26,21 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
-type SuccessResponse = {
+/*type SuccessResponse = {
     status: "success"
     data: {
         article: null | ArticleDataType
     }
-}
+}*/
 
+/*
 export type ArticleDataType = {
     uuid: string // "7debef2a-327c-413e-994d-aa75b32ff596"
     siteId: string // "60c6e368fd09180020febc9a"
     name: string // "New article"
     code: null | string
     incFilesTemplateId?: null | string
-}
+}*/

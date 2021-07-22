@@ -1,26 +1,26 @@
-import React from 'react'
-import { sitesPanelMessages } from 'messages/sitesPanelMessages'
-import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import NameSection from '../wrappers/NameSection/NameSection'
-import Button from 'common/formElements/Button/Button'
-import {
+// import React from 'react'
+// import { sitesPanelMessages } from 'messages/sitesPanelMessages'
+// import { useSelector } from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import NameSection from '../wrappers/NameSection/NameSection'
+// import Button from 'common/formElements/Button/Button'
+/*import {
     useFetchSites,
     useGetNewSiteOnClickHandler,
     useGetSitesItemsListProps
-} from './LeftPart1-func'
-import ItemsList from 'common/ItemsList/ItemsList'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { MiscTypes } from 'types/miscTypes'
-import './LeftPart-1.scss'
+} from './LeftPart1-func'*/
+// import ItemsList from 'common/ItemsList/ItemsList'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { MiscTypes } from 'types/miscTypes'
+// import './LeftPart-1.scss'
 
 
-type LeftPart1PropType = {
+/*type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}
+}*/
 
 /** Левая часть первой главной вкладки */
-export default function LeftPart1(props: LeftPart1PropType) {
+/*export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
@@ -37,10 +37,10 @@ export default function LeftPart1(props: LeftPart1PropType) {
             </NameSection>
         </div>
     )
-}
+}*/
 
 /** Компонент кнопки создания нового сайта */
-function NewSiteButton() {
+/*function NewSiteButton() {
 
     // id выделенного сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
@@ -60,10 +60,10 @@ function NewSiteButton() {
     }
 
     return <Button {...attrs} />
-}
+}*/
 
 /** Компонент списка сайтов */
-function SitesButtons() {
+/*function SitesButtons() {
     // Получить с сервера список сайтов и поставить в Хранилище
     useFetchSites()
 
@@ -75,4 +75,4 @@ function SitesButtons() {
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}
+}*/

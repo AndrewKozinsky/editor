@@ -31,7 +31,6 @@ export function useGetAppClasses() {
 /** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */
 export function useRedirectPage() {
     let history = useHistory()
-
     let location = useLocation()
 
     // Статус токена авторизации пользователя. Значения: 0, 1 или 2.
@@ -47,7 +46,7 @@ export function useRedirectPage() {
 
         // Если нахожусь на странице редактора и у пользователя нет правильного токена авторизации...
         if (pathname === '/editor/' && authTokenStatus === 1) {
-            // то перебросить на страницу страницу
+            // то перебросить на страницу входа
             history.push('/enter')
         }
     }, [authTokenStatus, location.pathname])

@@ -1,11 +1,11 @@
-import {useSelector} from 'react-redux'
-import {AppState} from 'src/store/rootReducer'
-import { useFetch } from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'src/store/rootReducer'
+// import { useFetch } from 'src/requests/reqFn/fetch'
+// import getApiUrl from 'src/requests/reqFn/apiUrls'
 
 
 // Функция удаляет сайт
-export function useGetArticlesFoldersRequest() {
+/*export function useGetArticlesFoldersRequest() {
     // id текущего сайта
     const {currentSiteId} = useSelector((store: AppState) => store.sites)
 
@@ -20,14 +20,14 @@ export function useGetArticlesFoldersRequest() {
         articlesResponse,
         doArticlesFetch
     }
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-export type GetArticlesFoldersServerResponse = null | FailResponse | SuccessResponse
+// export type GetArticlesFoldersServerResponse = null | FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -35,9 +35,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -47,4 +48,4 @@ type SuccessResponse = {
             userId: string // "60c626f9fd09180020febc99"
         }
     }
-}
+}*/

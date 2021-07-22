@@ -1,19 +1,19 @@
-import React, {ReactNode} from 'react'
-import SvgIcon from 'common/icons/SvgIcon'
-import {
+// import React, {ReactNode} from 'react'
+// import SvgIcon from 'common/icons/SvgIcon'
+/*import {
     getTriangleBtnClasses,
     useGetToggleFolder,
     useGetOnClickHandler
-} from './Item-func'
-import { componentsPanelMessages } from 'messages/componentsPanelMessages'
-import TempCompFilesTreeType from '../types'
-import {makeCN} from 'utils/StringUtils'
-import './Item.scss'
+} from './Item-func'*/
+// import { componentsPanelMessages } from 'messages/componentsPanelMessages'
+// import TempCompFilesTreeType from '../types'
+// import {makeCN} from 'utils/StringUtils'
+// import './Item.scss'
 
 
-const CN = 'temp-comp-ft-item'
+// const CN = 'temp-comp-ft-item'
 
-type ItemPropType = {
+/*type ItemPropType = {
     // Массив всех папок и файлов.
     items: TempCompFilesTreeType.Items
     // Данные папки или файла.
@@ -22,10 +22,10 @@ type ItemPropType = {
     offset: number
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}
+}*/
 
 /** Папка или файл в структуре папок */
-export default function Item(props: ItemPropType) {
+/*export default function Item(props: ItemPropType) {
     const {
         items,
         itemData,
@@ -53,19 +53,19 @@ export default function Item(props: ItemPropType) {
             </div>
         </div>
     )
-}
+}*/
 
-type TrianglePropType = {
+/*type TrianglePropType = {
     // Массив всех папок и файлов.
     items: TempCompFilesTreeType.Items
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}
+}*/
 
 /** Кнопка сворачивания/разворачивания папки. Для файла возвращается пустой элемент. */
-function Triangle(props: TrianglePropType) {
+/*function Triangle(props: TrianglePropType) {
     const {
         items,
         itemData,
@@ -91,30 +91,31 @@ function Triangle(props: TrianglePropType) {
             <SvgIcon type='filesTreeTriangle' />
         </button>
     )
-}
+}*/
 
 
-type IconPropType = {
+/*type IconPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
-}
+}*/
 
 /** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-function Icon(props: IconPropType) {
+/*function Icon(props: IconPropType) {
     const {
         itemData
     } = props
 
     if (itemData.type === 'file') return null
     return <SvgIcon type='filesTreeFolder' extraClass={`${CN}__folder-sign`} />
-}
+}*/
 
 
-type CirclesPropType = {
+/*type CirclesPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
-}
+}*/
 
+/*
 function Circles(props: CirclesPropType) {
     const {
         itemData
@@ -138,16 +139,17 @@ function Circles(props: CirclesPropType) {
         </div>
     )
 }
+*/
 
-type RightButtonsPropType = {
+/*type RightButtonsPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}
+}*/
 
 /** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-function RightButtons(props: RightButtonsPropType) {
+/*function RightButtons(props: RightButtonsPropType) {
     const {
         itemData,
         after,
@@ -203,4 +205,4 @@ function RightButtons(props: RightButtonsPropType) {
             {insideButton}
         </>
     )
-}
+}*/

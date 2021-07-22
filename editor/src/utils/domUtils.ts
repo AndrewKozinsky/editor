@@ -2,6 +2,7 @@
  * The function returns an object with info about element's padding
  * @param {HTMLElement} $elem — html-element
  */
+/*
 export function getElementPadding($elem: HTMLElement) {
     // String with padding. For example: 10px 20px
     const paddingStr = getComputedStyle($elem).padding
@@ -45,4 +46,4 @@ export function getElementPadding($elem: HTMLElement) {
     }
 
     return paddingObj
-}
+}*/

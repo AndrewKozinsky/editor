@@ -1,7 +1,7 @@
-import {removeFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-import StoreSitesTypes from './sitesTypes'
+// import {removeFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
+// import StoreSitesTypes from './sitesTypes'
 
-export type SitesReducerType = {
+/*export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
@@ -11,11 +11,11 @@ export type SitesReducerType = {
     }
     componentsSection: StoreSitesTypes.ComponentsSection
     articlesSection: StoreSitesTypes.ArticlesSection
-}
+}*/
 
 
 // Изначальные значения
-const initialState: SitesReducerType = {
+/*const initialState: SitesReducerType = {
     // Массив сайтов пользователя
     sites: [],
     // id выбранного сайта
@@ -53,18 +53,18 @@ const initialState: SitesReducerType = {
         // id шаблона подключаемых компонентов у выбранной статьи
         incFilesTemplateId: null
     }
-}
+}*/
 
 // Установка массива сайтов
-function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesAction): SitesReducerType {
+/*function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesAction): SitesReducerType {
     return {
         ...state,
         sites: action.payload
     }
-}
+}*/
 
 // Установка id выбранного сайта
-function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
+/*function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
         removeFromLocalStorage('editorSiteId')
@@ -78,10 +78,10 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
         ...state,
         currentSiteId: action.payload
     }
-}
+}*/
 
 // Установка id текущей основной вкладки справа
-function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
+/*function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorSitePartTab', action.payload)
 
@@ -89,11 +89,11 @@ function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRig
         ...state,
         rightMainTab: action.payload
     }
-}
+}*/
 
 
 // Установка массива шаблонов подключаемых файлов
-function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
+/*function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
     return {
         ...state,
         incFilesTemplatesSection: {
@@ -101,10 +101,10 @@ function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFil
             templates: action.payload
         }
     }
-}
+}*/
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
+/*function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
         removeFromLocalStorage('editorIncFilesId')
@@ -121,10 +121,10 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
             currentTemplateId: action.payload
         }
     }
-}
+}*/
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
+/*function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
     if (action.payload.id === null) {
         // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
         removeFromLocalStorage('editorComponentId')
@@ -180,10 +180,10 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
             componentsSection: newComponentSection
         }
     }
-}
+}*/
 
 // Component Template item (folder or file) type setting
-function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemTypeAction): SitesReducerType {
+/*function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemTypeAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage('editorComponentType')
@@ -200,10 +200,10 @@ function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes
             currentCompItemType: action.payload
         }
     }
-}
+}*/
 
 // Component Template item id setting
-function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemIdAction): SitesReducerType {
+/*function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage('editorComponentId')
@@ -220,15 +220,12 @@ function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.S
             currentCompItemId: action.payload
         }
     }
-}
-
-
-
+}*/
 
 
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
+/*function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
     if (action.payload.id === null) {
         // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
         removeFromLocalStorage('editorArticleId')
@@ -289,10 +286,10 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
             articlesSection: newArticleSection
         }
     }
-}
+}*/
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
+/*function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage('editorArticleType')
@@ -309,10 +306,10 @@ function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.
             currentArtItemType: action.payload
         }
     }
-}
+}*/
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
+/*function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage('editorArticleId')
@@ -329,10 +326,10 @@ function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.Se
             currentArtItemId: action.payload
         }
     }
-}
+}*/
 
 // Редьюсер Store.settings
-export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
+/*export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
     switch (action.type) {
         case StoreSitesTypes.SET_SITES:
@@ -369,4 +366,4 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             const x: never = null
             return state
     }
-}
+}*/

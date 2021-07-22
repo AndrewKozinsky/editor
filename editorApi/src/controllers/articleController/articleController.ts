@@ -1,8 +1,8 @@
-import { Response, NextFunction } from 'express'
-import { catchAsync } from '../../errors/catchAsync'
-import { ExtendedRequestType } from '../../types/commonTypes'
-import {AppError} from '../../errors/appError'
-import ArticleModel from '../../models/article'
+// import { Response, NextFunction } from 'express'
+// import { catchAsync } from '../../errors/catchAsync'
+// import { ExtendedRequestType } from '../../types/commonTypes'
+// import {AppError} from '../../errors/appError'
+// import ArticleModel from '../../models/article'
 
 
 /** [POST] api/article
@@ -10,7 +10,7 @@ import ArticleModel from '../../models/article'
  * В body нужно передавать объект вида:
  * {uuid: 'fu4d573g26gs3455', siteId: "60b45a889edf5b0029eb31eb", code: 'some_code'}
  */
-export const createArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const createArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Если не передали id сайта, то возвратить ошибочный ответ
     if (!req.body.siteId) {
@@ -50,11 +50,12 @@ export const createArticle = catchAsync<void>(async (req: ExtendedRequestType, r
             }
         }
     })
-})
+})*/
 
 /** [GET] api/articles/:uuid
  * Получение статьи (защищённый маршрут)
  */
+/*
 export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Получение статьи по переданному id
@@ -70,6 +71,7 @@ export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res:
         }
     })
 })
+*/
 
 
 /** [PATCH] api/articles/:uuid
@@ -77,7 +79,7 @@ export const getArticle = catchAsync<void>(async (req: ExtendedRequestType, res:
  * В body нужно передавать объект вида:
  * {"code": "some_code"}
  */
-export const updateArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
+/*export const updateArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
 
     // Найти статью и обновить её данные
     const updatedArticle = await ArticleModel.findOneAndUpdate(
@@ -100,13 +102,14 @@ export const updateArticle = catchAsync<void>(async (req: ExtendedRequestType, r
             article: updatedArticle
         }
     })
-})
+})*/
 
 
 /** [DELETE] api/articles/:uuid
  * Удаление шаблона компонента (защищённый маршрут)
  */
 /** Удаление статьи (защищённый маршрут) */
+/*
 export const deleteArticle = catchAsync<void>(async (req: ExtendedRequestType, res: Response, next: NextFunction) => {
     // Удалить статью из БД
     await ArticleModel.findOneAndDelete(
@@ -117,4 +120,4 @@ export const deleteArticle = catchAsync<void>(async (req: ExtendedRequestType, r
     res.status(200).json({
         status: 'success'
     })
-})
+})*/

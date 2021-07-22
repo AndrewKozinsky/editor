@@ -1,15 +1,15 @@
-import React, {useEffect} from 'react'
-import {useDispatch} from 'react-redux'
-import actions from 'store/rootAction'
-import store from 'store/store'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-import { useDeleteIncFilesTemplate } from 'src/requests/editor/incFiles/deleteIncFilesTemplateRequest'
+// import React, {useEffect} from 'react'
+// import {useDispatch} from 'react-redux'
+// import actions from 'store/rootAction'
+// import store from 'store/store'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+// import { useDeleteIncFilesTemplate } from 'src/requests/editor/incFiles/deleteIncFilesTemplateRequest'
 
 
-export function ModalContent() {
+/*export function ModalContent() {
     const dispatch = useDispatch()
 
     // Запрос на удаление пользователя
@@ -48,4 +48,4 @@ export function ModalContent() {
             </Wrapper>
         </>
     )
-}
+}*/

@@ -1,5 +1,5 @@
-import { getElementPadding } from 'utils/domUtils'
-import {CoordsObjType} from './usePassFlashElemsCoordsToIFrame'
+// import { getElementPadding } from 'utils/domUtils'
+// import {CoordsObjType} from './usePassFlashElemsCoordsToIFrame'
 
 
 /**
@@ -9,7 +9,7 @@ import {CoordsObjType} from './usePassFlashElemsCoordsToIFrame'
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
-export function setSizeAndPosition(
+/*export function setSizeAndPosition(
     $body: HTMLBodyElement,
     type: 'hover' | 'select',
     rectCoords: CoordsObjType,
@@ -30,14 +30,14 @@ export function setSizeAndPosition(
 
     // 3. Set coordinates to the rectangle coordinates
     positionFlashRect($flashRect, coords, rectCoords)
-}
+}*/
 
 /**
  * The function finds element by dataCompId, dataElemId and type
  * @param {HTMLBodyElement} $body — <body>
  * @param rectCoords
  */
-function getArticleElementByCoordinates($body: HTMLBodyElement, rectCoords: CoordsObjType): null | HTMLElement {
+/*function getArticleElementByCoordinates($body: HTMLBodyElement, rectCoords: CoordsObjType): null | HTMLElement {
     // Return null if cursor is not on component/element
     if (!rectCoords.dataCompId && rectCoords.dataElemId) return null
 
@@ -52,16 +52,16 @@ function getArticleElementByCoordinates($body: HTMLBodyElement, rectCoords: Coor
 
     // Return a founded element
     return $body.querySelector(queryStr)
-}
+}*/
 
 /**
  * The function hides element by style
  * @param type
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
-function hideRect(type: 'hover' | 'select', $flashRect: HTMLElement) {
+/*function hideRect(type: 'hover' | 'select', $flashRect: HTMLElement) {
     $flashRect.style.display = 'none'
-}
+}*/
 
 /**
  * The function returns coordinates of flashed rectangle depending on flashed element in article
@@ -69,6 +69,7 @@ function hideRect(type: 'hover' | 'select', $flashRect: HTMLElement) {
  * @param {String} type — type of a flashed rectangle: hover or select
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  */
+/*
 function getCoordinates(
     articleElement: HTMLElement, type: 'hover' | 'select', rectCoords: CoordsObjType
 ): coordsObjType{
@@ -92,13 +93,14 @@ function getCoordinates(
         height: coords.height + offset - (paddings.top + paddings.bottom) + 'px'
     }
 }
+*/
 
-type coordsObjType = {
+/*type coordsObjType = {
     top: string
     left: string
     width: string
     height: string
-}
+}*/
 
 /**
  * The function sets visibility, size and position to flashed rectangle
@@ -106,6 +108,7 @@ type coordsObjType = {
  * @param {Object} coords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  */
+/*
 function positionFlashRect($flashRect: HTMLElement, coords: coordsObjType, rectCoords: CoordsObjType) {
     // Make rectangle visible
     $flashRect.style.display = 'block'
@@ -118,4 +121,4 @@ function positionFlashRect($flashRect: HTMLElement, coords: coordsObjType, rectC
     $flashRect.style.left = coords.left
     $flashRect.style.width = coords.width
     $flashRect.style.height = coords.height
-}
+}*/

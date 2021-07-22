@@ -1,7 +1,7 @@
-import {Response} from 'express'
-import * as jwt from 'jsonwebtoken'
-import { config } from '../../config/config'
-import {IUser} from '../../models/user';
+// import {Response} from 'express'
+// import * as jwt from 'jsonwebtoken'
+// import { config } from '../../config/config'
+// import {IUser} from '../../models/user';
 
 /**
  * Функция возвращает ответ с токеном авторизации
@@ -9,7 +9,7 @@ import {IUser} from '../../models/user';
  * @param {Number} statusCode — код ответа сервера
  * @param {Object} user —
  */
-export function sendResponseWithAuthToken(user: IUser, res: Response, statusCode = 200) {
+/*export function sendResponseWithAuthToken(user: IUser, res: Response, statusCode = 200) {
     res.status(statusCode).json({
         status: 'success',
         data: {
@@ -19,14 +19,14 @@ export function sendResponseWithAuthToken(user: IUser, res: Response, statusCode
             }
         }
     })
-}
+}*/
 
 /**
  * Функция создающая токен авторизации и ставящая его в куку в объекте ответа сервера.
  * @param {String} userId — id пользователя
  * @param {Object} res — объект ответа сервера
  */
-export function createSendToken(userId: string, res: Response) {
+/*export function createSendToken(userId: string, res: Response) {
     // Подписание токена авторизации
     const token = signToken(userId)
 
@@ -40,7 +40,7 @@ export function createSendToken(userId: string, res: Response) {
     res.cookie('authToken', token, cookieOptions)
 
     return res
-}
+}*/
 
 
 /**
@@ -48,10 +48,10 @@ export function createSendToken(userId: string, res: Response) {
  * @param {String} userId — id пользователя
  * @returns {undefined|*}
  */
-function signToken(userId: string) {
+/*function signToken(userId: string) {
     return jwt.sign(
         { id: userId },
         config.jwtSecret,
         { expiresIn: config.jwtExpiresIn + config.jwtExpiresUnit }
     )
-}
+}*/

@@ -1,10 +1,10 @@
-import React, {ReactElement, useState} from 'react'
-import { MiscTypes } from 'types/miscTypes'
-import {getRandomId} from 'utils/StringUtils'
-import './Checkbox.scss'
+// import React, {ReactElement, useState} from 'react'
+// import { MiscTypes } from 'types/miscTypes'
+// import {getRandomId} from 'utils/StringUtils'
+// import './Checkbox.scss'
 
 
-export type CheckboxPropType = {
+/*export type CheckboxPropType = {
     label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
@@ -12,9 +12,10 @@ export type CheckboxPropType = {
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}
+}*/
 
 /* Компонент выпадающего списка */
+/*
 export default function Checkbox(props: CheckboxPropType) {
 
     const {
@@ -55,4 +56,4 @@ export default function Checkbox(props: CheckboxPropType) {
             <label {...labelAttribs}>{label}</label>
         </>
     )
-}
+}*/

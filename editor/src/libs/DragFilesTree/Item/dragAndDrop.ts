@@ -1,18 +1,18 @@
-import DragFilesTreeType from '../types'
-import {
+// import DragFilesTreeType from '../types'
+/*import {
     getItemDataById,
     hasFolderAnItem,
     showPlaceMark,
     moveItemTo
-} from '../StoreManage/manageState'
+} from '../StoreManage/manageState'*/
 
 /**
  * Обработчик начала перетаскивания
  * @param {Object} e — объект события
  */
-export function handleDragStart(e: any) {
+/*export function handleDragStart(e: any) {
     e.target.style.opacity = 0.2
-}
+}*/
 
 /**
  * Обработчик перетаскивания
@@ -21,7 +21,7 @@ export function handleDragStart(e: any) {
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  */
-export function handleDrag(
+/*export function handleDrag(
     e: any,
     itemData: DragFilesTreeType.Item,
     items: DragFilesTreeType.Items,
@@ -46,15 +46,15 @@ export function handleDrag(
     // Подсветить позицию сброса
     const newItems = showPlaceMark(items, dropPlaceCoords.itemId, dropPlaceCoords.place)
     setItems(newItems)
-}
+}*/
 
 /**
  * Обработчик отпускания мыши при перетаскивании
  * @param {Object} e — объект события
  */
-export function handleDragOver(e: any) {
+/*export function handleDragOver(e: any) {
     e.preventDefault()
-}
+}*/
 
 /**
  * Обработчик отпускания мыши при перетаскивании
@@ -64,7 +64,7 @@ export function handleDragOver(e: any) {
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-export function handleDragEnd(
+/*export function handleDragEnd(
     e: any,
     itemData: DragFilesTreeType.Item,
     items: DragFilesTreeType.Items,
@@ -95,7 +95,7 @@ export function handleDragEnd(
     if (after.changingTree) {
         after.changingTree(newItems)
     }
-}
+}*/
 
 
 // ================================================
@@ -106,7 +106,7 @@ export function handleDragEnd(
  * @param {String} itemBelowId — id элемента под курсором
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  */
-function isDropAllowed(
+/*function isDropAllowed(
     itemBelowId: DragFilesTreeType.UuId,
     itemData: DragFilesTreeType.Item
 ) {
@@ -115,7 +115,7 @@ function isDropAllowed(
 
     // Ничего не делать если родительскую папку хотят поместить внутрь дочерней
     return !(hasFolderAnItem(itemData, itemBelowId))
-}
+}*/
 
 /**
  * Функция возвращает объект вида: {itemId: '5', place: 'before'} с данными в каком элементе
@@ -126,7 +126,7 @@ function isDropAllowed(
  * @param {Array} items — массив данных по папкам и файлам
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  */
-function getDropPlaceCoords(
+/*function getDropPlaceCoords(
     e: any,
     itemBelow: HTMLElement,
     itemBelowId: DragFilesTreeType.UuId,
@@ -189,4 +189,4 @@ function getDropPlaceCoords(
             }
         }
     }
-}
+}*/

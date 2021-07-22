@@ -1,14 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react'
-import {getRandomId } from 'utils/StringUtils'
-import Notice from 'common/Notice/Notice'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { MiscTypes } from 'types/miscTypes'
-import Label from '../Label/Label'
-import {getTextInputClasses, useSetFocus} from './TextInput-func'
-import './TextInput.scss'
+// import React, {useEffect, useRef, useState} from 'react'
+// import {getRandomId } from 'utils/StringUtils'
+// import Notice from 'common/Notice/Notice'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { MiscTypes } from 'types/miscTypes'
+// import Label from '../Label/Label'
+// import {getTextInputClasses, useSetFocus} from './TextInput-func'
+// import './TextInput.scss'
 
 
-export type TextInputPropType = {
+/*export type TextInputPropType = {
     label?: string // Подпись текстового поля
     inputType?: 'text' | 'textarea' // Тип поля ввода
     type?: 'text' | 'email' | 'password' // Тип поля
@@ -25,11 +25,11 @@ export type TextInputPropType = {
     error?: string, // Текст ошибки
     disabled?: boolean // Заблокировано ли поле
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
-}
+}*/
 
 
 /** Текстовый компонент */
-export default function TextInput(props: TextInputPropType) {
+/*export default function TextInput(props: TextInputPropType) {
 
     const {
         label, // Подпись текстового поля
@@ -84,11 +84,11 @@ export default function TextInput(props: TextInputPropType) {
             <Error {...props} />
         </div>
     )
-}
+}*/
 
 
 /** Сообщение об ошибке текстового компонента */
-function Error(props: TextInputPropType) {
+/*function Error(props: TextInputPropType) {
     const {
         error // Текст ошибки
     } = props
@@ -99,4 +99,4 @@ function Error(props: TextInputPropType) {
             <Notice type='error'>{error}</Notice>
         </Wrapper>
     )
-}
+}*/

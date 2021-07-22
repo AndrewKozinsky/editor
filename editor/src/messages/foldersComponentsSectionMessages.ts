@@ -1,8 +1,8 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 
 // Структура папок и файлов шаблонов компонентов
-const obj = {
+/*const obj = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -11,6 +11,6 @@ const obj = {
         eng: 'New component',
         rus: 'Новый компонент'
     },
-}
+}*/
 
-export const foldersComponentsSectionMessages = getMessagesObject(obj)
+// export const foldersComponentsSectionMessages = getMessagesObject(obj)
