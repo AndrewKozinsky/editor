@@ -1,7 +1,7 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Названия вкладок на первой правой вкладке
-const obj = {
+/*const obj = {
     sites: {
         eng: 'Sites',
         rus: 'Сайты'
@@ -18,6 +18,6 @@ const obj = {
         eng: 'Articles',
         rus: 'Статьи'
     },
-}
+}*/
 
-export const rightTabsMessages = getMessagesObject(obj)
+// export const rightTabsMessages = getMessagesObject(obj)

@@ -1,20 +1,20 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import { useGetAnotherFolderData } from './ArticlesFolderForm-func'
-import ModalContent from './deleteFolder'
-import useGetShowModal from 'utils/hooksUtils'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import { useGetAnotherFolderData } from './ArticlesFolderForm-func'
+// import ModalContent from './deleteFolder'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 
 
 
 /** Компонент формы редактирования папки */
-export default function ArticlesFolderForm() {
+/*export default function ArticlesFolderForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'folder')
@@ -57,4 +57,4 @@ export default function ArticlesFolderForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/

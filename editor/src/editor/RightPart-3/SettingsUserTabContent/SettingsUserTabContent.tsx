@@ -1,15 +1,15 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
-import NameSection from '../../wrappers/NameSection/NameSection'
-import { userDataSectionMessages } from 'messages/userDataSectionMessages'
-import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
-import UserDataForm from '../EmailForm/EmailForm'
-import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
-import UserAccountForm from '../UserAccountForm/UserAccountForm'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
+// import NameSection from '../../wrappers/NameSection/NameSection'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+// import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
+// import UserDataForm from '../EmailForm/EmailForm'
+// import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
+// import UserAccountForm from '../UserAccountForm/UserAccountForm'
 
 
-export default function SettingsUserTabContent() {
+/*export default function SettingsUserTabContent() {
 
     return (
         <div>
@@ -32,4 +32,4 @@ export default function SettingsUserTabContent() {
             </Wrapper>
         </div>
     )
-}
+}*/

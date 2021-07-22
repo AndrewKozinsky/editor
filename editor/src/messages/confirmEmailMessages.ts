@@ -1,8 +1,8 @@
-import React from 'react'
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import React from 'react'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Форма ConfirmEmailFormBlock
-const obj = {
+/*const obj = {
     formHeader: {
         eng: 'Email confirm',
         rus: 'Подтверждение почты'
@@ -23,6 +23,6 @@ const obj = {
         eng: 'Token is invalid or has expired',
         rus: 'Токен неправильный или с истёкшим сроком действия'
     },
-}
+}*/
 
-export const confirmEmailMessages = getMessagesObject(obj)
+// export const confirmEmailMessages = getMessagesObject(obj)

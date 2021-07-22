@@ -1,13 +1,13 @@
-$CN: field-wrapper;
+//$CN: field-wrapper;
 
 // Обёртка группы полей ввода
-.#{$CN} {
+/*.#{$CN} {
     display: grid;
     grid-gap: 6px;
-}
+}*/
 
 // Класс дающий отступ между элементами обёртки
-.#{$CN}--gap20 {
+/*.#{$CN}--gap20 {
     display: flex;
     gap: 20px;
-}
+}*/

@@ -1,19 +1,20 @@
-import React, {useCallback} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+// import React, {useCallback} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import {AppState} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import Button from 'common/formElements/Button/Button'
-import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import { articlesTreeStore, setArtItems } from '../stores'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
+// import {useStore} from 'effector-react'
+// import {AppState} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Hr from 'common/misc/Hr/Hr'
+// import Button from 'common/formElements/Button/Button'
+// import { saveItemsOnServer } from '../FoldersList/FoldersList-func'
+// import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+// import { articlesTreeStore, setArtItems } from '../stores'
+// import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
+// import store from 'store/store'
 
 
-export default function ModalContent() {
+/*export default function ModalContent() {
     const dispatch = useDispatch()
 
     // Массив папок и файлов из Хранилища
@@ -26,10 +27,19 @@ export default function ModalContent() {
     const deleteFolder = useCallback(function () {
         // Удалить папку из Хранилища и возвратить новый массив
         const newItems = filesTreePublicMethods.deleteItem(articlesItems, currentArtItemId)
+
+        // If the opened article is not in new items array then it is in the deleted folder,
+        // then clear article editor because the article will be deleted.
+        if ( filesTreePublicMethods.getItemById(newItems, store.getState().article.articleUuId) ) {
+            store.dispatch( actions.article.clearArticle() )
+        }
+
         // Сохранить новые данные в Хранилище
         setArtItems(newItems)
+
         // Сохранить новый массив папок и файлов на сервере
         saveItemsOnServer('articles', newItems)
+
         // Обнулить свойство указывающее на uuid активного пункта в папках и статьях
         // потому что папка удалена
         dispatch(actions.sites.setCurrentArt(null, null))
@@ -57,4 +67,4 @@ export default function ModalContent() {
             </Wrapper>
         </>
     )
-}
+}*/

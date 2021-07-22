@@ -1,4 +1,4 @@
-import { MiscTypes } from 'src/types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 
 const addresses: MiscTypes.ObjStringKeyAnyVal = {
@@ -6,59 +6,70 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
-    login: 'users/login',
+    // login: 'users/login',
     // Регистрация
-    signup: 'users/signup',
+    // signup: 'users/signup',
     // Отправка письма со ссылкой на подтверждение почты
-    sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
+    // sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
     // Подтверждение почты
-    confirmEmail: function (confirmEmailToken: string) {
+    /*confirmEmail: function (confirmEmailToken: string) {
         return 'users/confirmEmail/' + confirmEmailToken
-    },
+    },*/
     // Изменение почты
-    changeEmail: 'users/changeEmail',
+    // changeEmail: 'users/changeEmail',
     // Изменение пароля
-    changePassword: 'users/changePassword',
+    // changePassword: 'users/changePassword',
     // Сброс пароля
-    resetPassword: 'users/resetPassword',
+    // resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного
-    changeResetPassword: function (resetPasswordToken: string) {
+    /*changeResetPassword: function (resetPasswordToken: string) {
         return 'users/resetPassword/' + resetPasswordToken
-    },
+    },*/
     // Текущий пользователь
-    me: 'users/me',
+    // me: 'users/me',
+
 
     // САЙТЫ
     // Сайты
-    sites: 'sites',
+    // sites: 'sites',
     // Конкретный сайт
-    site: function (siteId: string) {
+    /*site: function (siteId: string) {
         return 'sites/' + siteId
-    },
+    },*/
+
+
+    // SITE COMPONENTS
+    // Компоненты сайта
+    /*siteComponents: function (siteId: string) {
+        return 'sites/' + siteId + '/components'
+    },*/
+
+
+    // SITE INC FILES TEMPLATES
     // Шаблоны подключаемых файлов
-    incFilesTemplates: 'incFilesTemplate',
-    // Конкретный шаблон подключаемых файлов
-    incFilesTemplate: function (templateId: string) {
-        return 'incFilesTemplate/' + templateId
-    },
+    /*incFiles: function (siteId: string, incFilesId?: string) {
+        if (incFilesId) return 'sites/' + siteId + '/incFiles/' + incFilesId
+        else return 'sites/' + siteId + '/incFiles'
+    },*/
+
     // Папки шаблонов компонентов
-    componentsFolders: function (siteId: string) {
+    /*componentsFolders: function (siteId: string) {
         return 'componentsFolders/' + siteId
-    },
+    },*/
     // Шаблон компонента
-    component: function (uuid?: string) {
-        if (uuid) return 'component/' + uuid
-        else return 'component/'
-    },
+    /*component: function (uuid?: string) {
+        if (uuid) return 'components/' + uuid
+        else return 'components/'
+    },*/
     // Папки статей
-    articlesFolders: function (siteId: string) {
+    /*articlesFolders: function (siteId: string) {
         return 'articlesFolders/' + siteId
-    },
+    },*/
     // Статья
-    article: function (uuid?: string) {
-        if (uuid) return 'article/' + uuid
-        else return 'article/'
-    },
+    /*article: function (uuid?: string) {
+        if (uuid) return 'articles/' + uuid
+        else return 'articles/'
+    },*/
 }
 
 

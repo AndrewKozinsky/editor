@@ -6,7 +6,7 @@ $CN: icon;
 }
 // Тёмная заливка
 .#{$CN}-icon-fill {
-    fill: var(--icon-color);
+    fill: var(--text-color);
     opacity: .9;
 }
 
@@ -17,6 +17,6 @@ $CN: icon;
 
 // Чёрная обводка
 .#{$CN}-icon-stroke {
-    stroke: var(--icon-color);
+    stroke: var(--text-color);
     opacity: .85;
 }

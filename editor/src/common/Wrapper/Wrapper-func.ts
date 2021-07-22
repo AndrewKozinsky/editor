@@ -1,5 +1,5 @@
-import {makeCN} from 'utils/StringUtils'
-import {WrapperPropType} from './Wrapper'
+import { makeCN } from 'utils/StringUtils'
+import { WrapperPropType } from './Wrapper'
 
 /**
  * Функция возвращает классы универсальной обёртки

@@ -1,5 +1,5 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Изменение текущего пароля
@@ -7,7 +7,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
  * @param {String} newPassword — новый пароль
  * @param {String} newPasswordAgain — новый пароль еще раз
  */
-export default async function changePasswordRequest(passwordCurrent: string, newPassword: string, newPasswordAgain: string) {
+/*export default async function changePasswordRequest(passwordCurrent: string, newPassword: string, newPasswordAgain: string) {
     const options = {
         method: 'PATCH',
         body: JSON.stringify({
@@ -21,13 +21,13 @@ export default async function changePasswordRequest(passwordCurrent: string, new
     )
 
     return response
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type ChangePasswordRequestServerResponse = FailResponse | SuccessResponse
+// type ChangePasswordRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: 'passwordCurrent'
@@ -35,9 +35,10 @@ type FailResponse = {
         message: string
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -45,4 +46,4 @@ type SuccessResponse = {
             email: string // "andkozinskiy@yandex.ru"
         }
     }
-}
+}*/

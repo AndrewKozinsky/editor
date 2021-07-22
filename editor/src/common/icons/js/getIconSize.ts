@@ -15,112 +15,132 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 84 18"
             }
         // Значёк ошибки
-        case 'errorTriangle':
+        // case 'errorTriangle':
         // Значёк успеха
-        case 'successCircle':
+        /*case 'successCircle':
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
-            }
+            }*/
         // Галочка выбранного флага
-        case 'selectInputArrows':
+        /*case 'selectInputArrows':
             return {
                 width: "8px",
                 height: "14px",
                 viewBox: "0 0 8 14"
-            }
+            }*/
         // Значки главных вкладок
-        case 'mainTabMaterials':
-        case 'mainTabEditor':
-        case 'mainTabSettings':
+        // case 'mainTabMaterials':
+        // case 'mainTabEditor':
+        // case 'mainTabSettings':
         // Значки на вкладках сайта
-        case 'siteTabSite':
-        case 'siteTabPlugins':
-        case 'siteTabComponents':
-        case 'siteTabArticle':
+        // case 'siteTabSite':
+        // case 'siteTabPlugins':
+        // case 'siteTabComponents':
+        /*case 'siteTabArticle':
             return {
                 width: "31px",
                 height: "26px",
                 viewBox: "0 0 31 26"
-            }
+            }*/
         // Закругляемая часть в кнопки вкладки
-        case 'mainTabRoundScion':
+        /*case 'mainTabRoundScion':
             return {
                 width: "3px",
                 height: "3px",
                 viewBox: "0 0 3 3"
-            }
+            }*/
         // Значки на кнопках
-        case 'btnSignSave':
+        /*case 'btnSignSave':
             return {
                 width: "12px",
                 height: "15px",
                 viewBox: "0 0 12 15"
-            }
-        case 'btnSignFolder':
-        case 'btnSignAdd':
-        case 'btnSignJson':
-        case 'btnSignEdit':
+            }*/
+        // case 'btnSignFolder':
+        // case 'btnSignAdd':
+        // case 'btnSignJson':
+        // case 'btnSignEdit':
+        /*case 'btnSignCancel':
             return {
                 width: "15px",
                 height: "15px",
                 viewBox: "0 0 15 15"
-            }
-        case 'btnSignTrash':
+            }*/
+        // case 'btnSignTrash':
+        // case 'btnSignUndo':
+        /*case 'btnSignRedo':
             return {
                 width: "14px",
                 height: "15px",
                 viewBox: "0 0 14 15"
-            }
-        case 'btnSignCode':
+            }*/
+        /*case 'btnSignCode':
             return {
                 width: "16px",
                 height: "15px",
                 viewBox: "0 0 16 15"
-            }
+            }*/
 
-        case 'btnSignClose':
+        /*case 'btnSignClose':
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
-            }
-        case 'btnSignExit':
+            }*/
+        /*case 'btnSignExit':
             return {
                 width: "13px",
                 height: "15px",
                 viewBox: "0 0 13 15"
-            }
+            }*/
         // Тема интерфейса
-        case 'editorLightTheme':
-        case 'editorDarkTheme':
+        // case 'editorLightTheme':
+        /*case 'editorDarkTheme':
             return {
                 width: "76px",
                 height: "76px",
                 viewBox: "0 0 76 76"
-            }
+            }*/
         // Значки на FilesTree
-        case 'filesTreeTriangle':
+        /*case 'filesTreeTriangle':
             return {
                 width: "10px",
                 height: "10px",
                 viewBox: "0 0 10 10"
-            }
-        case 'filesTreeFolder':
-        case 'filesTreeFolderPlus':
-        case 'filesTreePlus':
-        case 'filesTreeTrash':
+            }*/
+        // case 'filesTreeFolder':
+        // case 'filesTreeFolderPlus':
+        // case 'filesTreePlus':
+        // case 'filesTreeTrash':
+        // case 'filesTreeTorus':
+        // case 'filesTreeUp':
+        /*case 'filesTreeDown':
             return {
                 width: "15px",
                 height: "15px",
                 viewBox: "0 0 15 15"
-            }
-        case 'filesTreePlaceMark':
+            }*/
+        /*case 'filesTreePlaceMark':
             return {
                 width: "8px",
                 height: "5px",
                 viewBox: "0 0 8 5"
+            }*/
+        /*case 'articleMenu':
+            return {
+                width: "18px",
+                height: "14px",
+                viewBox: "0 0 18 14"
+            }*/
+        case 'noticeInfo':
+        case 'noticeError':
+        case 'noticeSuccess':
+            return {
+                width: "18px",
+                height: "18px",
+                viewBox: "0 0 18 18"
             }
         default: {
             return {}

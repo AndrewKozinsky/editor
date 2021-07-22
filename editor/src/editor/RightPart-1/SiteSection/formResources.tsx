@@ -1,15 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
-import createSiteRequest from 'requests/editor/createSiteRequest'
-import updateSiteRequest from 'requests/editor/updateSiteRequest'
+// import * as yup from 'yup'
+// import FHTypes from 'libs/formHandler/types'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import { siteSectionMessages } from 'messages/siteSectionMessages'
+// import createSiteRequest from 'src/requests/editor/sites/createSiteRequest'
+// import updateSiteRequest from 'src/requests/editor/sites/updateSiteRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -92,21 +92,21 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
     const schemas = {
         name: yup.string().required(siteSectionMessages.siteNameInputRequired)
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -115,7 +115,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -154,14 +154,14 @@ function validateForm(
         // Заблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', true, 'submit')
     }
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -177,7 +177,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -186,7 +186,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
@@ -194,14 +194,14 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/
 
 
 /**
  * Функция создающая новый сайт
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function createNewSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
+/*async function createNewSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // Отправить данные на сервер...
     const response = await createSiteRequest(formDetails.readyFieldValues.name.toString())
 
@@ -219,14 +219,14 @@ async function createNewSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
 
         store.dispatch(actions.sites.setCurrentSiteId(newSite.id))
     }
-}
+}*/
 
 
 /**
  * Функция редактирующая данные существующего сайта
  * @param {Object} formDetails — объект с данными и методами манипулирования формой
  */
-async function updateSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
+/*async function updateSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
 
     // id и имя выбранного сайта
     const siteId = store.getState().sites.currentSiteId
@@ -249,4 +249,4 @@ async function updateSite(formDetails: FHTypes.FormDetailsInSubmitHandler) {
         // Скачать новый список сайтов и поставить в Хранилище
         await store.dispatch(actions.sites.requestSites())
     }
-}
+}*/

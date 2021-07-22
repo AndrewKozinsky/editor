@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import StoreSitesTypes from 'store/site/sitesTypes'
-import FHTypes from 'libs/formHandler/types'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import { ButtonIconType } from 'common/formElements/Button/Button'
-import { OptionsType } from 'common/formElements/Select/SelectTypes'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import { AppState } from 'store/rootReducer'
+// import StoreSitesTypes from 'store/site/sitesTypes'
+// import FHTypes from 'libs/formHandler/types'
+// import { siteSectionMessages } from 'messages/siteSectionMessages'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { ButtonIconType } from 'common/formElements/Button/Button'
+// import { OptionsType } from 'common/formElements/Select/SelectTypes'
 
 
 /**
@@ -14,7 +14,7 @@ import { OptionsType } from 'common/formElements/Select/SelectTypes'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего сайта и массив сайтов
     const {currentSiteId, sites} = useSelector((store: AppState) => store.sites)
 
@@ -43,7 +43,7 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [currentSiteId, sites])
-}
+}*/
 
 
 /**
@@ -52,7 +52,7 @@ export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FH
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} site — данные о сайте
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'defaultIncFilesTemplateId',
     site: null | StoreSitesTypes.SiteType
@@ -69,11 +69,11 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/
 
 
 /** Функция возвращает текст и тип значка на кнопке отправки формы */
-export function useGetSubmitButtonText() {
+/*export function useGetSubmitButtonText() {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [submitName, setSubmitName] = useState('')
@@ -95,13 +95,13 @@ export function useGetSubmitButtonText() {
     }, [currentSiteId])
 
     return { submitName, submitIconType }
-}
+}*/
 
 /**
  * Функция возвращает булево значение нужно ли показывать кнопку удаления сайта.
  * Она видна только если выделен существующий сайт.
  */
-export function useGetDeleteSiteVisibilityStatus() {
+/*export function useGetDeleteSiteVisibilityStatus() {
     // id текущего сайта
     const { currentSiteId } = useSelector((store: AppState) => store.sites)
     const [isVisible, setIsVisible] = useState(false)
@@ -112,7 +112,7 @@ export function useGetDeleteSiteVisibilityStatus() {
     }, [currentSiteId])
 
     return isVisible
-}
+}*/
 
 /**
  * Хук контролирует выпадающий список выбора шаблона по умолчанию для всего сайта.
@@ -121,7 +121,7 @@ export function useGetDeleteSiteVisibilityStatus() {
  * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
  * selectOptions — массив пунктов выпадающего списка
  */
-export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
+/*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
 
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppState) => {
@@ -171,4 +171,4 @@ export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
         isVisible,
         selectOptions
     }
-}
+}*/

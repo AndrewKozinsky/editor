@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import StoreSitesTypes from 'store/site/sitesTypes'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
-import {ButtonIconType} from 'common/formElements/Button/Button'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import StoreSitesTypes from 'store/site/sitesTypes'
+// import FHTypes from 'libs/formHandler/types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
+// import {ButtonIconType} from 'common/formElements/Button/Button'
 
 
 /**
@@ -13,7 +13,7 @@ import {ButtonIconType} from 'common/formElements/Button/Button'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего шаблона и массив шаблонов
     const {currentTemplateId, templates} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
@@ -41,7 +41,7 @@ export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [currentTemplateId, templates])
-}
+}*/
 
 /**
  * Функция формирует новое значение поля формы по переданным данным
@@ -49,7 +49,7 @@ export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} template — данные о шаблоне
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'head' | 'body',
     template: null | StoreSitesTypes.IncFilesTemplateType
@@ -66,10 +66,11 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/
 
 
 /** Функция возвращает текст на кнопке отправки в зависимости от того выделены ли новый шаблон или существующий */
+/*
 export function useGetSubmitButtonText() {
     // id текущего шаблона
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
@@ -90,4 +91,4 @@ export function useGetSubmitButtonText() {
     }, [currentTemplateId])
 
     return { submitName, submitIconType }
-}
+}*/

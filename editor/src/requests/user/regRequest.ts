@@ -1,30 +1,30 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для регистрации пользователя
  * @param {Object} values — данные для входа
  */
-export default async function regRequest(values: LoginRequestValuesType) {
+/*export default async function regRequest(values: LoginRequestValuesType) {
     const options = {
         method: 'POST',
         body: JSON.stringify(values)
     }
     const response: RegRequestServerResponse = await makeFetch(getApiUrl('signup'), options)
     return response
-}
+}*/
 
 // Данные для входа передаваемые в loginRequest
-export type LoginRequestValuesType = {
+/*export type LoginRequestValuesType = {
     "email": string
     "password": number | string
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type RegRequestServerResponse = FailResponse | SuccessResponse
+// type RegRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "error"
     errors: {
         code: 11000
@@ -32,9 +32,10 @@ type FailResponse = {
         message: string
         statusCode: number // 409
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -42,4 +43,4 @@ type SuccessResponse = {
             email: string // "andkozinskiy@yandex.ru"
         }
     }
-}
+}*/

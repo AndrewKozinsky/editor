@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
-import { rightTabsMessages } from 'messages/rightTabsMessages'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+// import { rightTabsMessages } from 'messages/rightTabsMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
-export function useGetTabData(): MainTabDataType[] {
+/*export function useGetTabData(): MainTabDataType[] {
 
     // Текущая вкладка
     const { rightMainTab, currentSiteId } = useSelector((store: AppState) => store.sites)
@@ -25,10 +25,10 @@ export function useGetTabData(): MainTabDataType[] {
     }, [rightMainTab, currentSiteId])
 
     return tabsData
-}
+}*/
 
 // Массив с данными вкладок
-const tabsData = [
+/*const tabsData = [
     {
         iconType: 'siteTabSite', // тип значка
         titleIndex: 'sites' // название свойства для получения названия в messages
@@ -45,14 +45,14 @@ const tabsData = [
         iconType: 'siteTabArticle',
         titleIndex: 'articles',
     },
-]
+]*/
 
 /**
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} rightMainTab — номер активной вкладки
  * @param {Boolean} isTabsDisabled — должны ли все вкладки кроме первой быть заблокированы
  */
-function getTabData(
+/*function getTabData(
     rightMainTab: number,
     isTabsDisabled: boolean
 ): MainTabDataType[] {
@@ -67,4 +67,4 @@ function getTabData(
             onClick: () => store.dispatch(actions.sites.setRightMainTab(i))
         }
     })
-}
+}*/

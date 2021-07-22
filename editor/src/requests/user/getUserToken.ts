@@ -1,9 +1,7 @@
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { useFetch } from 'requests/reqFn/fetch'
 
-type GetTokenDataServerResponse = {
-    status: string
-}
+
 
 // Функция возвращает токен пользователя
 export function useGetUserToken() {
@@ -16,4 +14,23 @@ export function useGetUserToken() {
         useFetch<GetTokenDataServerResponse>(getApiUrl('getUserToken'), options)
 
     return { userToken, doFetch }
+}
+
+
+
+// Тип данных с ответом от пользователя
+type GetTokenDataServerResponse = FailResponse | SuccessResponse
+
+// Ошибочный ответ
+type FailResponse = {
+    status: 'fail'
+}
+
+// Успешный ответ
+type SuccessResponse = {
+    status: "success"
+    data: {
+        name: string // "Andrew"
+        email: string // "andkozinskiy@yandex.ru"
+    }
 }

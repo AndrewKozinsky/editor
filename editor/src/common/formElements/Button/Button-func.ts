@@ -1,6 +1,6 @@
-import {useEffect} from 'react'
-import {makeCN} from 'utils/StringUtils'
-import { ButtonPropType } from './Button'
+// import {useEffect} from 'react'
+// import {makeCN} from 'utils/StringUtils'
+// import { ButtonPropType } from './Button'
 
 
 /**
@@ -8,7 +8,7 @@ import { ButtonPropType } from './Button'
  * @param {Object} buttonProps — props переданные в кнопку
  * @param {Boolean} block — должна ли кнопка быть блочным элементом на всю ширину
  */
-export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
+/*export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -31,7 +31,7 @@ export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
     if (block) classes.push(`${CN}--block`)
 
     return makeCN(classes)
-}
+}*/
 
 
 /**
@@ -40,7 +40,7 @@ export function getButtonClasses(buttonProps: ButtonPropType, block: boolean) {
  * @param {Boolean | Number} autoFocus — или булево значение нужно ли ставить фокусировку или число сообщающее задержку,
  * с которой нужно поставить фокусировку.
  */
-export function useSetFocus(buttonRef: any, autoFocus: boolean | number) {
+/*export function useSetFocus(buttonRef: any, autoFocus: boolean | number) {
     // Нужно ли ставить фокусировку
     useEffect(function () {
         // Если нужно ставить фокусировку
@@ -52,4 +52,4 @@ export function useSetFocus(buttonRef: any, autoFocus: boolean | number) {
             setTimeout(function () { buttonRef.current.focus() }, autoFocus)
         }
     }, [])
-}
+}*/

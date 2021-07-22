@@ -1,8 +1,8 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 
 // Структура папок и файлов статей
-const obj = {
+/*const obj = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -11,6 +11,6 @@ const obj = {
         eng: 'New article',
         rus: 'Новая статья'
     },
-}
+}*/
 
-export const foldersArticlesSectionMessages = getMessagesObject(obj)
+// export const foldersArticlesSectionMessages = getMessagesObject(obj)

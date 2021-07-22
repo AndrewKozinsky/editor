@@ -1,14 +1,14 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Notice from 'common/Notice/Notice'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Notice from 'common/Notice/Notice'
 
 
-type CommonErrorPropType = {
+/*type CommonErrorPropType = {
     error?: null | string // Текст ошибки
-}
+}*/
 
 /** Компонент общей ошибки формы входа пользователя */
-export default function CommonError(props: CommonErrorPropType) {
+/*export default function CommonError(props: CommonErrorPropType) {
 
     const {
         error
@@ -23,4 +23,4 @@ export default function CommonError(props: CommonErrorPropType) {
             </Notice>
         </Wrapper>
     )
-}
+}*/

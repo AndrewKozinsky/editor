@@ -1,17 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import FHTypes from 'libs/formHandler/types'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import { commonMessages } from 'messages/commonMessages'
-import {
-    changeResetPasswordFormMessages
-} from 'messages/changeResetPasswordFormMessages'
-import changeResetPasswordRequest from 'requests/user/changeResetPasswordRequest'
+// import * as yup from 'yup'
+// import FHTypes from 'libs/formHandler/types'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import { commonMessages } from 'messages/commonMessages'
+// import { changeResetPasswordFormMessages } from 'messages/changeResetPasswordFormMessages'
+// import changeResetPasswordRequest from 'requests/user/changeResetPasswordRequest'
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(): FHTypes.FormConfig {
+/*export default function getFormConfig(): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -149,7 +147,7 @@ export default function getFormConfig(): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -157,7 +155,7 @@ export default function getFormConfig(): FHTypes.FormConfig {
  * @param {Array} fields — данные о полях формы
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
+/*function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
 
     const schemas = {
         token: yup.string()
@@ -172,7 +170,7 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -181,7 +179,7 @@ function getSchema(fields: FHTypes.FieldsStateObj ,fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue
@@ -222,14 +220,14 @@ function validateForm(
     }
 
     return formState
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
 
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
@@ -245,7 +243,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -254,7 +252,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'token')
@@ -264,4 +262,4 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/

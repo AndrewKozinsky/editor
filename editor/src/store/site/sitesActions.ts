@@ -1,14 +1,14 @@
-import StoreSitesTypes from './sitesTypes'
-import {MiscTypes} from 'types/miscTypes'
-import store from '../store'
-import FilesTreeType from 'libs/FilesTree/types'
-import sitesRequest from 'requests/editor/sitesRequest'
-import getIncFilesTemplatesRequest from 'requests/editor/getIncFilesTemplatesRequest'
-import getArticleRequest, {ArticleDataType} from 'requests/editor/getArticleRequest'
-import getComponentRequest, { ComponentDataType } from 'requests/editor/getComponentRequest'
+// import StoreSitesTypes from './sitesTypes'
+// import {MiscTypes} from 'types/miscTypes'
+// import store from '../store'
+// import sitesRequest from 'src/requests/editor/sites/sitesRequest'
+// import getIncFilesTemplatesRequest from 'src/requests/editor/incFiles/getIncFilesTemplatesRequest'
+// import getArticleRequest, {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
+// import getComponentRequest, { ComponentDataType } from 'src/requests/editor/components/getComponentRequest'
+// import FilesTreeType from '../../types/filesTree'
 
 
-const sitesActions = {
+/*const sitesActions = {
     // Установка id текущей основной вкладки справа
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         return {
@@ -23,7 +23,6 @@ const sitesActions = {
     // Загрузка сайтов с сервера и установка в Хранилище
     requestSites() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
             // Запрос на получение списка сайтов
             const response = await sitesRequest()
 
@@ -152,6 +151,22 @@ const sitesActions = {
         }
     },
 
+    // Component Template item (folder or file) type setting
+    setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE,
+            payload
+        }
+    },
+
+    // Component Template item id setting
+    setCurrentCompItemId(payload: StoreSitesTypes.CurrentCompItemId): StoreSitesTypes.SetCurrentCompItemIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID,
+            payload
+        }
+    },
+
 
     // СТАТЬИ ======================================================================================
 
@@ -192,6 +207,22 @@ const sitesActions = {
             }
         }
     },
-}
 
-export default sitesActions
+    // Article item (folder or file) type setting
+    setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE,
+            payload
+        }
+    },
+
+    // Article item (folder or file) type setting
+    setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_ID,
+            payload
+        }
+    },
+}*/
+
+// export default sitesActions

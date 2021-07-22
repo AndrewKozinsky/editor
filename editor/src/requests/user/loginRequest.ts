@@ -1,11 +1,11 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
  * @param {Object} values — данные для входа
  */
-export default async function loginRequest(values: LoginRequestValuesType) {
+/*export default async function loginRequest(values: LoginRequestValuesType) {
     const options = {
         method: 'POST',
         body: JSON.stringify(values)
@@ -13,19 +13,19 @@ export default async function loginRequest(values: LoginRequestValuesType) {
     const response: LoginRequestServerResponse = await makeFetch(getApiUrl('login'), options)
 
     return response
-}
+}*/
 
 // Данные для входа передаваемые в loginRequest
-export type LoginRequestValuesType = {
+/*export type LoginRequestValuesType = {
     "email": string
     "password": number | string
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type LoginRequestServerResponse = FailResponse | SuccessResponse
+// type LoginRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -33,9 +33,10 @@ type FailResponse = {
         message: string // "Incorrect email or password"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -44,4 +45,4 @@ type SuccessResponse = {
             email: string
         }
     }
-}
+}*/

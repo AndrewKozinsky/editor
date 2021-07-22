@@ -1,14 +1,14 @@
-import React, {useRef} from 'react'
-import {MiscTypes} from 'types/miscTypes'
-import Loader from 'common/misc/Loader/Loader'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {getButtonClasses, useSetFocus} from './Button-func'
-import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
-import './Button.scss'
+// import React, {useRef} from 'react'
+// import {MiscTypes} from 'types/miscTypes'
+// import Loader from 'common/misc/Loader/Loader'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import {getButtonClasses, useSetFocus} from './Button-func'
+// import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
+// import './Button.scss'
 
 
-export type ButtonPropType = {
+/*export type ButtonPropType = {
     type?: 'button' | 'submit' | 'reset'
     view?: 'standard' | 'onlyIcon'
     color?: 'base' | 'accent'
@@ -20,14 +20,14 @@ export type ButtonPropType = {
     onClick?: (...args: any[]) => void
     disabled?: boolean
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
-}
+}*/
 
-export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash'| 'btnSignCode'
-    | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit' | 'btnSignEdit'
+// export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash'| 'btnSignCode'
+//     | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit' | 'btnSignEdit' | 'btnSignUndo' | 'btnSignRedo' | 'btnSignCancel'
 
 
 /** Компонент кнопки */
-export default function Button(props: ButtonPropType) {
+/*export default function Button(props: ButtonPropType) {
 
     let {
         type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
@@ -87,16 +87,16 @@ export default function Button(props: ButtonPropType) {
             {btnText}
         </button>
     )
-}
+}*/
 
 
-type ButtonIconPropType = {
+/*type ButtonIconPropType = {
     iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
     CN: string // Корневой класс кнопки
     color?: 'base' | 'accent' // Цвет заливки кнопки
-}
+}*/
 
-function ButtonIcon(props: ButtonIconPropType) {
+/*function ButtonIcon(props: ButtonIconPropType) {
     const {
         iconType,
         CN,
@@ -115,15 +115,15 @@ function ButtonIcon(props: ButtonIconPropType) {
     }
 
     return <SvgIcon {...attrs}  />
-}
+}*/
 
 
-type ButtonLoaderPropType = {
+/*type ButtonLoaderPropType = {
     loading?: boolean // Нужно ли отрисовывать загрузчик
-}
+}*/
 
 /** Компонент загрузчика кнопки */
-function ButtonLoader(props: ButtonLoaderPropType) {
+/*function ButtonLoader(props: ButtonLoaderPropType) {
 
     const {
         loading = false
@@ -131,4 +131,4 @@ function ButtonLoader(props: ButtonLoaderPropType) {
 
     if (!loading) return null
     return <Loader className='btn-loader' />
-}
+}*/

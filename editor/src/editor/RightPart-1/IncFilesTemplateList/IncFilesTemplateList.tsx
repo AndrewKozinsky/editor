@@ -1,20 +1,20 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {MiscTypes} from 'types/miscTypes'
-import Button from 'common/formElements/Button/Button'
-import Wrapper from 'common/Wrapper/Wrapper'
-import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
-import ItemsList from 'common/ItemsList/ItemsList'
-import {
+// import React from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import {MiscTypes} from 'types/miscTypes'
+// import Button from 'common/formElements/Button/Button'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
+// import ItemsList from 'common/ItemsList/ItemsList'
+/*import {
     useFetchIncFilesTemplates,
     useGetNewTemplateOnClickHandler,
     useGetTemplatesItemsListProps
-} from './IncFilesTemplateList-func'
+} from './IncFilesTemplateList-func'*/
 
 
 /** Компонент кнопки создания нового сайта */
-export function NewTemplateButton() {
+/*export function NewTemplateButton() {
     // id выделенного сайта
     const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
 
@@ -33,10 +33,10 @@ export function NewTemplateButton() {
     }
 
     return <Button {...attrs} />
-}
+}*/
 
 /** Компонент списка сайтов */
-export function TemplatesList() {
+/*export function TemplatesList() {
     // Получить с сервера список шаблонов подключаемых файлов и поставить в Хранилище
     useFetchIncFilesTemplates()
 
@@ -48,4 +48,4 @@ export function TemplatesList() {
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}
+}*/

@@ -1,11 +1,11 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Модальное окно
-const obj = {
+/*const obj = {
     closeBtn: {
         eng: 'Close',
         rus: 'Закрыть'
     }
-}
+}*/
 
-export const modalMessages = getMessagesObject(obj)
+// export const modalMessages = getMessagesObject(obj)

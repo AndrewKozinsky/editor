@@ -1,5 +1,5 @@
-import {makeFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 /**
  * Отправка нового пароля после сброса забытого
@@ -7,7 +7,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
  * @param {String} passwordConfirm — подтверждение пароля
  * @param {String} token — токен сброса пароля
  */
-export default async function changeResetPasswordRequest(password: string, passwordConfirm: string, token: string) {
+/*export default async function changeResetPasswordRequest(password: string, passwordConfirm: string, token: string) {
     const options = {
         method: 'PATCH',
         body: JSON.stringify({
@@ -19,13 +19,13 @@ export default async function changeResetPasswordRequest(password: string, passw
         getApiUrl('changeResetPassword', token), options
     )
     return response
-}
+}*/
 
 // Тип данных с ответом от пользователя
-type ChangeResetPasswordRequestServerResponse = FailResponse | SuccessResponse
+// type ChangeResetPasswordRequestServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
     errors: {
         field: null
@@ -33,9 +33,10 @@ type FailResponse = {
         message: string // "Token is invalid or has expired"
         statusCode: 400
     }
-}
+}*/
 
 // Успешный ответ
+/*
 type SuccessResponse = {
     status: "success"
     data: {
@@ -43,4 +44,4 @@ type SuccessResponse = {
             email: string // "andkozinskiy@yandex.ru"
         }
     }
-}
+}*/

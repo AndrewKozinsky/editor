@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
-import {makeCN} from 'utils/StringUtils'
+// import {useEffect, useState} from 'react'
+// import {useSelector} from 'react-redux'
+// import {AppState} from 'store/rootReducer'
+// import {makeCN} from 'utils/StringUtils'
 
 
 /** Хук возращает статус нужно ли отрисовывать окно */
-export function useGetIsModalOpen() {
+/*export function useGetIsModalOpen() {
     // Открыто ли модальное окно и его содержимое
     const { isOpen } = useSelector((store: AppState) => store.modal)
 
@@ -28,13 +28,13 @@ export function useGetIsModalOpen() {
     }, [isOpen])
 
     return isModalOpen
-}
+}*/
 
 /**
  * Функция возвращает классы обёртки модального окна в зависимости от того отрыли ли его или закрыли.
  * @param {String} CN — Название главного класса.
  */
-export function useGetModalClasses(CN: string) {
+/*export function useGetModalClasses(CN: string) {
 
     // Открыто ли модальное окно и его содержимое
     const { isOpen } = useSelector((store: AppState) => store.modal)
@@ -67,4 +67,4 @@ export function useGetModalClasses(CN: string) {
     }, [isOpen])
 
     return makeCN(classes)
-}
+}*/

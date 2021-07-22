@@ -1,7 +1,7 @@
-import StoreModalTypes from './modalTypes'
+// import StoreModalTypes from './modalTypes'
 
 
-const modalActions = {
+/*const modalActions = {
     // Открытие модального окна
     openModal(payload: StoreModalTypes.Content): StoreModalTypes.OpenModalAction {
         return {
@@ -15,6 +15,6 @@ const modalActions = {
             type: StoreModalTypes.MODAL_CLOSE,
         }
     },
-}
+}*/
 
-export default modalActions
+// export default modalActions

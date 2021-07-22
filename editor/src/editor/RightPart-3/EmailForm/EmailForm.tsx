@@ -1,16 +1,16 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import Notice from 'common/Notice/Notice'
-import useHandleConfirmChangingEmailModal from './confirmEmailModal'
-import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import Notice from 'common/Notice/Notice'
+// import useHandleConfirmChangingEmailModal from './confirmEmailModal'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 
 
-export default function EmailForm() {
+/*export default function EmailForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'email')
@@ -54,4 +54,4 @@ export default function EmailForm() {
             </Wrapper>}
         </>
     )
-}
+}*/

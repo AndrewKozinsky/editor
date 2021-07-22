@@ -1,10 +1,10 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+// import { useEffect } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-import { AppState } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { AppState } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import FHTypes from 'libs/formHandler/types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 
 /**
@@ -12,7 +12,7 @@ import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherComponent(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherComponent(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     const dispatch = useDispatch()
 
     // id текущего шаблона компонента
@@ -37,7 +37,7 @@ export function useGetAnotherComponent(formState: FHTypes.FormState, setFormStat
         // Поставить новое состояние формы
         setFormState(newFormState)
     }, [currentCompItemId, componentsSection])
-}
+}*/
 
 
 /**
@@ -46,7 +46,7 @@ export function useGetAnotherComponent(formState: FHTypes.FormState, setFormStat
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} value — новое значение поля
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'code',
     value: null | string
@@ -64,4 +64,4 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/

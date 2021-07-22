@@ -8,9 +8,12 @@ http {
         server_name editorium.local;
         root /sites;
 
-        location /api {
-            proxy_pass http://editor_api:3001;
-            rewrite ^\/api\/(.*) /$1 break;
+        #location /api1 {
+        #    proxy_pass http://express_api:3001;
+        #}
+
+        location /api2 {
+            proxy_pass http://nest_api:3002;
         }
 
         location /editor/ {
@@ -21,8 +24,8 @@ http {
             proxy_set_header Connection "upgrade";
         }
 
-        location /kia {
-            return 200 'Hello from Kia site';
+        location /test {
+            return 200 'Hello from Test site';
         }
     }
 }

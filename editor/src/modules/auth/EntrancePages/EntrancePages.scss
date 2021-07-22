@@ -2,8 +2,13 @@
 $CN: entrance-pages-wrapper;
 
 .#{$CN} {
-    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
     max-height: 100vh;
+    height: 100vh;
     overflow: auto;
 
     transition: opacity .2s, transform .2s;

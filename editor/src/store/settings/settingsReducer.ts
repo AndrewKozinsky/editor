@@ -7,7 +7,7 @@ export type SettingsReducerType = {
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
     mainTab: StoreSettingsTypes.MainTab
-    settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
+    // settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
 }
 
 // Изначальные значения
@@ -16,7 +16,8 @@ const initialState: SettingsReducerType = {
     editorLanguage: 'eng',
     // Тема интерфейса: light или dark
     editorTheme: 'light',
-    // Компоненты форм входа и редактор всегда отрисовываются. Эта настройка задаёт какой компонент должен при отрисовке возвращать null.
+    // Компоненты форм входа и редактор всегда отрисовываются.
+    // Эта настройка задаёт какой компонент должен при отрисовке возвращать null.
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
     entryAndEditorViewState: null,
@@ -26,7 +27,7 @@ const initialState: SettingsReducerType = {
     // Номер открытой вкладки
     mainTab: 0,
     // Активная вкладка панели «Настройки»: user или editor
-    settingsPanelTab: 'user'
+    // settingsPanelTab: 'user'
 }
 
 // Установка языка интерфейса
@@ -78,7 +79,7 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
     }
 }
 // Установка id вкладки в Настройках
-function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
+/*function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorSettingsTabId', action.payload)
 
@@ -86,7 +87,7 @@ function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTy
         ...state,
         settingsPanelTab: action.payload
     }
-}
+}*/
 
 
 // Редьюсер Store.settings
@@ -103,8 +104,8 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             return setLastAddress(state, action)
         case StoreSettingsTypes.SETTINGS_SET_MAIN_TAB:
             return setMainTab(state, action)
-        case StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB:
-            return setSettingsPanelTab(state, action)
+        // case StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB:
+        //     return setSettingsPanelTab(state, action)
         default:
             // @ts-ignore
             const x: never = null

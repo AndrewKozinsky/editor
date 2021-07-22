@@ -1,8 +1,8 @@
-import FilesTreeType from 'libs/FilesTree/types'
-import {ArticleDataType} from 'requests/editor/getArticleRequest'
-import {ComponentDataType} from 'requests/editor/getComponentRequest'
+// import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
+// import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
+// import FilesTreeType from '../../types/filesTree'
 
-namespace StoreSitesTypes {
+/*namespace StoreSitesTypes {
 
     // Сайт
     export type SiteType = {
@@ -113,6 +113,20 @@ namespace StoreSitesTypes {
         }
     }
 
+    // Component Template item (folder or file) type setting
+    export const SET_CURRENT_COMP_ITEM_TYPE = 'SET_CURRENT_COMP_ITEM_TYPE'
+    export type SetCurrentCompItemTypeAction = {
+        type: typeof SET_CURRENT_COMP_ITEM_TYPE
+        payload: StoreSitesTypes.CurrentCompItemType
+    }
+
+    // Component Template item id setting
+    export const SET_CURRENT_COMP_ITEM_ID = 'SET_CURRENT_COMP_ITEM_ID'
+    export type SetCurrentCompItemIdAction = {
+        type: typeof SET_CURRENT_COMP_ITEM_ID
+        payload: StoreSitesTypes.CurrentCompItemId
+    }
+
     // Установка id выбранной папки или статьи
     export const SET_CURRENT_ART = 'SET_CURRENT_ART'
     export type SetCurrentArtAction = {
@@ -124,6 +138,20 @@ namespace StoreSitesTypes {
         }
     }
 
+    // Article item (folder or file) type setting
+    export const SET_CURRENT_ART_ITEM_TYPE = 'SET_CURRENT_ART_ITEM_TYPE'
+    export type SetCurrentArtItemTypeAction = {
+        type: typeof SET_CURRENT_ART_ITEM_TYPE
+        payload: StoreSitesTypes.CurrentArtItemType
+    }
+
+    // Article item (folder or file) id setting
+    export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
+    export type SetCurrentArtItemIdAction = {
+        type: typeof SET_CURRENT_ART_ITEM_ID
+        payload: StoreSitesTypes.CurrentArtItemId
+    }
+
 
     export type SitesAction =
         | SetSitesAction
@@ -132,7 +160,11 @@ namespace StoreSitesTypes {
         | SetIncFilesTemplatesAction
         | SetCurrentIncFilesTemplateIdAction
         | SetCurrentCompAction
+        | SetCurrentCompItemTypeAction
+        | SetCurrentCompItemIdAction
         | SetCurrentArtAction
-}
+        | SetCurrentArtItemTypeAction
+        | SetCurrentArtItemIdAction
+}*/
 
-export default StoreSitesTypes
+// export default StoreSitesTypes

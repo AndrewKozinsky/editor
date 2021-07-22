@@ -1,13 +1,16 @@
 import React from 'react'
 // @ts-ignore
 import { Switch, Route } from 'react-router-dom'
-import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
+// import EnterFormBlock from "modules/auth/EnterFormBlock/EnterFormBlock"
 import AuthFormWrapper from 'modules/auth/AuthFormWrapper/AuthFormWrapper'
 import RegFormBlock from 'modules/auth/RegFormBlock/RegFormBlock'
-import ConfirmEmailFormBlock from 'modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
-import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
-import ChangeResetPasswordFormBlock from 'modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
-import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
+// import ConfirmEmailFormBlock from 'modules/auth/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
+// import ResetFormBlock from 'modules/auth/ResetFormBlock/ResetFormBlock'
+// import ChangeResetPasswordFormBlock from 'modules/auth/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
+import {
+    useGetWrapperClasses,
+    useViewStateChanger
+} from './EntrancePages-func'
 import './EntrancePages.scss'
 
 
@@ -28,18 +31,18 @@ export default function EntrancePages() {
                     <Route path='/reg'>
                         <RegFormBlock />
                     </Route>
-                    <Route path='/confirm-email'>
+                    {/*<Route path='/confirm-email'>
                         <ConfirmEmailFormBlock />
-                    </Route>
-                    <Route path='/reset-password'>
+                    </Route>*/}
+                    {/*<Route path='/reset-password'>
                         <ResetFormBlock />
-                    </Route>
-                    <Route path='/change-reset-password'>
+                    </Route>*/}
+                    {/*<Route path='/change-reset-password'>
                         <ChangeResetPasswordFormBlock />
-                    </Route>
-                    <Route path='*'>
+                    </Route>*/}
+                    {/*<Route path='*'>
                         <EnterFormBlock />
-                    </Route>
+                    </Route>*/}
                 </Switch>
             </AuthFormWrapper>
         </div>

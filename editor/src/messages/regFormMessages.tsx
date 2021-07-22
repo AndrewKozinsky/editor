@@ -14,37 +14,37 @@ import {
 const obj = {
     // Заголовок формы регистрации
     formHeader: {
-        eng: 'Sign in',
+        eng: 'Sign up',
         rus: 'Регистрация'
     },
     emailField: {
         eng: 'E-mail *',
         rus: 'Электронная почта *'
     },
-    emailErrInvalid: {
+    /*emailErrInvalid: {
         eng: 'Invalid email address',
         rus: 'Почта написана неправильно'
-    },
-    passwordField: {
+    },*/
+    /*passwordField: {
         eng: 'Password *',
         rus: 'Пароль *'
-    },
-    passwordConfirmField: {
+    },*/
+    /*passwordConfirmField: {
         eng: 'Repeat password *',
         rus: 'Повторите пароль *'
-    },
-    passwordsMustMatch: {
+    },*/
+    /*passwordsMustMatch: {
         eng: 'Passwords must match',
         rus: 'Пароли должны совпадать'
-    },
-    submitBtnText: {
-        eng: 'Sign in',
+    },*/
+    /*submitBtnText: {
+        eng: 'Sign up',
         rus: 'Зарегистрироваться'
-    },
-    somethingWentWrong: {
+    },*/
+    /*somethingWentWrong: {
         eng: 'Something went wrong',
         rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
-    },
+    },*/
 }
 
 export const regFormMessages = getMessagesObject(obj)
@@ -53,7 +53,7 @@ export const regFormMessages = getMessagesObject(obj)
 // Форма RegFormBlock
 const JSXObj = {
     doYouHaveAccount: {
-        eng: <>Already have an account? <Link to='/enter'>Sign in</Link>.</>,
+        eng: <>Already have an account? <Link to='/enter'>Log in</Link>.</>,
         rus: <>Уже есть учётная запись? <Link to='/enter'>Войдите</Link>.</>
     },
     legal: {

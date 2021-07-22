@@ -1,9 +1,9 @@
-import {useFetch} from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
+// import {useFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 
 // Функция меняет почту, на которую зарегистрирована учётная запись пользователя
-export function useChangeEmailRequest(newEmail: string) {
+/*export function useChangeEmailRequest(newEmail: string) {
 
     // Параметры запроса
     const options = { method: 'PUT', body: JSON.stringify({email: newEmail})}
@@ -13,19 +13,19 @@ export function useChangeEmailRequest(newEmail: string) {
         useFetch<ChangeEmailServerResponse>(getApiUrl('changeEmail'), options)
 
     return { response, doFetch }
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type ChangeEmailServerResponse = FailResponse | SuccessResponse
+// type ChangeEmailServerResponse = FailResponse | SuccessResponse
 
 // Ошибочный ответ
-type FailResponse = {
+/*type FailResponse = {
     status: "fail"
-}
+}*/
 
 // Успешный ответ
-type SuccessResponse = {
+/*type SuccessResponse = {
     status: "success"
     data: {
         user: {
@@ -33,4 +33,4 @@ type SuccessResponse = {
             language: 'rus' | 'eng'
         }
     }
-}
+}*/

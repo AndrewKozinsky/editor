@@ -1,8 +1,8 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 
 // Форма редактирования выбранной статьи
-const obj = {
+/*const obj = {
     articleNameInput: {
         eng: 'Article name',
         rus: 'Название статьи'
@@ -39,6 +39,6 @@ const obj = {
         eng: 'Edit',
         rus: 'Редактировать'
     },
-}
+}*/
 
-export const articleFormMessages = getMessagesObject(obj)
+// export const articleFormMessages = getMessagesObject(obj)

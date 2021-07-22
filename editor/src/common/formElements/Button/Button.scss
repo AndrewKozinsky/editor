@@ -1,8 +1,8 @@
-@import "../../commonStyles/commonStyles";
+//@import "../../commonStyles/commonStyles";
 
-$CN: btn;
+//$CN: btn;
 
-.#{$CN} {
+/*.#{$CN} {
     text-align: left;
     cursor: pointer;
     font-size: 1.4rem;
@@ -25,19 +25,19 @@ $CN: btn;
         opacity: .5;
         cursor: default;
     }
-}
+}*/
 
 
 // Тип кнопки.
 // standard (стандартная кнопка), onlyIcon (только значёк).
-.#{$CN}--standard-view {
+/*.#{$CN}--standard-view {
 
-}
+}*/
 
 
 // Цвет кнопки.
 // base (стандартный цвет), accent (акцентный цвет)
-.#{$CN}--base-color {
+/*.#{$CN}--base-color {
     color: var(--text-color);
     background-color: var(--button-color);
     transition: background-color .2s;
@@ -49,33 +49,33 @@ $CN: btn;
     &:disabled:hover {
         background-color: var(--button-color);
     }
-}
-.#{$CN}--accent-color {
+}*/
+/*.#{$CN}--accent-color {
     color: white;
     background-color: var(--accent-color);
-}
+}*/
 
 
 // Загрузчик
-$loaderCN: btn-loader;
+//$loaderCN: btn-loader;
 
-.#{$loaderCN} {
+/*.#{$loaderCN} {
     display: inline-block;
     width: 14px;
     height: 14px;
     vertical-align: -2px;
     margin-right: 4px;
-}
+}*/
 
 
 // Значёк
-.#{$CN}__icon {
+/*.#{$CN}__icon {
     margin-right: .4rem;
     margin-bottom: -2px;
-}
+}*/
 
 // Если кнопка должна быть блочным элементом на всю ширину
-.#{$CN}--block {
+/*.#{$CN}--block {
     display: block;
     width: 100%;
-}
+}*/

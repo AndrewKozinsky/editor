@@ -1,17 +1,17 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-import { useGetAnotherComponent } from './ComponentForm-func'
-import useGetShowModal from 'utils/hooksUtils'
-import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import { componentFormMessages } from 'messages/componentTemplateFormMessages'
+// import { useGetAnotherComponent } from './ComponentForm-func'
+// import useGetShowModal from 'utils/hooksUtils'
+// import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
 
-export default function ComponentForm() {
+/*export default function ComponentForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'component')
@@ -67,4 +67,4 @@ export default function ComponentForm() {
             </Wrapper>
         </Form>
     )
-}
+}*/

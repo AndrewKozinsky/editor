@@ -1,19 +1,19 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import Hr from 'common/misc/Hr/Hr'
-import Form from 'common/formElements/Form/Form'
-import Select from 'common/formElements/Select/Select'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import getFormConfig from './formResources'
-import { useManageTemplatesSelect } from './ArticleForm-func'
-import { articleFormMessages } from 'messages/articleFormMessages'
-import { useGetAnotherArticle } from './ArticleForm-func'
-import DeleteItemModal from '../../ComponentsOrArticles/DeleteItemModal/DeleteItemModal'
-import useGetShowModal from 'utils/hooksUtils'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import Hr from 'common/misc/Hr/Hr'
+// import Form from 'common/formElements/Form/Form'
+// import Select from 'common/formElements/Select/Select'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import getFormConfig from './formResources'
+// import {useGetEditArticleBtnHandler, useManageTemplatesSelect } from './ArticleForm-func'
+// import { articleFormMessages } from 'messages/articleFormMessages'
+// import { useGetAnotherArticle } from './ArticleForm-func'
+// import DeleteItemModal from '../../ComponentsOrArticles/DeleteItemModal/DeleteItemModal'
+// import useGetShowModal from 'utils/hooksUtils'
 
-export default function ArticleForm() {
+/*export default function ArticleForm() {
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'article')
 
@@ -25,6 +25,9 @@ export default function ArticleForm() {
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<DeleteItemModal type='article' />)
+
+    // Edit Article button handler
+    const onEditArticleBtnHandler = useGetEditArticleBtnHandler()
 
     return (
         <Form name='article' formHandlers={fh.formHandlers}>
@@ -70,9 +73,9 @@ export default function ArticleForm() {
                     color='accent'
                     text={articleFormMessages.editArticleBtnText}
                     icon='btnSignEdit'
-                    onClick={() => {}}
+                    onClick={onEditArticleBtnHandler}
                 />
             </Wrapper>
         </Form>
     )
-}
+}*/

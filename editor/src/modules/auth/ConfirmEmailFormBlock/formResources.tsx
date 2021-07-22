@@ -1,15 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import store from 'store/store'
-import actions from 'store/rootAction'
-import FHTypes from 'libs/formHandler/types'
-import { commonMessages } from 'messages/commonMessages'
-import confirmEmailRequest from 'requests/user/confirmEmailRequest'
-import {confirmEmailMessages} from 'messages/confirmEmailMessages';
+// import * as yup from 'yup'
+// import store from 'store/store'
+// import actions from 'store/rootAction'
+// import FHTypes from 'libs/formHandler/types'
+// import { commonMessages } from 'messages/commonMessages'
+// import confirmEmailRequest from 'requests/user/confirmEmailRequest'
+// import {confirmEmailMessages} from 'messages/confirmEmailMessages';
 
 
 // Объект настройки useFormHandler
-export default function getFormConfig(history: any): FHTypes.FormConfig {
+/*export default function getFormConfig(history: any): FHTypes.FormConfig {
     return {
         // Обязательно нужно передать все поля обрабатываемые FormHandler-ом
         fields: {
@@ -109,7 +109,7 @@ export default function getFormConfig(history: any): FHTypes.FormConfig {
             }
         }
     }
-}
+}*/
 
 
 
@@ -117,14 +117,14 @@ export default function getFormConfig(history: any): FHTypes.FormConfig {
  * Функция возвращает схему Yup для поля с переданным именем
  * @param {Array} fieldName — имя поля
  */
-function getSchema(fieldName: string): any {
+/*function getSchema(fieldName: string): any {
     const schemas = {
         token: yup.string().required(commonMessages.requiredField)
     }
 
     // @ts-ignore
     return schemas[fieldName]
-}
+}*/
 
 
 /**
@@ -133,7 +133,7 @@ function getSchema(fieldName: string): any {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
     setFormDataPropValue: FHTypes.SetFormDataPropValue,
@@ -164,18 +164,18 @@ function validateForm(
 
     // Убрать сообщение об общей ошибке в нижней части формы.
     return setFormDataPropValue( formState, 'commonError', null )
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на поле email если там есть ошибка
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
     return formState.fields.token.data.error
         ? formState.fields.token.$field
         : null
-}
+}*/
 
 
 /**
@@ -184,7 +184,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'token')
@@ -192,4 +192,4 @@ function setLoadingStatusToForm(
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
     return formState
-}
+}*/

@@ -1,13 +1,13 @@
-import {useEffect} from 'react'
-import {useSelector} from 'react-redux'
+// import {useEffect} from 'react'
+// import {useSelector} from 'react-redux'
 //@ts-ignore
-import {useStore} from 'effector-react'
-import { AppState } from 'store/rootReducer'
-import FHTypes from 'libs/formHandler/types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import FilesTreeType from 'libs/FilesTree/types'
-import filesTreePublicMethods from 'libs/FilesTree/publicMethods'
-import {componentsTreeStore} from '../stores'
+// import {useStore} from 'effector-react'
+// import { AppState } from 'store/rootReducer'
+// import FHTypes from 'libs/formHandler/types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
+// import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+// import {componentsTreeStore} from '../stores'
 
 
 /**
@@ -15,7 +15,7 @@ import {componentsTreeStore} from '../stores'
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция ставящая новое состояние формы
  */
-export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
+/*export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // Массив папок и файлов из Хранилища
     const componentsItems = useStore(componentsTreeStore)
 
@@ -25,7 +25,7 @@ export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormSta
     useEffect(function () {
         setNewFolderName(componentsItems, currentCompItemId, formState, setFormState)
     }, [currentCompItemId, componentsItems])
-}
+}*/
 
 /**
  * Функция получает название выделенной папки и ставит её в поле name у формы.
@@ -35,9 +35,9 @@ export function useGetAnotherFolderData(formState: FHTypes.FormState, setFormSta
  * @param {Object} formState — объект состояния формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
-function setNewFolderName(
-    items: FilesTreeType.Items,
-    currentItemId: FilesTreeType.UuId,
+/*function setNewFolderName(
+    items: DragFilesTreeType.Items,
+    currentItemId: DragFilesTreeType.UuId,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState
 ) {
@@ -51,7 +51,7 @@ function setNewFolderName(
 
     // Поставить новое состояние формы
     setFormState(newFormState)
-}
+}*/
 
 
 /**
@@ -60,10 +60,10 @@ function setNewFolderName(
  * @param {String} fieldName — имя изменяемого поля
  * @param {Object} folder — данные о папке
  */
-function changeField(
+/*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name',
-    folder: FilesTreeType.Item
+    folder: DragFilesTreeType.Item
 ) {
     // Получение поля формы по имени
     const field = formState.fields[fieldName]
@@ -76,4 +76,4 @@ function changeField(
 
     // Поставить новое значение поля name
     return makeImmutableObj(formState, field, newField)
-}
+}*/

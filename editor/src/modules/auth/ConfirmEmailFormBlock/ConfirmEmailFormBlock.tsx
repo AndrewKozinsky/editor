@@ -1,21 +1,21 @@
-import React from 'react'
+// import React from 'react'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Form from 'common/formElements/Form/Form'
-import Wrapper from 'common/Wrapper/Wrapper'
-import TextInput from 'common/formElements/TextInput/TextInput'
-import getFormConfig from './formResources'
-import { getMenuItems } from '../menuItems'
-import useFormHandler from 'libs/formHandler/useFormHandler'
-import { confirmEmailMessages } from 'messages/confirmEmailMessages'
-import CommonError from '../CommonError/CommonError'
+// import { useHistory } from 'react-router-dom'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Form from 'common/formElements/Form/Form'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import TextInput from 'common/formElements/TextInput/TextInput'
+// import getFormConfig from './formResources'
+// import { getMenuItems } from '../menuItems'
+// import useFormHandler from 'libs/formHandler/useFormHandler'
+// import { confirmEmailMessages } from 'messages/confirmEmailMessages'
+// import CommonError from '../CommonError/CommonError'
 
 
 /** Форма подтверждения почты */
-export default function ConfirmEmailFormBlock() {
+/*export default function ConfirmEmailFormBlock() {
     const history = useHistory()
 
     // FormHandler
@@ -54,4 +54,4 @@ export default function ConfirmEmailFormBlock() {
             </Form>
         </div>
     )
-}
+}*/

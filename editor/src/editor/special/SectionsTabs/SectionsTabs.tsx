@@ -1,11 +1,13 @@
-import React from 'react'
-import MainTab, {MainTabDataType} from '../MainTab/MainTab'
-import { useGetTabData } from './SectionsTabs-func'
-import './SectionsTabs.scss'
+// import React from 'react'
+// import ArticleMenu from '../ArticleMenu/ArticleMenu'
+// import MainTab, {MainTabDataType} from '../MainTab/MainTab'
+// import { useGetTabData } from './SectionsTabs-func'
+// import './SectionsTabs.scss'
+// import ArticleMenuButton from '../ArticleMenu/ArticleMenu'
 
 
 /** Компонент вкладок переключающих разделы радактора */
-export default function SectionsTabs() {
+/*export default function SectionsTabs() {
 
     const CN = 'section-tabs'
 
@@ -14,9 +16,13 @@ export default function SectionsTabs() {
 
     return (
         <div className={CN}>
-            {tabsDataArr.map(tabData => {
-                return <MainTab tabData={tabData} key={tabData.title} />
-            })}
+            <div>
+                {tabsDataArr.map(tabData => {
+                    return <MainTab tabData={tabData} key={tabData.title} />
+                })}
+            </div>
+            <ArticleMenuButton />
         </div>
     )
-}
+}*/
+
