@@ -8,9 +8,9 @@ http {
         server_name editorium.local;
         root /sites;
 
-        location /api1 {
-            proxy_pass http://express_api:3001;
-        }
+        #location /api1 {
+        #    proxy_pass http://express_api:3001;
+        #}
 
         location /api2 {
             proxy_pass http://nest_api:3002;

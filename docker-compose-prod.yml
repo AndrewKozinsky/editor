@@ -39,7 +39,7 @@ services:
   # API редактора
   express_api:
     build: expressApi
-    container_name: editor-api
+    container_name: express-api
     command: npm run start
     restart: unless-stopped
     environment:
