@@ -37,8 +37,8 @@ services:
 
 
   # API редактора
-  editor_api:
-    build: ./editorApi
+  express_api:
+    build: expressApi
     container_name: editor-api
     command: npm run start
     restart: unless-stopped
@@ -51,7 +51,7 @@ services:
     networks:
       - editorium-network
     volumes:
-      - ./editorApi/src:/app/src
+      - ./expressApi/src:/app/src
 
 
   # БД редактора

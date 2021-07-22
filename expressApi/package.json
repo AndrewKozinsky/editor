@@ -1,5 +1,5 @@
 {
-  "name": "editorapi",
+  "name": "expressapi",
   "version": "1.0.0",
   "description": "Editor API",
   "main": "index.js",
