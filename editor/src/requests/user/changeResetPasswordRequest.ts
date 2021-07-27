@@ -22,7 +22,7 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type ChangeResetPasswordRequestServerResponse = FailResponse | SuccessResponse
+// type ChangeResetPasswordRequestServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
@@ -35,13 +35,3 @@
     }
 }*/
 
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            email: string // "andkozinskiy@yandex.ru"
-        }
-    }
-}*/

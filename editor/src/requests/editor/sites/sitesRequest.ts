@@ -11,12 +11,8 @@
 
 
 // Тип данных с ответом от пользователя
-// type SitesRequestServerResponse = FailResponse | SuccessResponse
+// type SitesRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-}*/
 
 // Успешный ответ
 /*

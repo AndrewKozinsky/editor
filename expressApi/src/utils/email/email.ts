@@ -68,7 +68,7 @@ export class Email {
 
         // Create a transport
         const transport = nodemailer.createTransport({
-            host: config.fakeEmailHost,
+            host: config.fakeEmailDomain,
             port: config.fakeEmailPort,
             auth: {
                 user: config.fakeEmailUsername,

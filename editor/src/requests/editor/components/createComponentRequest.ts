@@ -27,18 +27,7 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type CreateNewComponentServerResponse = FailResponse | SuccessResponse
-
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string // "Incorrect email or password"
-        statusCode: 400
-    }
-}*/
+// type CreateNewComponentServerResponse = ErrorServerResponseType | SuccessResponse
 
 // Успешный ответ
 /*

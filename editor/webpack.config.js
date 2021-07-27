@@ -24,7 +24,6 @@ module.exports = function(env) {
         devServer: getDevServerSettings(),
         plugins: getPlugins(isDev),
         output: {
-            // publicPath: '/editor',
             path: path.resolve(__dirname, 'dist'),
             filename: 'main.js',
             assetModuleFilename: 'images/[hash][ext][query]'
@@ -60,7 +59,7 @@ function parseCSS(isDev) {
 // Функция возвращает настройки загрузчика других типов файлов
 function parseAssets() {
     return {
-        test: /\.(png|jpg|jpeg|gif|woff2)$/i,
+        test: /\.(png|jpg|jpeg|gif|woff2|pdf)$/i,
         type: "asset/resource",
     }
 }

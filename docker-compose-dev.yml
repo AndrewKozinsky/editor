@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.3"
 
 services:
 
@@ -8,8 +8,6 @@ services:
     container_name: editor-nginx
     depends_on:
       - editor
-#      - express_api
-#      - mongo_db
       - nest_api
       - postgres_db
     ports:
@@ -18,7 +16,6 @@ services:
       - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
     networks:
       - editorium-network
-
 
   # Клиентская часть редактора
   editor:
@@ -37,65 +34,43 @@ services:
     networks:
       - editorium-network
 
-
-  # API редактора (Express)
-#  express_api:
-#    build: ./expressApi
-#    container_name: express-api
-#    command: npm run dev
-#    restart: unless-stopped
-#    environment:
-#      - MODE=development
-#      - PORT=3001
-#      - MONGO_URL=mongodb://mongo_db:27017/mongo_db
-#    depends_on:
-#      - mongo_db
-#    networks:
-#      - editorium-network
-#    volumes:
-#      - ./expressApi/src:/app/src
-
-  # Mongo
-#  mongo_db:
-#    image: mongo:latest
-#    container_name: mongo_db
-#    restart: always
-#    ports:
-#      - 27017:27017
-#    volumes:
-#      - mongo_db:/data/db
-#    networks:
-#      - editorium-network
-
-
   # API редактора (Nest)
   nest_api:
-    build: ./nestApi
-    container_name: nest-api
+    build:
+      context: ./nestApi
+      dockerfile: Dockerfile.dev
+    container_name: nest_api
     command: npm run start:dev
     restart: unless-stopped
+    environment:
+      - MODE=development
+      - PORT=3002
+    depends_on:
+      - postgres_db
     networks:
       - editorium-network
     volumes:
       - ./nestApi/src:/app/src
 
   # Postgres
+  # BD: editor
+  # User: editor
+  # Password: dt52posQP00P
   postgres_db:
     image: postgres:13-alpine
     container_name: postgres_db
-    restart: always
+    restart: unless-stopped
     environment:
-      POSTGRES_PASSWORD: 123
+      POSTGRES_PASSWORD: sguen35GPA
       POSTGRES_USER: postgres
       POSTGRES_DB: editor
     volumes:
-      - postgres_db:/data/db
+      - postgres_db:/var/lib/postgresql/data
     networks:
       - editorium-network
 
 
 volumes:
-  mongo_db:
   postgres_db:
 
 networks:

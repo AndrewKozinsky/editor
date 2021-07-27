@@ -8,6 +8,13 @@ import {
     getMessagesJSXObject,
     getMessagesObject
 } from 'messages/fn/getMessagesObject'
+//@ts-ignore
+import disclaimerPdfLink from 'modules/auth/RegFormBlock/docs/Disclaimer.pdf'
+//@ts-ignore
+import policyOnPersonalDataProcessingPdfLink from 'modules/auth/RegFormBlock/docs/Policy_on_personal_data_processing.pdf'
+//@ts-ignore
+import consentToTheNewsletterPdfLink from 'modules/auth/RegFormBlock/docs/Consent_to_the_newsletter.pdf'
+
 
 
 // Форма RegFormBlock
@@ -25,22 +32,22 @@ const obj = {
         eng: 'Invalid email address',
         rus: 'Почта написана неправильно'
     },*/
-    /*passwordField: {
+    passwordField: {
         eng: 'Password *',
         rus: 'Пароль *'
-    },*/
-    /*passwordConfirmField: {
+    },
+    passwordConfirmField: {
         eng: 'Repeat password *',
         rus: 'Повторите пароль *'
-    },*/
-    /*passwordsMustMatch: {
+    },
+    passwordsMustMatch: {
         eng: 'Passwords must match',
         rus: 'Пароли должны совпадать'
-    },*/
-    /*submitBtnText: {
+    },
+    submitBtnText: {
         eng: 'Sign up',
         rus: 'Зарегистрироваться'
-    },*/
+    },
     /*somethingWentWrong: {
         eng: 'Something went wrong',
         rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
@@ -57,8 +64,8 @@ const JSXObj = {
         rus: <>Уже есть учётная запись? <Link to='/enter'>Войдите</Link>.</>
     },
     legal: {
-        eng: <>By registering on this site I accept <a href='https://google.com' target='_blank'>the terms of use</a> and consent to the newsletter, the <a href='https://google.com' target='_blank'>processing of personal data</a> and agree to <a href='https://google.com' target='_blank'>the privacy policy</a>.</>,
-        rus: <>Регистрируясь на этом сайте я принимаю <a href='https://google.com' target='_blank'>условия использования</a> и даю согласие на рассылку, <a href='https://google.com' target='_blank'>обработку персональных данных</a> и соглашаюсь c <a href='https://google.com' target='_blank'>политикой конфиденциальности</a>.</>
+        eng: <>By registering on this site, you acknowledge acceptance of <a href={disclaimerPdfLink} target='_blank'>the terms of the disclaimer</a>, <a href={policyOnPersonalDataProcessingPdfLink} target='_blank'>personal data processing policy</a>, and <a href={consentToTheNewsletterPdfLink} target='_blank'>consent to the mailing list</a>.</>,
+        rus: <>Регистрируясь на этом сайте вы подтверждаете принятие условий <a href={disclaimerPdfLink} target='_blank'>отказа от ответственности</a>, <a href={policyOnPersonalDataProcessingPdfLink} target='_blank'>политики в отношении обработки персональных данных</a> и <a href={consentToTheNewsletterPdfLink} target='_blank'>согласие с рассылкой</a>.</>
     },
 }
 

@@ -25,18 +25,8 @@
 
 
 // Тип данных с ответом от пользователя
-// type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
+// type UpdateSiteRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
 
 // Успешный ответ
 /*

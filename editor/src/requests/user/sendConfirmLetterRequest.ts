@@ -57,7 +57,7 @@
 
 
 // Тип данных с ответом от пользователя
-// type SendConfirmLetterServerResponse = FailResponse | SuccessResponse
+// type SendConfirmLetterServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
@@ -67,17 +67,5 @@
         isOperational: true
         message: string
         statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            name: string
-            email: string
-        }
     }
 }*/

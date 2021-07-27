@@ -14,7 +14,7 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type DeleteArticleRequestServerResponse = FailResponse | SuccessResponse
+// type DeleteArticleRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
 // Ошибочный ответ
 /*type FailResponse = {

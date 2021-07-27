@@ -1,7 +1,7 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
+import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Сообщения не привязанные к конкретному месту
-/*const obj = {
+const obj = {
     emailPlaceholder: {
         eng: 'For example: mail@gmail.com',
         rus: 'Например: mail@gmail.com'
@@ -22,9 +22,9 @@
         eng: 'Must be 50 characters or less',
         rus: 'Максимум можно ввести 50 символов'
     },
-}*/
+}
 
-// export const commonMessages = getMessagesObject(obj)
+export const commonMessages = getMessagesObject(obj)
 
 
 

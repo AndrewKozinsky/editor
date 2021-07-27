@@ -28,7 +28,7 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type CreateNewArticleServerResponse = FailResponse | SuccessResponse
+// type CreateNewArticleServerResponse = ErrorServerResponseType | SuccessResponse
 
 // Ошибочный ответ
 /*type FailResponse = {

@@ -5,14 +5,10 @@ http {
 
     server {
         listen 80;
-        server_name editorium.local;
+        server_name localhost;
         root /sites;
 
-        #location /api1 {
-        #    proxy_pass http://express_api:3001;
-        #}
-
-        location /api2 {
+        location /api {
             proxy_pass http://nest_api:3002;
         }
 
@@ -25,7 +21,7 @@ http {
         }
 
         location /test {
-            return 200 'Hello from Test site';
+            return 200 'Hello from Test';
         }
     }
 }

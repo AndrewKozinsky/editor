@@ -3,7 +3,7 @@ import Logo from '../icons/logo'
 import NoticeError from '../icons/NoticeError'
 import NoticeInfo from '../icons/NoticeInfo'
 import NoticeSuccess from '../icons/NoticeSuccess'
-// import ErrorTriangle from '../icons/errorTriangle'
+import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
 // import SelectInputArrows from '../icons/selectInputArrows'
 // import MainTabMaterials from '../icons/mainTabMaterials'
@@ -54,7 +54,7 @@ export function getIcon(type: string): ReactNode {
         logo: Logo,
 
         // Значёк ошибки
-        // errorTriangle: ErrorTriangle,
+        errorTriangle: ErrorTriangle,
 
         // Значёк успеха
         // successCircle: SuccessCircle,

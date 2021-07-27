@@ -35,18 +35,8 @@
 
 
 // Тип данных с ответом от пользователя
-// export type GetComponentsFoldersServerResponse = null | FailResponse | SuccessResponse
+// export type GetComponentsFoldersServerResponse = null | ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
 
 // Успешный ответ
 /*

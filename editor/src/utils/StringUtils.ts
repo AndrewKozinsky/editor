@@ -15,13 +15,11 @@ export function makeCN(classesArr: string[]) {
 }
 
 
-/**
- * Функция возвращает случайный идентификатор
- */
-/*export function getRandomId() {
+/** Функция возвращает случайный идентификатор */
+export function getRandomId() {
     const randomNum = Math.random() * 100000
     return 'id' + Math.round(randomNum)
-}*/
+}
 
 /**
  * Функция принимает почту и возвращает домен

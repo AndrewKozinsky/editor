@@ -8,7 +8,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
     // login: 'users/login',
     // Регистрация
-    // signup: 'users/signup',
+    signup: 'users/signup',
     // Отправка письма со ссылкой на подтверждение почты
     // sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
     // Подтверждение почты
@@ -79,10 +79,10 @@ function getApiUrl(url: string, ...args: any[]): string {
 
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
-            return '/api/' + addresses[url]
+            return '/api2/' + addresses[url]
         }
         else {
-            return '/api/' + addresses[url](...args)
+            return '/api2/' + addresses[url](...args)
         }
     }
 

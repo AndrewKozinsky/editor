@@ -22,7 +22,7 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type LoginRequestServerResponse = FailResponse | SuccessResponse
+// type LoginRequestServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
@@ -32,17 +32,5 @@
         isOperational: true
         message: string // "Incorrect email or password"
         statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            name: string
-            email: string
-        }
     }
 }*/

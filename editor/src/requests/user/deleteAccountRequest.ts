@@ -16,7 +16,7 @@
 
 
 // Тип данных с ответом от пользователя
-// type DeleteAccountServerResponse = FailResponse | SuccessResponse
+// type DeleteAccountServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
@@ -27,10 +27,4 @@
         message: string
         statusCode: 400
     }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
 }*/

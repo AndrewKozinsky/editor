@@ -17,20 +17,9 @@
 
 
 // Тип данных с ответом от пользователя
-// type ChangeEmailServerResponse = FailResponse | SuccessResponse
+// type ChangeEmailServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
     status: "fail"
-}*/
-
-// Успешный ответ
-/*type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            name: string
-            language: 'rus' | 'eng'
-        }
-    }
 }*/

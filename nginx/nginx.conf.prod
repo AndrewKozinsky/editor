@@ -5,16 +5,19 @@ http {
 
     server {
         listen 80;
-        server_name editorium.net;
+        server_name localhost;
         root /sites;
 
         location /api {
-            proxy_pass http://editor_api:3001;
-            rewrite ^\/api\/(.*) /$1 break;
+            proxy_pass http://nest_api:3002;
         }
-        location /editor {
+        location /editor/ {
             proxy_pass http://editor:3000/;
             rewrite ^\/editor\/(.*) /$1 break;
+        }
+
+        location /test {
+            return 200 'Hello from Test';
         }
     }
 }

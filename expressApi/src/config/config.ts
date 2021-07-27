@@ -8,7 +8,7 @@ export type ConfigType = {
     // devSiteURL: string
 
     // emailFrom: string
-    // fakeEmailHost: string
+    // fakeEmailDomain: string
     // fakeEmailPort: number
     // fakeEmailUsername: string
     // fakeEmailPassword: string
@@ -34,7 +34,7 @@ export const config: ConfigType = {
     // Из какого адреса будут приходить письма от сервиса
     // emailFrom: 'mail@andrewkozinsky.ru',
     // Адрес сервиса для ложных писем
-    // fakeEmailHost: 'smtp.mailtrap.io',
+    // fakeEmailDomain: 'smtp.mailtrap.io',
     // Номер порта сервиса для ложных писем
     // fakeEmailPort: 25,
     // Имя пользователя сервиса для ложных писем

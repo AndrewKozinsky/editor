@@ -17,18 +17,8 @@
 
 
 // Тип данных с ответом от пользователя
-// type GetIncFilesTemplatesRequestServerResponse = FailResponse | SuccessResponse
+// type GetIncFilesTemplatesRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string // "Incorrect email or password"
-        statusCode: 400
-    }
-}*/
 
 // Успешный ответ
 /*

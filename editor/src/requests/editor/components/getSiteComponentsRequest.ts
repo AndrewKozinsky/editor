@@ -14,18 +14,9 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type GetComponentRequestServerResponse = FailResponse | SuccessResponse
+// type GetComponentRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
+
 
 // Успешный ответ
 /*type SuccessResponse = {

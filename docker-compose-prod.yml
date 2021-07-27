@@ -1,8 +1,6 @@
-version: "3.9"
+version: "3.3"
 
 services:
-  # В лекции сказали в версии для публикации не должно быть внешний томов.
-  # Весь код должен лежать внутри.
 
   # Nginx
   nginx:
@@ -10,15 +8,14 @@ services:
     container_name: editor-nginx
     depends_on:
       - editor
-      - editor_api
-      - editor_db
+      - nest_api
+      - postgres_db
     ports:
       - 80:80
     volumes:
       - ./nginx/nginx.conf.prod:/etc/nginx/nginx.conf
     networks:
       - editorium-network
-
 
   # Клиентская часть редактора
   editor:
@@ -30,44 +27,45 @@ services:
     environment:
       - SITE_URL=editorium.net
     restart: unless-stopped
-    volumes:
-      - ./editor/src:/app/src
     networks:
       - editorium-network
 
-
-  # API редактора
-  express_api:
-    build: expressApi
-    container_name: express-api
-    command: npm run start
+  # API редактора (Nest)
+  nest_api:
+    build:
+      context: ./nestApi
+      dockerfile: Dockerfile.prod
+    container_name: nest_api
+    command: npm run start:prod
     restart: unless-stopped
     environment:
       - MODE=production
-      - PORT=3001
-      - MONGO_URL=mongodb://editor_db:27017/editor_db
+      - PORT=3002
     depends_on:
-      - editor_db
+      - postgres_db
     networks:
       - editorium-network
-    volumes:
-      - ./expressApi/src:/app/src
 
-
-  # БД редактора
-  editor_db:
-    image: mongo:latest
-    container_name: editor-db
-    ports:
-      - 27017:27017
+  # Postgres
+  # BD: editor
+  # User: editor
+  # Password: dt52posQP00P
+  postgres_db:
+    image: postgres:13-alpine
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: sguen35GPA
+      POSTGRES_USER: postgres
+      POSTGRES_DB: editor
     volumes:
-      - editor_db:/data/db
+      - postgres_db:/var/lib/postgresql/data
     networks:
       - editorium-network
 
 
 volumes:
-  editor_db:
+  postgres_db:
 
 networks:
   editorium-network:

@@ -16,20 +16,9 @@
 
 
 // Тип данных с ответом от пользователя
-// type LoginRequestServerResponse = FailResponse | SuccessResponse
+// type LoginRequestServerResponse = ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type FailResponse = {
     status: "fail"
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            email: string
-        }
-    }
 }*/

@@ -16,7 +16,7 @@
 
 
 // Тип данных с ответом от пользователя
-// type LoginRequestServerResponse = UnknownErrorResponse | FailErrorResponse | SuccessResponse
+// type LoginRequestServerResponse = UnknownErrorResponse | ErrorServerResponseType | UserServerResponseType
 
 // Ошибочный ответ
 /*type UnknownErrorResponse = {
@@ -35,15 +35,5 @@
         isOperational: true
         message: string // "There is no user with this email address."
         statusCode: 404
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        email: string // "andkozinskiy@yandex.ru"
-        message: string // "Email has been sent!"
     }
 }*/

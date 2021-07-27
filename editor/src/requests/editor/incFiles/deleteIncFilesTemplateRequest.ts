@@ -23,18 +23,9 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type DeleteIncFilesTemplateServerResponse = null | FailResponse | SuccessResponse
+// type DeleteIncFilesTemplateServerResponse = null | ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
+
 
 // Успешный ответ
 /*

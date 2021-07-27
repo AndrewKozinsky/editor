@@ -14,15 +14,15 @@ export function getIconSize(type: string) {
                 height: "18px",
                 viewBox: "0 0 84 18"
             }
-        // Значёк ошибки
-        // case 'errorTriangle':
         // Значёк успеха
-        /*case 'successCircle':
+        // case 'successCircle':
+        // Значёк ошибки
+        case 'errorTriangle':
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
-            }*/
+            }
         // Галочка выбранного флага
         /*case 'selectInputArrows':
             return {
