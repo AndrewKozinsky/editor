@@ -4,10 +4,11 @@ import UserServerResponseType from 'requests/user/userServerResponseType'
 
 namespace UniversalAuthFormConfigType {
     export type Config = {
-        fields: { [key: string]: Field },
-        submit: Submit,
-        requestFn: (formState: FHTypes.ReadyFieldsValues) => Promise<ErrorServerResponseType | UserServerResponseType>,
-        hideFormAfterSuccessfulSubmit?: boolean,
+        fields: { [key: string]: Field }
+        submit: Submit
+        requestFn: (formState: FHTypes.ReadyFieldsValues) => Promise<ErrorServerResponseType | UserServerResponseType>
+        hideCommonErrors?: boolean
+        hideFormAfterSuccessfulSubmit?: boolean
         afterSubmit?: AfterSubmit
     }
 
@@ -16,7 +17,7 @@ namespace UniversalAuthFormConfigType {
         type?: 'text' | 'email' | 'password',
         autocomplete?: 'email' | 'username' | 'current-password' | 'new-password',
         placeholder?: string,
-        autoFocus?:boolean,
+        autoFocus?:boolean | number,
         schema?: (fields?: FHTypes.FieldsStateObj) => any
     }
 

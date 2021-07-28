@@ -1,4 +1,3 @@
-import React from 'react'
 // @ts-ignore
 import * as yup from 'yup'
 import { commonMessages } from 'messages/commonMessages'
@@ -11,7 +10,7 @@ import FHTypes from 'libs/formHandler/types'
 
 
 function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
-    const emailFields: UniversalAuthFormConfigType.Field = {
+    const emailField: UniversalAuthFormConfigType.Field = {
         label: regFormMessages.emailField,
         autocomplete: 'username',
         placeholder: commonMessages.emailPlaceholder,
@@ -20,10 +19,10 @@ function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
             return yup.string()
                 .required(commonMessages.requiredField)
                 .email(regFormMessages.emailErrInvalid)
-                .max(100, commonMessages.passwordToLong)
+                .max(100, commonMessages.emailToLong)
         }
     }
-    const passFields: UniversalAuthFormConfigType.Field = {
+    const passField: UniversalAuthFormConfigType.Field = {
         label: regFormMessages.passwordField,
         type: 'password',
         autocomplete: 'new-password',
@@ -34,7 +33,7 @@ function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
                 .max(50, commonMessages.passwordToLong)
         }
     }
-    const passConfFields: UniversalAuthFormConfigType.Field = {
+    const passConfField: UniversalAuthFormConfigType.Field = {
         label: regFormMessages.passwordConfirmField,
         type: 'password',
         autocomplete: 'new-password',
@@ -46,9 +45,9 @@ function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
 
     const formConfig: UniversalAuthFormConfigType.Config = {
         fields: {
-            email: emailFields,
-            password: passFields,
-            passwordConfirm: passConfFields
+            email: emailField,
+            password: passField,
+            passwordConfirm: passConfField
         },
         submit: {
             text: regFormMessages.submitBtnText,

@@ -32,14 +32,14 @@ export class Email {
     }
 
     // Функция отправляет письмо со ссылкой на сброс пароля
-    /*async sendForgotPasswordLetter(resetToken: string) {
+    async sendForgotPasswordLetter(resetToken: string) {
         const subject = this.lang === 'rus'
             ? 'Ссылка на страницу сброса пароля от Editorium.net'
             : 'Your reset password token (valid for 10 minutes)'
 
         const [html, text] = new EmailTemplate(this.domain).createForgotPasswordLetter(resetToken, this.lang)
         this.send(subject, html, text)
-    }*/
+    }
 
     // Общая функция отправки письма.
     // В зависимости от режима сервера отправляет письма либо на mailtrap.io либо на реальный адрес

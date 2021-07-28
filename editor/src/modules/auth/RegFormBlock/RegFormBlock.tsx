@@ -11,7 +11,6 @@ import createFormConfig from './formConfig'
 
 /** User Sign up form */
 export default function RegFormBlock() {
-
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [email, setEmail] = useState('')
 
@@ -38,7 +37,7 @@ type LetterWasSentPropType = {
     email: string // Почта пользователя, на которую регистрируется учётная запись
 }
 
-/** Сообщение с просьбой подтвердить почту перед входом в редактор */
+/** The message that the letter was sent */
 export function LetterWasSent(props: LetterWasSentPropType) {
     if (!props.show) return null
 

@@ -13,7 +13,7 @@ type UniversalAuthFormPropType = {
     config: UniversalAuthFormConfigType.Config,
 }
 
-/** Форма входа в сервис */
+/** Universal Auth Form component */
 export default function UniversalAuthForm(props: UniversalAuthFormPropType) {
 
     const { config } = props

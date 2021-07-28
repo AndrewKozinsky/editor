@@ -92,7 +92,7 @@ UserSchema.methods.correctPassword = async (candidatePassword: string, userPassw
 
 // Функция проверяет изменился ли пароль пользователя позже, чем переданное время.
 // true обозначает, что изменился позже переданного времени
-UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: number) {
+/*UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: number) {
 
     if(this.passwordChangedAt) {
         const changedTimestamp = Math.round(
@@ -103,10 +103,10 @@ UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: n
     }
 
     return false
-}
+}*/
 
 // Метод создающий токен сброса пароля
-UserSchema.methods.createPasswordResetToken = function (this: IUser) {
+/*UserSchema.methods.createPasswordResetToken = function (this: IUser) {
     // Будет сгенерирована строка вида 2d860d2bb4d2d0184e99e80fac9390ab55bd72a0b545bdf06c34ae9a87cc6d2b
     const resetToken = crypto.randomBytes(32).toString('hex')
 
@@ -122,7 +122,7 @@ UserSchema.methods.createPasswordResetToken = function (this: IUser) {
     this.passwordResetExpires = newDate
 
     return resetToken
-}
+}*/
 
 
 const UserModel = mongoose.model<IUser>('User', UserSchema)

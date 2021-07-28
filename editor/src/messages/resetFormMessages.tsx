@@ -1,13 +1,13 @@
-// import React from 'react'
-/*import {
+import React from 'react'
+import {
     getMessagesJSXFnObject,
     getMessagesObject
-} from 'messages/fn/getMessagesObject'*/
-// import {getDomainFromEmail} from 'utils/StringUtils'
+} from 'messages/fn/getMessagesObject'
+import { getDomainFromEmail } from 'utils/StringUtils'
 
 
 // Форма ResetFormBlock
-/*const obj = {
+const obj = {
     // Заголовок формы сброса пароля
     formHeader: {
         eng: 'Reset password',
@@ -20,19 +20,15 @@
     submitBtnText: {
         eng: 'Reset',
         rus: 'Сбросить'
-    },
-    somethingWentWrong: {
-        eng: 'Something went wrong',
-        rus: 'Произошла непредвиденная ошибка. Форма не отправлена.'
-    },
-}*/
+    }
+}
 
-// export const resetFormMessages = getMessagesObject(obj)
+export const resetFormMessages = getMessagesObject(obj)
 
 
 
 // Форма ResetFormBlock
-/*const JSXFnObj = {
+const JSXFnObj = {
     retypePasswordLetter: (email: string) => {
         const domain = 'https://' + getDomainFromEmail(email)
 
@@ -41,6 +37,6 @@
             rus: <>На <a href={domain}>почту</a> выслано письмо со ссылкой на страницу сброса пароля.</>
         }
     },
-}*/
+}
 
-// export const resetFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)
+export const resetFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)

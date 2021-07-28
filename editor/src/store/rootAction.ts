@@ -2,10 +2,10 @@
 // import modalActions from './modal/modalActions'
 import settingsActions from './settings/settingsActions'
 // import sitesActions from './site/sitesActions'
-// import userActions from './user/userActions'
+import userActions from './user/userActions'
 
 const actions = {
-    // user: userActions,
+    user: userActions,
     // sites: sitesActions,
     settings: settingsActions,
     // article: articleActions,

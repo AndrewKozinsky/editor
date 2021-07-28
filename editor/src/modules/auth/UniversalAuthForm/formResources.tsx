@@ -125,7 +125,7 @@ export default function getFormConfig(config: UniversalAuthFormConfigType.Config
                     formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
                     // Показать общее сообщение. Оно будет показано ниже формы
-                    if (response.commonError) {
+                    if (response.commonError && !config.hideCommonErrors) {
                         formState = formDetails.setFormDataPropValue(
                             formState, 'commonError', serverMessages[response.commonError]
                         )

@@ -14,6 +14,10 @@ const obj = {
         eng: 'Required field',
         rus: 'Обязательное поле'
     },
+    emailToLong: {
+        eng: 'Must be 100 characters or less',
+        rus: 'Максимум можно ввести 100 символов'
+    },
     passwordToShort: {
         eng: 'Must be 6 characters or more',
         rus: 'Минимально нужно ввести 6 символов'

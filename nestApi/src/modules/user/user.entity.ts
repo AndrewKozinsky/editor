@@ -1,5 +1,6 @@
 import {
     BeforeInsert,
+    BeforeUpdate,
     Column,
     CreateDateColumn,
     Entity,
@@ -38,16 +39,23 @@ export class UserEntity {
     language: MiscTypes.Language
 
     // Date when user was created. It set automatically.
-    @CreateDateColumn({type: 'bigint', default: +(new Date())})
+    @CreateDateColumn({type: 'bigint', default: 0})
     createdAt: number
 
+    // Hash password before create or update user data
     @BeforeInsert()
+    @BeforeUpdate()
     async hashPassword() {
         if (!this.password) return
         // Hash password before insert
         this.password = await hash(this.password, 10)
         // Set a new date when the password was changed
         this.passwordChangedAt = +(new Date())
+    }
+
+    @BeforeInsert()
+    async setCreatedAtData() {
+        this.createdAt = +(new Date())
     }
 }
 

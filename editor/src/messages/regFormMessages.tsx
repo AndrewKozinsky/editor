@@ -28,10 +28,10 @@ const obj = {
         eng: 'E-mail *',
         rus: 'Электронная почта *'
     },
-    /*emailErrInvalid: {
+    emailErrInvalid: {
         eng: 'Invalid email address',
         rus: 'Почта написана неправильно'
-    },*/
+    },
     passwordField: {
         eng: 'Password *',
         rus: 'Пароль *'
@@ -48,10 +48,6 @@ const obj = {
         eng: 'Sign up',
         rus: 'Зарегистрироваться'
     },
-    /*somethingWentWrong: {
-        eng: 'Something went wrong',
-        rus: 'Произошла непредвиденная ошибка. Регистрация не выполнена.'
-    },*/
 }
 
 export const regFormMessages = getMessagesObject(obj)

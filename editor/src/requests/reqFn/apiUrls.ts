@@ -6,25 +6,25 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
-    // login: 'users/login',
+    login: 'users/login',
     // Регистрация
     signup: 'users/signup',
     // Отправка письма со ссылкой на подтверждение почты
-    // sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
+    sendConfirmLetter: 'users/sendConfirmLetter',
     // Подтверждение почты
-    /*confirmEmail: function (confirmEmailToken: string) {
+    confirmEmail: function (confirmEmailToken: string) {
         return 'users/confirmEmail/' + confirmEmailToken
-    },*/
+    },
     // Изменение почты
     // changeEmail: 'users/changeEmail',
     // Изменение пароля
     // changePassword: 'users/changePassword',
     // Сброс пароля
-    // resetPassword: 'users/resetPassword',
+    resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного
-    /*changeResetPassword: function (resetPasswordToken: string) {
+    changeResetPassword: function (resetPasswordToken: string) {
         return 'users/resetPassword/' + resetPasswordToken
-    },*/
+    },
     // Текущий пользователь
     // me: 'users/me',
 

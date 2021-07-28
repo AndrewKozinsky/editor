@@ -1,4 +1,3 @@
-import { promisify } from 'util'
 import { compare } from 'bcrypt'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -15,6 +14,11 @@ import { UserResponseInterface } from './types/userResponse.interface'
 import responseCommonError from 'src/utils/error/responseCommonError'
 import { LoginDto } from './dto/login.dto'
 import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from './dto/resetPassword.dto'
+import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+const crypto = require('crypto')
+
 
 @Injectable()
 export class UserService {
@@ -24,24 +28,19 @@ export class UserService {
     ) {}
 
     async getTokenData(request: ExpressRequestInterface): Promise<UserEntity> {
-        const token = request?.cookies.authToken
+        const token = request?.cookies?.token
 
         // Если токен не передан, то возвратить ошибочный ответ
         if(!token) sendErrorResponse()
 
         // Расшифровать JWT и получить payload
-        const decodedJWT: MiscTypes.JWTDecoded = await promisify( verify )(token, config.jwtSecret)
+        const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
 
         // Get user by id
         const user = await this.userRepository.findOne(decodedJWT.id)
 
         // Если пользователь не найден, то вернуть ошибочный ответ
         if (!user) sendErrorResponse()
-
-        // Если пароль изменён с последнего захода, то вернуть ошибочный ответ
-        if(this.changedPasswordAfter(user, decodedJWT.iat)) {
-            sendErrorResponse()
-        }
 
         // Если почта не подтверждена, то вернуть ошибочный ответ
         if(user.emailConfirmToken) {
@@ -58,7 +57,6 @@ export class UserService {
     }
 
     async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
-
         // Throw an error if user exists
         if (await this.getUserByEmail(createUserDto.email)) {
             responseCommonError('user_createUser_alreadyRegistered', HttpStatus.UNPROCESSABLE_ENTITY)
@@ -84,7 +82,7 @@ export class UserService {
 
         // Get user by email
         const user = await this.userRepository.findOne({email: loginDto.email})
-        const isPasswordMatch = compare(loginDto.password, user.password)
+        const isPasswordMatch = await compare(loginDto.password, user.password)
 
         // Throw an error response if user passed wrong data
         if (!user || !isPasswordMatch) {
@@ -99,9 +97,108 @@ export class UserService {
         return user
     }
 
+    async sendConfirmLetter(sendConfirmLetterDto: SendConfirmLetterDto, language: MiscTypes.Language): Promise<UserEntity> {
+        // Получение переданной в body почты
+        const email: string = sendConfirmLetterDto.email
+
+        // Поиск пользователя с такой почтой
+        const user = await this.getUserByEmail(email)
+
+        // Если пользователь не найден, то возратить ошибку
+        if (!user) {
+            responseCommonError('user_sendConfirmLetter_userIsNotExist', HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        // Если пользователь уже подтвердил почту
+        if (!user.emailConfirmToken) {
+            responseCommonError('user_sendConfirmLetter_emailIsConfirmed', HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        // Отправление письма с подтверждением почты
+        await sendEmailAddressConfirmLetter(language, user.email, user.emailConfirmToken)
+
+        return user
+    }
+
+    async confirmEmail(token: string): Promise<UserEntity> {
+
+        const user = await this.userRepository.findOne({emailConfirmToken: token})
+        // Если пользователь не найден, то возратить ошибку
+        if (!user) {
+            responseCommonError('user_confirmEmail_userIsNotFound', HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        // Erase emailConfirmToken property because email has been confirmed.
+        user.emailConfirmToken = ''
+
+        await this.userRepository.save(user)
+
+        return user
+    }
+
+    async resetPassword(sendConfirmLetterDto: ResetPasswordDto, language: MiscTypes.Language): Promise<UserEntity> {
+        // Получение переданной в body почты
+        const email: string = sendConfirmLetterDto.email
+
+        // Поиск пользователя с такой почтой
+        const user = await this.getUserByEmail(email)
+
+        // Вернуть ошибку если пользователь не найден
+        if (!user) {
+            responseCommonError('user_resetPassword_userIsNotFound', HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        // Пользователь найден...
+
+        // Создать токен сброса...
+        const resetToken = this.getPasswordResetToken()
+
+        // Записать его в свойство passwordResetToken в объект с данными найденного пользователя
+        // По нему определяется по какому пользователю нужно сбрасывать пароль.
+        user.passwordResetToken = resetToken
+
+        await this.userRepository.save(user)
+
+        // Послать пользователю письмо со сбросом пароля
+        try {
+            // Создать письмо
+            const userEmail = new Email(user.email, language)
+
+            // Отправить письмо со сбросом пароля
+            await userEmail.sendForgotPasswordLetter(resetToken)
+
+            // Send user data
+            return user
+        }
+        // Не удалось отправить письмо со сбросом пароля...
+        catch (err) {
+            // Бросить ошибку
+            responseCommonError('user_resetPassword_failedToSendEmail', HttpStatus.FAILED_DEPENDENCY)
+        }
+    }
+
+    async changeResetPassword(changeResetPasswordDto: ChangeResetPasswordDto, token: string): Promise<UserEntity> {
+        // Найду пользователя по токену смены пароля
+        const user = await this.userRepository.findOne({passwordResetToken: token})
+
+        // Бросить ошибку если пользователь не найден.
+        if (!user) {
+            responseCommonError('user_confirmEmail_userIsNotFound', HttpStatus.UNPROCESSABLE_ENTITY)
+        }
+
+        // Пользователь найден...
+        // Задание нового пароля и удаление данных для смены пароля
+        user.password = changeResetPasswordDto.password
+        user.passwordResetToken = ''
+
+        // Сохранить данные пользователя
+        return await this.userRepository.save(user)
+    }
+
+
     // ADDITIONAL METHODS
 
-    async getUserByEmail(email: string) {
+    async getUserByEmail(email: string): Promise<UserEntity> {
         return await this.userRepository.findOne({email})
     }
 
@@ -109,9 +206,16 @@ export class UserService {
         return sign(
             { id: user.id },
             config.jwtSecret,
-            { expiresIn: config.jwtExpiresIn + config.jwtExpiresUnit }
+            { expiresIn: '90d' }
         )
     }
+
+    // Метод создающий незашифрованный токен сброса пароля
+    getPasswordResetToken(): string {
+        // Будет сгенерирована строка вида 2d860d2bb4d2d0184e99e80fac9390ab55bd72a0b545bdf06c34ae9a87cc6d2b
+        return crypto.randomBytes(32).toString('hex')
+    }
+
 
     /**
      * The function form response and send it to clien
@@ -123,8 +227,8 @@ export class UserService {
     buildUserResponse(
         user: UserEntity,
         response: Response,
-        setCookieToken: boolean = true,
-        statusCode: number = HttpStatus.OK
+        statusCode: number = HttpStatus.OK,
+        setCookieToken: boolean = false
     ): void {
         const token = this.generateToken(user)
 
@@ -152,19 +256,6 @@ export class UserService {
         else {
             response.send(resBody)
         }
-    }
-
-    changedPasswordAfter = function (user: UserEntity, JWTTimestamp: number) {
-
-        if(user.passwordChangedAt) {
-            const changedTimestamp = Math.round(
-                this.passwordChangedAt.getTime() / 1000
-            )
-
-            return JWTTimestamp < changedTimestamp
-        }
-
-        return false
     }
 }
 

@@ -1,7 +1,11 @@
 import { getMessagesObject } from 'messages/fn/getMessagesObject'
+import { SendConfirmLetterDto } from '../../../nestApi/src/modules/user/dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from '../../../nestApi/src/modules/user/dto/resetPassword.dto'
 
 // Сообщения не привязанные к конкретному месту
 const obj = {
+    // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
+
     user_getTokenData_tokenIsNotPassed: {
         eng: 'Token was not passed or it is wrong.',
         rus: 'Токен не был передан в запросе.'
@@ -23,7 +27,7 @@ const obj = {
         rus: 'Строка не должна быть длиннее 100 символов.'
     },
     user_CreateUserDto_itIsNotEmail: {
-        eng: 'It is not look like email.',
+        eng: 'It is not look like an email.',
         rus: 'Это не похоже на почту.'
     },
     user_CreateUserDto_EmptyEmail: {
@@ -37,6 +41,90 @@ const obj = {
     user_CreateUserDto_passwordIsEmpty: {
         eng: 'You must specify the password.',
         rus: 'Пароль должен быть указан.'
+    },
+
+    user_LoginDto_emailTooLong: {
+        eng: 'The string must not be longer than 100 characters.',
+        rus: 'Строка не должна быть длиннее 100 символов.'
+    },
+    user_LoginDto_itIsNotEmail: {
+        eng: 'It is not look like an email.',
+        rus: 'Это не похоже на почту.'
+    },
+    user_LoginDto_emailIsEmpty: {
+        eng: 'You must specify the email.',
+        rus: 'Почта должна быть указана.'
+    },
+    user_LoginDto_passwordIsOutOfRange: {
+        eng: 'Password must be 5 to 20 characters long.',
+        rus: 'Пароль должен быть длиной от 5 до 20 символов.'
+    },
+    user_LoginDto_passwordIsEmpty: {
+        eng: 'You must specify the password.',
+        rus: 'Пароль должен быть указан.'
+    },
+
+    user_sendConfirmLetter_userIsNotExist: {
+        eng: 'User with such mail was not found.',
+        rus: 'Пользователь с такой почтой не найден.'
+    },
+    user_sendConfirmLetter_emailIsConfirmed: {
+        eng: 'User has already confirmed mail.',
+        rus: 'Пользователь уже подтвердил почту.'
+    },
+
+    user_SendConfirmLetterDto_emailTooLong: {
+        eng: 'The string must not be longer than 100 characters.',
+        rus: 'Строка не должна быть длиннее 100 символов.'
+    },
+    user_SendConfirmLetterDto_itIsNotEmail: {
+        eng: 'It is not look like an email.',
+        rus: 'Это не похоже на почту.'
+    },
+    user_SendConfirmLetterDto_emailIsEmpty: {
+        eng: 'You must specify the email.',
+        rus: 'Почта должна быть указана.'
+    },
+
+    user_confirmEmail_userIsNotFound: {
+        eng: 'User not found. The email is either already confirmed or has not yet been registered.',
+        rus: 'Пользователь не найден. Почта или уже подтверждена или еще не была зарегистрирована.'
+    },
+
+    user_ResetPasswordDto_emailTooLong: {
+        eng: 'The string must not be longer than 100 characters.',
+        rus: 'Строка не должна быть длиннее 100 символов.'
+    },
+    user_ResetPasswordDto_itIsNotEmail: {
+        eng: 'It is not look like an email.',
+        rus: 'Это не похоже на почту.'
+    },
+    user_ResetPasswordDto_emailIsEmpty: {
+        eng: 'You must specify the email.',
+        rus: 'Почта должна быть указана.'
+    },
+
+    user_resetPassword_userIsNotFound: {
+        eng: 'There is no user with this email address.',
+        rus: 'Не найдено пользователя с такой почтой.'
+    },
+    user_resetPassword_failedToSendEmail: {
+        eng: 'There was an error sending the email. Try again later.',
+        rus: 'Не удалось отправить письмо. Попробуйте позже.'
+    },
+
+    user_ChangeResetPasswordDto_passwordIsOutOfRange: {
+        eng: 'Password must be 5 to 20 characters long.',
+        rus: 'Пароль должен быть длиной от 5 до 20 символов.'
+    },
+    user_ChangeResetPasswordDto_passwordIsEmpty: {
+        eng: 'You must specify the password.',
+        rus: 'Пароль должен быть указан.'
+    },
+
+    user_changeResetPassword_userIsNotFound: {
+        eng: 'User not found. Maybe the password reset token is wrong or the password has not been reset.',
+        rus: 'Пользователь не найден. Возможно токен сброса пароля неправильный или пароль не сбрасывали.'
     },
 }
 

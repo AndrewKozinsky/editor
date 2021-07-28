@@ -1,33 +1,24 @@
-// import React from 'react'
-// import Header from 'common/textBlocks/Header/Header'
-// import Menu from 'common/misc/Menu/Menu'
-// import Button from 'common/formElements/Button/Button'
-// import Form from 'common/formElements/Form/Form'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Notice from 'common/Notice/Notice'
-// import getFormConfig from './formResources'
-// import { getMenuItems } from '../menuItems'
-/*import {
+import React, { useState } from 'react'
+import Header from 'common/textBlocks/Header/Header'
+import Menu from 'common/misc/Menu/Menu'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { getMenuItems } from '../menuItems'
+import {
     resetFormMessages,
     resetFormJSXFnMessages
-} from 'messages/resetFormMessages'*/
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import CommonError from '../CommonError/CommonError'
-// import FHTypes from 'libs/formHandler/types'
-// import {commonMessages} from 'messages/commonMessages'
+} from 'messages/resetFormMessages'
+import UniversalAuthForm from '../UniversalAuthForm/UniversalAuthForm'
+import Notice from 'common/textBlocks/Notice/Notice'
+import createFormConfig from './formConfig'
 
 
-/** Форма входа в сервис */
-/*export default function ResetFormBlock() {
+/** Форма сброса пароля */
+export default function ResetFormBlock() {
 
-    // FormHandler
-    const fh = useFormHandler(getFormConfig(), 'reset')
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+    const [email, setEmail] = useState('')
 
-    // Показывать или сообщением подтвердить почту или форму
-    const content = fh.form.emailWasSent
-        ? <EmailWasSentMessage email={fh.form.emailWasSent} />
-        : <ThisForm fh={fh} />
+    const formConfig = createFormConfig(setEmail, setShowSuccessMessage)
 
     return (
         <div>
@@ -37,70 +28,27 @@
             <Wrapper b={10}>
                 <Header text={resetFormMessages.formHeader} type='h1' />
             </Wrapper>
-            {content}
+            <UniversalAuthForm config={formConfig} />
+            <EmailWasSentMessage email={email} show={showSuccessMessage} />
         </div>
     )
-}*/
+}
 
 
-/*type ThisFormPropType = {
-    fh?: FHTypes.ReturnObj // Объектами с данными и методами манипуляцией формой
-}*/
-
-/** Форма входа пользователя */
-/*function ThisForm(props: ThisFormPropType) {
-
-    const {
-        fh
-    } = props
-
-    return (
-        <>
-            <Form name='reset' formHandlers={fh.formHandlers}>
-                <Wrapper>
-                    <TextInput
-                        label={resetFormMessages.emailField}
-                        name='email'
-                        value={fh.fields.email.value[0]}
-                        onChange={fh.onChangeFieldHandler}
-                        autocomplete='email'
-                        placeholder={commonMessages.emailPlaceholder}
-                        error={fh.fields.email.data.error}
-                        disabled={fh.fields.email.data.disabled}
-                        autoFocus
-                    />
-                </Wrapper>
-                <Wrapper t={20} align={'right'}>
-                    <Button
-                        type='submit'
-                        text={resetFormMessages.submitBtnText}
-                        name='submit'
-                        disabled={fh.fields.submit.data.disabled}
-                        loading={fh.fields.submit.data.loading}
-                    />
-                </Wrapper>
-                <CommonError error={fh.form.commonError} />
-            </Form>
-        </>
-    )
-}*/
-
-
-/*type EmailWasSentMessagePropType = {
+type EmailWasSentMessagePropType = {
+    show: boolean
     email: string // Почта пользователя, которую нужно подтвердить
-}*/
+}
 
 /** Сообщение с просьбой перейти к письму и нажать на ссылку для ввода нового пароля */
-/*function EmailWasSentMessage(props: EmailWasSentMessagePropType) {
-    const {
-        email
-    } = props
+function EmailWasSentMessage(props: EmailWasSentMessagePropType) {
+    if (!props.show) return null
 
     return (
         <>
-            <Notice>
-                {resetFormJSXFnMessages.retypePasswordLetter(email)}
+            <Notice icon='success' bg>
+                {resetFormJSXFnMessages.retypePasswordLetter(props.email)}
             </Notice>
         </>
     )
-}*/
+}
