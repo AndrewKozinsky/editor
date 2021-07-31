@@ -6,7 +6,7 @@ import { combineReducers } from 'redux'
 import userReducer from './user/userReducer'
 import settingsReducer from './settings/settingsReducer'
 // import sitesReducer from './site/sitesReducer'
-// import modalReducer from './modal/modalReducer'
+import modalReducer from './modal/modalReducer'
 // import articleReducer from './article/articleReducer'
 
 // Корневой редьюсер
@@ -15,7 +15,7 @@ export const rootReducer = combineReducers({
     // sites:  sitesReducer,
     settings:  settingsReducer,
     // article: articleReducer,
-    // modal:  modalReducer
+    modal:  modalReducer
 })
 
 export type AppState = ReturnType<typeof rootReducer>

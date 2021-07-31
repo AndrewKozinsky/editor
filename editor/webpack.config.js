@@ -78,6 +78,7 @@ function getResolve() {
             src: path.resolve(__dirname, './src/'),
             common: path.resolve(__dirname, './src/common'),
             editor: path.resolve(__dirname, './src/editor'),
+            entrance: path.resolve(__dirname, './src/entrance'),
             libs: path.resolve(__dirname, './src/libs'),
             messages: path.resolve(__dirname, './src/messages'),
             modules: path.resolve(__dirname, './src/modules'),

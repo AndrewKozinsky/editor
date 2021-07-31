@@ -1,10 +1,10 @@
-// import {makeCN} from 'utils/StringUtils'
+import { makeCN } from 'utils/StringUtils'
 
 /**
  * Функция возвращает классы обёртки полей ввода
  * @param {Number} gap — отступ между элементами внутри компонента.
  */
-/*export function getFieldGroupClasses(gap?: number) {
+export function getFieldGroupClasses(gap?: number) {
     // Классы
     const CN = 'field-wrapper'
     const classes = [CN]
@@ -13,4 +13,4 @@
     if (gap) classes.push(CN + '--gap' + gap)
 
     return makeCN(classes)
-}*/
+}

@@ -1,8 +1,9 @@
-// import React from 'react'
-// import { sitesPanelMessages } from 'messages/sitesPanelMessages'
+import React from 'react'
+import { getCN } from '../../utils/StringUtils'
+import { sitesPanelMessages } from 'messages/sitesPanelMessages'
 // import { useSelector } from 'react-redux'
 // import { AppState } from 'store/rootReducer'
-// import NameSection from '../wrappers/NameSection/NameSection'
+import NameSection from '../wrappers/NameSection/NameSection'
 // import Button from 'common/formElements/Button/Button'
 /*import {
     useFetchSites,
@@ -12,32 +13,32 @@
 // import ItemsList from 'common/ItemsList/ItemsList'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import { MiscTypes } from 'types/miscTypes'
-// import './LeftPart-1.scss'
+import './LeftPart-1.scss'
 
 
-/*type LeftPart1PropType = {
+type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}*/
+}
 
 /** Левая часть первой главной вкладки */
-/*export default function LeftPart1(props: LeftPart1PropType) {
+export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
 
     // Атрибуты обёртки панели
-    const CN = 'left-part-1'
+    const CN = getCN('left-part-1')
     const style = display ? {} : {display: 'none'}
 
     return (
-        <div className={CN} style={style}>
+        <div className={CN.root} style={style}>
             <NameSection header={sitesPanelMessages.header}>
-                <NewSiteButton />
-                <SitesButtons />
+                {/*<NewSiteButton />*/}
+                {/*<SitesButtons />*/}
             </NameSection>
         </div>
     )
-}*/
+}
 
 /** Компонент кнопки создания нового сайта */
 /*function NewSiteButton() {

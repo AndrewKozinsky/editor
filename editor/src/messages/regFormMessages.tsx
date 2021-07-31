@@ -9,11 +9,11 @@ import {
     getMessagesObject
 } from 'messages/fn/getMessagesObject'
 //@ts-ignore
-import disclaimerPdfLink from 'modules/auth/RegFormBlock/docs/Disclaimer.pdf'
+import disclaimerPdfLink from 'src/entrance/RegFormBlock/docs/Disclaimer.pdf'
 //@ts-ignore
-import policyOnPersonalDataProcessingPdfLink from 'modules/auth/RegFormBlock/docs/Policy_on_personal_data_processing.pdf'
+import policyOnPersonalDataProcessingPdfLink from 'src/entrance/RegFormBlock/docs/Policy_on_personal_data_processing.pdf'
 //@ts-ignore
-import consentToTheNewsletterPdfLink from 'modules/auth/RegFormBlock/docs/Consent_to_the_newsletter.pdf'
+import consentToTheNewsletterPdfLink from 'src/entrance/RegFormBlock/docs/Consent_to_the_newsletter.pdf'
 
 
 

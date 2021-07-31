@@ -1,11 +1,11 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
+import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Редактор»
-/*const obj = {
+const obj = {
     header: {
         eng: 'Editor',
         rus: 'Редактор'
     },
-}*/
+}
 
-// export const editorTabContentMessages = getMessagesObject(obj)
+export const editorTabContentMessages = getMessagesObject(obj)

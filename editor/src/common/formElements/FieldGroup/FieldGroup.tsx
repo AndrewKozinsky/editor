@@ -1,10 +1,10 @@
-// import React, {ReactElement, ReactNode} from 'react'
-// import Radio from '../Radio/Radio'
-// import Checkbox from '../Checkbox/Checkbox'
-// import FHTypes from 'libs/formHandler/types'
-// import Label from '../Label/Label'
-// import { getFieldGroupClasses } from './FieldGroup-func'
-// import './FieldGroup.scss'
+import React, {ReactElement, ReactNode} from 'react'
+import Radio from '../Radio/Radio'
+import Checkbox from '../Checkbox/Checkbox'
+import FHTypes from 'libs/formHandler/types'
+import Label from '../Label/Label'
+import { getFieldGroupClasses } from './FieldGroup-func'
+import './FieldGroup.scss'
 
 
 /**
@@ -14,9 +14,9 @@
  * Если в value передаётся массив строк, то это обозначает
  */
 
-// type InputDataType = { label: string | ReactElement, value: string }
+type InputDataType = { label: string | ReactElement, value: string }
 
-/*export type FieldGroupPropType = {
+export type FieldGroupPropType = {
     label?: string
     inputType: 'radio' | 'checkbox'
     groupName: string
@@ -26,16 +26,16 @@
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
-/*export default function FieldGroup(props: FieldGroupPropType) {
+export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
         inputType,
         groupName,
         inputsArr,
         value,
-        gap = 20,
+        gap,
         disabled = false, // Заблокировано ли поле
         onChange,
         onBlur
@@ -68,15 +68,15 @@
             </InputsWrapper>
         </>
     )
-}*/
+}
 
 
-/*export type InputsWrapperType = {
+export type InputsWrapperType = {
     gap: number,
     children: ReactNode
-}*/
+}
 
-/*function InputsWrapper(props: InputsWrapperType) {
+function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
         children
@@ -86,4 +86,4 @@
     const cls = getFieldGroupClasses(gap)
 
     return <div className={cls}>{children}</div>
-}*/
+}

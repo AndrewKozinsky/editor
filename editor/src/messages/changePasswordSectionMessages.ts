@@ -1,43 +1,43 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
+import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Секция «Изменение пароля»
-/*const obj = {
+const obj = {
     header: {
         eng: 'Change password',
         rus: 'Изменение пароля'
     },
-    currentPasswordField: {
+    /*currentPasswordField: {
         eng: 'Current password',
         rus: 'Текущий пароль'
-    },
-    newPasswordField: {
+    },*/
+    /*newPasswordField: {
         eng: 'New password',
         rus: 'Новый пароль'
-    },
-    newPasswordAgainField: {
+    },*/
+    /*newPasswordAgainField: {
         eng: 'Retype new password',
         rus: 'Повторите новый пароль'
-    },
-    submitBtnText: {
+    },*/
+    /*submitBtnText: {
         eng: 'Change password',
         rus: 'Изменить пароль'
-    },
-    passwordsMustMatch: {
+    },*/
+    /*passwordsMustMatch: {
         eng: 'Passwords must match',
         rus: 'Пароли должны совпадать'
-    },
-    passwordHasChanged: {
+    },*/
+    /*passwordHasChanged: {
         eng: 'Password has changed.',
         rus: 'Пароль изменён.'
-    },
-    cancelBtn: {
+    },*/
+    /*cancelBtn: {
         eng: 'Cancel',
         rus: 'Отменить'
-    },
-    changeBtn: {
+    },*/
+    /*changeBtn: {
         eng: 'Delete',
         rus: 'Удалить'
-    },
-}*/
+    },*/
+}
 
-// export const changePasswordSectionMessages = getMessagesObject(obj)
+export const changePasswordSectionMessages = getMessagesObject(obj)

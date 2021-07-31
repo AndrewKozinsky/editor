@@ -12,6 +12,10 @@ $CN: wrapper;
     display: flex;
     justify-content: flex-end;
 }
+.#{$CN}--align-justify {
+    display: flex;
+    justify-content: space-between;
+}
 
 
 // Классы дающие верний оступ

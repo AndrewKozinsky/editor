@@ -5,7 +5,7 @@ import './Wrapper.scss'
 
 export type WrapperPropType = {
     children?: ReactNode, // Дети компонента
-    align?: 'right' | 'center' // Выравнивание
+    align?: 'right' | 'center' | 'justify' // Выравнивание
     t?: TType // Отступ сверху
     b?: BType // Отступ снизу
     gap?: GapType // Отступы между элементами внутри обёртки

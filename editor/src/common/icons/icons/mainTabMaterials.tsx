@@ -1,7 +1,7 @@
-// import React from 'react'
+import React from 'react'
 
 
-/*export default function MainTabMaterials() {
+export default function MainTabMaterials() {
     return (
         <g fillRule="evenodd">
             <g transform="translate(6, 3)" fillRule="nonzero">
@@ -11,7 +11,7 @@
             </g>
         </g>
     )
-}*/
+}
 
 
 

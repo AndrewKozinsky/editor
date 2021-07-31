@@ -1,14 +1,14 @@
-// import React, {useState} from 'react'
-// import { getOptions, getWrapperClasses } from './Select-func'
-// import { OptionsType } from './SelectTypes'
-// import { MiscTypes } from 'types/miscTypes'
-// import { getRandomId } from 'utils/StringUtils'
-// import Label from '../Label/Label'
-// import SvgIcon from '../../icons/SvgIcon'
-// import './Select.scss'
+import React, {useState} from 'react'
+import { getOptions, getWrapperClasses } from './Select-func'
+import { OptionsType } from './SelectTypes'
+import { MiscTypes } from 'types/miscTypes'
+import { getRandomId } from 'utils/StringUtils'
+import Label from '../Label/Label'
+import SvgIcon from '../../icons/SvgIcon'
+import './Select.scss'
 
 
-/*export type SelectPropType = {
+export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
@@ -16,19 +16,19 @@
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     disabled?: boolean // Заблокировано ли поле
-}*/
+}
 
 /* Компонент выпадающего списка */
-/*export default function Select(props: SelectPropType) {
+export default function Select(props: SelectPropType) {
 
     const {
         label, // Подпись выпадающего списка
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
-        disabled = false, // Заблокировано ли поле
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
+        disabled = false, // Заблокировано ли поле
     } = props
 
     // Находится ли выпадающий список под фокусом
@@ -70,4 +70,4 @@
             </div>
         </>
     )
-}*/
+}

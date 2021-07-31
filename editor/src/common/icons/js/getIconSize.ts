@@ -24,33 +24,39 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 13 13"
             }
         // Галочка выбранного флага
-        /*case 'selectInputArrows':
+        case 'selectInputArrows':
             return {
                 width: "8px",
                 height: "14px",
                 viewBox: "0 0 8 14"
-            }*/
+            }
         // Значки главных вкладок
-        // case 'mainTabMaterials':
-        // case 'mainTabEditor':
-        // case 'mainTabSettings':
+        case 'mainTabMaterials':
+        case 'mainTabEditor':
+        case 'mainTabSettings':
         // Значки на вкладках сайта
         // case 'siteTabSite':
         // case 'siteTabPlugins':
         // case 'siteTabComponents':
-        /*case 'siteTabArticle':
+        case 'siteTabArticle':
             return {
                 width: "31px",
                 height: "26px",
                 viewBox: "0 0 31 26"
-            }*/
+            }
+        case 'mainTabHelp':
+            return {
+                width: "31px",
+                height: "25px",
+                viewBox: "0 0 31 25"
+            }
         // Закругляемая часть в кнопки вкладки
-        /*case 'mainTabRoundScion':
+        case 'mainTabRoundScion':
             return {
                 width: "3px",
                 height: "3px",
                 viewBox: "0 0 3 3"
-            }*/
+            }
         // Значки на кнопках
         /*case 'btnSignSave':
             return {

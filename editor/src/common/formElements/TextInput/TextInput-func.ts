@@ -29,7 +29,7 @@ export function useSetFocus(inputRef: any, autoFocus: boolean | number) {
     useEffect(function () {
         // Если нужно ставить фокусировку
         if (autoFocus === true) {
-            inputRef.current.focus()
+            inputRef?.current?.focus()
         }
         // Если нужно поставить фокусировку с некоторой задержкой
         else if (typeof autoFocus === 'number') {

@@ -22,6 +22,18 @@ su postgres
 Start psql
 psql
 
+Create editor database
+create database editor;
+
+Create user
+create user editor with encrypted password 'dt52posQP00P';
+
+Users list
+\du
+
+Set all privilegis to editor user
+grant all privileges on database editor to editor;
+
 Go to my database
 \c editor
 

@@ -1,6 +1,5 @@
-// import {makeCN} from 'utils/StringUtils'
+import { makeCN } from 'utils/StringUtils'
 
-/*
 export function useGetItemClasses(isActive: boolean = false): string {
 
     // Классы кнопки
@@ -11,4 +10,4 @@ export function useGetItemClasses(isActive: boolean = false): string {
     if (isActive) classes.push(`${CN}--active`)
 
     return makeCN(classes)
-}*/
+}

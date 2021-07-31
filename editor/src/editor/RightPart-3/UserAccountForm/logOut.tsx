@@ -9,7 +9,14 @@
         // Удалить куку авторизации
         document.cookie = 'authToken=logout; max-age=0'
 
-        // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
-        dispatch(actions.user.setAuthTokenStatus(1))
+        setTimeout(function () {
+            // Smooth hide the editor and show entrance forms wrapper
+            smoothMoveToEntrance()
+
+            setTimeout(function() {
+                // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
+                dispatch(actions.user.setAuthTokenStatus(1))
+            }, 600)
+        }, 1000)
     }
 }*/

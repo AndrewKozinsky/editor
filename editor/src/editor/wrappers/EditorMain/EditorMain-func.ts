@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+import {useSelector} from 'react-redux'
+import {AppState} from 'store/rootReducer'
 import {makeCN} from 'utils/StringUtils'
 
 
@@ -11,15 +11,15 @@ import {makeCN} from 'utils/StringUtils'
 export function useGetPageClasses(CN: string) {
 
     // Какой компонент должен быть отрисован
-    // const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
+    const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
 
     // Открыто ли модальное окно
-    // const isModalOpen = useSelector((store: AppState) => store.modal.isOpen)
+    const isModalOpen = useSelector((store: AppState) => store.modal.isOpen)
 
     const [classes, setClasses] = useState<string[]>( getClasses(CN) )
     const [isVisible, setIsVisible] = useState(false)
 
-    /*useEffect(function () {
+    useEffect(function () {
 
         // Классы редактора: нормальный вид и отдалённый от зрителя
         const normalClasses = getClasses(CN)
@@ -64,7 +64,7 @@ export function useGetPageClasses(CN: string) {
             setIsVisible(false)
             setClasses( scaleDownTransparencyClasses )
         }
-    }, [entryAndEditorViewState, isModalOpen])*/
+    }, [entryAndEditorViewState, isModalOpen])
 
     return {
         classes: makeCN(classes),
@@ -82,8 +82,8 @@ export function useGetPageClasses(CN: string) {
 function getClasses( CN: string, scaleDownType?: 'scaleDown' | 'scaleDownTransparent' ) {
     const classes = [CN]
 
-    // if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
-    // if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)
+    if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
+    if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)
 
     return classes
 }

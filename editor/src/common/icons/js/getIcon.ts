@@ -5,11 +5,12 @@ import NoticeInfo from '../icons/NoticeInfo'
 import NoticeSuccess from '../icons/NoticeSuccess'
 import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
-// import SelectInputArrows from '../icons/selectInputArrows'
-// import MainTabMaterials from '../icons/mainTabMaterials'
-// import MainTabEditor from '../icons/mainTabEditor'
-// import MainTabSettings from '../icons/mainTabSettings'
-// import MainTabRoundScion from '../icons/mainTabRoundScion'
+import SelectInputArrows from '../icons/selectInputArrows'
+import MainTabMaterials from '../icons/mainTabMaterials'
+import MainTabEditor from '../icons/mainTabEditor'
+import MainTabSettings from '../icons/mainTabSettings'
+import MainTabHelp from '../icons/mainTabHelp'
+import MainTabRoundScion from '../icons/mainTabRoundScion'
 // import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
 // import BtnSignTrash from '../icons/btnSignTrash'
@@ -60,12 +61,13 @@ export function getIcon(type: string): ReactNode {
         // successCircle: SuccessCircle,
 
         // Галочка выбранного флага
-        // selectInputArrows: SelectInputArrows,
+        selectInputArrows: SelectInputArrows,
 
         // Значки главных вкладок
-        // mainTabMaterials: MainTabMaterials,
-        // mainTabEditor: MainTabEditor,
-        // mainTabSettings: MainTabSettings,
+        mainTabMaterials: MainTabMaterials,
+        mainTabEditor: MainTabEditor,
+        mainTabSettings: MainTabSettings,
+        mainTabHelp: MainTabHelp,
 
         // Значки на вкладках сайта
         // siteTabSite: SiteTabSite,
@@ -74,7 +76,7 @@ export function getIcon(type: string): ReactNode {
         // siteTabArticle: SiteTabArticle,
 
         // Закругляемая часть в кнопки вкладки
-        // mainTabRoundScion: MainTabRoundScion,
+        mainTabRoundScion: MainTabRoundScion,
 
         // Значки на кнопках
         // btnSignSave: BtnSignSave,

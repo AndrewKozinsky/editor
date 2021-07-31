@@ -82,12 +82,10 @@ export class UserService {
 
         // Get user by email
         const user = await this.userRepository.findOne({email: loginDto.email})
-        const isPasswordMatch = await compare(loginDto.password, user.password)
+        if (!user) responseCommonError('user_login_userDoesNotExist')
 
-        // Throw an error response if user passed wrong data
-        if (!user || !isPasswordMatch) {
-            responseCommonError('user_login_userDoesNotExist')
-        }
+        const isPasswordMatch = await compare(loginDto.password, user.password)
+        if (!isPasswordMatch) responseCommonError('user_login_userDoesNotExist')
 
         // Throw an error response if user didn't confirm its email
         if (user.emailConfirmToken) {

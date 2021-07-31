@@ -18,8 +18,7 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, gap?: number) {
     let classes = [CN]
 
     // Добавление класса дающую выравнивание
-    if (align === 'center') classes.push(CN + '--align-center')
-    if (align === 'right')  classes.push(CN + '--align-right')
+    if (align) classes.push(CN + '--align-' + align)
 
     // Добавление класса дающего верхний оступ
     if (t) classes.push(CN + '--t' + t)

@@ -14,6 +14,31 @@ export function makeCN(classesArr: string[]) {
     return filteredClassesArr.join(' ')
 }
 
+export function getCN(CN: string): any {
+    const classObject = {cls: CN}
+
+    return new Proxy(classObject, {
+        get(target, prop) {
+            if (prop.toString() === 'root') {
+                return CN
+            }
+            return target.cls + transformClassName(prop.toString())
+        }
+    })
+}
+
+// desc -> __desc
+// cardDesc -> __card-desc
+// cardDesc_bold -> __card-desc--bold
+function transformClassName(shortCN: string) {
+    const parts = shortCN.split('_')
+
+    let resultStr = '__' + parts[0]
+    if (parts[1]) resultStr += '--' + convertToSnakeCase(parts[1])
+
+    return resultStr
+}
+
 
 /** Функция возвращает случайный идентификатор */
 export function getRandomId() {
@@ -48,3 +73,10 @@ export function convertToCamelCase(str: string) {
 
     return arr.join('')
 }*/
+
+function convertToSnakeCase(str: string) {
+    if (!str) return null
+
+    // boxShadow -> box-shadow
+    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+}
