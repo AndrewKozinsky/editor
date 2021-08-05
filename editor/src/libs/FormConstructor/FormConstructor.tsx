@@ -5,16 +5,15 @@ import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/F
 import Select, { SelectPropType } from 'common/formElements/Select/Select'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
-import useFormState from './state/useFormState'
 import CommonError from './CommonError'
 
 type FormConstructorPropType = {
     config: FCType.Config
+    state: FCType.StateFormReturn
 }
 
 function FormConstructor(props: FormConstructorPropType) {
-    const { config } = props
-    const state = useFormState(config)
+    const { config, state } = props
 
     if (!state.formVisible) return null
 

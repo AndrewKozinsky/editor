@@ -4,7 +4,7 @@ import {AppState} from 'src/store/rootReducer'
 import userActions from 'src/store/user/userActions'
 import settingsActions from 'src/store/settings/settingsActions'
 import { getFromLocalStorage } from 'src/utils/MiscUtils'
-// import sitesActions from 'store/site/sitesActions'
+import sitesActions from 'store/site/sitesActions'
 import { useGetUserToken } from 'src/requests/user/getUserToken'
 
 
@@ -66,6 +66,7 @@ export function useSetTokenStatus() {
 
     // При обновлении значения данных по токену...
     useEffect(function () {
+
         if (!userToken) return
 
         // Если ответ успешен, то поставить 2, в противном случае токена нет, поэтому 1
@@ -76,8 +77,7 @@ export function useSetTokenStatus() {
 
         // Если успешно зашли, то поставить в Хранилище почту пользователя
         if (userToken.status === 'success') {
-            //@ts-ignore
-            dispatch( userActions.setEmail(userToken.data.email) )
+            dispatch( userActions.setEmail(userToken.data.user.email) )
         }
     }, [userToken])
 

@@ -1,4 +1,4 @@
-// import StoreSitesTypes from './sitesTypes'
+import StoreSitesTypes from './sitesTypes'
 // import {MiscTypes} from 'types/miscTypes'
 // import store from '../store'
 // import sitesRequest from 'src/requests/editor/sites/sitesRequest'
@@ -8,20 +8,20 @@
 // import FilesTreeType from '../../types/filesTree'
 
 
-/*const sitesActions = {
+const sitesActions = {
     // Установка id текущей основной вкладки справа
-    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+    /*setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
             payload
         }
-    },
+    },*/
 
 
     // САЙТЫ =====================================================================================
 
     // Загрузка сайтов с сервера и установка в Хранилище
-    requestSites() {
+    /*requestSites() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // Запрос на получение списка сайтов
             const response = await sitesRequest()
@@ -40,15 +40,15 @@
             // Установка сайтов в Хранилище
             dispatch( sitesActions.setSites(preparedSites) )
         }
-    },
+    },*/
 
     // Установка массива сайтов
-    setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
+    /*setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
         return {
             type: StoreSitesTypes.SET_SITES,
             payload
         }
-    },
+    },*/
 
     // Установка id выбранного сайта
     setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
@@ -62,7 +62,7 @@
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
     // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
-    requestIncFilesTemplates() {
+    /*requestIncFilesTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
@@ -91,29 +91,29 @@
             // Установка шаблонов подключаемых файлов в Хранилище
             dispatch( sitesActions.setTemplates(preparedTemplates) )
         }
-    },
+    },*/
 
     // Установка массива шаблонов подключаемых файлов
-    setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
+    /*setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
         return {
             type: StoreSitesTypes.SET_INC_FILES_TEMPLATES,
             payload
         }
-    },
+    },*/
 
     // Установка id выбранного шаблона подключаемых шаблонов
-    setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
+    /*setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
             payload
         }
-    },
+    },*/
 
 
     // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    requestComponentTemplate() {
+    /*requestComponentTemplate() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // uuid выбранного шаблона компонента, данные которого нужно скачать
@@ -133,10 +133,10 @@
                 dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData) )
             }
         }
-    },
+    },*/
 
     // Установка id и типа выбранного шаблона компонента
-    setCurrentComp(
+    /*setCurrentComp(
         id: null | FilesTreeType.UuId,
         type: null | FilesTreeType.ItemType,
         compData?: ComponentDataType
@@ -149,29 +149,29 @@
                 compData
             }
         }
-    },
+    },*/
 
     // Component Template item (folder or file) type setting
-    setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
+    /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE,
             payload
         }
-    },
+    },*/
 
     // Component Template item id setting
-    setCurrentCompItemId(payload: StoreSitesTypes.CurrentCompItemId): StoreSitesTypes.SetCurrentCompItemIdAction {
+    /*setCurrentCompItemId(payload: StoreSitesTypes.CurrentCompItemId): StoreSitesTypes.SetCurrentCompItemIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID,
             payload
         }
-    },
+    },*/
 
 
     // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
-    requestArticle() {
+    /*requestArticle() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // uuid выбранной статьи, данные которой нужно скачать
@@ -190,10 +190,10 @@
                 dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
             }
         }
-    },
+    },*/
 
     // Установка id и типа выбранного шаблона компонента
-    setCurrentArt(
+    /*setCurrentArt(
         id: null | FilesTreeType.UuId,
         type: null | FilesTreeType.ItemType,
         article?: ArticleDataType
@@ -206,23 +206,23 @@
                 article
             }
         }
-    },
+    },*/
 
     // Article item (folder or file) type setting
-    setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
+    /*setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE,
             payload
         }
-    },
+    },*/
 
     // Article item (folder or file) type setting
-    setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
+    /*setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART_ITEM_ID,
             payload
         }
-    },
-}*/
+    },*/
+}
 
-// export default sitesActions
+export default sitesActions

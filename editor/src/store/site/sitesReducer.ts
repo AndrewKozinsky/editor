@@ -1,36 +1,36 @@
-// import {removeFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-// import StoreSitesTypes from './sitesTypes'
+import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import StoreSitesTypes from './sitesTypes'
 
-/*export type SitesReducerType = {
-    sites: StoreSitesTypes.SitesType
+export type SitesReducerType = {
+    // sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
-    rightMainTab: StoreSitesTypes.RightMainTab
-    incFilesTemplatesSection: {
+    // rightMainTab: StoreSitesTypes.RightMainTab
+    /*incFilesTemplatesSection: {
         templates: StoreSitesTypes.IncFilesTemplatesType
         currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
-    }
-    componentsSection: StoreSitesTypes.ComponentsSection
-    articlesSection: StoreSitesTypes.ArticlesSection
-}*/
+    }*/
+    // componentsSection: StoreSitesTypes.ComponentsSection
+    // articlesSection: StoreSitesTypes.ArticlesSection
+}
 
 
 // Изначальные значения
-/*const initialState: SitesReducerType = {
+const initialState: SitesReducerType = {
     // Массив сайтов пользователя
-    sites: [],
+    // sites: [],
     // id выбранного сайта
     currentSiteId: null,
     // id открытой вкладки на правой части
-    rightMainTab: 0,
+    // rightMainTab: 0,
     // Данные по вкладке «Шаблоны подключаемых файлов»
-    incFilesTemplatesSection: {
+    /*incFilesTemplatesSection: {
         // Массив шаблонов подключаемых файлов
         templates: [],
         // id выбранного шаблона подключаемых файлов
         currentTemplateId: null,
-    },
+    },*/
     // Данные по вкладке «Шаблоны компонентов»
-    componentsSection: {
+    /*componentsSection: {
         // uuid выбранного элемента: папки или компонента
         currentCompItemId: null,
         // тип выбранного элемента: папка или компонент
@@ -39,9 +39,9 @@
         currentCompName: null,
         // Строка с кодом выбранного шаблона компонента
         currentCompCode: null,
-    },
+    },*/
     // Данные по вкладке «Статьи»
-    articlesSection: {
+    /*articlesSection: {
         // uuid выбранного элемента: папки или статьи
         currentArtItemId: null,
         // Тип выбранного элемента: папка или компонент
@@ -52,8 +52,8 @@
         currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
         incFilesTemplateId: null
-    }
-}*/
+    }*/
+}
 
 // Установка массива сайтов
 /*function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesAction): SitesReducerType {
@@ -64,7 +64,7 @@
 }*/
 
 // Установка id выбранного сайта
-/*function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
+function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
         removeFromLocalStorage('editorSiteId')
@@ -78,7 +78,7 @@
         ...state,
         currentSiteId: action.payload
     }
-}*/
+}
 
 // Установка id текущей основной вкладки справа
 /*function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
@@ -329,41 +329,41 @@
 }*/
 
 // Редьюсер Store.settings
-/*export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
+export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
     switch (action.type) {
-        case StoreSitesTypes.SET_SITES:
-            return setSites(state, action)
+        // case StoreSitesTypes.SET_SITES:
+        //     return setSites(state, action)
         case StoreSitesTypes.SET_CURRENT_SITE_ID:
             return setCurrentSiteId(state, action)
-        case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
-            return setRightMainTab(state, action)
+        // case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
+        //     return setRightMainTab(state, action)
 
-        case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
-            return setTemplates(state, action)
-        case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
-            return setCurrentIncFilesTemplateId(state, action)
+        // case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
+        //     return setTemplates(state, action)
+        // case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
+        //     return setCurrentIncFilesTemplateId(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_COMP:
-            return setCurrentComp(state, action)
+        // case StoreSitesTypes.SET_CURRENT_COMP:
+        //     return setCurrentComp(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE:
-            return setCurrentCompItemType(state, action)
+        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE:
+        //     return setCurrentCompItemType(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID:
-            return setCurrentCompItemId(state, action)
+        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID:
+        //     return setCurrentCompItemId(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_ART:
-            return setCurrentArt(state, action)
+        // case StoreSitesTypes.SET_CURRENT_ART:
+        //     return setCurrentArt(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE:
-            return setCurrentArtItemType(state, action)
+        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE:
+        //     return setCurrentArtItemType(state, action)
 
-        case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
-            return setCurrentArtItemId(state, action)
+        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
+        //     return setCurrentArtItemId(state, action)
         default:
             // @ts-ignore
             const x: never = null
             return state
     }
-}*/
+}

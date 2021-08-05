@@ -9,4 +9,5 @@ export interface ExpressRequestInterface extends Request {
 
 interface UpdatedHeaders extends Headers {
     'Editor-Language': MiscTypes.Language
+    authorization?: string
 }

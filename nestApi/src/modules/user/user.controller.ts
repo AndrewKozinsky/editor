@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Req, Res, UsePipes } from '@nestjs/common'
+import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards, UsePipes } from '@nestjs/common'
 import { Response } from 'express'
 import { UserService } from './user.service'
 import { CreateUserDto } from './dto/createUser.dto'
@@ -10,6 +10,8 @@ import { Param } from '@nestjs/common'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { Patch } from '@nestjs/common'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import { ChangeEmailDto } from './dto/changeEmail.dto'
+import { AuthGuard } from './guards/auth.guard'
 
 @Controller('users')
 export class UserController {
@@ -90,5 +92,16 @@ export class UserController {
     ): Promise<void> {
         const user = await this.userService.changeResetPassword(changeResetPasswordDto, token)
         this.userService.buildUserResponse(user, response, HttpStatus.OK, true)
+    }
+
+    @Patch('changeEmail')
+    @UsePipes(new BackendValidationPipe())
+    @UseGuards(AuthGuard)
+    async changeEmail(
+        @Res({ passthrough: true }) response: Response,
+        @Body() changeEmailDto: ChangeEmailDto
+    ): Promise<void> {
+        // const user = await this.userService.changeEmail(changeEmailDto)
+        // this.userService.buildUserResponse(user, response, HttpStatus.OK)
     }
 }

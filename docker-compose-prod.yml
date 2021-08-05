@@ -6,12 +6,15 @@ services:
   nginx:
     build: ./nginx
     container_name: editor-nginx
+    environment:
+      - VIRTUAL_HOST=editorium.net
+      - LETSENCRYPT_HOST=editorium.net
     depends_on:
       - editor
       - nest_api
       - postgres_db
-    ports:
-      - 80:80
+#    ports:
+#      - 80:80
     volumes:
       - ./nginx/nginx.conf.prod:/etc/nginx/nginx.conf
     networks:
@@ -24,8 +27,6 @@ services:
       dockerfile: Dockerfile.prod
     container_name: editor-editor
     command: serve /app/dist -l 3000
-    environment:
-      - SITE_URL=editorium.net
     restart: unless-stopped
     networks:
       - editorium-network
@@ -69,4 +70,7 @@ volumes:
 
 networks:
   editorium-network:
-    driver: bridge
+
+  default:
+    external:
+      name: nginx-proxy

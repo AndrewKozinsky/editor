@@ -5,6 +5,7 @@ import ormconfig from '../ormconfig'
 import { LanguageMiddleware } from './user/middlewares/language.middleware'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { join } from 'path'
+import { AuthMiddleware } from './user/middlewares/auth.middleware'
 
 
 @Module({
@@ -22,7 +23,7 @@ import { join } from 'path'
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(LanguageMiddleware).forRoutes({
+        consumer.apply(LanguageMiddleware, AuthMiddleware).forRoutes({
             path: '*',
             method: RequestMethod.ALL
         })

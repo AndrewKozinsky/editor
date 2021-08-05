@@ -126,6 +126,19 @@ const obj = {
         eng: 'User not found. Maybe the password reset token is wrong or the password has not been reset.',
         rus: 'Пользователь не найден. Возможно токен сброса пароля неправильный или пароль не сбрасывали.'
     },
+
+    user_ChangeEmailDto_emailTooLong: {
+        eng: 'The string must not be longer than 100 characters.',
+        rus: 'Строка не должна быть длиннее 100 символов.'
+    },
+    user_ChangeEmailDto_itIsNotEmail: {
+        eng: 'It is not look like an email.',
+        rus: 'Это не похоже на почту.'
+    },
+    user_ChangeEmailDto_EmptyEmail: {
+        eng: 'You must specify the email.',
+        rus: 'Почта должна быть указана.'
+    },
 }
 
 export const serverMessages = getMessagesObject(obj)

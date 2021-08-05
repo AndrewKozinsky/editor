@@ -56,6 +56,9 @@ const config: FCType.Config = {
             <button key={1}>Btn 1</button>,
             <button key={2}>Btn 2</button>
         ]
+    },
+    async requestFn() {
+
     }
 }
 

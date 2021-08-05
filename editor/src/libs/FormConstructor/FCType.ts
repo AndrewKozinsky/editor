@@ -6,6 +6,7 @@ import FHTypes from '../formHandler/types'
 
 
 namespace FCType {
+    import FieldsStateObj = FHTypes.FieldsStateObj
     export type Config = {
         fields: ConfigFields
         bottom: {
@@ -21,21 +22,25 @@ namespace FCType {
 
     type ConfigTextField = {
         fieldType: 'text',
+        initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<TextInputPropType, FieldExcludedArgs>
     }
     type ConfigCheckboxesField = {
         fieldType: 'checkboxes'
+        initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<FieldGroupPropType, FieldExcludedArgs>
     }
     type ConfigRadiosField = {
         fieldType: 'radios'
+        initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<FieldGroupPropType, FieldExcludedArgs>
     }
     type ConfigSelectField = {
         fieldType: 'select'
+        initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<SelectPropType, FieldExcludedArgs>
     }
@@ -80,6 +85,7 @@ namespace FCType {
     export type SetSubmitBtnDisabled = ( status: boolean ) => void
     export type SetFormDisabled = ( status: boolean ) => void
     export type SetSubmitBtnLoading = ( status: boolean ) => void
+    export type UpdateField = ( fieldName: string, newFieldData: StateFieldsObj ) => void
 
     // Значения полей для отправки на сервер
     export type ReadyFieldsValues = {
@@ -89,6 +95,7 @@ namespace FCType {
 
     export type StateFormReturn = {
         fields: FieldsState
+        updateField: UpdateField
         submitBtnLoading: boolean
         submitBtnDisabled: boolean
         formVisible: boolean

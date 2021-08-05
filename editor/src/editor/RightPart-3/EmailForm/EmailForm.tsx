@@ -1,13 +1,23 @@
-// import React from 'react'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Button from 'common/formElements/Button/Button'
-// import Form from 'common/formElements/Form/Form'
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import getFormConfig from './formResources'
-// import Notice from 'common/Notice/Notice'
-// import useHandleConfirmChangingEmailModal from './confirmEmailModal'
-// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import { AppState } from 'store/rootReducer'
+import formConfig from './formConfig'
+
+
+export default function EmailForm() {
+    const email = useSelector((store: AppState) => store.user.email)
+    const formState = useFormConstructorState(formConfig)
+
+    useEffect(function() {
+        if (!email) return
+        const emailField = formState.fields.email
+        formState.updateField('email', { ...emailField, value: [email]})
+    }, [email])
+
+    return <FormConstructor config={formConfig} state={formState} />
+}
 
 
 /*export default function EmailForm() {

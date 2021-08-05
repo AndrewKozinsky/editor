@@ -5,12 +5,13 @@ http {
 
     server {
         listen 80;
-        server_name localhost;
-        root /sites;
+        listen 443;
+        server_name editorium.net www.editorium.net;
 
         location /api {
-            proxy_pass http://nest_api:3002;
+            proxy_pass http://nest_api:3002/;
         }
+
         location /editor/ {
             proxy_pass http://editor:3000/;
             rewrite ^\/editor\/(.*) /$1 break;

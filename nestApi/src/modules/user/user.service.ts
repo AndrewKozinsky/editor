@@ -17,6 +17,7 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import { ChangeEmailDto } from './dto/changeEmail.dto'
 const crypto = require('crypto')
 
 
@@ -193,11 +194,62 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
+    // changeEmail(changeEmailDto: ChangeEmailDto) {
+        // Получу новую почту
+        // const newEmail = req.body.email
+
+        // Если почту не передали, то бросить ошибку
+        /*if(!newEmail) {
+            return next(
+                new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
+            )
+        }*/
+
+        // Если передали такую же почту, то отправить ошибку
+        /*if(req.user && newEmail === req.user.email) {
+            return next(
+                new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
+            )
+        }*/
+
+        // Создам токен подтверждения почты
+        // const emailConfirmToken = crypto.randomBytes(32).toString('hex');
+
+        // Найду текущего пользователя и обновлю его почту
+        /*const user = await UserModel.findOneAndUpdate(
+            {email: req.user?.email},
+            {
+                email: newEmail,
+                emailConfirmToken: emailConfirmToken,
+            },
+            {new: true, useFindAndModify: false}
+        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*/
+
+        // Отправление письма с подтверждением почты
+        // await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
+
+        // Удалю куку авторизации
+        /*res.cookie('authToken', 'loggedout', {
+            expires: new Date(Date.now() + 2 * 1000),
+            httpOnly: true
+        })*/
+
+        /*res.status(200).json({
+            status: 'success',
+            data: {
+                user
+            }
+        })*/
+    // }
+
 
     // ADDITIONAL METHODS
 
     async getUserByEmail(email: string): Promise<UserEntity> {
         return await this.userRepository.findOne({email})
+    }
+    async getUserById(id: number): Promise<UserEntity> {
+        return await this.userRepository.findOne({id})
     }
 
     generateToken(user: UserEntity): string {

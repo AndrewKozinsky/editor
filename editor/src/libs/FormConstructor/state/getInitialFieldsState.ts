@@ -15,7 +15,7 @@ export default function getInitialFieldsState(formConfig: FCType.Config): FCType
         const fieldConfig = formConfig.fields[fieldName]
 
         const fieldProps: FCType.StateFieldsObj = {
-            value: [''],
+            value: fieldConfig.initialValue || [''],
             type: getFieldType(fieldConfig),
             valueCount: getValueCount(fieldConfig),
             disabled: false,

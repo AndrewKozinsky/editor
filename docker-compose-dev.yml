@@ -24,8 +24,6 @@ services:
       dockerfile: Dockerfile.dev
     container_name: editor-editor
     command: npm run dev
-    environment:
-      - SITE_URL=editorium.local
     restart: unless-stopped
     stdin_open: true
     tty: true
@@ -75,4 +73,3 @@ volumes:
 
 networks:
   editorium-network:
-    driver: bridge
