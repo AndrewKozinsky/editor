@@ -7,7 +7,7 @@ import { Switch, Route } from 'react-router-dom'
 import NotFound from '../NotFound/NotFound'
 
 // Страницы
-// import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
+import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
 // import EntrancePages from 'src/entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
@@ -20,10 +20,10 @@ import {
     // useRedirectPage
 } from './app-fn/App-func'
 // import setShortcutsHandler from './shortcuts/shortcutsHandler'
-// import './css/reset.css'
-// import './css/variables.scss'
-// import './css/default.scss'
-// import './css/app.scss'
+import './css/reset.css'
+import './css/variables.scss'
+import './css/default.scss'
+import './css/app.scss'
 
 
 /** Компонент всего приложения */
@@ -90,12 +90,11 @@ export default function App() {
 
     return (
         <div className={appClasses}>
-            <p>So</p>
             <Switch>
-                {/*<Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>*/}
-                    {/*<EditorMain />*/}
+                <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
+                    <EditorMain />
                     {/*<EntrancePages />*/}
-                {/*</Route>*/}
+                </Route>
                 <Route path="*">
                     <NotFound />
                 </Route>

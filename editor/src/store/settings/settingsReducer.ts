@@ -1,10 +1,10 @@
-// import { setInLocalStorage } from 'utils/MiscUtils'
+import { setInLocalStorage } from 'utils/MiscUtils'
 import StoreSettingsTypes from './settingsTypes'
 
 export type SettingsReducerType = {
     // editorLanguage: StoreSettingsTypes.EditorLanguage
     editorTheme: StoreSettingsTypes.EditorTheme
-    // entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
+    entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     // lastAddress: string
     // mainTab: StoreSettingsTypes.MainTab
     // settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
@@ -20,7 +20,7 @@ const initialState: SettingsReducerType = {
     // Эта настройка задаёт какой компонент должен при отрисовке возвращать null.
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
-    // entryAndEditorViewState: null,
+    entryAndEditorViewState: null,
     // Адрес последней страницы на которой был пользователь. Отсчёт ведётся от страницы редактора. Напр.: /enter
     // Это нужно для анимированного появления страницы редактора и страниц входа.
     // lastAddress: '',
@@ -42,7 +42,7 @@ const initialState: SettingsReducerType = {
 }*/
 
 // Установка темы интерфейса
-/*function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
+function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
     // Поставить тему в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorTheme', action.payload)
 
@@ -50,7 +50,7 @@ const initialState: SettingsReducerType = {
         ...state,
         editorTheme: action.payload
     }
-}*/
+}
 
 // Установка должна быть показана формы входа, редактор или переход между ними
 /*function setEntryAndEditorViewState(state: SettingsReducerType, action: StoreSettingsTypes.SetEntryAndEditorViewStateAction): SettingsReducerType {
@@ -96,8 +96,8 @@ export default function settingsReducer(state = initialState, action: StoreSetti
     switch (action.type) {
         // case StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE:
         //     return setEditorLanguage(state, action)
-        // case StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME:
-        //     return setEditorTheme(state, action)
+        case StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME:
+            return setEditorTheme(state, action)
         // case StoreSettingsTypes.SETTINGS_SET_ENTRY_AND_EDITOR_VIEW_STATE:
         //     return setEntryAndEditorViewState(state, action)
         // case StoreSettingsTypes.SETTINGS_SET_LAST_ADDRESS:
