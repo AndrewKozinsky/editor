@@ -1,11 +1,11 @@
-// import {useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
+import {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 // @ts-ignore
 // import { useHistory } from 'react-router-dom'
-// import {AppState} from 'src/store/rootReducer'
+import { AppState } from 'src/store/rootReducer'
 // import actions from 'src/store/rootAction';
-// import {makeCN} from 'src/utils/StringUtils'
-// import store from 'src/store/store'
+import { makeCN } from 'src/utils/StringUtils'
+import store from 'src/store/store'
 
 
 /**
@@ -14,7 +14,7 @@
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
  */
-/*export function useGetWrapperClasses() {
+export function useGetWrapperClasses() {
     const CN = 'entrance-pages-wrapper'
 
     // Статус токена авторизации
@@ -62,7 +62,7 @@
         classes: makeCN(classes),
         isVisible
     }
-}*/
+}
 
 /** Хук регулирует показ или окна редактора или окон входа в зависимости от различных условий. */
 /*export function useViewStateChanger() {

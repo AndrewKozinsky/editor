@@ -7,7 +7,7 @@ services:
     container_name: editor-nginx
     depends_on:
       - editor
-#      - nest_api
+      - nest_api
 #      - postgres_db
     ports:
       - 80:80

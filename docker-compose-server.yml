@@ -10,7 +10,7 @@ services:
       - LETSENCRYPT_HOST=editorium.net
     depends_on:
       - editor
-#      - nest_api
+      - nest_api
 #      - postgres_db
     volumes:
       - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf

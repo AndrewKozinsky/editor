@@ -3,23 +3,23 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 // Компоненты
-// import Loader from 'src/common/misc/Loader/Loader'
+import Loader from 'src/common/misc/Loader/Loader'
 import NotFound from '../NotFound/NotFound'
 
 // Страницы
-import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
-// import EntrancePages from 'src/entrance/EntrancePages/EntrancePages'
+import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
+import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
-/*import {
+import {
     useGetAndSetEditorSettings,
     useSetTokenStatus
-} from './app-fn/init'*/
+} from './app-fn/init'
 import {
     useGetAppClasses,
-    // useRedirectPage
+    useRedirectPage
 } from './app-fn/App-func'
-// import setShortcutsHandler from './shortcuts/shortcutsHandler'
+import setShortcutsHandler from './shortcuts/shortcutsHandler'
 import './css/reset.css'
 import './css/variables.scss'
 import './css/default.scss'
@@ -68,32 +68,32 @@ export default function App() {
     // Shift + Cmd + Fn + Del // Удаление оберти в HTML или  if ... else, while, for... в JS
 
     // Поставить настройки редактора в Хранилище
-    // useGetAndSetEditorSettings()
+    useGetAndSetEditorSettings()
 
     // Проинициализировать приложение и возвратить статус сделано ли это
-    // const isTokenSet = useSetTokenStatus()
+    const isTokenSet = useSetTokenStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    // setShortcutsHandler()
+    setShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет
-    // useRedirectPage()
+    useRedirectPage()
 
     // Классы обёртки компонента
     const appClasses = useGetAppClasses()
 
     // Показать загрузчик если приложение еще не инициализировалось
-    /*if (!isTokenSet) {
+    if (!isTokenSet) {
         return <div className={appClasses}><Loader /></div>
-    }*/
+    }
 
     return (
         <div className={appClasses}>
             <Switch>
                 <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
                     <EditorMain />
-                    {/*<EntrancePages />*/}
+                    <EntrancePages />
                 </Route>
                 <Route path="*">
                     <NotFound />

@@ -8,9 +8,9 @@ http {
         server_name editorium.local;
         root /sites;
 
-#        location /api {
-#            proxy_pass http://nest_api:3002;
-#        }
+        location /api {
+            proxy_pass http://nest_api:3002;
+        }
 
         location /editor/ {
             proxy_pass http://editor:3000/;

@@ -3,7 +3,7 @@ namespace StoreSettingsTypes {
 
     // Типы значений
     // Язык интерфейса
-    // export type EditorLanguage = 'eng' | 'rus'
+    export type EditorLanguage = 'eng' | 'rus'
     // Тема интерфейса
     export type EditorTheme = 'light' | 'dark'
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),

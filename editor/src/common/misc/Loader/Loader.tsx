@@ -1,14 +1,14 @@
-// import React from 'react'
-// import { makeCN } from 'utils/StringUtils'
-// import './Loader.scss'
+import React from 'react'
+import { makeCN } from 'utils/StringUtils'
+import './Loader.scss'
 
 
-/*type LoaderPropType = {
+type LoaderPropType = {
     className?: string // Дополнительный класс обёртки
-}*/
+}
 
 /** Компонент загрузчика */
-/*export default function Loader(props: LoaderPropType) {
+export default function Loader(props: LoaderPropType) {
     const { className } = props
 
     // Классы обёртки
@@ -22,4 +22,4 @@
             </svg>
         </div>
     )
-}*/
+}

@@ -29,7 +29,7 @@ export function useGetAppClasses() {
 
 
 /** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */
-/*export function useRedirectPage() {
+export function useRedirectPage() {
     let history = useHistory()
     let location = useLocation()
 
@@ -50,4 +50,4 @@ export function useGetAppClasses() {
             history.push('/enter')
         }
     }, [authTokenStatus, location.pathname])
-}*/
+}

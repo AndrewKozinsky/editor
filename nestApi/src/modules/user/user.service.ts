@@ -1,19 +1,19 @@
 // import { compare } from 'bcrypt'
-// import { HttpStatus, Injectable } from '@nestjs/common'
-// import { InjectRepository } from '@nestjs/typeorm'
-// import { UserEntity } from './user.entity'
-// import { Repository } from 'typeorm'
+import { HttpStatus, Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { UserEntity } from './user.entity'
+import { Repository } from 'typeorm'
 // import { sign, verify } from 'jsonwebtoken'
 // import { CreateUserDto } from './dto/createUser.dto'
 // import { createRandomString } from 'src/utils/stringUtils'
 // import MiscTypes from 'src/types/miscTypes'
 // import { Email } from 'src/utils/email/email'
-// import { Response } from 'express'
+import { Response } from 'express'
 // import { config } from 'src/config'
 // import { UserResponseInterface } from './types/userResponse.interface'
 // import responseCommonError from 'src/utils/error/responseCommonError'
 // import { LoginDto } from './dto/login.dto'
-// import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 // import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 // import { ResetPasswordDto } from './dto/resetPassword.dto'
 // import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
@@ -21,43 +21,46 @@
 // const crypto = require('crypto')
 
 
-/*@Injectable()
+@Injectable()
 export class UserService {
-    constructor(
+    /*constructor(
         @InjectRepository(UserEntity)
         private readonly userRepository: Repository<UserEntity>
-    ) {}
+    ) {}*/
 
     async getTokenData(request: ExpressRequestInterface): Promise<UserEntity> {
-        const token = request?.cookies?.token
+        // const token = request?.cookies?.token
 
         // Если токен не передан, то возвратить ошибочный ответ
-        if(!token) sendErrorResponse()
+        // if(!token) sendErrorResponse()
 
         // Расшифровать JWT и получить payload
-        const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
+        // const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
 
         // Get user by id
-        const user = await this.userRepository.findOne(decodedJWT.id)
+        // const user = await this.userRepository.findOne(decodedJWT.id)
 
         // Если пользователь не найден, то вернуть ошибочный ответ
-        if (!user) sendErrorResponse()
+        // if (!user) sendErrorResponse()
 
         // Если почта не подтверждена, то вернуть ошибочный ответ
-        if(user.emailConfirmToken) {
+        /*if(user.emailConfirmToken) {
             sendErrorResponse()
-        }
+        }*/
 
         // Если все проверки прошли мимо, то вернуть пользователя
-        return user
+        // return user
 
         // Функция возвращающая ошибочный ответ
-        function sendErrorResponse() {
+        /*function sendErrorResponse() {
             responseCommonError('user_getTokenData_tokenIsNotPassed', HttpStatus.UNPROCESSABLE_ENTITY)
-        }
+        }*/
+
+        // DELETE THIS
+        return {}
     }
 
-    async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
+    /*async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Throw an error if user exists
         if (await this.getUserByEmail(createUserDto.email)) {
             responseCommonError('user_createUser_alreadyRegistered', HttpStatus.UNPROCESSABLE_ENTITY)
@@ -77,9 +80,9 @@ export class UserService {
         await sendEmailAddressConfirmLetter(language, newUser.email, emailConfirmToken)
 
         return await this.userRepository.save(newUser)
-    }
+    }*/
 
-    async login(loginDto: LoginDto): Promise<UserEntity> {
+    /*async login(loginDto: LoginDto): Promise<UserEntity> {
 
         // Get user by email
         const user = await this.userRepository.findOne({email: loginDto.email})
@@ -94,9 +97,9 @@ export class UserService {
         }
 
         return user
-    }
+    }*/
 
-    async sendConfirmLetter(sendConfirmLetterDto: SendConfirmLetterDto, language: MiscTypes.Language): Promise<UserEntity> {
+    /*async sendConfirmLetter(sendConfirmLetterDto: SendConfirmLetterDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Получение переданной в body почты
         const email: string = sendConfirmLetterDto.email
 
@@ -117,9 +120,9 @@ export class UserService {
         await sendEmailAddressConfirmLetter(language, user.email, user.emailConfirmToken)
 
         return user
-    }
+    }*/
 
-    async confirmEmail(token: string): Promise<UserEntity> {
+    /*async confirmEmail(token: string): Promise<UserEntity> {
 
         const user = await this.userRepository.findOne({emailConfirmToken: token})
         // Если пользователь не найден, то возратить ошибку
@@ -133,9 +136,9 @@ export class UserService {
         await this.userRepository.save(user)
 
         return user
-    }
+    }*/
 
-    async resetPassword(sendConfirmLetterDto: ResetPasswordDto, language: MiscTypes.Language): Promise<UserEntity> {
+    /*async resetPassword(sendConfirmLetterDto: ResetPasswordDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Получение переданной в body почты
         const email: string = sendConfirmLetterDto.email
 
@@ -174,9 +177,9 @@ export class UserService {
             // Бросить ошибку
             responseCommonError('user_resetPassword_failedToSendEmail', HttpStatus.FAILED_DEPENDENCY)
         }
-    }
+    }*/
 
-    async changeResetPassword(changeResetPasswordDto: ChangeResetPasswordDto, token: string): Promise<UserEntity> {
+    /*async changeResetPassword(changeResetPasswordDto: ChangeResetPasswordDto, token: string): Promise<UserEntity> {
         // Найду пользователя по токену смены пароля
         const user = await this.userRepository.findOne({passwordResetToken: token})
 
@@ -192,97 +195,97 @@ export class UserService {
 
         // Сохранить данные пользователя
         return await this.userRepository.save(user)
-    }
+    }*/
 
     // changeEmail(changeEmailDto: ChangeEmailDto) {
         // Получу новую почту
         // const newEmail = req.body.email
 
         // Если почту не передали, то бросить ошибку
-        /!*if(!newEmail) {
+        /*if(!newEmail) {
             return next(
                 new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
             )
-        }*!/
+        }*/
 
         // Если передали такую же почту, то отправить ошибку
-        /!*if(req.user && newEmail === req.user.email) {
+        /*if(req.user && newEmail === req.user.email) {
             return next(
                 new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
             )
-        }*!/
+        }*/
 
         // Создам токен подтверждения почты
         // const emailConfirmToken = crypto.randomBytes(32).toString('hex');
 
         // Найду текущего пользователя и обновлю его почту
-        /!*const user = await UserModel.findOneAndUpdate(
+        /*const user = await UserModel.findOneAndUpdate(
             {email: req.user?.email},
             {
                 email: newEmail,
                 emailConfirmToken: emailConfirmToken,
             },
             {new: true, useFindAndModify: false}
-        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*!/
+        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*/
 
         // Отправление письма с подтверждением почты
         // await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
 
         // Удалю куку авторизации
-        /!*res.cookie('authToken', 'loggedout', {
+        /*res.cookie('authToken', 'loggedout', {
             expires: new Date(Date.now() + 2 * 1000),
             httpOnly: true
-        })*!/
+        })*/
 
-        /!*res.status(200).json({
+        /*res.status(200).json({
             status: 'success',
             data: {
                 user
             }
-        })*!/
+        })*/
     // }
 
 
     // ADDITIONAL METHODS
 
-    async getUserByEmail(email: string): Promise<UserEntity> {
+    /*async getUserByEmail(email: string): Promise<UserEntity> {
         return await this.userRepository.findOne({email})
-    }
-    async getUserById(id: number): Promise<UserEntity> {
+    }*/
+    /*async getUserById(id: number): Promise<UserEntity> {
         return await this.userRepository.findOne({id})
-    }
+    }*/
 
-    generateToken(user: UserEntity): string {
+    /*generateToken(user: UserEntity): string {
         return sign(
             { id: user.id },
             config.jwtSecret,
             { expiresIn: '90d' }
         )
-    }
+    }*/
 
     // Метод создающий незашифрованный токен сброса пароля
-    getPasswordResetToken(): string {
+    /*getPasswordResetToken(): string {
         // Будет сгенерирована строка вида 2d860d2bb4d2d0184e99e80fac9390ab55bd72a0b545bdf06c34ae9a87cc6d2b
         return crypto.randomBytes(32).toString('hex')
-    }
+    }*/
 
 
-    /!**
+    /**
      * The function form response and send it to clien
      * @param {Object} user — user data from database
      * @param {Object} response — response object
      * @param {Number} statusCode — status code
      * @param {Boolean} setCookieToken — do I have to put token cookie
-     *!/
+     */
     buildUserResponse(
         user: UserEntity,
         response: Response,
         statusCode: number = HttpStatus.OK,
         setCookieToken: boolean = false
     ): void {
-        const token = this.generateToken(user)
+        // const token = this.generateToken(user)
 
-        const resBody: UserResponseInterface = {
+        /*const resBody: UserResponseInterface = {
             status: 'success',
             statusCode,
             data: {
@@ -294,21 +297,26 @@ export class UserService {
                     token
                 }
             }
-        }
+        }*/
 
-        response.statusCode = statusCode
+        // response.statusCode = statusCode
 
-        if (setCookieToken) {
+        /*if (setCookieToken) {
             const cookieOptions = {
                 expires: new Date(Date.now() + config.jwtExpiresIn * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
             response.cookie('token', token, cookieOptions)
-        }
+        }*/
 
-        response.send(resBody)
+        // response.send(resBody)
+
+        // DELETE THIS!
+        response.send({
+            status: 'false'
+        })
     }
-}*/
+}
 
 
 /**

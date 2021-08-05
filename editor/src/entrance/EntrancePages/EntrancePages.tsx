@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 // @ts-ignore
 // import { Switch, Route } from 'react-router-dom'
 // import EnterFormBlock from 'src/entrance/EnterFormBlock/EnterFormBlock'
@@ -7,14 +7,14 @@
 // import ConfirmEmailFormBlock from 'src/entrance/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
 // import ResetFormBlock from 'src/entrance/ResetFormBlock/ResetFormBlock'
 // import ChangeResetPasswordFormBlock from 'src/entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
-// import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
-// import './EntrancePages.scss'
+import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
+import './EntrancePages.scss'
 
 
-/*export default function EntrancePages() {
+export default function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
-    useViewStateChanger()
+    // useViewStateChanger()
 
     // Классы обёртки
     const {classes, isVisible} = useGetWrapperClasses()
@@ -23,7 +23,7 @@
 
     return (
         <div className={classes}>
-            <AuthFormWrapper>
+            {/*<AuthFormWrapper>
                 <Switch>
                     <Route path='/reg'>
                         <RegFormBlock />
@@ -41,7 +41,7 @@
                         <EnterFormBlock />
                     </Route>
                 </Switch>
-            </AuthFormWrapper>
+            </AuthFormWrapper>*/}
         </div>
     )
-}*/
+}
