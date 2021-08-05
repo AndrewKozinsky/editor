@@ -8,8 +8,9 @@ http {
         server_name editorium.local;
         root /sites;
 
-        location /api {
+        location /api2 {
             proxy_pass http://nest_api:3002;
+            rewrite ^\/api2\/(.*) /$1 break;
         }
 
         location /editor/ {
