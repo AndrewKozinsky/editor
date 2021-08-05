@@ -28,20 +28,20 @@ services:
       - ./editor/src:/app/src
 
   # API редактора (Nest)
-#  nest_api:
-#    build:
-#      context: ./nestApi
-#      dockerfile: Dockerfile.dev
-#    container_name: nest_api
-#    command: npm run start:dev
-#    restart: unless-stopped
-#    environment:
-#      - MODE=development
-#      - PORT=3002
+  nest_api:
+    build:
+      context: ./nestApi
+      dockerfile: Dockerfile.dev
+    container_name: nest_api
+    command: npm run start:dev
+    restart: unless-stopped
+    environment:
+      - MODE=development
+      - PORT=3002
 #    depends_on:
 #      - postgres_db
-#    volumes:
-#      - ./nestApi/src:/app/src
+    volumes:
+      - ./nestApi/src:/app/src
 
   # Postgres
   # BD: editor
