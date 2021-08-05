@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react'
-import FHTypes from '../types'
-import { getFormDetails } from './useHandlerBrowserEvent'
-import { getSubmitFormDetails } from './useSubmitForm'
+// import { useEffect, useState } from 'react'
+// import FHTypes from '../types'
+// import { getFormDetails } from './useHandlerBrowserEvent'
+// import { getSubmitFormDetails } from './useSubmitForm'
 
 
 /**
@@ -10,7 +10,7 @@ import { getSubmitFormDetails } from './useSubmitForm'
  * @param {Object} formState — состояние формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
-export default function useStateChangeHandler(
+/*export default function useStateChangeHandler(
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState,
@@ -31,7 +31,7 @@ export default function useStateChangeHandler(
         // Запустить функции обрабатывающие событие stateChange, описанные в полях
         stateChangeHandler(formConfig, formState, setFormState, setCanRunStateChangeHandler)
     }, [formState])
-}
+}*/
 
 /**
  * Функция запускаемая при изменении Состояния формы
@@ -40,7 +40,7 @@ export default function useStateChangeHandler(
  * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setCanRunStateChangeHandler — функция устанавливающая можно ли запускать обработчик изменения Состояния
  */
-function stateChangeHandler(
+/*function stateChangeHandler(
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState,
@@ -73,4 +73,4 @@ function stateChangeHandler(
         // Запуск обработчика изменения состояния формы
         formConfig.form.stateChange(formDetails)
     }
-}
+}*/

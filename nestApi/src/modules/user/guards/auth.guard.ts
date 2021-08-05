@@ -1,6 +1,7 @@
-import { CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common'
-import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+// import { CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common'
+// import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 
+/*
 export class AuthGuard implements CanActivate {
     canActivate(context: ExecutionContext): boolean {
         const request = context.switchToHttp().getRequest<ExpressRequestInterface>()
@@ -8,4 +9,4 @@ export class AuthGuard implements CanActivate {
         if (request.user) return true
         throw new HttpException('Not authorized', HttpStatus.UNAUTHORIZED)
     }
-}
+}*/

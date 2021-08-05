@@ -5,14 +5,15 @@ services:
   nginx:
     image: nginx:1.19.7-alpine
     container_name: editor-nginx
+    environment:
+      - VIRTUAL_HOST=editorium.net
+      - LETSENCRYPT_HOST=editorium.net
     depends_on:
       - editor
 #      - nest_api
 #      - postgres_db
-    ports:
-      - 80:80
     volumes:
-      - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
+      - ./nginx/nginx.conf.prod:/etc/nginx/nginx.conf
 #    networks:
 #      - editorium-network
 
@@ -20,14 +21,10 @@ services:
   editor:
     build:
       context: ./editor
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     container_name: editor-editor
-    command: npm run dev
+    command: serve /app/dist -l 3000
     restart: unless-stopped
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./editor/src:/app/src
 #    networks:
 #      - editorium-network
 
@@ -35,19 +32,17 @@ services:
 #  nest_api:
 #    build:
 #      context: ./nestApi
-#      dockerfile: Dockerfile.dev
+#      dockerfile: Dockerfile.prod
 #    container_name: nest_api
-#    command: npm run start:dev
+#    command: npm run start:prod
 #    restart: unless-stopped
 #    environment:
-#      - MODE=development
+#      - MODE=production
 #      - PORT=3002
 #    depends_on:
 #      - postgres_db
 #    networks:
 #      - editorium-network
-#    volumes:
-#      - ./nestApi/src:/app/src
 
   # Postgres
   # BD: editor
@@ -72,3 +67,7 @@ services:
 
 #networks:
 #  editorium-network:
+
+#  default:
+#    external:
+#      name: nginx-proxy

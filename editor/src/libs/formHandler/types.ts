@@ -1,7 +1,7 @@
-import React from 'react'
+// import React from 'react'
 
 // Типы FormHandler
-namespace FHTypes {
+/*namespace FHTypes {
 
     // ОБЪЕКТ КОНФИГУРАЦИИ ------------------------------------------
     // Тип объекта конфигурации useFormHandler передаваемый пользователем
@@ -213,6 +213,6 @@ namespace FHTypes {
         eventName: null | FormEventsNames,
         fieldName?: null | string
     }
-}
+}*/
 
-export default FHTypes
+// export default FHTypes

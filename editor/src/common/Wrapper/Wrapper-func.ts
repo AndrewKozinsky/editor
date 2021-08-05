@@ -1,12 +1,12 @@
-import { makeCN } from 'utils/StringUtils'
-import { WrapperPropType } from './Wrapper'
+// import { makeCN } from 'utils/StringUtils'
+// import { WrapperPropType } from './Wrapper'
 
 /**
  * Функция возвращает классы универсальной обёртки
  * @param {Object} wrapperProps — props переданные в обёртку
  * @param {Number} gap — отступ между элементами внутри компонента.
  */
-export function getWrapperClasses(wrapperProps: WrapperPropType, gap?: number) {
+/*export function getWrapperClasses(wrapperProps: WrapperPropType, gap?: number) {
     const {
         align,
         t,        // Отступ сверху
@@ -30,4 +30,4 @@ export function getWrapperClasses(wrapperProps: WrapperPropType, gap?: number) {
     if (gap) classes.push(CN + '--gap' + gap)
 
     return makeCN(classes)
-}
+}*/

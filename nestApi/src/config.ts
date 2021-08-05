@@ -1,4 +1,5 @@
 
+/*
 export const config = {
     // Режим работы (development или production)
     workMode: String(process.env.MODE),
@@ -32,4 +33,4 @@ export const config = {
     jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
     jwtExpiresIn: 90,
     jwtExpiresUnit: 'd'
-}
+}*/

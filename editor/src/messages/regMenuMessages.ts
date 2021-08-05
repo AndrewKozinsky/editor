@@ -1,6 +1,6 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
-const obj = {
+/*const obj = {
         // Пункт «Регистрация»
         reg: {
             eng: 'Sign up',
@@ -16,6 +16,6 @@ const obj = {
             eng: 'Reset password',
             rus: 'Сброс пароля'
         },
-}
+}*/
 
-export const regMenuMessages = getMessagesObject(obj)
+// export const regMenuMessages = getMessagesObject(obj)

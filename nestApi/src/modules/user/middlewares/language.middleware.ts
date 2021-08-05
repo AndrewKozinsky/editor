@@ -1,9 +1,10 @@
-import { Injectable, NestMiddleware } from '@nestjs/common'
-import { Response, NextFunction } from 'express'
-import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+// import { Injectable, NestMiddleware } from '@nestjs/common'
+// import { Response, NextFunction } from 'express'
+// import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 
 
 // Middleware
+/*
 @Injectable()
 export class LanguageMiddleware implements NestMiddleware {
 
@@ -13,4 +14,4 @@ export class LanguageMiddleware implements NestMiddleware {
         }
         next()
     }
-}
+}*/

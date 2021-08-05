@@ -1,11 +1,11 @@
-import FHTypes from '../types'
-import {
+// import FHTypes from '../types'
+/*import {
     getSetFieldData,
     getSetFieldDataPropValue,
     getSetFieldValue,
     setFormData,
     setFormDataPropValue
-} from './formStateSettersAndGetters'
+} from './formStateSettersAndGetters'*/
 
 
 /**
@@ -16,7 +16,7 @@ import {
  * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setBrowserEvent — установка
  */
-export function handleBrowserEvent(
+/*export function handleBrowserEvent(
     browserEvent: FHTypes.BrowserEventState,
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
@@ -48,7 +48,7 @@ export function handleBrowserEvent(
     setTimeout(() => {
         setBrowserEvent({browserEvent: null, eventName: null})
     }, 0)
-}
+}*/
 
 /**
  * Функция возращает объект, который передаётся в пользовательский обработчик браузерного события
@@ -56,7 +56,7 @@ export function handleBrowserEvent(
  * @param {Object} formState — объект События формы
  * @param {String} fieldName — имя поля где призошло событие
  */
-export function getFormDetails(
+/*export function getFormDetails(
     browserEvent: null | FHTypes.BrowserEventState,
     formState: FHTypes.FormState,
     fieldName: string
@@ -77,4 +77,4 @@ export function getFormDetails(
         // Функция изменяющая свойство в данных формы
         setFormDataPropValue: setFormDataPropValue,
     }
-}
+}*/

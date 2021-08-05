@@ -1,5 +1,5 @@
-import {useEffect} from 'react'
-import FHTypes from '../types'
+// import {useEffect} from 'react'
+// import FHTypes from '../types'
 
 
 /**
@@ -9,7 +9,7 @@ import FHTypes from '../types'
  * @param {Function} setFormState — функция устанавливающая новое Состояние useFormHandler
  * @param {Element} $form — ссылка на элемент формы
  */
-export default function useSetServiceDataToForm(
+/*export default function useSetServiceDataToForm(
     formState: FHTypes.FormState, setFormState: FHTypes.SetFormState, $form: FHTypes.$form
 ) {
     useEffect(function () {
@@ -53,7 +53,7 @@ export default function useSetServiceDataToForm(
         // Установка объекта с данными поля в Состояние формы
         setFormState(newFormState)
     }, [$form])
-}
+}*/
 
 /**
  * Если на момент отрисовки формы нет каких-то полей, то в их данных не будет ссылки на элемент,
@@ -62,7 +62,7 @@ export default function useSetServiceDataToForm(
  * @param {Object} formState — объект состояния формы
  * @param {String} fieldName — имя поля, у которого нужно поставить ссылку на поле, его тип и количество возможных значений
  */
-export function setServiceDataToField( formState: FHTypes.FormState, fieldName: string ) {
+/*export function setServiceDataToField( formState: FHTypes.FormState, fieldName: string ) {
     // Поле формы
     const $field: HTMLInputElement = formState.form.$form.querySelector(`*[name="${fieldName}"]`)
     if (!$field) return {...formState.fields[fieldName]}
@@ -80,14 +80,14 @@ export function setServiceDataToField( formState: FHTypes.FormState, fieldName: 
         fieldType,
         valueCount
     }
-}
+}*/
 
 
 /**
  * Функция возращает тип поля: text, select, checkbox, radio или button
  * @param {HTMLFormElement} $input — поле формы
  */
-function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
+/*function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
 
     // Текущее поле
     let $thisInput = $input
@@ -111,7 +111,7 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
 
     // Во всех остальных случаях это будет выпадающий список
     return 'select'
-}
+}*/
 
 /**
  * Функция определяет сколько значений поля будет отдавать расширение:
@@ -121,7 +121,7 @@ function getFieldType($input: HTMLInputElement): FHTypes.FieldType {
  * @param {HTMLFormElement} $input — поле формы
  * @param {String} inputType — тип поля: text, select, checkbox или radio
  */
-function getValueCount($input: HTMLInputElement, inputType: FHTypes.FieldType): FHTypes.ValueCount {
+/*function getValueCount($input: HTMLInputElement, inputType: FHTypes.FieldType): FHTypes.ValueCount {
 
     if (inputType === 'button'){
         return 'zero'
@@ -136,4 +136,4 @@ function getValueCount($input: HTMLInputElement, inputType: FHTypes.FieldType): 
     else {
         return 'many'
     }
-}
+}*/

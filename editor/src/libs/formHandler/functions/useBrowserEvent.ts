@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import FHTypes from '../types'
+// import { useState } from 'react'
+// import FHTypes from '../types'
 
 
 /**
@@ -8,7 +8,7 @@ import FHTypes from '../types'
  * В setBrowserEvent находится функция изменяющая объект browserEvent
  * Это нужно чтобы при обновлении eventName запускался бы обработчик этого события у поля.
  */
-export default function useBrowserEvent($form: FHTypes.$form) {
+/*export default function useBrowserEvent($form: FHTypes.$form) {
     const [browserEvent, setBrowserEvent] = useState<FHTypes.BrowserEventState>(
         { browserEvent: null, eventName: null, fieldName: '' }
     )
@@ -17,4 +17,4 @@ export default function useBrowserEvent($form: FHTypes.$form) {
         browserEvent,
         setBrowserEvent
     }
-}
+}*/

@@ -1,9 +1,9 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
-import { SendConfirmLetterDto } from '../../../nestApi/src/modules/user/dto/sendConfirmLetter.dto'
-import { ResetPasswordDto } from '../../../nestApi/src/modules/user/dto/resetPassword.dto'
+// import { getMessagesObject } from 'messages/fn/getMessagesObject'
+// import { SendConfirmLetterDto } from '../../../nestApi/src/modules/user/dto/sendConfirmLetter.dto'
+// import { ResetPasswordDto } from '../../../nestApi/src/modules/user/dto/resetPassword.dto'
 
 // Сообщения не привязанные к конкретному месту
-const obj = {
+/*const obj = {
     // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
 
     user_getTokenData_tokenIsNotPassed: {
@@ -139,6 +139,6 @@ const obj = {
         eng: 'You must specify the email.',
         rus: 'Почта должна быть указана.'
     },
-}
+}*/
 
-export const serverMessages = getMessagesObject(obj)
+// export const serverMessages = getMessagesObject(obj)

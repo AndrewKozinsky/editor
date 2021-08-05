@@ -1,29 +1,29 @@
 import React from 'react'
 // @ts-ignore
-import { Switch, Route } from 'react-router-dom'
+// import { Switch, Route } from 'react-router-dom'
 
 // Компоненты
-import Loader from 'src/common/misc/Loader/Loader'
-import NotFound from '../NotFound/NotFound'
+// import Loader from 'src/common/misc/Loader/Loader'
+// import NotFound from '../NotFound/NotFound'
 
 // Страницы
-import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
-import EntrancePages from 'src/entrance/EntrancePages/EntrancePages'
+// import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
+// import EntrancePages from 'src/entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
-import {
+/*import {
     useGetAndSetEditorSettings,
     useSetTokenStatus
-} from './app-fn/init'
-import {
+} from './app-fn/init'*/
+/*import {
     useGetAppClasses,
     useRedirectPage
-} from './app-fn/App-func'
-import setShortcutsHandler from './shortcuts/shortcutsHandler'
-import './css/reset.css'
-import './css/variables.scss'
-import './css/default.scss'
-import './css/app.scss'
+} from './app-fn/App-func'*/
+// import setShortcutsHandler from './shortcuts/shortcutsHandler'
+// import './css/reset.css'
+// import './css/variables.scss'
+// import './css/default.scss'
+// import './css/app.scss'
 
 
 /** Компонент всего приложения */
@@ -68,27 +68,27 @@ export default function App() {
     // Shift + Cmd + Fn + Del // Удаление оберти в HTML или  if ... else, while, for... в JS
 
     // Поставить настройки редактора в Хранилище
-    useGetAndSetEditorSettings()
+    // useGetAndSetEditorSettings()
 
     // Проинициализировать приложение и возвратить статус сделано ли это
-    const isTokenSet = useSetTokenStatus()
+    // const isTokenSet = useSetTokenStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    setShortcutsHandler()
+    // setShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет
-    useRedirectPage()
+    // useRedirectPage()
 
     // Классы обёртки компонента
-    const appClasses = useGetAppClasses()
+    // const appClasses = useGetAppClasses()
 
     // Показать загрузчик если приложение еще не инициализировалось
-    if (!isTokenSet) {
+    /*if (!isTokenSet) {
         return <div className={appClasses}><Loader /></div>
-    }
+    }*/
 
-    return (
+    /*return (
         <div className={appClasses}>
             <Switch>
                 <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
@@ -100,5 +100,6 @@ export default function App() {
                 </Route>
             </Switch>
         </div>
-    )
+    )*/
+    return <p>Editor</p>
 }

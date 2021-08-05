@@ -1,11 +1,11 @@
-import React from 'react'
-import FCType from '../FCType'
+// import React from 'react'
+// import FCType from '../FCType'
 // import { serverMessages } from '../../../messages/serverMessages'
-import getFirstInvalidFieldName from './getFirstInvalidFieldName'
-import getReadyFieldsValues from './getReadyFieldsValues'
-import setErrorsToFields from './setErrorsToFields'
+// import getFirstInvalidFieldName from './getFirstInvalidFieldName'
+// import getReadyFieldsValues from './getReadyFieldsValues'
+// import setErrorsToFields from './setErrorsToFields'
 
-export default function formSubmitHandler(
+/*export default function formSubmitHandler(
     e: React.BaseSyntheticEvent,
     fields: FCType.FieldsState,
     setFields: FCType.SetFields,
@@ -66,13 +66,13 @@ export default function formSubmitHandler(
     // Если поля формы заполнены неверно...
     // if(firstWrongFieldName) {
         // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
-        /*formState = setLoadingStatusToForm(
+        /!*formState = setLoadingStatusToForm(
             config, formState, formDetails.setFieldDataPropValue, false
-        )*/
+        )*!/
         // Заблокировать кнопку отправки
-        /*formState = formDetails.setFieldDataPropValue(
+        /!*formState = formDetails.setFieldDataPropValue(
             formState, 'disabled', true, 'submit'
-        )*/
+        )*!/
 
 
 
@@ -93,7 +93,7 @@ export default function formSubmitHandler(
     // formState = setLoadingStatusToForm(config, formState, formDetails.setFieldDataPropValue, false)
 
     // Если ввели правильные данные
-    /*if (response.status === 'success') {
+    /!*if (response.status === 'success') {
         // Set isFormSentSuccessful property to true
         formState = formDetails.setFormDataPropValue(formState, 'isFormSentSuccessful', true)
 
@@ -104,9 +104,9 @@ export default function formSubmitHandler(
         if (config.afterSubmit) {
             config.afterSubmit(response, formDetails.state)
         }
-    }*/
+    }*!/
     // Если ввели неправильные данные
-    /*else {
+    /!*else {
         // Заблокировать кнопку отправки
         formState = formDetails.setFieldDataPropValue(formState, 'disabled', true, 'submit')
 
@@ -128,10 +128,10 @@ export default function formSubmitHandler(
         if (config.afterSubmit) {
             config.afterSubmit(response, formDetails.state)
         }
-    }*/
+    }*!/
 
     // Поставить новое Состояние формы
     // formDetails.setFormState(formState)
-}
+}*/
 
 

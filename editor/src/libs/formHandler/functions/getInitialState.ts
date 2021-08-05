@@ -1,11 +1,11 @@
-import FHTypes from '../types'
+// import FHTypes from '../types'
 
 
 /**
  * Функция создаёт первоначальный объект Состояния формы
  * @param {Object} formConfig — конфигурацию формы переданная программистом
  */
-export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {
+/*export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {
 
     // Данные о полях формы
     let fields: FHTypes.FieldsStateObj = {}
@@ -29,4 +29,4 @@ export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes
         fields,
         form
     }
-}
+}*/

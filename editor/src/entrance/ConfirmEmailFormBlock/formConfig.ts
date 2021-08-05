@@ -1,17 +1,17 @@
 // @ts-ignore
-import * as yup from 'yup'
-import store from 'src/store/store'
-import actions from 'src/store/rootAction'
-import { commonMessages } from 'src/messages/commonMessages'
-import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
-import FHTypes from 'src/libs/formHandler/types'
-import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
-import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
+// import * as yup from 'yup'
+// import store from 'src/store/store'
+// import actions from 'src/store/rootAction'
+// import { commonMessages } from 'src/messages/commonMessages'
+// import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
+// import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
+// import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
 
 
-function createFormConfig(history: any) {
+f/*unction createFormConfig(history: any) {
     const tokenField: UniversalAuthFormConfigType.Field = {
         label: confirmEmailMessages.tokenField,
         autoFocus: true,
@@ -50,8 +50,8 @@ function createFormConfig(history: any) {
             }, 50)
         }
     }
-}
+}*/
 
-export default createFormConfig
+// export default createFormConfig
 
 

@@ -1,11 +1,11 @@
-import FHTypes from 'src/libs/formHandler/types'
+// import FHTypes from 'src/libs/formHandler/types'
 
 // Объект настройки useFormHandler
-import UniversalAuthFormConfigType from './UniversalAuthFormConfigType'
-import { serverMessages } from 'src/messages/serverMessages'
+// import UniversalAuthFormConfigType from './UniversalAuthFormConfigType'
+// import { serverMessages } from 'src/messages/serverMessages'
 
 
-export default function getFormConfig(config: UniversalAuthFormConfigType.Config): FHTypes.FormConfig {
+/*export default function getFormConfig(config: UniversalAuthFormConfigType.Config): FHTypes.FormConfig {
     const fields = {}
     let fieldCounter = -1
 
@@ -149,7 +149,7 @@ export default function getFormConfig(config: UniversalAuthFormConfigType.Config
             }
         }
     }
-}
+}*/
 
 
 /**
@@ -159,7 +159,7 @@ export default function getFormConfig(config: UniversalAuthFormConfigType.Config
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Function} setFormDataPropValue — установщик значения свойства данных формы
  */
-function validateForm(
+/*function validateForm(
     config: UniversalAuthFormConfigType.Config,
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
@@ -208,14 +208,14 @@ function validateForm(
 
     // Убрать сообщение об общей ошибке в нижней части формы.
     return setFormDataPropValue( formState, 'commonError', null )
-}
+}*/
 
 
 /**
  * Функция возвращает ссылку на элемент первого поля с ошибкой
  * @param {Object} formState — объект с Состоянием формы
  */
-function getFirstInvalidField(formState: FHTypes.FormState) {
+/*function getFirstInvalidField(formState: FHTypes.FormState) {
     // Первое поле, где есть ошибка
     let $firstWrongField: null | HTMLInputElement = null
 
@@ -230,7 +230,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
     }
 
     return $firstWrongField
-}
+}*/
 
 
 /**
@@ -240,7 +240,7 @@ function getFirstInvalidField(formState: FHTypes.FormState) {
  * @param {Function} setFieldDataPropValue — установщик значения свойства данных поля
  * @param {Boolean} status — блокировать или разблокировать поля
  */
-function setLoadingStatusToForm(
+/*function setLoadingStatusToForm(
     config: UniversalAuthFormConfigType.Config,
     formState: FHTypes.FormState,
     setFieldDataPropValue: FHTypes.SetFieldDataPropValue,
@@ -254,4 +254,4 @@ function setLoadingStatusToForm(
     }
 
     return formState
-}
+}*/

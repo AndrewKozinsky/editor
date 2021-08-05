@@ -1,12 +1,12 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
-import { AppState } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import store from 'store/store'
-import { settingsPanelMessages } from 'messages/settingsPanelMessages'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
+// import { AppState } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import store from 'store/store'
+// import { settingsPanelMessages } from 'messages/settingsPanelMessages'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
-export function useGetSettingsItemsListProps(): ItemsListPropType {
+/*export function useGetSettingsItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
 
     // Активная вкладка панели настроек
@@ -17,10 +17,10 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
         items: getItemsListProps(), // Список пунктов
         activeItemId: activeTab // id активного пункта
     }
-}
+}*/
 
 /** Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки» */
-function getItemsListProps(): ItemType[] {
+/*function getItemsListProps(): ItemType[] {
     return [
         {
             id: 'user',
@@ -33,4 +33,4 @@ function getItemsListProps(): ItemType[] {
             onClick: () => store.dispatch( actions.settings.setSettingsPanelTab('editor') )
         }
     ]
-}
+}*/

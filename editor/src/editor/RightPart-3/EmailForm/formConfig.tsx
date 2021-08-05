@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import store from 'store/store'
+// import * as yup from 'yup'
+// import FCType from 'libs/FormConstructor/FCType'
+// import store from 'store/store'
 
 
-const config: FCType.Config = {
+/*const config: FCType.Config = {
     fields: {
         email: {
             fieldType: 'text',
@@ -29,6 +29,6 @@ const config: FCType.Config = {
     async requestFn() {
 
     }
-}
+}*/
 
-export default config
+// export default config

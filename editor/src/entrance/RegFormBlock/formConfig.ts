@@ -1,15 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import { commonMessages } from 'src/messages/commonMessages'
-import { regFormMessages } from 'src/messages/regFormMessages'
-import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
-import regRequest from 'src/requests/user/regRequest'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
-import FHTypes from 'src/libs/formHandler/types'
+// import * as yup from 'yup'
+// import { commonMessages } from 'src/messages/commonMessages'
+// import { regFormMessages } from 'src/messages/regFormMessages'
+// import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
+// import regRequest from 'src/requests/user/regRequest'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
 
 
-function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
+/*function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
     const emailField: UniversalAuthFormConfigType.Field = {
         label: regFormMessages.emailField,
         autocomplete: 'username',
@@ -71,6 +71,6 @@ function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
             setShowSuccessMessage(true)
         }
     }
-}
+}*/
 
-export default createFormConfig
+// export default createFormConfig

@@ -1,12 +1,13 @@
-import React from 'react'
-import './LeftPart-4.scss'
+// import React from 'react'
+// import './LeftPart-4.scss'
 
 
-type LeftPart1PropType = {
+/*type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}
+}*/
 
 /** Левая часть первой главной вкладки */
+/*
 export default function LeftPart4(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
@@ -21,4 +22,4 @@ export default function LeftPart4(props: LeftPart1PropType) {
 
         </div>
     )
-}
+}*/

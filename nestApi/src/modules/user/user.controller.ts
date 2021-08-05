@@ -1,18 +1,19 @@
-import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards, UsePipes } from '@nestjs/common'
-import { Response } from 'express'
-import { UserService } from './user.service'
-import { CreateUserDto } from './dto/createUser.dto'
-import { ExpressRequestInterface } from '../../types/expressRequest.interface'
-import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
-import { LoginDto } from './dto/login.dto'
-import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-import { Param } from '@nestjs/common'
-import { ResetPasswordDto } from './dto/resetPassword.dto'
-import { Patch } from '@nestjs/common'
-import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
-import { ChangeEmailDto } from './dto/changeEmail.dto'
-import { AuthGuard } from './guards/auth.guard'
+// import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards, UsePipes } from '@nestjs/common'
+// import { Response } from 'express'
+// import { UserService } from './user.service'
+// import { CreateUserDto } from './dto/createUser.dto'
+// import { ExpressRequestInterface } from '../../types/expressRequest.interface'
+// import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
+// import { LoginDto } from './dto/login.dto'
+// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+// import { Param } from '@nestjs/common'
+// import { ResetPasswordDto } from './dto/resetPassword.dto'
+// import { Patch } from '@nestjs/common'
+// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+// import { ChangeEmailDto } from './dto/changeEmail.dto'
+// import { AuthGuard } from './guards/auth.guard'
 
+/*
 @Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService) {}
@@ -104,4 +105,4 @@ export class UserController {
         // const user = await this.userService.changeEmail(changeEmailDto)
         // this.userService.buildUserResponse(user, response, HttpStatus.OK)
     }
-}
+}*/

@@ -1,17 +1,17 @@
-import { setInLocalStorage } from 'utils/MiscUtils'
-import StoreSettingsTypes from './settingsTypes'
+// import { setInLocalStorage } from 'utils/MiscUtils'
+// import StoreSettingsTypes from './settingsTypes'
 
-export type SettingsReducerType = {
+/*export type SettingsReducerType = {
     editorLanguage: StoreSettingsTypes.EditorLanguage
     editorTheme: StoreSettingsTypes.EditorTheme
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
     mainTab: StoreSettingsTypes.MainTab
     settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
-}
+}*/
 
 // Изначальные значения
-const initialState: SettingsReducerType = {
+/*const initialState: SettingsReducerType = {
     // Язык интерфейса: eng или rus
     editorLanguage: 'eng',
     // Тема интерфейса: light или dark
@@ -28,10 +28,10 @@ const initialState: SettingsReducerType = {
     mainTab: 0,
     // Активная вкладка панели «Настройки»: user или editor
     settingsPanelTab: 'user'
-}
+}*/
 
 // Установка языка интерфейса
-function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
+/*function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
     // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorLanguage', action.payload)
 
@@ -39,10 +39,10 @@ function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsType
         ...state,
         editorLanguage: action.payload
     }
-}
+}*/
 
 // Установка темы интерфейса
-function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
+/*function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
     // Поставить тему в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorTheme', action.payload)
 
@@ -50,26 +50,26 @@ function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.S
         ...state,
         editorTheme: action.payload
     }
-}
+}*/
 
 // Установка должна быть показана формы входа, редактор или переход между ними
-function setEntryAndEditorViewState(state: SettingsReducerType, action: StoreSettingsTypes.SetEntryAndEditorViewStateAction): SettingsReducerType {
+/*function setEntryAndEditorViewState(state: SettingsReducerType, action: StoreSettingsTypes.SetEntryAndEditorViewStateAction): SettingsReducerType {
     return {
         ...state,
         entryAndEditorViewState: action.payload
     }
-}
+}*/
 
 // Установка адреса последней страницы
-function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.SetLastAddressAction): SettingsReducerType {
+/*function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.SetLastAddressAction): SettingsReducerType {
     return {
         ...state,
         lastAddress: action.payload
     }
-}
+}*/
 
 // Установка адреса последней страницы
-function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
+/*function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
     // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorTab', action.payload)
 
@@ -77,9 +77,9 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
         ...state,
         mainTab: action.payload
     }
-}
+}*/
 // Установка id вкладки в Настройках
-function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
+/*function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorSettingsTabId', action.payload)
 
@@ -87,11 +87,11 @@ function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTy
         ...state,
         settingsPanelTab: action.payload
     }
-}
+}*/
 
 
 // Редьюсер Store.settings
-export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
+/*export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
 
     switch (action.type) {
         case StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE:
@@ -111,4 +111,4 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             const x: never = null
             return state
     }
-}
+}*/

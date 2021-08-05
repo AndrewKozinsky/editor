@@ -1,20 +1,20 @@
-import { enterFormMessages } from 'src/messages/enterFormMessages'
+// import { enterFormMessages } from 'src/messages/enterFormMessages'
 // @ts-ignore
-import * as yup from 'yup'
-import store from 'src/store/store'
-import actions from 'src/store/rootAction'
-import { commonMessages } from 'src/messages/commonMessages'
-import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
-import loginRequest from 'src/requests/user/loginRequest'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
-import FHTypes from 'src/libs/formHandler/types'
-import { regFormMessages } from 'src/messages/regFormMessages'
-import { serverMessages } from 'src/messages/serverMessages'
-import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+// import * as yup from 'yup'
+// import store from 'src/store/store'
+// import actions from 'src/store/rootAction'
+// import { commonMessages } from 'src/messages/commonMessages'
+// import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
+// import loginRequest from 'src/requests/user/loginRequest'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
+// import { regFormMessages } from 'src/messages/regFormMessages'
+// import { serverMessages } from 'src/messages/serverMessages'
+// import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 
 
-function createFormConfig(
+/*function createFormConfig(
     setEmail: any,
     setShowCommonError: any,
     setCommonError: any,
@@ -94,6 +94,6 @@ function createFormConfig(
             smoothMoveToEditor()
         }
     }
-}
+}*/
 
-export default createFormConfig
+// export default createFormConfig

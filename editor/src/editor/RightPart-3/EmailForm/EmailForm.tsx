@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { useSelector } from 'react-redux'
-import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import { AppState } from 'store/rootReducer'
-import formConfig from './formConfig'
+// import React, { useEffect } from 'react'
+// import { useSelector } from 'react-redux'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+// import { AppState } from 'store/rootReducer'
+// import formConfig from './formConfig'
 
 
-export default function EmailForm() {
+/*export default function EmailForm() {
     const email = useSelector((store: AppState) => store.user.email)
     const formState = useFormConstructorState(formConfig)
 
@@ -17,7 +17,7 @@ export default function EmailForm() {
     }, [email])
 
     return <FormConstructor config={formConfig} state={formState} />
-}
+}*/
 
 
 /*export default function EmailForm() {

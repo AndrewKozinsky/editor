@@ -14,7 +14,7 @@ namespace StoreSitesTypes {
     // Сайты
     // export type SitesType = SiteType[]
     // id выбранного сайта
-    export type CurrentSiteId = null | string
+    // export type CurrentSiteId = null | string
     // id открытой вкладки на правой части
     // export type RightMainTab = number
 
@@ -74,11 +74,11 @@ namespace StoreSitesTypes {
     }*/
 
     // Установка id выбранного сайта
-    export const SET_CURRENT_SITE_ID = 'SET_CURRENT_SITE_ID'
-    export type SetCurrentSiteIdAction = {
+    // export const SET_CURRENT_SITE_ID = 'SET_CURRENT_SITE_ID'
+    /*export type SetCurrentSiteIdAction = {
         type: typeof SET_CURRENT_SITE_ID
         payload: CurrentSiteId
-    }
+    }*/
 
     // Установка id текущей основной вкладки справа
     // export const SET_RIGHT_MAIN_TAB = 'SET_RIGHT_MAIN_TAB'
@@ -153,9 +153,9 @@ namespace StoreSitesTypes {
     }*/
 
 
-    export type SitesAction =
+    // export type SitesAction =
         // | SetSitesAction
-        | SetCurrentSiteIdAction
+        // | SetCurrentSiteIdAction
         // | SetRightMainTabAction
         // | SetIncFilesTemplatesAction
         // | SetCurrentIncFilesTemplateIdAction
@@ -167,4 +167,4 @@ namespace StoreSitesTypes {
         // | SetCurrentArtItemIdAction
 }
 
-export default StoreSitesTypes
+// export default StoreSitesTypes

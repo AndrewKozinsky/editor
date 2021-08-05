@@ -1,6 +1,6 @@
-import FCType from '../FCType'
+// import FCType from '../FCType'
 
-export default function setErrorsToFields(
+/*export default function setErrorsToFields(
     fields: FCType.FieldsState,
     config: FCType.Config,
 ) {
@@ -41,4 +41,4 @@ export default function setErrorsToFields(
         fieldsCopy,
         isFormValid
     }
-}
+}*/

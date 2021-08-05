@@ -1,5 +1,6 @@
-import FCType from '../FCType'
+// import FCType from '../FCType'
 
+/*
 export default function updateFieldFn(
     fields: FCType.FieldsState,
     setFields: FCType.SetFields,
@@ -9,4 +10,4 @@ export default function updateFieldFn(
     const fieldsCopy = {...fields}
     fieldsCopy[fieldName] = newFieldData
     setFields( fieldsCopy )
-}
+}*/

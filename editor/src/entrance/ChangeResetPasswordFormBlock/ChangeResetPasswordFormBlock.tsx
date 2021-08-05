@@ -1,20 +1,20 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'src/common/textBlocks/Header/Header'
-import Menu from 'src/common/misc/Menu/Menu'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import { getMenuItems } from '../menuItems'
-import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
-import UniversalAuthForm from '../UniversalAuthForm/UniversalAuthForm'
-import createFormConfig from './formConfig'
-import Notice from 'src/common/textBlocks/Notice/Notice'
-import Button from 'src/common/formElements/Button/Button'
-import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+// import { useHistory } from 'react-router-dom'
+// import Header from 'src/common/textBlocks/Header/Header'
+// import Menu from 'src/common/misc/Menu/Menu'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import { getMenuItems } from '../menuItems'
+// import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
+// import UniversalAuthForm from '../UniversalAuthForm/UniversalAuthForm'
+// import createFormConfig from './formConfig'
+// import Notice from 'src/common/textBlocks/Notice/Notice'
+// import Button from 'src/common/formElements/Button/Button'
+// import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 
 
 /** Форма входа в сервис */
-export default function ChangeResetPasswordFormBlock() {
+/*export default function ChangeResetPasswordFormBlock() {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
     const formConfig = createFormConfig(setShowSuccessMessage)
@@ -31,11 +31,11 @@ export default function ChangeResetPasswordFormBlock() {
             {showSuccessMessage && <PasswordChangedMessage />}
         </div>
     )
-}
+}*/
 
 
 /** Сообщение об изменённом пароле */
-function PasswordChangedMessage() {
+/*function PasswordChangedMessage() {
     let history = useHistory()
 
     function switchToEditor() {
@@ -58,4 +58,4 @@ function PasswordChangedMessage() {
             </Wrapper>
         </Notice>
     )
-}
+}*/

@@ -1,15 +1,15 @@
-import {useState, useCallback, useEffect} from 'react'
-import getInitialState from './functions/getInitialState'
-import useGetForm from './functions/useGetForm'
-import useSetServiceDataToForm from './functions/useSetServiceDataToForm'
-import useBrowserEvent from './functions/useBrowserEvent'
-import { handleBrowserEvent } from './functions/useHandlerBrowserEvent'
-import getFields from './functions/getFields'
-import inputChangeHandler from './functions/inputChangeHandler'
-import useStateChangeHandler from './functions/useStateChangeHandler'
-import useSubmitForm from './functions/useSubmitForm'
-import {getSetFieldValue} from './functions/formStateSettersAndGetters'
-import FHTypes from './types'
+// import {useState, useCallback, useEffect} from 'react'
+// import getInitialState from './functions/getInitialState'
+// import useGetForm from './functions/useGetForm'
+// import useSetServiceDataToForm from './functions/useSetServiceDataToForm'
+// import useBrowserEvent from './functions/useBrowserEvent'
+// import { handleBrowserEvent } from './functions/useHandlerBrowserEvent'
+// import getFields from './functions/getFields'
+// import inputChangeHandler from './functions/inputChangeHandler'
+// import useStateChangeHandler from './functions/useStateChangeHandler'
+// import useSubmitForm from './functions/useSubmitForm'
+// import {getSetFieldValue} from './functions/formStateSettersAndGetters'
+// import FHTypes from './types'
 
 
 /**
@@ -17,7 +17,7 @@ import FHTypes from './types'
  * @param {Object} formConfig — объект настройки useFormHandler
  * @param {String} formName — имя формы
  */
-export default function useFormHandler(
+/*export default function useFormHandler(
     formConfig: FHTypes.FormConfig, formName: string
 ): FHTypes.ReturnObj {
 
@@ -83,4 +83,4 @@ export default function useFormHandler(
         // Данные формы
         form: formState.form.data
     }
-}
+}*/

@@ -1,6 +1,7 @@
-import FCType from '../FCType'
+// import FCType from '../FCType'
 
 
+/*
 export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType.ReadyFieldsValues {
     let fieldsValuesSubmitObj: FCType.ReadyFieldsValues = {}
 
@@ -16,4 +17,4 @@ export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType
     }
 
     return fieldsValuesSubmitObj
-}
+}*/

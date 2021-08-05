@@ -1,11 +1,11 @@
-import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import { SelectPropType } from 'common/formElements/Select/Select'
-import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-import { ButtonPropType } from 'common/formElements/Button/Button'
-import FHTypes from '../formHandler/types'
+// import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+// import { SelectPropType } from 'common/formElements/Select/Select'
+// import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+// import { ButtonPropType } from 'common/formElements/Button/Button'
+// import FHTypes from '../formHandler/types'
 
 
-namespace FCType {
+/*namespace FCType {
     import FieldsStateObj = FHTypes.FieldsStateObj
     export type Config = {
         fields: ConfigFields
@@ -106,8 +106,8 @@ namespace FCType {
         onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void
         onFormSubmit: (e: React.BaseSyntheticEvent) => void
     }
-}
+}*/
 
 
 
-export default FCType
+// export default FCType

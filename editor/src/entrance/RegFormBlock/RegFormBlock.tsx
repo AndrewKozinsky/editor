@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
-import Header from 'src/common/textBlocks/Header/Header'
-import Menu from 'src/common/misc/Menu/Menu'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import Notice from 'src/common/textBlocks/Notice/Notice'
-import { getMenuItems } from '../menuItems'
-import { regFormMessages, regFormJSXFnMessages, regFormJSXMessages } from 'src/messages/regFormMessages'
-import UniversalAuthForm from '../UniversalAuthForm/UniversalAuthForm'
-import createFormConfig from './formConfig'
+// import React, { useState } from 'react'
+// import Header from 'src/common/textBlocks/Header/Header'
+// import Menu from 'src/common/misc/Menu/Menu'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import Notice from 'src/common/textBlocks/Notice/Notice'
+// import { getMenuItems } from '../menuItems'
+// import { regFormMessages, regFormJSXFnMessages, regFormJSXMessages } from 'src/messages/regFormMessages'
+// import UniversalAuthForm from '../UniversalAuthForm/UniversalAuthForm'
+// import createFormConfig from './formConfig'
 
 
 /** User Sign up form */
-export default function RegFormBlock() {
+/*export default function RegFormBlock() {
     const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [email, setEmail] = useState('')
 
@@ -29,16 +29,16 @@ export default function RegFormBlock() {
             <Info hide={showSuccessMessage} />
         </div>
     )
-}
+}*/
 
 
-type LetterWasSentPropType = {
+/*type LetterWasSentPropType = {
     show: boolean
     email: string // Почта пользователя, на которую регистрируется учётная запись
-}
+}*/
 
 /** The message that the letter was sent */
-export function LetterWasSent(props: LetterWasSentPropType) {
+/*export function LetterWasSent(props: LetterWasSentPropType) {
     if (!props.show) return null
 
     return (
@@ -46,12 +46,13 @@ export function LetterWasSent(props: LetterWasSentPropType) {
             {regFormJSXFnMessages.confirmRegistrationLetter(props.email)}
         </Notice>
     )
-}
+}*/
 
-type InfoPropType = {
+/*type InfoPropType = {
     hide: boolean
-}
+}*/
 
+/*
 function Info(props: InfoPropType) {
     if (props.hide) return null
 
@@ -65,4 +66,4 @@ function Info(props: InfoPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

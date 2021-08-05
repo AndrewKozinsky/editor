@@ -1,11 +1,11 @@
-import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+// import {useEffect, useState} from 'react'
+// import {useDispatch, useSelector} from 'react-redux'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import {AppState} from 'src/store/rootReducer'
-import actions from 'src/store/rootAction';
-import {makeCN} from 'src/utils/StringUtils'
-import store from 'src/store/store'
+// import { useHistory } from 'react-router-dom'
+// import {AppState} from 'src/store/rootReducer'
+// import actions from 'src/store/rootAction';
+// import {makeCN} from 'src/utils/StringUtils'
+// import store from 'src/store/store'
 
 
 /**
@@ -14,7 +14,7 @@ import store from 'src/store/store'
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
  */
-export function useGetWrapperClasses() {
+/*export function useGetWrapperClasses() {
     const CN = 'entrance-pages-wrapper'
 
     // Статус токена авторизации
@@ -62,10 +62,10 @@ export function useGetWrapperClasses() {
         classes: makeCN(classes),
         isVisible
     }
-}
+}*/
 
 /** Хук регулирует показ или окна редактора или окон входа в зависимости от различных условий. */
-export function useViewStateChanger() {
+/*export function useViewStateChanger() {
     const dispatch = useDispatch()
 
     // Предыдущий адрес
@@ -90,19 +90,20 @@ export function useViewStateChanger() {
         // Поставить текущий адрес в Хранилище в качестве последнего
         dispatch( actions.settings.setLastAddress(address) )
     }, [address])
-}
+}*/
 
 // Если с формы входа перешли в редактор
-export function smoothMoveToEditor() {
+/*export function smoothMoveToEditor() {
     // Поставить, что сначала должен быть плавный переход к редактору...
     store.dispatch( actions.settings.setEntryAndEditorViewState('toEditor') )
     setTimeout(function () {
         // ...а затем полное закрытие формы входа через некоторое время
         store.dispatch( actions.settings.setEntryAndEditorViewState('editor') )
     }, 500)
-}
+}*/
 
 // Если с редактора перешли на форму входа
+/*
 export function smoothMoveToEntrance() {
     // Поставить, что сначала должен быть плавный переход к форме входа...
     store.dispatch( actions.settings.setEntryAndEditorViewState('toEntry') )
@@ -110,4 +111,4 @@ export function smoothMoveToEntrance() {
         // ...а затем полное закрытие редактора через некоторое время
         store.dispatch( actions.settings.setEntryAndEditorViewState('entry') )
     }, 500)
-}
+}*/

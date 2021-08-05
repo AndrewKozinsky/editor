@@ -1,12 +1,12 @@
-import { useCallback, useState } from 'react'
-import FCType from '../FCType'
-import getInitialFieldsState from './getInitialFieldsState'
-import fieldChangeHandler from './fieldChangeHandler'
+// import { useCallback, useState } from 'react'
+// import FCType from '../FCType'
+// import getInitialFieldsState from './getInitialFieldsState'
+// import fieldChangeHandler from './fieldChangeHandler'
 // import changeField from './changeFieldFn'
-import formSubmitHandler from './formSubmitHandler'
-import updateFieldFn from './updateField'
+// import formSubmitHandler from './formSubmitHandler'
+// import updateFieldFn from './updateField'
 
-export default function useFormConstructorState(formConfig: FCType.Config): FCType.StateFormReturn {
+/*export default function useFormConstructorState(formConfig: FCType.Config): FCType.StateFormReturn {
     const [fields, setFields] = useState<FCType.FieldsState>(getInitialFieldsState(formConfig))
     const [submitBtnLoading, setSubmitBtnLoading] = useState(false)
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
@@ -42,4 +42,4 @@ export default function useFormConstructorState(formConfig: FCType.Config): FCTy
         onChangeFieldHandler,
         onFormSubmit,
     }
-}
+}*/

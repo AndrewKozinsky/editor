@@ -1,15 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import { commonMessages } from 'src/messages/commonMessages'
-import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
-import FHTypes from 'src/libs/formHandler/types'
-import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
-import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
+// import * as yup from 'yup'
+// import { commonMessages } from 'src/messages/commonMessages'
+// import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
+// import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
+// import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
 
 
-function createFormConfig(setShowSuccessMessage: any) {
+/*function createFormConfig(setShowSuccessMessage: any) {
     const tokenField: UniversalAuthFormConfigType.Field = {
         label: changeResetPasswordFormMessages.tokenField,
         autoFocus: true,
@@ -69,8 +69,8 @@ function createFormConfig(setShowSuccessMessage: any) {
             setShowSuccessMessage(true)
         }
     }
-}
+}*/
 
-export default createFormConfig
+// export default createFormConfig
 
 

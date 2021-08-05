@@ -1,13 +1,13 @@
-import React from 'react'
-import {
+// import React from 'react'
+/*import {
     getMessagesJSXFnObject,
     getMessagesObject
-} from 'messages/fn/getMessagesObject'
-import { getDomainFromEmail } from 'utils/StringUtils'
+} from 'messages/fn/getMessagesObject'*/
+// import { getDomainFromEmail } from 'utils/StringUtils'
 
 
 // Форма ResetFormBlock
-const obj = {
+/*const obj = {
     // Заголовок формы сброса пароля
     formHeader: {
         eng: 'Reset password',
@@ -21,14 +21,14 @@ const obj = {
         eng: 'Reset',
         rus: 'Сбросить'
     }
-}
+}*/
 
-export const resetFormMessages = getMessagesObject(obj)
+// export const resetFormMessages = getMessagesObject(obj)
 
 
 
 // Форма ResetFormBlock
-const JSXFnObj = {
+/*const JSXFnObj = {
     retypePasswordLetter: (email: string) => {
         const domain = 'https://' + getDomainFromEmail(email)
 
@@ -37,6 +37,6 @@ const JSXFnObj = {
             rus: <>На <a href={domain}>почту</a> выслано письмо со ссылкой на страницу сброса пароля.</>
         }
     },
-}
+}*/
 
-export const resetFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)
+// export const resetFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)

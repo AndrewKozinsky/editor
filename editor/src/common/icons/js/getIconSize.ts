@@ -4,7 +4,7 @@
  * В зависимости от типа значка будут возвращены разные названия размеры
  * @param {String} type — тип значка.
  */
-export function getIconSize(type: string) {
+/*export function getIconSize(type: string) {
 
     switch (type) {
         // Логотип редактора
@@ -58,88 +58,88 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 3 3"
             }
         // Значки на кнопках
-        /*case 'btnSignSave':
+        /!*case 'btnSignSave':
             return {
                 width: "12px",
                 height: "15px",
                 viewBox: "0 0 12 15"
-            }*/
+            }*!/
         // case 'btnSignFolder':
         // case 'btnSignAdd':
         // case 'btnSignJson':
         // case 'btnSignEdit':
-        /*case 'btnSignCancel':
+        /!*case 'btnSignCancel':
             return {
                 width: "15px",
                 height: "15px",
                 viewBox: "0 0 15 15"
-            }*/
+            }*!/
         // case 'btnSignTrash':
         // case 'btnSignUndo':
-        /*case 'btnSignRedo':
+        /!*case 'btnSignRedo':
             return {
                 width: "14px",
                 height: "15px",
                 viewBox: "0 0 14 15"
-            }*/
-        /*case 'btnSignCode':
+            }*!/
+        /!*case 'btnSignCode':
             return {
                 width: "16px",
                 height: "15px",
                 viewBox: "0 0 16 15"
-            }*/
+            }*!/
 
-        /*case 'btnSignClose':
+        /!*case 'btnSignClose':
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
-            }*/
-        /*case 'btnSignExit':
+            }*!/
+        /!*case 'btnSignExit':
             return {
                 width: "13px",
                 height: "15px",
                 viewBox: "0 0 13 15"
-            }*/
+            }*!/
         // Тема интерфейса
         // case 'editorLightTheme':
-        /*case 'editorDarkTheme':
+        /!*case 'editorDarkTheme':
             return {
                 width: "76px",
                 height: "76px",
                 viewBox: "0 0 76 76"
-            }*/
+            }*!/
         // Значки на FilesTree
-        /*case 'filesTreeTriangle':
+        /!*case 'filesTreeTriangle':
             return {
                 width: "10px",
                 height: "10px",
                 viewBox: "0 0 10 10"
-            }*/
+            }*!/
         // case 'filesTreeFolder':
         // case 'filesTreeFolderPlus':
         // case 'filesTreePlus':
         // case 'filesTreeTrash':
         // case 'filesTreeTorus':
         // case 'filesTreeUp':
-        /*case 'filesTreeDown':
+        /!*case 'filesTreeDown':
             return {
                 width: "15px",
                 height: "15px",
                 viewBox: "0 0 15 15"
-            }*/
-        /*case 'filesTreePlaceMark':
+            }*!/
+        /!*case 'filesTreePlaceMark':
             return {
                 width: "8px",
                 height: "5px",
                 viewBox: "0 0 8 5"
-            }*/
-        /*case 'articleMenu':
+            }*!/
+        /!*case 'articleMenu':
             return {
                 width: "18px",
                 height: "14px",
                 viewBox: "0 0 18 14"
-            }*/
+            }*!/
         case 'noticeInfo':
         case 'noticeError':
         case 'noticeSuccess':
@@ -152,4 +152,4 @@ export function getIconSize(type: string) {
             return {}
         }
     }
-}
+}*/

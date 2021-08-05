@@ -1,27 +1,27 @@
-import { compare } from 'bcrypt'
-import { HttpStatus, Injectable } from '@nestjs/common'
-import { InjectRepository } from '@nestjs/typeorm'
-import { UserEntity } from './user.entity'
-import { Repository } from 'typeorm'
-import { sign, verify } from 'jsonwebtoken'
-import { CreateUserDto } from './dto/createUser.dto'
-import { createRandomString } from 'src/utils/stringUtils'
-import MiscTypes from 'src/types/miscTypes'
-import { Email } from 'src/utils/email/email'
-import { Response } from 'express'
-import { config } from 'src/config'
-import { UserResponseInterface } from './types/userResponse.interface'
-import responseCommonError from 'src/utils/error/responseCommonError'
-import { LoginDto } from './dto/login.dto'
-import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
-import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-import { ResetPasswordDto } from './dto/resetPassword.dto'
-import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
-import { ChangeEmailDto } from './dto/changeEmail.dto'
-const crypto = require('crypto')
+// import { compare } from 'bcrypt'
+// import { HttpStatus, Injectable } from '@nestjs/common'
+// import { InjectRepository } from '@nestjs/typeorm'
+// import { UserEntity } from './user.entity'
+// import { Repository } from 'typeorm'
+// import { sign, verify } from 'jsonwebtoken'
+// import { CreateUserDto } from './dto/createUser.dto'
+// import { createRandomString } from 'src/utils/stringUtils'
+// import MiscTypes from 'src/types/miscTypes'
+// import { Email } from 'src/utils/email/email'
+// import { Response } from 'express'
+// import { config } from 'src/config'
+// import { UserResponseInterface } from './types/userResponse.interface'
+// import responseCommonError from 'src/utils/error/responseCommonError'
+// import { LoginDto } from './dto/login.dto'
+// import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+// import { ResetPasswordDto } from './dto/resetPassword.dto'
+// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+// import { ChangeEmailDto } from './dto/changeEmail.dto'
+// const crypto = require('crypto')
 
 
-@Injectable()
+/*@Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserEntity)
@@ -199,47 +199,47 @@ export class UserService {
         // const newEmail = req.body.email
 
         // Если почту не передали, то бросить ошибку
-        /*if(!newEmail) {
+        /!*if(!newEmail) {
             return next(
                 new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
             )
-        }*/
+        }*!/
 
         // Если передали такую же почту, то отправить ошибку
-        /*if(req.user && newEmail === req.user.email) {
+        /!*if(req.user && newEmail === req.user.email) {
             return next(
                 new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
             )
-        }*/
+        }*!/
 
         // Создам токен подтверждения почты
         // const emailConfirmToken = crypto.randomBytes(32).toString('hex');
 
         // Найду текущего пользователя и обновлю его почту
-        /*const user = await UserModel.findOneAndUpdate(
+        /!*const user = await UserModel.findOneAndUpdate(
             {email: req.user?.email},
             {
                 email: newEmail,
                 emailConfirmToken: emailConfirmToken,
             },
             {new: true, useFindAndModify: false}
-        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*/
+        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*!/
 
         // Отправление письма с подтверждением почты
         // await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
 
         // Удалю куку авторизации
-        /*res.cookie('authToken', 'loggedout', {
+        /!*res.cookie('authToken', 'loggedout', {
             expires: new Date(Date.now() + 2 * 1000),
             httpOnly: true
-        })*/
+        })*!/
 
-        /*res.status(200).json({
+        /!*res.status(200).json({
             status: 'success',
             data: {
                 user
             }
-        })*/
+        })*!/
     // }
 
 
@@ -267,13 +267,13 @@ export class UserService {
     }
 
 
-    /**
+    /!**
      * The function form response and send it to clien
      * @param {Object} user — user data from database
      * @param {Object} response — response object
-     * @param {Boolean} setCookieToken — do I have to put token cookie
      * @param {Number} statusCode — status code
-     */
+     * @param {Boolean} setCookieToken — do I have to put token cookie
+     *!/
     buildUserResponse(
         user: UserEntity,
         response: Response,
@@ -296,18 +296,19 @@ export class UserService {
             }
         }
 
+        response.statusCode = statusCode
+
         if (setCookieToken) {
             const cookieOptions = {
                 expires: new Date(Date.now() + config.jwtExpiresIn * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
-            response.cookie('token', token, cookieOptions).send(resBody)
+            response.cookie('token', token, cookieOptions)
         }
-        else {
-            response.send(resBody)
-        }
+
+        response.send(resBody)
     }
-}
+}*/
 
 
 /**
@@ -317,6 +318,7 @@ export class UserService {
  * @param {String} confirmToken — токен подтверждения почты
  * @returns {Promise<void>}
  */
+/*
 async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email: string, confirmToken: string) {
 
     // Создать новое письмо...
@@ -325,4 +327,4 @@ async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email
 
     // Послать письмо для подтверждения почты
     userEmail.sendConfirmLetter(confirmToken).then(() => {})
-}
+}*/

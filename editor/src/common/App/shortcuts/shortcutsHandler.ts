@@ -4,9 +4,9 @@
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
-export default function setShortcutsHandler() {
+/*export default function setShortcutsHandler() {
     // document.addEventListener('keydown', shortcutsHandler)
-}
+}*/
 
 
 /**

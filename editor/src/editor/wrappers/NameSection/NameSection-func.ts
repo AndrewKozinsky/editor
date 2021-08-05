@@ -1,10 +1,10 @@
-import { makeCN } from 'utils/StringUtils'
+// import { makeCN } from 'utils/StringUtils'
 
 /**
  * Функция возвращает классы заголовка компонента
  * @param {Number} type — тип компонента. 1 — большой, 2 — мелкий компонент
  */
-export function getHeaderClasses(type: number) {
+/*export function getHeaderClasses(type: number) {
 
     // Классы обёртки
     const CN = 'name-section'
@@ -15,4 +15,4 @@ export function getHeaderClasses(type: number) {
     classes.push(`${CN}__header--type${type}`)
 
     return makeCN(classes)
-}
+}*/

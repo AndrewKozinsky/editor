@@ -1,20 +1,20 @@
-import React, { ReactElement } from 'react'
-import UniversalAuthFormConfigType from './UniversalAuthFormConfigType'
-import Button from 'src/common/formElements/Button/Button'
-import Form from 'src/common/formElements/Form/Form'
-import Wrapper, { WrapperPropType } from 'src/common/Wrapper/Wrapper'
-import TextInput, { TextInputPropType } from 'src/common/formElements/TextInput/TextInput'
-import getFormConfig from './formResources'
-import useFormHandler from 'src/libs/formHandler/useFormHandler'
-import CommonError from '../CommonError/CommonError'
+// import React, { ReactElement } from 'react'
+// import UniversalAuthFormConfigType from './UniversalAuthFormConfigType'
+// import Button from 'src/common/formElements/Button/Button'
+// import Form from 'src/common/formElements/Form/Form'
+// import Wrapper, { WrapperPropType } from 'src/common/Wrapper/Wrapper'
+// import TextInput, { TextInputPropType } from 'src/common/formElements/TextInput/TextInput'
+// import getFormConfig from './formResources'
+// import useFormHandler from 'src/libs/formHandler/useFormHandler'
+// import CommonError from '../CommonError/CommonError'
 
 
-type UniversalAuthFormPropType = {
+/*type UniversalAuthFormPropType = {
     config: UniversalAuthFormConfigType.Config,
-}
+}*/
 
 /** Universal Auth Form component */
-export default function UniversalAuthForm(props: UniversalAuthFormPropType) {
+/*export default function UniversalAuthForm(props: UniversalAuthFormPropType) {
 
     const { config } = props
 
@@ -80,4 +80,4 @@ export default function UniversalAuthForm(props: UniversalAuthFormPropType) {
             {fh.form.commonError && <CommonError error={fh.form.commonError} />}
         </Form>
     )
-}
+}*/

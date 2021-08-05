@@ -22,6 +22,9 @@ su postgres
 Start psql
 psql
 
+Show databases
+\l
+
 Create editor database
 create database editor;
 

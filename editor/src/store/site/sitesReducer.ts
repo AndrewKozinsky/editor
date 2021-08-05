@@ -1,9 +1,9 @@
-import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
-import StoreSitesTypes from './sitesTypes'
+// import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+// import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
     // sites: StoreSitesTypes.SitesType
-    currentSiteId: StoreSitesTypes.CurrentSiteId
+    // currentSiteId: StoreSitesTypes.CurrentSiteId
     // rightMainTab: StoreSitesTypes.RightMainTab
     /*incFilesTemplatesSection: {
         templates: StoreSitesTypes.IncFilesTemplatesType
@@ -19,7 +19,7 @@ const initialState: SitesReducerType = {
     // Массив сайтов пользователя
     // sites: [],
     // id выбранного сайта
-    currentSiteId: null,
+    // currentSiteId: null,
     // id открытой вкладки на правой части
     // rightMainTab: 0,
     // Данные по вкладке «Шаблоны подключаемых файлов»
@@ -64,7 +64,7 @@ const initialState: SitesReducerType = {
 }*/
 
 // Установка id выбранного сайта
-function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
+/*function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
         removeFromLocalStorage('editorSiteId')
@@ -78,7 +78,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
         ...state,
         currentSiteId: action.payload
     }
-}
+}*/
 
 // Установка id текущей основной вкладки справа
 /*function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
@@ -329,7 +329,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
 }*/
 
 // Редьюсер Store.settings
-export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
+/*export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
     switch (action.type) {
         // case StoreSitesTypes.SET_SITES:
@@ -366,4 +366,4 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             const x: never = null
             return state
     }
-}
+}*/

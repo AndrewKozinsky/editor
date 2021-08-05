@@ -1,4 +1,4 @@
-import StoreSitesTypes from './sitesTypes'
+// import StoreSitesTypes from './sitesTypes'
 // import {MiscTypes} from 'types/miscTypes'
 // import store from '../store'
 // import sitesRequest from 'src/requests/editor/sites/sitesRequest'
@@ -51,12 +51,12 @@ const sitesActions = {
     },*/
 
     // Установка id выбранного сайта
-    setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
+    /*setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_SITE_ID,
             payload
         }
-    },
+    },*/
 
 
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
@@ -225,4 +225,4 @@ const sitesActions = {
     },*/
 }
 
-export default sitesActions
+// export default sitesActions

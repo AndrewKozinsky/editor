@@ -1,5 +1,5 @@
 
-namespace StoreSettingsTypes {
+/*namespace StoreSettingsTypes {
 
     // Типы значений
     // Язык интерфейса
@@ -66,6 +66,6 @@ namespace StoreSettingsTypes {
         | SetLastAddressAction
         | SetMainTabAction
         | SetSettingsPanelTabAction
-}
+}*/
 
-export default StoreSettingsTypes
+// export default StoreSettingsTypes

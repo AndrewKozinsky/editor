@@ -1,10 +1,10 @@
-import React from 'react'
-import FCType from './FCType'
+// import React from 'react'
+// import FCType from './FCType'
 //@ts-ignore
-import * as yup from 'yup'
+// import * as yup from 'yup'
 
 
-const config: FCType.Config = {
+/*const config: FCType.Config = {
     fields: {
         text: {
             fieldType: 'text',
@@ -60,6 +60,6 @@ const config: FCType.Config = {
     async requestFn() {
 
     }
-}
+}*/
 
-export default config
+// export default config

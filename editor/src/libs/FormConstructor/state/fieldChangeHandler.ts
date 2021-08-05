@@ -1,8 +1,8 @@
-import FCType from '../FCType'
-import setErrorsToFields from './setErrorsToFields'
+// import FCType from '../FCType'
+// import setErrorsToFields from './setErrorsToFields'
 
 
-export default function fieldChangeHandler(
+/*export default function fieldChangeHandler(
     e: React.BaseSyntheticEvent,
     fields: FCType.FieldsState,
     setFields: FCType.SetFields,
@@ -31,14 +31,14 @@ export default function fieldChangeHandler(
     }
 
     setFields(updatedFields)
-}
+}*/
 
 /**
  * Функция получает новое значение поля и в зависимости от типа поля возвращает новый массив значений поля
  * @param {Object} inputData — данные поля
  * @param {String} newValue — новое значение поля
  */
-function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
+/*function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
 
     if (inputData.valueCount === 'one') {
         return [newValue]
@@ -59,4 +59,4 @@ function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
 
         return valuesNewArr
     }
-}
+}*/

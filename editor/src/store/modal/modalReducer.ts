@@ -1,30 +1,30 @@
-import StoreModalTypes from './modalTypes'
+// import StoreModalTypes from './modalTypes'
 
-export type ModalReducerType = {
+/*export type ModalReducerType = {
     isOpen: StoreModalTypes.IsOpen
     content: StoreModalTypes.Content
-}
+}*/
 
 // Изначальные значения
-const initialState: ModalReducerType = {
+/*const initialState: ModalReducerType = {
     // Язык интерфейса: eng или rus
     isOpen: false,
     // Содержимое модального окна
     content: null
-}
+}*/
 
 // Открытие модального окна
-function openModal(state: ModalReducerType, action: StoreModalTypes.OpenModalAction): ModalReducerType {
+/*function openModal(state: ModalReducerType, action: StoreModalTypes.OpenModalAction): ModalReducerType {
     return { ...state, isOpen: true, content: action.payload }
-}
+}*/
 // Закрытие модального окна
-function closeModal(state: ModalReducerType, action: StoreModalTypes.CloseModalAction): ModalReducerType {
+/*function closeModal(state: ModalReducerType, action: StoreModalTypes.CloseModalAction): ModalReducerType {
     return { ...state, isOpen: false }
-}
+}*/
 
 
 // Редьюсер Store.modal
-export default function modalReducer(state = initialState, action: StoreModalTypes.ModalAction): ModalReducerType {
+/*export default function modalReducer(state = initialState, action: StoreModalTypes.ModalAction): ModalReducerType {
 
     switch (action.type) {
         case StoreModalTypes.MODAL_OPEN:
@@ -36,4 +36,4 @@ export default function modalReducer(state = initialState, action: StoreModalTyp
             const x: never = null
             return state
     }
-}
+}*/

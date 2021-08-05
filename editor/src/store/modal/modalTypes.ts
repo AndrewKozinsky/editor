@@ -1,6 +1,6 @@
-import { ReactElement } from 'react'
+// import { ReactElement } from 'react'
 
-namespace StoreModalTypes {
+/*namespace StoreModalTypes {
 
     // Типы значений
     // Открыто ли модальное окно
@@ -26,6 +26,6 @@ namespace StoreModalTypes {
     export type ModalAction =
         | OpenModalAction
         | CloseModalAction
-}
+}*/
 
-export default StoreModalTypes
+// export default StoreModalTypes

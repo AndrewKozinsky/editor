@@ -1,9 +1,10 @@
-const nodemailer = require('nodemailer')
-const sendpulse = require('sendpulse-api')
-import { config } from 'src/config'
-import { EmailTemplate } from './emailTemplate'
+// const nodemailer = require('nodemailer')
+// const sendpulse = require('sendpulse-api')
+// import { config } from 'src/config'
+// import { EmailTemplate } from './emailTemplate'
 
 
+/*
 export class Email {
     to: string
     from: string
@@ -119,4 +120,4 @@ export class Email {
         // Функция сообщающая результат отправки письма
         function showAnswer(answer) {}
     }
-}
+}*/

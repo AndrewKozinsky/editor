@@ -1,5 +1,6 @@
-import { IsEmail, IsNotEmpty, Length, MaxLength } from 'class-validator'
+// import { IsEmail, IsNotEmpty, Length, MaxLength } from 'class-validator'
 
+/*
 export class CreateUserDto {
     readonly name: string
 
@@ -16,4 +17,4 @@ export class CreateUserDto {
     @Length(6, 50, {message: 'user_CreateUserDto_passwordIsOutOfRange'})
     @IsNotEmpty({message: 'user_CreateUserDto_passwordIsEmpty'})
     readonly password: string
-}
+}*/

@@ -1,12 +1,12 @@
-import React from 'react'
-import SvgIcon from 'src/common/icons/SvgIcon'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import {makeCN} from 'src/utils/StringUtils'
-import { notFoundJSXMessages } from 'src/messages/notFoundMessages'
-import './NotFound.scss'
+// import React from 'react'
+// import SvgIcon from 'src/common/icons/SvgIcon'
+// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import {makeCN} from 'src/utils/StringUtils'
+// import { notFoundJSXMessages } from 'src/messages/notFoundMessages'
+// import './NotFound.scss'
 
 
-export default function NotFound() {
+/*export default function NotFound() {
     // Класс обёртки
     const CN = 'not-found'
 
@@ -30,4 +30,4 @@ export default function NotFound() {
             </Wrapper>
         </div>
     )
-}
+}*/

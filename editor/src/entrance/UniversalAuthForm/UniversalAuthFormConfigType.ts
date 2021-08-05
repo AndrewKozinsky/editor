@@ -1,8 +1,8 @@
-import FHTypes from 'src/libs/formHandler/types'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
 
-namespace UniversalAuthFormConfigType {
+/*namespace UniversalAuthFormConfigType {
     export type Config = {
         fields: { [key: string]: Field }
         submit: Submit
@@ -28,6 +28,6 @@ namespace UniversalAuthFormConfigType {
     export type AfterSubmit = ((
         response: ErrorServerResponseType | UserServerResponseType, formState: FHTypes.FormState
     ) => void)
-}
+}*/
 
-export default UniversalAuthFormConfigType
+// export default UniversalAuthFormConfigType

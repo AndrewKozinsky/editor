@@ -1,16 +1,16 @@
-import { ReactNode } from 'react'
-import Logo from '../icons/logo'
-import NoticeError from '../icons/NoticeError'
-import NoticeInfo from '../icons/NoticeInfo'
-import NoticeSuccess from '../icons/NoticeSuccess'
-import ErrorTriangle from '../icons/errorTriangle'
+// import { ReactNode } from 'react'
+// import Logo from '../icons/logo'
+// import NoticeError from '../icons/NoticeError'
+// import NoticeInfo from '../icons/NoticeInfo'
+// import NoticeSuccess from '../icons/NoticeSuccess'
+// import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
-import SelectInputArrows from '../icons/selectInputArrows'
-import MainTabMaterials from '../icons/mainTabMaterials'
-import MainTabEditor from '../icons/mainTabEditor'
-import MainTabSettings from '../icons/mainTabSettings'
-import MainTabHelp from '../icons/mainTabHelp'
-import MainTabRoundScion from '../icons/mainTabRoundScion'
+// import SelectInputArrows from '../icons/selectInputArrows'
+// import MainTabMaterials from '../icons/mainTabMaterials'
+// import MainTabEditor from '../icons/mainTabEditor'
+// import MainTabSettings from '../icons/mainTabSettings'
+// import MainTabHelp from '../icons/mainTabHelp'
+// import MainTabRoundScion from '../icons/mainTabRoundScion'
 // import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
 // import BtnSignTrash from '../icons/btnSignTrash'
@@ -44,7 +44,7 @@ import MainTabRoundScion from '../icons/mainTabRoundScion'
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
  * @param {String} type — тип значка.
  */
-export function getIcon(type: string): ReactNode {
+/*export function getIcon(type: string): ReactNode {
 
     type componentsType = {
         [key: string]: ReactNode
@@ -120,4 +120,4 @@ export function getIcon(type: string): ReactNode {
     }
 
     return components[type]
-}
+}*/

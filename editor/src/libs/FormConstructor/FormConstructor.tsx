@@ -1,18 +1,18 @@
-import React from 'react'
-import FCType from './FCType'
-import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-import Select, { SelectPropType } from 'common/formElements/Select/Select'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button, { ButtonPropType } from 'common/formElements/Button/Button'
-import CommonError from './CommonError'
+// import React from 'react'
+// import FCType from './FCType'
+// import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+// import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+// import Select, { SelectPropType } from 'common/formElements/Select/Select'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button, { ButtonPropType } from 'common/formElements/Button/Button'
+// import CommonError from './CommonError'
 
-type FormConstructorPropType = {
+/*type FormConstructorPropType = {
     config: FCType.Config
     state: FCType.StateFormReturn
-}
+}*/
 
-function FormConstructor(props: FormConstructorPropType) {
+/*function FormConstructor(props: FormConstructorPropType) {
     const { config, state } = props
 
     if (!state.formVisible) return null
@@ -24,17 +24,17 @@ function FormConstructor(props: FormConstructorPropType) {
             <CommonError error={state.commonError} />
         </form>
     )
-}
+}*/
 
-export default FormConstructor
+// export default FormConstructor
 
 
-type FieldsPropType = {
+/*type FieldsPropType = {
     config: FCType.Config
     state: FCType.StateFormReturn
-}
+}*/
 
-function Fields(props: FieldsPropType) {
+/*function Fields(props: FieldsPropType) {
     const { fields } = props.config
     const { state } = props
 
@@ -80,15 +80,15 @@ function Fields(props: FieldsPropType) {
     })
 
     return <>{fieldsMarkup}</>
-}
+}*/
 
 
-type BottomPropType = {
+/*type BottomPropType = {
     config: FCType.Config
     state: FCType.StateFormReturn
-}
+}*/
 
-function Bottom(props: BottomPropType) {
+/*function Bottom(props: BottomPropType) {
     const { config } = props
     const elems = config.bottom.elems
 
@@ -98,14 +98,14 @@ function Bottom(props: BottomPropType) {
             <SubmitButton config={props.config} state={props.state} />
         </Wrapper>
     )
-}
+}*/
 
-type SubmitPropType = {
+/*type SubmitPropType = {
     config: FCType.Config
     state: FCType.StateFormReturn
-}
+}*/
 
-function SubmitButton(props: SubmitPropType) {
+/*function SubmitButton(props: SubmitPropType) {
     const { state } = props
 
     const submitBtnConfig = props.config.bottom.submit as ButtonPropType
@@ -116,4 +116,4 @@ function SubmitButton(props: SubmitPropType) {
     submitBtnConfig.loading = state.submitBtnLoading
 
     return <Button {...submitBtnConfig} />
-}
+}*/

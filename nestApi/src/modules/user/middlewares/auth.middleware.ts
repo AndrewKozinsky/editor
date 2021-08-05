@@ -1,11 +1,12 @@
-import { Injectable, NestMiddleware } from '@nestjs/common'
-import { ExpressRequestInterface } from '../../../types/expressRequest.interface'
-import { NextFunction, Response } from 'express'
-import MiscTypes from '../../../types/miscTypes'
-import { config } from '../../../config'
-import { UserService } from '../user.service'
-import {verify} from 'jsonwebtoken'
+// import { Injectable, NestMiddleware } from '@nestjs/common'
+// import { ExpressRequestInterface } from '../../../types/expressRequest.interface'
+// import { NextFunction, Response } from 'express'
+// import MiscTypes from '../../../types/miscTypes'
+// import { config } from '../../../config'
+// import { UserService } from '../user.service'
+// import {verify} from 'jsonwebtoken'
 
+/*
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
     constructor(private readonly userService: UserService) {}
@@ -35,4 +36,4 @@ export class AuthMiddleware implements NestMiddleware {
             next()
         }
     }
-}
+}*/

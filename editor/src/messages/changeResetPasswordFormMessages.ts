@@ -1,9 +1,9 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
+// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 // @ts-ignore
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 // Форма ChangeResetPasswordFormBlock
-const obj = {
+/*const obj = {
     // Заголовок формы ввода нового пароля
     formHeader: {
         eng: 'Password change',
@@ -38,9 +38,9 @@ const obj = {
         eng: 'To the editor.',
         rus: 'В редактор.'
     },
-}
+}*/
 
-export const changeResetPasswordFormMessages = getMessagesObject(obj)
+// export const changeResetPasswordFormMessages = getMessagesObject(obj)
 
 
 

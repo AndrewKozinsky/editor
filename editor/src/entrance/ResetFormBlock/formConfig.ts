@@ -1,15 +1,15 @@
 // @ts-ignore
-import * as yup from 'yup'
-import { commonMessages } from 'src/messages/commonMessages'
-import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
-import ErrorServerResponseType from 'src/requests/errorServerResponseType'
-import UserServerResponseType from 'src/requests/user/userServerResponseType'
-import FHTypes from 'src/libs/formHandler/types'
-import { resetFormMessages } from 'src/messages/resetFormMessages'
-import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
+// import * as yup from 'yup'
+// import { commonMessages } from 'src/messages/commonMessages'
+// import UniversalAuthFormConfigType from '../UniversalAuthForm/UniversalAuthFormConfigType'
+// import ErrorServerResponseType from 'src/requests/errorServerResponseType'
+// import UserServerResponseType from 'src/requests/user/userServerResponseType'
+// import FHTypes from 'src/libs/formHandler/types'
+// import { resetFormMessages } from 'src/messages/resetFormMessages'
+// import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
 
 
-function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
+/*function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
     const emailField: UniversalAuthFormConfigType.Field = {
         label: resetFormMessages.emailField,
         autocomplete: 'email',
@@ -48,8 +48,8 @@ function createFormConfig(setEmail: any, setShowSuccessMessage: any) {
             setShowSuccessMessage(true)
         }
     }
-}
+}*/
 
-export default createFormConfig
+// export default createFormConfig
 
 

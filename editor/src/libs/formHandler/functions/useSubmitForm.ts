@@ -1,12 +1,12 @@
-import {useEffect, useState} from 'react'
-import FHTypes from '../types'
-import {
+// import {useEffect, useState} from 'react'
+// import FHTypes from '../types'
+/*import {
     getSetFieldData,
     getSetFieldDataPropValue,
     getSetFieldValue,
     setFormData,
     setFormDataPropValue
-} from './formStateSettersAndGetters'
+} from './formStateSettersAndGetters'*/
 
 
 /**
@@ -15,7 +15,7 @@ import {
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
-export default function useSubmitForm(
+/*export default function useSubmitForm(
     formConfig: FHTypes.FormConfig,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState
@@ -37,10 +37,10 @@ export default function useSubmitForm(
     }, [canRunSubmitHandler])
 
     return setCanRunSubmitHandler
-}
+}*/
 
 
-export function getSubmitFormDetails(
+/*export function getSubmitFormDetails(
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState,
 ): FHTypes.FormDetailsInSubmitHandler {
@@ -62,14 +62,14 @@ export function getSubmitFormDetails(
         // Значения полей для отправки на сервер
         readyFieldValues: getReadyFieldsValues(formState)
     }
-}
+}*/
 
 
 /**
  * Функция подготавливает объект со значениями полей для отправки на сервер
  * @param {Object} formState — объект Состояния формы
  */
-function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFieldsValues {
+/*function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFieldsValues {
     let fieldsValuesSubmitObj: FHTypes.ReadyFieldsValues = {}
 
     for (let fieldName in formState.fields) {
@@ -87,4 +87,4 @@ function getReadyFieldsValues(formState: FHTypes.FormState): FHTypes.ReadyFields
     }
 
     return fieldsValuesSubmitObj
-}
+}*/
