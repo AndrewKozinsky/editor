@@ -1,5 +1,5 @@
-// import { ReactNode } from 'react'
-// import Logo from '../icons/logo'
+import { ReactNode } from 'react'
+import Logo from '../icons/logo'
 // import NoticeError from '../icons/NoticeError'
 // import NoticeInfo from '../icons/NoticeInfo'
 // import NoticeSuccess from '../icons/NoticeSuccess'
@@ -44,7 +44,7 @@
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
  * @param {String} type — тип значка.
  */
-/*export function getIcon(type: string): ReactNode {
+export function getIcon(type: string): ReactNode {
 
     type componentsType = {
         [key: string]: ReactNode
@@ -55,19 +55,19 @@
         logo: Logo,
 
         // Значёк ошибки
-        errorTriangle: ErrorTriangle,
+        // errorTriangle: ErrorTriangle,
 
         // Значёк успеха
         // successCircle: SuccessCircle,
 
         // Галочка выбранного флага
-        selectInputArrows: SelectInputArrows,
+        // selectInputArrows: SelectInputArrows,
 
         // Значки главных вкладок
-        mainTabMaterials: MainTabMaterials,
-        mainTabEditor: MainTabEditor,
-        mainTabSettings: MainTabSettings,
-        mainTabHelp: MainTabHelp,
+        // mainTabMaterials: MainTabMaterials,
+        // mainTabEditor: MainTabEditor,
+        // mainTabSettings: MainTabSettings,
+        // mainTabHelp: MainTabHelp,
 
         // Значки на вкладках сайта
         // siteTabSite: SiteTabSite,
@@ -76,7 +76,7 @@
         // siteTabArticle: SiteTabArticle,
 
         // Закругляемая часть в кнопки вкладки
-        mainTabRoundScion: MainTabRoundScion,
+        // mainTabRoundScion: MainTabRoundScion,
 
         // Значки на кнопках
         // btnSignSave: BtnSignSave,
@@ -114,10 +114,10 @@
         // articleMenu: ArticleMenu,
 
         // Значки в Notice
-        noticeInfo: NoticeInfo,
-        noticeError: NoticeError,
-        noticeSuccess: NoticeSuccess,
+        // noticeInfo: NoticeInfo,
+        // noticeError: NoticeError,
+        // noticeSuccess: NoticeSuccess,
     }
 
     return components[type]
-}*/
+}

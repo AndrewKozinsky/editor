@@ -1,10 +1,10 @@
 import React from 'react'
 // @ts-ignore
-// import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 
 // Компоненты
 // import Loader from 'src/common/misc/Loader/Loader'
-// import NotFound from '../NotFound/NotFound'
+import NotFound from '../NotFound/NotFound'
 
 // Страницы
 // import EditorMain from 'src/editor/wrappers/EditorMain/EditorMain'
@@ -15,10 +15,10 @@ import React from 'react'
     useGetAndSetEditorSettings,
     useSetTokenStatus
 } from './app-fn/init'*/
-/*import {
+import {
     useGetAppClasses,
-    useRedirectPage
-} from './app-fn/App-func'*/
+    // useRedirectPage
+} from './app-fn/App-func'
 // import setShortcutsHandler from './shortcuts/shortcutsHandler'
 // import './css/reset.css'
 // import './css/variables.scss'
@@ -81,25 +81,25 @@ export default function App() {
     // useRedirectPage()
 
     // Классы обёртки компонента
-    // const appClasses = useGetAppClasses()
+    const appClasses = useGetAppClasses()
 
     // Показать загрузчик если приложение еще не инициализировалось
     /*if (!isTokenSet) {
         return <div className={appClasses}><Loader /></div>
     }*/
 
-    /*return (
+    return (
         <div className={appClasses}>
+            <p>So</p>
             <Switch>
-                <Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>
-                    <EditorMain />
-                    <EntrancePages />
-                </Route>
+                {/*<Route path={['/', '/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']} exact>*/}
+                    {/*<EditorMain />*/}
+                    {/*<EntrancePages />*/}
+                {/*</Route>*/}
                 <Route path="*">
                     <NotFound />
                 </Route>
             </Switch>
         </div>
-    )*/
-    return <p>Editor</p>
+    )
 }

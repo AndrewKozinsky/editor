@@ -13,8 +13,8 @@ services:
       - 80:80
     volumes:
       - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
-#    networks:
-#      - editorium-network
+    networks:
+      - editorium-network
 
   # Клиентская часть редактора
   editor:
@@ -28,8 +28,8 @@ services:
     tty: true
     volumes:
       - ./editor/src:/app/src
-#    networks:
-#      - editorium-network
+    networks:
+      - editorium-network
 
   # API редактора (Nest)
 #  nest_api:
@@ -70,5 +70,5 @@ services:
 #volumes:
 #  postgres_db:
 
-#networks:
-#  editorium-network:
+networks:
+  editorium-network:
