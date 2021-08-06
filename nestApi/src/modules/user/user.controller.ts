@@ -3,7 +3,7 @@ import { Response } from 'express'
 import { UserService } from './user.service'
 // import { CreateUserDto } from './dto/createUser.dto'
 import { ExpressRequestInterface } from '../../types/expressRequest.interface'
-// import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
+import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
 // import { LoginDto } from './dto/login.dto'
 // import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 // import { Param } from '@nestjs/common'
@@ -18,12 +18,11 @@ export class UserController {
     constructor(private readonly userService: UserService) {}
 
     @Post('getTokenData')
-    // @UsePipes(new BackendValidationPipe())
+    @UsePipes(new BackendValidationPipe())
     async getTokenData(
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
-        console.log(555)
         const user = await this.userService.getTokenData(req)
         this.userService.buildUserResponse(user, response)
     }

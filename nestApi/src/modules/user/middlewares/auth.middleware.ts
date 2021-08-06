@@ -1,16 +1,16 @@
 import { Injectable, NestMiddleware } from '@nestjs/common'
-// import { ExpressRequestInterface } from '../../../types/expressRequest.interface'
+import { ExpressRequestInterface } from '../../../types/expressRequest.interface'
 import { NextFunction, Response } from 'express'
-// import MiscTypes from '../../../types/miscTypes'
-// import { config } from '../../../config'
-// import { UserService } from '../user.service'
-// import {verify} from 'jsonwebtoken'
+import MiscTypes from '../../../types/miscTypes'
+import { config } from '../../../config'
+import { UserService } from '../user.service'
+import { verify } from 'jsonwebtoken'
 
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
-    // constructor(private readonly userService: UserService) {}
+    constructor(private readonly userService: UserService) {}
 
-    /*async use(req: ExpressRequestInterface, res: Response, next: NextFunction) {
+    async use(req: ExpressRequestInterface, res: Response, next: NextFunction) {
         const token = req.cookies.token || req.headers?.authorization?.split(' ')[1]
 
         if (!token) {
@@ -34,10 +34,5 @@ export class AuthMiddleware implements NestMiddleware {
             req.user = null
             next()
         }
-    }*/
-
-    // DELETE THIS
-    async use(req: any, res: Response, next: NextFunction) {
-        next()
     }
 }

@@ -1,7 +1,7 @@
 
 export const config = {
     // Режим работы (development или production)
-    // workMode: String(process.env.MODE),
+    workMode: String(process.env.MODE),
     // Порт сервиса
     port: Number(process.env.PORT),
 
@@ -29,7 +29,7 @@ export const config = {
     // sendpulseTokenStorage: '/tmp/',
 
     // JWT
-    // jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
-    // jwtExpiresIn: 90,
+    jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
+    jwtExpiresIn: 90,
     // jwtExpiresUnit: 'd'
 }

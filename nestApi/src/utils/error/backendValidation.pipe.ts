@@ -1,4 +1,4 @@
-/*import {
+import {
     ArgumentMetadata,
     HttpException,
     HttpStatus,
@@ -7,9 +7,8 @@
 } from '@nestjs/common'
 import { plainToClass } from 'class-transformer'
 import { validate } from 'class-validator'
-import { ErrorResponseInterface } from './errorResponse.interface'*/
+import { ErrorResponseInterface } from './errorResponse.interface'
 
-/*
 export class BackendValidationPipe implements PipeTransform {
 
     async transform(value: any, metadata: ArgumentMetadata) {
@@ -39,4 +38,4 @@ export class BackendValidationPipe implements PipeTransform {
             errors: errorsObj
         }
     }
-}*/
+}

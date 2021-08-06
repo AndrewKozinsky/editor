@@ -5,7 +5,7 @@ Drop the database:
 node --require ts-node/register ./node_modules/typeorm/cli.js schema:drop --config=src/ormconfig.ts
 
 Generate migration files and save them in migration folder:
-node --require ts-node/register ./node_modules/typeorm/cli.js migration:generate --config=src/ormconfig.ts -n SETNAME
+node --require ts-node/register ./node_modules/typeorm/cli.js migration:generate --config=src/ormconfig.ts -n CreateUser
 
 Change database by a migration file
 node --require ts-node/register ./node_modules/typeorm/cli.js migration:run --config=src/ormconfig.ts
@@ -28,11 +28,11 @@ Show databases
 Create editor database
 create database editor;
 
-Create user
-create user editor with encrypted password 'dt52posQP00P';
-
 Users list
 \du
+
+Create user
+create user editor with encrypted password 'dt52posQP00P';
 
 Set all privilegis to editor user
 grant all privileges on database editor to editor;

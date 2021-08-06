@@ -3,15 +3,15 @@ import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './user.entity'
 import { Repository } from 'typeorm'
-// import { sign, verify } from 'jsonwebtoken'
+import { sign, verify } from 'jsonwebtoken'
 // import { CreateUserDto } from './dto/createUser.dto'
 // import { createRandomString } from 'src/utils/stringUtils'
-// import MiscTypes from 'src/types/miscTypes'
+import MiscTypes from 'src/types/miscTypes'
 // import { Email } from 'src/utils/email/email'
 import { Response } from 'express'
-// import { config } from 'src/config'
-// import { UserResponseInterface } from './types/userResponse.interface'
-// import responseCommonError from 'src/utils/error/responseCommonError'
+import { config } from 'src/config'
+import { UserResponseInterface } from './types/userResponse.interface'
+import responseCommonError from 'src/utils/error/responseCommonError'
 // import { LoginDto } from './dto/login.dto'
 import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 // import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
@@ -23,41 +23,38 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 
 @Injectable()
 export class UserService {
-    /*constructor(
+    constructor(
         @InjectRepository(UserEntity)
         private readonly userRepository: Repository<UserEntity>
-    ) {}*/
+    ) {}
 
     async getTokenData(request: ExpressRequestInterface): Promise<UserEntity> {
-        // const token = request?.cookies?.token
+        const token = request?.cookies?.token
 
         // Если токен не передан, то возвратить ошибочный ответ
-        // if(!token) sendErrorResponse()
+        if(!token) sendErrorResponse()
 
         // Расшифровать JWT и получить payload
-        // const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
+        const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
 
         // Get user by id
-        // const user = await this.userRepository.findOne(decodedJWT.id)
+        const user = await this.userRepository.findOne(decodedJWT.id)
 
         // Если пользователь не найден, то вернуть ошибочный ответ
-        // if (!user) sendErrorResponse()
+        if (!user) sendErrorResponse()
 
         // Если почта не подтверждена, то вернуть ошибочный ответ
-        /*if(user.emailConfirmToken) {
+        if(user.emailConfirmToken) {
             sendErrorResponse()
-        }*/
+        }
 
         // Если все проверки прошли мимо, то вернуть пользователя
-        // return user
+        return user
 
         // Функция возвращающая ошибочный ответ
-        /*function sendErrorResponse() {
+        function sendErrorResponse() {
             responseCommonError('user_getTokenData_tokenIsNotPassed', HttpStatus.UNPROCESSABLE_ENTITY)
-        }*/
-
-        // DELETE THIS
-        return {}
+        }
     }
 
     /*async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
@@ -248,20 +245,20 @@ export class UserService {
 
     // ADDITIONAL METHODS
 
-    /*async getUserByEmail(email: string): Promise<UserEntity> {
+    async getUserByEmail(email: string): Promise<UserEntity> {
         return await this.userRepository.findOne({email})
-    }*/
-    /*async getUserById(id: number): Promise<UserEntity> {
+    }
+    async getUserById(id: number): Promise<UserEntity> {
         return await this.userRepository.findOne({id})
-    }*/
+    }
 
-    /*generateToken(user: UserEntity): string {
+    generateToken(user: UserEntity): string {
         return sign(
             { id: user.id },
             config.jwtSecret,
             { expiresIn: '90d' }
         )
-    }*/
+    }
 
     // Метод создающий незашифрованный токен сброса пароля
     /*getPasswordResetToken(): string {
@@ -283,9 +280,9 @@ export class UserService {
         statusCode: number = HttpStatus.OK,
         setCookieToken: boolean = false
     ): void {
-        // const token = this.generateToken(user)
+        const token = this.generateToken(user)
 
-        /*const resBody: UserResponseInterface = {
+        const resBody: UserResponseInterface = {
             status: 'success',
             statusCode,
             data: {
@@ -297,24 +294,19 @@ export class UserService {
                     token
                 }
             }
-        }*/
+        }
 
-        // response.statusCode = statusCode
+        response.statusCode = statusCode
 
-        /*if (setCookieToken) {
+        if (setCookieToken) {
             const cookieOptions = {
                 expires: new Date(Date.now() + config.jwtExpiresIn * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
             response.cookie('token', token, cookieOptions)
-        }*/
+        }
 
-        // response.send(resBody)
-
-        // DELETE THIS!
-        response.send({
-            status: 'false'
-        })
+        response.send(resBody)
     }
 }
 
