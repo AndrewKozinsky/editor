@@ -8,7 +8,7 @@ services:
     depends_on:
       - editor
       - nest_api
-#      - postgres_db
+      - postgres_db
     ports:
       - 80:80
     volumes:
@@ -34,24 +34,24 @@ services:
     environment:
       - MODE=production
       - PORT=3002
-#    depends_on:
-#      - postgres_db
+    depends_on:
+      - postgres_db
 
   # Postgres
   # BD: editor
   # User: editor
   # Password: dt52posQP00P
-#  postgres_db:
-#    image: postgres:13-alpine
-#    container_name: postgres_db
-#    restart: unless-stopped
-#    environment:
-#      POSTGRES_PASSWORD: sguen35GPA
-#      POSTGRES_USER: postgres
-#      POSTGRES_DB: editor
-#    volumes:
-#      - postgres_db:/var/lib/postgresql/data
+  postgres_db:
+    image: postgres:13-alpine
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: sguen35GPA
+      POSTGRES_USER: postgres
+      POSTGRES_DB: editor
+    volumes:
+      - postgres_db:/var/lib/postgresql/data
 
 
-#volumes:
-#  postgres_db:
+volumes:
+  postgres_db:
