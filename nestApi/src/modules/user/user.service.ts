@@ -4,8 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './user.entity'
 import { Repository } from 'typeorm'
 import { sign, verify } from 'jsonwebtoken'
-// import { CreateUserDto } from './dto/createUser.dto'
-// import { createRandomString } from 'src/utils/stringUtils'
+import { CreateUserDto } from './dto/createUser.dto'
+import { createRandomString } from 'src/utils/stringUtils'
 import MiscTypes from 'src/types/miscTypes'
 // import { Email } from 'src/utils/email/email'
 import { Response } from 'express'
@@ -57,7 +57,7 @@ export class UserService {
         }
     }
 
-    /*async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
+    async createUser(createUserDto: CreateUserDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Throw an error if user exists
         if (await this.getUserByEmail(createUserDto.email)) {
             responseCommonError('user_createUser_alreadyRegistered', HttpStatus.UNPROCESSABLE_ENTITY)
@@ -77,7 +77,7 @@ export class UserService {
         await sendEmailAddressConfirmLetter(language, newUser.email, emailConfirmToken)
 
         return await this.userRepository.save(newUser)
-    }*/
+    }
 
     /*async login(loginDto: LoginDto): Promise<UserEntity> {
 
@@ -318,13 +318,12 @@ export class UserService {
  * @param {String} confirmToken — токен подтверждения почты
  * @returns {Promise<void>}
  */
-/*
 async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email: string, confirmToken: string) {
 
     // Создать новое письмо...
     // В конструктор передаётся почта пользователя и URL сайта вида https://editorium.net
-    const userEmail = new Email(email, language)
+    // const userEmail = new Email(email, language)
 
     // Послать письмо для подтверждения почты
-    userEmail.sendConfirmLetter(confirmToken).then(() => {})
-}*/
+    // userEmail.sendConfirmLetter(confirmToken).then(() => {})
+}

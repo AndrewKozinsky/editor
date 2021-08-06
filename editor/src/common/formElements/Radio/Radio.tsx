@@ -1,10 +1,10 @@
-// import React, { ReactElement, useState } from 'react'
-// import { MiscTypes } from 'types/miscTypes'
-// import { getRandomId } from 'utils/StringUtils'
-// import './Radio.scss'
+import React, { ReactElement, useState } from 'react'
+import { MiscTypes } from 'types/miscTypes'
+import { getRandomId } from 'utils/StringUtils'
+import './Radio.scss'
 
 
-/*export type RadioPropType = {
+export type RadioPropType = {
     label: string | ReactElement // Подпись флага
     name: string // Имя группы флагов
     value: string | number // Значение флага
@@ -12,10 +12,10 @@
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
 /* Компонент выпадающего списка */
-/*export default function Radio(props: RadioPropType) {
+export default function Radio(props: RadioPropType) {
 
     const {
         label, // Подпись выпадающего списка
@@ -55,4 +55,4 @@
             <label {...labelAttribs}>{label}</label>
         </>
     )
-}*/
+}

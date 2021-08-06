@@ -17,12 +17,12 @@ export function getIconSize(type: string) {
         // Значёк успеха
         // case 'successCircle':
         // Значёк ошибки
-        /*case 'errorTriangle':
+        case 'errorTriangle':
             return {
                 width: "13px",
                 height: "13px",
                 viewBox: "0 0 13 13"
-            }*/
+            }
         // Галочка выбранного флага
         /*case 'selectInputArrows':
             return {
@@ -140,14 +140,14 @@ export function getIconSize(type: string) {
                 height: "14px",
                 viewBox: "0 0 18 14"
             }*/
-        // case 'noticeInfo':
-        // case 'noticeError':
-        /*case 'noticeSuccess':
+        case 'noticeInfo':
+        case 'noticeError':
+        case 'noticeSuccess':
             return {
                 width: "18px",
                 height: "18px",
                 viewBox: "0 0 18 18"
-            }*/
+            }
         default: {
             return {}
         }

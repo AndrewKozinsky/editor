@@ -1,7 +1,7 @@
-// import FCType from '../FCType'
+import FCType from "../FCType"
 
 /** Функция возвращает ссылку на элемент первого поля с ошибкой */
-/*export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
+export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
 
     // Перебор всех полей чтобы найти поле с первой ошибкой
     for(let fieldName in fields) {
@@ -13,4 +13,4 @@
     }
 
     return null
-}*/
+}

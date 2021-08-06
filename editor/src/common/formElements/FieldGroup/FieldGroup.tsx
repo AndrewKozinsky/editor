@@ -1,10 +1,9 @@
-// import React, {ReactElement, ReactNode} from 'react'
-// import Radio from '../Radio/Radio'
-// import Checkbox from '../Checkbox/Checkbox'
-// import FHTypes from 'libs/formHandler/types'
-// import Label from '../Label/Label'
-// import { getFieldGroupClasses } from './FieldGroup-func'
-// import './FieldGroup.scss'
+import React, {ReactElement, ReactNode} from 'react'
+import Radio from '../Radio/Radio'
+import Checkbox from '../Checkbox/Checkbox'
+import Label from '../Label/Label'
+import { getFieldGroupClasses } from './FieldGroup-func'
+import './FieldGroup.scss'
 
 
 /**
@@ -14,21 +13,21 @@
  * Если в value передаётся массив строк, то это обозначает
  */
 
-// type InputDataType = { label: string | ReactElement, value: string }
+type InputDataType = { label: string | ReactElement, value: string }
 
-/*export type FieldGroupPropType = {
+export type FieldGroupPropType = {
     label?: string
     inputType: 'radio' | 'checkbox'
     groupName: string
     inputsArr: InputDataType[]
-    value: FHTypes.FieldValue
+    value: string[]
     gap?: 20 // Отступы между элементами внутри обёртки
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
-/*export default function FieldGroup(props: FieldGroupPropType) {
+export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
         inputType,
@@ -68,15 +67,15 @@
             </InputsWrapper>
         </>
     )
-}*/
+}
 
 
-/*export type InputsWrapperType = {
+export type InputsWrapperType = {
     gap: number,
     children: ReactNode
-}*/
+}
 
-/*function InputsWrapper(props: InputsWrapperType) {
+function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
         children
@@ -86,4 +85,4 @@
     const cls = getFieldGroupClasses(gap)
 
     return <div className={cls}>{children}</div>
-}*/
+}

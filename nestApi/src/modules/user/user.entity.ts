@@ -26,21 +26,21 @@ export class UserEntity {
     @Column({type: 'varchar', width: 250})
     password: string
 
-    @Column({type: 'bigint', default: 0})
-    passwordChangedAt: number
+    @Column({type: 'timestamp'})
+    passwordChangedAt: Date
 
     @Column({type: 'varchar', width: 250, default: ''})
     passwordResetToken: string
 
-    @Column({type: 'bigint', default: 0})
-    passwordResetExpires: number
+    @Column({type: 'timestamp', nullable: true})
+    passwordResetExpires: Date
 
     @Column({type: 'char', length: 3, default: 'eng'})
     language: MiscTypes.Language
 
     // Date when user was created. It set automatically.
-    @CreateDateColumn()
-    createdAt: number
+    @CreateDateColumn({type: 'timestamp'})
+    createdAt: Date
 
     // Hash password before create or update user data
     @BeforeInsert()
@@ -50,12 +50,12 @@ export class UserEntity {
         // Hash password before insert
         this.password = await hash(this.password, 10)
         // Set a new date when the password was changed
-        this.passwordChangedAt = +(new Date())
+        this.passwordChangedAt = new Date()
     }
 
     @BeforeInsert()
     async setCreatedAtData() {
-        this.createdAt = +(new Date())
+        this.createdAt = new Date()
     }
 }
 

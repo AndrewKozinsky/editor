@@ -1,9 +1,9 @@
 import React from 'react'
 // @ts-ignore
-// import { Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 // import EnterFormBlock from 'src/entrance/EnterFormBlock/EnterFormBlock'
-// import AuthFormWrapper from 'src/entrance/AuthFormWrapper/AuthFormWrapper'
-// import RegFormBlock from 'src/entrance/RegFormBlock/RegFormBlock'
+import AuthFormWrapper from 'src/entrance/AuthFormWrapper/AuthFormWrapper'
+import RegFormBlock from 'entrance/RegFormBlock/RegFormBlock'
 // import ConfirmEmailFormBlock from 'src/entrance/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
 // import ResetFormBlock from 'src/entrance/ResetFormBlock/ResetFormBlock'
 // import ChangeResetPasswordFormBlock from 'src/entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
@@ -14,7 +14,7 @@ import './EntrancePages.scss'
 export default function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
-    // useViewStateChanger()
+    useViewStateChanger()
 
     // Классы обёртки
     const {classes, isVisible} = useGetWrapperClasses()
@@ -23,25 +23,25 @@ export default function EntrancePages() {
 
     return (
         <div className={classes}>
-            {/*<AuthFormWrapper>
+            <AuthFormWrapper>
                 <Switch>
                     <Route path='/reg'>
                         <RegFormBlock />
                     </Route>
-                    <Route path='/confirm-email'>
+                    {/*<Route path='/confirm-email'>
                         <ConfirmEmailFormBlock />
-                    </Route>
-                    <Route path='/reset-password'>
+                    </Route>*/}
+                    {/*<Route path='/reset-password'>
                         <ResetFormBlock />
-                    </Route>
-                    <Route path='/change-reset-password'>
+                    </Route>*/}
+                    {/*<Route path='/change-reset-password'>
                         <ChangeResetPasswordFormBlock />
-                    </Route>
-                    <Route path='*'>
+                    </Route>*/}
+                    {/*<Route path='*'>
                         <EnterFormBlock />
-                    </Route>
+                    </Route>*/}
                 </Switch>
-            </AuthFormWrapper>*/}
+            </AuthFormWrapper>
         </div>
     )
 }

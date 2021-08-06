@@ -1,19 +1,21 @@
-// import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-// import { SelectPropType } from 'common/formElements/Select/Select'
-// import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-// import { ButtonPropType } from 'common/formElements/Button/Button'
-// import FHTypes from '../formHandler/types'
+import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+import { SelectPropType } from 'common/formElements/Select/Select'
+import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+import { ButtonPropType } from 'common/formElements/Button/Button'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import UserServerResponseType from 'requests/user/userServerResponseType'
 
 
-/*namespace FCType {
-    import FieldsStateObj = FHTypes.FieldsStateObj
+namespace FCType {
     export type Config = {
         fields: ConfigFields
         bottom: {
             submit: ConfigSubmitButton
             elems?: JSX.Element[]
         },
-        requestFn: (formState: FHTypes.ReadyFieldsValues) => Promise<unknown>
+        requestFn: (formState: ReadyFieldsValues) => Promise<Response>
+        afterSubmit?: (response: Response) => void
+        hideAfterSuccessfulSubmit?: boolean
     }
 
     export type ConfigFields = { [key: string]: ConfigField }
@@ -49,6 +51,8 @@
     type FieldExcludedArgs = 'onChange' | 'value' | 'disabled' | 'error'
     type ConfigSubmitButton = Omit<ButtonPropType, 'type'>
 
+    type Response = ErrorServerResponseType | UserServerResponseType
+
 
     // =======================================================================
 
@@ -80,12 +84,11 @@
     export type SetCommonError = ( err: null | string ) => void
 
     export type SetFormVisible = ( isVisible: boolean ) => void
+    export type SetFormDisabled = ( isDisabled: boolean ) => void
     export type SetSubmitCounter = ( num: number ) => void
-    export type SetFormHasErrors = ( status: boolean ) => void
+    export type SetFormSentSuccessfully = ( status: boolean ) => void
     export type SetSubmitBtnDisabled = ( status: boolean ) => void
-    export type SetFormDisabled = ( status: boolean ) => void
     export type SetSubmitBtnLoading = ( status: boolean ) => void
-    export type UpdateField = ( fieldName: string, newFieldData: StateFieldsObj ) => void
 
     // Значения полей для отправки на сервер
     export type ReadyFieldsValues = {
@@ -95,19 +98,21 @@
 
     export type StateFormReturn = {
         fields: FieldsState
-        updateField: UpdateField
+        // updateField: UpdateField
         submitBtnLoading: boolean
         submitBtnDisabled: boolean
+        submitCounter: number,
         formVisible: boolean
-        formDisabled: boolean
         setFormVisible: SetFormVisible
+        formDisabled: boolean
+        setFormDisabled: SetFormDisabled
         commonError: CommonError
         setCommonError: SetCommonError
+        formSentSuccessfully: boolean
         onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void
         onFormSubmit: (e: React.BaseSyntheticEvent) => void
     }
-}*/
+}
 
 
-
-// export default FCType
+export default FCType

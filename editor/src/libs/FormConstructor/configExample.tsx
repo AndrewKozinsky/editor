@@ -3,7 +3,7 @@
 //@ts-ignore
 // import * as yup from 'yup'
 
-
+// MAY BE IT IS WRONG
 /*const config: FCType.Config = {
     fields: {
         text: {

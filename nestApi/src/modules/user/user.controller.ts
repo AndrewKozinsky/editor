@@ -1,14 +1,25 @@
-import { Body, Controller, Get, HttpStatus, Post, Req, Res, UseGuards, UsePipes } from '@nestjs/common'
+import {
+    Body,
+    Controller,
+    Get,
+    Post,
+    Patch,
+    Param,
+    HttpStatus,
+    Req,
+    Res,
+    UseGuards,
+    UsePipes
+} from '@nestjs/common'
 import { Response } from 'express'
 import { UserService } from './user.service'
-// import { CreateUserDto } from './dto/createUser.dto'
+import { CreateUserDto } from './dto/createUser.dto'
 import { ExpressRequestInterface } from '../../types/expressRequest.interface'
 import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
 // import { LoginDto } from './dto/login.dto'
 // import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-// import { Param } from '@nestjs/common'
+
 // import { ResetPasswordDto } from './dto/resetPassword.dto'
-// import { Patch } from '@nestjs/common'
 // import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 // import { ChangeEmailDto } from './dto/changeEmail.dto'
 // import { AuthGuard } from './guards/auth.guard'
@@ -23,13 +34,14 @@ export class UserController {
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
+        console.log(444)
         const user = await this.userService.getTokenData(req)
         this.userService.buildUserResponse(user, response)
     }
 
-    // @Post('signup')
-    // @UsePipes(new BackendValidationPipe())
-    /*async createUser(
+    @Post('signup')
+    @UsePipes(new BackendValidationPipe())
+    async createUser(
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
         @Body() createUserDto: CreateUserDto
@@ -37,7 +49,7 @@ export class UserController {
         const language = req.headers['Editor-Language']
         const user = await this.userService.createUser(createUserDto, language)
         this.userService.buildUserResponse(user, response, HttpStatus.CREATED)
-    }*/
+    }
 
     // @Post('login')
     // @UsePipes(new BackendValidationPipe())

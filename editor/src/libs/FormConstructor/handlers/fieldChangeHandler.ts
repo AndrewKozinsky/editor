@@ -1,18 +1,15 @@
-// import FCType from '../FCType'
-// import setErrorsToFields from './setErrorsToFields'
+import FCType from '../FCType'
+import setErrorsToFields from '../state/setErrorsToFields'
 
 
-/*export default function fieldChangeHandler(
+export default function fieldChangeHandler(
     e: React.BaseSyntheticEvent,
     fields: FCType.FieldsState,
     setFields: FCType.SetFields,
     submitCounter: number,
-    setSubmitCounter: FCType.SetSubmitCounter,
-    formHasErrors: boolean,
-    setFormHasErrors: FCType.SetFormHasErrors,
     formConfig: FCType.Config,
     setSubmitBtnDisabled: FCType.SetSubmitBtnDisabled,
-    setCommonError: FCType.SetCommonError
+    setCommonError: FCType.SetCommonError,
 ) {
     const fieldName = e.target.name
 
@@ -30,16 +27,17 @@
         setSubmitBtnDisabled(!isFormValid)
     }
 
+    setCommonError(null)
+
     setFields(updatedFields)
-}*/
+}
 
 /**
  * Функция получает новое значение поля и в зависимости от типа поля возвращает новый массив значений поля
  * @param {Object} inputData — данные поля
  * @param {String} newValue — новое значение поля
  */
-/*function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
-
+function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
     if (inputData.valueCount === 'one') {
         return [newValue]
     }
@@ -59,4 +57,4 @@
 
         return valuesNewArr
     }
-}*/
+}

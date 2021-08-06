@@ -1,18 +1,18 @@
-// import {ReactElement} from 'react'
-// import store from 'store/store'
+import { ReactElement } from 'react'
+import store from 'store/store'
 
 
-/*export type ObjType = {
+export type ObjType = {
     [key: string]: LangStringObj
-}*/
-/*export type JSXType = {
+}
+export type JSXType = {
     [key: string]: LangJSXObj
-}*/
-/*export type JSXFnType = {
+}
+export type JSXFnType = {
     [key: string]: LangJSXFnObj
-}*/
+}
 
-/*type LangStringObj = {
+type LangStringObj = {
     eng: string,
     rus: string
 }
@@ -30,10 +30,10 @@ type ReturnJSXType = {
 }
 type ReturnJSXFnType = {
     [key: string]: LangJSXFnObj
-}*/
+}
 
 
-/*export function getMessagesObject(obj: ObjType) {
+export function getMessagesObject(obj: ObjType) {
     const lang = store.getState().settings.editorLanguage
 
     let newObj: ReturnObjType = {}
@@ -46,9 +46,9 @@ type ReturnJSXFnType = {
     }
 
     return newObj
-}*/
+}
 
-/*export function getMessagesJSXObject(obj: JSXType) {
+export function getMessagesJSXObject(obj: JSXType) {
     const lang = store.getState().settings.editorLanguage
 
     let newObj: ReturnJSXType = {}
@@ -61,10 +61,10 @@ type ReturnJSXFnType = {
     }
 
     return newObj
-}*/
+}
 
 
-/*export function getMessagesJSXFnObject(obj: JSXFnType) {
+export function getMessagesJSXFnObject(obj: JSXFnType) {
     const lang = store.getState().settings.editorLanguage
 
     let newObj: ReturnJSXFnType = {}
@@ -84,4 +84,4 @@ type ReturnJSXFnType = {
     }
 
     return newObj
-}*/
+}

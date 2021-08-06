@@ -1,22 +1,19 @@
-// import React, {ReactNode} from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-// import { makeCN } from 'utils/StringUtils'
-// import './Notice.scss'
+import React, {ReactNode} from 'react'
+import SvgIcon from 'common/icons/SvgIcon'
+import { makeCN } from 'utils/StringUtils'
+import './Notice.scss'
 
 
-// const CN = 'notice'
+const CN = 'notice'
 
-/*export type NoticePropType = {
+export type NoticePropType = {
     icon?: 'info' | 'error' | 'success' // Тип значка: info (информация), error (ошибка), success (успех)
     bg?: boolean // If there is a background
     children?: ReactNode
-}*/
+}
 
-/**
- * Компонент текстового уведомления.
- * Если передать тип, то это будет или сообщение об ошибке или об успехе.
- */
-/*export default function Notice(props: NoticePropType) {
+/** Компонент уведомления. */
+export default function Notice(props: NoticePropType) {
     const { children, bg = false } = props
 
     const classes = [CN]
@@ -28,11 +25,11 @@
             <div>{children}</div>
         </div>
     )
-}*/
+}
 
 
 /** Значёк левее содержимого */
-/*function Sign(props: NoticePropType) {
+function Sign(props: NoticePropType) {
     const { icon } = props
 
     if (icon === 'info') {
@@ -46,4 +43,4 @@
     }
 
     return null
-}*/
+}

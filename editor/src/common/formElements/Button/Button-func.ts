@@ -1,13 +1,13 @@
-// import { useEffect } from 'react'
-// import { makeCN } from 'utils/StringUtils'
-// import { ButtonPropType } from './Button'
+import { useEffect } from 'react'
+import { makeCN } from 'utils/StringUtils'
+import { ButtonPropType } from './Button'
 
 
 /**
  * Функция возвращает классы кнопки
  * @param {Object} buttonProps — props переданные в кнопку
  */
-/*export function getButtonClasses(buttonProps: ButtonPropType) {
+export function getButtonClasses(buttonProps: ButtonPropType) {
     const {
         view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
@@ -36,7 +36,7 @@
     if (align) classes.push(`${CN}--${align}`)
 
     return makeCN(classes)
-}*/
+}
 
 
 /**
@@ -45,7 +45,7 @@
  * @param {Boolean | Number} autoFocus — или булево значение нужно ли ставить фокусировку или число сообщающее задержку,
  * с которой нужно поставить фокусировку.
  */
-/*export function useSetFocus(buttonRef: any, autoFocus: boolean | number) {
+export function useSetFocus(buttonRef: any, autoFocus: boolean | number) {
     // Нужно ли ставить фокусировку
     useEffect(function () {
         // Если нужно ставить фокусировку
@@ -57,4 +57,4 @@
             setTimeout(function () { buttonRef.current.focus() }, autoFocus)
         }
     }, [])
-}*/
+}

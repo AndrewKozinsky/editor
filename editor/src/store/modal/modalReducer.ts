@@ -27,10 +27,10 @@ function closeModal(state: ModalReducerType, action: StoreModalTypes.CloseModalA
 export default function modalReducer(state = initialState, action: StoreModalTypes.ModalAction): ModalReducerType {
 
     switch (action.type) {
-        // case StoreModalTypes.MODAL_OPEN:
-        //     return openModal(state, action)
-        // case StoreModalTypes.MODAL_CLOSE:
-        //     return closeModal(state, action)
+        case StoreModalTypes.MODAL_OPEN:
+            return openModal(state, action)
+        case StoreModalTypes.MODAL_CLOSE:
+            return closeModal(state, action)
         default:
             // @ts-ignore
             const x: never = null
