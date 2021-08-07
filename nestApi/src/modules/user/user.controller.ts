@@ -16,11 +16,10 @@ import { UserService } from './user.service'
 import { CreateUserDto } from './dto/createUser.dto'
 import { ExpressRequestInterface } from '../../types/expressRequest.interface'
 import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
-// import { LoginDto } from './dto/login.dto'
-// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-
-// import { ResetPasswordDto } from './dto/resetPassword.dto'
-// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import { LoginDto } from './dto/login.dto'
+import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from './dto/resetPassword.dto'
+import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 // import { ChangeEmailDto } from './dto/changeEmail.dto'
 // import { AuthGuard } from './guards/auth.guard'
 
@@ -34,7 +33,6 @@ export class UserController {
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
-        console.log(444)
         const user = await this.userService.getTokenData(req)
         this.userService.buildUserResponse(user, response)
     }
@@ -51,19 +49,19 @@ export class UserController {
         this.userService.buildUserResponse(user, response, HttpStatus.CREATED)
     }
 
-    // @Post('login')
-    // @UsePipes(new BackendValidationPipe())
-    /*async login(
+    @Post('login')
+    @UsePipes(new BackendValidationPipe())
+    async login(
         @Res({ passthrough: true }) response: Response,
         @Body() loginDto: LoginDto
     ): Promise<void> {
         const user = await this.userService.login(loginDto)
         this.userService.buildUserResponse(user, response, HttpStatus.OK, true  )
-    }*/
+    }
 
-    // @Post('sendConfirmLetter')
-    // @UsePipes(new BackendValidationPipe())
-    /*async sendConfirmLetter(
+    @Post('sendConfirmLetter')
+    @UsePipes(new BackendValidationPipe())
+    async sendConfirmLetter(
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
         @Body() sendConfirmLetterDto: SendConfirmLetterDto
@@ -71,21 +69,21 @@ export class UserController {
         const language = req.headers['Editor-Language']
         const user = await this.userService.sendConfirmLetter(sendConfirmLetterDto, language)
         this.userService.buildUserResponse(user, response)
-    }*/
+    }
 
-    // @Get('confirmEmail/:token')
-    // @UsePipes(new BackendValidationPipe())
-    /*async confirmEmail(
+    @Get('confirmEmail/:token')
+    @UsePipes(new BackendValidationPipe())
+    async confirmEmail(
         @Param('token') token: string,
         @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
         const user = await this.userService.confirmEmail(token)
         this.userService.buildUserResponse(user, response)
-    }*/
+    }
 
-    // @Post('resetPassword')
-    // @UsePipes(new BackendValidationPipe())
-    /*async resetPassword(
+    @Post('resetPassword')
+    @UsePipes(new BackendValidationPipe())
+    async resetPassword(
         @Req() req: ExpressRequestInterface,
         @Res({ passthrough: true }) response: Response,
         @Body() resetPasswordDto: ResetPasswordDto
@@ -93,18 +91,18 @@ export class UserController {
         const language = req.headers['Editor-Language']
         const user = await this.userService.resetPassword(resetPasswordDto, language)
         this.userService.buildUserResponse(user, response)
-    }*/
+    }
 
-    // @Patch('resetPassword/:token')
-    // @UsePipes(new BackendValidationPipe())
-    /*async changeResetPassword(
+    @Patch('resetPassword/:token')
+    @UsePipes(new BackendValidationPipe())
+    async changeResetPassword(
         @Param('token') token: string,
         @Res({ passthrough: true }) response: Response,
         @Body() changeResetPasswordDto: ChangeResetPasswordDto
     ): Promise<void> {
         const user = await this.userService.changeResetPassword(changeResetPasswordDto, token)
         this.userService.buildUserResponse(user, response, HttpStatus.OK, true)
-    }*/
+    }
 
     // @Patch('changeEmail')
     // @UsePipes(new BackendValidationPipe())

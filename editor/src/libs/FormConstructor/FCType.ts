@@ -14,7 +14,7 @@ namespace FCType {
             elems?: JSX.Element[]
         },
         requestFn: (formState: ReadyFieldsValues) => Promise<Response>
-        afterSubmit?: (response: Response) => void
+        afterSubmit?: (response: Response, outerFns: OuterFns, formDetails: FormDetails) => void
         hideAfterSuccessfulSubmit?: boolean
     }
 
@@ -48,7 +48,7 @@ namespace FCType {
     }
 
     type FieldSchema = (fields?: FieldsState) => any
-    type FieldExcludedArgs = 'onChange' | 'value' | 'disabled' | 'error'
+    type FieldExcludedArgs = 'onChange' | 'value' | 'disabled' | 'error' | 'name'
     type ConfigSubmitButton = Omit<ButtonPropType, 'type'>
 
     type Response = ErrorServerResponseType | UserServerResponseType
@@ -90,6 +90,12 @@ namespace FCType {
     export type SetSubmitBtnDisabled = ( status: boolean ) => void
     export type SetSubmitBtnLoading = ( status: boolean ) => void
 
+    export type OuterFns = { [key: string]: any }
+
+    export type FormDetails = {
+        setFormVisible: SetFormVisible
+    }
+
     // Значения полей для отправки на сервер
     export type ReadyFieldsValues = {
         // Имя поля. Например email
@@ -98,7 +104,6 @@ namespace FCType {
 
     export type StateFormReturn = {
         fields: FieldsState
-        // updateField: UpdateField
         submitBtnLoading: boolean
         submitBtnDisabled: boolean
         submitCounter: number,

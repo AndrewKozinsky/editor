@@ -4,7 +4,8 @@ import getInitialFieldsState from './getInitialFieldsState'
 import fieldChangeHandler from '../handlers/fieldChangeHandler'
 import formSubmitHandler from '../handlers/formSubmitHandler'
 
-export default function useFormConstructorState(formConfig: FCType.Config): FCType.StateFormReturn {
+
+export default function useFormConstructorState(formConfig: FCType.Config, outerFns: FCType.OuterFns = {}): FCType.StateFormReturn {
     const [fields, setFields] = useState<FCType.FieldsState>(getInitialFieldsState(formConfig))
     const [submitBtnLoading, setSubmitBtnLoading] = useState(false)
     const [submitBtnDisabled, setSubmitBtnDisabled] = useState<boolean>(false)
@@ -21,9 +22,12 @@ export default function useFormConstructorState(formConfig: FCType.Config): FCTy
     const onFormSubmit = useCallback((e) => {
         formSubmitHandler(
             e, fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
-            setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully
+            setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns
         )
-    }, [fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled, setSubmitBtnLoading, setCommonError, setFormVisible])
+    }, [
+        fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
+        setSubmitBtnLoading, setCommonError, setFormVisible, outerFns
+    ])
 
 
     return {

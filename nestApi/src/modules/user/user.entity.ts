@@ -47,8 +47,10 @@ export class UserEntity {
     @BeforeUpdate()
     async hashPassword() {
         if (!this.password) return
+
         // Hash password before insert
         this.password = await hash(this.password, 10)
+
         // Set a new date when the password was changed
         this.passwordChangedAt = new Date()
     }

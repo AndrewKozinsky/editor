@@ -17,7 +17,7 @@
                     .max(100, 'String is too long')
             },
             fieldData: {
-                name: 'text', // Аттрибут name текстового поля
+
             }
         }
     },

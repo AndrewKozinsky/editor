@@ -1,7 +1,7 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
+import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Форма ConfirmEmailFormBlock
-/*const obj = {
+const obj = {
     formHeader: {
         eng: 'Email confirm',
         rus: 'Подтверждение почты'
@@ -14,6 +14,6 @@
         eng: 'Confirm email',
         rus: 'Подтвердить почту'
     },
-}*/
+}
 
-// export const confirmEmailMessages = getMessagesObject(obj)
+export const confirmEmailMessages = getMessagesObject(obj)

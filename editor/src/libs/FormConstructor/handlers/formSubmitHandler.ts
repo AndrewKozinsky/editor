@@ -17,7 +17,8 @@ export default async function formSubmitHandler(
     setSubmitBtnLoading: FCType.SetSubmitBtnLoading,
     setCommonError: FCType.SetCommonError,
     setFormVisible: FCType.SetFormVisible,
-    setFormSentSuccessfully: FCType.SetFormSentSuccessfully
+    setFormSentSuccessfully: FCType.SetFormSentSuccessfully,
+    outerFns: FCType.OuterFns
 ): Promise<void> {
     e.preventDefault()
 
@@ -85,7 +86,7 @@ export default async function formSubmitHandler(
     }
 
     if (formConfig.afterSubmit) {
-        formConfig.afterSubmit(response)
+        formConfig.afterSubmit(response, outerFns, {setFormVisible})
     }
 }
 

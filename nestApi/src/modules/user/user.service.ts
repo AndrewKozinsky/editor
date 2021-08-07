@@ -1,4 +1,4 @@
-// import { compare } from 'bcrypt'
+import { compare } from 'bcrypt'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './user.entity'
@@ -7,18 +7,18 @@ import { sign, verify } from 'jsonwebtoken'
 import { CreateUserDto } from './dto/createUser.dto'
 import { createRandomString } from 'src/utils/stringUtils'
 import MiscTypes from 'src/types/miscTypes'
-// import { Email } from 'src/utils/email/email'
+import { Email } from 'src/utils/email/email'
 import { Response } from 'express'
 import { config } from 'src/config'
 import { UserResponseInterface } from './types/userResponse.interface'
 import responseCommonError from 'src/utils/error/responseCommonError'
-// import { LoginDto } from './dto/login.dto'
+import { LoginDto } from './dto/login.dto'
 import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
-// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-// import { ResetPasswordDto } from './dto/resetPassword.dto'
-// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from './dto/resetPassword.dto'
+import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 // import { ChangeEmailDto } from './dto/changeEmail.dto'
-// const crypto = require('crypto')
+const crypto = require('crypto')
 
 
 @Injectable()
@@ -66,6 +66,7 @@ export class UserService {
         const emailConfirmToken = createRandomString()
 
         const newUser = new UserEntity()
+
         Object.assign(
             newUser,
             { emailConfirmToken },
@@ -79,10 +80,9 @@ export class UserService {
         return await this.userRepository.save(newUser)
     }
 
-    /*async login(loginDto: LoginDto): Promise<UserEntity> {
-
+    async login(loginDto: LoginDto): Promise<UserEntity> {
         // Get user by email
-        const user = await this.userRepository.findOne({email: loginDto.email})
+        const user = await this.getUserByEmail(loginDto.email)
         if (!user) responseCommonError('user_login_userDoesNotExist')
 
         const isPasswordMatch = await compare(loginDto.password, user.password)
@@ -94,9 +94,9 @@ export class UserService {
         }
 
         return user
-    }*/
+    }
 
-    /*async sendConfirmLetter(sendConfirmLetterDto: SendConfirmLetterDto, language: MiscTypes.Language): Promise<UserEntity> {
+    async sendConfirmLetter(sendConfirmLetterDto: SendConfirmLetterDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Получение переданной в body почты
         const email: string = sendConfirmLetterDto.email
 
@@ -117,9 +117,9 @@ export class UserService {
         await sendEmailAddressConfirmLetter(language, user.email, user.emailConfirmToken)
 
         return user
-    }*/
+    }
 
-    /*async confirmEmail(token: string): Promise<UserEntity> {
+    async confirmEmail(token: string): Promise<UserEntity> {
 
         const user = await this.userRepository.findOne({emailConfirmToken: token})
         // Если пользователь не найден, то возратить ошибку
@@ -129,13 +129,15 @@ export class UserService {
 
         // Erase emailConfirmToken property because email has been confirmed.
         user.emailConfirmToken = ''
+        // Delete password from user not to save because User Entity will change it
+        delete user.password
 
         await this.userRepository.save(user)
 
         return user
-    }*/
+    }
 
-    /*async resetPassword(sendConfirmLetterDto: ResetPasswordDto, language: MiscTypes.Language): Promise<UserEntity> {
+    async resetPassword(sendConfirmLetterDto: ResetPasswordDto, language: MiscTypes.Language): Promise<UserEntity> {
         // Получение переданной в body почты
         const email: string = sendConfirmLetterDto.email
 
@@ -155,6 +157,8 @@ export class UserService {
         // Записать его в свойство passwordResetToken в объект с данными найденного пользователя
         // По нему определяется по какому пользователю нужно сбрасывать пароль.
         user.passwordResetToken = resetToken
+        // Delete password from user not to save because User Entity will change it
+        delete user.password
 
         await this.userRepository.save(user)
 
@@ -174,9 +178,9 @@ export class UserService {
             // Бросить ошибку
             responseCommonError('user_resetPassword_failedToSendEmail', HttpStatus.FAILED_DEPENDENCY)
         }
-    }*/
+    }
 
-    /*async changeResetPassword(changeResetPasswordDto: ChangeResetPasswordDto, token: string): Promise<UserEntity> {
+    async changeResetPassword(changeResetPasswordDto: ChangeResetPasswordDto, token: string): Promise<UserEntity> {
         // Найду пользователя по токену смены пароля
         const user = await this.userRepository.findOne({passwordResetToken: token})
 
@@ -192,7 +196,7 @@ export class UserService {
 
         // Сохранить данные пользователя
         return await this.userRepository.save(user)
-    }*/
+    }
 
     // changeEmail(changeEmailDto: ChangeEmailDto) {
         // Получу новую почту
@@ -261,10 +265,10 @@ export class UserService {
     }
 
     // Метод создающий незашифрованный токен сброса пароля
-    /*getPasswordResetToken(): string {
+    getPasswordResetToken(): string {
         // Будет сгенерирована строка вида 2d860d2bb4d2d0184e99e80fac9390ab55bd72a0b545bdf06c34ae9a87cc6d2b
         return crypto.randomBytes(32).toString('hex')
-    }*/
+    }
 
 
     /**
@@ -322,8 +326,8 @@ async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email
 
     // Создать новое письмо...
     // В конструктор передаётся почта пользователя и URL сайта вида https://editorium.net
-    // const userEmail = new Email(email, language)
+    const userEmail = new Email(email, language)
 
     // Послать письмо для подтверждения почты
-    // userEmail.sendConfirmLetter(confirmToken).then(() => {})
+    userEmail.sendConfirmLetter(confirmToken).then(() => {})
 }

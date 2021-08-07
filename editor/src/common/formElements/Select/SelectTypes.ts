@@ -1,4 +1,3 @@
-
 export type OptionsType = OptionType[]
 
 export type OptionType = {

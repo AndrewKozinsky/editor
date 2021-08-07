@@ -2,25 +2,20 @@ import React from 'react'
 //@ts-ignore
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import { regFormMessages } from 'messages/regFormMessages'
 import { commonMessages } from 'messages/commonMessages'
-import regRequest from 'src/requests/user/regRequest'
+import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
+import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
 
 
 const config: FCType.Config = {
     fields: {
-        email: {
+        token: {
             fieldType: 'text',
             schema: (fields) => {
-                return yup.string()
-                    .required(commonMessages.requiredField)
-                    .email(regFormMessages.emailErrInvalid)
-                    .max(100, commonMessages.emailToLong)
+                return yup.string().required(commonMessages.requiredField)
             },
             fieldData: {
-                label: regFormMessages.emailField,
-                autocomplete: 'username',
-                placeholder: commonMessages.emailPlaceholder,
+                label: changeResetPasswordFormMessages.tokenField,
                 autoFocus: true,
             }
         },
@@ -33,7 +28,7 @@ const config: FCType.Config = {
                     .max(50, commonMessages.passwordToLong)
             },
             fieldData: {
-                label: regFormMessages.passwordField,
+                label: changeResetPasswordFormMessages.passwordField,
                 type: 'password',
                 autocomplete: 'new-password',
             }
@@ -42,10 +37,10 @@ const config: FCType.Config = {
             fieldType: 'text',
             schema: (fields) => {
                 return yup.string()
-                    .oneOf([fields.password.value[0]], regFormMessages.passwordsMustMatch)
+                    .oneOf([fields.password.value[0]], changeResetPasswordFormMessages.passwordsMustMatch)
             },
             fieldData: {
-                label: regFormMessages.passwordConfirmField,
+                label: changeResetPasswordFormMessages.passwordConfirmField,
                 type: 'password',
                 autocomplete: 'new-password',
             }
@@ -53,7 +48,7 @@ const config: FCType.Config = {
     },
     bottom: {
         submit: {
-            text: regFormMessages.submitBtnText,
+            text: changeResetPasswordFormMessages.submitBtnText,
             big: true,
             block: true,
             align: 'center',
@@ -62,7 +57,11 @@ const config: FCType.Config = {
     },
     async requestFn(readyFieldValues) {
         // @ts-ignore
-        return await regRequest(readyFieldValues)
+        return await changeResetPasswordRequest(
+            readyFieldValues.password.toString(),
+            readyFieldValues.passwordConfirm.toString(),
+            readyFieldValues.token.toString()
+        )
     },
     afterSubmit(response) {
         console.log(response)

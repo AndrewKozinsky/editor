@@ -40,6 +40,7 @@ function Fields(props: FormConstructorPropType) {
 
         if (fieldConfig.fieldType === 'text') {
             const fieldData = fieldConfig.fieldData as TextInputPropType
+            fieldData.name = fieldName
             fieldData.value = state.fields[fieldName].value[0]
             fieldData.onChange = state.onChangeFieldHandler
             fieldData.error = state.fields[fieldName].error
