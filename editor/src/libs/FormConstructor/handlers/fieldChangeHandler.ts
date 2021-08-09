@@ -27,9 +27,8 @@ export default function fieldChangeHandler(
         setSubmitBtnDisabled(!isFormValid)
     }
 
-    setCommonError(null)
-
     setFields(updatedFields)
+    setCommonError(null)
 }
 
 /**

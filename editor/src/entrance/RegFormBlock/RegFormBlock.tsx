@@ -6,7 +6,6 @@ import Notice from 'common/textBlocks/Notice/Notice'
 import { getMenuItems } from '../menuItems'
 import {
     regFormMessages,
-    regFormJSXFnMessages,
     regFormJSXMessages
 } from 'src/messages/regFormMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
@@ -27,26 +26,8 @@ export default function RegFormBlock() {
                 <Header text={regFormMessages.formHeader} type='h1' />
             </Wrapper>
             <FormConstructor config={config} state={formState} />
-            <LetterWasSent email={ formState.fields.email.value[0] } show={ formState.formSentSuccessfully } />
             <Info hide={ formState.formSentSuccessfully } />
         </div>
-    )
-}
-
-
-type LetterWasSentPropType = {
-    show: boolean
-    email: string // Почта пользователя, на которую регистрируется учётная запись
-}
-
-/** The message that the letter was sent */
-export function LetterWasSent(props: LetterWasSentPropType) {
-    if (!props.show) return null
-
-    return (
-        <Notice icon='success' bg>
-            {regFormJSXFnMessages.confirmRegistrationLetter(props.email)}
-        </Notice>
     )
 }
 

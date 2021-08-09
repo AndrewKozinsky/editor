@@ -18,7 +18,9 @@ export default async function formSubmitHandler(
     setCommonError: FCType.SetCommonError,
     setFormVisible: FCType.SetFormVisible,
     setFormSentSuccessfully: FCType.SetFormSentSuccessfully,
-    outerFns: FCType.OuterFns
+    outerFns: FCType.OuterFns,
+    commonSuccess: FCType.CommonSuccess,
+    showCommonSuccess: FCType.ShowCommonSuccess
 ): Promise<void> {
     e.preventDefault()
 
@@ -48,20 +50,24 @@ export default async function formSubmitHandler(
 
     setFormDisabled(true)
     setSubmitBtnLoading(true)
+    setSubmitBtnDisabled(true)
 
     // Get ready fields values
     const readyFieldValues = getReadyFieldsValues(fields)
 
-    // Отправить данные на сервер...
-    const response = await formConfig.requestFn(readyFieldValues)
+    // Send data to a server and get response
+    let response: FCType.Response = formConfig.requestFn
+        ? await formConfig.requestFn(readyFieldValues, outerFns)
+        : {status: 'success'}
 
-    // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
+    // Разблокировать все поля. У кнопки отправки убрать загрузку
     setFormDisabled(false)
     setSubmitBtnLoading(false)
 
     if (response.status === 'success') {
         if (formConfig.hideAfterSuccessfulSubmit) {
             setFormVisible(false)
+            return
         }
 
         setFormSentSuccessfully(true)
@@ -86,7 +92,11 @@ export default async function formSubmitHandler(
     }
 
     if (formConfig.afterSubmit) {
-        formConfig.afterSubmit(response, outerFns, {setFormVisible})
+        const formDetails = {
+            setFormVisible,
+            readyFieldValues
+        }
+        formConfig.afterSubmit(response, outerFns, formDetails, )
     }
 }
 

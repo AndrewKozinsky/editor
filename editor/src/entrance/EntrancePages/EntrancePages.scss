@@ -10,7 +10,7 @@ $CN: entrance-pages-wrapper;
     height: 100vh;
     overflow: auto;
 
-    transition: opacity .2s, transform .2s;
+    transition: opacity .3s, transform .3s;
     transition-timing-function: cubic-bezier(.07,.73,.65,1);
 }
 .#{$CN}--scale-up {

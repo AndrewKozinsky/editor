@@ -126,18 +126,31 @@ const obj = {
         rus: 'Пользователь не найден. Возможно токен сброса пароля неправильный или пароль не сбрасывали.'
     },*/
 
-    /*user_ChangeEmailDto_emailTooLong: {
+    user_ChangeEmailDto_emailTooLong: {
         eng: 'The string must not be longer than 100 characters.',
         rus: 'Строка не должна быть длиннее 100 символов.'
-    },*/
-    /*user_ChangeEmailDto_itIsNotEmail: {
+    },
+    user_ChangeEmailDto_itIsNotEmail: {
         eng: 'It is not look like an email.',
         rus: 'Это не похоже на почту.'
-    },*/
-    /*user_ChangeEmailDto_EmptyEmail: {
+    },
+    user_ChangeEmailDto_EmptyEmail: {
         eng: 'You must specify the email.',
         rus: 'Почта должна быть указана.'
-    },*/
+    },
+
+    user_changeEmail_NoEmail: {
+        eng: 'The new mail must be specified.',
+        rus: 'Должна быть указана новая почта.'
+    },
+    user_changeEmail_NewEmailISEqualToCurrent: {
+        eng: 'Existing email was passed. Write new one to change existing one.',
+        rus: 'Передана существующая почта. Передайте другую чтобы её изменить.'
+    },
+    user_changeEmail_NewEmailISUsedByAnotherUser: {
+        eng: 'The email is used by another user.',
+        rus: 'Почта занята другим пользователем.'
+    },
 }
 
 export const serverMessages = getMessagesObject(obj)

@@ -20,7 +20,7 @@
 // import { foldersArticlesSectionMessages } from 'messages/foldersArticlesSectionMessages'
 // import { foldersComponentsSectionMessages } from 'messages/foldersComponentsSectionMessages'
 // import {useSelector} from 'react-redux'
-// import {AppState} from '../../../../store/rootReducer'
+// import {AppState} from 'store/rootReducer'
 
 
 /*type FoldersListPropType = {

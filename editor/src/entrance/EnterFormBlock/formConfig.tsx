@@ -8,6 +8,7 @@ import loginRequest from 'src/requests/user/loginRequest'
 import actions from 'src/store/rootAction'
 import store from 'src/store/store'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+import userActions from '../../store/user/userActions'
 
 
 const config: FCType.Config = {
@@ -62,8 +63,12 @@ const config: FCType.Config = {
             store.dispatch(actions.user.setAuthTokenStatus(2))
 
             // Перебросить в редактор
-            if ('history' in outerFns ) {
-                outerFns.history.push('/')
+            if ('history' in outerFns ) outerFns.history.push('/')
+
+            // Set user's email to Store
+            if ('data' in response) {
+                const email = response.data.user.email
+                store.dispatch( userActions.setEmail(email) )
             }
 
             // Smooth hide entrance forms wrapper and show the editor
@@ -76,8 +81,7 @@ const config: FCType.Config = {
                 formDetails.setFormVisible(false)
             }
         }
-    },
-    hideAfterSuccessfulSubmit: true
+    }
 }
 
 

@@ -11,7 +11,8 @@
     --base-l-part: 94%; // Светимость (темно -> светло)
 
     // Базовый цвет
-    --base-color: hsl(var(--base-h-part), var(--base-s-part), var(--base-l-part));
+    --base-color-naked: var(--base-h-part), var(--base-s-part), var(--base-l-part);
+    --base-color: hsl(var(--base-color-naked));
 
     // Части акцентного цвета
     --accent-h-part: 215;
@@ -26,7 +27,8 @@
 
     // ЦВЕТА ТЕКСТА
     // Цвет основного текста
-    --text-color: hsl(var(--base-h-part), var(--base-s-part), 20%);
+    --text-color-naked: var(--base-h-part), var(--base-s-part), 20%;
+    --text-color: hsl(var(--text-color-naked));
     // Цвет текстозаполнителя
     --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 55%);
 

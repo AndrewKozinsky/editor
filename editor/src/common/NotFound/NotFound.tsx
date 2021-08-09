@@ -1,7 +1,7 @@
 import React from 'react'
-import SvgIcon from 'src/common/icons/SvgIcon'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import { makeCN } from 'src/utils/StringUtils'
+import SvgIcon from 'common/icons/SvgIcon'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { makeCN } from 'utils/StringUtils'
 import { notFoundJSXMessages } from 'src/messages/notFoundMessages'
 import './NotFound.scss'
 

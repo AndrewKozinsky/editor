@@ -3,7 +3,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 // Компоненты
-import Loader from 'src/common/misc/Loader/Loader'
+import Loader from 'common/misc/Loader/Loader'
 import NotFound from '../NotFound/NotFound'
 
 // Страницы

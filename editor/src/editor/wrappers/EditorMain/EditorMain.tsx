@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react'
 import { useGetPageClasses } from './EditorMain-func'
-// import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
-// import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
-// import Modal from 'modules/Modal/Modal'
+import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
+import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
+import Modal from 'common/modalEntities/Modal/Modal'
 import './EditorMain.scss'
 
 
@@ -20,14 +20,14 @@ export default function EditorMain(): ReactElement {
         <>
             <div className={classes}>
                 <div className={`${CN}__left`}>
-                    {/*<SectionsTabs />*/}
-                    {/*<EditorPartProvider position='left' />*/}
+                    <SectionsTabs />
+                    <EditorPartProvider position='left' />
                 </div>
                 <div className={`${CN}__right`}>
-                    {/*<EditorPartProvider position='right' />*/}
+                    <EditorPartProvider position='right' />
                 </div>
             </div>
-            {/*<Modal />*/}
+            <Modal />
         </>
     )
 }

@@ -17,7 +17,7 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
-// import { ChangeEmailDto } from './dto/changeEmail.dto'
+import { ChangeEmailDto } from './dto/changeEmail.dto'
 const crypto = require('crypto')
 
 
@@ -63,6 +63,7 @@ export class UserService {
             responseCommonError('user_createUser_alreadyRegistered', HttpStatus.UNPROCESSABLE_ENTITY)
         }
 
+        // Create email confirm token
         const emailConfirmToken = createRandomString()
 
         const newUser = new UserEntity()
@@ -198,53 +199,35 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
-    // changeEmail(changeEmailDto: ChangeEmailDto) {
+    async changeEmail(user: UserEntity, changeEmailDto: ChangeEmailDto, language: MiscTypes.Language) {
         // Получу новую почту
-        // const newEmail = req.body.email
+        const newEmail = changeEmailDto.email
 
         // Если почту не передали, то бросить ошибку
-        /*if(!newEmail) {
-            return next(
-                new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
-            )
-        }*/
+        if (!newEmail) {
+            responseCommonError('user_changeEmail_NoEmail')
+        }
 
         // Если передали такую же почту, то отправить ошибку
-        /*if(req.user && newEmail === req.user.email) {
-            return next(
-                new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
-            )
-        }*/
+        if (newEmail === user.email) {
+            responseCommonError('user_changeEmail_NewEmailISEqualToCurrent')
+        }
 
-        // Создам токен подтверждения почты
-        // const emailConfirmToken = crypto.randomBytes(32).toString('hex');
+        // If email is used by another user throw an error
+        if (await this.getUserByEmail(newEmail)) {
+            responseCommonError('user_changeEmail_NewEmailISUsedByAnotherUser')
+        }
 
-        // Найду текущего пользователя и обновлю его почту
-        /*const user = await UserModel.findOneAndUpdate(
-            {email: req.user?.email},
-            {
-                email: newEmail,
-                emailConfirmToken: emailConfirmToken,
-            },
-            {new: true, useFindAndModify: false}
-        ).select('-_id -emailConfirmToken -__v -passwordChangedAt')*/
+        // Create email confirm token
+        const emailConfirmToken = createRandomString()
 
         // Отправление письма с подтверждением почты
-        // await sendEmailAddressConfirmLetter(req, req.body.email, emailConfirmToken)
+        await sendEmailAddressConfirmLetter(language, newEmail, emailConfirmToken)
 
-        // Удалю куку авторизации
-        /*res.cookie('authToken', 'loggedout', {
-            expires: new Date(Date.now() + 2 * 1000),
-            httpOnly: true
-        })*/
+        const updatedUser = { ...user, emailConfirmToken, email: newEmail }
 
-        /*res.status(200).json({
-            status: 'success',
-            data: {
-                user
-            }
-        })*/
-    // }
+        return await this.userRepository.save(updatedUser)
+    }
 
 
     // ADDITIONAL METHODS
@@ -276,13 +259,13 @@ export class UserService {
      * @param {Object} user — user data from database
      * @param {Object} response — response object
      * @param {Number} statusCode — status code
-     * @param {Boolean} setCookieToken — do I have to put token cookie
+     * @param {String} cookieToken — do I have to put token cookie. none: don't set token; set: set token; clear: clear token
      */
     buildUserResponse(
         user: UserEntity,
         response: Response,
         statusCode: number = HttpStatus.OK,
-        setCookieToken: boolean = false
+        cookieToken: 'none' | 'set' | 'clear' = 'none'
     ): void {
         const token = this.generateToken(user)
 
@@ -302,12 +285,19 @@ export class UserService {
 
         response.statusCode = statusCode
 
-        if (setCookieToken) {
+        if (cookieToken === 'set') {
             const cookieOptions = {
                 expires: new Date(Date.now() + config.jwtExpiresIn * 24 * 60 * 60 * 1000),
                 httpOnly: true
             }
             response.cookie('token', token, cookieOptions)
+        }
+        else if (cookieToken === 'clear') {
+            const cookieOptions = {
+                expires: new Date(Date.now() + 2 * 1000),
+                httpOnly: true
+            }
+            response.cookie('token', 'loggedout', cookieOptions)
         }
 
         response.send(resBody)

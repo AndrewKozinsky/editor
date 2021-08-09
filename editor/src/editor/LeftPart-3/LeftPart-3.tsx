@@ -1,17 +1,17 @@
-// import React from 'react'
-// import NameSection from '../wrappers/NameSection/NameSection'
-// import ItemsList from 'common/ItemsList/ItemsList'
-// import { useGetSettingsItemsListProps } from './LeftPart-3-func'
-// import { settingsPanelMessages } from 'messages/settingsPanelMessages'
-// import './LeftPart-3.scss'
+import React from 'react'
+import NameSection from '../wrappers/NameSection/NameSection'
+import ItemsList from 'common/ItemsList/ItemsList'
+import { useGetSettingsItemsListProps } from './LeftPart-3-func'
+import { settingsPanelMessages } from 'messages/settingsPanelMessages'
+import './LeftPart-3.scss'
 
 
-/*type LeftPart3PropType = {
+type LeftPart3PropType = {
     display?: boolean
-}*/
+}
 
 /** Левая часть третьей главной вкладки */
-/*export default function LeftPart3(props: LeftPart3PropType) {
+export default function LeftPart3(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -29,4 +29,4 @@
             </NameSection>
         </div>
     )
-}*/
+}

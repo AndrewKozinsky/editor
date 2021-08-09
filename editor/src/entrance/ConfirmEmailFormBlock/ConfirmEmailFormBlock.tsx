@@ -1,13 +1,13 @@
 import React from 'react'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
-import Header from 'src/common/textBlocks/Header/Header'
-import Menu from 'src/common/misc/Menu/Menu'
-import Wrapper from 'src/common/Wrapper/Wrapper'
+import Header from 'common/textBlocks/Header/Header'
+import Menu from 'common/misc/Menu/Menu'
+import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
 import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
 import config from './formConfig'
-import FormConstructor from '../../libs/FormConstructor/FormConstructor'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 
 

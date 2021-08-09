@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 // import store from 'store/store'
 // import actions from 'store/rootAction'
-// import Wrapper from 'src/common/Wrapper/Wrapper'
+// import Wrapper from 'common/Wrapper/Wrapper'
 // import { AppState } from 'store/rootReducer'
 // import Hr from 'common/misc/Hr/Hr'
 // import Button from 'common/formElements/Button/Button'

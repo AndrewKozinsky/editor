@@ -20,8 +20,10 @@ import { LoginDto } from './dto/login.dto'
 import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
-// import { ChangeEmailDto } from './dto/changeEmail.dto'
-// import { AuthGuard } from './guards/auth.guard'
+import { ChangeEmailDto } from './dto/changeEmail.dto'
+import { AuthGuard } from './guards/auth.guard'
+import { UserEntity } from './user.entity'
+import { User } from './decorators/user.decorator'
 
 @Controller('users')
 export class UserController {
@@ -56,7 +58,7 @@ export class UserController {
         @Body() loginDto: LoginDto
     ): Promise<void> {
         const user = await this.userService.login(loginDto)
-        this.userService.buildUserResponse(user, response, HttpStatus.OK, true  )
+        this.userService.buildUserResponse(user, response, HttpStatus.OK, 'set'  )
     }
 
     @Post('sendConfirmLetter')
@@ -78,7 +80,7 @@ export class UserController {
         @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
         const user = await this.userService.confirmEmail(token)
-        this.userService.buildUserResponse(user, response)
+        this.userService.buildUserResponse(user, response, HttpStatus.OK, 'set')
     }
 
     @Post('resetPassword')
@@ -101,17 +103,20 @@ export class UserController {
         @Body() changeResetPasswordDto: ChangeResetPasswordDto
     ): Promise<void> {
         const user = await this.userService.changeResetPassword(changeResetPasswordDto, token)
-        this.userService.buildUserResponse(user, response, HttpStatus.OK, true)
+        this.userService.buildUserResponse(user, response, HttpStatus.OK, 'set')
     }
 
-    // @Patch('changeEmail')
-    // @UsePipes(new BackendValidationPipe())
-    // @UseGuards(AuthGuard)
-    /*async changeEmail(
+    @Patch('changeEmail')
+    @UsePipes(new BackendValidationPipe())
+    @UseGuards(AuthGuard)
+    async changeEmail(
+        @Req() req: ExpressRequestInterface,
+        @User() user: UserEntity,
         @Res({ passthrough: true }) response: Response,
         @Body() changeEmailDto: ChangeEmailDto
     ): Promise<void> {
-        // const user = await this.userService.changeEmail(changeEmailDto)
-        // this.userService.buildUserResponse(user, response, HttpStatus.OK)
-    }*/
+        const language = req.headers['Editor-Language']
+        const updatedUser = await this.userService.changeEmail(user, changeEmailDto, language)
+        this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
+    }
 }

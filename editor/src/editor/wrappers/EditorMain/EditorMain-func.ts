@@ -13,9 +13,6 @@ export function useGetPageClasses(CN: string) {
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
 
-    // Открыто ли модальное окно
-    const isModalOpen = useSelector((store: AppState) => store.modal.isOpen)
-
     const [classes, setClasses] = useState<string[]>( getClasses(CN) )
     const [isVisible, setIsVisible] = useState(false)
 
@@ -29,12 +26,7 @@ export function useGetPageClasses(CN: string) {
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
         // или он вообще не будет отрисовываться.
         // Если нужно показать редактор
-        // Если открыто модальное окно
-        if (entryAndEditorViewState === 'editor' && isModalOpen) {
-            setIsVisible(true)
-            setClasses( scaleDownClasses )
-        }
-        else if (entryAndEditorViewState === 'editor') {
+        if (entryAndEditorViewState === 'editor') {
             setIsVisible(true)
             setClasses( normalClasses )
         }
@@ -64,7 +56,7 @@ export function useGetPageClasses(CN: string) {
             setIsVisible(false)
             setClasses( scaleDownTransparencyClasses )
         }
-    }, [entryAndEditorViewState, isModalOpen])
+    }, [entryAndEditorViewState])
 
     return {
         classes: makeCN(classes),

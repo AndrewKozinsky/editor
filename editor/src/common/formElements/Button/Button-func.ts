@@ -13,7 +13,8 @@ export function getButtonClasses(buttonProps: ButtonPropType) {
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         block,
         big = false,
-        align
+        align,
+        extraClass
     } = buttonProps
 
     // Классы кнопки
@@ -33,9 +34,11 @@ export function getButtonClasses(buttonProps: ButtonPropType) {
     if (block) classes.push(`${CN}--block`)
     // Add class if button must be big
     if (big) classes.push(`${CN}--big`)
-    if (align) classes.push(`${CN}--${align}`)
 
-    return makeCN(classes)
+    if (align) classes.push(`${CN}--${align}`)
+    if (extraClass) classes.push(extraClass)
+
+    return makeCN( classes )
 }
 
 

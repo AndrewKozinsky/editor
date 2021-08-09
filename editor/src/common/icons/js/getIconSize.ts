@@ -31,32 +31,32 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 8 14"
             }*/
         // Значки главных вкладок
-        // case 'mainTabMaterials':
-        // case 'mainTabEditor':
-        // case 'mainTabSettings':
+        case 'mainTabMaterials':
+        case 'mainTabEditor':
+        case 'mainTabSettings':
         // Значки на вкладках сайта
         // case 'siteTabSite':
         // case 'siteTabPlugins':
         // case 'siteTabComponents':
-        /*case 'siteTabArticle':
+        case 'siteTabArticle':
             return {
                 width: "31px",
                 height: "26px",
                 viewBox: "0 0 31 26"
-            }*/
-        /*case 'mainTabHelp':
+            }
+        case 'mainTabHelp':
             return {
                 width: "31px",
                 height: "25px",
                 viewBox: "0 0 31 25"
-            }*/
+            }
         // Закругляемая часть в кнопки вкладки
-        /*case 'mainTabRoundScion':
+        case 'mainTabRoundScion':
             return {
                 width: "3px",
                 height: "3px",
                 viewBox: "0 0 3 3"
-            }*/
+            }
         // Значки на кнопках
         /*case 'btnSignSave':
             return {
@@ -89,12 +89,12 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 16 15"
             }*/
 
-        /*case 'btnSignClose':
+        case 'btnSignClose':
             return {
-                width: "13px",
-                height: "13px",
-                viewBox: "0 0 13 13"
-            }*/
+                width: "15px",
+                height: "15px",
+                viewBox: "0 0 15 15"
+            }
         /*case 'btnSignExit':
             return {
                 width: "13px",

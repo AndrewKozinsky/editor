@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { AppState } from 'src/store/rootReducer'
 // @ts-ignore
@@ -8,21 +8,21 @@ import { makeCN } from 'src/utils/StringUtils'
 
 /** Хук возвращает классы обёртки компонента App */
 export function useGetAppClasses() {
+
     // Получение текущей темы интерфейса
-    const editorTheme = useSelector((store: AppState) => store.settings.editorTheme)
+    const { editorTheme, entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
+    const [classes, setClasses] = useState<string[]>([])
 
-    // Составление классов приложения
-    let classes = ['app']
-    if (editorTheme === 'dark') classes.push('dark-theme')
+    useEffect(function() {
+        let classesCopy = ['app']
+        if (editorTheme === 'dark') classesCopy.push('dark-theme')
 
-    // Текущий адрес
-    const pathname = window.location.pathname // Напр.: /editor/enter
+        if (entryAndEditorViewState === 'toEntry' || entryAndEditorViewState === 'entry') {
+            classesCopy.push('app--second-bg')
+        }
 
-    // Если нахожусь на страницах с формами, то поставить более тёмный фон
-    const formPages = ['/enter', '/reg', '/reset-password', '/change-reset-password', '/confirm-email']
-    if (formPages.includes(pathname.slice(7))) {
-        classes.push('app--second-bg')
-    }
+        setClasses( classesCopy )
+    }, [editorTheme, entryAndEditorViewState])
 
     return makeCN(classes)
 }

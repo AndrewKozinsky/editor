@@ -1,11 +1,11 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
+import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Секция «Изменение пароля»
 const obj = {
-    /*header: {
+    header: {
         eng: 'Change password',
         rus: 'Изменение пароля'
-    },*/
+    },
     /*currentPasswordField: {
         eng: 'Current password',
         rus: 'Текущий пароль'
@@ -40,4 +40,4 @@ const obj = {
     },*/
 }
 
-// export const changePasswordSectionMessages = getMessagesObject(obj)
+export const changePasswordSectionMessages = getMessagesObject(obj)

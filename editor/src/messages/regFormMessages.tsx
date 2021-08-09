@@ -48,6 +48,10 @@ const obj = {
         eng: 'Sign up',
         rus: 'Зарегистрироваться'
     },
+    confirmRegistrationLetter: {
+        eng: 'An email with a link to confirm your mailing address was sent to the specified email address. Click on it to activate your account.',
+        rus: 'На указанную почту выслано письмо со ссылкой для подтверждения почтового адреса. Перейдите по ней чтобы активировать учётную запись.'
+    },
 }
 
 export const regFormMessages = getMessagesObject(obj)
@@ -66,18 +70,3 @@ const JSXObj = {
 }
 
 export const regFormJSXMessages = getMessagesJSXObject(JSXObj)
-
-
-// Форма RegFormBlock
-const JSXFnObj = {
-    confirmRegistrationLetter: (email: string) => {
-        const domain = 'https://' + getDomainFromEmail(email)
-
-        return {
-            eng: <>An email with a link to confirm your mailing address was sent to the specified <a href={domain}>email address</a>. Click on it to activate your account.</>,
-            rus: <>На указанную <a href={domain}>почту</a> выслано письмо со ссылкой для подтверждения почтового адреса. Перейдите по ней чтобы активировать учётную запись.</>
-        }
-    },
-}
-
-export const regFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)

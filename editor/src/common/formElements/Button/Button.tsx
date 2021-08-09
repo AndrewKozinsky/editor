@@ -19,6 +19,8 @@ export type ButtonPropType = {
     name?: string
     loading?: boolean
     block?: boolean // Должна ли кнопка быть блочным элементом на всю ширину
+    extraClass?: string
+    id?: string
     onClick?: (...args: any[]) => void
     disabled?: boolean
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
@@ -41,6 +43,7 @@ export default function Button(props: ButtonPropType) {
         disabled = false, // Заблокирована ли кнопка
         loading = false, // Нужно ли на кнопке рисовать загрузчик
         onClick,
+        id,
         autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
 
@@ -79,6 +82,7 @@ export default function Button(props: ButtonPropType) {
     }
     if (name) btnAttrs.name = name
     if (onClick) btnAttrs.onClick = onClick
+    if (id) btnAttrs.id = id
 
 
     return (

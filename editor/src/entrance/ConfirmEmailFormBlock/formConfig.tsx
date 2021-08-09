@@ -7,6 +7,8 @@ import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
 import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
 import store from 'src/store/store'
 import actions from 'src/store/rootAction'
+import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+import userActions from '../../store/user/userActions'
 
 
 const config: FCType.Config = {
@@ -35,17 +37,23 @@ const config: FCType.Config = {
         // @ts-ignore
         return await confirmEmailRequest(readyFieldValues.token)
     },
-    afterSubmit(response, outerFns) {
+    afterSubmit(response, outerFns, formDetails) {
         if (response.status === 'success') {
-            setTimeout(() => {
-                // Поставить токен авторизации в Хранилище
-                store.dispatch(actions.user.setAuthTokenStatus(2))
 
-                // Перебросить в редактор
-                if ('history' in outerFns ) {
-                    outerFns.history.push('/')
-                }
-            }, 50)
+            // Поставить токен авторизации в Хранилище
+            store.dispatch(actions.user.setAuthTokenStatus(2))
+
+            // Перебросить в редактор
+            if ('history' in outerFns ) outerFns.history.push('/')
+
+            // Set user's email to Store
+            if ('data' in response) {
+                const email = response.data.user.email
+                store.dispatch( userActions.setEmail(email) )
+            }
+
+            // Smooth hide entrance forms wrapper and show the editor
+            smoothMoveToEditor()
         }
     }
 }

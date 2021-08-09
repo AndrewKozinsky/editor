@@ -40,7 +40,8 @@ const config: FCType.Config = {
     afterSubmit(response) {
 
     },
-    hideAfterSuccessfulSubmit: true
+    showCommonSuccess: true,
+    commonSuccess: resetFormMessages.retypePasswordLetter
 }
 
 

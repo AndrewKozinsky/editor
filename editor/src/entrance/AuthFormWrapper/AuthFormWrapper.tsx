@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react'
-import SvgIcon from 'src/common/icons/SvgIcon'
+import SvgIcon from 'common/icons/SvgIcon'
 import './AuthFormWrapper.scss'
 
 

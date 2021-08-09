@@ -1,6 +1,6 @@
-// import {ReactElement} from 'react'
-// import {useDispatch} from 'react-redux'
-// import actions from '../store/rootAction'
+// import { ReactElement } from 'react'
+import { useDispatch } from 'react-redux'
+import actions from '../store/rootAction'
 
 
 /** Хук возвращает функцию открывающую модальное окно */
@@ -12,14 +12,6 @@
     }
 }*/
 
-/** Хук возвращает функцию закрывающую модальное окно */
-/*export function useGetModalCloseHandler() {
-    const dispatch = useDispatch()
-
-    return function () {
-        dispatch(actions.modal.closeModal())
-    }
-}*/
 
 /**
  * Запись в localStorage данных предварительно пропущенных через JSON.stringify

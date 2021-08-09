@@ -3,9 +3,9 @@ import FCType from './FCType'
 import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import Select, { SelectPropType } from 'common/formElements/Select/Select'
-import Wrapper from 'common/Wrapper/Wrapper'
+import Wrapper, { TType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
-import CommonError from './misc/CommonError'
+import CommonNotice from './misc/CommonNotice'
 
 type FormConstructorPropType = {
     config: FCType.Config
@@ -21,7 +21,7 @@ function FormConstructor(props: FormConstructorPropType) {
         <form onSubmit={state.onFormSubmit}>
             <Fields config={config} state={state} />
             <Bottom config={config} state={state} />
-            <CommonError error={state.commonError} />
+            <Common config={config} state={state} />
         </form>
     )
 }
@@ -33,7 +33,9 @@ function Fields(props: FormConstructorPropType) {
     const { fields } = props.config
     const { state } = props
 
-    const fieldsMarkup = Object.keys(fields).map((fieldName, i) => {
+    if (!fields) return null
+
+    let fieldsMarkup = Object.keys(fields).map((fieldName, i) => {
         const fieldConfig = fields[fieldName]
 
         let field = null
@@ -80,10 +82,13 @@ function Fields(props: FormConstructorPropType) {
 
 
 function Bottom(props: FormConstructorPropType) {
-    const { elems } = props.config.bottom
+    const { elems, topOffset } = props.config.bottom
+
+    let topOffsetValue: TType = 20
+    if (topOffset === 'small') topOffsetValue = 10
 
     return (
-        <Wrapper t={20} align='justify'>
+        <Wrapper t={topOffsetValue} align='justify'>
             <div>{elems}</div>
             <SubmitButton {...props} />
         </Wrapper>
@@ -95,10 +100,21 @@ function SubmitButton(props: FormConstructorPropType) {
 
     const submitBtnConfig = props.config.bottom.submit as ButtonPropType
     submitBtnConfig.type = 'submit'
-
     submitBtnConfig.disabled = state.submitBtnDisabled || state.formDisabled
-
     submitBtnConfig.loading = state.submitBtnLoading
 
     return <Button {...submitBtnConfig} />
+}
+
+function Common(props: FormConstructorPropType) {
+    const { state } = props
+
+    if (state.commonError && state.showCommonError) {
+        return <CommonNotice type='error' text={state.commonError} />
+    }
+    else if (state.commonSuccess && state.showCommonSuccess && state.formSentSuccessfully) {
+        return <CommonNotice type='success' text={state.commonSuccess} />
+    }
+
+    return null
 }

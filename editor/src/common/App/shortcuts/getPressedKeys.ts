@@ -1,16 +1,14 @@
 
-// type Keys = 'esc' | 'alt' | 'cmd' | 'shift' | 's' | 'z'
-
-/*export type PressedKeysObj = {
+export type PressedKeysObj = {
     [K in Keys]: boolean
-}*/
-
+}
+type Keys = 'esc' | 'alt' | 'cmd' | 'shift' | 's' | 'z'
 
 /**
  * The function return object of pressed keys.
  * @param {KeyboardEvent} e — event object
  */
-/*export function getPressedKeys(e: KeyboardEvent): PressedKeysObj {
+export function getPressedKeys(e: KeyboardEvent): PressedKeysObj {
     // Is it MacOS?
     let isMac = navigator.platform === 'MacIntel'
 
@@ -30,7 +28,7 @@
     }
 
     return keysObj
-}*/
+}
 
 
 /**
@@ -38,7 +36,6 @@
  * @param {Object} pressedKeys — object with keys pressed status
  * @param {Array} keysArr — array if keys which must be pressed
  */
-/*
 export function checkPressedKeys(pressedKeys: PressedKeysObj, keysArr: Keys[]) {
     let result = true
 
@@ -50,4 +47,4 @@ export function checkPressedKeys(pressedKeys: PressedKeysObj, keysArr: Keys[]) {
     }
 
     return  result
-}*/
+}

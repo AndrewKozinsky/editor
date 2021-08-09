@@ -16,7 +16,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'users/confirmEmail/' + confirmEmailToken
     },
     // Изменение почты
-    // changeEmail: 'users/changeEmail',
+    changeEmail: 'users/changeEmail',
     // Изменение пароля
     // changePassword: 'users/changePassword',
     // Сброс пароля

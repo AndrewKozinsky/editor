@@ -1,17 +1,16 @@
-// import React, { ReactNode } from 'react'
-// import { getHeaderClasses } from './NameSection-func'
-// import './NameSection.scss'
+import React, { ReactNode } from 'react'
+import { getHeaderClasses } from './NameSection-func'
+import './NameSection.scss'
 
 
-/*type NameSectionPropType = {
+type NameSectionPropType = {
     type?: 1 | 2 // Размер компонента: 1 (больше) или 2 (меньше)
     header: string // Текст заголовка
     children?: ReactNode // Дети компонента
-}*/
+}
 
 /* Компонент блока с заголовком */
-/*function NameSection(props: NameSectionPropType) {
-
+function NameSection(props: NameSectionPropType) {
     const {
         type = 1,
         header,
@@ -31,6 +30,6 @@
             {children}
         </div>
     )
-}*/
+}
 
-// export default NameSection
+export default NameSection

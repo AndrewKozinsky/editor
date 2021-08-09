@@ -1,19 +1,19 @@
 import React, { useState } from 'react'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
-import Header from 'src/common/textBlocks/Header/Header'
-import Menu from 'src/common/misc/Menu/Menu'
-import Button from 'src/common/formElements/Button/Button'
-import Wrapper from 'src/common/Wrapper/Wrapper'
+import Header from 'common/textBlocks/Header/Header'
+import Menu from 'common/misc/Menu/Menu'
+import Button from 'common/formElements/Button/Button'
+import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
 import {
     enterFormMessages,
     enterFormJSXFnMessages
 } from 'src/messages/enterFormMessages'
-import FormConstructor from '../../libs/FormConstructor/FormConstructor'
-import useFormConstructorState from '../../libs/FormConstructor/state/useFormConstructorState'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import config from './formConfig'
-import Notice from 'src/common/textBlocks/Notice/Notice'
+import Notice from 'common/textBlocks/Notice/Notice'
 import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
 
 

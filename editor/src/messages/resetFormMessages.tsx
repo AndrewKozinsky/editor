@@ -20,23 +20,12 @@ const obj = {
     submitBtnText: {
         eng: 'Reset',
         rus: 'Сбросить'
+    },
+    retypePasswordLetter: {
+        eng: 'An email was sent to you with a link to reset your password.',
+        rus: 'На почту выслано письмо со ссылкой на страницу сброса пароля.'
     }
 }
 
 export const resetFormMessages = getMessagesObject(obj)
 
-
-
-// Форма ResetFormBlock
-const JSXFnObj = {
-    retypePasswordLetter: (email: string) => {
-        const domain = 'https://' + getDomainFromEmail(email)
-
-        return {
-            eng: <>An <a href={domain}>email</a> was sent to you with a link to reset your password.</>,
-            rus: <>На <a href={domain}>почту</a> выслано письмо со ссылкой на страницу сброса пароля.</>
-        }
-    },
-}
-
-export const resetFormJSXFnMessages = getMessagesJSXFnObject(JSXFnObj)

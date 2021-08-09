@@ -8,7 +8,7 @@
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import store from '../../../../store/store'
+// import store from 'store/store'
 
 
 /**

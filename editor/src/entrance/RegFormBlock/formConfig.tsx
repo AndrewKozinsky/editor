@@ -67,7 +67,8 @@ const config: FCType.Config = {
     afterSubmit(response) {
         console.log(response)
     },
-    hideAfterSuccessfulSubmit: true
+    showCommonSuccess: true,
+    commonSuccess: regFormMessages.confirmRegistrationLetter
 }
 
 
