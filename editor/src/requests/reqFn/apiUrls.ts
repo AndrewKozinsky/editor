@@ -18,7 +18,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Изменение почты
     changeEmail: 'users/changeEmail',
     // Изменение пароля
-    // changePassword: 'users/changePassword',
+    changePassword: 'users/changePassword',
     // Сброс пароля
     resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного
@@ -26,7 +26,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'users/resetPassword/' + resetPasswordToken
     },
     // Текущий пользователь
-    // me: 'users/me',
+    me: 'users/me',
 
 
     // САЙТЫ

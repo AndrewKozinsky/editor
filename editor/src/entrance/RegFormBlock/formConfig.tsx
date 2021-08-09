@@ -64,9 +64,7 @@ const config: FCType.Config = {
         // @ts-ignore
         return await regRequest(readyFieldValues)
     },
-    afterSubmit(response) {
-        console.log(response)
-    },
+    afterSubmit(response) {},
     showCommonSuccess: true,
     commonSuccess: regFormMessages.confirmRegistrationLetter
 }

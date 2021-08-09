@@ -6,6 +6,7 @@ import { config } from '../../../config'
 import { UserService } from '../user.service'
 import { verify } from 'jsonwebtoken'
 
+// The middleware sets user property to Request with user's data
 @Injectable()
 export class AuthMiddleware implements NestMiddleware {
     constructor(private readonly userService: UserService) {}

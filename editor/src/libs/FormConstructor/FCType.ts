@@ -17,6 +17,7 @@ namespace FCType {
             topOffset?: 'small' | 'big'
             submit: ConfigSubmitButton
             elems?: JSX.Element[]
+            align?: 'left' | 'right'
         },
         requestFn?: (readyFieldValues: ReadyFieldsValues, outerFns: OuterFns) => Promise<Response>
         afterSubmit?: (response: Response, outerFns: OuterFns, formDetails: FormDetails) => void

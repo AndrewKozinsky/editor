@@ -3,7 +3,7 @@ import FCType from './FCType'
 import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import Select, { SelectPropType } from 'common/formElements/Select/Select'
-import Wrapper, { TType } from 'common/Wrapper/Wrapper'
+import Wrapper, { TType, WrapperPropType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import CommonNotice from './misc/CommonNotice'
 
@@ -82,13 +82,14 @@ function Fields(props: FormConstructorPropType) {
 
 
 function Bottom(props: FormConstructorPropType) {
-    const { elems, topOffset } = props.config.bottom
+    const { elems, topOffset, align } = props.config.bottom
 
-    let topOffsetValue: TType = 20
-    if (topOffset === 'small') topOffsetValue = 10
+    let wrapperProps: WrapperPropType = {align: 'justify', t: 20}
+    if (topOffset === 'small') wrapperProps.t = 10
+    if (align === 'left') delete wrapperProps.align
 
     return (
-        <Wrapper t={topOffsetValue} align='justify'>
+        <Wrapper {...wrapperProps}>
             <div>{elems}</div>
             <SubmitButton {...props} />
         </Wrapper>

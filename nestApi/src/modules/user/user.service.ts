@@ -18,7 +18,9 @@ import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 import { ChangeEmailDto } from './dto/changeEmail.dto'
+import { ChangePasswordDto } from './dto/changePassword.dto'
 const crypto = require('crypto')
+import { hash } from 'bcrypt'
 
 
 @Injectable()
@@ -229,6 +231,49 @@ export class UserService {
         return await this.userRepository.save(updatedUser)
     }
 
+    async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
+
+        // Compare user password in DB and the password which user passed in body
+        const isPasswordsMatch = await compare(changePasswordDto.currentPassword, user.password)
+
+        // Throw an error if they are not match
+        if (!isPasswordsMatch) {
+            responseCommonError('user_changePassword_PasswordsIsNotMatch')
+        }
+
+        const hashedPassword = await hash(changePasswordDto.newPassword, 10)
+        const updatedUser = { ...user, password: hashedPassword }
+
+        // Поставить новый пароль в данные пользователя
+        return await this.userRepository.save(updatedUser)
+    }
+
+    async deleteCurrentUser(req: ExpressRequestInterface) {
+        const user = req.user
+
+        this.userRepository.delete(user)
+
+        // Удалить все сайты созданные пользователем
+        // await SiteModel.deleteMany({ userId: req.user.id })
+
+        // Удалить шаблоны подключения внешних файлов
+        // await IncFilesTemplateModel.deleteMany({userId: req.user.id})
+
+        // Удалить папки шаблонов компонентов
+        // await ComponentsFoldersModel.deleteMany({userId: req.user.id})
+
+        // Удалить шаблоны компонентов
+        // await ComponentModel.deleteMany({userId: req.user.id})
+
+        // Удалить все папки статей созданных пользователем
+        // await ArticlesFoldersModel.deleteMany({userId: req.params.siteId})
+
+        // Удалить все статьи созданные пользователем
+        // await ArticleModel.deleteMany({userId: req.params.siteId})
+
+        return user
+    }
+
 
     // ADDITIONAL METHODS
 
@@ -306,7 +351,7 @@ export class UserService {
 
 
 /**
- * Функция отправляющая письмо со ссылкой подтверждения почты
+ * Функция отправляющая письмо со ссылкой подтверждения почты при регистрации или смены почты
  * @param {String} language — объект запроса от клиента
  * @param {String} email — почта пользователю, которую он должен подтвердить
  * @param {String} confirmToken — токен подтверждения почты

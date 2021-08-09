@@ -55,6 +55,16 @@ export class UserEntity {
         this.passwordChangedAt = new Date()
     }
 
+    @BeforeUpdate()
+    async fff() {
+        console.log('@BeforeUpdate()')
+    }
+
+    @BeforeInsert()
+    async fff2() {
+        console.log('@BeforeInsert()')
+    }
+
     @BeforeInsert()
     async setCreatedAtData() {
         this.createdAt = new Date()

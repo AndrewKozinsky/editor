@@ -4,11 +4,9 @@ import { changePasswordSectionMessages } from 'messages/changePasswordSectionMes
 import NameSection from '../../wrappers/NameSection/NameSection'
 import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
-// import FormConstructor from 'libs/FormConstructor/FormConstructor'
-// import configExample from 'libs/FormConstructor/configExample'
 import UserDataForm from '../EmailForm/form/EmailForm'
-// import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
-// import UserAccountForm from '../UserAccountForm/UserAccountForm'
+import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
+import UserAccountForm from '../UserAccountForm/UserAccountForm'
 
 
 export default function SettingsUserTabContent() {
@@ -23,19 +21,15 @@ export default function SettingsUserTabContent() {
 
             <Wrapper t={25}>
                 <NameSection header={changePasswordSectionMessages.header} type={2}>
-                    {/*<ChangePasswordForm />*/}
+                    <ChangePasswordForm />
                 </NameSection>
             </Wrapper>
 
             <Wrapper t={25}>
                 <NameSection header={userAccountSectionMessages.header} type={2}>
-                    {/*<UserAccountForm />*/}
+                    <UserAccountForm />
                 </NameSection>
             </Wrapper>
-
-            {/*<Wrapper t={25}>*/}
-                {/*<FormConstructor config={configExample} />*/}
-            {/*</Wrapper>*/}
         </div>
     )
 }

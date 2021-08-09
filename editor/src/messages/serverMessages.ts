@@ -5,10 +5,15 @@ import { getMessagesObject } from 'messages/fn/getMessagesObject'
 const obj = {
     // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
 
-    /*user_getTokenData_tokenIsNotPassed: {
+    authGuard_userIsNotAuthorized: {
+        eng: 'This request requires authorization.',
+        rus: 'Для этого запроса требуется авторизация.'
+    },
+
+    user_getTokenData_tokenIsNotPassed: {
         eng: 'Token was not passed or it is wrong.',
         rus: 'Токен не был передан в запросе.'
-    },*/
+    },
     user_createUser_alreadyRegistered: {
         eng: 'The user with this email is signed up already.',
         rus: 'Пользователь с такой почтой уже зарегистрирован.'
@@ -144,12 +149,29 @@ const obj = {
         rus: 'Должна быть указана новая почта.'
     },
     user_changeEmail_NewEmailISEqualToCurrent: {
-        eng: 'Existing email was passed. Write new one to change existing one.',
+        eng: 'Existing email was passed. Write a new one to change existing one.',
         rus: 'Передана существующая почта. Передайте другую чтобы её изменить.'
     },
     user_changeEmail_NewEmailISUsedByAnotherUser: {
         eng: 'The email is used by another user.',
         rus: 'Почта занята другим пользователем.'
+    },
+
+    user_ChangePasswordDto_passwordIsOutOfRange: {
+        eng: 'Password must be 5 to 20 characters long.',
+        rus: 'Пароль должен быть длиной от 5 до 20 символов.'
+    },
+    user_ChangePasswordDto_currentPasswordIsEmpty: {
+        eng: 'You must specify the current password.',
+        rus: 'Должен быть указан текущий пароль.'
+    },
+    user_ChangePasswordDto_newPasswordIsEmpty: {
+        eng: 'You must specify the new password.',
+        rus: 'Должен быть указан новый пароль.'
+    },
+    user_changePassword_PasswordsIsNotMatch: {
+        eng: 'The current user password does not match the one entered.',
+        rus: 'Текущий пароль пользователя не совпадает с введённым.'
     },
 }
 

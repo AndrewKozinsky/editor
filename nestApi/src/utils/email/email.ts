@@ -21,8 +21,8 @@ export class Email {
     async sendConfirmLetter(token: string) {
         // Тема письма
         const subject = this.lang === 'eng'
-            ? 'Confirm your email for registration at Editorium.net'
-            : 'Подтвердите вашу почту для регистрации на Editorium.net'
+            ? 'Confirm your email in Editorium.net'
+            : 'Подтвердите вашу почту на Editorium.net'
 
         // Создать html и текстовую версию письма
         const [html, text] = new EmailTemplate(this.domain).createConfirmLetter(token, this.lang)

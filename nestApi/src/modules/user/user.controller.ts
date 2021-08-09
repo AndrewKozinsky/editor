@@ -1,15 +1,6 @@
 import {
-    Body,
-    Controller,
-    Get,
-    Post,
-    Patch,
-    Param,
-    HttpStatus,
-    Req,
-    Res,
-    UseGuards,
-    UsePipes
+    Req, Res, Get, Post, Patch,
+    Param, Body, Controller, HttpStatus, UseGuards, UsePipes, Delete
 } from '@nestjs/common'
 import { Response } from 'express'
 import { UserService } from './user.service'
@@ -24,6 +15,7 @@ import { ChangeEmailDto } from './dto/changeEmail.dto'
 import { AuthGuard } from './guards/auth.guard'
 import { UserEntity } from './user.entity'
 import { User } from './decorators/user.decorator'
+import { ChangePasswordDto } from './dto/changePassword.dto'
 
 @Controller('users')
 export class UserController {
@@ -119,4 +111,28 @@ export class UserController {
         const updatedUser = await this.userService.changeEmail(user, changeEmailDto, language)
         this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
     }
+
+    @Patch('changePassword')
+    @UsePipes(new BackendValidationPipe())
+    @UseGuards(AuthGuard)
+    async changePassword(
+        @User() user: UserEntity,
+        @Res({ passthrough: true }) response: Response,
+        @Body() changePasswordDto: ChangePasswordDto
+    ): Promise<void> {
+        const updatedUser = await this.userService.changePassword(user, changePasswordDto)
+        this.userService.buildUserResponse(updatedUser, response, undefined, 'set')
+    }
+
+    @Delete('me')
+    @UsePipes(new BackendValidationPipe())
+    @UseGuards(AuthGuard)
+    async deleteCurrentUser(
+        @Req() req: ExpressRequestInterface,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<void> {
+        const updatedUser = await this.userService.deleteCurrentUser(req)
+        this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
+    }
 }
+

@@ -63,9 +63,7 @@ const config: FCType.Config = {
             readyFieldValues.token.toString()
         )
     },
-    afterSubmit(response) {
-        console.log(response)
-    },
+    afterSubmit(response) {},
     hideAfterSuccessfulSubmit: true
 }
 

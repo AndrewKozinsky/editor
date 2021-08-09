@@ -21,6 +21,7 @@ const config: FCType.Config = {
             fieldData: {
                 label: userDataSectionMessages.emailField,
                 placeholder: userDataSectionMessages.emailPlaceholder,
+                maxWidth: 250,
             }
         }
     },
@@ -28,11 +29,11 @@ const config: FCType.Config = {
         topOffset: 'small',
         submit: {
             text: userDataSectionMessages.submitBtnText,
-        }
+        },
+        align: 'left'
     },
     afterSubmit(response, outerFns, formDetails) {
         const newEmail = formDetails.readyFieldValues.email.toString()
-        console.log(newEmail)
         store.dispatch( actions.modal.openModal(<ModalContent newEmail={newEmail}/>) )
     },
 }

@@ -6,30 +6,30 @@ const obj = {
         eng: 'Change password',
         rus: 'Изменение пароля'
     },
-    /*currentPasswordField: {
+    currentPasswordField: {
         eng: 'Current password',
         rus: 'Текущий пароль'
-    },*/
-    /*newPasswordField: {
+    },
+    newPasswordField: {
         eng: 'New password',
         rus: 'Новый пароль'
-    },*/
-    /*newPasswordAgainField: {
+    },
+    newPasswordAgainField: {
         eng: 'Retype new password',
         rus: 'Повторите новый пароль'
-    },*/
-    /*submitBtnText: {
+    },
+    submitBtnText: {
         eng: 'Change password',
         rus: 'Изменить пароль'
-    },*/
-    /*passwordsMustMatch: {
+    },
+    passwordsMustMatch: {
         eng: 'Passwords must match',
         rus: 'Пароли должны совпадать'
-    },*/
-    /*passwordHasChanged: {
+    },
+    passwordHasChanged: {
         eng: 'Password has changed.',
         rus: 'Пароль изменён.'
-    },*/
+    },
     /*cancelBtn: {
         eng: 'Cancel',
         rus: 'Отменить'

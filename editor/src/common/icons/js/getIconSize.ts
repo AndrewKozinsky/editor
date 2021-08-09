@@ -74,14 +74,14 @@ export function getIconSize(type: string) {
                 height: "15px",
                 viewBox: "0 0 15 15"
             }*/
-        // case 'btnSignTrash':
+        case 'btnSignTrash':
         // case 'btnSignUndo':
-        /*case 'btnSignRedo':
+        case 'btnSignRedo':
             return {
                 width: "14px",
                 height: "15px",
                 viewBox: "0 0 14 15"
-            }*/
+            }
         /*case 'btnSignCode':
             return {
                 width: "16px",
@@ -95,12 +95,12 @@ export function getIconSize(type: string) {
                 height: "15px",
                 viewBox: "0 0 15 15"
             }
-        /*case 'btnSignExit':
+        case 'btnSignExit':
             return {
                 width: "13px",
                 height: "15px",
                 viewBox: "0 0 13 15"
-            }*/
+            }
         // Тема интерфейса
         // case 'editorLightTheme':
         /*case 'editorDarkTheme':

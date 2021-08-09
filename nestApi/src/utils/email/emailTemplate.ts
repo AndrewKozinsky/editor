@@ -18,8 +18,8 @@ export class EmailTemplate {
 
         // Текстовая версия письма
         const textContent = lang === 'rus'
-            ? `Ваш адрес был указан при регистрации на сервисе Editorium. Пожалуйста, подтвердите почту перейдя по адресу: ${this.domain}/editor/confirm-email и в открывшейся форме укажите токен ${token}. Если вы не регистрировались на этом сервисе, то проигнорируйте это письмо.`
-            : `Your email address was provided when you registered in the Editorium. Please confirm your email by going to ${this.domain}/editor/confirm-email and enter ${token} in the form that opens. If you did not register for this service, please ignore this letter.`
+            ? `Ваш адрес был указан при регистрации/смене почты на сервисе Editorium. Пожалуйста, подтвердите почту перейдя по адресу: ${this.domain}/editor/confirm-email и в открывшейся форме укажите токен ${token}. Если вы не регистрировались на этом сервисе или не отправляли запрос на изменение почты, то проигнорируйте это письмо.`
+            : `Your address was given when you registered/changed your email at Editorium. Please confirm your email address by going to: ${this.domain}/editor/confirm-email and then entering your token ${token} in the form that appears. If you have not registered on this service or have not sent a request to change your mail, then ignore this email.`
 
         // Получить каркас письма и вставить в него содержимое
         const htmlTemplate = baseTemplate(this.domain, letterContent, lang)
