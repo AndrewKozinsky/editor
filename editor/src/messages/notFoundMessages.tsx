@@ -1,11 +1,10 @@
 import React from 'react'
 //@ts-ignore
 import { Link } from 'react-router-dom'
-import { getMessagesJSXObject } from './fn/getMessagesObject'
 
 
 // Страница Not Found
-const JSXObj = {
+export const notFoundMessages = {
     header: {
         eng: <>Page not found</>,
         rus: <>Страница не найдена</>
@@ -19,5 +18,3 @@ const JSXObj = {
         rus: <>Или перейдите на <Link to='/'>страницу редактора</Link>.</>
     },
 }
-
-export const notFoundJSXMessages = getMessagesJSXObject(JSXObj)

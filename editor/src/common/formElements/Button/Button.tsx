@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { ReactElement, useRef } from 'react'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import { useSelector } from 'react-redux'
@@ -15,7 +15,7 @@ export type ButtonPropType = {
     big?: boolean, // Is button big
     align?: 'center' | 'right'
     icon?: ButtonIconType
-    text?: string
+    text?: string | ReactElement
     name?: string
     loading?: boolean
     block?: boolean // Должна ли кнопка быть блочным элементом на всю ширину
@@ -58,7 +58,7 @@ export default function Button(props: ButtonPropType) {
     useSetFocus(buttonRef, autoFocus)
 
     // Текст кнопки
-    let btnText: null | string = null
+    let btnText: null | string | ReactElement = null
     if (view !== 'onlyIcon' && text) btnText = text
 
     // При загрузке поменять текст кнопки

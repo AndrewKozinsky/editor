@@ -34,7 +34,7 @@ export default function Menu(props: MenuPropType) {
         <nav className={CN}>
             <ul className={`${CN}__ul`}>
                 {$items}
-            </ul>{/**/}
+            </ul>
         </nav>
     )
 }

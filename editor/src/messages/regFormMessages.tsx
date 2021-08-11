@@ -3,11 +3,6 @@ import React from 'react'
 import { getDomainFromEmail } from 'utils/StringUtils'
 //@ts-ignore
 import { Link } from 'react-router-dom'
-import {
-    getMessagesJSXFnObject,
-    getMessagesJSXObject,
-    getMessagesObject
-} from 'messages/fn/getMessagesObject'
 //@ts-ignore
 import disclaimerPdfLink from 'entrance/RegFormBlock/docs/Disclaimer.pdf'
 //@ts-ignore
@@ -18,7 +13,7 @@ import consentToTheNewsletterPdfLink from 'entrance/RegFormBlock/docs/Consent_to
 
 
 // Форма RegFormBlock
-const obj = {
+export const regFormMessages = {
     // Заголовок формы регистрации
     formHeader: {
         eng: 'Sign up',
@@ -52,13 +47,6 @@ const obj = {
         eng: 'An email with a link to confirm your mailing address was sent to the specified email address. Click on it to activate your account.',
         rus: 'На указанную почту выслано письмо со ссылкой для подтверждения почтового адреса. Перейдите по ней чтобы активировать учётную запись.'
     },
-}
-
-export const regFormMessages = getMessagesObject(obj)
-
-
-// Форма RegFormBlock
-const JSXObj = {
     doYouHaveAccount: {
         eng: <>Already have an account? <Link to='/enter'>Log in</Link>.</>,
         rus: <>Уже есть учётная запись? <Link to='/enter'>Войдите</Link>.</>
@@ -68,5 +56,3 @@ const JSXObj = {
         rus: <>Регистрируясь на этом сайте вы подтверждаете принятие условий <a href={disclaimerPdfLink} target='_blank'>отказа от ответственности</a>, <a href={policyOnPersonalDataProcessingPdfLink} target='_blank'>политики в отношении обработки персональных данных</a> и <a href={consentToTheNewsletterPdfLink} target='_blank'>согласие с рассылкой</a>.</>
     },
 }
-
-export const regFormJSXMessages = getMessagesJSXObject(JSXObj)

@@ -5,7 +5,7 @@ import HeaderPage from 'common/HeaderPage/HeaderPage'
 import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
 import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
 import { userTabContentMessages } from 'messages/userTabContentMessages'
-import { editorTabContentMessages } from 'messages/editorTabContentMessages'
+import { editorTabContentMessages } from '../../../messages/editorTabContentMessages'
 import './RightPart-3.scss'
 
 
@@ -19,6 +19,8 @@ export default function RightPart3(props: RightPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
+    const lang: 'rus' | 'eng' = useSelector((store: AppState) => store.settings.editorLanguage)
+
     // Активная вкладка панели настроек
     const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
 
@@ -31,7 +33,7 @@ export default function RightPart3(props: RightPart3PropType) {
             if (tabName === 'user') {
                 return (
                     <HeaderPage
-                        headerText={userTabContentMessages.header}
+                        headerText={userTabContentMessages.header[lang]}
                         display={tabName === activeTab}
                         key={tabName}
                     >
@@ -42,7 +44,7 @@ export default function RightPart3(props: RightPart3PropType) {
             else if (tabName === 'editor') {
                 return (
                     <HeaderPage
-                        headerText={editorTabContentMessages.header}
+                        headerText={editorTabContentMessages.header[lang]}
                         display={tabName === activeTab}
                         key={tabName}
                     >
@@ -54,7 +56,7 @@ export default function RightPart3(props: RightPart3PropType) {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [activeTab])
+    }, [activeTab, lang])
 
     const CN = 'right-part-3'
     const style = display ? {} : {display: 'none'}

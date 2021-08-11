@@ -1,5 +1,4 @@
 import React from 'react'
-import { modalMessages } from 'src/messages/modalMessages'
 import { useSelector } from 'react-redux'
 import { AppState } from 'src/store/rootReducer'
 import {
@@ -31,7 +30,6 @@ export default function Modal() {
         <div className={`${CN}__outer-wrapper`} onClickCapture={(e) => onModalClose(e)}>
             <div className={CN}>
                 <Button
-                    text={modalMessages.close}
                     icon='btnSignClose'
                     onClick={onModalClose}
                     autoFocus

@@ -1,13 +1,8 @@
 import React from 'react'
-import {
-    getMessagesJSXFnObject,
-    getMessagesObject
-} from 'messages/fn/getMessagesObject'
-import { getDomainFromEmail } from 'utils/StringUtils'
 
 
 // Форма ResetFormBlock
-const obj = {
+export const resetFormMessages = {
     // Заголовок формы сброса пароля
     formHeader: {
         eng: 'Reset password',
@@ -26,6 +21,4 @@ const obj = {
         rus: 'На почту выслано письмо со ссылкой на страницу сброса пароля.'
     }
 }
-
-export const resetFormMessages = getMessagesObject(obj)
 

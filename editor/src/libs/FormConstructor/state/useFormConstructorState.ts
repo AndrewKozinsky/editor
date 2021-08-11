@@ -5,6 +5,8 @@ import fieldChangeHandler from '../handlers/fieldChangeHandler'
 import formSubmitHandler from '../handlers/formSubmitHandler'
 import updateFieldFn from './UpdateField'
 import { getInitialShowCommonSuccess, getInitialCommonSuccess } from './successfulMessage'
+import { serverMessages } from 'messages/serverMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function useFormConstructorState(formConfig: FCType.Config, outerFns: FCType.OuterFns = {}): FCType.StateFormReturn {
@@ -26,6 +28,8 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     const [formSentSuccessfully, setFormSentSuccessfully] = useState(false)
     const [formDisabled, setFormDisabled] = useState(false)
 
+    const serverMsg = useGetMessages(serverMessages)
+
 
     const onChangeFieldHandler = useCallback((e) => {
         fieldChangeHandler(e, fields, setFields, submitCounter, formConfig, setSubmitBtnDisabled, setCommonError)
@@ -34,11 +38,13 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     const onFormSubmit = useCallback((e) => {
         formSubmitHandler(
             e, fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
-            setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess
+            setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess,
+            serverMsg
         )
     }, [
         fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
-        setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess
+        setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess,
+        serverMsg
     ])
 
     return {

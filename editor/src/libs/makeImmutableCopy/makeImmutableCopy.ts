@@ -7,7 +7,7 @@
  * @param {Object || Array} [newData] — в процессе работы функция создаёт объект или массив с копией. Это служебный аргумент. Сюда передавать ничего не нужно.
  * @returns {Object || Array} — функция возвращает неизменяемую копию из аргумента mainData.
  */
-export default function makeImmutableObj(mainData: any, originalData: any, changedData: any, newData?: any) {
+/*export default function makeImmutableObj(mainData: any, originalData: any, changedData: any, newData?: any) {
 
     // Если mainData равен originalData, тогда вернуть изменённый объект
     if(mainData === originalData) {
@@ -57,7 +57,7 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
 
 
     return newData
-}
+}*/
 
 
 
@@ -67,7 +67,7 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
  * @param {Object || Array} originalData — объект/массив, который может быть в currentData.
  * @returns {Boolean} — возвращает булево значение есть ли в currentData объект originalData.
  */
-function isDataHasOriginalData(currentData: any, originalData: any) {
+/*function isDataHasOriginalData(currentData: any, originalData: any) {
 
     // Если текущий объект равен целевому объекту, то вернуть правду
     if(currentData === originalData) return true;
@@ -103,4 +103,4 @@ function isDataHasOriginalData(currentData: any, originalData: any) {
 
     // Во всех остальных случаях вернуть ложь
     return false
-}
+}*/

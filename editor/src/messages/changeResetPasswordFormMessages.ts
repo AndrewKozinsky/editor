@@ -1,7 +1,6 @@
-import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Форма ChangeResetPasswordFormBlock
-const obj = {
+export const changeResetPasswordFormMessages = {
     // Заголовок формы ввода нового пароля
     formHeader: {
         eng: 'Password change',
@@ -37,8 +36,6 @@ const obj = {
         rus: 'В редактор.'
     },
 }
-
-export const changeResetPasswordFormMessages = getMessagesObject(obj)
 
 
 

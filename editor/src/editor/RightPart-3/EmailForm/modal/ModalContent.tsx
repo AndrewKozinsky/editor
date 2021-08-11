@@ -4,6 +4,8 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import submitBtnFormConfig from './submitBtnFormConfig'
+import useGetMessages from '../../../../messages/fn/useGetMessages'
+import getSubmitBtnFormConfig from './submitBtnFormConfig'
 
 type ModalContentPropType = {
     newEmail: string
@@ -11,12 +13,18 @@ type ModalContentPropType = {
 
 export default function ModalContent(props: ModalContentPropType) {
     const { newEmail } = props
-    const formState = useFormConstructorState(submitBtnFormConfig, {newEmail})
+    const userDataSectionMsg = useGetMessages(userDataSectionMessages)
+    const submitBtnFormConfig = getSubmitBtnFormConfig(userDataSectionMsg)
+
+    const formState = useFormConstructorState(
+        submitBtnFormConfig,
+        {newEmail}
+    )
 
     return (
         <ModalShortContent
-            header={userDataSectionMessages.confirmModalHeader}
-            text={userDataSectionMessages.confirmModalText}
+            header={userDataSectionMsg.confirmModalHeader}
+            text={userDataSectionMsg.confirmModalText}
             bottomElem={<FormConstructor config={submitBtnFormConfig} state={formState} />}
         />
     )

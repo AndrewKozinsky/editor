@@ -1,11 +1,11 @@
-import React, { ReactNode } from 'react'
+import React, { ReactElement, ReactNode } from 'react'
 import { getHeaderClasses } from './NameSection-func'
 import './NameSection.scss'
 
 
 type NameSectionPropType = {
     type?: 1 | 2 // Размер компонента: 1 (больше) или 2 (меньше)
-    header: string // Текст заголовка
+    header: string | ReactElement // Текст заголовка
     children?: ReactNode // Дети компонента
 }
 

@@ -102,13 +102,13 @@ export function getIconSize(type: string) {
                 viewBox: "0 0 13 15"
             }
         // Тема интерфейса
-        // case 'editorLightTheme':
-        /*case 'editorDarkTheme':
+        case 'editorLightTheme':
+        case 'editorDarkTheme':
             return {
                 width: "76px",
                 height: "76px",
                 viewBox: "0 0 76 76"
-            }*/
+            }
         // Значки на FilesTree
         /*case 'filesTreeTriangle':
             return {

@@ -28,6 +28,7 @@ import './css/app.scss'
 
 /** Компонент всего приложения */
 export default function App() {
+    // TODO Figure out why the types from Store are not detected.
     // TODO Don't forgot to use eslint, prettier and stylelint.
     // TODO MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
     // TODO If I have two Grid components and I put an image to the second grid's cell it appears in the first.

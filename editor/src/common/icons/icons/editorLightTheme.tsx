@@ -1,7 +1,7 @@
-// import React from 'react'
+import React from 'react'
 
 
-/*export default function EditorLightTheme() {
+export default function EditorLightTheme() {
     return (
         <g>
             <rect fill="rgb(217, 218, 222)" fillRule="nonzero" x="0" y="0" width="76" height="76" rx="4" />
@@ -15,7 +15,7 @@
             <path d="M63,50 C65.7614237,50 68,52.2385763 68,55 C68,57.7614237 65.7614237,60 63,60 L58.4836409,60.00121 C59.4414134,58.570872 60,56.8506685 60,55 C60,53.1493961 59.4414523,51.4292479 58.4837411,49.9989396 L63,50 Z" fill="rgb(53, 53, 54)" fillRule="nonzero" opacity="0.5" />
         </g>
     )
-}*/
+}
 
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 // import NameSection from '../../wrappers/NameSection/NameSection'
 // import {componentsPanelMessages} from 'messages/componentsPanelMessages'
 // import TempCompList from '../TempCompList/TempCompList'
-// import './LeftPart-2.scss'
+import './LeftPart-2.scss'
 
 type LeftPart3PropType = {
     display?: boolean

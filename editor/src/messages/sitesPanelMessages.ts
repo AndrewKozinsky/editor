@@ -1,7 +1,5 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
-
 // Панель «Сайты»
-/*const obj = {
+/*const sitesPanelMessages = {
     header: {
         eng: 'Sites',
         rus: 'Сайты'
@@ -12,4 +10,3 @@
     },
 }*/
 
-// export const sitesPanelMessages = getMessagesObject(obj)

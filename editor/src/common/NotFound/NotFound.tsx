@@ -2,11 +2,14 @@ import React from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { makeCN } from 'utils/StringUtils'
-import { notFoundJSXMessages } from 'src/messages/notFoundMessages'
+import { notFoundMessages } from 'src/messages/notFoundMessages'
+import useGetMessages from '../../messages/fn/useGetMessages'
 import './NotFound.scss'
 
 
 export default function NotFound() {
+    const notFoundMsg = useGetMessages(notFoundMessages)
+
     // Класс обёртки
     const CN = 'not-found'
 
@@ -18,15 +21,15 @@ export default function NotFound() {
             <SvgIcon type='logo' />
 
             <Wrapper t={15}>
-                <h1 className={makeCN(headerClasses)}>{notFoundJSXMessages.header}</h1>
+                <h1 className={makeCN(headerClasses)}>{notFoundMsg.header}</h1>
             </Wrapper>
 
             <Wrapper t={15}>
-                <p>{notFoundJSXMessages.p1}</p>
+                <p>{notFoundMsg.p1}</p>
             </Wrapper>
 
             <Wrapper t={5}>
-                <p>{notFoundJSXMessages.p2}</p>
+                <p>{notFoundMsg.p2}</p>
             </Wrapper>
         </div>
     )

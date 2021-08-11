@@ -1,4 +1,4 @@
-import { ReactEventHandler, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from 'src/store/rootReducer'
 import actions from '../../../store/rootAction'

@@ -16,7 +16,7 @@ import './FieldGroup.scss'
 type InputDataType = { label: string | ReactElement, value: string }
 
 export type FieldGroupPropType = {
-    label?: string
+    label?: string | ReactElement
     inputType: 'radio' | 'checkbox'
     groupName: string
     inputsArr: InputDataType[]

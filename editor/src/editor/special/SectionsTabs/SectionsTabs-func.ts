@@ -5,10 +5,13 @@ import store from 'store/store'
 import actions from 'store/rootAction'
 import { mainTabsMessages } from 'messages/mainTabsMessages'
 import { MainTabDataType } from '../MainTab/MainTab'
+import useGetMessages from '../../../messages/fn/useGetMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
 export function useGetTabData(): MainTabDataType[] {
+
+    const mainTabsMsg = useGetMessages(mainTabsMessages)
 
     // Номер активной вкладки
     const { mainTab } = useSelector((store: AppState) => store.settings)
@@ -18,7 +21,7 @@ export function useGetTabData(): MainTabDataType[] {
 
     useEffect(function () {
         // Сгенерировать данные и поставить в Местное состояние
-        setTabsData( getTabData(mainTab) )
+        setTabsData( getTabData(mainTab, mainTabsMsg) )
     }, [mainTab])
 
     return tabsData
@@ -28,14 +31,14 @@ export function useGetTabData(): MainTabDataType[] {
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} activeTabNum — номер активной вкладки
  */
-function getTabData( activeTabNum: number ): MainTabDataType[] {
+function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[] {
 
     // Сгенеривать данные трёх вкладок
     return ['mainTabMaterials', 'mainTabEditor', 'mainTabSettings', 'mainTabHelp']
         .map((type, i) => {
         return {
             // num: i + 1, // I think I can delete it
-            title: mainTabsMessages[type],
+            title: mainTabsMsg[type],
             iconType: type,
             active: i === activeTabNum,
             position: <'top'|'left'>'top',

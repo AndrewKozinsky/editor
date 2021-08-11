@@ -1,7 +1,6 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Сообщения не привязанные к конкретному месту
-const obj = {
+export const commonMessages = {
     emailPlaceholder: {
         eng: 'For example: mail@gmail.com',
         rus: 'Например: mail@gmail.com'
@@ -27,8 +26,6 @@ const obj = {
         rus: 'Максимум можно ввести 50 символов'
     },
 }
-
-export const commonMessages = getMessagesObject(obj)
 
 
 

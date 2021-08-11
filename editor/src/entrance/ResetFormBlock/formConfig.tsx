@@ -2,47 +2,48 @@ import React from 'react'
 //@ts-ignore
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import { commonMessages } from 'messages/commonMessages'
-import { resetFormMessages } from 'src/messages/resetFormMessages'
 import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
 
-
-const config: FCType.Config = {
-    fields: {
-        email: {
-            fieldType: 'text',
-            schema: (fields) => {
-                return yup.string()
-                    .required(commonMessages.requiredField)
-                    .email(commonMessages.emailErrInvalid)
+function getConfig(commonMsg: any, resetFormMsg: any) {
+    const config: FCType.Config = {
+        fields: {
+            email: {
+                fieldType: 'text',
+                schema: (fields) => {
+                    return yup.string()
+                        .required(commonMsg.requiredField)
+                        .email(commonMsg.emailErrInvalid)
+                },
+                fieldData: {
+                    label: resetFormMsg.emailField,
+                    autocomplete: 'email',
+                    placeholder: commonMsg.emailPlaceholder,
+                    autoFocus: true,
+                }
             },
-            fieldData: {
-                label: resetFormMessages.emailField,
-                autocomplete: 'email',
-                placeholder: commonMessages.emailPlaceholder,
-                autoFocus: true,
-            }
         },
-    },
-    bottom: {
-        submit: {
-            text: resetFormMessages.submitBtnText,
-            big: true,
-            block: true,
-            align: 'center',
-            color: 'accent'
+        bottom: {
+            submit: {
+                text: resetFormMsg.submitBtnText,
+                big: true,
+                block: true,
+                align: 'center',
+                color: 'accent'
+            },
         },
-    },
-    async requestFn(readyFieldValues) {
-        // @ts-ignore
-        return await resetPasswordRequest(readyFieldValues.email)
-    },
-    afterSubmit(response) {
+        async requestFn(readyFieldValues) {
+            // @ts-ignore
+            return await resetPasswordRequest(readyFieldValues.email)
+        },
+        afterSubmit(response) {
 
-    },
-    showCommonSuccess: true,
-    commonSuccess: resetFormMessages.retypePasswordLetter
+        },
+        showCommonSuccess: true,
+        commonSuccess: resetFormMsg.retypePasswordLetter
+    }
+
+    return config
 }
 
 
-export default config
+export default getConfig

@@ -1,11 +1,11 @@
-import React, { ReactElement } from 'react'
-import Wrapper from '../../Wrapper/Wrapper'
+// import React, { ReactElement } from 'react'
+// import Wrapper from '../../Wrapper/Wrapper'
 
-type ModalButtonsListPropType = {
+/*type ModalButtonsListPropType = {
     buttons: ReactElement[]
-}
+}*/
 
-function ModalButtonsList(props: ModalButtonsListPropType) {
+/*function ModalButtonsList(props: ModalButtonsListPropType) {
     const { buttons } = props
 
     return buttons.map(($button, i) => {
@@ -15,6 +15,6 @@ function ModalButtonsList(props: ModalButtonsListPropType) {
             </Wrapper>
         )
     })
-}
+}*/
 
-export default ModalButtonsList
+// export default ModalButtonsList

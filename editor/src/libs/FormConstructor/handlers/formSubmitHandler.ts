@@ -2,7 +2,6 @@ import React from 'react'
 import FCType from '../FCType'
 import getFirstInvalidFieldName from '../misc/getFirstInvalidFieldName'
 import getReadyFieldsValues from '../misc/getReadyFieldsValues'
-import { serverMessages } from 'messages/serverMessages'
 import setErrorsToFields from '../state/setErrorsToFields'
 
 export default async function formSubmitHandler(
@@ -20,7 +19,8 @@ export default async function formSubmitHandler(
     setFormSentSuccessfully: FCType.SetFormSentSuccessfully,
     outerFns: FCType.OuterFns,
     commonSuccess: FCType.CommonSuccess,
-    showCommonSuccess: FCType.ShowCommonSuccess
+    showCommonSuccess: FCType.ShowCommonSuccess,
+    serverMsg: any
 ): Promise<void> {
     e.preventDefault()
 
@@ -79,7 +79,7 @@ export default async function formSubmitHandler(
 
         // Показать общее сообщение. Оно будет показано ниже формы
         if (response.commonError) {
-            setCommonError( serverMessages[response.commonError])
+            setCommonError( serverMsg[response.commonError])
         }
 
         if (response.errors) {

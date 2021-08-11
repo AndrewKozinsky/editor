@@ -4,7 +4,7 @@ import './HeaderPage.scss'
 
 
 type HeaderPagePropType = {
-    headerText: string
+    headerText: string | ReactElement
     display?: boolean
     children: ReactElement | ReactElement[]
 }

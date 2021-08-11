@@ -1,7 +1,8 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
+import React from 'react'
+
 
 // Секция «Цветовая тема»
-/*const obj = {
+export const themeSectionMessages = {
     themeRadiosHeader: {
         eng: 'Color theme',
         rus: 'Цветовая схема'
@@ -14,6 +15,8 @@
         eng: 'Dark',
         rus: 'Тёмная'
     },
-}*/
-
-// export const themeSectionMessages = getMessagesObject(obj)
+    header: {
+        eng: <>Page not found</>,
+        rus: <>Страница не найдена</>
+    }
+}

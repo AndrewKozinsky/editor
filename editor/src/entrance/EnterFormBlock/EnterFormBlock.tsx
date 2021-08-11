@@ -6,20 +6,26 @@ import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
+import useGetMessages from '../../messages/fn/useGetMessages'
+import { regMenuMessages } from '../../messages/regMenuMessages'
 import {
     enterFormMessages,
-    enterFormJSXFnMessages
 } from 'src/messages/enterFormMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import config from './formConfig'
+import getConfig from './formConfig'
 import Notice from 'common/textBlocks/Notice/Notice'
 import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
+import { commonMessages } from '../../messages/commonMessages'
 
 
 /** Форма входа в сервис */
 export default function EnterFormBlock() {
     const history = useHistory()
+    const commonMsg = useGetMessages(commonMessages)
+    const enterFormMsg = useGetMessages(enterFormMessages)
+    const regMenuMsg = useGetMessages(regMenuMessages)
+    const config = getConfig(commonMsg, enterFormMsg)
 
     const [showConfirmEmailMessage, setShowConfirmEmailMessage] = useState(false)
     const formState = useFormConstructorState(config, {history, setShowConfirmEmailMessage})
@@ -27,10 +33,10 @@ export default function EnterFormBlock() {
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems()}/>
+                <Menu items={getMenuItems(regMenuMsg)}/>
             </Wrapper>
             <Wrapper b={10}>
-                <Header text={enterFormMessages.formHeader} type='h1' />
+                <Header text={enterFormMsg.formHeader} type='h1' />
             </Wrapper>
             <FormConstructor config={config} state={formState} />
             {showConfirmEmailMessage && <ConfirmLetterMessage email={formState.fields.email.value[0]} />}
@@ -46,6 +52,8 @@ type ConfirmLetterMessagePropType = {
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
 function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     const { email } = props
+    const commonMsg = useGetMessages(commonMessages)
+    const enterFormMsg = useGetMessages(enterFormMessages)
 
     // Обработчик щелчка по кнопке
     const { isLoading, success, error, doFetch } = useGetSendConfirmLetter(email)
@@ -53,10 +61,10 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     return (
         <>
             <Notice icon='error' bg>
-                <p>{enterFormJSXFnMessages.confirmRegistrationLetter(email)}</p>
+                <p>{enterFormMsg.confirmRegistrationLetter}</p>
                 <Wrapper t={10} b={5}>
                     <Button
-                        text={enterFormMessages.sendAnotherLetter}
+                        text={enterFormMsg.sendAnotherLetter}
                         loading={isLoading}
                         onClick={doFetch}
                     />
@@ -64,12 +72,12 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
             </Notice>
             {error && <Wrapper t={10}>
                 <Notice icon='error' bg>
-                    {enterFormMessages.failedToSendAnotherConfirmationLetter}
+                    {enterFormMsg.failedToSendAnotherConfirmationLetter}
                 </Notice>
             </Wrapper>}
             {success && <Wrapper t={10}>
                 <Notice icon='success' bg>
-                    {enterFormMessages.confirmationLetterWasSent}
+                    {enterFormMsg.confirmationLetterWasSent}
                 </Notice>
             </Wrapper>}
         </>

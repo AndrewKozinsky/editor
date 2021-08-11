@@ -3,8 +3,8 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Header from '../../textBlocks/Header/Header'
 
 type ModalShortContentPropType = {
-    header: string
-    text:string
+    header: string | ReactElement
+    text:string | ReactElement
     bottomElem: ReactElement
 }
 

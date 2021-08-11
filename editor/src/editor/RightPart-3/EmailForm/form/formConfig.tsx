@@ -3,39 +3,44 @@ import React from 'react'
 import * as yup from 'yup'
 import FCType from 'src/libs/FormConstructor/FCType'
 import store from 'src/store/store'
-import { userDataSectionMessages } from 'src/messages/userDataSectionMessages'
 import actions from 'store/rootAction'
 import ModalContent from '../modal/ModalContent'
 
 
-const config: FCType.Config = {
-    fields: {
-        email: {
-            fieldType: 'text',
-            schema: (fields) => {
-                return yup.string()
-                    .required(userDataSectionMessages.requiredField)
-                    .email(userDataSectionMessages.emailErrInvalid)
-                    .max(100, userDataSectionMessages.emailIsTooLong)
-            },
-            fieldData: {
-                label: userDataSectionMessages.emailField,
-                placeholder: userDataSectionMessages.emailPlaceholder,
-                maxWidth: 250,
+function getConfig(userDataSectionMsg: any) {
+    const config: FCType.Config = {
+        fields: {
+            email: {
+                fieldType: 'text',
+                schema: (fields) => {
+                    return yup.string()
+                        .required(userDataSectionMsg.requiredField)
+                        .email(userDataSectionMsg.emailErrInvalid)
+                        .max(100, userDataSectionMsg.emailIsTooLong)
+                },
+                fieldData: {
+                    label: userDataSectionMsg.emailField,
+                    placeholder: userDataSectionMsg.emailPlaceholder,
+                    maxWidth: 250,
+                }
             }
-        }
-    },
-    bottom: {
-        topOffset: 'small',
-        submit: {
-            text: userDataSectionMessages.submitBtnText,
         },
-        align: 'left'
-    },
-    afterSubmit(response, outerFns, formDetails) {
-        const newEmail = formDetails.readyFieldValues.email.toString()
-        store.dispatch( actions.modal.openModal(<ModalContent newEmail={newEmail}/>) )
-    },
+        bottom: {
+            topOffset: 'small',
+            submit: {
+                text: userDataSectionMsg.submitBtnText,
+            },
+            align: 'left'
+        },
+        afterSubmit(response, outerFns, formDetails) {
+            const newEmail = formDetails.readyFieldValues.email.toString()
+            store.dispatch( actions.modal.openModal(<ModalContent newEmail={newEmail}/>) )
+        },
+    }
+
+    return config
 }
 
-export default config
+
+
+export default getConfig

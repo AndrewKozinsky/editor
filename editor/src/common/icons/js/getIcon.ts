@@ -19,8 +19,8 @@ import BtnSignTrash from '../icons/btnSignTrash'
 // import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
 import BtnSignExit from '../icons/btnSignExit';
-// import EditorLightTheme from '../icons/editorLightTheme'
-// import EditorDarkTheme from '../icons/editorDarkTheme'
+import EditorLightTheme from '../icons/editorLightTheme'
+import EditorDarkTheme from '../icons/editorDarkTheme'
 // import SiteTabSite from '../icons/siteTabSite'
 // import SiteTabPlugins from '../icons/siteTabPlugins'
 // import SiteTabArticle from '../icons/siteTabArticle'
@@ -93,8 +93,8 @@ export function getIcon(type: string): ReactNode {
         // btnSignCancel: BtnSignCancel,
 
         // Тема интерфейса
-        // editorLightTheme: EditorLightTheme,
-        // editorDarkTheme: EditorDarkTheme,
+        editorLightTheme: EditorLightTheme,
+        editorDarkTheme: EditorDarkTheme,
 
         // Значки на FilesTree
         // filesTreeTriangle: FilesTreeTriangle,

@@ -1,8 +1,7 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 
 // Сообщения не привязанные к конкретному месту
-const obj = {
+export const serverMessages = {
     // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
 
     authGuard_userIsNotAuthorized: {
@@ -174,5 +173,3 @@ const obj = {
         rus: 'Текущий пароль пользователя не совпадает с введённым.'
     },
 }
-
-export const serverMessages = getMessagesObject(obj)

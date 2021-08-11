@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { getHeaderClasses } from './Header-func'
 import './Header.scss'
 
 
 export type HeaderPropType = {
-    text: string
+    text: string | ReactElement
     type?: 'h1' | 'h2' // Тип заголовка: он задаёт тег заголовка и размер текста
 }
 

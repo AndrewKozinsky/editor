@@ -1,7 +1,6 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Components templates section in LeftPart-2
-/*const obj = {
+/*export const componentsPanelMessages = {
     header: {
         eng: 'Components',
         rus: 'Компоненты'
@@ -19,5 +18,3 @@
         rus: 'Вставить внутрь элемента'
     },
 }*/
-
-// export const componentsPanelMessages = getMessagesObject(obj)

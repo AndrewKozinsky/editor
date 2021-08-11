@@ -1,6 +1,5 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
-const obj = {
+export const regMenuMessages = {
         // Пункт «Регистрация»
         reg: {
             eng: 'Sign up',
@@ -17,5 +16,3 @@ const obj = {
             rus: 'Сброс пароля'
         },
 }
-
-export const regMenuMessages = getMessagesObject(obj)

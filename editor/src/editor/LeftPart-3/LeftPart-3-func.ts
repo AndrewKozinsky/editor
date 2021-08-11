@@ -4,32 +4,35 @@ import { AppState } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import store from 'store/store'
 import { settingsPanelMessages } from 'messages/settingsPanelMessages'
+import useGetMessages from '../../messages/fn/useGetMessages'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
 export function useGetSettingsItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
+
+    const settingsPanelMsg = useGetMessages(settingsPanelMessages)
 
     // Активная вкладка панели настроек
     const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
 
     // Сформировать и вернуть объект с атрибутами списка пунктов панели «Настройки»
     return {
-        items: getItemsListProps(), // Список пунктов
+        items: getItemsListProps(settingsPanelMsg), // Список пунктов
         activeItemId: activeTab // id активного пункта
     }
 }
 
 /** Функция формирует и возвращает объект с атрибутами списка пунктов панели «Настройки» */
-function getItemsListProps(): ItemType[] {
+function getItemsListProps(settingsPanelMsg: any): ItemType[] {
     return [
         {
             id: 'user',
-            name: settingsPanelMessages.leftMenuItemUser,
+            name: settingsPanelMsg.leftMenuItemUser,
             onClick: () => store.dispatch( actions.settings.setSettingsPanelTab('user') )
         },
         {
             id: 'editor',
-            name: settingsPanelMessages.leftMenuItemEditor,
+            name: settingsPanelMsg.leftMenuItemEditor,
             onClick: () => store.dispatch( actions.settings.setSettingsPanelTab('editor') )
         }
     ]

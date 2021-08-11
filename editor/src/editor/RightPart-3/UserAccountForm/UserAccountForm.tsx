@@ -5,9 +5,12 @@ import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
 import useGetLogOut from './logOut'
 import useGetShowModal from 'utils/hooksUtils'
 import { ModalContent } from './deleteAccount'
+import useGetMessages from '../../../messages/fn/useGetMessages'
 
 
 export default function UserAccountForm() {
+
+    const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
 
     // Хук возвращает функцию открывающую модальное окно
     // с подтверждением удаления учётной записи пользователя
@@ -19,12 +22,12 @@ export default function UserAccountForm() {
     return (
         <Wrapper gap={10}>
             <Button
-                text={userAccountSectionMessages.deleteBtn}
+                text={userAccountSectionMsg.deleteBtn}
                 icon='btnSignTrash'
                 onClick={deleteAccount}
             />
             <Button
-                text={userAccountSectionMessages.logOutBtn}
+                text={userAccountSectionMsg.logOutBtn}
                 icon='btnSignExit'
                 onClick={logOut}
             />

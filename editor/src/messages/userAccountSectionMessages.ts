@@ -1,7 +1,6 @@
-import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Секция «Учетная запись»
-const obj = {
+export const userAccountSectionMessages = {
     header: {
         eng: 'User account',
         rus: 'Учетная запись'
@@ -15,7 +14,7 @@ const obj = {
         rus: 'Выйти'
     },
     confirmModalHeader: {
-        eng: 'Do you want to delete your account',
+        eng: 'Do you want to delete your account?',
         rus: 'Удалить учётную запись?'
     },
     confirmModalText: {
@@ -23,5 +22,3 @@ const obj = {
         rus: 'С удалением учётной записи будут удалены и все статьи созданные в редакторе. Статьи на вашем сайте затронуты не будут. Удалить учётную запись?'
     },
 }
-
-export const userAccountSectionMessages = getMessagesObject(obj)

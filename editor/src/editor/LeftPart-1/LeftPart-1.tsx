@@ -12,7 +12,7 @@ import React from 'react'
 // import ItemsList from 'common/ItemsList/ItemsList'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import { MiscTypes } from 'types/miscTypes'
-import './LeftPart-1.scss'
+// import './LeftPart-1.scss'
 
 
 type LeftPart1PropType = {

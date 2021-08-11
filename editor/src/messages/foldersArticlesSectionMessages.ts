@@ -2,7 +2,7 @@
 
 
 // Структура папок и файлов статей
-/*const obj = {
+/*export const foldersArticlesSectionMessages = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -12,5 +12,3 @@
         rus: 'Новая статья'
     },
 }*/
-
-// export const foldersArticlesSectionMessages = getMessagesObject(obj)
