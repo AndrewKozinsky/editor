@@ -5,7 +5,7 @@ import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
 import useGetLogOut from './logOut'
 import useGetShowModal from 'utils/hooksUtils'
 import { ModalContent } from './deleteAccount'
-import useGetMessages from '../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function UserAccountForm() {

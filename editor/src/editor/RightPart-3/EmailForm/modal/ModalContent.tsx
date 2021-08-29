@@ -4,7 +4,7 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import submitBtnFormConfig from './submitBtnFormConfig'
-import useGetMessages from '../../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 import getSubmitBtnFormConfig from './submitBtnFormConfig'
 
 type ModalContentPropType = {

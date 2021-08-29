@@ -1,10 +1,10 @@
 import React from 'react'
 import FormConstructor from '../../../libs/FormConstructor/FormConstructor'
 import useFormConstructorState from "../../../libs/FormConstructor/state/useFormConstructorState"
-import { commonMessages } from '../../../messages/commonMessages'
-import { changePasswordSectionMessages } from '../../../messages/changePasswordSectionMessages'
+import { commonMessages } from 'messages/commonMessages'
+import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
 import getConfig from './formConfig'
-import useGetMessages from '../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function ChangePasswordForm() {

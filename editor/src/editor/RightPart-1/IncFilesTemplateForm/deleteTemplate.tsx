@@ -1,7 +1,7 @@
 // import React, {useEffect} from 'react'
 // import {useDispatch} from 'react-redux'
 // import actions from 'store/rootAction'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
 // import Button from 'common/formElements/Button/Button'

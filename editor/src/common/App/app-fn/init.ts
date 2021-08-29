@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+import { AppStateType } from 'src/store/rootReducer'
 import userActions from 'src/store/user/userActions'
 import settingsActions from 'src/store/settings/settingsActions'
 import { getFromLocalStorage } from 'src/utils/MiscUtils'
@@ -53,7 +53,7 @@ export function useSetTokenStatus() {
     const dispatch = useDispatch()
 
     // Получение статуса токена из Хранилища
-    const { authTokenStatus } = useSelector((store: AppState) => store.user)
+    const { authTokenStatus } = useSelector((store: AppStateType) => store.user)
 
     // Токен пользователя и функция для его запроса
     const { userToken, doFetch } = useGetUserToken()

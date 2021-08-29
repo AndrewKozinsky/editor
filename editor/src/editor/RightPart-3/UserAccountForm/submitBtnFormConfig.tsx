@@ -2,7 +2,7 @@ import React from 'react'
 //@ts-ignore
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import store from 'store/store'
+import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
 import regRequest from '../../../requests/user/deleteAccountRequest'

@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 // import actions from 'store/rootAction'
 // import {ItemsListPropType} from 'common/ItemsList/ItemsList'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 
 
@@ -10,7 +10,7 @@
 /*export function useFetchIncFilesTemplates() {
     const dispatch = useDispatch()
 
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // При загрузке компонента и при изменении выбранного сайта...
     useEffect(function () {
@@ -28,7 +28,7 @@
     const dispatch = useDispatch()
 
     // id выбранного шаблона подключаемых файлов
-    const {currentTemplateId, templates} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     // Сформировать и вернуть объект с атрибутами списка шаблонов
     return {

@@ -2,7 +2,7 @@ import React from 'react'
 //@ts-ignore
 import * as yup from 'yup'
 import FCType from 'src/libs/FormConstructor/FCType'
-import store from 'src/store/store'
+import { store } from 'src/store/rootReducer'
 import actions from 'store/rootAction'
 import ModalContent from '../modal/ModalContent'
 

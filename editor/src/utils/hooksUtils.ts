@@ -1,6 +1,6 @@
 import {ReactElement, useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import {AppState} from 'store/rootReducer'
+import {AppStateType} from 'store/rootReducer'
 import actions from 'store/rootAction'
 
 /**
@@ -11,7 +11,7 @@ export default function useGetShowModal(modalContent: ReactElement) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
-    const isOpen = useSelector((store: AppState) => store.modal.isOpen)
+    const isOpen = useSelector((store: AppStateType) => store.modal.isOpen)
 
     // Должно ли быть открыто модальное окно подтверждения изменения почты
     const [isModalOpen, setIsModalOpen] = useState(false)

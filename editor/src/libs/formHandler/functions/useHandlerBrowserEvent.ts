@@ -11,7 +11,7 @@
 /**
  * Функция запускаемая после браузерного события
  * @param {Object} browserEvent — объект с данными о произошедшем событии
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formConfig — outer configure object
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setBrowserEvent — установка

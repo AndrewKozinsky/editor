@@ -4,7 +4,7 @@ import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConst
 import { useUpdateEmailInForm } from './useUpdateEmailInForm'
 import { userDataSectionMessages } from 'src/messages/userDataSectionMessages'
 import getConfig from './formConfig'
-import useGetMessages from '../../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function EmailForm() {

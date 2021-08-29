@@ -1,14 +1,14 @@
 // import {useFetch} from 'src/requests/reqFn/fetch'
 // import getApiUrl from 'src/requests/reqFn/apiUrls'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'src/store/rootReducer'
+// import { AppStateType } from 'src/store/rootReducer'
 
 
 // Функция удаляет сайт
 /*export function useDeleteSite() {
 
     // id выделенного сайта, который нужно удалить
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Параметры запроса
     const options = { method: 'DELETE'}

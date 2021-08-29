@@ -1,7 +1,7 @@
 // import {useCallback, useEffect} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
-// import store from 'store/store'
-// import {AppState} from 'store/rootReducer'
+// import { store } from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import DragFilesTreeType from 'libs/DragFilesTree/types'
 // import createArticleRequest from 'requests/editor/article/createArticleRequest'
@@ -27,11 +27,11 @@
 // SET ALL DATA TO REDUX!!!
 /*export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
     // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // id папки или компонента, который должнен быть выделен
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Хук делающий запрос данных с сервера на получение папок с компонентами
     const {componentsResponse, doComponentsFetch} = useGetComponentsFoldersRequest()

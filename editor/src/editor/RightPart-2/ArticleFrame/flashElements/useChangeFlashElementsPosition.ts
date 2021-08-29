@@ -1,6 +1,6 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import {setSizeAndPosition} from './setSizeAndPosition'
 
 
@@ -8,7 +8,7 @@
  * The hooks creates Observers to watch for a hoverrectcoords and a selectrectcoords element attribute
  */
 /*export function useChangeFlashElementsPosition() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
 
     const [observersHaveBeenSet, setObserversHaveBeenSet] = useState(false)
 

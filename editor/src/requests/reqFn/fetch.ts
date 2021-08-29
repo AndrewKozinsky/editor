@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import store from 'store/store'
+import { AppStateType } from 'store/rootReducer'
+import { store } from 'store/rootReducer'
 
 
 // Тип параметров запроса
@@ -30,7 +30,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
     const [error, setError] = useState(false)
 
     // Язык интерфейса
-    const editorLanguage = useSelector((store: AppState) => store.settings.editorLanguage)
+    const editorLanguage = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {

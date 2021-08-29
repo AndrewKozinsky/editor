@@ -1,6 +1,6 @@
 import React from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 // import SitePartProvider from '../SitePartProvider/SitePartProvider'
 // import SitePartTabs from '../SitePartTabs/SitePartTabs'
 import './RightPart-1.scss'
@@ -17,7 +17,7 @@ export default function RightPart1(props: RightPart1PropType) {
     } = props
 
     // Выделенный сайт
-    // const { currentSiteId } = useSelector((store: AppState) => store.sites)
+    // const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
 
     const CN = 'right-part-1'
     const style = display ? {} : {display: 'none'}

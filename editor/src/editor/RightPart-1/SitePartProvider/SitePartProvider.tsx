@@ -1,7 +1,7 @@
 // import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
 // import SiteSection from '../SiteSection/SiteSection'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import HeaderPage from 'common/HeaderPage/HeaderPage'
 // import {NewTemplateButton, TemplatesList} from '../IncFilesTemplateList/IncFilesTemplateList'
 // import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
@@ -17,9 +17,9 @@
  */
 /*export default function SitePartProvider(): ReactElement {
     // Current site id and active tab number
-    const { currentSiteId, rightMainTab } = useSelector((store: AppState) => store.sites)
+    const { currentSiteId, rightMainTab } = useSelector((store: AppStateType) => store.sites)
     // id выделенного шаблона подключаемых файлов
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState<ReactElement>(null)

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 import LeftPart1 from 'editor/LeftPart-1/LeftPart-1'
 import LeftPart2 from 'editor/LeftPart-2/LeftPart-2/LeftPart-2'
 import LeftPart3 from 'editor/LeftPart-3/LeftPart-3'
@@ -24,7 +24,7 @@ export default function EditorPartProvider(props: EditorPartProviderPropType) {
     const { position } = props
 
     // Номер активной вкладки
-    const { mainTab } = useSelector((store: AppState) => store.settings)
+    const { mainTab } = useSelector((store: AppStateType) => store.settings)
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState(<></>)

@@ -1,6 +1,6 @@
 // @ts-ignore
 // import * as yup from 'yup'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import { articleFormMessages } from 'messages/articleFormMessages'
 // import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'

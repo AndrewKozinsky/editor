@@ -10,8 +10,8 @@ services:
       - LETSENCRYPT_HOST=editorium.net
     depends_on:
       - editor
-      - nest_api
-      - postgres_db
+      - nest
+      - postgres
     volumes:
       - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
 
@@ -25,37 +25,37 @@ services:
     restart: unless-stopped
 
   # API редактора (Nest)
-  nest_api:
+  nest:
     build:
       context: ./nestApi
       dockerfile: Dockerfile.prod
-    container_name: nest_api
+    container_name: editor-nest
     command: npm run start:prod
     restart: unless-stopped
     environment:
       - MODE=production
       - PORT=3002
     depends_on:
-      - postgres_db
+      - postgres
 
   # Postgres
   # BD: editor
   # User: editor
   # Password: dt52posQP00P
-  postgres_db:
+  postgres:
     image: postgres:13-alpine
-    container_name: postgres_db
+    container_name: editor-postgres
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: sguen35GPA
       POSTGRES_USER: postgres
       POSTGRES_DB: editor
     volumes:
-      - postgres_db:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
 
 volumes:
-  postgres_db:
+  postgres:
 
 networks:
   default:

@@ -1,7 +1,7 @@
 import React from 'react'
 // import { sitesPanelMessages } from 'messages/sitesPanelMessages'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 // import NameSection from '../wrappers/NameSection/NameSection'
 // import Button from 'common/formElements/Button/Button'
 /*import {
@@ -43,7 +43,7 @@ export default function LeftPart1(props: LeftPart1PropType) {
 /*function NewSiteButton() {
 
     // id выделенного сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewSiteOnClickHandler()

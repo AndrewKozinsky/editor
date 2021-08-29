@@ -1,7 +1,7 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
 // import actions from 'store/rootAction'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
@@ -16,10 +16,10 @@
  *  and returns updated array */
 /*export function useGetTempCompsFolders() {
     // Component templates folders
-    const { tempCompsFolders } = useSelector((store: AppState) => store.article)
+    const { tempCompsFolders } = useSelector((store: AppStateType) => store.article)
 
     // Component templates array
-    const tempCompsArr = useSelector((store: AppState) => store.article.tempComps)
+    const tempCompsArr = useSelector((store: AppStateType) => store.article.tempComps)
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
@@ -143,7 +143,7 @@
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component templates array
-    const {tempComps} = useSelector((store: AppState) => store.article)
+    const {tempComps} = useSelector((store: AppStateType) => store.article)
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: FilesTreeType.UuId) {
@@ -181,7 +181,7 @@
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component template array
-    const {tempComps} = useSelector((store: AppState) => store.article)
+    const {tempComps} = useSelector((store: AppStateType) => store.article)
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: FilesTreeType.UuId) {

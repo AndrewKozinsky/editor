@@ -1,9 +1,9 @@
 import FCType from "../FCType"
 
-/** Функция возвращает ссылку на элемент первого поля с ошибкой */
+/** The function returns a link with first field with error */
 export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
 
-    // Перебор всех полей чтобы найти поле с первой ошибкой
+    // Iterate all fields to find the first error
     for(let fieldName in fields) {
         const field = fields[fieldName]
 

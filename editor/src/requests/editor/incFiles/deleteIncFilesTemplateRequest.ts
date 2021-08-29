@@ -1,14 +1,14 @@
 // import {useFetch} from 'requests/reqFn/fetch'
 // import getApiUrl from 'requests/reqFn/apiUrls'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 
 // Функция удаляет шаблон подключаемых файлов
 /*export function useDeleteIncFilesTemplate() {
 
     // id выделенного шаблона, который нужно удалить
-    const { currentSiteId } = useSelector((store: AppState) => store.sites)
-    const { currentTemplateId } = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
+    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     // Параметры запроса
     const options = { method: 'DELETE'}

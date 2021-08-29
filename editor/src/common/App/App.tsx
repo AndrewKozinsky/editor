@@ -25,7 +25,6 @@ import './css/variables.scss'
 import './css/default.scss'
 import './css/app.scss'
 
-
 /** Компонент всего приложения */
 export default function App() {
     // TODO Figure out why the types from Store are not detected.

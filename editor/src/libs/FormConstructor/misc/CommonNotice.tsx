@@ -8,7 +8,7 @@ type NoticePropType = {
     text?: string | ReactElement // Текст ошибки
 }
 
-/** Компонент общей ошибки формы входа пользователя */
+/** Common error component */
 export default function CommonNotice(props: NoticePropType) {
     const { type, text } = props
 

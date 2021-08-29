@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+import { AppStateType } from 'src/store/rootReducer'
 // @ts-ignore
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeCN } from 'src/utils/StringUtils'
@@ -10,7 +10,8 @@ import { makeCN } from 'src/utils/StringUtils'
 export function useGetAppClasses() {
 
     // Получение текущей темы интерфейса
-    const { editorTheme, entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
+    const { editorTheme, entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
+
     const [classes, setClasses] = useState<string[]>([])
 
     useEffect(function() {
@@ -34,7 +35,7 @@ export function useRedirectPage() {
     let location = useLocation()
 
     // Статус токена авторизации пользователя. Значения: 0, 1 или 2.
-    const { authTokenStatus } = useSelector((store: AppState) => store.user)
+    const { authTokenStatus } = useSelector((store: AppStateType) => store.user)
 
     // При изменении authTokenStatus или адреса страницы...
     useEffect(function () {

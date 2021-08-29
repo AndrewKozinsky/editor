@@ -2,10 +2,10 @@ import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
-import { AppState } from 'src/store/rootReducer'
+import { AppStateType } from 'src/store/rootReducer'
 import actions from 'src/store/rootAction';
 import { makeCN } from 'src/utils/StringUtils'
-import store from 'src/store/store'
+import { store } from 'src/store/rootReducer'
 
 
 /**
@@ -18,10 +18,10 @@ export function useGetWrapperClasses() {
     const CN = 'entrance-pages-wrapper'
 
     // Статус токена авторизации
-    const { authTokenStatus } = useSelector((store: AppState) => store.user)
+    const { authTokenStatus } = useSelector((store: AppStateType) => store.user)
 
     // Какой компонент должен быть отрисован
-    const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
+    const { entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
 
     const [classes, setClasses] = useState<string[]>([CN])
     const [isVisible, setIsVisible] = useState(false)
@@ -69,7 +69,7 @@ export function useViewStateChanger() {
     const dispatch = useDispatch()
 
     // Предыдущий адрес
-    const { lastAddress } = useSelector((store: AppState) => store.settings)
+    const { lastAddress } = useSelector((store: AppStateType) => store.settings)
 
     let history = useHistory()
     const address = history.location.pathname // Текущий адрес виде /enter

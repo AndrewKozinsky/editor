@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+import { AppStateType } from 'src/store/rootReducer'
 import actions from '../../../store/rootAction'
 import { hasElemParentWithSelector } from '../../../utils/elementsUtils'
 
@@ -8,7 +8,7 @@ import { hasElemParentWithSelector } from '../../../utils/elementsUtils'
 /** Хук возращает статус нужно ли отрисовывать окно */
 export function useGetIsModalOpen() {
     // Открыто ли модальное окно и его содержимое
-    const { isOpen } = useSelector((store: AppState) => store.modal)
+    const { isOpen } = useSelector((store: AppStateType) => store.modal)
 
     // Должно ли модальное окно быть отрисовано
     const [isModalOpen, setIsModalOpen] = useState(isOpen)

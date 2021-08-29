@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
 import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
 import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
 import { userTabContentMessages } from 'messages/userTabContentMessages'
-import { editorTabContentMessages } from '../../../messages/editorTabContentMessages'
+import { editorTabContentMessages } from 'messages/editorTabContentMessages'
 import './RightPart-3.scss'
 
 
@@ -19,10 +19,10 @@ export default function RightPart3(props: RightPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
-    const lang: 'rus' | 'eng' = useSelector((store: AppState) => store.settings.editorLanguage)
+    const lang: 'rus' | 'eng' = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
     // Активная вкладка панели настроек
-    const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
+    const activeTab = useSelector((store: AppStateType) => store.settings.settingsPanelTab)
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState(<></>)

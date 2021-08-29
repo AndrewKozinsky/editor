@@ -6,15 +6,9 @@ import { getFieldGroupClasses } from './FieldGroup-func'
 import './FieldGroup.scss'
 
 
-/**
- * Компонент FieldGroup в зависимости от переданного объекта отрисовывает элементы поля ввода формы: текстовое поле, флаги, переключатели, выпадающий список.
- * Дополнительно разрешает противоречия в типах передаваемых данных. Везде в свойство value передаётся или строка или массив строк.
- * А сами компоненты ожидают строку. Поэтому FieldGroup переводит этот тип в строковый.
- * Если в value передаётся массив строк, то это обозначает
- */
-
 type InputDataType = { label: string | ReactElement, value: string }
 
+/** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
 export type FieldGroupPropType = {
     label?: string | ReactElement
     inputType: 'radio' | 'checkbox'
@@ -22,6 +16,7 @@ export type FieldGroupPropType = {
     inputsArr: InputDataType[]
     value: string[]
     gap?: 20 // Отступы между элементами внутри обёртки
+    vertical?: boolean // Are the inputs arranged vertically?
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
@@ -35,6 +30,7 @@ export default function FieldGroup(props: FieldGroupPropType) {
         inputsArr,
         value,
         gap,
+        vertical = false,
         disabled = false, // Заблокировано ли поле
         onChange,
         onBlur
@@ -48,7 +44,7 @@ export default function FieldGroup(props: FieldGroupPropType) {
     return (
         <>
             {$label}
-            <InputsWrapper gap={gap}>
+            <InputsWrapper gap={gap} vertical={vertical}>
                 {inputsArr.map((inputData, i) => {
 
                     const attrs = {
@@ -72,17 +68,19 @@ export default function FieldGroup(props: FieldGroupPropType) {
 
 export type InputsWrapperType = {
     gap: number,
+    vertical: boolean
     children: ReactNode
 }
 
 function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
+        vertical,
         children
     } = props
 
     // Классы обёртки
-    const cls = getFieldGroupClasses(gap)
+    const cls = getFieldGroupClasses(vertical, gap)
 
     return <div className={cls}>{children}</div>
 }

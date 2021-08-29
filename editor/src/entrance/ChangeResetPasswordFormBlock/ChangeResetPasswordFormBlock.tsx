@@ -1,6 +1,6 @@
 import React from 'react'
-import useGetMessages from '../../messages/fn/useGetMessages'
-import { regMenuMessages } from '../../messages/regMenuMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+import { regMenuMessages } from 'messages/regMenuMessages'
 // @ts-ignore
 import { useHistory } from 'react-router-dom'
 import Header from 'common/textBlocks/Header/Header'

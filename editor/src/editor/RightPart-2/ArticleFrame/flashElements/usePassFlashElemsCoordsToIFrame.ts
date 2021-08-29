@@ -1,6 +1,6 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import StoreArticleTypes from 'store/article/articleTypes'
 
 // Type with coordinates of a flashed element
@@ -19,7 +19,7 @@
 
 /** The hook gets coordinated of a flashed element from the Store and write its to <body> as a attribute */
 /*export function usePassFlashElemsCoordsToIFrame() {
-    const { $links, history, historyCurrentIdx } = useSelector((store: AppState) => store.article)
+    const { $links, history, historyCurrentIdx } = useSelector((store: AppStateType) => store.article)
 
     // Objects witch data is stored. I will update them if data from the Store is different
     const [hoverRectCoords, setHoverRectCoords] = useState(coordsInitialObj)

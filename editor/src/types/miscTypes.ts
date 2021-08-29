@@ -1,5 +1,5 @@
-import store from 'store/store'
-import { AppState } from 'store/rootReducer'
+import { store } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 
 export namespace MiscTypes {
     /** Тип объекта со строковыми ключами с любым значением */
@@ -18,5 +18,5 @@ export namespace MiscTypes {
     // export type AppDispatch = typeof store.dispatch
 
     /** Тип аргумента getState для Redux Thunk */
-    // export type GetState = () => AppState
+    // export type GetState = () => AppStateType
 }

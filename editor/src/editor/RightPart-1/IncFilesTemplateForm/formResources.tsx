@@ -1,9 +1,9 @@
 // @ts-ignore
 // import * as yup from 'yup'
 // import {useSelector} from 'react-redux'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
 // import createIncFilesTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/incFiles/createIncFilesTemplateRequest'

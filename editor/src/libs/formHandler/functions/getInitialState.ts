@@ -3,7 +3,7 @@
 
 /**
  * Функция создаёт первоначальный объект Состояния формы
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formConfig — outer configure object
  */
 /*export default function getInitialState(formConfig: FHTypes.FormConfig): FHTypes.FormState {
 

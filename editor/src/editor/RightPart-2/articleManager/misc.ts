@@ -2,7 +2,7 @@
 // import {updateArticleCodeRequest} from 'requests/editor/article/updateArticleRequest'
 // import StoreArticleTypes from 'store/article/articleTypes'
 // import actions from 'store/rootAction'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import articleManager from './articleManager'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 // import deleteArticleRequest from '../../../requests/editor/article/deleteArticleRequest'

@@ -2,15 +2,15 @@ import FCType from '../FCType'
 
 
 /**
- *
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * THe function composes fields' initial values object for set it in state
+ * @param {Object} formConfig — outer configure object
  */
 export default function getInitialFieldsState(formConfig: FCType.Config): FCType.FieldsState {
 
-    // Данные о полях формы
+    // Fields data
     let fields: FCType.FieldsState = {}
 
-    // Проход по полям формы из объекта конфигурации для наполнения fields данными о полях
+    // Walk through form fields from a configuration object for filling fields with data.
     if (formConfig.fields) {
         Object.keys(formConfig.fields).forEach(fieldName => {
             const fieldConfig = formConfig.fields[fieldName]

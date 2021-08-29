@@ -1,19 +1,19 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import {AppState} from 'store/rootReducer'
+import { AppStateType, useAppSelector } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { themeSectionMessages } from '../../../messages/themeSectionMessages'
-import useGetMessages from '../../../messages/fn/useGetMessages'
+import { themeSectionMessages } from 'messages/themeSectionMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function ThemeSection() {
     const themeSectionMsg = useGetMessages(themeSectionMessages)
 
     // Тема интерфейса
-    const theme = useSelector((store: AppState) => store.settings.editorTheme)
+    const theme = useAppSelector(store => store.settings.editorTheme)
 
     const onChangeHandler = useGetOnChangeHandler()
 
@@ -25,6 +25,7 @@ export default function ThemeSection() {
                 groupName='theme'
                 value={[theme]}
                 gap={20}
+                vertical
                 onChange={onChangeHandler}
                 inputsArr={
                     [

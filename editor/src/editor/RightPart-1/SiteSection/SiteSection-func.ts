@@ -1,6 +1,6 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
@@ -16,7 +16,7 @@
  */
 /*export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего сайта и массив сайтов
-    const {currentSiteId, sites} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId, sites} = useSelector((store: AppStateType) => store.sites)
 
     useEffect(function () {
         if (!sites.length) return
@@ -75,7 +75,7 @@
 /** Функция возвращает текст и тип значка на кнопке отправки формы */
 /*export function useGetSubmitButtonText() {
     // id текущего сайта
-    const { currentSiteId } = useSelector((store: AppState) => store.sites)
+    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
     const [submitName, setSubmitName] = useState('')
     const [submitIconType, setSubmitIconType] = useState<ButtonIconType>('btnSignAdd')
 
@@ -103,7 +103,7 @@
  */
 /*export function useGetDeleteSiteVisibilityStatus() {
     // id текущего сайта
-    const { currentSiteId } = useSelector((store: AppState) => store.sites)
+    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(function () {
@@ -124,7 +124,7 @@
 /*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
 
     // Массив шаблонов подключаемых файлов
-    const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppState) => {
+    const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppStateType) => {
         return store.sites.incFilesTemplatesSection.templates
     })
 

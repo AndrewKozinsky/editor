@@ -5,22 +5,22 @@ import getReadyFieldsValues from '../misc/getReadyFieldsValues'
 import setErrorsToFields from '../state/setErrorsToFields'
 
 export default async function formSubmitHandler(
-    e: React.BaseSyntheticEvent,
-    fields: FCType.FieldsState,
-    setFields: FCType.SetFields,
-    submitCounter: number,
-    setSubmitCounter: FCType.SetSubmitCounter,
-    formConfig: FCType.Config,
-    setSubmitBtnDisabled: FCType.SetSubmitBtnDisabled,
-    setFormDisabled: FCType.SetFormDisabled,
-    setSubmitBtnLoading: FCType.SetSubmitBtnLoading,
-    setCommonError: FCType.SetCommonError,
-    setFormVisible: FCType.SetFormVisible,
-    setFormSentSuccessfully: FCType.SetFormSentSuccessfully,
-    outerFns: FCType.OuterFns,
-    commonSuccess: FCType.CommonSuccess,
-    showCommonSuccess: FCType.ShowCommonSuccess,
-    serverMsg: any
+    e: React.BaseSyntheticEvent, // Event object
+    fields: FCType.FieldsState, // Fields data from Store
+    setFields: FCType.SetFields, // Fields data setting function
+    submitCounter: number, // How many time form was submitted
+    setSubmitCounter: FCType.SetSubmitCounter, // Set submit counter setting function
+    formConfig: FCType.Config, // Outer configure object
+    setSubmitBtnDisabled: FCType.SetSubmitBtnDisabled, // Set submit button disabled setting function
+    setFormDisabled: FCType.SetFormDisabled, // Set form disabled setting function
+    setSubmitBtnLoading: FCType.SetSubmitBtnLoading, // Set submit button loading status function
+    setCommonError: FCType.SetCommonError, // Common error setting function
+    setFormVisible: FCType.SetFormVisible, // Set form visible setting function
+    setFormSentSuccessfully: FCType.SetFormSentSuccessfully, // Set form successfully sent setting function
+    outerFns: FCType.OuterFns, // User's functions passed to FormConstructor config
+    commonSuccess: FCType.CommonSuccess, // Success message
+    showCommonSuccess: FCType.ShowCommonSuccess, // Show success message setting function
+    serverMsg: any // Error message from a server response
 ): Promise<void> {
     e.preventDefault()
 
@@ -38,7 +38,7 @@ export default async function formSubmitHandler(
             // Первое поле, где есть ошибка
             let firstWrongFieldName = getFirstInvalidFieldName(fieldsCopy)
 
-            // Поставить фокус на первое поле где есть ошибка
+            // Set a focus to the first field with an error
             const $firstWrongField = document.querySelector(`[name="${firstWrongFieldName}"]`) as HTMLFormElement
             if ($firstWrongField) $firstWrongField.focus()
 
@@ -60,7 +60,7 @@ export default async function formSubmitHandler(
         ? await formConfig.requestFn(readyFieldValues, outerFns)
         : {status: 'success'}
 
-    // Разблокировать все поля. У кнопки отправки убрать загрузку
+    // Unlock all fields. Remove loading status from the submit button
     setFormDisabled(false)
     setSubmitBtnLoading(false)
 
@@ -72,12 +72,12 @@ export default async function formSubmitHandler(
 
         setFormSentSuccessfully(true)
     }
-    // Если ввели неправильные данные
+    // If user set wrong data
     else {
-        // Заблокировать кнопку отправки
+        // Lock submit button
         setSubmitBtnDisabled(true)
 
-        // Показать общее сообщение. Оно будет показано ниже формы
+        // Show common message. It will be shown below a form
         if (response.commonError) {
             setCommonError( serverMsg[response.commonError])
         }

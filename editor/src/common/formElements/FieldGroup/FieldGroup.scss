@@ -6,6 +6,11 @@ $CN: field-wrapper;
     grid-gap: 6px;
 }
 
+// If the inputs arranged vertically
+.#{$CN}--vertical {
+    display: flex;
+}
+
 // Класс дающий отступ между элементами обёртки
 .#{$CN}--gap20 {
     gap: 20px;

@@ -6,7 +6,7 @@
 
 /**
  * Обработчик изменения Состояния формы. Он запускает обработчики этого события описанные в полях
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formConfig — outer configure object
  * @param {Object} formState — состояние формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
@@ -35,7 +35,7 @@
 
 /**
  * Функция запускаемая при изменении Состояния формы
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formConfig — outer configure object
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  * @param {Function} setCanRunStateChangeHandler — функция устанавливающая можно ли запускать обработчик изменения Состояния

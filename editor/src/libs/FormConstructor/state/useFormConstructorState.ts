@@ -8,7 +8,11 @@ import { getInitialShowCommonSuccess, getInitialCommonSuccess } from './successf
 import { serverMessages } from 'messages/serverMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/**
+ *
+ * @param {Object} formConfig — configuration form object
+ * @param {Object} outerFns — user's functions passed to FormConstructor config
+ */
 export default function useFormConstructorState(formConfig: FCType.Config, outerFns: FCType.OuterFns = {}): FCType.StateFormReturn {
     const [fields, setFields] = useState<FCType.FieldsState>(getInitialFieldsState(formConfig))
     const updateField = useCallback((fieldName: string, newFieldData: FCType.StateFieldsObj) => {

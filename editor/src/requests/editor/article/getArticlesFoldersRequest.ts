@@ -1,5 +1,5 @@
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'src/store/rootReducer'
+// import {AppStateType} from 'src/store/rootReducer'
 // import { useFetch } from 'src/requests/reqFn/fetch'
 // import getApiUrl from 'src/requests/reqFn/apiUrls'
 
@@ -7,7 +7,7 @@
 // Функция удаляет сайт
 /*export function useGetArticlesFoldersRequest() {
     // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Параметры запроса
     const options = { method: 'GET'}

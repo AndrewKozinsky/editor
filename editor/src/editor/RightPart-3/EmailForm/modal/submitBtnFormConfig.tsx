@@ -3,7 +3,7 @@ import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import { changeEmailRequest } from 'src/requests/user/changeEmailRequest'
-import store from 'store/store'
+import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
 

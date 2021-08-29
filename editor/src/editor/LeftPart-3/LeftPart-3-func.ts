@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import store from 'store/store'
+import { store } from 'store/rootReducer'
 import { settingsPanelMessages } from 'messages/settingsPanelMessages'
-import useGetMessages from '../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
 export function useGetSettingsItemsListProps(): ItemsListPropType {
@@ -13,7 +13,7 @@ export function useGetSettingsItemsListProps(): ItemsListPropType {
     const settingsPanelMsg = useGetMessages(settingsPanelMessages)
 
     // Активная вкладка панели настроек
-    const activeTab = useSelector((store: AppState) => store.settings.settingsPanelTab)
+    const activeTab = useSelector((store: AppStateType) => store.settings.settingsPanelTab)
 
     // Сформировать и вернуть объект с атрибутами списка пунктов панели «Настройки»
     return {

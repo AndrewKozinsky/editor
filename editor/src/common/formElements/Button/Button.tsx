@@ -2,7 +2,7 @@ import React, { ReactElement, useRef } from 'react'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 import { getButtonClasses, useSetFocus } from './Button-func'
 import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
 import './Button.scss'
@@ -50,7 +50,7 @@ export default function Button(props: ButtonPropType) {
     const CN = 'btn'
 
     // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+    const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
     // Ссылка на элемент
     const buttonRef = useRef(null)

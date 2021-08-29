@@ -1,8 +1,8 @@
 // import {useEffect, useState} from 'react'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import { getElementPadding } from 'utils/domUtils'
 
 /**
@@ -10,7 +10,7 @@
  * They save information about component/element under cursor in Store
  */
 /*export function useSetMouseHandlersForFlashRects() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
     // Were mouse move handler set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 

@@ -1,5 +1,5 @@
 // import { ReactElement } from 'react'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 
 
 /*export type ObjType = {

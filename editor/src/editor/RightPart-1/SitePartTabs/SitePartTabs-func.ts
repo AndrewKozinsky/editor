@@ -1,7 +1,7 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
-// import store from 'store/store'
+// import {AppStateType} from 'store/rootReducer'
+// import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import {MainTabDataType} from 'editor/special/MainTab/MainTab'
 // import { rightTabsMessages } from 'messages/rightTabsMessages'
@@ -11,7 +11,7 @@
 /*export function useGetTabData(): MainTabDataType[] {
 
     // Текущая вкладка
-    const { rightMainTab, currentSiteId } = useSelector((store: AppState) => store.sites)
+    const { rightMainTab, currentSiteId } = useSelector((store: AppStateType) => store.sites)
 
     // Возвращаемые функцией данные по вкладкам
     const [tabsData, setTabsData] = useState<MainTabDataType[]>([])

@@ -4,7 +4,7 @@ import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import loginRequest from 'src/requests/user/loginRequest'
 import actions from 'src/store/rootAction'
-import store from 'src/store/store'
+import { store } from 'src/store/rootReducer'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 import userActions from '../../store/user/userActions'
 
@@ -88,3 +88,10 @@ function getConfig(commonMsg: any, enterFormMsg: any) {
 
 
 export default getConfig
+
+
+
+
+
+
+

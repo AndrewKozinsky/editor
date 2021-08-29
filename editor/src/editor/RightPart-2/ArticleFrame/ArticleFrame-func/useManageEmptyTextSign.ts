@@ -1,11 +1,11 @@
 // import {useEffect, useState} from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 
 
 /** Hook manages Empty text sign visibility */
 /*export function useManageEmptyTextSign() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
     // Did event handler has set?
     const [handlerHasSet, setHandlerHasSet] = useState(false)
 

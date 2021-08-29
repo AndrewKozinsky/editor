@@ -1,9 +1,9 @@
 // import {useEffect} from 'react'
 // import ReactDOM from 'react-dom'
 // import { useSelector } from 'react-redux'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 // import {MiscTypes} from 'types/miscTypes'
 // import {getFromLocalStorage} from 'utils/MiscUtils'
 // import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'
@@ -42,7 +42,7 @@
 
 /** Hook sets <div> in IFrame to put an article in */
 /*export function useSetRootDivToIFrame() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
 
     useEffect(function () {
         if (!$links.$body || history.length) return
@@ -54,7 +54,7 @@
 
 /** Hook sets article JSX to IFrame */
 /*export function useSetArticleToIFrame() {
-    const { $links, history, historyCurrentIdx, tempComps } = useSelector((store: AppState) => store.article)
+    const { $links, history, historyCurrentIdx, tempComps } = useSelector((store: AppStateType) => store.article)
 
     useEffect(function () {
         if (!$links.$body || !history.length) return

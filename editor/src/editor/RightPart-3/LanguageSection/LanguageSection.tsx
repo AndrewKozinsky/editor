@@ -1,16 +1,16 @@
 import React from 'react'
 import { useDispatch, useSelector} from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import {AppState} from 'store/rootReducer'
+import {AppStateType} from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { languageSectionMessages } from 'messages/languageSectionMessages'
-import useGetMessages from '../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function LanguageSection() {
 
     // Язык интерфейса
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+    const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
     // Обработчик выбора другого языка
     const onChangeHandler = useGetOnChangeHandler()

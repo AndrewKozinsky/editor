@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 // import actions from 'store/rootAction'
 // import {ItemsListPropType} from 'common/ItemsList/ItemsList'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 
 
@@ -23,7 +23,7 @@
     const dispatch = useDispatch()
 
     // id выбранного сайта
-    const {currentSiteId, sites} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId, sites} = useSelector((store: AppStateType) => store.sites)
 
     // Сформировать и вернуть объект с атрибутами списка пунктов
     return {

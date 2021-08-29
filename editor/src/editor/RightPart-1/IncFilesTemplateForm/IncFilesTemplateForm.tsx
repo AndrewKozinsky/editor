@@ -1,6 +1,6 @@
 // import React from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import useGetShowModal from 'utils/hooksUtils'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import TextInput from 'common/formElements/TextInput/TextInput'
@@ -84,7 +84,7 @@
 /** Кнопка удаления шаблона подключаемых файлов */
 /*function DeleteTemplateButton() {
     // id текущего шаблона
-    const { currentTemplateId } = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)

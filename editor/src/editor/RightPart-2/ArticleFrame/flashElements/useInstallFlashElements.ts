@@ -1,10 +1,10 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 
 /** The hooks sets flash rectangles into IFrame */
 /*export function useInstallFlashElements() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
 
     // Were flash elements installed?
     const [wereInstalled, setWereInstalled] = useState(false)

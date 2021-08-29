@@ -1,4 +1,4 @@
-// import store from 'src/store/store'
+// import { store } from 'src/store/rootReducer'
 // import {makeFetch} from 'src/requests/reqFn/fetch'
 // import getApiUrl from 'src/requests/reqFn/apiUrls'
 // import FilesTreeType from '../../../types/filesTree'

@@ -7,10 +7,10 @@ import { getMenuItems } from '../menuItems'
 import { regFormMessages } from 'src/messages/regFormMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useGetMessages from '../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 import getConfig from './formConfig'
-import { commonMessages } from '../../messages/commonMessages'
-import { regMenuMessages } from '../../messages/regMenuMessages'
+import { commonMessages } from 'messages/commonMessages'
+import { regMenuMessages } from 'messages/regMenuMessages'
 
 
 /** User Sign up form */

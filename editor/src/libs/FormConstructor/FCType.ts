@@ -61,9 +61,9 @@ namespace FCType {
 
     export type Response = ErrorServerResponseType | UserServerResponseType | {status: 'success'}
 
-    // Значения полей для отправки на сервер
+    // Fields' values for sending to the server
     export type ReadyFieldsValues = {
-        // Имя поля. Например email
+        // Field's name. email, for example
         [key: string]: string | string[]
     }
 
@@ -80,25 +80,23 @@ namespace FCType {
     export type SetFields = (fields: FieldsState) => void
 
     export type FieldsState = {
-        // Имя поля. Например email
+        // Field's name. email, for example
         [key: string]: StateFieldsObj
     }
 
     export type StateFieldsObj = {
-        // Значение поля.
+        // Field's value
         value: StateFieldValue
         type: FieldType
-        // Сколько значений может быть у поля: one (одно) или many (несколько). Это зависит от типа поля.
+        // How many values field has: one or many. It is depend on field's type.
         valueCount: ValueCount
         disabled: boolean,
         loading: boolean,
         error?: null | string
     }
 
-    // Значение поля
     export type StateFieldValue = string[]
     export type FieldType = 'text' | 'select' | 'checkbox' | 'radio' | 'button'
-    // Сколько значений может быть у поля: нисколько (кнопка), одно или несколько
     export type ValueCount = 'one' | 'many'
 
     export type UpdateField = ( fieldName: string, newFieldData: StateFieldsObj ) => void

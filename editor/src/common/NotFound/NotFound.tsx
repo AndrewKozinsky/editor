@@ -3,7 +3,7 @@ import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { makeCN } from 'utils/StringUtils'
 import { notFoundMessages } from 'src/messages/notFoundMessages'
-import useGetMessages from '../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 import './NotFound.scss'
 
 

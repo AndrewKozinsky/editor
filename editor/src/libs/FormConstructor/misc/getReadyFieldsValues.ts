@@ -1,6 +1,10 @@
 import FCType from "../FCType"
 
 
+/**
+ * The function returns ready fields values
+ * @param {Object} fields — fields data
+ */
 export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType.ReadyFieldsValues {
     let fieldsValuesSubmitObj: FCType.ReadyFieldsValues = {}
 

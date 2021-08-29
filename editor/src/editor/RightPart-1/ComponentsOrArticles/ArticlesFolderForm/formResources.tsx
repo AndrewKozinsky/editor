@@ -1,7 +1,7 @@
 // @ts-ignore
 // import * as yup from 'yup'
 // import FHTypes from 'libs/formHandler/types'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 // import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'

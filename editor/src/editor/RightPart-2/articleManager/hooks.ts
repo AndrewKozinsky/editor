@@ -1,5 +1,5 @@
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'src/store/rootReducer'
+// import {AppStateType} from 'src/store/rootReducer'
 // import {useEffect, useState} from 'react'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
@@ -13,7 +13,7 @@
 /** Hook returns current history item object */
 /*function useGetHistoryItem() {
     // Templates component from the Store
-    const { history, historyCurrentIdx } = useSelector((store: AppState) => store.article)
+    const { history, historyCurrentIdx } = useSelector((store: AppStateType) => store.article)
     const [currentItem, setCurrentItem] = useState<null | StoreArticleTypes.HistoryItem>(null)
 
     useEffect(function () {

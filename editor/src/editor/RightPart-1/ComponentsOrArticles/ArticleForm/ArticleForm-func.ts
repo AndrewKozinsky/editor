@@ -1,14 +1,14 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 
 
 /**
@@ -20,16 +20,16 @@
     const dispatch = useDispatch()
 
     // Все статьи и id текущего сайта
-    const sites: StoreSitesTypes.SitesType = useSelector((store: AppState) => store.sites.sites)
-    const currentSiteId = useSelector((store: AppState) => store.sites.currentSiteId)
+    const sites: StoreSitesTypes.SitesType = useSelector((store: AppStateType) => store.sites.sites)
+    const currentSiteId = useSelector((store: AppStateType) => store.sites.currentSiteId)
     // Текущий сайт
     const currentSite = sites.find(s => s.id === currentSiteId)
 
     // id текущей статьи
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Данные статьи
-    const {articlesSection} = useSelector((store: AppState) => store.sites)
+    const {articlesSection} = useSelector((store: AppStateType) => store.sites)
 
     // При выделении другой статьи...
     useEffect(function () {
@@ -97,7 +97,7 @@
  */
 /*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Массив шаблонов подключаемых файлов
-    const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
+    const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppStateType) => {
         return store.sites.incFilesTemplatesSection.templates
     })
 
@@ -153,9 +153,9 @@
 // Hook returns edit Article button onClick handler
 /*
 export function useGetEditArticleBtnHandler() {
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     return useCallback(function () {
         store.dispatch(actions.article.fillArticle(

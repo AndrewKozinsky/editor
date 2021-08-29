@@ -1,7 +1,7 @@
 // @ts-ignore
 // import * as yup from 'yup'
 // import FHTypes from 'libs/formHandler/types'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
 // import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'

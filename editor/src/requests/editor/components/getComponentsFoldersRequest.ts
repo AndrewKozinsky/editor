@@ -1,5 +1,5 @@
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'src/store/rootReducer'
+// import {AppStateType} from 'src/store/rootReducer'
 // import {makeFetch, useFetch} from 'src/requests/reqFn/fetch'
 // import getApiUrl from 'src/requests/reqFn/apiUrls'
 
@@ -8,7 +8,7 @@
 // I DON'T WANT TO USE REQUEST FUNCTIONS WITH SIDE EFFECTS
 /*export function useGetComponentsFoldersRequest() {
     // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Параметры запроса
     const options = { method: 'GET'}

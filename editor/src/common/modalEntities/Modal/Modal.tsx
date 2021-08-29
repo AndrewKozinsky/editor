@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'src/store/rootReducer'
+import { AppStateType } from 'src/store/rootReducer'
 import {
     useGetIsModalOpen,
     useGetModalCloseHandler
@@ -13,7 +13,7 @@ import './Modal.scss'
 export default function Modal() {
 
     // Содержимое модального окна
-    const { content } = useSelector((store: AppState) => store.modal)
+    const { content } = useSelector((store: AppStateType) => store.modal)
 
     // Обработчик закрытия модального окна
     const onModalClose = useGetModalCloseHandler()

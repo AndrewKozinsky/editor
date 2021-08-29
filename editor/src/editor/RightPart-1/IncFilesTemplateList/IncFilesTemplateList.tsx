@@ -1,6 +1,6 @@
 // import React from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import {MiscTypes} from 'types/miscTypes'
 // import Button from 'common/formElements/Button/Button'
 // import Wrapper from 'common/Wrapper/Wrapper'
@@ -16,7 +16,7 @@
 /** Компонент кнопки создания нового сайта */
 /*export function NewTemplateButton() {
     // id выделенного сайта
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewTemplateOnClickHandler()

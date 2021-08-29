@@ -1,11 +1,11 @@
 // import {useEffect, useState} from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame
 /*export function useSetUserScriptsAndStylesToIFrame() {
-    const { $links, incFiles, history } = useSelector((store: AppState) => store.article)
+    const { $links, incFiles, history } = useSelector((store: AppStateType) => store.article)
 
     // Were mouse move handler set?
     const [filesWereSet, setFilesWereSet] = useState(false)

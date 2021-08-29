@@ -1,6 +1,6 @@
 // import {useEffect, useState} from 'react'
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
@@ -15,7 +15,7 @@
  */
 /*export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего шаблона и массив шаблонов
-    const {currentTemplateId, templates} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
 
     useEffect(function () {
         // Найти шаблон с указанным id
@@ -73,7 +73,7 @@
 /*
 export function useGetSubmitButtonText() {
     // id текущего шаблона
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
     const [submitName, setSubmitName] = useState('')
     const [submitIconType, setSubmitIconType] = useState<ButtonIconType>('btnSignAdd')
 

@@ -7,10 +7,10 @@ services:
     container_name: editor-nginx
     depends_on:
       - editor
-      - nest_api
-      - postgres_db
+      - nest
+      - postgres
     ports:
-      - 80:80
+      - "80:80"
     volumes:
       - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
 
@@ -28,18 +28,18 @@ services:
       - ./editor/src:/app/src
 
   # API редактора (Nest)
-  nest_api:
+  nest:
     build:
       context: ./nestApi
       dockerfile: Dockerfile.dev
-    container_name: nest_api
+    container_name: editor-nest
     command: npm run start:dev
     restart: unless-stopped
     environment:
       - MODE=development
       - PORT=3002
     depends_on:
-      - postgres_db
+      - postgres
     volumes:
       - ./nestApi/src:/app/src
 
@@ -47,17 +47,17 @@ services:
   # BD: editor
   # User: editor
   # Password: dt52posQP00P
-  postgres_db:
+  postgres:
     image: postgres:13-alpine
-    container_name: postgres_db
+    container_name: editor-postgres
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: sguen35GPA
       POSTGRES_USER: postgres
       POSTGRES_DB: editor
     volumes:
-      - postgres_db:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
 
 
 volumes:
-  postgres_db:
+  postgres:

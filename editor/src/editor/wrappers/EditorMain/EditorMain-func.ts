@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 import { makeCN } from 'utils/StringUtils'
 
 
@@ -11,7 +11,7 @@ import { makeCN } from 'utils/StringUtils'
 export function useGetPageClasses(CN: string) {
 
     // Какой компонент должен быть отрисован
-    const { entryAndEditorViewState } = useSelector((store: AppState) => store.settings)
+    const { entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
 
     const [classes, setClasses] = useState<string[]>( getClasses(CN) )
     const [isVisible, setIsVisible] = useState(false)

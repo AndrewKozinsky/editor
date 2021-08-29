@@ -6,8 +6,8 @@ import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
-import useGetMessages from '../../messages/fn/useGetMessages'
-import { regMenuMessages } from '../../messages/regMenuMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+import { regMenuMessages } from 'messages/regMenuMessages'
 import {
     enterFormMessages,
 } from 'src/messages/enterFormMessages'
@@ -16,7 +16,7 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import getConfig from './formConfig'
 import Notice from 'common/textBlocks/Notice/Notice'
 import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
-import { commonMessages } from '../../messages/commonMessages'
+import { commonMessages } from 'messages/commonMessages'
 
 
 /** Форма входа в сервис */

@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
@@ -36,8 +36,8 @@
     const articlesItems = useStore(articlesTreeStore)
 
     // uuid выделенного компонента или статьи
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Функция удаляющая выделенный компонент или статью
     const deleteItem = useCallback(async function () {

@@ -1,12 +1,12 @@
 // import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import {useEffect} from 'react'
 
 
 // Hook cleans the iframe if an article was cleaned
 /*
 export function useCleanIFrame() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
 
     useEffect(function () {
         if (!$links.$body || history.length) return

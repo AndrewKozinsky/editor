@@ -3,7 +3,7 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import useGetMessages from '../../../messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 import getSubmitBtnFormConfig from './submitBtnFormConfig'
 
 

@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
@@ -20,7 +20,7 @@
     const componentsItems = useStore(componentsTreeStore)
 
     // id папки или компонента, который должнен быть выделен
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
 
     // Функция удаляющая выделенную папку
     const deleteFolder = useCallback(function () {

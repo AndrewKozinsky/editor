@@ -1,10 +1,10 @@
 import { ReactElement } from 'react'
 import { useSelector } from 'react-redux'
-import { AppState } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 
 
 export default function useGetMessages<T>(obj: T) {
-    const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+    const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
     type ObjNextType = {
         [K in keyof T]: string | ReactElement

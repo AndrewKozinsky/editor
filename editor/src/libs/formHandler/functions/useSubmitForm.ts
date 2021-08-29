@@ -11,7 +11,7 @@
 
 /**
  * Обработчик отправки формы
- * @param {Object} formConfig — конфигурацию формы переданная программистом
+ * @param {Object} formConfig — outer configure object
  * @param {Object} formState — объект Состояния формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */

@@ -1,5 +1,5 @@
 import actions from 'store/rootAction'
-import store from 'store/store'
+import { store } from 'store/rootReducer'
 import {
     checkPressedKeys,
     getPressedKeys,
