@@ -1,5 +1,5 @@
 You must get in Docker container first:
-docker exec -it nest_api sh
+docker exec -it editor-nest sh
 
 Drop the database:
 node --require ts-node/register ./node_modules/typeorm/cli.js schema:drop --config=src/ormconfig.ts
@@ -14,7 +14,7 @@ node --require ts-node/register ./node_modules/typeorm/cli.js migration:run --co
 
 // INSIDE POSTGRES DB
 Go to postgres container
-docker exec -it postgres_db sh
+docker exec -it editor-postgres sh
 
 Switch to postgres user
 su postgres

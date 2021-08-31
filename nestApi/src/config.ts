@@ -17,7 +17,7 @@ export const config = {
     // Адрес сервиса для ложных писем
     fakeEmailDomain: 'smtp.mailtrap.io',
     // Номер порта сервиса для ложных писем
-    fakeEmailPort: 25,
+    fakeEmailPort: 2525,
     // Имя пользователя сервиса для ложных писем
     fakeEmailUsername: 'd025be73c2e110',
     // Пароль пользователя сервиса для ложных писем

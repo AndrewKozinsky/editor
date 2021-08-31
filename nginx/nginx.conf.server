@@ -9,7 +9,7 @@ http {
         server_name editorium.net www.editorium.net;
 
         location /api2 {
-            proxy_pass http://nest_api:3002;
+            proxy_pass http://nest:3002;
             rewrite ^\/api2\/(.*) /$1 break;
         }
 
