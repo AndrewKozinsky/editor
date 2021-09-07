@@ -6,7 +6,6 @@ http {
     server {
         listen 80;
         server_name editorium.local;
-        root /sites;
 
         location /api2 {
             proxy_pass http://nest:3002;

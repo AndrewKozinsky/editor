@@ -6,7 +6,6 @@ COPY package*.json ./
 # Поставить сервер
 RUN npm install && npm install -g serve
 
-# Скопировать все остальные файлы
 COPY . .
 
 # Скопировать файл serve.json
