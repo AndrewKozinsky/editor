@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import regRequest from 'src/requests/user/regRequest'
+// import * as yup from 'yup'
+// import FCType from 'libs/FormConstructor/FCType'
+// import regRequest from 'src/requests/user/regRequest'
 
 
-function getConfig(commonMsg: any, regFormMsg: any) {
+/*function getConfig(commonMsg: any, regFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -69,7 +69,7 @@ function getConfig(commonMsg: any, regFormMsg: any) {
     }
 
     return config
-}
+}*/
 
 
-export default getConfig
+// export default getConfig

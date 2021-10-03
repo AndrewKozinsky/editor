@@ -1,5 +1,6 @@
 
 // Секция «Изменение пароля»
+/*
 export const changePasswordSectionMessages = {
     header: {
         eng: 'Change password',
@@ -29,12 +30,12 @@ export const changePasswordSectionMessages = {
         eng: 'Password has changed.',
         rus: 'Пароль изменён.'
     },
-    /*cancelBtn: {
+    /!*cancelBtn: {
         eng: 'Cancel',
         rus: 'Отменить'
-    },*/
-    /*changeBtn: {
+    },*!/
+    /!*changeBtn: {
         eng: 'Delete',
         rus: 'Удалить'
-    },*/
-}
+    },*!/
+}*/

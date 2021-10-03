@@ -1,26 +1,26 @@
-import { ReactNode } from 'react'
-import Logo from '../icons/logo'
-import NoticeError from '../icons/NoticeError'
-import NoticeInfo from '../icons/NoticeInfo'
-import NoticeSuccess from '../icons/NoticeSuccess'
-import ErrorTriangle from '../icons/errorTriangle'
+// import { ReactNode } from 'react'
+// import Logo from '../icons/logo'
+// import NoticeError from '../icons/NoticeError'
+// import NoticeInfo from '../icons/NoticeInfo'
+// import NoticeSuccess from '../icons/NoticeSuccess'
+// import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
 // import SelectInputArrows from '../icons/selectInputArrows'
-import MainTabMaterials from '../icons/mainTabMaterials'
-import MainTabEditor from '../icons/mainTabEditor'
-import MainTabSettings from '../icons/mainTabSettings'
-import MainTabHelp from '../icons/mainTabHelp'
-import MainTabRoundScion from '../icons/mainTabRoundScion'
+// import MainTabMaterials from '../icons/mainTabMaterials'
+// import MainTabEditor from '../icons/mainTabEditor'
+// import MainTabSettings from '../icons/mainTabSettings'
+// import MainTabHelp from '../icons/mainTabHelp'
+// import MainTabRoundScion from '../icons/mainTabRoundScion'
 // import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
-import BtnSignTrash from '../icons/btnSignTrash'
+// import BtnSignTrash from '../icons/btnSignTrash'
 // import BtnSignAdd from '../icons/btnSignAdd'
 // import BtnSignCode from '../icons/btnSignCode'
 // import BtnSignJson from '../icons/btnSignJson'
-import BtnSignClose from '../icons/btnSignClose'
-import BtnSignExit from '../icons/btnSignExit';
-import EditorLightTheme from '../icons/editorLightTheme'
-import EditorDarkTheme from '../icons/editorDarkTheme'
+// import BtnSignClose from '../icons/btnSignClose'
+// import BtnSignExit from '../icons/btnSignExit';
+// import EditorLightTheme from '../icons/editorLightTheme'
+// import EditorDarkTheme from '../icons/editorDarkTheme'
 // import SiteTabSite from '../icons/siteTabSite'
 // import SiteTabPlugins from '../icons/siteTabPlugins'
 // import SiteTabArticle from '../icons/siteTabArticle'
@@ -44,7 +44,7 @@ import EditorDarkTheme from '../icons/editorDarkTheme'
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
  * @param {String} type — тип значка.
  */
-export function getIcon(type: string): ReactNode {
+/*export function getIcon(type: string): ReactNode {
 
     type componentsType = {
         [key: string]: ReactNode
@@ -52,10 +52,10 @@ export function getIcon(type: string): ReactNode {
 
     const components: componentsType = {
         // Логотип редактора
-        logo: Logo,
+        // logo: Logo,
 
         // Значёк ошибки
-        errorTriangle: ErrorTriangle,
+        // errorTriangle: ErrorTriangle,
 
         // Значёк успеха
         // successCircle: SuccessCircle,
@@ -64,10 +64,10 @@ export function getIcon(type: string): ReactNode {
         // selectInputArrows: SelectInputArrows,
 
         // Значки главных вкладок
-        mainTabMaterials: MainTabMaterials,
-        mainTabEditor: MainTabEditor,
-        mainTabSettings: MainTabSettings,
-        mainTabHelp: MainTabHelp,
+        // mainTabMaterials: MainTabMaterials,
+        // mainTabEditor: MainTabEditor,
+        // mainTabSettings: MainTabSettings,
+        // mainTabHelp: MainTabHelp,
 
         // Значки на вкладках сайта
         // siteTabSite: SiteTabSite,
@@ -76,25 +76,25 @@ export function getIcon(type: string): ReactNode {
         // siteTabArticle: SiteTabArticle,
 
         // Закругляемая часть в кнопки вкладки
-        mainTabRoundScion: MainTabRoundScion,
+        // mainTabRoundScion: MainTabRoundScion,
 
         // Значки на кнопках
         // btnSignSave: BtnSignSave,
         // btnSignFolder: BtnSignFolder,
-        btnSignTrash: BtnSignTrash,
+        // btnSignTrash: BtnSignTrash,
         // btnSignCode: BtnSignCode,
         // btnSignAdd: BtnSignAdd,
         // btnSignJson: BtnSignJson,
-        btnSignClose: BtnSignClose,
-        btnSignExit: BtnSignExit,
+        // btnSignClose: BtnSignClose,
+        // btnSignExit: BtnSignExit,
         // btnSignEdit: BtnSignEdit,
         // btnSignUndo: BtnSignUndo,
         // btnSignRedo: BtnSignRedo,
         // btnSignCancel: BtnSignCancel,
 
         // Тема интерфейса
-        editorLightTheme: EditorLightTheme,
-        editorDarkTheme: EditorDarkTheme,
+        // editorLightTheme: EditorLightTheme,
+        // editorDarkTheme: EditorDarkTheme,
 
         // Значки на FilesTree
         // filesTreeTriangle: FilesTreeTriangle,
@@ -114,10 +114,10 @@ export function getIcon(type: string): ReactNode {
         // articleMenu: ArticleMenu,
 
         // Значки в Notice
-        noticeInfo: NoticeInfo,
-        noticeError: NoticeError,
-        noticeSuccess: NoticeSuccess,
+        // noticeInfo: NoticeInfo,
+        // noticeError: NoticeError,
+        // noticeSuccess: NoticeSuccess,
     }
 
     return components[type]
-}
+}*/

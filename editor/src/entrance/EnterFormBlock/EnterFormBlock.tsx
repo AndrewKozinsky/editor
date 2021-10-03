@@ -1,26 +1,26 @@
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Button from 'common/formElements/Button/Button'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { getMenuItems } from '../menuItems'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
-import {
-    enterFormMessages,
-} from 'src/messages/enterFormMessages'
-import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import getConfig from './formConfig'
-import Notice from 'common/textBlocks/Notice/Notice'
-import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
-import { commonMessages } from 'messages/commonMessages'
+// import { useHistory } from 'react-router-dom'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Button from 'common/formElements/Button/Button'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { getMenuItems } from '../menuItems'
+// import useGetMessages from 'messages/fn/useGetMessages'
+// import { regMenuMessages } from 'messages/regMenuMessages'
+// import {
+//     enterFormMessages,
+// } from 'src/messages/enterFormMessages'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+// import getConfig from './formConfig'
+// import Notice from 'common/textBlocks/Notice/Notice'
+// import { useGetSendConfirmLetter } from 'src/requests/user/sendConfirmLetterRequest'
+// import { commonMessages } from 'messages/commonMessages'
 
 
 /** Форма входа в сервис */
-export default function EnterFormBlock() {
+/*export default function EnterFormBlock() {
     const history = useHistory()
     const commonMsg = useGetMessages(commonMessages)
     const enterFormMsg = useGetMessages(enterFormMessages)
@@ -42,15 +42,15 @@ export default function EnterFormBlock() {
             {showConfirmEmailMessage && <ConfirmLetterMessage email={formState.fields.email.value[0]} />}
         </div>
     )
-}
+}*/
 
 
-type ConfirmLetterMessagePropType = {
+/*type ConfirmLetterMessagePropType = {
     email: string // Почта пользователя, которую нужно подтвердить
-}
+}*/
 
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
-function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
+/*function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     const { email } = props
     const commonMsg = useGetMessages(commonMessages)
     const enterFormMsg = useGetMessages(enterFormMessages)
@@ -82,4 +82,4 @@ function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
             </Wrapper>}
         </>
     )
-}
+}*/

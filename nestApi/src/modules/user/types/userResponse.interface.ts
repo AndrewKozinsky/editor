@@ -1,6 +1,6 @@
-import MiscTypes from "src/types/miscTypes"
+// import MiscTypes from "src/types/miscTypes"
 
-export interface UserResponseInterface {
+/*export interface UserResponseInterface {
     status: 'success',
     statusCode: number,
     data: {
@@ -12,4 +12,4 @@ export interface UserResponseInterface {
             token: string
         }
     }
-}
+}*/

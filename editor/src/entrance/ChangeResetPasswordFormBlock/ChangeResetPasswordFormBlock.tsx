@@ -1,23 +1,23 @@
-import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
+// import React from 'react'
+// import useGetMessages from 'messages/fn/useGetMessages'
+// import { regMenuMessages } from 'messages/regMenuMessages'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { getMenuItems } from '../menuItems'
-import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
-import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import Notice from 'common/textBlocks/Notice/Notice'
-import Button from 'common/formElements/Button/Button'
-import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-import getConfig from './formConfig'
+// import { useHistory } from 'react-router-dom'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { getMenuItems } from '../menuItems'
+// import { changeResetPasswordFormMessages } from 'src/messages/changeResetPasswordFormMessages'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+// import Notice from 'common/textBlocks/Notice/Notice'
+// import Button from 'common/formElements/Button/Button'
+// import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+// import getConfig from './formConfig'
 
 
 /** Форма входа в сервис */
-export default function ChangeResetPasswordFormBlock() {
+/*export default function ChangeResetPasswordFormBlock() {
     const changeResetPasswordFormMsg = useGetMessages(changeResetPasswordFormMessages)
     const regMenuMsg = useGetMessages(regMenuMessages)
     const config = getConfig(changeResetPasswordFormMsg)
@@ -35,11 +35,11 @@ export default function ChangeResetPasswordFormBlock() {
             {formState.formSentSuccessfully && <PasswordChangedMessage />}
         </div>
     )
-}
+}*/
 
 
 /** Сообщение об изменённом пароле */
-function PasswordChangedMessage() {
+/*function PasswordChangedMessage() {
     let history = useHistory()
     const changeResetPasswordFormMsg = useGetMessages(changeResetPasswordFormMessages)
 
@@ -63,4 +63,4 @@ function PasswordChangedMessage() {
             </Wrapper>
         </Notice>
     )
-}
+}*/

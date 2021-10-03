@@ -1,4 +1,4 @@
-import FCType from "../FCType"
+// import FCType from "../FCType"
 
 /**
  * The function gets new field data and set it in fields object, then refresh Fields state
@@ -7,7 +7,7 @@ import FCType from "../FCType"
  * @param {String} fieldName — the field name I want to replace data with
  * @param {Object} newFieldData — the new field data
  */
-export default function updateFieldFn(
+/*export default function updateFieldFn(
     fields: FCType.FieldsState,
     setFields: FCType.SetFields,
     fieldName: string,
@@ -16,4 +16,4 @@ export default function updateFieldFn(
     const fieldsCopy = {...fields}
     fieldsCopy[fieldName] = newFieldData
     setFields( fieldsCopy )
-}
+}*/

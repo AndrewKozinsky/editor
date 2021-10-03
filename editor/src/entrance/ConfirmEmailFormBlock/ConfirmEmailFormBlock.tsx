@@ -1,20 +1,20 @@
-import React from 'react'
+// import React from 'react'
 // @ts-ignore
-import { useHistory } from 'react-router-dom'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { getMenuItems } from '../menuItems'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
-import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
-import getConfig from './formConfig'
-import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+// import { useHistory } from 'react-router-dom'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { getMenuItems } from '../menuItems'
+// import useGetMessages from 'messages/fn/useGetMessages'
+// import { regMenuMessages } from 'messages/regMenuMessages'
+// import { confirmEmailMessages } from 'src/messages/confirmEmailMessages'
+// import getConfig from './formConfig'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 
 
 /** Форма подтверждения почты */
-export default function ConfirmEmailFormBlock() {
+/*export default function ConfirmEmailFormBlock() {
     const history = useHistory()
 
     const confirmEmailMsg = useGetMessages(confirmEmailMessages)
@@ -33,4 +33,4 @@ export default function ConfirmEmailFormBlock() {
             <FormConstructor config={config} state={formState} />
         </div>
     )
-}
+}*/

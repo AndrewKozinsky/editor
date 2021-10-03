@@ -1,12 +1,12 @@
-import { makeFetch, useFetch } from 'requests/reqFn/fetch'
-import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from '../errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
-import { LoginRequestValuesType } from './loginRequest'
+// import { makeFetch, useFetch } from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import ErrorServerResponseType from '../errorServerResponseType'
+// import UserServerResponseType from './userServerResponseType'
+// import { LoginRequestValuesType } from './loginRequest'
 
 
 // Функция меняет почту, на которую зарегистрирована учётная запись пользователя
-export function useChangeEmailRequest(newEmail: string) {
+/*export function useChangeEmailRequest(newEmail: string) {
 
     // Параметры запроса
     const options = { method: 'PATCH', body: JSON.stringify({email: newEmail})}
@@ -16,9 +16,9 @@ export function useChangeEmailRequest(newEmail: string) {
         useFetch<ChangeEmailServerResponse>(getApiUrl('changeEmail'), options)
 
     return { response, doFetch }
-}
+}*/
 
-export async function changeEmailRequest(newEmail: string) {
+/*export async function changeEmailRequest(newEmail: string) {
     const options = {
         method: 'PATCH',
         body: JSON.stringify({ email: newEmail })
@@ -26,8 +26,8 @@ export async function changeEmailRequest(newEmail: string) {
     const response: ChangeEmailServerResponse = await makeFetch(getApiUrl('changeEmail'), options)
 
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type ChangeEmailServerResponse = ErrorServerResponseType | UserServerResponseType
+// type ChangeEmailServerResponse = ErrorServerResponseType | UserServerResponseType

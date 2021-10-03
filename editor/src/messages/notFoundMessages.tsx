@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 
 // Страница Not Found
-export const notFoundMessages = {
+/*export const notFoundMessages = {
     header: {
         eng: <>Page not found</>,
         rus: <>Страница не найдена</>
@@ -17,4 +17,4 @@ export const notFoundMessages = {
         eng: <>Or go to <Link to='/'>the editor page</Link>.</>,
         rus: <>Или перейдите на <Link to='/'>страницу редактора</Link>.</>
     },
-}
+}*/

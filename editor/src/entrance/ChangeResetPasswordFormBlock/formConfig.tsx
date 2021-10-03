@@ -1,11 +1,11 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import { commonMessages } from 'messages/commonMessages'
-import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
+// import * as yup from 'yup'
+// import FCType from 'libs/FormConstructor/FCType'
+// import { commonMessages } from 'messages/commonMessages'
+// import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
 
-function getConfig(changeResetPasswordFormMsg: any) {
+/*function getConfig(changeResetPasswordFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             token: {
@@ -67,6 +67,6 @@ function getConfig(changeResetPasswordFormMsg: any) {
     }
 
     return config
-}
+}*/
 
-export default getConfig
+// export default getConfig

@@ -1,6 +1,6 @@
-import StoreUserTypes from './userTypes'
+// import StoreUserTypes from './userTypes'
 
-const userActions = {
+/*const userActions = {
     // Установка статуса токена авторизации пользователя
     setAuthTokenStatus(payload: StoreUserTypes.AuthTokenStatusType): StoreUserTypes.SetAuthTokenStatusActionType {
         return {
@@ -16,6 +16,6 @@ const userActions = {
             payload,
         }
     }
-}
+}*/
 
-export default userActions
+// export default userActions

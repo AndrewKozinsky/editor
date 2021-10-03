@@ -1,9 +1,9 @@
-import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
-import { smoothMoveToEntrance } from '../../../entrance/EntrancePages/EntrancePages-func'
+// import { useDispatch } from 'react-redux'
+// import actions from 'store/rootAction'
+// import { smoothMoveToEntrance } from '../../../entrance/EntrancePages/EntrancePages-func'
 
 // Хук возвращает функцию выводящую пользователя из учётной записи
-export default function useGetLogOut() {
+/*export default function useGetLogOut() {
     const dispatch = useDispatch()
 
     return function () {
@@ -20,4 +20,4 @@ export default function useGetLogOut() {
             }, 600)
         }, 1000)
     }
-}
+}*/

@@ -1,6 +1,6 @@
 // import { ReactElement } from 'react'
-import { useDispatch } from 'react-redux'
-import actions from '../store/rootAction'
+// import { useDispatch } from 'react-redux'
+// import actions from '../store/rootAction'
 
 
 /** Хук возвращает функцию открывающую модальное окно */
@@ -18,9 +18,9 @@ import actions from '../store/rootAction'
  * @param {String} propName — имя свойства
  * @param {String} value — значение свойства
  */
-export function setInLocalStorage(propName: string, value: any) {
+/*export function setInLocalStorage(propName: string, value: any) {
     localStorage.setItem(propName, JSON.stringify(value))
-}
+}*/
 
 /**
  * Получение из localStorage данных предварительно пропущенных через JSON.parse
@@ -28,20 +28,20 @@ export function setInLocalStorage(propName: string, value: any) {
  * @param {String} defaultValue — значение по умолчанию, которое будет возвращено
  * если в localStorage у запрашиваемого свойства нет значения.
  */
-export function getFromLocalStorage(propName: string, defaultValue?: any) {
+/*export function getFromLocalStorage(propName: string, defaultValue?: any) {
     let value = localStorage.getItem(propName)
     if (!value && defaultValue !== undefined) return defaultValue
 
     return JSON.parse(value)
-}
+}*/
 
 /**
  * Удаление данных из localStorage
  * @param {String} propName — имя свойства
  */
-export function removeFromLocalStorage(propName: string) {
+/*export function removeFromLocalStorage(propName: string) {
     localStorage.removeItem(propName)
-}
+}*/
 
 /**
  * The function create deep copy of object or array

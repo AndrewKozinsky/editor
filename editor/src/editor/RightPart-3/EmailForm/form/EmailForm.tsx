@@ -1,13 +1,13 @@
-import React from 'react'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import { useUpdateEmailInForm } from './useUpdateEmailInForm'
-import { userDataSectionMessages } from 'src/messages/userDataSectionMessages'
-import getConfig from './formConfig'
-import useGetMessages from 'messages/fn/useGetMessages'
+// import React from 'react'
+// import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
+// import { useUpdateEmailInForm } from './useUpdateEmailInForm'
+// import { userDataSectionMessages } from 'src/messages/userDataSectionMessages'
+// import getConfig from './formConfig'
+// import useGetMessages from 'messages/fn/useGetMessages'
 
 
-export default function EmailForm() {
+/*export default function EmailForm() {
     const userDataSectionMsg = useGetMessages(userDataSectionMessages)
     const formConfig = getConfig(userDataSectionMsg)
 
@@ -17,4 +17,4 @@ export default function EmailForm() {
     useUpdateEmailInForm(formState)
 
     return <FormConstructor config={formConfig} state={formState} />
-}
+}*/

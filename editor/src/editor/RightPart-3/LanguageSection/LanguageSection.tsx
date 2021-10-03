@@ -1,13 +1,13 @@
-import React from 'react'
-import { useDispatch, useSelector} from 'react-redux'
-import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import {AppStateType} from 'store/rootReducer'
-import actions from 'store/rootAction'
-import { languageSectionMessages } from 'messages/languageSectionMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+// import React from 'react'
+// import { useDispatch, useSelector} from 'react-redux'
+// import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+// import {AppStateType} from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import { languageSectionMessages } from 'messages/languageSectionMessages'
+// import useGetMessages from 'messages/fn/useGetMessages'
 
 
-export default function LanguageSection() {
+/*export default function LanguageSection() {
 
     // Язык интерфейса
     const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
@@ -32,10 +32,10 @@ export default function LanguageSection() {
             }
         />
     )
-}
+}*/
 
 /** Хук возвращает функцию-обработчик выбора другого языка */
-function useGetOnChangeHandler() {
+/*function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 
     return function (e: React.BaseSyntheticEvent) {
@@ -43,4 +43,4 @@ function useGetOnChangeHandler() {
 
         dispatch(actions.settings.setEditorLanguage(value))
     }
-}
+}*/

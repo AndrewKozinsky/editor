@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { AppStateType } from 'store/rootReducer'
-import { store } from 'store/rootReducer'
+// import { useEffect, useState } from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppStateType } from 'store/rootReducer'
+// import { store } from 'store/rootReducer'
 
 
 // Тип параметров запроса
-type OptionsType = {
+/*type OptionsType = {
     // Request method
     method: string,
     // Additional headers
     headers?: {[key: string]: string},
     // What is it need for?
     // [key: string]: undefined | string | {}
-}
+}*/
 
 /** Хук загружающий данные с сервера
  * @param {String} url — строка c адресом запроса
  * @param {Object} options — параметры запроса
  */
-export function useFetch<T>(url: string, options: OptionsType) {
+/*export function useFetch<T>(url: string, options: OptionsType) {
 
     // Идёт ли сейчас загрузка
     const [isLoading, setIsLoading] = useState(false)
@@ -64,13 +64,13 @@ export function useFetch<T>(url: string, options: OptionsType) {
         error,
         doFetch
     }
-}
+}*/
 
 /** Функция загружающая данные с сервера
  * @param {String} url — строка c адресом запроса
  * @param {Object} options — параметры запроса
  */
-export async function makeFetch(url: string, options: OptionsType) {
+/*export async function makeFetch(url: string, options: OptionsType) {
     const lang = store.getState().settings.editorLanguage
 
     // Добавление заголовка языка интерфейса в параметры запроса
@@ -85,14 +85,14 @@ export async function makeFetch(url: string, options: OptionsType) {
         if (lang === 'rus') message = 'Не удалось получить данные.'
         throw new Error(message)
     }
-}
+}*/
 
 /**
  * Функция добавляет в объект параметров запроса заголовок Editor-Language с языком
  * @param {Object} optionsObj — объект параметров запроса
  * @param {String} lang — язык интерфейса пользователя
  */
-function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
+/*function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
     return {
         ...optionsObj,
         headers: {
@@ -102,4 +102,4 @@ function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
             'Editor-Language': lang
         }
     }
-}
+}*/

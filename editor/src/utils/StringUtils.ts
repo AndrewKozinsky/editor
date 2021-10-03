@@ -5,14 +5,14 @@
  * строку разделённую пробелами для формирования классов CSS.
  * @param {Array} classesArr
  */
-export function makeCN(classesArr: string[]) {
+/*export function makeCN(classesArr: string[]) {
     // Сформировать новый массив классов без пустых значений
     const filteredClassesArr = classesArr.filter(cls => {
         return (cls && cls !== '')
     })
 
     return filteredClassesArr.join(' ')
-}
+}*/
 
 /*export function getCN(CN: string): any {
     const classObject = {cls: CN}
@@ -41,18 +41,18 @@ export function makeCN(classesArr: string[]) {
 
 
 /** Функция возвращает случайный идентификатор */
-export function getRandomId() {
+/*export function getRandomId() {
     const randomNum = Math.random() * 100000
     return 'id' + Math.round(randomNum)
-}
+}*/
 
 /**
  * Функция принимает почту и возвращает домен
  * @param {String} email — почта
  */
-export function getDomainFromEmail(email: string) {
+/*export function getDomainFromEmail(email: string) {
     return email.split('@')[1]
-}
+}*/
 
 
 /**

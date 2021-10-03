@@ -1,11 +1,11 @@
-import FCType from '../FCType'
+// import FCType from '../FCType'
 
 /**
  * The function checks fields and set error if it is invalid
  * @param {Object} fields — fields data from Store
  * @param {Object} config — configuration form object
  */
-export default function setErrorsToFields(
+/*export default function setErrorsToFields(
     fields: FCType.FieldsState,
     config: FCType.Config,
 ) {
@@ -45,4 +45,4 @@ export default function setErrorsToFields(
         fieldsCopy,
         isFormValid
     }
-}
+}*/

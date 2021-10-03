@@ -1,11 +1,11 @@
-import FCType from '../FCType'
+// import FCType from '../FCType'
 
 
 /**
  * THe function composes fields' initial values object for set it in state
  * @param {Object} formConfig — outer configure object
  */
-export default function getInitialFieldsState(formConfig: FCType.Config): FCType.FieldsState {
+/*export default function getInitialFieldsState(formConfig: FCType.Config): FCType.FieldsState {
 
     // Fields data
     let fields: FCType.FieldsState = {}
@@ -32,9 +32,9 @@ export default function getInitialFieldsState(formConfig: FCType.Config): FCType
     }
 
     return fields
-}
+}*/
 
-function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
+/*function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
     if (fieldConfig.fieldType === 'text') {
         return 'text'
     }
@@ -47,13 +47,13 @@ function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
     else if (fieldConfig.fieldType === 'select') {
         return 'select'
     }
-}
+}*/
 
-function getValueCount(fieldConfig: FCType.ConfigField): FCType.ValueCount {
+/*function getValueCount(fieldConfig: FCType.ConfigField): FCType.ValueCount {
     if (fieldConfig.fieldType === 'checkboxes') {
         return 'many'
     }
     else {
         return 'one'
     }
-}
+}*/

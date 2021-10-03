@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { AppStateType } from 'store/rootReducer'
-import { makeCN } from 'utils/StringUtils'
+// import { useEffect, useState } from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppStateType } from 'store/rootReducer'
+// import { makeCN } from 'utils/StringUtils'
 
 
 /**
  * Функция возращает классы главной обёртки редактора и булево значение нужно ли отрисовывать редактор
  * @param CN
  */
-export function useGetPageClasses(CN: string) {
+/*export function useGetPageClasses(CN: string) {
 
     // Какой компонент должен быть отрисован
     const { entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
@@ -62,7 +62,7 @@ export function useGetPageClasses(CN: string) {
         classes: makeCN(classes),
         isVisible
     }
-}
+}*/
 
 /**
  * Функция возращает классы главной обёртки редактора в зависимости от различных значений:
@@ -71,11 +71,11 @@ export function useGetPageClasses(CN: string) {
  * scaleDown — редактор отдалён от зрителя
  * scaleDownTransparent — редактор отдалён от зрителя и прозрачен
  */
-function getClasses( CN: string, scaleDownType?: 'scaleDown' | 'scaleDownTransparent' ) {
+/*function getClasses( CN: string, scaleDownType?: 'scaleDown' | 'scaleDownTransparent' ) {
     const classes = [CN]
 
     if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
     if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)
 
     return classes
-}
+}*/

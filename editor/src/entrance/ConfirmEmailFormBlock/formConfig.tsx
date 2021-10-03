@@ -1,17 +1,17 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import { commonMessages } from 'messages/commonMessages'
-import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
-import { store } from 'src/store/rootReducer'
-import actions from 'src/store/rootAction'
-import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-import userActions from '../../store/user/userActions'
+// import * as yup from 'yup'
+// import FCType from 'libs/FormConstructor/FCType'
+// import { commonMessages } from 'messages/commonMessages'
+// import confirmEmailRequest from 'src/requests/user/confirmEmailRequest'
+// import { store } from 'src/store/rootReducer'
+// import actions from 'src/store/rootAction'
+// import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+// import userActions from '../../store/user/userActions'
 
 
 
-function getConfig(confirmEmailMsg: any) {
+/*function getConfig(confirmEmailMsg: any) {
     const config: FCType.Config = {
         fields: {
             token: {
@@ -60,7 +60,7 @@ function getConfig(confirmEmailMsg: any) {
     }
 
     return config
-}
+}*/
 
 
-export default getConfig
+// export default getConfig

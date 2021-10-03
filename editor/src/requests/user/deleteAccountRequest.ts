@@ -1,10 +1,10 @@
 // import {useFetch} from 'requests/reqFn/fetch'
 // import getApiUrl from 'requests/reqFn/apiUrls'
-import { makeFetch } from '../reqFn/fetch'
-import getApiUrl from '../reqFn/apiUrls'
-import { RegRequestValuesType } from './regRequest'
-import ErrorServerResponseType from '../errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
+// import { makeFetch } from '../reqFn/fetch'
+// import getApiUrl from '../reqFn/apiUrls'
+// import { RegRequestValuesType } from './regRequest'
+// import ErrorServerResponseType from '../errorServerResponseType'
+// import UserServerResponseType from './userServerResponseType'
 
 
 // Хук удаляет учётная запись пользователя
@@ -22,13 +22,13 @@ import UserServerResponseType from './userServerResponseType'
 
 
 
-export default async function regRequest() {
+/*export default async function regRequest() {
     const options = { method: 'DELETE'}
 
     const response: DeleteAccountServerResponse = await makeFetch(getApiUrl('me'), options)
     return response
-}
+}*/
 
 
 // Тип данных с ответом от пользователя
-type DeleteAccountServerResponse = ErrorServerResponseType | UserServerResponseType
+// type DeleteAccountServerResponse = ErrorServerResponseType | UserServerResponseType

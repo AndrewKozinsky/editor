@@ -1,20 +1,20 @@
-import React from 'react'
-import Header from 'common/textBlocks/Header/Header'
-import Menu from 'common/misc/Menu/Menu'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Notice from 'common/textBlocks/Notice/Notice'
-import { getMenuItems } from '../menuItems'
-import { regFormMessages } from 'src/messages/regFormMessages'
-import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useGetMessages from 'messages/fn/useGetMessages'
-import getConfig from './formConfig'
-import { commonMessages } from 'messages/commonMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
+// import React from 'react'
+// import Header from 'common/textBlocks/Header/Header'
+// import Menu from 'common/misc/Menu/Menu'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Notice from 'common/textBlocks/Notice/Notice'
+// import { getMenuItems } from '../menuItems'
+// import { regFormMessages } from 'src/messages/regFormMessages'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useGetMessages from 'messages/fn/useGetMessages'
+// import getConfig from './formConfig'
+// import { commonMessages } from 'messages/commonMessages'
+// import { regMenuMessages } from 'messages/regMenuMessages'
 
 
 /** User Sign up form */
-export default function RegFormBlock() {
+/*export default function RegFormBlock() {
     const commonMsg = useGetMessages(commonMessages)
     const regFormMsg = useGetMessages(regFormMessages)
     const regMenuMsg = useGetMessages(regMenuMessages)
@@ -34,13 +34,13 @@ export default function RegFormBlock() {
             <Info hide={ formState.formSentSuccessfully } />
         </div>
     )
-}
+}*/
 
-type InfoPropType = {
+/*type InfoPropType = {
     hide: boolean
-}
+}*/
 
-function Info(props: InfoPropType) {
+/*function Info(props: InfoPropType) {
     const regFormMsg = useGetMessages(regFormMessages)
 
     if (props.hide) return null
@@ -55,4 +55,4 @@ function Info(props: InfoPropType) {
             </Wrapper>
         </>
     )
-}
+}*/

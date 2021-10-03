@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { AppStateType } from 'src/store/rootReducer'
+// import { useEffect, useState } from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppStateType } from 'src/store/rootReducer'
 // @ts-ignore
-import { useHistory, useLocation } from 'react-router-dom'
-import { makeCN } from 'src/utils/StringUtils'
+// import { useHistory, useLocation } from 'react-router-dom'
+// import { makeCN } from 'src/utils/StringUtils'
 
 
 /** Хук возвращает классы обёртки компонента App */
-export function useGetAppClasses() {
+/*export function useGetAppClasses() {
 
     // Получение текущей темы интерфейса
     const { editorTheme, entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
@@ -26,11 +26,11 @@ export function useGetAppClasses() {
     }, [editorTheme, entryAndEditorViewState])
 
     return makeCN(classes)
-}
+}*/
 
 
 /** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */
-export function useRedirectPage() {
+/*export function useRedirectPage() {
     let history = useHistory()
     let location = useLocation()
 
@@ -51,4 +51,4 @@ export function useRedirectPage() {
             history.push('/enter')
         }
     }, [authTokenStatus, location.pathname])
-}
+}*/

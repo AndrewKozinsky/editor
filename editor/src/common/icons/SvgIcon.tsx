@@ -1,20 +1,20 @@
-import React from 'react'
-import { getIcon } from './js/getIcon'
-import { getIconSize } from './js/getIconSize'
-import { makeCN } from 'utils/StringUtils'
-import './css/SvgIcon.scss'
+// import React from 'react'
+// import { getIcon } from './js/getIcon'
+// import { getIconSize } from './js/getIconSize'
+// import { makeCN } from 'utils/StringUtils'
+// import './css/SvgIcon.scss'
 
 
-type BaseClasses = '-black-fill' | '-icon-fill' | '-white-fill' | '-icon-stroke'
+// type BaseClasses = '-black-fill' | '-icon-fill' | '-white-fill' | '-icon-stroke'
 
-export type SvgIconPropType = {
+/*export type SvgIconPropType = {
     type: string // Тип значка
     baseClass?: BaseClasses // Класс значка из готового набора классов
     extraClass?: string // Класс значка если нужного нет в готовом наборе
-}
+}*/
 
 /** Значёк */
-export default function SvgIcon(props: SvgIconPropType) {
+/*export default function SvgIcon(props: SvgIconPropType) {
 
     let {
         type, // Тип значка
@@ -38,8 +38,8 @@ export default function SvgIcon(props: SvgIconPropType) {
 
     return (
         <svg {...iconSizes} className={className}>
-            {/*@ts-ignore*/}
+            {/!*@ts-ignore*!/}
             <Icon />
         </svg>
     )
-}
+}*/

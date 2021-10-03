@@ -1,13 +1,13 @@
-import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import { SelectPropType } from 'common/formElements/Select/Select'
-import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-import { ButtonPropType } from 'common/formElements/Button/Button'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from 'requests/user/userServerResponseType'
-import { ReactElement } from 'react'
+// import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+// import { SelectPropType } from 'common/formElements/Select/Select'
+// import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+// import { ButtonPropType } from 'common/formElements/Button/Button'
+// import ErrorServerResponseType from 'requests/errorServerResponseType'
+// import UserServerResponseType from 'requests/user/userServerResponseType'
+// import { ReactElement } from 'react'
 
 
-namespace FCType {
+/*namespace FCType {
 
     // CONFIGURATION OBJECT  ===================================================
 
@@ -154,7 +154,6 @@ namespace FCType {
         onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void
         onFormSubmit: (e: React.BaseSyntheticEvent) => void
     }
-}
+}*/
 
-
-export default FCType
+// export default FCType

@@ -1,10 +1,10 @@
-import React from 'react'
+// import React from 'react'
 //@ts-ignore
-import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
+// import * as yup from 'yup'
+// import FCType from 'libs/FormConstructor/FCType'
+// import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
 
-function getConfig(commonMsg: any, resetFormMsg: any) {
+/*function getConfig(commonMsg: any, resetFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -43,7 +43,7 @@ function getConfig(commonMsg: any, resetFormMsg: any) {
     }
 
     return config
-}
+}*/
 
 
-export default getConfig
+// export default getConfig

@@ -1,11 +1,11 @@
-import FCType from "../FCType"
+// import FCType from "../FCType"
 
 
 /**
  * The function returns ready fields values
  * @param {Object} fields — fields data
  */
-export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType.ReadyFieldsValues {
+/*export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType.ReadyFieldsValues {
     let fieldsValuesSubmitObj: FCType.ReadyFieldsValues = {}
 
     for (let fieldName in fields) {
@@ -20,4 +20,4 @@ export default function getReadyFieldsValues(fields: FCType.FieldsState): FCType
     }
 
     return fieldsValuesSubmitObj
-}
+}*/

@@ -1,15 +1,15 @@
-import React, { ReactElement } from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Notice from 'common/textBlocks/Notice/Notice'
+// import React, { ReactElement } from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Notice from 'common/textBlocks/Notice/Notice'
 
 
-type NoticePropType = {
+/*type NoticePropType = {
     type: 'error' | 'success' | null
     text?: string | ReactElement // Текст ошибки
-}
+}*/
 
 /** Common error component */
-export default function CommonNotice(props: NoticePropType) {
+/*export default function CommonNotice(props: NoticePropType) {
     const { type, text } = props
 
     if (!type) return null
@@ -21,4 +21,4 @@ export default function CommonNotice(props: NoticePropType) {
             </Notice>
         </Wrapper>
     )
-}
+}*/

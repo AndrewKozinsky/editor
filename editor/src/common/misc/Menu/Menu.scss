@@ -1,27 +1,27 @@
 
-$CN: menu;
+//$CN: menu;
 
-.#{$CN} {
+/*.#{$CN} {
 
-}
+}*/
 
-.#{$CN}__ul {
+/*.#{$CN}__ul {
 
-}
+}*/
 
-.#{$CN}__li {
+/*.#{$CN}__li {
     display: inline-block;
-}
-.#{$CN}__li:last-child {
+}*/
+/*.#{$CN}__li:last-child {
     margin-right: 0;
-}
-.#{$CN}__li {
+}*/
+/*.#{$CN}__li {
     font-size: 1.4rem;
     line-height: 1.8rem;
     margin-right: 14px;
-}
+}*/
 
-.#{$CN}--disabled-link {
+/*.#{$CN}--disabled-link {
     color: hsl(var(--base-h-part), var(--base-s-part), var(--base-color-10));
     cursor: default;
     border-bottom-color: transparent;
@@ -29,4 +29,4 @@ $CN: menu;
     &:hover {
         border-bottom-color: transparent;
     }
-}
+}*/

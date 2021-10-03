@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppStateType } from 'src/store/rootReducer'
-import userActions from 'src/store/user/userActions'
-import settingsActions from 'src/store/settings/settingsActions'
-import { getFromLocalStorage } from 'src/utils/MiscUtils'
+// import { useEffect, useState } from 'react'
+// import { useDispatch, useSelector } from 'react-redux'
+// import { AppStateType } from 'src/store/rootReducer'
+// import userActions from 'src/store/user/userActions'
+// import settingsActions from 'src/store/settings/settingsActions'
+// import { getFromLocalStorage } from 'src/utils/MiscUtils'
 // import sitesActions from 'store/site/sitesActions'
-import { useGetUserToken } from 'requests/user/getUserToken'
+// import { useGetUserToken } from 'requests/user/getUserToken'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов
  *  и заносящий это в Хранилище при запуске приложения */
-export function useGetAndSetEditorSettings() {
+/*export function useGetAndSetEditorSettings() {
     const dispatch = useDispatch()
 
     // При отрисовке компонента...
@@ -39,7 +39,7 @@ export function useGetAndSetEditorSettings() {
         // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])
-}
+}*/
 
 
 /**
@@ -49,7 +49,7 @@ export function useGetAndSetEditorSettings() {
  * Поэтому делается запрос на сервер для его проверки. И в зависимости от этого статус становится
  * или 1 (токена нет или он неверный) или 2 (токен правильный)
  */
-export function useSetTokenStatus() {
+/*export function useSetTokenStatus() {
     const dispatch = useDispatch()
 
     // Получение статуса токена из Хранилища
@@ -93,4 +93,4 @@ export function useSetTokenStatus() {
 
     // Возратить проинициализировано ли приложение.
     return isTokenSet
-}
+}*/

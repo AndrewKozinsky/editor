@@ -1,5 +1,5 @@
 // Тип объекта конфигурации
-export type ConfigType = {
+/*export type ConfigType = {
     workMode: string
     port: number
     db: string
@@ -16,9 +16,9 @@ export type ConfigType = {
     jwtSecret: string
     // jwtExpiresIn: number
     // jwtExpiresUnit: string
-}
+}*/
 
-export const config: ConfigType = {
+/*export const config: ConfigType = {
     // Режим работы (development или production)
     workMode: String(process.env.MODE),
     // Порт сервиса
@@ -46,7 +46,7 @@ export const config: ConfigType = {
     jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
     // jwtExpiresIn: 90,
     // jwtExpiresUnit: 'd'
-}
+}*/
 
 
 

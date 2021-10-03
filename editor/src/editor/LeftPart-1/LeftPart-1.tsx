@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 // import { sitesPanelMessages } from 'messages/sitesPanelMessages'
 // import { useSelector } from 'react-redux'
 // import { AppStateType } from 'store/rootReducer'
@@ -15,12 +15,12 @@ import React from 'react'
 // import './LeftPart-1.scss'
 
 
-type LeftPart1PropType = {
+/*type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}
+}*/
 
 /** Левая часть первой главной вкладки */
-export default function LeftPart1(props: LeftPart1PropType) {
+/*export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
@@ -31,13 +31,13 @@ export default function LeftPart1(props: LeftPart1PropType) {
 
     return (
         <div className={CN} style={style}>
-            {/*<NameSection header={sitesPanelMessages.header}>*/}
-                {/*<NewSiteButton />*/}
-                {/*<SitesButtons />*/}
-            {/*</NameSection>*/}
+            {/!*<NameSection header={sitesPanelMessages.header}>*!/}
+                {/!*<NewSiteButton />*!/}
+                {/!*<SitesButtons />*!/}
+            {/!*</NameSection>*!/}
         </div>
     )
-}
+}*/
 
 /** Компонент кнопки создания нового сайта */
 /*function NewSiteButton() {

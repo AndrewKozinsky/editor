@@ -1,14 +1,14 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Button from 'common/formElements/Button/Button'
-import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
-import useGetLogOut from './logOut'
-import useGetShowModal from 'utils/hooksUtils'
-import { ModalContent } from './deleteAccount'
-import useGetMessages from 'messages/fn/useGetMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import Button from 'common/formElements/Button/Button'
+// import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
+// import useGetLogOut from './logOut'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { ModalContent } from './deleteAccount'
+// import useGetMessages from 'messages/fn/useGetMessages'
 
 
-export default function UserAccountForm() {
+/*export default function UserAccountForm() {
 
     const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
 
@@ -33,4 +33,4 @@ export default function UserAccountForm() {
             />
         </Wrapper>
     )
-}
+}*/

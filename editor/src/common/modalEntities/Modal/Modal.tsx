@@ -1,16 +1,16 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { AppStateType } from 'src/store/rootReducer'
-import {
+// import React from 'react'
+// import { useSelector } from 'react-redux'
+// import { AppStateType } from 'src/store/rootReducer'
+/*import {
     useGetIsModalOpen,
     useGetModalCloseHandler
-} from './Modal-func'
-import Button from 'common/formElements/Button/Button'
-import './Modal.scss'
+} from './Modal-func'*/
+// import Button from 'common/formElements/Button/Button'
+// import './Modal.scss'
 
 
 /** Модальное окно */
-export default function Modal() {
+/*export default function Modal() {
 
     // Содержимое модального окна
     const { content } = useSelector((store: AppStateType) => store.modal)
@@ -40,4 +40,4 @@ export default function Modal() {
             </div>
         </div>
     )
-}
+}*/

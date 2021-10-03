@@ -1,18 +1,18 @@
-import React, {ReactNode} from 'react'
-import SvgIcon from 'common/icons/SvgIcon'
-import { makeCN } from 'utils/StringUtils'
-import './InputError.scss'
+// import React, {ReactNode} from 'react'
+// import SvgIcon from 'common/icons/SvgIcon'
+// import { makeCN } from 'utils/StringUtils'
+// import './InputError.scss'
 
 
-export type InputErrorPropType = {
+/*export type InputErrorPropType = {
     text?: ReactNode
-}
+}*/
 
 /**
  * Компонент текстового уведомления.
  * Если передать тип, то это будет или сообщение об ошибке или об успехе.
  */
-export default function InputError(props: InputErrorPropType) {
+/*export default function InputError(props: InputErrorPropType) {
     const { text } = props
 
     // Классы обёртки уведомления
@@ -27,4 +27,4 @@ export default function InputError(props: InputErrorPropType) {
             <p className={CN + '__paragraph'}>{text}</p>
         </div>
     )
-}
+}*/

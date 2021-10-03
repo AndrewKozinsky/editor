@@ -1,8 +1,8 @@
-@import "../../common/commonStyles/commonStyles";
+//@import "../../common/commonStyles/commonStyles";
 
-$CN: auth-form-wrapper;
+//$CN: auth-form-wrapper;
 
-.#{$CN} {
+/*.#{$CN} {
     width: 410px;
     box-sizing: border-box;
     background-color: var(--bg-color);
@@ -10,8 +10,8 @@ $CN: auth-form-wrapper;
     padding: 4rem 6rem;
     border-radius: var(--radius-2);
     //@include big-shadow;
-}
+}*/
 
-.#{$CN}__logo-wrapper {
+/*.#{$CN}__logo-wrapper {
     margin-bottom: 1.5rem;
-}
+}*/

@@ -1,14 +1,14 @@
-import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import NameSection from '../../wrappers/NameSection/NameSection'
-import { userDataSectionMessages } from 'messages/userDataSectionMessages'
-import UserDataForm from '../EmailForm/form/EmailForm'
-import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
-import UserAccountForm from '../UserAccountForm/UserAccountForm'
-import useGetMessages from 'messages/fn/useGetMessages'
+// import React from 'react'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import NameSection from '../../wrappers/NameSection/NameSection'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
+// import UserDataForm from '../EmailForm/form/EmailForm'
+// import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
+// import UserAccountForm from '../UserAccountForm/UserAccountForm'
+// import useGetMessages from 'messages/fn/useGetMessages'
 
 
-export default function SettingsUserTabContent() {
+/*export default function SettingsUserTabContent() {
 
     const userDataSectionMsg = useGetMessages(userDataSectionMessages)
 
@@ -33,4 +33,4 @@ export default function SettingsUserTabContent() {
             </Wrapper>
         </div>
     )
-}
+}*/

@@ -1,7 +1,8 @@
-import React from 'react'
+// import React from 'react'
 
 
 // Секция «Цветовая тема»
+/*
 export const themeSectionMessages = {
     themeRadiosHeader: {
         eng: 'Color theme',
@@ -19,4 +20,4 @@ export const themeSectionMessages = {
         eng: <>Page not found</>,
         rus: <>Страница не найдена</>
     }
-}
+}*/

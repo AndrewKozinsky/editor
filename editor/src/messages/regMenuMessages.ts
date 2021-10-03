@@ -1,5 +1,5 @@
 
-export const regMenuMessages = {
+/*export const regMenuMessages = {
         // Пункт «Регистрация»
         reg: {
             eng: 'Sign up',
@@ -15,4 +15,4 @@ export const regMenuMessages = {
             eng: 'Reset password',
             rus: 'Сброс пароля'
         },
-}
+}*/

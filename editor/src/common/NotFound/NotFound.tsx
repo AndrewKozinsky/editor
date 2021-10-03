@@ -1,13 +1,13 @@
-import React from 'react'
-import SvgIcon from 'common/icons/SvgIcon'
-import Wrapper from 'common/Wrapper/Wrapper'
-import { makeCN } from 'utils/StringUtils'
-import { notFoundMessages } from 'src/messages/notFoundMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
-import './NotFound.scss'
+// import React from 'react'
+// import SvgIcon from 'common/icons/SvgIcon'
+// import Wrapper from 'common/Wrapper/Wrapper'
+// import { makeCN } from 'utils/StringUtils'
+// import { notFoundMessages } from 'src/messages/notFoundMessages'
+// import useGetMessages from 'messages/fn/useGetMessages'
+// import './NotFound.scss'
 
 
-export default function NotFound() {
+/*export default function NotFound() {
     const notFoundMsg = useGetMessages(notFoundMessages)
 
     // Класс обёртки
@@ -33,4 +33,4 @@ export default function NotFound() {
             </Wrapper>
         </div>
     )
-}
+}*/

@@ -1,8 +1,8 @@
 
 // Секция «Язык»
-export const languageSectionMessages = {
+/*export const languageSectionMessages = {
     langRadiosHeader: {
         eng: 'Language',
         rus: 'Язык'
     }
-}
+}*/

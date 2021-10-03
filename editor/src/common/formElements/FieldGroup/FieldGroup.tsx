@@ -1,15 +1,15 @@
-import React, {ReactElement, ReactNode} from 'react'
-import Radio from '../Radio/Radio'
-import Checkbox from '../Checkbox/Checkbox'
-import Label from '../Label/Label'
-import { getFieldGroupClasses } from './FieldGroup-func'
-import './FieldGroup.scss'
+// import React, {ReactElement, ReactNode} from 'react'
+// import Radio from '../Radio/Radio'
+// import Checkbox from '../Checkbox/Checkbox'
+// import Label from '../Label/Label'
+// import { getFieldGroupClasses } from './FieldGroup-func'
+// import './FieldGroup.scss'
 
 
-type InputDataType = { label: string | ReactElement, value: string }
+// type InputDataType = { label: string | ReactElement, value: string }
 
 /** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
-export type FieldGroupPropType = {
+/*export type FieldGroupPropType = {
     label?: string | ReactElement
     inputType: 'radio' | 'checkbox'
     groupName: string
@@ -20,9 +20,9 @@ export type FieldGroupPropType = {
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}
+}*/
 
-export default function FieldGroup(props: FieldGroupPropType) {
+/*export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
         inputType,
@@ -63,16 +63,16 @@ export default function FieldGroup(props: FieldGroupPropType) {
             </InputsWrapper>
         </>
     )
-}
+}*/
 
 
-export type InputsWrapperType = {
+/*export type InputsWrapperType = {
     gap: number,
     vertical: boolean
     children: ReactNode
-}
+}*/
 
-function InputsWrapper(props: InputsWrapperType) {
+/*function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
         vertical,
@@ -83,4 +83,4 @@ function InputsWrapper(props: InputsWrapperType) {
     const cls = getFieldGroupClasses(vertical, gap)
 
     return <div className={cls}>{children}</div>
-}
+}*/

@@ -1,12 +1,12 @@
-import StoreUserTypes from "./userTypes"
+// import StoreUserTypes from "./userTypes"
 
-export type UserReducerType = {
+/*export type UserReducerType = {
     authTokenStatus: StoreUserTypes.AuthTokenStatusType
     email: StoreUserTypes.EmailType
-}
+}*/
 
 // Изначальные значения
-const initialState: UserReducerType = {
+/*const initialState: UserReducerType = {
     // Статус токена авторизации:
     // 0 — неизвестно есть ли токен и правилен ли он
     // 1 — токена нет
@@ -14,26 +14,26 @@ const initialState: UserReducerType = {
     authTokenStatus: 0,
     // Почта пользователя
     email: ''
-}
+}*/
 
 // Установка статуса токена авторизации
-function setAuthTokenStatus(state: UserReducerType, action: StoreUserTypes.SetAuthTokenStatusActionType): UserReducerType {
+/*function setAuthTokenStatus(state: UserReducerType, action: StoreUserTypes.SetAuthTokenStatusActionType): UserReducerType {
     return {
         ...state,
         authTokenStatus: action.payload
     }
-}
+}*/
 
 // Set user's email
-function setEmail(state: UserReducerType, action: StoreUserTypes.SetEmailActionType): UserReducerType {
+/*function setEmail(state: UserReducerType, action: StoreUserTypes.SetEmailActionType): UserReducerType {
     return {
         ...state,
         email: action.payload
     }
-}
+}*/
 
 // Редьюсер Store.user
-export default function userReducer( state = initialState, action: StoreUserTypes.UserActionTypes ): UserReducerType {
+/*export default function userReducer( state = initialState, action: StoreUserTypes.UserActionTypes ): UserReducerType {
     switch (action.type) {
         case StoreUserTypes.SET_AUTH_TOKEN_STATUS:
             return setAuthTokenStatus(state, action)
@@ -44,4 +44,4 @@ export default function userReducer( state = initialState, action: StoreUserType
             const x: never = null
             return state
     }
-}
+}*/

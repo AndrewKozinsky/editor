@@ -1,7 +1,7 @@
-import FCType from "../FCType"
+// import FCType from "../FCType"
 
 /** The function returns a link with first field with error */
-export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
+/*export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
 
     // Iterate all fields to find the first error
     for(let fieldName in fields) {
@@ -13,4 +13,4 @@ export default function getFirstInvalidFieldName(fields: FCType.FieldsState) {
     }
 
     return null
-}
+}*/

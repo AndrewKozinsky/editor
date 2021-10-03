@@ -1,15 +1,15 @@
-import React from 'react'
-import { useAppSelector } from '../../../store/rootReducer'
+// import React from 'react'
+// import { useAppSelector } from '../../../store/rootReducer'
 // import ArticleMenu from '../ArticleMenu/ArticleMenu'
-import MainTab, { MainTabDataType } from '../MainTab/MainTab'
-import { useGetTabData } from './SectionsTabs-func'
+// import MainTab, { MainTabDataType } from '../MainTab/MainTab'
+// import { useGetTabData } from './SectionsTabs-func'
 // import ArticleMenuButton from '../ArticleMenu/ArticleMenu'
-import './SectionsTabs.scss'
-import StoreSettingsTypes from '../../../store/settings/settingsTypes'
+// import './SectionsTabs.scss'
+// import StoreSettingsTypes from '../../../store/settings/settingsTypes'
 
 
 /** Компонент вкладок переключающих разделы радактора */
-export default function SectionsTabs() {
+/*export default function SectionsTabs() {
 
     const CN = 'section-tabs'
 
@@ -25,8 +25,8 @@ export default function SectionsTabs() {
                     return <MainTab tabData={tabData} key={tabData.title} />
                 })}
             </div>
-            {/*<ArticleMenuButton />*/}
+            {/!*<ArticleMenuButton />*!/}
         </div>
     )
-}
+}*/
 

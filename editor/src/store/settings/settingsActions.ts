@@ -1,7 +1,7 @@
 // Types
-import StoreSettingsTypes from './settingsTypes'
+// import StoreSettingsTypes from './settingsTypes'
 
-const settingsActions = {
+/*const settingsActions = {
 
     // Установка языка интерфейса
     setEditorLanguage(payload: StoreSettingsTypes.EditorLanguage): StoreSettingsTypes.SetEditorLanguageAction {
@@ -50,6 +50,6 @@ const settingsActions = {
             payload
         }
     },
-}
+}*/
 
-export default settingsActions
+// export default settingsActions

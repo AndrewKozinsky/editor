@@ -1,7 +1,7 @@
-import React from 'react'
+// import React from 'react'
 
 
-export default function EditorDarkTheme() {
+/*export default function EditorDarkTheme() {
     return (
         <g>
             <rect fill="rgb(53, 53, 54)" fillRule="nonzero" x="0" y="0" width="76" height="76" rx="4" />
@@ -25,7 +25,7 @@ export default function EditorDarkTheme() {
             </g>
         </g>
     )
-}
+}*/
 
 
 

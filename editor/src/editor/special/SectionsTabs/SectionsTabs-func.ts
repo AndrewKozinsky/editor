@@ -1,15 +1,15 @@
-import {useEffect, useState} from 'react'
-import { useSelector} from 'react-redux'
-import {AppStateType} from 'store/rootReducer'
-import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import { mainTabsMessages } from 'messages/mainTabsMessages'
-import { MainTabDataType } from '../MainTab/MainTab'
-import useGetMessages from 'messages/fn/useGetMessages'
+// import {useEffect, useState} from 'react'
+// import { useSelector} from 'react-redux'
+// import {AppStateType} from 'store/rootReducer'
+// import { store } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import { mainTabsMessages } from 'messages/mainTabsMessages'
+// import { MainTabDataType } from '../MainTab/MainTab'
+// import useGetMessages from 'messages/fn/useGetMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
-export function useGetTabData(): MainTabDataType[] {
+/*export function useGetTabData(): MainTabDataType[] {
 
     const mainTabsMsg = useGetMessages(mainTabsMessages)
 
@@ -25,13 +25,13 @@ export function useGetTabData(): MainTabDataType[] {
     }, [mainTab])
 
     return tabsData
-}
+}*/
 
 /**
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} activeTabNum — номер активной вкладки
  */
-function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[] {
+/*function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[] {
 
     // Сгенеривать данные трёх вкладок
     return ['mainTabMaterials', 'mainTabEditor', 'mainTabSettings', 'mainTabHelp']
@@ -45,4 +45,4 @@ function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[]
             onClick: () => store.dispatch(actions.settings.setMainTab(i))
         }
     })
-}
+}*/
