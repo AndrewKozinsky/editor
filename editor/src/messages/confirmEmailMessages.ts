@@ -1,6 +1,6 @@
 
 // Форма ConfirmEmailFormBlock
-/*export const confirmEmailMessages = {
+export const confirmEmailMessages = {
     formHeader: {
         eng: 'Email confirm',
         rus: 'Подтверждение почты'
@@ -13,4 +13,4 @@
         eng: 'Confirm email',
         rus: 'Подтвердить почту'
     },
-}*/
+}

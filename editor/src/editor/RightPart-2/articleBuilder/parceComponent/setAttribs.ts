@@ -1,6 +1,6 @@
 // import {ConsistObj} from './getConsistObjsArr'
-// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import { HTMLObjArrType } from './htmlStringToObject'
 
 /**

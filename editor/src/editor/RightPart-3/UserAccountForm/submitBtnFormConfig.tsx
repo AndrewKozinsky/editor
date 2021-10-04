@@ -1,5 +1,4 @@
 // import React from 'react'
-//@ts-ignore
 // import * as yup from 'yup'
 // import FCType from 'libs/FormConstructor/FCType'
 // import { store } from 'store/rootReducer'

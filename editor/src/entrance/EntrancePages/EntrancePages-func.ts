@@ -1,12 +1,10 @@
-// import {useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// @ts-ignore
-// import { useHistory } from 'react-router-dom'
-// import { AppStateType } from 'src/store/rootReducer'
-// import actions from 'src/store/rootAction';
-// import { makeCN } from 'src/utils/StringUtils'
-// import { store } from 'src/store/rootReducer'
-
+import {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import { useHistory } from 'react-router-dom'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import useGetUserSelectors from 'store/user/userSelectors'
+import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
 /**
  * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
@@ -14,16 +12,14 @@
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
  */
-/*export function useGetWrapperClasses() {
-    const CN = 'entrance-pages-wrapper'
-
+export function useIsComponentVisible() {
     // Статус токена авторизации
-    const { authTokenStatus } = useSelector((store: AppStateType) => store.user)
+    const { authTokenStatus } = useGetUserSelectors()
 
     // Какой компонент должен быть отрисован
-    const { entryAndEditorViewState } = useSelector((store: AppStateType) => store.settings)
+    const { entryAndEditorViewState } = useGetSettingsSelectors()
 
-    const [classes, setClasses] = useState<string[]>([CN])
+    // Видны ли страницы входа?
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(function () {
@@ -32,44 +28,30 @@
         }
         else if (entryAndEditorViewState === 'editor') {
             setIsVisible(false)
-            setClasses([CN, `${CN}--scale-up`])
         }
         else if (entryAndEditorViewState === 'toEditor') {
             setIsVisible(true)
-            setClasses([CN])
-            setTimeout(function () {
-                setClasses([CN, `${CN}--scale-up`])
-            }, 10)
         }
         else if (entryAndEditorViewState === 'toEntry') {
             setIsVisible(true)
-            setClasses([CN, `${CN}--scale-up`])
-            setTimeout(function () {
-                setClasses([CN])
-            }, 10)
         }
         else if (entryAndEditorViewState === 'entry') {
             setIsVisible(true)
-            setClasses([CN])
         }
         else {
             setIsVisible(false)
-            setClasses([CN])
         }
     }, [entryAndEditorViewState])
 
-    return {
-        classes: makeCN(classes),
-        isVisible
-    }
-}*/
+    return isVisible
+}
 
 /** Хук регулирует показ или окна редактора или окон входа в зависимости от различных условий. */
-/*export function useViewStateChanger() {
+export function useViewStateChanger() {
     const dispatch = useDispatch()
 
     // Предыдущий адрес
-    const { lastAddress } = useSelector((store: AppStateType) => store.settings)
+    const { lastAddress } = useGetSettingsSelectors()
 
     let history = useHistory()
     const address = history.location.pathname // Текущий адрес виде /enter
@@ -90,24 +72,24 @@
         // Поставить текущий адрес в Хранилище в качестве последнего
         dispatch( actions.settings.setLastAddress(address) )
     }, [address])
-}*/
+}
 
 // Если с формы входа перешли в редактор
-/*export function smoothMoveToEditor() {
+export function smoothMoveToEditor() {
     // Поставить, что сначала должен быть плавный переход к редактору...
     store.dispatch( actions.settings.setEntryAndEditorViewState('toEditor') )
     setTimeout(function () {
         // ...а затем полное закрытие формы входа через некоторое время
         store.dispatch( actions.settings.setEntryAndEditorViewState('editor') )
     }, 500)
-}*/
+}
 
 // Если с редактора перешли на форму входа
-/*export function smoothMoveToEntrance() {
+export function smoothMoveToEntrance() {
     // Поставить, что сначала должен быть плавный переход к форме входа...
     store.dispatch( actions.settings.setEntryAndEditorViewState('toEntry') )
     setTimeout(function () {
         // ...а затем полное закрытие редактора через некоторое время
         store.dispatch( actions.settings.setEntryAndEditorViewState('entry') )
     }, 500)
-}*/
+}

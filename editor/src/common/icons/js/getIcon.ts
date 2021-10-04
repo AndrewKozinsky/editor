@@ -1,9 +1,9 @@
-// import { ReactNode } from 'react'
-// import Logo from '../icons/logo'
-// import NoticeError from '../icons/NoticeError'
-// import NoticeInfo from '../icons/NoticeInfo'
-// import NoticeSuccess from '../icons/NoticeSuccess'
-// import ErrorTriangle from '../icons/errorTriangle'
+import { ReactNode } from 'react'
+import Logo from '../icons/logo'
+import NoticeError from '../icons/NoticeError'
+import NoticeInfo from '../icons/NoticeInfo'
+import NoticeSuccess from '../icons/NoticeSuccess'
+import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
 // import SelectInputArrows from '../icons/selectInputArrows'
 // import MainTabMaterials from '../icons/mainTabMaterials'
@@ -44,7 +44,7 @@
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
  * @param {String} type — тип значка.
  */
-/*export function getIcon(type: string): ReactNode {
+export function getIcon(type: string): ReactNode {
 
     type componentsType = {
         [key: string]: ReactNode
@@ -52,10 +52,10 @@
 
     const components: componentsType = {
         // Логотип редактора
-        // logo: Logo,
+        logo: Logo,
 
         // Значёк ошибки
-        // errorTriangle: ErrorTriangle,
+        errorTriangle: ErrorTriangle,
 
         // Значёк успеха
         // successCircle: SuccessCircle,
@@ -114,10 +114,10 @@
         // articleMenu: ArticleMenu,
 
         // Значки в Notice
-        // noticeInfo: NoticeInfo,
-        // noticeError: NoticeError,
-        // noticeSuccess: NoticeSuccess,
+        noticeInfo: NoticeInfo,
+        noticeError: NoticeError,
+        noticeSuccess: NoticeSuccess,
     }
 
     return components[type]
-}*/
+}

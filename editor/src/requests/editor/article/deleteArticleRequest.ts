@@ -1,6 +1,6 @@
-// import {makeFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
-// import StoreSitesTypes from 'src/store/site/sitesTypes'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import StoreSitesTypes from 'store/site/sitesTypes'
 
 /** Функция удаляет статью выделенную в списке всех статей */
 /*export default async function deleteArticleRequest(currentArtItemId: StoreSitesTypes.CurrentArtItemId) {

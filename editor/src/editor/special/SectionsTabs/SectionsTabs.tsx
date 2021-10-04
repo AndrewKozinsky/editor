@@ -1,11 +1,11 @@
 // import React from 'react'
-// import { useAppSelector } from '../../../store/rootReducer'
+// import { useAppSelector } from 'store/rootReducer'
 // import ArticleMenu from '../ArticleMenu/ArticleMenu'
 // import MainTab, { MainTabDataType } from '../MainTab/MainTab'
 // import { useGetTabData } from './SectionsTabs-func'
 // import ArticleMenuButton from '../ArticleMenu/ArticleMenu'
 // import './SectionsTabs.scss'
-// import StoreSettingsTypes from '../../../store/settings/settingsTypes'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
 
 
 /** Компонент вкладок переключающих разделы радактора */

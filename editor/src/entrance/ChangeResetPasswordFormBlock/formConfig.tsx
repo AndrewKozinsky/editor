@@ -1,17 +1,19 @@
-// import React from 'react'
-//@ts-ignore
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import { commonMessages } from 'messages/commonMessages'
-// import changeResetPasswordRequest from 'src/requests/user/changeResetPasswordRequest'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import changeResetPasswordRequest from 'requests/user/changeResetPasswordRequest'
 
-/*function getConfig(changeResetPasswordFormMsg: any) {
+/**
+ * Функция возвращает конфигурацию формы входа в сервис
+ * @param {Object} commonMsg — объект с текстами ошибок
+ * @param {Object} changeResetPasswordFormMsg — объект с текстами ошибок
+ */
+function getConfig(commonMsg: any,changeResetPasswordFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             token: {
                 fieldType: 'text',
                 schema: (fields) => {
-                    return yup.string().required(commonMessages.requiredField)
+                    return yup.string().required(commonMsg.requiredField)
                 },
                 fieldData: {
                     label: changeResetPasswordFormMsg.tokenField,
@@ -22,9 +24,9 @@
                 fieldType: 'text',
                 schema: (fields) => {
                     return yup.string()
-                        .required(commonMessages.requiredField)
-                        .min(6, commonMessages.passwordToShort)
-                        .max(50, commonMessages.passwordToLong)
+                        .required(commonMsg.requiredField)
+                        .min(6, commonMsg.passwordToShort)
+                        .max(50, commonMsg.passwordToLong)
                 },
                 fieldData: {
                     label: changeResetPasswordFormMsg.passwordField,
@@ -67,6 +69,6 @@
     }
 
     return config
-}*/
+}
 
-// export default getConfig
+export default getConfig

@@ -1,22 +1,23 @@
-// import React from 'react'
-// import Header from 'common/textBlocks/Header/Header'
-// import Menu from 'common/misc/Menu/Menu'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import { getMenuItems } from '../menuItems'
-// import useGetMessages from 'messages/fn/useGetMessages'
-// import { regMenuMessages } from 'messages/regMenuMessages'
-// import { resetFormMessages } from 'src/messages/resetFormMessages'
-// import FormConstructor from 'libs/FormConstructor/FormConstructor'
-// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-// import { commonMessages } from 'messages/commonMessages'
-// import getConfig from './formConfig'
+import React from 'react'
+import Header from 'common/textBlocks/Header/Header'
+import Menu from 'common/misc/Menu/Menu'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { getMenuItems } from '../menuItems'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import { commonMessages } from 'messages/commonMessages'
+import getConfig from './formConfig'
+import useGetMessages from 'messages/fn/useGetMessages'
+import { regMenuMessages } from 'messages/regMenuMessages'
+import { resetFormMessages } from 'messages/resetFormMessages'
 
 
 /** Форма сброса пароля */
-/*export default function ResetFormBlock() {
+export default function ResetFormBlock() {
     const commonMsg = useGetMessages(commonMessages)
     const resetFormMsg = useGetMessages(resetFormMessages)
     const regMenuMsg = useGetMessages(regMenuMessages)
+
     const config = getConfig(commonMsg, resetFormMsg)
     const formState = useFormConstructorState(config)
 
@@ -31,4 +32,4 @@
             <FormConstructor config={config} state={formState} />
         </div>
     )
-}*/
+}

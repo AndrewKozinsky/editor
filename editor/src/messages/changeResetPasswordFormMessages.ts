@@ -1,6 +1,6 @@
 
 // Форма ChangeResetPasswordFormBlock
-/*export const changeResetPasswordFormMessages = {
+export const changeResetPasswordFormMessages = {
     // Заголовок формы ввода нового пароля
     formHeader: {
         eng: 'Password change',
@@ -32,7 +32,7 @@
         rus: 'Пароль изменён.'
     },
     toEditor: {
-        eng: 'To the editor.',
-        rus: 'В редактор.'
+        eng: 'To the editor',
+        rus: 'В редактор'
     },
-}*/
+}

@@ -1,10 +1,9 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import { store } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import { articleFormMessages } from 'messages/articleFormMessages'
-// import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
-// import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
+// import { updateArticleNameRequest } from 'requests/editor/article/updateArticleRequest'
+// import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 /*import {
     articlesTreeStore,

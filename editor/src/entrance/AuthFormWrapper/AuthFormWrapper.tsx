@@ -1,22 +1,21 @@
-// import React, { ReactNode } from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-// import './AuthFormWrapper.scss'
+import React, { ReactNode } from 'react'
+import SvgIcon from 'common/icons/SvgIcon'
+import makeClasses from './AuthFormWrapper-classes'
 
-
-/*type AuthFormWrapperPropType = {
+type AuthFormWrapperPropType = {
     children: ReactNode
-}*/
+}
 
 /** Обёртка форм регистрации, входа пользователя и сброса пароля */
-/*export default function AuthFormWrapper(props: AuthFormWrapperPropType) {
-    const CN = 'auth-form-wrapper'
+export default function AuthFormWrapper(props: AuthFormWrapperPropType) {
+    const CN = makeClasses()
 
     return (
-        <section className={CN}>
-            <div className={`${CN}__logo-wrapper`}>
+        <section className={CN.root}>
+            <div className={CN.logoWrapper}>
                 <SvgIcon type='logo' baseClass='-black-fill' />
             </div>
             {props.children}
         </section>
     )
-}*/
+}

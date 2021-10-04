@@ -1,7 +1,7 @@
-// import { ErrorResponseInterface } from './errorResponse.interface'
-// import { HttpException, HttpStatus } from '@nestjs/common'
+import { ErrorResponseInterface } from './errorResponse.interface'
+import { HttpException, HttpStatus } from '@nestjs/common'
 
-/*export default function responseCommonError(
+export default function responseCommonError(
     errMessage: string,
     statusCode: number = HttpStatus.UNPROCESSABLE_ENTITY
 ): void {
@@ -12,4 +12,4 @@
     }
 
     throw new HttpException(responseBody, statusCode)
-}*/
+}

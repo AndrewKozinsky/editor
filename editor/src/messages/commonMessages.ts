@@ -1,6 +1,6 @@
 
 // Сообщения не привязанные к конкретному месту
-/*export const commonMessages = {
+export const commonMessages = {
     emailPlaceholder: {
         eng: 'For example: mail@gmail.com',
         rus: 'Например: mail@gmail.com'
@@ -25,17 +25,4 @@
         eng: 'Must be 50 characters or less',
         rus: 'Максимум можно ввести 50 символов'
     },
-}*/
-
-
-
-
-
-
-
-
-
-
-
-
-
+}

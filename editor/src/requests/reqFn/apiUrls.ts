@@ -1,7 +1,7 @@
 import { MiscTypes } from 'types/miscTypes'
 
 
-/*const addresses: MiscTypes.ObjStringKeyAnyVal = {
+const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
@@ -16,7 +16,7 @@ import { MiscTypes } from 'types/miscTypes'
         return 'users/confirmEmail/' + confirmEmailToken
     },
     // Изменение почты
-    changeEmail: 'users/changeEmail',
+    // changeEmail: 'users/changeEmail',
     // Изменение пароля
     changePassword: 'users/changePassword',
     // Сброс пароля
@@ -26,56 +26,56 @@ import { MiscTypes } from 'types/miscTypes'
         return 'users/resetPassword/' + resetPasswordToken
     },
     // Текущий пользователь
-    me: 'users/me',
+    // me: 'users/me',
 
 
     // САЙТЫ
     // Сайты
     // sites: 'sites',
     // Конкретный сайт
-    /!*site: function (siteId: string) {
+    /*site: function (siteId: string) {
         return 'sites/' + siteId
-    },*!/
+    },*/
 
 
     // SITE COMPONENTS
     // Компоненты сайта
-    /!*siteComponents: function (siteId: string) {
+    /*siteComponents: function (siteId: string) {
         return 'sites/' + siteId + '/components'
-    },*!/
+    },*/
 
 
     // SITE INC FILES TEMPLATES
     // Шаблоны подключаемых файлов
-    /!*incFiles: function (siteId: string, incFilesId?: string) {
+    /*incFiles: function (siteId: string, incFilesId?: string) {
         if (incFilesId) return 'sites/' + siteId + '/incFiles/' + incFilesId
         else return 'sites/' + siteId + '/incFiles'
-    },*!/
+    },*/
 
     // Папки шаблонов компонентов
-    /!*componentsFolders: function (siteId: string) {
+    /*componentsFolders: function (siteId: string) {
         return 'componentsFolders/' + siteId
-    },*!/
+    },*/
     // Шаблон компонента
-    /!*component: function (uuid?: string) {
+    /*component: function (uuid?: string) {
         if (uuid) return 'components/' + uuid
         else return 'components/'
-    },*!/
+    },*/
     // Папки статей
-    /!*articlesFolders: function (siteId: string) {
+    /*articlesFolders: function (siteId: string) {
         return 'articlesFolders/' + siteId
-    },*!/
+    },*/
     // Статья
-    /!*article: function (uuid?: string) {
+    /*article: function (uuid?: string) {
         if (uuid) return 'articles/' + uuid
         else return 'articles/'
-    },*!/
-}*/
+    },*/
+}
 
 
 // Оборачивание объекта addresses чтобы при запросе
 // к началу каждого адреса добавлялась приставка /api/.
-/*function getApiUrl(url: string, ...args: any[]): string {
+function getApiUrl(url: string, ...args: any[]): string {
 
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
@@ -88,6 +88,6 @@ import { MiscTypes } from 'types/miscTypes'
 
     // @ts-ignore
     const x: never = null
-}*/
+}
 
-// export default getApiUrl
+export default getApiUrl

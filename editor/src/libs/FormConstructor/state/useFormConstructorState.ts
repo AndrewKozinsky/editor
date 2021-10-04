@@ -1,19 +1,19 @@
-// import { useCallback, useState } from 'react'
-// import FCType from '../FCType'
-// import getInitialFieldsState from './getInitialFieldsState'
-// import fieldChangeHandler from '../handlers/fieldChangeHandler'
-// import formSubmitHandler from '../handlers/formSubmitHandler'
-// import updateFieldFn from './UpdateField'
-// import { getInitialShowCommonSuccess, getInitialCommonSuccess } from './successfulMessage'
-// import { serverMessages } from 'messages/serverMessages'
-// import useGetMessages from 'messages/fn/useGetMessages'
+import { useCallback, useState } from 'react'
+import FCType from '../FCType'
+import getInitialFieldsState from './getInitialFieldsState'
+import fieldChangeHandler from '../handlers/fieldChangeHandler'
+import formSubmitHandler from '../handlers/formSubmitHandler'
+import updateFieldFn from './UpdateField'
+import { getInitialShowCommonSuccess, getInitialCommonSuccess } from './successfulMessage'
+import { serverMessages } from 'messages/serverMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 /**
  *
  * @param {Object} formConfig — configuration form object
  * @param {Object} outerFns — user's functions passed to FormConstructor config
  */
-/*export default function useFormConstructorState(formConfig: FCType.Config, outerFns: FCType.OuterFns = {}): FCType.StateFormReturn {
+export default function useFormConstructorState(formConfig: FCType.Config, outerFns: FCType.OuterFns = {}): FCType.StateFormReturn {
     const [fields, setFields] = useState<FCType.FieldsState>(getInitialFieldsState(formConfig))
     const updateField = useCallback((fieldName: string, newFieldData: FCType.StateFieldsObj) => {
         updateFieldFn(fields, setFields, fieldName, newFieldData)
@@ -81,4 +81,4 @@
         onChangeFieldHandler,
         onFormSubmit,
     }
-}*/
+}

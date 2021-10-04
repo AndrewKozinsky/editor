@@ -13,7 +13,7 @@
 // import { FolderType } from '../types'
 // import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
 // import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
-// import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'src/requests/editor/components/getComponentsFoldersRequest'
+// import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'requests/editor/components/getComponentsFoldersRequest'
 // import { useGetArticlesFoldersRequest } from 'requests/editor/article/getArticlesFoldersRequest'
 // import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 // import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'

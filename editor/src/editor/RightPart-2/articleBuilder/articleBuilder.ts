@@ -1,6 +1,6 @@
 // import {ReactElement} from 'react'
-// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import createJsxFromComponents from './componentsToJSX';
 // import createHTMLFromComponents from './createHTMLFromComponents';
 // import { HTMLObjArrType } from './parceComponent/htmlStringToObject';

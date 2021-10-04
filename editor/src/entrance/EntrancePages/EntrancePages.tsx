@@ -1,28 +1,30 @@
-// import React from 'react'
-// @ts-ignore
-// import { Switch, Route } from 'react-router-dom'
-// import EnterFormBlock from 'entrance/EnterFormBlock/EnterFormBlock'
-// import AuthFormWrapper from 'src/entrance/AuthFormWrapper/AuthFormWrapper'
-// import RegFormBlock from 'entrance/RegFormBlock/RegFormBlock'
-// import ConfirmEmailFormBlock from 'src/entrance/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
-// import ResetFormBlock from 'src/entrance/ResetFormBlock/ResetFormBlock'
-// import ChangeResetPasswordFormBlock from 'src/entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
-// import { useGetWrapperClasses, useViewStateChanger } from './EntrancePages-func'
-// import './EntrancePages.scss'
+import React from 'react'
+import useMakeClasses from './EntrancePages-classes'
+import { useIsComponentVisible } from './EntrancePages-func'
+import { Switch, Route } from 'react-router-dom'
+import EnterFormBlock from 'entrance/EnterFormBlock/EnterFormBlock'
+import AuthFormWrapper from 'entrance/AuthFormWrapper/AuthFormWrapper'
+import RegFormBlock from 'entrance/RegFormBlock/RegFormBlock'
+import ConfirmEmailFormBlock from 'entrance/ConfirmEmailFormBlock/ConfirmEmailFormBlock'
+import ResetFormBlock from 'entrance/ResetFormBlock/ResetFormBlock'
+import ChangeResetPasswordFormBlock from 'entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
+import { useViewStateChanger } from './EntrancePages-func'
 
 
-/*export default function EntrancePages() {
+export default function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
     useViewStateChanger()
 
-    // Классы обёртки
-    const {classes, isVisible} = useGetWrapperClasses()
+    // Классы компонента
+    const CN = useMakeClasses()
 
+    // Компонент видим?
+    const isVisible = useIsComponentVisible()
     if (!isVisible) return null
 
     return (
-        <div className={classes}>
+        <div className={CN.root}>
             <AuthFormWrapper>
                 <Switch>
                     <Route path='/reg'>
@@ -44,4 +46,4 @@
             </AuthFormWrapper>
         </div>
     )
-}*/
+}

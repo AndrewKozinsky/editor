@@ -81,7 +81,7 @@
     --accent-l-part: 50%;
 
     // Акцентный цвет
-    //--accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
     // Акцентный цвет при наведении
     --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 45%);
 
@@ -91,12 +91,12 @@
     --text-color-naked: var(--base-h-part), var(--base-s-part), 100%;
     --text-color: hsl(var(--text-color-naked));
     // Цвет текстозаполнителя
-    //--text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 55%);
+    --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 55%);
 
 
     // ЦВЕТА ССЫЛОК
     // Цвет ссылки
-    //--link-color: var(--accent-color);
+    --link-color: var(--accent-color);
 
 
     // ЦВЕТА ЭЛЕМЕНТОВ
@@ -117,5 +117,5 @@
 
     // РАЗНОЕ
     // Цвет при фокусе
-    //--focus-color: hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), .9);
+    --focus-color: hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), .9);
 }

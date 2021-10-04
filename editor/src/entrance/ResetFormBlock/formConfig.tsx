@@ -1,10 +1,13 @@
-// import React from 'react'
-//@ts-ignore
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import resetPasswordRequest from 'src/requests/user/resetPasswordRequest'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import resetPasswordRequest from 'requests/user/resetPasswordRequest'
 
-/*function getConfig(commonMsg: any, resetFormMsg: any) {
+/**
+ * Функция возвращает конфигурацию формы сброса пароля
+ * @param {Object} commonMsg — объект с текстами ошибок
+ * @param {Object} resetFormMsg — объект с текстами ошибок
+ */
+function getConfig(commonMsg: any, resetFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -32,8 +35,7 @@
             },
         },
         async requestFn(readyFieldValues) {
-            // @ts-ignore
-            return await resetPasswordRequest(readyFieldValues.email)
+            return await resetPasswordRequest(readyFieldValues.email.toString())
         },
         afterSubmit(response) {
 
@@ -43,7 +45,7 @@
     }
 
     return config
-}*/
+}
 
 
-// export default getConfig
+export default getConfig

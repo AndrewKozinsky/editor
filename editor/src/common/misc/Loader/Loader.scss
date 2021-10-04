@@ -1,10 +1,10 @@
 
-/*.loader-wrapper {
+.loader__wrapper {
     width: 30px;
     height: 30px;
-}*/
+}
 
-/*.animate-loader {
+.loader__svg {
     animation: spin 1.25s linear infinite;
 
     circle {
@@ -15,10 +15,10 @@
         fill: var(--bg-color);
         opacity: .8;
     }
-}*/
+}
 
-/*@keyframes spin {
+@keyframes spin {
     to {
         transform: rotate(360deg);
     }
-}*/
+}

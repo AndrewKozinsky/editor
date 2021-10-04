@@ -1,8 +1,8 @@
 // import React from 'react'
-// import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
-// import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
+// import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 // import { useUpdateEmailInForm } from './useUpdateEmailInForm'
-// import { userDataSectionMessages } from 'src/messages/userDataSectionMessages'
+// import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 // import getConfig from './formConfig'
 // import useGetMessages from 'messages/fn/useGetMessages'
 

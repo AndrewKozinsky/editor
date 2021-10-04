@@ -1,10 +1,10 @@
-// import React from 'react'
-// import FCType from '../FCType'
-// import getFirstInvalidFieldName from '../misc/getFirstInvalidFieldName'
-// import getReadyFieldsValues from '../misc/getReadyFieldsValues'
-// import setErrorsToFields from '../state/setErrorsToFields'
+import React from 'react'
+import FCType from '../FCType'
+import getFirstInvalidFieldName from '../misc/getFirstInvalidFieldName'
+import getReadyFieldsValues from '../misc/getReadyFieldsValues'
+import setErrorsToFields from '../state/setErrorsToFields'
 
-/*export default async function formSubmitHandler(
+export default async function formSubmitHandler(
     e: React.BaseSyntheticEvent, // Event object
     fields: FCType.FieldsState, // Fields data from Store
     setFields: FCType.SetFields, // Fields data setting function
@@ -65,12 +65,12 @@
     setSubmitBtnLoading(false)
 
     if (response.status === 'success') {
+        setFormSentSuccessfully(true)
+
         if (formConfig.hideAfterSuccessfulSubmit) {
             setFormVisible(false)
             return
         }
-
-        setFormSentSuccessfully(true)
     }
     // If user set wrong data
     else {
@@ -98,4 +98,4 @@
         }
         formConfig.afterSubmit(response, outerFns, formDetails, )
     }
-}*/
+}

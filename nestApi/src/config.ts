@@ -1,5 +1,5 @@
 
-/*export const config = {
+export const config = {
     // Режим работы (development или production)
     workMode: String(process.env.MODE),
     // Порт сервиса
@@ -30,6 +30,5 @@
 
     // JWT
     jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
-    jwtExpiresIn: 90,
-    // jwtExpiresUnit: 'd'
-}*/
+    jwtExpiresIn: 90
+}

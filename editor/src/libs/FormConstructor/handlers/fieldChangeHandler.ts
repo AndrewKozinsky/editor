@@ -1,8 +1,8 @@
-// import FCType from '../FCType'
-// import setErrorsToFields from '../state/setErrorsToFields'
+import FCType from '../FCType'
+import setErrorsToFields from '../state/setErrorsToFields'
 
 
-/*export default function fieldChangeHandler(
+export default function fieldChangeHandler(
     e: React.BaseSyntheticEvent, // Event object
     fields: FCType.FieldsState, // Fields data from Store
     setFields: FCType.SetFields, // Fields data setting function
@@ -31,14 +31,14 @@
 
     setFields(updatedFields)
     setCommonError(null)
-}*/
+}
 
 /**
  * The function gets the new field's value and depends on field's type return the new field values array
  * @param {Object} inputData — field's data
  * @param {String} newValue — new field's value
  */
-/*function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
+function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
     if (inputData.valueCount === 'one') {
         return [newValue]
     }
@@ -58,4 +58,4 @@
 
         return valuesNewArr
     }
-}*/
+}

@@ -1,8 +1,8 @@
-// import React from 'react'
+import React from 'react'
 
 
-// Форма ResetFormBlock
-/*export const resetFormMessages = {
+// Тексты формы ResetFormBlock
+export const resetFormMessages = {
     // Заголовок формы сброса пароля
     formHeader: {
         eng: 'Reset password',
@@ -20,5 +20,4 @@
         eng: 'An email was sent to you with a link to reset your password.',
         rus: 'На почту выслано письмо со ссылкой на страницу сброса пароля.'
     }
-}*/
-
+}

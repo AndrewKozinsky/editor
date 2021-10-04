@@ -1,47 +1,43 @@
-// import React from 'react'
-// @ts-ignore
-// import { Link, useRouteMatch } from 'react-router-dom'
-// import './Menu.scss'
+import React from 'react'
+import { Link, useRouteMatch } from 'react-router-dom'
+import makeClasses from './Menu-classes'
+import {makeCN} from '../../../utils/StringUtils'
 
-
-// Корневой класс
-// const CN = 'menu'
 
 // Тип props у компонента Menu
-/*export type MenuPropType = {
-    items: MenuItems
-}*/
+export type MenuPropType = {
+    items: MenuItems // Пункты меню
+}
 // Тип массива данных для генерации пунктов меню
-// export type MenuItems = MenuItem[]
-// export type MenuItem = {to: string, label: string}
+export type MenuItems = MenuItem[]
+export type MenuItem = {to: string, label: string}
 
 /** Компонент меню. Сейчас используется на форме входа. */
-/*export default function Menu(props: MenuPropType) {
+export default function Menu(props: MenuPropType) {
+    const { items } = props
 
-    const {
-        items
-    } = props
+    const CN = makeClasses()
 
     const $items = items.map((item, i) => {
         return (
-            <li className={`${CN}__li`} key={i}>
+            <li className={CN.li} key={i}>
                 <MenuLink to={item.to} label={item.label} key={i} />
             </li>
         )
     })
 
     return (
-        <nav className={CN}>
-            <ul className={`${CN}__ul`}>
+        <nav className={CN.root}>
+            <ul className={CN.ul}>
                 {$items}
             </ul>
         </nav>
     )
-}*/
+}
 
 
 /** Компонент ссылки меню */
-/*function MenuLink(props: MenuItem) {
+function MenuLink(props: MenuItem) {
 
     const {
         to, // Куда ведёт ссылка
@@ -55,7 +51,7 @@
     })
 
     const classes: string[] = []
-    if (match) classes.push(`${CN}--disabled-link`)
+    if (match) classes.push('menu--disabled-link')
 
-    return <Link to={to} className={classes}>{label}</Link>
-}*/
+    return <Link to={to} className={makeCN(classes)}>{label}</Link>
+}

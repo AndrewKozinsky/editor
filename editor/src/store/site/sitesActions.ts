@@ -1,10 +1,10 @@
 // import StoreSitesTypes from './sitesTypes'
 // import {MiscTypes} from 'types/miscTypes'
-// import store from '../store'
-// import sitesRequest from 'src/requests/editor/sites/sitesRequest'
-// import getIncFilesTemplatesRequest from 'src/requests/editor/incFiles/getIncFilesTemplatesRequest'
-// import getArticleRequest, {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
-// import getComponentRequest, { ComponentDataType } from 'src/requests/editor/components/getComponentRequest'
+// import store from 'store'
+// import sitesRequest from 'requests/editor/sites/sitesRequest'
+// import getIncFilesTemplatesRequest from 'requests/editor/incFiles/getIncFilesTemplatesRequest'
+// import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
+// import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
 
 

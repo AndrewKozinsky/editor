@@ -1,27 +1,23 @@
-// import React from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import { makeCN } from 'utils/StringUtils'
-// import { notFoundMessages } from 'src/messages/notFoundMessages'
-// import useGetMessages from 'messages/fn/useGetMessages'
-// import './NotFound.scss'
+import React from 'react'
+import makeClasses from './NotFound-classes'
+import SvgIcon from 'common/icons/SvgIcon'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { notFoundMessages } from 'messages/notFoundMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
-/*export default function NotFound() {
+export default function NotFound() {
     const notFoundMsg = useGetMessages(notFoundMessages)
 
-    // Класс обёртки
-    const CN = 'not-found'
-
-    // Классы заголовка
-    const headerClasses = [`${CN}__header`, `${CN}__header`]
+    // Классы компонента
+    const CN = makeClasses()
 
     return (
-        <div className={CN}>
+        <div className={CN.root}>
             <SvgIcon type='logo' />
 
             <Wrapper t={15}>
-                <h1 className={makeCN(headerClasses)}>{notFoundMsg.header}</h1>
+                <h1 className={CN.header}>{notFoundMsg.header}</h1>
             </Wrapper>
 
             <Wrapper t={15}>
@@ -33,4 +29,4 @@
             </Wrapper>
         </div>
     )
-}*/
+}

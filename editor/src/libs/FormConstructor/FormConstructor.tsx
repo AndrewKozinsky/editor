@@ -1,19 +1,19 @@
-// import React from 'react'
-// import FCType from './FCType'
-// import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-// import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-// import Select, { SelectPropType } from 'common/formElements/Select/Select'
-// import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
-// import Button, { ButtonPropType } from 'common/formElements/Button/Button'
-// import CommonNotice from './misc/CommonNotice'
+import React from 'react'
+import FCType from './FCType'
+import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+import Select, { SelectPropType } from 'common/formElements/Select/Select'
+import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
+import Button, { ButtonPropType } from 'common/formElements/Button/Button'
+import CommonNotice from './misc/CommonNotice'
 
-/*type FormConstructorPropType = {
+type FormConstructorPropType = {
     config: FCType.Config // Form config
     state: FCType.StateFormReturn // Form state
-}*/
+}
 
 /** The component gets form config and its state and generate form's markup */
-/*function FormConstructor(props: FormConstructorPropType) {
+function FormConstructor(props: FormConstructorPropType) {
     const { config, state } = props
 
     if (!state.formVisible) return null
@@ -25,12 +25,12 @@
             <Common config={config} state={state} />
         </form>
     )
-}*/
+}
 
-// export default FormConstructor
+export default FormConstructor
 
 /** Form fields component */
-/*function Fields(props: FormConstructorPropType) {
+function Fields(props: FormConstructorPropType) {
     const { fields } = props.config
     const { state } = props
 
@@ -87,10 +87,10 @@
     })
 
     return <>{fieldsMarkup}</>
-}*/
+}
 
 /** The component with some passed elements (buttons, for example) and a submit button */
-/*function Bottom(props: FormConstructorPropType) {
+function Bottom(props: FormConstructorPropType) {
     const { elems, topOffset, align } = props.config.bottom
 
     // Some wrapper customization
@@ -104,10 +104,10 @@
             <SubmitButton {...props} />
         </Wrapper>
     )
-}*/
+}
 
 /** Submit button component */
-/*function SubmitButton(props: FormConstructorPropType) {
+function SubmitButton(props: FormConstructorPropType) {
     const { state } = props
 
     const submitBtnConfig = props.config.bottom.submit as ButtonPropType
@@ -116,10 +116,10 @@
     submitBtnConfig.loading = state.submitBtnLoading
 
     return <Button {...submitBtnConfig} />
-}*/
+}
 
 /** A component with common succes or error message */
-/*function Common(props: FormConstructorPropType) {
+function Common(props: FormConstructorPropType) {
     const { state } = props
 
     if (state.commonError && state.showCommonError) {
@@ -130,4 +130,4 @@
     }
 
     return null
-}*/
+}

@@ -1,4 +1,3 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import FHTypes from 'libs/formHandler/types'
 // import { store } from 'store/rootReducer'

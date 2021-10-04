@@ -1,7 +1,7 @@
 // import {useSelector} from 'react-redux'
-// import {AppStateType} from 'src/store/rootReducer'
-// import {makeFetch, useFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {AppStateType} from 'store/rootReducer'
+// import {makeFetch, useFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 
 // Функция удаляет сайт

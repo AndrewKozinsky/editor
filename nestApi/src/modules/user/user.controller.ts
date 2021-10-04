@@ -1,23 +1,23 @@
-// import {
-//     Req, Res, Get, Post, Patch,
-//     Param, Body, Controller, HttpStatus, UseGuards, UsePipes, Delete
-// } from '@nestjs/common'
-// import { Response } from 'express'
-// import { UserService } from './user.service'
-// import { CreateUserDto } from './dto/createUser.dto'
-// import { ExpressRequestInterface } from '../../types/expressRequest.interface'
-// import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
-// import { LoginDto } from './dto/login.dto'
-// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-// import { ResetPasswordDto } from './dto/resetPassword.dto'
-// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import {
+    Req, Res, Get, Post, Patch,
+    Param, Body, Controller, HttpStatus, UseGuards, UsePipes, Delete
+} from '@nestjs/common'
+import { Response } from 'express'
+import { UserService } from './user.service'
+import { CreateUserDto } from './dto/createUser.dto'
+import { ExpressRequestInterface } from '../../types/expressRequest.interface'
+import { BackendValidationPipe } from 'src/utils/error/backendValidation.pipe'
+import { LoginDto } from './dto/login.dto'
+import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from './dto/resetPassword.dto'
+import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 // import { ChangeEmailDto } from './dto/changeEmail.dto'
 // import { AuthGuard } from './guards/auth.guard'
 // import { UserEntity } from './user.entity'
 // import { User } from './decorators/user.decorator'
 // import { ChangePasswordDto } from './dto/changePassword.dto'
 
-/*@Controller('users')
+@Controller('users')
 export class UserController {
     constructor(private readonly userService: UserService) {}
 
@@ -98,7 +98,7 @@ export class UserController {
         this.userService.buildUserResponse(user, response, HttpStatus.OK, 'set')
     }
 
-    @Patch('changeEmail')
+    /*@Patch('changeEmail')
     @UsePipes(new BackendValidationPipe())
     @UseGuards(AuthGuard)
     async changeEmail(
@@ -110,9 +110,9 @@ export class UserController {
         const language = req.headers['Editor-Language']
         const updatedUser = await this.userService.changeEmail(user, changeEmailDto, language)
         this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
-    }
+    }*/
 
-    @Patch('changePassword')
+    /*@Patch('changePassword')
     @UsePipes(new BackendValidationPipe())
     @UseGuards(AuthGuard)
     async changePassword(
@@ -122,9 +122,9 @@ export class UserController {
     ): Promise<void> {
         const updatedUser = await this.userService.changePassword(user, changePasswordDto)
         this.userService.buildUserResponse(updatedUser, response, undefined, 'set')
-    }
+    }*/
 
-    @Delete('me')
+    /*@Delete('me')
     @UsePipes(new BackendValidationPipe())
     @UseGuards(AuthGuard)
     async deleteCurrentUser(
@@ -133,6 +133,6 @@ export class UserController {
     ): Promise<void> {
         const updatedUser = await this.userService.deleteCurrentUser(req)
         this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
-    }
-}*/
+    }*/
+}
 

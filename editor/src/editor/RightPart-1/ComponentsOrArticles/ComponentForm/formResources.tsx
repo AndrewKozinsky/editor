@@ -1,12 +1,11 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import { store } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import {componentsTreeStore, setCompItems} from '../stores'
 // import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-// import {updateComponentRequest} from 'src/requests/editor/components/updateComponentRequest'
-// import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
+// import {updateComponentRequest} from 'requests/editor/components/updateComponentRequest'
+// import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
 
 
 /** Объект настройки useFormHandler */

@@ -1,15 +1,12 @@
-// import React, {ReactElement, ReactNode} from 'react'
-// import Radio from '../Radio/Radio'
-// import Checkbox from '../Checkbox/Checkbox'
-// import Label from '../Label/Label'
-// import { getFieldGroupClasses } from './FieldGroup-func'
-// import './FieldGroup.scss'
+import React, {ReactElement, ReactNode} from 'react'
+import Radio from '../Radio/Radio'
+import Checkbox from '../Checkbox/Checkbox'
+import Label from '../Label/Label'
+import makeClasses from './FieldGroup-classes'
 
-
-// type InputDataType = { label: string | ReactElement, value: string }
 
 /** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
-/*export type FieldGroupPropType = {
+export type FieldGroupPropType = {
     label?: string | ReactElement
     inputType: 'radio' | 'checkbox'
     groupName: string
@@ -20,9 +17,11 @@
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
-/*export default function FieldGroup(props: FieldGroupPropType) {
+type InputDataType = { label: string | ReactElement, value: string }
+
+export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
         inputType,
@@ -53,34 +52,32 @@
                         name: groupName,
                         checked: !!value.includes(inputData.value),
                         disabled,
-                        key: i,
                         onChange,
                         onBlur
                     }
 
-                    return <Component {...attrs} />
+                    return <Component {...attrs} key={i} />
                 })}
             </InputsWrapper>
         </>
     )
-}*/
+}
 
 
-/*export type InputsWrapperType = {
+export type InputsWrapperType = {
     gap: number,
     vertical: boolean
     children: ReactNode
-}*/
+}
 
-/*function InputsWrapper(props: InputsWrapperType) {
+function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
         vertical,
         children
     } = props
 
-    // Классы обёртки
-    const cls = getFieldGroupClasses(vertical, gap)
+    const CN = makeClasses(vertical, gap)
 
-    return <div className={cls}>{children}</div>
-}*/
+    return <div className={CN.wrapper}>{children}</div>
+}

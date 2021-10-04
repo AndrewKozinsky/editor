@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { store } from 'store/rootReducer'
 import { Provider } from 'react-redux'
-// @ts-ignore
 import { BrowserRouter as Router } from 'react-router-dom'
 import App from './common/App/App'
 

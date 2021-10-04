@@ -1,15 +1,15 @@
-// import {
-//     BeforeInsert,
-//     BeforeUpdate,
-//     Column,
-//     CreateDateColumn,
-//     Entity,
-//     PrimaryGeneratedColumn
-// } from 'typeorm'
-// import { hash } from 'bcrypt'
-// import MiscTypes from '../../types/miscTypes'
+import {
+    BeforeInsert,
+    BeforeUpdate,
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn
+} from 'typeorm'
+import { hash } from 'bcrypt'
+import MiscTypes from '../../types/miscTypes'
 
-/*@Entity({name: 'users'})
+@Entity({name: 'users'})
 export class UserEntity {
     @PrimaryGeneratedColumn()
     id: number
@@ -59,6 +59,4 @@ export class UserEntity {
     async setCreatedAtData() {
         this.createdAt = new Date()
     }
-}*/
-
-
+}

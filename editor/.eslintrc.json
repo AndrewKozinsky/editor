@@ -18,6 +18,8 @@
     ],
     "rules": {
         "semi": ["error", "never"],
-        "quotes": ["error", "single"]
+        "quotes": ["error", "single"],
+        // Disable key property check in JSX because it doesn't work in spread operator
+        "react/jsx-key": ["off", { "checkFragmentShorthand": false }]
     }
 }

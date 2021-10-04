@@ -1,4 +1,4 @@
-/*export function baseTemplate(domain: string, content: string, lang: string) {
+export function baseTemplate(domain: string, content: string, lang: string) {
 
     // Адрес логотипа
     const logoSrc = domain + '/api2/common/editorium-small-logo.svg'
@@ -85,4 +85,4 @@
         
         </body>
         </html>`
-}*/
+}

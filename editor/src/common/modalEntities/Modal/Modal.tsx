@@ -1,6 +1,6 @@
 // import React from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'src/store/rootReducer'
+// import { AppStateType } from 'store/rootReducer'
 /*import {
     useGetIsModalOpen,
     useGetModalCloseHandler

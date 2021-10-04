@@ -1,7 +1,7 @@
 
 
 // Сообщения не привязанные к конкретному месту
-/*export const serverMessages = {
+export const serverMessages = {
     // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
 
     authGuard_userIsNotAuthorized: {
@@ -125,10 +125,10 @@
         rus: 'Пароль должен быть указан.'
     },
 
-    /!*user_changeResetPassword_userIsNotFound: {
+    user_changeResetPassword_userIsNotFound: {
         eng: 'User not found. Maybe the password reset token is wrong or the password has not been reset.',
         rus: 'Пользователь не найден. Возможно токен сброса пароля неправильный или пароль не сбрасывали.'
-    },*!/
+    },
 
     user_ChangeEmailDto_emailTooLong: {
         eng: 'The string must not be longer than 100 characters.',
@@ -172,4 +172,4 @@
         eng: 'The current user password does not match the one entered.',
         rus: 'Текущий пароль пользователя не совпадает с введённым.'
     },
-}*/
+}

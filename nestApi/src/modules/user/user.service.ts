@@ -1,29 +1,29 @@
-// import { compare } from 'bcrypt'
-// import { HttpStatus, Injectable } from '@nestjs/common'
-// import { InjectRepository } from '@nestjs/typeorm'
-// import { UserEntity } from './user.entity'
-// import { Repository } from 'typeorm'
-// import { sign, verify } from 'jsonwebtoken'
-// import { CreateUserDto } from './dto/createUser.dto'
-// import { createRandomString } from 'src/utils/stringUtils'
-// import MiscTypes from 'src/types/miscTypes'
-// import { Email } from 'src/utils/email/email'
-// import { Response } from 'express'
-// import { config } from 'src/config'
-// import { UserResponseInterface } from './types/userResponse.interface'
-// import responseCommonError from 'src/utils/error/responseCommonError'
-// import { LoginDto } from './dto/login.dto'
-// import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
-// import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
-// import { ResetPasswordDto } from './dto/resetPassword.dto'
-// import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
+import { compare } from 'bcrypt'
+import { HttpStatus, Injectable } from '@nestjs/common'
+import { InjectRepository } from '@nestjs/typeorm'
+import { UserEntity } from './user.entity'
+import { Repository } from 'typeorm'
+import { sign, verify } from 'jsonwebtoken'
+import { CreateUserDto } from './dto/createUser.dto'
+import { createRandomString } from 'src/utils/stringUtils'
+import MiscTypes from 'src/types/miscTypes'
+import { Email } from 'src/utils/email/email'
+import { Response } from 'express'
+import { config } from 'src/config'
+import { UserResponseInterface } from './types/userResponse.interface'
+import responseCommonError from 'src/utils/error/responseCommonError'
+import { LoginDto } from './dto/login.dto'
+import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
+import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
+import { ResetPasswordDto } from './dto/resetPassword.dto'
+import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 // import { ChangeEmailDto } from './dto/changeEmail.dto'
 // import { ChangePasswordDto } from './dto/changePassword.dto'
-// const crypto = require('crypto')
-// import { hash } from 'bcrypt'
+const crypto = require('crypto')
+import { hash } from 'bcrypt'
 
 
-/*@Injectable()
+@Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserEntity)
@@ -189,7 +189,7 @@ export class UserService {
 
         // Бросить ошибку если пользователь не найден.
         if (!user) {
-            responseCommonError('user_confirmEmail_userIsNotFound', HttpStatus.UNPROCESSABLE_ENTITY)
+            responseCommonError('user_changeResetPassword_userIsNotFound', HttpStatus.UNPROCESSABLE_ENTITY)
         }
 
         // Пользователь найден...
@@ -201,7 +201,7 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
-    async changeEmail(user: UserEntity, changeEmailDto: ChangeEmailDto, language: MiscTypes.Language) {
+    /*async changeEmail(user: UserEntity, changeEmailDto: ChangeEmailDto, language: MiscTypes.Language) {
         // Получу новую почту
         const newEmail = changeEmailDto.email
 
@@ -229,9 +229,9 @@ export class UserService {
         const updatedUser = { ...user, emailConfirmToken, email: newEmail }
 
         return await this.userRepository.save(updatedUser)
-    }
+    }*/
 
-    async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
+    /*async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
 
         // Compare user password in DB and the password which user passed in body
         const isPasswordsMatch = await compare(changePasswordDto.currentPassword, user.password)
@@ -246,9 +246,9 @@ export class UserService {
 
         // Поставить новый пароль в данные пользователя
         return await this.userRepository.save(updatedUser)
-    }
+    }*/
 
-    async deleteCurrentUser(req: ExpressRequestInterface) {
+    /*async deleteCurrentUser(req: ExpressRequestInterface) {
         const user = req.user
 
         this.userRepository.delete(user)
@@ -272,7 +272,7 @@ export class UserService {
         // await ArticleModel.deleteMany({userId: req.params.siteId})
 
         return user
-    }
+    }*/
 
 
     // ADDITIONAL METHODS
@@ -299,13 +299,13 @@ export class UserService {
     }
 
 
-    /!**
+    /**
      * The function form response and send it to clien
      * @param {Object} user — user data from database
      * @param {Object} response — response object
      * @param {Number} statusCode — status code
      * @param {String} cookieToken — do I have to put token cookie. none: don't set token; set: set token; clear: clear token
-     *!/
+     */
     buildUserResponse(
         user: UserEntity,
         response: Response,
@@ -347,7 +347,7 @@ export class UserService {
 
         response.send(resBody)
     }
-}*/
+}
 
 
 /**
@@ -357,12 +357,11 @@ export class UserService {
  * @param {String} confirmToken — токен подтверждения почты
  * @returns {Promise<void>}
  */
-/*async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email: string, confirmToken: string) {
-
+async function sendEmailAddressConfirmLetter(language: MiscTypes.Language, email: string, confirmToken: string) {
     // Создать новое письмо...
-    // В конструктор передаётся почта пользователя и URL сайта вида https://editorium.net
+    // В конструктор передаётся почта пользователя и язык
     const userEmail = new Email(email, language)
 
     // Послать письмо для подтверждения почты
     userEmail.sendConfirmLetter(confirmToken).then(() => {})
-}*/
+}

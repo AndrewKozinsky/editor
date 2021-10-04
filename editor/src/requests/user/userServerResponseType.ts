@@ -1,6 +1,7 @@
-// import StoreSettingsTypes from 'store/settings/settingsTypes'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 
-/*type UserServerResponseType = {
+// Тип данных о пользователе от сервера
+type UserServerResponseType = {
     status: 'success',
     statusCode: number,
     data: {
@@ -12,6 +13,6 @@
             token?: string // 'ewhjw643gjwfsht667GS'
         }
     }
-}*/
+}
 
-// export default UserServerResponseType
+export default UserServerResponseType

@@ -1,5 +1,5 @@
-// import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
-// import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
+// import {ArticleDataType} from 'requests/editor/article/getArticleRequest'
+// import {ComponentDataType} from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
 
 namespace StoreSitesTypes {

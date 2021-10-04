@@ -1,4 +1,3 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import {useSelector} from 'react-redux'
 // import { store } from 'store/rootReducer'

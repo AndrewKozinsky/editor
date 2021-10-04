@@ -1,46 +1,44 @@
-// import React, {ReactNode} from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-// import { makeCN } from 'utils/StringUtils'
-// import './Notice.scss'
+import React, {ReactNode} from 'react'
+import makeClasses from './Notice-classes'
+import SvgIcon from 'common/icons/SvgIcon'
 
 
-// const CN = 'notice'
-
-/*export type NoticePropType = {
+export type NoticePropType = {
     icon?: 'info' | 'error' | 'success' // Тип значка: info (информация), error (ошибка), success (успех)
     bg?: boolean // If there is a background
     children?: ReactNode
-}*/
+}
 
 /** Компонент уведомления. */
-/*export default function Notice(props: NoticePropType) {
+export default function Notice(props: NoticePropType) {
     const { children, bg = false } = props
 
-    const classes = [CN]
-    if (bg) classes.push(CN + '--bg')
+    const CN = makeClasses(bg)
 
     return (
-        <div className={ makeCN(classes) }>
+        <div className={ CN.bg }>
             <Sign {...props} />
             <div>{children}</div>
         </div>
     )
-}*/
+}
 
 
 /** Значёк левее содержимого */
-/*function Sign(props: NoticePropType) {
+function Sign(props: NoticePropType) {
     const { icon } = props
 
+    const CN = makeClasses()
+
     if (icon === 'info') {
-        return <SvgIcon type='noticeInfo' baseClass='-icon-fill' extraClass={CN + '__icon'} />
+        return <SvgIcon type='noticeInfo' baseClass='-icon-fill' extraClass={CN.icon} />
     }
     else if (icon === 'error') {
-        return <SvgIcon type='noticeError' baseClass='-icon-fill' extraClass={CN + '__icon'} />
+        return <SvgIcon type='noticeError' baseClass='-icon-fill' extraClass={CN.icon} />
     }
     else if (icon === 'success') {
-        return <SvgIcon type='noticeSuccess' baseClass='-icon-fill' extraClass={CN + '__icon'} />
+        return <SvgIcon type='noticeSuccess' baseClass='-icon-fill' extraClass={CN.icon} />
     }
 
     return null
-}*/
+}

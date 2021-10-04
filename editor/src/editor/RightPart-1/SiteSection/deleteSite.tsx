@@ -6,7 +6,7 @@
 // import Hr from 'common/misc/Hr/Hr'
 // import Button from 'common/formElements/Button/Button'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import {useDeleteSite} from 'src/requests/editor/sites/deleteSiteRequest'
+// import {useDeleteSite} from 'requests/editor/sites/deleteSiteRequest'
 
 
 

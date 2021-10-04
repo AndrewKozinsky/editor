@@ -45,3 +45,68 @@
 26. Перейдите в папку editor (если вы открыли другую вкладку Терминала, то путь будет отличаться): ```cd editor/editor```
 27. Запустите: Реакт в режиме разработки ```npm run dev```
 28. В браузере перейдите по адресу **http://editorium.local/editor/**.
+
+### Способ получения названий классов CSS
+Названия классов нужно писать не напрямую в разметке, а через объект. Подробнее написано [на GitHub](https://github.com/AndrewKozinsky/organizing-css-code) в разделе «Объект с классами».
+
+### Настройка форм
+Для создания формы нужно получить объект с конфигурацией (обычно он находится в отдельном файле), создать состояние формы через вызов useFormConstructorState(config) в который передаётся объект конфигурации и отрисовка компонента <FormConstructor /> куда передётся конфигурация и состояние. По этим данным будет отрисована форма. 
+```
+export default function MyComponent() {
+    const formState = useFormConstructorState(config)
+    return <FormConstructor config={config} state={formState} />
+}
+```
+
+Объект конфигурации:
+
+```
+const config: FCType.Config = {
+    fields: {
+        // Название поля (для атрибута name)
+        email: {
+            // Тип поля
+            fieldType: 'text',
+            // Функция проверяющая правильность заполнения поля
+            schema: (fields) => {
+                return yup.string()
+                    .required(commonMsg.requiredField)
+                    .email(regFormMsg.emailErrInvalid)
+                    .max(100, commonMsg.emailToLong)
+            },
+            // Различные параметры, которые нужно передать полю
+            fieldData: {
+                label: regFormMsg.emailField,
+                autocomplete: 'username',
+                placeholder: commonMsg.emailPlaceholder,
+                autoFocus: true,
+            }
+        },
+        // Далее пишутся прочие поля ...
+    },
+    // Настройки нижней части формы
+    bottom: {
+        // Параметры для кнопки отправки
+        submit: {
+            text: regFormMsg.submitBtnText,
+            big: true,
+            block: true,
+            align: 'center',
+            color: 'accent'
+        },
+    },
+    // Обработчик отправки формы. В аргументе readyFieldValues находится значения полей.
+    async requestFn(readyFieldValues) {
+        return await regRequest(readyFieldValues)
+    },
+    // Функция запускаемая после отправки формы
+    afterSubmit(response) {},
+    // Нужно ли показывать сообщение об успешной отправке формы
+    showCommonSuccess: true,
+    // Текст сообщения об успешной отправке формы.
+    // Если его не передать, то будет показан стандартный текст.
+    commonSuccess: regFormMsg.confirmRegistrationLetter
+}
+
+export default config
+```

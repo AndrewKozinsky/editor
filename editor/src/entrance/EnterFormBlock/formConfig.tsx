@@ -1,15 +1,17 @@
-// import React from 'react'
-//@ts-ignore
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import loginRequest from 'src/requests/user/loginRequest'
-// import actions from 'src/store/rootAction'
-// import { store } from 'src/store/rootReducer'
-// import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-// import userActions from '../../store/user/userActions'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import loginRequest, { LoginRequestValuesType } from 'requests/user/loginRequest'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+import userActions from 'store/user/userActions'
 
-
-/*function getConfig(commonMsg: any, enterFormMsg: any) {
+/**
+ * Функция возвращает конфигурацию формы входа в сервис
+ * @param {Object} commonMsg — объект с текстами ошибок
+ * @param {Object} enterFormMsg — объект с текстами ошибок
+ */
+function getConfig(commonMsg: any, enterFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -52,8 +54,7 @@
             },
         },
         async requestFn(readyFieldValues) {
-            // @ts-ignore
-            return await loginRequest(readyFieldValues)
+            return await loginRequest(readyFieldValues as LoginRequestValuesType)
         },
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {
@@ -80,11 +81,10 @@
                     formDetails.setFormVisible(false)
                 }
             }
-        }
+        },
     }
 
     return config
-}*/
+}
 
-
-// export default getConfig
+export default getConfig

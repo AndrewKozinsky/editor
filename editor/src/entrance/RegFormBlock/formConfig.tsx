@@ -1,11 +1,14 @@
-// import React from 'react'
-//@ts-ignore
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import regRequest from 'src/requests/user/regRequest'
+import React from 'react'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import regRequest from 'requests/user/regRequest'
 
-
-/*function getConfig(commonMsg: any, regFormMsg: any) {
+/**
+ * Функция возвращает конфигурацию формы регистрации
+ * @param {Object} commonMsg — объект с текстами ошибок
+ * @param {Object} regFormMsg — объект с текстами ошибок
+ */
+function getConfig(commonMsg: any, regFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -69,7 +72,7 @@
     }
 
     return config
-}*/
+}
 
 
-// export default getConfig
+export default getConfig

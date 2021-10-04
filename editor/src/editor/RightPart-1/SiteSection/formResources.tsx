@@ -1,11 +1,10 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import FHTypes from 'libs/formHandler/types'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import createSiteRequest from 'src/requests/editor/sites/createSiteRequest'
-// import updateSiteRequest from 'src/requests/editor/sites/updateSiteRequest'
+// import createSiteRequest from 'requests/editor/sites/createSiteRequest'
+// import updateSiteRequest from 'requests/editor/sites/updateSiteRequest'
 
 
 // Объект настройки useFormHandler

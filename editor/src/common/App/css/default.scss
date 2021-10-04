@@ -1,8 +1,8 @@
-/*:root {
+:root {
     font-size: 10px;
-}*/
+}
 
-/*@font-face {
+@font-face {
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Regular.woff2") format("woff2");
     font-weight: 400;
@@ -16,9 +16,9 @@
     font-family: "SF UI Display";
     src: url("../fonts/SFUIDisplay-Bold.woff2") format("woff2");
     font-weight: 700;
-}*/
+}
 
-/*body {
+body {
     font-family: 'SF UI Display', sans-serif;
     font-size: 1.4rem;
     line-height: 1.8rem;
@@ -26,9 +26,9 @@
     overflow: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}*/
+}
 
-/** {
+* {
     &::-webkit-scrollbar {
         width: .6rem;
         height: 6px;
@@ -45,16 +45,16 @@
         background-color: var(--button-color);
         border-radius: var(--radius);
     }
-}*/
+}
 
 
-/*#root {
+#root {
     display: flex;
     min-height: 100vh;
     box-sizing: border-box;
-}*/
+}
 
-/*a {
+a {
     color: var(--accent-color);
     text-decoration: none;
     border-bottom: 1px solid hsla( var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), 0.3 );
@@ -69,4 +69,4 @@
         outline-offset: 4px;
         outline-width: 1px;
     }
-}*/
+}

@@ -5,14 +5,15 @@
  * строку разделённую пробелами для формирования классов CSS.
  * @param {Array} classesArr
  */
-/*export function makeCN(classesArr: string[]) {
+export function makeCN(classesArr: string[]): string{
     // Сформировать новый массив классов без пустых значений
     const filteredClassesArr = classesArr.filter(cls => {
         return (cls && cls !== '')
     })
 
+    // Составить строку из массива строк
     return filteredClassesArr.join(' ')
-}*/
+}
 
 /*export function getCN(CN: string): any {
     const classObject = {cls: CN}
@@ -41,10 +42,10 @@
 
 
 /** Функция возвращает случайный идентификатор */
-/*export function getRandomId() {
+export function getRandomId() {
     const randomNum = Math.random() * 100000
     return 'id' + Math.round(randomNum)
-}*/
+}
 
 /**
  * Функция принимает почту и возвращает домен

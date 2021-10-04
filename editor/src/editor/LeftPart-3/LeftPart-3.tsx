@@ -5,8 +5,8 @@
 // import { settingsPanelMessages } from 'messages/settingsPanelMessages'
 // import useGetMessages from 'messages/fn/useGetMessages'
 // import './LeftPart-3.scss'
-// import {AppStateType} from '../../store/rootReducer'
-// import StoreSettingsTypes from '../../store/settings/settingsTypes'
+// import {AppStateType} from 'store/rootReducer'
+// import StoreSettingsTypes from 'store/settings/settingsTypes'
 // import { useSelector } from 'react-redux'
 
 

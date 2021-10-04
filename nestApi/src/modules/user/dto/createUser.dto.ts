@@ -1,6 +1,6 @@
-// import { IsEmail, IsNotEmpty, Length, MaxLength } from 'class-validator'
+import { IsEmail, IsNotEmpty, Length, MaxLength } from 'class-validator'
 
-/*export class CreateUserDto {
+export class CreateUserDto {
     readonly name: string
 
     // NEXT TIME CREATE FILE WITH CONSTANTS EMAIL MAX WITH OR PASSWORD MIN AND MAX WITH AND SO LONG.
@@ -16,4 +16,4 @@
     @Length(6, 50, {message: 'user_CreateUserDto_passwordIsOutOfRange'})
     @IsNotEmpty({message: 'user_CreateUserDto_passwordIsEmpty'})
     readonly password: string
-}*/
+}
