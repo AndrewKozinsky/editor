@@ -3,7 +3,7 @@ import useMakeClasses from './EditorMain-classes'
 import { useGetPageVisibility } from './EditorMain-func'
 import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
 import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
-// import Modal from 'common/modalEntities/Modal/Modal'
+import Modal from 'common/modalEntities/Modal/Modal'
 
 
 /** Главная страница редактора. */
@@ -26,7 +26,7 @@ export default function EditorMain(): ReactElement {
                     <EditorPartProvider position='right' />
                 </div>
             </div>
-            {/*<Modal />*/}
+            <Modal />
         </>
     )
 }

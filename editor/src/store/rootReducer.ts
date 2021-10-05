@@ -5,7 +5,7 @@ import userReducer from './user/userReducer'
 import settingsReducer from './settings/settingsReducer'
 // import sitesReducer from './site/sitesReducer'
 // import articleReducer from './article/articleReducer'
-// import modalReducer from './modal/modalReducer'
+import modalReducer from './modal/modalReducer'
 // @ts-ignore
 import { composeWithDevTools } from 'redux-devtools-extension'
 // @ts-ignore
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     // sites:  sitesReducer,
     settings:  settingsReducer, // Настройки приложения
     // article: articleReducer,
-    // modal:  modalReducer
+    modal:  modalReducer
 })
 
 export const store = createStore(

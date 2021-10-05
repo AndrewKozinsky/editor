@@ -1,15 +1,14 @@
-// import { useEffect } from 'react'
-// import { useSelector } from 'react-redux'
-// import {AppStateType, useAppSelector} from 'store/rootReducer'
-// import FCType from 'libs/FormConstructor/FCType'
-// import StoreUserTypes from 'store/user/userTypes'
+import { useEffect } from 'react'
+import FCType from 'libs/FormConstructor/FCType'
+import useGetUserSelectors from 'store/user/userSelectors'
 
-/*export function useUpdateEmailInForm(formState: FCType.StateFormReturn) {
-    const email = useSelector((store: AppStateType) => store.user.email)
+
+export function useUpdateEmailInForm(formState: FCType.StateFormReturn) {
+    const { email } = useGetUserSelectors()
 
     useEffect(function() {
         if (!email) return
         const emailField = formState.fields.email
         formState.updateField('email', { ...emailField, value: [email]})
     }, [email])
-}*/
+}

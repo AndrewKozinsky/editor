@@ -1,43 +1,41 @@
-// import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
-/*import {
+import React from 'react'
+import useGetModalSelectors from 'store/modal/modalSelectors'
+import makeClasses from './Modal-classes'
+import {
     useGetIsModalOpen,
     useGetModalCloseHandler
-} from './Modal-func'*/
-// import Button from 'common/formElements/Button/Button'
-// import './Modal.scss'
+} from './Modal-func'
+import Button from 'common/formElements/Button/Button'
 
 
 /** Модальное окно */
-/*export default function Modal() {
+export default function Modal() {
 
     // Содержимое модального окна
-    const { content } = useSelector((store: AppStateType) => store.modal)
+    const { content } = useGetModalSelectors()
 
     // Обработчик закрытия модального окна
     const onModalClose = useGetModalCloseHandler()
-
     // Открыто ли модальное окно
     const isOpen = useGetIsModalOpen()
 
-    const CN = 'modal'
+    const CN = makeClasses()
 
     // Ничего не отрисовывать если модальное окно закрыто
     if (!isOpen) return null
 
     return (
-        <div className={`${CN}__outer-wrapper`} onClickCapture={(e) => onModalClose(e)}>
-            <div className={CN}>
+        <div className={CN.outerWrapper} onClickCapture={(e) => onModalClose(e)}>
+            <div className={CN.root}>
                 <Button
                     icon='btnSignClose'
                     onClick={onModalClose}
                     autoFocus
-                    extraClass={`${CN}__close-btn`}
+                    extraClass={CN.closeBtn}
                     id='modal-close-btn'
                 />
                 {content}
             </div>
         </div>
     )
-}*/
+}

@@ -1,16 +1,15 @@
-// import React from 'react'
-// import { useDispatch, useSelector} from 'react-redux'
-// import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-// import {AppStateType} from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import { languageSectionMessages } from 'messages/languageSectionMessages'
-// import useGetMessages from 'messages/fn/useGetMessages'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+import actions from 'store/rootAction'
+import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import { languageSectionMessages } from 'messages/languageSectionMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 
-/*export default function LanguageSection() {
-
+export default function LanguageSection() {
     // Язык интерфейса
-    const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
+    const { editorLanguage } = useGetSettingsSelectors()
 
     // Обработчик выбора другого языка
     const onChangeHandler = useGetOnChangeHandler()
@@ -22,7 +21,7 @@
             label={languageSectionMsg.langRadiosHeader}
             inputType='radio'
             groupName='language'
-            value={[lang]}
+            value={[editorLanguage]}
             onChange={onChangeHandler}
             inputsArr={
                 [
@@ -32,10 +31,10 @@
             }
         />
     )
-}*/
+}
 
 /** Хук возвращает функцию-обработчик выбора другого языка */
-/*function useGetOnChangeHandler() {
+function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 
     return function (e: React.BaseSyntheticEvent) {
@@ -43,4 +42,4 @@
 
         dispatch(actions.settings.setEditorLanguage(value))
     }
-}*/
+}

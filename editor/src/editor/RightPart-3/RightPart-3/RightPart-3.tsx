@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
-// import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
-// import HeaderPage from 'common/HeaderPage/HeaderPage'
-// import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
-// import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
-// import { userTabContentMessages } from 'messages/userTabContentMessages'
-// import { editorTabContentMessages } from 'messages/editorTabContentMessages'
-// import './RightPart-3.scss'
+import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import HeaderPage from 'common/HeaderPage/HeaderPage'
+import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
+import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
+import { userTabContentMessages } from 'messages/userTabContentMessages'
+import { editorTabContentMessages } from 'messages/editorTabContentMessages'
+import './RightPart-3.scss'
 
 
 type RightPart3PropType = {
@@ -19,22 +18,20 @@ export default function RightPart3(props: RightPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
-    // const lang: 'rus' | 'eng' = useSelector((store: AppStateType) => store.settings.editorLanguage)
-
-    // Активная вкладка панели настроек
-    // const activeTab = useSelector((store: AppStateType) => store.settings.settingsPanelTab)
+    // Язык и активная вкладка панели настроек
+    const { editorLanguage, settingsPanelTab } = useGetSettingsSelectors()
 
     // Возвращаемые компоненты
-    // const [partComponents, setPartComponents] = useState(<></>)
+    const [partComponents, setPartComponents] = useState(<></>)
 
-    /*useEffect(function () {
+    useEffect(function () {
         // Составление массива из двух элементов. Элементу, который соответствует вкладке, задаётся видимость.
         const parts = ['user', 'editor'].map((tabName) => {
             if (tabName === 'user') {
                 return (
                     <HeaderPage
-                        headerText={userTabContentMessages.header[lang]}
-                        display={tabName === activeTab}
+                        headerText={userTabContentMessages.header[editorLanguage]}
+                        display={tabName === settingsPanelTab}
                         key={tabName}
                     >
                         <SettingsUserTabContent />
@@ -44,8 +41,8 @@ export default function RightPart3(props: RightPart3PropType) {
             else if (tabName === 'editor') {
                 return (
                     <HeaderPage
-                        headerText={editorTabContentMessages.header[lang]}
-                        display={tabName === activeTab}
+                        headerText={editorTabContentMessages.header[editorLanguage]}
+                        display={tabName === settingsPanelTab}
                         key={tabName}
                     >
                         <SettingsEditorTabContent />
@@ -56,14 +53,14 @@ export default function RightPart3(props: RightPart3PropType) {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [activeTab, lang])*/
+    }, [settingsPanelTab, editorLanguage])
 
     const CN = 'right-part-3'
     const style = display ? {} : {display: 'none'}
 
     return (
         <div className={CN} style={style}>
-            {/*{partComponents}*/}
+            {partComponents}
         </div>
     )
 }

@@ -7,7 +7,6 @@ import { useGetTabData } from './SectionsTabs-func'
 
 /** Компонент вкладок переключающих разделы радактора */
 export default function SectionsTabs() {
-
     const CN = makeClasses()
 
     // Данные для генерирования вкладок

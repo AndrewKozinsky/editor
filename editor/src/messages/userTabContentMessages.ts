@@ -1,8 +1,8 @@
 
 // Содержимое вкладки «Пользователь»
-/*export const userTabContentMessages = {
+export const userTabContentMessages = {
     header: {
         eng: 'User',
         rus: 'Пользователь'
     },
-}*/
+}

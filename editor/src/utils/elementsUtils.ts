@@ -3,7 +3,6 @@
  * @param {HTMLElement} $targetElem — element with you need to check match to selecor
  * @param {String} selector — CSS selector
  */
-/*
 export function hasElemParentWithSelector($targetElem: HTMLElement, selector: string) {
     let hasParent = false
 
@@ -20,4 +19,4 @@ export function hasElemParentWithSelector($targetElem: HTMLElement, selector: st
     }
 
     return hasParent
-}*/
+}

@@ -1,15 +1,15 @@
-// import React, {ReactElement} from 'react'
-// import Header from '../textBlocks/Header/Header'
-// import './HeaderPage.scss'
+import React, {ReactElement} from 'react'
+import Header from '../textBlocks/Header/Header'
+import makeClasses from './HeaderPage-classes'
 
 
-/*type HeaderPagePropType = {
+type HeaderPagePropType = {
     headerText: string | ReactElement
     display?: boolean
     children: ReactElement | ReactElement[]
-}*/
+}
 
-/*export default function HeaderPage(props: HeaderPagePropType) {
+export default function HeaderPage(props: HeaderPagePropType) {
 
     const {
         headerText,
@@ -17,19 +17,18 @@
         children
     } = props
 
-    // Корневой класс
-    const CN = 'header-page'
+    const CN = makeClasses()
 
     let content: ReactElement
 
     if (Array.isArray(children)) {
         content = (
-            <div className={`${CN}__content-divided`}>
-                <div className={`${CN}__content-divided-left`}>
+            <div className={CN.contentDivided}>
+                <div className={CN.contentDividedLeft}>
                     {children[0]}
                 </div>
-                <div className={`${CN}__content-divided-center`} />
-                <div className={`${CN}__content-divided-right`}>
+                <div className={CN.contentDividedCenter} />
+                <div className={CN.contentDividedRight}>
                     {children[1]}
                 </div>
             </div>
@@ -37,7 +36,7 @@
     }
     else {
         content = (
-            <div className={`${CN}__content-single`}>
+            <div className={CN.contentSingle}>
                 {children}
             </div>
         )
@@ -46,11 +45,11 @@
     const style = display ? {} : {display: 'none'}
 
     return (
-        <div className={CN} style={style}>
-            <div className={`${CN}__header-wrapper`}>
+        <div className={CN.root} style={style}>
+            <div className={CN.headerWrapper}>
                 <Header text={headerText} type='h2'/>
             </div>
             {content}
         </div>
     )
-}*/
+}

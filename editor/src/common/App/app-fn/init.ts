@@ -20,7 +20,7 @@ export function useGetAndSetEditorSettings() {
         let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
         let mainTab = getFromLocalStorage('editorTab', 3) // id главной вкладки
         // let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
-        // let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
+        let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
         // let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
         // let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
         // let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
@@ -33,7 +33,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setMainTab(mainTab) )
         // dispatch( sitesActions.setCurrentSiteId(siteId) )
-        // dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
+        dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         // dispatch( sitesActions.setRightMainTab(sitePartTab) )
         // dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
         // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )

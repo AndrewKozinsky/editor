@@ -1,13 +1,11 @@
-// import React from 'react'
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import { changeEmailRequest } from 'requests/user/changeEmailRequest'
-// import { store } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
+import FCType from 'libs/FormConstructor/FCType'
+import { changeEmailRequest } from 'requests/user/changeEmailRequest'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
 
 
-/*function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
+function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
     const submitBtnFormConfig: FCType.Config = {
         bottom: {
             submit: {
@@ -42,7 +40,7 @@
     }
 
     return submitBtnFormConfig
-}*/
+}
 
 
-// export default getSubmitBtnFormConfig
+export default getSubmitBtnFormConfig

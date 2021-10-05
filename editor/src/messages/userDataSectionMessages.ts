@@ -1,6 +1,6 @@
 
 // Секция «Данные пользователя»
-/*export const userDataSectionMessages = {
+export const userDataSectionMessages = {
     header: {
         eng: 'User data',
         rus: 'Данные пользователя'
@@ -29,10 +29,10 @@
         eng: 'Mail cannot be longer than 100 characters',
         rus: 'Почта не может быть длиннее 100 символов'
     },
-    /!*newEmailEqualToOldOne: {
+    /*newEmailEqualToOldOne: {
         eng: 'This is the current mailing address. You must enter a different one to change it.',
         rus: 'Это текущий почтовый адрес. Для изменения нужно ввести другой.'
-    },*!/
+    },*/
     emailHasChanged: {
         eng: 'Your email has been successfully changed. A confirmation link has been sent to your email. Click on it to confirm your email.',
         rus: 'Почта успешно изменена. На вашу почту отправлена ссылка на подтверждение. Перейдите по ней чтобы подтвердить почту.'
@@ -53,4 +53,4 @@
         eng: 'Mail has been changed successfully',
         rus: 'Почта успешно изменена'
     },
-}*/
+}

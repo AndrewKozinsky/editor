@@ -1,14 +1,14 @@
-// import { useEffect, useState } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
-// import { AppStateType } from 'src/store/rootReducer'
-// import actions from 'store/rootAction'
-// import { hasElemParentWithSelector } from '../../../utils/elementsUtils'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import actions from 'store/rootAction'
+import { hasElemParentWithSelector } from 'utils/elementsUtils'
+import useGetModalSelectors from 'store/modal/modalSelectors'
 
 
 /** Хук возращает статус нужно ли отрисовывать окно */
-/*export function useGetIsModalOpen() {
+export function useGetIsModalOpen() {
     // Открыто ли модальное окно и его содержимое
-    const { isOpen } = useSelector((store: AppStateType) => store.modal)
+    const { isOpen } = useGetModalSelectors()
 
     // Должно ли модальное окно быть отрисовано
     const [isModalOpen, setIsModalOpen] = useState(isOpen)
@@ -19,10 +19,10 @@
     }, [isOpen])
 
     return isModalOpen
-}*/
+}
 
 /** Хук возвращает функцию закрывающую модальное окно */
-/*export function useGetModalCloseHandler() {
+export function useGetModalCloseHandler() {
     const dispatch = useDispatch()
 
     // @ts-ignore
@@ -34,4 +34,4 @@
 
         dispatch(actions.modal.closeModal())
     }
-}*/
+}

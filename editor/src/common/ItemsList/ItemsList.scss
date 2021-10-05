@@ -1,12 +1,12 @@
-//@import "common/commonStyles/commonStyles";
+@import "../../common/commonStyles/commonStyles";
 
-//$CN: items-list;
+$CN: items-list;
 
-//.#{$CN} {}
+.#{$CN} {}
 
-//$item: #{$CN}__item;
+$item: #{$CN}__item;
 
-/*.#{$item} {
+.#{$item} {
     display: block;
     width: 100%;
     font-size: 1.4rem;
@@ -35,11 +35,11 @@
         opacity: .5;
         cursor: default;
     }
-}*/
+}
 
 
 // Активная кнопка
-/*.#{$item}--active {
+.#{$item}--active {
     color: white;
     cursor: default;
     background-color: var(--accent-color);
@@ -47,4 +47,4 @@
     &:hover {
         background-color: var(--accent-color);
     }
-}*/
+}

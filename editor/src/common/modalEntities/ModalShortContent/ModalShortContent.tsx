@@ -1,15 +1,15 @@
-// import React, { ReactElement } from 'react'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Header from '../../textBlocks/Header/Header'
+import React, { ReactElement } from 'react'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Header from '../../textBlocks/Header/Header'
 
-/*type ModalShortContentPropType = {
+type ModalShortContentPropType = {
     header: string | ReactElement
     text:string | ReactElement
     bottomElem: ReactElement
-}*/
+}
 
 /* Modal content component with header, text and any number of buttons */
-/*function ModalShortContent(props: ModalShortContentPropType) {
+function ModalShortContent(props: ModalShortContentPropType) {
     const { header, text, bottomElem } = props
 
     return (
@@ -25,6 +25,6 @@
             </Wrapper>
         </>
     )
-}*/
+}
 
-// export default ModalShortContent
+export default ModalShortContent

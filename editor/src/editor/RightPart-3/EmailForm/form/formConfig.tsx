@@ -1,12 +1,12 @@
-// import React from 'react'
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import { store } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import ModalContent from '../modal/ModalContent'
+import React from 'react'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import ModalContent from '../modal/ModalContent'
 
 
-/*function getConfig(userDataSectionMsg: any) {
+function getConfig(userDataSectionMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -38,7 +38,7 @@
     }
 
     return config
-}*/
+}
 
 
-// export default getConfig
+export default getConfig

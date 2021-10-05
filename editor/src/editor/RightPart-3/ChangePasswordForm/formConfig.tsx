@@ -1,9 +1,9 @@
 // import React from 'react'
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import changePasswordRequest from 'requests/user/changePasswordRequest'
+import * as yup from 'yup'
+import FCType from 'libs/FormConstructor/FCType'
+import changePasswordRequest from 'requests/user/changePasswordRequest'
 
-/*function getConfig(commonMsg: any, changePasswordSectionMsg: any) {
+function getConfig(commonMsg: any, changePasswordSectionMsg: any) {
     const config: FCType.Config = {
         fields: {
             currentPassword: {
@@ -67,6 +67,6 @@
     }
 
     return config
-}*/
+}
 
-// export default getConfig
+export default getConfig

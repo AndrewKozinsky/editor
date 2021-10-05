@@ -1,13 +1,11 @@
-// import React from 'react'
-// import * as yup from 'yup'
-// import FCType from 'libs/FormConstructor/FCType'
-// import { store } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
-// import regRequest from '../../../requests/user/deleteAccountRequest'
+import FCType from 'libs/FormConstructor/FCType'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
+import deleteAccountRequest from 'requests/user/deleteAccountRequest'
 
 
-/*function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
+function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
     const submitBtnFormConfig: FCType.Config = {
         bottom: {
             submit: {
@@ -18,7 +16,7 @@
             },
         },
         async requestFn(readyFieldValues, outerFns) {
-            return await regRequest()
+            return await deleteAccountRequest()
         },
         afterSubmit(response, outerFns) {
             if (response.status === 'success') {
@@ -44,7 +42,7 @@
     }
 
     return submitBtnFormConfig
-}*/
+}
 
 
-// export default getSubmitBtnFormConfig
+export default getSubmitBtnFormConfig

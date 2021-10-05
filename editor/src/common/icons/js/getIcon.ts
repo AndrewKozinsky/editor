@@ -13,14 +13,14 @@ import MainTabHelp from '../icons/mainTabHelp'
 import MainTabRoundScion from '../icons/mainTabRoundScion'
 // import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
-// import BtnSignTrash from '../icons/btnSignTrash'
+import BtnSignTrash from '../icons/btnSignTrash'
 // import BtnSignAdd from '../icons/btnSignAdd'
 // import BtnSignCode from '../icons/btnSignCode'
 // import BtnSignJson from '../icons/btnSignJson'
-// import BtnSignClose from '../icons/btnSignClose'
-// import BtnSignExit from '../icons/btnSignExit';
-// import EditorLightTheme from '../icons/editorLightTheme'
-// import EditorDarkTheme from '../icons/editorDarkTheme'
+import BtnSignClose from '../icons/btnSignClose'
+import BtnSignExit from '../icons/btnSignExit';
+import EditorLightTheme from '../icons/editorLightTheme'
+import EditorDarkTheme from '../icons/editorDarkTheme'
 import SiteTabSite from '../icons/siteTabSite'
 import SiteTabPlugins from '../icons/siteTabPlugins'
 import SiteTabArticle from '../icons/siteTabArticle'
@@ -81,20 +81,20 @@ export function getIcon(type: string): ReactNode {
         // Значки на кнопках
         // btnSignSave: BtnSignSave,
         // btnSignFolder: BtnSignFolder,
-        // btnSignTrash: BtnSignTrash,
+        btnSignTrash: BtnSignTrash,
         // btnSignCode: BtnSignCode,
         // btnSignAdd: BtnSignAdd,
         // btnSignJson: BtnSignJson,
-        // btnSignClose: BtnSignClose,
-        // btnSignExit: BtnSignExit,
+        btnSignClose: BtnSignClose,
+        btnSignExit: BtnSignExit,
         // btnSignEdit: BtnSignEdit,
         // btnSignUndo: BtnSignUndo,
         // btnSignRedo: BtnSignRedo,
         // btnSignCancel: BtnSignCancel,
 
         // Тема интерфейса
-        // editorLightTheme: EditorLightTheme,
-        // editorDarkTheme: EditorDarkTheme,
+        editorLightTheme: EditorLightTheme,
+        editorDarkTheme: EditorDarkTheme,
 
         // Значки на FilesTree
         // filesTreeTriangle: FilesTreeTriangle,

@@ -1,17 +1,17 @@
-// import {ReactElement, useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import {AppStateType} from 'store/rootReducer'
-// import actions from 'store/rootAction'
+import { ReactElement, useEffect, useState } from 'react'
+import useGetModalSelectors from '../store/modal/modalSelectors'
+import { useDispatch } from 'react-redux'
+import actions from 'store/rootAction'
 
 /**
  * Хук возвращает функцию показывающую модальное окно с переданным содержимым
  * @param modalContent
  */
-/*export default function useGetShowModal(modalContent: ReactElement) {
+export default function useGetShowModal(modalContent: ReactElement) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
-    const isOpen = useSelector((store: AppStateType) => store.modal.isOpen)
+    const { isOpen } = useGetModalSelectors()
 
     // Должно ли быть открыто модальное окно подтверждения изменения почты
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,4 +31,4 @@
     }, [isModalOpen])
 
     return () => setIsModalOpen(true)
-}*/
+}

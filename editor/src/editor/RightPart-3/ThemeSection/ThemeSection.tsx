@@ -1,20 +1,21 @@
-// import React from 'react'
-// import { useDispatch, useSelector} from 'react-redux'
-// import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
 // import { AppStateType, useAppSelector } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import SvgIcon from 'common/icons/SvgIcon'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import { themeSectionMessages } from 'messages/themeSectionMessages'
-// import useGetMessages from 'messages/fn/useGetMessages'
+import actions from 'store/rootAction'
+import SvgIcon from 'common/icons/SvgIcon'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { themeSectionMessages } from 'messages/themeSectionMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+import useGetSettingsSelectors from '../../../store/settings/settingsSelectors'
 
 
-/*export default function ThemeSection() {
+export default function ThemeSection() {
     const themeSectionMsg = useGetMessages(themeSectionMessages)
 
     // Тема интерфейса
-    const theme = useAppSelector(store => store.settings.editorTheme)
-
+    const { editorTheme } = useGetSettingsSelectors()
+    // Обработчик изменения переключателя темы интерфейса
     const onChangeHandler = useGetOnChangeHandler()
 
     return (
@@ -23,7 +24,7 @@
                 label={themeSectionMsg.themeRadiosHeader}
                 inputType='radio'
                 groupName='theme'
-                value={[theme]}
+                value={[editorTheme]}
                 gap={20}
                 vertical
                 onChange={onChangeHandler}
@@ -57,14 +58,14 @@
             />
         </>
     )
-}*/
+}
 
-
-/*function useGetOnChangeHandler() {
+// Обработчик изменения переключателя темы интерфейса
+function useGetOnChangeHandler() {
     const dispatch = useDispatch()
 
     return function (e: React.BaseSyntheticEvent) {
         const value = e.target.value
         dispatch(actions.settings.setEditorTheme(value))
     }
-}*/
+}

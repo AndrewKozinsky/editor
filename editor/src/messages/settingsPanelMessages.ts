@@ -1,6 +1,6 @@
 
 // Панель «Настройки»
-/*export const settingsPanelMessages = {
+export const settingsPanelMessages = {
     header: {
         eng: 'Settings',
         rus: 'Настройки'
@@ -13,4 +13,4 @@
         eng: 'Editor',
         rus: 'Редактор'
     },
-}*/
+}

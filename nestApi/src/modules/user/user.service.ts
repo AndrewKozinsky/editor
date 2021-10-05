@@ -17,8 +17,8 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
-// import { ChangeEmailDto } from './dto/changeEmail.dto'
-// import { ChangePasswordDto } from './dto/changePassword.dto'
+import { ChangeEmailDto } from './dto/changeEmail.dto'
+import { ChangePasswordDto } from './dto/changePassword.dto'
 const crypto = require('crypto')
 import { hash } from 'bcrypt'
 
@@ -201,7 +201,7 @@ export class UserService {
         return await this.userRepository.save(user)
     }
 
-    /*async changeEmail(user: UserEntity, changeEmailDto: ChangeEmailDto, language: MiscTypes.Language) {
+    async changeEmail(user: UserEntity, changeEmailDto: ChangeEmailDto, language: MiscTypes.Language) {
         // Получу новую почту
         const newEmail = changeEmailDto.email
 
@@ -229,9 +229,9 @@ export class UserService {
         const updatedUser = { ...user, emailConfirmToken, email: newEmail }
 
         return await this.userRepository.save(updatedUser)
-    }*/
+    }
 
-    /*async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
+    async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
 
         // Compare user password in DB and the password which user passed in body
         const isPasswordsMatch = await compare(changePasswordDto.currentPassword, user.password)
@@ -246,9 +246,9 @@ export class UserService {
 
         // Поставить новый пароль в данные пользователя
         return await this.userRepository.save(updatedUser)
-    }*/
+    }
 
-    /*async deleteCurrentUser(req: ExpressRequestInterface) {
+    async deleteCurrentUser(req: ExpressRequestInterface) {
         const user = req.user
 
         this.userRepository.delete(user)
@@ -272,7 +272,7 @@ export class UserService {
         // await ArticleModel.deleteMany({userId: req.params.siteId})
 
         return user
-    }*/
+    }
 
 
     // ADDITIONAL METHODS
