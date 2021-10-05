@@ -1,6 +1,5 @@
 
 // Подсказки вкладок
-/*
 export const mainTabsMessages = {
     mainTabMaterials: {
         eng: 'Materials',
@@ -18,4 +17,4 @@ export const mainTabsMessages = {
         eng: 'Help',
         rus: 'Помощь'
     },
-}*/
+}

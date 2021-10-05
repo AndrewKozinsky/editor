@@ -35,21 +35,21 @@ const settingsActions = {
         }
     },
 
-    // Установка номера последней вкладки
-    /*setMainTab(payload: StoreSettingsTypes.MainTab): StoreSettingsTypes.SetMainTabAction {
+    // Установка номера главной вкладки
+    setMainTab(payload: StoreSettingsTypes.MainTab): StoreSettingsTypes.SetMainTabAction {
         return {
             type: StoreSettingsTypes.SETTINGS_SET_MAIN_TAB,
             payload
         }
-    },*/
+    },
 
-    // Установка номера последней вкладки
-    /*setSettingsPanelTab(payload: StoreSettingsTypes.SettingsPanelTab): StoreSettingsTypes.SetSettingsPanelTabAction {
+    // Активная вкладка панели «Настройки»: user или editor
+    setSettingsPanelTab(payload: StoreSettingsTypes.SettingsPanelTab): StoreSettingsTypes.SetSettingsPanelTabAction {
         return {
             type: StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB,
             payload
         }
-    },*/
+    },
 }
 
 export default settingsActions

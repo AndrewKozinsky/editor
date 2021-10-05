@@ -18,7 +18,7 @@ export function useGetAndSetEditorSettings() {
         // Получение значения из LocalStorage
         let language = getFromLocalStorage('editorLanguage', 'eng') // Язык интерфейса: eng или rus
         let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
-        // let mainTab = getFromLocalStorage('editorTab', 3) // id главной вкладки
+        let mainTab = getFromLocalStorage('editorTab', 3) // id главной вкладки
         // let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
         // let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
         // let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
@@ -31,7 +31,7 @@ export function useGetAndSetEditorSettings() {
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
-        // dispatch( settingsActions.setMainTab(mainTab) )
+        dispatch( settingsActions.setMainTab(mainTab) )
         // dispatch( sitesActions.setCurrentSiteId(siteId) )
         // dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         // dispatch( sitesActions.setRightMainTab(sitePartTab) )

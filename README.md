@@ -46,6 +46,14 @@
 27. Запустите: Реакт в режиме разработки ```npm run dev```
 28. В браузере перейдите по адресу **http://editorium.local/editor/**.
 
+
+### Запуск на сервере
+1. Зайдите на сервер и перейдите в папку ```/home/sites/editor```.
+2. Обновите файлы: ```git pull```.
+3. Проверьте чтобы активной была ветка develop: ```git branch```.
+4. Если ветка develop не активна, то перейдите в неё ```git checkout develop```.
+5. Запустите docker-compose по указанному файлу конфигурации: ```docker-compose -f docker-compose-server.yml up --build```
+
 ### Способ получения названий классов CSS
 Названия классов нужно писать не напрямую в разметке, а через объект. Подробнее написано [на GitHub](https://github.com/AndrewKozinsky/organizing-css-code) в разделе «Объект с классами».
 

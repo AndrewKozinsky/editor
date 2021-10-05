@@ -1,13 +1,13 @@
-// import React from 'react'
-// import './RightPart-4.scss'
+import React from 'react'
+import './RightPart-4.scss'
 
 
-/*type RightPart4PropType = {
+type RightPart4PropType = {
     display?: boolean
-}*/
+}
 
-/** Правая часть третьей главной вкладки */
-/*export default function RightPart4(props: RightPart4PropType) {
+/** Правая часть четвёртой главной вкладки */
+export default function RightPart4(props: RightPart4PropType) {
     const {
         display // Показывать ли обёртку
     } = props
@@ -17,7 +17,6 @@
 
     return (
         <div className={CN} style={style}>
-
         </div>
     )
-}*/
+}

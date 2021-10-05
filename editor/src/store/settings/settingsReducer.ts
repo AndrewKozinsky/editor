@@ -6,8 +6,8 @@ export type SettingsReducerType = {
     editorTheme: StoreSettingsTypes.EditorTheme
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
-    // mainTab: StoreSettingsTypes.MainTab
-    // settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
+    mainTab: StoreSettingsTypes.MainTab
+    settingsPanelTab: StoreSettingsTypes.SettingsPanelTab
 }
 
 // Изначальные значения
@@ -25,9 +25,9 @@ const initialState: SettingsReducerType = {
     // Это нужно для анимированного появления страницы редактора и страниц входа.
     lastAddress: '',
     // Номер открытой вкладки
-    // mainTab: 0,
+    mainTab: 0,
     // Активная вкладка панели «Настройки»: user или editor
-    // settingsPanelTab: 'user'
+    settingsPanelTab: 'user'
 }
 
 // Установка языка интерфейса
@@ -68,8 +68,8 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
     }
 }
 
-// Установка адреса последней страницы
-/*function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
+// Установка номера главной вкладки
+function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
     // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorTab', action.payload)
 
@@ -77,9 +77,9 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
         ...state,
         mainTab: action.payload
     }
-}*/
+}
 // Установка id вкладки в Настройках
-/*function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
+function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorSettingsTabId', action.payload)
 
@@ -87,7 +87,7 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
         ...state,
         settingsPanelTab: action.payload
     }
-}*/
+}
 
 
 // Редьюсер Store.settings
@@ -102,10 +102,10 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             return setEntryAndEditorViewState(state, action)
         case StoreSettingsTypes.SETTINGS_SET_LAST_ADDRESS:
             return setLastAddress(state, action)
-        // case StoreSettingsTypes.SETTINGS_SET_MAIN_TAB:
-        //     return setMainTab(state, action)
-        // case StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB:
-        //     return setSettingsPanelTab(state, action)
+        case StoreSettingsTypes.SETTINGS_SET_MAIN_TAB:
+            return setMainTab(state, action)
+        case StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB:
+            return setSettingsPanelTab(state, action)
         default:
             // @ts-ignore
             const x: never = null

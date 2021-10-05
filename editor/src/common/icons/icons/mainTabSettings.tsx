@@ -1,7 +1,7 @@
-// import React from 'react'
+import React from 'react'
 
-
-/*export default function MainTabSettings() {
+// Значёк у вкладки настроек
+export default function MainTabSettings() {
     return (
         <g fillRule="evenodd">
             <g transform="translate(2, 4)" fillRule="nonzero">
@@ -10,6 +10,4 @@
             </g>
         </g>
     )
-}*/
-
-
+}

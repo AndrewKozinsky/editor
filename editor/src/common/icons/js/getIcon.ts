@@ -6,11 +6,11 @@ import NoticeSuccess from '../icons/NoticeSuccess'
 import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
 // import SelectInputArrows from '../icons/selectInputArrows'
-// import MainTabMaterials from '../icons/mainTabMaterials'
-// import MainTabEditor from '../icons/mainTabEditor'
-// import MainTabSettings from '../icons/mainTabSettings'
-// import MainTabHelp from '../icons/mainTabHelp'
-// import MainTabRoundScion from '../icons/mainTabRoundScion'
+import MainTabMaterials from '../icons/mainTabMaterials'
+import MainTabEditor from '../icons/mainTabEditor'
+import MainTabSettings from '../icons/mainTabSettings'
+import MainTabHelp from '../icons/mainTabHelp'
+import MainTabRoundScion from '../icons/mainTabRoundScion'
 // import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
 // import BtnSignTrash from '../icons/btnSignTrash'
@@ -21,10 +21,10 @@ import ErrorTriangle from '../icons/errorTriangle'
 // import BtnSignExit from '../icons/btnSignExit';
 // import EditorLightTheme from '../icons/editorLightTheme'
 // import EditorDarkTheme from '../icons/editorDarkTheme'
-// import SiteTabSite from '../icons/siteTabSite'
-// import SiteTabPlugins from '../icons/siteTabPlugins'
-// import SiteTabArticle from '../icons/siteTabArticle'
-// import SiteTabComponents from '../icons/siteTabComponents'
+import SiteTabSite from '../icons/siteTabSite'
+import SiteTabPlugins from '../icons/siteTabPlugins'
+import SiteTabArticle from '../icons/siteTabArticle'
+import SiteTabComponents from '../icons/siteTabComponents'
 // import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
 // import FilesTreeTriangle from '../icons/filesTreeTriangle'
 // import FilesTreePlus from '../icons/filesTreePlus'
@@ -64,19 +64,19 @@ export function getIcon(type: string): ReactNode {
         // selectInputArrows: SelectInputArrows,
 
         // Значки главных вкладок
-        // mainTabMaterials: MainTabMaterials,
-        // mainTabEditor: MainTabEditor,
-        // mainTabSettings: MainTabSettings,
-        // mainTabHelp: MainTabHelp,
+        mainTabMaterials: MainTabMaterials,
+        mainTabEditor: MainTabEditor,
+        mainTabSettings: MainTabSettings,
+        mainTabHelp: MainTabHelp,
 
         // Значки на вкладках сайта
-        // siteTabSite: SiteTabSite,
-        // siteTabPlugins: SiteTabPlugins,
-        // siteTabComponents: SiteTabComponents,
-        // siteTabArticle: SiteTabArticle,
+        siteTabSite: SiteTabSite,
+        siteTabPlugins: SiteTabPlugins,
+        siteTabComponents: SiteTabComponents,
+        siteTabArticle: SiteTabArticle,
 
         // Закругляемая часть в кнопки вкладки
-        // mainTabRoundScion: MainTabRoundScion,
+        mainTabRoundScion: MainTabRoundScion,
 
         // Значки на кнопках
         // btnSignSave: BtnSignSave,
