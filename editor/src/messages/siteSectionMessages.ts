@@ -1,10 +1,10 @@
 
 // Содержимое вкладки «Сайты»
-/*const siteSectionMessages = {
-    headerNewSite: {
+export const siteSectionMessages = {
+    /*headerNewSite: {
         eng: 'New site',
         rus: 'Новый сайт'
-    },
+    },*/
     siteNameInput: {
         eng: 'Name',
         rus: 'Название'
@@ -14,13 +14,13 @@
         rus: 'Например: Корпоративный портал'
     },
     siteNameInputRequired: {
-        eng: 'Required',
+        eng: 'This field is required',
         rus: 'Обязательное поле'
     },
-    defaultTemplateInput: {
+    /*defaultTemplateInput: {
         eng: 'The default template of the plug-in files',
         rus: 'Шаблон подключаемых файлов по умолчанию'
-    },
+    },*/
     submitBtnTextNewSite: {
         eng: 'Create',
         rus: 'Создать'
@@ -45,8 +45,8 @@
         eng: 'Delete',
         rus: 'Удалить'
     },
-    defaultTemplateSelectNoValue: {
+    /*defaultTemplateSelectNoValue: {
         eng: 'Not selected',
         rus: 'Не выбрано'
-    },
-}*/
+    },*/
+}

@@ -1,8 +1,7 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
-// import SitePartProvider from '../SitePartProvider/SitePartProvider'
-// import SitePartTabs from '../SitePartTabs/SitePartTabs'
+import SitePartProvider from '../SitePartProvider/SitePartProvider'
+import SitePartTabs from '../SitePartTabs/SitePartTabs'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
 import './RightPart-1.scss'
 
 
@@ -17,18 +16,18 @@ export default function RightPart1(props: RightPart1PropType) {
     } = props
 
     // Выделенный сайт
-    // const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
+    const { currentSiteId } = useGetSitesSelectors()
 
     const CN = 'right-part-1'
     const style = display ? {} : {display: 'none'}
 
     // Ничего не отрисовывать если сайт не выделен
-    // if (currentSiteId === null) return null
+    if (currentSiteId === null) return null
 
     return (
         <div className={CN} style={style}>
-            {/*<SitePartTabs />*/}
-            {/*<SitePartProvider />*/}
+            <SitePartTabs />
+            <SitePartProvider />
         </div>
     )
 }

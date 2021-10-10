@@ -20,6 +20,8 @@ export default async function formSubmitHandler(
     outerFns: FCType.OuterFns, // User's functions passed to FormConstructor config
     commonSuccess: FCType.CommonSuccess, // Success message
     showCommonSuccess: FCType.ShowCommonSuccess, // Show success message setting function
+    formData: FCType.FormData, // Пользовательские данные формы
+    setFormData: FCType.SetFormData, // Установка пользовательских данных формы
     serverMsg: any // Error message from a server response
 ): Promise<void> {
     e.preventDefault()
@@ -55,9 +57,16 @@ export default async function formSubmitHandler(
     // Get ready fields values
     const readyFieldValues = getReadyFieldsValues(fields)
 
+    const formDetails = {
+        setFormVisible,
+        readyFieldValues,
+        formData,
+        setFormData
+    }
+
     // Send data to a server and get response
     let response: FCType.Response = formConfig.requestFn
-        ? await formConfig.requestFn(readyFieldValues, outerFns)
+        ? await formConfig.requestFn(readyFieldValues, outerFns, formDetails)
         : {status: 'success'}
 
     // Unlock all fields. Remove loading status from the submit button
@@ -92,10 +101,6 @@ export default async function formSubmitHandler(
     }
 
     if (formConfig.afterSubmit) {
-        const formDetails = {
-            setFormVisible,
-            readyFieldValues
-        }
-        formConfig.afterSubmit(response, outerFns, formDetails, )
+        formConfig.afterSubmit(response, outerFns, formDetails)
     }
 }

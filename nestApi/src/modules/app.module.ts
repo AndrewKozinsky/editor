@@ -1,11 +1,12 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
+import { join } from 'path'
 import { UserModule } from './user/user.module'
+import { SiteModule } from './site/site.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import ormconfig from '../ormconfig'
 import { ServeStaticModule } from '@nestjs/serve-static'
-import { join } from 'path'
 import { AuthMiddleware } from './user/middlewares/auth.middleware'
-import {LanguageMiddleware} from './user/middlewares/language.middleware'
+import { LanguageMiddleware } from './user/middlewares/language.middleware'
 
 
 @Module({
@@ -16,7 +17,8 @@ import {LanguageMiddleware} from './user/middlewares/language.middleware'
           rootPath: join(__dirname, '../../src', 'staticFiles'),
           renderPath: 'wildcard'
       }),
-      UserModule
+      UserModule,
+      SiteModule
   ],
   controllers: [],
   providers: [],

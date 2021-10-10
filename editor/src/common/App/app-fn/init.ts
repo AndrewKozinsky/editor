@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import useGetUserSelectors from 'store/user/userSelectors'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import { getFromLocalStorage } from 'utils/MiscUtils'
-// import sitesActions from 'store/site/sitesActions'
+import sitesActions from 'store/site/sitesActions'
 import { useGetUserToken } from 'requests/user/getUserToken'
 
 
@@ -19,9 +19,9 @@ export function useGetAndSetEditorSettings() {
         let language = getFromLocalStorage('editorLanguage', 'eng') // Язык интерфейса: eng или rus
         let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
         let mainTab = getFromLocalStorage('editorTab', 3) // id главной вкладки
-        // let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
+        let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
         let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
-        // let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
+        let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
         // let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
         // let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
         // let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
@@ -32,9 +32,9 @@ export function useGetAndSetEditorSettings() {
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setMainTab(mainTab) )
-        // dispatch( sitesActions.setCurrentSiteId(siteId) )
+        dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
-        // dispatch( sitesActions.setRightMainTab(sitePartTab) )
+        dispatch( sitesActions.setRightMainTab(sitePartTab) )
         // dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
         // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )

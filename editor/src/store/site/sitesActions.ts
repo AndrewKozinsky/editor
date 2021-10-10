@@ -1,7 +1,7 @@
-// import StoreSitesTypes from './sitesTypes'
-// import {MiscTypes} from 'types/miscTypes'
+import StoreSitesTypes from './sitesTypes'
+import { MiscTypes } from 'types/miscTypes'
 // import store from 'store'
-// import sitesRequest from 'requests/editor/sites/sitesRequest'
+import sitesRequest from 'requests/editor/sites/sitesRequest'
 // import getIncFilesTemplatesRequest from 'requests/editor/incFiles/getIncFilesTemplatesRequest'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
@@ -10,18 +10,18 @@
 
 const sitesActions = {
     // Установка id текущей основной вкладки справа
-    /*setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
             payload
         }
-    },*/
+    },
 
 
     // САЙТЫ =====================================================================================
 
     // Загрузка сайтов с сервера и установка в Хранилище
-    /*requestSites() {
+    requestSites() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // Запрос на получение списка сайтов
             const response = await sitesRequest()
@@ -31,7 +31,7 @@ const sitesActions = {
             // Формированое массива сайтов для установки в Хранилище
             const preparedSites = response.data.sites.map((site: any) => {
                 return {
-                    id: site._id,
+                    id: site.id,
                     name: site.name,
                     defaultIncFilesTemplateId: site.defaultIncFilesTemplateId || null
                 }
@@ -40,23 +40,23 @@ const sitesActions = {
             // Установка сайтов в Хранилище
             dispatch( sitesActions.setSites(preparedSites) )
         }
-    },*/
+    },
 
     // Установка массива сайтов
-    /*setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
+    setSites(payload: StoreSitesTypes.SitesType): StoreSitesTypes.SetSitesAction {
         return {
             type: StoreSitesTypes.SET_SITES,
             payload
         }
-    },*/
+    },
 
     // Установка id выбранного сайта
-    /*setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
+    setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_SITE_ID,
             payload
         }
-    },*/
+    },
 
 
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
@@ -93,21 +93,21 @@ const sitesActions = {
         }
     },*/
 
-    // Установка массива шаблонов подключаемых файлов
-    /*setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
+    // Установка массива шаблонов сайта
+    setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
         return {
             type: StoreSitesTypes.SET_INC_FILES_TEMPLATES,
             payload
         }
-    },*/
+    },
 
-    // Установка id выбранного шаблона подключаемых шаблонов
-    /*setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
+    // Установка id выбранного шаблона сайта
+    setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
             payload
         }
-    },*/
+    },
 
 
     // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
@@ -225,4 +225,4 @@ const sitesActions = {
     },*/
 }
 
-// export default sitesActions
+export default sitesActions

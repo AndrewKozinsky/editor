@@ -1,5 +1,5 @@
-// import { store } from 'store/rootReducer'
-// import { AppStateType } from 'store/rootReducer'
+import { store } from 'store/rootReducer'
+import { AppStateType } from 'store/rootReducer'
 
 export namespace MiscTypes {
     /** Тип объекта со строковыми ключами с любым значением */
@@ -15,8 +15,8 @@ export namespace MiscTypes {
     // export type ReactRef = null | {current: HTMLElement}
 
     /** Диспетчер Редакса */
-    // export type AppDispatch = typeof store.dispatch
+    export type AppDispatch = typeof store.dispatch
 
     /** Тип аргумента getState для Redux Thunk */
-    // export type GetState = () => AppStateType
+    export type GetState = () => AppStateType
 }

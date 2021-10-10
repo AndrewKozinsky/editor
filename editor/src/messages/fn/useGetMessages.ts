@@ -8,11 +8,11 @@ import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 export default function useGetMessages<T>(obj: T) {
     const {editorLanguage} = useGetSettingsSelectors()
 
-    type ObjNextType = {
+    type MessagesLangObjType = {
         [K in keyof T]: string | ReactElement
     }
 
-    const objNext = {} as ObjNextType
+    const objNext = {} as MessagesLangObjType
 
     for (let key in obj) {
         // @ts-ignore

@@ -17,9 +17,10 @@ namespace FCType {
             topOffset?: 'small' | 'big'
             submit: ConfigSubmitButton
             elems?: JSX.Element[]
-            align?: 'left' | 'right'
+            align?: 'left' | 'right',
+            hr?: boolean
         },
-        requestFn?: (readyFieldValues: ReadyFieldsValues, outerFns: OuterFns) => Promise<Response>
+        requestFn?: (readyFieldValues: ReadyFieldsValues, outerFns: OuterFns, formDetails: FormDetails) => Promise<Response>
         afterSubmit?: (response: Response, outerFns: OuterFns, formDetails: FormDetails) => void
         hideAfterSuccessfulSubmit?: boolean
         commonSuccess?: CommonSuccess
@@ -70,8 +71,10 @@ namespace FCType {
     export type OuterFns = { [key: string]: any }
 
     export type FormDetails = {
-        setFormVisible: SetFormVisible,
+        setFormVisible: SetFormVisible
         readyFieldValues: ReadyFieldsValues
+        formData: FormData
+        setFormData: SetFormData
     }
 
 
@@ -90,8 +93,8 @@ namespace FCType {
         type: FieldType
         // How many values field has: one or many. It is depend on field's type.
         valueCount: ValueCount
-        disabled: boolean,
-        loading: boolean,
+        disabled: boolean
+        loading: boolean
         error?: null | string
     }
 
@@ -123,6 +126,8 @@ namespace FCType {
     export type SetFormSentSuccessfully = ( status: FormSentSuccessfully ) => void
     export type FormDisabled = boolean
     export type SetFormDisabled = ( isDisabled: FormDisabled ) => void
+    export type FormData = any
+    export type SetFormData = ( formData: FormData ) => void
 
     export type StateFormReturn = {
         fields: FieldsState
@@ -150,6 +155,8 @@ namespace FCType {
         setFormSentSuccessfully: SetFormSentSuccessfully
         formDisabled: FormDisabled
         setFormDisabled: SetFormDisabled
+        formData: FormData
+        setFormData: SetFormData
 
         onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void
         onFormSubmit: (e: React.BaseSyntheticEvent) => void

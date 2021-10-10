@@ -31,6 +31,8 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     const [formVisible, setFormVisible] = useState(true)
     const [formSentSuccessfully, setFormSentSuccessfully] = useState(false)
     const [formDisabled, setFormDisabled] = useState(false)
+    // Данные пользователя хранимые формой
+    const [formData, setFormData] = useState({})
 
     const serverMsg = useGetMessages(serverMessages)
 
@@ -43,7 +45,7 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
         formSubmitHandler(
             e, fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
             setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess,
-            serverMsg
+            formData, setFormData, serverMsg
         )
     }, [
         fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
@@ -77,6 +79,8 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
         setFormSentSuccessfully,
         formDisabled,
         setFormDisabled,
+        formData,
+        setFormData,
 
         onChangeFieldHandler,
         onFormSubmit,

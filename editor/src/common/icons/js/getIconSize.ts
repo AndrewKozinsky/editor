@@ -58,22 +58,22 @@ export function getIconSize(type: string) {
                 viewBox: '0 0 3 3'
             }
         // Значки на кнопках
-        /*case 'btnSignSave':
+        case 'btnSignSave':
             return {
-                width: "12px",
-                height: "15px",
-                viewBox: "0 0 12 15"
-            }*/
+                width: '12px',
+                height: '15px',
+                viewBox: '0 0 12 15'
+            }
         // case 'btnSignFolder':
-        // case 'btnSignAdd':
+        case 'btnSignAdd':
         // case 'btnSignJson':
         // case 'btnSignEdit':
-        /*case 'btnSignCancel':
+        case 'btnSignCancel':
             return {
-                width: "15px",
-                height: "15px",
-                viewBox: "0 0 15 15"
-            }*/
+                width: '15px',
+                height: '15px',
+                viewBox: '0 0 15 15'
+            }
         case 'btnSignTrash':
         // case 'btnSignUndo':
         // case 'btnSignRedo':

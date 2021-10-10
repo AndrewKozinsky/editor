@@ -3,7 +3,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 // Reducers
 import userReducer from './user/userReducer'
 import settingsReducer from './settings/settingsReducer'
-// import sitesReducer from './site/sitesReducer'
+import sitesReducer from './site/sitesReducer'
 // import articleReducer from './article/articleReducer'
 import modalReducer from './modal/modalReducer'
 // @ts-ignore
@@ -15,7 +15,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 // Корневой редьюсер
 const rootReducer = combineReducers({
     user:  userReducer, // Данные пользователя
-    // sites:  sitesReducer,
+    sites:  sitesReducer,
     settings:  settingsReducer, // Настройки приложения
     // article: articleReducer,
     modal:  modalReducer

@@ -1,5 +1,5 @@
 // Панель «Сайты»
-/*const sitesPanelMessages = {
+export const sitesPanelMessages = {
     header: {
         eng: 'Sites',
         rus: 'Сайты'
@@ -8,5 +8,5 @@
         eng: 'New site',
         rus: 'Новый сайт'
     },
-}*/
+}
 

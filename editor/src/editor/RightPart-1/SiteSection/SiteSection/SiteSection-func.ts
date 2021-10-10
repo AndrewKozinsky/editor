@@ -1,12 +1,37 @@
-// import {useEffect, useState} from 'react'
+import { useEffect } from 'react'
 // import {useSelector} from 'react-redux'
 // import { AppStateType } from 'store/rootReducer'
-// import StoreSitesTypes from 'store/site/sitesTypes'
-// import FHTypes from 'libs/formHandler/types'
+import StoreSitesTypes from 'src/store/site/sitesTypes'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { ButtonIconType } from 'common/formElements/Button/Button'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
+import useGetSitesSelectors from 'src/store/site/sitesSelectors'
+import FCType from 'src/libs/FormConstructor/FCType'
+
+/**
+ * Хук изменяет имя сайта в поле Название при переключении сайта
+ * @param {Object} formState — объект состояния формы
+ */
+export function useSetSiteName(formState: FCType.StateFormReturn) {
+    // id текущего сайта и массив сайтов
+    const { currentSiteId, sites } = useGetSitesSelectors()
+
+    useEffect(function () {
+        if (!sites.length) return
+
+        // Найти сайт с указанным id
+        let site = sites.find(site => site.id === currentSiteId)
+        if (!site) return
+
+        // Поставить название выбранного сайта в поле «Название» в форме редактирования сайта
+        const valueFieldNewData = Object.assign(formState.fields['name'],{ value: [site.name]})
+        formState.updateField('name', valueFieldNewData)
+
+        // Не забудь про defaultIncFilesTemplateId
+    }, [currentSiteId, sites])
+}
+
 
 
 /**

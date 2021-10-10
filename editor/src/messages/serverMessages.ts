@@ -172,4 +172,39 @@ export const serverMessages = {
         eng: 'The current user password does not match the one entered.',
         rus: 'Текущий пароль пользователя не совпадает с введённым.'
     },
+
+    site_CreateSiteDto_EmptyName: {
+        eng: 'You must specify the site name.',
+        rus: 'Название сайта должно быть указано.'
+    },
+    site_CreateSiteDto_nameTooLong: {
+        eng: 'The site name must not be longer than 255 characters.',
+        rus: 'Название сайта не должно быть длиннее 255 символов.'
+    },
+    site_CreateSiteDto_EmptyUserId: {
+        eng: 'You must specify the user\'s id who created this site.',
+        rus: 'Укажите пользователя создавшего сайт.'
+    },
+
+    site_UpdateSiteDto_EmptyName: {
+        eng: 'You must specify the site name.',
+        rus: 'Название сайта должно быть указано.'
+    },
+    site_UpdateSiteDto_nameTooLong: {
+        eng: 'The site name must not be longer than 255 characters.',
+        rus: 'Название сайта не должно быть длиннее 255 символов.'
+    },
+    site_UpdateSiteDto_EmptyUserId: {
+        eng: 'You must specify the user\'s id who created this site.',
+        rus: 'Укажите пользователя создавшего сайт.'
+    },
+
+    site_DeleteSiteDto_SiteIsNotExists: {
+        eng: 'This site does not exist',
+        rus: 'Указанный сайт не существует.'
+    },
+    site_DeleteSiteDto_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the deleted site.',
+        rus: 'Текущий пользователь не создавал удаляемый сайт.'
+    },
 }

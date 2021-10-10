@@ -40,9 +40,9 @@ export function getFromLocalStorage(propName: string, defaultValue?: any) {
  * Удаление данных из localStorage
  * @param {String} propName — имя свойства
  */
-/*export function removeFromLocalStorage(propName: string) {
+export function removeFromLocalStorage(propName: string) {
     localStorage.removeItem(propName)
-}*/
+}
 
 /**
  * The function create deep copy of object or array

@@ -1,14 +1,14 @@
-// import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
-// import StoreSitesTypes from './sitesTypes'
+import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
-    // sites: StoreSitesTypes.SitesType
-    // currentSiteId: StoreSitesTypes.CurrentSiteId
-    // rightMainTab: StoreSitesTypes.RightMainTab
-    /*incFilesTemplatesSection: {
+    sites: StoreSitesTypes.SitesType
+    currentSiteId: StoreSitesTypes.CurrentSiteId
+    rightMainTab: StoreSitesTypes.RightMainTab
+    incFilesTemplatesSection: {
         templates: StoreSitesTypes.IncFilesTemplatesType
         currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
-    }*/
+    }
     // componentsSection: StoreSitesTypes.ComponentsSection
     // articlesSection: StoreSitesTypes.ArticlesSection
 }
@@ -17,18 +17,18 @@ export type SitesReducerType = {
 // Изначальные значения
 const initialState: SitesReducerType = {
     // Массив сайтов пользователя
-    // sites: [],
+    sites: [],
     // id выбранного сайта
-    // currentSiteId: null,
+    currentSiteId: null,
     // id открытой вкладки на правой части
-    // rightMainTab: 0,
-    // Данные по вкладке «Шаблоны подключаемых файлов»
-    /*incFilesTemplatesSection: {
-        // Массив шаблонов подключаемых файлов
+    rightMainTab: 0,
+    // Данные по вкладке «Шаблоны сайта»
+    incFilesTemplatesSection: {
+        // Массив шаблонов сайта
         templates: [],
-        // id выбранного шаблона подключаемых файлов
+        // id выбранного шаблона сайта
         currentTemplateId: null,
-    },*/
+    },
     // Данные по вкладке «Шаблоны компонентов»
     /*componentsSection: {
         // uuid выбранного элемента: папки или компонента
@@ -56,15 +56,15 @@ const initialState: SitesReducerType = {
 }
 
 // Установка массива сайтов
-/*function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesAction): SitesReducerType {
+function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesAction): SitesReducerType {
     return {
         ...state,
         sites: action.payload
     }
-}*/
+}
 
 // Установка id выбранного сайта
-/*function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
+function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
         removeFromLocalStorage('editorSiteId')
@@ -78,10 +78,10 @@ const initialState: SitesReducerType = {
         ...state,
         currentSiteId: action.payload
     }
-}*/
+}
 
 // Установка id текущей основной вкладки справа
-/*function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
+function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
     setInLocalStorage('editorSitePartTab', action.payload)
 
@@ -89,11 +89,11 @@ const initialState: SitesReducerType = {
         ...state,
         rightMainTab: action.payload
     }
-}*/
+}
 
 
-// Установка массива шаблонов подключаемых файлов
-/*function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
+// Установка массива шаблонов сайта
+function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
     return {
         ...state,
         incFilesTemplatesSection: {
@@ -101,10 +101,10 @@ const initialState: SitesReducerType = {
             templates: action.payload
         }
     }
-}*/
+}
 
 // Установка id выбранного подключаемых шаблонов
-/*function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
+function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
         removeFromLocalStorage('editorIncFilesId')
@@ -121,7 +121,7 @@ const initialState: SitesReducerType = {
             currentTemplateId: action.payload
         }
     }
-}*/
+}
 
 // Установка id выбранного подключаемых шаблонов
 /*function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
@@ -329,20 +329,20 @@ const initialState: SitesReducerType = {
 }*/
 
 // Редьюсер Store.settings
-/*export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
+export default function sitesReducer(state = initialState, action: StoreSitesTypes.SitesAction): SitesReducerType {
 
     switch (action.type) {
-        // case StoreSitesTypes.SET_SITES:
-        //     return setSites(state, action)
+        case StoreSitesTypes.SET_SITES:
+            return setSites(state, action)
         case StoreSitesTypes.SET_CURRENT_SITE_ID:
             return setCurrentSiteId(state, action)
-        // case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
-        //     return setRightMainTab(state, action)
+        case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
+            return setRightMainTab(state, action)
 
-        // case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
-        //     return setTemplates(state, action)
-        // case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
-        //     return setCurrentIncFilesTemplateId(state, action)
+        case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
+            return setTemplates(state, action)
+        case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
+            return setCurrentIncFilesTemplateId(state, action)
 
         // case StoreSitesTypes.SET_CURRENT_COMP:
         //     return setCurrentComp(state, action)
@@ -366,4 +366,4 @@ const initialState: SitesReducerType = {
             const x: never = null
             return state
     }
-}*/
+}

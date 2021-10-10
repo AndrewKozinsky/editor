@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Значёк для вкладки Сайты -> Статьи сайта
 export default function SiteTabArticle() {
     return (
         <g fillRule="nonzero">

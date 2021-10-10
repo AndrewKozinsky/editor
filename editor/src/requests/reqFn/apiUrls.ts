@@ -31,11 +31,11 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
 
     // САЙТЫ
     // Сайты
-    // sites: 'sites',
+    sites: 'sites',
     // Конкретный сайт
-    /*site: function (siteId: string) {
+    site: function (siteId: string) {
         return 'sites/' + siteId
-    },*/
+    },
 
 
     // SITE COMPONENTS

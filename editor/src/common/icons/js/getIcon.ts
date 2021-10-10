@@ -11,10 +11,10 @@ import MainTabEditor from '../icons/mainTabEditor'
 import MainTabSettings from '../icons/mainTabSettings'
 import MainTabHelp from '../icons/mainTabHelp'
 import MainTabRoundScion from '../icons/mainTabRoundScion'
-// import BtnSignSave from '../icons/btnSignSave'
+import BtnSignSave from '../icons/btnSignSave'
 // import BtnSignFolder from '../icons/btnSignFolder'
 import BtnSignTrash from '../icons/btnSignTrash'
-// import BtnSignAdd from '../icons/btnSignAdd'
+import BtnSignAdd from '../icons/btnSignAdd'
 // import BtnSignCode from '../icons/btnSignCode'
 // import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
@@ -79,11 +79,11 @@ export function getIcon(type: string): ReactNode {
         mainTabRoundScion: MainTabRoundScion,
 
         // Значки на кнопках
-        // btnSignSave: BtnSignSave,
+        btnSignSave: BtnSignSave,
         // btnSignFolder: BtnSignFolder,
         btnSignTrash: BtnSignTrash,
         // btnSignCode: BtnSignCode,
-        // btnSignAdd: BtnSignAdd,
+        btnSignAdd: BtnSignAdd,
         // btnSignJson: BtnSignJson,
         btnSignClose: BtnSignClose,
         btnSignExit: BtnSignExit,
