@@ -4,9 +4,9 @@
 // import actions from 'store/rootAction'
 // import {AppStateType} from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
-// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-// import createIncFilesTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/incFiles/createIncFilesTemplateRequest'
-// import updateIncFilesTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/incFiles/updateIncFilesTemplateRequest'
+// import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
+// import createSiteTemplateRequest, { CreateNewTemplateValuesType } from 'requests/editor/siteTemplate/createIncFilesTemplateRequest'
+// import updateSiteTemplateRequest, { UpdateTemplateValuesType } from 'requests/editor/siteTemplate/updateIncFilesTemplateRequest'
 
 
 // Объект настройки useFormHandler
@@ -131,7 +131,7 @@
 
     const schemas = {
         name: yup.string()
-            .required(incFilesTemplateSectionMessages.templateNameInputRequired)
+            .required(siteTemplateSectionMessages.templateNameInputRequired)
     }
 
     // @ts-ignore
@@ -250,7 +250,7 @@
         await store.dispatch(actions.sites.requestIncFilesTemplates())
 
         // Найти в Хранилище шаблон с таким же именем и выделить его
-        const newTemplate = store.getState().sites.incFilesTemplatesSection.templates.find((template: any) => {
+        const newTemplate = store.getState().sites.siteTemplatesSection.templates.find((template: any) => {
             return template.id === response.data.template._id
         })
 
@@ -277,7 +277,7 @@
  */
 /*async function updateTemplate(formDetails: FHTypes.FormDetailsInSubmitHandler) {
     // id выбранного шаблона
-    const { currentTemplateId } = store.getState().sites.incFilesTemplatesSection
+    const { currentTemplateId } = store.getState().sites.siteTemplatesSection
     const { currentSiteId } = store.getState().sites
 
     // Сформировать объект с данными шаблона подключаемых файлов

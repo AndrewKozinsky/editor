@@ -31,7 +31,7 @@ export class UserController {
         this.userService.buildUserResponse(user, response)
     }
 
-    @Post('signup')
+    @Post()
     @UsePipes(new BackendValidationPipe())
     async createUser(
         @Req() req: ExpressRequestInterface,
@@ -124,7 +124,7 @@ export class UserController {
         this.userService.buildUserResponse(updatedUser, response, undefined, 'set')
     }
 
-    @Delete('me')
+    @Delete()
     @UsePipes(new BackendValidationPipe())
     @UseGuards(AuthGuard)
     async deleteCurrentUser(

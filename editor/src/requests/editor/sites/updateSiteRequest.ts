@@ -21,7 +21,7 @@ export default async function updateSiteRequest(values: UpdateSiteRequestValuesT
 // Данные для изменения сайта передаваемые в updateSiteRequest
 export type UpdateSiteRequestValuesType = {
     name: string, // название сайта
-    defaultIncFilesTemplateId: null | number // id шаблона подключаемых файлов по умолчанию
+    defaultSiteTemplateId: null | number // id шаблона подключаемых файлов по умолчанию
 }
 
 

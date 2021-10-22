@@ -2,7 +2,7 @@ import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 // import store from 'store'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
-// import getIncFilesTemplatesRequest from 'requests/editor/incFiles/getIncFilesTemplatesRequest'
+// import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
@@ -33,7 +33,7 @@ const sitesActions = {
                 return {
                     id: site.id,
                     name: site.name,
-                    defaultIncFilesTemplateId: site.defaultIncFilesTemplateId || null
+                    defaultSiteTemplateId: site.defaultSiteTemplateId || null
                 }
             })
 
@@ -62,7 +62,7 @@ const sitesActions = {
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
     // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
-    /*requestIncFilesTemplates() {
+    /*requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
@@ -73,7 +73,7 @@ const sitesActions = {
             if (!siteId) dispatch( sitesActions.setTemplates([]) )
 
             // Запрос и ответ от сервера
-            const response = await getIncFilesTemplatesRequest(siteId)
+            const response = await getSiteTemplatesRequest(siteId)
 
             if (response.status !== 'success') return
 
@@ -94,17 +94,17 @@ const sitesActions = {
     },*/
 
     // Установка массива шаблонов сайта
-    setTemplates(payload: StoreSitesTypes.IncFilesTemplatesType): StoreSitesTypes.SetIncFilesTemplatesAction {
+    setTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {
         return {
-            type: StoreSitesTypes.SET_INC_FILES_TEMPLATES,
+            type: StoreSitesTypes.SET_SITE_TEMPLATES,
             payload
         }
     },
 
     // Установка id выбранного шаблона сайта
-    setCurrentIncFilesTemplateId(payload: StoreSitesTypes.CurrentIncFilesTemplateId): StoreSitesTypes.SetCurrentIncFilesTemplateIdAction {
+    setCurrentSiteTemplateId(payload: StoreSitesTypes.CurrentSiteTemplateId): StoreSitesTypes.SetCurrentSiteTemplateIdAction {
         return {
-            type: StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID,
+            type: StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID,
             payload
         }
     },
@@ -226,3 +226,20 @@ const sitesActions = {
 }
 
 export default sitesActions
+
+
+
+
+
+const config = {
+    name: 'Стандартные стили',
+    head: [
+        '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">',
+        '<meta http-equiv="x-rim-auto-match" content="none">',
+        '<script type="text/javascript" async="" id="mtsadv-counter" src="https://tech.rtb.mts.ru/js/sync.js"></script>'
+    ],
+    bodyEnd: [
+        '<script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>',
+        '<script type="text/javascript" async="" id="mtsadv-counter" src="https://tech.rtb.mts.ru/js/sync.js"></script>'
+    ]
+}

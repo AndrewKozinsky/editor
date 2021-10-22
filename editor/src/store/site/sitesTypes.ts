@@ -9,7 +9,7 @@ namespace StoreSitesTypes {
         id: string,
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
-        defaultIncFilesTemplateId: null | string
+        defaultSiteTemplateId: null | string
     }
     // Сайты
     export type SitesType = SiteType[]
@@ -19,16 +19,16 @@ namespace StoreSitesTypes {
     export type RightMainTab = number
 
     // Шаблон подключаемых файлов
-    export type IncFilesTemplateType = {
+    export type SiteTemplateType = {
         id: string,
         name: string,
         head?: string
         body?: string
     }
     // Массив шаблонов подключаемых файлов
-    export type IncFilesTemplatesType = IncFilesTemplateType[]
+    export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
-    export type CurrentIncFilesTemplateId = null | string
+    export type CurrentSiteTemplateId = null | string
 
     // uuid выбранного элемента: папки или компонента
     // export type CurrentCompItemId = null | FilesTreeType.UuId
@@ -62,7 +62,7 @@ namespace StoreSitesTypes {
         currentArtItemType: CurrentArtItemType
         currentArtName: ArticleName
         currentArtCode: ArticleCode,
-        incFilesTemplateId: CurrentIncFilesTemplateId
+        siteTemplateId: CurrentSiteTemplateId
     }*/
 
     // Типы типа и тип экшена
@@ -89,17 +89,17 @@ namespace StoreSitesTypes {
 
 
     // Установка массива шаблонов подключаемых файлов
-    export const SET_INC_FILES_TEMPLATES = 'SET_INC_FILES_TEMPLATES'
-    export type SetIncFilesTemplatesAction = {
-        type: typeof SET_INC_FILES_TEMPLATES
-        payload: IncFilesTemplatesType
+    export const SET_SITE_TEMPLATES = 'SET_SITE_TEMPLATES'
+    export type SetSiteTemplatesAction = {
+        type: typeof SET_SITE_TEMPLATES
+        payload: SiteTemplatesType
     }
 
     // Установка id выбранного шаблона подключаемых файлов
-    export const SET_CURRENT_INC_FILES_TEMPLATE_ID = 'SET_CURRENT_INC_FILES_TEMPLATE_ID'
-    export type SetCurrentIncFilesTemplateIdAction = {
-        type: typeof SET_CURRENT_INC_FILES_TEMPLATE_ID
-        payload: CurrentIncFilesTemplateId
+    export const SET_CURRENT_SITE_TEMPLATE_ID = 'SET_CURRENT_SITE_TEMPLATE_ID'
+    export type SetCurrentSiteTemplateIdAction = {
+        type: typeof SET_CURRENT_SITE_TEMPLATE_ID
+        payload: CurrentSiteTemplateId
     }
 
     // Установка id выбранного шаблона компонента
@@ -157,8 +157,8 @@ namespace StoreSitesTypes {
         | SetSitesAction
         | SetCurrentSiteIdAction
         | SetRightMainTabAction
-        | SetIncFilesTemplatesAction
-        | SetCurrentIncFilesTemplateIdAction
+        | SetSiteTemplatesAction
+        | SetCurrentSiteTemplateIdAction
         // | SetCurrentCompAction
         // | SetCurrentCompItemTypeAction
         // | SetCurrentCompItemIdAction

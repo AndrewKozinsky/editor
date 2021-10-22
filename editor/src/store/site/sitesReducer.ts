@@ -5,9 +5,9 @@ export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
-    incFilesTemplatesSection: {
-        templates: StoreSitesTypes.IncFilesTemplatesType
-        currentTemplateId: StoreSitesTypes.CurrentIncFilesTemplateId
+    siteTemplatesSection: {
+        templates: StoreSitesTypes.SiteTemplatesType
+        currentTemplateId: StoreSitesTypes.CurrentSiteTemplateId
     }
     // componentsSection: StoreSitesTypes.ComponentsSection
     // articlesSection: StoreSitesTypes.ArticlesSection
@@ -23,7 +23,7 @@ const initialState: SitesReducerType = {
     // id открытой вкладки на правой части
     rightMainTab: 0,
     // Данные по вкладке «Шаблоны сайта»
-    incFilesTemplatesSection: {
+    siteTemplatesSection: {
         // Массив шаблонов сайта
         templates: [],
         // id выбранного шаблона сайта
@@ -51,7 +51,7 @@ const initialState: SitesReducerType = {
         // Строка с кодом выбранной статьи
         currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
-        incFilesTemplateId: null
+        siteTemplateId: null
     }*/
 }
 
@@ -93,18 +93,18 @@ function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRig
 
 
 // Установка массива шаблонов сайта
-function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetIncFilesTemplatesAction): SitesReducerType {
+function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetSiteTemplatesAction): SitesReducerType {
     return {
         ...state,
-        incFilesTemplatesSection: {
-            ...state.incFilesTemplatesSection,
+        siteTemplatesSection: {
+            ...state.siteTemplatesSection,
             templates: action.payload
         }
     }
 }
 
 // Установка id выбранного подключаемых шаблонов
-function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentIncFilesTemplateIdAction): SitesReducerType {
+function setCurrentSiteTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
         removeFromLocalStorage('editorIncFilesId')
@@ -116,8 +116,8 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
 
     return {
         ...state,
-        incFilesTemplatesSection: {
-            ...state.incFilesTemplatesSection,
+        siteTemplatesSection: {
+            ...state.siteTemplatesSection,
             currentTemplateId: action.payload
         }
     }
@@ -239,7 +239,7 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
                 currentArtItemType: null,
                 currentArtName: '',
                 currentArtCode: null,
-                incFilesTemplateId: null
+                siteTemplateId: null
             }
         }
     }
@@ -262,7 +262,7 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
                 // Строка с кодом выбранной статьи
                 currentArtCode: null,
                 // id шаблона подключаемых компонентов у выбранной статьи
-                incFilesTemplateId: null
+                siteTemplateId: null
             }
         }
         // Если ставят данные статьи
@@ -277,7 +277,7 @@ function setCurrentIncFilesTemplateId(state: SitesReducerType, action: StoreSite
             if (article) {
                 newArticleSection.currentArtName = article.name
                 newArticleSection.currentArtCode = article.code || null
-                newArticleSection.incFilesTemplateId = article.incFilesTemplateId || null
+                newArticleSection.siteTemplateId = article.siteTemplateId || null
             }
         }
 
@@ -339,10 +339,10 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
         case StoreSitesTypes.SET_RIGHT_MAIN_TAB:
             return setRightMainTab(state, action)
 
-        case StoreSitesTypes.SET_INC_FILES_TEMPLATES:
+        case StoreSitesTypes.SET_SITE_TEMPLATES:
             return setTemplates(state, action)
-        case StoreSitesTypes.SET_CURRENT_INC_FILES_TEMPLATE_ID:
-            return setCurrentIncFilesTemplateId(state, action)
+        case StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID:
+            return setCurrentSiteTemplateId(state, action)
 
         // case StoreSitesTypes.SET_CURRENT_COMP:
         //     return setCurrentComp(state, action)

@@ -28,7 +28,7 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
         const valueFieldNewData = Object.assign(formState.fields['name'],{ value: [site.name]})
         formState.updateField('name', valueFieldNewData)
 
-        // Не забудь про defaultIncFilesTemplateId
+        // Не забудь про defaultSiteTemplateId
     }, [currentSiteId, sites])
 }
 
@@ -49,11 +49,11 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
         // Найти сайт с указанным id
         let site = sites.find((site: StoreSitesTypes.SiteType) => site.id === currentSiteId)
 
-        if (!site) site = { id: null, name: '', defaultIncFilesTemplateId: null }
+        if (!site) site = { id: null, name: '', defaultSiteTemplateId: null }
 
         // Поставить новые значения в поля...
         let newFormState = changeField(formState, 'name', site)
-        newFormState = changeField(newFormState, 'defaultIncFilesTemplateId', site)
+        newFormState = changeField(newFormState, 'defaultSiteTemplateId', site)
 
         // В данные формы поставить тип формы:
         // createSite если хотят создать новый сайт
@@ -79,7 +79,7 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
  */
 /*function changeField(
     formState: FHTypes.FormState,
-    fieldName: 'name' | 'defaultIncFilesTemplateId',
+    fieldName: 'name' | 'defaultSiteTemplateId',
     site: null | StoreSitesTypes.SiteType
 ) {
     // Получение поля формы по имени
@@ -150,7 +150,7 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
 
     // Массив шаблонов подключаемых файлов
     const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppStateType) => {
-        return store.sites.incFilesTemplatesSection.templates
+        return store.sites.siteTemplatesSection.templates
     })
 
     const [isVisible, setIsVisible] = useState(false)

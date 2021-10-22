@@ -17,6 +17,10 @@ export const siteSectionMessages = {
         eng: 'This field is required',
         rus: 'Обязательное поле'
     },
+    siteNameInputIsTooLong: {
+        eng: 'Site name can not be longer than 255 characters',
+        rus: 'Название сайта не может быть длиннее 255 символов'
+    },
     /*defaultTemplateInput: {
         eng: 'The default template of the plug-in files',
         rus: 'Шаблон подключаемых файлов по умолчанию'

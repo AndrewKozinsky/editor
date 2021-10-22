@@ -5,7 +5,7 @@
 /*export interface ISite extends Document {
     name: string,
     userId: string,
-    defaultIncFilesTemplateId?: null | string,
+    defaultSiteTemplateId?: null | string,
     createdAt: Date,
 }*/
 
@@ -22,7 +22,7 @@
         required: [true, '{{site.userIdRequired}}']
     },
     // id пользователя
-    defaultIncFilesTemplateId: {
+    defaultSiteTemplateId: {
         type: String,
     },
     createdAt: {

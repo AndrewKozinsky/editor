@@ -7,5 +7,5 @@ export class CreateSiteDto {
     })
     name: string
 
-    defaultIncFilesTemplateId: string
+    defaultSiteTemplateId: string
 }

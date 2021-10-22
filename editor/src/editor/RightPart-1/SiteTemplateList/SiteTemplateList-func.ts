@@ -28,7 +28,7 @@
     const dispatch = useDispatch()
 
     // id выбранного шаблона подключаемых файлов
-    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
 
     // Сформировать и вернуть объект с атрибутами списка шаблонов
     return {

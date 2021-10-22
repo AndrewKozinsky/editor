@@ -11,6 +11,6 @@ export interface SitesResponseInterface {
 type SiteType = {
     id: number
     name: string
-    defaultIncFilesTemplateId: null | string
+    defaultSiteTemplateId: null | string
     createdAt: Date
 }

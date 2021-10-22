@@ -22,13 +22,13 @@
     // .delete(authController.protect, siteController.deleteSite)
 
 // Site included files templates
-// router.route('/:siteId/incFiles')
+// router.route('/:siteId/siteTemplate')
     // Получение всех шаблонов
-    // .get(authController.protect, incFilesController.getSiteIncFilesTemplates)
+    // .get(authController.protect, incFilesController.getSiteSiteTemplates)
     // Создание шаблона
     // .post(authController.protect, incFilesController.createIncFilesTemplate)
 
-// router.route('/:siteId/incFiles/:templateId')
+// router.route('/:siteId/siteTemplate/:templateId')
     // Get an included files template
     // .get(authController.protect, incFilesController.getSiteIncFilesTemplate)
     // Изменение данных шаблона

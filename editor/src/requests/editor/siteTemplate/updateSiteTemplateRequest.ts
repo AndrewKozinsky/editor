@@ -7,7 +7,7 @@
  * @param {String} siteId — site id
  * @param {String} templateId — id шаблона подключаемых файлов
  */
-/*export default async function updateIncFilesTemplateRequest(values: UpdateTemplateValuesType, siteId: string, templateId: string) {
+/*export default async function updateSiteTemplateRequest(values: UpdateTemplateValuesType, siteId: string, templateId: string) {
     const templateData = {
         name: values.name,
         codeInHead: {
@@ -23,7 +23,7 @@
         body: JSON.stringify(templateData)
     }
     const response: UpdateTemplateRequestServerResponse = await makeFetch(
-        getApiUrl('incFiles', siteId, templateId), options
+        getApiUrl('siteTemplate', siteId, templateId), options
     )
 
     return response

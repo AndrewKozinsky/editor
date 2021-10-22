@@ -1,10 +1,10 @@
 import React from 'react'
 import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import updateSiteRequest, { UpdateSiteRequestValuesType } from 'requests/editor/sites/updateSiteRequest'
-import actions from 'store/rootAction'
-import { store } from 'store/rootReducer'
-import DeleteSiteButton from './DeleteSiteButton/DeleteSiteButton'
+import FCType from 'src/libs/FormConstructor/FCType'
+import updateSiteRequest, { UpdateSiteRequestValuesType } from 'src/requests/editor/sites/updateSiteRequest'
+import actions from 'src/store/rootAction'
+import { store } from 'src/store/rootReducer'
+import DeleteSiteButton from '../DeleteSiteButton/DeleteSiteButton'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getCurrentSiteFormConfig(siteSectionMsg: any) {
@@ -15,6 +15,7 @@ function getCurrentSiteFormConfig(siteSectionMsg: any) {
                 schema: (fields) => {
                     return yup.string()
                         .required(siteSectionMsg.siteNameInputRequired)
+                        .max(255, siteSectionMsg.siteNameInputIsTooLong)
                 },
                 fieldData: {
                     label: siteSectionMsg.siteNameInput,

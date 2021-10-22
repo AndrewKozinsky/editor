@@ -45,13 +45,13 @@ function parseCSS(isDev) {
     if (isDev) {
         return {
             test: /\.s?css$/i,
-            use: ["style-loader", "css-loader", "sass-loader"],
+            use: ['style-loader', 'css-loader', 'sass-loader'],
         }
     }
     else {
         return {
             test: /\.s?css$/i,
-            use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         }
     }
 }
@@ -60,7 +60,7 @@ function parseCSS(isDev) {
 function parseAssets() {
     return {
         test: /\.(png|jpg|jpeg|gif|woff2|pdf)$/i,
-        type: "asset/resource",
+        type: 'asset/resource',
     }
 }
 
@@ -97,8 +97,8 @@ function getDevServerSettings() {
         compress: true,
         port: 3000,
         host: '0.0.0.0',
-        disableHostCheck: true,
         historyApiFallback: true,
+        disableHostCheck: true,
         hot: true
     }
 }

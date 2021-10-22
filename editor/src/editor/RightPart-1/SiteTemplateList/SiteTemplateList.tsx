@@ -10,13 +10,13 @@
     useFetchIncFilesTemplates,
     useGetNewTemplateOnClickHandler,
     useGetTemplatesItemsListProps
-} from './IncFilesTemplateList-func'*/
+} from './SiteTemplateList-func'*/
 
 
 /** Компонент кнопки создания нового сайта */
 /*export function NewTemplateButton() {
     // id выделенного сайта
-    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewTemplateOnClickHandler()

@@ -47,9 +47,9 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
 
     // SITE INC FILES TEMPLATES
     // Шаблоны подключаемых файлов
-    /*incFiles: function (siteId: string, incFilesId?: string) {
-        if (incFilesId) return 'sites/' + siteId + '/incFiles/' + incFilesId
-        else return 'sites/' + siteId + '/incFiles'
+    /*siteTemplate: function (siteId: string, incFilesId?: string) {
+        if (incFilesId) return 'sites/' + siteId + '/siteTemplate/' + incFilesId
+        else return 'sites/' + siteId + '/siteTemplate'
     },*/
 
     // Папки шаблонов компонентов

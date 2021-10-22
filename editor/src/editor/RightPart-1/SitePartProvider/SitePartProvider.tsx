@@ -2,8 +2,8 @@ import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import SiteSection from '../SiteSection/SiteSection/SiteSection'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
-// import { NewTemplateButton, TemplatesList } from '../IncFilesTemplateList/IncFilesTemplateList'
-// import IncFilesTemplateForm from '../IncFilesTemplateForm/IncFilesTemplateForm'
+// import { NewTemplateButton, TemplatesList } from '../SiteTemplateList/SiteTemplateList'
+// import SiteTemplateForm from '../SiteTemplateForm/SiteTemplateForm'
 // import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
 // import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
 // import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
@@ -20,7 +20,7 @@ export default function SitePartProvider(): ReactElement {
     const { currentSiteId, rightMainTab } = useGetSitesSelectors()
 
     // id выделенного шаблона сайта
-    const { currentTemplateId } = useGetSitesSelectors().incFilesTemplatesSection
+    const { currentTemplateId } = useGetSitesSelectors().siteTemplatesSection
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState<ReactElement>(null)
@@ -40,14 +40,14 @@ export default function SitePartProvider(): ReactElement {
             }
             else if (num === 1) {
                 return (
-                    <HeaderPage headerText={rightTabsMsg.incFilesTemplates} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMsg.siteTemplates} display={num === rightMainTab} key={num}>
                         <>
                             {/*<NewTemplateButton />*/}
                             {/*<TemplatesList />*/}
                         </>
                         {/*Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,*/}
                         {/*поэтому ничего не отрисовывать.*/}
-                        {/*{currentTemplateId !== null && <IncFilesTemplateForm />}*/}
+                        {/*{currentTemplateId !== null && <SiteTemplateForm />}*/}
                     </HeaderPage>
                 )
             }

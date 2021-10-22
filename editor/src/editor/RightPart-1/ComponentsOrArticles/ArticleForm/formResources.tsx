@@ -29,7 +29,7 @@
                     }
                 },
             },
-            incFilesTemplateId: {
+            siteTemplateId: {
                 initialValue: [''],
             },
             submit: {
@@ -195,7 +195,7 @@
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
-    formState = setFieldDataPropValue(formState, 'disabled', status, 'incFilesTemplateId')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'siteTemplateId')
     formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
@@ -214,8 +214,8 @@
     // Данные полей формы
     const fields = formDetails.readyFieldValues
     const articleName = fields.name.toString()
-    let templateId = fields.incFilesTemplateId
-        ? fields.incFilesTemplateId.toString()
+    let templateId = fields.siteTemplateId
+        ? fields.siteTemplateId.toString()
         : null
 
     // Отправить данные на сервер...

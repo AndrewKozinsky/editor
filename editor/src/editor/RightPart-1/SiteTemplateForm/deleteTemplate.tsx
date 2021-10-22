@@ -5,8 +5,8 @@
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
 // import Button from 'common/formElements/Button/Button'
-// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
-// import { useDeleteIncFilesTemplate } from 'requests/editor/incFiles/deleteIncFilesTemplateRequest'
+// import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
+// import { useDeleteIncFilesTemplate } from 'requests/editor/siteTemplate/deleteIncFilesTemplateRequest'
 
 
 /*export function ModalContent() {

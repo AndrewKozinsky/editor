@@ -6,7 +6,6 @@ import useGetMessages from 'messages/fn/useGetMessages'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
 
 
-
 /** Кнопка удаления сайта открывающая модальное окно подтверждения */
 export default function DeleteSiteButton() {
     // Сообщения формы

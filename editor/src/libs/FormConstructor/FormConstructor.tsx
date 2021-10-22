@@ -7,6 +7,9 @@ import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
 import CommonNotice from './misc/CommonNotice'
+import useGetMessages from '../../messages/fn/useGetMessages'
+import {notFoundMessages} from '../../messages/notFoundMessages'
+import {serverMessages} from '../../messages/serverMessages'
 
 type FormConstructorPropType = {
     config: FCType.Config // Form config
@@ -36,6 +39,8 @@ function Fields(props: FormConstructorPropType) {
     const { fields } = props.config
     const { state } = props
 
+    const serverMsg = useGetMessages(serverMessages)
+
     // A form may consists only submit button
     if (!fields) return null
 
@@ -55,7 +60,16 @@ function Fields(props: FormConstructorPropType) {
             fieldData.name = fieldName
             fieldData.value = state.fields[fieldName].value[0]
             fieldData.onChange = state.onChangeFieldHandler
-            fieldData.error = state.fields[fieldName].error
+
+            // Получить текст ошибки...
+            let errorText = state.fields[fieldName].error
+            // Возможно этот текст ошибки пришёл из сервера.
+            // Тогда он будет вида site_CreateSiteDto_nameTooLong
+            // Поэтому проверю есть ли человекочитаемый эквивалент в объекте serverMsg
+            //@ts-ignore
+            if (serverMsg[errorText]) errorText = serverMsg[errorText]
+            // Назначу текст ошибки
+            fieldData.error = errorText
 
             // Disable field if it is disabled or entire form
             fieldData.disabled = !!(state.fields[fieldName].disabled || state.formDisabled)

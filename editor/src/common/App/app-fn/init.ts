@@ -35,7 +35,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
-        // dispatch( sitesActions.setCurrentIncFilesTemplateId(editorIncFilesId) )
+        // dispatch( sitesActions.setCurrentSiteTemplateId(editorIncFilesId) )
         // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])

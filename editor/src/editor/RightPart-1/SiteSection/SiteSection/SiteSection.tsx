@@ -1,11 +1,11 @@
 import React from 'react'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import getNewSiteFormConfig from '../newSiteFormConfig'
+import getNewSiteFormConfig from './newSiteFormConfig'
 import useGetMessages from 'messages/fn/useGetMessages'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import getCurrentSiteFormConfig from '../currentSiteFormConfig'
+import getCurrentSiteFormConfig from './currentSiteFormConfig'
 import { useSetSiteName } from './SiteSection-func'
 import './SiteSection.scss'
 

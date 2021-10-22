@@ -22,7 +22,7 @@
         body: JSON.stringify(newTemplateData)
     }
     const response: LoginRequestServerResponse = await makeFetch(
-        getApiUrl('incFiles', values.siteId), options
+        getApiUrl('siteTemplate', values.siteId), options
     )
     return response
 }*/

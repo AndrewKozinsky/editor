@@ -12,13 +12,13 @@
 /*import {
     useGetAnotherTemplate,
     useGetSubmitButtonText
-} from './IncFilesTemplateForm-func'*/
-// import { incFilesTemplateSectionMessages } from 'messages/incFilesTemplateSectionMessages'
+} from './SiteTemplateForm-func'*/
+// import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
 // import { ModalContent } from './deleteTemplate'
 
 
 /** Форма создания или редактирования шаблона подключаемых файлов */
-/*export default function IncFilesTemplateForm() {
+/*export default function SiteTemplateForm() {
 
     // FormHandler
     const fh = useFormHandler(getFormConfig(), 'incFilesTemplate')
@@ -84,7 +84,7 @@
 /** Кнопка удаления шаблона подключаемых файлов */
 /*function DeleteTemplateButton() {
     // id текущего шаблона
-    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления шаблона
     const openDeleteTemplateConfirmation = useGetShowModal(<ModalContent />)

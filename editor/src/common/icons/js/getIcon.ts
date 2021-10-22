@@ -18,7 +18,7 @@ import BtnSignAdd from '../icons/btnSignAdd'
 // import BtnSignCode from '../icons/btnSignCode'
 // import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
-import BtnSignExit from '../icons/btnSignExit';
+import BtnSignExit from '../icons/btnSignExit'
 import EditorLightTheme from '../icons/editorLightTheme'
 import EditorDarkTheme from '../icons/editorDarkTheme'
 import SiteTabSite from '../icons/siteTabSite'

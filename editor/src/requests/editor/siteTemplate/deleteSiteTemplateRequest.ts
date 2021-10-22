@@ -8,7 +8,7 @@
 
     // id выделенного шаблона, который нужно удалить
     const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
-    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
 
     // Параметры запроса
     const options = { method: 'DELETE'}
@@ -16,7 +16,7 @@
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const {data: response, doFetch} =
         useFetch<DeleteIncFilesTemplateServerResponse>(
-            getApiUrl('incFiles', currentSiteId, currentTemplateId), options
+            getApiUrl('siteTemplate', currentSiteId, currentTemplateId), options
         )
 
     return { response, doFetch }

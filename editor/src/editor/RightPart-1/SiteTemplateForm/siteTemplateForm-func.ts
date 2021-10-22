@@ -4,7 +4,7 @@
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-// import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
+// import {siteTemplateSectionMessages} from 'messages/siteTemplateSectionMessages'
 // import {ButtonIconType} from 'common/formElements/Button/Button'
 
 
@@ -15,11 +15,11 @@
  */
 /*export function useGetAnotherTemplate(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
     // id текущего шаблона и массив шаблонов
-    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId, templates} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
 
     useEffect(function () {
         // Найти шаблон с указанным id
-        const template = templates.find((template: StoreSitesTypes.IncFilesTemplateType) => {
+        const template = templates.find((template: StoreSitesTypes.SiteTemplateType) => {
             return template.id === currentTemplateId
         })
 
@@ -52,7 +52,7 @@
 /*function changeField(
     formState: FHTypes.FormState,
     fieldName: 'name' | 'head' | 'body',
-    template: null | StoreSitesTypes.IncFilesTemplateType
+    template: null | StoreSitesTypes.SiteTemplateType
 ) {
     // Получение поля формы по имени
     const field = formState.fields[fieldName]
@@ -73,7 +73,7 @@
 /*
 export function useGetSubmitButtonText() {
     // id текущего шаблона
-    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
     const [submitName, setSubmitName] = useState('')
     const [submitIconType, setSubmitIconType] = useState<ButtonIconType>('btnSignAdd')
 

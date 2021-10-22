@@ -18,7 +18,7 @@ type SiteType = {
             id: number // 7
             name: string // "РУСХИТ"
             userId: number // 2
-            defaultIncFilesTemplateId: null | number
+            defaultSiteTemplateId: null | number
         }
     }
 }

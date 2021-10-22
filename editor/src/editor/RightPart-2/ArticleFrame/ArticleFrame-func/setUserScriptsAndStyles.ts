@@ -5,7 +5,7 @@
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame
 /*export function useSetUserScriptsAndStylesToIFrame() {
-    const { $links, incFiles, history } = useSelector((store: AppStateType) => store.article)
+    const { $links, siteTemplate, history } = useSelector((store: AppStateType) => store.article)
 
     // Were mouse move handler set?
     const [filesWereSet, setFilesWereSet] = useState(false)
@@ -14,21 +14,21 @@
         if (!$links.$body || !history.length || filesWereSet) return
 
         // Set code in <head>
-        if (incFiles.inHead) {
-            const nodes = createNodesFromString(incFiles.inHead)
+        if (siteTemplate.inHead) {
+            const nodes = createNodesFromString(siteTemplate.inHead)
             putNodesToDocument($links.$document, nodes, 'head')
         }
 
         // Set code before end the <body>
-        if (incFiles.beforeEndBody) {
-            const nodes = createNodesFromString(incFiles.beforeEndBody)
+        if (siteTemplate.beforeEndBody) {
+            const nodes = createNodesFromString(siteTemplate.beforeEndBody)
             putNodesToDocument($links.$document, nodes, 'body')
         }
 
         // Set flag that files were set
         setFilesWereSet(true)
 
-    }, [$links, incFiles, incFiles, history, filesWereSet])
+    }, [$links, siteTemplate, siteTemplate, history, filesWereSet])
 
     useEffect(function () {
         if (!history.length) {

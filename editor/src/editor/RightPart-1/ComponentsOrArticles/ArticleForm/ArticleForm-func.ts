@@ -43,16 +43,16 @@
         let newFormState = changeField(formState, 'name', articlesSection.currentArtName)
 
         // Если в данных статьи есть id шаблона файлов, то поставить его в качестве значения в выпадающем списке.
-        if (articlesSection.incFilesTemplateId) {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', articlesSection.incFilesTemplateId)
+        if (articlesSection.SiteTemplateId) {
+            newFormState = changeField(newFormState, 'siteTemplateId', articlesSection.incFilesTemplateId)
         }
         // Если шаблона нет, то поставить id шаблона по умолчанию
-        else if (currentSite && currentSite.defaultIncFilesTemplateId) {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', currentSite.defaultIncFilesTemplateId)
+        else if (currentSite && currentSite.defaultSiteTemplateId) {
+            newFormState = changeField(newFormState, 'SiteTemplateId', currentSite.defaultSiteTemplateId)
         }
         // В остальных случаях ничего не ставить
         else {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', '')
+            newFormState = changeField(newFormState, 'siteTemplateId', '')
         }
 
         // Поставить новое состояние формы
@@ -69,7 +69,7 @@
  */
 /*function changeField(
     formState: FHTypes.FormState,
-    fieldName: 'name' | 'incFilesTemplateId',
+    fieldName: 'name' | 'siteTemplateId',
     value: null | string
 ) {
     // Получение поля формы по имени
@@ -97,8 +97,8 @@
  */
 /*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Массив шаблонов подключаемых файлов
-    const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppStateType) => {
-        return store.sites.incFilesTemplatesSection.templates
+    const templates:StoreSitesTypes.SiteTemplatesType = useSelector((store: AppStateType) => {
+        return store.sites.siteTemplatesSection.templates
     })
 
     // Видим ли выпадающий список подключаемых файлов
@@ -154,7 +154,7 @@
 /*
 export function useGetEditArticleBtnHandler() {
     const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
-    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.incFilesTemplatesSection)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
     const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     return useCallback(function () {

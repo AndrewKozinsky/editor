@@ -10,7 +10,7 @@
 
     const options = { method: 'GET' }
     const response: GetIncFilesTemplatesRequestServerResponse = await makeFetch(
-        getApiUrl('incFiles', siteId, templateId), options
+        getApiUrl('siteTemplate', siteId, templateId), options
     )
 
     return response

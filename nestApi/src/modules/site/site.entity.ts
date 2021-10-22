@@ -20,9 +20,8 @@ export class SiteEntity {
     userId: number
 
     // id шаблона сайта по умолчанию.
-    // То есть при создании новой статьи выбранной шаблона будет автоматически подставлен.
     @Column({type: 'varchar', width: 255, default: null})
-    defaultIncFilesTemplateId: string
+    defaultSiteTemplateId: string
 
     // Date when site was created. It set automatically.
     @CreateDateColumn({type: 'timestamp'})

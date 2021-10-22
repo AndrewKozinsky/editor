@@ -1,9 +1,9 @@
 import * as yup from 'yup'
-import FCType from 'libs/FormConstructor/FCType'
-import actions from 'store/rootAction'
-import { store } from 'store/rootReducer'
-import createSiteRequest, { CreateSiteRequestValuesType } from 'requests/editor/sites/createSiteRequest'
-import useGetUserSelectors from '../../../store/user/userSelectors'
+import FCType from 'src/libs/FormConstructor/FCType'
+import actions from 'src/store/rootAction'
+import { store } from 'src/store/rootReducer'
+import createSiteRequest, { CreateSiteRequestValuesType } from 'src/requests/editor/sites/createSiteRequest'
+
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getNewSiteFormConfig(siteSectionMsg: any) {
@@ -14,10 +14,12 @@ function getNewSiteFormConfig(siteSectionMsg: any) {
                 schema: (fields) => {
                     return yup.string()
                         .required(siteSectionMsg.siteNameInputRequired)
+                        .max(255, siteSectionMsg.siteNameInputIsTooLong)
                 },
                 fieldData: {
                     label: siteSectionMsg.siteNameInput,
                     placeholder: siteSectionMsg.siteNamePlaceholder,
+                    autoFocus: true
                 }
             }
         },

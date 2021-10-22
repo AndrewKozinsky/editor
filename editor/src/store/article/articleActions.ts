@@ -5,7 +5,7 @@
 // import getArticleRequest from 'requests/editor/article/getArticleRequest'
 // import StoreArticleTypes from './articleTypes'
 // import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
-// import getIncFilesTemplateRequest from 'requests/editor/incFiles/getIncFilesTemplateRequest'
+// import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
 // import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
 // import FilesTreeType from 'types/filesTree'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
@@ -26,7 +26,7 @@
     },
 
     // Наполнение Хранилища данными для отрисовки статьи
-    fillArticle(siteId: string, incFilesTemplateId: string, articleUuId?: string) {
+    fillArticle(siteId: string, siteTemplateId: string, articleUuId?: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const articleMarksFromLS = getFromLocalStorage('article')
 
@@ -34,7 +34,7 @@
                 // Save article data to localStorage to know what kind of article the editor has to open next time
                 articleManager.supplementArtMarksInLocalStorage({
                     siteId,
-                    incFilesId: incFilesTemplateId,
+                    incFilesId: siteTemplateId,
                     articleId: articleUuId,
                     openCompFoldersUuIds: []
                 })
@@ -121,7 +121,7 @@
     // Setting included files template in Store
     setIncFilesTemplate(inHead: string, beforeEndBody: string): StoreArticleTypes.SetIncFilesTemplateAction {
         return {
-            type: StoreArticleTypes.SET_INC_FILES_TEMPLATE,
+            type: StoreArticleTypes.SET_SITE_TEMPLATE,
             payload: {
                 inHead,
                 beforeEndBody
