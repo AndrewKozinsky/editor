@@ -98,8 +98,11 @@ function getDevServerSettings() {
         port: 3000,
         host: '0.0.0.0',
         historyApiFallback: true,
-        disableHostCheck: true,
-        hot: true
+        allowedHosts: 'all',
+        hot: false,
+        client: {
+            webSocketURL: 'auto://0.0.0.0:0/editor/ws'
+        },
     }
 }
 
