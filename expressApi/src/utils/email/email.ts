@@ -103,9 +103,9 @@ export class Email {
                 'to' : [
                     { "email" : this.to }
                 ]
-            };
+            }
 
-            sendpulse.smtpSendMail(answerGetter, email);
+            sendpulse.smtpSendMail(answerGetter, email)
         })*/
     }
 }

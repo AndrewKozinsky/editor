@@ -111,8 +111,9 @@ export class Email {
             }
 
             try {
-                sendpulse.smtpSendMail(showAnswer, emailOptions);
-            } catch (err) {
+                sendpulse.smtpSendMail(showAnswer, emailOptions)
+            }
+            catch (err) {
                 console.log(err)
             }
         })

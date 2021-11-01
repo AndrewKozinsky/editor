@@ -36,7 +36,7 @@ export function getIconSize(type: string) {
         case 'mainTabSettings':
         // Значки на вкладках сайта
         case 'siteTabSite':
-        case 'siteTabPlugins':
+        case 'siteTabTemplates':
         case 'siteTabComponents':
         case 'siteTabArticle':
             return {

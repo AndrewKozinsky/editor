@@ -31,7 +31,7 @@
 16. Выведите список пользователей: ```\du```
 17. Если там нет пользователя editor, то создайте: ```create user editor with encrypted password 'dt52posQP00P';```
 18. И передайте пользователя editor все привелегии: ```grant all privileges on database editor to editor;```
-19. Можно выйти из контейнера дважды запустив: ```exit```
+19. Можно выйти из контейнера дважды или трижды запустив: ```exit```
 
 #### Наполнение базы данных
 20. Перейдите в контейнер Nest-а: ```docker exec -it editor-nest sh```.

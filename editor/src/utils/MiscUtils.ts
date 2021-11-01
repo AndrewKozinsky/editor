@@ -53,9 +53,9 @@ export function removeFromLocalStorage(propName: string) {
     let f = function copy(data: T) {
         switch (toString.call(data)){
             case "[object Array]":
-                return parseArray(data);
+                return parseArray(data)
             case "[object Object]":
-                return parseObj(data);
+                return parseObj(data)
             default: return null // Возвращу null чтобы проверяльщик не ругался
         }
 
@@ -64,30 +64,30 @@ export function removeFromLocalStorage(propName: string) {
                 switch (toString.call(elem)){
                     case "[object Array]":
                     case "[object Object]":
-                        return copy(elem);
+                        return copy(elem)
                     default: return elem
                 }
             })
         }
 
         function parseObj(obj: any) {
-            let result = {};
+            let result = {}
 
             for(let key in obj) {
                 switch (toString.call(obj[key])){
                     case "[object Array]":
                     case "[object Object]":
                         //@ts-ignore
-                        result[key] = copy(obj[key]);
-                        break;
+                        result[key] = copy(obj[key])
+                        break
                     default:
                         //@ts-ignore
                         result[key] = obj[key]
                 }
             }
-            return result;
+            return result
         }
-    };
+    }
 
-    return f(data);
+    return f(data)
 }*/

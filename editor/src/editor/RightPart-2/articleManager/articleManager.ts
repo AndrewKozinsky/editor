@@ -22,7 +22,7 @@ import { hooks } from './hooks'
 import {
     createArticle,
     createComponent
-} from './create';
+} from './create'
 import {
     canComponentPutInElement,
     hasElemNestedElements,

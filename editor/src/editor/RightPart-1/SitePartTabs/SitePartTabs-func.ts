@@ -36,8 +36,8 @@ const tabsData = [
         titleIndex: 'sites' // название свойства для получения названия в messages
     },
     {
-        iconType: 'siteTabPlugins',
-        titleIndex: 'incFilesTemplates'
+        iconType: 'siteTabTemplates',
+        titleIndex: 'siteTemplates'
     },
     {
         iconType: 'siteTabComponents',

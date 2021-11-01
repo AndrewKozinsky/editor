@@ -28,7 +28,7 @@
 ): TempCompTypes.TempComp {
 
     return tempCompArr.find((tempComp) => {
-        return tempComp.uuid === tempCompId;
+        return tempComp.uuid === tempCompId
     })
 }*/
 

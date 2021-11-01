@@ -6,10 +6,9 @@ import Select, { SelectPropType } from 'common/formElements/Select/Select'
 import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
-import CommonNotice from './misc/CommonNotice'
-import useGetMessages from '../../messages/fn/useGetMessages'
-import {notFoundMessages} from '../../messages/notFoundMessages'
-import {serverMessages} from '../../messages/serverMessages'
+import CommonNotice from 'libs/FormConstructor/misc/CommonNotice'
+import useGetMessages from 'messages/fn/useGetMessages'
+import {serverMessages} from 'messages/serverMessages'
 
 type FormConstructorPropType = {
     config: FCType.Config // Form config
@@ -117,11 +116,12 @@ function BottomDivider(props: FormConstructorPropType) {
 
 /** The component with some passed elements (buttons, for example) and a submit button */
 function Bottom(props: FormConstructorPropType) {
-    const { elems, topOffset, align } = props.config.bottom
+    const { hr } = props.config.bottom
+    const { elems, align } = props.config.bottom
 
     // Some wrapper customization
-    let wrapperProps: WrapperPropType = {align: 'justify', t: 20}
-    if (topOffset === 'big') wrapperProps.t = 10
+    let wrapperProps: WrapperPropType = {align: 'justify', t: 5}
+    if (hr) wrapperProps.t = 15
     if (align === 'left') delete wrapperProps.align
 
     return (

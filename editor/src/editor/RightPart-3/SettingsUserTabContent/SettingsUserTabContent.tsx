@@ -7,7 +7,7 @@ import UserAccountForm from '../UserAccountForm/UserAccountForm'
 import useGetMessages from 'messages/fn/useGetMessages'
 import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
-import {userAccountSectionMessages} from '../../../messages/userAccountSectionMessages'
+import {userAccountSectionMessages} from 'messages/userAccountSectionMessages'
 
 
 export default function SettingsUserTabContent() {

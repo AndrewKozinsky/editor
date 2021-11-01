@@ -8,7 +8,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
     login: 'users/login',
     // Регистрация
-    signup: 'users/signup',
+    signup: 'users',
     // Отправка письма со ссылкой на подтверждение почты
     sendConfirmLetter: 'users/sendConfirmLetter',
     // Подтверждение почты

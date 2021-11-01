@@ -37,7 +37,7 @@
     let tagName = htmlObj.tag
 
     // Подготовлю атрибуты
-    let attribs = fixAttribs(htmlObj, key);
+    let attribs = fixAttribs(htmlObj, key)
 
     // Подготовлю детей
     // @ts-ignore
@@ -105,8 +105,8 @@
 
         // Все классы нужно писать как className.
         if(propName === 'class') {
-            let classValue = objAttribs.class;
-            delete objAttribs.class;
+            let classValue = objAttribs.class
+            delete objAttribs.class
             objAttribs.className = classValue
         }
 

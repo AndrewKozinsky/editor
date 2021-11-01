@@ -12,7 +12,7 @@ export default function SitePartTabs() {
 
     return (
         <div className={CN}>
-            {tabsDataArr.map(tabData => {
+            {tabsDataArr.map((tabData, i) => {
                 return <MainTab tabData={tabData} key={tabData.title} />
             })}
         </div>

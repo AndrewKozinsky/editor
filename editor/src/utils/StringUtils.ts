@@ -65,12 +65,12 @@ export function getRandomId() {
 export function convertToCamelCase(str: string) {
     // box-shadow -> boxShadow
 
-    let arr = str.split('-');
+    let arr = str.split('-')
 
     arr = arr.map((str, i) => {
-        if(i > 0) return str[0].toUpperCase() + str.substr(1);
+        if(i > 0) return str[0].toUpperCase() + str.substr(1)
         return str
-    });
+    })
 
     return arr.join('')
 }*/
@@ -80,5 +80,5 @@ function convertToSnakeCase(str: string) {
     if (!str) return null
 
     // boxShadow -> box-shadow
-    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
 }*/

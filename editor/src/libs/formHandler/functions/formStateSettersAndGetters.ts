@@ -31,7 +31,7 @@
         const field = formState.fields[fieldName || defaultFieldName]
         const newField = {...field, data: fieldData}
 
-        return <FHTypes.FormState>makeImmutableObj(formState, field, newField);
+        return <FHTypes.FormState>makeImmutableObj(formState, field, newField)
     }
 }*/
 

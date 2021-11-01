@@ -22,7 +22,7 @@ import BtnSignExit from '../icons/btnSignExit'
 import EditorLightTheme from '../icons/editorLightTheme'
 import EditorDarkTheme from '../icons/editorDarkTheme'
 import SiteTabSite from '../icons/siteTabSite'
-import SiteTabPlugins from '../icons/siteTabPlugins'
+import SiteTabTemplates from '../icons/siteTemplates'
 import SiteTabArticle from '../icons/siteTabArticle'
 import SiteTabComponents from '../icons/siteTabComponents'
 // import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
@@ -71,7 +71,7 @@ export function getIcon(type: string): ReactNode {
 
         // Значки на вкладках сайта
         siteTabSite: SiteTabSite,
-        siteTabPlugins: SiteTabPlugins,
+        siteTabTemplates: SiteTabTemplates,
         siteTabComponents: SiteTabComponents,
         siteTabArticle: SiteTabArticle,
 

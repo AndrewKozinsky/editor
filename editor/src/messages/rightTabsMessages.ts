@@ -7,7 +7,7 @@ export const rightTabsMessages = {
     },
     siteTemplates: {
         eng: 'Templates of plug-in files',
-        rus: 'Шаблоны подключаемых файлов'
+        rus: 'Site style templates'
     },
     components: {
         eng: 'Component templates',

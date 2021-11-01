@@ -70,7 +70,7 @@
 /*function isDataHasOriginalData(currentData: any, originalData: any) {
 
     // Если текущий объект равен целевому объекту, то вернуть правду
-    if(currentData === originalData) return true;
+    if(currentData === originalData) return true
 
 
     // Если это массив

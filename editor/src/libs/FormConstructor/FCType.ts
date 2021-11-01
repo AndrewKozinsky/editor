@@ -14,7 +14,7 @@ namespace FCType {
     export type Config = {
         fields?: ConfigFields
         bottom: {
-            topOffset?: 'small' | 'big'
+            // topOffset?: 'small' | 'big' // Думаю это лишнее
             submit: ConfigSubmitButton
             elems?: JSX.Element[]
             align?: 'left' | 'right',
