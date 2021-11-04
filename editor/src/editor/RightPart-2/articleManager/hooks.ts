@@ -1,5 +1,4 @@
-// import {useSelector} from 'react-redux'
-// import {AppStateType} from 'src/store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import {useEffect, useState} from 'react'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'

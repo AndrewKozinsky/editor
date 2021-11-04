@@ -1,6 +1,5 @@
 // import {useEffect, useState} from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame

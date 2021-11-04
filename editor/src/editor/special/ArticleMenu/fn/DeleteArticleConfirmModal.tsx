@@ -1,6 +1,5 @@
 // import React, {useCallback} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'

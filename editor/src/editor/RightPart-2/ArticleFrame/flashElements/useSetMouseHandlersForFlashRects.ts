@@ -1,7 +1,6 @@
 // import {useEffect, useState} from 'react'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 // import { getElementPadding } from 'utils/domUtils'
 

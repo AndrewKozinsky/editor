@@ -1,6 +1,6 @@
 // import {HTMLObjArrType} from './htmlStringToObject'
-// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-// import {createDeepCopy} from 'src/utils/MiscUtils'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import {createDeepCopy} from 'utils/MiscUtils'
 
 /**
  * Function synchronize the number of elements in html object with number of elements in component data

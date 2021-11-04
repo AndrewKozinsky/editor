@@ -3,7 +3,6 @@
 // import { useSelector } from 'react-redux'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
-// import { AppStateType } from 'store/rootReducer'
 // import {MiscTypes} from 'types/miscTypes'
 // import {getFromLocalStorage} from 'utils/MiscUtils'
 // import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'

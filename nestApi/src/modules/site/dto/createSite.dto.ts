@@ -1,4 +1,5 @@
 import { IsNotEmpty, MaxLength } from 'class-validator'
+import {Column} from 'typeorm'
 
 export class CreateSiteDto {
     @IsNotEmpty({message: 'site_CreateSiteDto_EmptyName'})
@@ -7,5 +8,6 @@ export class CreateSiteDto {
     })
     name: string
 
-    defaultSiteTemplateId: string
+    @Column({type: 'integer'})
+    defaultSiteTemplateId: number
 }

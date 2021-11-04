@@ -1,5 +1,4 @@
 // import React from 'react'
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 // import {MiscTypes} from 'types/miscTypes'
 // import Button from 'common/formElements/Button/Button'

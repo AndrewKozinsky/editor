@@ -1,5 +1,4 @@
 // import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 
 /** The hooks sets flash rectangles into IFrame */

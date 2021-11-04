@@ -1,5 +1,4 @@
 // import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 import { store } from 'store/rootReducer'
 
 

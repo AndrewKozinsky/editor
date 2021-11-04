@@ -1,6 +1,5 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 /** The hook returns boolean if Save article button is disabled */

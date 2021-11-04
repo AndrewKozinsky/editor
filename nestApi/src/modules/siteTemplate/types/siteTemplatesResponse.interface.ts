@@ -1,16 +1,15 @@
 
 // Тип данных отравляемых клиенту при операциях с сайтом
-export interface SitesResponseInterface {
+export interface SiteTemplatesResponseInterface {
     status: 'success'
     statusCode: number
     data: {
-        sites: SiteType[]
+        siteTemplates: SiteTemplateType[]
     }
 }
 
-type SiteType = {
+type SiteTemplateType = {
     id: number
-    name: string
-    defaultSiteTemplateId: null | number
+    content: string
     createdAt: Date
 }

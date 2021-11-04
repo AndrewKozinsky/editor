@@ -1,6 +1,5 @@
 // import React from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import ArticleForm from './ArticleForm/ArticleForm'
 // import ArticlesFolderForm from './ArticlesFolderForm/ArticlesFolderForm'
 

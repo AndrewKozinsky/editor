@@ -1,13 +1,13 @@
 import { useEffect } from 'react'
-// import {useSelector} from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
-import StoreSitesTypes from 'src/store/site/sitesTypes'
+import StoreSitesTypes from 'store/site/sitesTypes'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { ButtonIconType } from 'common/formElements/Button/Button'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import useGetSitesSelectors from 'src/store/site/sitesSelectors'
-import FCType from 'src/libs/FormConstructor/FCType'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import FCType from 'libs/FormConstructor/FCType'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта
@@ -32,70 +32,26 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
     }, [currentSiteId, sites])
 }
 
-
-
 /**
- * Хук отслеживает выделение существующего сайта или нового и изменяет форму чтобы отражать выделенный сайт
- * @param {Object} formState — объект состояния формы
- * @param {Function} setFormState — функция ставящая новое состояние формы
+ * Функция запускаемая после получения ответа от сервера
+ * при отправке формы создания нового сайта или изменения существующего
+ * @param {Object} response — объект ответа от сервера
  */
-/*export function useGetAnotherSite(formState: FHTypes.FormState, setFormState: FHTypes.SetFormState) {
-    // id текущего сайта и массив сайтов
-    const {currentSiteId, sites} = useSelector((store: AppStateType) => store.sites)
+export async function afterSubmit(response: FCType.Response) {
+    // Если сайт успешно создан...
+    if (response.status === 'success') {
+        // Скачать новый список сайтов и поставить в Хранилище
+        await store.dispatch(actions.sites.requestSites())
 
-    useEffect(function () {
-        if (!sites.length) return
-
-        // Найти сайт с указанным id
-        let site = sites.find((site: StoreSitesTypes.SiteType) => site.id === currentSiteId)
-
-        if (!site) site = { id: null, name: '', defaultSiteTemplateId: null }
-
-        // Поставить новые значения в поля...
-        let newFormState = changeField(formState, 'name', site)
-        newFormState = changeField(newFormState, 'defaultSiteTemplateId', site)
-
-        // В данные формы поставить тип формы:
-        // createSite если хотят создать новый сайт
-        // или saveSite если хотят сохранить данные существующего сайта
-        const newFormData = {
-            ...formState.form.data,
-            formType: site.name ? 'saveSite' : 'createSite'
-        }
-
-        newFormState = makeImmutableObj(newFormState, formState.form.data, newFormData)
-
-        // Поставить новое состояние формы
-        setFormState(newFormState)
-    }, [currentSiteId, sites])
-}*/
-
-
-/**
- * Функция формирует новое значение поля формы по переданным данным
- * @param {Object} formState — объект состояния формы
- * @param {String} fieldName — имя изменяемого поля
- * @param {Object} site — данные о сайте
- */
-/*function changeField(
-    formState: FHTypes.FormState,
-    fieldName: 'name' | 'defaultSiteTemplateId',
-    site: null | StoreSitesTypes.SiteType
-) {
-    // Получение поля формы по имени
-    const field = formState.fields[fieldName]
-    // Создание копии поля
-    const newField = {...field}
-    // Обнуление ошибки
-    newField.data.error = null
-    // Занесение нового значения. Если в site ничего, то поставить пустое значение.
-    const val = site ? site[fieldName] : ''
-    newField.value = [val]
-
-    // Поставить новое значение поля name
-    return makeImmutableObj(formState, field, newField)
-}*/
-
+        // Найти в Хранилище сайт с таким же id как у только что созданного сайта
+        const newSite = store.getState().sites.sites.find((site: any) => {
+            // @ts-ignore
+            return site.id === response.data.sites[0].id
+        })
+        // Выделить созданный сайт
+        store.dispatch(actions.sites.setCurrentSiteId(newSite.id))
+    }
+}
 
 /** Функция возвращает текст и тип значка на кнопке отправки формы */
 /*export function useGetSubmitButtonText() {

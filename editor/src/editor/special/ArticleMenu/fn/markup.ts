@@ -1,6 +1,4 @@
 // import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 /*

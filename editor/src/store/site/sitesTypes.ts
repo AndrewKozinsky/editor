@@ -9,7 +9,7 @@ namespace StoreSitesTypes {
         id: string,
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
-        defaultSiteTemplateId: null | string
+        defaultSiteTemplateId: null | number
     }
     // Сайты
     export type SitesType = SiteType[]

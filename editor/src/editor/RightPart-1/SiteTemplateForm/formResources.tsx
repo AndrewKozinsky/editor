@@ -1,5 +1,4 @@
 // import * as yup from 'yup'
-// import {useSelector} from 'react-redux'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import {AppStateType} from 'store/rootReducer'

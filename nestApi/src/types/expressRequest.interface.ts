@@ -5,6 +5,7 @@ export interface ExpressRequestInterface extends Request {
     user?: UserEntity
     headers: UpdatedHeaders
     cookies: MiscTypes.ObjStringKeyStringVal
+    params: { [key: string]: string }
 }
 
 interface UpdatedHeaders extends Headers {

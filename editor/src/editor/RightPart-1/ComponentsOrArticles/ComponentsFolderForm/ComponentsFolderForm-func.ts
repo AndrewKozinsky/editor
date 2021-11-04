@@ -1,8 +1,6 @@
 // import {useEffect} from 'react'
-// import {useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import { AppStateType } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import DragFilesTreeType from 'libs/DragFilesTree/types'

@@ -1,6 +1,5 @@
 // import {useEffect, useState} from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 
 
 /** Hook manages Empty text sign visibility */

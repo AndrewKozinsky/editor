@@ -1,7 +1,6 @@
 // import {useFetch} from 'requests/reqFn/fetch'
 // import getApiUrl from 'requests/reqFn/apiUrls'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 
 // Функция удаляет шаблон подключаемых файлов
 /*export function useDeleteIncFilesTemplate() {

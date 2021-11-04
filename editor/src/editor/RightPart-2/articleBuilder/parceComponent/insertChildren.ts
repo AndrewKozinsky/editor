@@ -1,5 +1,5 @@
 // import {ConsistObj} from './getConsistObjsArr'
-// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import { parseComponent } from './parseComponent'
 // import { HTMLObjArrType } from './htmlStringToObject'
 // import {parseText} from '../parseText/parseText'

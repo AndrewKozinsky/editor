@@ -1,7 +1,6 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-// import { AppStateType } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'

@@ -1,4 +1,3 @@
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 // import {useEffect} from 'react'
 

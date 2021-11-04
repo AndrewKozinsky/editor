@@ -207,4 +207,29 @@ export const serverMessages = {
         eng: 'The current user did not create the deleted site.',
         rus: 'Текущий пользователь не создавал удаляемый сайт.'
     },
+
+    siteTemplate_CreateSiteTemplateDto_EmptySiteId: {
+        eng: 'You must specify the site name.',
+        rus: 'Должен быть указан id сайта которому принадлежит шаблон.'
+    },
+    siteTemplate_CreateSiteTemplateDto_EmptyContent: {
+        eng: 'You must specify the site template.',
+        rus: 'Должен быть указан код шаблона сайта.'
+    },
+    siteTemplate_UpdateSiteTemplateDto_EmptyContent: {
+        eng: 'You must specify the site template.',
+        rus: 'Должен быть указан код шаблона сайта.'
+    },
+    siteTemplate_UpdateSiteTemplate_SiteIsNotExist: {
+        eng: 'The transferred website template does not exist.',
+        rus: 'Переданный шаблон сайта не существует.'
+    },
+    siteTemplate_DeleteSiteTemplate_SiteTemplateIsNotExists: {
+        eng: 'This site does not exist',
+        rus: 'Указанный сайт не существует.'
+    },
+    siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the deleted site template.',
+        rus: 'Текущий пользователь не создавал удаляемый шаблон сайта.'
+    },
 }

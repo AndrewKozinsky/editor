@@ -300,7 +300,7 @@ export class UserService {
 
 
     /**
-     * The function form response and send it to clien
+     * The function form response and send it to client
      * @param {Object} user — user data from database
      * @param {Object} response — response object
      * @param {Number} statusCode — status code

@@ -1,7 +1,6 @@
 // import { useEffect } from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-// import { AppStateType } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'

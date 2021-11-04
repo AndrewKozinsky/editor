@@ -1,5 +1,4 @@
 // import React from 'react'
-// import {useSelector} from 'react-redux'
 // import {AppStateType} from 'store/rootReducer'
 // import useGetShowModal from 'utils/hooksUtils'
 // import Wrapper from 'common/Wrapper/Wrapper'

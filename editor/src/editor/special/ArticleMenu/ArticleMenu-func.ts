@@ -1,6 +1,5 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import { useSelector, useDispatch } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 

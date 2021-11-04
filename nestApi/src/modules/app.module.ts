@@ -7,6 +7,7 @@ import ormconfig from '../ormconfig'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { AuthMiddleware } from './user/middlewares/auth.middleware'
 import { LanguageMiddleware } from './user/middlewares/language.middleware'
+import {SiteTemplateModule} from './siteTemplate/siteTemplate.module'
 
 
 @Module({
@@ -18,7 +19,8 @@ import { LanguageMiddleware } from './user/middlewares/language.middleware'
           renderPath: 'wildcard'
       }),
       UserModule,
-      SiteModule
+      SiteModule,
+      SiteTemplateModule
   ],
   controllers: [],
   providers: [],

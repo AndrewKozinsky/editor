@@ -3,7 +3,6 @@
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
-// import { AppStateType } from 'store/rootReducer'
 // import Hr from 'common/misc/Hr/Hr'
 // import Button from 'common/formElements/Button/Button'
 // import {articleMenuMessages} from 'messages/articleMenuMessages'

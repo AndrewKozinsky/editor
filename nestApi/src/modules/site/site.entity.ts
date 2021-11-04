@@ -20,8 +20,8 @@ export class SiteEntity {
     userId: number
 
     // id шаблона сайта по умолчанию.
-    @Column({type: 'varchar', width: 255, default: null})
-    defaultSiteTemplateId: string
+    @Column({type: 'integer', default: null})
+    defaultSiteTemplateId: number
 
     // Date when site was created. It set automatically.
     @CreateDateColumn({type: 'timestamp'})

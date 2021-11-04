@@ -4,13 +4,11 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { SiteEntity } from './site.entity'
 import {UserEntity} from '../user/user.entity'
 import {Repository, getRepository} from 'typeorm'
-// import { createRandomString } from 'src/utils/stringUtils'
-// import MiscTypes from 'src/types/miscTypes'
-// import { Email } from 'src/utils/email/email'
 import { Response } from 'express'
 import { SitesResponseInterface } from './types/sitesResponse.interface'
 import {UpdateSiteDto} from './dto/updateSite.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
+import {SiteTemplateService} from '../siteTemplate/siteTemplate.service'
 // import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 // import { SendConfirmLetterDto } from './dto/sendConfirmLetter.dto'
 // import { ResetPasswordDto } from './dto/resetPassword.dto'
@@ -24,7 +22,8 @@ export class SiteService {
 
     constructor(
         @InjectRepository(SiteEntity)
-        private readonly siteRepository: Repository<SiteEntity>
+        private readonly siteRepository: Repository<SiteEntity>,
+        // private readonly siteTemplateService: SiteTemplateService
     ) {}
 
     /** Получение всех сайтов (защищённый маршрут) */
@@ -71,14 +70,13 @@ export class SiteService {
             responseCommonError('site_DeleteSiteDto_CurrentUserIsNotAuthor')
         }
 
+        // Удалить сайт из БД
         await this.siteRepository.delete({id: siteId})
 
-        // Удалить сайт из БД
-        // await SiteModel.findByIdAndDelete(req.params.siteId)
+        // Удалить шаблоны сайта
+        // await this.siteTemplateService.deleteSiteTemplates(siteId)
 
-        // Удалить шаблоны подключения внешних файлов
-        // await IncFilesTemplateModel.deleteMany({siteId: req.params.siteId})
-
+        // =================================
         // Удалить папки шаблонов компонентов
         // await ComponentsFoldersModel.deleteMany({siteId: req.params.siteId})
 
@@ -96,7 +94,7 @@ export class SiteService {
 
 
     /**
-     * The function form response and send it to clien
+     * The function form response and send it to client
      * @param {Object} sites — sites data from database
      * @param {Object} response — response object
      * @param {Number} statusCode — status code

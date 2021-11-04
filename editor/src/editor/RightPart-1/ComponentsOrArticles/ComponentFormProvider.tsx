@@ -1,6 +1,5 @@
 // import React from 'react'
 // import { useSelector } from 'react-redux'
-// import { AppStateType } from 'store/rootReducer'
 // import ComponentForm from './ComponentForm/ComponentForm'
 // import ComponentsFolderForm from './ComponentsFolderForm/ComponentsFolderForm'
 

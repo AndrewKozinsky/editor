@@ -1,6 +1,6 @@
-// import { store } from 'src/store/rootReducer'
-// import {makeFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import { store } from 'store/rootReducer'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 // import FilesTreeType from '../../../types/filesTree'
 
 /**
