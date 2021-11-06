@@ -1,40 +1,40 @@
 // import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Шаблоны подключаемых файлов»
-/*export const siteTemplateSectionMessages = {
-    headerNewPlugin: {
+export const siteTemplateSectionMessages = {
+    /*headerNewPlugin: {
         eng: 'New template',
         rus: 'Новый шаблон'
-    },
+    },*/
     newTemplateBtn: {
         eng: 'New file template',
         rus: 'Новый шаблон файлов'
     },
-    templateNameInput: {
-        eng: 'Template name',
-        rus: 'Название шаблона'
+    templateCodeInput: {
+        eng: 'Template code',
+        rus: 'Код шаблона'
     },
-    templateNamePlaceholder: {
-        eng: 'For example: Dark article',
-        rus: 'Например: Тёмная статья'
-    },
-    defaultTemplateCheckboxLabel: {
-        eng: 'Default template',
-        rus: 'Шаблон по умолчанию'
-    },
-    headInput: {
-        eng: 'Code added to <head>',
-        rus: 'Код добавляемый в <head>'
-    },
-    bodyInput: {
-        eng: 'Code added before </body>',
-        rus: 'Код добавляемый до </body>'
-    },
-    templateNameInputRequired: {
+    codeInputRequired: {
         eng: 'Required',
         rus: 'Обязательное поле'
     },
-    submitBtnTextNewSite: {
+    /*defaultTemplateCheckboxLabel: {
+        eng: 'Default template',
+        rus: 'Шаблон по умолчанию'
+    },*/
+    /*headInput: {
+        eng: 'Code added to <head>',
+        rus: 'Код добавляемый в <head>'
+    },*/
+    /*bodyInput: {
+        eng: 'Code added before </body>',
+        rus: 'Код добавляемый до </body>'
+    },*/
+    /*templateNameInputRequired: {
+        eng: 'Required',
+        rus: 'Обязательное поле'
+    },*/
+    submitBtnTextNew: {
         eng: 'Create',
         rus: 'Создать'
     },
@@ -42,20 +42,20 @@
         eng: 'Save',
         rus: 'Сохранить'
     },
-    deleteSiteBtnText: {
+    deleteSiteTemplateBtnText: {
         eng: 'Delete',
         rus: 'Удалить'
     },
-    deletePluginConfirmationTextInModal: {
-        eng: 'Are you sure you want to delete the plugin template?',
-        rus: 'Вы уверены, что хотите удалить шаблон подключаемых файлов?'
+    deleteConfirmationTextInModal: {
+        eng: 'Are you sure you want to delete the site template?',
+        rus: 'Вы уверены, что хотите удалить шаблон сайта?'
     },
-    closeDeletePluginModalBtn: {
+    closeDeleteModalBtn: {
         eng: 'Cancel',
         rus: 'Отменить'
     },
-    deletePluginBtnInModal: {
+    deleteBtnInModal: {
         eng: 'Delete',
         rus: 'Удалить'
     },
-}*/
+}

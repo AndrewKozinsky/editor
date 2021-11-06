@@ -1,13 +1,9 @@
 import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import CloseModalButton from './CloseModalButton'
-import actions from '../../../../store/rootAction'
-import deleteSiteRequest from '../../../../requests/editor/sites/deleteSiteRequest'
-import {store} from '../../../../store/rootReducer'
-// import loginRequest, { LoginRequestValuesType } from 'requests/user/loginRequest'
-// import actions from 'store/rootAction'
-// import { store } from 'store/rootReducer'
-// import userActions from 'store/user/userActions'
+import actions from 'store/rootAction'
+import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
+import {store} from 'store/rootReducer'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -44,16 +40,3 @@ function getConfig(siteSectionMsg: any) {
 }
 
 export default getConfig
-
-
-/*return (
-    <Button
-        type='button'
-        text={}
-        icon='btnSignTrash'
-        onClick={openDeleteSiteConfirmation}
-    />
-)*/
-
-// Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
-// const openDeleteSiteConfirmation = useGetShowModal(<ModalContent />)

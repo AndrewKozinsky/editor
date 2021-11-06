@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
-import StoreSitesTypes from 'store/site/sitesTypes'
-// import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-// import { ButtonIconType } from 'common/formElements/Button/Button'
-// import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import useGetSitesSelectors from 'store/site/sitesSelectors'
-import FCType from 'libs/FormConstructor/FCType'
-import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import StoreSitesTypes from 'store/site/sitesTypes'
+import FCType from 'libs/FormConstructor/FCType'
+import { OptionsType } from 'common/formElements/Select/SelectTypes'
+import useGetMessages from 'messages/fn/useGetMessages'
+import { siteSectionMessages } from 'messages/siteSectionMessages'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта
@@ -24,12 +23,81 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
         let site = sites.find(site => site.id === currentSiteId)
         if (!site) return
 
-        // Поставить название выбранного сайта в поле «Название» в форме редактирования сайта
-        const valueFieldNewData = Object.assign(formState.fields['name'],{ value: [site.name]})
-        formState.updateField('name', valueFieldNewData)
+        const valueFieldData = Object.assign(
+            formState.fields['name'],
+            { value: [site.name] }
+        )
 
-        // Не забудь про defaultSiteTemplateId
+        formState.updateField('name', valueFieldData)
     }, [currentSiteId, sites])
+}
+
+
+/**
+ * Хук добавляет в выпадающий список «Шаблон сайта по умолчанию» пункты сформированные из шаблонов сайта
+ * @param {Object} formState — объект состояния формы
+ */
+export function useSetSiteTemplates(formState: FCType.StateFormReturn) {
+    const siteSectionMsg = useGetMessages(siteSectionMessages)
+
+    // id текущего сайта и массив сайтов
+    const { templates } = useGetSitesSelectors().siteTemplatesSection
+    const { sites, currentSiteId } = useGetSitesSelectors()
+
+    // Формирование пунктов выпадающего списка
+    const options = getOptions(templates, siteSectionMsg)
+
+    useEffect(function () {
+        const valueFieldData = Object.assign(
+            formState.fields['defaultSiteTemplateId'],
+            {
+                options,
+                value: getValue(sites, currentSiteId),
+                disabled: options.length == 1
+            }
+        )
+        formState.updateField('defaultSiteTemplateId', valueFieldData)
+    }, [sites, currentSiteId, templates])
+}
+
+/**
+ * Функция формирует пункты выпадающего списка «Шаблон сайта по умолчанию»
+ * @param {Array} templates — массив шаблонов сайта
+ * @param {Object} siteSectionMsg — объект с текстами интерфейса
+ */
+function getOptions(
+    templates: StoreSitesTypes.SiteTemplatesType,
+    siteSectionMsg: any
+) {
+    // Пункты выпадающего списка названий шаблонов сайта
+    const options: OptionsType = templates.map(template => {
+        return {
+            value: template.id,
+            label: template.content
+        }
+    })
+
+    // Добавление пустого пункта
+    options.unshift({
+        value: 0,
+        label: siteSectionMsg.defaultSiteTemplateNotSelected.toString()
+    })
+
+    return options
+}
+
+/**
+ * Формирование значения (текущий пункт) выпадающего списка «Шаблон сайта по умолчанию»
+ * @param {Array} sites — массив сайтов
+ * @param {Number} currentSiteId — id текущего сайта
+ */
+function getValue(
+    sites: StoreSitesTypes.SitesType, currentSiteId: StoreSitesTypes.CurrentSiteId
+) {
+    const currentSite = sites.find(site => site.id === currentSiteId)
+
+    let value = currentSite?.defaultSiteTemplateId?.toString() || ''
+    return [value]
 }
 
 /**
@@ -52,104 +120,3 @@ export async function afterSubmit(response: FCType.Response) {
         store.dispatch(actions.sites.setCurrentSiteId(newSite.id))
     }
 }
-
-/** Функция возвращает текст и тип значка на кнопке отправки формы */
-/*export function useGetSubmitButtonText() {
-    // id текущего сайта
-    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
-    const [submitName, setSubmitName] = useState('')
-    const [submitIconType, setSubmitIconType] = useState<ButtonIconType>('btnSignAdd')
-
-    useEffect(function () {
-        // Если выделели новый сайт
-        if (!currentSiteId) {
-            setSubmitName(siteSectionMessages.submitBtnTextNewSite)
-            // На кнопке отправки поставить значёк Плюс.
-            setSubmitIconType('btnSignAdd')
-        }
-        // Если выделили существующий сайт.
-        else {
-            setSubmitName(siteSectionMessages.submitBtnTextSave)
-            // На кнопке отправки поставить значёк Сохранения.
-            setSubmitIconType('btnSignSave')
-        }
-    }, [currentSiteId])
-
-    return { submitName, submitIconType }
-}*/
-
-/**
- * Функция возвращает булево значение нужно ли показывать кнопку удаления сайта.
- * Она видна только если выделен существующий сайт.
- */
-/*export function useGetDeleteSiteVisibilityStatus() {
-    // id текущего сайта
-    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
-    const [isVisible, setIsVisible] = useState(false)
-
-    useEffect(function () {
-        if (!currentSiteId) setIsVisible(false)
-        else setIsVisible(true)
-    }, [currentSiteId])
-
-    return isVisible
-}*/
-
-/**
- * Хук контролирует выпадающий список выбора шаблона по умолчанию для всего сайта.
- * Возвращает объект со свойствами:
- * showSelect — показывать ли выпадающий список со списком шаблонов,
- * один из которых можно указать в качестве шаблона по умолчанию для всего сайта.
- * selectOptions — массив пунктов выпадающего списка
- */
-/*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
-
-    // Массив шаблонов подключаемых файлов
-    const templates:StoreSitesTypes.IncFilesTemplatesType  = useSelector((store: AppStateType) => {
-        return store.sites.siteTemplatesSection.templates
-    })
-
-    const [isVisible, setIsVisible] = useState(false)
-    const [selectOptions, setSelectOptions] = useState([])
-
-    useEffect(function () {
-        // Если есть массив шаблонов...
-        if (templates && templates.length) {
-
-            // Формирование массива пунктов выпадающего списка
-            const options: OptionsType = templates.map(template => {
-                return {
-                    value: template.id,
-                    label: template.name
-                }
-            })
-            options.unshift({
-                value: 'none',
-                label: siteSectionMessages.defaultTemplateSelectNoValue
-            })
-
-            // Установка пунктов выпадающего списка
-            setSelectOptions(options)
-            // Сделать <select> видимым
-            setIsVisible(true)
-        }
-        // Если нет массива шаблонов...
-        else {
-            // Скрыть <select>
-            setIsVisible(false)
-
-            // Очистить значение выпадающего списка в обработчике форм
-            const templatesField = fh.formState.fields.defaultTemplate
-            const newTemplatesField = {
-                ...templatesField,
-                fieldValue: ['']
-            }
-            fh.setFormState = makeImmutableObj(fh.formState, templatesField, newTemplatesField)
-        }
-    }, [templates])
-
-    return {
-        isVisible,
-        selectOptions
-    }
-}*/

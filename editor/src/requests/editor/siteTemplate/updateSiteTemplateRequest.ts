@@ -1,62 +1,29 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from '../../errorServerResponseType'
+import SiteTemplateServerResponseType from './siteTemplateServerResponseType'
 
 /**
  * Функция обновляет существующий шаблон подключаемых файлов
  * @param {Object} values — новые данные шаблона подключаемых файлов
- * @param {String} siteId — site id
  * @param {String} templateId — id шаблона подключаемых файлов
  */
-/*export default async function updateSiteTemplateRequest(values: UpdateTemplateValuesType, siteId: string, templateId: string) {
-    const templateData = {
-        name: values.name,
-        codeInHead: {
-            code: values.headCode
-        },
-        codeBeforeEndBody: {
-            code: values.bodyCode
-        },
-    }
-
+export default async function updateSiteTemplateRequest(values: UpdateSiteTemplateValuesType, templateId: string) {
     const options = {
         method: 'PATCH',
-        body: JSON.stringify(templateData)
+        body: JSON.stringify(values)
     }
     const response: UpdateTemplateRequestServerResponse = await makeFetch(
-        getApiUrl('siteTemplate', siteId, templateId), options
+        getApiUrl('siteTemplate', templateId), options
     )
 
     return response
-}*/
+}
 
 // Данные для входа передаваемые в loginRequest
-/*export type UpdateTemplateValuesType = {
-    name: string,
-    headCode: null | string,
-    bodyCode: null | string
-}*/
+export type UpdateSiteTemplateValuesType = {
+    content: string
+}
 
 // Тип данных с ответом от пользователя
-// type UpdateTemplateRequestServerResponse = ErrorServerResponseType | SuccessResponse
-
-
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        template: {
-            _id: string // "60c9b2438e886a003b669911"
-            userId: string //"60c626f9fd09180020febc99"
-            siteId: string // "60c89dccfe73df002a1c4fa4"
-            name: string // "Шаблон"
-            codeBeforeEndBody: {
-                code: null | string // "</body>"
-            }
-            codeInHead: {
-                code: null | string // "<head>"
-            }
-        }
-    }
-}*/
+type UpdateTemplateRequestServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType

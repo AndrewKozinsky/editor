@@ -1,8 +1,8 @@
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
-// import store from 'store'
+import { store } from 'store/rootReducer'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
-// import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
+import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
@@ -61,14 +61,14 @@ const sitesActions = {
 
     // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
 
-    // Загрузка с сервера шаблонов подлючаемых файлова и установка в Хранилище
-    /*requestSiteTemplates() {
+    // Загрузка с сервера шаблонов сайта и установка в Хранилище
+    requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // id текущего сайта для которого нужно получить шаблоны подключаемых файлов
+            // id текущего сайта для которого нужно получить шаблоны
             const siteId = store.getState().sites.currentSiteId
 
-            // Если не передан id сайта, то обнулить массив шаблонов подключаемых файлов в Хранилище
+            // Если не передан id сайта, то обнулить массив шаблонов сайта
             // потому что выбрали новый сайт
             if (!siteId) dispatch( sitesActions.setTemplates([]) )
 
@@ -78,20 +78,18 @@ const sitesActions = {
             if (response.status !== 'success') return
 
             // Формированое массива шаблонов для установки в Хранилище
-            const preparedTemplates = response.data.templates.map((template: any) => {
+            const preparedTemplates = response.data.siteTemplates.map(template => {
                 // Формирование возвращаемого объекта с данными шаблона подключаемых файлов
                 return  {
-                    id: template._id,
-                    name: template.name,
-                    head: template.codeInHead?.code || '',
-                    body: template.codeBeforeEndBody?.code || ''
+                    id: template.id,
+                    content: template.content
                 }
             })
 
             // Установка шаблонов подключаемых файлов в Хранилище
             dispatch( sitesActions.setTemplates(preparedTemplates) )
         }
-    },*/
+    },
 
     // Установка массива шаблонов сайта
     setTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {

@@ -33,7 +33,12 @@ export function getFromLocalStorage(propName: string, defaultValue?: any) {
     let value = localStorage.getItem(propName)
     if (!value && defaultValue !== undefined) return defaultValue
 
-    return JSON.parse(value)
+    try {
+        return JSON.parse(value)
+    }
+    catch(err) {
+        return value
+    }
 }
 
 /**

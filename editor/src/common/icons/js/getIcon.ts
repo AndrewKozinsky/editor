@@ -5,7 +5,7 @@ import NoticeInfo from '../icons/NoticeInfo'
 import NoticeSuccess from '../icons/NoticeSuccess'
 import ErrorTriangle from '../icons/errorTriangle'
 // import SuccessCircle from '../icons/successCircle'
-// import SelectInputArrows from '../icons/selectInputArrows'
+import SelectInputArrows from '../icons/selectInputArrows'
 import MainTabMaterials from '../icons/mainTabMaterials'
 import MainTabEditor from '../icons/mainTabEditor'
 import MainTabSettings from '../icons/mainTabSettings'
@@ -60,8 +60,8 @@ export function getIcon(type: string): ReactNode {
         // Значёк успеха
         // successCircle: SuccessCircle,
 
-        // Галочка выбранного флага
-        // selectInputArrows: SelectInputArrows,
+        // Стрелочки выпадающего списка
+        selectInputArrows: SelectInputArrows,
 
         // Значки главных вкладок
         mainTabMaterials: MainTabMaterials,

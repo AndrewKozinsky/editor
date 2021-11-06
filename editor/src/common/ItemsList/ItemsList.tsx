@@ -3,14 +3,14 @@ import makeClasses from './ItemsList-classes'
 
 
 export type ItemType = {
-    id: string
+    id: number | string
     name: string
     onClick: () => void // Функция запускаемая при щелчке по пункту
 }
 
 export type ItemsListPropType = {
     items: ItemType[], // Список пунктов
-    activeItemId: string // id выбранного пункта
+    activeItemId: number | null | string // id выбранного пункта
 }
 
 export default function ItemsList(props: ItemsListPropType) {
@@ -47,7 +47,6 @@ function Item(props: ItemPropType) {
 
     // Формирование классов кнопки
     const CN = makeClasses(isActive)
-    // const classes = useGetItemClasses(isActive)
 
     return (
         <button className={CN.item} onClick={item.onClick}>

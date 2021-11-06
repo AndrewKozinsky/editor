@@ -3,7 +3,7 @@ import MainTab, { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import { useGetTabData } from './SitePartTabs-func'
 import './SitePartTabs.scss'
 
-
+/** Компонент 4-х вкладок в сайтах */
 export default function SitePartTabs() {
     const CN = 'site-part-tabs'
 

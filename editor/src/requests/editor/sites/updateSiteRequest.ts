@@ -13,6 +13,7 @@ export default async function updateSiteRequest(values: UpdateSiteRequestValuesT
         method: 'PATCH',
         body: JSON.stringify(values)
     }
+
     const response: UpdateSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
 
     return response

@@ -107,11 +107,11 @@ function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetSiteTe
 function setCurrentSiteTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        removeFromLocalStorage('editorIncFilesId')
+        removeFromLocalStorage('editorSiteTemplateId')
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorIncFilesId', action.payload)
+        setInLocalStorage('editorSiteTemplateId', action.payload)
     }
 
     return {

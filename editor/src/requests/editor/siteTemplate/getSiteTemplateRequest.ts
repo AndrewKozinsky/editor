@@ -18,7 +18,7 @@
 
 
 // Тип данных с ответом от пользователя
-// type GetIncFilesTemplatesRequestServerResponse = ErrorServerResponseType | SuccessResponse
+// type GetIncFilesTemplatesRequestServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType
 
 
 // Успешный ответ

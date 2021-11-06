@@ -9,5 +9,5 @@ export class UpdateSiteDto {
     name: string
 
     @Column({type: 'integer'})
-    defaultSiteTemplateId: number
+    defaultSiteTemplateId: number | ''
 }

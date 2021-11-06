@@ -30,7 +30,6 @@ export type TextInputPropType = {
 
 /** Текстовый компонент */
 export default function TextInput(props: TextInputPropType) {
-
     const {
         label, // Подпись текстового поля
         inputType = 'text', // Тип поля ввода

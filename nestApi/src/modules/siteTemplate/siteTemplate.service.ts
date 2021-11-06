@@ -9,6 +9,7 @@ import { SiteTemplatesResponseInterface } from './types/siteTemplatesResponse.in
 import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { UpdateSiteTemplateDto } from './dto/updateSiteTemplate.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
+import {sortByCreatedAt} from '../../utils/miscUtils'
 
 
 @Injectable()
@@ -18,6 +19,14 @@ export class SiteTemplateService {
         @InjectRepository(SiteTemplateEntity)
         private readonly siteTemplateRepository: Repository<SiteTemplateEntity>
     ) {}
+
+    /** Получение шаблонов сайта (защищённый маршрут) */
+    async getSiteTemplates(siteId: number): Promise<SiteTemplateEntity[]> {
+        let templates = await this.siteTemplateRepository.find({siteId})
+
+        // Отсортировать шаблоны по времени создания и вернуть
+        return sortByCreatedAt(templates)
+    }
 
     /** Получение шаблона сайта (защищённый маршрут) */
     async getSiteTemplate(req: ExpressRequestInterface): Promise<SiteTemplateEntity> {

@@ -23,13 +23,13 @@ export function getIconSize(type: string) {
                 height: '13px',
                 viewBox: '0 0 13 13'
             }
-        // Галочка выбранного флага
-        /*case 'selectInputArrows':
+        // Стрелочки выпадающего списка
+        case 'selectInputArrows':
             return {
-                width: "8px",
-                height: "14px",
-                viewBox: "0 0 8 14"
-            }*/
+                width: '8px',
+                height: '14px',
+                viewBox: '0 0 8 14'
+            }
         // Значки главных вкладок
         case 'mainTabMaterials':
         case 'mainTabEditor':

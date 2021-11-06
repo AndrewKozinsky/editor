@@ -1,28 +1,30 @@
-// import React from 'react'
-// import {AppStateType} from 'store/rootReducer'
-// import {MiscTypes} from 'types/miscTypes'
-// import Button from 'common/formElements/Button/Button'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import {incFilesTemplateSectionMessages} from 'messages/incFilesTemplateSectionMessages'
-// import ItemsList from 'common/ItemsList/ItemsList'
-/*import {
+import React from 'react'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import Button, {ButtonPropType} from 'common/formElements/Button/Button'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+import ItemsList from 'common/ItemsList/ItemsList'
+import {
     useFetchIncFilesTemplates,
     useGetNewTemplateOnClickHandler,
     useGetTemplatesItemsListProps
-} from './SiteTemplateList-func'*/
+} from './SiteTemplateList-func'
 
 
 /** Компонент кнопки создания нового сайта */
-/*export function NewTemplateButton() {
+export function NewTemplateButton() {
     // id выделенного сайта
-    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
+    const { currentTemplateId } = useGetSitesSelectors().siteTemplatesSection
+
+    const siteTemplateSectionMsg = useGetMessages(siteTemplateSectionMessages)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewTemplateOnClickHandler()
 
     // Атрибуты кнопки
-    const attrs: MiscTypes.ObjStringKeyAnyVal = {
-        text: incFilesTemplateSectionMessages.newTemplateBtn,
+    const attrs: ButtonPropType = {
+        text: siteTemplateSectionMsg.newTemplateBtn,
         icon: 'btnSignAdd',
         block: true,
         onClick: onClickHandler
@@ -32,10 +34,10 @@
     }
 
     return <Button {...attrs} />
-}*/
+}
 
-/** Компонент списка сайтов */
-/*export function TemplatesList() {
+/** Компонент списка шаблонов сайта */
+export function TemplatesList() {
     // Получить с сервера список шаблонов подключаемых файлов и поставить в Хранилище
     useFetchIncFilesTemplates()
 
@@ -47,4 +49,4 @@
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}*/
+}

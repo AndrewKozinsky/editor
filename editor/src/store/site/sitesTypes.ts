@@ -1,12 +1,12 @@
-// import {ArticleDataType} from 'requests/editor/article/getArticleRequest'
-// import {ComponentDataType} from 'requests/editor/components/getComponentRequest'
+// import { ArticleDataType } from 'requests/editor/article/getArticleRequest'
+// import { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
 
 namespace StoreSitesTypes {
 
     // Сайт
     export type SiteType = {
-        id: string,
+        id: number,
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
         defaultSiteTemplateId: null | number
@@ -14,21 +14,19 @@ namespace StoreSitesTypes {
     // Сайты
     export type SitesType = SiteType[]
     // id выбранного сайта
-    export type CurrentSiteId = null | string
+    export type CurrentSiteId = null | number | ''
     // id открытой вкладки на правой части
     export type RightMainTab = number
 
     // Шаблон подключаемых файлов
     export type SiteTemplateType = {
-        id: string,
-        name: string,
-        head?: string
-        body?: string
+        id: number,
+        content: string
     }
     // Массив шаблонов подключаемых файлов
     export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
-    export type CurrentSiteTemplateId = null | string
+    export type CurrentSiteTemplateId = null | number | ''
 
     // uuid выбранного элемента: папки или компонента
     // export type CurrentCompItemId = null | FilesTreeType.UuId

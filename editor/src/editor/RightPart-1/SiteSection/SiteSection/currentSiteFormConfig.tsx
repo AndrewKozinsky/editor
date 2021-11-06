@@ -21,7 +21,14 @@ function getCurrentSiteFormConfig(siteSectionMsg: any) {
                     label: siteSectionMsg.siteNameInput,
                     placeholder: siteSectionMsg.siteNamePlaceholder,
                 }
-            }
+            },
+            defaultSiteTemplateId: {
+                fieldType: 'select',
+                fieldData: {
+                    label: siteSectionMsg.defaultTemplateInput,
+                    options: [],
+                }
+            },
         },
         bottom: {
             submit: {

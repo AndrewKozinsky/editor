@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import useGetUserSelectors from 'store/user/userSelectors'
 import { useDispatch } from 'react-redux'
+import useGetUserSelectors from 'store/user/userSelectors'
 import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
-import { getFromLocalStorage } from 'utils/MiscUtils'
 import sitesActions from 'store/site/sitesActions'
+import { getFromLocalStorage } from 'utils/MiscUtils'
 import { useGetUserToken } from 'requests/user/getUserToken'
 
 
@@ -22,7 +22,7 @@ export function useGetAndSetEditorSettings() {
         let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
         let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
         let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
-        // let editorIncFilesId = getFromLocalStorage('editorIncFilesId', null) // id выбранного шаблона подключаемых файлов
+        let editorSiteTemplateId = getFromLocalStorage('editorSiteTemplateId', null) // id выбранного шаблона подключаемых файлов
         // let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
         // let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
         // let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
@@ -35,7 +35,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
-        // dispatch( sitesActions.setCurrentSiteTemplateId(editorIncFilesId) )
+        dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
         // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])

@@ -6,7 +6,7 @@ import useGetMessages from 'messages/fn/useGetMessages'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import getCurrentSiteFormConfig from './currentSiteFormConfig'
-import { useSetSiteName } from './SiteSection-func'
+import {useSetSiteName, useSetSiteTemplates} from './SiteSection-func'
 import './SiteSection.scss'
 
 
@@ -48,9 +48,8 @@ function ExistingSiteForm() {
     // Хук изменяет имя сайта в поле Название при переключении сайта
     useSetSiteName(formState)
 
-    return (
-        <>
-            <FormConstructor config={config} state={formState} />
-        </>
-    )
+    // Хук добавляет выпадающий список шаблонов сайта если он имеется
+    useSetSiteTemplates(formState)
+
+    return <FormConstructor config={config} state={formState} />
 }

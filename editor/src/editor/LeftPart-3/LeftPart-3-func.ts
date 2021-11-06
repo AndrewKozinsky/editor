@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux'
 import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import actions from 'store/rootAction'

@@ -1,8 +1,11 @@
 // import {useFetch} from 'requests/reqFn/fetch'
 // import getApiUrl from 'requests/reqFn/apiUrls'
-// import { useSelector } from 'react-redux'
+import { makeFetch } from '../../reqFn/fetch'
+import getApiUrl from '../../reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import SiteTemplateServerResponseType from './siteTemplateServerResponseType'
 
-// Функция удаляет шаблон подключаемых файлов
+// Хук удаляет шаблон подключаемых файлов
 /*export function useDeleteIncFilesTemplate() {
 
     // id выделенного шаблона, который нужно удалить
@@ -21,13 +24,24 @@
     return { response, doFetch }
 }*/
 
+
+
+/**
+ * Функция удаляет шаблон сайта
+ * @param {Object} templateId — id удаляемого шаблона
+ */
+export default async function deleteSiteTemplateRequest(templateId: number) {
+    const options = {
+        method: 'DELETE'
+    }
+
+    const response: DeleteSiteTemplateServerResponse = await makeFetch(
+        getApiUrl('siteTemplate', templateId), options
+    )
+
+    return response
+}
+
 // Тип данных с ответом от пользователя
-// type DeleteIncFilesTemplateServerResponse = null | ErrorServerResponseType | SuccessResponse
+type DeleteSiteTemplateServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType
 
-
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-}*/

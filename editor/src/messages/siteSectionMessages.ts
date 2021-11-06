@@ -1,10 +1,6 @@
 
 // Содержимое вкладки «Сайты»
 export const siteSectionMessages = {
-    /*headerNewSite: {
-        eng: 'New site',
-        rus: 'Новый сайт'
-    },*/
     siteNameInput: {
         eng: 'Name',
         rus: 'Название'
@@ -21,10 +17,10 @@ export const siteSectionMessages = {
         eng: 'Site name can not be longer than 255 characters',
         rus: 'Название сайта не может быть длиннее 255 символов'
     },
-    /*defaultTemplateInput: {
-        eng: 'The default template of the plug-in files',
-        rus: 'Шаблон подключаемых файлов по умолчанию'
-    },*/
+    defaultTemplateInput: {
+        eng: 'The default site template',
+        rus: 'Шаблон сайта по умолчанию'
+    },
     submitBtnTextNewSite: {
         eng: 'Create',
         rus: 'Создать'
@@ -49,8 +45,8 @@ export const siteSectionMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
-    /*defaultTemplateSelectNoValue: {
+    defaultSiteTemplateNotSelected: {
         eng: 'Not selected',
         rus: 'Не выбрано'
-    },*/
+    },
 }

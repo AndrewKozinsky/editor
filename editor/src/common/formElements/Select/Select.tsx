@@ -58,15 +58,14 @@ export default function Select(props: SelectPropType) {
     if (label) inputAttribs.id = id
     if (disabled) inputAttribs.disabled = true
 
-
     return (
         <>
-            <Label label={label}  id={id} />
+            <Label label={label} id={id} />
             <div className={CN.wrapper}>
                 <select {...inputAttribs}>
                     {getOptions(options)}
                 </select>
-                <div className='select-input-wrapper__tip'>
+                <div className='select-input__wrapper-tip'>
                     <SvgIcon type='selectInputArrows' baseClass='-icon-stroke' />
                 </div>
             </div>

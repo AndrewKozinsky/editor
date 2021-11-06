@@ -2,8 +2,8 @@ import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import SiteSection from '../SiteSection/SiteSection/SiteSection'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
-// import { NewTemplateButton, TemplatesList } from '../SiteTemplateList/SiteTemplateList'
-// import SiteTemplateForm from '../SiteTemplateForm/SiteTemplateForm'
+import { NewTemplateButton, TemplatesList } from '../SiteTemplateList/SiteTemplateList'
+import SiteTemplateForm from '../SiteTemplateForm/TemplateSection/siteTemplateForm'
 // import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
 // import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
 // import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
@@ -42,12 +42,12 @@ export default function SitePartProvider(): ReactElement {
                 return (
                     <HeaderPage headerText={rightTabsMsg.siteTemplates} display={num === rightMainTab} key={num}>
                         <>
-                            {/*<NewTemplateButton />*/}
-                            {/*<TemplatesList />*/}
+                            <NewTemplateButton />
+                            <TemplatesList />
                         </>
                         {/*Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,*/}
                         {/*поэтому ничего не отрисовывать.*/}
-                        {/*{currentTemplateId !== null && <SiteTemplateForm />}*/}
+                        {currentTemplateId !== null && <SiteTemplateForm />}
                     </HeaderPage>
                 )
             }

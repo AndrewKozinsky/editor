@@ -1,7 +1,7 @@
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { useFetch } from 'requests/reqFn/fetch'
 import UserServerResponseType from './userServerResponseType'
-import ErrorServerResponseType from '../errorServerResponseType'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
 
 
 // Функция возвращает токен пользователя

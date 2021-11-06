@@ -37,19 +37,21 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'sites/' + siteId
     },
 
+    // SITE TEMPLATES
+    // Шаблоны подключаемых файлов
+    siteTemplates: function (siteId: string) {
+        return 'sites/' + siteId + '/siteTemps'
+    },
+    createSiteTemplate: 'siteTemplates',
+    siteTemplate: function (siteTemplateId: number) {
+        return 'siteTemplates/' + siteTemplateId
+    },
+
 
     // SITE COMPONENTS
     // Компоненты сайта
     /*siteComponents: function (siteId: string) {
         return 'sites/' + siteId + '/components'
-    },*/
-
-
-    // SITE INC FILES TEMPLATES
-    // Шаблоны подключаемых файлов
-    /*siteTemplate: function (siteId: string, incFilesId?: string) {
-        if (incFilesId) return 'sites/' + siteId + '/siteTemplate/' + incFilesId
-        else return 'sites/' + siteId + '/siteTemplate'
     },*/
 
     // Папки шаблонов компонентов

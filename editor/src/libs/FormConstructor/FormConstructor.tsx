@@ -86,11 +86,19 @@ function Fields(props: FormConstructorPropType) {
         }
         else if (fieldConfig.fieldType === 'select') {
             const fieldData = fieldConfig.fieldData as SelectPropType
+            fieldData.name = fieldName
             fieldData.value = state.fields[fieldName].value[0]
+
+            //@ts-ignore
+            if (state.fields[fieldName].options) {
+                //@ts-ignore
+                fieldData.options = state.fields[fieldName].options
+            }
+
+
             fieldData.onChange = state.onChangeFieldHandler
 
             fieldData.disabled = !!(state.fields[fieldName].disabled || state.formDisabled)
-
             field = <Select {...fieldData} />
         }
 

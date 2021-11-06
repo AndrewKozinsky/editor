@@ -6,7 +6,7 @@ import useGetSettingsSelectors from 'store/settings/settingsSelectors'
  * @param {Object} obj — объект с текстами на разных языках
  */
 export default function useGetMessages<T>(obj: T) {
-    const {editorLanguage} = useGetSettingsSelectors()
+    const { editorLanguage } = useGetSettingsSelectors()
 
     type MessagesLangObjType = {
         [K in keyof T]: string | ReactElement

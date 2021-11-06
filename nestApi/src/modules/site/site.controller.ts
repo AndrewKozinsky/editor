@@ -11,11 +11,15 @@ import { UserEntity } from '../user/user.entity'
 import { User } from '../user/decorators/user.decorator'
 import { AuthGuard } from '../user/guards/auth.guard'
 import { UpdateSiteDto } from './dto/updateSite.dto'
+import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
 
 
 @Controller('sites')
 export class SiteController {
-    constructor(private readonly siteService: SiteService) {}
+    constructor(
+        private readonly siteService: SiteService,
+        private readonly siteTemplateService: SiteTemplateService
+    ) {}
 
     @Get()
     async findAll(
@@ -37,6 +41,7 @@ export class SiteController {
     ): Promise<void> {
         const site = await this.siteService.createSite(createSiteDto, user)
 
+        // Не забудь при создании сайта создавать запись в таблицах папок компонентах и в папках статей
         // Создание данных по модели ComponentsFolders
         /*await ComponentsFoldersModel.create({
             userId: req.user?.id,
@@ -50,6 +55,16 @@ export class SiteController {
         })*/
 
         this.siteService.buildSiteResponse([site], response, HttpStatus.CREATED)
+    }
+
+    // Получение всех шаблонов сайта
+    @Get(':siteId/siteTemps')
+    async getSiteTemplates(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response
+    ): Promise<void> {
+        const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
+        this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
     }
 
     @Patch(':siteId')

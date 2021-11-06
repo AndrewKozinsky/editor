@@ -1,7 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import SiteServerResponseType from './siteServerResponseType'
-import ErrorServerResponseType from '../../errorServerResponseType'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
 
 /**
  * Запрос на удаление сайта

@@ -1,7 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import UserServerResponseType from './userServerResponseType'
-import ErrorServerResponseType from '../errorServerResponseType'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
 
 /**
  * Функция отправляет данные для регистрации пользователя

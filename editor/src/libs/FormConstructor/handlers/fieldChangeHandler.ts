@@ -50,7 +50,8 @@ function getNewValue(inputData: FCType.StateFieldsObj, newValue: string) {
         let valuesNewArr = [...inputData.value]
         if (isPassedValueExists) {
             valuesNewArr = valuesNewArr.filter(val => val !== newValue)
-        } else {
+        }
+        else {
             valuesNewArr.push(newValue)
         }
 
