@@ -1,7 +1,8 @@
 import * as yup from 'yup'
 import FCType from 'src/libs/FormConstructor/FCType'
-import createSiteTemplateRequest, {CreateNewSiteTemplateValuesType} from 'src/requests/editor/siteTemplate/createSiteTemplateRequest'
+import createSiteTemplateRequest, {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import { afterSubmit } from './siteTemplateForm-func'
+import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
 
 
 /** Функция возвращает конфигурацию формы создания нового шаблона сайта */
@@ -13,6 +14,11 @@ function getNewSiteTemplateFormConfig(siteTemplateSectionMsg: any) {
                 schema: (fields) => {
                     return yup.string()
                         .required(siteTemplateSectionMsg.codeInputRequired)
+                        .test('check-code', siteTemplateSectionMsg.codeInputIsWrong,
+                            function(code) {
+                                return !checkCodeSiteTemplate(code).length
+                            }
+                        )
                 },
                 fieldData: {
                     inputType: 'textarea',

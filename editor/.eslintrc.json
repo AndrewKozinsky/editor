@@ -17,8 +17,8 @@
         "@typescript-eslint"
     ],
     "rules": {
-        "semi": ["error", "never"],
-        "quotes": ["error", "single"],
+        "semi": ["warn", "never"],
+        "quotes": ["warn", "single", { "allowTemplateLiterals": true }],
         // Disable key property check in JSX because it doesn't work in spread operator
         "react/jsx-key": ["off", { "checkFragmentShorthand": false }]
     }

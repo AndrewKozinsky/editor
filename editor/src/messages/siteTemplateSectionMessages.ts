@@ -7,8 +7,8 @@ export const siteTemplateSectionMessages = {
         rus: 'Новый шаблон'
     },*/
     newTemplateBtn: {
-        eng: 'New file template',
-        rus: 'Новый шаблон файлов'
+        eng: 'New site template',
+        rus: 'Новый шаблон сайта'
     },
     templateCodeInput: {
         eng: 'Template code',
@@ -18,22 +18,10 @@ export const siteTemplateSectionMessages = {
         eng: 'Required',
         rus: 'Обязательное поле'
     },
-    /*defaultTemplateCheckboxLabel: {
-        eng: 'Default template',
-        rus: 'Шаблон по умолчанию'
-    },*/
-    /*headInput: {
-        eng: 'Code added to <head>',
-        rus: 'Код добавляемый в <head>'
-    },*/
-    /*bodyInput: {
-        eng: 'Code added before </body>',
-        rus: 'Код добавляемый до </body>'
-    },*/
-    /*templateNameInputRequired: {
-        eng: 'Required',
-        rus: 'Обязательное поле'
-    },*/
+    codeInputIsWrong: {
+        eng: 'Incorrect template code',
+        rus: 'Неверный код шаблона'
+    },
     submitBtnTextNew: {
         eng: 'Create',
         rus: 'Создать'
@@ -58,4 +46,14 @@ export const siteTemplateSectionMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    checkCodeErrorHeader: {
+        eng: 'The template needs to be refined',
+        rus: 'Шаблон требует доработки'
+    },
+    checkCodeSuccessHeader: {
+        eng: 'The template is correct',
+        rus: 'Шаблон написан верно'
+    },
+
+    // Тексты ошибок при проверке кода
 }

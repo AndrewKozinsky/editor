@@ -7,6 +7,9 @@ import {siteTemplateSectionMessages} from 'messages/siteTemplateSectionMessages'
 import getNewSiteTemplateFormConfig from './newSiteTemplateFormConfig'
 import getCurrentSiteTemplateFormConfig from './currentSiteTemplateFormConfig'
 import { useSetSiteTemplateCode } from './siteTemplateForm-func'
+import Wrapper from 'common/Wrapper/Wrapper'
+import CodeCheckInfo from '../../../special/CodeCheckInfo/CodeCheckInfo'
+import CodeHelper from '../CodeHelper/CodeHelper'
 
 
 /** Форма создания или редактирования шаблона подключаемых файлов */
@@ -27,7 +30,12 @@ function NewSiteTemplateForm() {
     const config = getNewSiteTemplateFormConfig(siteTemplateSectionMsg)
     const formState = useFormConstructorState(config)
 
-    return <FormConstructor config={config} state={formState} />
+    return (
+        <>
+            <FormConstructor config={config} state={formState} />
+            <CodeHelper code={formState.fields.content.value[0]} />
+        </>
+    )
 }
 
 /* Форма редактирования существующего шаблона сайта */
@@ -43,5 +51,11 @@ function ExistingSiteTemplateForm() {
     // Хук изменяет код шаблона сайта в поле Код шаблона при переключении шаблона
     useSetSiteTemplateCode(formState)
 
-    return <FormConstructor config={config} state={formState} />
+    console.log()
+    return (
+        <>
+            <FormConstructor config={config} state={formState} />
+            <CodeHelper code={formState.fields.content.value[0]} />
+        </>
+    )
 }

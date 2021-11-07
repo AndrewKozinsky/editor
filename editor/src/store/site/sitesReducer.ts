@@ -103,7 +103,7 @@ function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetSiteTe
     }
 }
 
-// Установка id выбранного подключаемых шаблонов
+// Установка id выбранного шаблона текущего сайта
 function setCurrentSiteTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteTemplateIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.

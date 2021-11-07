@@ -3,11 +3,11 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import FCType from 'libs/FormConstructor/FCType'
-import SiteTemplateServerResponseType from 'src/requests/editor/siteTemplate/siteTemplateServerResponseType'
+import SiteTemplateServerResponseType from 'requests/editor/siteTemplate/siteTemplateServerResponseType'
 
 
 /**
- * Хук изменяет имя сайта в поле Название при переключении сайта
+ * Хук изменяет код шаблона сайта в поле Код шаблона при переключении сайта или шаблона
  * @param {Object} formState — объект состояния формы
  */
 export function useSetSiteTemplateCode(formState: FCType.StateFormReturn) {
@@ -17,12 +17,13 @@ export function useSetSiteTemplateCode(formState: FCType.StateFormReturn) {
     useEffect(function () {
         if (!templates.length) return
 
-        // Найти шаблона сайта с указанным id
+        // Найти шаблон сайта с указанным id
         let siteTemplate = templates.find(templates => templates.id === currentTemplateId)
-        if (!siteTemplate) return
 
-        // Поставить код выбранного шаблона сайта в поле «Код шаблона» в форме редактирования шаблона сайта
-        const valueFieldNewData = Object.assign(formState.fields['content'],{ value: [siteTemplate.content]})
+        const value = siteTemplate ? siteTemplate.content : ''
+
+        // Поставить код выбранного шаблона сайта в поле «Код шаблона»
+        const valueFieldNewData = Object.assign(formState.fields['content'],{ value: [value] })
         formState.updateField('content', valueFieldNewData)
     }, [currentTemplateId, templates])
 }

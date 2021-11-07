@@ -21,6 +21,7 @@ namespace StoreSitesTypes {
     // Шаблон подключаемых файлов
     export type SiteTemplateType = {
         id: number,
+        name: string
         content: string
     }
     // Массив шаблонов подключаемых файлов

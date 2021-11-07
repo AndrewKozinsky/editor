@@ -1,3 +1,4 @@
+import JSON5 from 'json5'
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
@@ -76,12 +77,16 @@ const sitesActions = {
             const response = await getSiteTemplatesRequest(siteId)
 
             if (response.status !== 'success') return
+            // console.log(response.data.siteTemplates)
 
             // Формированое массива шаблонов для установки в Хранилище
             const preparedTemplates = response.data.siteTemplates.map(template => {
+                let templateName = JSON5.parse(template.content).name
+
                 // Формирование возвращаемого объекта с данными шаблона подключаемых файлов
                 return  {
                     id: template.id,
+                    name: templateName,
                     content: template.content
                 }
             })

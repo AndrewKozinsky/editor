@@ -6,6 +6,7 @@ function makeClasses(bg?: boolean) {
     return {
         bg: getBgClass(bg),
         icon: noticeRootClass + '__icon',
+        content: noticeRootClass + '__content',
     }
 }
 

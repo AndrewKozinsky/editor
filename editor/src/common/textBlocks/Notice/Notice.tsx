@@ -18,7 +18,7 @@ export default function Notice(props: NoticePropType) {
     return (
         <div className={ CN.bg }>
             <Sign {...props} />
-            <div>{children}</div>
+            <div className={ CN.content }>{children}</div>
         </div>
     )
 }

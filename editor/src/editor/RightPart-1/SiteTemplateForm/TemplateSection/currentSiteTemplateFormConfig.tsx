@@ -2,10 +2,11 @@ import * as yup from 'yup'
 import FCType from 'src/libs/FormConstructor/FCType'
 import { store } from 'src/store/rootReducer'
 import { afterSubmit } from './siteTemplateForm-func'
-import {CreateNewSiteTemplateValuesType} from 'src/requests/editor/siteTemplate/createSiteTemplateRequest'
-import updateSiteTemplateRequest from 'src/requests/editor/siteTemplate/updateSiteTemplateRequest'
+import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
+import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
 import React from 'react'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
+import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getCurrentSiteTemplateFormConfig(siteTemplateSectionMsg: any) {
@@ -16,6 +17,11 @@ function getCurrentSiteTemplateFormConfig(siteTemplateSectionMsg: any) {
                 schema: (fields) => {
                     return yup.string()
                         .required(siteTemplateSectionMsg.codeInputRequired)
+                        .test('check-code', siteTemplateSectionMsg.codeInputIsWrong,
+                            function(code) {
+                                return !checkCodeSiteTemplate(code).length
+                            }
+                        )
                 },
                 fieldData: {
                     inputType: 'textarea',

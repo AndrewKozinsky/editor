@@ -83,7 +83,7 @@ function getResolve() {
             messages: path.resolve(__dirname, './src/messages'),
             modules: path.resolve(__dirname, './src/modules'),
             pages: path.resolve(__dirname, './src/pages'),
-            requests: path.resolve(__dirname, './src/requests'),
+            requests: path.resolve(__dirname, './requests'),
             store: path.resolve(__dirname, './src/store'),
             types: path.resolve(__dirname, './src/types'),
             utils: path.resolve(__dirname, './src/utils')

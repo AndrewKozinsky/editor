@@ -35,7 +35,7 @@ export function useGetTemplatesItemsListProps(): ItemsListPropType {
         items: templates.map((template: StoreSitesTypes.SiteTemplateType) => {
             return {
                 id: template.id,
-                name: template.content,
+                name: template.name,
                 onClick: () => dispatch( actions.sites.setCurrentSiteTemplateId(template.id) )
             }
         }),
