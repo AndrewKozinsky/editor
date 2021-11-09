@@ -48,7 +48,7 @@ function ExistingSiteForm() {
     // Хук изменяет имя сайта в поле Название при переключении сайта
     useSetSiteName(formState)
 
-    // Хук добавляет выпадающий список шаблонов сайта если он имеется
+    // Хук добавляет в форму выпадающий список шаблонов сайта если он имеется
     useSetSiteTemplates(formState)
 
     return <FormConstructor config={config} state={formState} />

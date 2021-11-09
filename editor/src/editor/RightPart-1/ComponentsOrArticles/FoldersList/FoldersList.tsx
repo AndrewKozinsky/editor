@@ -1,8 +1,8 @@
-// import React from 'react'
+import React from 'react'
 //@ts-ignore
 // import {useStore} from 'effector-react'
 // import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
-// import { FolderType } from '../types'
+import { FolderType } from '../types'
 /*import {
     useGetFoldersFromServerAndPutInEffector,
     afterCollapseFolder,
@@ -22,39 +22,39 @@
 // import {AppStateType} from 'store/rootReducer'
 
 
-/*type FoldersListPropType = {
+type FoldersListPropType = {
     type: FolderType // Тип списка папок: компоненты или статьи
-}*/
+}
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
-/*export default function FoldersList(props: FoldersListPropType) {
-    const { type } = props
+export default function FoldersList(props: FoldersListPropType) {
+    // const { type } = props
 
     // Получение с сервера порядка следования папок и установка в Эффектор
     // SET ALL DATA TO REDUX!!!
-    useGetFoldersFromServerAndPutInEffector(type)
+    // useGetFoldersFromServerAndPutInEffector(type)
 
     // Папки компонентов из Эффектора
-    let store = componentsTreeStore
-    if(type === 'articles') store = articlesTreeStore
-    const items = useStore(store)
+    // let store = componentsTreeStore
+    // if(type === 'articles') store = articlesTreeStore
+    // const items = useStore(store)
 
     // Установщик Состояния папок
-    let setItems = setCompItems
-    if(type === 'articles') setItems = setArtItems
+    // let setItems = setCompItems
+    // if(type === 'articles') setItems = setArtItems
 
     // Название папки
-    let newFolderName = foldersComponentsSectionMessages.createNewFolderBth
-    if(type === 'articles') newFolderName = foldersArticlesSectionMessages.createNewFolderBth
+    // let newFolderName = foldersComponentsSectionMessages.createNewFolderBth
+    // if(type === 'articles') newFolderName = foldersArticlesSectionMessages.createNewFolderBth
 
     // Название файла
-    let newFileName = foldersComponentsSectionMessages.createNewFileBth
-    if(type === 'articles') newFileName = foldersArticlesSectionMessages.createNewFileBth
+    // let newFileName = foldersComponentsSectionMessages.createNewFileBth
+    // if(type === 'articles') newFileName = foldersArticlesSectionMessages.createNewFileBth
 
     // Обработчик щелчка по папке или файлу
-    const onItemClick = useGetOnItemClick(type)
+    // const onItemClick = useGetOnItemClick(type)
 
-    return (
+    /*return (
         <DragFilesTree
             items={items}
             setItems={setItems}
@@ -66,5 +66,6 @@
             afterSelectItem={onItemClick}
             afterDeleteItem={(items, itemUuid) => afterDeleteItem(type, items, itemUuid)}
         />
-    )
-}*/
+    )*/
+    return <p>DragFilesTree</p>
+}

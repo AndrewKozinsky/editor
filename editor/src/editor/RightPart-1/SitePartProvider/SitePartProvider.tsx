@@ -4,9 +4,9 @@ import SiteSection from '../SiteSection/SiteSection/SiteSection'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
 import { NewTemplateButton, TemplatesList } from '../SiteTemplateList/SiteTemplateList'
 import SiteTemplateForm from '../SiteTemplateForm/TemplateSection/siteTemplateForm'
-// import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
-// import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
-// import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
+import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
+import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
+import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
 import { rightTabsMessages } from 'messages/rightTabsMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 
@@ -54,16 +54,16 @@ export default function SitePartProvider(): ReactElement {
             else if (num === 2) {
                 return (
                     <HeaderPage headerText={rightTabsMsg.components} display={num === rightMainTab} key={num}>
-                        {/*<FoldersList type='components' />*/}
-                        {/*<ComponentFormProvider />*/}
+                        <FoldersList type='components' />
+                        <ComponentFormProvider />
                     </HeaderPage>
                 )
             }
             else if (num === 3) {
                 return (
                     <HeaderPage headerText={rightTabsMsg.articles} display={num === rightMainTab} key={num}>
-                        {/*<FoldersList type='articles' />*/}
-                        {/*<ArticleFormProvider />*/}
+                        <FoldersList type='articles' />
+                        <ArticleFormProvider />
                     </HeaderPage>
                 )
             }

@@ -73,7 +73,7 @@ function getOptions(
     const options: OptionsType = templates.map(template => {
         return {
             value: template.id,
-            label: template.content
+            label: template.name
         }
     })
 

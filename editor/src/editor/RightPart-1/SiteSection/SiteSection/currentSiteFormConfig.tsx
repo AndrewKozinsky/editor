@@ -43,7 +43,6 @@ function getCurrentSiteFormConfig(siteSectionMsg: any) {
             // id выбранного сайта
             const siteId = store.getState().sites.currentSiteId
 
-            // @ts-ignore
             return await updateSiteRequest(readyFieldValues as UpdateSiteRequestValuesType, siteId)
         },
         afterSubmit

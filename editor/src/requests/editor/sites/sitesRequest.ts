@@ -14,4 +14,3 @@ export default async function sitesRequest() {
 
 // Тип данных с ответом от пользователя
 type SitesRequestServerResponse = ErrorServerResponseType | SiteServerResponseType
-
