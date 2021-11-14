@@ -1,7 +1,7 @@
 import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import regRequest from 'requests/user/regRequest'
+import regRequest, {RegRequestValuesType} from 'requests/user/regRequest'
 
 /**
  * Функция возвращает конфигурацию формы регистрации
@@ -63,8 +63,7 @@ function getConfig(commonMsg: any, regFormMsg: any) {
             },
         },
         async requestFn(readyFieldValues) {
-            // @ts-ignore
-            return await regRequest(readyFieldValues)
+            return await regRequest(readyFieldValues as RegRequestValuesType)
         },
         afterSubmit(response) {},
         showCommonSuccess: true,

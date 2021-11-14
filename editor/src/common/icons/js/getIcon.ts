@@ -12,7 +12,7 @@ import MainTabSettings from '../icons/mainTabSettings'
 import MainTabHelp from '../icons/mainTabHelp'
 import MainTabRoundScion from '../icons/mainTabRoundScion'
 import BtnSignSave from '../icons/btnSignSave'
-// import BtnSignFolder from '../icons/btnSignFolder'
+import BtnSignFolder from '../icons/btnSignFolder'
 import BtnSignTrash from '../icons/btnSignTrash'
 import BtnSignAdd from '../icons/btnSignAdd'
 // import BtnSignCode from '../icons/btnSignCode'
@@ -25,12 +25,12 @@ import SiteTabSite from '../icons/siteTabSite'
 import SiteTabTemplates from '../icons/siteTemplates'
 import SiteTabArticle from '../icons/siteTabArticle'
 import SiteTabComponents from '../icons/siteTabComponents'
-// import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
-// import FilesTreeTriangle from '../icons/filesTreeTriangle'
-// import FilesTreePlus from '../icons/filesTreePlus'
-// import FilesTreeFolder from '../icons/filesTreeFolder'
-// import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
-// import FilesTreeTrash from '../icons/filesTreeTrash'
+import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
+import FilesTreeTriangle from '../icons/filesTreeTriangle'
+import FilesTreePlus from '../icons/filesTreePlus'
+import FilesTreeFolder from '../icons/filesTreeFolder'
+import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
+import FilesTreeTrash from '../icons/filesTreeTrash'
 // import BtnSignEdit from '../icons/btnSignEdit'
 // import FilesTreeTorus from '../icons/filesTreeTorus'
 // import FilesTreeUp from '../icons/filesTreeUp'
@@ -80,7 +80,7 @@ export function getIcon(type: string): ReactNode {
 
         // Значки на кнопках
         btnSignSave: BtnSignSave,
-        // btnSignFolder: BtnSignFolder,
+        btnSignFolder: BtnSignFolder,
         btnSignTrash: BtnSignTrash,
         // btnSignCode: BtnSignCode,
         btnSignAdd: BtnSignAdd,
@@ -97,19 +97,19 @@ export function getIcon(type: string): ReactNode {
         editorDarkTheme: EditorDarkTheme,
 
         // Значки на FilesTree
-        // filesTreeTriangle: FilesTreeTriangle,
-        // filesTreeFolder: FilesTreeFolder,
-        // filesTreeFolderPlus: FilesTreeFolderPlus,
-        // filesTreePlus: FilesTreePlus,
+        filesTreeTriangle: FilesTreeTriangle,
+        filesTreeFolder: FilesTreeFolder,
+        filesTreeFolderPlus: FilesTreeFolderPlus,
+        filesTreePlus: FilesTreePlus,
         // filesTreeTorus: FilesTreeTorus,
         // filesTreeUp: FilesTreeUp,
         // filesTreeDown: FilesTreeDown,
 
         // Значёк указателя помещения перетаскиваемого элемента
-        // filesTreePlaceMark: FilesTreePlaceMark,
+        filesTreePlaceMark: FilesTreePlaceMark,
 
         // Значёк указателя помещения перетаскиваемого элемента
-        // filesTreeTrash: FilesTreeTrash,
+        filesTreeTrash: FilesTreeTrash,
         // Article menu sign on menu button
         // articleMenu: ArticleMenu,
 

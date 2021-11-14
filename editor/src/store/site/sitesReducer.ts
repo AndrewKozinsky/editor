@@ -8,9 +8,11 @@ export type SitesReducerType = {
     siteTemplatesSection: {
         templates: StoreSitesTypes.SiteTemplatesType
         currentTemplateId: StoreSitesTypes.CurrentSiteTemplateId
-    }
-    // componentsSection: StoreSitesTypes.ComponentsSection
-    // articlesSection: StoreSitesTypes.ArticlesSection
+    },
+    compFolderSection: StoreSitesTypes.CompFolderSection
+    componentsSection: StoreSitesTypes.ComponentsSection
+    articleFolderSection: StoreSitesTypes.ArticleFolderSection
+    articlesSection: StoreSitesTypes.ArticlesSection
 }
 
 
@@ -29,30 +31,38 @@ const initialState: SitesReducerType = {
         // id выбранного шаблона сайта
         currentTemplateId: null,
     },
+    // Объект с данными папки с компонентами
+    compFolderSection: {
+        compFolder: null // Код папки
+    },
     // Данные по вкладке «Шаблоны компонентов»
-    /*componentsSection: {
+    componentsSection: {
         // uuid выбранного элемента: папки или компонента
         currentCompItemId: null,
         // тип выбранного элемента: папка или компонент
-        currentCompItemType: null,
+        // currentCompItemType: null,
         // Имя выбранного компонента
-        currentCompName: null,
+        // currentCompName: null,
         // Строка с кодом выбранного шаблона компонента
-        currentCompCode: null,
-    },*/
+        // currentCompCode: null,
+    },
+    // Объект с данными папки со статьями
+    articleFolderSection: {
+        artFolder: null // Код папки
+    },
     // Данные по вкладке «Статьи»
-    /*articlesSection: {
+    articlesSection: {
         // uuid выбранного элемента: папки или статьи
         currentArtItemId: null,
         // Тип выбранного элемента: папка или компонент
-        currentArtItemType: null,
+        // currentArtItemType: null,
         // Имя выбранной статьи
-        currentArtName: '',
+        // currentArtName: '',
         // Строка с кодом выбранной статьи
-        currentArtCode: null,
+        // currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
-        siteTemplateId: null
-    }*/
+        // siteTemplateId: null
+    }
 }
 
 // Установка массива сайтов
@@ -119,6 +129,15 @@ function setCurrentSiteTemplateId(state: SitesReducerType, action: StoreSitesTyp
         siteTemplatesSection: {
             ...state.siteTemplatesSection,
             currentTemplateId: action.payload
+        }
+    }
+}
+
+function setCompFolder(state: SitesReducerType, action: StoreSitesTypes.SetCompFolderAction): SitesReducerType {
+    return {
+        ...state,
+        compFolderSection: {
+            compFolder: action.payload
         }
     }
 }
@@ -343,6 +362,9 @@ export default function sitesReducer(state = initialState, action: StoreSitesTyp
             return setTemplates(state, action)
         case StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID:
             return setCurrentSiteTemplateId(state, action)
+
+        case StoreSitesTypes.SET_COMP_FOLDER:
+            return setCompFolder(state, action)
 
         // case StoreSitesTypes.SET_CURRENT_COMP:
         //     return setCurrentComp(state, action)

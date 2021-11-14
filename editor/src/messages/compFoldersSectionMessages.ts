@@ -2,7 +2,7 @@
 
 
 // Структура папок и файлов шаблонов компонентов
-/*const foldersComponentsSectionMessages = {
+export const compFoldersSectionMessages = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -11,4 +11,4 @@
         eng: 'New component',
         rus: 'Новый компонент'
     },
-}*/
+}

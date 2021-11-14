@@ -8,6 +8,8 @@ import { ServeStaticModule } from '@nestjs/serve-static'
 import { AuthMiddleware } from './user/middlewares/auth.middleware'
 import { LanguageMiddleware } from './user/middlewares/language.middleware'
 import {SiteTemplateModule} from './siteTemplate/siteTemplate.module'
+import { ComponentModule } from './component/component.module'
+import { CompFolderModule } from './compFolder/compFolder.module'
 
 
 @Module({
@@ -20,7 +22,9 @@ import {SiteTemplateModule} from './siteTemplate/siteTemplate.module'
       }),
       UserModule,
       SiteModule,
-      SiteTemplateModule
+      SiteTemplateModule,
+      CompFolderModule,
+      ComponentModule,
   ],
   controllers: [],
   providers: [],

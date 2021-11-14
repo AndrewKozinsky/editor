@@ -16,7 +16,7 @@
     // id of included files template id
     incFilesId?: string // '60cc62ab5405e00071442016'
     // open component template folder uuids
-    openCompFoldersUuIds?: FilesTreeType.UuIdArr // ['1', '3']
+    openCompFoldersUuIds?: FilesTreeType.IdArr // ['1', '3']
 }*/
 
 /**

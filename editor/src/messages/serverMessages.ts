@@ -209,7 +209,7 @@ export const serverMessages = {
     },
 
     siteTemplate_CreateSiteTemplateDto_EmptySiteId: {
-        eng: 'You must specify the site name.',
+        eng: 'The id of the site to which the template belongs must be specified.',
         rus: 'Должен быть указан id сайта которому принадлежит шаблон.'
     },
     siteTemplate_CreateSiteTemplateDto_EmptyContent: {
@@ -229,6 +229,57 @@ export const serverMessages = {
         rus: 'Указанный сайт не существует.'
     },
     siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the deleted site template.',
+        rus: 'Текущий пользователь не создавал удаляемый шаблон сайта.'
+    },
+
+    component_CreateComponentDto_EmptySiteId: {
+        eng: 'The id of the site to which the component belongs must be specified.',
+        rus: 'Должен быть указан id сайта которому принадлежит компонент.'
+    },
+    component_CreateComponentDto_EmptyContent: {
+        eng: 'You must specify the component code.',
+        rus: 'Должен быть указан код компонента.'
+    },
+    component_UpdateComponentDto_EmptyContent: {
+        eng: 'You must specify the component code.',
+        rus: 'Должен быть указан код компонента.'
+    },
+    component_UpdateComponent_ComponentIsNotExist: {
+        eng: 'The transferred component does not exist.',
+        rus: 'Переданный компонент сайта не существует.'
+    },
+
+    component_DeleteComponent_ComponentIsNotExist: {
+        eng: 'The specified component does not exist.',
+        rus: 'Указанный компонент не существует.'
+    },
+    component_DeleteComponent_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create a component.',
+        rus: 'Текущий пользователь не создавал компонент.'
+    },
+
+    compFolder_CreateCompFolderDto_EmptySiteId: {
+        eng: 'The id of the site to which the components folder belongs must be specified.',
+        rus: 'Должен быть указан id сайта которому принадлежит папка с компонентами.'
+    },
+    compFolder_CreateCompFolderDto_EmptyContent: {
+        eng: 'You must specify the components folder code.',
+        rus: 'Должен быть указан код папки с компонентами.'
+    },
+    compFolder_UpdateCompFolderDto_EmptyContent: {
+        eng: 'The code of the folder with the components must be specified.',
+        rus: 'Должен быть указан код папки с компонентами.'
+    },
+    compFolder_UpdateCompFolder_CompFolderIsNotExist: {
+        eng: 'The specified folder with components does not exist.',
+        rus: 'Указанная папка с компонентами не существует.'
+    },
+    compFolder_DeleteCompFolder_CompFolderIsNotExist: {
+        eng: 'The specified folder with components does not exist.',
+        rus: 'Указанная папка с компонентами не существует.'
+    },
+    compFolder_DeleteCompFolder_CurrentUserIsNotAuthor: {
         eng: 'The current user did not create the deleted site template.',
         rus: 'Текущий пользователь не создавал удаляемый шаблон сайта.'
     },

@@ -1,13 +1,13 @@
-// import React, {Fragment, ReactNode} from 'react'
-// import DragFilesTreeType from '../types'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Button from 'common/formElements/Button/Button'
-// import { useGetFilesTreeMinWidth } from './DragFilesTree-func'
-// import Item from '../Item/Item'
-// import {createNewItem} from '../Item/Item-func'
+import React, {Fragment, ReactNode, SyntheticEvent} from 'react'
+import DragFilesTreeType from '../types'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Button from 'common/formElements/Button/Button'
+import { useGetFilesTreeMinWidth } from './DragFilesTree-func'
+import Item from '../Item/Item'
+import { createNewFile, createNewFolder } from '../Item/Item-func'
 
 
-/*type DragFilesTreePropType = {
+type DragFilesTreePropType = {
     // Массив данных списка папок и файлов
     items: null | DragFilesTreeType.Items
     // Функция устанавливающая массив папок в Хранилище
@@ -18,6 +18,8 @@
     newFileName?: string
     // Функция запускаемая после добавления нового файла
     afterAddingNewItem?: DragFilesTreeType.AfterAddingNewItemFn
+    // Функция возращает id файла после сохранения в БД
+    getFileId: DragFilesTreeType.GetFileIdFn
     // Функция запускаемая после щелчка по папке или файлу
     afterSelectItem?: DragFilesTreeType.AfterSelectItemFn
     // Функция запускаемая после разворачивания/сворачивания папки
@@ -26,10 +28,10 @@
     afterChangingTree?: DragFilesTreeType.AfterChangingTreeFn
     // Функция запускаемая после удаления папки или файла
     afterDeleteItem?: DragFilesTreeType.AfterDeleteItem
-}*/
+}
 
 /** Список папок и файлов */
-/*export default function DragFilesTree(props: DragFilesTreePropType) {
+export default function DragFilesTree(props: DragFilesTreePropType) {
 
     const {
         newFolderName = 'New folder', // Название новой папки
@@ -55,8 +57,8 @@
                 <Button
                     text={newFolderName}
                     icon='btnSignFolder'
-                    onClick={(e: any) => {
-                        createNewItem(e, 'folder', null, props.items, props.setItems, after)
+                    onClick={(e: SyntheticEvent) => {
+                        createNewFolder(e, null, props.items, props.setItems, after)
                     }}
                 />
             </Wrapper>
@@ -64,15 +66,15 @@
                 <Button
                     text={newFileName}
                     icon='btnSignAdd'
-                    onClick={(e: any) => {
-                        createNewItem(e, 'file', null, props.items, props.setItems, after)
+                    onClick={(e: SyntheticEvent) => {
+                        createNewFile(e, null, props.items, props.setItems, after)
                     }}
                 />
             </Wrapper>
             {generateItems(props.items, props.items, props.setItems, 0, after)}
         </div>
     )
-}*/
+}
 
 /**
  * Рекурсивная функция генерирующая разметку дерева файлов
@@ -83,7 +85,7 @@
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*function generateItems(
+function generateItems(
     allItems: DragFilesTreeType.Items,
     innerItems: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
@@ -107,7 +109,7 @@
         }
 
         return (
-            <Fragment key={itemData.uuid}>
+            <Fragment key={itemData.id}>
                 <Item
                     items={allItems}
                     itemData={itemData}
@@ -119,4 +121,4 @@
             </Fragment>
         )
     })
-}*/
+}

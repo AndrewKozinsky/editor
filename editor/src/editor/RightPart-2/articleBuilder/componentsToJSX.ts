@@ -96,7 +96,7 @@
     const objAttribs = htmlObj.attrs
 
     // Если атрибутов нет, то вернуть объект с атрибутом key.
-    if(!objAttribs) return {
+    if (!objAttribs) return {
         key: key
     }
 
@@ -104,13 +104,13 @@
     for(let propName in objAttribs) {
 
         // Все классы нужно писать как className.
-        if(propName === 'class') {
+        if (propName === 'class') {
             let classValue = objAttribs.class
             delete objAttribs.class
             objAttribs.className = classValue
         }
 
-        if(propName === 'style') {
+        if (propName === 'style') {
             // В переменной будет так: box-shadow: 0 30px 55px rgba(0, 0, 0, .2); transform: translateY(5px);
             let styleStr = objAttribs[propName].trim()
 

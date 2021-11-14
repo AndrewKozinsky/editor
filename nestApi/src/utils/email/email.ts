@@ -45,11 +45,11 @@ export class Email {
     // В зависимости от режима сервера отправляет письма либо на mailtrap.io либо на реальный адрес
     send(subject: string, htmlContent: string, textContent: string) {
         // Послать письма разными сервисами в зависимости от режима работы
-        if(config.workMode === 'development') {
+        if (config.workMode === 'development') {
             //@ts-ignore
             this.sendFakeEmail(subject, htmlContent, textContent)
         }
-        else if(config.workMode === 'production') {
+        else if (config.workMode === 'production') {
             this.sendRealEmail(subject, htmlContent, textContent)
         }
     }

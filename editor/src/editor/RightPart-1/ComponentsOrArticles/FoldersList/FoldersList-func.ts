@@ -1,110 +1,82 @@
-// import {useCallback, useEffect} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
+import { useCallback, useEffect } from 'react'
+import {useDispatch} from 'react-redux'
+// import { useDispatch } from 'react-redux'
 // import { store } from 'store/rootReducer'
 // import {AppStateType} from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import DragFilesTreeType from 'libs/DragFilesTree/types'
+import actions from 'store/rootAction'
 // import createArticleRequest from 'requests/editor/article/createArticleRequest'
 // import createComponentRequest from 'requests/editor/components/createComponentRequest'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 // import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import {setCompItems, setArtItems} from '../stores'
-// import { FolderType } from '../types'
+import { FolderType } from '../types'
 // import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
 // import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
-// import {GetComponentsFoldersServerResponse, useGetComponentsFoldersRequest } from 'requests/editor/components/getComponentsFoldersRequest'
+import {
+    // GetComponentsFoldersServerResponse,
+    // useGetComponentsFoldersRequest
+} from 'src/requests/editor/compFolders/getCompFolderRequest'
 // import { useGetArticlesFoldersRequest } from 'requests/editor/article/getArticlesFoldersRequest'
 // import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 // import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import sitesActions from 'store/site/sitesActions'
 
 
 /**
  * Хук скачивает с сервера папки и ставит в Хранилище
  * @param {String} type — тип папок: с компонентами или со статьями
  */
-// SET ALL DATA TO REDUX!!!
-/*export function useGetFoldersFromServerAndPutInEffector(type: FolderType) {
+export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
+    const dispatch = useDispatch()
+
     // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
-
-    // id папки или компонента, который должнен быть выделен
-    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
-
-    // Хук делающий запрос данных с сервера на получение папок с компонентами
-    const {componentsResponse, doComponentsFetch} = useGetComponentsFoldersRequest()
-
-    // Хук делающий запрос данных с сервера на получение папок со статьями
-    const {articlesResponse, doArticlesFetch} = useGetArticlesFoldersRequest()
-
+    const { currentSiteId } = useGetSitesSelectors()
 
     // При изменении выбранного сайта...
     useEffect(function () {
         // Если не передан id сайта, то обнулить папки в Хранилище
         if (!currentSiteId) {
-            // Поставить в Эффектор пустые значения по папкам компонентов и статей
-            setCompItems(null)
-            setArtItems(null)
+            dispatch(actions.sites.setCompFolder(null))
+            // *** Тут напиши обнуление статей ***
             return
         }
 
         // Скачать новый массив папок компонентов и статей
-        if (type === 'components') doComponentsFetch()
-        if (type === 'articles') doArticlesFetch()
-    }, [currentSiteId])
-
-    useEffect(function () {
-        if (!componentsResponse) return
-
-        // При получении данных по папкам поставить их в Эффектор
-        setItemsToEffector(componentsResponse, type, currentCompItemId, setCompItems)
-    }, [componentsResponse])
-
-    useEffect(function () {
-        if (!articlesResponse) return
-
-        // При получении данных по папкам поставить их в Эффектор
-        setItemsToEffector(articlesResponse, type, currentArtItemId, setArtItems)
-    }, [articlesResponse])
-}*/
-
-/**
- *
- * @param {Object} response — объект ответа от сервера
- * @param {String} type — тип папок: с компонентами или со статьями
- * @param {String} currentItemId — uuid элемента, который должен быть выделен
- * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
- */
-/*function setItemsToEffector(
-    response: GetComponentsFoldersServerResponse,
-    type: FolderType,
-    currentItemId: DragFilesTreeType.UuId,
-    setItems: (items: DragFilesTreeType.Items) => void
-) {
-    if (response.status === 'fail') return
-
-    if (response.data.folders.content) {
-        // Превратить присланный JSON в массив
-        let content = JSON.parse(response.data.folders.content)
-
-        // Открыть папки, которые должны быть открытыми
-        const openedFoldersUuIds = getOpenedFoldersUuId(type)
-        if (openedFoldersUuIds) {
-            content = addOpenPropToFolders(content, openedFoldersUuIds)
+        if (type === 'components') {
+            dispatch(actions.sites.requestCompFolder())
         }
+        if (type === 'articles') {
+            // *** Тут напиши загрузку статей ***
+        }
+    }, [currentSiteId])
+}
 
-        // Выделить элемент, который должен быть выделен
-        content = selectItem(content, currentItemId).newItems
+export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items {
+    if (type === 'components') {
+        return useGetSitesSelectors().compFolderSection.compFolder
+    }
+    else if (type === 'articles') {
+        return useGetSitesSelectors().compFolderSection.compFolder
+    }
+}
 
-        // Поставить в Эффектор присланный порядок
-        setItems(content)
-    }
-    else {
-        setItems([])
-    }
-}*/
+
+export function useGetSetFolders(type: FolderType) {
+    const dispatch = useDispatch()
+
+    return useCallback(function (newItems: DragFilesTreeType.Items) {
+        if (type === 'components') {
+            return dispatch(sitesActions.setCompFolder(newItems))
+        }
+        else if (type === 'articles') {
+            return dispatch()
+        }
+    }, [])
+}
 
 
 /**
@@ -174,22 +146,21 @@
  * @param {Object} item — данные нового файла.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-/*export async function afterAddingNewItem(type: FolderType, items: DragFilesTreeType.Items, item: DragFilesTreeType.Item) {
+export async function afterAddingNewItem(type: FolderType, items: DragFilesTreeType.Items, item: DragFilesTreeType.Item) {
     // Параметры функции создания шаблона компонента или статьи
-    const uuid = item.uuid
-    const name = item.name
+    const { id, name } = item
 
     // Сохранить данные на сервере
     if (type === 'components') {
-        await createComponentRequest(uuid, name, 'null')
+        // const serverResponse = await createComponentRequest(id, name, 'null')
     }
     else if (type === 'articles') {
         // Create code of a new article
-        let code = JSON.stringify( articleManager.createArticle() )
+        // let code = JSON.stringify( articleManager.createArticle() )
 
-        await createArticleRequest(uuid, name, code)
+        // await createArticleRequest(id, name, code)
     }
-}*/
+}
 
 /**
  * Функция запускаемая после раскрытия/скрытия любой папки.

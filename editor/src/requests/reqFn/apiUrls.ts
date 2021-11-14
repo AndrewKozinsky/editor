@@ -54,10 +54,13 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'sites/' + siteId + '/components'
     },*/
 
-    // Папки шаблонов компонентов
-    /*componentsFolders: function (siteId: string) {
-        return 'componentsFolders/' + siteId
-    },*/
+    // Папка шаблонов компонентов
+    compFoldersBySite: function (siteId: number) {
+        return `sites/${siteId}/compFolders`
+    },
+    compFolder: function (compFolderId: number) {
+        return 'compFolders/' + compFolderId
+    },
     // Шаблон компонента
     /*component: function (uuid?: string) {
         if (uuid) return 'components/' + uuid

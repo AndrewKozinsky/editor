@@ -10,6 +10,8 @@ import { UpdateSiteDto } from './dto/updateSite.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
 import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
 import {sortByCreatedAt} from '../../utils/miscUtils'
+import { ComponentService } from '../component/component.service'
+import { CompFolderService } from '../compFolder/compFolder.service'
 
 
 @Injectable()
@@ -18,7 +20,9 @@ export class SiteService {
     constructor(
         @InjectRepository(SiteEntity)
         private readonly siteRepository: Repository<SiteEntity>,
-        private readonly siteTemplateService: SiteTemplateService
+        private readonly siteTemplateService: SiteTemplateService,
+        private readonly compFolderService: CompFolderService,
+        private readonly componentService: ComponentService
     ) {}
 
     /** Получение всех сайтов (защищённый маршрут) */
@@ -40,6 +44,12 @@ export class SiteService {
                 userId: user.id,
                 ...createSiteDto
             }
+        )
+
+        // Создание папки с компонентами
+        await this.compFolderService.createCompFolder(
+            { siteId: newSite.id, content: null },
+            user
         )
 
         return await this.siteRepository.save(newSite)
@@ -80,12 +90,21 @@ export class SiteService {
         // Удалить шаблоны сайта
         await this.siteTemplateService.deleteSiteTemplates(siteId)
 
+        // Удалить папки шаблонов компонентов
+        await this.compFolderService.deleteCompFolderBySiteId(siteId, currentUser)
+
+        // Удалить шаблоны компонентов
+        await this.componentService.deleteComponents(siteId)
+
+        // Удалить папки статей
+
+
+        // Удалить статьи
+
+
         // =================================
         // Удалить папки шаблонов компонентов
         // await ComponentsFoldersModel.deleteMany({siteId: req.params.siteId})
-
-        // Удалить шаблоны компонентов
-        // await ComponentModel.deleteMany({siteId: req.params.siteId})
 
         // Удалить папки статей
         // await ArticlesFoldersModel.deleteMany({siteId: req.params.siteId})

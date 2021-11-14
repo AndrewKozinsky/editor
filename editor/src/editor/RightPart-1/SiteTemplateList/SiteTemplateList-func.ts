@@ -7,7 +7,7 @@ import { ItemsListPropType } from 'common/ItemsList/ItemsList'
 
 
 // Хук скачивает с сервера массив шаблонов подключаемых файлов и ставит в Хранилище
-export function useFetchIncFilesTemplates() {
+export function useFetchSiteTemplates() {
     const dispatch = useDispatch()
 
     const { currentSiteId } = useGetSitesSelectors()

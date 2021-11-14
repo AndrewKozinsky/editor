@@ -1,6 +1,7 @@
 // import { ArticleDataType } from 'requests/editor/article/getArticleRequest'
 // import { ComponentDataType } from 'requests/editor/components/getComponentRequest'
-// import FilesTreeType from '../../types/filesTree'
+
+import DragFilesTreeType from '../../libs/DragFilesTree/types'
 
 namespace StoreSitesTypes {
 
@@ -28,9 +29,11 @@ namespace StoreSitesTypes {
     export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
     export type CurrentSiteTemplateId = null | number | ''
+    // Код папки с компонентами
+    export type CompFolderDataType = null | string
 
-    // uuid выбранного элемента: папки или компонента
-    // export type CurrentCompItemId = null | FilesTreeType.UuId
+    // id выбранного элемента: папки или компонента
+    export type CurrentCompItemId = null | number
     // Тип выбранного шаблона компонента (папка или компонент)
     // export type CurrentCompItemType = null | FilesTreeType.ItemType
     // Имя выбранного компонента
@@ -38,16 +41,26 @@ namespace StoreSitesTypes {
     // Строка с кодом выбранного шаблона компонента
     // export type ComponentCode = null | string
 
+    // Объект с данными папки с компонентами
+    export type CompFolderSection = {
+        compFolder: DragFilesTreeType.Items
+    }
+
     // Объект с данными компонента
-    /*export type ComponentsSection = {
+    export type ComponentsSection = {
         currentCompItemId: CurrentCompItemId
-        currentCompItemType: CurrentCompItemType
-        currentCompName: ComponentName
-        currentCompCode: ComponentCode
-    }*/
+        // currentCompItemType: CurrentCompItemType
+        // currentCompName: ComponentName
+        // currentCompCode: ComponentCode
+    }
+
+    // Объект с данными папки со статьями
+    export type ArticleFolderSection = {
+        artFolder: null | string
+    }
 
     // uuid выбранного элемента: папки или статьи
-    // export type CurrentArtItemId = null | FilesTreeType.UuId
+    export type CurrentArtItemId = null | number
     // Тип выбранного элемента (папка или компонент)
     // export type CurrentArtItemType = null | FilesTreeType.ItemType
     // Имя выбранной статьи
@@ -56,13 +69,13 @@ namespace StoreSitesTypes {
     // export type ArticleCode = null | string
 
     // Объект с данными статьи
-    /*export type ArticlesSection = {
+    export type ArticlesSection = {
         currentArtItemId: CurrentArtItemId
-        currentArtItemType: CurrentArtItemType
-        currentArtName: ArticleName
-        currentArtCode: ArticleCode,
-        siteTemplateId: CurrentSiteTemplateId
-    }*/
+        // currentArtItemType: CurrentArtItemType
+        // currentArtName: ArticleName
+        // currentArtCode: ArticleCode,
+        // siteTemplateId: CurrentSiteTemplateId
+    }
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -101,12 +114,18 @@ namespace StoreSitesTypes {
         payload: CurrentSiteTemplateId
     }
 
+    export const SET_COMP_FOLDER = 'SET_COMP_FOLDER'
+    export type SetCompFolderAction = {
+        type: typeof SET_COMP_FOLDER
+        payload: DragFilesTreeType.Items
+    }
+
     // Установка id выбранного шаблона компонента
     // export const SET_CURRENT_COMP = 'SET_CURRENT_COMP'
     /*export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | FilesTreeType.UuId
+            id: null | FilesTreeType.Id
             type: null | FilesTreeType.ItemType
             compData?: ComponentDataType
         }
@@ -131,7 +150,7 @@ namespace StoreSitesTypes {
     /*export type SetCurrentArtAction = {
         type: typeof SET_CURRENT_ART
         payload: {
-            id: null | FilesTreeType.UuId
+            id: null | FilesTreeType.Id
             type: null | FilesTreeType.ItemType
             article?: ArticleDataType
         }
@@ -158,6 +177,7 @@ namespace StoreSitesTypes {
         | SetRightMainTabAction
         | SetSiteTemplatesAction
         | SetCurrentSiteTemplateIdAction
+        | SetCompFolderAction
         // | SetCurrentCompAction
         // | SetCurrentCompItemTypeAction
         // | SetCurrentCompItemIdAction

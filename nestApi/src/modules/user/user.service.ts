@@ -34,7 +34,7 @@ export class UserService {
         const token = request?.cookies?.token
 
         // Если токен не передан, то возвратить ошибочный ответ
-        if(!token) sendErrorResponse()
+        if (!token) sendErrorResponse()
 
         // Расшифровать JWT и получить payload
         const decodedJWT: MiscTypes.JWTDecoded = await verify(token, config.jwtSecret)
@@ -46,7 +46,7 @@ export class UserService {
         if (!user) sendErrorResponse()
 
         // Если почта не подтверждена, то вернуть ошибочный ответ
-        if(user.emailConfirmToken) {
+        if (user.emailConfirmToken) {
             sendErrorResponse()
         }
 

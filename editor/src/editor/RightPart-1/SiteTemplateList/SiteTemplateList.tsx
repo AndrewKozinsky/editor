@@ -6,7 +6,7 @@ import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessage
 import useGetMessages from 'messages/fn/useGetMessages'
 import ItemsList from 'common/ItemsList/ItemsList'
 import {
-    useFetchIncFilesTemplates,
+    useFetchSiteTemplates,
     useGetNewTemplateOnClickHandler,
     useGetTemplatesItemsListProps
 } from './SiteTemplateList-func'
@@ -39,7 +39,7 @@ export function NewTemplateButton() {
 /** Компонент списка шаблонов сайта */
 export function TemplatesList() {
     // Получить с сервера список шаблонов подключаемых файлов и поставить в Хранилище
-    useFetchIncFilesTemplates()
+    useFetchSiteTemplates()
 
     // Аргументы для компонента выводящий список сайтов
     const itemsListProps = useGetTemplatesItemsListProps()

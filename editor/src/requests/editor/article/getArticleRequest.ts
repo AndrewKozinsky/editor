@@ -4,7 +4,7 @@
 
 
 /** Функция получает данные статьи */
-/*export default async function getArticleRequest(articleUuid: FilesTreeType.UuId) {
+/*export default async function getArticleRequest(articleUuid: FilesTreeType.Id) {
 
     const options = { method: 'GET' }
     const response: GetArticleRequestServerResponse = await makeFetch(

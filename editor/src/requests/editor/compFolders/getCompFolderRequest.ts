@@ -1,6 +1,8 @@
-// import {AppStateType} from 'store/rootReducer'
-// import {makeFetch, useFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch, useFetch } from 'src/requests/reqFn/fetch'
+import getApiUrl from 'src/requests/reqFn/apiUrls'
+import ErrorServerResponseType from '../../errorServerResponseType'
+import SiteTemplateServerResponseType from '../siteTemplate/siteTemplateServerResponseType'
+import CompFolderServerResponseType from './compFolderServerResponseType'
 
 
 // Функция удаляет сайт
@@ -22,30 +24,16 @@
     }
 }*/
 
-/*export async function getComponentsFoldersRequest(siteId: string) {
+export async function getCompFolderRequest(siteId: number) {
     const options = { method: 'GET'}
 
-    const response: GetComponentsFoldersServerResponse = await makeFetch(
-        getApiUrl('componentsFolders', siteId), options
+    const response: GetCompFolderServerResponse = await makeFetch(
+        getApiUrl('compFoldersBySite', siteId), options
     )
 
     return response
-}*/
+}
 
 
 // Тип данных с ответом от пользователя
-// export type GetComponentsFoldersServerResponse = null | ErrorServerResponseType | SuccessResponse
-
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        folders: {
-            content: string // "[{\"uuid\":\"1\",\"type\":\"folder\",\"name\":\"New folder\"}...]"
-            siteId: string // "60c89dccfe73df002a1c4fa4"
-            userId: string // "60c626f9fd09180020febc99"
-        }
-    }
-}*/
+export type GetCompFolderServerResponse = ErrorServerResponseType | CompFolderServerResponseType

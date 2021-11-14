@@ -64,7 +64,7 @@ export function getIconSize(type: string) {
                 height: '15px',
                 viewBox: '0 0 12 15'
             }
-        // case 'btnSignFolder':
+        case 'btnSignFolder':
         case 'btnSignAdd':
         // case 'btnSignJson':
         // case 'btnSignEdit':
@@ -110,30 +110,30 @@ export function getIconSize(type: string) {
                 viewBox: '0 0 76 76'
             }
         // Значки на FilesTree
-        /*case 'filesTreeTriangle':
+        case 'filesTreeTriangle':
             return {
-                width: "10px",
-                height: "10px",
-                viewBox: "0 0 10 10"
-            }*/
-        // case 'filesTreeFolder':
-        // case 'filesTreeFolderPlus':
-        // case 'filesTreePlus':
-        // case 'filesTreeTrash':
+                width: '10px',
+                height: '10px',
+                viewBox: '0 0 10 10'
+            }
+        case 'filesTreeFolder':
+        case 'filesTreeFolderPlus':
+        case 'filesTreePlus':
+        case 'filesTreeTrash':
         // case 'filesTreeTorus':
         // case 'filesTreeUp':
-        /*case 'filesTreeDown':
+        case 'filesTreeDown':
             return {
-                width: "15px",
-                height: "15px",
-                viewBox: "0 0 15 15"
-            }*/
-        /*case 'filesTreePlaceMark':
+                width: '15px',
+                height: '15px',
+                viewBox: '0 0 15 15'
+            }
+        case 'filesTreePlaceMark':
             return {
                 width: "8px",
                 height: "5px",
                 viewBox: "0 0 8 5"
-            }*/
+            }
         /*case 'articleMenu':
             return {
                 width: "18px",

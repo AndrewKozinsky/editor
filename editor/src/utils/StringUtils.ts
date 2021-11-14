@@ -68,7 +68,7 @@ export function convertToCamelCase(str: string) {
     let arr = str.split('-')
 
     arr = arr.map((str, i) => {
-        if(i > 0) return str[0].toUpperCase() + str.substr(1)
+        if (i > 0) return str[0].toUpperCase() + str.substr(1)
         return str
     })
 

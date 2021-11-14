@@ -4,6 +4,9 @@ import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
+import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
+import { CompFolderType } from 'requests/editor/compFolders/compFolderServerResponseType'
+import DragFilesTreeType from '../../libs/DragFilesTree/types'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
@@ -77,7 +80,6 @@ const sitesActions = {
             const response = await getSiteTemplatesRequest(siteId)
 
             if (response.status !== 'success') return
-            // console.log(response.data.siteTemplates)
 
             // Формированое массива шаблонов для установки в Хранилище
             const preparedTemplates = response.data.siteTemplates.map(template => {
@@ -113,6 +115,38 @@ const sitesActions = {
     },
 
 
+    // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
+
+    requestCompFolder() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            const { currentSiteId } = store.getState().sites
+
+            // Запрос к серверу на получение кода папки с компонентами
+            const response = await getCompFolderRequest(currentSiteId)
+
+            if (response.status !== 'success') return
+            const compFolderStr = response.data.compFolders[0]
+
+            let compFolderObj: null | DragFilesTreeType.Items = null
+            try { compFolderObj = JSON5.parse(compFolderStr.content) }
+            catch(err) {}
+
+            if (compFolderObj) {
+                // Установка папки с компонентами в Хранилище
+                dispatch( sitesActions.setCompFolder(compFolderObj) )
+            }
+        }
+    },
+
+    // Установка папки компонентов
+    setCompFolder(payload: DragFilesTreeType.Items): StoreSitesTypes.SetCompFolderAction {
+        return {
+            type: StoreSitesTypes.SET_COMP_FOLDER,
+            payload: payload
+        }
+    },
+
+
     // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
@@ -140,7 +174,7 @@ const sitesActions = {
 
     // Установка id и типа выбранного шаблона компонента
     /*setCurrentComp(
-        id: null | FilesTreeType.UuId,
+        id: null | FilesTreeType.Id,
         type: null | FilesTreeType.ItemType,
         compData?: ComponentDataType
     ): StoreSitesTypes.SetCurrentCompAction {
@@ -171,6 +205,10 @@ const sitesActions = {
     },*/
 
 
+    // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
+
+
+
     // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
@@ -197,7 +235,7 @@ const sitesActions = {
 
     // Установка id и типа выбранного шаблона компонента
     /*setCurrentArt(
-        id: null | FilesTreeType.UuId,
+        id: null | FilesTreeType.Id,
         type: null | FilesTreeType.ItemType,
         article?: ArticleDataType
     ): StoreSitesTypes.SetCurrentArtAction {

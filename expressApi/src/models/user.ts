@@ -66,7 +66,7 @@ const UserSchema: Schema = new Schema({
 // Перед сохранением пользователя зашифровать пароль
 UserSchema.pre('save', async function(this: IUser, next) {
     // Завершить функцию если не обновляют пароль
-    if(!this.isModified('password')) return next()
+    if (!this.isModified('password')) return next()
 
     // Зашифровать пароль
     this.password = await bcrypt.hash(this.password, 10)
@@ -94,7 +94,7 @@ UserSchema.methods.correctPassword = async (candidatePassword: string, userPassw
 // true обозначает, что изменился позже переданного времени
 /*UserSchema.methods.changedPasswordAfter = function (this: IUser, JWTTimestamp: number) {
 
-    if(this.passwordChangedAt) {
+    if (this.passwordChangedAt) {
         const changedTimestamp = Math.round(
             this.passwordChangedAt.getTime() / 1000
         )

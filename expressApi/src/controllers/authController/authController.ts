@@ -24,12 +24,12 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     let token
 
     // Получение токена из кук
-    if(req.cookies && req.cookies.authToken) {
+    if (req.cookies && req.cookies.authToken) {
         token = req.cookies.authToken
     }
 
     // Если токен не передан, то возвратить ошибочный ответ
-    if(!token) return sendErrorResponse(next)
+    if (!token) return sendErrorResponse(next)
 
     // Расшифровать JWT и получить payload
     const decoded = await promisify( jwt.verify )(token, config.jwtSecret)
@@ -38,15 +38,15 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const currentUser = await UserModel.findById(decoded.id)
 
     // Если пользователь не найден, то вернуть ошибочный ответ
-    if(!currentUser) return sendErrorResponse(next)
+    if (!currentUser) return sendErrorResponse(next)
 
     // Если пароль изменён с последнего захода, то вернуть ошибочный ответ
-    if(currentUser.changedPasswordAfter(decoded.iat)) {
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
         return sendErrorResponse(next)
     }
 
     // Если почта не подтверждена, то вернуть ошибочный ответ
-    if(currentUser.emailConfirmToken) {
+    if (currentUser.emailConfirmToken) {
         return sendErrorResponse(next)
     }
 
@@ -75,7 +75,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     let token: string | undefined = req.cookies.authToken
 
     // Если токен не передан, то бросить ошибку
-    if(!token) {
+    if (!token) {
         return next(
             new AppError(null, '{{authController.protectNoToken}}', 401)
         )
@@ -88,14 +88,14 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const currentUser: IUser | null = await UserModel.findById(decoded.id).select('+password')
 
     // Бросить ошибку если пользователь не существует
-    if(!currentUser) {
+    if (!currentUser) {
         return next(
             new AppError(null, '{{authController.protectNoUser}}', 401)
         )
     }
 
     // Проверить что пароль не изменён
-    if(currentUser.changedPasswordAfter(decoded.iat)) {
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next(
             new AppError(null, '{{authController.protectPasswordChanged}}', 401)
         )
@@ -150,7 +150,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     )
 
     // Если пользователь не найден, то бросить ошибку
-    if(!user) {
+    if (!user) {
         return next(
             new AppError(null, '{{authController.confirmEmailUserNotFound}}', 400)
         )
@@ -173,7 +173,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const password: string = req.body.password
 
     // Если почту или пароль не передали, то попросить ввести и завершить функцию
-    if(!email || !password) {
+    if (!email || !password) {
         return next(
             new AppError(null, '{{authController.loginNoEmailOrPassword}}', 400)
         )
@@ -183,7 +183,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const user: IUser | null = await UserModel.findOne({email}).select('+password -__v')
 
     // Если пользователь не найден или пароли не совпадают, то бросить ошибку.
-    if(!user || !await user.correctPassword(password, user.password)) {
+    if (!user || !await user.correctPassword(password, user.password)) {
         return next(
             new AppError(null, '{{authController.loginWrongEmailOrPassword}}', 400)
         )
@@ -191,7 +191,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
 
     // Если в данных пользователя в поле emailConfirmToken есть строка,
     // то значит пользователь еще не подтвердил почту. Попросить чтобы подтвердил.
-    if(user.emailConfirmToken) {
+    if (user.emailConfirmToken) {
         return next(
             new AppError(null, '{{authController.loginConfirmEmail}}', 403)
         )
@@ -256,7 +256,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const user: IUser | null = await UserModel.findOne({ email: req.body.email })
 
     // Вернуть ошибку если пользователь не найден
-    if(!user) {
+    if (!user) {
         return next(
             new AppError(null, '{{authController.forgotPasswordNoUser}}', 404)
         )
@@ -365,14 +365,14 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     const newEmail = req.body.email
 
     // Если почту не передали, то бросить ошибку
-    if(!newEmail) {
+    if (!newEmail) {
         return next(
             new AppError('email', '{{authController.changeEmailNoEmail}}', 400)
         )
     }
 
     // Если передали такую же почту, то отправить ошибку
-    if(req.user && newEmail === req.user.email) {
+    if (req.user && newEmail === req.user.email) {
         return next(
             new AppError('email', '{{authController.changeEmailNewEmailISEqualToCurrent}}', 400)
         )
@@ -418,7 +418,7 @@ export const getTokenData = async (req: ExtendedRequestType, res: Response, next
     if (!user) return
 
     // Если пользователь ввёл неверный текущий пароль, то бросить ошибку
-    if(!await user.correctPassword(req.body.passwordCurrent, user.password)) {
+    if (!await user.correctPassword(req.body.passwordCurrent, user.password)) {
         return next(
             new AppError('passwordCurrent', '{{authController.changePasswordCurrentPasswordIsWrong}}', 401)
         )

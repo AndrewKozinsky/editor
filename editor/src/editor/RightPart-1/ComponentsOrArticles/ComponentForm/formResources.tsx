@@ -73,7 +73,7 @@
 
 
                 // Если поля формы заполнены неверно...
-                if($firstWrongField) {
+                if ($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -157,7 +157,7 @@
     }
 
     // Если поля формы заполнены верно...
-    if(isFormValid) {
+    if (isFormValid) {
         // Разблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', false, 'submit')
     }

@@ -12,14 +12,60 @@ import { User } from '../user/decorators/user.decorator'
 import { AuthGuard } from '../user/guards/auth.guard'
 import { UpdateSiteDto } from './dto/updateSite.dto'
 import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
+import { CompFolderService } from '../compFolder/compFolder.service'
+import {CompFolderEntity} from '../compFolder/compFolder.entity'
 
 
 @Controller('sites')
 export class SiteController {
     constructor(
         private readonly siteService: SiteService,
-        private readonly siteTemplateService: SiteTemplateService
+        private readonly siteTemplateService: SiteTemplateService,
+        private readonly compFolderService: CompFolderService
     ) {}
+
+
+    // ПАПКА С КОМПОНЕНТАМИ =========================================
+
+    // Получение папки с компонентами сайта
+    @UseGuards(AuthGuard)
+    @Get(':siteId/compFolders')
+    async getCompFolderBySiteId(
+        @Req() req: ExpressRequestInterface,
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<void> {
+        const compFolder = await this.compFolderService.getCompFolderBySiteId(siteId)
+        this.compFolderService.buildCompFolderResponse([compFolder], response)
+    }
+
+    // Удаление папки с компонентами сайта
+    @UseGuards(AuthGuard)
+    @Delete(':siteId/compFolders')
+    async deleteCompFolderBySiteId(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response,
+        @User() currentUser: UserEntity,
+    ): Promise<void> {
+        await this.compFolderService.deleteCompFolderBySiteId(siteId, currentUser)
+        this.compFolderService.buildCompFolderResponse([], response)
+    }
+
+
+    // ШАБЛОНЫ САЙТА =========================================
+
+    // Получение всех шаблонов сайта
+    @Get(':siteId/siteTemps')
+    async getSiteTemplates(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response
+    ): Promise<void> {
+        const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
+        this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
+    }
+
+
+    // САЙТЫ =========================================
 
     @Get()
     async findAll(
@@ -57,16 +103,6 @@ export class SiteController {
         this.siteService.buildSiteResponse([site], response, HttpStatus.CREATED)
     }
 
-    // Получение всех шаблонов сайта
-    @Get(':siteId/siteTemps')
-    async getSiteTemplates(
-        @Param('siteId') siteId: number,
-        @Res({ passthrough: true }) response: Response
-    ): Promise<void> {
-        const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
-        this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
-    }
-
     @Patch(':siteId')
     @UsePipes(new BackendValidationPipe())
     @UseGuards(AuthGuard)
@@ -81,7 +117,7 @@ export class SiteController {
 
     @Delete(':siteId')
     @UseGuards(AuthGuard)
-    async deleteCurrentUser(
+    async deleteSite(
         @Param('siteId') siteId: number,
         @Res({ passthrough: true }) response: Response,
         @User() currentUser: UserEntity

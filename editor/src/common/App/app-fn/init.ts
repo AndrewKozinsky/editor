@@ -8,7 +8,7 @@ import { getFromLocalStorage } from 'utils/MiscUtils'
 import { useGetUserToken } from 'requests/user/getUserToken'
 
 
-/** Хук получающий из LocalStorage данные о языке интерфейса, теме и размерах элементов
+/** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах
  *  и заносящий это в Хранилище при запуске приложения */
 export function useGetAndSetEditorSettings() {
     const dispatch = useDispatch()

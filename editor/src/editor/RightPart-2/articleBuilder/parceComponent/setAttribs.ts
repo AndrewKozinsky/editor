@@ -45,7 +45,7 @@
                 attrValue.push(dataElemAttr.value)
             }
             // If in dataElemAttr.value is array of values ids...
-            else if(Array.isArray(dataElemAttr.value)) {
+            else if (Array.isArray(dataElemAttr.value)) {
                 // Go through all ids and get string values
                 for(let dataElemAttrValueId of dataElemAttr.value) {
                     const attrValue2 = attrTemplate.values.find(v => v.id === dataElemAttrValueId)
