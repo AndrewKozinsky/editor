@@ -1,21 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
 import { FolderType } from '../types'
 import {
     useGetFolders,
     useGetFoldersFromServerAndPutInStore,
     useGetSetFolders,
-    // afterCollapseFolder,
-    // useGetOnItemClick,
-    afterAddingNewItem,
-    // saveItemsOnServer,
-    // afterDeleteItem
+    afterCollapseFolder,
+    useGetOnItemClick,
+    afterAddingNewFile,
+    saveItemsOnServer,
+    afterDeleteItem
 } from './FoldersList-func'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import useGetMessages from 'messages/fn/useGetMessages'
 import { compFoldersSectionMessages } from 'messages/compFoldersSectionMessages'
-import itemsDataExample from '../../../../libs/DragFilesTree/itemsDataExample'
-import useGetSitesSelectors from '../../../../store/site/sitesSelectors'
 /*import {
     componentsTreeStore,
     articlesTreeStore,
@@ -52,19 +50,7 @@ export default function FoldersList(props: FoldersListPropType) {
     if (type === 'articles') newFileName = compFoldersSectionMsg.createNewFileBth
 
     // Обработчик щелчка по папке или файлу
-    // const onItemClick = useGetOnItemClick(type)
-
-
-    // ТЕСТОВЫЕ ДАННЫЕ ==========================================
-
-    function getFileId(): Promise<number> {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                resolve(Math.random() * 1000 + 1000)
-            }, 1000)
-        })
-    }
-    // / ТЕСТОВЫЕ ДАННЫЕ ==========================================
+    const onItemClick = useGetOnItemClick(type)
 
 
     return (
@@ -73,12 +59,11 @@ export default function FoldersList(props: FoldersListPropType) {
             setItems={setItems}
             newFolderName={newFolderName.toString()}
             newFileName={newFileName.toString()}
-            afterAddingNewItem={(items, item) => afterAddingNewItem(type, items, item)}
-            getFileId={getFileId}
-            // afterChangingTree={(items) => saveItemsOnServer(type, items)}
-            // afterCollapseFolder={(arrUuId) => afterCollapseFolder(type, arrUuId)}
-            // afterSelectItem={onItemClick}
-            // afterDeleteItem={(items, itemUuid) => afterDeleteItem(type, items, itemUuid)}
+            afterAddingNewFile={() => afterAddingNewFile(type)}
+            afterChangingTree={(items) => saveItemsOnServer(type, items)}
+            afterCollapseFolder={(arrUuId) => afterCollapseFolder(type, arrUuId)}
+            afterSelectItem={onItemClick}
+            afterDeleteItem={(items, itemId) => afterDeleteItem(type, items, itemId)}
         />
     )
 }

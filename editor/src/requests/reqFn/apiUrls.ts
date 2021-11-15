@@ -62,10 +62,10 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'compFolders/' + compFolderId
     },
     // Шаблон компонента
-    /*component: function (uuid?: string) {
-        if (uuid) return 'components/' + uuid
-        else return 'components/'
-    },*/
+    components: 'components',
+    component: function (id: number) {
+        return 'components/' + id
+    },
     // Папки статей
     /*articlesFolders: function (siteId: string) {
         return 'articlesFolders/' + siteId

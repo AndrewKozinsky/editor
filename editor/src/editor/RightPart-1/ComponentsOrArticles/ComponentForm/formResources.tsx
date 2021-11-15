@@ -5,7 +5,7 @@
 // import {componentsTreeStore, setCompItems} from '../stores'
 // import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 // import {updateComponentRequest} from 'requests/editor/components/updateComponentRequest'
-// import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
+// import putCompFolderRequest from 'requests/editor/components/putCompFolderRequest'
 
 
 /** Объект настройки useFormHandler */
@@ -255,5 +255,5 @@
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
     // Отправить данные на сервер...
-    await putComponentsFoldersRequest(preparedItems)
+    await putCompFolderRequest(preparedItems)
 }*/

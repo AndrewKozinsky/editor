@@ -17,9 +17,7 @@ type DragFilesTreePropType = {
     // Название нового файла (текст на кнопке и название нового файла)
     newFileName?: string
     // Функция запускаемая после добавления нового файла
-    afterAddingNewItem?: DragFilesTreeType.AfterAddingNewItemFn
-    // Функция возращает id файла после сохранения в БД
-    getFileId: DragFilesTreeType.GetFileIdFn
+    afterAddingNewFile?: DragFilesTreeType.AfterAddingNewFileFn
     // Функция запускаемая после щелчка по папке или файлу
     afterSelectItem?: DragFilesTreeType.AfterSelectItemFn
     // Функция запускаемая после разворачивания/сворачивания папки
@@ -41,7 +39,7 @@ export default function DragFilesTree(props: DragFilesTreePropType) {
     const after: DragFilesTreeType.After = {
         newFolderName,
         newFileName,
-        addingNewItem: props.afterAddingNewItem,
+        addingNewFile: props.afterAddingNewFile,
         selectItem: props.afterSelectItem,
         collapseFolder: props.afterCollapseFolder,
         changingTree: props.afterChangingTree,

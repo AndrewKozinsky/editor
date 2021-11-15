@@ -5,8 +5,13 @@ import { store } from 'store/rootReducer'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
+import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
 import { CompFolderType } from 'requests/editor/compFolders/compFolderServerResponseType'
 import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import { getOpenedFoldersId } from '../../libs/DragFilesTree/StoreManage/manageState'
+import filesTreePublicMethods from '../../libs/DragFilesTree/publicMethods'
+import {getOpenedFoldersIds} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+import {getFromLocalStorage} from '../../utils/MiscUtils'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
 // import FilesTreeType from '../../types/filesTree'
@@ -119,27 +124,41 @@ const sitesActions = {
 
     requestCompFolder() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const { currentSiteId } = store.getState().sites
+            const { currentSiteId } = getState().sites
 
             // Запрос к серверу на получение кода папки с компонентами
             const response = await getCompFolderRequest(currentSiteId)
 
             if (response.status !== 'success') return
-            const compFolderStr = response.data.compFolders[0]
 
-            let compFolderObj: null | DragFilesTreeType.Items = null
-            try { compFolderObj = JSON5.parse(compFolderStr.content) }
-            catch(err) {}
-
-            if (compFolderObj) {
-                // Установка папки с компонентами в Хранилище
-                dispatch( sitesActions.setCompFolder(compFolderObj) )
+            const compFolderObj: StoreSitesTypes.CompFolderActionPayload = {
+                compFolderId: response.data.compFolders[0].id,
+                compFolder: null
             }
+
+            let foldersData = response.data.compFolders[0].content
+
+            const openedFoldersIds = getOpenedFoldersIds('components')
+            if (openedFoldersIds) {
+                foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
+            }
+
+            // id последней выбранной папки или компонента из LocalStorage
+            const editorComponentId = getFromLocalStorage('editorComponentId')
+
+            // Выделить элемент, который должен быть выделен
+            foldersData = selectItem(foldersData, editorComponentId).newItems
+
+            compFolderObj.compFolder = foldersData
+
+
+            // Установка папки с компонентами в Хранилище
+            dispatch( sitesActions.setCompFolder(compFolderObj) )
         }
     },
 
     // Установка папки компонентов
-    setCompFolder(payload: DragFilesTreeType.Items): StoreSitesTypes.SetCompFolderAction {
+    setCompFolder(payload: StoreSitesTypes.CompFolderActionPayload): StoreSitesTypes.SetCompFolderAction {
         return {
             type: StoreSitesTypes.SET_COMP_FOLDER,
             payload: payload
@@ -173,20 +192,20 @@ const sitesActions = {
     },*/
 
     // Установка id и типа выбранного шаблона компонента
-    /*setCurrentComp(
-        id: null | FilesTreeType.Id,
-        type: null | FilesTreeType.ItemType,
-        compData?: ComponentDataType
+    setCurrentComp(
+        id: null | DragFilesTreeType.Id,
+        type: null | DragFilesTreeType.ItemType,
+        // compData?: ComponentDataType
     ): StoreSitesTypes.SetCurrentCompAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP,
             payload: {
                 id,
                 type,
-                compData
+                // compData
             }
         }
-    },*/
+    },
 
     // Component Template item (folder or file) type setting
     /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {

@@ -9,6 +9,7 @@ import {
     selectItem,
     addNewLoadingFile
 } from '../StoreManage/manageState'
+import {afterAddingNewFile} from '../../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -134,7 +135,7 @@ export async function createNewFile(
     setItems(result.newState)
 
     const normalFile = {...result.newItem}
-    normalFile.id = await after.getFileId()
+    normalFile.id = await after.addingNewFile()
     delete normalFile.loading
 
     // Если при добавлении файла папка была свёрнута,
@@ -145,17 +146,12 @@ export async function createNewFile(
         after.collapseFolder(openedFoldersId)
     }
 
-    // Запустить функцию, которая должна быть запущена после добавления файла
-    if (after.addingNewItem) {
-        after.addingNewItem(result.newState, result.newItem)
-    }
+    const updatedState = makeImmutableCopy(result.newState, result.newItem, normalFile)
 
     // Запустить функцию, которая должна быть запущена после изменения структуры папок
     if (after.changingTree) {
-        after.changingTree(result.newState)
+        after.changingTree(updatedState)
     }
-
-    const updatedState = makeImmutableCopy(result.newState, result.newItem, normalFile)
 
     // Обновить Состояние списка папок
     setItems(updatedState)

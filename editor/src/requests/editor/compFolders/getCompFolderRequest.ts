@@ -1,39 +1,46 @@
-import { makeFetch, useFetch } from 'src/requests/reqFn/fetch'
-import getApiUrl from 'src/requests/reqFn/apiUrls'
-import ErrorServerResponseType from '../../errorServerResponseType'
-import SiteTemplateServerResponseType from '../siteTemplate/siteTemplateServerResponseType'
-import CompFolderServerResponseType from './compFolderServerResponseType'
+import JSON5 from 'json5'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import {
+    GetCompFolderRowServerRespType,
+    GetCompFolderServerSuccessRespType
+} from './compFolderServerResponseType'
 
-
-// Функция удаляет сайт
-// I DON'T WANT TO USE REQUEST FUNCTIONS WITH SIDE EFFECTS
-/*export function useGetComponentsFoldersRequest() {
-    // id текущего сайта
-    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
-
-    // Параметры запроса
-    const options = { method: 'GET'}
-
-    // Хук делающий запрос данных с сервера на получение папок с компонентами
-    const {data: componentsResponse, doFetch: doComponentsFetch} =
-        useFetch<GetComponentsFoldersServerResponse>(getApiUrl('componentsFolders', currentSiteId), options)
-
-    return {
-        componentsResponse,
-        doComponentsFetch
-    }
-}*/
 
 export async function getCompFolderRequest(siteId: number) {
-    const options = { method: 'GET'}
+    const options = { method: 'GET' }
 
-    const response: GetCompFolderServerResponse = await makeFetch(
+    const rowResponse: GetCompFolderRowServerRespType | ErrorServerResponseType = await makeFetch(
         getApiUrl('compFoldersBySite', siteId), options
     )
 
-    return response
+    // При успешном ответе нужно превратить данные папок с компонентами из строк в массив объектов.
+    // За это отвечает код ниже.
+    if (rowResponse.status === 'success') {
+        try {
+            // Составление массива объектов из массива строк
+            const parsedFolders = rowResponse.data.compFolders.map(folderData => {
+                return {
+                    ...folderData,
+                    content: JSON5.parse(folderData.content)
+                }
+            })
+
+            // Собрать новый объект ответа сервера с объектами полученными из строк
+            let response: GetCompFolderServerSuccessRespType = {
+                ...rowResponse,
+                data: {
+                    compFolders: parsedFolders
+                }
+            }
+
+            return response
+        }
+        catch (err) {}
+    }
+    else if (rowResponse.status === 'fail') {
+        return rowResponse
+    }
 }
 
-
-// Тип данных с ответом от пользователя
-export type GetCompFolderServerResponse = ErrorServerResponseType | CompFolderServerResponseType

@@ -1,5 +1,7 @@
 
 // Типы компонента DragFilesTree
+import {afterAddingNewFile} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+
 namespace DragFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
@@ -31,9 +33,9 @@ namespace DragFilesTreeType {
     export type SetItems = (items: Items) => void
 
     // Функция запускаемая после создания новой папки или файла
-    export type AfterAddingNewItemFn = (items: Items, item: Item) => void
-
-    export type GetFileIdFn = () => Promise<number>
+    // export type AfterAddingNewFileFn = (...args: any) => Promise<number>
+    // export type AfterAddingNewFileFn = () => (...args: any) => Promise<number>
+    export type AfterAddingNewFileFn = () => Promise<number>
 
     // Функция запускаемая после щелчка по папке или файлу
     export type AfterSelectItemFn = (item: Item) => void
@@ -51,8 +53,7 @@ namespace DragFilesTreeType {
     export type After = {
         newFolderName?: string
         newFileName?: string
-        addingNewItem?: AfterAddingNewItemFn
-        getFileId: GetFileIdFn
+        addingNewFile?: AfterAddingNewFileFn
         selectItem?: AfterSelectItemFn
         collapseFolder?: AfterCollapseFolderFn
         changingTree?: AfterChangingTreeFn

@@ -29,29 +29,29 @@ namespace StoreSitesTypes {
     export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
     export type CurrentSiteTemplateId = null | number | ''
-    // Код папки с компонентами
-    export type CompFolderDataType = null | string
 
     // id выбранного элемента: папки или компонента
     export type CurrentCompItemId = null | number
     // Тип выбранного шаблона компонента (папка или компонент)
-    // export type CurrentCompItemType = null | FilesTreeType.ItemType
+    export type CurrentCompItemType = null | DragFilesTreeType.ItemType
     // Имя выбранного компонента
-    // export type ComponentName = null | string
+    export type ComponentName = null | string
     // Строка с кодом выбранного шаблона компонента
-    // export type ComponentCode = null | string
+    export type ComponentCode = null | string
 
     // Объект с данными папки с компонентами
     export type CompFolderSection = {
+        compFolderId: CompFolderId
         compFolder: DragFilesTreeType.Items
     }
+    export type CompFolderId = null | number
 
     // Объект с данными компонента
     export type ComponentsSection = {
         currentCompItemId: CurrentCompItemId
-        // currentCompItemType: CurrentCompItemType
-        // currentCompName: ComponentName
-        // currentCompCode: ComponentCode
+        currentCompItemType: CurrentCompItemType
+        currentCompName: ComponentName
+        currentCompCode: ComponentCode
     }
 
     // Объект с данными папки со статьями
@@ -115,21 +115,26 @@ namespace StoreSitesTypes {
     }
 
     export const SET_COMP_FOLDER = 'SET_COMP_FOLDER'
+    export type CompFolderActionPayload = {
+        compFolderId?: CompFolderId
+        compFolder: DragFilesTreeType.Items
+    }
     export type SetCompFolderAction = {
         type: typeof SET_COMP_FOLDER
-        payload: DragFilesTreeType.Items
+        payload: CompFolderActionPayload
     }
 
     // Установка id выбранного шаблона компонента
-    // export const SET_CURRENT_COMP = 'SET_CURRENT_COMP'
-    /*export type SetCurrentCompAction = {
+    export const SET_CURRENT_COMP = 'SET_CURRENT_COMP'
+    export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | FilesTreeType.Id
-            type: null | FilesTreeType.ItemType
-            compData?: ComponentDataType
+            id: null | DragFilesTreeType.Id
+            type: null | DragFilesTreeType.ItemType
+            // compName?: ComponentDataType
+            // compData?: ComponentDataType
         }
-    }*/
+    }
 
     // Component Template item (folder or file) type setting
     // export const SET_CURRENT_COMP_ITEM_TYPE = 'SET_CURRENT_COMP_ITEM_TYPE'
@@ -178,7 +183,7 @@ namespace StoreSitesTypes {
         | SetSiteTemplatesAction
         | SetCurrentSiteTemplateIdAction
         | SetCompFolderAction
-        // | SetCurrentCompAction
+        | SetCurrentCompAction
         // | SetCurrentCompItemTypeAction
         // | SetCurrentCompItemIdAction
         // | SetCurrentArtAction

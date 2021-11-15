@@ -3,7 +3,7 @@
 // import { store } from 'store/rootReducer'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import { componentFolderFormMessages } from 'messages/componentFolderFormMessages'
-// import putComponentsFoldersRequest from 'requests/editor/components/putComponentsFoldersRequest'
+// import putCompFolderRequest from 'requests/editor/components/putCompFolderRequest'
 // import { componentsTreeStore, setCompItems } from '../stores'
 
 
@@ -219,5 +219,5 @@
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
     // Сохранить данные на сервере
-    await putComponentsFoldersRequest(preparedItems)
+    await putCompFolderRequest(preparedItems)
 }*/

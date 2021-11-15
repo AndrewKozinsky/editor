@@ -298,6 +298,7 @@ export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
         delete newItem.placeMark
         delete newItem.open
         delete newItem.active
+        delete newItem.loading
 
         if (newItem.content) {
             newItem.content = prepareItemsToSaveInServer(newItem.content)
@@ -471,7 +472,7 @@ export function getMaxDeep(items: DragFilesTreeType.Items) {
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {Array} openFolderIds — id папок, которые должны быть изначально открыты
  */
-/*export function addOpenPropToFolders(
+export function addOpenPropToFolders(
     items: DragFilesTreeType.Items, openFolderIds: DragFilesTreeType.IdArr
 ): DragFilesTreeType.Items {
     return items.map(item => {
@@ -487,7 +488,7 @@ export function getMaxDeep(items: DragFilesTreeType.Items) {
 
         return newItem
     })
-}*/
+}
 
 /**
  * Функция выделяет элемент с переданным id и возвращает новый массив папок и файлов.
