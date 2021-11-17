@@ -12,6 +12,8 @@ import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
 import {sortByCreatedAt} from '../../utils/miscUtils'
 import { ComponentService } from '../component/component.service'
 import { CompFolderService } from '../compFolder/compFolder.service'
+import { ArtFolderService } from '../artFolder/artFolder.service'
+import { ArticleService } from '../article/article.service'
 
 
 @Injectable()
@@ -22,7 +24,9 @@ export class SiteService {
         private readonly siteRepository: Repository<SiteEntity>,
         private readonly siteTemplateService: SiteTemplateService,
         private readonly compFolderService: CompFolderService,
-        private readonly componentService: ComponentService
+        private readonly componentService: ComponentService,
+        private readonly artFolderService: ArtFolderService,
+        private readonly articleService: ArticleService,
     ) {}
 
     /** Получение всех сайтов (защищённый маршрут) */
@@ -52,6 +56,12 @@ export class SiteService {
             user
         )
 
+        // Создание папки со статьями
+        await this.artFolderService.createArtFolder(
+            { siteId: newSite.id, content: null },
+            user
+        )
+
         return await this.siteRepository.save(newSite)
     }
 
@@ -60,7 +70,12 @@ export class SiteService {
         const site = await this.siteRepository.findOne({ id })
 
         // Throw an error if site is not exist
-        if (!site) responseCommonError('site_UpdateSiteDto_EmptyUserId')
+        if (!site) {
+            responseCommonError(
+                'site_UpdateSiteDto_EmptyUserId',
+                HttpStatus.BAD_REQUEST
+            )
+        }
 
         // Если приходит пустая строка, то шаблон по умолчанию не выбран,
         // поэтому поставлю null потому что поле принимает или число или null
@@ -77,11 +92,19 @@ export class SiteService {
         const site = await this.siteRepository.findOne({id: siteId})
 
         // Throw an error if site is not exist
-        if (!site) responseCommonError('site_DeleteSiteDto_SiteIsNotExists')
+        if (!site) {
+            responseCommonError(
+                'site_DeleteSiteDto_SiteIsNotExists',
+                HttpStatus.BAD_REQUEST
+            )
+        }
 
         // Бросить ошибку если текущий пользователь не создавал удаляемую статью
         if (site.userId !== currentUser.id) {
-            responseCommonError('site_DeleteSiteDto_CurrentUserIsNotAuthor')
+            responseCommonError(
+                'site_DeleteSiteDto_CurrentUserIsNotAuthor',
+                HttpStatus.FORBIDDEN
+            )
         }
 
         // Удалить сайт из БД
@@ -97,20 +120,10 @@ export class SiteService {
         await this.componentService.deleteComponents(siteId)
 
         // Удалить папки статей
-
-
-        // Удалить статьи
-
-
-        // =================================
-        // Удалить папки шаблонов компонентов
-        // await ComponentsFoldersModel.deleteMany({siteId: req.params.siteId})
-
-        // Удалить папки статей
-        // await ArticlesFoldersModel.deleteMany({siteId: req.params.siteId})
+        await this.artFolderService.deleteArtFolderBySiteId(siteId, currentUser)
 
         // Удалить статьи
-        // await ArticleModel.deleteMany({siteId: req.params.siteId})
+        await this.articleService.deleteArticles(siteId)
 
         return null
     }

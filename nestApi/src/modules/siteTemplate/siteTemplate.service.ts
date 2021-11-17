@@ -56,7 +56,10 @@ export class SiteTemplateService {
 
         // Throw an error if site template is not exist
         if (!siteTemplate) {
-            responseCommonError('siteTemplate_UpdateSiteTemplate_SiteIsNotExist')
+            responseCommonError(
+                'siteTemplate_UpdateSiteTemplate_SiteIsNotExist',
+                HttpStatus.BAD_REQUEST
+            )
         }
 
         const updatedSiteTemplate = Object.assign(siteTemplate, updateSiteTemplateDto)
@@ -69,12 +72,18 @@ export class SiteTemplateService {
 
         // Throw an error if site template is not exist
         if (!siteTemplate) {
-            responseCommonError('siteTemplate_DeleteSiteTemplate_SiteTemplateIsNotExists')
+            responseCommonError(
+                'siteTemplate_DeleteSiteTemplate_SiteTemplateIsNotExists',
+                HttpStatus.BAD_REQUEST
+            )
         }
 
         // Бросить ошибку если текущий пользователь не создавал удаляемый шаблон сайта
         if (siteTemplate.userId !== currentUser.id) {
-            responseCommonError('siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor')
+            responseCommonError(
+                'siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor',
+                HttpStatus.FORBIDDEN
+            )
         }
 
         await this.siteTemplateRepository.delete({id: siteTemplateId})

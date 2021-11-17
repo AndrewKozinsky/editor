@@ -177,13 +177,25 @@ export const serverMessages = {
         eng: 'You must specify the site name.',
         rus: 'Название сайта должно быть указано.'
     },
+    site_CreateSiteDto_contentIsNotAString: {
+        eng: 'You must specify the site name.',
+        rus: 'Название сайта должно быть указано.'
+    },
     site_CreateSiteDto_nameTooLong: {
         eng: 'The site name must not be longer than 255 characters.',
         rus: 'Название сайта не должно быть длиннее 255 символов.'
     },
+    site_CreateSiteDto_defaultSiteTemplateIdIsNotANumber: {
+        eng: 'The defaultSiteTemplateId field must be a number.',
+        rus: 'Поле defaultSiteTemplateId должно быть числом.'
+    },
     site_CreateSiteDto_EmptyUserId: {
         eng: 'You must specify the user\'s id who created this site.',
         rus: 'Укажите пользователя создавшего сайт.'
+    },
+    site_UpdateSiteDto_nameIsNotAString: {
+        eng: 'The name field must be a string.',
+        rus: 'Поле name должно быть строкой.'
     },
 
     site_UpdateSiteDto_EmptyName: {
@@ -216,9 +228,17 @@ export const serverMessages = {
         eng: 'You must specify the site template.',
         rus: 'Должен быть указан код шаблона сайта.'
     },
+    siteTemplate_CreateSiteTemplateDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
     siteTemplate_UpdateSiteTemplateDto_EmptyContent: {
         eng: 'You must specify the site template.',
         rus: 'Должен быть указан код шаблона сайта.'
+    },
+    siteTemplate_UpdateSiteTemplateDto_contentIsNotAStringEmptyContent: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
     },
     siteTemplate_UpdateSiteTemplate_SiteIsNotExist: {
         eng: 'The transferred website template does not exist.',
@@ -241,9 +261,22 @@ export const serverMessages = {
         eng: 'You must specify the component code.',
         rus: 'Должен быть указан код компонента.'
     },
+    component_CreateComponent_SiteIsNotExist: {
+        eng: 'The site in question does not exist.',
+        rus: 'Указанного сайта не существует.'
+    },
+    component_CreateComponent_SiteTemplateIsNotExist: {
+        eng: 'The specified website template does not exist.',
+        rus: 'Указанный шаблон сайта не существует.'
+    },
+
     component_UpdateComponentDto_EmptyContent: {
         eng: 'You must specify the component code.',
         rus: 'Должен быть указан код компонента.'
+    },
+    component_UpdateComponentDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
     },
     component_UpdateComponent_ComponentIsNotExist: {
         eng: 'The transferred component does not exist.',
@@ -271,6 +304,10 @@ export const serverMessages = {
         eng: 'The code of the folder with the components must be specified.',
         rus: 'Должен быть указан код папки с компонентами.'
     },
+    compFolder_UpdateCompFolderDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
     compFolder_UpdateCompFolder_CompFolderIsNotExist: {
         eng: 'The specified folder with components does not exist.',
         rus: 'Указанная папка с компонентами не существует.'
@@ -282,5 +319,81 @@ export const serverMessages = {
     compFolder_DeleteCompFolder_CurrentUserIsNotAuthor: {
         eng: 'The current user did not create the deleted site template.',
         rus: 'Текущий пользователь не создавал удаляемый шаблон сайта.'
+    },
+
+    artFolder_CreateArtFolderDto_EmptySiteId: {
+        eng: 'The id of the site to which the articles folder belongs must be specified.',
+        rus: 'Должен быть указан id сайта которому принадлежит папка со статьями.'
+    },
+    artFolder_CreateArtFolderDto_siteIdIsNotANumber: {
+        eng: 'The site id must be a number.',
+        rus: 'id сайта должен быть числом.'
+    },
+    artFolder_CreateArtFolderDto_EmptyContent: {
+        eng: 'You must specify the articles folder code.',
+        rus: 'Должен быть указан код папки со статьями.'
+    },
+    artFolder_CreateArtFolderDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
+    artFolder_UpdateArtFolderDto_EmptyContent: {
+        eng: 'The code of the folder with the articles must be specified.',
+        rus: 'Должен быть указан код папки со статьями.'
+    },
+    artFolder_UpdateArtFolderDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
+    artFolder_UpdateArtFolder_ArtFolderIsNotExist: {
+        eng: 'The specified folder with articles does not exist.',
+        rus: 'Указанная папка со статьями не существует.'
+    },
+    artFolder_DeleteArtFolder_ArtFolderIsNotExist: {
+        eng: 'The specified folder with articles does not exist.',
+        rus: 'Указанная папка со статьями не существует.'
+    },
+    artFolder_DeleteArtFolder_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the articles folder to be deleted.',
+        rus: 'Текущий пользователь не создавал удаляемую папку со статьями.'
+    },
+
+    article_CreateArticleDto_nameIsEmpty: {
+        eng: 'The name of the site should not be empty.',
+        rus: 'Название сайта не должно быть пустым.'
+    },
+    article_CreateArticleDto_nameTooLong: {
+        eng: 'The site name should not be longer than 255 characters.',
+        rus: 'Название сайта не должно быть длиннее 255 символов.'
+    },
+    article_CreateArticleDto_siteTemplateIdIsNotANumber: {
+        eng: 'The id of the website template must be a number.',
+        rus: 'id шаблона сайта должно быть числом.'
+    },
+    article_CreateArticleDto_EmptySiteId: {
+        eng: 'The id of the site to which the article belongs must be specified.',
+        rus: 'Должен быть указан id сайта которому принадлежит статья.'
+    },
+
+    article_UpdateArticleDto_EmptyContent: {
+        eng: 'The content field cannot be empty.',
+        rus: 'Поле content не может быть пустым.'
+    },
+    article_UpdateArticleDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
+    article_UpdateArticle_ArticleIsNotExist: {
+        eng: 'This article does not exist.',
+        rus: 'Указанной статьи не существует.'
+    },
+
+    article_DeleteArticle_ArticleIsNotExist: {
+        eng: 'This article does not exist.',
+        rus: 'Указанной статьи не существует.'
+    },
+    article_DeleteArticle_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the article to be deleted.',
+        rus: 'Текущий пользователь не создавал удаляемую статью.'
     },
 }

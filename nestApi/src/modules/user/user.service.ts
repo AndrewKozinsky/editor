@@ -86,14 +86,16 @@ export class UserService {
     async login(loginDto: LoginDto): Promise<UserEntity> {
         // Get user by email
         const user = await this.getUserByEmail(loginDto.email)
-        if (!user) responseCommonError('user_login_userDoesNotExist')
+        if (!user) responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
 
         const isPasswordMatch = await compare(loginDto.password, user.password)
-        if (!isPasswordMatch) responseCommonError('user_login_userDoesNotExist')
+        if (!isPasswordMatch) {
+            responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
+        }
 
         // Throw an error response if user didn't confirm its email
         if (user.emailConfirmToken) {
-            responseCommonError('user_login_userDoesNotConfirmEmail')
+            responseCommonError('user_login_userDoesNotConfirmEmail', HttpStatus.BAD_REQUEST)
         }
 
         return user
@@ -207,17 +209,17 @@ export class UserService {
 
         // Если почту не передали, то бросить ошибку
         if (!newEmail) {
-            responseCommonError('user_changeEmail_NoEmail')
+            responseCommonError('user_changeEmail_NoEmail', HttpStatus.BAD_REQUEST)
         }
 
         // Если передали такую же почту, то отправить ошибку
         if (newEmail === user.email) {
-            responseCommonError('user_changeEmail_NewEmailISEqualToCurrent')
+            responseCommonError('user_changeEmail_NewEmailISEqualToCurrent', HttpStatus.BAD_REQUEST)
         }
 
         // If email is used by another user throw an error
         if (await this.getUserByEmail(newEmail)) {
-            responseCommonError('user_changeEmail_NewEmailISUsedByAnotherUser')
+            responseCommonError('user_changeEmail_NewEmailISUsedByAnotherUser', HttpStatus.BAD_REQUEST)
         }
 
         // Create email confirm token
@@ -238,7 +240,7 @@ export class UserService {
 
         // Throw an error if they are not match
         if (!isPasswordsMatch) {
-            responseCommonError('user_changePassword_PasswordsIsNotMatch')
+            responseCommonError('user_changePassword_PasswordsIsNotMatch', HttpStatus.BAD_REQUEST)
         }
 
         const hashedPassword = await hash(changePasswordDto.newPassword, 10)

@@ -1,6 +1,6 @@
 import {
-    Req, Res, Get, Post, Patch, Param, Body,
-    Controller, HttpStatus, UseGuards, UsePipes, Delete
+    Res, Post, Patch, Param, Body,
+    Controller, HttpStatus, UseGuards, UsePipes
 } from '@nestjs/common'
 import { CompFolderService } from './compFolder.service'
 import { Response } from 'express'

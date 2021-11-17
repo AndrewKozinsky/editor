@@ -1,3 +1,4 @@
+import ErrorServerResponseType from '../../errorServerResponseType'
 
 // Успешный ответ от сервера при операциях с компонентами
 type ComponentServerResponseType = {
@@ -17,4 +18,6 @@ type ComponentType = {
     createdAt: Date
 }
 
-
+// Тип данных с ответом от сервера
+export type DeleteComponentRequestServerResponse =
+    ErrorServerResponseType | ComponentServerResponseType

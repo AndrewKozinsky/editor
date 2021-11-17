@@ -10,6 +10,10 @@ import { SiteTemplateEntity } from '../siteTemplate/siteTemplate.entity'
 import { ComponentEntity } from '../component/component.entity'
 import { CompFolderService } from '../compFolder/compFolder.service'
 import {CompFolderEntity} from '../compFolder/compFolder.entity'
+import { ArtFolderService } from '../artFolder/artFolder.service'
+import { ArtFolderEntity } from '../artFolder/artFolder.entity'
+import { ArticleEntity } from '../article/article.entity'
+import {ArticleService} from '../article/article.service'
 
 @Module({
     imports: [
@@ -17,6 +21,8 @@ import {CompFolderEntity} from '../compFolder/compFolder.entity'
         TypeOrmModule.forFeature([SiteTemplateEntity]),
         TypeOrmModule.forFeature([CompFolderEntity]),
         TypeOrmModule.forFeature([ComponentEntity]),
+        TypeOrmModule.forFeature([ArtFolderEntity]),
+        TypeOrmModule.forFeature([ArticleEntity]),
     ],
     controllers: [SiteController],
     providers: [
@@ -24,7 +30,9 @@ import {CompFolderEntity} from '../compFolder/compFolder.entity'
         AuthGuard,
         SiteTemplateService,
         CompFolderService,
-        ComponentService
+        ComponentService,
+        ArtFolderService,
+        ArticleService
     ],
     exports: [SiteService]
 })

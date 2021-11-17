@@ -9,6 +9,5 @@ import { AuthGuard } from '../user/guards/auth.guard'
     imports: [TypeOrmModule.forFeature([CompFolderEntity])],
     controllers: [CompFolderController],
     providers: [CompFolderService, AuthGuard],
-    exports: [CompFolderService] // Нужно ли его экспортировать?
 })
 export class CompFolderModule {}

@@ -12,7 +12,6 @@ type CommonType<T> = {
 export type CompFolderType<T> = {
     id: number
     content: T
-    createdAt: Date
 }
 
 // Типы ответов от сервера при операциях с папками с компонентами

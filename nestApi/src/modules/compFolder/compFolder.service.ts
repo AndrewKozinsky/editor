@@ -6,10 +6,8 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { CompFolderEntity } from './compFolder.entity'
 import { UserEntity } from '../user/user.entity'
 import { CompFolderResponseInterface } from './types/compFolderResponse.interface'
-import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { UpdateCompFolderDto } from './dto/updateCompFolder.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
-// import {sortByCreatedAt} from '../../utils/miscUtils'
 
 
 @Injectable()
@@ -51,7 +49,10 @@ export class CompFolderService {
 
         // Throw an error if compFolder is not exist
         if (!compFolder) {
-            responseCommonError('compFolder_UpdateCompFolder_CompFolderIsNotExist')
+            responseCommonError(
+                'compFolder_UpdateCompFolder_CompFolderIsNotExist',
+                HttpStatus.BAD_REQUEST
+            )
         }
 
         const updatedCompFolder = Object.assign(compFolder, updateSiteTemplateDto)
@@ -67,12 +68,15 @@ export class CompFolderService {
 
         // Throw an error if site template is not exist
         if (!compFolder) {
-            responseCommonError('compFolder_DeleteCompFolder_CompFolderIsNotExist')
+            responseCommonError(
+                'compFolder_DeleteCompFolder_CompFolderIsNotExist',
+                HttpStatus.BAD_REQUEST
+            )
         }
 
         // Бросить ошибку если текущий пользователь не создавал удаляемый компонент
         if (compFolder.userId !== currentUser.id) {
-            responseCommonError('compFolder_DeleteCompFolder_CurrentUserIsNotAuthor')
+            responseCommonError('compFolder_DeleteCompFolder_CurrentUserIsNotAuthor', HttpStatus.FORBIDDEN)
         }
 
         await this.compFolderRepository.delete({siteId})

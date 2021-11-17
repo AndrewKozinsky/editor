@@ -9,6 +9,7 @@ import { ComponentResponseInterface } from './types/componentResponse.interface'
 import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { UpdateComponentDto } from './dto/updateComponent.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
+import { SiteEntity } from '../site/site.entity'
 // import {sortByCreatedAt} from '../../utils/miscUtils'
 
 
@@ -17,11 +18,13 @@ export class ComponentService {
 
     constructor(
         @InjectRepository(ComponentEntity)
-        private readonly componentRepository: Repository<ComponentEntity>
+        private readonly componentRepository: Repository<ComponentEntity>,
+        @InjectRepository(SiteEntity)
+        private readonly siteRepository: Repository<SiteEntity>
     ) {}
 
     /** Получение компонента (защищённый маршрут) */
-    async getComponent(req: ExpressRequestInterface): Promise<ComponentEntity> {
+    async getComponent(req: ExpressRequestInterface): Promise<ComponentEntity | null> {
         return await this.componentRepository.findOne(req.params.componentId)
     }
 
@@ -39,6 +42,16 @@ export class ComponentService {
             }
         )
 
+        // Проверка на существование указанного сайта
+        const site = await this.siteRepository.findOne({ id: newComponent.siteId })
+        // Throw an error if site is not exist
+        if (!site) {
+            responseCommonError(
+                'component_CreateComponent_SiteIsNotExist',
+                HttpStatus.BAD_REQUEST
+            )
+        }
+
         return await this.componentRepository.save(newComponent)
     }
 
@@ -50,7 +63,10 @@ export class ComponentService {
 
         // Throw an error if component is not exist
         if (!component) {
-            responseCommonError('component_UpdateComponent_ComponentIsNotExist')
+            responseCommonError(
+                'component_UpdateComponent_ComponentIsNotExist',
+                HttpStatus.BAD_REQUEST
+            )
         }
 
         const updatedComponent = Object.assign(component, updateSiteTemplateDto)
@@ -63,12 +79,15 @@ export class ComponentService {
 
         // Throw an error if site template is not exist
         if (!component) {
-            responseCommonError('component_DeleteComponent_ComponentIsNotExist')
+            responseCommonError('component_DeleteComponent_ComponentIsNotExist', HttpStatus.BAD_REQUEST)
         }
 
         // Бросить ошибку если текущий пользователь не создавал удаляемый компонент
         if (component.userId !== currentUser.id) {
-            responseCommonError('siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor')
+            responseCommonError(
+                'siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor',
+                HttpStatus.FORBIDDEN
+            )
         }
 
         await this.componentRepository.delete({id: componentId})

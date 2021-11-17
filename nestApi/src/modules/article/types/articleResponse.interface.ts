@@ -1,14 +1,17 @@
 
 // Тип данных отравляемых клиенту при операциях с сайтом
-export interface CompFolderResponseInterface {
+export interface ArticleResponseInterface {
     status: 'success'
     statusCode: number
     data: {
-        compFolders: CompFolderType[]
+        articles: ArticleType[]
     }
 }
 
-type CompFolderType = {
+type ArticleType = {
     id: number
+    name: string
     content: string
+    siteTemplateId: number
+    createdAt: Date
 }

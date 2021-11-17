@@ -1,7 +1,5 @@
 import {
-    BeforeInsert,
     Column,
-    CreateDateColumn,
     Entity,
     PrimaryGeneratedColumn
 } from 'typeorm'
@@ -22,15 +20,4 @@ export class CompFolderEntity {
     // JSON со структурой папок и файлов
     @Column({type: 'text'})
     content: string
-
-    // Date when folder was created. It set automatically.
-    @CreateDateColumn({type: 'timestamp'})
-    createdAt: Date
-
-
-    // Установка времени создания шаблона сайта при создании
-    @BeforeInsert()
-    async setCreatedAtData() {
-        this.createdAt = new Date()
-    }
 }

@@ -63,8 +63,8 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     },
     // Шаблон компонента
     components: 'components',
-    component: function (id: number) {
-        return 'components/' + id
+    component: function (compId: number) {
+        return 'components/' + compId
     },
     // Папки статей
     /*articlesFolders: function (siteId: string) {

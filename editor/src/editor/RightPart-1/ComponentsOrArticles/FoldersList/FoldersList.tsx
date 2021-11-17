@@ -8,8 +8,8 @@ import {
     afterCollapseFolder,
     useGetOnItemClick,
     afterAddingNewFile,
-    saveItemsOnServer,
-    afterDeleteItem
+    saveFoldersOnServer,
+    afterDeleteItem, useGetNewItemsName
 } from './FoldersList-func'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import useGetMessages from 'messages/fn/useGetMessages'
@@ -40,14 +40,8 @@ export default function FoldersList(props: FoldersListPropType) {
     // Установщик Состояния папок
     const setItems = useGetSetFolders(type)
 
-    // Название папки
-    const compFoldersSectionMsg = useGetMessages(compFoldersSectionMessages)
-    let newFolderName = compFoldersSectionMsg.createNewFolderBth
-    if (type === 'articles') newFolderName = compFoldersSectionMsg.createNewFolderBth
-
-    // Название файла
-    let newFileName = compFoldersSectionMsg.createNewFileBth
-    if (type === 'articles') newFileName = compFoldersSectionMsg.createNewFileBth
+    // Имена нового файла и папки при создании
+    const [newFileName, newFolderName] = useGetNewItemsName(type)
 
     // Обработчик щелчка по папке или файлу
     const onItemClick = useGetOnItemClick(type)
@@ -57,10 +51,10 @@ export default function FoldersList(props: FoldersListPropType) {
         <DragFilesTree
             items={folders}
             setItems={setItems}
-            newFolderName={newFolderName.toString()}
-            newFileName={newFileName.toString()}
+            newFolderName={newFolderName}
+            newFileName={newFileName}
             afterAddingNewFile={() => afterAddingNewFile(type)}
-            afterChangingTree={(items) => saveItemsOnServer(type, items)}
+            afterChangingTree={(items) => saveFoldersOnServer(type, items)}
             afterCollapseFolder={(arrUuId) => afterCollapseFolder(type, arrUuId)}
             afterSelectItem={onItemClick}
             afterDeleteItem={(items, itemId) => afterDeleteItem(type, items, itemId)}

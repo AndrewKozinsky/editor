@@ -1,14 +1,14 @@
 
 // Тип данных отравляемых клиенту при операциях с сайтом
-export interface CompFolderResponseInterface {
+export interface ArtFolderResponseInterface {
     status: 'success'
     statusCode: number
     data: {
-        compFolders: CompFolderType[]
+        artFolders: ArtFolderType[]
     }
 }
 
-type CompFolderType = {
+type ArtFolderType = {
     id: number
     content: string
 }

@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import {useCallback, useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import JSON5 from 'json5'
 // import { store } from 'store/rootReducer'
@@ -24,6 +24,10 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import sitesActions from 'store/site/sitesActions'
 import { store } from 'store/rootReducer'
+import useGetMessages from '../../../../messages/fn/useGetMessages'
+import {compFoldersSectionMessages} from '../../../../messages/compFoldersSectionMessages'
+import useGetSettingsSelectors from '../../../../store/settings/settingsSelectors'
+import {artFoldersSectionMessages} from '../../../../messages/artFoldersSectionMessages'
 
 
 /**
@@ -78,13 +82,38 @@ export function useGetSetFolders(type: FolderType) {
     }, [])
 }
 
+/**
+ * Хук возвращает тексты для кнопок создания нового файла и новой папки
+ * @param type
+ */
+export function useGetNewItemsName(type: FolderType) {
+    const [newFileName, setNewFileName] = useState('newFileName')
+    const [newFolderName, setFolderName] = useState('newFolderName')
+
+    const compFoldersSectionMsg = useGetMessages(compFoldersSectionMessages)
+    const artFoldersSectionMsg = useGetMessages(artFoldersSectionMessages)
+
+    useEffect(function () {
+        if (type === 'components') {
+            setNewFileName(compFoldersSectionMsg.createNewFileBth.toString())
+            setFolderName(compFoldersSectionMsg.createNewFolderBth.toString())
+        }
+        else {
+            setNewFileName(artFoldersSectionMsg.createNewFileBth.toString())
+            setFolderName(artFoldersSectionMsg.createNewFolderBth.toString())
+        }
+    }, [type])
+
+    return [newFileName, newFolderName]
+}
+
 
 /**
  * Функция сохраняет массив папок или шаблонов компонентов на сервере
  * @param {String} type — тип папок: с компонентами или со статьями.
  * @param {Array} items — массив данных по папкам и файлам.
  */
-export async function saveItemsOnServer(type: FolderType, items: DragFilesTreeType.Items) {
+export async function saveFoldersOnServer(type: FolderType, items: DragFilesTreeType.Items) {
     // id папки с компонентами текущего сайта
     const compFolderId = store.getState().sites.compFolderSection.compFolderId
 
@@ -132,8 +161,8 @@ export function afterDeleteItem(
         setInLocalStorage('editorArticlesOpenedFolders', openedFoldersId)
     }*/
 
-    // Сохранить данные на сервере
-    saveItemsOnServer(type, items)
+    // Сохранить массив папок на сервере
+    saveFoldersOnServer(type, items)
 
     // Удалить компонент или статью на сервере
     if (type === 'components') {

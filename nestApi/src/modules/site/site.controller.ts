@@ -13,7 +13,7 @@ import { AuthGuard } from '../user/guards/auth.guard'
 import { UpdateSiteDto } from './dto/updateSite.dto'
 import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
 import { CompFolderService } from '../compFolder/compFolder.service'
-import {CompFolderEntity} from '../compFolder/compFolder.entity'
+import { ArtFolderService } from '../artFolder/artFolder.service'
 
 
 @Controller('sites')
@@ -21,7 +21,8 @@ export class SiteController {
     constructor(
         private readonly siteService: SiteService,
         private readonly siteTemplateService: SiteTemplateService,
-        private readonly compFolderService: CompFolderService
+        private readonly compFolderService: CompFolderService,
+        private readonly artFolderService: ArtFolderService
     ) {}
 
 
@@ -49,6 +50,33 @@ export class SiteController {
     ): Promise<void> {
         await this.compFolderService.deleteCompFolderBySiteId(siteId, currentUser)
         this.compFolderService.buildCompFolderResponse([], response)
+    }
+
+
+    // ПАПКА СО СТАТЬЯМИ =========================================
+
+    // Получение папки со статьями сайта
+    @UseGuards(AuthGuard)
+    @Get(':siteId/artFolders')
+    async getArtFolderBySiteId(
+        @Req() req: ExpressRequestInterface,
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response,
+    ): Promise<void> {
+        const artFolder = await this.artFolderService.getArtFolderBySiteId(siteId)
+        this.artFolderService.buildArtFolderResponse([artFolder], response)
+    }
+
+    // Удаление папки со статьями сайта
+    @UseGuards(AuthGuard)
+    @Delete(':siteId/artFolders')
+    async deleteArtFolderBySiteId(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response,
+        @User() currentUser: UserEntity,
+    ): Promise<void> {
+        await this.artFolderService.deleteArtFolderBySiteId(siteId, currentUser)
+        this.artFolderService.buildArtFolderResponse([], response)
     }
 
 
@@ -86,19 +114,6 @@ export class SiteController {
         @User() user: UserEntity,
     ): Promise<void> {
         const site = await this.siteService.createSite(createSiteDto, user)
-
-        // Не забудь при создании сайта создавать запись в таблицах папок компонентах и в папках статей
-        // Создание данных по модели ComponentsFolders
-        /*await ComponentsFoldersModel.create({
-            userId: req.user?.id,
-            siteId: newSite._id
-        })*/
-
-        // Создание данных по модели ArticlesFolders
-        /*await ArticlesFoldersModel.create({
-            userId: req.user?.id,
-            siteId: newSite._id
-        })*/
 
         this.siteService.buildSiteResponse([site], response, HttpStatus.CREATED)
     }

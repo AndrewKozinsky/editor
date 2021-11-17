@@ -10,6 +10,8 @@ import { LanguageMiddleware } from './user/middlewares/language.middleware'
 import {SiteTemplateModule} from './siteTemplate/siteTemplate.module'
 import { ComponentModule } from './component/component.module'
 import { CompFolderModule } from './compFolder/compFolder.module'
+import { ArtFolderModule } from './artFolder/artFolder.module'
+import { ArticleModule } from './article/article.module'
 
 
 @Module({
@@ -25,6 +27,8 @@ import { CompFolderModule } from './compFolder/compFolder.module'
       SiteTemplateModule,
       CompFolderModule,
       ComponentModule,
+      ArtFolderModule,
+      ArticleModule,
   ],
   controllers: [],
   providers: [],

@@ -1,24 +1,16 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
 import StoreSitesTypes from 'store/site/sitesTypes'
+import { DeleteComponentRequestServerResponse } from './componentServerResponseType'
 
-/** Функция удаляет шаблоны компонента выделенный в списке всех компонентов */
+/** Функция удаляет шаблон компонента */
 export default async function deleteComponentRequest(currentCompItemId: StoreSitesTypes.CurrentCompItemId) {
 
-    // const options = { method: 'DELETE' }
-    /*const response: DeleteComponentRequestServerResponse = await makeFetch(
+    const options = { method: 'DELETE' }
+    const response: DeleteComponentRequestServerResponse = await makeFetch(
         getApiUrl('component', currentCompItemId), options
-    )*/
+    )
 
-    // return response
+    return response
 }
 
-// Тип данных с ответом от пользователя
-// type DeleteComponentRequestServerResponse = ErrorServerResponseType | SuccessResponse
-
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-}*/
