@@ -1,18 +1,17 @@
-// import React, {ReactElement} from 'react'
-// import { MiscTypes } from 'types/miscTypes'
-// import { getLabelClasses } from './Label-func'
-// import './Label.scss'
+import React, {ReactElement} from 'react'
+import { MiscTypes } from 'types/miscTypes'
+import makeClasses from './Label-classes'
 
 
-/*type LabelPropType = {
+type LabelPropType = {
     label?: string | ReactElement // Подпись
     id?: string // id для связи подписи с другим элементом. id будет задаваться как атрибут for.
     bold?: boolean // Должен ли текст быть жирным
     disabled?: boolean // Заблокировано ли поле
-}*/
+}
 
-/** Подпись выпадающего списка */
-/*function Label(props: LabelPropType) {
+/** Компонент подписи полей формы */
+function Label(props: LabelPropType) {
     const {
         label, // Подпись поля ввода
         id, // id поля ввода
@@ -22,15 +21,17 @@
 
     if (!label) return null
 
+    const CN = makeClasses(disabled, bold)
+
     // Атрибуты label
     const labelAttrs: MiscTypes.ObjStringKeyStringVal = {}
     // Классы подписи
-    labelAttrs.className = getLabelClasses(disabled, bold)
+    labelAttrs.className = CN.root
     // Добавить атрибут for равный id поля к которому должна быть привязана подпись
     if (id) labelAttrs.htmlFor = id
 
     return <label {...labelAttrs}>{label}</label>
-}*/
+}
 
 
-// export default Label
+export default Label

@@ -1,7 +1,7 @@
-/*export type OptionType = {
-    value: string
+export type OptionsType = OptionType[]
+
+export type OptionType = {
+    value: number | string
     label: string
     disabled?: boolean
-}*/
-
-// export type OptionsType = OptionType[]
+}

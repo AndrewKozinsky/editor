@@ -1,41 +1,35 @@
-// import React, {ReactElement, ReactNode} from 'react'
-// import Radio from '../Radio/Radio'
-// import Checkbox from '../Checkbox/Checkbox'
-// import FHTypes from 'libs/formHandler/types'
-// import Label from '../Label/Label'
-// import { getFieldGroupClasses } from './FieldGroup-func'
-// import './FieldGroup.scss'
+import React, {ReactElement, ReactNode} from 'react'
+import Radio from '../Radio/Radio'
+import Checkbox from '../Checkbox/Checkbox'
+import Label from '../Label/Label'
+import makeClasses from './FieldGroup-classes'
 
 
-/**
- * Компонент FieldGroup в зависимости от переданного объекта отрисовывает элементы поля ввода формы: текстовое поле, флаги, переключатели, выпадающий список.
- * Дополнительно разрешает противоречия в типах передаваемых данных. Везде в свойство value передаётся или строка или массив строк.
- * А сами компоненты ожидают строку. Поэтому FieldGroup переводит этот тип в строковый.
- * Если в value передаётся массив строк, то это обозначает
- */
-
-// type InputDataType = { label: string | ReactElement, value: string }
-
-/*export type FieldGroupPropType = {
-    label?: string
+/** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
+export type FieldGroupPropType = {
+    label?: string | ReactElement
     inputType: 'radio' | 'checkbox'
     groupName: string
     inputsArr: InputDataType[]
-    value: FHTypes.FieldValue
+    value: string[]
     gap?: 20 // Отступы между элементами внутри обёртки
+    vertical?: boolean // Are the inputs arranged vertically?
     disabled?: boolean // Заблокировано ли поле
     onChange: (e: React.BaseSyntheticEvent) => void
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
-}*/
+}
 
-/*export default function FieldGroup(props: FieldGroupPropType) {
+type InputDataType = { label: string | ReactElement, value: string }
+
+export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
         inputType,
         groupName,
         inputsArr,
         value,
-        gap = 20,
+        gap,
+        vertical = false,
         disabled = false, // Заблокировано ли поле
         onChange,
         onBlur
@@ -49,7 +43,7 @@
     return (
         <>
             {$label}
-            <InputsWrapper gap={gap}>
+            <InputsWrapper gap={gap} vertical={vertical}>
                 {inputsArr.map((inputData, i) => {
 
                     const attrs = {
@@ -58,32 +52,32 @@
                         name: groupName,
                         checked: !!value.includes(inputData.value),
                         disabled,
-                        key: i,
                         onChange,
                         onBlur
                     }
 
-                    return <Component {...attrs} />
+                    return <Component {...attrs} key={i} />
                 })}
             </InputsWrapper>
         </>
     )
-}*/
+}
 
 
-/*export type InputsWrapperType = {
+export type InputsWrapperType = {
     gap: number,
+    vertical: boolean
     children: ReactNode
-}*/
+}
 
-/*function InputsWrapper(props: InputsWrapperType) {
+function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,
+        vertical,
         children
     } = props
 
-    // Классы обёртки
-    const cls = getFieldGroupClasses(gap)
+    const CN = makeClasses(vertical, gap)
 
-    return <div className={cls}>{children}</div>
-}*/
+    return <div className={CN.wrapper}>{children}</div>
+}

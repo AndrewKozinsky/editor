@@ -1,6 +1,6 @@
 //@ts-ignore
 // import {createEvent, createStore} from 'effector'
-// import DragFilesTreeType from '../../../libs/DragFilesTree/types'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 
 // ---------------------------------------------------------------------------

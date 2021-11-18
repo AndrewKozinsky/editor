@@ -44,7 +44,7 @@
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 /*export function useGetToggleFolder(
-    folderId: TempCompFilesTreeType.UuId,
+    folderId: TempCompFilesTreeType.Id,
     items: TempCompFilesTreeType.Items,
     after: TempCompFilesTreeType.After
 ) {

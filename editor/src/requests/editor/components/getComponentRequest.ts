@@ -1,10 +1,10 @@
-// import {makeFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 // import FilesTreeType from '../../../types/filesTree'
 
 
 /** Функция получает данные статьи */
-/*export default async function getComponentRequest(componentUuid: FilesTreeType.UuId) {
+/*export default async function getComponentRequest(componentUuid: FilesTreeType.Id) {
 
     const options = { method: 'GET' }
     const response: GetComponentRequestServerResponse = await makeFetch(
@@ -15,18 +15,8 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type GetComponentRequestServerResponse = FailResponse | SuccessResponse
+// type GetComponentRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
 
 // Успешный ответ
 /*type SuccessResponse = {

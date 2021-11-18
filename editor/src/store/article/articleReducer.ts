@@ -12,7 +12,7 @@
     // Components templates array
     tempComps: null | StoreArticleTypes.TempComps
     // Code with
-    incFiles: {
+    siteTemplate: {
         inHead: null | string
         beforeEndBody: null | string
     }
@@ -32,7 +32,7 @@
         name: 'Banner',
         code: <TempCompTypes.TempComp>{}
     }],
-    incFiles: {
+    siteTemplate: {
         inHead: '<link href="http://s.ru/reset.css">',
         beforeEndBody: null
     },
@@ -70,7 +70,7 @@
     articleSiteId: null,
     tempCompsFolders: null,
     tempComps: null,
-    incFiles: {
+    siteTemplate: {
         inHead: null,
         beforeEndBody: null
     },
@@ -116,12 +116,12 @@
 }*/
 
 // Installing an included files string with code
-/*function setIncFilesTemplate(
-    state: ArticleReducerType, action: StoreArticleTypes.SetIncFilesTemplateAction
+/*function setSiteTemplate(
+    state: ArticleReducerType, action: StoreArticleTypes.SetSiteTemplateAction
 ): ArticleReducerType {
     return {
         ...state,
-        incFiles: action.payload
+        siteTemplate: action.payload
     }
 }*/
 
@@ -280,8 +280,8 @@ export default function articleReducer(
             return setArticleMarks(state, action)
         case StoreArticleTypes.SET_TEMP_COMPS:
             return setTempComps(state, action)
-        case StoreArticleTypes.SET_INC_FILES_TEMPLATE:
-            return setIncFilesTemplate(state, action)
+        case StoreArticleTypes.SET_SITE_TEMPLATE:
+            return setSiteTemplate(state, action)
         case StoreArticleTypes.SET_ARTICLE:
             return setArticle(state, action)
         case StoreArticleTypes.SET_LINKS:

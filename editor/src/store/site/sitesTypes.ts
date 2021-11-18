@@ -1,39 +1,60 @@
-// import {ArticleDataType} from 'src/requests/editor/article/getArticleRequest'
-// import {ComponentDataType} from 'src/requests/editor/components/getComponentRequest'
-// import FilesTreeType from '../../types/filesTree'
+import DragFilesTreeType from '../../libs/DragFilesTree/types'
 
-/*namespace StoreSitesTypes {
+namespace StoreSitesTypes {
 
+    // САЙТЫ (ТИПЫ) ===================================================================
     // Сайт
     export type SiteType = {
-        id: string,
+        id: number,
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
-        defaultIncFilesTemplateId: null | string
+        defaultSiteTemplateId: null | number
     }
     // Сайты
     export type SitesType = SiteType[]
     // id выбранного сайта
-    export type CurrentSiteId = null | string
+    export type CurrentSiteId = null | number | ''
+
+    // ПРАВЫЕ ВКЛАДКИ =================================================================
+
     // id открытой вкладки на правой части
     export type RightMainTab = number
 
+    // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ (ТИПЫ) =============================================
+
     // Шаблон подключаемых файлов
-    export type IncFilesTemplateType = {
-        id: string,
-        name: string,
-        head?: string
-        body?: string
+    export type SiteTemplateType = {
+        id: number,
+        name: string
+        content: string
     }
     // Массив шаблонов подключаемых файлов
-    export type IncFilesTemplatesType = IncFilesTemplateType[]
+    export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
-    export type CurrentIncFilesTemplateId = null | string
+    export type CurrentSiteTemplateId = null | number | ''
 
-    // uuid выбранного элемента: папки или компонента
-    export type CurrentCompItemId = null | FilesTreeType.UuId
+    // ПАПКИ С КОМПОНЕНТАМИ (ТИПЫ) ====================================================
+
+    // Объект с данными папки с компонентами
+    export type CompFolderSection = {
+        compFolderId: null | number
+        compFolder: DragFilesTreeType.Items
+    }
+
+    // ПАПКИ СО СТАТЬЯМИ (ТИПЫ) =======================================================
+
+    // Объект с данными папки со статьями
+    export type ArtFolderSection = {
+        artFolderId: null | number
+        artFolder: DragFilesTreeType.Items
+    }
+
+    // КОМПОНЕНТЫ (ТИПЫ) ==============================================================
+
+    // id выбранного элемента: папки или компонента
+    export type CurrentCompItemId = null | number
     // Тип выбранного шаблона компонента (папка или компонент)
-    export type CurrentCompItemType = null | FilesTreeType.ItemType
+    export type CurrentCompItemType = null | DragFilesTreeType.ItemType
     // Имя выбранного компонента
     export type ComponentName = null | string
     // Строка с кодом выбранного шаблона компонента
@@ -47,10 +68,12 @@
         currentCompCode: ComponentCode
     }
 
+    // СТАТЬИ (ТИПЫ) ==================================================================
+
     // uuid выбранного элемента: папки или статьи
-    export type CurrentArtItemId = null | FilesTreeType.UuId
+    export type CurrentArtItemId = null | number
     // Тип выбранного элемента (папка или компонент)
-    export type CurrentArtItemType = null | FilesTreeType.ItemType
+    export type CurrentArtItemType = null | DragFilesTreeType.ItemType
     // Имя выбранной статьи
     export type ArticleName = string
     // Строка с кодом выбранной статьи
@@ -62,8 +85,10 @@
         currentArtItemType: CurrentArtItemType
         currentArtName: ArticleName
         currentArtCode: ArticleCode,
-        incFilesTemplateId: CurrentIncFilesTemplateId
+        siteTemplateId: CurrentSiteTemplateId
     }
+
+    // САЙТЫ (ЭКШЕНЫ) =================================================================
 
     // Типы типа и тип экшена
     // Установка массива сайтов
@@ -80,6 +105,8 @@
         payload: CurrentSiteId
     }
 
+    // ПРАВЫЕ ВКЛАДКИ (ЭКШЕНЫ) ========================================================
+
     // Установка id текущей основной вкладки справа
     export const SET_RIGHT_MAIN_TAB = 'SET_RIGHT_MAIN_TAB'
     export type SetRightMainTabAction = {
@@ -87,84 +114,126 @@
         payload: RightMainTab
     }
 
+    // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ (ЭКШЕНЫ) ===========================================
 
     // Установка массива шаблонов подключаемых файлов
-    export const SET_INC_FILES_TEMPLATES = 'SET_INC_FILES_TEMPLATES'
-    export type SetIncFilesTemplatesAction = {
-        type: typeof SET_INC_FILES_TEMPLATES
-        payload: IncFilesTemplatesType
+    export const SET_SITE_TEMPLATES = 'SET_SITE_TEMPLATES'
+    export type SetSiteTemplatesAction = {
+        type: typeof SET_SITE_TEMPLATES
+        payload: SiteTemplatesType
     }
 
     // Установка id выбранного шаблона подключаемых файлов
-    export const SET_CURRENT_INC_FILES_TEMPLATE_ID = 'SET_CURRENT_INC_FILES_TEMPLATE_ID'
-    export type SetCurrentIncFilesTemplateIdAction = {
-        type: typeof SET_CURRENT_INC_FILES_TEMPLATE_ID
-        payload: CurrentIncFilesTemplateId
+    export const SET_CURRENT_SITE_TEMPLATE_ID = 'SET_CURRENT_SITE_TEMPLATE_ID'
+    export type SetCurrentSiteTemplateIdAction = {
+        type: typeof SET_CURRENT_SITE_TEMPLATE_ID
+        payload: CurrentSiteTemplateId
     }
+
+    // ПАПКИ С КОМПОНЕНТАМИ (ЭКШЕНЫ) ==================================================
+
+    export const SET_COMP_FOLDER = 'SET_COMP_FOLDER'
+    export type SetCompFolderAction = {
+        type: typeof SET_COMP_FOLDER
+        payload: SetCompFolderActionPayload
+    }
+    export type SetCompFolderActionPayload = {
+        id: number
+        folders: DragFilesTreeType.Items
+    }
+
+    // ПАПКИ СО СТАТЬЯМИ (ЭКШЕНЫ) =====================================================
+
+    export const SET_ART_FOLDER = 'SET_ART_FOLDER'
+    export type SetArtFolderAction = {
+        type: typeof SET_ART_FOLDER
+        payload: SetArtFolderActionPayload
+    }
+    export type SetArtFolderActionPayload = {
+        id: number
+        folders: DragFilesTreeType.Items
+    }
+
+    // КОМПОНЕНТЫ (ЭКШЕНЫ) ============================================================
 
     // Установка id выбранного шаблона компонента
     export const SET_CURRENT_COMP = 'SET_CURRENT_COMP'
     export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | FilesTreeType.UuId
-            type: null | FilesTreeType.ItemType
-            compData?: ComponentDataType
+            id: null | DragFilesTreeType.Id
+            type: null | DragFilesTreeType.ItemType
+            name?: string
+            code?: string
         }
     }
 
-    // Component Template item (folder or file) type setting
-    export const SET_CURRENT_COMP_ITEM_TYPE = 'SET_CURRENT_COMP_ITEM_TYPE'
-    export type SetCurrentCompItemTypeAction = {
-        type: typeof SET_CURRENT_COMP_ITEM_TYPE
-        payload: StoreSitesTypes.CurrentCompItemType
-    }
-
-    // Component Template item id setting
-    export const SET_CURRENT_COMP_ITEM_ID = 'SET_CURRENT_COMP_ITEM_ID'
-    export type SetCurrentCompItemIdAction = {
-        type: typeof SET_CURRENT_COMP_ITEM_ID
-        payload: StoreSitesTypes.CurrentCompItemId
-    }
+    // СТАТЬИ (ЭКШЕНЫ) ================================================================
 
     // Установка id выбранной папки или статьи
     export const SET_CURRENT_ART = 'SET_CURRENT_ART'
     export type SetCurrentArtAction = {
         type: typeof SET_CURRENT_ART
         payload: {
-            id: null | FilesTreeType.UuId
-            type: null | FilesTreeType.ItemType
-            article?: ArticleDataType
+            id: null | DragFilesTreeType.Id
+            type: null | DragFilesTreeType.ItemType
+            name?: string
+            code?: string
+            siteTemplateId?: null | number
         }
     }
 
+
+
+    // Component Template item (folder or file) type setting
+    // export const SET_CURRENT_COMP_ITEM_TYPE = 'SET_CURRENT_COMP_ITEM_TYPE'
+    /*export type SetCurrentCompItemTypeAction = {
+        type: typeof SET_CURRENT_COMP_ITEM_TYPE
+        payload: StoreSitesTypes.CurrentCompItemType
+    }*/
+
+    // Component Template item id setting
+    // export const SET_CURRENT_COMP_ITEM_ID = 'SET_CURRENT_COMP_ITEM_ID'
+    /*export type SetCurrentCompItemIdAction = {
+        type: typeof SET_CURRENT_COMP_ITEM_ID
+        payload: StoreSitesTypes.CurrentCompItemId
+    }*/
+
+
+
     // Article item (folder or file) type setting
-    export const SET_CURRENT_ART_ITEM_TYPE = 'SET_CURRENT_ART_ITEM_TYPE'
-    export type SetCurrentArtItemTypeAction = {
+    // export const SET_CURRENT_ART_ITEM_TYPE = 'SET_CURRENT_ART_ITEM_TYPE'
+    /*export type SetCurrentArtItemTypeAction = {
         type: typeof SET_CURRENT_ART_ITEM_TYPE
         payload: StoreSitesTypes.CurrentArtItemType
-    }
+    }*/
 
     // Article item (folder or file) id setting
-    export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
-    export type SetCurrentArtItemIdAction = {
+    // export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
+    /*export type SetCurrentArtItemIdAction = {
         type: typeof SET_CURRENT_ART_ITEM_ID
         payload: StoreSitesTypes.CurrentArtItemId
-    }
+    }*/
 
 
     export type SitesAction =
         | SetSitesAction
         | SetCurrentSiteIdAction
         | SetRightMainTabAction
-        | SetIncFilesTemplatesAction
-        | SetCurrentIncFilesTemplateIdAction
-        | SetCurrentCompAction
-        | SetCurrentCompItemTypeAction
-        | SetCurrentCompItemIdAction
-        | SetCurrentArtAction
-        | SetCurrentArtItemTypeAction
-        | SetCurrentArtItemIdAction
-}*/
+        | SetSiteTemplatesAction
+        | SetCurrentSiteTemplateIdAction
 
-// export default StoreSitesTypes
+        | SetCompFolderAction
+        | SetArtFolderAction
+
+        | SetCurrentCompAction
+        // | SetCurrentCompItemTypeAction
+        // | SetCurrentCompItemIdAction
+
+        | SetCurrentArtAction
+        // | SetCurrentArtAction
+        // | SetCurrentArtItemTypeAction
+        // | SetCurrentArtItemIdAction
+}
+
+export default StoreSitesTypes

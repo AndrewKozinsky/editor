@@ -1,7 +1,7 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
 // import actions from 'store/rootAction'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
@@ -16,10 +16,10 @@
  *  and returns updated array */
 /*export function useGetTempCompsFolders() {
     // Component templates folders
-    const { tempCompsFolders } = useSelector((store: AppState) => store.article)
+    const { tempCompsFolders } = useSelector((store: AppStateType) => store.article)
 
     // Component templates array
-    const tempCompsArr = useSelector((store: AppState) => store.article.tempComps)
+    const tempCompsArr = useSelector((store: AppStateType) => store.article.tempComps)
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
@@ -40,7 +40,7 @@
         }
 
         // Get opened component template folders uuid array to open these folders
-        const openUuIdArr: null | FilesTreeType.UuIdArr = getFromLocalStorage('article')?.openCompFoldersUuIds
+        const openUuIdArr: null | FilesTreeType.IdArr = getFromLocalStorage('article')?.openCompFoldersUuIds
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(
@@ -64,7 +64,7 @@
  */
 /*function prepareFoldersAndItemsStructure(
     tempCompsFolders: FilesTreeType.Items,
-    openUuIdArr: null | FilesTreeType.UuIdArr,
+    openUuIdArr: null | FilesTreeType.IdArr,
     selectedElem: StoreArticleTypes.HoveredElem,
     tempCompsArr: TempCompTypes.TempComps,
     article: ArticleTypes.Article
@@ -120,7 +120,7 @@
 /*export function useGetAfterCollapseFolder() {
     const dispatch = useDispatch()
 
-    return useCallback(function (folders: TempCompFilesTreeType.Items, openUuIdArr: FilesTreeType.UuIdArr) {
+    return useCallback(function (folders: TempCompFilesTreeType.Items, openUuIdArr: FilesTreeType.IdArr) {
         // Set a new folders structure list in the Store
         dispatch(actions.article.setTempCompFolders(folders))
 
@@ -143,10 +143,10 @@
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component templates array
-    const {tempComps} = useSelector((store: AppState) => store.article)
+    const {tempComps} = useSelector((store: AppStateType) => store.article)
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.UuId) {
+    return useCallback(function (tempCompId: FilesTreeType.Id) {
         const selectedCompId = flashedElemCoords.selectedElem.dataCompId
 
         let componentsAndMaxCompId: CreateCompFnReturnType
@@ -181,10 +181,10 @@
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component template array
-    const {tempComps} = useSelector((store: AppState) => store.article)
+    const {tempComps} = useSelector((store: AppStateType) => store.article)
 
     // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.UuId) {
+    return useCallback(function (tempCompId: FilesTreeType.Id) {
         const selectedElemCoords = flashedElemCoords.selectedElem
 
         const componentsAndMaxCompId = articleManager.createCompAndSetInElem(

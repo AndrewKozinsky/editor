@@ -1,11 +1,6 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Сайты»
-/*const obj = {
-    headerNewSite: {
-        eng: 'New site',
-        rus: 'Новый сайт'
-    },
+export const siteSectionMessages = {
     siteNameInput: {
         eng: 'Name',
         rus: 'Название'
@@ -15,12 +10,16 @@
         rus: 'Например: Корпоративный портал'
     },
     siteNameInputRequired: {
-        eng: 'Required',
+        eng: 'This field is required',
         rus: 'Обязательное поле'
     },
+    siteNameInputIsTooLong: {
+        eng: 'Site name can not be longer than 255 characters',
+        rus: 'Название сайта не может быть длиннее 255 символов'
+    },
     defaultTemplateInput: {
-        eng: 'The default template of the plug-in files',
-        rus: 'Шаблон подключаемых файлов по умолчанию'
+        eng: 'The default site template',
+        rus: 'Шаблон сайта по умолчанию'
     },
     submitBtnTextNewSite: {
         eng: 'Create',
@@ -46,10 +45,8 @@
         eng: 'Delete',
         rus: 'Удалить'
     },
-    defaultTemplateSelectNoValue: {
+    defaultSiteTemplateNotSelected: {
         eng: 'Not selected',
         rus: 'Не выбрано'
     },
-}*/
-
-// export const siteSectionMessages = getMessagesObject(obj)
+}

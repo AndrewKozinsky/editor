@@ -1,12 +1,11 @@
 // import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import {isCursorOnTextComponent, isTextCompAhead} from '../flashElements/useSetMouseHandlersForFlashRects'
 
 
 /** The hook doesn't allow to set focus while user clicks on no text components. */
 /*export function useRemoveUnwantedFocus() {
-    const { $links, history } = useSelector((store: AppState) => store.article)
+    const { $links, history } = useSelector((store: AppStateType) => store.article)
 
     // Were mouse move handler set?
     const [mouseClickHandlerSet, setMouseClickHandlerSet] = useState(false)

@@ -24,7 +24,6 @@ module.exports = function(env) {
         devServer: getDevServerSettings(),
         plugins: getPlugins(isDev),
         output: {
-            // publicPath: '/editor',
             path: path.resolve(__dirname, 'dist'),
             filename: 'main.js',
             assetModuleFilename: 'images/[hash][ext][query]'
@@ -46,13 +45,13 @@ function parseCSS(isDev) {
     if (isDev) {
         return {
             test: /\.s?css$/i,
-            use: ["style-loader", "css-loader", "sass-loader"],
+            use: ['style-loader', 'css-loader', 'sass-loader'],
         }
     }
     else {
         return {
             test: /\.s?css$/i,
-            use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+            use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
         }
     }
 }
@@ -60,8 +59,8 @@ function parseCSS(isDev) {
 // Функция возвращает настройки загрузчика других типов файлов
 function parseAssets() {
     return {
-        test: /\.(png|jpg|jpeg|gif|woff2)$/i,
-        type: "asset/resource",
+        test: /\.(png|jpg|jpeg|gif|woff2|pdf)$/i,
+        type: 'asset/resource',
     }
 }
 
@@ -79,6 +78,7 @@ function getResolve() {
             src: path.resolve(__dirname, './src/'),
             common: path.resolve(__dirname, './src/common'),
             editor: path.resolve(__dirname, './src/editor'),
+            entrance: path.resolve(__dirname, './src/entrance'),
             libs: path.resolve(__dirname, './src/libs'),
             messages: path.resolve(__dirname, './src/messages'),
             modules: path.resolve(__dirname, './src/modules'),
@@ -97,9 +97,12 @@ function getDevServerSettings() {
         compress: true,
         port: 3000,
         host: '0.0.0.0',
-        disableHostCheck: true,
         historyApiFallback: true,
-        hot: true
+        allowedHosts: 'all',
+        hot: false,
+        client: {
+            webSocketURL: 'auto://0.0.0.0:0/editor/ws'
+        },
     }
 }
 

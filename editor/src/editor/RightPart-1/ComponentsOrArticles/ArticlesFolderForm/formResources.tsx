@@ -1,7 +1,6 @@
-// @ts-ignore
 // import * as yup from 'yup'
 // import FHTypes from 'libs/formHandler/types'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
 // import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
@@ -67,7 +66,7 @@
 
 
                 // Если поля формы заполнены неверно...
-                if($firstWrongField) {
+                if ($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -148,7 +147,7 @@
     }
 
     // Если поля формы заполнены верно...
-    if(isFormValid) {
+    if (isFormValid) {
         // Разблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', false, 'submit')
     }

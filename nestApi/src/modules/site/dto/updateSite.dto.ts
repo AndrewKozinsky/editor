@@ -1,0 +1,17 @@
+import {IsNotEmpty, IsOptional, IsString, MaxLength} from 'class-validator'
+import {Column} from 'typeorm'
+
+export class UpdateSiteDto {
+    @IsNotEmpty({message: 'site_UpdateSiteDto_EmptyName'})
+    @IsString({
+        message: 'site_UpdateSiteDto_nameIsNotAString'
+    })
+    @MaxLength( 255, {
+        message: 'site_UpdateSiteDto_nameTooLong'
+    })
+    name: string
+
+    @IsOptional()
+    // Тут нужно как-то проверить, что присылают или число или строку
+    defaultSiteTemplateId: number | ''
+}

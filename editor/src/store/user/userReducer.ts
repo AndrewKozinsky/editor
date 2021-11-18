@@ -1,4 +1,4 @@
-import StoreUserTypes from "./userTypes"
+import StoreUserTypes from './userTypes'
 
 export type UserReducerType = {
     authTokenStatus: StoreUserTypes.AuthTokenStatusType
@@ -24,7 +24,7 @@ function setAuthTokenStatus(state: UserReducerType, action: StoreUserTypes.SetAu
     }
 }
 
-// Установка статуса токена авторизации
+// Set user's email
 function setEmail(state: UserReducerType, action: StoreUserTypes.SetEmailActionType): UserReducerType {
     return {
         ...state,

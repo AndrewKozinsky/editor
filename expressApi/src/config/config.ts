@@ -1,5 +1,5 @@
 // Тип объекта конфигурации
-export type ConfigType = {
+/*export type ConfigType = {
     workMode: string
     port: number
     db: string
@@ -8,7 +8,7 @@ export type ConfigType = {
     // devSiteURL: string
 
     // emailFrom: string
-    // fakeEmailHost: string
+    // fakeEmailDomain: string
     // fakeEmailPort: number
     // fakeEmailUsername: string
     // fakeEmailPassword: string
@@ -16,9 +16,9 @@ export type ConfigType = {
     jwtSecret: string
     // jwtExpiresIn: number
     // jwtExpiresUnit: string
-}
+}*/
 
-export const config: ConfigType = {
+/*export const config: ConfigType = {
     // Режим работы (development или production)
     workMode: String(process.env.MODE),
     // Порт сервиса
@@ -34,7 +34,7 @@ export const config: ConfigType = {
     // Из какого адреса будут приходить письма от сервиса
     // emailFrom: 'mail@andrewkozinsky.ru',
     // Адрес сервиса для ложных писем
-    // fakeEmailHost: 'smtp.mailtrap.io',
+    // fakeEmailDomain: 'smtp.mailtrap.io',
     // Номер порта сервиса для ложных писем
     // fakeEmailPort: 25,
     // Имя пользователя сервиса для ложных писем
@@ -46,7 +46,7 @@ export const config: ConfigType = {
     jwtSecret: 'geuAFR83_IXfpwx742$QQwfgiut45_cs',
     // jwtExpiresIn: 90,
     // jwtExpiresUnit: 'd'
-}
+}*/
 
 
 

@@ -1,14 +1,13 @@
 // import {useCallback, useEffect, useState} from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-// import { AppState } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import StoreSitesTypes from 'store/site/sitesTypes'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import { OptionsType } from 'common/formElements/Select/SelectTypes'
 // import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import store from '../../../../store/store'
+// import { store } from 'store/rootReducer'
 
 
 /**
@@ -20,16 +19,16 @@
     const dispatch = useDispatch()
 
     // Все статьи и id текущего сайта
-    const sites: StoreSitesTypes.SitesType = useSelector((store: AppState) => store.sites.sites)
-    const currentSiteId = useSelector((store: AppState) => store.sites.currentSiteId)
+    const sites: StoreSitesTypes.SitesType = useSelector((store: AppStateType) => store.sites.sites)
+    const currentSiteId = useSelector((store: AppStateType) => store.sites.currentSiteId)
     // Текущий сайт
     const currentSite = sites.find(s => s.id === currentSiteId)
 
     // id текущей статьи
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Данные статьи
-    const {articlesSection} = useSelector((store: AppState) => store.sites)
+    const {articlesSection} = useSelector((store: AppStateType) => store.sites)
 
     // При выделении другой статьи...
     useEffect(function () {
@@ -43,16 +42,16 @@
         let newFormState = changeField(formState, 'name', articlesSection.currentArtName)
 
         // Если в данных статьи есть id шаблона файлов, то поставить его в качестве значения в выпадающем списке.
-        if (articlesSection.incFilesTemplateId) {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', articlesSection.incFilesTemplateId)
+        if (articlesSection.SiteTemplateId) {
+            newFormState = changeField(newFormState, 'siteTemplateId', articlesSection.incFilesTemplateId)
         }
         // Если шаблона нет, то поставить id шаблона по умолчанию
-        else if (currentSite && currentSite.defaultIncFilesTemplateId) {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', currentSite.defaultIncFilesTemplateId)
+        else if (currentSite && currentSite.defaultSiteTemplateId) {
+            newFormState = changeField(newFormState, 'SiteTemplateId', currentSite.defaultSiteTemplateId)
         }
         // В остальных случаях ничего не ставить
         else {
-            newFormState = changeField(newFormState, 'incFilesTemplateId', '')
+            newFormState = changeField(newFormState, 'siteTemplateId', '')
         }
 
         // Поставить новое состояние формы
@@ -69,7 +68,7 @@
  */
 /*function changeField(
     formState: FHTypes.FormState,
-    fieldName: 'name' | 'incFilesTemplateId',
+    fieldName: 'name' | 'siteTemplateId',
     value: null | string
 ) {
     // Получение поля формы по имени
@@ -97,8 +96,8 @@
  */
 /*export function useManageTemplatesSelect(fh: FHTypes.ReturnObj) {
     // Массив шаблонов подключаемых файлов
-    const templates:StoreSitesTypes.IncFilesTemplatesType = useSelector((store: AppState) => {
-        return store.sites.incFilesTemplatesSection.templates
+    const templates:StoreSitesTypes.SiteTemplatesType = useSelector((store: AppStateType) => {
+        return store.sites.siteTemplatesSection.templates
     })
 
     // Видим ли выпадающий список подключаемых файлов
@@ -153,9 +152,9 @@
 // Hook returns edit Article button onClick handler
 /*
 export function useGetEditArticleBtnHandler() {
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
-    const {currentTemplateId} = useSelector((store: AppState) => store.sites.incFilesTemplatesSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
+    const {currentTemplateId} = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     return useCallback(function () {
         store.dispatch(actions.article.fillArticle(

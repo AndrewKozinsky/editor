@@ -1,7 +1,6 @@
 // import React, {useCallback} from 'react'
 // import {useDispatch, useSelector} from 'react-redux'
-// import { AppState } from 'store/rootReducer'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
@@ -12,8 +11,8 @@
 
 /*export function DeleteArticleConfirmModal() {
     const dispatch = useDispatch()
-    const { articleUuId } = useSelector((store: AppState) => store.article)
-    const { currentArtItemId } = useSelector((store: AppState) => store.sites.articlesSection)
+    const { articleUuId } = useSelector((store: AppStateType) => store.article)
+    const { currentArtItemId } = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Функция удаляющая выделенную папку
     const closeModal = useCallback(async function () {

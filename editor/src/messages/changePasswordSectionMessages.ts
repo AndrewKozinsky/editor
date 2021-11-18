@@ -1,7 +1,6 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Секция «Изменение пароля»
-/*const obj = {
+export const changePasswordSectionMessages = {
     header: {
         eng: 'Change password',
         rus: 'Изменение пароля'
@@ -30,14 +29,12 @@
         eng: 'Password has changed.',
         rus: 'Пароль изменён.'
     },
-    cancelBtn: {
+    /*cancelBtn: {
         eng: 'Cancel',
         rus: 'Отменить'
-    },
-    changeBtn: {
+    },*/
+    /*changeBtn: {
         eng: 'Delete',
         rus: 'Удалить'
-    },
-}*/
-
-// export const changePasswordSectionMessages = getMessagesObject(obj)
+    },*/
+}

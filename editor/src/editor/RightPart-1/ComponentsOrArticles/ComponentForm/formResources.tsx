@@ -1,12 +1,11 @@
-// @ts-ignore
 // import * as yup from 'yup'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import {componentsTreeStore, setCompItems} from '../stores'
 // import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-// import {updateComponentRequest} from 'src/requests/editor/components/updateComponentRequest'
-// import putComponentsFoldersRequest from 'src/requests/editor/components/putComponentsFoldersRequest'
+// import {updateComponentRequest} from 'requests/editor/components/updateComponentRequest'
+// import putCompFolderRequest from 'requests/editor/components/putCompFolderRequest'
 
 
 /** Объект настройки useFormHandler */
@@ -74,7 +73,7 @@
 
 
                 // Если поля формы заполнены неверно...
-                if($firstWrongField) {
+                if ($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -158,7 +157,7 @@
     }
 
     // Если поля формы заполнены верно...
-    if(isFormValid) {
+    if (isFormValid) {
         // Разблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', false, 'submit')
     }
@@ -256,5 +255,5 @@
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
     // Отправить данные на сервер...
-    await putComponentsFoldersRequest(preparedItems)
+    await putCompFolderRequest(preparedItems)
 }*/

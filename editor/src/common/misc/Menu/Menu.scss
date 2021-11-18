@@ -22,7 +22,7 @@ $CN: menu;
 }
 
 .#{$CN}--disabled-link {
-    color: hsl(var(--base-h-part), var(--base-s-part), var(--base-color-10));
+    color: hsl(var(--base-h-part), var(--base-s-part), 50%);
     cursor: default;
     border-bottom-color: transparent;
 

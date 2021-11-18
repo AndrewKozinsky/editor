@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
@@ -11,7 +11,7 @@
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import { articlesTreeStore, setArtItems } from '../stores'
 // import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 
 
 /*export default function ModalContent() {
@@ -21,7 +21,7 @@
     const articlesItems = useStore(articlesTreeStore)
 
     // id папки или компонента, который должнен быть выделен
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Функция удаляющая выделенную папку
     const deleteFolder = useCallback(function () {

@@ -1,6 +1,6 @@
-// import {ReactElement} from 'react'
-// import {useDispatch} from 'react-redux'
-// import actions from '../store/rootAction'
+// import { ReactElement } from 'react'
+// import { useDispatch } from 'react-redux'
+// import actions from 'store/rootAction'
 
 
 /** Хук возвращает функцию открывающую модальное окно */
@@ -12,17 +12,10 @@
     }
 }*/
 
-/** Хук возвращает функцию закрывающую модальное окно */
-/*export function useGetModalCloseHandler() {
-    const dispatch = useDispatch()
-
-    return function () {
-        dispatch(actions.modal.closeModal())
-    }
-}*/
 
 /**
- * Запись в localStorage данных предварительно пропущенных через JSON.stringify
+ * Функция получает данные, которые нужно записать в localStorage.
+ * Чтобы сохранить типы полученные данные предварительно пропускаются через JSON.stringify
  * @param {String} propName — имя свойства
  * @param {String} value — значение свойства
  */
@@ -40,7 +33,12 @@ export function getFromLocalStorage(propName: string, defaultValue?: any) {
     let value = localStorage.getItem(propName)
     if (!value && defaultValue !== undefined) return defaultValue
 
-    return JSON.parse(value)
+    try {
+        return JSON.parse(value)
+    }
+    catch(err) {
+        return value
+    }
 }
 
 /**
@@ -55,14 +53,14 @@ export function removeFromLocalStorage(propName: string) {
  * The function create deep copy of object or array
  * @param {Object | Array} data — copied data
  */
-export function createDeepCopy<T>(data: T): T {
+/*export function createDeepCopy<T>(data: T): T {
 
     let f = function copy(data: T) {
         switch (toString.call(data)){
             case "[object Array]":
-                return parseArray(data);
+                return parseArray(data)
             case "[object Object]":
-                return parseObj(data);
+                return parseObj(data)
             default: return null // Возвращу null чтобы проверяльщик не ругался
         }
 
@@ -71,30 +69,30 @@ export function createDeepCopy<T>(data: T): T {
                 switch (toString.call(elem)){
                     case "[object Array]":
                     case "[object Object]":
-                        return copy(elem);
+                        return copy(elem)
                     default: return elem
                 }
             })
         }
 
         function parseObj(obj: any) {
-            let result = {};
+            let result = {}
 
             for(let key in obj) {
                 switch (toString.call(obj[key])){
                     case "[object Array]":
                     case "[object Object]":
                         //@ts-ignore
-                        result[key] = copy(obj[key]);
-                        break;
+                        result[key] = copy(obj[key])
+                        break
                     default:
                         //@ts-ignore
                         result[key] = obj[key]
                 }
             }
-            return result;
+            return result
         }
-    };
+    }
 
-    return f(data);
-}
+    return f(data)
+}*/

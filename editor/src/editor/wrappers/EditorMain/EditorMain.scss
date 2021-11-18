@@ -1,6 +1,6 @@
-//$CN: editor-main;
+$CN: editor-main;
 
-/*.#{$CN} {
+.#{$CN} {
     position: absolute;
     display: grid;
     grid-auto-flow: column;
@@ -12,36 +12,33 @@
 
     transition: opacity .2s, transform .2s;
     transition-timing-function: cubic-bezier(.07,.73,.65,1);
-}*/
+}
 
 // Левая часть редактора
-/*.#{$CN}__left {
+.#{$CN}__left {
     display: flex;
     flex-direction: column;
     border-right: 1px solid var(--button-color-hover);
 
     // Вкладки
-    & > *:first-child {
-        
-    }
+    & > *:first-child {}
+
     // Обёртка после вкладок
     & > *:last-child {
         flex-grow: 1;
     }
-}*/
+}
 
 // Правая часть редактора
-/*.#{$CN}__right {
-
-}*/
+.#{$CN}__right {}
 
 // Класс отдаляющий редактор от зрителя
-/*.#{$CN}--scale-down {
+.#{$CN}--scale-down {
     opacity: 0.45;
     transform: scale(0.95);
-}*/
+}
 // Класс отдаляющий редактор от зрителя и с прозрачностью
-/*.#{$CN}--scale-down-transparent {
+.#{$CN}--scale-down-transparent {
     opacity: 0;
     transform: scale(0.9);
-}*/
+}

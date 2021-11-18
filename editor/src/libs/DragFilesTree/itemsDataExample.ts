@@ -1,71 +1,71 @@
-// import DragFilesTreeType from 'libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 // Пример данных получаемых компонентов FilesTree
-/*const itemsDataExample: DragFilesTreeType.Items = [
+const itemsDataExample: DragFilesTreeType.Items = [
     {
-        uuid: '1',
+        id: 1,
         type: 'folder',
         name: 'Расследования',
     },
     {
-        uuid: '2',
+        id: 2,
         type: 'file',
         name: 'Без ОМОНа. Репортаж из спокойного Минска',
     },
     {
-        uuid: '3',
+        id: 3,
         type: 'folder',
         name: 'Портреты',
     },
     {
-        uuid: '4',
+        id: 4,
         type: 'folder',
         name: 'Спецпроекты',
         open: true,
         content: [
             {
-                uuid: '5',
+                id: 5,
                 type: 'folder',
                 name: 'Железные маски',
                 open: true,
                 content: [
                     {
-                        uuid: '6',
+                        id: 6,
                         type: 'file',
                         name: 'Возведенный в степень. Портрет Виктора Садовничего, математика, который не просчитался.',
                     },
                     {
-                        uuid: '7',
+                        id: 7,
                         type: 'file',
                         name: 'Лермонтов',
                     },
                     {
-                        uuid: '8',
+                        id: 8,
                         type: 'file',
                         name: 'Спасти спецкора. Рассказ о том, почему власти согласились на освобождение Ивана Голунова.',
                     },
                 ]
             },
             {
-                uuid: '9',
+                id: 9,
                 type: 'folder',
                 name: 'Коронованные особы и дворцовый переворот',
             },
             {
-                uuid: '10',
+                id: 10,
                 type: 'folder',
                 name: 'Тюрьма народов',
             },
         ]
     },
     {
-        uuid: '11',
+        id: 11,
         type: 'folder',
         name: 'Мнения'
     },
-]*/
+]
 
-// export default itemsDataExample
+export default itemsDataExample
 
 
 

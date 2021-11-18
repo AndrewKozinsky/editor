@@ -1,19 +1,15 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import {makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import UserServerResponseType from './userServerResponseType'
 
-/**
- * Изменение текущего пароля
- * @param {String} passwordCurrent — текущий пароль
- * @param {String} newPassword — новый пароль
- * @param {String} newPasswordAgain — новый пароль еще раз
- */
-/*export default async function changePasswordRequest(passwordCurrent: string, newPassword: string, newPasswordAgain: string) {
+/** Изменение текущего пароля */
+export default async function changePasswordRequest(currentPassword: string, newPassword: string) {
     const options = {
         method: 'PATCH',
         body: JSON.stringify({
-            passwordCurrent,
-            newPassword,
-            newPasswordAgain
+            currentPassword,
+            newPassword
         })
     }
     const response: ChangePasswordRequestServerResponse = await makeFetch(
@@ -21,29 +17,7 @@
     )
 
     return response
-}*/
+}
 
 // Тип данных с ответом от пользователя
-// type ChangePasswordRequestServerResponse = FailResponse | SuccessResponse
-
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: 'passwordCurrent'
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            email: string // "andkozinskiy@yandex.ru"
-        }
-    }
-}*/
+type ChangePasswordRequestServerResponse = ErrorServerResponseType | UserServerResponseType

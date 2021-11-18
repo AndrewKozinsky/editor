@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
-import {useSelector} from 'react-redux'
-import { AppState } from 'store/rootReducer'
-import store from 'store/store'
+import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import { store } from 'store/rootReducer'
 
 
 // Тип параметров запроса
@@ -30,7 +29,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
     const [error, setError] = useState(false)
 
     // Язык интерфейса
-    const editorLanguage = useSelector((store: AppState) => store.settings.editorLanguage)
+    const { editorLanguage } = useGetSettingsSelectors()
 
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {
@@ -70,7 +69,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
  * @param {String} url — строка c адресом запроса
  * @param {Object} options — параметры запроса
  */
-/*export async function makeFetch(url: string, options: OptionsType) {
+export async function makeFetch(url: string, options: OptionsType) {
     const lang = store.getState().settings.editorLanguage
 
     // Добавление заголовка языка интерфейса в параметры запроса
@@ -85,7 +84,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
         if (lang === 'rus') message = 'Не удалось получить данные.'
         throw new Error(message)
     }
-}*/
+}
 
 /**
  * Функция добавляет в объект параметров запроса заголовок Editor-Language с языком

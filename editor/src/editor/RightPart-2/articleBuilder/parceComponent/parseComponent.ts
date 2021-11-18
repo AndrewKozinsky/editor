@@ -1,5 +1,5 @@
-// import ArticleTypes from 'src/store/article/codeType/articleCodeType'
-// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import htmlStringToObject, {HTMLObjArrType} from './htmlStringToObject'
 // import articleManager from '../../articleManager/articleManager'
 // import { putRepeatedElems } from './putRepeatedElems'

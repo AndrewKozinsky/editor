@@ -1,7 +1,6 @@
 // import { useEffect } from 'react'
 // import { useDispatch, useSelector } from 'react-redux'
 //@ts-ignore
-// import { AppState } from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
@@ -16,10 +15,10 @@
     const dispatch = useDispatch()
 
     // id текущего шаблона компонента
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
 
     // Данные статьи
-    const {componentsSection} = useSelector((store: AppState) => store.sites)
+    const {componentsSection} = useSelector((store: AppStateType) => store.sites)
 
     // При выделении другого компонента скачать его данные и поставить в Хранилище
     useEffect(function () {

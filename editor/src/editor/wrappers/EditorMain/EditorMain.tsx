@@ -1,33 +1,32 @@
 import React, { ReactElement } from 'react'
-import { useGetPageClasses } from './EditorMain-func'
-// import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
-// import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
-// import Modal from 'modules/Modal/Modal'
-// import './EditorMain.scss'
+import useMakeClasses from './EditorMain-classes'
+import { useGetPageVisibility } from './EditorMain-func'
+import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
+import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
+import Modal from 'common/modalEntities/Modal/Modal'
 
 
 /** Главная страница редактора. */
 export default function EditorMain(): ReactElement {
-
-    const CN = 'editor-main'
-    // Классы обёртки и видим ли редактор
-    const {classes, isVisible} = useGetPageClasses(CN)
+    const CN = useMakeClasses()
+    // Видим ли редактор
+    const isVisible = useGetPageVisibility()
 
     // Ничего не отрисовывать если редактор не должен быть видим.
-    // if (!isVisible) return null
+    if (!isVisible) return null
 
     return (
         <>
-            <div className={classes}>
-                {/*<div className={`${CN}__left`}>
+            <div className={CN.root}>
+                <div className={CN.leftPart}>
                     <SectionsTabs />
                     <EditorPartProvider position='left' />
                 </div>
-                <div className={`${CN}__right`}>
+                <div className={CN.rightPart}>
                     <EditorPartProvider position='right' />
-                </div>*/}
+                </div>
             </div>
-            {/*<Modal />*/}
+            <Modal />
         </>
     )
 }

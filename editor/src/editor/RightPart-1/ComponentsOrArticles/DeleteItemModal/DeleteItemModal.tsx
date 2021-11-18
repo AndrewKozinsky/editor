@@ -2,7 +2,7 @@
 // import {useDispatch, useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import {AppState} from 'store/rootReducer'
+// import {AppStateType} from 'store/rootReducer'
 // import actions from 'store/rootAction'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Hr from 'common/misc/Hr/Hr'
@@ -15,8 +15,8 @@
 } from '../stores'*/
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 // import {saveItemsOnServer} from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-// import deleteArticleRequest from 'src/requests/editor/article/deleteArticleRequest'
-// import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
+// import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+// import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 // import { articleFormMessages } from 'messages/articleFormMessages'
 // import {componentFormMessages} from 'messages/componentTemplateFormMessages'
 
@@ -36,8 +36,8 @@
     const articlesItems = useStore(articlesTreeStore)
 
     // uuid выделенного компонента или статьи
-    const {currentCompItemId} = useSelector((store: AppState) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     // Функция удаляющая выделенный компонент или статью
     const deleteItem = useCallback(async function () {

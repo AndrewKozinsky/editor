@@ -1,7 +1,6 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
 
 // Подсказки вкладок
-/*const obj = {
+export const mainTabsMessages = {
     mainTabMaterials: {
         eng: 'Materials',
         rus: 'Материалы'
@@ -14,6 +13,8 @@
         eng: 'Settings',
         rus: 'Настройки'
     },
-}*/
-
-// export const mainTabsMessages = getMessagesObject(obj)
+    mainTabHelp: {
+        eng: 'Help',
+        rus: 'Помощь'
+    },
+}

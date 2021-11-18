@@ -1,7 +1,7 @@
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import articleManager from './articleManager';
+// import articleManager from './articleManager'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import StoreArticleTypes from 'store/article/articleTypes';
+// import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
  * The function check can you insert a component into the target element

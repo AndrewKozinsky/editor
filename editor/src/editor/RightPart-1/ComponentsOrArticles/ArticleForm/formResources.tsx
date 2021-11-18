@@ -1,10 +1,9 @@
-// @ts-ignore
 // import * as yup from 'yup'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import { articleFormMessages } from 'messages/articleFormMessages'
-// import { updateArticleNameRequest } from 'src/requests/editor/article/updateArticleRequest'
-// import putArticlesFoldersRequest from 'src/requests/editor/article/putArticlesFoldersRequest'
+// import { updateArticleNameRequest } from 'requests/editor/article/updateArticleRequest'
+// import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
 // import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 /*import {
     articlesTreeStore,
@@ -30,7 +29,7 @@
                     }
                 },
             },
-            incFilesTemplateId: {
+            siteTemplateId: {
                 initialValue: [''],
             },
             submit: {
@@ -67,7 +66,7 @@
 
 
                 // Если поля формы заполнены неверно...
-                if($firstWrongField) {
+                if ($firstWrongField) {
                     // Разблокировать все поля. У кнопки отправки убрать блокировку и загрузку
                     formState = setLoadingStatusToForm(formState, formDetails.setFieldDataPropValue, false)
                     // Заблокировать кнопку отправки
@@ -151,7 +150,7 @@
     }
 
     // Если поля формы заполнены верно...
-    if(isFormValid) {
+    if (isFormValid) {
         // Разблокировать кнопку отправки
         return setFieldDataPropValue(formState, 'disabled', false, 'submit')
     }
@@ -196,7 +195,7 @@
     formState: FHTypes.FormState, setFieldDataPropValue: FHTypes.SetFieldDataPropValue, status: boolean
 ) {
     formState = setFieldDataPropValue(formState, 'disabled', status, 'name')
-    formState = setFieldDataPropValue(formState, 'disabled', status, 'incFilesTemplateId')
+    formState = setFieldDataPropValue(formState, 'disabled', status, 'siteTemplateId')
     formState = setFieldDataPropValue(formState, 'disabled', status, 'submit')
     formState = setFieldDataPropValue(formState, 'loading', status, 'submit')
 
@@ -215,8 +214,8 @@
     // Данные полей формы
     const fields = formDetails.readyFieldValues
     const articleName = fields.name.toString()
-    let templateId = fields.incFilesTemplateId
-        ? fields.incFilesTemplateId.toString()
+    let templateId = fields.siteTemplateId
+        ? fields.siteTemplateId.toString()
         : null
 
     // Отправить данные на сервер...

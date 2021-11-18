@@ -1,4 +1,3 @@
-
 $CN: wrapper;
 
 .#{$CN} {}
@@ -11,6 +10,10 @@ $CN: wrapper;
 .#{$CN}--align-right {
     display: flex;
     justify-content: flex-end;
+}
+.#{$CN}--align-justify {
+    display: flex;
+    justify-content: space-between;
 }
 
 
@@ -41,6 +44,9 @@ $CN: wrapper;
 
 
 // Классы дающие нижний оступ
+.#{$CN}--b5 {
+    margin-bottom: .5rem;
+}
 .#{$CN}--b10 {
     margin-bottom: 1rem;
 }
@@ -54,5 +60,6 @@ $CN: wrapper;
 
 // Класс дающий отступ между элементами обёртки
 .#{$CN}--gap10 {
+    display: flex;
     gap: 10px;
 }

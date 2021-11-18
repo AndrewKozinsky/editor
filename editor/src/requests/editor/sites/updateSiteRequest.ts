@@ -1,53 +1,32 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import SiteServerResponseType from './siteServerResponseType'
 
 /**
- * Функция отправляет данные для входа пользователя в редактор
- * @param {String} siteId — id сайта
- * @param {String} name — название сайта
- * @param {String} defaultIncFilesTemplateId — id шаблона подключаемых файлов по умолчанию
+ * Функция отправляет данные для обновления данных сайта
+ * @param {Object} values — новые данные сайта
+ * @param {Number} siteId — id изменяемого сайта
  */
-/*export default async function updateSiteRequest(
-    siteId: string, name: string, defaultIncFilesTemplateId: null | string
-) {
+export default async function updateSiteRequest(values: UpdateSiteRequestValuesType, siteId: number) {
     const options = {
         method: 'PATCH',
-        body: JSON.stringify({
-            name,
-            defaultIncFilesTemplateId,
-            siteId
-        })
+        body: JSON.stringify(values)
     }
+
     const response: UpdateSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
 
     return response
-}*/
+}
+
+// Данные для изменения сайта передаваемые в updateSiteRequest
+export type UpdateSiteRequestValuesType = {
+    name?: string, // название сайта
+    defaultSiteTemplateId?: null | number // id шаблона подключаемых файлов по умолчанию
+}
 
 
-// Тип данных с ответом от пользователя
-// type UpdateSiteRequestServerResponse = FailResponse | SuccessResponse
+//
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        site: {
-            defaultIncFilesTemplateId: null | string
-            name: string // "РУСХИТ"
-            userId: string // "60c626f9fd09180020febc99"
-            _id: string // "60c89dccfe73df002a1c4fa4"
-        }
-    }
-}*/
+// Тип данных с ответом от сервера
+type UpdateSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

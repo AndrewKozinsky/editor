@@ -2,7 +2,7 @@
 // import {updateArticleCodeRequest} from 'requests/editor/article/updateArticleRequest'
 // import StoreArticleTypes from 'store/article/articleTypes'
 // import actions from 'store/rootAction'
-// import store from 'store/store'
+// import { store } from 'store/rootReducer'
 // import articleManager from './articleManager'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
 // import deleteArticleRequest from '../../../requests/editor/article/deleteArticleRequest'
@@ -16,7 +16,7 @@
     // id of included files template id
     incFilesId?: string // '60cc62ab5405e00071442016'
     // open component template folder uuids
-    openCompFoldersUuIds?: FilesTreeType.UuIdArr // ['1', '3']
+    openCompFoldersUuIds?: FilesTreeType.IdArr // ['1', '3']
 }*/
 
 /**

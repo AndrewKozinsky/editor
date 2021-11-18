@@ -1,5 +1,5 @@
-// import {makeFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
+// import {makeFetch} from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
 
 
 /** Функция отправляет запрос на получение шаблонов компонентов сайта */
@@ -14,18 +14,9 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type GetComponentRequestServerResponse = FailResponse | SuccessResponse
+// type GetComponentRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
+
 
 // Успешный ответ
 /*type SuccessResponse = {

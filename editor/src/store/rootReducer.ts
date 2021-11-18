@@ -1,21 +1,32 @@
-// Core
 //@ts-ignore
-import { combineReducers } from 'redux'
-
+import { applyMiddleware, combineReducers, createStore } from 'redux'
 // Reducers
 import userReducer from './user/userReducer'
 import settingsReducer from './settings/settingsReducer'
-// import sitesReducer from './site/sitesReducer'
-// import modalReducer from './modal/modalReducer'
+import sitesReducer from './site/sitesReducer'
 // import articleReducer from './article/articleReducer'
+import modalReducer from './modal/modalReducer'
+// @ts-ignore
+import { composeWithDevTools } from 'redux-devtools-extension'
+// @ts-ignore
+import ReduxThunk from 'redux-thunk'
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 
 // Корневой редьюсер
-export const rootReducer = combineReducers({
-    user:  userReducer,
-    // sites:  sitesReducer,
-    settings:  settingsReducer,
+const rootReducer = combineReducers({
+    user:  userReducer, // Данные пользователя
+    sites:  sitesReducer,
+    settings:  settingsReducer, // Настройки приложения
     // article: articleReducer,
-    // modal:  modalReducer
+    modal:  modalReducer
 })
 
-export type AppState = ReturnType<typeof rootReducer>
+export const store = createStore(
+    rootReducer,
+    composeWithDevTools(
+        applyMiddleware(ReduxThunk)
+    )
+)
+
+export type AppStateType = ReturnType<typeof rootReducer>
+export const useAppSelector: TypedUseSelectorHook<AppStateType> = useSelector

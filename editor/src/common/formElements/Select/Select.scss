@@ -1,17 +1,17 @@
-//@import "../../commonStyles/commonStyles";
+@import "../../commonStyles/commonStyles";
 
 // ---------------------------------------------------------------
 
-//$wrapper-class: select-input-wrapper;
+$wrapper-class: select-input__wrapper;
 
 // Обёртка выпадающего списка
-/*.#{$wrapper-class} {
+.#{$wrapper-class} {
     position: relative;
     overflow: hidden;
     border-radius: var(--radius);
-}*/
+}
 
-/*.#{$wrapper-class}__tip {
+.#{$wrapper-class}-tip {
     position: absolute;
     top: 0;
     right: 0;
@@ -22,26 +22,25 @@
     align-items: center;
 
     background-color: var(--text-placeholder-color);
-}*/
+}
 
 // Класс добавляемый к обёртке при фокусировке на выпадающем списке
-/*.#{$wrapper-class}--focus {
+.#{$wrapper-class}--focus {
     @include focus;
 
-    .#{$wrapper-class}__tip {
+    .#{$wrapper-class}-tip {
         background-color: var(--accent-color);
     }
 
     svg {
         stroke: white;
     }
-}*/
+}
 
 // ---------------------------------------------------------------
 
-//$select-class: select-input;
+$select-class: select-input;
 
-/*
 .#{$select-class} {
     display: block;
     width: 100%;
@@ -59,4 +58,4 @@
     &:disabled {
         opacity: .5;
     }
-}*/
+}

@@ -1,8 +1,6 @@
 // import {useEffect} from 'react'
-// import {useSelector} from 'react-redux'
 //@ts-ignore
 // import {useStore} from 'effector-react'
-// import { AppState } from 'store/rootReducer'
 // import FHTypes from 'libs/formHandler/types'
 // import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 // import DragFilesTreeType from 'libs/DragFilesTree/types'
@@ -20,7 +18,7 @@
     const articlesItems = useStore(articlesTreeStore)
 
     // id текущей папки у статей
-    const {currentArtItemId} = useSelector((store: AppState) => store.sites.articlesSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
 
     useEffect(function () {
         setNewFolderName(articlesItems, currentArtItemId, formState, setFormState)

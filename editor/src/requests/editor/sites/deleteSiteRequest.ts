@@ -1,42 +1,21 @@
-// import {useFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
-// import { useSelector } from 'react-redux'
-// import { AppState } from 'src/store/rootReducer'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import SiteServerResponseType from './siteServerResponseType'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
 
-
-// Функция удаляет сайт
-/*export function useDeleteSite() {
-
-    // id выделенного сайта, который нужно удалить
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
-
+/**
+ * Запрос на удаление сайта
+ * @param {Number} siteId — id удаляемого сайта
+ */
+export default async function deleteSiteRequest(siteId: number) {
     // Параметры запроса
-    const options = { method: 'DELETE'}
+    const options = { method: 'DELETE' }
 
-    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: response, doFetch} =
-        useFetch<DeleteSiteServerResponse>(getApiUrl('site', currentSiteId), options)
-
-    return { response, doFetch }
-}*/
+    const response: DeleteSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
+    return response
+}
 
 
-// Тип данных с ответом от пользователя
-// type DeleteSiteServerResponse = null | FailResponse | SuccessResponse
+// Тип данных с ответом от сервера
+type DeleteSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-}*/

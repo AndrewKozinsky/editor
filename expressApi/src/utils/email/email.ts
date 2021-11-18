@@ -46,10 +46,10 @@ export class Email {
     /*send(subject: string, htmlContent: string, textContent: string) {
 
         // Послать письма разными сервисами в зависимости от режима работы
-        if(config.workMode === 'development') {
+        if (config.workMode === 'development') {
             this.sendFakeEmail(subject, htmlContent, textContent)
         }
-        else if(config.workMode === 'production') {
+        else if (config.workMode === 'production') {
             this.sendRealEmail(subject, htmlContent, textContent)
         }
     }*/
@@ -68,7 +68,7 @@ export class Email {
 
         // Create a transport
         const transport = nodemailer.createTransport({
-            host: config.fakeEmailHost,
+            host: config.fakeEmailDomain,
             port: config.fakeEmailPort,
             auth: {
                 user: config.fakeEmailUsername,
@@ -103,9 +103,9 @@ export class Email {
                 'to' : [
                     { "email" : this.to }
                 ]
-            };
+            }
 
-            sendpulse.smtpSendMail(answerGetter, email);
+            sendpulse.smtpSendMail(answerGetter, email)
         })*/
     }
 }

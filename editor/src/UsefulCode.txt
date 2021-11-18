@@ -5,7 +5,7 @@ const dispatch = useDispatch()
 // StoreSettingsTypes.EditorLanguage
 
 // Язык интерфейса
-const lang = useSelector((store: AppState) => store.settings.editorLanguage)
+const lang = useSelector((store: AppStateType) => store.settings.editorLanguage)
 
 
 $CN: left-part-3;

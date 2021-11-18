@@ -1,7 +1,7 @@
 import React from 'react'
 
 // Типы FormHandler
-namespace FHTypes {
+/*namespace FHTypes {
 
     // ОБЪЕКТ КОНФИГУРАЦИИ ------------------------------------------
     // Тип объекта конфигурации useFormHandler передаваемый пользователем
@@ -9,20 +9,7 @@ namespace FHTypes {
         // Объект с данными по полям
         fields: {
             // Имя поля. Например email
-            [key: string]: {
-                // Изначальное значение поля. Например: ['andkozinsky@gmail.com'].
-                initialValue?: FieldValue,
-                // Изначальные данные поля. Например { error: null }
-                initialData?: FieldData
-                // Обработчики браузерных событий
-                change?: ConfigFieldEventHandler
-                focus?: ConfigFieldEventHandler
-                blur?: ConfigFieldEventHandler
-                click?: ConfigFieldEventHandler
-                submit?: ConfigFieldEventHandler
-                // Обработчик изменения Состояния формы
-                statechange?: ConfigFieldEventHandler
-            }
+            [key: string]: ConfigField
         },
         form: {
             // Изначальные данные формы. Например { submitCounter: 0 }
@@ -34,6 +21,21 @@ namespace FHTypes {
             submit: ConfigFormEventHandler
         }
     }
+    export type ConfigField = {
+        // Изначальное значение поля. Например: ['andkozinsky@gmail.com'].
+        initialValue?: FieldValue,
+        // Изначальные данные поля. Например { error: null }
+        initialData?: FieldData
+        // Обработчики браузерных событий
+        change?: ConfigFieldEventHandler
+        focus?: ConfigFieldEventHandler
+        blur?: ConfigFieldEventHandler
+        click?: ConfigFieldEventHandler
+        submit?: ConfigFieldEventHandler
+        // Обработчик изменения Состояния формы
+        statechange?: ConfigFieldEventHandler
+    }
+
     // Обработчик события поля
     type ConfigFieldEventHandler = (formDetails: FormDetailsInEventHandler) => FormState
     // Обработчик события формы
@@ -211,6 +213,6 @@ namespace FHTypes {
         eventName: null | FormEventsNames,
         fieldName?: null | string
     }
-}
+}*/
 
-export default FHTypes
+// export default FHTypes

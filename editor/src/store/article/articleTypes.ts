@@ -85,9 +85,9 @@
     }
 
     // Set article object
-    export const SET_INC_FILES_TEMPLATE = 'SET_INC_FILES_TEMPLATE'
+    export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
     export type SetIncFilesTemplateAction = {
-        type: typeof SET_INC_FILES_TEMPLATE
+        type: typeof SET_SITE_TEMPLATE
         payload: {
             inHead: string
             beforeEndBody: string

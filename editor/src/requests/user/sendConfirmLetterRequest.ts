@@ -1,27 +1,29 @@
-// import {useEffect, useState} from 'react'
-// import {useFetch, makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import {useEffect, useState} from 'react'
+import {useFetch, makeFetch} from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import UserServerResponseType from './userServerResponseType'
 
 /**
  * Функция отправляет еще одно письмо для подтверждения почты пользователя
  * @param {Object} email — Почта пользователя, которую нужно подтвердить
  */
-/*export default async function sendConfirmLetterRequest(email: string) {
+export default async function sendConfirmLetterRequest(email: string) {
     const options = {
         method: 'POST',
         body: JSON.stringify({email: email})
     }
-    const response: SendConfirmLetterServerResponse = await makeFetch(getApiUrl('login'), options)
+    const response: SendConfirmLetterServerResponse = await makeFetch(getApiUrl('sendConfirmLetter'), options)
 
     return response
-}*/
+}
 
 
 /**
  * Хук возвращает функцию делающую запрос на отправку еще одного письма с подтверждением почты
  * @param {String} email — почта пользователя, которую нужно подтвердить.
  */
-/*export function useGetSendConfirmLetter(email: string) {
+export function useGetSendConfirmLetter(email: string) {
 
     const [success, setSuccess] = useState(false)
 
@@ -33,7 +35,7 @@
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
     const { isLoading, data, error, doFetch } = useFetch<SendConfirmLetterServerResponse>(
-        getApiUrl('sendAnotherConfirmLetter'), options
+        getApiUrl('sendConfirmLetter'), options
     )
 
     // При получении данных с сервера...
@@ -43,8 +45,6 @@
         if (data.status === 'success') {
             setSuccess(true)
         }
-
-
     }, [data])
 
     return {
@@ -53,31 +53,8 @@
         error, // В процессе запроса возникли ошибки
         doFetch // Функция делающая запрос
     }
-}*/
+}
 
 
 // Тип данных с ответом от пользователя
-// type SendConfirmLetterServerResponse = FailResponse | SuccessResponse
-
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        user: {
-            name: string
-            email: string
-        }
-    }
-}*/
+type SendConfirmLetterServerResponse = ErrorServerResponseType | UserServerResponseType

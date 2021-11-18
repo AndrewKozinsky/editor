@@ -1,5 +1,5 @@
 // import {ConsistObj} from './getConsistObjsArr'
-// import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import { parseComponent } from './parseComponent'
 // import { HTMLObjArrType } from './htmlStringToObject'
 // import {parseText} from '../parseText/parseText'
@@ -16,10 +16,10 @@
         const parsedChildren: HTMLObjArrType.Arr = []
 
         for (let child of consistObj.dataElem.children) {
-            if(child.type === 'component') {
+            if (child.type === 'component') {
                 parsedChildren.push(parseComponent(child, tempComps))
             }
-            else if(child.type === 'textComponent') {
+            else if (child.type === 'textComponent') {
                 // Set additional attribute with text data component id
                 // in order to get information about text component in element
                 consistObj.htmlElem.attrs['data-em-text-data-comp-id'] = child.dataCompId.toString()

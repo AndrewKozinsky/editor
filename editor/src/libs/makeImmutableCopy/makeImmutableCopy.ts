@@ -10,20 +10,20 @@
 export default function makeImmutableObj(mainData: any, originalData: any, changedData: any, newData?: any) {
 
     // Если mainData равен originalData, тогда вернуть изменённый объект
-    if(mainData === originalData) {
+    if (mainData === originalData) {
         return changedData
     }
 
 
     // Есть в mainData нет целевого объекта, то вернуть переданный mainData
-    if(!isDataHasOriginalData(mainData, originalData)) return mainData
+    if (!isDataHasOriginalData(mainData, originalData)) return mainData
 
 
     // В mainData есть целевой объект...
 
 
     // Если это массив...
-    if(toString.call(mainData) === "[object Array]") {
+    if (toString.call(mainData) === "[object Array]") {
 
         // Скопировать массив и вставить как значение возвращаемого объекта
         newData = mainData.concat()
@@ -40,7 +40,7 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
 
 
     // Если это объект...
-    if(toString.call(mainData) === "[object Object]") {
+    if (toString.call(mainData) === "[object Object]") {
 
         // Скопировать объект и вставить как значение возвращаемого объекта
         newData = Object.assign({}, mainData)
@@ -70,17 +70,17 @@ export default function makeImmutableObj(mainData: any, originalData: any, chang
 function isDataHasOriginalData(currentData: any, originalData: any) {
 
     // Если текущий объект равен целевому объекту, то вернуть правду
-    if(currentData === originalData) return true;
+    if (currentData === originalData) return true
 
 
     // Если это массив
-    if(toString.call(currentData) === "[object Array]") {
+    if (toString.call(currentData) === "[object Array]") {
 
         // Перебрать все элементы массива...
         for(let i = 0; i < currentData.length; i++) {
 
             // ... и передать элемент на проверку.
-            if(isDataHasOriginalData(currentData[i], originalData)) {
+            if (isDataHasOriginalData(currentData[i], originalData)) {
                 return true
             }
         }
@@ -88,13 +88,13 @@ function isDataHasOriginalData(currentData: any, originalData: any) {
 
 
     // Если это объект
-    if(toString.call(currentData) === "[object Object]") {
+    if (toString.call(currentData) === "[object Object]") {
 
         // Перебрать все свойства объекта
         for(let key in currentData) {
 
             // ... и передать значение свойства на проверку.
-            if(isDataHasOriginalData(currentData[key], originalData)) {
+            if (isDataHasOriginalData(currentData[key], originalData)) {
                 return true
             }
         }

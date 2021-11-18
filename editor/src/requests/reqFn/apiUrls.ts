@@ -6,36 +6,46 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
     // Вход пользователя. В ответ сервер отправляет токен авторизации.
-    // login: 'users/login',
+    login: 'users/login',
     // Регистрация
-    // signup: 'users/signup',
+    signup: 'users',
     // Отправка письма со ссылкой на подтверждение почты
-    // sendAnotherConfirmLetter: 'users/sendAnotherConfirmLetter',
+    sendConfirmLetter: 'users/sendConfirmLetter',
     // Подтверждение почты
-    /*confirmEmail: function (confirmEmailToken: string) {
+    confirmEmail: function (confirmEmailToken: string) {
         return 'users/confirmEmail/' + confirmEmailToken
-    },*/
+    },
     // Изменение почты
-    // changeEmail: 'users/changeEmail',
+    changeEmail: 'users/changeEmail',
     // Изменение пароля
-    // changePassword: 'users/changePassword',
+    changePassword: 'users/changePassword',
     // Сброс пароля
-    // resetPassword: 'users/resetPassword',
+    resetPassword: 'users/resetPassword',
     // Отправка нового пароля вместо сброшенного
-    /*changeResetPassword: function (resetPasswordToken: string) {
+    changeResetPassword: function (resetPasswordToken: string) {
         return 'users/resetPassword/' + resetPasswordToken
-    },*/
+    },
     // Текущий пользователь
-    // me: 'users/me',
+    me: 'users/me',
 
 
     // САЙТЫ
     // Сайты
-    // sites: 'sites',
+    sites: 'sites',
     // Конкретный сайт
-    /*site: function (siteId: string) {
+    site: function (siteId: string) {
         return 'sites/' + siteId
-    },*/
+    },
+
+    // SITE TEMPLATES
+    // Шаблоны подключаемых файлов
+    siteTemplates: function (siteId: string) {
+        return 'sites/' + siteId + '/siteTemps'
+    },
+    createSiteTemplate: 'siteTemplates',
+    siteTemplate: function (siteTemplateId: number) {
+        return 'siteTemplates/' + siteTemplateId
+    },
 
 
     // SITE COMPONENTS
@@ -44,32 +54,34 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'sites/' + siteId + '/components'
     },*/
 
-
-    // SITE INC FILES TEMPLATES
-    // Шаблоны подключаемых файлов
-    /*incFiles: function (siteId: string, incFilesId?: string) {
-        if (incFilesId) return 'sites/' + siteId + '/incFiles/' + incFilesId
-        else return 'sites/' + siteId + '/incFiles'
-    },*/
-
-    // Папки шаблонов компонентов
-    /*componentsFolders: function (siteId: string) {
-        return 'componentsFolders/' + siteId
-    },*/
+    // Папка шаблонов компонентов
+    compFoldersBySite: function (siteId: number) {
+        return `sites/${siteId}/compFolders`
+    },
+    compFolder: function (compFolderId: number) {
+        return compFolderId
+            ? 'compFolders/' + compFolderId
+            : 'compFolders/'
+    },
     // Шаблон компонента
-    /*component: function (uuid?: string) {
-        if (uuid) return 'components/' + uuid
-        else return 'components/'
-    },*/
+    components: 'components',
+    component: function (compId: number) {
+        return 'components/' + compId
+    },
     // Папки статей
-    /*articlesFolders: function (siteId: string) {
-        return 'articlesFolders/' + siteId
-    },*/
+    artFoldersBySite: function (siteId: number) {
+        return `sites/${siteId}/artFolders`
+    },
+    artFolder: function (artFolderId?: number) {
+        return artFolderId
+            ? 'artFolders/' + artFolderId
+            : 'artFolders/'
+    },
     // Статья
-    /*article: function (uuid?: string) {
-        if (uuid) return 'articles/' + uuid
-        else return 'articles/'
-    },*/
+    articles: 'articles',
+    article: function (artId: number) {
+        return 'articles/' + artId
+    },
 }
 
 
@@ -79,10 +91,10 @@ function getApiUrl(url: string, ...args: any[]): string {
 
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
-            return '/api/' + addresses[url]
+            return '/api2/' + addresses[url]
         }
         else {
-            return '/api/' + addresses[url](...args)
+            return '/api2/' + addresses[url](...args)
         }
     }
 

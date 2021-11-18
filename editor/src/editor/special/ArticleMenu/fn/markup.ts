@@ -1,11 +1,9 @@
 // import {useEffect, useState} from 'react'
-// import {useSelector} from 'react-redux'
-// import { AppState } from 'store/rootReducer'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 /*
 export function useIsMarkupBtnDisabled() {
-    const {articleUuId} = useSelector((store: AppState) => store.article)
+    const {articleUuId} = useSelector((store: AppStateType) => store.article)
     const article = articleManager.hooks.getArticle()
 
     // Is button disabled

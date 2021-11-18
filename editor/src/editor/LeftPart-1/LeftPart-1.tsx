@@ -1,29 +1,32 @@
-// import React from 'react'
-// import { sitesPanelMessages } from 'messages/sitesPanelMessages'
-// import { useSelector } from 'react-redux'
-// import { AppState } from 'store/rootReducer'
-// import NameSection from '../wrappers/NameSection/NameSection'
-// import Button from 'common/formElements/Button/Button'
-/*import {
+import React from 'react'
+import NameSection from '../wrappers/NameSection/NameSection'
+import Button from 'common/formElements/Button/Button'
+import {
     useFetchSites,
     useGetNewSiteOnClickHandler,
     useGetSitesItemsListProps
-} from './LeftPart1-func'*/
-// import ItemsList from 'common/ItemsList/ItemsList'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import { MiscTypes } from 'types/miscTypes'
-// import './LeftPart-1.scss'
+} from './LeftPart1-func'
+import ItemsList from 'common/ItemsList/ItemsList'
+import Wrapper from 'common/Wrapper/Wrapper'
+import { MiscTypes } from 'types/miscTypes'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import useGetMessages from 'messages/fn/useGetMessages'
+import { sitesPanelMessages } from 'messages/sitesPanelMessages'
+import './LeftPart-1.scss'
 
 
-/*type LeftPart1PropType = {
+
+type LeftPart1PropType = {
     display?: boolean // Показывать ли компонент
-}*/
+}
 
 /** Левая часть первой главной вкладки */
-/*export default function LeftPart1(props: LeftPart1PropType) {
+export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
+
+    const sitesPanelMsg = useGetMessages(sitesPanelMessages)
 
     // Атрибуты обёртки панели
     const CN = 'left-part-1'
@@ -31,26 +34,29 @@
 
     return (
         <div className={CN} style={style}>
-            <NameSection header={sitesPanelMessages.header}>
+            <NameSection header={sitesPanelMsg.header}>
                 <NewSiteButton />
                 <SitesButtons />
             </NameSection>
         </div>
     )
-}*/
+}
 
 /** Компонент кнопки создания нового сайта */
-/*function NewSiteButton() {
+function NewSiteButton() {
 
     // id выделенного сайта
-    const {currentSiteId} = useSelector((store: AppState) => store.sites)
+    const { currentSiteId } = useGetSitesSelectors()
+    // const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewSiteOnClickHandler()
 
+    const sitesPanelMsg = useGetMessages(sitesPanelMessages)
+
     // Атрибуты кнопки
     const attrs: MiscTypes.ObjStringKeyAnyVal = {
-        text: sitesPanelMessages.newSiteBtn,
+        text: sitesPanelMsg.newSiteBtn,
         icon: 'btnSignAdd',
         block: true,
         onClick: onClickHandler
@@ -60,10 +66,10 @@
     }
 
     return <Button {...attrs} />
-}*/
+}
 
 /** Компонент списка сайтов */
-/*function SitesButtons() {
+function SitesButtons() {
     // Получить с сервера список сайтов и поставить в Хранилище
     useFetchSites()
 
@@ -75,4 +81,4 @@
             <ItemsList {...itemsListProps}/>
         </Wrapper>
     )
-}*/
+}

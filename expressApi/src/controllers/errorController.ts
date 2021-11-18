@@ -35,15 +35,15 @@ export function globalErrorHandler (err: any, req: Request, res: Response, next:
     error.message = getMessageDependingOnTheLang(err.message, lang)
 
     // Если значение поля должно быть уникальным, но ввели дублирующие значения.
-    if(error.code === 11000) error = handleDuplicateFieldsBD(error, lang);
-    if(error.errors) error = handleValidationErrorBD(error);
-    if(error.name === 'JsonWebTokenError') handleJWTError(error)
-    // if(error.name === 'TokenExpiredError') handleJWTExpiredError(error)
+    if (error.code === 11000) error = handleDuplicateFieldsBD(error, lang);
+    if (error.errors) error = handleValidationErrorBD(error);
+    if (error.name === 'JsonWebTokenError') handleJWTError(error)
+    // if (error.name === 'TokenExpiredError') handleJWTExpiredError(error)
 
-    if(config.workMode === 'development') {
+    if (config.workMode === 'development') {
         sendErrorDev(error, res)
     }
-    else if(config.workMode === 'production') {
+    else if (config.workMode === 'production') {
         sendErrorProd(error, res)
     }
 }
@@ -69,7 +69,7 @@ function sendErrorDev(err: ErrorType, res: Response) {
 // Функция отправляет ошибочный ответ в режиме публикации
 function sendErrorProd(err: ErrorType, res: Response) {
 
-    if(err.isOperational) {
+    if (err.isOperational) {
         res
             .status(err.statusCode)
             .json({

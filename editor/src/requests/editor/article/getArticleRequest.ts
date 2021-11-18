@@ -4,7 +4,7 @@
 
 
 /** Функция получает данные статьи */
-/*export default async function getArticleRequest(articleUuid: FilesTreeType.UuId) {
+/*export default async function getArticleRequest(articleUuid: FilesTreeType.Id) {
 
     const options = { method: 'GET' }
     const response: GetArticleRequestServerResponse = await makeFetch(
@@ -15,18 +15,8 @@
 }*/
 
 // Тип данных с ответом от пользователя
-// type GetArticleRequestServerResponse = FailResponse | SuccessResponse
+// type GetArticleRequestServerResponse = ErrorServerResponseType | SuccessResponse
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
 
 // Успешный ответ
 /*type SuccessResponse = {

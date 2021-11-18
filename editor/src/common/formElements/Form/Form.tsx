@@ -1,16 +1,16 @@
-import React, { ReactNode } from 'react'
-import FHTypes from 'libs/formHandler/types'
-import './Form.scss'
+// import React, { ReactNode } from 'react'
+// import FHTypes from 'libs/formHandler/types'
+// import './Form.scss'
 
 
-type FormPropType = {
+/*type FormPropType = {
     name: string
     formHandlers: FHTypes.FormHandlers
     children: ReactNode
-}
+}*/
 
 /** Компонент формы оборачивающий поля */
-export default function Form(props: FormPropType) {
+/*export default function Form(props: FormPropType) {
     const {
         name,
         formHandlers,
@@ -25,4 +25,4 @@ export default function Form(props: FormPropType) {
             {children}
         </form>
     );
-}
+}*/

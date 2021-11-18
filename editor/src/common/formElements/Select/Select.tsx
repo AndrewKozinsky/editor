@@ -1,14 +1,14 @@
-// import React, {useState} from 'react'
-// import { getOptions, getWrapperClasses } from './Select-func'
-// import { OptionsType } from './SelectTypes'
-// import { MiscTypes } from 'types/miscTypes'
-// import { getRandomId } from 'utils/StringUtils'
-// import Label from '../Label/Label'
-// import SvgIcon from '../../icons/SvgIcon'
-// import './Select.scss'
+import React, {useState} from 'react'
+import { getOptions } from './Select-func'
+import { OptionsType } from './SelectTypes'
+import { MiscTypes } from 'types/miscTypes'
+import { getRandomId } from 'utils/StringUtils'
+import makeClasses from './Select-classes'
+import Label from '../Label/Label'
+import SvgIcon from '../../icons/SvgIcon'
 
 
-/*export type SelectPropType = {
+export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
@@ -16,19 +16,19 @@
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     disabled?: boolean // Заблокировано ли поле
-}*/
+}
 
 /* Компонент выпадающего списка */
-/*export default function Select(props: SelectPropType) {
+export default function Select(props: SelectPropType) {
 
     const {
         label, // Подпись выпадающего списка
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
-        disabled = false, // Заблокировано ли поле
         onChange, // Обработчик выбора пункта
         onBlur, // Обработчик потерей полем фокуса
+        disabled = false, // Заблокировано ли поле
     } = props
 
     // Находится ли выпадающий список под фокусом
@@ -36,6 +36,8 @@
 
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
+
+    const CN = makeClasses(isFocus)
 
     // Атрибуты поля
     const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
@@ -56,18 +58,17 @@
     if (label) inputAttribs.id = id
     if (disabled) inputAttribs.disabled = true
 
-
     return (
         <>
-            <Label label={label}  id={id} />
-            <div className={getWrapperClasses(isFocus)}>
+            <Label label={label} id={id} />
+            <div className={CN.wrapper}>
                 <select {...inputAttribs}>
                     {getOptions(options)}
                 </select>
-                <div className='select-input-wrapper__tip'>
+                <div className='select-input__wrapper-tip'>
                     <SvgIcon type='selectInputArrows' baseClass='-icon-stroke' />
                 </div>
             </div>
         </>
     )
-}*/
+}

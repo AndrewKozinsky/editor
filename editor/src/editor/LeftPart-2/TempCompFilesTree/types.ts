@@ -15,7 +15,7 @@
     export type UuId = string
 
     // Массив uuid
-    export type UuIdArr = FilesTreeType.UuIdArr
+    export type UuIdArr = FilesTreeType.IdArr
 
     // Тип элемента: файл или папка
     // export type ItemType = FilesTreeType.ItemType

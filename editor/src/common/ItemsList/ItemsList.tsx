@@ -1,20 +1,19 @@
-// import React from 'react'
-// import { useGetItemClasses } from './ItemsList-func'
-// import './ItemsList.scss'
+import React from 'react'
+import makeClasses from './ItemsList-classes'
 
 
-/*export type ItemType = {
-    id: string
+export type ItemType = {
+    id: number | string
     name: string
     onClick: () => void // Функция запускаемая при щелчке по пункту
-}*/
+}
 
-/*export type ItemsListPropType = {
+export type ItemsListPropType = {
     items: ItemType[], // Список пунктов
-    activeItemId: string // id выбранного пункта
-}*/
+    activeItemId: number | null | string // id выбранного пункта
+}
 
-/*export default function ItemsList(props: ItemsListPropType) {
+export default function ItemsList(props: ItemsListPropType) {
     const {
         items,
         activeItemId
@@ -24,36 +23,34 @@
         <div>
             {
                 items.map(item => {
-                    if (item.id === activeItemId) {
-                        return <Item item={item} key={item.id} isActive />
-                    } else {
-                        return <Item item={item} key={item.id} />
-                    }
+                    return item.id === activeItemId
+                        ? <Item item={item} key={item.id} isActive />
+                        : <Item item={item} key={item.id} />
                 })
             }
         </div>
     )
-}*/
+}
 
 
-/*type ItemPropType = {
+type ItemPropType = {
     item: ItemType, // Данные пункта
     isActive?: boolean // Активен ли пункт
-}*/
+}
 
 /** Кнопка списка */
-/*function Item(props: ItemPropType) {
+function Item(props: ItemPropType) {
     const {
         item,
         isActive,
     } = props
 
     // Формирование классов кнопки
-    const classes = useGetItemClasses(isActive)
+    const CN = makeClasses(isActive)
 
     return (
-        <button className={classes} onClick={item.onClick}>
+        <button className={CN.item} onClick={item.onClick}>
             {item.name}
         </button>
     )
-}*/
+}

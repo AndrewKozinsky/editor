@@ -1,12 +1,12 @@
-import React from 'react'
-import { getHeaderClasses } from './Header-func'
-import './Header.scss'
+import React, { ReactElement } from 'react'
+import makeClasses from './Header-classes'
 
 
 export type HeaderPropType = {
-    text: string
-    type?: 'h1' | 'h2' // Тип заголовка: он задаёт тег заголовка и размер текста
+    text: string | ReactElement
+    type?: HeaderTypeType // Тип заголовка: он задаёт тег заголовка и размер текста
 }
+export type HeaderTypeType = 'h1' | 'h2'
 
 /** Заголовок */
 export default function Header(props: HeaderPropType) {
@@ -16,8 +16,10 @@ export default function Header(props: HeaderPropType) {
         type = 'h1' // Тип заголовка: h1. Позже будут добавлены другие типы
     } = props
 
+    const CN = makeClasses(type)
+
     return (
-        <h1 className={getHeaderClasses(type)}>
+        <h1 className={CN.root}>
             { text }
         </h1>
     )

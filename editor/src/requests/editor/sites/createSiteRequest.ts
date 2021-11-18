@@ -1,42 +1,26 @@
-// import {makeFetch} from 'src/requests/reqFn/fetch'
-// import getApiUrl from 'src/requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
+import SiteServerResponseType from './siteServerResponseType'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
- * @param {String} name — название сайта
+ * @param {String} values — данные для создания сайта
  */
-/*export default async function createSiteRequest(name: string) {
+export default async function createSiteRequest(values: CreateSiteRequestValuesType) {
     const options = {
         method: 'POST',
-        body: JSON.stringify({name})
+        body: JSON.stringify(values)
     }
     const response: CreateSiteRequestServerResponse = await makeFetch(getApiUrl('sites'), options)
     return response
-}*/
+}
 
 
-// Тип данных с ответом от пользователя
-// type CreateSiteRequestServerResponse = FailResponse | SuccessResponse
+// Данные для создания сайта передаваемые в createSiteRequest
+export type CreateSiteRequestValuesType = {
+    name: string
+}
 
-// Ошибочный ответ
-/*type FailResponse = {
-    status: "fail"
-    errors: {
-        field: null
-        isOperational: true
-        message: string
-        statusCode: 400
-    }
-}*/
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        site: {
-            id: string // "60c6e368fd09180020febc9a",
-            name: string // "РУСХИТ"
-        }
-    }
-}*/
+// Тип данных с ответом от сервера
+type CreateSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

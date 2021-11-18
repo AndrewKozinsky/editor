@@ -1,7 +1,7 @@
-import React from 'react'
-import FHTypes from '../types'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import { setServiceDataToField } from './useSetServiceDataToForm'
+// import React from 'react'
+// import FHTypes from '../types'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import { setServiceDataToField } from './useSetServiceDataToForm'
 
 /**
  * Обработчик изменения поля формы
@@ -9,7 +9,7 @@ import { setServiceDataToField } from './useSetServiceDataToForm'
  * @param {Object} formState — Состояние формы
  * @param {Function} setFormState — функция изменяющая Состояние формы
  */
-export default function inputChangeHandler(
+/*export default function inputChangeHandler(
     e: React.BaseSyntheticEvent,
     formState: FHTypes.FormState,
     setFormState: FHTypes.SetFormState
@@ -33,14 +33,14 @@ export default function inputChangeHandler(
     // Получение и установка нового Состояния формы
     let newState: FHTypes.FormState = makeImmutableObj(formState, inputData, inputDataCopy)
     setFormState(newState)
-}
+}*/
 
 /**
  * Функция получает новое значение поля и в зависимости от типа поля возвращает новый массив значений поля
  * @param {Object} inputData — данные поля
  * @param {String} newValue — новое значение поля
  */
-function getNewValue(inputData: FHTypes.FieldStateObj, newValue: string) {
+/*function getNewValue(inputData: FHTypes.FieldStateObj, newValue: string) {
     if (inputData.valueCount === 'zero') {
         return ['']
     }
@@ -61,4 +61,4 @@ function getNewValue(inputData: FHTypes.FieldStateObj, newValue: string) {
 
         return valuesNewArr
     }
-}
+}*/
