@@ -113,7 +113,7 @@ export class SiteService {
         // Удалить шаблоны сайта
         await this.siteTemplateService.deleteSiteTemplates(siteId)
 
-        // Удалить папки шаблонов компонентов
+        // Удалить папку шаблонов компонентов
         await this.compFolderService.deleteCompFolderBySiteId(siteId, currentUser)
 
         // Удалить шаблоны компонентов

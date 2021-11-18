@@ -66,7 +66,7 @@ export function useGetToggleFolder(
         // которая должна запускаться при разворачивании/сворачивании папки
         // и передать массив открытых папок
         if (after.collapseFolder) {
-            // Получить uuid раскрытых папок
+            // Получить id раскрытых папок
             const openedFoldersId = getOpenedFoldersId(newItems)
             after.collapseFolder(openedFoldersId)
         }

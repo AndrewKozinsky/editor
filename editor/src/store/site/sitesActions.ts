@@ -5,27 +5,18 @@ import { store } from 'store/rootReducer'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
-import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
-import { CompFolderType } from 'requests/editor/compFolders/compFolderServerResponseType'
 import DragFilesTreeType from '../../libs/DragFilesTree/types'
-import { getOpenedFoldersId } from '../../libs/DragFilesTree/StoreManage/manageState'
-import filesTreePublicMethods from '../../libs/DragFilesTree/publicMethods'
-import {getOpenedFoldersIds} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-import {getFromLocalStorage} from '../../utils/MiscUtils'
+// import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
+// import { getOpenedFoldersId } from '../../libs/DragFilesTree/StoreManage/manageState'
+// import filesTreePublicMethods from '../../libs/DragFilesTree/publicMethods'
+// import {getOpenedFoldersIds} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+// import {getFromLocalStorage} from '../../utils/MiscUtils'
+import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
 // import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
 // import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
-// import FilesTreeType from '../../types/filesTree'
 
 
 const sitesActions = {
-    // Установка id текущей основной вкладки справа
-    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
-        return {
-            type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
-            payload
-        }
-    },
-
 
     // САЙТЫ =====================================================================================
 
@@ -67,8 +58,17 @@ const sitesActions = {
         }
     },
 
+    // ПРАВЫЕ ВКЛАДКИ ==================================================================================
 
-    // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ===========================================================================
+    // Установка id текущей основной вкладки справа
+    setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+        return {
+            type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
+            payload
+        }
+    },
+
+    // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ==================================================================================
 
     // Загрузка с сервера шаблонов сайта и установка в Хранилище
     requestSiteTemplates() {
@@ -103,14 +103,6 @@ const sitesActions = {
         }
     },
 
-    // Установка массива шаблонов сайта
-    setTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {
-        return {
-            type: StoreSitesTypes.SET_SITE_TEMPLATES,
-            payload
-        }
-    },
-
     // Установка id выбранного шаблона сайта
     setCurrentSiteTemplateId(payload: StoreSitesTypes.CurrentSiteTemplateId): StoreSitesTypes.SetCurrentSiteTemplateIdAction {
         return {
@@ -119,6 +111,13 @@ const sitesActions = {
         }
     },
 
+    // Установка массива шаблонов сайта
+    setTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {
+        return {
+            type: StoreSitesTypes.SET_SITE_TEMPLATES,
+            payload
+        }
+    },
 
     // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
 
@@ -128,45 +127,134 @@ const sitesActions = {
 
             // Запрос к серверу на получение кода папки с компонентами
             const response = await getCompFolderRequest(currentSiteId)
-
             if (response.status !== 'success') return
 
-            const compFolderObj: StoreSitesTypes.CompFolderActionPayload = {
-                compFolderId: response.data.compFolders[0].id,
-                compFolder: null
+            let foldersData = response.data.compFolders[0]
+
+            if (foldersData) {
+                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
+                // ОТДЕЛЬНЫЙ ЭКШЕН.
+                // const openedFoldersIds = getOpenedFoldersIds('components')
+                /*if (openedFoldersIds) {
+                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
+                }*/
+
+                // id последней выбранной папки или компонента из LocalStorage
+                // const editorComponentId = getFromLocalStorage('editorComponentId')
+
+                // Выделить элемент, который должен быть выделен
+                // foldersData = selectItem(foldersData, editorComponentId).newItems
             }
-
-            let foldersData = response.data.compFolders[0].content
-
-            const openedFoldersIds = getOpenedFoldersIds('components')
-            if (openedFoldersIds) {
-                foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
-            }
-
-            // id последней выбранной папки или компонента из LocalStorage
-            const editorComponentId = getFromLocalStorage('editorComponentId')
-
-            // Выделить элемент, который должен быть выделен
-            foldersData = selectItem(foldersData, editorComponentId).newItems
-
-            compFolderObj.compFolder = foldersData
-
 
             // Установка папки с компонентами в Хранилище
-            dispatch( sitesActions.setCompFolder(compFolderObj) )
+            // dispatch( sitesActions.setCompFolder(compFolder) )
+            dispatch( sitesActions.setCompFolder({
+                id: foldersData.id,
+                folders: foldersData.content
+            }) )
         }
     },
 
     // Установка папки компонентов
-    setCompFolder(payload: StoreSitesTypes.CompFolderActionPayload): StoreSitesTypes.SetCompFolderAction {
+    setCompFolder(payload: StoreSitesTypes.SetCompFolderActionPayload): StoreSitesTypes.SetCompFolderAction {
         return {
             type: StoreSitesTypes.SET_COMP_FOLDER,
+            payload
+        }
+    },
+
+    // ПАПКИ СО СТАТЬЯМИ ==================================================================================
+
+    requestArtFolder() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            const { currentSiteId } = getState().sites
+
+            // Запрос к серверу на получение кода папки со статьями
+            const response = await getArtFolderRequest(currentSiteId)
+            if (response.status !== 'success') return
+
+            let foldersData = response.data.artFolders[0]
+
+            if (foldersData) {
+                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
+                // ОТДЕЛЬНЫЙ ЭКШЕН.
+                // const openedFoldersIds = getOpenedFoldersIds('articles')
+                /*if (openedFoldersIds) {
+                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
+                }*/
+
+                // id последней выбранной папки или компонента из LocalStorage
+                // const editorArticleId = getFromLocalStorage('editorArticleId')
+
+                // Выделить элемент, который должен быть выделен
+                // foldersData = selectItem(foldersData, editorArticleId).newItems
+            }
+
+            // Установка папки с компонентами в Хранилище
+            dispatch( sitesActions.setArtFolder({
+                id: foldersData.id,
+                folders: foldersData.content
+            }) )
+        }
+    },
+
+    // Установка папки статей
+    setArtFolder(payload: StoreSitesTypes.SetArtFolderActionPayload): StoreSitesTypes.SetArtFolderAction {
+        return {
+            type: StoreSitesTypes.SET_ART_FOLDER,
             payload: payload
         }
     },
 
+    // КОМПОНЕНТЫ ==================================================================================
 
-    // ШАБЛОНЫ КОМПОНЕНТОВ ==================================================================================
+    // Установка id и типа выбранного шаблона компонента
+    setCurrentComp(
+        id: null | DragFilesTreeType.Id,
+        type: null | DragFilesTreeType.ItemType,
+        name?: string,
+        code?: string
+    ): StoreSitesTypes.SetCurrentCompAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_COMP,
+            payload: {
+                id,
+                type,
+                name,
+                code
+            }
+        }
+    },
+
+    // СТАТЬИ ======================================================================================
+
+    // Установка id и типа выбранного шаблона компонента
+    setCurrentArt(
+        id: null | DragFilesTreeType.Id,
+        type: null | DragFilesTreeType.ItemType,
+        name?: string,
+        code?: string,
+        siteTemplateId?: null | number
+    ): StoreSitesTypes.SetCurrentArtAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_ART,
+            payload: {
+                id,
+                type,
+                name,
+                code,
+                siteTemplateId
+            }
+        }
+    },
+
+
+
+
+
+
+
+
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
     /*requestComponentTemplate() {
@@ -191,22 +279,6 @@ const sitesActions = {
         }
     },*/
 
-    // Установка id и типа выбранного шаблона компонента
-    setCurrentComp(
-        id: null | DragFilesTreeType.Id,
-        type: null | DragFilesTreeType.ItemType,
-        // compData?: ComponentDataType
-    ): StoreSitesTypes.SetCurrentCompAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_COMP,
-            payload: {
-                id,
-                type,
-                // compData
-            }
-        }
-    },
-
     // Component Template item (folder or file) type setting
     /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
         return {
@@ -224,11 +296,6 @@ const sitesActions = {
     },*/
 
 
-    // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
-
-
-
-    // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера шаблона компонента и установка в Хранилище
     /*requestArticle() {
@@ -252,22 +319,6 @@ const sitesActions = {
         }
     },*/
 
-    // Установка id и типа выбранного шаблона компонента
-    /*setCurrentArt(
-        id: null | FilesTreeType.Id,
-        type: null | FilesTreeType.ItemType,
-        article?: ArticleDataType
-    ): StoreSitesTypes.SetCurrentArtAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_ART,
-            payload: {
-                id,
-                type,
-                article
-            }
-        }
-    },*/
-
     // Article item (folder or file) type setting
     /*setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
         return {
@@ -286,20 +337,3 @@ const sitesActions = {
 }
 
 export default sitesActions
-
-
-
-
-
-const config = {
-    name: 'Стандартные стили',
-    head: [
-        '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">',
-        '<meta http-equiv="x-rim-auto-match" content="none">',
-        '<script type="text/javascript" async="" id="mtsadv-counter" src="https://tech.rtb.mts.ru/js/sync.js"></script>'
-    ],
-    bodyEnd: [
-        '<script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script>',
-        '<script type="text/javascript" async="" id="mtsadv-counter" src="https://tech.rtb.mts.ru/js/sync.js"></script>'
-    ]
-}

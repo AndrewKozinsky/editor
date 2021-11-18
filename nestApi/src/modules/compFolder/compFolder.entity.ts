@@ -17,7 +17,7 @@ export class CompFolderEntity {
     @Column({type: 'integer'})
     siteId: number
 
-    // JSON со структурой папок и файлов
-    @Column({type: 'text'})
+    // JSON со структурой папок и компонентов
+    @Column({type: 'text', default: null})
     content: string
 }

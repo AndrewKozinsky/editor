@@ -1,7 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ComponentServerResponseType from './componentServerResponseType'
-import ErrorServerResponseType from '../../errorServerResponseType'
+import { ComponentRequestServerResponse } from './componentServerResponseType'
+
 
 /**
  * Функция создаёт новый шаблон компонента
@@ -17,11 +17,8 @@ export default async function createComponentRequest(siteId: number, content: nu
             content
         })
     }
-    const response: CreateNewComponentServerResponse = await makeFetch(
+    const response: ComponentRequestServerResponse = await makeFetch(
         getApiUrl('components'), options
     )
     return response
 }
-
-// Тип данных с ответом от сервера
-type CreateNewComponentServerResponse = ErrorServerResponseType | ComponentServerResponseType

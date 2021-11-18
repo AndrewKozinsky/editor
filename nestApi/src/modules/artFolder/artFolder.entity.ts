@@ -18,6 +18,6 @@ export class ArtFolderEntity {
     siteId: number
 
     // JSON со структурой папок и статей
-    @Column({type: 'text'})
+    @Column({type: 'text', default: null})
     content: string
 }

@@ -3,16 +3,16 @@ import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import ErrorServerResponseType from 'requests/errorServerResponseType'
 import {
-    CompFolderRowServerRespType,
-    CompFolderServerSuccessRespType
-} from './compFolderServerResponseType'
+    ArtFolderRowServerRespType,
+    ArtFolderServerSuccessRespType
+} from './artFolderServerResponseType'
 
 
-export async function getCompFolderRequest(siteId: number) {
+export async function getArtFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 
-    const rowResponse: CompFolderRowServerRespType | ErrorServerResponseType = await makeFetch(
-        getApiUrl('compFoldersBySite', siteId), options
+    const rowResponse: ArtFolderRowServerRespType | ErrorServerResponseType = await makeFetch(
+        getApiUrl('artFoldersBySite', siteId), options
     )
 
     // При успешном ответе нужно превратить данные папок с компонентами из строк в массив объектов.
@@ -20,7 +20,7 @@ export async function getCompFolderRequest(siteId: number) {
     if (rowResponse.status === 'success') {
         try {
             // Составление массива объектов из массива строк
-            const parsedFolders = rowResponse.data.compFolders.map(folderData => {
+            const parsedFolders = rowResponse.data.artFolders.map(folderData => {
                 return {
                     ...folderData,
                     content: JSON5.parse(folderData.content)
@@ -28,10 +28,10 @@ export async function getCompFolderRequest(siteId: number) {
             })
 
             // Собрать новый объект ответа сервера с объектами полученными из строк
-            let response: CompFolderServerSuccessRespType = {
+            let response: ArtFolderServerSuccessRespType = {
                 ...rowResponse,
                 data: {
-                    compFolders: parsedFolders
+                    artFolders: parsedFolders
                 }
             }
 
@@ -44,3 +44,20 @@ export async function getCompFolderRequest(siteId: number) {
     }
 }
 
+
+// КОД НИЖЕ МОЖНО УДАЛИТЬ...
+// import { makeFetch } from 'requests/reqFn/fetch'
+// import getApiUrl from 'requests/reqFn/apiUrls'
+// import { ArtFoldersServerResponseType } from './artFoldersServerResponseType'
+
+// Функция запрашивает папку со статьями переданного сайта
+/*export async function getArtFolderRequest(siteId: number) {
+    // Параметры запроса
+    const options = { method: 'GET'}
+
+    const response: ArtFoldersServerResponseType = await makeFetch(
+        getApiUrl('artFoldersBySite', siteId), options
+    )
+
+    return response
+}*/

@@ -1,33 +1,23 @@
 import {useCallback, useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
 import JSON5 from 'json5'
-// import { store } from 'store/rootReducer'
-// import {AppStateType} from 'store/rootReducer'
 import actions from 'store/rootAction'
-// import createArticleRequest from 'requests/editor/article/createArticleRequest'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
-// import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-// import {setCompItems, setArtItems} from '../stores'
-import { FolderType } from '../types'
-import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
-// import putArticlesFoldersRequest from 'requests/editor/article/putArticlesFoldersRequest'
-import {
-    // GetComponentsFoldersServerResponse,
-} from 'src/requests/editor/compFolders/getCompFolderRequest'
-// import { useGetArticlesFoldersRequest } from 'requests/editor/article/getArticlesFoldersRequest'
-// import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-import useGetSitesSelectors from 'store/site/sitesSelectors'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
-import sitesActions from 'store/site/sitesActions'
-import { store } from 'store/rootReducer'
-import useGetMessages from '../../../../messages/fn/useGetMessages'
-import {compFoldersSectionMessages} from '../../../../messages/compFoldersSectionMessages'
-import useGetSettingsSelectors from '../../../../store/settings/settingsSelectors'
-import {artFoldersSectionMessages} from '../../../../messages/artFoldersSectionMessages'
+import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
+import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import useGetMessages from 'messages/fn/useGetMessages'
+import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
+import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
+import { FolderType } from '../types'
 
 
 /**
@@ -45,7 +35,7 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
         // Если не передан id сайта, то обнулить папки в Хранилище
         if (!currentSiteId) {
             dispatch(actions.sites.setCompFolder(null))
-            // *** Тут напиши обнуление статей ***
+            dispatch(actions.sites.setArtFolder(null))
             return
         }
 
@@ -54,7 +44,7 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
             dispatch(actions.sites.requestCompFolder())
         }
         if (type === 'articles') {
-            // *** Тут напиши загрузку статей ***
+            dispatch(actions.sites.requestArtFolder())
         }
     }, [currentSiteId])
 }
@@ -64,7 +54,7 @@ export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items 
         return useGetSitesSelectors().compFolderSection.compFolder
     }
     else if (type === 'articles') {
-        return useGetSitesSelectors().compFolderSection.compFolder
+        return useGetSitesSelectors().artFolderSection.artFolder
     }
 }
 
@@ -72,14 +62,23 @@ export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items 
 export function useGetSetFolders(type: FolderType) {
     const dispatch = useDispatch()
 
+    const { compFolderId } = useGetSitesSelectors().compFolderSection
+    const { artFolderId } = useGetSitesSelectors().artFolderSection
+
     return useCallback(function (newItems: DragFilesTreeType.Items) {
         if (type === 'components') {
-            return dispatch(sitesActions.setCompFolder({compFolder: newItems}))
+            return dispatch(sitesActions.setCompFolder({
+                id: compFolderId,
+                folders: newItems
+            }))
         }
         else if (type === 'articles') {
-            return dispatch()
+            return dispatch(sitesActions.setArtFolder({
+                id: artFolderId,
+                folders: newItems
+            }))
         }
-    }, [])
+    }, [compFolderId, artFolderId])
 }
 
 /**
@@ -109,23 +108,22 @@ export function useGetNewItemsName(type: FolderType) {
 
 
 /**
- * Функция сохраняет массив папок или шаблонов компонентов на сервере
- * @param {String} type — тип папок: с компонентами или со статьями.
- * @param {Array} items — массив данных по папкам и файлам.
+ * Функция сохраняет массив папок на сервере
+ * @param {String} type — тип папок: компонентов или статей.
+ * @param {Array} items — массив папок и файлов.
  */
 export async function saveFoldersOnServer(type: FolderType, items: DragFilesTreeType.Items) {
-    // id папки с компонентами текущего сайта
-    const compFolderId = store.getState().sites.compFolderSection.compFolderId
-
     // Подготовить сохраняемый массив папок и файлов
     const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
 
     // Сохранить данные на сервере
     if (type === 'components') {
+        const { compFolderId } = store.getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedItems)
     }
     else {
-        // await putArticlesFoldersRequest(..., preparedItems)
+        const { artFolderId } = store.getState().sites.artFolderSection
+        await putArtFolderRequest(artFolderId, preparedItems)
     }
 }
 
@@ -143,7 +141,7 @@ export function afterDeleteItem(
         store.dispatch( actions.sites.setCurrentComp(null, null) )
     }
     else if (type === 'articles') {
-        // store.dispatch( actions.sites.setCurrentArt(null, null) )
+        store.dispatch( actions.sites.setCurrentArt(null, null) )
 
         // If the opened article is not in new items array then it is in the deleted folder,
         // then clear article editor because the article will be deleted.
@@ -157,9 +155,9 @@ export function afterDeleteItem(
     if (type === 'components') {
         setInLocalStorage('editorCompOpenedFolders', openedFoldersId)
     }
-    /*else if (type === 'articles') {
-        setInLocalStorage('editorArticlesOpenedFolders', openedFoldersId)
-    }*/
+    else if (type === 'articles') {
+        setInLocalStorage('editorArtOpenedFolders', openedFoldersId)
+    }
 
     // Сохранить массив папок на сервере
     saveFoldersOnServer(type, items)
@@ -168,9 +166,9 @@ export function afterDeleteItem(
     if (type === 'components') {
         deleteComponentRequest(deletedItemId)
     }
-    /*else if (type === 'articles') {
+    else if (type === 'articles') {
         deleteArticleRequest(deletedItemId)
-    }*/
+    }
 }
 
 
@@ -194,8 +192,15 @@ export async function afterAddingNewFile(type: FolderType): Promise<number> {
         return newCompId
     }
     else {
-        // Тут будет код по аналогии с компонентом
-        return 123
+        const serverResponse = await createArticleRequest(
+            currentSiteId, 'Название статьи...'
+        )
+
+        let newArtId = 100000000
+        if (serverResponse.status === 'success') {
+            newArtId = serverResponse.data.articles[0].id
+        }
+        return newArtId
     }
 }
 
@@ -214,7 +219,7 @@ export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.I
         setInLocalStorage('editorCompOpenedFolders', ids)
     }
     else {
-        setInLocalStorage('editorArticlesOpenedFolders', ids)
+        setInLocalStorage('editorArtOpenedFolders', ids)
     }
 }
 
@@ -225,7 +230,7 @@ export function getOpenedFoldersIds(type: FolderType) {
         return getFromLocalStorage('editorCompOpenedFolders')
     }
     else if (type === 'articles') {
-        return getFromLocalStorage('editorArticlesOpenedFolders')
+        return getFromLocalStorage('editorArtOpenedFolders')
     }
 }
 
@@ -238,8 +243,8 @@ export function useGetOnItemClick(type: FolderType) {
         if (type === 'components') {
             dispatch(actions.sites.setCurrentComp(item.id, item.type))
         }
-        /*else if (type === 'articles') {
-            dispatch(actions.sites.setCurrentArt(item.uuid, item.type))
-        }*/
+        else if (type === 'articles') {
+            dispatch(actions.sites.setCurrentArt(item.id, item.type))
+        }
     }, [dispatch])
 }

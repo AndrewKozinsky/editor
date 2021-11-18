@@ -1,14 +1,20 @@
-import {IsInt, IsNotEmpty, IsString} from 'class-validator'
-import { Column } from 'typeorm'
+import {
+    IsInt,
+    IsNotEmpty,
+    IsOptional,
+    IsString
+} from 'class-validator'
 
 export class CreateArtFolderDto {
-    @IsNotEmpty({message: 'artFolder_CreateArtFolderDto_EmptySiteId'})
+    @IsNotEmpty({
+        message: 'artFolder_CreateArtFolderDto_EmptySiteId'
+    })
     @IsInt({
         message: 'artFolder_CreateArtFolderDto_siteIdIsNotANumber'
     })
     siteId: number
 
-    @IsNotEmpty({message: 'artFolder_CreateArtFolderDto_EmptyContent'})
+    @IsOptional()
     @IsString({
         message: 'artFolder_CreateArtFolderDto_contentIsNotAString'
     })

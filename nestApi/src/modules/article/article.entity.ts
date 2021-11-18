@@ -24,7 +24,7 @@ export class ArticleEntity {
     name: string
 
     // Содержимое статьи
-    @Column({type: 'text'})
+    @Column({type: 'text', default: null})
     content: string
 
     // id шаблона сайта

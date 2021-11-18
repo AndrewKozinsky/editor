@@ -178,8 +178,8 @@ export const serverMessages = {
         rus: 'Название сайта должно быть указано.'
     },
     site_CreateSiteDto_contentIsNotAString: {
-        eng: 'You must specify the site name.',
-        rus: 'Название сайта должно быть указано.'
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
     },
     site_CreateSiteDto_nameTooLong: {
         eng: 'The site name must not be longer than 255 characters.',
@@ -296,9 +296,13 @@ export const serverMessages = {
         eng: 'The id of the site to which the components folder belongs must be specified.',
         rus: 'Должен быть указан id сайта которому принадлежит папка с компонентами.'
     },
-    compFolder_CreateCompFolderDto_EmptyContent: {
-        eng: 'You must specify the components folder code.',
-        rus: 'Должен быть указан код папки с компонентами.'
+    compFolder_CreateCompFolderDto_siteIdIsNotANumber: {
+        eng: 'The site id must be a number.',
+        rus: 'id сайта должен быть числом.'
+    },
+    compFolder_CreateCompFolderDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
     },
     compFolder_UpdateCompFolderDto_EmptyContent: {
         eng: 'The code of the folder with the components must be specified.',
@@ -328,10 +332,6 @@ export const serverMessages = {
     artFolder_CreateArtFolderDto_siteIdIsNotANumber: {
         eng: 'The site id must be a number.',
         rus: 'id сайта должен быть числом.'
-    },
-    artFolder_CreateArtFolderDto_EmptyContent: {
-        eng: 'You must specify the articles folder code.',
-        rus: 'Должен быть указан код папки со статьями.'
     },
     artFolder_CreateArtFolderDto_contentIsNotAString: {
         eng: 'The content field must be a string.',

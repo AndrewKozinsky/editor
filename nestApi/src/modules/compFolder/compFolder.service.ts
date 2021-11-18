@@ -83,13 +83,6 @@ export class CompFolderService {
         return null
     }
 
-    // Думаю это уже не трубуется
-    /** Удаление папки с компонентами сайта */
-    /*async deleteCompFolderOfSite(siteId: number): Promise<null> {
-        await this.compFolderRepository.delete({siteId})
-        return null
-    }*/
-
 
     /**
      * The function form response and send it to client

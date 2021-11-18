@@ -1,21 +1,20 @@
 import ErrorServerResponseType from '../../errorServerResponseType'
 
 // Успешный ответ от сервера при операциях с компонентами
-type ComponentServerResponseType = {
+type ArticleServerResponseType = {
     status: 'success',
     statusCode: number,
     data: {
-        components: ComponentType[]
+        articles: ArticleType[]
     }
 }
 
-
-type ComponentType = {
+type ArticleType = {
     id: number
     content: string
     createdAt: Date
 }
 
 // Тип данных с ответом от сервера
-export type ComponentRequestServerResponse =
-    ErrorServerResponseType | ComponentServerResponseType
+export type ArticleRequestServerResponse =
+    ErrorServerResponseType | ArticleServerResponseType

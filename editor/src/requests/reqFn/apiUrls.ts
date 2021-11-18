@@ -59,7 +59,9 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return `sites/${siteId}/compFolders`
     },
     compFolder: function (compFolderId: number) {
-        return 'compFolders/' + compFolderId
+        return compFolderId
+            ? 'compFolders/' + compFolderId
+            : 'compFolders/'
     },
     // Шаблон компонента
     components: 'components',
@@ -67,14 +69,19 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'components/' + compId
     },
     // Папки статей
-    /*articlesFolders: function (siteId: string) {
-        return 'articlesFolders/' + siteId
-    },*/
+    artFoldersBySite: function (siteId: number) {
+        return `sites/${siteId}/artFolders`
+    },
+    artFolder: function (artFolderId?: number) {
+        return artFolderId
+            ? 'artFolders/' + artFolderId
+            : 'artFolders/'
+    },
     // Статья
-    /*article: function (uuid?: string) {
-        if (uuid) return 'articles/' + uuid
-        else return 'articles/'
-    },*/
+    articles: 'articles',
+    article: function (artId: number) {
+        return 'articles/' + artId
+    },
 }
 
 

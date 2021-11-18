@@ -1,15 +1,17 @@
-import { IsNotEmpty } from 'class-validator'
-import { Column } from 'typeorm'
+import {IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator'
 
 export class CreateCompFolderDto {
     @IsNotEmpty({
         message: 'compFolder_CreateCompFolderDto_EmptySiteId'
     })
-
+    @IsInt({
+        message: 'compFolder_CreateCompFolderDto_siteIdIsNotANumber'
+    })
     siteId: number
 
-    @IsNotEmpty({
-        message: 'compFolder_CreateCompFolderDto_EmptyContent'
+    @IsOptional()
+    @IsString({
+        message: 'compFolder_CreateCompFolderDto_contentIsNotAString'
     })
     content: string
 }
