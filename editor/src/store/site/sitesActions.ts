@@ -5,15 +5,12 @@ import { store } from 'store/rootReducer'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
-// import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
-// import { getOpenedFoldersId } from '../../libs/DragFilesTree/StoreManage/manageState'
-// import filesTreePublicMethods from '../../libs/DragFilesTree/publicMethods'
-// import {getOpenedFoldersIds} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-// import {getFromLocalStorage} from '../../utils/MiscUtils'
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
-// import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
-// import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
+import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+import config from 'utils/config'
+import { getFromLocalStorage } from 'utils/MiscUtils'
 
 
 const sitesActions = {
@@ -132,22 +129,18 @@ const sitesActions = {
             let foldersData = response.data.compFolders[0]
 
             if (foldersData) {
-                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
-                // ОТДЕЛЬНЫЙ ЭКШЕН.
-                // const openedFoldersIds = getOpenedFoldersIds('components')
-                /*if (openedFoldersIds) {
-                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
-                }*/
+                const openedFoldersIds = getOpenedFoldersIds('components')
+                if (openedFoldersIds) {
+                    foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorComponentId = getFromLocalStorage('editorComponentId')
-
+                const editorComponentId = getFromLocalStorage(config.ls.editorComponentId)
                 // Выделить элемент, который должен быть выделен
-                // foldersData = selectItem(foldersData, editorComponentId).newItems
+                foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
-            // dispatch( sitesActions.setCompFolder(compFolder) )
             dispatch( sitesActions.setCompFolder({
                 id: foldersData.id,
                 folders: foldersData.content
@@ -176,18 +169,15 @@ const sitesActions = {
             let foldersData = response.data.artFolders[0]
 
             if (foldersData) {
-                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
-                // ОТДЕЛЬНЫЙ ЭКШЕН.
-                // const openedFoldersIds = getOpenedFoldersIds('articles')
-                /*if (openedFoldersIds) {
-                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
-                }*/
+                const openedFoldersIds = getOpenedFoldersIds('articles')
+                if (openedFoldersIds) {
+                    foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorArticleId = getFromLocalStorage('editorArticleId')
-
+                const editorArticleId = getFromLocalStorage(config.ls.editorArticleId)
                 // Выделить элемент, который должен быть выделен
-                // foldersData = selectItem(foldersData, editorArticleId).newItems
+                foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
             }
 
             // Установка папки с компонентами в Хранилище

@@ -1,6 +1,6 @@
 
 // Форма редактирования выбранной папки шаблона компонента
-/*export const componentFolderFormMessages = {
+export const componentFolderFormMessages = {
     folderNameInput: {
         eng: 'Folder name',
         rus: 'Название папки'
@@ -17,6 +17,10 @@
         eng: 'The folder name cannot be empty',
         rus: 'Название папки не может быть пустым'
     },
+    formNameInputTooLong: {
+        eng: 'A folder name cannot be longer than 255 characters',
+        rus: 'Название папки не может быть длиннее 255 символов'
+    },
     deleteFolderConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the folder with the component templates?',
         rus: 'Вы уверены, что хотите удалить папку с шаблонами компонентов?'
@@ -29,4 +33,4 @@
         eng: 'Delete',
         rus: 'Удалить'
     },
-}*/
+}

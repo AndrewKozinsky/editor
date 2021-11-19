@@ -9,7 +9,6 @@ import {
     selectItem,
     addNewLoadingFile
 } from '../StoreManage/manageState'
-import {afterAddingNewFile} from '../../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -95,19 +94,27 @@ export function createNewFolder(
     // Добавить новую папку или файл и возвратить новый элемент и новое Состояние
     const result = addNewFolder(folderData, items, after)
 
+    // Если при добавлении файла папка была свёрнута,
+    // то после добавления она автоматически раскрывается, поэтому запущу функцию,
+    // которая должна быть запущена после раскрытия/скрытия папок
+    if (after.collapseFolder) {
+        const openedFoldersId = getOpenedFoldersId(result.newState)
+        after.collapseFolder(openedFoldersId)
+    }
+
     // Запустить функцию, которая должна быть запущена после изменения структуры папок
     if (after.changingTree) {
         after.changingTree(result.newState)
     }
 
     // Сделаю новый элемент текущим
-    const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
+    // const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
 
     // Запустить функцию, которая должна быть запущена после выделения элемента
-    if (after.selectItem) after.selectItem(newItem)
+    if (after.selectItem) after.selectItem(result.newItem)
 
     // Обновить Состояние списка папок
-    setItems(newItems)
+    setItems(result.newState)
 }
 
 

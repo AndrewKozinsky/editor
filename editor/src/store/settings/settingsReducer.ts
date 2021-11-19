@@ -1,5 +1,6 @@
 import { setInLocalStorage } from 'utils/MiscUtils'
 import StoreSettingsTypes from './settingsTypes'
+import config from '../../utils/config'
 
 export type SettingsReducerType = {
     editorLanguage: StoreSettingsTypes.EditorLanguage
@@ -33,7 +34,7 @@ const initialState: SettingsReducerType = {
 // Установка языка интерфейса
 function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
     // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage('editorLanguage', action.payload)
+    setInLocalStorage(config.ls.editorLanguage, action.payload)
 
     return {
         ...state,
@@ -44,7 +45,7 @@ function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsType
 // Установка темы интерфейса
 function setEditorTheme(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorThemeAction): SettingsReducerType {
     // Поставить тему в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage('editorTheme', action.payload)
+    setInLocalStorage(config.ls.editorTheme, action.payload)
 
     return {
         ...state,
@@ -71,7 +72,7 @@ function setLastAddress(state: SettingsReducerType, action: StoreSettingsTypes.S
 // Установка номера главной вкладки
 function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMainTabAction): SettingsReducerType {
     // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage('editorTab', action.payload)
+    setInLocalStorage(config.ls.editorTab, action.payload)
 
     return {
         ...state,
@@ -81,7 +82,7 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
 // Установка id вкладки в Настройках
 function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage('editorSettingsTabId', action.payload)
+    setInLocalStorage(config.ls.editorSettingsTabId, action.payload)
 
     return {
         ...state,

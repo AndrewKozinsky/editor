@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Button from 'common/formElements/Button/Button'
 // import TextInput from 'common/formElements/TextInput/TextInput'
@@ -10,6 +10,13 @@
 // import { useGetAnotherComponent } from './ComponentForm-func'
 // import useGetShowModal from 'utils/hooksUtils'
 // import DeleteItemModal from '../DeleteItemModal/DeleteItemModal'
+
+export default function CompForm() {
+
+    return (
+        <p>CompForm</p>
+    )
+}
 
 /*export default function ComponentForm() {
 

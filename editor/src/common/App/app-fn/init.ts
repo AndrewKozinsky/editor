@@ -5,6 +5,7 @@ import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'
 import { getFromLocalStorage } from 'utils/MiscUtils'
+import config from 'utils/config'
 import { useGetUserToken } from 'requests/user/getUserToken'
 
 
@@ -16,17 +17,17 @@ export function useGetAndSetEditorSettings() {
     // При отрисовке компонента...
     useEffect(function () {
         // Получение значения из LocalStorage
-        let language = getFromLocalStorage('editorLanguage', 'eng') // Язык интерфейса: eng или rus
-        let theme = getFromLocalStorage('editorTheme', 'light') // Тема интерфейса
-        let mainTab = getFromLocalStorage('editorTab', 3) // id главной вкладки
-        let siteId = getFromLocalStorage('editorSiteId', '') // id сайта
-        let settingsTabId = getFromLocalStorage('editorSettingsTabId', 'user') // id вкладки в Настройках
-        let sitePartTab = getFromLocalStorage('editorSitePartTab', 0) // id вкладки в Сайтах
-        let editorSiteTemplateId = getFromLocalStorage('editorSiteTemplateId', null) // id выбранного шаблона подключаемых файлов
-        // let editorComponentId = getFromLocalStorage('editorComponentId', null) // id выбранного шаблона компонента
-        // let editorComponentType = getFromLocalStorage('editorComponentType', null) // тип выбранного элемента: папка или компонент
-        // let editorArticleId = getFromLocalStorage('editorArticleId', null) // id выбранной папки или статьи
-        // let editorArticleType = getFromLocalStorage('editorArticleType', null) // тип выбранного элемента: папка или статья
+        let language = getFromLocalStorage(config.ls.editorLanguage, 'eng') // Язык интерфейса: eng или rus
+        let theme = getFromLocalStorage(config.ls.editorTheme, 'light') // Тема интерфейса
+        let mainTab = getFromLocalStorage(config.ls.editorTab, 3) // id главной вкладки
+        let siteId = getFromLocalStorage(config.ls.editorSiteId, '') // id сайта
+        let settingsTabId = getFromLocalStorage(config.ls.editorSettingsTabId, 'user') // id вкладки в Настройках
+        let sitePartTab = getFromLocalStorage(config.ls.editorSitePartTab, 0) // id вкладки в Сайтах
+        let editorSiteTemplateId = getFromLocalStorage(config.ls.editorSiteTemplateId, null) // id выбранного шаблона подключаемых файлов
+        let editorComponentId = getFromLocalStorage(config.ls.editorComponentId, null) // id выбранного шаблона компонента
+        let editorComponentType = getFromLocalStorage(config.ls.editorComponentType, null) // тип выбранного элемента: папка или компонент
+        let editorArticleId = getFromLocalStorage(config.ls.editorArticleId, null) // id выбранной папки или статьи
+        let editorArticleType = getFromLocalStorage(config.ls.editorArticleType, null) // тип выбранного элемента: папка или статья
 
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
@@ -36,8 +37,8 @@ export function useGetAndSetEditorSettings() {
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
         dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
-        // dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
-        // dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
+        dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
+        dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
     }, [])
 }
 

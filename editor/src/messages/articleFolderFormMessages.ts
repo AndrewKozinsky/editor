@@ -1,6 +1,6 @@
 
 // Форма редактирования выбранной папки шаблона компонента
-/*export const articleFolderFormMessages = {
+export const articleFolderFormMessages = {
     folderNameInput: {
         eng: 'Folder name',
         rus: 'Название папки'
@@ -29,4 +29,4 @@
         eng: 'Delete',
         rus: 'Удалить'
     },
-}*/
+}

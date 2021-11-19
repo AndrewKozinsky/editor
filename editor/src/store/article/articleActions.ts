@@ -18,7 +18,7 @@
     // Наполнение Хранилища данными для отрисовки статьи
     clearArticle() {
         // Remove marks about article in Local Storage
-        removeFromLocalStorage('article')
+        removeFromLocalStorage(config.ls.article)
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
@@ -28,7 +28,7 @@
     // Наполнение Хранилища данными для отрисовки статьи
     fillArticle(siteId: string, siteTemplateId: string, articleUuId?: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const articleMarksFromLS = getFromLocalStorage('article')
+            const articleMarksFromLS = getFromLocalStorage(config.ls.article)
 
             if (articleMarksFromLS?.articleId !== articleUuId) {
                 // Save article data to localStorage to know what kind of article the editor has to open next time

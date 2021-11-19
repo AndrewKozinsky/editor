@@ -113,7 +113,7 @@ function Fields(props: FormConstructorPropType) {
 }
 
 function BottomDivider(props: FormConstructorPropType) {
-    if (!props.config.bottom.hr) return null
+    if (!props.config.bottom?.hr) return null
 
     return (
         <Wrapper t={10}>

@@ -11,7 +11,7 @@
 // Hook sets article data in Store when IFrame rendered
 /*export function useSetArticleDataInStore() {
     useEffect(function () {
-        const articleData = getFromLocalStorage('article')
+        const articleData = getFromLocalStorage(config.ls.article)
         if (!articleData) return
 
         store.dispatch(actions.article.fillArticle(

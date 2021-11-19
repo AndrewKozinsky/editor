@@ -1,7 +1,7 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
-// import ArticleForm from './ArticleForm/ArticleForm'
-// import ArticlesFolderForm from './ArticlesFolderForm/ArticlesFolderForm'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import ArtFolderForm from './ArtFolderForm/FolderForm/ArtFolderForm'
+import ArtForm from './ArtForm/ArtForm'
 
 
 /**
@@ -11,11 +11,9 @@ import React from 'react'
 export default function ArticleFormProvider() {
 
     // Тип выбранного элемента в дереве папок и файлов
-    // const {currentArtItemType} = useSelector((store: AppStateType) => store.sites.articlesSection)
+    const { currentArtItemType } = useGetSitesSelectors().articlesSection
 
-    // if (currentArtItemType === 'folder') return <ArticlesFolderForm />
-    // if (currentArtItemType === 'file') return <ArticleForm />
-    // return null
-
-    return <p>ArticleFormProvider</p>
+    if (currentArtItemType === 'folder') return <ArtFolderForm />
+    if (currentArtItemType === 'file') return <ArtForm />
+    return null
 }

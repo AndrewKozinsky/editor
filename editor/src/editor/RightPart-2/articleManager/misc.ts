@@ -26,13 +26,13 @@
  */
 /*export function supplementArtMarksInLocalStorage(this: typeof articleManager, marksObj: MarksObj) {
     // Current object with article data
-    const currentMarkObj = getFromLocalStorage('article')
+    const currentMarkObj = getFromLocalStorage(config.ls.article)
 
     let updatedMarkObj = currentMarkObj
         ? Object.assign(currentMarkObj, marksObj)
         : marksObj
 
-    setInLocalStorage('article', updatedMarkObj)
+    setInLocalStorage(config.ls.article, updatedMarkObj)
 }*/
 
 /**

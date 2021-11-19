@@ -18,7 +18,7 @@ import {
 //     useGetAppClasses,
     useRedirectPage
 } from './app-fn/App-func'
-// import setShortcutsHandler from './shortcuts/shortcutsHandler'
+import setShortcutsHandler from './shortcuts/shortcutsHandler'
 import './css/reset.css'
 import './css/variables.scss'
 import './css/default.scss'
@@ -77,7 +77,7 @@ export default function App() {
     const isTokenSet = useSetTokenStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    // setShortcutsHandler()
+    setShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет

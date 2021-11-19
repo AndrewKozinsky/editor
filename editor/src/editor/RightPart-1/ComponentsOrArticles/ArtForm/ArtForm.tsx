@@ -1,4 +1,4 @@
-// import React from 'react'
+import React from 'react'
 // import Wrapper from 'common/Wrapper/Wrapper'
 // import Button from 'common/formElements/Button/Button'
 // import TextInput from 'common/formElements/TextInput/TextInput'
@@ -12,6 +12,13 @@
 // import { useGetAnotherArticle } from './ArticleForm-func'
 // import DeleteItemModal from '../../ComponentsOrArticles/DeleteItemModal/DeleteItemModal'
 // import useGetShowModal from 'utils/hooksUtils'
+
+export default function ArtForm() {
+
+    return (
+        <p>ArtForm</p>
+    )
+}
 
 /*export default function ArticleForm() {
     // FormHandler

@@ -138,7 +138,7 @@ namespace StoreSitesTypes {
         payload: SetCompFolderActionPayload
     }
     export type SetCompFolderActionPayload = {
-        id: number
+        id?: number
         folders: DragFilesTreeType.Items
     }
 
@@ -150,7 +150,7 @@ namespace StoreSitesTypes {
         payload: SetArtFolderActionPayload
     }
     export type SetArtFolderActionPayload = {
-        id: number
+        id?: number
         folders: DragFilesTreeType.Items
     }
 

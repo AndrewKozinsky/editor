@@ -18,6 +18,7 @@ import useGetMessages from 'messages/fn/useGetMessages'
 import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
 import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
 import { FolderType } from '../types'
+import config from '../../../../utils/config'
 
 
 /**
@@ -131,7 +132,7 @@ export async function saveFoldersOnServer(type: FolderType, items: DragFilesTree
  * Функция запускаемая после удаления или папки или файла (статьми или компонента)
  * @param {String} type — тип папок: с компонентами или со статьями.
  * @param {Array} items — массив данных по папкам и файлам.
- * @param {String} deletedItemId — uuid удалённого элемента
+ * @param {String} deletedItemId — id удалённого элемента
  */
 export function afterDeleteItem(
     type: FolderType, items: DragFilesTreeType.Items, deletedItemId: DragFilesTreeType.Id
@@ -145,7 +146,7 @@ export function afterDeleteItem(
 
         // If the opened article is not in new items array then it is in the deleted folder,
         // then clear article editor because the article will be deleted.
-        /*if ( filesTreePublicMethods.getItemById(items, store.getState().article.articleUuId) ) {
+        /*if ( filesTreePublicMethods.getItemById(items, store.getState().article.articleId) ) {
             store.dispatch( actions.article.clearArticle() )
         }*/
     }
@@ -153,10 +154,10 @@ export function afterDeleteItem(
     // Обновить id открытых папок в LocalStorage
     const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(items)
     if (type === 'components') {
-        setInLocalStorage('editorCompOpenedFolders', openedFoldersId)
+        setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
     }
     else if (type === 'articles') {
-        setInLocalStorage('editorArtOpenedFolders', openedFoldersId)
+        setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
     }
 
     // Сохранить массив папок на сервере
@@ -206,31 +207,31 @@ export async function afterAddingNewFile(type: FolderType): Promise<number> {
 
 /**
  * Функция запускаемая после раскрытия/скрытия любой папки.
- * После этого массив uuid открытых папок записывается в localstorage
+ * После этого массив id открытых папок записывается в localstorage
  * чтобы при следующем запуске страницы эти папки бы отрисовывались открытыми.
  * @param {String} type — тип папок: с компонентами или со статьями
- * @param {Array} idArr — массив uuid раскрытых папок
+ * @param {Array} idArr — массив id раскрытых папок
  */
 export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.IdArr) {
-    // Массив uuid открытых папок
+    // Массив id открытых папок
     const ids = JSON.stringify(idArr)
 
     if (type === 'components') {
-        setInLocalStorage('editorCompOpenedFolders', ids)
+        setInLocalStorage(config.ls.editorCompOpenedFolders, ids)
     }
     else {
-        setInLocalStorage('editorArtOpenedFolders', ids)
+        setInLocalStorage(config.ls.editorArtOpenedFolders, ids)
     }
 }
 
-/** Функция получает из localStorage uuid открытых папок и возвращает
+/** Функция получает из localStorage id открытых папок и возвращает
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersIds(type: FolderType) {
     if (type === 'components') {
-        return getFromLocalStorage('editorCompOpenedFolders')
+        return getFromLocalStorage(config.ls.editorCompOpenedFolders)
     }
     else if (type === 'articles') {
-        return getFromLocalStorage('editorArtOpenedFolders')
+        return getFromLocalStorage(config.ls.editorArtOpenedFolders)
     }
 }
 

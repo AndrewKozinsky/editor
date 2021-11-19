@@ -2,8 +2,8 @@ import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import CloseModalButton from './CloseModalButton'
 import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
 import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
-import {store} from 'store/rootReducer'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -11,7 +11,6 @@ import {store} from 'store/rootReducer'
  */
 function getConfig(siteSectionMsg: any) {
     const config: FCType.Config = {
-        // fields: {},
         bottom: {
             submit: {
                 text: siteSectionMsg.deleteSiteBtnText,

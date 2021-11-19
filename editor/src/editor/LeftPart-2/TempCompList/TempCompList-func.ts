@@ -40,7 +40,7 @@
         }
 
         // Get opened component template folders uuid array to open these folders
-        const openUuIdArr: null | FilesTreeType.IdArr = getFromLocalStorage('article')?.openCompFoldersUuIds
+        const openUuIdArr: null | FilesTreeType.IdArr = getFromLocalStorage(config.ls.article)?.openCompFoldersUuIds
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(
