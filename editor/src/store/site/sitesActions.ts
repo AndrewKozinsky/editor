@@ -1,16 +1,18 @@
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
+import config from 'utils/config'
+import { getFromLocalStorage } from 'utils/MiscUtils'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
+import getComponentRequest from 'requests/editor/components/getComponentRequest'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/MiscUtils'
+import TempCompTypes from '../article/codeType/tempCompCodeType'
 
 
 const sitesActions = {
@@ -198,6 +200,37 @@ const sitesActions = {
 
     // КОМПОНЕНТЫ ==================================================================================
 
+    // Загрузка с сервера шаблона компонента и установка в Хранилище
+    requestComponentTemplate() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // id выбранного шаблона компонента, данные которого нужно скачать
+            const { currentCompItemId } = store.getState().sites.componentsSection
+
+            // Если id компонента не передан, то обнулить данные компонета в Хранилище
+            if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
+
+            // Запрос и ответ от сервера
+            const response = await getComponentRequest(currentCompItemId)
+
+            if (response.status !== 'success') return
+
+            const responseData = response.data.components[0]
+
+            if (!responseData) {
+                dispatch( sitesActions.setCurrentComp(responseData.id, 'file') )
+            }
+
+            const compData = responseData.content
+            const compDataParsed: TempCompTypes.Content = JSON5.parse(responseData.content)
+
+            // Установка данных шаблона компонента в Хранилище
+            dispatch( sitesActions.setCurrentComp(
+                responseData.id, 'file', compDataParsed.name, compData
+            ))
+        }
+    },
+
     // Установка id и типа выбранного шаблона компонента
     setCurrentComp(
         id: null | DragFilesTreeType.Id,
@@ -218,7 +251,29 @@ const sitesActions = {
 
     // СТАТЬИ ======================================================================================
 
-    // Установка id и типа выбранного шаблона компонента
+    // Загрузка с сервера статьи и установка в Хранилище
+    /*requestArticle() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // id выбранной статьи, данные которой нужно скачать
+            const {currentArtItemId} = getState().sites.articlesSection
+
+            // Если id статьи не передан, то обнулить данные статьи в Хранилище
+            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
+
+            // Запрос и ответ от сервера
+            const response = await getArticleRequest(currentArtItemId)
+
+            if (response.status !== 'success') return
+            const articleData = response.data.article
+
+            if (articleData) {
+                dispatch( sitesActions.setCurrentArt(articleData.id, 'file', articleData) )
+            }
+        }
+    },*/
+
+    // Установка id и типа выбранной статьи
     setCurrentArt(
         id: null | DragFilesTreeType.Id,
         type: null | DragFilesTreeType.ItemType,
@@ -246,28 +301,7 @@ const sitesActions = {
 
 
 
-    // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestComponentTemplate() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // uuid выбранного шаблона компонента, данные которого нужно скачать
-            const {currentCompItemId} = store.getState().sites.componentsSection
-
-            // Если uuid компонента не передан, то обнулить данные компонета в Хранилище
-            if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
-
-            // Запрос и ответ от сервера
-            const response = await getComponentRequest(currentCompItemId)
-
-            if (response.status !== 'success') return
-            const compData = response.data.component
-
-            if (compData) {
-                // Установка данных шаблона компонента в Хранилище
-                dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData) )
-            }
-        }
-    },*/
 
     // Component Template item (folder or file) type setting
     /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
@@ -282,30 +316,6 @@ const sitesActions = {
         return {
             type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID,
             payload
-        }
-    },*/
-
-
-
-    // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestArticle() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
-            // uuid выбранной статьи, данные которой нужно скачать
-            const {currentArtItemId} = getState().sites.articlesSection
-
-            // Если uuid статьи не передан, то обнулить данные статьи в Хранилище
-            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
-
-            // Запрос и ответ от сервера
-            const response = await getArticleRequest(currentArtItemId)
-
-            if (response.status !== 'success') return
-            const articleData = response.data.article
-
-            if (articleData) {
-                dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
-            }
         }
     },*/
 

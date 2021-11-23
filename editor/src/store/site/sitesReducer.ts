@@ -196,8 +196,8 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
                 ...state.componentsSection,
                 currentCompItemId: action.payload.id,
                 currentCompItemType: action.payload.type,
-                currentCompName: action.payload.name || null,
-                currentCompCode: action.payload.code || null
+                currentCompName: action.payload.name || '',
+                currentCompCode: action.payload.code || ''
             }
         }
 

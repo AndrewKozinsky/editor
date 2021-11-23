@@ -63,20 +63,34 @@ export default function Item(props: ItemPropType) {
             onMouseOver={markItemElem}
             onMouseOut={markItemElem}
             onDragStart={handleDragStart}
-            onDrag={(e: SyntheticEvent) => handleDrag(e, itemData, items, setItems)}
+            onDrag={(e: SyntheticEvent) => {
+                handleDrag(e, itemData, items, setItems)
+            }}
             onDragOver={handleDragOver}
-            onDragEnd={(e: SyntheticEvent) => handleDragEnd(e, itemData, items, setItems, after)}
+            onDragEnd={(e: SyntheticEvent) => {
+                handleDragEnd(e, itemData, items, setItems, after)
+            }}
         >
             <div
                 className={CN.innerWrapper}
                 data-ft-inner='true'
             >
                 <PlaceArrow itemData={itemData} />
-                <Triangle items={items} setItems={setItems} itemData={itemData} after={after} />
+                <Triangle
+                    items={items}
+                    setItems={setItems}
+                    itemData={itemData}
+                    after={after}
+                />
                 <Icon itemData={itemData} />
                 { itemData.name }
                 <Loading itemData={itemData} />
-                <RightButtons items={items} setItems={setItems} itemData={itemData} after={after} />
+                <RightButtons
+                    items={items}
+                    setItems={setItems}
+                    itemData={itemData}
+                    after={after}
+                />
             </div>
         </div>
     )
@@ -205,7 +219,7 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => removeItem(e, items, setItems, itemData.id, after)}
+            onClick={(e: SyntheticEvent) => removeItem(e, items, setItems, itemData, after)}
         >
             <SvgIcon type='filesTreeTrash' />
         </button>

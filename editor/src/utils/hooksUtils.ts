@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from 'react'
-import useGetModalSelectors from '../store/modal/modalSelectors'
+import useGetModalSelectors from 'store/modal/modalSelectors'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 

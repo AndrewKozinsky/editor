@@ -54,7 +54,7 @@
         // Свернуть/развернуть папку и возвратить новый массив папок и файлов
         const newItems = toggleFolder(items, folderId)
 
-        // Получить uuid раскрытых папок
+        // Получить id раскрытых папок
         const openedFoldersUuid = getOpenedFoldersUuid(newItems)
 
         after.afterCollapseFolder(newItems, openedFoldersUuid)
@@ -64,7 +64,7 @@
 
 /**
  * Хук возвращает обработчик щелчка по папке или файлу.
- * В местное состояние ставит uuid этой папки или файла.
+ * В местное состояние ставит id этой папки или файла.
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
@@ -77,9 +77,9 @@
     return useCallback(function (e: SyntheticEvent) {
         // Toggle folder opening
         if (itemData.type === 'folder') {
-            const newItems = toggleFolder(items, itemData.uuid)
+            const newItems = toggleFolder(items, itemData.id)
 
-            // Получить uuid раскрытых папок
+            // Получить id раскрытых папок
             const openedFoldersUuid = getOpenedFoldersUuid(newItems)
 
             after.afterCollapseFolder(newItems, openedFoldersUuid)

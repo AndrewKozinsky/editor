@@ -13,20 +13,20 @@
 // import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 
-/*const articleActions = {
+const articleActions = {
 
     // Наполнение Хранилища данными для отрисовки статьи
-    clearArticle() {
+    /*clearArticle() {
         // Remove marks about article in Local Storage
         removeFromLocalStorage(config.ls.article)
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
         }
-    },
+    },*/
 
     // Наполнение Хранилища данными для отрисовки статьи
-    fillArticle(siteId: string, siteTemplateId: string, articleUuId?: string) {
+    /*fillArticle(siteId: string, siteTemplateId: string, articleUuId?: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const articleMarksFromLS = getFromLocalStorage(config.ls.article)
 
@@ -54,18 +54,18 @@
             // Do request for component templates array and set they in store
             dispatch( articleActions.requestTempCompsFolders(siteId) )
         }
-    },
+    },*/
 
     // Action sets article uuId and article site id to the Store
-    setArticleMarks(siteId: string, articleUuId: string) {
+    /*setArticleMarks(siteId: string, articleUuId: string) {
         return {
             type: StoreArticleTypes.SET_ARTICLE_MARKS,
             payload: { siteId, articleUuId }
         }
-    },
+    },*/
 
     // Загрузка шаблонов компонентов сайта с сервера и установка в Хранилище
-    requestSiteComponents(siteId: string) {
+    /*requestSiteComponents(siteId: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Запрос на получение шаблонов компонентов сайта
@@ -87,18 +87,18 @@
             // Установка компонентов в Хранилище
             dispatch( articleActions.setTempComps(tempComps) )
         }
-    },
+    },*/
 
     // Установка массива шаблонов компонентов
-    setTempComps(payload: StoreArticleTypes.TempComps): StoreArticleTypes.SetTempCompAction {
+    /*setTempComps(payload: StoreArticleTypes.TempComps): StoreArticleTypes.SetTempCompAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMPS,
             payload
         }
-    },
+    },*/
 
     // Request for included files template and setting it in Store
-    requestIncFilesTemplate(siteId: string, incFilesTemplateId: string) {
+    /*requestIncFilesTemplate(siteId: string, incFilesTemplateId: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Request for an incFilesTemplate and get a response from a server
@@ -116,10 +116,10 @@
                 dispatch( articleActions.setIncFilesTemplate( '', '' ))
             }
         }
-    },
+    },*/
 
     // Setting included files template in Store
-    setIncFilesTemplate(inHead: string, beforeEndBody: string): StoreArticleTypes.SetIncFilesTemplateAction {
+    /*setIncFilesTemplate(inHead: string, beforeEndBody: string): StoreArticleTypes.SetIncFilesTemplateAction {
         return {
             type: StoreArticleTypes.SET_SITE_TEMPLATE,
             payload: {
@@ -127,10 +127,10 @@
                 beforeEndBody
             }
         }
-    },
+    },*/
 
     // Загрузка шаблонов компонентов сайта с сервера и установка в Хранилище
-    requestArticle(articleUuId: string) {
+    /*requestArticle(articleUuId: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Request for an article and response from a server
@@ -150,10 +150,10 @@
             // Set an article to Store
             dispatch( articleActions.setArticle( parsedArticle ))
         }
-    },
+    },*/
 
     // Set an article after receiving the data. Action return history array with single article
-    setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
+    /*setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
         return {
             type: StoreArticleTypes.SET_ARTICLE,
             payload: [
@@ -175,10 +175,10 @@
                 }
             ]
         }
-    },
+    },*/
 
     // Request to template component folders and set they in Store
-    requestTempCompsFolders(articleSiteId: string) {
+    /*requestTempCompsFolders(articleSiteId: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Запрос и ответ от сервера
@@ -195,21 +195,21 @@
             // Set component template folders in the Store
             dispatch( articleActions.setTempCompFolders(parsedFolders) )
         }
-    },
+    },*/
 
-    /!**
+    /**
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
-     *!/
-    setTempCompFolders( folders: null | FilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+     */
+    /*setTempCompFolders( folders: null | FilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
             payload: folders
         }
-    },
+    },*/
 
     // Action sets links to IFrame window, document, head and body to Store
-    setLinks(
+    /*setLinks(
         $window: StoreArticleTypes.WindowLink,
         $document: StoreArticleTypes.DocumentLink,
         $head: StoreArticleTypes.HeadLink,
@@ -224,16 +224,16 @@
                 $body
             }
         }
-    },
+    },*/
 
-    /!**
+    /**
      * Set ids for hovered or selected component/element
      * @param {String} actionType — is component/element hovered or selected
      * @param {String} type — component/element type: null | 'component' | 'element' | 'textComponent'
      * @param {Number} dataCompId — component id
      * @param {Number} dataElemId — element id (It is null if component/element was hovered)
-     *!/
-    setHoveredElement(
+     */
+    /*setHoveredElement(
         actionType: 'hover' | 'select',
         type: StoreArticleTypes.HoveredElementType,
         dataCompId: StoreArticleTypes.HoveredElementCompId,
@@ -243,36 +243,36 @@
             type: StoreArticleTypes.SET_HOVERED_ELEMENT,
             payload: { actionType, type, dataCompId, dataElemId }
         }
-    },
+    },*/
 
-    /!**
+    /**
      * Action forms a new history item
      * @param {Object} itemDetails —
-     *!/
-    createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
+     */
+    /*createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
         return {
             type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
             payload: itemDetails
         }
-    },
+    },*/
 
-    /!**
+    /**
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
-     *!/
-    makeHistoryStep( step: 'undo' | 'redo' ) {
+     */
+    /*makeHistoryStep( step: 'undo' | 'redo' ) {
         return {
             type: StoreArticleTypes.MAKE_HISTORY_STEP,
             payload: step
         }
-    },
+    },*/
 
-    /!** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved *!/
-    setHistoryStepWhenArticleWasSaved() {
+    /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
+    /*setHistoryStepWhenArticleWasSaved() {
         return {
             type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
         }
-    },
-}*/
+    },*/
+}
 
-// export default articleActions
+export default articleActions

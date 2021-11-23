@@ -1,29 +1,29 @@
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 // import FilesTreeType from '../../types/filesTree'
-// import StoreArticleTypes from './articleTypes'
+import StoreArticleTypes from './articleTypes'
 // import ArticleTypes from './codeType/articleCodeType'
 // import TempCompTypes from './codeType/tempCompCodeType'
 
-/*export type ArticleReducerType = {
-    articleUuId: null | string
-    articleSiteId: null | string
+export type ArticleReducerType = {
+    // articleUuId: null | string
+    // articleSiteId: null | string
     // Components template folders
-    tempCompsFolders: null | FilesTreeType.Items
+    // tempCompsFolders: null | FilesTreeType.Items
     // Components templates array
-    tempComps: null | StoreArticleTypes.TempComps
+    // tempComps: null | StoreArticleTypes.TempComps
     // Code with
-    siteTemplate: {
-        inHead: null | string
-        beforeEndBody: null | string
-    }
-    $links: StoreArticleTypes.LinksObj
+    // siteTemplate: {
+    //     inHead: null | string
+    //     beforeEndBody: null | string
+    // }
+    // $links: StoreArticleTypes.LinksObj
     // History steps array
-    history: StoreArticleTypes.HistoryItems,
+    // history: StoreArticleTypes.HistoryItems,
     // Current history point
-    historyCurrentIdx: number
+    // historyCurrentIdx: number
     // A history step when the article was saved
-    historyStepWhenWasSave: number
-}*/
+    // historyStepWhenWasSave: number
+}
 
 // Article reducer state example
 /*const stateExample: ArticleReducerType = {
@@ -65,25 +65,25 @@
 }*/
 
 // Initial values
-/*const initialState: ArticleReducerType = {
-    articleUuId: null,
-    articleSiteId: null,
-    tempCompsFolders: null,
-    tempComps: null,
-    siteTemplate: {
-        inHead: null,
-        beforeEndBody: null
-    },
-    $links: {
-        $window: null,
-        $document: null,
-        $head: null,
-        $body: null
-    },
-    history: [],
-    historyCurrentIdx: 0,
-    historyStepWhenWasSave: 0
-}*/
+const initialState: ArticleReducerType = {
+    // articleUuId: null,
+    // articleSiteId: null,
+    // tempCompsFolders: null,
+    // tempComps: null,
+    // siteTemplate: {
+    //     inHead: null,
+    //     beforeEndBody: null
+    // },
+    // $links: {
+    //     $window: null,
+    //     $document: null,
+    //     $head: null,
+    //     $body: null
+    // },
+    // history: [],
+    // historyCurrentIdx: 0,
+    // historyStepWhenWasSave: 0
+}
 
 /*function clearArticle(
     state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
@@ -268,37 +268,36 @@
 
 
 // Редьюсер Store.article
-/*
 export default function articleReducer(
     state = initialState, action: StoreArticleTypes.ArticleAction
 ): ArticleReducerType {
 
     switch (action.type) {
-        case StoreArticleTypes.CLEAR_ARTICLE:
-            return clearArticle(state, action)
-        case StoreArticleTypes.SET_ARTICLE_MARKS:
-            return setArticleMarks(state, action)
-        case StoreArticleTypes.SET_TEMP_COMPS:
-            return setTempComps(state, action)
-        case StoreArticleTypes.SET_SITE_TEMPLATE:
-            return setSiteTemplate(state, action)
-        case StoreArticleTypes.SET_ARTICLE:
-            return setArticle(state, action)
-        case StoreArticleTypes.SET_LINKS:
-            return setLinks(state, action)
-        case StoreArticleTypes.SET_HOVERED_ELEMENT:
-            return setHoveredElement(state, action)
-        case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
-            return setTempCompFolders(state, action)
-        case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
-            return createAndSetHistoryItem(state, action)
-        case StoreArticleTypes.MAKE_HISTORY_STEP:
-            return makeHistoryStep(state, action)
-        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
-            return setHistoryStepWhenArticleWasSaved(state, action)
+        // case StoreArticleTypes.CLEAR_ARTICLE:
+        //     return clearArticle(state, action)
+        // case StoreArticleTypes.SET_ARTICLE_MARKS:
+        //     return setArticleMarks(state, action)
+        // case StoreArticleTypes.SET_TEMP_COMPS:
+        //     return setTempComps(state, action)
+        // case StoreArticleTypes.SET_SITE_TEMPLATE:
+        //     return setSiteTemplate(state, action)
+        // case StoreArticleTypes.SET_ARTICLE:
+        //     return setArticle(state, action)
+        // case StoreArticleTypes.SET_LINKS:
+        //     return setLinks(state, action)
+        // case StoreArticleTypes.SET_HOVERED_ELEMENT:
+        //     return setHoveredElement(state, action)
+        // case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
+        //     return setTempCompFolders(state, action)
+        // case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
+        //     return createAndSetHistoryItem(state, action)
+        // case StoreArticleTypes.MAKE_HISTORY_STEP:
+        //     return makeHistoryStep(state, action)
+        // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
+        //     return setHistoryStepWhenArticleWasSaved(state, action)
         default:
             // @ts-ignore
             const x: never = null
             return state
     }
-}*/
+}

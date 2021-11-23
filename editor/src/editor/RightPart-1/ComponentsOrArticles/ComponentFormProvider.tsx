@@ -1,6 +1,6 @@
 import React from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import CompForm from './CompForm/CompForm'
+import CompForm from './CompForm/CompForm/CompForm'
 import CompFolderForm from './CompFolderForm/FolderForm/CompFolderForm'
 
 

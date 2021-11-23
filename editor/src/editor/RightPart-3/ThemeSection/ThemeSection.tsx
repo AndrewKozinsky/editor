@@ -7,7 +7,7 @@ import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { themeSectionMessages } from 'messages/themeSectionMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
-import useGetSettingsSelectors from '../../../store/settings/settingsSelectors'
+import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
 
 export default function ThemeSection() {

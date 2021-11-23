@@ -534,3 +534,31 @@ export function changeName(items: DragFilesTreeType.Items, itemId: DragFilesTree
         newItems: makeImmutableCopy(itemsCopy, item, itemCopy)
     }
 }
+
+
+/**
+ * Функция возвращает массив идентификаторов файлов существующих в переданной папке
+ * @param {Array} folders — массив всех папок
+ * @param {Number} folderId — id папки в которой нужно найти идентификаторы файлов
+ */
+export function getFilesIdsInFolder(folders: DragFilesTreeType.Items, folderId: number): number[] {
+    const targetFolder = getItemDataById(folders, folderId)
+    if (!targetFolder) return []
+
+    const ids: number[] = []
+
+    findItems(folders)
+
+    function findItems(items: DragFilesTreeType.Items) {
+        items.forEach(function (item) {
+            if (item.type === 'file') {
+                ids.push(item.id)
+            }
+            else if (item.content?.length) {
+                findItems(item.content)
+            }
+        })
+    }
+
+    return ids
+}

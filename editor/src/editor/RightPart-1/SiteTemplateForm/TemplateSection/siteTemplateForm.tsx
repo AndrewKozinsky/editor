@@ -7,8 +7,6 @@ import {siteTemplateSectionMessages} from 'messages/siteTemplateSectionMessages'
 import getNewSiteTemplateFormConfig from './newSiteTemplateFormConfig'
 import getCurrentSiteTemplateFormConfig from './currentSiteTemplateFormConfig'
 import { useSetSiteTemplateCode } from './siteTemplateForm-func'
-import Wrapper from 'common/Wrapper/Wrapper'
-import CodeCheckInfo from '../../../special/CodeCheckInfo/CodeCheckInfo'
 import CodeHelper from '../CodeHelper/CodeHelper'
 
 
@@ -51,7 +49,6 @@ function ExistingSiteTemplateForm() {
     // Хук изменяет код шаблона сайта в поле Код шаблона при переключении шаблона
     useSetSiteTemplateCode(formState)
 
-    console.log()
     return (
         <>
             <FormConstructor config={config} state={formState} />

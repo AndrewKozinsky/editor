@@ -4,7 +4,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import userReducer from './user/userReducer'
 import settingsReducer from './settings/settingsReducer'
 import sitesReducer from './site/sitesReducer'
-// import articleReducer from './article/articleReducer'
+import articleReducer from './article/articleReducer'
 import modalReducer from './modal/modalReducer'
 // @ts-ignore
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
     user:  userReducer, // Данные пользователя
     sites:  sitesReducer,
     settings:  settingsReducer, // Настройки приложения
-    // article: articleReducer,
+    article: articleReducer,
     modal:  modalReducer
 })
 

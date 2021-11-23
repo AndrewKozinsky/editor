@@ -1,4 +1,4 @@
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'

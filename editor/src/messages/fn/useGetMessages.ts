@@ -16,7 +16,7 @@ export default function useGetMessages<T>(obj: T) {
 
     for (let key in obj) {
         // @ts-ignore
-        objNext[key] = obj[key][editorLanguage]
+        objNext[key] = obj[key][editorLanguage].toString()
     }
 
     return objNext

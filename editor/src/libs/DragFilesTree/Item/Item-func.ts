@@ -168,26 +168,26 @@ export async function createNewFile(
 /**
  * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
  * @param {Object} e — объект события
- * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Array} originalItems — массив данных по папкам и файлам.
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
- * @param {String} itemId — id папки или файла, которую нужно удалить
+ * @param {String} item — объект папки или файла, которую нужно удалить
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function removeItem(
     e: null | SyntheticEvent,
-    items: DragFilesTreeType.Items,
+    originalItems: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
-    itemId: DragFilesTreeType.Id,
+    item: DragFilesTreeType.Item,
     after?: DragFilesTreeType.After,
 ) {
     if (e) e.stopPropagation()
 
     // Удалить переданный элемент и возвратить новый список папок и файлов
-    const newItems = deleteItem(items, itemId)
+    const newItems = deleteItem(originalItems, item.id)
 
     // Запустить функцию, которая должна быть запущена после удаления папки или файла
     if (after && after.deleteItem) {
-        after.deleteItem(newItems, itemId)
+        after.deleteItem(originalItems, newItems, item)
     }
 
     // Обновить Состояние списка папок

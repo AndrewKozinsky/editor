@@ -73,7 +73,7 @@
     } = props
 
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
-    const toggleFolder = useGetToggleFolder(itemData.uuid, items, after)
+    const toggleFolder = useGetToggleFolder(itemData.id, items, after)
 
     // Классы кнопки сворачивания папки
     const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
@@ -164,7 +164,7 @@ function Circles(props: CirclesPropType) {
         afterButtons.push(
             <button
                 className={`${CN}__btn ${CN}__right-btn`}
-                onClick={(e) => after.afterClickBeforeBtn(itemData.uuid)}
+                onClick={(e) => after.afterClickBeforeBtn(itemData.id)}
                 title={componentsPanelMessages.beforeButton}
                 key={1}
             >
@@ -174,7 +174,7 @@ function Circles(props: CirclesPropType) {
         afterButtons.push(
             <button
                 className={`${CN}__btn ${CN}__right-btn`}
-                onClick={(e) => after.afterClickAfterBtn(itemData.uuid)}
+                onClick={(e) => after.afterClickAfterBtn(itemData.id)}
                 title={componentsPanelMessages.afterButton}
                 key={2}
             >
@@ -191,7 +191,7 @@ function Circles(props: CirclesPropType) {
     const insideButton = (
         <button
             className={ makeCN(insideButtonClasses) }
-            onClick={(e) => after.afterClickInsideBtn(itemData.uuid)}
+            onClick={(e) => after.afterClickInsideBtn(itemData.id)}
             title={componentsPanelMessages.insideButton}
             key={3}
         >

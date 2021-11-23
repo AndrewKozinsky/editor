@@ -1,12 +1,13 @@
 import {useCallback, useEffect, useState} from 'react'
 import { useDispatch } from 'react-redux'
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import config from 'utils/config'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
@@ -14,11 +15,11 @@ import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
 import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
 import { FolderType } from '../types'
-import config from '../../../../utils/config'
 
 
 /**
@@ -131,18 +132,56 @@ export async function saveFoldersOnServer(type: FolderType, items: DragFilesTree
 /**
  * Функция запускаемая после удаления или папки или файла (статьми или компонента)
  * @param {String} type — тип папок: с компонентами или со статьями.
- * @param {Array} items — массив данных по папкам и файлам.
- * @param {String} deletedItemId — id удалённого элемента
+ * @param {Array} originalItems — массив данных по папкам и файлам.
+ * @param {Array} newItems — массив данных по папкам и файлам.
+ * @param {String} deletedItem — объект удаляемого элемента
  */
 export function afterDeleteItem(
-    type: FolderType, items: DragFilesTreeType.Items, deletedItemId: DragFilesTreeType.Id
+    type: FolderType,
+    originalItems: DragFilesTreeType.Items,
+    newItems: DragFilesTreeType.Items,
+    deletedItem: DragFilesTreeType.Item,
 ) {
+    // Массив id открытых папок в LocalStorage
+    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(newItems)
+
+    // Получить все id файлов внутри папки
+    const filesIdsInside = filesTreePublicMethods.getFilesIdsInFolder(originalItems, deletedItem.id)
+
     // Обнулить данные выделенного элемента в Хранилище
     if (type === 'components') {
+        // Убрать id выделенной папки или файла из Хранилища
         store.dispatch( actions.sites.setCurrentComp(null, null) )
+
+        if (deletedItem.type === 'folder') {
+            // Поставить новый массив открытых папок в LocalStorage
+            setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
+
+            filesIdsInside.forEach(innerFileId => {
+                deleteComponentRequest(innerFileId)
+            })
+        }
+        else {
+            // Сделать запрос на удаление компонента
+            deleteComponentRequest(deletedItem.id)
+        }
     }
     else if (type === 'articles') {
+        // Убрать id выделенной папки или файла из Хранилища
         store.dispatch( actions.sites.setCurrentArt(null, null) )
+
+        if (deletedItem.type === 'folder') {
+            // Поставить новый массив открытых папок в LocalStorage
+            setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
+
+            filesIdsInside.forEach(innerFileId => {
+                deleteArticleRequest(innerFileId)
+            })
+        }
+        else {
+            // Сделать запрос на удаление компонента
+            deleteArticleRequest(deletedItem.id)
+        }
 
         // If the opened article is not in new items array then it is in the deleted folder,
         // then clear article editor because the article will be deleted.
@@ -151,58 +190,45 @@ export function afterDeleteItem(
         }*/
     }
 
-    // Обновить id открытых папок в LocalStorage
-    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(items)
-    if (type === 'components') {
-        setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
-    }
-    else if (type === 'articles') {
-        setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
-    }
-
     // Сохранить массив папок на сервере
-    saveFoldersOnServer(type, items)
-
-    // Удалить компонент или статью на сервере
-    if (type === 'components') {
-        deleteComponentRequest(deletedItemId)
-    }
-    else if (type === 'articles') {
-        deleteArticleRequest(deletedItemId)
-    }
+    saveFoldersOnServer(type, newItems)
 }
 
 
 /**
  * Функция запускаемая после добавления новой папки или файла (компонента или статьи)
  * @param {String} type — тип папок: с компонентами или со статьями
+ * @param {String} newFileName —
  */
-export async function afterAddingNewFile(type: FolderType): Promise<number> {
+export async function afterAddingNewFile(type: FolderType, newFileName: string): Promise<number> {
     const { currentSiteId } = store.getState().sites
 
     // Сохранить данные на сервере
     if (type === 'components') {
+        const minCompContent: TempCompTypes.Content = {
+            name: newFileName,
+            html: '<p>Text...</p>'
+        }
         const serverResponse = await createComponentRequest(
-            currentSiteId, JSON5.stringify(null)
+            currentSiteId, JSON5.stringify(minCompContent)
         )
 
-        let newCompId = 100000000
         if (serverResponse.status === 'success') {
-            newCompId = serverResponse.data.components[0].id
+            return  serverResponse.data.components[0].id
         }
-        return newCompId
     }
     else {
         const serverResponse = await createArticleRequest(
             currentSiteId, 'Название статьи...'
         )
 
-        let newArtId = 100000000
         if (serverResponse.status === 'success') {
-            newArtId = serverResponse.data.articles[0].id
+            return serverResponse.data.articles[0].id
         }
-        return newArtId
     }
+
+    // Функция должна вернуть число. Пусть в случае неудачного ответа будет возвращено такое значение:
+    return 100000000
 }
 
 /**

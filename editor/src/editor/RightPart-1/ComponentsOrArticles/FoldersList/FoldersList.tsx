@@ -53,11 +53,14 @@ export default function FoldersList(props: FoldersListPropType) {
             setItems={setItems}
             newFolderName={newFolderName}
             newFileName={newFileName}
-            afterAddingNewFile={() => afterAddingNewFile(type)}
+            afterAddingNewFile={() => afterAddingNewFile(type, newFileName)}
             afterChangingTree={(items) => saveFoldersOnServer(type, items)}
             afterCollapseFolder={(arrUuId) => afterCollapseFolder(type, arrUuId)}
             afterSelectItem={onItemClick}
-            afterDeleteItem={(items, itemId) => afterDeleteItem(type, items, itemId)}
+            afterDeleteItem={(originalItems, newItems, item) => {
+                // debugger
+                afterDeleteItem(type, originalItems, newItems, item)
+            }}
         />
     )
 }

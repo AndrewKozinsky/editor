@@ -1,4 +1,4 @@
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import ErrorServerResponseType from 'requests/errorServerResponseType'

@@ -1,23 +1,15 @@
 
 // Форма редактирования выбранного шаблона компонента
-/*export const componentFormMessages = {
-    componentNameInput: {
-        eng: 'Component name',
-        rus: 'Название компонента'
-    },
-    componentNamePlaceholder: {
-        eng: 'Banner, for example',
-        rus: 'Например: Баннер'
-    },
-    componentCodeInput: {
+export const componentFormMessages = {
+    componentContentInput: {
         eng: 'Component template code',
         rus: 'Код шаблона компонента'
     },
-    componentNameRequired: {
-        eng: 'The Component name cannot be empty',
-        rus: 'Название компонента не может быть пустым'
+    componentContentInputIsWrong: {
+        eng: 'The component\'s template code is not correct',
+        rus: 'Код шаблона компонента не правильный'
     },
-    submitBtnText: {
+    submitBtnTextSave: {
         eng: 'Save',
         rus: 'Сохранить'
     },
@@ -37,4 +29,12 @@
         eng: 'Delete',
         rus: 'Удалить'
     },
-}*/
+    checkCodeErrorHeader: {
+        eng: 'The template needs to be refined',
+        rus: 'Шаблон требует доработки'
+    },
+    checkCodeSuccessHeader: {
+        eng: 'The template is correct',
+        rus: 'Шаблон написан верно'
+    },
+}

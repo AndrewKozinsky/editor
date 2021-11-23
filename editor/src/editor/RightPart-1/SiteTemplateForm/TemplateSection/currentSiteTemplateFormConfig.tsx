@@ -1,6 +1,6 @@
 import * as yup from 'yup'
-import FCType from 'src/libs/FormConstructor/FCType'
-import { store } from 'src/store/rootReducer'
+import FCType from 'libs/FormConstructor/FCType'
+import { store } from 'store/rootReducer'
 import { afterSubmit } from './siteTemplateForm-func'
 import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'

@@ -47,13 +47,6 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'siteTemplates/' + siteTemplateId
     },
 
-
-    // SITE COMPONENTS
-    // Компоненты сайта
-    /*siteComponents: function (siteId: string) {
-        return 'sites/' + siteId + '/components'
-    },*/
-
     // Папка шаблонов компонентов
     compFoldersBySite: function (siteId: number) {
         return `sites/${siteId}/compFolders`
@@ -68,6 +61,10 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     component: function (compId: number) {
         return 'components/' + compId
     },
+    // Компоненты сайта
+    /*siteComponents: function (siteId: string) {
+        return 'sites/' + siteId + '/components'
+    },*/
     // Папки статей
     artFoldersBySite: function (siteId: number) {
         return `sites/${siteId}/artFolders`

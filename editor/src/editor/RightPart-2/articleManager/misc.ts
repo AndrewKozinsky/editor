@@ -5,7 +5,7 @@
 // import { store } from 'store/rootReducer'
 // import articleManager from './articleManager'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-// import deleteArticleRequest from '../../../requests/editor/article/deleteArticleRequest'
+// import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 
 
 /*type MarksObj = {

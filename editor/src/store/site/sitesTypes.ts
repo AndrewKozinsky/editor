@@ -70,7 +70,7 @@ namespace StoreSitesTypes {
 
     // СТАТЬИ (ТИПЫ) ==================================================================
 
-    // uuid выбранного элемента: папки или статьи
+    // id выбранного элемента: папки или статьи
     export type CurrentArtItemId = null | number
     // Тип выбранного элемента (папка или компонент)
     export type CurrentArtItemType = null | DragFilesTreeType.ItemType
