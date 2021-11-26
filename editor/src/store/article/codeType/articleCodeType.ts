@@ -1,4 +1,4 @@
-/*namespace ArticleTypes {
+namespace ArticleTypes {
     // Article
     export type Article = {
         // Additional information
@@ -18,30 +18,30 @@
     // Component
     export type Component = {
         // Component type
-        type: 'component'
+        // type: 'component'
         // Component data id
-        dataCompId: DataCompId // 1
+        // dataCompId: DataCompId // 1
         // Component template id
-        tempCompId: TempCompId // 'fhd-009-dfd-mvpo'
-        layer?: Layer
+        // tempCompId: TempCompId
+        // layer?: Layer
         // Component elements
-        elems?: ComponentElems
+        // elems?: ComponentElems
     }
 
-    export type DataCompId = number // 1
-    export type TempCompId = string // 'fhd-009-dfd-mvpo'
+    // export type DataCompId = number // 1
+    // export type TempCompId = number // 2
 
     // Layers options
-    export type Layer = {
+    /*export type Layer = {
         collapsed?: boolean // true
         hidden?: boolean // true
-    }
+    }*/
 
     // Component elements
-    export type ComponentElems = ComponentElem[]
+    // export type ComponentElems = ComponentElem[]
 
     // Component element
-    export type ComponentElem = {
+    /*export type ComponentElem = {
         // Element data id
         dataElemId: DataElemId // 1
         // Element template id
@@ -53,70 +53,70 @@
         attribs?: Attribs
         layer?: Layer
         children?: ElemChildren
-    }
+    }*/
 
-    export type DataElemId = number // 1
-    export type TempElemId = string // 'banner'
-    export type ElemGroup = string // ''banner-1'
-    export type Tag = number | string // 1 OR 'div'
+    // export type DataElemId = number // 1
+    // export type TempElemId = string // 'banner'
+    // export type ElemGroup = string // ''banner-1'
+    // export type Tag = number | string // 1 OR 'div'
 
-    export type Attribs = Attrib[]
+    // export type Attribs = Attrib[]
 
-    export type Attrib = {
+    /*export type Attrib = {
         id: ComponentElemAttribId // 1
         // Array of attributes ids (if there are exact number of values) or exact value (if it value was written in text field)
         value: ComponentElemAttribValue // [4, 6] OR 'banner'
-    }
+    }*/
 
-    export type ComponentElemAttribId = number // 1
-    export type ComponentElemAttribValue = number[] | string // [4, 6] OR 'banner'
+    // export type ComponentElemAttribId = number // 1
+    // export type ComponentElemAttribValue = number[] | string // [4, 6] OR 'banner'
 
-    export type ElemChildren = (Component | TextComponent)[]
+    // export type ElemChildren = (Component | TextComponent)[]
 
     // =================================================================================================================
 
 
     // Text component
     export type TextComponent = {
-        type: 'textComponent'
+        // type: 'textComponent'
         // Component data id
-        dataCompId: DataCompId // 2
+        // dataCompId: DataCompId // 2
         // Component template id
-        tempCompId: TempCompId // 'fhd-009-dfd-mvpo'
+        // tempCompId: TempCompId // 'fhd-009-dfd-mvpo'
         // id элемента шаблона чтобы понимать откуда брать данные по тегам и атрибутам
-        tempElemId: TempElemId // 'banner'
+        // tempElemId: TempElemId // 'banner'
         // Layer settings
-        layer?: Layer
-        children?: TextChildren
+        // layer?: Layer
+        // children?: TextChildren
     }
 
-    export type TextChildren = TextChild[]
-    export type TextChild = Component | TagObject | TextObject
+    // export type TextChildren = TextChild[]
+    // export type TextChild = Component | TagObject | TextObject
 
-    export type TagObject =  {
+    /*export type TagObject =  {
         type: 'textTag'
         // id тега, в который завернут контент
         tag: Tag
         attribs?: Attribs
         children?: TextChildren
-    }
+    }*/
 
-    export type TextObject =  {
+    /*export type TextObject =  {
         type: 'text'
         text: string
-    }
-}*/
+    }*/
+}
 
-// export default ArticleTypes
+export default ArticleTypes
 
 
-/*export const emptyArticleData: ArticleTypes.Article = {
+export const emptyArticleData: ArticleTypes.Article = {
     meta: {
         // Max component id to understand what component id must be next
         maxComponentId: 0
     },
     // Components array
     components: []
-}*/
+}
 
 

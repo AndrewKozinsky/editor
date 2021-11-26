@@ -1,5 +1,5 @@
 import {WrapperPropType} from './Wrapper'
-import { makeCN } from '../../utils/StringUtils'
+import { makeCN } from 'utils/StringUtils'
 import './Wrapper.scss'
 
 const wrapperRootClass = 'wrapper'
@@ -17,6 +17,7 @@ function makeClasses(wrapperProps: WrapperPropType) {
 function getRootClass(wrapperProps: WrapperPropType) {
     const {
         align,
+        verticalAlign,
         t,     // Отступ сверху
         b      // Отступ снизу
     } = wrapperProps
@@ -25,6 +26,7 @@ function getRootClass(wrapperProps: WrapperPropType) {
 
     // Добавление класса дающую выравнивание
     if (align) classes.push(wrapperRootClass + '--align-' + align)
+    if (verticalAlign) classes.push(wrapperRootClass + '--vertical-align-' + verticalAlign)
 
     // Добавление класса дающего верхний оступ
     if (t) classes.push(wrapperRootClass + '--t' + t)

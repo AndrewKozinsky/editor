@@ -13,6 +13,7 @@ import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 import TempCompTypes from '../article/codeType/tempCompCodeType'
+import getArticleRequest from 'requests/editor/article/getArticleRequest'
 
 
 const sitesActions = {
@@ -190,7 +191,7 @@ const sitesActions = {
         }
     },
 
-    // Установка папки статей
+    // Установка папки со статьями
     setArtFolder(payload: StoreSitesTypes.SetArtFolderActionPayload): StoreSitesTypes.SetArtFolderAction {
         return {
             type: StoreSitesTypes.SET_ART_FOLDER,
@@ -205,7 +206,7 @@ const sitesActions = {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id выбранного шаблона компонента, данные которого нужно скачать
-            const { currentCompItemId } = store.getState().sites.componentsSection
+            const { currentCompItemId } = store.getState().sites.componentSection
 
             // Если id компонента не передан, то обнулить данные компонета в Хранилище
             if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
@@ -252,11 +253,11 @@ const sitesActions = {
     // СТАТЬИ ======================================================================================
 
     // Загрузка с сервера статьи и установка в Хранилище
-    /*requestArticle() {
+    requestArticle() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id выбранной статьи, данные которой нужно скачать
-            const {currentArtItemId} = getState().sites.articlesSection
+            const { currentArtItemId } = getState().sites.articleSection
 
             // Если id статьи не передан, то обнулить данные статьи в Хранилище
             if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
@@ -265,13 +266,19 @@ const sitesActions = {
             const response = await getArticleRequest(currentArtItemId)
 
             if (response.status !== 'success') return
-            const articleData = response.data.article
+            const articleData = response.data.articles[0]
 
             if (articleData) {
-                dispatch( sitesActions.setCurrentArt(articleData.id, 'file', articleData) )
+                dispatch( sitesActions.setCurrentArt(
+                    articleData.id,
+                    'file',
+                    articleData.name,
+                    articleData.content,
+                    articleData.siteTemplateId
+                ))
             }
         }
-    },*/
+    },
 
     // Установка id и типа выбранной статьи
     setCurrentArt(
@@ -303,21 +310,7 @@ const sitesActions = {
 
 
 
-    // Component Template item (folder or file) type setting
-    /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE,
-            payload
-        }
-    },*/
 
-    // Component Template item id setting
-    /*setCurrentCompItemId(payload: StoreSitesTypes.CurrentCompItemId): StoreSitesTypes.SetCurrentCompItemIdAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID,
-            payload
-        }
-    },*/
 
     // Article item (folder or file) type setting
     /*setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {

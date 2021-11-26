@@ -43,7 +43,7 @@ function getFormConfig(componentFormMsg: any) {
             // Массив папок и файлов из Хранилища
             const folders = store.getState().sites.compFolderSection.compFolder
             // id выбранной папки
-            const { currentCompItemId } = store.getState().sites.componentsSection
+            const { currentCompItemId } = store.getState().sites.componentSection
 
             // Изменить название компонента на введённое и обновить Хранилище папок
             const { name } = JSON5.parse(readyFieldValues.content.toString())

@@ -62,9 +62,9 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
         return 'components/' + compId
     },
     // Компоненты сайта
-    /*siteComponents: function (siteId: string) {
+    componentsBySite: function (siteId: number) {
         return 'sites/' + siteId + '/components'
-    },*/
+    },
     // Папки статей
     artFoldersBySite: function (siteId: number) {
         return `sites/${siteId}/artFolders`

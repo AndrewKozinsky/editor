@@ -39,12 +39,12 @@
             return
         }
 
-        // Get opened component template folders uuid array to open these folders
-        const openUuIdArr: null | FilesTreeType.IdArr = getFromLocalStorage(config.ls.article)?.openCompFoldersUuIds
+        // Get opened component template folders id array to open these folders
+        const openIdArr: null | FilesTreeType.IdArr = getFromLocalStorage(config.ls.article)?.openCompFoldersUuIds
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(
-            tempCompsFolders, openUuIdArr, flashedElemCoords.selectedElem, tempCompsArr, article
+            tempCompsFolders, openIdArr, flashedElemCoords.selectedElem, tempCompsArr, article
         )
 
         // Save updated folders and component templates structure

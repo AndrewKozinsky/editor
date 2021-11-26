@@ -15,13 +15,13 @@
  * The function creates a new component data with passed tempCompId
  * @param {Object} article — article object
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template uuid
+ * @param {String} tempCompId — component template id
  */
 /*export function createComponent(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId
+    tempCompId: TempCompTypes.Id
 ) {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
 
@@ -30,7 +30,7 @@
     const compData: ArticleTypes.Component = {
         type: 'component',
         dataCompId: ++maxCompId,
-        tempCompId: tempComp.uuid
+        tempCompId: tempComp.id
     }
 
     const elementsFnResult = createCompElements(tempComp, maxCompId)
@@ -160,7 +160,7 @@
     return {
         type: 'textComponent',
         dataCompId: dataCompId,
-        tempCompId: tempComp.uuid,
+        tempCompId: tempComp.id,
         tempElemId: tempElem.tempElemId,
         children: [
             {type: 'text', text: ''}

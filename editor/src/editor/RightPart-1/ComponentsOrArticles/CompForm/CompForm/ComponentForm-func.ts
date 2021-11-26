@@ -8,7 +8,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 /** Хук отслеживает выбор другого компонента и скачивает данные по нему с сервера и ставит их в Хранилище */
 export function useGetComDataFromServerAndSetInStore() {
     const dispatch = useDispatch()
-    const { currentCompItemId } = useGetSitesSelectors().componentsSection
+    const { currentCompItemId } = useGetSitesSelectors().componentSection
 
     // Скачать данные при выделении другого компонента
     useEffect(function () {
@@ -21,7 +21,7 @@ export function useGetComDataFromServerAndSetInStore() {
  * @param {Object} formState — объект состояния формы
  */
 export function useSetAnotherFormData(formState: FCType.StateFormReturn) {
-    const { currentCompCode } = useGetSitesSelectors().componentsSection
+    const { currentCompCode } = useGetSitesSelectors().componentSection
 
     useEffect(function () {
         const valueFieldNewData = Object.assign(

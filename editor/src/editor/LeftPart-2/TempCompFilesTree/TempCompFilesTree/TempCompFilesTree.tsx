@@ -64,7 +64,7 @@
         }
 
         return (
-            <Fragment key={itemData.uuid}>
+            <Fragment key={itemData.id}>
                 <Item
                     items={allItems}
                     itemData={itemData}

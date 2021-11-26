@@ -12,7 +12,7 @@
 /*export function DeleteArticleConfirmModal() {
     const dispatch = useDispatch()
     const { articleUuId } = useSelector((store: AppStateType) => store.article)
-    const { currentArtItemId } = useSelector((store: AppStateType) => store.sites.articlesSection)
+    const { currentArtItemId } = useSelector((store: AppStateType) => store.sites.articleSection)
 
     // Функция удаляющая выделенную папку
     const closeModal = useCallback(async function () {

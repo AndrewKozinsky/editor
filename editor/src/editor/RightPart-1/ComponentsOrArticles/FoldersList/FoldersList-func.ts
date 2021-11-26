@@ -4,6 +4,8 @@ const JSON5 = require('json5')
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
@@ -14,8 +16,6 @@ import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderReque
 import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import useGetSitesSelectors from 'store/site/sitesSelectors'
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
 import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
@@ -219,7 +219,7 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
     }
     else {
         const serverResponse = await createArticleRequest(
-            currentSiteId, 'Название статьи...'
+            currentSiteId, newFileName
         )
 
         if (serverResponse.status === 'success') {

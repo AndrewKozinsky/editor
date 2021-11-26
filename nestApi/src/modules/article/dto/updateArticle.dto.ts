@@ -1,11 +1,19 @@
-import {IsNotEmpty, IsString} from 'class-validator'
+import {IsNumber, IsOptional, IsString} from 'class-validator'
 
 export class UpdateArticleDto {
-    @IsNotEmpty({
-        message: 'article_UpdateArticleDto_EmptyContent'
+    @IsOptional()
+    @IsString({
+        message: 'article_UpdateArticleDto_nameIsNotAString'
     })
+    name: string
+
+    @IsOptional()
     @IsString({
         message: 'article_UpdateArticleDto_contentIsNotAString'
     })
     content: string
+
+    @IsOptional()
+    @IsNumber()
+    siteTemplateId: number
 }

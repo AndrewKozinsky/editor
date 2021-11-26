@@ -15,6 +15,8 @@ const config = {
         editorComponentType: 'editorComponentType',
         editorArticleId: 'editorArticleId',
         editorArticleType: 'editorArticleType',
+
+        editArticleId: 'editArticleId' // id редактируемой статьи
     }
 }
 

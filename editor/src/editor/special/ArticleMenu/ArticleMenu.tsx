@@ -12,7 +12,7 @@
 // import './ArticleMenu.scss'
 // import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
 // import { useCloseArticle } from './fn/close'
-// import useGetShowModal from '../../../utils/hooksUtils'
+// import useGetShowModal from 'utils/hooksUtils'
 // import {CloseArticleConfirmModal} from './fn/CloseArticleConfirmModal'
 // import {DeleteArticleConfirmModal} from './fn/DeleteArticleConfirmModal'
 // import { useIsMarkupBtnDisabled } from './fn/markup'

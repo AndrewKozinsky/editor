@@ -1,7 +1,7 @@
 // import {SyntheticEvent, useCallback} from 'react'
 // import {makeCN} from 'utils/StringUtils'
 /*import {
-    getOpenedFoldersUuid,
+    getOpenedFoldersId,
     toggleFolder
 } from '../StoreManage/manageState'*/
 // import TempCompFilesTreeType from '../types'

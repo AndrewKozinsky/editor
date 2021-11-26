@@ -67,7 +67,7 @@ export function getIconSize(type: string) {
         case 'btnSignFolder':
         case 'btnSignAdd':
         // case 'btnSignJson':
-        // case 'btnSignEdit':
+        case 'btnSignEdit':
         case 'btnSignCancel':
             return {
                 width: '15px',

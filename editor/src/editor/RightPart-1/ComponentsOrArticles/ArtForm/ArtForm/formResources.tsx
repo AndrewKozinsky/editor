@@ -209,7 +209,7 @@
  */
 /*async function saveArticleOnServer( formDetails: FHTypes.FormDetailsInSubmitHandler ) {
     // id выбранной статьи
-    const {currentArtItemId} = store.getState().sites.articlesSection
+    const {currentArtItemId} = store.getState().sites.articleSection
 
     // Данные полей формы
     const fields = formDetails.readyFieldValues
@@ -231,7 +231,7 @@
     const items = articlesTreeStore.getState()
 
     // id выбранной статьи
-    const {currentArtItemId} = store.getState().sites.articlesSection
+    const {currentArtItemId} = store.getState().sites.articleSection
 
     // Изменить название файла на введённое и обновить Хранилище папок
     let result = filesTreePublicMethods.changeItemName(

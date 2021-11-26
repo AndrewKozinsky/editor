@@ -1,6 +1,6 @@
 import { setInLocalStorage } from 'utils/MiscUtils'
 import StoreSettingsTypes from './settingsTypes'
-import config from '../../utils/config'
+import config from 'utils/config'
 
 export type SettingsReducerType = {
     editorLanguage: StoreSettingsTypes.EditorLanguage

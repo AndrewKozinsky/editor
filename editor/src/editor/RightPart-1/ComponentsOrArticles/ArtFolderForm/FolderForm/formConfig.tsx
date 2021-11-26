@@ -36,7 +36,7 @@ function getFormConfig(articleFolderFormMsg: any) {
             // Массив папок и файлов из Хранилища
             const folders = store.getState().sites.artFolderSection.artFolder
             // id выбранной папки
-            const { currentArtItemId } = store.getState().sites.articlesSection
+            const { currentArtItemId } = store.getState().sites.articleSection
 
             // Изменить название папки на введённое и обновить Хранилище папок
             const folderName = readyFieldValues.name.toString()

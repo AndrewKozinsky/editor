@@ -11,16 +11,6 @@ import {
     saveFoldersOnServer,
     afterDeleteItem, useGetNewItemsName
 } from './FoldersList-func'
-import DragFilesTreeType from 'libs/DragFilesTree/types'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { compFoldersSectionMessages } from 'messages/compFoldersSectionMessages'
-/*import {
-    componentsTreeStore,
-    articlesTreeStore,
-    setCompItems,
-    setArtItems
-} from '../stores'*/
-// import { foldersArticlesSectionMessages } from 'messages/foldersArticlesSectionMessages'
 
 
 type FoldersListPropType = {
@@ -55,10 +45,9 @@ export default function FoldersList(props: FoldersListPropType) {
             newFileName={newFileName}
             afterAddingNewFile={() => afterAddingNewFile(type, newFileName)}
             afterChangingTree={(items) => saveFoldersOnServer(type, items)}
-            afterCollapseFolder={(arrUuId) => afterCollapseFolder(type, arrUuId)}
+            afterCollapseFolder={(arrId) => afterCollapseFolder(type, arrId)}
             afterSelectItem={onItemClick}
             afterDeleteItem={(originalItems, newItems, item) => {
-                // debugger
                 afterDeleteItem(type, originalItems, newItems, item)
             }}
         />

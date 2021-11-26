@@ -1,7 +1,7 @@
 import React from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import ArtFolderForm from './ArtFolderForm/FolderForm/ArtFolderForm'
-import ArtForm from './ArtForm/ArtForm'
+import ArtForm from './ArtForm/ArtForm/ArtForm'
 
 
 /**
@@ -11,7 +11,7 @@ import ArtForm from './ArtForm/ArtForm'
 export default function ArticleFormProvider() {
 
     // Тип выбранного элемента в дереве папок и файлов
-    const { currentArtItemType } = useGetSitesSelectors().articlesSection
+    const { currentArtItemType } = useGetSitesSelectors().articleSection
 
     if (currentArtItemType === 'folder') return <ArtFolderForm />
     if (currentArtItemType === 'file') return <ArtForm />

@@ -35,9 +35,9 @@
     const componentsItems = useStore(componentsTreeStore)
     const articlesItems = useStore(articlesTreeStore)
 
-    // uuid выделенного компонента или статьи
-    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentsSection)
-    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articlesSection)
+    // id выделенного компонента или статьи
+    const {currentCompItemId} = useSelector((store: AppStateType) => store.sites.componentSection)
+    const {currentArtItemId} = useSelector((store: AppStateType) => store.sites.articleSection)
 
     // Функция удаляющая выделенный компонент или статью
     const deleteItem = useCallback(async function () {
@@ -51,7 +51,7 @@
             await saveItemsOnServer('components', newItems)
             // Удалить компонент на сервере
             await deleteComponentRequest(currentCompItemId)
-            // Обнулить свойство указывающее на uuid активного компонента потому что он удаленён
+            // Обнулить свойство указывающее на id активного компонента потому что он удаленён
             dispatch(actions.sites.setCurrentComp(null, null))
         }
         // Аналогично для статей

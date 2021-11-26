@@ -1,22 +1,34 @@
 import React from 'react'
-// import Wrapper from 'common/Wrapper/Wrapper'
-// import Button from 'common/formElements/Button/Button'
-// import TextInput from 'common/formElements/TextInput/TextInput'
-// import Hr from 'common/misc/Hr/Hr'
-// import Form from 'common/formElements/Form/Form'
-// import Select from 'common/formElements/Select/Select'
-// import useFormHandler from 'libs/formHandler/useFormHandler'
-// import getFormConfig from './formResources'
-// import {useGetEditArticleBtnHandler, useManageTemplatesSelect } from './ArticleForm-func'
-// import { articleFormMessages } from 'messages/articleFormMessages'
-// import { useGetAnotherArticle } from './ArticleForm-func'
-// import DeleteItemModal from '../../ComponentsOrArticles/DeleteItemModal/DeleteItemModal'
-// import useGetShowModal from 'utils/hooksUtils'
+import useGetMessages from 'messages/fn/useGetMessages'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+// import { useGetEditArticleBtnHandler } from './ArticleForm-func'
+import { articleFormMessages } from 'messages/articleFormMessages'
+import getFormConfig from './formConfig'
+import {useFillSiteTemplatesSelect, useGetArtDataFromServerAndSetInStore, useSetAnotherFormData } from './ArtForm-func'
+import EditArticleSection from '../EditArticleSection/EditArticleSection'
 
 export default function ArtForm() {
+    // Сообщения формы
+    const articleFormMsg = useGetMessages(articleFormMessages)
+
+    // Объекты конфигурации и состояния формы
+    const config = getFormConfig(articleFormMsg)
+    const formState = useFormConstructorState(config)
+
+    // Скачать данные статьи с сервера и поставить в Хранилище
+    useGetArtDataFromServerAndSetInStore()
+    // Хук наполняет выпадающий список шаблона сайта в форме существующими значениями
+    useFillSiteTemplatesSelect(formState)
+    // Хук изменяет значения полей формы при переключении статей
+    useSetAnotherFormData(formState)
 
     return (
-        <p>ArtForm</p>
+        <>
+            <FormConstructor config={config} state={formState} />
+            <EditArticleSection />
+        </>
+
     )
 }
 

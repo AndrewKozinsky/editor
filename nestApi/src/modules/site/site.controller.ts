@@ -14,6 +14,7 @@ import { UpdateSiteDto } from './dto/updateSite.dto'
 import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
 import { CompFolderService } from '../compFolder/compFolder.service'
 import { ArtFolderService } from '../artFolder/artFolder.service'
+import { ComponentService } from '../component/component.service'
 
 
 @Controller('sites')
@@ -22,8 +23,22 @@ export class SiteController {
         private readonly siteService: SiteService,
         private readonly siteTemplateService: SiteTemplateService,
         private readonly compFolderService: CompFolderService,
-        private readonly artFolderService: ArtFolderService
+        private readonly artFolderService: ArtFolderService,
+        private readonly componentService: ComponentService,
     ) {}
+
+
+    // ШАБЛОНЫ САЙТА =========================================
+
+    // Получение всех шаблонов сайта
+    @Get(':siteId/siteTemps')
+    async getSiteTemplates(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response
+    ): Promise<void> {
+        const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
+        this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
+    }
 
 
     // ПАПКА С КОМПОНЕНТАМИ =========================================
@@ -80,16 +95,18 @@ export class SiteController {
     }
 
 
-    // ШАБЛОНЫ САЙТА =========================================
+    // КОМПОНЕНТЫ =========================================
 
-    // Получение всех шаблонов сайта
-    @Get(':siteId/siteTemps')
-    async getSiteTemplates(
+    // Получение компонентов сайта
+    @UseGuards(AuthGuard)
+    @Get(':siteId/components')
+    async getComponentsBySiteId(
+        @Req() req: ExpressRequestInterface,
         @Param('siteId') siteId: number,
-        @Res({ passthrough: true }) response: Response
+        @Res({ passthrough: true }) response: Response,
     ): Promise<void> {
-        const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
-        this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
+        const components = await this.componentService.getComponentsBySiteId(siteId)
+        this.componentService.buildComponentResponse(components, response)
     }
 
 

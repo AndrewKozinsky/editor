@@ -40,7 +40,7 @@
  * @param {Object} template — component template
  * @param {String} tempElemId — an element template id
  */
-/*function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tempElemId: TempCompTypes.UuId): TempCompTypes.Elem {
+/*function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tempElemId: TempCompTypes.Id): TempCompTypes.Elem {
     return template.code.elems.find(tempElem => tempElem.tempElemId === tempElemId)
 }*/
 

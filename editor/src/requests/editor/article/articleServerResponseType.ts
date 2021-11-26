@@ -11,7 +11,10 @@ type ArticleServerResponseType = {
 
 type ArticleType = {
     id: number
-    content: string
+    siteId: number
+    name: null | string
+    content: null | string
+    siteTemplateId: null | number
     createdAt: Date
 }
 

@@ -45,17 +45,17 @@
 }*/
 
 /**
- * Функция возвращает uuid раскрытых папок
+ * Функция возвращает id раскрытых папок
  * @param {Array} items — массив данных по папкам и файлам
- * @param {Array} arr — массив с uuid открытых папок (требуется внутри работы функции, в саму функцию передавать не нужно)
+ * @param {Array} arr — массив с id открытых папок (требуется внутри работы функции, в саму функцию передавать не нужно)
  */
-/*export function getOpenedFoldersUuid(items: TempCompFilesTreeType.Items, arr: TempCompFilesTreeType.IdArr = []) {
+/*export function getOpenedFoldersId(items: TempCompFilesTreeType.Items, arr: TempCompFilesTreeType.IdArr = []) {
     items.forEach((item: TempCompFilesTreeType.Item) => {
         if (item.open) {
-            arr.push(item.uuid)
+            arr.push(item.id)
 
             if (item.content) {
-                getOpenedFoldersUuid(item.content, arr)
+                getOpenedFoldersId(item.content, arr)
             }
         }
     })

@@ -1,6 +1,6 @@
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import config from 'utils/config'
 import StoreSitesTypes from './sitesTypes'
-import config from '../../utils/config'
 
 export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
@@ -12,8 +12,8 @@ export type SitesReducerType = {
     },
     compFolderSection: StoreSitesTypes.CompFolderSection
     artFolderSection: StoreSitesTypes.ArtFolderSection
-    componentsSection: StoreSitesTypes.ComponentsSection
-    articlesSection: StoreSitesTypes.ArticlesSection
+    componentSection: StoreSitesTypes.ComponentSection
+    articleSection: StoreSitesTypes.ArticleSection
 }
 
 // Изначальные значения
@@ -42,7 +42,7 @@ const initialState: SitesReducerType = {
         artFolder: null // Код папки
     },
     // Данные по вкладке «Шаблоны компонентов»
-    componentsSection: {
+    componentSection: {
         // id выбранного элемента: папки или компонента
         currentCompItemId: null,
         // тип выбранного элемента: папка или компонент
@@ -53,13 +53,13 @@ const initialState: SitesReducerType = {
         currentCompCode: null,
     },
     // Данные по вкладке «Статьи»
-    articlesSection: {
+    articleSection: {
         // id выбранного элемента: папки или статьи
         currentArtItemId: null,
         // Тип выбранного элемента: папка или компонент
         currentArtItemType: null,
         // Имя выбранной статьи
-        currentArtName: '',
+        currentArtName: null,
         // Строка с кодом выбранной статьи
         currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
@@ -178,12 +178,12 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
         // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
         setInLocalStorage(config.ls.editorComponentType, action.payload.type)
 
-        let newComponentSection: StoreSitesTypes.ComponentsSection
+        let newComponentSection: StoreSitesTypes.ComponentSection
 
         // Если выделили папку
         if (action.payload.type === 'folder') {
             newComponentSection = {
-                ...state.componentsSection,
+                ...state.componentSection,
                 currentCompItemId: action.payload.id,
                 currentCompItemType: action.payload.type,
                 currentCompName: null,
@@ -193,7 +193,7 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
         // Если если выделили компонент
         else if (action.payload.type === 'file') {
             newComponentSection = {
-                ...state.componentsSection,
+                ...state.componentSection,
                 currentCompItemId: action.payload.id,
                 currentCompItemType: action.payload.type,
                 currentCompName: action.payload.name || '',
@@ -203,7 +203,7 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 
         return {
             ...state,
-            componentsSection: newComponentSection
+            componentSection: newComponentSection
         }
     }
     else {
@@ -214,8 +214,8 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 
         return {
             ...state,
-            componentsSection: {
-                ...state.componentsSection,
+            componentSection: {
+                ...state.componentSection,
                 currentCompItemId: null,
                 currentCompItemType: null,
                 currentCompName: null,
@@ -235,15 +235,15 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
         // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
         setInLocalStorage(config.ls.editorArticleType, action.payload.type)
 
-        let newArticleSection: StoreSitesTypes.ArticlesSection
+        let newArticleSection: StoreSitesTypes.ArticleSection
 
         // Если ставят данные папки
         if (action.payload.type === 'folder') {
             newArticleSection = {
-                ...state.articlesSection,
+                ...state.articleSection,
                 currentArtItemId: action.payload.id,
                 currentArtItemType: action.payload.type,
-                currentArtName: action.payload.name,
+                currentArtName: '',
                 currentArtCode: null,
                 siteTemplateId: null
             }
@@ -251,10 +251,10 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
         // Если ставят данные статьи
         else if (action.payload.type === 'file') {
             newArticleSection = {
-                ...state.articlesSection,
+                ...state.articleSection,
                 currentArtItemId: action.payload.id,
                 currentArtItemType: action.payload.type,
-                currentArtName: action.payload.name,
+                currentArtName: action.payload.name || '',
                 currentArtCode: action.payload.code || null,
                 siteTemplateId: action.payload.siteTemplateId || null
             }
@@ -262,7 +262,7 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
 
         return {
             ...state,
-            articlesSection: newArticleSection
+            articleSection: newArticleSection
         }
     }
     else {
@@ -273,8 +273,8 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
 
         return {
             ...state,
-            articlesSection: {
-                ...state.articlesSection,
+            articleSection: {
+                ...state.articleSection,
                 currentArtItemId: null,
                 currentArtItemType: null,
                 currentArtName: '',
@@ -300,45 +300,9 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
 
 
 
-// Component Template item (folder or file) type setting
-/*function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemTypeAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorComponentType)
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorComponentType, action.payload)
-    }
 
-    return {
-        ...state,
-        componentsSection: {
-            ...state.componentsSection,
-            currentCompItemType: action.payload
-        }
-    }
-}*/
 
-// Component Template item id setting
-/*function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemIdAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorComponentId)
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorComponentId, action.payload)
-    }
 
-    return {
-        ...state,
-        componentsSection: {
-            ...state.componentsSection,
-            currentCompItemId: action.payload
-        }
-    }
-}*/
 
 // Установка id выбранного подключаемых шаблонов
 /*function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
@@ -353,8 +317,8 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
 
     return {
         ...state,
-        articlesSection: {
-            ...state.articlesSection,
+        articleSection: {
+            ...state.articleSection,
             currentArtItemType: action.payload
         }
     }
@@ -373,8 +337,8 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
 
     return {
         ...state,
-        articlesSection: {
-            ...state.articlesSection,
+        articleSection: {
+            ...state.articleSection,
             currentArtItemId: action.payload
         }
     }
@@ -409,18 +373,6 @@ export default function sitesReducer(
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
 
-
-        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE:
-        //     return setCurrentCompItemType(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID:
-        //     return setCurrentCompItemId(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE:
-        //     return setCurrentArtItemType(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
-        //     return setCurrentArtItemId(state, action)
         default:
             // @ts-ignore
             const x: never = null

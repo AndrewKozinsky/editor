@@ -19,7 +19,7 @@
 /**
  * The function finds component template in templates array
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template uuid
+ * @param {String} tempCompId — component template id
  */
 /*export function getTemplate(
     this: typeof articleManager,

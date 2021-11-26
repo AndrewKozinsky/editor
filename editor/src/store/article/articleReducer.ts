@@ -5,8 +5,8 @@ import StoreArticleTypes from './articleTypes'
 // import TempCompTypes from './codeType/tempCompCodeType'
 
 export type ArticleReducerType = {
-    // articleUuId: null | string
-    // articleSiteId: null | string
+    articleId: null | number
+    // articleSiteId: null | number
     // Components template folders
     // tempCompsFolders: null | FilesTreeType.Items
     // Components templates array
@@ -28,7 +28,7 @@ export type ArticleReducerType = {
 // Article reducer state example
 /*const stateExample: ArticleReducerType = {
     tempComps: [{
-        uuid: '3522-6322-7532-6290',
+        id: 9,
         name: 'Banner',
         code: <TempCompTypes.TempComp>{}
     }],
@@ -66,7 +66,7 @@ export type ArticleReducerType = {
 
 // Initial values
 const initialState: ArticleReducerType = {
-    // articleUuId: null,
+    articleId: null,
     // articleSiteId: null,
     // tempCompsFolders: null,
     // tempComps: null,
@@ -85,22 +85,35 @@ const initialState: ArticleReducerType = {
     // historyStepWhenWasSave: 0
 }
 
-/*function clearArticle(
+function clearArticle(
     state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
 ): ArticleReducerType {
     // Do not touch the document's links
-    const newState = Object.assign(initialState, {$links: state.$links})
+    const newState = Object.assign(
+        initialState,
+        // {$links: state.$links}
+    )
 
     return newState
-}*/
+}
 
-// Sets article uuId and article site id
+// Установка id редактируемой статьи. После редактор загружает все данные.
+function setArticleId(
+    state: ArticleReducerType, action: StoreArticleTypes.SetArticleIdAction
+): ArticleReducerType {
+    return {
+        ...state,
+        articleId: action.payload,
+    }
+}
+
+// Sets article id and article site id
 /*function setArticleMarks(
     state: ArticleReducerType, action: StoreArticleTypes.SetArticleMarksAction
 ): ArticleReducerType {
     return {
         ...state,
-        articleUuId: action.payload.articleUuId,
+        articleId: action.payload.articleId,
         articleSiteId: action.payload.siteId,
     }
 }*/
@@ -273,8 +286,10 @@ export default function articleReducer(
 ): ArticleReducerType {
 
     switch (action.type) {
-        // case StoreArticleTypes.CLEAR_ARTICLE:
-        //     return clearArticle(state, action)
+        case StoreArticleTypes.CLEAR_ARTICLE:
+            return clearArticle(state, action)
+        case StoreArticleTypes.SET_ARTICLE_ID:
+            return setArticleId(state, action)
         // case StoreArticleTypes.SET_ARTICLE_MARKS:
         //     return setArticleMarks(state, action)
         // case StoreArticleTypes.SET_TEMP_COMPS:

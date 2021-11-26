@@ -61,7 +61,7 @@ namespace StoreSitesTypes {
     export type ComponentCode = null | string
 
     // Объект с данными компонента
-    export type ComponentsSection = {
+    export type ComponentSection = {
         currentCompItemId: CurrentCompItemId
         currentCompItemType: CurrentCompItemType
         currentCompName: ComponentName
@@ -75,12 +75,12 @@ namespace StoreSitesTypes {
     // Тип выбранного элемента (папка или компонент)
     export type CurrentArtItemType = null | DragFilesTreeType.ItemType
     // Имя выбранной статьи
-    export type ArticleName = string
+    export type ArticleName = null | string
     // Строка с кодом выбранной статьи
     export type ArticleCode = null | string
 
     // Объект с данными статьи
-    export type ArticlesSection = {
+    export type ArticleSection = {
         currentArtItemId: CurrentArtItemId
         currentArtItemType: CurrentArtItemType
         currentArtName: ArticleName
@@ -184,38 +184,6 @@ namespace StoreSitesTypes {
     }
 
 
-
-    // Component Template item (folder or file) type setting
-    // export const SET_CURRENT_COMP_ITEM_TYPE = 'SET_CURRENT_COMP_ITEM_TYPE'
-    /*export type SetCurrentCompItemTypeAction = {
-        type: typeof SET_CURRENT_COMP_ITEM_TYPE
-        payload: StoreSitesTypes.CurrentCompItemType
-    }*/
-
-    // Component Template item id setting
-    // export const SET_CURRENT_COMP_ITEM_ID = 'SET_CURRENT_COMP_ITEM_ID'
-    /*export type SetCurrentCompItemIdAction = {
-        type: typeof SET_CURRENT_COMP_ITEM_ID
-        payload: StoreSitesTypes.CurrentCompItemId
-    }*/
-
-
-
-    // Article item (folder or file) type setting
-    // export const SET_CURRENT_ART_ITEM_TYPE = 'SET_CURRENT_ART_ITEM_TYPE'
-    /*export type SetCurrentArtItemTypeAction = {
-        type: typeof SET_CURRENT_ART_ITEM_TYPE
-        payload: StoreSitesTypes.CurrentArtItemType
-    }*/
-
-    // Article item (folder or file) id setting
-    // export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
-    /*export type SetCurrentArtItemIdAction = {
-        type: typeof SET_CURRENT_ART_ITEM_ID
-        payload: StoreSitesTypes.CurrentArtItemId
-    }*/
-
-
     export type SitesAction =
         | SetSitesAction
         | SetCurrentSiteIdAction
@@ -227,13 +195,7 @@ namespace StoreSitesTypes {
         | SetArtFolderAction
 
         | SetCurrentCompAction
-        // | SetCurrentCompItemTypeAction
-        // | SetCurrentCompItemIdAction
-
         | SetCurrentArtAction
-        // | SetCurrentArtAction
-        // | SetCurrentArtItemTypeAction
-        // | SetCurrentArtItemIdAction
 }
 
 export default StoreSitesTypes

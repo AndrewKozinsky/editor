@@ -21,7 +21,7 @@ function getConfig(componentFormMsg: any) {
         },
         async requestFn(readyFieldValues) {
             const { compFolder, compFolderId } = store.getState().sites.compFolderSection
-            const { currentCompItemId } = store.getState().sites.componentsSection
+            const { currentCompItemId } = store.getState().sites.componentSection
 
             // Удалить компонент из Хранилища и возвратить новый массив
             const newFoldersArr = filesTreePublicMethods.deleteItem(compFolder, currentCompItemId)

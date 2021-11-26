@@ -1,71 +1,93 @@
-// @ts-ignore
-// import JSON6 from 'json-6'
-// import { MiscTypes } from 'types/miscTypes'
-// import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
+const JSON5 = require('json5')
+import { MiscTypes } from 'types/miscTypes'
+import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
 // import getArticleRequest from 'requests/editor/article/getArticleRequest'
-// import StoreArticleTypes from './articleTypes'
-// import ArticleTypes, {emptyArticleData} from './codeType/articleCodeType'
+import StoreArticleTypes from './articleTypes'
+import ArticleTypes, { emptyArticleData } from './codeType/articleCodeType'
 // import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
 // import {getComponentsFoldersRequest} from 'requests/editor/components/getComponentsFoldersRequest'
 // import FilesTreeType from 'types/filesTree'
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-// import {getFromLocalStorage, removeFromLocalStorage} from 'utils/MiscUtils'
+import {
+    getFromLocalStorage,
+    removeFromLocalStorage, setInLocalStorage
+} from 'utils/MiscUtils'
+import config from 'utils/config'
 // import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 
 const articleActions = {
 
-    // Наполнение Хранилища данными для отрисовки статьи
-    /*clearArticle() {
-        // Remove marks about article in Local Storage
-        removeFromLocalStorage(config.ls.article)
+    // Очистка статьи
+    clearArticle() {
+        // Remove editable article id in Local Storage
+        removeFromLocalStorage(config.ls.editArticleId)
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
         }
-    },*/
+    },
+
+    /**
+     * Установка id редактируемой статьи. После редактор загружает все данные.
+     * @param {Number} articleId — id статьи
+     */
+    setArticleId(articleId: number): StoreArticleTypes.SetArticleIdAction {
+        // Set editable article id in Local Storage
+        setInLocalStorage(config.ls.editArticleId, articleId)
+
+        return {
+            type: StoreArticleTypes.SET_ARTICLE_ID,
+            payload: articleId
+        }
+    }
 
     // Наполнение Хранилища данными для отрисовки статьи
-    /*fillArticle(siteId: string, siteTemplateId: string, articleUuId?: string) {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const articleMarksFromLS = getFromLocalStorage(config.ls.article)
+    // fillArticle(
+    //     siteId: number,
+    //     siteTemplateId: number,
+    //     articleId: number
+    // ) {
+    //     return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // const articleMarksFromLS = getFromLocalStorage(config.ls.article)
 
-            if (articleMarksFromLS?.articleId !== articleUuId) {
+            /*if (articleMarksFromLS?.articleId !== articleId) {
                 // Save article data to localStorage to know what kind of article the editor has to open next time
                 articleManager.supplementArtMarksInLocalStorage({
                     siteId,
                     incFilesId: siteTemplateId,
-                    articleId: articleUuId,
-                    openCompFoldersUuIds: []
+                    articleId: articleId,
+                    openCompFoldersIds: []
                 })
-            }
+            }*/
 
-            dispatch( articleActions.setArticleMarks(siteId, articleUuId) )
+            // dispatch( articleActions.setArticleMarks(siteId, articleId) )
 
             // Do request for a site templates components and set it in Store
-            dispatch( articleActions.requestSiteComponents(siteId) )
+            // dispatch( articleActions.requestSiteComponents(siteId) )
 
             // Do request for a site files template and set they in Store
-            dispatch( articleActions.requestIncFilesTemplate(siteId, incFilesTemplateId) )
+            // dispatch( articleActions.requestIncFilesTemplate(siteId, incFilesTemplateId) )
 
             // Do request for the article and set it in Store
-            dispatch( articleActions.requestArticle(articleUuId) )
+            // dispatch( articleActions.requestArticle(articleId) )
 
             // Do request for component templates array and set they in store
-            dispatch( articleActions.requestTempCompsFolders(siteId) )
-        }
-    },*/
+            // dispatch( articleActions.requestTempCompsFolders(siteId) )
+        // }
+    // },
 
-    // Action sets article uuId and article site id to the Store
-    /*setArticleMarks(siteId: string, articleUuId: string) {
+    // Action sets article Id and article site id to the Store
+    /*setArticleMarks(siteId: number, articleId: number) {
         return {
             type: StoreArticleTypes.SET_ARTICLE_MARKS,
-            payload: { siteId, articleUuId }
+            payload: { siteId, articleId }
         }
     },*/
 
     // Загрузка шаблонов компонентов сайта с сервера и установка в Хранилище
-    /*requestSiteComponents(siteId: string) {
+    /*requestSiteComponents(siteId: number) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Запрос на получение шаблонов компонентов сайта
@@ -76,10 +98,9 @@ const articleActions = {
             const tempComps: StoreArticleTypes.TempComps = response.data.components.map(
                 (compObj: any) => {
                     return {
-                        uuid: compObj.uuid,
+                        id: compObj.id,
                         name: compObj.name,
-                        // MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6
-                        code: JSON6.parse( compObj.code )
+                        code: JSON5.parse( compObj.code )
                     }
                 }
             )
@@ -98,7 +119,7 @@ const articleActions = {
     },*/
 
     // Request for included files template and setting it in Store
-    /*requestIncFilesTemplate(siteId: string, incFilesTemplateId: string) {
+    /*requestIncFilesTemplate(siteId: number, incFilesTemplateId: string) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Request for an incFilesTemplate and get a response from a server
@@ -129,20 +150,19 @@ const articleActions = {
         }
     },*/
 
-    // Загрузка шаблонов компонентов сайта с сервера и установка в Хранилище
-    /*requestArticle(articleUuId: string) {
+    // Загрузка статьи с сервера и установка в Хранилище
+    /*requestArticle(articleId: number) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Request for an article and response from a server
-            const response = await getArticleRequest(articleUuId)
+            const response = await getArticleRequest(articleId)
             if (response.status !== 'success') return
 
-            let articleData = response.data.article
+            let articleData = response.data.articles[0]
             if (!articleData) return
 
             // Convert string to an object
-            // MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
-            let parsedArticle: ArticleTypes.Article = JSON6.parse( articleData.code )
+            let parsedArticle: ArticleTypes.Article = JSON5.parse( articleData.content )
 
             // If parsedArticle is null, then assign empty array to variable to allow work with an article
             if (!parsedArticle) parsedArticle = emptyArticleData
@@ -153,32 +173,32 @@ const articleActions = {
     },*/
 
     // Set an article after receiving the data. Action return history array with single article
-    /*setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
-        return {
-            type: StoreArticleTypes.SET_ARTICLE,
-            payload: [
-                {
+    // setArticle(payload: ArticleTypes.Article): StoreArticleTypes.SetArticleAction {
+    //     return {
+            // type: StoreArticleTypes.SET_ARTICLE,
+            // payload: [
+                // {
                     // Articles
-                    article: payload,
+                    // article: payload,
                     // Hovered component/element coordinates
-                    hoveredElem: {
+                    /*hoveredElem: {
                         type: null,
                         dataCompId: null,
                         dataElemId: null
-                    },
+                    },*/
                     // Selected component/element coordinates
-                    selectedElem: {
+                    /*selectedElem: {
                         type: null,
                         dataCompId: null,
                         dataElemId: null
-                    }
-                }
-            ]
-        }
-    },*/
+                    }*/
+                // }
+            // ]
+        // }
+    // },
 
     // Request to template component folders and set they in Store
-    /*requestTempCompsFolders(articleSiteId: string) {
+    /*requestTempCompsFolders(articleSiteId: number) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // Запрос и ответ от сервера

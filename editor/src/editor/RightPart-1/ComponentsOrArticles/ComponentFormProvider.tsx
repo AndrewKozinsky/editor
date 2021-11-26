@@ -11,7 +11,7 @@ import CompFolderForm from './CompFolderForm/FolderForm/CompFolderForm'
 export default function ComponentFormProvider() {
 
     // Тип выбранного элемента в дереве папок и файлов
-    const { currentCompItemType } = useGetSitesSelectors().componentsSection
+    const { currentCompItemType } = useGetSitesSelectors().componentSection
 
     if (currentCompItemType === 'folder') return <CompFolderForm />
     else if (currentCompItemType === 'file') return <CompForm />

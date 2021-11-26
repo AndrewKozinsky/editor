@@ -22,7 +22,7 @@
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId,
+    tempCompId: TempCompTypes.Id,
     targetDataCompId: ArticleTypes.DataCompId,
     targetDataElemId: ArticleTypes.DataElemId
 ): CreateCompFnReturnType {
@@ -63,7 +63,7 @@
  * @param {String} place — a place where to put a created component: before or after
  * @param {Object} article — article object
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template uuid
+ * @param {String} tempCompId — component template id
  * @param {String} targetDataCompId — a target data component id relative with the a new component will be placed
  */
 /*export function createCompAndSetItNearComp(
@@ -71,7 +71,7 @@
     place: 'before' | 'after',
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId,
+    tempCompId: TempCompTypes.Id,
     targetDataCompId: ArticleTypes.DataCompId
 ): CreateCompFnReturnType {
     // Create a new component
@@ -107,14 +107,14 @@
  * @param {String} place — a place where to put a created component
  * @param {Object} article — article object
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template uuid
+ * @param {String} tempCompId — component template id
  */
 /*export function createCompAndSetInRootOfArticle(
     this: typeof articleManager,
     place: 'begin' | 'end',
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId,
+    tempCompId: TempCompTypes.Id,
 ): CreateCompFnReturnType {
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)

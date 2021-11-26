@@ -7,6 +7,7 @@ import sitesActions from 'store/site/sitesActions'
 import { getFromLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
 import { useGetUserToken } from 'requests/user/getUserToken'
+import articleActions from '../../../store/article/articleActions'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах
@@ -29,6 +30,8 @@ export function useGetAndSetEditorSettings() {
         let editorArticleId = getFromLocalStorage(config.ls.editorArticleId, null) // id выбранной папки или статьи
         let editorArticleType = getFromLocalStorage(config.ls.editorArticleType, null) // тип выбранного элемента: папка или статья
 
+        let editArticleId = getFromLocalStorage(config.ls.editArticleId, null) // id редактируемой статьи
+
         // Поставить значения в Хранилище
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
@@ -39,6 +42,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
+        dispatch( articleActions.setArticleId(editArticleId) )
     }, [])
 }
 

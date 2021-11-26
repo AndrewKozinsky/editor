@@ -31,7 +31,7 @@ import FilesTreePlus from '../icons/filesTreePlus'
 import FilesTreeFolder from '../icons/filesTreeFolder'
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
-// import BtnSignEdit from '../icons/btnSignEdit'
+import BtnSignEdit from '../icons/btnSignEdit'
 // import FilesTreeTorus from '../icons/filesTreeTorus'
 // import FilesTreeUp from '../icons/filesTreeUp'
 // import FilesTreeDown from '../icons/filesTreeDown'
@@ -87,7 +87,7 @@ export function getIcon(type: string): ReactNode {
         // btnSignJson: BtnSignJson,
         btnSignClose: BtnSignClose,
         btnSignExit: BtnSignExit,
-        // btnSignEdit: BtnSignEdit,
+        btnSignEdit: BtnSignEdit,
         // btnSignUndo: BtnSignUndo,
         // btnSignRedo: BtnSignRedo,
         // btnSignCancel: BtnSignCancel,

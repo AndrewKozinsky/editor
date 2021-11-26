@@ -19,7 +19,7 @@ function getConfig(compFolderFormMsg: any) {
             elems: [<CloseModalButton key={2} />]
         },
         async requestFn(readyFieldValues) {
-            const { currentCompItemId } = store.getState().sites.componentsSection
+            const { currentCompItemId } = store.getState().sites.componentSection
             const { compFolder, compFolderId } = store.getState().sites.compFolderSection
 
             // Удалить папку из Хранилища и возвратить новый массив
@@ -28,7 +28,7 @@ function getConfig(compFolderFormMsg: any) {
             // Сохранить новые данные в Хранилище
             store.dispatch( actions.sites.setCompFolder({folders: newFoldersArr}) )
 
-            // Обнулить свойство указывающее на uuid активного пункта в папках и шаблонах компонентах потому что папка удалена
+            // Обнулить свойство указывающее на id активного пункта в папках и шаблонах компонентах потому что папка удалена
             store.dispatch( actions.sites.setCurrentComp(null, null) )
 
             // Сохранить новый массив папок и файлов на сервере

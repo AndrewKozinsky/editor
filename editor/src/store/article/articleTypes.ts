@@ -1,20 +1,20 @@
-// import TempCompTypes from './codeType/tempCompCodeType'
-// import ArticleTypes from './codeType/articleCodeType'
+import TempCompTypes from './codeType/tempCompCodeType'
+import ArticleTypes from './codeType/articleCodeType'
 // import FilesTreeType from 'libs/DragFilesTree/types'
 // import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
 namespace StoreArticleTypes {
 
-    // export type HistoryItems = HistoryItem[]
+    export type HistoryItems = HistoryItem[]
 
-    // export type HistoryItem = {
+    export type HistoryItem = {
         // Articles
-        // article: ArticleTypes.Article
+        article: ArticleTypes.Article
         // Hovered component/element coordinates
         // hoveredElem: HoveredElem
         // Selected component/element coordinates
         // selectedElem: HoveredElem
-    // }
+    }
 
     /*export type HoveredElem = {
         type: HoveredElementType
@@ -27,14 +27,14 @@ namespace StoreArticleTypes {
     // export type HoveredElementElemId = null | ArticleTypes.DataElemId
 
     // Components
-    // export type TempComps = TempComp[]
+    export type TempComps = TempComp[]
 
     // A component template
-    /*export type TempComp = {
-        id: string
+    export type TempComp = {
+        id: number
         name: string
         code: TempCompTypes.TempComp
-    }*/
+    }
 
     /*export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
@@ -60,11 +60,18 @@ namespace StoreArticleTypes {
     }
 
     // Set components templates array
+    export const SET_ARTICLE_ID = 'SET_ARTICLE_ID'
+    export type SetArticleIdAction = {
+        type: typeof SET_ARTICLE_ID,
+        payload: number
+    }
+
+    // Set components templates array
     // export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
     /*export type SetArticleMarksAction = {
         type: typeof SET_ARTICLE_MARKS
         payload: {
-            siteId: string,
+            siteId: number,
             articleId: number
         }
     }*/
@@ -148,8 +155,9 @@ namespace StoreArticleTypes {
 
     export type ArticleAction =
         | ClearArticleAction
-    //     | SetArticleMarksAction
-    //     | SetTempCompAction
+        | SetArticleIdAction
+        // | SetArticleMarksAction
+        // | SetTempCompAction
     //     | SetIncFilesTemplateAction
     //     | SetArticleAction
     //     | SetLinksAction

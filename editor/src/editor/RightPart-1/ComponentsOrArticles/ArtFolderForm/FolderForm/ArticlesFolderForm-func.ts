@@ -13,7 +13,7 @@ export function useGetAnotherFolderData(formState: FCType.StateFormReturn) {
     // Массив папок
     const foldersArr = useGetSitesSelectors().artFolderSection.artFolder
     // id выделенной папки
-    const { currentArtItemId } = useGetSitesSelectors().articlesSection
+    const { currentArtItemId } = useGetSitesSelectors().articleSection
 
     useEffect(function () {
         setNewFolderName(foldersArr, currentArtItemId, formState)

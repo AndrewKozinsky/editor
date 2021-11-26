@@ -39,13 +39,13 @@
 /**
  * The function checks if $element in component template html-string has children
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template uuid
+ * @param {String} tempCompId — component template id
  * @param {String} tempElemId — element template id
  */
 /*export function hasElemNestedElements(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId,
+    tempCompId: TempCompTypes.Id,
     tempElemId: TempCompTypes.TempElemId
 ) {
     // Get component template

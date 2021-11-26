@@ -1,17 +1,21 @@
 
 // Форма редактирования выбранной статьи
-/*export const articleFormMessages = {
+export const articleFormMessages = {
     articleNameInput: {
         eng: 'Article name',
         rus: 'Название статьи'
     },
-    defaultTemplateInput: {
-        eng: 'The default template of the plug-in files',
-        rus: 'Шаблон подключаемых файлов по умолчанию'
-    },
     articleNameRequired: {
         eng: 'The article name cannot be empty',
         rus: 'Название статьи не может быть пустым'
+    },
+    articleNameIsTooLong: {
+        eng: 'An article name cannot be longer than 255 characters',
+        rus: 'Название статьи не может быть длиннее 255 символов'
+    },
+    defaultTemplateInput: {
+        eng: 'The default template of the plug-in files',
+        rus: 'Шаблон подключаемых файлов по умолчанию'
     },
     submitBtnText: {
         eng: 'Save',
@@ -37,4 +41,12 @@
         eng: 'Edit',
         rus: 'Редактировать'
     },
-}*/
+    toEditor: {
+        eng: 'To the editor',
+        rus: 'В редактор'
+    },
+    articleIsAlreadyEdited: {
+        eng: 'The article is already being edited',
+        rus: 'Статья уже редактируется'
+    },
+}

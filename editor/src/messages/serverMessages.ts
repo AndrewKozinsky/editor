@@ -374,10 +374,9 @@ export const serverMessages = {
         eng: 'The id of the site to which the article belongs must be specified.',
         rus: 'Должен быть указан id сайта которому принадлежит статья.'
     },
-
-    article_UpdateArticleDto_EmptyContent: {
-        eng: 'The content field cannot be empty.',
-        rus: 'Поле content не может быть пустым.'
+    article_UpdateArticleDto_nameIsNotAString: {
+        eng: 'The name field must be a string.',
+        rus: 'Поле name должно быть строкой.'
     },
     article_UpdateArticleDto_contentIsNotAString: {
         eng: 'The content field must be a string.',
@@ -386,6 +385,10 @@ export const serverMessages = {
     article_UpdateArticle_ArticleIsNotExist: {
         eng: 'This article does not exist.',
         rus: 'Указанной статьи не существует.'
+    },
+    article_UpdateArticleDto_siteTemplateIdIsNotANumber: {
+        eng: 'The siteTemplateId field must be a number.',
+        rus: 'Поле siteTemplateId должно быть числом.'
     },
 
     article_DeleteArticle_ArticleIsNotExist: {
