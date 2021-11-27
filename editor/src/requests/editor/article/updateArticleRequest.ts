@@ -1,9 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
+import {ArticleRowServerRespType} from './articleServerResponseType'
 
-
-import {ArticleRequestServerResponse} from './articleServerResponseType'
 
 /**
  * Функция сохраняет имя статьи и id шаблона подключаемых файлов этой статьи
@@ -26,7 +24,8 @@ export async function updateArticleRequest(
             content
         })
     }
-    const response: ArticleRequestServerResponse = await makeFetch(
+
+    const response: ArticleRowServerRespType = await makeFetch(
         getApiUrl('article', articleId), options
     )
 

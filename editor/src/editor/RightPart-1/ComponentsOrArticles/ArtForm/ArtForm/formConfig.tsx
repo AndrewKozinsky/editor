@@ -52,7 +52,10 @@ function getFormConfig(artFormMsg: any) {
 
             // Название статьи и id выбранного шаблона сайта
             const articleName = readyFieldValues.name.toString()
-            const articleTemplateId = parseInt(readyFieldValues.siteTemplateId.toString())
+            let articleTemplateId = readyFieldValues.siteTemplateId === null
+                ? null
+                : parseInt(readyFieldValues.siteTemplateId?.toString())
+
 
             // Изменить название статьи на введённое и обновить папки в Хранилище
             const { newItems } = filesTreePublicMethods.changeItemName(

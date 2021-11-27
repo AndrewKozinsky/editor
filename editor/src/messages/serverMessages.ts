@@ -366,6 +366,10 @@ export const serverMessages = {
         eng: 'The site name should not be longer than 255 characters.',
         rus: 'Название сайта не должно быть длиннее 255 символов.'
     },
+    article_CreateArticleDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
     article_CreateArticleDto_siteTemplateIdIsNotANumber: {
         eng: 'The id of the website template must be a number.',
         rus: 'id шаблона сайта должно быть числом.'

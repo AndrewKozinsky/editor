@@ -19,7 +19,6 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
         updateFieldFn(fields, setFields, fieldName, newFieldData)
     }, [fields, setFields])
 
-    // console.log(fields)
 
     const [submitCounter, setSubmitCounter] = useState(0)
     const [submitBtnLoading, setSubmitBtnLoading] = useState(false)

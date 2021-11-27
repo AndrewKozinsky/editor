@@ -43,6 +43,7 @@ export default function Select(props: SelectPropType) {
     const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
         name,
         className: 'select-input',
+        value: value || '',
         onFocus: () => setIsFocus(true),
         onBlur: (e: React.BaseSyntheticEvent) => {
             // Поставить статус сфокусированности в Состояние
@@ -53,7 +54,6 @@ export default function Select(props: SelectPropType) {
         onChange
     }
 
-    if (value) inputAttribs.value = value
     // Если есть подпись, то добавить id чтобы связать подпись и выпадающий список
     if (label) inputAttribs.id = id
     if (disabled) inputAttribs.disabled = true

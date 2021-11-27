@@ -40,6 +40,6 @@ export function useGetToEditorFn() {
     const dispatch = useDispatch()
 
     return useCallback(function () {
-        store.dispatch(actions.settings.setMainTab(2))
+        store.dispatch(actions.settings.setMainTab(1))
     }, [dispatch])
 }

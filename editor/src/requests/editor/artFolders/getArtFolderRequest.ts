@@ -43,21 +43,3 @@ export async function getArtFolderRequest(siteId: number) {
         return rowResponse
     }
 }
-
-
-// КОД НИЖЕ МОЖНО УДАЛИТЬ...
-// import { makeFetch } from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
-// import { ArtFoldersServerResponseType } from './artFoldersServerResponseType'
-
-// Функция запрашивает папку со статьями переданного сайта
-/*export async function getArtFolderRequest(siteId: number) {
-    // Параметры запроса
-    const options = { method: 'GET'}
-
-    const response: ArtFoldersServerResponseType = await makeFetch(
-        getApiUrl('artFoldersBySite', siteId), options
-    )
-
-    return response
-}*/

@@ -30,7 +30,7 @@ export class ArticleService {
         return await this.articleRepository.findOne(req.params.articleId)
     }
 
-    /** Создание компонента (защищённый маршрут) */
+    /** Создание статьи (защищённый маршрут) */
     async createArticle(
         createArticleDto: CreateArticleDto, user: UserEntity
     ): Promise<ArticleEntity> {
@@ -64,8 +64,9 @@ export class ArticleService {
         return await this.articleRepository.save(newArticle)
     }
 
+    /** Обновление статьи (защищённый маршрут) */
     async updateArticle(
-        articleId: number, updateSiteTemplateDto: UpdateArticleDto
+        articleId: number, updateArticleDto: UpdateArticleDto
     ): Promise<ArticleEntity> {
         // Найти статью, которую нужно обновить
         const article = await this.articleRepository.findOne({ id: articleId })
@@ -75,7 +76,13 @@ export class ArticleService {
             responseCommonError('article_UpdateArticle_ArticleIsNotExist', HttpStatus.BAD_REQUEST)
         }
 
-        const updatedArticle = Object.assign(article, updateSiteTemplateDto)
+        // Если приходит пустая строка, то шаблон сайта не выбран,
+        // поэтому поставлю null потому что поле принимает или число или null
+        if (!updateArticleDto.siteTemplateId) {
+            updateArticleDto.siteTemplateId = null
+        }
+
+        const updatedArticle = Object.assign(article, updateArticleDto)
         return await this.articleRepository.save(updatedArticle)
     }
 

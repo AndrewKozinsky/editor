@@ -12,7 +12,7 @@ export namespace MiscTypes {
     // export type ObjStringKeyGenVal<T> = {[key: string]: T}
 
     /** Тип объекта с любыми строковыми ключами с любым значением */
-    // export type ReactRef = null | {current: HTMLElement}
+    export type ReactRef = null | {current: HTMLElement}
 
     /** Диспетчер Редакса */
     export type AppDispatch = typeof store.dispatch

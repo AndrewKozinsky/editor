@@ -1,13 +1,10 @@
-import {useCallback, useEffect, useState} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
-// import StoreSitesTypes from 'store/site/sitesTypes'
-// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-// import { OptionsType } from 'common/formElements/Select/SelectTypes'
-// import { siteSectionMessages } from 'messages/siteSectionMessages'
-// import { store } from 'store/rootReducer'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import FCType from 'libs/FormConstructor/FCType'
+import {articleFormMessages} from 'messages/articleFormMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 
 /** Хук отслеживает выбор другого компонента и скачивает данные по нему с сервера и ставит их в Хранилище */
 export function useGetArtDataFromServerAndSetInStore() {
@@ -25,23 +22,34 @@ export function useGetArtDataFromServerAndSetInStore() {
  * @param {Object} formState — объект состояния формы
  */
 export function useFillSiteTemplatesSelect(formState: FCType.StateFormReturn) {
-    const siteTemplates = useGetSitesSelectors().siteTemplatesSection.templates
+    const { templates } = useGetSitesSelectors().siteTemplatesSection
+    const { siteTemplateId } = useGetSitesSelectors().articleSection
+    const { currentSiteId } = useGetSitesSelectors()
+    const articleFormMsg = useGetMessages(articleFormMessages)
 
     useEffect(function () {
-        const options = siteTemplates.map(template => {
+        const options = templates.map(template => {
             return {
                 value: template.id,
                 label: template.name
             }
         })
 
+        options.unshift({
+            value: 0,
+            label: articleFormMsg.templateNotSelected.toString()
+        })
+
         // Наполнение выпадающего списка
         const newSiteTemplateIdField = Object.assign(
             formState.fields['siteTemplateId'],
-            { options: options }
+            {
+                options: options,
+                value: [siteTemplateId]
+            }
         )
         formState.updateField('siteTemplateId', newSiteTemplateIdField)
-    }, [siteTemplates])
+    }, [templates, currentSiteId, siteTemplateId])
 }
 
 /**
@@ -58,12 +66,5 @@ export function useSetAnotherFormData(formState: FCType.StateFormReturn) {
             { value: [currentArtName] }
         )
         formState.updateField('name', newNameField)
-
-        // Обновление поля Шаблон сайта
-        const newSiteTemplateIdField = Object.assign(
-            formState.fields['siteTemplateId'],
-            { value: [siteTemplateId] }
-        )
-        formState.updateField('siteTemplateId', newSiteTemplateIdField)
     }, [currentArtName, siteTemplateId])
 }

@@ -19,21 +19,3 @@ export type ArtFolderType<T> = {
 export type ArtFolderRowServerRespType = ErrorServerResponseType | CommonType<string>
 // Разобранный
 export type ArtFolderServerSuccessRespType = CommonType<DragFilesTreeType.Items>
-
-
-// КОД НИЖЕ МОЖНО УДАЛИТЬ...
-// Успешный ответ от сервера при операциях с сайтами
-/*type ArtFoldersSuccessServerResponseType = {
-    status: 'success',
-    statusCode: number,
-    data: {
-        artFolders: ArtFolderType[]
-    }
-}*/
-
-/*type ArtFolderType = {
-    id: number
-    content: string | null
-}*/
-
-// export type ArtFoldersServerResponseType = ErrorServerResponseType | ArtFoldersSuccessServerResponseType

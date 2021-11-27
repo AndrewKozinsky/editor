@@ -14,8 +14,8 @@ export const articleFormMessages = {
         rus: 'Название статьи не может быть длиннее 255 символов'
     },
     defaultTemplateInput: {
-        eng: 'The default template of the plug-in files',
-        rus: 'Шаблон подключаемых файлов по умолчанию'
+        eng: 'Site styles',
+        rus: 'Стили сайта'
     },
     submitBtnText: {
         eng: 'Save',
@@ -48,5 +48,9 @@ export const articleFormMessages = {
     articleIsAlreadyEdited: {
         eng: 'The article is already being edited',
         rus: 'Статья уже редактируется'
+    },
+    templateNotSelected: {
+        eng: 'Not selected',
+        rus: 'Не выбрано'
     },
 }

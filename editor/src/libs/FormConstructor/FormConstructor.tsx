@@ -95,7 +95,6 @@ function Fields(props: FormConstructorPropType) {
                 fieldData.options = state.fields[fieldName].options
             }
 
-
             fieldData.onChange = state.onChangeFieldHandler
 
             fieldData.disabled = !!(state.fields[fieldName].disabled || state.formDisabled)

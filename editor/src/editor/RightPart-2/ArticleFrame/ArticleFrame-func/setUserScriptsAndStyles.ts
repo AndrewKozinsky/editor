@@ -1,32 +1,31 @@
-// import {useEffect, useState} from 'react'
-// import { useSelector } from 'react-redux'
+import { useEffect, useState } from 'react'
+import useGetArticleSelectors from 'store/article/articleSelectors'
 
 
 // Hook sets scripts and styles to <head> and <body> of the IFrame
-/*export function useSetUserScriptsAndStylesToIFrame() {
-    const { $links, siteTemplate, history } = useSelector((store: AppStateType) => store.article)
+export function useSetUserScriptsAndStylesToIFrame() {
+    const { $links, siteTemplate, history } = useGetArticleSelectors()
 
     // Were mouse move handler set?
     const [filesWereSet, setFilesWereSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || !history.length || filesWereSet) return
+        if (!siteTemplate || !$links.$body || !history.length || filesWereSet) return
 
         // Set code in <head>
-        if (siteTemplate.inHead) {
-            const nodes = createNodesFromString(siteTemplate.inHead)
+        if (siteTemplate.head) {
+            const nodes = createNodesFromString(siteTemplate.head)
             putNodesToDocument($links.$document, nodes, 'head')
         }
 
         // Set code before end the <body>
-        if (siteTemplate.beforeEndBody) {
-            const nodes = createNodesFromString(siteTemplate.beforeEndBody)
+        if (siteTemplate.endBody) {
+            const nodes = createNodesFromString(siteTemplate.endBody)
             putNodesToDocument($links.$document, nodes, 'body')
         }
 
         // Set flag that files were set
         setFilesWereSet(true)
-
     }, [$links, siteTemplate, siteTemplate, history, filesWereSet])
 
     useEffect(function () {
@@ -35,13 +34,13 @@
             setFilesWereSet(false)
         }
     }, [history])
-}*/
+}
 
 /**
  * The function gets string with HTML and turns it into html-elements
  * @param {String} htmlStr — string with html
  */
-/*function createNodesFromString(htmlStr: string): Element[] {
+function createNodesFromString(htmlStr: string): Element[] {
     const div = document.createElement('div')
     div.innerHTML = htmlStr
 
@@ -53,14 +52,14 @@
     }
 
     return nodes
-}*/
+}
 
 /**
  * The function gets <script> or <style> element and recreates it in the new element because I can't set node
  * into <head> or <body> without this procedure. It doesn't work. So I must recreate nodes.
  * @param {Element} node — node
  */
-/*function createNode(node: Element) {
+function createNode(node: Element) {
     const newNode = document.createElement(node.tagName.toLowerCase())
 
     for (let attr of node.attributes) {
@@ -69,7 +68,7 @@
     }
 
     return newNode
-}*/
+}
 
 /**
  * The function set <script> or <style> elements into <head> or <body>
@@ -77,11 +76,10 @@
  * @param {NodeListOf} nodes — nodes list
  * @param {String} place — where to put nodes
  */
-/*
 function putNodesToDocument($doc: Document, nodes: Node[], place: 'head' | 'body') {
     const $place = place === 'head' ? $doc.head : $doc.body
 
     for (let node of nodes) {
         $place.appendChild(node)
     }
-}*/
+}

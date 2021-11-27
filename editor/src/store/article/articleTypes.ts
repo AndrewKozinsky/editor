@@ -1,5 +1,7 @@
 import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
+import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 // import FilesTreeType from 'libs/DragFilesTree/types'
 // import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
 
@@ -27,27 +29,27 @@ namespace StoreArticleTypes {
     // export type HoveredElementElemId = null | ArticleTypes.DataElemId
 
     // Components
-    export type TempComps = TempComp[]
+    // export type TempComps = TempComp[]
 
     // A component template
-    export type TempComp = {
+    /*export type TempComp = {
         id: number
         name: string
         code: TempCompTypes.TempComp
-    }
+    }*/
 
-    /*export type LinksObj = {
+    export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
         $document: StoreArticleTypes.DocumentLink
         $head:     StoreArticleTypes.HeadLink
         $body:     StoreArticleTypes.BodyLink
-    }*/
+    }
 
     // IFrame window, document, head and body
-    // export type WindowLink = null | Window
-    // export type DocumentLink = null | HTMLDocument
-    // export type HeadLink = null | HTMLHeadElement
-    // export type BodyLink = null | HTMLBodyElement
+    export type WindowLink = null | Window
+    export type DocumentLink = null | HTMLDocument
+    export type HeadLink = null | HTMLHeadElement
+    export type BodyLink = null | HTMLBodyElement
 
 
     // =============================================
@@ -66,6 +68,35 @@ namespace StoreArticleTypes {
         payload: number
     }
 
+    // Set article object
+    export const SET_ARTICLE = 'SET_ARTICLE'
+    export type SetArticleAction = {
+        type: typeof SET_ARTICLE
+        payload: {
+            article: ArticleTypes.Article,
+            siteId: number,
+            siteTemplateId: number,
+            /*hoveredElem: {
+                type: null,
+                dataCompId: number | null,
+                dataElemId: number | null
+            },*/
+            /*selectedElem: {
+                type: null,
+                dataCompId: number | null,
+                dataElemId: number | null
+            },*/
+        }
+    }
+
+    // Типы типа и тип экшена
+    // Set components templates array
+    export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
+    export type SetTempCompAction = {
+        type: typeof SET_TEMP_COMPS
+        payload: TempCompTypes.TempComps
+    }
+
     // Set components templates array
     // export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
     /*export type SetArticleMarksAction = {
@@ -76,34 +107,16 @@ namespace StoreArticleTypes {
         }
     }*/
 
-    // Типы типа и тип экшена
-    // Set components templates array
-    // export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
-    /*export type SetTempCompAction = {
-        type: typeof SET_TEMP_COMPS
-        payload: StoreArticleTypes.TempComps
-    }*/
-
     // Set article object
-    // export const SET_ARTICLE = 'SET_ARTICLE'
-    /*export type SetArticleAction = {
-        type: typeof SET_ARTICLE
-        payload: HistoryItems
-    }*/
-
-    // Set article object
-    // export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
-    /*export type SetIncFilesTemplateAction = {
+    export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
+    export type SetSiteTemplateAction = {
         type: typeof SET_SITE_TEMPLATE
-        payload: {
-            inHead: string
-            beforeEndBody: string
-        }
-    }*/
+        payload: SiteTemplateTypes.Template
+    }
 
     // Set links to iFrame elements
-    // export const SET_LINKS = 'SET_LINKS'
-    /*export type SetLinksAction = {
+    export const SET_LINKS = 'SET_LINKS'
+    export type SetLinksAction = {
         type: typeof SET_LINKS
         payload: {
             $window:   WindowLink
@@ -111,7 +124,7 @@ namespace StoreArticleTypes {
             $head:     HeadLink
             $body:     BodyLink
         }
-    }*/
+    }
 
     // Set links to iFrame elements
     // export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
@@ -125,12 +138,12 @@ namespace StoreArticleTypes {
         }
     }*/
 
-    // Set links to iFrame elements
-    // export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
-    /*export type SetTempCompFoldersAction = {
+    //
+    export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
+    export type SetTempCompFoldersAction = {
         type: typeof SET_TEMP_COMP_FOLDERS
-        payload: FilesTreeType.Items
-    }*/
+        payload: DragFilesTreeType.Items
+    }
 
     //
     // export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
@@ -156,13 +169,13 @@ namespace StoreArticleTypes {
     export type ArticleAction =
         | ClearArticleAction
         | SetArticleIdAction
+        | SetArticleAction
         // | SetArticleMarksAction
-        // | SetTempCompAction
-    //     | SetIncFilesTemplateAction
-    //     | SetArticleAction
-    //     | SetLinksAction
+        | SetTempCompAction
+        | SetSiteTemplateAction
+        | SetLinksAction
     //     | SetHoveredElementAction
-    //     | SetTempCompFoldersAction
+        | SetTempCompFoldersAction
     //     | CreateAndSetHistoryItemAction
     //     | MakeHistoryStepAction
     //     | SetHistoryStepWhenArticleWasSavedAction

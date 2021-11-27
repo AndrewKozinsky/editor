@@ -1,26 +1,25 @@
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-// import FilesTreeType from '../../types/filesTree'
 import StoreArticleTypes from './articleTypes'
+import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import TempCompTypes from './codeType/tempCompCodeType'
+import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 // import ArticleTypes from './codeType/articleCodeType'
-// import TempCompTypes from './codeType/tempCompCodeType'
 
 export type ArticleReducerType = {
     articleId: null | number
-    // articleSiteId: null | number
+    siteId: null | number
+    siteTemplateId: null | number
+    // Текущие стили сайта
+    siteTemplate: null | SiteTemplateTypes.Template
     // Components template folders
-    // tempCompsFolders: null | FilesTreeType.Items
+    tempCompsFolders: null | DragFilesTreeType.Items
     // Components templates array
-    // tempComps: null | StoreArticleTypes.TempComps
-    // Code with
-    // siteTemplate: {
-    //     inHead: null | string
-    //     beforeEndBody: null | string
-    // }
-    // $links: StoreArticleTypes.LinksObj
+    tempComps: null | TempCompTypes.TempComps
+    $links: StoreArticleTypes.LinksObj
     // History steps array
-    // history: StoreArticleTypes.HistoryItems,
+    history: StoreArticleTypes.HistoryItems,
     // Current history point
-    // historyCurrentIdx: number
+    historyCurrentIdx: number
     // A history step when the article was saved
     // historyStepWhenWasSave: number
 }
@@ -32,10 +31,7 @@ export type ArticleReducerType = {
         name: 'Banner',
         code: <TempCompTypes.TempComp>{}
     }],
-    siteTemplate: {
-        inHead: '<link href="http://s.ru/reset.css">',
-        beforeEndBody: null
-    },
+    siteTemplate: null,
     $links: {
         $window:   window,
         $document: window.document,
@@ -67,21 +63,19 @@ export type ArticleReducerType = {
 // Initial values
 const initialState: ArticleReducerType = {
     articleId: null,
-    // articleSiteId: null,
-    // tempCompsFolders: null,
-    // tempComps: null,
-    // siteTemplate: {
-    //     inHead: null,
-    //     beforeEndBody: null
-    // },
-    // $links: {
-    //     $window: null,
-    //     $document: null,
-    //     $head: null,
-    //     $body: null
-    // },
-    // history: [],
-    // historyCurrentIdx: 0,
+    siteId: null,
+    siteTemplateId: null,
+    siteTemplate: null,
+    tempCompsFolders: null,
+    tempComps: null,
+    $links: {
+        $window: null,
+        $document: null,
+        $head: null,
+        $body: null
+    },
+    history: [],
+    historyCurrentIdx: 0,
     // historyStepWhenWasSave: 0
 }
 
@@ -91,7 +85,7 @@ function clearArticle(
     // Do not touch the document's links
     const newState = Object.assign(
         initialState,
-        // {$links: state.$links}
+        {$links: state.$links}
     )
 
     return newState
@@ -119,41 +113,44 @@ function setArticleId(
 }*/
 
 // Installing of components array
-/*function setTempComps(
+function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
 ): ArticleReducerType {
     return {
         ...state,
         tempComps: action.payload
     }
-}*/
+}
 
-// Installing an included files string with code
-/*function setSiteTemplate(
+// Installing a site styles
+function setSiteTemplate(
     state: ArticleReducerType, action: StoreArticleTypes.SetSiteTemplateAction
 ): ArticleReducerType {
     return {
         ...state,
         siteTemplate: action.payload
     }
-}*/
+}
 
-// Installing an article code
-/*function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
+// Installing an article code and other things
+function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
     return {
         ...state,
-        history: action.payload,
-        historyCurrentIdx: 0
+        siteId: action.payload.siteId,
+        siteTemplateId: action.payload.siteTemplateId || null,
+        history: [
+            { article: action.payload.article }
+        ]
     }
-}*/
+}
 
 // Installing an article code
-/*function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksAction): ArticleReducerType {
+function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksAction): ArticleReducerType {
     return {
         ...state,
         $links: action.payload
     }
-}*/
+}
 
 // Set ids for hovered or selected component/element
 /*function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
@@ -194,12 +191,12 @@ function setArticleId(
 }*/
 
 // Installing an article code
-/*function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
+function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
     return {
         ...state,
         tempCompsFolders: action.payload,
     }
-}*/
+}
 
 //
 /*function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
@@ -290,20 +287,20 @@ export default function articleReducer(
             return clearArticle(state, action)
         case StoreArticleTypes.SET_ARTICLE_ID:
             return setArticleId(state, action)
+        case StoreArticleTypes.SET_ARTICLE:
+            return setArticle(state, action)
         // case StoreArticleTypes.SET_ARTICLE_MARKS:
         //     return setArticleMarks(state, action)
-        // case StoreArticleTypes.SET_TEMP_COMPS:
-        //     return setTempComps(state, action)
-        // case StoreArticleTypes.SET_SITE_TEMPLATE:
-        //     return setSiteTemplate(state, action)
-        // case StoreArticleTypes.SET_ARTICLE:
-        //     return setArticle(state, action)
-        // case StoreArticleTypes.SET_LINKS:
-        //     return setLinks(state, action)
+        case StoreArticleTypes.SET_TEMP_COMPS:
+            return setTempComps(state, action)
+        case StoreArticleTypes.SET_SITE_TEMPLATE:
+            return setSiteTemplate(state, action)
+        case StoreArticleTypes.SET_LINKS:
+            return setLinks(state, action)
         // case StoreArticleTypes.SET_HOVERED_ELEMENT:
         //     return setHoveredElement(state, action)
-        // case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
-        //     return setTempCompFolders(state, action)
+        case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
+            return setTempCompFolders(state, action)
         // case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
         //     return createAndSetHistoryItem(state, action)
         // case StoreArticleTypes.MAKE_HISTORY_STEP:
