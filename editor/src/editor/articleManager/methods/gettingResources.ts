@@ -1,5 +1,5 @@
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import articleManager from './articleManager'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import articleManager from '../articleManager'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
 
@@ -17,20 +17,20 @@
 }*/
 
 /**
- * The function finds component template in templates array
+ * The function finds component template in templates array by id.
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
-/*export function getTemplate(
+export function getTemplate(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId
+    tempCompId: TempCompTypes.Id
 ): TempCompTypes.TempComp {
 
     return tempCompArr.find((tempComp) => {
-        return tempComp.uuid === tempCompId
+        return tempComp.id === tempCompId
     })
-}*/
+}
 
 
 /**

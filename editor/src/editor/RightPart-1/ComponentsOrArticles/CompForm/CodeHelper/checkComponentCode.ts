@@ -1,11 +1,15 @@
 const JSON5 = require('json5')
-import { checkElemAttrs } from './checkElemAttrs'
-import { checkElemTags } from './checkElemTags'
-import { checkElemText } from './checkElemText'
-import { checkForDifferentObjAttrValuesInArr } from './checkForDifferentObjAttrValuesInArr'
+import {
+    checkForDifferentObjAttrValuesInArr,
+    checkForExtraProps,
+    checkProp
+} from './checkFns'
+import { isMarkupCorrect } from './checkHtmlMarkup'
+import { checkMatchingMarkupWithElems } from './checkMatchingMarkupWithElems'
 
 /**
- * Код проверяющий правильность кода шаблона. Возвращает массив ошибок. Если ошибок нет, то массив будет пустым.
+ * Код проверяющий правильность кода шаблона компонента.
+ * Возвращает массив ошибок.Если ошибок нет, то массив будет пустым.
  * @param {String} code — код шаблона сайта введённый пользователем в поле ввода
  */
 export default function checkComponentCode(code: string) {
@@ -14,31 +18,19 @@ export default function checkComponentCode(code: string) {
     try {
         const codeObj = JSON5.parse(code)
 
-        // НУЖНО ДОПОЛНИТЕЛЬНО НАПИСАТЬ ПРОВЕРКУ СООТВЕТСТВИЯ АТРИБУТОВ data-em-id С АТРИБУТАМИ В МАССИВЕ attrs.
-        // И В ЦЕЛОМ КАЧЕСТВО КОДА МЕНЯ НЕ УСТРАИВАЕТ
-        if (!codeObj.html) {
-            errorsArr.push('В объекте должно быть свойство html с разметкой компонента')
-            return errorsArr
-        }
-        else if (codeObj.html === '' || typeof codeObj.html !== 'string') {
-            errorsArr.push('В свойстве html должна быть строка с разметкой компонента')
-            return errorsArr
-        }
-        else if (!isCorrectMarkup(codeObj.html)) {
-            errorsArr.push('В свойстве html должна быть разметка компонента. Допускается только 1 корневой тег.')
-            return errorsArr
-        }
+        // Проверки полей name, html и elems
+        errorsArr.push(...checkProp(codeObj.name, 'name', 'string', true))
+        errorsArr.push(...checkProp(codeObj.html, 'html', 'string', true, isMarkupCorrect.bind(this, codeObj.html)))
+        errorsArr.push(...checkProp(codeObj.elems, 'elems', 'arrayOfObjects', false, checkElems.bind(this, codeObj.elems)))
 
-        if (codeObj.elems) {
-            const checkElemsResult = checkElems(codeObj.elems)
-            errorsArr.push(...checkElemsResult)
-        }
+        // Проверка, что в объекте codeObj нет лишних полей
+        errorsArr.push(...checkForExtraProps(codeObj, ['html', 'elems', 'name']))
 
-        Object.keys(codeObj).forEach(propName => {
-            if (['html', 'elems', 'name'].indexOf(propName) < 0) {
-                errorsArr.push(`В компоненте свойство ${propName} лишнее`)
-            }
-        })
+        // Если нет других ошибок и в свойстве elems находится массив, то проверить
+        // чтобы элементы в данных соответствовали элементам в разметке.
+        if (!errorsArr.length && Array.isArray(codeObj.elems)) {
+            errorsArr.push(...checkMatchingMarkupWithElems(codeObj))
+        }
 
         return errorsArr
     }
@@ -47,104 +39,239 @@ export default function checkComponentCode(code: string) {
     }
 }
 
-function isCorrectMarkup(htmlStr?: string) {
-    if (!htmlStr) return false
-
-    try {
-        const parser = new DOMParser()
-        const doc = parser.parseFromString(htmlStr, 'text/html')
-        const elemsArr = doc.body.childNodes
-
-        // Если в elemsArr есть 1 элемент, то разметка правильная потому что должен быть 1 корневой элемент.
-        return elemsArr.length === 1
-    }
-    catch (err) {
-        console.log(err)
-        return false
-    }
-}
-
-function checkElems(elems: unknown): string[] {
+/**
+ * Проверка массива code.elems.
+ * @param {Array} elems — массив code.elems.
+ */
+function checkElems(elems: any[]): string[] {
     const errorsArr: string[] = []
 
-    if (!Array.isArray(elems)) {
-        errorsArr.push('Свойство elems должно быть массивом.')
-        return errorsArr
-    }
-
-    for (let i = 0; i < elems.length; i++) {
-        if ( !(elems[i] instanceof Object) ) {
-            errorsArr.push('В массиве elems должны быть объекты')
-            return errorsArr
-        }
-    }
-
     elems.forEach(elem => {
-        if (!elem.elemId) {
-            errorsArr.push('В объекте массива elems должно быть свойство elemId. Например banner.')
-        }
-        else if (typeof elem.elemId !== 'string' || elem.elemId === '') {
-            errorsArr.push('Свойство elemId должно быть строкой. Например banner.')
-        }
-        else if (!elem.elemId.length) {
-            errorsArr.push('Свойство elemId должно содержать значение. Например banner.')
-        }
+        // Проверка полей объекта elem...
+        errorsArr.push(...checkProp(elem.elemId, 'elemId', 'string', true))
+        errorsArr.push(...checkProp(elem.elemName, 'elemName', 'string', true))
+        errorsArr.push(...checkProp(elem.elemHidden, 'elemHidden', 'boolean', false))
+        errorsArr.push(...checkProp(elem.elemCanDuplicate, 'elemCanDuplicate', 'boolean', false))
+        errorsArr.push(...checkProp(elem.elemTextInside, 'elemTextInside', 'boolean', false))
+        errorsArr.push(...checkProp(elem.elemAttrs, 'elemAttrs', 'arrayOfObjects', false, checkElemAttrs.bind(this, elem.elemAttrs)))
+        errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
+        errorsArr.push(...checkProp(elem.elemText, 'elemText', 'object', false, checkElemText.bind(this, elem.elemText)))
 
-        if (!elem.elemName) {
-            errorsArr.push('В объекте массива elems должно быть свойство elemName. Например Баннер.')
-        }
-        else if (typeof elem.elemName !== 'string' || elem.elemName === '') {
-            errorsArr.push('Свойство elemName должно быть строкой. Например Баннер.')
-        }
-        else if (!elem.elemName.length) {
-            errorsArr.push('Свойство elemName должно содержать значение. Например Баннер.')
-        }
-
-        if (elem.elemHidden === '' || elem.elemHidden === null || elem.elemHidden && typeof elem.elemHidden !== 'boolean') {
-            errorsArr.push('Свойство elemHidden должно быть булевым значением. По умолчанию имеет значение true.')
-        }
-
-        if (elem.elemCanDuplicate === '' || elem.elemCanDuplicate === null || elem.elemCanDuplicate && typeof elem.elemCanDuplicate !== 'boolean') {
-            errorsArr.push('Свойство elemCanDuplicate должно быть булевым значением. По умолчанию имеет значение false.')
-        }
-
-        if (elem.elemTextInside === '' || elem.elemTextInside === null || elem.elemTextInside && typeof elem.elemTextInside !== 'boolean') {
-            errorsArr.push('Свойство elemTextInside должно быть булевым значением. По умолчанию имеет значение true.')
-        }
-
-        if (elem.elemAttrs) {
-            const checkElemAttrsResult = checkElemAttrs(elem.elemAttrs)
-            errorsArr.push(...checkElemAttrsResult)
-        }
-        if (elem.elemTags) {
-            const checkElemTagsResult = checkElemTags(elem.elemTags)
-            errorsArr.push(...checkElemTagsResult)
-        }
-
-        if (elem.elemText instanceof Object) {
-            const checkElemTextResult = checkElemText(elem.elemText)
-            errorsArr.push(...checkElemTextResult)
-        }
-        else {
-            errorsArr.push('Свойство elemText должно быть объектом.')
-        }
-
-        Object.keys(elem).forEach(propName => {
-            if (['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside', 'elemText'].indexOf(propName) < 0) {
-                errorsArr.push(`В компоненте свойство ${propName} лишнее`)
-            }
-        })
+        // Проверка, что в объекте elem нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps(
+                elem,
+                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside', 'elemText']
+            )
+        )
     })
 
-    const areThereDifferentIds = checkForDifferentObjAttrValuesInArr(elems, 'elemId')
-    if (!areThereDifferentIds) {
-        errorsArr.push(`В объекте массива elems свойства elemId должны иметь разные значения.`)
-    }
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elems, 'elemId'))
 
     return errorsArr
 }
 
-export const inputView = ['text', 'radio', 'checkbox', 'select']
+/**
+ * Проверка массива code.elems[0].elemAttrs.
+ * @param {Array} elemAttrs — массив code.elems[0].elemAttrs
+ */
+export function checkElemAttrs(elemAttrs: any[]): string[] {
+    const errorsArr: string[] = []
+
+    elemAttrs.forEach(elemAttr => {
+        // Проверка полей объекта elemAttr...
+        errorsArr.push(...checkProp(elemAttr.elemAttrId, 'elemAttrId', 'number', true))
+        errorsArr.push(...checkProp(elemAttr.elemAttrName, 'elemAttrName', 'string', true))
+        errorsArr.push(...checkProp(elemAttr.elemAttrAlt, 'elemAttrAlt', 'string', false))
+        errorsArr.push(...checkProp(elemAttr.elemAttrView, 'elemAttrView', 'input', false))
+        errorsArr.push(...checkProp(elemAttr.elemAttrLockedValue, 'elemAttrLockedValue', 'string', false))
+        errorsArr.push(...checkProp(elemAttr.elemAttrValues, 'elemAttrValues', 'arrayOfObjects', false, checkElemAttrValues.bind(this, elemAttr.elemAttrValues)))
+
+        // Проверка, что в объекте elemAttr нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps(
+                elemAttr,
+                ['elemAttrId', 'elemAttrName', 'elemAttrAlt', 'elemAttrView', 'elemAttrLockedValue', 'elemAttrValues']
+            )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrs, 'elemAttrId'))
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemAttrs[0].elemAttrValues
+ * @param {Array} elemAttrValues — массив code.elems[0].elemAttrs[0].elemAttrValues
+ */
+export function checkElemAttrValues(elemAttrValues: any[]): string[] {
+    const errorsArr: string[] = []
+
+    elemAttrValues.forEach(elemAttrValue => {
+        // Проверка полей объекта elemAttrValue...
+        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueId, 'elemAttrValueId', 'number', true))
+        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueValue, 'elemAttrValueValue', 'string', true))
+        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueAlt, 'elemAttrValueAlt', 'string', false))
+        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueChecked, 'elemAttrValueChecked', 'boolean', false))
+
+        // Проверка, что в объекте elemAttrValue нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps(
+                elemAttrValue,
+                ['elemAttrValueId', 'elemAttrValueValue', 'elemAttrValueAlt', 'elemAttrValueChecked']
+            )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemText.
+ * @param {Array} elemTextObj — массив code.elems[0].elemText.
+ */
+export function checkElemText(elemTextObj: any): string[] {
+    const errorsArr: string[] = []
+
+    // Проверка полей объекта elemTextObj...
+    errorsArr.push(...checkProp(elemTextObj.elemTextTags, 'elemTextTags', 'arrayOfObjects', false, checkElemTextTags.bind(this, elemTextObj.elemTextTags)))
+    errorsArr.push(...checkProp(elemTextObj.elemTextAttrs, 'elemTextAttrs', 'arrayOfObjects', false, checkElemTextAttrs.bind(this, elemTextObj.elemTextAttrs)))
+
+    // Проверка, что в объекте codeObj нет лишних полей
+    errorsArr.push(
+        ...checkForExtraProps( elemTextObj, ['elemTextTags', 'elemTextAttrs'] )
+    )
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemTags.
+ * @param {Array} elemTagsObj — массив code.elems[0].elemTags.
+ */
+export function checkElemTags(elemTagsObj: any): string[] {
+    const errorsArr: string[] = []
+
+    // Проверка полей объекта elemTagsObj...
+    errorsArr.push(...checkProp(elemTagsObj.elemTagsValues, 'elemTagsValues', 'arrayOfObjects', false, checkElemTagsValues.bind(this, elemTagsObj.elemTagsValues)))
+    errorsArr.push(...checkProp(elemTagsObj.elemTagsView, 'elemTagsView', 'input', false))
+
+    // Проверка, что в объекте elemTagsObj нет лишних полей
+    errorsArr.push(
+        ...checkForExtraProps( elemTagsObj, ['elemTagsValues', 'elemTagsView'] )
+    )
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemTags[0].elemTagsValues.
+ * @param {Array} elemTagsValues — массив code.elems[0].elemTags[0].elemTagsValues.
+ */
+function checkElemTagsValues(elemTagsValues: any[]) {
+    const errorsArr: string[] = []
+
+    elemTagsValues.forEach(elemTagsValue => {
+        // Проверка полей объекта elemTagsValue...
+        errorsArr.push(...checkProp(elemTagsValue.elemTagValueId, 'elemTagValueId', 'number', true))
+        errorsArr.push(...checkProp(elemTagsValue.elemTagValueName, 'elemTagValueName', 'string', true))
+
+        // Проверка, что в объекте elemTagsValue нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps( elemTagsValue, ['elemTagValueId', 'elemTagValueName'] )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemText[0].elemTextTags.
+ * @param {Array} elemTextTags — массив code.elems[0].elemText[0].elemTextTags.
+ */
+export function checkElemTextTags(elemTextTags: any[]): string[] {
+    const errorsArr: string[] = []
+
+    elemTextTags.forEach(elemTextTag => {
+        // Проверка полей объекта elemTextTag...
+        errorsArr.push(...checkProp(elemTextTag.elemTextTagId, 'elemTextTagId', 'number', true))
+        errorsArr.push(...checkProp(elemTextTag.elemTextTagName, 'elemTextTagName', 'string', true))
+
+        // Проверка, что в объекте elemTextTags нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps( elemTextTag, ['elemTextTagId', 'elemTextTagName'] )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextTags, 'elemTextTagId'))
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemText[0].checkElemTextAttrs.
+ * @param {Array} elemTextAttrs — массив code.elems[0].elemText[0].checkElemTextAttrs.
+ */
+export function checkElemTextAttrs(elemTextAttrs: any[]): string[] {
+    const errorsArr: string[] = []
+
+    elemTextAttrs.forEach(elemTextAttr => {
+        // Проверка полей объекта elemTextAttr...
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrId, 'elemTextAttrId', 'number', true))
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrName, 'elemTextAttrName', 'string', true))
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrAlt, 'elemTextAttrAlt', 'string', false))
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrView, 'elemTextAttrView', 'input', false))
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrLockedValue, 'elemTextAttrLockedValue', 'string', false))
+        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrValues, 'elemTextAttrValues', 'string', false, checkElemTextAttrValues.bind(this, elemTextAttr.elemTextAttrValues)))
+
+        // Проверка, что в объекте elemTextAttr нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps(
+                elemTextAttr,
+                ['elemTextAttrId', 'elemTextAttrName', 'elemTextAttrAlt', 'elemTextAttrView', 'elemTextAttrLockedValue', 'elemTextAttrValues']
+            )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextAttrs, 'elemTextAttrId'))
+
+    return errorsArr
+}
+
+/**
+ * Проверка массива code.elems[0].elemText[0].checkElemTextAttrs[0].elemTextAttrValues.
+ * @param {Array} elemTextAttrValues — массив code.elems[0].elemText[0].checkElemTextAttrs[0].elemTextAttrValues.
+ */
+export function checkElemTextAttrValues(elemTextAttrValues: any[]): string[] {
+    const errorsArr: string[] = []
+
+    elemTextAttrValues.forEach(elemTextAttrValue => {
+        // Проверка полей объекта elemTextAttrValue...
+        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueId, 'elemTextAttrValueId', 'number', true))
+        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueValue, 'elemTextAttrValueValue', 'string', true))
+        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueAlt, 'elemTextAttrValueAlt', 'string', false))
+        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueChecked, 'elemTextAttrValueChecked', 'boolean', false))
+
+        // Проверка, что в объекте elemTextAttrValue нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps(
+                elemTextAttrValue,
+                ['elemTextAttrValueId', 'elemTextAttrValueValue', 'elemTextAttrValueAlt', 'elemTextAttrValueChecked']
+            )
+        )
+    })
+
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextAttrValues, 'elemTextAttrValueId'))
+
+    return errorsArr
+}
+
+
 
 // Пример кода шаблона сайта (используется в примере шаблона)
 export const componentCodeExample = `{
@@ -164,7 +291,6 @@ export const componentCodeExample = `{
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrView: 'text',
-
                     elemAttrLockedValue: 'banner ',
                     elemAttrValues: [
                         {

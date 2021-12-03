@@ -1,7 +1,8 @@
 import React from 'react'
-// import NameSection from '../../wrappers/NameSection/NameSection'
-// import {componentsPanelMessages} from 'messages/componentsPanelMessages'
-// import TempCompList from '../TempCompList/TempCompList'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
+import { componentsPanelMessages } from 'messages/componentsPanelMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+import TempCompList from '../TempCompList/TempCompList'
 import './LeftPart-2.scss'
 
 type LeftPart3PropType = {
@@ -14,19 +15,21 @@ export default function LeftPart2(props: LeftPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
+    const componentsPanelMsg = useGetMessages(componentsPanelMessages)
+
     const CN = 'left-part-2'
     const style = display ? {} : {display: 'none'}
 
     return (
         <div className={CN} style={style}>
-            {/*<div className={`${CN}__top`} >
-                <NameSection header={componentsPanelMessages.header}>
+            <div className={`${CN}__top`} >
+                <NameSection header={componentsPanelMsg.header}>
                     <TempCompList />
                 </NameSection>
-            </div>*/}
-            {/*<div className={`${CN}__bottom`} >
+            </div>
+            <div className={`${CN}__bottom`} >
                 2
-            </div>*/}
+            </div>
         </div>
     )
 }

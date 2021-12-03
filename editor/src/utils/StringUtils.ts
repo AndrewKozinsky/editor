@@ -61,7 +61,6 @@ export function getRandomId() {
  * @param {String} str — строка, которую нужно перевести в верблюжью нотацию.
  * @returns {String} — возвращает строку переведённую в верблюжью нотацию.
  */
-/*
 export function convertToCamelCase(str: string) {
     // box-shadow -> boxShadow
 
@@ -73,7 +72,7 @@ export function convertToCamelCase(str: string) {
     })
 
     return arr.join('')
-}*/
+}
 
 /*
 function convertToSnakeCase(str: string) {

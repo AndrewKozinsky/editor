@@ -4,10 +4,10 @@
 
 /*export function createArticle(): ArticleTypes.Article {
     return {
-        meta: {
-            maxComponentId: 0
+        dMeta: {
+            dMaxCompId: 0
         },
-        components: []
+        dComps: []
     }
 }*/
 
@@ -25,7 +25,7 @@
 ) {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
 
-    let maxCompId = article.meta.maxComponentId
+    let maxCompId = article.dMeta.dMaxCompId
 
     const compData: ArticleTypes.Component = {
         type: 'component',

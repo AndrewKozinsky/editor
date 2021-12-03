@@ -1,21 +1,22 @@
-// import React, {Fragment, ReactNode} from 'react'
-// import Item from '../Item/Item'
-// import { useGetFilesTreeMinWidth } from './TempCompFilesTree-func'
-// import TempCompFilesTreeType from '../types'
+import React, {Fragment, ReactNode} from 'react'
+import Item from '../Item/Item'
+import { useGetFilesTreeMinWidth } from './TempCompFilesTree-func'
+import TempCompFilesTreeType from '../types'
 
 
-/*type TempCompFilesTreePropType = {
+type TempCompFilesTreePropType = {
     // Массив данных списка папок и файлов
     items: null | TempCompFilesTreeType.Items
     // Функция запускаемая после разворачивания/сворачивания папки
     afterCollapseFolder: TempCompFilesTreeType.AfterCollapseFolder
+    // Обработчики щелчков по кнопкам вставки компонента до, после и внутрь выделенного компонента
     afterClickBeforeBtn: TempCompFilesTreeType.AfterClickBeforeBtn
     afterClickAfterBtn: TempCompFilesTreeType.AfterClickAfterBtn
     afterClickInsideBtn: TempCompFilesTreeType.AfterClickInsideBtn
-}*/
+}
 
 /** Список папок и файлов */
-/*export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
+export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
 
     const after: TempCompFilesTreeType.After = {
         afterCollapseFolder: props.afterCollapseFolder,
@@ -32,7 +33,7 @@
             {generateItems(props.items, props.items, 0, after)}
         </div>
     )
-}*/
+}
 
 /**
  * Рекурсивная функция генерирующая разметку дерева файлов
@@ -42,7 +43,7 @@
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*function generateItems(
+function generateItems(
     allItems: TempCompFilesTreeType.Items,
     innerItems: TempCompFilesTreeType.Items,
     offset: number,
@@ -75,4 +76,4 @@
             </Fragment>
         )
     })
-}*/
+}

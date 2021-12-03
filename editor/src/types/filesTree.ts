@@ -2,7 +2,7 @@
 // Тип данных папки с вложенными файлами и документами
 // получаемые с сервера
 // Думаю это можно удалить и использовать DragFilesTreeType
-/*namespace FilesTreeType {
+namespace FilesTreeType {
     // Folders and files array
     export type Items = Item[]
 
@@ -19,6 +19,6 @@
 
     // Item type: folder or file
     export type ItemType = 'file' | 'folder'
-}*/
+}
 
-// export default FilesTreeType
+export default FilesTreeType

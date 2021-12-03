@@ -1,5 +1,5 @@
 import React from 'react'
-import NameSection from '../wrappers/NameSection/NameSection'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
 import Button from 'common/formElements/Button/Button'
 import {
     useFetchSites,

@@ -1,7 +1,7 @@
-// import FilesTreeType from 'types/filesTree'
+import FilesTreeType from 'types/filesTree'
 
 // Типы компонента TempCompFilesTree
-/*namespace TempCompFilesTreeType {
+namespace TempCompFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
@@ -12,21 +12,21 @@
     }
 
     // id папки или файла
-    export type UuId = string
+    export type Id = number
 
     // Массив uuid
-    export type UuIdArr = FilesTreeType.IdArr
+    export type IdArr = FilesTreeType.IdArr
 
     // Тип элемента: файл или папка
-    // export type ItemType = FilesTreeType.ItemType
+    export type ItemType = FilesTreeType.ItemType
 
 
-    export type AfterClickBeforeBtn = (ItemUuId: UuId) => void
-    export type AfterClickAfterBtn = (ItemUuId: UuId) => void
-    export type AfterClickInsideBtn = (ItemUuId: UuId) => void
+    export type AfterClickBeforeBtn = (ItemId: Id) => void
+    export type AfterClickAfterBtn = (ItemId: Id) => void
+    export type AfterClickInsideBtn = (ItemId: Id) => void
 
     // Функция запускаемая после разворачивания/сворачивания папки
-    export type AfterCollapseFolder = (items: Items, openUuIdArr: UuIdArr) => void
+    export type AfterCollapseFolder = (items: Items, openUuIdArr: IdArr) => void
 
     export type After = {
         afterCollapseFolder: AfterCollapseFolder
@@ -34,6 +34,6 @@
         afterClickAfterBtn: AfterClickAfterBtn
         afterClickInsideBtn: AfterClickInsideBtn
     }
-}*/
+}
 
-// export default TempCompFilesTreeType
+export default TempCompFilesTreeType

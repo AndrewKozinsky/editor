@@ -1,10 +1,10 @@
-// import {SyntheticEvent, useCallback} from 'react'
-// import {makeCN} from 'utils/StringUtils'
-/*import {
+import { SyntheticEvent, useCallback } from 'react'
+import { makeCN } from 'utils/StringUtils'
+import {
     getOpenedFoldersId,
     toggleFolder
-} from '../StoreManage/manageState'*/
-// import TempCompFilesTreeType from '../types'
+} from '../StoreManage/manageState'
+import TempCompFilesTreeType from '../types'
 
 
 
@@ -14,7 +14,7 @@
  * @param {String} CN — класс компонента
  * @param {Object} itemData — данные папки или файла
  */
-/*export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
+export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
 
     if (itemData.type === 'file') {
         return `${CN}__btn-triangle--for-file`
@@ -34,7 +34,7 @@
 
         return makeCN(classes)
     }
-}*/
+}
 
 
 /**
@@ -43,7 +43,7 @@
  * @param {Array} items — массив с данными по папкам и файлам
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetToggleFolder(
+export function useGetToggleFolder(
     folderId: TempCompFilesTreeType.Id,
     items: TempCompFilesTreeType.Items,
     after: TempCompFilesTreeType.After
@@ -55,12 +55,11 @@
         const newItems = toggleFolder(items, folderId)
 
         // Получить id раскрытых папок
-        const openedFoldersUuid = getOpenedFoldersUuid(newItems)
+        const openedFoldersId = getOpenedFoldersId(newItems)
 
-        after.afterCollapseFolder(newItems, openedFoldersUuid)
-
+        after.afterCollapseFolder(newItems, openedFoldersId)
     }, [items, folderId])
-}*/
+}
 
 /**
  * Хук возвращает обработчик щелчка по папке или файлу.
@@ -80,7 +79,7 @@
             const newItems = toggleFolder(items, itemData.id)
 
             // Получить id раскрытых папок
-            const openedFoldersUuid = getOpenedFoldersUuid(newItems)
+            const openedFoldersUuid = getOpenedFoldersId(newItems)
 
             after.afterCollapseFolder(newItems, openedFoldersUuid)
         }

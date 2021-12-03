@@ -1,9 +1,9 @@
 import React, { useRef } from 'react'
 import {
-    // useSetArticleDataInStore,
+    useSetArticleDataInStore,
     useSetIFrameElemsLinks,
-    // useSetRootDivToIFrame,
-    // useSetArticleToIFrame,
+    useSetRootDivToIFrame,
+    useSetArticleToIFrame,
 } from './ArticleFrame-func/ArticleFrame-func'
 import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
 // import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
@@ -24,7 +24,7 @@ export default function ArticleFrame() {
     // useCleanIFrame()
 
     // Hook sets article data in Store when IFrame rendered
-    // useSetArticleDataInStore()
+    useSetArticleDataInStore()
 
     // Hook sets links to IFrame window, document, head and body to Store when IFrame rendered
     useSetIFrameElemsLinks(windowRef)
@@ -36,10 +36,10 @@ export default function ArticleFrame() {
     // useManageEmptyTextSign()
 
     // Hook sets <div> in IFrame to put an article in
-    // useSetRootDivToIFrame()
+    useSetRootDivToIFrame()
 
     // Hook sets article JSX to IFrame
-    // useSetArticleToIFrame()
+    useSetArticleToIFrame()
 
     // Set and control hovered and selected rectangles in IFrame
     // useInstallFlashElements()

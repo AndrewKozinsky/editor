@@ -16,23 +16,7 @@
     // id of included files template id
     incFilesId?: string // '60cc62ab5405e00071442016'
     // open component template folder uuids
-    openCompFoldersUuIds?: FilesTreeType.IdArr // ['1', '3']
-}*/
-
-/**
- * Function saves article misc data (article site id, article uuid and other data) to localStorage
- * to know what kind of article the editor has to open next time
- * @param {Object} marksObj — saved data
- */
-/*export function supplementArtMarksInLocalStorage(this: typeof articleManager, marksObj: MarksObj) {
-    // Current object with article data
-    const currentMarkObj = getFromLocalStorage(config.ls.article)
-
-    let updatedMarkObj = currentMarkObj
-        ? Object.assign(currentMarkObj, marksObj)
-        : marksObj
-
-    setInLocalStorage(config.ls.article, updatedMarkObj)
+    openCompFoldersIds?: FilesTreeType.IdArr // ['1', '3']
 }*/
 
 /**

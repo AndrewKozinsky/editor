@@ -10,23 +10,18 @@ import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
-import {
-    useGetAndSetEditorSettings,
-    useSetTokenStatus
-} from './app-fn/init'
-import {
-//     useGetAppClasses,
-    useRedirectPage
-} from './app-fn/App-func'
+import { useGetAndSetEditorSettings, useSetTokenStatus } from './app-fn/init'
+import { useRedirectPage } from './app-fn/App-func'
 import setShortcutsHandler from './shortcuts/shortcutsHandler'
+import useGetClasses from './app-fn/App-classes'
 import './css/reset.css'
 import './css/variables.scss'
 import './css/default.scss'
-import useGetClasses from './app-fn/App-classes'
 
 
 /** Компонент всего приложения */
 export default function App() {
+    // TODO Что если данные статьи хранить в отдельном хуке в articleManager вне Редакса?
     // TODO В GET нельзя передать тело запроса, но дополнительные даные можно передать через запросы в URL: /compFolder?siteId=3. Поэтому я могу убрать обработчик /sites/3/compFolder из sites.
 
     // TODO В некотрых местах кода я формирую объект свойств, который затем передаю через оператор rest в тег в JSX. И в качестве типа пишу MiscTypes.StringKeyWithAnyValues потому что объект со войствами формируется не сразу, а может дополняться по ходу кода. Поэтому я не могу зайдействовать автоматическое определение кода TypeScript-а. Так вот, в качестве типа этого объекта можно указать тип свойств принимаемых тегом. Не знаю как он называется.

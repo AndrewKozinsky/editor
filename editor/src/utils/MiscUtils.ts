@@ -1,17 +1,3 @@
-// import { ReactElement } from 'react'
-// import { useDispatch } from 'react-redux'
-// import actions from 'store/rootAction'
-
-
-/** Хук возвращает функцию открывающую модальное окно */
-/*export function useGetModalOpenHandler() {
-    const dispatch = useDispatch()
-
-    return function (content: ReactElement) {
-        dispatch(actions.modal.openModal(content))
-    }
-}*/
-
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -53,13 +39,13 @@ export function removeFromLocalStorage(propName: string) {
  * The function create deep copy of object or array
  * @param {Object | Array} data — copied data
  */
-/*export function createDeepCopy<T>(data: T): T {
+export function createDeepCopy<T>(data: T): T {
 
     let f = function copy(data: T) {
         switch (toString.call(data)){
-            case "[object Array]":
+            case '[object Array]':
                 return parseArray(data)
-            case "[object Object]":
+            case '[object Object]':
                 return parseObj(data)
             default: return null // Возвращу null чтобы проверяльщик не ругался
         }
@@ -67,8 +53,8 @@ export function removeFromLocalStorage(propName: string) {
         function parseArray(arr: any) {
             return arr.map((elem: any) => {
                 switch (toString.call(elem)){
-                    case "[object Array]":
-                    case "[object Object]":
+                    case '[object Array]':
+                    case '[object Object]':
                         return copy(elem)
                     default: return elem
                 }
@@ -80,8 +66,8 @@ export function removeFromLocalStorage(propName: string) {
 
             for(let key in obj) {
                 switch (toString.call(obj[key])){
-                    case "[object Array]":
-                    case "[object Object]":
+                    case '[object Array]':
+                    case '[object Object]':
                         //@ts-ignore
                         result[key] = copy(obj[key])
                         break
@@ -95,4 +81,4 @@ export function removeFromLocalStorage(propName: string) {
     }
 
     return f(data)
-}*/
+}

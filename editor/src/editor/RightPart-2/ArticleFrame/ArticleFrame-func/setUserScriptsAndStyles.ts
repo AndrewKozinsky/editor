@@ -26,7 +26,7 @@ export function useSetUserScriptsAndStylesToIFrame() {
 
         // Set flag that files were set
         setFilesWereSet(true)
-    }, [$links, siteTemplate, siteTemplate, history, filesWereSet])
+    }, [$links, siteTemplate, history, filesWereSet])
 
     useEffect(function () {
         if (!history.length) {

@@ -235,8 +235,8 @@ function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes
 
     function createArticle() {
         const newArticle = articleManager.createArticle()
-        newArticle.meta.maxComponentId = action.payload.maxCompId
-        newArticle.components = action.payload.components
+        newArticle.dMeta.dMaxCompId = action.payload.maxCompId
+        newArticle.dComps = action.payload.components
 
         return newArticle
     }

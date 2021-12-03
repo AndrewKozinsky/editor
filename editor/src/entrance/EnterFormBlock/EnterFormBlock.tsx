@@ -49,7 +49,6 @@ type ConfirmLetterMessagePropType = {
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
 function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     const { email } = props
-    const commonMsg = useGetMessages(commonMessages)
     const enterFormMsg = useGetMessages(enterFormMessages)
 
     // Обработчик щелчка по кнопке

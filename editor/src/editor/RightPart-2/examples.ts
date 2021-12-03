@@ -116,6 +116,66 @@ const paragraphTemplate: TempCompTypes.Content = {
     ]
 }
 
+const burgerTemplate: TempCompTypes.Content = {
+    name: 'Burger',
+    html: `<div class="burger burger--white" data-em-id="general" data-em-group="general-main">
+    <div class="burger__top">
+        <div class="burger__cell burger__cell--round" data-em-id="cell" data-em-group="cell-top"></div>
+        <div class="burger__cell burger__cell--round" data-em-id="cell" data-em-group="cell-top"></div>
+    </div>
+    <div class="burger__mediterranean" data-em-id="mediterranean" data-em-group="mediterranean-main"></div>
+    <div class="burger__cell" data-em-id="cell" data-em-group="cell-bottom"></div>
+</div>`,
+    elems: [
+        {
+            elemId: 'general',
+            elemName: 'Главная обёртка',
+            elemAttrs: [
+                {
+                    elemAttrId: 1,
+                    elemAttrName: 'class',
+                    elemAttrAlt: 'Класс',
+                    elemAttrView: 'text',
+                    elemAttrLockedValue: 'burger ',
+                    elemAttrValues: [
+                        {
+                            elemAttrValueId: 1,
+                            elemAttrValueValue: 'burger--white',
+                            elemAttrValueAlt: 'Белая подложка',
+                            elemAttrValueChecked: true
+                        },
+                        {
+                            elemAttrValueId: 2,
+                            elemAttrValueValue: 'burger--green',
+                            elemAttrValueAlt: 'Зелёная подложка',
+                            elemAttrValueChecked: false
+                        },
+                    ]
+                },
+            ],
+            elemTags: {
+                elemTagsValues: [
+                    {elemTagValueId: 1, elemTagValueName: 'aside'},
+                    {elemTagValueId: 2, elemTagValueName: 'section'},
+                ]
+            }
+        },
+        {
+            elemId: 'cell',
+            elemName: 'Ячейка',
+            elemTags: {
+                elemTagsValues: [
+                    {elemTagValueId: 5, elemTagValueName: 'main'},
+                ]
+            }
+        },
+        {
+            elemId: 'mediterranean',
+            elemName: 'Средняя часть'
+        },
+    ]
+}
+
 // ================================================
 
 const artData: ArticleTypes.Article = {
@@ -126,127 +186,95 @@ const artData: ArticleTypes.Article = {
         {
             dCompType: 'component',
             dCompId: 1,
-            tCompId: 152,
-            dCompElems: [
+            tCompId: 106,
+            dElems: [
                 {
                     dCompElemId: 1,
-                    tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-top',
-                    dCompElemTag: 1,
+                    tCompElemId: 'general',
+                    dCompElemGroup: 'general-main',
+                    dCompElemTag: 2,
                     dCompElemAttrs: [
-                        { dCompElemAttrId: 1, dCompElemAttrValue: [1] }
+                        {dCompElemAttrId: 1, dCompElemAttrValue: [1, 2]},
                     ],
-                    dCompElemChildren: [
-                        {
-                            dCompType: 'component',
-                            dCompId: 2,
-                            tCompId: 150,
-                            dCompElems: [
-                                {
-                                    dCompElemId: 1,
-                                    tCompElemId: 'banner',
-                                    dCompElemGroup: 'banner-first',
-                                    dCompElemAttrs: [
-                                        { dCompElemAttrId: 1, dCompElemAttrValue: [1] }
-                                    ]
-                                },
-                                {
-                                    dCompElemId: 2,
-                                    tCompElemId: 'banner-container',
-                                    dCompElemGroup: 'banner-container-first',
-    //                                 dCompElemAttrs: [
-    //                                     { dCompElemAttrId: 1, dCompElemAttrValue: [1] }
-    //                                 ],
-                                    dCompElemChildren: [
-                                        {
-                                            dCompType: 'component',
-                                            dCompId: 3,
-                                            tCompId: 14
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
                 },
                 {
                     dCompElemId: 2,
                     tCompElemId: 'cell',
                     dCompElemGroup: 'cell-top',
-                    dCompElemTag: 2,
-                    dCompElemAttrs: [
-                        { dCompElemAttrId: 1, dCompElemAttrValue: [2] }
-                    ]
-                }
-            ]
-        },
+                },
+                {
+                    dCompElemId: 3,
+                    tCompElemId: 'cell',
+                    dCompElemGroup: 'cell-top',
+                    dCompElemTag: 5,
+                    dCompElemChildren: [
 
-        // ============================================================================
-        {
-            dCompType: 'component',
-            dCompId: 4,
-            tCompId: 7,
-            dCompElems: [
-                {
-                    dCompElemId: 1,
-                    tCompElemId: 'paragraph',
-                    dCompElemGroup: 'paragraph-first',
-                    dCompElemChildren: [
+
                         {
-                            dCompType: 'textComponent',
-                            dCompId: 6,
-                            tCompId: 2,
-                            tCompElemId: 'paragraph',
-                            dCompElemChildren: [
-                                { dCompType: 'text', text: '' },
+                            dCompType: 'component',
+                            dCompId: 2,
+                            tCompId: 106,
+                            dElems: [
                                 {
-                                    dCompType: 'textTag',
-                                    dTextTag: 8,
-                                    dCompElemChildren: [
-                                        { dCompType: 'text', text: ' '}
+                                    dCompElemId: 1,
+                                    tCompElemId: 'general',
+                                    dCompElemGroup: 'general-main',
+                                    dCompElemTag: 2,
+                                    dCompElemAttrs: [
+                                        {dCompElemAttrId: 1, dCompElemAttrValue: []},
                                     ]
-                                }
+                                },
+                                {
+                                    dCompElemId: 2,
+                                    tCompElemId: 'cell',
+                                    dCompElemGroup: 'cell-top',
+                                },
+                                {
+                                    dCompElemId: 3,
+                                    tCompElemId: 'cell',
+                                    dCompElemGroup: 'cell-top',
+                                    dCompElemTag: 5
+                                },
+                                {
+                                    dCompElemId: 4,
+                                    tCompElemId: 'cell',
+                                    dCompElemGroup: 'cell-top',
+                                },
+                                {
+                                    dCompElemId: 5,
+                                    tCompElemId: 'mediterranean',
+                                    dCompElemGroup: 'mediterranean-main',
+                                },
+                                {
+                                    dCompElemId: 6,
+                                    tCompElemId: 'cell',
+                                    dCompElemGroup: 'cell-bottom',
+                                    dCompElemChildren: [
+
+                                    ]
+                                },
                             ]
                         }
+
+
                     ]
-                }
-            ]
+                },
+                {
+                    dCompElemId: 4,
+                    tCompElemId: 'cell',
+                    dCompElemGroup: 'cell-top',
+                },
+                {
+                    dCompElemId: 5,
+                    tCompElemId: 'mediterranean',
+                    dCompElemGroup: 'mediterranean-main',
+                },
+                {
+                    dCompElemId: 6,
+                    tCompElemId: 'cell',
+                    dCompElemGroup: 'cell-bottom',
+                },
+            ],
         },
-        {
-            dCompType: 'component',
-            dCompId: 5,
-            tCompId: 10,
-            dCompElems: [
-                {
-                    dCompElemId: 1,
-                    tCompElemId: 'paragraph',
-                    dCompElemGroup: 'paragraph-first',
-                    dCompElemChildren: [
-                        {
-                            dCompType: 'textComponent',
-                            dCompId: 7,
-                            tCompId: 144,
-                            tCompElemId: 'paragraph',
-                            dCompElemChildren: [
-                                { dCompType: 'text', text: 'Hello' },
-                                {
-                                    dCompType: 'textTag',
-                                    dTextTag: 8,
-                                    dTagObjectAttrs: [
-                                        {
-                                            dCompElemAttrId: 1,
-                                            dCompElemAttrValue: [1, 2]
-                                        }
-                                    ],
-                                    dCompElemChildren: [
-                                        { dCompType: 'text', text: 'Hello from span'}
-                                    ]
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
     ]
 }

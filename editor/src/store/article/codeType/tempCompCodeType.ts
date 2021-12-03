@@ -1,3 +1,4 @@
+// Типы шаблона компонента
 namespace TempCompTypes {
     export type TempComps = TempComp[]
 
@@ -31,7 +32,7 @@ namespace TempCompTypes {
         // Массив атрибутов
         elemAttrs?: ElemAttrs
         elemTags?: {
-            elemTagsValues?: ElemTags,
+            elemTagsValues?: ElemTagsValues,
             elemTagsView?: InputType
         }
         //  Показывать ли данный элемент в статье по умолчанию
@@ -75,9 +76,9 @@ namespace TempCompTypes {
         elemAttrValueChecked?: boolean // true
     }
 
-    export type ElemTags = ElemTag[]
+    export type ElemTagsValues = ElemTagsValue[]
 
-    export type ElemTag = {
+    export type ElemTagsValue = {
         // Tag identifier. Он нужен чтобы можно было менять значения тега не завися от самого значения. Можно ввести только цифры.
         elemTagValueId: number // 1
         // Tag name

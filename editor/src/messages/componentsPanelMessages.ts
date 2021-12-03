@@ -1,6 +1,6 @@
 
 // Components templates section in LeftPart-2
-/*export const componentsPanelMessages = {
+export const componentsPanelMessages = {
     header: {
         eng: 'Components',
         rus: 'Компоненты'
@@ -17,4 +17,4 @@
         eng: 'Insert in element',
         rus: 'Вставить внутрь элемента'
     },
-}*/
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import NameSection from '../wrappers/NameSection/NameSection'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
 import ItemsList from 'common/ItemsList/ItemsList'
 import { useGetSettingsItemsListProps } from './LeftPart-3-func'
 import { settingsPanelMessages } from 'messages/settingsPanelMessages'

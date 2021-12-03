@@ -1,6 +1,6 @@
 import React from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
-import NameSection from '../../wrappers/NameSection/NameSection'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
 import UserDataForm from '../EmailForm/form/EmailForm'
 import ChangePasswordForm from '../ChangePasswordForm/ChangePasswordForm'
 import UserAccountForm from '../UserAccountForm/UserAccountForm'

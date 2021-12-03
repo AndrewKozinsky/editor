@@ -3,11 +3,11 @@
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
 
-/*export const hooks = {
-    getHistoryItem: useGetHistoryItem,
+export const hooks = {
+    // getHistoryItem: useGetHistoryItem,
     getArticle: useGetArticle,
-    getFlashedElemCoords: useGetFlashedElemCoords
-}*/
+    // getFlashedElemCoords: useGetFlashedElemCoords
+}
 
 /** Hook returns current history item object */
 /*function useGetHistoryItem() {
@@ -26,18 +26,18 @@
 }*/
 
 /** Hook returns current article */
-/*function useGetArticle() {
-    const historyItem = useGetHistoryItem()
-    const [article, setArticle] = useState<null | ArticleTypes.Article>(null)
+function useGetArticle() {
+    // const historyItem = useGetHistoryItem()
+    // const [article, setArticle] = useState<null | ArticleTypes.Article>(null)
 
-    useEffect(function () {
+    /*useEffect(function () {
         if (!historyItem) return
 
         setArticle(historyItem.article)
-    }, [historyItem])
+    }, [historyItem])*/
 
-    return article
-}*/
+    // return article
+}
 
 
 /*type FlashedElemsCoords = {

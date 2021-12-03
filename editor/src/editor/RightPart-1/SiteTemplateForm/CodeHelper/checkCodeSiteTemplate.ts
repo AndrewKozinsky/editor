@@ -20,15 +20,11 @@ export default function checkCodeSiteTemplate(code: string) {
             errorsArr.push('Добавьте имя шаблона в свойство name.')
         }
 
-        /*if (!codeObj.head && !codeObj.endBody) {
-            errorsArr.push('Можете добавить свойства head и endBody где прописать код вставляемый в <head> и в конце <body>. Это могут быть ссылки на файлы CSS и JavaScript.')
-        }*/
-
-        if (codeObj.head && !isCorrectMarkup(codeObj.head)) {
+        if (codeObj.head && !isMarkupCorrect(codeObj.head)) {
             errorsArr.push('В свойстве head должна быть строка с корректным HTML-кодом добавляемым в <head> статьи. Смотрите пример ниже.')
         }
 
-        if (codeObj.endBody && !isCorrectMarkup(codeObj.endBody)) {
+        if (codeObj.endBody && !isMarkupCorrect(codeObj.endBody)) {
             errorsArr.push('В свойстве endBody должна быть строка с корректным HTML-кодом добавляемым перед закрывающем </body> в статье. Смотрите пример ниже.')
         }
 
@@ -47,7 +43,7 @@ export default function checkCodeSiteTemplate(code: string) {
     }
 }
 
-function isCorrectMarkup(htmlStr?: string) {
+function isMarkupCorrect(htmlStr?: string) {
     if (!htmlStr) return false
 
     try {

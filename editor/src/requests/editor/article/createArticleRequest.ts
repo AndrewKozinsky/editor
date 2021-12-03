@@ -14,8 +14,8 @@ export default async function createArticleRequest(
 ) {
     // При создании новой статьи будет вставляться пустое содержимое
     const newArticleContent: ArticleTypes.Article = {
-        meta: { maxComponentId: 0 },
-        components: []
+        dMeta: { dMaxCompId: 0 },
+        dComps: []
     }
 
     const options = {

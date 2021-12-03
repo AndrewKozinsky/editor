@@ -1,29 +1,27 @@
-// import React, {ReactElement} from 'react'
-// import { convertToCamelCase } from 'utils/StringUtils'
-// import {HTMLObjArrType} from './parceComponent/htmlStringToObject'
+import React, { ReactElement } from 'react'
+import { convertToCamelCase } from 'utils/StringUtils'
+import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
 
 /**
  * Функция получает массив со структурой HTML и преобразует его в JSX.
  * @param {Object} htmlStructure — объект с разобранной HTML-структурой компонента
  * @param {Number} key — key
  */
-/*export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement {
+export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement[] {
     //@ts-ignore
     return htmlStructure.map((htmlObj, i) => {
-        // If it is an empty text component set special sign...
         if ('text' in htmlObj) {
             return handleTextObject(htmlObj)
         }
         else if ('tag' in htmlObj) {
             return handleTagObject(htmlObj, i)
         }
-
     })
-}*/
+}
 
-/*function handleTextObject(htmlObj: HTMLObjArrType.Text) {
+function handleTextObject(htmlObj: HTMLObjArrType.Text) {
     return htmlObj.text
-}*/
+}
 
 
 /**
@@ -31,8 +29,8 @@
  * @param {Object} htmlObj — object with html-structure
  * @param {Number} key — key property
  */
-/*function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
-    setEmptyTextSign(htmlObj)
+function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
+    // setEmptyTextSign(htmlObj)
 
     let tagName = htmlObj.tag
 
@@ -40,15 +38,13 @@
     let attribs = fixAttribs(htmlObj, key)
 
     // Подготовлю детей
-    // @ts-ignore
     let children = (htmlObj.children)
-            //@ts-ignore
             ? createJsxFromComponents(htmlObj.children)
             : null
 
     // Верну созданный компонент Реакта
     return React.createElement( tagName, attribs, children )
-}*/
+}
 
 
 /*function setEmptyTextSign(htmlObj: HTMLObjArrType.Tag) {
@@ -92,13 +88,11 @@
  * @param {Number} key — key
  * @returns {*}
  */
-/*function fixAttribs(htmlObj: HTMLObjArrType.Tag, key: number) {
+function fixAttribs(htmlObj: HTMLObjArrType.Tag, key: number) {
     const objAttribs = htmlObj.attrs
 
     // Если атрибутов нет, то вернуть объект с атрибутом key.
-    if (!objAttribs) return {
-        key: key
-    }
+    if (!objAttribs) return { key: key }
 
     // Переберу объект и заменю названия свойств.
     for(let propName in objAttribs) {
@@ -114,10 +108,10 @@
             // В переменной будет так: box-shadow: 0 30px 55px rgba(0, 0, 0, .2); transform: translateY(5px);
             let styleStr = objAttribs[propName].trim()
 
-            /!*[
+            /*[
                 "box-shadow: 0 30px 55px rgba(0, 0, 0, .2)",
                 "transform: translateY(5px);"
-            ]*!/
+            ]*/
             let styleArr = styleStr.split('; ')
 
             // Удалю последнюю точку с запятой
@@ -142,14 +136,14 @@
         }
 
         // If inside of the element will be a text component
-        if (propName === 'data-em-text-data-comp-id') {
+        // if (propName === 'data-em-text-data-comp-id') {
             // Set contentEditable attribute
-            objAttribs.contentEditable = ''
-        }
+            // objAttribs.contentEditable = ''
+        // }
     }
 
     //@ts-ignore
     objAttribs.key = key
 
     return objAttribs
-}*/
+}

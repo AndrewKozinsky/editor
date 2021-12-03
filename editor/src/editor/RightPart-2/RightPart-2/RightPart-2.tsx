@@ -1,6 +1,5 @@
 import React from 'react'
 import ArticleFrame from '../ArticleFrame/ArticleFrame'
-import {useSetArticleDataInStore} from './RightPart-2-func'
 import './RightPart-2.scss'
 
 
@@ -13,9 +12,6 @@ export default function RightPart2(props: RightPart2PropType) {
     const {
         display // Показывать ли обёртку
     } = props
-
-    // Поставить данные статьи в Хранилище при изменении id редактируемой статьи
-    useSetArticleDataInStore()
 
     const CN = 'right-part-2'
     const style = display ? {} : {display: 'none'}

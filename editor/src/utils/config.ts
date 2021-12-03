@@ -16,7 +16,8 @@ const config = {
         editorArticleId: 'editorArticleId',
         editorArticleType: 'editorArticleType',
 
-        editArticleId: 'editArticleId' // id редактируемой статьи
+        editArticleId: 'editArticleId', // id редактируемой статьи
+        editOpenCompFoldersIds: 'editOpenCompFoldersIds' // Массив идентификаторов открытых папок компонентов в редактируемой статье
     }
 }
 

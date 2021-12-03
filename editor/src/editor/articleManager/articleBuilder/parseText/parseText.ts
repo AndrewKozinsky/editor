@@ -1,8 +1,8 @@
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import {HTMLObjArrType} from '../parceComponent/htmlStringToObject'
+// import {HTMLObjArrType} from '../parseComponent/htmlStringToObject'
 // import articleManager from '../../articleManager/articleManager'
-// import {parseComponent} from '../parceComponent/parseComponent'
+// import {parseComponent} from '../parseComponent/parseComponent'
 
 /**
  * The function turns text component data to html-object

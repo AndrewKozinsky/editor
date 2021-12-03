@@ -23,9 +23,9 @@ namespace ArticleTypes {
         dCompId: DataCompId // 1
         // Component template id
         tCompId: TempCompId
-        layer?: Layer
+        dCompLayer?: Layer
         // Component elements
-        dCompElems?: ComponentElems
+        dElems?: ComponentElems
     }
 
     export type DataCompId = number // 1
@@ -33,8 +33,8 @@ namespace ArticleTypes {
 
     // Layers options
     export type Layer = {
-        collapsed?: boolean // true
-        hidden?: boolean // true
+        layerCollapsed?: boolean // true
+        layerHidden?: boolean // true
     }
 
     // Component elements
@@ -51,7 +51,7 @@ namespace ArticleTypes {
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
         dCompElemTag?: Tag
         dCompElemAttrs?: Attribs
-        layer?: Layer
+        dCompElemLayer?: Layer
         dCompElemChildren?: ElemChildren
     }
 
@@ -116,5 +116,10 @@ export const emptyArticleData: ArticleTypes.Article = {
         dMaxCompId: 0
     },
     // Components array
-    dComps: []
+    dComps: [{
+        // Component type
+        dCompType: 'component',
+        dCompId: 1,
+        tCompId: 95,
+    }]
 }
