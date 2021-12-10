@@ -42,7 +42,7 @@
 /*function getAttribs(objAttribs: HTMLObjArrType.Attrs): string {
     let generalArr: string[] = []
 
-    const unnecessaryProps = ['data-em-data-elem-id', 'data-em-data-comp-id', 'data-em-group', 'data-em-id', 'data-em-text-data-comp-id']
+    const unnecessaryProps = ['data-em-d-elem-id', 'data-em-data-comp-id', 'data-em-group', 'data-em-id', 'data-em-text-data-comp-id']
 
     for(let propKey in objAttribs) {
         if (unnecessaryProps.includes(propKey)) continue

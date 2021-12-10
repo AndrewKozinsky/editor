@@ -5,7 +5,7 @@
 // Hook cleans the iframe if an article was cleaned
 /*
 export function useCleanIFrame() {
-    const { $links, history } = useSelector((store: AppStateType) => store.article)
+    const { $links, history } = useGetArticleSelectors()
 
     useEffect(function () {
         if (!$links.$body || history.length) return

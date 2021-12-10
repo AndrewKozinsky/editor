@@ -139,7 +139,13 @@ function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArti
         siteId: action.payload.siteId,
         siteTemplateId: action.payload.siteTemplateId || null,
         history: [
-            { article: action.payload.article }
+            {
+                article: action.payload.article,
+                hoveredElem: action.payload.hoveredElem,
+                selectedElem: action.payload.selectedElem,
+                moveHoveredElem: action.payload.moveHoveredElem,
+                moveSelectedElem: action.payload.moveSelectedElem
+            }
         ]
     }
 }
@@ -153,20 +159,20 @@ function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksA
 }
 
 // Set ids for hovered or selected component/element
-/*function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
+function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
     // Get history array and current article idx
-    const {history, historyCurrentIdx} = state
+    const { history, historyCurrentIdx } = state
     // Current article
     let article = history[historyCurrentIdx]
 
-    // Hovered/selected element coordinates
+    // Hovered/selected/move element coordinates
     const hoveredElem = {
         type: action.payload.type,
         dataCompId: action.payload.dataCompId,
         dataElemId: action.payload.dataElemId
     }
 
-    // Update hovered/selected element coordinates in article
+    // Update hovered/selected/move element coordinates in article
     if (action.payload.actionType === 'hover') {
         article = {
             ...article,
@@ -179,6 +185,18 @@ function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksA
             selectedElem: hoveredElem
         }
     }
+    else if (action.payload.actionType === 'moveHover') {
+        article = {
+            ...article,
+            moveHoveredElem: hoveredElem
+        }
+    }
+    else if (action.payload.actionType === 'moveSelect') {
+        article = {
+            ...article,
+            moveSelectedElem: hoveredElem
+        }
+    }
 
     // Set the new article to history array
     const updatedHistoryArr = [...history]
@@ -188,7 +206,7 @@ function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksA
         ...state,
         history: updatedHistoryArr
     }
-}*/
+}
 
 // Installing an article code
 function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
@@ -297,8 +315,8 @@ export default function articleReducer(
             return setSiteTemplate(state, action)
         case StoreArticleTypes.SET_LINKS:
             return setLinks(state, action)
-        // case StoreArticleTypes.SET_HOVERED_ELEMENT:
-        //     return setHoveredElement(state, action)
+        case StoreArticleTypes.SET_HOVERED_ELEMENT:
+            return setHoveredElement(state, action)
         case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
             return setTempCompFolders(state, action)
         // case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:

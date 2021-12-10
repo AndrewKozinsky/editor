@@ -41,7 +41,6 @@ namespace TempCompTypes {
         elemCanDuplicate?: boolean // false
         // Нужно ли в элемент добавить пустой текстовый компонент для удобного набора
         elemTextInside?: boolean // true
-        elemText?: ElemText
     }
 
     export type ElemId = string // 'banner'
@@ -85,46 +84,6 @@ namespace TempCompTypes {
         elemTagValueName: string // 'h1'
     }
 
-    export type ElemText = {
-        // Allowed tags for use
-        elemTextTags?: ElemTextTags
-        elemTextAttrs?: ElemTextAttrs
-    }
-
-    export type ElemTextTags = ElemTextTag[]
-
-    export type ElemTextTag = {
-        elemTextTagId: number // 1
-        elemTextTagName: string // 'p'
-    }
-
-    export type ElemTextAttrs = ElemTextAttr[]
-
-    export type ElemTextAttr = {
-        elemTextAttrId: number // 1
-        // Attribute name
-        elemTextAttrName: string // 'class'
-        // Alternative attribute name
-        elemTextAttrAlt?: string // 'Класс'
-        // In what view attribute value will be shown in the text panel
-        elemTextAttrView?: InputType
-        // An attribute value that will always be present
-        elemTextAttrLockedValue?: string // 'banner '
-        elemTextAttrValues?: ElemTextAttrValues
-    }
-
-    export type ElemTextAttrValues = ElemTextAttrValue[]
-
-    export type ElemTextAttrValue = {
-        // Attribute identifier. Он нужен чтобы можно было удалять и менять значения атрибутов не завися от самого значения.
-        elemTextAttrValueId: number // 1
-        // Attribute name
-        elemTextAttrValueValue: string // 'pattern-1'
-        // Alternative attribute name
-        elemTextAttrValueAlt?: string // 'Узор 1'
-        // Отмечен ли данный класс при создании компонента
-        elemTextAttrValueChecked?: boolean // true
-    }
 
     export type InputType = 'text' | 'radio' | 'checkbox' | 'select'
 }

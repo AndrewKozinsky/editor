@@ -3,13 +3,18 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../../articleManager'
 import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
 import { putRepeatedElems } from './putRepeatedElems'
+import { setExtraAttribsToMainTag } from './setExtraAttribsToMainTag'
 import { getConsistObjArr } from './getConsistObjArr'
 import { changeTagName } from './changeTagName'
-import { setExtraAttribs } from './setExtraAttribs'
 import { setAttribs } from './setAttribs'
 import { insertChildren } from './insertChildren'
 
-
+/**
+ * Функция получает данные компонента и сливает с шаблоном компонента. В результате получается HTML-объект.
+ * В других функциях он будет преобразован в JSX.
+ * @param {Object} compData — данные компонента
+ * @param {Array} tempComps — массив шаблонов компонентов
+ */
 export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
 
     // Get component template by its tmpCompId
@@ -22,21 +27,19 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     let htmlObjOriginal = htmlStringToObject(htmlStr)
     const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
 
+    // Поставить главной обёртке htmlObj дополнительные атрибуты
+    setExtraAttribsToMainTag(htmlObj, compData)
+
     // Based on information from dataComp I will find elements that should have duplicates and put they into html-object.
     putRepeatedElems(htmlObj, compData)
 
     // Array of objects consists of objects with correspondence between component template, data and html-object
     const consistObj = getConsistObjArr(template, compData, htmlObj)
 
-    if (!consistObj) {
-        // Set dataCompId (component data id) to the root tag
-        htmlObj.attrs['data-em-data-comp-id'] = compData.dCompId.toString()
-        return htmlObj
-    }
+    if (!consistObj) return htmlObj
 
     for(let consistData of consistObj) {
         changeTagName(consistData)
-        setExtraAttribs(consistData)
         setAttribs(consistData)
         insertChildren(consistData, tempComps)
     }

@@ -1,5 +1,5 @@
-// import {useEffect, useState} from 'react'
-// import {AppStateType} from 'store/rootReducer'
+// import { useEffect, useState } from 'react'
+// import useGetArticleSelectors from 'store/article/articleSelectors'
 // import StoreArticleTypes from 'store/article/articleTypes'
 
 // Type with coordinates of a flashed element
@@ -18,45 +18,70 @@
 
 /** The hook gets coordinated of a flashed element from the Store and write its to <body> as a attribute */
 /*export function usePassFlashElemsCoordsToIFrame() {
-    const { $links, history, historyCurrentIdx } = useSelector((store: AppStateType) => store.article)
+    const { $links, history, historyCurrentIdx } = useGetArticleSelectors()
 
     // Objects witch data is stored. I will update them if data from the Store is different
     const [hoverRectCoords, setHoverRectCoords] = useState(coordsInitialObj)
     const [selectRectCoords, setSelectRectCoords] = useState(coordsInitialObj)
+    const [moveHoverRectCoords, setMoveHoverRectCoords] = useState(coordsInitialObj)
+    const [moveSelectRectCoords, setMoveSelectRectCoords] = useState(coordsInitialObj)
 
     useEffect(function () {
         if (!$links.$body || !history.length) return
 
-        // Get data of the hovered and selected element from an actual article
-        const { hoveredElem, selectedElem } = history[historyCurrentIdx]
+        // Get data of the flashed element from an actual article
+        const { hoveredElem, selectedElem, moveHoveredElem, moveSelectedElem } = history[historyCurrentIdx]
 
         // Update hoverRectCoords if a data from the Store is different
         if (hoveredElem.dataCompId !== hoverRectCoords.dataCompId || hoveredElem.dataElemId !== hoverRectCoords.dataElemId) {
             setHoverRectCoords(hoveredElem)
         }
-
         // Update selectRectCoords if a data from the Store is different
         if (selectedElem.dataCompId !== selectRectCoords.dataCompId || selectedElem.dataElemId !== selectRectCoords.dataElemId) {
             setSelectRectCoords(selectedElem)
         }
+        if (moveHoveredElem.dataCompId !== moveHoverRectCoords.dataCompId || moveHoveredElem.dataElemId !== moveHoverRectCoords.dataElemId) {
+            setMoveHoverRectCoords(moveHoveredElem)
+        }
+        if (moveHoveredElem.dataCompId !== moveSelectRectCoords.dataCompId || moveHoveredElem.dataElemId !== moveSelectRectCoords.dataElemId) {
+            setMoveSelectRectCoords(moveSelectedElem)
+        }
     }, [$links, history, historyCurrentIdx])
 
 
-    // The useEffect is watches when hoverRectCoords changes to write new jovered element coordinates to <body> as attribute
+    // The useEffect is watches when coordinates of a flashed rectangle changed to write new coordinates to <body> as attribute
     useEffect(function () {
-        if (!$links.$body) return
-
-        // Change object into JSON
-        const hoverCoords = JSON.stringify(hoverRectCoords)
-        // Save JSON in attribute
-        $links.$body.setAttribute('hoverrectcoords', hoverCoords)
+        saveCoordsToBody($links, 'hoverrectcoords', hoverRectCoords)
     }, [hoverRectCoords])
 
-    // The save with the selected elements
     useEffect(function () {
-        if (!$links.$body) return
-
-        const selectCoords = JSON.stringify(selectRectCoords)
-        $links.$body.setAttribute('selectrectcoords', selectCoords)
+        saveCoordsToBody($links, 'selectrectcoords', selectRectCoords)
     }, [selectRectCoords])
+
+    useEffect(function () {
+        saveCoordsToBody($links, 'movehoverrectcoords', moveHoverRectCoords)
+    }, [moveHoverRectCoords])
+
+    useEffect(function () {
+        saveCoordsToBody($links, 'moveselectrectcoords', moveSelectRectCoords)
+    }, [moveSelectRectCoords])
+}*/
+
+/**
+ * Функция получает объект с координатами и сохраняет их в <body> под переданным атрибутом
+ * @param {Object} $links — объект ссылок на элементы iFrame.
+ * @param {String} attrName — имя атрибута, который нужно поставить в <body>.
+ * @param {Object} coordsObj — объект с координами подвечивающего прямоугольника
+ */
+/*
+function saveCoordsToBody(
+    $links: StoreArticleTypes.LinksObj,
+    attrName: 'hoverrectcoords' | 'selectrectcoords' | 'movehoverrectcoords' | 'moveselectrectcoords' ,
+    coordsObj: CoordsObjType
+) {
+    if (!$links.$body) return
+
+    // Превратить данные о выделенном прямоугольнике в JSON
+    const hoverCoords = JSON.stringify(coordsObj)
+    $links.$body.setAttribute(attrName, hoverCoords)
 }*/

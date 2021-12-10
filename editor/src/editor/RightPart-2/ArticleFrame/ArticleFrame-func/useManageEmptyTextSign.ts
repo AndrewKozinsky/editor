@@ -4,7 +4,7 @@
 
 /** Hook manages Empty text sign visibility */
 /*export function useManageEmptyTextSign() {
-    const { $links, history } = useSelector((store: AppStateType) => store.article)
+    const { $links, history } = useGetArticleSelectors()
     // Did event handler has set?
     const [handlerHasSet, setHandlerHasSet] = useState(false)
 

@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createJsxFromComponents from './componentsToJSX'
@@ -15,8 +15,9 @@ export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComp
     const componentsArr = createComponentsArr(articleData, tempComps)
 
     // Create JSX from components array
-    // return [React.createElement( 'p', {}, ['Hello, world!'] )]
     return createJsxFromComponents(componentsArr)
+    // Пример кода возращаемый функцией
+    // return [React.createElement( 'p', {}, ['Hello, world!'] )]
 }
 
 /**

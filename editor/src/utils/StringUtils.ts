@@ -74,10 +74,22 @@ export function convertToCamelCase(str: string) {
     return arr.join('')
 }
 
-/*
-function convertToSnakeCase(str: string) {
+/**
+ * Функция принимает строку вида boxShadow и превращает её в box-shadow.
+ * @param {String} str — строка, которую нужно перевести в змеиную нотацию.
+ * @returns {String} — возвращает строку переведённую в змеиную нотацию.
+ */
+export function convertToSnakeCase(str: string) {
     if (!str) return null
 
     // boxShadow -> box-shadow
-    return str.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`)
-}*/
+    return str.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)
+}
+
+/**
+ * Функция принимает строку и делает первую букву заглавной.
+ * @param {String} str — строка, в которой первую букву нужно сделать заглавной.
+ */
+export function setUpperCaseForFirstLetter(str: string) {
+    return str.slice(0, 1).toUpperCase() + str.slice(1)
+}

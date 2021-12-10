@@ -1,3 +1,5 @@
+import {store} from '../rootReducer'
+
 const JSON5 = require('json5')
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
@@ -13,6 +15,7 @@ import { ArticleType } from 'requests/editor/article/articleServerResponseType'
 import {getCompFolderRequest} from 'requests/editor/compFolders/getCompFolderRequest'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
+import actions from '../rootAction'
 // import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
 
 
@@ -70,17 +73,27 @@ const articleActions = {
                 siteId: articleFullData.siteId,
                 siteTemplateId: articleFullData.siteTemplateId,
                 // Hovered component/element coordinates
-                /*hoveredElem: {
+                hoveredElem: {
                     type: null,
                     dataCompId: null,
                     dataElemId: null
-                },*/
+                },
                 // Selected component/element coordinates
-                /*selectedElem: {
+                selectedElem: {
                     type: null,
                     dataCompId: null,
                     dataElemId: null
-                }*/
+                },
+                moveHoveredElem: {
+                    type: null,
+                    dataCompId: null,
+                    dataElemId: null
+                },
+                moveSelectedElem: {
+                    type: null,
+                    dataCompId: null,
+                    dataElemId: null
+                },
             }
         }
     },
@@ -189,23 +202,101 @@ const articleActions = {
     },
 
     /**
-     * Set ids for hovered or selected component/element
+     * Экшен ставит данные для установки подсвечивающихся прямоугольников.
+     * Но кроме этого в зависимости от переданных данных корректирует видимость подсвечивающихся прямоугольников.
+     * Например если элемент подсвечен выделяющим прямоугольником, то при наведении мыши около него
+     * не будет отрисовываться прямоугольник при наведении и так далее.
+     * @param {Boolean} ctrlPressed — зажата ли клавиша Ctrl/Cmd
+     * @param {String} actionType — тип действия
+     * @param {String} nodeType — тип компонента/элемента
+     * @param {Number} dataCompId — id компонента
+     * @param {Number} dataElemId — id элемента
+     */
+    setFlashRectangles(
+        actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
+        nodeType: StoreArticleTypes.HoveredElementType,
+        dataCompId: StoreArticleTypes.HoveredElemId,
+        dataElemId: StoreArticleTypes.HoveredElemId
+    ) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            const { history, historyCurrentIdx} = getState().article
+            const currentArticle = history[historyCurrentIdx]
+
+            // Если на элемент навели мышью...
+            if (actionType === 'hover') {
+                // Если навели на элемент, но он уже выделен...
+                if (currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId) {
+                    // Спрятать наводящую рамку
+                    dispatch( actions.article.setHoveredElement(
+                        'hover', null, null, null
+                    ))
+                }
+                // Выделить элемент наводящей рамкой...
+                else {
+                    dispatch( actions.article.setHoveredElement(
+                        'hover', nodeType, dataCompId, dataElemId
+                    ))
+                }
+
+                // Спрятать рамку вокруг наведённого компонента для перемещения
+                dispatch( actions.article.setHoveredElement(
+                    'moveHover', null, null, null
+                ))
+            }
+            // Если элемент выделили...
+            else if (actionType === 'select') {
+                dispatch( actions.article.setHoveredElement(
+                    'select', nodeType, dataCompId, dataElemId
+                ))
+            }
+            // Если на компонента навели мышью для перемещения...
+            else if (actionType === 'moveHover') {
+                // Если навели на элемент, но он уже выделен...
+                if (currentArticle.moveSelectedElem.dataCompId === dataCompId) {
+                    // Спрятать наводящую рамку
+                    dispatch( actions.article.setHoveredElement(
+                        'moveHover', null, null, null
+                    ))
+                }
+                // Выделить элемент наводящей рамкой...
+                else {
+                    dispatch( actions.article.setHoveredElement(
+                        'moveHover', nodeType, dataCompId, dataElemId
+                    ))
+                }
+
+                // Спрятать рамку вокруг наведённого элемента
+                dispatch( actions.article.setHoveredElement(
+                    'hover', null, null, null
+                ))
+            }
+            // Если компонент выделили для перемещения...
+            else if (actionType === 'moveSelect') {
+                dispatch( actions.article.setHoveredElement(
+                    'moveSelect', nodeType, dataCompId, dataElemId
+                ))
+            }
+        }
+    },
+
+    /**
+     * Set ids for hovered or selected or moved component/element
      * @param {String} actionType — is component/element hovered or selected
-     * @param {String} type — component/element type: null | 'component' | 'element' | 'textComponent'
+     * @param {String} nodeType — component/element type: null | 'component' | 'element' | 'textComponent'
      * @param {Number} dataCompId — component id
      * @param {Number} dataElemId — element id (It is null if component/element was hovered)
      */
-    /*setHoveredElement(
-        actionType: 'hover' | 'select',
-        type: StoreArticleTypes.HoveredElementType,
-        dataCompId: StoreArticleTypes.HoveredElementCompId,
-        dataElemId: StoreArticleTypes.HoveredElementElemId
+    setHoveredElement(
+        actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
+        nodeType: StoreArticleTypes.HoveredElementType,
+        dataCompId: StoreArticleTypes.HoveredElemId,
+        dataElemId: StoreArticleTypes.HoveredElemId
     ) {
         return {
             type: StoreArticleTypes.SET_HOVERED_ELEMENT,
-            payload: { actionType, type, dataCompId, dataElemId }
+            payload: { actionType, nodeType, dataCompId, dataElemId }
         }
-    },*/
+    },
 
     /**
      * Action forms a new history item

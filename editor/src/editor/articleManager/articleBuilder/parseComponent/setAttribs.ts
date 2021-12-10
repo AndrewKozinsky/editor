@@ -31,36 +31,36 @@ function setAttribToHtmlElem(
     const attrName = attrTemplate.elemAttrName
 
     // Array with the attribute values
-    let attrValue: string[] = []
+    // let attrValue: string[] = []
     // Set locked value if it exists
-    if (attrTemplate.elemAttrLockedValue) {
-        attrValue.push(attrTemplate.elemAttrLockedValue)
-    }
+    // if (attrTemplate.elemAttrLockedValue) {
+    //     attrValue.push(attrTemplate.elemAttrLockedValue)
+    // }
 
     // If there are attributes in element data...
-    if (dataElem.dCompElemAttrs?.length) {
+    // if (dataElem.dCompElemAttrs?.length) {
 
         // Find object with current attribute data
         // Something like {id: 1, value: [1]} where id is an attrib id from elem template,
         // and value is array of ids of an attrib values from elem template. Instead of array of ids may be string with exact value
-        const dataElemAttr = dataElem.dCompElemAttrs.find(attr => attr.dCompElemAttrId === attrTemplate.elemAttrId)
+        // const dataElemAttr = dataElem.dCompElemAttrs.find(attr => attr.dCompElemAttrId === attrTemplate.elemAttrId)
 
-        if (dataElemAttr) {
+        // if (dataElemAttr) {
             // If in dataElemAttr.value is ready value...
-            if (typeof dataElemAttr.dCompElemAttrValue === 'string') {
-                attrValue.push(dataElemAttr.dCompElemAttrValue)
-            }
+            // if (typeof dataElemAttr.dCompElemAttrValue === 'string') {
+            //     attrValue.push(dataElemAttr.dCompElemAttrValue)
+            // }
             // If in dataElemAttr.value is array of values ids...
-            else if (Array.isArray(dataElemAttr.dCompElemAttrValue)) {
+            // else if (Array.isArray(dataElemAttr.dCompElemAttrValue)) {
                 // Go through all ids and get string values
-                for(let dataElemAttrValueId of dataElemAttr.dCompElemAttrValue) {
-                    const attrValue2 = attrTemplate.elemAttrValues.find(v => v.elemAttrValueId === dataElemAttrValueId)
-                    attrValue.push(attrValue2.elemAttrValueValue)
-                }
-            }
-        }
-    }
+                // for(let dataElemAttrValueId of dataElemAttr.dCompElemAttrValue) {
+                //     const attrValue2 = attrTemplate.elemAttrValues.find(v => v.elemAttrValueId === dataElemAttrValueId)
+                //     attrValue.push(attrValue2.elemAttrValueValue)
+                // }
+            // }
+        // }
+    // }
 
     // Join all attributes values to a string
-    htmlElem.attrs[attrName] = attrValue.join(' ')
+    // htmlElem.attrs[attrName] = attrValue.join(' ')
 }

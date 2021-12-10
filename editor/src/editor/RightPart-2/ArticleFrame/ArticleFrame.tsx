@@ -6,15 +6,15 @@ import {
     useSetArticleToIFrame,
 } from './ArticleFrame-func/ArticleFrame-func'
 import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
+import { useSetServiceStyleToIFrame } from './ArticleFrame-func/useSetServiceStyleToIFrame'
 // import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
-// import {useInstallFlashElements} from './flashElements/useInstallFlashElements'
+// import { useInstallFlashRects } from './flashElements/useInstallFlashRects'
 // import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
 // import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
-// import {useChangeFlashElementsPosition} from './flashElements/useChangeFlashElementsPosition'
+// import { useChangeFlashElementsPosition } from './flashElements/useChangeFlashElementsPosition'
 // import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
 // import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
 import './ArticleFrame.scss'
-import TempCompTypes from '../../../store/article/codeType/tempCompCodeType'
 
 
 export default function ArticleFrame() {
@@ -32,6 +32,9 @@ export default function ArticleFrame() {
     // Hook sets user's scripts and styles to IFrame
     useSetUserScriptsAndStylesToIFrame()
 
+    // Поставить служебные стили в IFrame
+    useSetServiceStyleToIFrame()
+
     // Hook manages Empty text sign visibility
     // useManageEmptyTextSign()
 
@@ -42,7 +45,7 @@ export default function ArticleFrame() {
     useSetArticleToIFrame()
 
     // Set and control hovered and selected rectangles in IFrame
-    // useInstallFlashElements()
+    // useInstallFlashRects()
     // useSetMouseHandlersForFlashRects()
     // usePassFlashElemsCoordsToIFrame()
     // useChangeFlashElementsPosition()

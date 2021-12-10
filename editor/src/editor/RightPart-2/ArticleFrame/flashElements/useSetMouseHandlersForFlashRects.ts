@@ -1,7 +1,7 @@
-// import {useEffect, useState} from 'react'
+// import { useEffect, useState } from 'react'
+// import useGetArticleSelectors from 'store/article/articleSelectors'
 // import { store } from 'store/rootReducer'
 // import actions from 'store/rootAction'
-// import {AppStateType} from 'store/rootReducer'
 // import { getElementPadding } from 'utils/domUtils'
 
 /**
@@ -9,8 +9,8 @@
  * They save information about component/element under cursor in Store
  */
 /*export function useSetMouseHandlersForFlashRects() {
-    const { $links, history } = useSelector((store: AppStateType) => store.article)
-    // Were mouse move handler set?
+    const { $links, history } = useGetArticleSelectors()
+    // Were mouse move handlers set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
     useEffect(function () {
@@ -48,20 +48,35 @@
  * @param {String} actionType — mouse hovers or selects under element
  */
 /*function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
+    const ctrlPressed = isCtrlPressed(event)
+
     // Element under cursor
     const target = event.target as HTMLElement
 
     // Clear hovered rectangle if there is not components under cursor
     if (!target.closest(`[data-em-data-comp-id]`)) {
-        store.dispatch( actions.article.setHoveredElement(
+        store.dispatch( actions.article.setFlashRectangles(
             actionType, null, null, null
         ))
+
+        if (ctrlPressed && actionType === 'hover') {
+            store.dispatch( actions.article.setFlashRectangles(
+                'moveHover', null, null, null
+            ))
+        }
+        else if (ctrlPressed && actionType === 'select') {
+            store.dispatch( actions.article.setFlashRectangles(
+                'moveSelect', null, null, null
+            ))
+        }
 
         return
     }
 
     // Closest element on cursor
-    const elemWithCompId = target.closest(`[data-em-data-comp-id]`) as HTMLElement
+    const elemWithCompId: HTMLElement = ctrlPressed
+        ? target.closest(`[data-em-data-comp-id]`)
+        : target.closest(`[data-em-data-comp-id]`)
 
     // Regular component data id, text component data id and element data id
     const dataCompId = parseInt(elemWithCompId.dataset.emDataCompId) || null
@@ -75,25 +90,46 @@
         // Text component doesn't have own wrapper. That's why it always is inside element.
         // An element can have padding.
         // The function defines if cursor on a text component or on element's padding
-        const cursorOnTextComponent = isCursorOnTextComponent(event, target)
+        // const cursorOnTextComponent = isCursorOnTextComponent(event, target)
 
-        if (cursorOnTextComponent) {
-            store.dispatch( actions.article.setHoveredElement(
-                actionType, 'textComponent', dataTextCompId, null
-            ))
-        }
-        else {
-            store.dispatch( actions.article.setHoveredElement(
-                actionType, nodeType, dataCompId, dataElemId
-            ))
-        }
+        // if (cursorOnTextComponent) {
+        //     store.dispatch( actions.article.setFlashRectangles(
+        //         actionType, 'textComponent', dataTextCompId, null
+            // ))
+        // }
+        // else {
+        //     store.dispatch( actions.article.setFlashRectangles(
+        //         actionType, nodeType, dataCompId, dataElemId
+            // ))
+        // }
     }
     // Otherwise there is a standard element/component
     else {
-        store.dispatch( actions.article.setHoveredElement(
-            actionType, nodeType, dataCompId, dataElemId
-        ))
+        if (!ctrlPressed) {
+            store.dispatch( actions.article.setFlashRectangles(
+                actionType, nodeType, dataCompId, dataElemId
+            ))
+        }
+        else if (ctrlPressed && actionType === 'hover') {
+            store.dispatch( actions.article.setFlashRectangles(
+                'moveHover', nodeType, dataCompId, dataElemId
+            ))
+        }
+        else if (ctrlPressed && actionType === 'select') {
+            store.dispatch( actions.article.setFlashRectangles(
+                'moveSelect', nodeType, dataCompId, dataElemId
+            ))
+        }
     }
+}*/
+
+/**
+ * Функция возращает булево значение нажата ли клавиша ctrl (Win) или Cmd (Mac).
+ * @param {Object} event — объект события
+ */
+/*function isCtrlPressed(event: MouseEvent) {
+    const isMac = navigator.platform.startsWith('Mac')
+    return !isMac && event.ctrlKey || isMac && event.metaKey
 }*/
 
 /**
@@ -101,21 +137,21 @@
  * @param {HTMLElement} $target — element under a cursor
  */
 /*export function isTextCompAhead($target: HTMLElement) {
-    let $currentNode = $target
+    // let $currentNode = $target
 
     // Finding text component element in the loop
     // If text component element is found a program return true
     // Otherwise one return false
-    while ($currentNode.tagName !== 'BODY') {
-        if ($currentNode.dataset.emTextDataCompId) {
-            return true
-        }
-        else if ($currentNode.dataset.emDataCompId) {
-            return false
-        }
+    // while ($currentNode.tagName !== 'BODY') {
+    //     if ($currentNode.dataset.emTextDataCompId) {
+    //         return true
+        // }
+        // else if ($currentNode.dataset.emDataCompId) {
+        //     return false
+        // }
 
-        $currentNode = $currentNode.parentElement
-    }
+        // $currentNode = $currentNode.parentElement
+    // }
 
     return false
 }*/

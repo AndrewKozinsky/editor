@@ -4,8 +4,8 @@ import { HTMLObjArrType } from './htmlStringToObject'
 
 type ConsistObjsArr = ConsistObj[]
 export type ConsistObj = {
-    dataComp: ArticleTypes.Component
-    dElem: ArticleTypes.ComponentElem
+    dataComp: ArticleTypes.Component // Данные компонента
+    dElem: ArticleTypes.ComponentElem // Данные элемента
     tempElem: TempCompTypes.Elem
     htmlComp: HTMLObjArrType.Tag
     htmlElem?: HTMLObjArrType.Tag
@@ -24,7 +24,13 @@ export function getConsistObjArr(
 ): null | ConsistObjsArr {
     if (!compData.dElems) return null
 
-    return compData.dElems.map(dElem => {
+    const consistObjsArr: ConsistObjsArr = []
+
+    // Перебрать все элементы в данных
+    compData.dElems.forEach(dElem => {
+        // Проверить, что в шаблоне есть элемент, на который указывает данные элемента
+        if (!ifElemDataAndElemTempMath(template, dElem)) return
+
         const partObject: ConsistObj = {
             dataComp: compData,
             dElem: dElem,
@@ -33,8 +39,27 @@ export function getConsistObjArr(
             htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.dCompElemGroup, dElem.tCompElemId)
         }
 
-        return partObject
+        consistObjsArr.push(partObject)
     })
+
+    return consistObjsArr
+}
+
+/**
+ * Функция проверяет, что в шаблоне есть элемент, на который есть данные
+ * @param {Object} template — шаблон компонента
+ * @param {Object} dElem — данные элемента
+ */
+function ifElemDataAndElemTempMath(
+    template: TempCompTypes.TempComp, dElem: ArticleTypes.ComponentElem
+): boolean {
+    if (template.content?.elems.length === 0) return
+
+    const tElem = template.content.elems.find(tElem => {
+        if (tElem.elemId === dElem.tCompElemId) return tElem
+    })
+
+    return !!tElem
 }
 
 /**
@@ -43,7 +68,7 @@ export function getConsistObjArr(
  * @param {String} tCompElemId — an element template id
  */
 function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElemId: TempCompTypes.ElemId): TempCompTypes.Elem {
-    return template.content.elems.find(tempElem => tempElem.elemId === tCompElemId)
+    return template.content?.elems.find(tempElem => tempElem.elemId === tCompElemId)
 }
 
 /**
@@ -60,7 +85,8 @@ function getHtmlElem(
     tCompElemId: string
 ): HTMLObjArrType.Tag {
 
-    let htmlElem: HTMLObjArrType.Tag
+    let htmlElem: HTMLObjArrType.Tag | null = null
+
     find(htmlObj)
 
     function find(htmlObj: HTMLObjArrType.Tag) {
@@ -69,14 +95,14 @@ function getHtmlElem(
         // If there is attr with a passed tCompElemId and a group name...
         if (htmlObj.attrs['data-em-id'] === tCompElemId
             && htmlObj.attrs['data-em-group'] === dCompElemGroup
-            && htmlObj.attrs['data-em-data-elem-id'] === dCompElemId.toString())
+            && htmlObj.attrs['data-em-d-elem-id'] === dCompElemId.toString())
         {
-            // The searches has finished
+            // The searches have finished
             htmlElem = htmlObj
             return
         }
 
-        if (htmlObj.children?.length === 0) return
+        if (!htmlObj.children?.length) return
 
         // Go through the children and find html-element there...
         for (let i = 0; i < htmlObj.children.length; i++) {
@@ -87,9 +113,9 @@ function getHtmlElem(
             // If there is attr with a passed tCompElemId and a group name...
             if (childObj.attrs['data-em-id'] === tCompElemId
                 && childObj.attrs['data-em-group'] === dCompElemGroup
-                && childObj.attrs['data-em-data-elem-id'] === dCompElemId.toString()
+                && childObj.attrs['data-em-d-elem-id'] === dCompElemId.toString()
             ) {
-                // The searches has finished
+                // The searches have finished
                 htmlElem = childObj
                 return
             }

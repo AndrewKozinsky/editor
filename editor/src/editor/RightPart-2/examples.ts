@@ -97,21 +97,7 @@ const paragraphTemplate: TempCompTypes.Content = {
         {
             elemId: 'paragraph',
             elemName: 'Paragraph',
-            elemText: {
-                elemTextAttrs: [
-                    {
-                        elemTextAttrId: 1,
-                        elemTextAttrName: 'class',
-                        elemTextAttrValues: [
-                            {elemTextAttrValueId: 1, elemTextAttrValueValue: 'one-class'},
-                            {elemTextAttrValueId: 2, elemTextAttrValueValue: 'two-class'},
-                        ]
-                    },
-                ],
-                elemTextTags: [
-                    {elemTextTagId: 8, elemTextTagName: 'span'},
-                ]
-            }
+            elemTextInside: true
         }
     ]
 }
@@ -167,7 +153,8 @@ const burgerTemplate: TempCompTypes.Content = {
                 elemTagsValues: [
                     {elemTagValueId: 5, elemTagValueName: 'main'},
                 ]
-            }
+            },
+            elemTextInside: true
         },
         {
             elemId: 'mediterranean',
@@ -180,7 +167,7 @@ const burgerTemplate: TempCompTypes.Content = {
 
 const artData: ArticleTypes.Article = {
     dMeta: {
-        dMaxCompId: 8
+        dMaxCompId: 12
     },
     dComps: [
         {
@@ -201,6 +188,11 @@ const artData: ArticleTypes.Article = {
                     dCompElemId: 2,
                     tCompElemId: 'cell',
                     dCompElemGroup: 'cell-top',
+                    dCompElemChildren: {
+                        dCompType: 'simpleTextComponent',
+                        dCompId: 10,
+                        text: 'Привет, это Навальный!'
+                    }
                 },
                 {
                     dCompElemId: 3,
@@ -249,9 +241,6 @@ const artData: ArticleTypes.Article = {
                                     dCompElemId: 6,
                                     tCompElemId: 'cell',
                                     dCompElemGroup: 'cell-bottom',
-                                    dCompElemChildren: [
-
-                                    ]
                                 },
                             ]
                         }
@@ -263,6 +252,11 @@ const artData: ArticleTypes.Article = {
                     dCompElemId: 4,
                     tCompElemId: 'cell',
                     dCompElemGroup: 'cell-top',
+                    dCompElemChildren: {
+                        dCompType: 'simpleTextComponent',
+                        dCompId: 11,
+                        text: ''
+                    }
                 },
                 {
                     dCompElemId: 5,
@@ -273,8 +267,13 @@ const artData: ArticleTypes.Article = {
                     dCompElemId: 6,
                     tCompElemId: 'cell',
                     dCompElemGroup: 'cell-bottom',
+                    dCompElemChildren: {
+                        dCompType: 'simpleTextComponent',
+                        dCompId: 12,
+                        text: ''
+                    }
                 },
             ],
-        },
+        }
     ]
 }

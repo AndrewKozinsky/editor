@@ -12,21 +12,25 @@ namespace StoreArticleTypes {
     export type HistoryItem = {
         // Articles
         article: ArticleTypes.Article
-        // Hovered component/element coordinates
-        // hoveredElem: HoveredElem
-        // Selected component/element coordinates
-        // selectedElem: HoveredElem
+        // Flash rectangles coordinates
+        hoveredElem: FlashedElem
+        selectedElem: FlashedElem
+        moveHoveredElem: MoveFlashedElem
+        moveSelectedElem: MoveFlashedElem
     }
 
-    /*export type HoveredElem = {
-        type: HoveredElementType
-        dataCompId: HoveredElementCompId
-        dataElemId: HoveredElementElemId
-    }*/
+    export type FlashedElem = {
+        type: FlashedElementType
+        dataCompId: FlashedElemId
+        dataElemId: FlashedElemId
+    }
+    export type MoveFlashedElem = {
+        type: FlashedElementType
+        dataCompId: FlashedElemId
+    }
 
-    // export type HoveredElementType = null | 'component' | 'element' | 'textComponent'
-    // export type HoveredElementCompId = null | ArticleTypes.DataCompId
-    // export type HoveredElementElemId = null | ArticleTypes.DataElemId
+    export type FlashedElementType = null | 'component' | 'element' | 'textComponent'
+    export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
     // export type TempComps = TempComp[]
@@ -76,16 +80,26 @@ namespace StoreArticleTypes {
             article: ArticleTypes.Article,
             siteId: number,
             siteTemplateId: number,
-            /*hoveredElem: {
+            hoveredElem: {
                 type: null,
                 dataCompId: number | null,
                 dataElemId: number | null
-            },*/
-            /*selectedElem: {
+            },
+            selectedElem: {
                 type: null,
                 dataCompId: number | null,
                 dataElemId: number | null
-            },*/
+            },
+            moveHoveredElem: {
+                type: null,
+                dataCompId: number | null,
+                dataElemId: number | null
+            },
+            moveSelectedElem: {
+                type: null,
+                dataCompId: number | null,
+                dataElemId: number | null
+            },
         }
     }
 
@@ -127,16 +141,16 @@ namespace StoreArticleTypes {
     }
 
     // Set links to iFrame elements
-    // export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
-    /*export type SetHoveredElementAction = {
+    export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
+    export type SetHoveredElementAction = {
         type: typeof SET_HOVERED_ELEMENT
         payload: {
-            actionType: 'hover' | 'select',
-            type: StoreArticleTypes.HoveredElementType,
-            dataCompId: StoreArticleTypes.HoveredElementCompId,
-            dataElemId: StoreArticleTypes.HoveredElementElemId
+            actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
+            type: StoreArticleTypes.FlashedElementType,
+            dataCompId: StoreArticleTypes.FlashedElemId,
+            dataElemId: StoreArticleTypes.FlashedElemId
         }
-    }*/
+    }
 
     //
     export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
@@ -174,7 +188,7 @@ namespace StoreArticleTypes {
         | SetTempCompAction
         | SetSiteTemplateAction
         | SetLinksAction
-    //     | SetHoveredElementAction
+        | SetHoveredElementAction
         | SetTempCompFoldersAction
     //     | CreateAndSetHistoryItemAction
     //     | MakeHistoryStepAction

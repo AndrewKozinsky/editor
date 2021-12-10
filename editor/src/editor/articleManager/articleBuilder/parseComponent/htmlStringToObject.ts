@@ -116,7 +116,7 @@ export namespace HTMLObjArrType {
         tag: string
         dataTagType?: 'comp' | 'elem' // data element id
         dataElemId?: number // data element id
-        // dataCompId?: number // data component id
+        dataCompId?: number // data component id
         attrs?: Attrs
         children?: Arr
     }

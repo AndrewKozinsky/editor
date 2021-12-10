@@ -5,7 +5,7 @@
 
 /** The hook doesn't allow to set focus while user clicks on no text components. */
 /*export function useRemoveUnwantedFocus() {
-    const { $links, history } = useSelector((store: AppStateType) => store.article)
+    const { $links, history } = useGetArticleSelectors()
 
     // Were mouse move handler set?
     const [mouseClickHandlerSet, setMouseClickHandlerSet] = useState(false)

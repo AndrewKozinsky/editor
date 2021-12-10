@@ -18,7 +18,7 @@ export function changeTagName(consistObj: ConsistObj) {
  * @param {Object} dElem — element data object
  * @param {Object} tempElem — template element object
  */
-function getTagName(dElem: ArticleTypes.ComponentElem, tempElem: TempCompTypes.Elem): string {
+function getTagName(dElem: ArticleTypes.ComponentElem, tempElem: TempCompTypes.Elem): string | null {
     if (!dElem.dCompElemTag) return null
 
     // If tag is a string, that is a ready tag name.

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
@@ -57,12 +57,15 @@ export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
 /** Hook sets <div> in IFrame to put an article in */
 export function useSetRootDivToIFrame() {
     const { $links, history } = useGetArticleSelectors()
+    const [wrapperInstalled, setWrapperInstalled] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || history.length) return
+        if (!$links.$body || history.length || wrapperInstalled) return
 
-        const rootDiv = document.createElement('div')
+        const rootDiv = document.createElement('main')
         $links.$body.append(rootDiv)
+
+        setWrapperInstalled(true)
     }, [$links, history])
 }
 

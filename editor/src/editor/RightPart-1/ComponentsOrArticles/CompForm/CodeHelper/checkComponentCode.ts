@@ -55,13 +55,12 @@ function checkElems(elems: any[]): string[] {
         errorsArr.push(...checkProp(elem.elemTextInside, 'elemTextInside', 'boolean', false))
         errorsArr.push(...checkProp(elem.elemAttrs, 'elemAttrs', 'arrayOfObjects', false, checkElemAttrs.bind(this, elem.elemAttrs)))
         errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
-        errorsArr.push(...checkProp(elem.elemText, 'elemText', 'object', false, checkElemText.bind(this, elem.elemText)))
 
         // Проверка, что в объекте elem нет лишних полей
         errorsArr.push(
             ...checkForExtraProps(
                 elem,
-                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside', 'elemText']
+                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside']
             )
         )
     })
@@ -129,24 +128,6 @@ export function checkElemAttrValues(elemAttrValues: any[]): string[] {
     return errorsArr
 }
 
-/**
- * Проверка массива code.elems[0].elemText.
- * @param {Array} elemTextObj — массив code.elems[0].elemText.
- */
-export function checkElemText(elemTextObj: any): string[] {
-    const errorsArr: string[] = []
-
-    // Проверка полей объекта elemTextObj...
-    errorsArr.push(...checkProp(elemTextObj.elemTextTags, 'elemTextTags', 'arrayOfObjects', false, checkElemTextTags.bind(this, elemTextObj.elemTextTags)))
-    errorsArr.push(...checkProp(elemTextObj.elemTextAttrs, 'elemTextAttrs', 'arrayOfObjects', false, checkElemTextAttrs.bind(this, elemTextObj.elemTextAttrs)))
-
-    // Проверка, что в объекте codeObj нет лишних полей
-    errorsArr.push(
-        ...checkForExtraProps( elemTextObj, ['elemTextTags', 'elemTextAttrs'] )
-    )
-
-    return errorsArr
-}
 
 /**
  * Проверка массива code.elems[0].elemTags.
@@ -186,87 +167,6 @@ function checkElemTagsValues(elemTagsValues: any[]) {
     })
 
     errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
-
-    return errorsArr
-}
-
-/**
- * Проверка массива code.elems[0].elemText[0].elemTextTags.
- * @param {Array} elemTextTags — массив code.elems[0].elemText[0].elemTextTags.
- */
-export function checkElemTextTags(elemTextTags: any[]): string[] {
-    const errorsArr: string[] = []
-
-    elemTextTags.forEach(elemTextTag => {
-        // Проверка полей объекта elemTextTag...
-        errorsArr.push(...checkProp(elemTextTag.elemTextTagId, 'elemTextTagId', 'number', true))
-        errorsArr.push(...checkProp(elemTextTag.elemTextTagName, 'elemTextTagName', 'string', true))
-
-        // Проверка, что в объекте elemTextTags нет лишних полей
-        errorsArr.push(
-            ...checkForExtraProps( elemTextTag, ['elemTextTagId', 'elemTextTagName'] )
-        )
-    })
-
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextTags, 'elemTextTagId'))
-
-    return errorsArr
-}
-
-/**
- * Проверка массива code.elems[0].elemText[0].checkElemTextAttrs.
- * @param {Array} elemTextAttrs — массив code.elems[0].elemText[0].checkElemTextAttrs.
- */
-export function checkElemTextAttrs(elemTextAttrs: any[]): string[] {
-    const errorsArr: string[] = []
-
-    elemTextAttrs.forEach(elemTextAttr => {
-        // Проверка полей объекта elemTextAttr...
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrId, 'elemTextAttrId', 'number', true))
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrName, 'elemTextAttrName', 'string', true))
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrAlt, 'elemTextAttrAlt', 'string', false))
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrView, 'elemTextAttrView', 'input', false))
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrLockedValue, 'elemTextAttrLockedValue', 'string', false))
-        errorsArr.push(...checkProp(elemTextAttr.elemTextAttrValues, 'elemTextAttrValues', 'string', false, checkElemTextAttrValues.bind(this, elemTextAttr.elemTextAttrValues)))
-
-        // Проверка, что в объекте elemTextAttr нет лишних полей
-        errorsArr.push(
-            ...checkForExtraProps(
-                elemTextAttr,
-                ['elemTextAttrId', 'elemTextAttrName', 'elemTextAttrAlt', 'elemTextAttrView', 'elemTextAttrLockedValue', 'elemTextAttrValues']
-            )
-        )
-    })
-
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextAttrs, 'elemTextAttrId'))
-
-    return errorsArr
-}
-
-/**
- * Проверка массива code.elems[0].elemText[0].checkElemTextAttrs[0].elemTextAttrValues.
- * @param {Array} elemTextAttrValues — массив code.elems[0].elemText[0].checkElemTextAttrs[0].elemTextAttrValues.
- */
-export function checkElemTextAttrValues(elemTextAttrValues: any[]): string[] {
-    const errorsArr: string[] = []
-
-    elemTextAttrValues.forEach(elemTextAttrValue => {
-        // Проверка полей объекта elemTextAttrValue...
-        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueId, 'elemTextAttrValueId', 'number', true))
-        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueValue, 'elemTextAttrValueValue', 'string', true))
-        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueAlt, 'elemTextAttrValueAlt', 'string', false))
-        errorsArr.push(...checkProp(elemTextAttrValue.elemTextAttrValueChecked, 'elemTextAttrValueChecked', 'boolean', false))
-
-        // Проверка, что в объекте elemTextAttrValue нет лишних полей
-        errorsArr.push(
-            ...checkForExtraProps(
-                elemTextAttrValue,
-                ['elemTextAttrValueId', 'elemTextAttrValueValue', 'elemTextAttrValueAlt', 'elemTextAttrValueChecked']
-            )
-        )
-    })
-
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTextAttrValues, 'elemTextAttrValueId'))
 
     return errorsArr
 }
@@ -312,31 +212,7 @@ export const componentCodeExample = `{
             },
             elemHidden: true,
             elemCanDuplicate: false,
-            elemTextInside: true,
-            elemText: {
-                elemTextTags: [
-                    { elemTextTagId: 1, elemTextTagName: 'p' },
-                    { elemTextTagId: 2, elemTextTagName: 'i' },
-                    { elemTextTagId: 3, elemTextTagName: 'blockuote' },
-                ],
-                elemTextAttrs: [
-                    {
-                        elemTextAttrId: 1,
-                        elemTextAttrName: 'class',
-                        elemTextAttrAlt: 'Класс',
-                        elemTextAttrView: 'checkbox',
-                        elemTextAttrLockedValue: 'banner ',
-                        elemTextAttrValues: [
-                            {
-                                elemTextAttrValueId: 1,
-                                elemTextAttrValueValue: 'pattern-1',
-                                elemTextAttrValueAlt: 'Узор 1',
-                                elemTextAttrValueChecked: true
-                            }
-                        ]
-                    }
-                ]
-            }
+            elemTextInside: true
         }
     ]
 }`

@@ -1,21 +1,21 @@
 // import { getElementPadding } from 'utils/domUtils'
-// import {CoordsObjType} from './usePassFlashElemsCoordsToIFrame'
+// import { CoordsObjType } from './usePassFlashElemsCoordsToIFrame'
 
+// type FlashRectType = 'hover' | 'select' | 'movehover' | 'moveselect'
 
 /**
  * The function sets visibility, size and position for flashed rectangle
  * @param {HTMLBodyElement} $body — <body>
  * @param {String} type — type of a flashed rectangle: hover or select
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
- * @param {HTMLElement} $flashRect — a link to a flashed rectangle
+ * @param {Element} $flashRect — a link to a flashed rectangle
  */
 /*export function setSizeAndPosition(
     $body: HTMLBodyElement,
-    type: 'hover' | 'select',
+    type: FlashRectType,
     rectCoords: CoordsObjType,
     $flashRect: HTMLElement,
 ) {
-
     // 1. Get element by coordinates
     const articleElement = getArticleElementByCoordinates($body, rectCoords)
 
@@ -43,12 +43,12 @@
 
     // Create query string to find component/element under cursor
     let queryStr = `[data-em-data-comp-id="${rectCoords.dataCompId}"]`
-    if (rectCoords.dataElemId) queryStr += `[data-em-data-elem-id="${rectCoords.dataElemId}"]`
-    else queryStr += `:not([data-em-data-elem-id])`
+    if (rectCoords.dataElemId) queryStr += `[data-em-d-elem-id="${rectCoords.dataElemId}"]`
+    else queryStr += `:not([data-em-d-elem-id])`
 
-    if (rectCoords.type === 'textComponent') {
-        queryStr = `[data-em-text-data-comp-id="${rectCoords.dataCompId}"]`
-    }
+    // if (rectCoords.type === 'textComponent') {
+    //     queryStr = `[data-em-text-data-comp-id="${rectCoords.dataCompId}"]`
+    // }
 
     // Return a founded element
     return $body.querySelector(queryStr)
@@ -59,7 +59,7 @@
  * @param type
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
-/*function hideRect(type: 'hover' | 'select', $flashRect: HTMLElement) {
+/*function hideRect(type: FlashRectType, $flashRect: HTMLElement) {
     $flashRect.style.display = 'none'
 }*/
 
@@ -71,20 +71,20 @@
  */
 /*
 function getCoordinates(
-    articleElement: HTMLElement, type: 'hover' | 'select', rectCoords: CoordsObjType
-): coordsObjType{
-    // Get flashed an element's coordinates object
+    articleElement: HTMLElement, type: FlashRectType, rectCoords: CoordsObjType
+): CoordsType {
+    // Get a flashed element's coordinates object
     const coords = articleElement.getBoundingClientRect()
 
     // Offset from flashed element in article to flashed rectangle depends on type
-    const offset = type === 'hover' ? 2 : 4
+    const offset = (type === 'hover' || type === 'movehover') ? 2 : 4
 
     // Get paddings of flashed element in article.
     // If flashed element is a text component, so need to take away parent's padding.
     let paddings = { left: 0, top: 0, right: 0, bottom: 0 }
-    if (rectCoords.type === 'textComponent') {
-        paddings = getElementPadding(articleElement)
-    }
+    // if (rectCoords.type === 'textComponent') {
+    //     paddings = getElementPadding(articleElement)
+    // }
 
     return {
         top: coords.top - offset + (paddings.top) + 'px',
@@ -95,7 +95,7 @@ function getCoordinates(
 }
 */
 
-/*type coordsObjType = {
+/*type CoordsType = {
     top: string
     left: string
     width: string
@@ -108,13 +108,12 @@ function getCoordinates(
  * @param {Object} coords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  */
-/*
-function positionFlashRect($flashRect: HTMLElement, coords: coordsObjType, rectCoords: CoordsObjType) {
+/*function positionFlashRect($flashRect: HTMLElement, coords: CoordsType, rectCoords: CoordsObjType) {
     // Make rectangle visible
     $flashRect.style.display = 'block'
 
     // Set red color to border if it is a text component
-    $flashRect.style.borderColor = (rectCoords.type === 'textComponent') ? 'rgb(255, 99, 71)' : ''
+    // $flashRect.style.borderColor = (rectCoords.type === 'textComponent') ? 'rgb(255, 99, 71)' : ''
 
     //Set coordinates to an element
     $flashRect.style.top = coords.top
