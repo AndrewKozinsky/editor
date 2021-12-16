@@ -1,5 +1,4 @@
-import {store} from '../rootReducer'
-
+// import { store } from '../rootReducer'
 const JSON5 = require('json5')
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
@@ -12,7 +11,7 @@ import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplate
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
 import { ArticleType } from 'requests/editor/article/articleServerResponseType'
-import {getCompFolderRequest} from 'requests/editor/compFolders/getCompFolderRequest'
+import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
@@ -22,14 +21,14 @@ import actions from '../rootAction'
 const articleActions = {
 
     // Очистка статьи
-    clearArticle() {
+    /*clearArticle() {
         // Remove editable article id in Local Storage
         removeFromLocalStorage(config.ls.editArticleId)
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
         }
-    },
+    },*/
 
     /**
      * Установка id редактируемой статьи. После редактор загружает все данные.
@@ -71,29 +70,7 @@ const articleActions = {
                 // Article
                 article: articleFullData.content,
                 siteId: articleFullData.siteId,
-                siteTemplateId: articleFullData.siteTemplateId,
-                // Hovered component/element coordinates
-                hoveredElem: {
-                    type: null,
-                    dataCompId: null,
-                    dataElemId: null
-                },
-                // Selected component/element coordinates
-                selectedElem: {
-                    type: null,
-                    dataCompId: null,
-                    dataElemId: null
-                },
-                moveHoveredElem: {
-                    type: null,
-                    dataCompId: null,
-                    dataElemId: null
-                },
-                moveSelectedElem: {
-                    type: null,
-                    dataCompId: null,
-                    dataElemId: null
-                },
+                siteTemplateId: articleFullData.siteTemplateId
             }
         }
     },
@@ -106,7 +83,7 @@ const articleActions = {
             const response = await getSiteComponentsRequest(siteId)
             if (response.status !== 'success') return
 
-            // Формированое массива компонентов для установки в Хранилище
+            // Формирование массива компонентов для установки в Хранилище
             const tempComps: TempCompTypes.TempComps = response.data.components.map(
                 function(compObj) {
                     const parsedContent: TempCompTypes.Content = JSON5.parse(compObj.content)
@@ -171,7 +148,6 @@ const articleActions = {
             dispatch( articleActions.setTempCompFolders(foldersObj) )
         }
     },
-
     /**
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
@@ -206,17 +182,14 @@ const articleActions = {
      * Но кроме этого в зависимости от переданных данных корректирует видимость подсвечивающихся прямоугольников.
      * Например если элемент подсвечен выделяющим прямоугольником, то при наведении мыши около него
      * не будет отрисовываться прямоугольник при наведении и так далее.
-     * @param {Boolean} ctrlPressed — зажата ли клавиша Ctrl/Cmd
      * @param {String} actionType — тип действия
-     * @param {String} nodeType — тип компонента/элемента
      * @param {Number} dataCompId — id компонента
      * @param {Number} dataElemId — id элемента
      */
     setFlashRectangles(
-        actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
-        nodeType: StoreArticleTypes.HoveredElementType,
-        dataCompId: StoreArticleTypes.HoveredElemId,
-        dataElemId: StoreArticleTypes.HoveredElemId
+        actionType: StoreArticleTypes.FlashedElemType,
+        dataCompId: StoreArticleTypes.FlashedElemId,
+        dataElemId: StoreArticleTypes.FlashedElemId
     ) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const { history, historyCurrentIdx} = getState().article
@@ -225,56 +198,64 @@ const articleActions = {
             // Если на элемент навели мышью...
             if (actionType === 'hover') {
                 // Если навели на элемент, но он уже выделен...
-                if (currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId) {
+                if (currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setHoveredElement(
-                        'hover', null, null, null
+                    dispatch( actions.article.setFlashedElement(
+                        'hover', null, null
                     ))
                 }
-                // Выделить элемент наводящей рамкой...
+                // В противном случае выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setHoveredElement(
-                        'hover', nodeType, dataCompId, dataElemId
+                    dispatch( actions.article.setFlashedElement(
+                        'hover', dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого компонента для перемещения
-                dispatch( actions.article.setHoveredElement(
-                    'moveHover', null, null, null
+                dispatch( actions.article.setFlashedElement(
+                    'moveHover', null, null
                 ))
             }
             // Если элемент выделили...
             else if (actionType === 'select') {
-                dispatch( actions.article.setHoveredElement(
-                    'select', nodeType, dataCompId, dataElemId
+                dispatch( actions.article.setFlashedElement(
+                    'select', dataCompId, dataElemId
                 ))
             }
-            // Если на компонента навели мышью для перемещения...
+            // Если на компонент навели мышью для перемещения...
             else if (actionType === 'moveHover') {
                 // Если навели на элемент, но он уже выделен...
-                if (currentArticle.moveSelectedElem.dataCompId === dataCompId) {
+                if (currentArticle.moveSelectedComp.dataCompId === dataCompId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setHoveredElement(
-                        'moveHover', null, null, null
+                    dispatch( actions.article.setFlashedElement(
+                        'moveHover', null, null
                     ))
                 }
                 // Выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setHoveredElement(
-                        'moveHover', nodeType, dataCompId, dataElemId
+                    dispatch( actions.article.setFlashedElement(
+                        'moveHover', dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого элемента
-                dispatch( actions.article.setHoveredElement(
-                    'hover', null, null, null
+                dispatch( actions.article.setFlashedElement(
+                    'hover', null, null
                 ))
             }
             // Если компонент выделили для перемещения...
             else if (actionType === 'moveSelect') {
-                dispatch( actions.article.setHoveredElement(
-                    'moveSelect', nodeType, dataCompId, dataElemId
+                dispatch( actions.article.setFlashedElement(
+                    'moveSelect', dataCompId, null
                 ))
+
+                // Если на этом элементе есть рамка наведения...
+                if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
+                    // Спрятать наводящую рамку
+                    dispatch( actions.article.setFlashedElement(
+                        'moveHover', null, null
+                    ))
+                }
             }
         }
     },
@@ -282,19 +263,17 @@ const articleActions = {
     /**
      * Set ids for hovered or selected or moved component/element
      * @param {String} actionType — is component/element hovered or selected
-     * @param {String} nodeType — component/element type: null | 'component' | 'element' | 'textComponent'
      * @param {Number} dataCompId — component id
      * @param {Number} dataElemId — element id (It is null if component/element was hovered)
      */
-    setHoveredElement(
+    setFlashedElement(
         actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
-        nodeType: StoreArticleTypes.HoveredElementType,
-        dataCompId: StoreArticleTypes.HoveredElemId,
-        dataElemId: StoreArticleTypes.HoveredElemId
+        dataCompId: StoreArticleTypes.FlashedElemId,
+        dataElemId: StoreArticleTypes.FlashedElemId
     ) {
         return {
-            type: StoreArticleTypes.SET_HOVERED_ELEMENT,
-            payload: { actionType, nodeType, dataCompId, dataElemId }
+            type: StoreArticleTypes.SET_FLASHED_ELEMENT,
+            payload: { actionType, dataCompId, dataElemId }
         }
     },
 
@@ -326,6 +305,17 @@ const articleActions = {
             type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
         }
     },*/
+
+    /**
+     * Установка id редактируемой статьи. После редактор загружает все данные.
+     * @param {Number} isPrepared — подготовлены ли данные статьи для соединения с шаблонами
+     */
+    setArticleDataPrepared(isPrepared: boolean): StoreArticleTypes.SetArticleDataPreparedAction {
+        return {
+            type: StoreArticleTypes.SET_ARTICLE_DATA_PREPARED,
+            payload: isPrepared
+        }
+    },
 }
 
 export default articleActions

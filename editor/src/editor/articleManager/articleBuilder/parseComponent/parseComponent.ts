@@ -2,8 +2,8 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../../articleManager'
 import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
-import { putRepeatedElems } from './putRepeatedElems'
 import { setExtraAttribsToMainTag } from './setExtraAttribsToMainTag'
+import { putRepeatedElems } from './putRepeatedElems'
 import { getConsistObjArr } from './getConsistObjArr'
 import { changeTagName } from './changeTagName'
 import { setAttribs } from './setAttribs'
@@ -25,6 +25,7 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
 
     // Convert html string to html-object
     let htmlObjOriginal = htmlStringToObject(htmlStr)
+
     const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
 
     // Поставить главной обёртке htmlObj дополнительные атрибуты
@@ -34,10 +35,10 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     putRepeatedElems(htmlObj, compData)
 
     // Array of objects consists of objects with correspondence between component template, data and html-object
+    // Другими словами массив объектов с шаблонами элементов и данными элементов.
     const consistObj = getConsistObjArr(template, compData, htmlObj)
 
     if (!consistObj) return htmlObj
-
     for(let consistData of consistObj) {
         changeTagName(consistData)
         setAttribs(consistData)

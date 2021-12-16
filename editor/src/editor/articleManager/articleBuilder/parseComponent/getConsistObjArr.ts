@@ -6,9 +6,9 @@ type ConsistObjsArr = ConsistObj[]
 export type ConsistObj = {
     dataComp: ArticleTypes.Component // Данные компонента
     dElem: ArticleTypes.ComponentElem // Данные элемента
-    tempElem: TempCompTypes.Elem
-    htmlComp: HTMLObjArrType.Tag
-    htmlElem?: HTMLObjArrType.Tag
+    tempElem: TempCompTypes.Elem // Шаблон элемента
+    htmlComp: HTMLObjArrType.Tag // html-компонент
+    htmlElem: HTMLObjArrType.Tag
 }
 
 /**
@@ -24,42 +24,16 @@ export function getConsistObjArr(
 ): null | ConsistObjsArr {
     if (!compData.dElems) return null
 
-    const consistObjsArr: ConsistObjsArr = []
-
     // Перебрать все элементы в данных
-    compData.dElems.forEach(dElem => {
-        // Проверить, что в шаблоне есть элемент, на который указывает данные элемента
-        if (!ifElemDataAndElemTempMath(template, dElem)) return
-
-        const partObject: ConsistObj = {
+    return compData.dElems.map((dElem) => {
+        return {
             dataComp: compData,
             dElem: dElem,
             tempElem: getTemplateElemByTempElemId(template, dElem.tCompElemId),
             htmlComp: htmlObj,
             htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.dCompElemGroup, dElem.tCompElemId)
         }
-
-        consistObjsArr.push(partObject)
     })
-
-    return consistObjsArr
-}
-
-/**
- * Функция проверяет, что в шаблоне есть элемент, на который есть данные
- * @param {Object} template — шаблон компонента
- * @param {Object} dElem — данные элемента
- */
-function ifElemDataAndElemTempMath(
-    template: TempCompTypes.TempComp, dElem: ArticleTypes.ComponentElem
-): boolean {
-    if (template.content?.elems.length === 0) return
-
-    const tElem = template.content.elems.find(tElem => {
-        if (tElem.elemId === dElem.tCompElemId) return tElem
-    })
-
-    return !!tElem
 }
 
 /**

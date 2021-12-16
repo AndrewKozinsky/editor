@@ -1,14 +1,12 @@
-import {useEffect, useState} from 'react'
 import ReactDOM from 'react-dom'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { MiscTypes } from 'types/miscTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import { useDispatch } from 'react-redux'
 import articleActions from 'store/article/articleActions'
 import articleManager from 'editor/articleManager/articleManager'
-// import { getFromLocalStorage } from 'utils/MiscUtils'
-// import { turnArticleDataToJSX } from '../../articleBuilder/articleBuilder'
 
 
 // Поставить данные статьи в Хранилище при изменении id редактируемой статьи
@@ -29,6 +27,8 @@ export function useSetArticleDataInStore() {
     }, [siteId, siteTemplateId])
 
     useEffect(function () {
+        if (!siteTemplateId) return
+
         dispatch( articleActions.requestSiteTemplate(siteTemplateId) )
     }, [siteTemplateId])
 }
@@ -56,25 +56,26 @@ export function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
 
 /** Hook sets <div> in IFrame to put an article in */
 export function useSetRootDivToIFrame() {
-    const { $links, history } = useGetArticleSelectors()
+    const { $links } = useGetArticleSelectors()
     const [wrapperInstalled, setWrapperInstalled] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || history.length || wrapperInstalled) return
+        if (!$links.$body || wrapperInstalled) return
 
         const rootDiv = document.createElement('main')
         $links.$body.append(rootDiv)
 
         setWrapperInstalled(true)
-    }, [$links, history])
+    }, [$links])
 }
 
 /** Hook sets article JSX to IFrame */
 export function useSetArticleToIFrame() {
-    const { $links, history, historyCurrentIdx, tempComps } = useGetArticleSelectors()
+    const { $links, history, historyCurrentIdx, tempComps, articleDataPrepared } = useGetArticleSelectors()
+    const {  } = useGetArticleSelectors()
 
     useEffect(function () {
-        if (!$links.$body || !history.length || !tempComps) return
+        if (!articleDataPrepared) return
 
         const article = history[historyCurrentIdx].article
 
@@ -83,5 +84,5 @@ export function useSetArticleToIFrame() {
             articleManager.turnArticleDataToJSX(article, tempComps),
             $links.$body.firstChild as Element
         )
-    }, [history, tempComps, historyCurrentIdx])
+    }, [$links, history, historyCurrentIdx, tempComps, articleDataPrepared])
 }

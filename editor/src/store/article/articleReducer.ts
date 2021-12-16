@@ -1,11 +1,14 @@
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 import StoreArticleTypes from './articleTypes'
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-// import ArticleTypes from './codeType/articleCodeType'
+import ArticleTypes from './codeType/articleCodeType'
 
 export type ArticleReducerType = {
+    // Статус статьи: clear (данных нет), loading (загрузка данных),
+    // prepareData (подготовка данных статьи в соответствии с текущим шаблоном)
+    // и readyData (данные готовы для сборки статьи)
     articleId: null | number
     siteId: null | number
     siteTemplateId: null | number
@@ -22,16 +25,23 @@ export type ArticleReducerType = {
     historyCurrentIdx: number
     // A history step when the article was saved
     // historyStepWhenWasSave: number
+    articleDataPrepared: boolean
 }
 
 // Article reducer state example
-/*const stateExample: ArticleReducerType = {
+const stateExample: ArticleReducerType = {
+    articleId: 2,
+    siteId: 10,
+    siteTemplateId: 4,
+    siteTemplate: null,
+    tempCompsFolders: null,
     tempComps: [{
         id: 9,
-        name: 'Banner',
-        code: <TempCompTypes.TempComp>{}
+        content: {
+            name: 'Banner',
+            html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>'
+        }
     }],
-    siteTemplate: null,
     $links: {
         $window:   window,
         $document: window.document,
@@ -41,24 +51,26 @@ export type ArticleReducerType = {
     history: [
         {
             article: <ArticleTypes.Article>{},
-            lastId: 32,
             hoveredElem: {
-                type: 'element',
-                dataCompId: 5,
-                dataElemId: 2
+                dataCompId: 1,
+                dataElemId: 1
             },
-            // Selected component/element coordinates
             selectedElem: {
-                type: null
-                dataCompId: null,
-                dataElemId: null
+                dataCompId: 1,
+                dataElemId: 1
+            },
+            moveHoveredComp: {
+                dataCompId: 1,
+            },
+            moveSelectedComp: {
+                dataCompId: 1,
             }
         },
-        {...}
     ],
-    historyCurrentIdx: 0
-    historyStepWhenWasSave: 0
-}*/
+    historyCurrentIdx: 0,
+    // historyStepWhenWasSave: 0,
+    articleDataPrepared: false
+}
 
 // Initial values
 const initialState: ArticleReducerType = {
@@ -76,10 +88,11 @@ const initialState: ArticleReducerType = {
     },
     history: [],
     historyCurrentIdx: 0,
-    // historyStepWhenWasSave: 0
+    // historyStepWhenWasSave: 0,
+    articleDataPrepared: false
 }
 
-function clearArticle(
+/*function clearArticle(
     state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
 ): ArticleReducerType {
     // Do not touch the document's links
@@ -89,7 +102,7 @@ function clearArticle(
     )
 
     return newState
-}
+}*/
 
 // Установка id редактируемой статьи. После редактор загружает все данные.
 function setArticleId(
@@ -141,10 +154,21 @@ function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArti
         history: [
             {
                 article: action.payload.article,
-                hoveredElem: action.payload.hoveredElem,
-                selectedElem: action.payload.selectedElem,
-                moveHoveredElem: action.payload.moveHoveredElem,
-                moveSelectedElem: action.payload.moveSelectedElem
+                hoveredElem: {
+                    dataCompId: null,
+                    dataElemId: null
+                },
+                // Selected component/element coordinates
+                selectedElem: {
+                    dataCompId: null,
+                    dataElemId: null
+                },
+                moveHoveredComp: {
+                    dataCompId: null,
+                },
+                moveSelectedComp: {
+                    dataCompId: null,
+                },
             }
         ]
     }
@@ -159,42 +183,44 @@ function setLinks(state: ArticleReducerType, action: StoreArticleTypes.SetLinksA
 }
 
 // Set ids for hovered or selected component/element
-function setHoveredElement(state: ArticleReducerType, action: StoreArticleTypes.SetHoveredElementAction): ArticleReducerType {
+function setFlashedElement(state: ArticleReducerType, action: StoreArticleTypes.SetFlashedElementAction): ArticleReducerType {
     // Get history array and current article idx
     const { history, historyCurrentIdx } = state
     // Current article
     let article = history[historyCurrentIdx]
 
-    // Hovered/selected/move element coordinates
-    const hoveredElem = {
-        type: action.payload.type,
+    // Hovered/selected element coordinates
+    const flashedElem = {
         dataCompId: action.payload.dataCompId,
         dataElemId: action.payload.dataElemId
+    }
+    const movedComp = {
+        dataCompId: action.payload.dataCompId,
     }
 
     // Update hovered/selected/move element coordinates in article
     if (action.payload.actionType === 'hover') {
         article = {
             ...article,
-            hoveredElem: hoveredElem
+            hoveredElem: flashedElem
         }
     }
     else if (action.payload.actionType === 'select') {
         article = {
             ...article,
-            selectedElem: hoveredElem
+            selectedElem: flashedElem
         }
     }
     else if (action.payload.actionType === 'moveHover') {
         article = {
             ...article,
-            moveHoveredElem: hoveredElem
+            moveHoveredComp: movedComp
         }
     }
     else if (action.payload.actionType === 'moveSelect') {
         article = {
             ...article,
-            moveSelectedElem: hoveredElem
+            moveSelectedComp: movedComp
         }
     }
 
@@ -294,6 +320,14 @@ function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes
     }
 }*/
 
+// The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
+function setArticleDataPrepared(state: ArticleReducerType, action: StoreArticleTypes.SetArticleDataPreparedAction): ArticleReducerType {
+    return {
+        ...state,
+        articleDataPrepared: action.payload
+    }
+}
+
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -301,8 +335,8 @@ export default function articleReducer(
 ): ArticleReducerType {
 
     switch (action.type) {
-        case StoreArticleTypes.CLEAR_ARTICLE:
-            return clearArticle(state, action)
+        // case StoreArticleTypes.CLEAR_ARTICLE:
+        //     return clearArticle(state, action)
         case StoreArticleTypes.SET_ARTICLE_ID:
             return setArticleId(state, action)
         case StoreArticleTypes.SET_ARTICLE:
@@ -315,8 +349,8 @@ export default function articleReducer(
             return setSiteTemplate(state, action)
         case StoreArticleTypes.SET_LINKS:
             return setLinks(state, action)
-        case StoreArticleTypes.SET_HOVERED_ELEMENT:
-            return setHoveredElement(state, action)
+        case StoreArticleTypes.SET_FLASHED_ELEMENT:
+            return setFlashedElement(state, action)
         case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
             return setTempCompFolders(state, action)
         // case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
@@ -325,6 +359,8 @@ export default function articleReducer(
         //     return makeHistoryStep(state, action)
         // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
         //     return setHistoryStepWhenArticleWasSaved(state, action)
+        case StoreArticleTypes.SET_ARTICLE_DATA_PREPARED:
+            return setArticleDataPrepared(state, action)
         default:
             // @ts-ignore
             const x: never = null

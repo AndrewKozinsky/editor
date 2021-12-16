@@ -1,6 +1,7 @@
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import articleManager from './articleManager'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /*export function createArticle(): ArticleTypes.Article {
     return {
@@ -167,3 +168,15 @@
         ]
     }
 }*/
+
+/**
+ * Функция создаёт объект пустого текстового компонента
+ * @param {Number} maxCompId — максимальный id компонента существующий в статье
+ */
+export function createSimpleTextComponent(maxCompId: number): ArticleTypes.SimpleTextComponent {
+    return {
+        dCompType: 'simpleTextComponent',
+        dCompId: maxCompId + 1,
+        text: ''
+    }
+}

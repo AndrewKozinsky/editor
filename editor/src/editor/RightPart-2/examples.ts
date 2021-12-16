@@ -182,7 +182,7 @@ const artData: ArticleTypes.Article = {
                     dCompElemTag: 2,
                     dCompElemAttrs: [
                         {dCompElemAttrId: 1, dCompElemAttrValue: [1, 2]},
-                    ],
+                    ]
                 },
                 {
                     dCompElemId: 2,
@@ -199,9 +199,22 @@ const artData: ArticleTypes.Article = {
                     tCompElemId: 'cell',
                     dCompElemGroup: 'cell-top',
                     dCompElemTag: 5,
+                },
+                {
+                    dCompElemId: 4,
+                    tCompElemId: 'cell',
+                    dCompElemGroup: 'cell-top',
+                    dCompElemChildren: {
+                        dCompType: 'simpleTextComponent',
+                        dCompId: 11,
+                        text: ''
+                    }
+                },
+                {
+                    dCompElemId: 5,
+                    tCompElemId: 'mediterranean',
+                    dCompElemGroup: 'mediterranean-main',
                     dCompElemChildren: [
-
-
                         {
                             dCompType: 'component',
                             dCompId: 2,
@@ -244,24 +257,7 @@ const artData: ArticleTypes.Article = {
                                 },
                             ]
                         }
-
-
                     ]
-                },
-                {
-                    dCompElemId: 4,
-                    tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-top',
-                    dCompElemChildren: {
-                        dCompType: 'simpleTextComponent',
-                        dCompId: 11,
-                        text: ''
-                    }
-                },
-                {
-                    dCompElemId: 5,
-                    tCompElemId: 'mediterranean',
-                    dCompElemGroup: 'mediterranean-main',
                 },
                 {
                     dCompElemId: 6,

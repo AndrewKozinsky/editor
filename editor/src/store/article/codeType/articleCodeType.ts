@@ -30,7 +30,7 @@ namespace ArticleTypes {
 
     export type Id = number // 1
 
-    // Layers options
+    // Layer options
     export type Layer = {
         layerCollapsed?: boolean // true
         layerHidden?: boolean // true

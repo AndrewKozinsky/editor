@@ -16,7 +16,7 @@ export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComp
 
     // Create JSX from components array
     return createJsxFromComponents(componentsArr)
-    // Пример кода возращаемый функцией
+    // Пример кода возвращаемый функцией
     // return [React.createElement( 'p', {}, ['Hello, world!'] )]
 }
 

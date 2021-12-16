@@ -1,6 +1,5 @@
 import { HTMLObjArrType } from './htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { createDeepCopy } from 'utils/MiscUtils'
 
 /**
  * Функция ставит дополнительные атрибуты главной обёртке компонента в htmlObj

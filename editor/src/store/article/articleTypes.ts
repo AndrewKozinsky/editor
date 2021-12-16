@@ -3,7 +3,7 @@ import ArticleTypes from './codeType/articleCodeType'
 import DragFilesTreeType from '../../libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 // import FilesTreeType from 'libs/DragFilesTree/types'
-// import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
+// import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
 
 namespace StoreArticleTypes {
 
@@ -15,21 +15,18 @@ namespace StoreArticleTypes {
         // Flash rectangles coordinates
         hoveredElem: FlashedElem
         selectedElem: FlashedElem
-        moveHoveredElem: MoveFlashedElem
-        moveSelectedElem: MoveFlashedElem
+        moveHoveredComp: MoveFlashedElem
+        moveSelectedComp: MoveFlashedElem
     }
 
     export type FlashedElem = {
-        type: FlashedElementType
         dataCompId: FlashedElemId
         dataElemId: FlashedElemId
     }
     export type MoveFlashedElem = {
-        type: FlashedElementType
         dataCompId: FlashedElemId
     }
 
-    export type FlashedElementType = null | 'component' | 'element' | 'textComponent'
     export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
@@ -60,10 +57,10 @@ namespace StoreArticleTypes {
 
     // Типы типа и тип экшена
     // Set components templates array
-    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
-    export type ClearArticleAction = {
-        type: typeof CLEAR_ARTICLE
-    }
+    // export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
+    // export type ClearArticleAction = {
+    //     type: typeof CLEAR_ARTICLE
+    // }
 
     // Set components templates array
     export const SET_ARTICLE_ID = 'SET_ARTICLE_ID'
@@ -79,27 +76,7 @@ namespace StoreArticleTypes {
         payload: {
             article: ArticleTypes.Article,
             siteId: number,
-            siteTemplateId: number,
-            hoveredElem: {
-                type: null,
-                dataCompId: number | null,
-                dataElemId: number | null
-            },
-            selectedElem: {
-                type: null,
-                dataCompId: number | null,
-                dataElemId: number | null
-            },
-            moveHoveredElem: {
-                type: null,
-                dataCompId: number | null,
-                dataElemId: number | null
-            },
-            moveSelectedElem: {
-                type: null,
-                dataCompId: number | null,
-                dataElemId: number | null
-            },
+            siteTemplateId: number
         }
     }
 
@@ -140,19 +117,18 @@ namespace StoreArticleTypes {
         }
     }
 
-    // Set links to iFrame elements
-    export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
-    export type SetHoveredElementAction = {
-        type: typeof SET_HOVERED_ELEMENT
+    export type FlashedElemType = 'hover' | 'select' | 'moveHover' | 'moveSelect'
+    export const SET_FLASHED_ELEMENT = 'SET_FLASHED_ELEMENT'
+    export type SetFlashedElementAction = {
+        type: typeof SET_FLASHED_ELEMENT
         payload: {
-            actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
-            type: StoreArticleTypes.FlashedElementType,
+            actionType: FlashedElemType,
             dataCompId: StoreArticleTypes.FlashedElemId,
             dataElemId: StoreArticleTypes.FlashedElemId
         }
     }
 
-    //
+
     export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
     export type SetTempCompFoldersAction = {
         type: typeof SET_TEMP_COMP_FOLDERS
@@ -179,20 +155,28 @@ namespace StoreArticleTypes {
         type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
     }*/
 
+    // Set components templates array
+    export const SET_ARTICLE_DATA_PREPARED = 'SET_ARTICLE_DATA_PREPARED'
+    export type SetArticleDataPreparedAction = {
+        type: typeof SET_ARTICLE_DATA_PREPARED,
+        payload: boolean
+    }
+
 
     export type ArticleAction =
-        | ClearArticleAction
+        // | ClearArticleAction
         | SetArticleIdAction
         | SetArticleAction
         // | SetArticleMarksAction
         | SetTempCompAction
         | SetSiteTemplateAction
         | SetLinksAction
-        | SetHoveredElementAction
+        | SetFlashedElementAction
         | SetTempCompFoldersAction
     //     | CreateAndSetHistoryItemAction
     //     | MakeHistoryStepAction
     //     | SetHistoryStepWhenArticleWasSavedAction
+        | SetArticleDataPreparedAction
 }
 
 export default StoreArticleTypes

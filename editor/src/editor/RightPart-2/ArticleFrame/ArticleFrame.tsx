@@ -6,12 +6,13 @@ import {
     useSetArticleToIFrame,
 } from './ArticleFrame-func/ArticleFrame-func'
 import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
+import useCorrectArticleData from './ArticleFrame-func/useCorrectArticleData'
 import { useSetServiceStyleToIFrame } from './ArticleFrame-func/useSetServiceStyleToIFrame'
 // import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
-// import { useInstallFlashRects } from './flashElements/useInstallFlashRects'
-// import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
-// import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
-// import { useChangeFlashElementsPosition } from './flashElements/useChangeFlashElementsPosition'
+import { useInstallFlashRects } from './flashElements/useInstallFlashRects'
+import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
+import { usePassFlashRectCoordsToIFrame } from './flashElements/usePassFlashRectCoordsToIFrame'
+import { useChangeFlashRectanglesPosition } from './flashElements/useChangeFlashRectanglesPosition'
 // import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
 // import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
 import './ArticleFrame.scss'
@@ -41,14 +42,20 @@ export default function ArticleFrame() {
     // Hook sets <div> in IFrame to put an article in
     useSetRootDivToIFrame()
 
+    // Хук готовит данные статьи чтобы они соответствовали шаблонам компонента.
+    // Это требуется если в статью добавили компоненты, сохранили и закрыли статью.
+    // После отредактировали шаблоны компонентов, например, убрали или добавили элементы.
+    // Поэтому данные нужно исправить чтобы при сборке статьи не было проблем.
+    useCorrectArticleData()
+
     // Hook sets article JSX to IFrame
     useSetArticleToIFrame()
 
     // Set and control hovered and selected rectangles in IFrame
-    // useInstallFlashRects()
-    // useSetMouseHandlersForFlashRects()
-    // usePassFlashElemsCoordsToIFrame()
-    // useChangeFlashElementsPosition()
+    useInstallFlashRects()
+    useSetMouseHandlersForFlashRects()
+    usePassFlashRectCoordsToIFrame()
+    useChangeFlashRectanglesPosition()
 
     // If a user clicks on a element containing a text component, it will get the focus.
     // The hook sets a click handler removes unwanted focus.

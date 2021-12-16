@@ -1,9 +1,7 @@
 import {useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 
-/**
- * Хук создаёт и ставит служебные стили в IFrame
- */
+/** Хук создаёт и ставит служебные стили в IFrame */
 export function useSetServiceStyleToIFrame() {
     const { $links, history } = useGetArticleSelectors()
 
@@ -11,7 +9,7 @@ export function useSetServiceStyleToIFrame() {
     const [wasInstalled, setWasInstalled] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || !history.length || wasInstalled) return
+        if (!$links.$body || wasInstalled) return
 
         // Create and set <style> into <head>
         const styleElem = document.createElement('style')
@@ -19,12 +17,5 @@ export function useSetServiceStyleToIFrame() {
         styleElem.innerText = `text-component {display:block;}text-component:focus {outline:none;}`
 
         $links.$head.appendChild(styleElem)
-    }, [$links, history, wasInstalled])
-
-    useEffect(function () {
-        if (!history.length) {
-            // Set flag that files are not set
-            setWasInstalled(false)
-        }
-    }, [history])
+    }, [$links, wasInstalled])
 }

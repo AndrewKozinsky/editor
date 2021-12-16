@@ -19,10 +19,11 @@ import {
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {turnArticleDataToJSX} from './articleBuilder/articleBuilder'
-// import {
+import {
 //     createArticle,
-//     createComponent
-// } from './methods/create'
+//     createComponent,
+    createSimpleTextComponent
+} from './methods/create'
 // import {
 //     canComponentPutInElement,
 //     hasElemNestedElements,
@@ -63,6 +64,7 @@ class ArticleManager {
     // CREATE
     // createArticle = createArticle
     // createComponent = createComponent
+    createSimpleTextComponent = createSimpleTextComponent
 
     // INSERT
     // createCompAndSetInRootOfArticle = createCompAndSetInRootOfArticle

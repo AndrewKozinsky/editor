@@ -1,15 +1,15 @@
-// import { useEffect, useState } from 'react'
-// import useGetArticleSelectors from 'store/article/articleSelectors'
-// import { setSizeAndPosition } from './setSizeAndPosition'
+import { useEffect, useState } from 'react'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import { setSizeAndPosition } from './setSizeAndPosition'
 
 
-/** The hooks creates Observers to watch for a flashed rectangles attributes */
-/*export function useChangeFlashElementsPosition() {
+/** The hooks create Observers to watch for a flashed rectangles attributes */
+export function useChangeFlashRectanglesPosition() {
     const { $links, history } = useGetArticleSelectors()
     const [observersHaveBeenSet, setObserversHaveBeenSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$body || observersHaveBeenSet || !history.length) return
+        if (observersHaveBeenSet || !$links.$body || !history.length) return
 
         // Links of flashed rectangles
         const hoverRect = $links.$body.querySelector('[data-em-hover-rect]') as HTMLElement
@@ -34,7 +34,7 @@
         // Set the flag that Observers were set.
         setObserversHaveBeenSet(false)
     }, [$links, observersHaveBeenSet, history])
-}*/
+}
 
 /**
  * The function creates an Observer to watch attributes changing on the body
@@ -43,7 +43,7 @@
  * @param {String} type — type of a flashed rectangle: hover or select
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
-/*function observeReactCoordsProps(
+function observeReactCoordsProps(
     $body: HTMLBodyElement,
     type: 'hover' | 'select' | 'movehover' | 'moveselect',
     $flashRect: HTMLElement
@@ -63,4 +63,4 @@
     observer.observe($body, {
         attributes: true, attributeFilter: [type + 'rectcoords']
     })
-}*/
+}

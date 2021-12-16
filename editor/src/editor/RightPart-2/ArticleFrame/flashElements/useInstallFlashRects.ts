@@ -1,16 +1,16 @@
-// import { useEffect, useState } from 'react'
-// import useGetArticleSelectors from 'store/article/articleSelectors'
-// import {convertToSnakeCase, setUpperCaseForFirstLetter } from 'utils/StringUtils'
+import { useEffect, useState } from 'react'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import {convertToSnakeCase, setUpperCaseForFirstLetter } from 'utils/StringUtils'
 
-/** The hooks sets flash rectangles into IFrame */
-/*export function useInstallFlashRects() {
+/** The hook sets flash rectangles into IFrame */
+export function useInstallFlashRects() {
     const { $links, history } = useGetArticleSelectors()
 
     // Were flash elements installed?
     const [wereInstalled, setWereInstalled] = useState(false)
 
     useEffect(function () {
-        c
+        if (!$links.$body || wereInstalled) return
 
         // Set style for the flash rectangles
         setExtraStyle($links.$head)
@@ -31,13 +31,13 @@
             setWereInstalled(false)
         }
     }, [history])
-}*/
+}
 
 /**
  * The function set CSS to manage Empty text sign visibility
  * @param {HTMLHeadElement} $head — <head>
  */
-/*function setExtraStyle($head: HTMLHeadElement) {
+function setExtraStyle($head: HTMLHeadElement) {
     // Flash rectangles style
     const style = `.em-flash-rect {
         display: none;
@@ -73,14 +73,14 @@
     const styleElem = document.createElement('style')
     styleElem.innerText = style
     $head.appendChild(styleElem)
-}*/
+}
 
 /**
  * The function creates a flash rectangle element and appends it in the <body>
  * @param {HTMLBodyElement} $body — <body>
  * @param {String} type — flash rectangle type: hover or select
  */
-/*function createFlashElement($body: HTMLBodyElement, type: 'hover' | 'select' | 'moveHover' | 'moveSelect') {
+function createFlashElement($body: HTMLBodyElement, type: 'hover' | 'select' | 'moveHover' | 'moveSelect') {
     const flashRect = document.createElement('div')
 
     // Add attribute to find it in an another function
@@ -98,4 +98,4 @@
 
     // Append a flash rectangle to the <body>
     $body.appendChild(flashRect)
-}*/
+}
