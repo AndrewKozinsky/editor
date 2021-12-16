@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import {convertToSnakeCase, setUpperCaseForFirstLetter } from 'utils/StringUtils'
+import { convertToSnakeCase, setUpperCaseForFirstLetter } from 'utils/StringUtils'
 
 /** The hook sets flash rectangles into IFrame */
 export function useInstallFlashRects() {

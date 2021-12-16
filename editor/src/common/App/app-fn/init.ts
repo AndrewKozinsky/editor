@@ -7,7 +7,7 @@ import sitesActions from 'store/site/sitesActions'
 import { getFromLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
 import { useGetUserToken } from 'requests/user/getUserToken'
-import articleActions from '../../../store/article/articleActions'
+import articleActions from 'store/article/articleActions'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах

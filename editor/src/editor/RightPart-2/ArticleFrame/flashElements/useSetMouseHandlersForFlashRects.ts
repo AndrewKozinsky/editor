@@ -2,9 +2,7 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import StoreArticleTypes from '../../../../store/article/articleTypes'
-import { setUpperCaseForFirstLetter } from '../../../../utils/StringUtils'
-// import { getElementPadding } from 'utils/domUtils'
+import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
@@ -16,14 +14,13 @@ export function useSetMouseHandlersForFlashRects() {
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$document || mouseMoveHandlerSet || !history.length) return
-
+        if (!$links.$document || !$links.$window || mouseMoveHandlerSet || !history.length) return
         // Set handlers mousemove and mousedown
         $links.$document.addEventListener('mousemove', hoverHandler)
         $links.$document.addEventListener('mousedown', selectHandler)
 
         // Set flag that handlers were set
-        // setMouseMoveHandlerSet(true)
+        setMouseMoveHandlerSet(true)
     }, [$links, mouseMoveHandlerSet, history])
 
     useEffect(function () {
@@ -57,14 +54,13 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 
     if (ctrlPressed) {
         const $component = target.closest(`[data-em-d-gen-comp-id]`) as HTMLElement
-        // console.log($component)
+
         // Тип выделенного компонента: move
         let moveActionType: StoreArticleTypes.FlashedElemType =
             actionType === 'hover' ? 'moveHover' : 'moveSelect'
 
         if ($component) {
             const dataCompId = parseInt($component.dataset.emDGenCompId) || null
-
             setFlashRectangle(moveActionType, dataCompId, null)
         }
         else {

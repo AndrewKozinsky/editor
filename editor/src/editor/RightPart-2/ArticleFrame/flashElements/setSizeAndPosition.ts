@@ -1,22 +1,24 @@
+import StoreArticleTypes from 'store/article/articleTypes'
 import { CoordsObjType } from './usePassFlashRectCoordsToIFrame'
 
-type FlashRectType = 'hover' | 'select' | 'movehover' | 'moveselect'
+export type FlashRectType = 'hover' | 'select' | 'movehover' | 'moveselect'
+type ScrollObjType = { top: number, left: number }
 
 /**
  * The function sets visibility, size and position for flashed rectangle
- * @param {HTMLBodyElement} $body — <body>
+ * @param {Object} $links — объект ссылок на элементы iFrame.
  * @param {String} type — type of flashed rectangle: hover | select | movehover | moveselect
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {Element} $flashRect — a link to a flashed rectangle
  */
 export function setSizeAndPosition(
-    $body: HTMLBodyElement,
+    $links: StoreArticleTypes.LinksObj,
     type: FlashRectType,
     rectCoords: CoordsObjType,
     $flashRect: HTMLElement,
 ) {
     // 1. Get element by coordinates
-    const articleElement = getArticleElementByCoordinates($body, type, rectCoords)
+    const articleElement = getArticleElementByCoordinates($links.$body, type, rectCoords)
 
     // Hide flashed rectangle if an element didn't found
     if (!articleElement) {
@@ -24,8 +26,14 @@ export function setSizeAndPosition(
         return
     }
 
+    // Объект с данными по прокрутке окна iFrame-а.
+    const scrollObj: ScrollObjType  = {
+        top: $links.$window.scrollY,
+        left: $links.$window.scrollX,
+    }
+
     // 2. Get the article element rectangle coordinates
-    const coords = getCoordinates(articleElement, type, rectCoords)
+    const coords = getCoordinates(articleElement, type, rectCoords, scrollObj)
 
     // 3. Set coordinates to the rectangle coordinates
     positionFlashRect($flashRect, coords, rectCoords)
@@ -69,9 +77,13 @@ function hideRect(type: FlashRectType, $flashRect: HTMLElement) {
  * @param {HTMLElement} articleElement — flashed element in article
  * @param {String} type — тип подсветки: hover | select | movehover | moveselect
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
+ * @param {Number} scrollObj — данные по прокрутке iFrame-а.
  */
 function getCoordinates(
-    articleElement: HTMLElement, type: FlashRectType, rectCoords: CoordsObjType
+    articleElement: HTMLElement,
+    type: FlashRectType,
+    rectCoords: CoordsObjType,
+    scrollObj: ScrollObjType
 ): CoordsType {
     // Get a flashed element's coordinates object
     const coords = articleElement.getBoundingClientRect()
@@ -80,8 +92,8 @@ function getCoordinates(
     const offset = (type === 'hover' || type === 'movehover') ? 2 : 4
 
     return {
-        top: coords.top - offset + 'px',
-        left: coords.left - offset + 'px',
+        top: coords.top - offset + scrollObj.top + 'px',
+        left: coords.left - offset + scrollObj.left + 'px',
         width: coords.width + offset + 'px',
         height: coords.height + offset + 'px'
     }

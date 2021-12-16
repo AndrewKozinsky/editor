@@ -15,6 +15,7 @@ import { usePassFlashRectCoordsToIFrame } from './flashElements/usePassFlashRect
 import { useChangeFlashRectanglesPosition } from './flashElements/useChangeFlashRectanglesPosition'
 // import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
 // import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
+import { useSetResizeHandlersForFlashRects } from './flashElements/useSetResizeHandlersForFlashRects'
 import './ArticleFrame.scss'
 
 
@@ -56,6 +57,7 @@ export default function ArticleFrame() {
     useSetMouseHandlersForFlashRects()
     usePassFlashRectCoordsToIFrame()
     useChangeFlashRectanglesPosition()
+    useSetResizeHandlersForFlashRects()
 
     // If a user clicks on a element containing a text component, it will get the focus.
     // The hook sets a click handler removes unwanted focus.
