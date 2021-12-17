@@ -316,6 +316,14 @@ const articleActions = {
             payload: isPrepared
         }
     },
+
+    // Setting included files template in Store
+    setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
+        return {
+            type: StoreArticleTypes.SET_TEXT_COMP_ID,
+            payload: textCompId
+        }
+    },
 }
 
 export default articleActions

@@ -64,7 +64,10 @@ const stateExample: ArticleReducerType = {
             },
             moveSelectedComp: {
                 dataCompId: 1,
-            }
+            },
+            selectedTextComp: {
+                dataCompId: null,
+            },
         },
     ],
     historyCurrentIdx: 0,
@@ -114,17 +117,6 @@ function setArticleId(
     }
 }
 
-// Sets article id and article site id
-/*function setArticleMarks(
-    state: ArticleReducerType, action: StoreArticleTypes.SetArticleMarksAction
-): ArticleReducerType {
-    return {
-        ...state,
-        articleId: action.payload.articleId,
-        articleSiteId: action.payload.siteId,
-    }
-}*/
-
 // Installing of components array
 function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
@@ -167,6 +159,9 @@ function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArti
                     dataCompId: null,
                 },
                 moveSelectedComp: {
+                    dataCompId: null,
+                },
+                selectedTextComp: {
                     dataCompId: null,
                 },
             }
@@ -328,6 +323,34 @@ function setArticleDataPrepared(state: ArticleReducerType, action: StoreArticleT
     }
 }
 
+// Функция устанавливает id выделенного текстового компонента
+function setTextCompId(state: ArticleReducerType, action: StoreArticleTypes.SetTextCompIdAction): ArticleReducerType {
+    // Get history array and current article idx
+    const { history, historyCurrentIdx } = state
+    // Current article
+    let article = history[historyCurrentIdx]
+
+    // Hovered/selected element coordinates
+    const selectedTextComp = {
+        ...article.selectedTextComp,
+        dataCompId: action.payload,
+    }
+
+    article = {
+        ...article,
+        selectedTextComp
+    }
+
+    // Set the new article to history array
+    const updatedHistoryArr = [...history]
+    updatedHistoryArr[historyCurrentIdx] = article
+
+    return {
+        ...state,
+        history: updatedHistoryArr
+    }
+}
+
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -341,8 +364,6 @@ export default function articleReducer(
             return setArticleId(state, action)
         case StoreArticleTypes.SET_ARTICLE:
             return setArticle(state, action)
-        // case StoreArticleTypes.SET_ARTICLE_MARKS:
-        //     return setArticleMarks(state, action)
         case StoreArticleTypes.SET_TEMP_COMPS:
             return setTempComps(state, action)
         case StoreArticleTypes.SET_SITE_TEMPLATE:
@@ -361,6 +382,8 @@ export default function articleReducer(
         //     return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.SET_ARTICLE_DATA_PREPARED:
             return setArticleDataPrepared(state, action)
+        case StoreArticleTypes.SET_TEXT_COMP_ID:
+            return setTextCompId(state, action)
         default:
             // @ts-ignore
             const x: never = null

@@ -55,7 +55,7 @@ class ArticleManager {
     // getCompParentArray = getCompParentArray
 
     // CHECK
-    // The method returns boolean can passed component put in element
+    // The method returns boolean can pass component put in element
     // canComponentPutInElement = canComponentPutInElement
     // hasElemNestedElements = hasElemNestedElements
     // canMakeHistoryStep = canMakeHistoryStep

@@ -2,7 +2,6 @@ import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import DragFilesTreeType from '../../libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-// import FilesTreeType from 'libs/DragFilesTree/types'
 // import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
 
 namespace StoreArticleTypes {
@@ -17,6 +16,8 @@ namespace StoreArticleTypes {
         selectedElem: FlashedElem
         moveHoveredComp: MoveFlashedElem
         moveSelectedComp: MoveFlashedElem
+        // Current text component
+        selectedTextComp: SelectedTextComp
     }
 
     export type FlashedElem = {
@@ -24,6 +25,10 @@ namespace StoreArticleTypes {
         dataElemId: FlashedElemId
     }
     export type MoveFlashedElem = {
+        dataCompId: FlashedElemId
+    }
+
+    export type SelectedTextComp = {
         dataCompId: FlashedElemId
     }
 
@@ -87,16 +92,6 @@ namespace StoreArticleTypes {
         type: typeof SET_TEMP_COMPS
         payload: TempCompTypes.TempComps
     }
-
-    // Set components templates array
-    // export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
-    /*export type SetArticleMarksAction = {
-        type: typeof SET_ARTICLE_MARKS
-        payload: {
-            siteId: number,
-            articleId: number
-        }
-    }*/
 
     // Set article object
     export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
@@ -162,12 +157,18 @@ namespace StoreArticleTypes {
         payload: boolean
     }
 
+    // Установка id выделенного текстового компонента
+    export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
+    export type SetTextCompIdAction = {
+        type: typeof SET_TEXT_COMP_ID,
+        payload: number | null
+    }
+
 
     export type ArticleAction =
         // | ClearArticleAction
         | SetArticleIdAction
         | SetArticleAction
-        // | SetArticleMarksAction
         | SetTempCompAction
         | SetSiteTemplateAction
         | SetLinksAction
@@ -177,6 +178,7 @@ namespace StoreArticleTypes {
     //     | MakeHistoryStepAction
     //     | SetHistoryStepWhenArticleWasSavedAction
         | SetArticleDataPreparedAction
+        | SetTextCompIdAction
 }
 
 export default StoreArticleTypes

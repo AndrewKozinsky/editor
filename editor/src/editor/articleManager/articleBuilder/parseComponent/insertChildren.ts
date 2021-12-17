@@ -28,7 +28,7 @@ export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.
         let editableTextTag = {
             tag: 'text-component',
             attrs: {
-                'data-em-d-text-comp-id': consistObj.dataComp.dCompId.toString(),
+                'data-em-d-text-comp-id': elemChildren.dCompId.toString(),
                 contentEditable: '',
                 suppressContentEditableWarning: ''
             },
