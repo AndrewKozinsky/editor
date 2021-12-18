@@ -9,7 +9,7 @@
 // } from './methods/misc'
 import {
 //     getCurrentHistoryItem,
-//     getComponent,
+    getComponent,
 //     getCompElem,
 //     getTempCompByDataCompId,
 //     getTempElemByDataCompIdAndDataElemId,
@@ -18,7 +18,7 @@ import {
 //     getCompParentArray
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
-import {turnArticleDataToJSX} from './articleBuilder/articleBuilder'
+import { turnArticleDataToJSX } from './articleBuilder/articleBuilder'
 import {
 //     createArticle,
 //     createComponent,
@@ -44,7 +44,7 @@ class ArticleManager {
     // Finds element template in templates array
     // getTemplateElement = getTemplateElement
     // Finds template in templates array
-    // getComponent = getComponent
+    getComponent = getComponent
     // Finds element template in templates array
     // getCompElem = getCompElem
     // Finds component template by data component id
@@ -72,7 +72,7 @@ class ArticleManager {
     // createCompAndSetItNearComp = createCompAndSetItNearComp
 
     // HOOKS (object with hooks)
-    // hooks = hooks
+    hooks = hooks
 
     // MISC
     // saveArticle = saveArticle

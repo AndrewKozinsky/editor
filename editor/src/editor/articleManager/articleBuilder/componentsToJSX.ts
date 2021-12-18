@@ -56,7 +56,7 @@ function fixAttribs(htmlObj: HTMLObjArrType.Tag, key: number, tagName: string) {
     // Если атрибутов нет, то вернуть объект с атрибутом key.
     if (!objAttribs) return { key: key }
 
-    // Переберу объект и заменю названия свойств.
+    // Переберу объект, и заменю названия свойств.
     for(let propName in objAttribs) {
 
         // Все классы нужно писать как className.

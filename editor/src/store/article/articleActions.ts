@@ -324,6 +324,22 @@ const articleActions = {
             payload: textCompId
         }
     },
+
+    // Setting included files template in Store
+    setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
+        return {
+            type: StoreArticleTypes.SET_PRESSED_KEY,
+            payload: pressedKeyData
+        }
+    },
+
+    // Setting included files template in Store
+    updateCurrentArticle(newArticle: StoreArticleTypes.HistoryItem): StoreArticleTypes.UpdateCurrentArticleAction {
+        return {
+            type: StoreArticleTypes.UPDATE_CURRENT_ARTICLE,
+            payload: newArticle
+        }
+    },
 }
 
 export default articleActions

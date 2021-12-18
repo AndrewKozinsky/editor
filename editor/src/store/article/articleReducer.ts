@@ -1,4 +1,5 @@
 // import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+import { act } from 'react-dom/test-utils'
 import StoreArticleTypes from './articleTypes'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
@@ -18,6 +19,8 @@ export type ArticleReducerType = {
     tempCompsFolders: null | DragFilesTreeType.Items
     // Components templates array
     tempComps: null | TempCompTypes.TempComps
+    // Данные о последней нажатой клавише
+    pressedKey: StoreArticleTypes.PressedKey
     $links: StoreArticleTypes.LinksObj
     // History steps array
     history: StoreArticleTypes.HistoryItems,
@@ -42,6 +45,12 @@ const stateExample: ArticleReducerType = {
             html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>'
         }
     }],
+    pressedKey: {
+        code: null,
+        altKey: false,
+        ctrlKey: false,
+        shiftKey: false
+    },
     $links: {
         $window:   window,
         $document: window.document,
@@ -83,6 +92,12 @@ const initialState: ArticleReducerType = {
     siteTemplate: null,
     tempCompsFolders: null,
     tempComps: null,
+    pressedKey: {
+        code: null,
+        altKey: false,
+        ctrlKey: false,
+        shiftKey: false
+    },
     $links: {
         $window: null,
         $document: null,
@@ -351,6 +366,28 @@ function setTextCompId(state: ArticleReducerType, action: StoreArticleTypes.SetT
     }
 }
 
+// Функция устанавливает id выделенного текстового компонента
+function setPressedKey(state: ArticleReducerType, action: StoreArticleTypes.SetPressedKeyAction): ArticleReducerType {
+    return {
+        ...state,
+        pressedKey: action.payload
+    }
+}
+
+// Функция обновляет текущую статью
+function updateCurrentArticle(state: ArticleReducerType, action: StoreArticleTypes.UpdateCurrentArticleAction): ArticleReducerType {
+    const { history, historyCurrentIdx } = state
+
+    // Set the new article to history array
+    const updatedHistoryArr = [...history]
+    updatedHistoryArr[historyCurrentIdx] = action.payload
+
+    return {
+        ...state,
+        history: updatedHistoryArr
+    }
+}
+
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -382,8 +419,12 @@ export default function articleReducer(
         //     return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.SET_ARTICLE_DATA_PREPARED:
             return setArticleDataPrepared(state, action)
+        case StoreArticleTypes.SET_PRESSED_KEY:
+            return setPressedKey(state, action)
         case StoreArticleTypes.SET_TEXT_COMP_ID:
             return setTextCompId(state, action)
+        case StoreArticleTypes.UPDATE_CURRENT_ARTICLE:
+            return updateCurrentArticle(state, action)
         default:
             // @ts-ignore
             const x: never = null

@@ -1,6 +1,6 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../articleManager'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 // import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
@@ -59,33 +59,41 @@ export function getTemplate(
 /**
  * The function finds component data in data components array
  * @param {Array} dataCompArr — array of data components
- * @param {String} dataCompId — a desired component id
+ * @param {Number} dataCompId — a desired data component id
  */
-/*export function getComponent(
+export function getComponent(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
-    dataCompId: ArticleTypes.DataCompId
+    dataCompId: ArticleTypes.Id
 ): null | ArticleTypes.ArticleArrayItem {
 
-    return dataCompArr.find(dataComp => {
-        if (dataComp.dataCompId === dataCompId) {
+    for (let i = 0; i < dataCompArr.length; i++) {
+        const dataComp = dataCompArr[i]
+
+        if (dataComp.dCompId === dataCompId) {
             return dataComp
         }
 
-        if (dataComp.type === 'component' && dataComp.elems) {
-
-            for (let i = 0; i < dataComp.elems.length; i++) {
-                const elem = dataComp.elems[i]
-
-                if (!elem.children) continue
-
-                const res = this.getComponent(elem.children, dataCompId)
-
-                if (res) return res
-            }
+        if (dataComp.dCompType !== 'component' || !dataComp.dElems) {
+            continue
         }
-    })
-}*/
+
+        for (let k = 0; k < dataComp.dElems.length; k++) {
+            const elem = dataComp.dElems[k]
+
+            if (!Array.isArray(elem.dCompElemChildren)) {
+                if (elem.dCompElemChildren.dCompId === dataCompId) {
+                    return elem.dCompElemChildren
+                }
+
+                continue
+            }
+
+            const foundedComp = this.getComponent(elem.dCompElemChildren, dataCompId)
+            if (foundedComp) return foundedComp
+        }
+    }
+}
 
 /**
  * The function finds element data in data components array

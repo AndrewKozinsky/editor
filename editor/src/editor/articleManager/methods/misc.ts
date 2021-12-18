@@ -31,7 +31,7 @@
     historyCurrentIdx: number,
     articleUuId: null | string
 ) {
-    if (!articleUuId) return
+    if (!articleId) return
 
     // Set current history step to historyStepWhenWasSave to know what step the article was saved
     store.dispatch( actions.article.setHistoryStepWhenArticleWasSaved() )

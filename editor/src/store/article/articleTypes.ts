@@ -57,6 +57,15 @@ namespace StoreArticleTypes {
     export type HeadLink = null | HTMLHeadElement
     export type BodyLink = null | HTMLBodyElement
 
+    export type PressedKeyType = null | string
+    export type PressedKey = {
+        code: PressedKeyType, // Тип клавиши. null обозначает необрабатываемую клавишу, Text символьная, остальные значения берутся из e.code
+        value?: string // Если code Letter, то сюда заносится значение символа
+        altKey: boolean
+        ctrlKey: boolean
+        shiftKey: boolean
+    }
+
 
     // =============================================
 
@@ -157,11 +166,25 @@ namespace StoreArticleTypes {
         payload: boolean
     }
 
+    // Установка данных последней введённого символа
+    export const SET_PRESSED_KEY = 'SET_PRESSED_KEY'
+    export type SetPressedKeyAction = {
+        type: typeof SET_PRESSED_KEY,
+        payload: PressedKey
+    }
+
     // Установка id выделенного текстового компонента
     export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
     export type SetTextCompIdAction = {
         type: typeof SET_TEXT_COMP_ID,
         payload: number | null
+    }
+
+    // Установка id выделенного текстового компонента
+    export const UPDATE_CURRENT_ARTICLE = 'UPDATE_CURRENT_ARTICLE'
+    export type UpdateCurrentArticleAction = {
+        type: typeof UPDATE_CURRENT_ARTICLE,
+        payload: HistoryItem
     }
 
 
@@ -178,7 +201,9 @@ namespace StoreArticleTypes {
     //     | MakeHistoryStepAction
     //     | SetHistoryStepWhenArticleWasSavedAction
         | SetArticleDataPreparedAction
+        | SetPressedKeyAction
         | SetTextCompIdAction
+        | UpdateCurrentArticleAction
 }
 
 export default StoreArticleTypes

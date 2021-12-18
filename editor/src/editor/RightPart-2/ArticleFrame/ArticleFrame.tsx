@@ -16,6 +16,8 @@ import { useChangeFlashRectanglesPosition } from './flashElements/useChangeFlash
 // import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
 // import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
 import { useSetResizeHandlersForFlashRects } from './flashElements/useSetResizeHandlersForFlashRects'
+import useSetKeyDownHandlerForText from './textComponents/useSetKeyDownHandlerForText'
+import useChangeActiveTextComponent from './textComponents/useChangeActiveTextComponent'
 import './ArticleFrame.scss'
 
 
@@ -52,14 +54,18 @@ export default function ArticleFrame() {
     // Hook sets article JSX to IFrame
     useSetArticleToIFrame()
 
-    // Set and control hovered and selected rectangles in IFrame
+    // Подсвечивающие прямоугольники
     useInstallFlashRects()
     useSetMouseHandlersForFlashRects()
     usePassFlashRectCoordsToIFrame()
     useChangeFlashRectanglesPosition()
     useSetResizeHandlersForFlashRects()
 
-    // If a user clicks on a element containing a text component, it will get the focus.
+    // Работа с текстом
+    useSetKeyDownHandlerForText()
+    useChangeActiveTextComponent()
+
+    // If a user clicks on an element containing a text component, it will get the focus.
     // The hook sets a click handler removes unwanted focus.
     // useRemoveUnwantedFocus()
 

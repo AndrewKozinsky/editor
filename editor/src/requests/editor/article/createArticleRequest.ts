@@ -17,6 +17,7 @@ export default async function createArticleRequest(
         dMeta: { dMaxCompId: 0 },
         dComps: []
     }
+    // ТУТ ЛУЧШЕ ВОСПОЛЬЗОВАТЬСЯ МЕТОДОМ createArticle ИЗ ArticleManager
 
     const options = {
         method: 'POST',
