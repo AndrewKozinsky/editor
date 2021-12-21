@@ -14,19 +14,18 @@ namespace TempCompFilesTreeType {
     // id папки или файла
     export type Id = number
 
-    // Массив uuid
+    // Массив id
     export type IdArr = FilesTreeType.IdArr
 
     // Тип элемента: файл или папка
-    export type ItemType = FilesTreeType.ItemType
-
+    // export type ItemType = FilesTreeType.ItemType
 
     export type AfterClickBeforeBtn = (ItemId: Id) => void
     export type AfterClickAfterBtn = (ItemId: Id) => void
     export type AfterClickInsideBtn = (ItemId: Id) => void
 
     // Функция запускаемая после разворачивания/сворачивания папки
-    export type AfterCollapseFolder = (items: Items, openUuIdArr: IdArr) => void
+    export type AfterCollapseFolder = (items: Items, openIdArr: IdArr) => void
 
     export type After = {
         afterCollapseFolder: AfterCollapseFolder

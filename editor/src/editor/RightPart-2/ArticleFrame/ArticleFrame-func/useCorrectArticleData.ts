@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
@@ -11,15 +11,24 @@ export default function useCorrectArticleData() {
     const dispatch = useDispatch()
     const { tempComps, history, historyCurrentIdx } = useGetArticleSelectors()
 
+    const [articleWasCorrected, setArticleWasCorrected] = useState(false)
+
     useEffect(function () {
-        if (!history.length || !tempComps) return
+        if (!history.length || !tempComps || articleWasCorrected) return
+
         const article = history[historyCurrentIdx].article
 
         // Пройти через компоненты в данных и изменить их чтобы они соответствовали шаблонам
+        // ВОЗМОЖНО ЭТО СТОИТ ВЫНЕСТИ В articleManager
         goThroughDataComps(article, article.dComps, tempComps)
 
         // Поставить в Хранилище, что данные подготовлены и можно их соединять с шаблонами для отрисовки статьи
         dispatch( articleActions.setArticleDataPrepared(true) )
+
+        // Пусть исправление данных статьи срабатывает только при отрытии.
+        // Позже можно изменить это поведение чтобы исправление срабатывало всякий раз как изменяют
+        // шаблоны компонентов открытой статьи
+        setArticleWasCorrected(true)
     }, [tempComps, history, historyCurrentIdx])
 }
 
@@ -58,8 +67,6 @@ function goThroughDataComps(article: ArticleTypes.Article, dComps: ArticleTypes.
                 }
             }
         }
-
-
     }
 }
 
@@ -83,6 +90,7 @@ function makeMatchBetweenTCompsAndDComps(
 
         if (!tElem) {
             dElems.splice(i, 1)
+            --i
             continue
         }
 
@@ -187,9 +195,10 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
  * @param {Object} tElem — шаблон элемента
  */
 function setEmptyTextComponent(article: ArticleTypes.Article, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
+
     // Поставить пустой текстовый компонент в массив детей если в шаблоне указано свойство elemTextInside, а текстового компонента нет
     if (tElem.elemTextInside) {
-        if (!dElem.dCompElemChildren || Array.isArray(dElem.dCompElemChildren)) {
+        if ([undefined, null].indexOf(dElem.dCompElemChildren) > -1 || Array.isArray(dElem.dCompElemChildren)) {
             const newEmptyTextComp = articleManager.createSimpleTextComponent(article.dMeta.dMaxCompId)
 
             dElem.dCompElemChildren = newEmptyTextComp

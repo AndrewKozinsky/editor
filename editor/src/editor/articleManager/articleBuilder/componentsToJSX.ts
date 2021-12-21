@@ -33,7 +33,7 @@ function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
     let tagName = htmlObj.tag
 
     // Подготовлю атрибуты
-    let attribs = fixAttribs(htmlObj, key, tagName)
+    let attribs = fixAttribs(htmlObj, tagName, key)
 
     // Подготовлю детей
     let children = (htmlObj.children)
@@ -47,10 +47,11 @@ function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
 /**
  * Функция подготовливает атрибуты текущего элемента
  * @param {Object} htmlObj — object with html-structure
+ * @param {String} tagName — имя тега
  * @param {Number} key — key
  * @returns {*}
  */
-function fixAttribs(htmlObj: HTMLObjArrType.Tag, key: number, tagName: string) {
+function fixAttribs(htmlObj: HTMLObjArrType.Tag, tagName: string, key: number) {
     const objAttribs = htmlObj.attrs
 
     // Если атрибутов нет, то вернуть объект с атрибутом key.

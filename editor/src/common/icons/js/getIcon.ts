@@ -32,9 +32,9 @@ import FilesTreeFolder from '../icons/filesTreeFolder'
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
 import BtnSignEdit from '../icons/btnSignEdit'
-// import FilesTreeTorus from '../icons/filesTreeTorus'
-// import FilesTreeUp from '../icons/filesTreeUp'
-// import FilesTreeDown from '../icons/filesTreeDown'
+import FilesTreeTorus from '../icons/filesTreeTorus'
+import FilesTreeUp from '../icons/filesTreeUp'
+import FilesTreeDown from '../icons/filesTreeDown'
 // import ArticleMenu from '../icons/articleMenu'
 // import BtnSignUndo from '../icons/btnSignUndo'
 // import BtnSignRedo from '../icons/btnSignRedo'
@@ -101,9 +101,9 @@ export function getIcon(type: string): ReactNode {
         filesTreeFolder: FilesTreeFolder,
         filesTreeFolderPlus: FilesTreeFolderPlus,
         filesTreePlus: FilesTreePlus,
-        // filesTreeTorus: FilesTreeTorus,
-        // filesTreeUp: FilesTreeUp,
-        // filesTreeDown: FilesTreeDown,
+        filesTreeTorus: FilesTreeTorus,
+        filesTreeUp: FilesTreeUp,
+        filesTreeDown: FilesTreeDown,
 
         // Значёк указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: FilesTreePlaceMark,

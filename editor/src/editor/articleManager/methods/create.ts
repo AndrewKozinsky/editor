@@ -1,16 +1,23 @@
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import articleManager from './articleManager'
+import articleManager from '../articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 
-/*export function createArticle(): ArticleTypes.Article {
+/**
+ * Функция создаёт данные статьи. Если ничего не передать, то будут данные для новой статьи.
+ * @param {Number} dMaxCompId — максимальный id компонента
+ * @param {Array} dComps — массив компонентов статьи
+ */
+export function createArticle(
+    dMaxCompId: number = 0, dComps: ArticleTypes.Components = []
+): ArticleTypes.Article {
     return {
         dMeta: {
-            dMaxCompId: 0
+            dMaxCompId
         },
-        dComps: []
+        dComps
     }
-}*/
+}
 
 /**
  * The function creates a new component data with passed tempCompId
@@ -18,7 +25,7 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
-/*export function createComponent(
+export function createComponent(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
@@ -29,14 +36,14 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
     let maxCompId = article.dMeta.dMaxCompId
 
     const compData: ArticleTypes.Component = {
-        type: 'component',
-        dataCompId: ++maxCompId,
-        tempCompId: tempComp.id
+        dCompType: 'component',
+        dCompId: ++maxCompId,
+        tCompId: tempComp.id
     }
 
     const elementsFnResult = createCompElements(tempComp, maxCompId)
     if (elementsFnResult.compElems) {
-        compData.elems = elementsFnResult.compElems
+        compData.dElems = elementsFnResult.compElems
         maxCompId = elementsFnResult.maxCompId
     }
 
@@ -44,17 +51,22 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
         compData,
         maxCompId
     }
-}*/
+}
+
+type CreateCompElementsReturnType = {
+    compElems: null | ArticleTypes.ComponentElems,
+    maxCompId: number
+}
 
 /**
  * The function creates elements in a new component
  * @param {Object} tempComp — a component template
  * @param {Number} maxCompId — a maximum component id in an article
  */
-/*function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number) {
+function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number): CreateCompElementsReturnType {
     let newMaxCompId = maxCompId
 
-    if (!tempComp.code.elems?.length) {
+    if (!tempComp.content.elems?.length) {
         return {
             compElems: null,
             maxCompId: newMaxCompId
@@ -63,35 +75,33 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 
     // Turn html-string to HTMLElement
     const parser = new DOMParser()
-    const doc = parser.parseFromString(tempComp.code.html, 'text/html')
+    const doc = parser.parseFromString(tempComp.content.html, 'text/html')
     const $component = doc.body.childNodes[0] as HTMLElement
 
-    const newElemsArr = tempComp.code.elems.map((tempElem, i) => {
-
-        let $elem: HTMLElement = $component.closest(`[data-em-id=${tempElem.tempElemId}]`)
-        if (!$elem) $elem = $component.querySelector(`[data-em-id=${tempElem.tempElemId}]`)
-
-        const elementGroupName = $elem.dataset.emGroup
+    const newElemsArr = tempComp.content.elems.map((tElem, i) => {
 
         const newElemData: ArticleTypes.ComponentElem = {
-            dataElemId: i + 1,
-            tempElemId: tempElem.tempElemId,
-            elemGroup: elementGroupName
+            dCompElemId: i + 1,
+            tCompElemId: tElem.elemId,
+            dCompElemGroup: getElemGroupNameFromHTML($component, tElem.elemId)
         }
 
-        const elemAttrs = createElemAttribs(tempElem)
-        if (elemAttrs) newElemData.attribs
+        const elemAttrs = createElemAttribs(tElem)
+        if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
 
-        if (tempElem.hidden) {
+        // Пока не знаю нужно ли это делать
+        /*if (tElem.hidden) {
             newElemData.layer = {
                 hidden: true
             }
-        }
+        }*/
 
-        if (tempElem.text) {
-            newMaxCompId++
-            const res = createNewTextComponent(tempComp, tempElem, newMaxCompId)
-            newElemData.children = [ res ]
+        if (tElem.elemTextInside) {
+            ++newMaxCompId
+            newElemData.dCompElemChildren = createSimpleTextComponent(newMaxCompId)
+        }
+        else {
+            newElemData.dCompElemChildren = []
         }
 
         return newElemData
@@ -101,73 +111,77 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
         compElems: newElemsArr,
         maxCompId: newMaxCompId
     }
-}*/
+}
 
 /**
- * The function creates attributes object in a element
- * @param {Object} tempElem — a template element object
+ * Функция получает html-компонент, находит элемент с переданным идентификатором и возвращает имя группы,
+ * к которой принадлежит элемент
+ * @param {HTMLElement} $component — html-компонент
+ * @param {String} tElemId — id шаблона элемента
  */
-/*function createElemAttribs(tempElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
-    if (!tempElem.attribs?.keys.length) return null
+function getElemGroupNameFromHTML($component: HTMLElement, tElemId: string) {
+    const $wrapper = document.createElement('div')
+    $wrapper.append($component)
 
-    const attribsArr: ArticleTypes.Attribs = []
+    let $elem: HTMLElement = $wrapper.querySelector(`[data-em-id=${tElemId}]`)
 
-    for (let attribTemp of tempElem?.attribs) {
-        let attribData: ArticleTypes.Attrib
+    return $elem
+        ? $elem.dataset.emGroup
+        : null
+}
 
-        if (attribTemp.view === 'text') {
-            attribData = {id: attribTemp.id, value: ''}
-        } else {
-            attribData = {id: attribTemp.id, value: []}
+/**
+ * Функция формирует массив атрибутов элемента с пустыми значениями.
+ * Если какие-то значения атрибутов помечены отмеченными по умолчанию, то они ставятся в этот массив
+ * чтобы при создании нужные значения уже были проставлены
+ * @param {Object} tElem — a template element object
+ */
+function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
+    if (!tElem.elemAttrs) return null
+
+    const dElemAttrs: ArticleTypes.Attribs = []
+
+    // Перебор атрибутов элемента
+    for (let attribTemp of tElem?.elemAttrs) {
+
+        let dElemAttr: ArticleTypes.Attrib
+
+        // В каком виде будет заноситься значение атрибута?
+        // Если предполагается ввод через текстовое поле, то значение атрибута будет текстовым
+        // В любых других случаях будет массив с идентификаторами готовых значений атрибута
+        let dElemAttrValue: string |  ArticleTypes.ComponentElemAttribValue =
+            attribTemp.elemAttrView === 'text' ? '' : []
+
+        // Объект с данными id атрибута и его незаполненного значения.
+        // Значения по умолчанию будут записываться ниже.
+        dElemAttr = {
+            dCompElemAttrId: attribTemp.elemAttrId,
+            dCompElemAttrValue: dElemAttrValue
         }
 
-        if (attribTemp.values?.length) {
-            for (let tempValue of attribTemp.values) {
-                if (tempValue.checked) {
-                    if (attribTemp.view === 'text') {
-                        attribData.value = attribData.value + ' ' + tempValue.value
-                    }
-                    else {
-                        if (Array.isArray(attribData.value)) {
-                            attribData.value.push(tempValue.id)
-                        }
-                    }
-                }
+        if (attribTemp.elemAttrValues?.length === 0) return
+
+        // Перебор значений в шаблоне элемента
+        for (let i = 0; i < attribTemp.elemAttrValues.length; i++) {
+            // Ничего не делать если перебираемое значение не отмечено как значение по умолчанию
+            const tAttrValue = attribTemp.elemAttrValues[i]
+            if (!tAttrValue.elemAttrValueChecked) continue
+
+            // Поставить значение по умолчанию в зависимости от формата хранения значений
+            if (attribTemp.elemAttrView === 'text') {
+                dElemAttr.dCompElemAttrValue = tAttrValue.elemAttrValueValue
+            }
+            else if (Array.isArray(dElemAttr.dCompElemAttrValue)) {
+                dElemAttr.dCompElemAttrValue.push(tAttrValue.elemAttrValueId)
             }
         }
 
-        if (attribTemp.view === 'text') {
-            if (attribData.value) attribsArr.push(attribData)
-        }
-        else {
-            if (Array.isArray(attribData.value)) {
-                if (attribData.value.length) attribsArr.push(attribData)
-            }
-        }
+        // Поставить в массив атрибутов элемента сформированный объект атрибута элемента
+        dElemAttrs.push(dElemAttr)
     }
 
-    return attribsArr
-}*/
-
-/**
- * The function creates an empty text component
- * @param {Object} tempComp — a component template
- * @param {Object} tempElem — a template element object
- * @param {Number} dataCompId — component id
- */
-/*function createNewTextComponent(
-    tempComp: TempCompTypes.TempComp, tempElem: TempCompTypes.Elem, dataCompId: number
-): ArticleTypes.TextComponent {
-    return {
-        type: 'textComponent',
-        dataCompId: dataCompId,
-        tempCompId: tempComp.id,
-        tempElemId: tempElem.tempElemId,
-        children: [
-            {type: 'text', text: ''}
-        ]
-    }
-}*/
+    return dElemAttrs
+}
 
 /**
  * Функция создаёт объект пустого текстового компонента

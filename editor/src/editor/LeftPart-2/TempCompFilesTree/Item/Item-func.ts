@@ -1,40 +1,9 @@
 import { SyntheticEvent, useCallback } from 'react'
-import { makeCN } from 'utils/StringUtils'
 import {
     getOpenedFoldersId,
     toggleFolder
 } from '../StoreManage/manageState'
 import TempCompFilesTreeType from '../types'
-
-
-
-/**
- * Функция возвращает классы кнопки сворачивания/разворачивания папки.
- * Если передан файл, то возвращает классы для невидимого элемента.
- * @param {String} CN — класс компонента
- * @param {Object} itemData — данные папки или файла
- */
-export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
-
-    if (itemData.type === 'file') {
-        return `${CN}__btn-triangle--for-file`
-    }
-    else if (itemData.type === 'folder') {
-        const classes  = [`${CN}__btn`, `${CN}__btn-triangle`]
-
-        // Если папка открыта
-        if (itemData.open) {
-            classes.push(`${CN}__btn-triangle--open`)
-        }
-
-        // Если в папке нет данных, то сделать кнопку невидимой
-        if (!itemData.content || !itemData.content.length) {
-            classes.push(`${CN}__btn-triangle--invisible`)
-        }
-
-        return makeCN(classes)
-    }
-}
 
 
 /**
@@ -68,7 +37,7 @@ export function useGetToggleFolder(
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetOnClickHandler(
+export function useGetOnClickHandler(
     items: TempCompFilesTreeType.Items,
     itemData: TempCompFilesTreeType.Item,
     after: TempCompFilesTreeType.After
@@ -84,4 +53,4 @@ export function useGetToggleFolder(
             after.afterCollapseFolder(newItems, openedFoldersUuid)
         }
     }, [itemData, after])
-}*/
+}

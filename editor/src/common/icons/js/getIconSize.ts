@@ -120,8 +120,8 @@ export function getIconSize(type: string) {
         case 'filesTreeFolderPlus':
         case 'filesTreePlus':
         case 'filesTreeTrash':
-        // case 'filesTreeTorus':
-        // case 'filesTreeUp':
+        case 'filesTreeTorus':
+        case 'filesTreeUp':
         case 'filesTreeDown':
             return {
                 width: '15px',
@@ -130,9 +130,9 @@ export function getIconSize(type: string) {
             }
         case 'filesTreePlaceMark':
             return {
-                width: "8px",
-                height: "5px",
-                viewBox: "0 0 8 5"
+                width: '8px',
+                height: '5px',
+                viewBox: '0 0 8 5'
             }
         /*case 'articleMenu':
             return {

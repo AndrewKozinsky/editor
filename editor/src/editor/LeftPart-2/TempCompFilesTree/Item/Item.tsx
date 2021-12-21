@@ -1,18 +1,14 @@
 import React, {ReactNode} from 'react'
+import makeClasses from './Item-classes'
 import SvgIcon from 'common/icons/SvgIcon'
 import {
-    getTriangleBtnClasses,
     useGetToggleFolder,
-    // useGetOnClickHandler
+    useGetOnClickHandler
 } from './Item-func'
 import { componentsPanelMessages } from 'messages/componentsPanelMessages'
 import TempCompFilesTreeType from '../types'
-import { makeCN } from 'utils/StringUtils'
 import useGetMessages from 'messages/fn/useGetMessages'
-import './Item.scss'
 
-
-const CN = 'temp-comp-ft-item'
 
 type ItemPropType = {
     // Массив всех папок и файлов.
@@ -34,23 +30,23 @@ export default function Item(props: ItemPropType) {
         after
     } = props
 
+    const CN = makeClasses()
+
     // Хук возвращает обработчик щелчка по элементу
-    // const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
+    const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
 
     return (
         <div
             style={{paddingLeft: offset * 20}}
-            className={CN}
+            className={CN.root}
             // onClick={onItemClickHandler}
         >
-            <div className={`${CN}__inner`}>
+            <div className={CN.inner}>
                 <Triangle items={items} itemData={itemData} after={after} />
                 <Icon itemData={itemData} />
                 <Circles itemData={itemData} />
                 <p className={`${CN}__item-name`}>{itemData.name}</p>
-                <div className={`${CN}__right-part`}>
-                    <RightButtons itemData={itemData} after={after} />
-                </div>
+                <RightButtons itemData={itemData} after={after} />
             </div>
         </div>
     )
@@ -73,19 +69,18 @@ function Triangle(props: TrianglePropType) {
         after
     } = props
 
+    const CN = makeClasses(itemData)
+
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
     const toggleFolder = useGetToggleFolder(itemData.id, items, after)
 
-    // Классы кнопки сворачивания папки
-    const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
-
     if (itemData.type === 'file') {
-        return <div className={triangleBtnClasses} />
+        return <div className={CN.triangleBtn} />
     }
 
     return (
         <button
-            className={triangleBtnClasses}
+            className={CN.triangleBtn}
             onClick={toggleFolder}
             data-ft-item-btn='true'
         >
@@ -100,14 +95,16 @@ type IconPropType = {
     itemData: TempCompFilesTreeType.Item
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
     const {
         itemData
     } = props
 
+    const CN = makeClasses()
+
     if (itemData.type === 'file') return null
-    return <SvgIcon type='filesTreeFolder' extraClass={`${CN}__folder-sign`} />
+    return <SvgIcon type='filesTreeFolder' extraClass={CN.folderSign} />
 }
 
 
@@ -117,25 +114,15 @@ type CirclesPropType = {
 }
 
 function Circles(props: CirclesPropType) {
-    const {
-        itemData
-    } = props
+    const { itemData } = props
 
-    let afterClasses = [`${CN}__circle`]
-    if (itemData.afterButtonAllowed) {
-        afterClasses.push(`${CN}__circle--visible`)
-    }
-
-    let insideClasses = [`${CN}__circle`]
-    if (itemData.insideButtonAllowed) {
-        insideClasses.push(`${CN}__circle--visible`)
-    }
+    const CN = makeClasses(itemData)
 
     return (
-        <div className={`${CN}__circles`}>
-            <div className={ makeCN(afterClasses) } />
-            <div className={ makeCN(afterClasses) } />
-            <div className={ makeCN(insideClasses) } />
+        <div className={CN.circles}>
+            <div className={CN.afterCircle} />
+            <div className={CN.afterCircle} />
+            <div className={CN.insideCircle} />
         </div>
     )
 }
@@ -147,12 +134,14 @@ type RightButtonsPropType = {
     after: TempCompFilesTreeType.After
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function RightButtons(props: RightButtonsPropType) {
     const {
         itemData,
         after,
     } = props
+
+    const CN = makeClasses(itemData)
 
     const componentsPanelMsg = useGetMessages(componentsPanelMessages)
 
@@ -164,7 +153,7 @@ function RightButtons(props: RightButtonsPropType) {
     if (itemData.afterButtonAllowed) {
         afterButtons.push(
             <button
-                className={`${CN}__btn ${CN}__right-btn`}
+                className={CN.afterBtn}
                 onClick={(e) => after.afterClickBeforeBtn(itemData.id)}
                 title={componentsPanelMsg.beforeButton.toString()}
                 key={1}
@@ -174,7 +163,7 @@ function RightButtons(props: RightButtonsPropType) {
         )
         afterButtons.push(
             <button
-                className={`${CN}__btn ${CN}__right-btn`}
+                className={CN.afterBtn}
                 onClick={(e) => after.afterClickAfterBtn(itemData.id)}
                 title={componentsPanelMsg.afterButton.toString()}
                 key={2}
@@ -184,14 +173,9 @@ function RightButtons(props: RightButtonsPropType) {
         )
     }
 
-    let insideButtonClasses = [`${CN}__btn`, `${CN}__right-btn`]
-    if (!itemData.insideButtonAllowed) {
-        insideButtonClasses.push(`${CN}__right-btn--invisible`)
-    }
-
     const insideButton = (
         <button
-            className={ makeCN(insideButtonClasses) }
+            className={ CN.insideBtn }
             onClick={(e) => after.afterClickInsideBtn(itemData.id)}
             title={componentsPanelMsg.insideButton.toString()}
             key={3}
@@ -201,9 +185,9 @@ function RightButtons(props: RightButtonsPropType) {
     )
 
     return (
-        <>
+        <div className={CN.rightPart}>
             {afterButtons}
             {insideButton}
-        </>
+        </div>
     )
 }

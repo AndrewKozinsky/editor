@@ -1,10 +1,9 @@
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-import { act } from 'react-dom/test-utils'
 import StoreArticleTypes from './articleTypes'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
+import articleManager from '../../editor/articleManager/articleManager'
 
 export type ArticleReducerType = {
     // Статус статьи: clear (данных нет), loading (загрузка данных),
@@ -27,7 +26,7 @@ export type ArticleReducerType = {
     // Current history point
     historyCurrentIdx: number
     // A history step when the article was saved
-    // historyStepWhenWasSave: number
+    historyStepWhenWasSave: number
     articleDataPrepared: boolean
 }
 
@@ -61,10 +60,12 @@ const stateExample: ArticleReducerType = {
         {
             article: <ArticleTypes.Article>{},
             hoveredElem: {
+                tagType: null,
                 dataCompId: 1,
                 dataElemId: 1
             },
             selectedElem: {
+                tagType: null,
                 dataCompId: 1,
                 dataElemId: 1
             },
@@ -80,7 +81,7 @@ const stateExample: ArticleReducerType = {
         },
     ],
     historyCurrentIdx: 0,
-    // historyStepWhenWasSave: 0,
+    historyStepWhenWasSave: 0,
     articleDataPrepared: false
 }
 
@@ -106,7 +107,7 @@ const initialState: ArticleReducerType = {
     },
     history: [],
     historyCurrentIdx: 0,
-    // historyStepWhenWasSave: 0,
+    historyStepWhenWasSave: 0,
     articleDataPrepared: false
 }
 
@@ -162,11 +163,13 @@ function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArti
             {
                 article: action.payload.article,
                 hoveredElem: {
+                    tagType: null,
                     dataCompId: null,
                     dataElemId: null
                 },
                 // Selected component/element coordinates
                 selectedElem: {
+                    tagType: null,
                     dataCompId: null,
                     dataElemId: null
                 },
@@ -201,6 +204,7 @@ function setFlashedElement(state: ArticleReducerType, action: StoreArticleTypes.
 
     // Hovered/selected element coordinates
     const flashedElem = {
+        tagType: action.payload.tagType,
         dataCompId: action.payload.dataCompId,
         dataElemId: action.payload.dataElemId
     }
@@ -252,8 +256,8 @@ function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes
     }
 }
 
-//
-/*function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
+// Редьюсер ставит новую версию статьи в массив истории
+function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction): ArticleReducerType {
 
     const historyArr = createHistoryArr()
 
@@ -264,46 +268,40 @@ function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes
         historyCurrentIdx: historyArr.length - 1
     }
 
-
     function createHistoryArr() {
         const historyArrCopy =  [...state.history]
-        historyArrCopy.length = state.historyCurrentIdx + 1
+
         historyArrCopy.push(
             createHistoryItem()
         )
 
+        // console.log(historyArrCopy[1])
+
         return historyArrCopy
     }
 
-    function createHistoryItem() {
+    function createHistoryItem(): StoreArticleTypes.HistoryItem {
         const currentHistoryItem = state.history[state.historyCurrentIdx]
 
-        const historyItem: StoreArticleTypes.HistoryItem = {
-            article: createArticle(),
+        return {
+            article: articleManager.createArticle(
+                action.payload.maxCompId,
+                action.payload.components
+            ),
             hoveredElem: currentHistoryItem.hoveredElem,
-            selectedElem: currentHistoryItem.selectedElem
+            selectedElem: currentHistoryItem.selectedElem,
+            moveHoveredComp: currentHistoryItem.moveHoveredComp,
+            moveSelectedComp: currentHistoryItem.moveSelectedComp,
+            selectedTextComp: currentHistoryItem.selectedTextComp
         }
-
-        return historyItem
-    }
-
-    function createArticle() {
-        const newArticle = articleManager.createArticle()
-        newArticle.dMeta.dMaxCompId = action.payload.maxCompId
-        newArticle.dComps = action.payload.components
-
-        return newArticle
     }
 
     function getSaveStep() {
-        let newHistoryStepWhenWasSave = state.historyStepWhenWasSave
-        if (newHistoryStepWhenWasSave > state.history.length) {
-            newHistoryStepWhenWasSave = -1
-        }
-
-        return newHistoryStepWhenWasSave
+        return state.historyStepWhenWasSave > state.history.length
+            ? state.historyStepWhenWasSave - 1
+            : state.historyStepWhenWasSave
     }
-}*/
+}
 
 // The function changes a current history step
 /*function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
@@ -411,8 +409,8 @@ export default function articleReducer(
             return setFlashedElement(state, action)
         case StoreArticleTypes.SET_TEMP_COMP_FOLDERS:
             return setTempCompFolders(state, action)
-        // case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
-        //     return createAndSetHistoryItem(state, action)
+        case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
+            return createAndSetHistoryItem(state, action)
         // case StoreArticleTypes.MAKE_HISTORY_STEP:
         //     return makeHistoryStep(state, action)
         // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:

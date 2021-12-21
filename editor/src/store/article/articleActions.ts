@@ -1,5 +1,6 @@
 // import { store } from '../rootReducer'
 const JSON5 = require('json5')
+import { CreateCompFnReturnType } from '../../editor/articleManager/methods/insert'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -15,7 +16,6 @@ import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderR
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
-// import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
 
 
 const articleActions = {
@@ -183,11 +183,13 @@ const articleActions = {
      * Например если элемент подсвечен выделяющим прямоугольником, то при наведении мыши около него
      * не будет отрисовываться прямоугольник при наведении и так далее.
      * @param {String} actionType — тип действия
+     * @param {String} tagType —
      * @param {Number} dataCompId — id компонента
      * @param {Number} dataElemId — id элемента
      */
     setFlashRectangles(
         actionType: StoreArticleTypes.FlashedElemType,
+        tagType: StoreArticleTypes.FlashedTagType,
         dataCompId: StoreArticleTypes.FlashedElemId,
         dataElemId: StoreArticleTypes.FlashedElemId
     ) {
@@ -198,28 +200,28 @@ const articleActions = {
             // Если на элемент навели мышью...
             if (actionType === 'hover') {
                 // Если навели на элемент, но он уже выделен...
-                if (currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
+                if (currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
                     // Спрятать наводящую рамку
                     dispatch( actions.article.setFlashedElement(
-                        'hover', null, null
+                        'hover', tagType, null, null
                     ))
                 }
                 // В противном случае выделить элемент наводящей рамкой...
                 else {
                     dispatch( actions.article.setFlashedElement(
-                        'hover', dataCompId, dataElemId
+                        'hover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого компонента для перемещения
                 dispatch( actions.article.setFlashedElement(
-                    'moveHover', null, null
+                    'moveHover', tagType, null, null
                 ))
             }
             // Если элемент выделили...
             else if (actionType === 'select') {
                 dispatch( actions.article.setFlashedElement(
-                    'select', dataCompId, dataElemId
+                    'select', tagType, dataCompId, dataElemId
                 ))
             }
             // Если на компонент навели мышью для перемещения...
@@ -228,32 +230,32 @@ const articleActions = {
                 if (currentArticle.moveSelectedComp.dataCompId === dataCompId) {
                     // Спрятать наводящую рамку
                     dispatch( actions.article.setFlashedElement(
-                        'moveHover', null, null
+                        'moveHover', tagType, null, null
                     ))
                 }
                 // Выделить элемент наводящей рамкой...
                 else {
                     dispatch( actions.article.setFlashedElement(
-                        'moveHover', dataCompId, dataElemId
+                        'moveHover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого элемента
                 dispatch( actions.article.setFlashedElement(
-                    'hover', null, null
+                    'hover', tagType, null, null
                 ))
             }
             // Если компонент выделили для перемещения...
             else if (actionType === 'moveSelect') {
                 dispatch( actions.article.setFlashedElement(
-                    'moveSelect', dataCompId, null
+                    'moveSelect', tagType, dataCompId, null
                 ))
 
                 // Если на этом элементе есть рамка наведения...
                 if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
                     // Спрятать наводящую рамку
                     dispatch( actions.article.setFlashedElement(
-                        'moveHover', null, null
+                        'moveHover', tagType, null, null
                     ))
                 }
             }
@@ -263,30 +265,32 @@ const articleActions = {
     /**
      * Set ids for hovered or selected or moved component/element
      * @param {String} actionType — is component/element hovered or selected
+     * @param {String} tagType — тип выделенного элемента
      * @param {Number} dataCompId — component id
      * @param {Number} dataElemId — element id (It is null if component/element was hovered)
      */
     setFlashedElement(
         actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
+        tagType: StoreArticleTypes.FlashedTagType,
         dataCompId: StoreArticleTypes.FlashedElemId,
         dataElemId: StoreArticleTypes.FlashedElemId
     ) {
         return {
             type: StoreArticleTypes.SET_FLASHED_ELEMENT,
-            payload: { actionType, dataCompId, dataElemId }
+            payload: { actionType, tagType, dataCompId, dataElemId }
         }
     },
 
     /**
      * Action forms a new history item
-     * @param {Object} itemDetails —
+     * @param {Object} itemDetails — данные для вставки нового элемента в массив статей
      */
-    /*createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
+    createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
         return {
             type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
             payload: itemDetails
         }
-    },*/
+    },
 
     /**
      * Action changes a current history step

@@ -23,7 +23,7 @@ export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComp
 /**
  * Функция превращает данные статьи и шаблоны компонентов в HTML. Нужно чтобы получить итоговую разметку для вставки на сайт.
  * @param {Object} articleData — данные статьи.
- * @param tempComps — масссив шаблонов компонентов.
+ * @param tempComps — массив шаблонов компонентов.
  */
 /*export function turnArticleDataToHTML(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): string {
     const componentsArr = createComponentsArr(articleData, tempComps)

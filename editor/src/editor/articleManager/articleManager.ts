@@ -1,8 +1,8 @@
-// import {
-//     createCompAndSetItNearComp,
-//     createCompAndSetInElem,
-//     createCompAndSetInRootOfArticle
-// } from './methods/insert'
+import {
+    createCompAndSetItNearComp,
+    createCompAndSetInElem,
+    createCompAndSetInRootOfArticle
+} from './methods/insert'
 // import {
 //     deleteArticle,
 //     saveArticle,
@@ -10,18 +10,19 @@
 import {
 //     getCurrentHistoryItem,
     getComponent,
-//     getCompElem,
-//     getTempCompByDataCompId,
-//     getTempElemByDataCompIdAndDataElemId,
+    getDataElemInDataComp,
+    getDataElemInDataCompArr,
+    getTempCompByDataCompId,
+    getTempElemByDataCompIdAndDataElemId,
     getTemplate,
-//     getTemplateElement,
-//     getCompParentArray
+    getTElemInTComp,
+    getCompParentArray
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import { turnArticleDataToJSX } from './articleBuilder/articleBuilder'
 import {
-//     createArticle,
-//     createComponent,
+    createArticle,
+    createComponent,
     createSimpleTextComponent
 } from './methods/create'
 // import {
@@ -42,17 +43,19 @@ class ArticleManager {
     // Finds template in templates array
     getTemplate = getTemplate
     // Finds element template in templates array
-    // getTemplateElement = getTemplateElement
+    getTElemInTComp = getTElemInTComp
     // Finds template in templates array
     getComponent = getComponent
-    // Finds element template in templates array
-    // getCompElem = getCompElem
+    // Поиск элемента данных в компоненте данных
+    getDataElemInDataComp = getDataElemInDataComp
+    // Поиск данных элемента в массиве данных компонентов
+    getDataElemInDataCompArr = getDataElemInDataCompArr
     // Finds component template by data component id
-    // getTempCompByDataCompId = getTempCompByDataCompId
+    getTempCompByDataCompId = getTempCompByDataCompId
     // Finds element template by data component id and data element id
-    // getTempElemByDataCompIdAndDataElemId = getTempElemByDataCompIdAndDataElemId
+    getTempElemByDataCompIdAndDataElemId = getTempElemByDataCompIdAndDataElemId
     // Finds an array in witch component is
-    // getCompParentArray = getCompParentArray
+    getCompParentArray = getCompParentArray
 
     // CHECK
     // The method returns boolean can pass component put in element
@@ -62,14 +65,14 @@ class ArticleManager {
     // isArticleSave = isArticleSave
 
     // CREATE
-    // createArticle = createArticle
-    // createComponent = createComponent
+    createArticle = createArticle
+    createComponent = createComponent
     createSimpleTextComponent = createSimpleTextComponent
 
     // INSERT
-    // createCompAndSetInRootOfArticle = createCompAndSetInRootOfArticle
-    // createCompAndSetInElem = createCompAndSetInElem
-    // createCompAndSetItNearComp = createCompAndSetItNearComp
+    createCompAndSetInRootOfArticle = createCompAndSetInRootOfArticle
+    createCompAndSetInElem = createCompAndSetInElem
+    createCompAndSetItNearComp = createCompAndSetItNearComp
 
     // HOOKS (object with hooks)
     hooks = hooks

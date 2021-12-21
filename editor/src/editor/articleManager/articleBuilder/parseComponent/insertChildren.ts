@@ -14,8 +14,9 @@ export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.
 
     // Если это массив компонентов
     if (Array.isArray(elemChildren)) {
-        const parsedChildren: HTMLObjArrType.Arr = []
+        if (!elemChildren.length) return
 
+        const parsedChildren: HTMLObjArrType.Arr = []
         for (let child of elemChildren) {
             parsedChildren.push(parseComponent(child, tempComps))
         }

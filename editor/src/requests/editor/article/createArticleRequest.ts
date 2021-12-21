@@ -3,6 +3,7 @@ import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { ArticleRowServerRespType } from './articleServerResponseType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import articleManager from '../../../editor/articleManager/articleManager'
 
 /**
  * Функция создаёт новую статью
@@ -13,11 +14,7 @@ export default async function createArticleRequest(
     siteId: number, name: string
 ) {
     // При создании новой статьи будет вставляться пустое содержимое
-    const newArticleContent: ArticleTypes.Article = {
-        dMeta: { dMaxCompId: 0 },
-        dComps: []
-    }
-    // ТУТ ЛУЧШЕ ВОСПОЛЬЗОВАТЬСЯ МЕТОДОМ createArticle ИЗ ArticleManager
+    const newArticleContent = articleManager.createArticle()
 
     const options = {
         method: 'POST',

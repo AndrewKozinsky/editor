@@ -32,14 +32,19 @@ export default function useSetKeyDownHandlerForText() {
  * @param {KeyboardEvent} e — объект события
  */
 function keyDownHandler(e: KeyboardEvent) {
-    // Если текст копируют или вставляют, то ничего не делать
-    if ((e.code == 'KeyC' || e.code == 'KeyV') && e.metaKey) {
+    if (
+        // Если текст копируют или вставляют...
+        (e.metaKey && (e.code == 'KeyC' || e.code == 'KeyV')) ||
+        // Если открывают инструменты разработчика...
+        (e.altKey && e.metaKey && e.code == 'KeyI')
+    ) {
+        // ...то ничего не делать
         return
     }
     else {
         // Предотвратить установку напечатанного символа в <text-component>
         // Потому что напечатанный символ сначала будет попадать в Хранилище
-        // и после Реакт перерисует текстовый узел
+        // и после React перерисует текстовый узел
         //
         e.preventDefault()
     }

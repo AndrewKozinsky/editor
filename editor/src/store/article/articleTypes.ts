@@ -2,14 +2,14 @@ import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import DragFilesTreeType from '../../libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-// import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
+import { CreateCompFnReturnType } from '../../editor/articleManager/methods/insert'
 
 namespace StoreArticleTypes {
 
     export type HistoryItems = HistoryItem[]
 
     export type HistoryItem = {
-        // Articles
+        // Article
         article: ArticleTypes.Article
         // Flash rectangles coordinates
         hoveredElem: FlashedElem
@@ -20,7 +20,9 @@ namespace StoreArticleTypes {
         selectedTextComp: SelectedTextComp
     }
 
+    export type FlashedTagType = null | 'element' | 'rootElement' | 'component'
     export type FlashedElem = {
+        tagType: FlashedTagType
         dataCompId: FlashedElemId
         dataElemId: FlashedElemId
     }
@@ -126,8 +128,9 @@ namespace StoreArticleTypes {
     export type SetFlashedElementAction = {
         type: typeof SET_FLASHED_ELEMENT
         payload: {
-            actionType: FlashedElemType,
-            dataCompId: StoreArticleTypes.FlashedElemId,
+            actionType: FlashedElemType
+            tagType: StoreArticleTypes.FlashedTagType
+            dataCompId: StoreArticleTypes.FlashedElemId
             dataElemId: StoreArticleTypes.FlashedElemId
         }
     }
@@ -139,12 +142,11 @@ namespace StoreArticleTypes {
         payload: DragFilesTreeType.Items
     }
 
-    //
-    // export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
-    /*export type CreateAndSetHistoryItemAction = {
+    export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
+    export type CreateAndSetHistoryItemAction = {
         type: typeof CREATE_AND_SET_HISTORY_ITEM
         payload: CreateCompFnReturnType
-    }*/
+    }
 
     // Action changes a current history step
     // export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
@@ -197,7 +199,7 @@ namespace StoreArticleTypes {
         | SetLinksAction
         | SetFlashedElementAction
         | SetTempCompFoldersAction
-    //     | CreateAndSetHistoryItemAction
+        | CreateAndSetHistoryItemAction
     //     | MakeHistoryStepAction
     //     | SetHistoryStepWhenArticleWasSavedAction
         | SetArticleDataPreparedAction

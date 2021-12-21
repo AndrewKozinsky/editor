@@ -7,6 +7,8 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
 export function setExtraAttribsToMainTag(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+    if (!htmlObj.attrs) htmlObj.attrs = {}
+
     // id компонента
     htmlObj.attrs['data-em-d-gen-comp-id'] = dataComp.dCompId.toString()
 

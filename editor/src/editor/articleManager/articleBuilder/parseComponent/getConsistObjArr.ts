@@ -58,7 +58,6 @@ function getHtmlElem(
     dCompElemGroup: string,
     tCompElemId: string
 ): HTMLObjArrType.Tag {
-
     let htmlElem: HTMLObjArrType.Tag | null = null
 
     find(htmlObj)

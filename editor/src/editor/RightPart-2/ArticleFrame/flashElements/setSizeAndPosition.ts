@@ -18,10 +18,10 @@ export function setSizeAndPosition(
     $flashRect: HTMLElement,
 ) {
     // 1. Get element by coordinates
-    const articleElement = getArticleElementByCoordinates($links.$body, type, rectCoords)
+    const $element = getArticleElementByCoordinates($links.$body, type, rectCoords)
 
     // Hide flashed rectangle if an element didn't found
-    if (!articleElement) {
+    if (!$element) {
         hideRect(type, $flashRect)
         return
     }
@@ -33,7 +33,7 @@ export function setSizeAndPosition(
     }
 
     // 2. Get the article element rectangle coordinates
-    const coords = getCoordinates(articleElement, type, rectCoords, scrollObj)
+    const coords = getCoordinates($element, type, rectCoords, scrollObj)
 
     // 3. Set coordinates to the rectangle coordinates
     positionFlashRect($flashRect, coords, rectCoords)
@@ -43,7 +43,7 @@ export function setSizeAndPosition(
  * The function finds element by dataCompId, dataElemId and type
  * @param {HTMLBodyElement} $body — <body>
  * @param {String} type — тип подсветки: hover | select | movehover | moveselect
- * @param rectCoords
+ * @param {Object} rectCoords — id данных элемента и компонента над которым стоит курсор
  */
 function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectType, rectCoords: CoordsObjType): null | HTMLElement {
     // Return null if cursor is not on component/element
@@ -53,7 +53,12 @@ function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectT
     let queryStr = ''
 
     if (type === 'hover' || type === 'select') {
-        queryStr = `[data-em-d-comp-id="${rectCoords.dataCompId}"][data-em-d-elem-id="${rectCoords.dataElemId}"]`
+        if (rectCoords.dataElemId) {
+            queryStr = `[data-em-d-comp-id="${rectCoords.dataCompId}"][data-em-d-elem-id="${rectCoords.dataElemId}"]`
+        }
+        else {
+            queryStr = `[data-em-d-gen-comp-id="${rectCoords.dataCompId}"]`
+        }
     }
     else if (type === 'movehover' || type === 'moveselect') {
         queryStr = `[data-em-d-gen-comp-id="${rectCoords.dataCompId}"]`

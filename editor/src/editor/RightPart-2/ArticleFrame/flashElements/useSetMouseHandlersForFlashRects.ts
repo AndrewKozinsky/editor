@@ -3,7 +3,6 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import StoreArticleTypes from 'store/article/articleTypes'
-import { number } from 'yup'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
@@ -16,6 +15,7 @@ export function useSetMouseHandlersForFlashRects() {
 
     useEffect(function () {
         if (!$links.$document || !$links.$window || mouseMoveHandlerSet || !history.length) return
+
         // Set handlers mousemove and mousedown
         $links.$document.addEventListener('mousemove', hoverHandler)
         $links.$document.addEventListener('mousedown', selectHandler)
@@ -63,10 +63,10 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 
         if ($component) {
             const dataCompId = parseInt($component.dataset.emDGenCompId) || null
-            setFlashRectangle(moveActionType, dataCompId, null)
+            setFlashRectangle(moveActionType, 'component', dataCompId, null)
         }
         else {
-            setFlashRectangle(moveActionType, null, null)
+            setFlashRectangle(moveActionType, 'component', null, null)
         }
     }
     // Если клавиша CTRL не нажата, то хотят поставить выделяющий прямоугольник
@@ -74,31 +74,26 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
         // Получить объект с данными курсор стоит над текстовым компонентом или элементом
         let elemAndTextComp = getElementAndTextComponent($target)
 
-        // Если курсор стоит над текстовым компонентом и нажали кнопку мыши чтобы, поставить курсор
-        if (elemAndTextComp.textComp && actionType === 'select') {
-            // Получение id данных текстового компонента под курсором
-            const textCompCompId = parseInt(elemAndTextComp.textComp.dataset.emDTextCompId) || null
-
+        // Если курсор стоит над текстовым компонентом и нажали кнопку мыши, то убрать выделяющий прямоугольник
+        if (elemAndTextComp.type === 'textComponent' && actionType === 'select') {
             // Запустить экшен ставящий id текстового компонента в Хранилище
-            setTextCompId(textCompCompId)
+            setTextCompId(elemAndTextComp.dCompId)
 
             // Скрыть выделяющий прямоугольник
-            setFlashRectangle(actionType, null, null)
+            setFlashRectangle(actionType, null, null, null)
+        }
+        // Если курсор стоит над корневым тегом компонента не являющийся элементом
+        else if (elemAndTextComp.type === 'component') {
+            setFlashRectangle(actionType, elemAndTextComp.type, elemAndTextComp.dCompId, null)
         }
         // Если курсор стоит над элементом
-        else if (elemAndTextComp.element) {
-            const dataCompId = parseInt(elemAndTextComp.element.dataset.emDCompId) || null
-            const dataElemId = parseInt(elemAndTextComp.element.dataset.emDElemId) || null
-
-            setFlashRectangle(actionType, dataCompId, dataElemId)
-
-            // Запустить экшен обнуляющий id текстового компонента в Хранилище
-            if (actionType === 'select') setTextCompId(null)
+        else if (elemAndTextComp.type === 'element' || elemAndTextComp.type === 'rootElement') {
+            setFlashRectangle(actionType, elemAndTextComp.type, elemAndTextComp.dCompId, elemAndTextComp.dElemId)
         }
-        // Курсор не стоит ни над тем и другим, поэтому обнулить данные о выделениях
         else {
+            // console.log(elemAndTextComp)
             // Скрыть выделяющий прямоугольник
-            setFlashRectangle(actionType, null, null)
+            setFlashRectangle(actionType, null, null, null)
 
             // Запустить экшен обнуляющий id текстового компонента в Хранилище
             if (actionType === 'select') setTextCompId(null)
@@ -109,14 +104,18 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 /**
  * Функция запускает экшен подсвечивающий элемент
  * @param {String} actionType — тип подсветки: 'hover' | 'select' | 'moveHover' | 'moveSelect'
+ * @param {Boolean} tagType — тип тега над которым завис курсор: component, rootElement или element
  * @param {Number} dataCompId — id данных компонента подсвечиваемого компонента/элемента
  * @param {Number} dataElemId — id данных элемента подсвечиваемого компонента/элемента
  */
 function setFlashRectangle(
-    actionType: StoreArticleTypes.FlashedElemType, dataCompId: number | null, dataElemId: number | null
+    actionType: StoreArticleTypes.FlashedElemType,
+    tagType: StoreArticleTypes.FlashedTagType,
+    dataCompId: number | null,
+    dataElemId: number | null
 ) {
     store.dispatch( actions.article.setFlashRectangles(
-        actionType, dataCompId, dataElemId
+        actionType, tagType, dataCompId, dataElemId
     ))
 }
 
@@ -138,8 +137,15 @@ function isCtrlPressed(event: MouseEvent) {
 }
 
 type ElementAndTextComponentType = {
-    element: null | HTMLElement,
-    textComp: null | HTMLElement
+    // Над чем находится курсор:
+    type:
+        null |             // Тип элемента не относится к другим разрешённым значениям
+        'textComponent' |  // Текстовый компонент),
+        'element' |        // Элемент, который не является корневым тегом
+        'rootElement' |    // Элемент, который является корневым тегом
+        'component'        // Корневой тег, не являющийся элементом
+    dCompId: null | number // id данных компонента
+    dElemId: null | number // id данных элемента
 }
 
 /**
@@ -151,8 +157,9 @@ function getElementAndTextComponent($target: HTMLElement): ElementAndTextCompone
     let $currentElem: HTMLElement = $target
 
     const resultObj: ElementAndTextComponentType = {
-        element: null,
-        textComp: null
+        type: null,
+        dCompId: null,
+        dElemId: null
     }
 
     for (;$currentElem;) {
@@ -164,14 +171,38 @@ function getElementAndTextComponent($target: HTMLElement): ElementAndTextCompone
             return resultObj
         }
 
+        const textDCompId = $currentElem.dataset.emDTextCompId
+        const dGenCompId = $currentElem.dataset.emDGenCompId
+        const dCompId = $currentElem.dataset.emDCompId
+        const dElemId = $currentElem.dataset.emDElemId
+
         // Завершить поиск если наткнулись на текстовый компонент
-        if ($currentElem.matches('[data-em-d-text-comp-id]')) {
-            resultObj.textComp = $currentElem
+        if (textDCompId) {
+            resultObj.type = 'textComponent'
+            resultObj.dCompId = parseInt(textDCompId)
             return resultObj
         }
 
-        if ($currentElem.matches('[data-em-d-comp-id]')) {
-            resultObj.element = $currentElem
+        // Если курсор стоит над корневым тегом компонента, который не является элементом
+        if (dGenCompId && !dCompId) {
+            resultObj.type = 'component'
+            resultObj.dCompId = parseInt(dGenCompId)
+            return resultObj
+        }
+
+        // Если курсор стоит над корневым тегом компонента, который является элементом
+        if (dGenCompId && dCompId) {
+            resultObj.type = 'rootElement'
+            resultObj.dCompId = parseInt(dCompId)
+            resultObj.dElemId = parseInt(dElemId)
+            return resultObj
+        }
+
+        // Если курсор стоит не над корневым тегом компонента, который является элементом
+        if (!dGenCompId && dCompId) {
+            resultObj.type = 'element'
+            resultObj.dCompId = parseInt(dCompId)
+            resultObj.dElemId = parseInt(dElemId)
             return resultObj
         }
 

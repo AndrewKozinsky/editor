@@ -26,7 +26,6 @@ export function getTemplate(
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id
 ): TempCompTypes.TempComp {
-
     return tempCompArr.find((tempComp) => {
         return tempComp.id === tempCompId
     })
@@ -42,19 +41,35 @@ export function getTemplate(
 /*export function getTemplateElement(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.UuId,
+    tempCompId: TempCompTypes.Id,
     tempElemId: TempCompTypes.TempElemId
 ): null | TempCompTypes.Elem {
-    const template = this.getTemplate(tempCompArr, tempCompId)
-    if (!template) return null
+    // const template = this.getTemplate(tempCompArr, tempCompId)
+    // if (!template) return null
 
-    if (!template.code.elems?.length) return null
+    // if (!template.code.elems?.length) return null
 
-    const tempElement = template.code.elems.find(elem => elem.tempElemId === tempElemId)
-    if (!tempElement) return null
+    // const tempElement = template.code.elems.find(elem => elem.tempElemId === tempElemId)
+    // if (!tempElement) return null
 
-    return tempElement
+    // return tempElement
 }*/
+
+/**
+ * Поиск шаблона элемента в шаблоне компонента
+ * @param {String} tempComp — component template
+ * @param {String} tempElemId — element template id
+ */
+export function getTElemInTComp(
+    this: typeof articleManager,
+    tempComp: TempCompTypes.TempComp,
+    tempElemId: TempCompTypes.ElemId
+): null | TempCompTypes.Elem {
+    if (!tempComp.content.elems?.length) return null
+
+    const tempElement = tempComp.content.elems.find(elem => elem.elemId === tempElemId)
+    return tempElement || null
+}
 
 /**
  * The function finds component data in data components array
@@ -96,25 +111,41 @@ export function getComponent(
 }
 
 /**
- * The function finds element data in data components array
+ * Поиск данных элемента в массиве данных компонентов
  * @param {Array} dataCompArr — array of data components
- * @param {String} dataCompId — a data component id of the desired element
- * @param {String} dataElemId — a desired element id
+ * @param {Number} dataCompId — a data component id of the desired element
+ * @param {Number} dataElemId — a desired element id
  */
-/*export function getCompElem(
+export function getDataElemInDataCompArr(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
-    dataCompId: ArticleTypes.DataCompId,
-    dataElemId: ArticleTypes.DataElemId
+    dataCompId: ArticleTypes.Id,
+    dataElemId: ArticleTypes.Id
 ) {
     const component = this.getComponent(dataCompArr, dataCompId)
     if (!dataCompArr) return null
 
-    if (component.type === 'component' && component.elems) {
-        return component.elems.find(elem => elem.dataElemId === dataElemId)
+    if (component.dCompType === 'component' && component.dElems) {
+        return component.dElems.find(dElem => dElem.dCompElemId === dataElemId)
     }
     return null
-}*/
+}
+
+/**
+ * Поиск данных элемента в данных компонента
+ * @param {Object} dataComp — a data component id of the desired element
+ * @param {Number} dataElemId — a desired element id
+ */
+export function getDataElemInDataComp(
+    this: typeof articleManager,
+    dataComp: ArticleTypes.ArticleArrayItem,
+    dataElemId: ArticleTypes.Id
+): null | ArticleTypes.ComponentElem {
+    if (dataComp.dCompType === 'simpleTextComponent') return null
+    if (!dataComp.dElems.length) return null
+
+    return dataComp.dElems.find(dElem => dElem.dCompElemId === dataElemId)
+}
 
 /**
  * The function find component template by dataCompId
@@ -122,20 +153,22 @@ export function getComponent(
  * @param {String} dataCompId — a data component id
  * @param {Array} tempCompArr — components templates array
  */
-/*export function getTempCompByDataCompId(
+export function getTempCompByDataCompId(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
-    dataCompId: ArticleTypes.DataCompId,
+    dataCompId: ArticleTypes.Id,
     tempCompArr: TempCompTypes.TempComps,
 ): null | TempCompTypes.TempComp {
 
-    const foundedDataComp =  this.getComponent(dataCompArr, dataCompId)
-    if (!foundedDataComp) return null
+    // const foundedDataComp =  this.getComponent(dataCompArr, dataCompId)
+    // if (!foundedDataComp) return null
 
-    const tempCompId = foundedDataComp.tempCompId
+    // const tempCompId = foundedDataComp.tempCompId
 
-    return this.getTemplate(tempCompArr, tempCompId)
-}*/
+    // return this.getTemplate(tempCompArr, tempCompId)
+
+    return null
+}
 
 /**
  * The function returns element template by DataCompId and DataElemId
@@ -144,80 +177,81 @@ export function getComponent(
  * @param {String} dataElemId — data element id which I have to get element template
  * @param {Array} tempCompArr — components templates array
  */
-/*export function getTempElemByDataCompIdAndDataElemId(
+export function getTempElemByDataCompIdAndDataElemId(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
-    dataCompId: ArticleTypes.DataCompId,
-    dataElemId: ArticleTypes.DataElemId,
+    dataCompId: ArticleTypes.Id,
+    dataElemId: ArticleTypes.Id,
     tempCompArr: TempCompTypes.TempComps,
 ): null | TempCompTypes.Elem {
 
     // Get data component
     const foundedDataComp = this.getComponent(dataCompArr, dataCompId)
-    if (!foundedDataComp) return
+    if (!foundedDataComp) return null
 
     // Get data element
-    const foundedDataElem = this.getCompElem(dataCompArr, dataCompId, dataElemId)
-    if (!foundedDataElem) return
+    const foundedDataElem = this.getDataElemInDataComp(foundedDataComp, dataElemId)
+    if (!foundedDataElem) return null
+
+    if (foundedDataComp.dCompType === 'simpleTextComponent') return null
 
     // Get element template
-    const foundedTempComp =  this.getTempCompByDataCompId(dataCompArr, dataCompId, tempCompArr)
+    const foundedTempComp =  this.getTemplate(tempCompArr, foundedDataComp.tCompId)
     if (!foundedTempComp) return null
 
     // Get template element and return it
-    return this.getTemplateElement(tempCompArr, foundedDataComp.tempCompId, foundedDataElem.tempElemId)
-}*/
+    return this.getTElemInTComp(foundedTempComp, foundedDataElem.tCompElemId)
+}
 
 
-// type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
+type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
 
 /**
  * The function finds an array in witch component is
- * @param {Array} dataCompArr — array of data components
- * @param {String} dataCompId — a data component id
+ * @param {Array} dCompArr — array of data components
+ * @param {String} dCompId — a data component id
  */
-/*export function getCompParentArray(
+export function getCompParentArray(
     this: typeof articleManager,
-    dataCompArr: ArticleTypes.Components,
-    dataCompId: ArticleTypes.DataCompId,
+    dCompArr: ArticleTypes.Components,
+    dCompId: ArticleTypes.Id,
 ): ParentArrayType {
     let parentArray: ParentArrayType = null
 
-    for (let i = 0; i < dataCompArr.length; i++) {
-        const dataComp = dataCompArr[i]
+    for (let i = 0; i < dCompArr.length; i++) {
+        const dataComp = dCompArr[i]
 
-        if (dataComp.dataCompId === dataCompId) {
-            parentArray = dataCompArr
-        } else {
-            if (dataComp.type !== 'textComponent') {
-                const foundedArr = findParentArray(dataComp, dataCompId)
-                if (foundedArr) {
-                    parentArray = foundedArr
-                    break
-                }
+        if (dataComp.dCompId === dCompId) {
+            parentArray = dCompArr
+        }
+        else {
+            if (dataComp.dCompType === 'simpleTextComponent') continue
+
+            const foundedArr = findParentArray(dataComp, dCompId)
+            if (foundedArr) {
+                parentArray = foundedArr
+                break
             }
         }
     }
 
     return parentArray
-}*/
+}
 
-/*function findParentArray(
-    dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.DataCompId
+function findParentArray(
+    dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.Id
 ): null | ArticleTypes.Components {
-    if (!dataComp.elems) return null
+    if (!dataComp.dElems) return null
 
-    for (let i = 0; i < dataComp.elems.length; i++) {
-        const elem = dataComp.elems[i]
-        if (!elem.children?.length) continue
+    for (let i = 0; i < dataComp.dElems.length; i++) {
+        const dElem = dataComp.dElems[i]
+        if (!Array.isArray(dElem.dCompElemChildren) || !dElem.dCompElemChildren.length) continue
 
-        for (let j = 0; j < elem.children.length; j++) {
-            const innerDataComp = elem.children[j]
+        for (let j = 0; j < dElem.dCompElemChildren.length; j++) {
+            const innerDataComp = dElem.dCompElemChildren[j]
 
-            if (innerDataComp.type === 'textComponent') continue
-
-            if (innerDataComp.dataCompId === dataCompId) {
-                return elem.children
+            if (innerDataComp.dCompId === dataCompId) {
+                return dElem.dCompElemChildren
             }
             else {
                 const res = findParentArray(innerDataComp, dataCompId)
@@ -225,4 +259,4 @@ export function getComponent(
             }
         }
     }
-}*/
+}

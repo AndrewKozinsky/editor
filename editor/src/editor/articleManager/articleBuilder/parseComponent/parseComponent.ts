@@ -37,8 +37,8 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     // Array of objects consists of objects with correspondence between component template, data and html-object
     // Другими словами массив объектов с шаблонами элементов и данными элементов.
     const consistObj = getConsistObjArr(template, compData, htmlObj)
-
     if (!consistObj) return htmlObj
+
     for(let consistData of consistObj) {
         changeTagName(consistData)
         setAttribs(consistData)

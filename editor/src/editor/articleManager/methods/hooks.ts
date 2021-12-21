@@ -7,7 +7,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 export const hooks = {
     // getHistoryItem: useGetCurrentArticle,
     getArticle: useGetCurrentArticle,
-    // getFlashedElemCoords: useGetFlashedElemCoords
+    getFlashedElemCoords: useGetFlashedElemCoords
 }
 
 /** Hook returns current history item object */
@@ -27,13 +27,13 @@ function useGetCurrentArticle() {
 }
 
 
-/*type FlashedElemsCoords = {
-    hoveredElem: StoreArticleTypes.HoveredElem
-    selectedElem: StoreArticleTypes.HoveredElem
-}*/
+type FlashedElemsCoords = {
+    hoveredElem: StoreArticleTypes.FlashedElem
+    selectedElem: StoreArticleTypes.FlashedElem
+}
 
 /** Hook returns object with coordinated hovered and selected component/element */
-/*function useGetFlashedElemCoords() {
+function useGetFlashedElemCoords() {
     const historyItem = useGetCurrentArticle()
     const [flashedElemsCoords, setFlashedElemsCoords] = useState<null | FlashedElemsCoords>(null)
 
@@ -47,4 +47,4 @@ function useGetCurrentArticle() {
     }, [historyItem])
 
     return flashedElemsCoords
-}*/
+}
