@@ -1,44 +1,47 @@
-// import React from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-/*import {
-    useGetIsButtonVisible,
-    useIsDataBtnDisabled,
+import React from 'react'
+import useGetMessages from '../../../messages/fn/useGetMessages'
+import { notFoundMessages } from '../../../messages/notFoundMessages'
+import makeClasses from './ArticleMenu-classes'
+import SvgIcon from 'common/icons/SvgIcon'
+import {
+    useIsButtonVisible,
+    // useIsDataBtnDisabled,
     useIsHistoryBtnDisabled,
     useMakeHistoryStep,
-    useShowData
-} from './ArticleMenu-func'*/
-// import Button from 'common/formElements/Button/Button'
-// import {articleMenuMessages} from 'messages/articleMenuMessages'
-// import './ArticleMenu.scss'
-// import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
-// import { useCloseArticle } from './fn/close'
-// import useGetShowModal from 'utils/hooksUtils'
+    // useShowData
+} from './ArticleMenu-func'
+import Button from 'common/formElements/Button/Button'
+import { articleMenuMessages } from 'messages/articleMenuMessages'
+import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
+import { useCloseArticle } from './CloseModal/close'
+import useGetShowModal from 'utils/hooksUtils'
 // import {CloseArticleConfirmModal} from './fn/CloseArticleConfirmModal'
-// import {DeleteArticleConfirmModal} from './fn/DeleteArticleConfirmModal'
-// import { useIsMarkupBtnDisabled } from './fn/markup'
-// import {ArticleMarkupModal} from './fn/ArticleMarkupModal'
+import { useIsMarkupBtnDisabled } from './fn/markup'
+import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
+import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
 
 
-/*export default function ArticleMenuButton() {
+export default function ArticleMenuButton() {
+    const CN = makeClasses()
+
     // Is the Article menu button visible
-    const isVisible = useGetIsButtonVisible()
-
-    if (!isVisible) return null
+    if (!useIsButtonVisible()) return null
 
     return (
-        <div className='article-menu-wrapper'>
-            <button className='article-menu-button'>
+        <div className={CN.outerWrapper}>
+            <button className={CN.mainButton}>
                 <SvgIcon type='articleMenu' />
             </button>
             <ArticleMenu />
         </div>
     )
-}*/
+}
 
 
-/*
 function ArticleMenu() {
-    const menuCN = 'article-menu'
+    const CN = makeClasses()
+
+    const articleMenuMsg = useGetMessages(articleMenuMessages)
 
     // Undo button
     const isUndoBtnDisabled = useIsHistoryBtnDisabled('undo')
@@ -50,71 +53,70 @@ function ArticleMenu() {
 
     // Show markup button
     const isMarkupBtnDisabled = useIsMarkupBtnDisabled()
-    const openMarkupModal = useGetShowModal(<ArticleMarkupModal />)
+    const openMarkupModal = useGetShowModal(<ArticleMarkupModal />, 'full')
 
     // Show data button functions
-    const isDataBtnDisabled = useIsDataBtnDisabled()
-    const showData = useShowData()
+    // const isDataBtnDisabled = useIsDataBtnDisabled()
+    // const showData = useShowData()
 
     // Save button functions
     const isSaveBtnDisabled = useIsSaveBtnDisabled()
     const saveArticle = useSaveArticle()
 
     // Close article button
-    const openConfirmCloseModal = useGetShowModal(<CloseArticleConfirmModal />)
-    const closeArticle = useCloseArticle(openConfirmCloseModal)
+    const closeArticle = useCloseArticle()
 
     // Delete article button
     const deleteArticle = useGetShowModal(<DeleteArticleConfirmModal />)
 
     return (
-        <div className={menuCN}>
-            <div className={`${menuCN}__inner`}>
+        <div className={CN.menuRoot}>
+            <div className={CN.menuSection}>
                 <Button
-                    text={articleMenuMessages.undo}
+                    text={articleMenuMsg.undo}
                     icon='btnSignUndo'
                     onClick={makeUndoStep}
                     disabled={isUndoBtnDisabled}
                 />
                 <Button
-                    text={articleMenuMessages.redo}
+                    text={articleMenuMsg.redo}
                     icon='btnSignRedo'
                     onClick={makeRedoStep}
                     disabled={isRedoBtnDisabled}
                 />
             </div>
-            <div className={`${menuCN}__inner`}>
+            <div className={CN.menuSection}>
                 <Button
-                    text={articleMenuMessages.markup}
+                    text={articleMenuMsg.markup}
                     icon='btnSignCode'
                     onClick={openMarkupModal}
                     disabled={isMarkupBtnDisabled}
                 />
-                <Button
-                    text={articleMenuMessages.data}
+                {/*<Button
+                    text={articleMenuMsg.data}
                     icon='btnSignJson'
                     onClick={showData}
                     disabled={isDataBtnDisabled}
-                />
+                />*/}
             </div>
-            <div className={`${menuCN}__inner`}>
+            <div className={CN.menuSection}>
                 <Button
-                    text={articleMenuMessages.save}
+                    text={articleMenuMsg.save}
                     icon='btnSignSave'
                     onClick={saveArticle}
                     disabled={isSaveBtnDisabled}
                 />
                 <Button
-                    text={articleMenuMessages.close}
-                    icon='btnSignCancel'
+                    text={articleMenuMsg.close}
+                    icon='btnSignClose'
                     onClick={closeArticle}
                 />
                 <Button
-                    text={articleMenuMessages.delete}
+                    text={articleMenuMsg.delete}
                     icon='btnSignTrash'
                     onClick={deleteArticle}
                 />
             </div>
         </div>
     )
-}*/
+}

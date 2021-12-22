@@ -4,7 +4,7 @@ import './Label.scss'
 
 const labelRootClass = 'label'
 
-function makeClasses(disabled?: boolean, bold?: boolean) {
+export default function makeClasses(disabled?: boolean, bold?: boolean) {
     return {
         root: getLabelClasses(disabled, bold)
     }
@@ -28,5 +28,3 @@ export function getLabelClasses(disabled?: boolean, bold?: boolean) {
 
     return makeCN(classes)
 }
-
-export default makeClasses

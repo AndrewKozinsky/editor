@@ -4,9 +4,9 @@ import './Wrapper.scss'
 
 const wrapperRootClass = 'wrapper'
 
-function makeClasses(wrapperProps: WrapperPropType) {
+export default function makeClasses(wrapperProps: WrapperPropType, extraClass?: string) {
     return {
-        root: getRootClass(wrapperProps), // Обёртка
+        root: getRootClass(wrapperProps, extraClass), // Обёртка
     }
 }
 
@@ -14,7 +14,7 @@ function makeClasses(wrapperProps: WrapperPropType) {
  * Функция возвращает классы универсальной обёртки
  * @param {Object} wrapperProps — props переданные в обёртку
  */
-function getRootClass(wrapperProps: WrapperPropType) {
+function getRootClass(wrapperProps: WrapperPropType, extraClass?: string) {
     const {
         align,
         verticalAlign,
@@ -37,7 +37,7 @@ function getRootClass(wrapperProps: WrapperPropType) {
     // Добавление класса дающего отступ между элементами внутри обёртки
     if (wrapperProps.gap) classes.push(wrapperRootClass + '--gap' + wrapperProps.gap)
 
+    if (extraClass) classes.push(extraClass)
+
     return makeCN(classes)
 }
-
-export default makeClasses

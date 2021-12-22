@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк папки
+// Значок папки
 export default function BtnSignFolder() {
     return (
         <g fillRule="evenodd">

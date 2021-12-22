@@ -2,7 +2,7 @@ import './HeaderPage.scss'
 
 const rootClass = 'header-page'
 
-function makeClasses() {
+export default function makeClasses() {
     return {
         root: rootClass,
         contentDivided: `${rootClass}__content-divided`,
@@ -13,6 +13,3 @@ function makeClasses() {
         headerWrapper: `${rootClass}__header-wrapper`,
     }
 }
-
-
-export default makeClasses

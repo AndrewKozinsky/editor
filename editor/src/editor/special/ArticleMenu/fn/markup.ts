@@ -1,19 +1,21 @@
-// import {useEffect, useState} from 'react'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
+import { useEffect, useState } from 'react'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import articleManager from '../../../articleManager/articleManager'
 
-/*
+
 export function useIsMarkupBtnDisabled() {
-    const {articleUuId} = useSelector((store: AppStateType) => store.article)
-    const article = articleManager.hooks.getArticle()
+    const { articleId } = useGetArticleSelectors()
+    const historyItem = articleManager.hooks.getArticle()
 
     // Is button disabled
     const [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(function () {
-        const isArticleExists = articleUuId && article?.components.length
+        if (!historyItem) return
+        const isArticleExists = articleId && historyItem.article?.dComps.length
 
         setIsDisabled(!isArticleExists)
-    }, [articleUuId, article])
+    }, [articleId, historyItem])
 
     return isDisabled
-}*/
+}

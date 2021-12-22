@@ -4,7 +4,7 @@ import './Header.scss'
 
 const headerRootClass = 'header'
 
-function makeClasses(type?: HeaderTypeType) {
+export default function makeClasses(type?: HeaderTypeType) {
     return {
         root: getHeaderRootClass(type)
     }
@@ -25,5 +25,3 @@ export function getHeaderRootClass(type?: HeaderTypeType) {
 
     return makeCN(classes)
 }
-
-export default makeClasses

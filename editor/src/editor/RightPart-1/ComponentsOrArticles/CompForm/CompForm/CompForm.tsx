@@ -1,8 +1,8 @@
 import React from 'react'
 import useGetMessages from 'src/messages/fn/useGetMessages'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
-import { componentFormMessages } from 'src/messages/componentTemplateFormMessages'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 import getFormConfig from './formConfig'
 import {
     useGetComDataFromServerAndSetInStore,
@@ -28,6 +28,5 @@ export default function CompForm() {
             <FormConstructor config={config} state={formState} />
             <CodeHelper code={formState.fields.content.value[0]} />
         </>
-
     )
 }

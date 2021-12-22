@@ -2,12 +2,12 @@ import React from 'react'
 import './LeftPart-4.scss'
 
 
-type LeftPart1PropType = {
+type LeftPart4PropType = {
     display?: boolean // Показывать ли компонент
 }
 
 /** Левая часть первой главной вкладки */
-export default function LeftPart4(props: LeftPart1PropType) {
+export default function LeftPart4(props: LeftPart4PropType) {
     const {
         display // Показывать ли компонент
     } = props
@@ -18,6 +18,7 @@ export default function LeftPart4(props: LeftPart1PropType) {
 
     return (
         <div className={CN} style={style}>
+
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import { CreateCompFnReturnType } from '../../editor/articleManager/methods/insert'
 
@@ -73,10 +73,10 @@ namespace StoreArticleTypes {
 
     // Типы типа и тип экшена
     // Set components templates array
-    // export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
-    // export type ClearArticleAction = {
-    //     type: typeof CLEAR_ARTICLE
-    // }
+    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
+    export type ClearArticleAction = {
+        type: typeof CLEAR_ARTICLE
+    }
 
     // Set components templates array
     export const SET_ARTICLE_ID = 'SET_ARTICLE_ID'
@@ -149,17 +149,17 @@ namespace StoreArticleTypes {
     }
 
     // Action changes a current history step
-    // export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
-    /*export type MakeHistoryStepAction = {
+    export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
+    export type MakeHistoryStepAction = {
         type: typeof MAKE_HISTORY_STEP
         payload: 'undo' | 'redo'
-    }*/
+    }
 
     // Action changes a current history step
-    // export const SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED = 'SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED'
-    /*export type SetHistoryStepWhenArticleWasSavedAction = {
+    export const SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED = 'SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED'
+    export type SetHistoryStepWhenArticleWasSavedAction = {
         type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
-    }*/
+    }
 
     // Set components templates array
     export const SET_ARTICLE_DATA_PREPARED = 'SET_ARTICLE_DATA_PREPARED'
@@ -191,7 +191,7 @@ namespace StoreArticleTypes {
 
 
     export type ArticleAction =
-        // | ClearArticleAction
+        | ClearArticleAction
         | SetArticleIdAction
         | SetArticleAction
         | SetTempCompAction
@@ -200,8 +200,8 @@ namespace StoreArticleTypes {
         | SetFlashedElementAction
         | SetTempCompFoldersAction
         | CreateAndSetHistoryItemAction
-    //     | MakeHistoryStepAction
-    //     | SetHistoryStepWhenArticleWasSavedAction
+        | MakeHistoryStepAction
+        | SetHistoryStepWhenArticleWasSavedAction
         | SetArticleDataPreparedAction
         | SetPressedKeyAction
         | SetTextCompIdAction

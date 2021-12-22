@@ -74,7 +74,7 @@ export function useGetSetFolders(type: FolderType) {
                 folders: newItems
             }))
         }
-        else if (type === 'articles') {
+        else if (type == 'articles') {
             return dispatch(sitesActions.setArtFolder({
                 id: artFolderId,
                 folders: newItems

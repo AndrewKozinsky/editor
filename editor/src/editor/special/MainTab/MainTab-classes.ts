@@ -3,7 +3,7 @@ import './MainTab.scss'
 
 const rootClass = 'main-tab'
 
-function makeClasses(active: boolean, position: 'top' | 'left') {
+export default function makeClasses(active: boolean, position: 'top' | 'left') {
     return {
         tab: getTabClasses(active, position),
         scion: `${rootClass}__scion`
@@ -28,5 +28,3 @@ export function getTabClasses(active: boolean, position: 'top' | 'left') {
 
     return makeCN(classes)
 }
-
-export default makeClasses

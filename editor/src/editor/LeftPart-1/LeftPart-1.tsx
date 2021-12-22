@@ -44,10 +44,8 @@ export default function LeftPart1(props: LeftPart1PropType) {
 
 /** Компонент кнопки создания нового сайта */
 function NewSiteButton() {
-
     // id выделенного сайта
     const { currentSiteId } = useGetSitesSelectors()
-    // const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewSiteOnClickHandler()

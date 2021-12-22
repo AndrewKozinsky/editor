@@ -84,7 +84,7 @@
 
 
 /**
- * Функция возращает тип поля: text, select, checkbox, radio или button
+ * Функция возвращает тип поля: text, select, checkbox, radio или button
  * @param {HTMLFormElement} $input — поле формы
  */
 /*function getFieldType($input: HTMLInputElement): FHTypes.FieldType {

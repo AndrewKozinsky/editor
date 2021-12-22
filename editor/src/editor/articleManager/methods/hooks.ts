@@ -11,6 +11,8 @@ export const hooks = {
 }
 
 /** Hook returns current history item object */
+// Надо бы эту функцию переименовать в getCurrentHistoryItem потому что она возвращает именно его
+// Либо сразу возвращать статью, а не элемент истории
 function useGetCurrentArticle() {
     // Templates component from the Store
     const { history, historyCurrentIdx } = useGetArticleSelectors()

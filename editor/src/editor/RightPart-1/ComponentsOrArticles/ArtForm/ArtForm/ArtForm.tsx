@@ -4,7 +4,11 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import { articleFormMessages } from 'messages/articleFormMessages'
 import getFormConfig from './formConfig'
-import {useFillSiteTemplatesSelect, useGetArtDataFromServerAndSetInStore, useSetAnotherFormData } from './ArtForm-func'
+import {
+    useFillSiteTemplatesSelect,
+    useGetArtDataFromServerAndSetInStore,
+    useSetAnotherFormData
+} from './ArtForm-func'
 import EditArticleSection from '../EditArticleSection/EditArticleSection'
 
 export default function ArtForm() {

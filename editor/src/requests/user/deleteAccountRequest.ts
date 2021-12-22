@@ -5,21 +5,6 @@ import ErrorServerResponseType from 'requests/errorServerResponseType'
 import UserServerResponseType from './userServerResponseType'
 
 
-// Хук удаляет учётная запись пользователя
-/*export function useDeleteAccount() {
-
-    // Параметры запроса
-    const options = { method: 'DELETE'}
-
-    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: response, doFetch} =
-        useFetch<DeleteAccountServerResponse>(getApiUrl('me'), options)
-
-    return { response, doFetch }
-}*/
-
-
-
 export default async function deleteAccountRequest() {
     const options = { method: 'DELETE'}
 

@@ -1,20 +1,20 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import StoreArticleTypes from 'store/article/articleTypes'
+import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
  * The function finds current history item object
  * @param {Array} historyArr — articles history array
  * @param {Number} historyCurrentIdx — current history item index
  */
-/*export function getCurrentHistoryItem(
+export function getCurrentHistoryItem(
     this: typeof articleManager,
     historyArr: StoreArticleTypes.HistoryItems,
     historyCurrentIdx: number
 ): StoreArticleTypes.HistoryItem {
     return historyArr[historyCurrentIdx]
-}*/
+}
 
 /**
  * The function finds component template in templates array by id.

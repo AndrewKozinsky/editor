@@ -17,7 +17,7 @@ export function ModalContent() {
         <ModalShortContent
             header={userAccountSectionMsg.confirmModalHeader}
             text={userAccountSectionMsg.confirmModalText}
-            bottomElem={
+            bottomElems={
                 <FormConstructor config={submitBtnFormConfig} state={formState} />
             }
         />

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
 import useGetMessages from 'messages/fn/useGetMessages'
-import {componentFormMessages} from 'messages/componentTemplateFormMessages'
+import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 import CodeCheckInfo from 'editor/special/CodeCheckInfo/CodeCheckInfo'
 import checkComponentCode, {componentCodeExample} from './checkComponentCode'
 

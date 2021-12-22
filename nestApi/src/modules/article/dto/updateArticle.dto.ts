@@ -15,5 +15,5 @@ export class UpdateArticleDto {
 
     @IsOptional()
     @IsNumber()
-    siteTemplateId: number
+    siteTemplateId: number | ''
 }

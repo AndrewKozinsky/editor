@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк у вкладки настроек
+// Значок у вкладки настроек
 export default function MainTabSettings() {
     return (
         <g fillRule="evenodd">

@@ -3,7 +3,7 @@ import './NameSection.scss'
 
 const rootClass = 'name-section'
 
-function makeClasses(type: 1 | 2) {
+export default function makeClasses(type: 1 | 2) {
     return {
         header: getHeaderClasses(type),
         bg: `${rootClass}__header-bg`
@@ -23,6 +23,4 @@ export function getHeaderClasses(type: 1 | 2) {
 
     return makeCN(classes)
 }
-
-export default makeClasses
 

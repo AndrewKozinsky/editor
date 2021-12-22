@@ -7,7 +7,7 @@ namespace FilesTreeType {
     export type Items = Item[]
 
     export type Item = {
-        id: Id // Folder or file uuid
+        id: Id // Folder or file id
         type: ItemType // Item type: folder or file
         name: string // Item name
         open?: boolean // Is folder open

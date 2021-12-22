@@ -2,7 +2,7 @@
 
 
 /**
- * Функция возращает данные по полям
+ * Функция возвращает данные по полям
  * @param {Object} formState — объект Состояния формы
  */
 /*export default function getFields(formState: FHTypes.FormState): FHTypes.ReturnFieldsObj {

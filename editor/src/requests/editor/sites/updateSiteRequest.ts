@@ -26,7 +26,5 @@ export type UpdateSiteRequestValuesType = {
 }
 
 
-//
-
 // Тип данных с ответом от сервера
 type UpdateSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

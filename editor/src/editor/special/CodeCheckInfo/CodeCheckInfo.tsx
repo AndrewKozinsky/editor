@@ -5,7 +5,7 @@ import makeClasses from './CodeCheckInfo-classes'
 
 type CodeCheckInfoPropType = {
     type: 'codeCheck' | 'codeExample' // Тип плашки: codeCheck (информация о проверке кода), codeExample (пример кода)
-    checkStatus?: 'error' | 'success' // Значёк плашки типа codeCheck
+    checkStatus?: 'error' | 'success' // Значок плашки типа codeCheck
     header: string, // Заголовок
     items?: string[] // Пункты списка ошибок
     code?: string // Код
@@ -15,7 +15,7 @@ type CodeCheckInfoPropType = {
 function  CodeCheckInfo(props: CodeCheckInfoPropType) {
     const CN = makeClasses()
 
-    // Значёк на плашке
+    // Значок на плашке
     const icon = props.checkStatus || 'info'
 
     return (

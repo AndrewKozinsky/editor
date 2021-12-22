@@ -6,9 +6,8 @@ import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
 import StoreArticleTypes from './articleTypes'
-import ArticleTypes, { emptyArticleData } from './codeType/articleCodeType'
+import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
 import { ArticleType } from 'requests/editor/article/articleServerResponseType'
@@ -21,14 +20,14 @@ import actions from '../rootAction'
 const articleActions = {
 
     // Очистка статьи
-    /*clearArticle() {
+    clearArticle() {
         // Remove editable article id in Local Storage
         removeFromLocalStorage(config.ls.editArticleId)
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
         }
-    },*/
+    },
 
     /**
      * Установка id редактируемой статьи. После редактор загружает все данные.
@@ -50,6 +49,7 @@ const articleActions = {
      */
     requestArticle(articleId: number) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            if (!articleId) return
 
             // Request for an article and response from a server
             const response = await getArticleRequest(articleId)
@@ -296,19 +296,19 @@ const articleActions = {
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
      */
-    /*makeHistoryStep( step: 'undo' | 'redo' ) {
+    makeHistoryStep( step: 'undo' | 'redo' ) {
         return {
             type: StoreArticleTypes.MAKE_HISTORY_STEP,
             payload: step
         }
-    },*/
+    },
 
     /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
-    /*setHistoryStepWhenArticleWasSaved() {
+    setHistoryStepWhenArticleWasSaved() {
         return {
             type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
         }
-    },*/
+    },
 
     /**
      * Установка id редактируемой статьи. После редактор загружает все данные.

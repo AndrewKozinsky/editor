@@ -79,6 +79,8 @@ function goThroughDataComps(article: ArticleTypes.Article, dComps: ArticleTypes.
 function makeMatchBetweenTCompsAndDComps(
     article: ArticleTypes.Article, dElems: ArticleTypes.ComponentElems, tElems: TempCompTypes.Elems
 ) {
+    if (!dElems) return
+
     // Удалить из данных элементы, для которых нет элементов в шаблоне
     for (let i = 0; i < dElems.length; i++) {
         const dElem = dElems[i]
@@ -86,6 +88,7 @@ function makeMatchBetweenTCompsAndDComps(
         const tElem = tElems.find(tElem => {
             return dElem.tCompElemId === tElem.elemId
             // НУЖНО ЕЩЁ ОБРАБОТАТЬ СЛУЧАЙ КОГДА ИМЯ ГРУППЫ В ШАБЛОНЕ НЕ СООТВЕТСТВУЕТ ИМЕНИ ГРУППЫ В ДАННЫХ, ХОТЯ ID элемента совпадают
+            // ТАК ЖЕ ИСПРАВЬ СИТУАЦИИ КОГДА В ШАБЛОНЕ ЕСТЬ ЭЛЕМЕНТЫ, А В ДАННЫХ ИХ НЕТ
         })
 
         if (!tElem) {

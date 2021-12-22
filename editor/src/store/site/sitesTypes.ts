@@ -1,4 +1,5 @@
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import ArticleTypes from '../article/codeType/articleCodeType'
 
 namespace StoreSitesTypes {
 
@@ -77,7 +78,7 @@ namespace StoreSitesTypes {
     // Имя выбранной статьи
     export type ArticleName = null | string
     // Строка с кодом выбранной статьи
-    export type ArticleCode = null | string
+    export type ArticleCode = null | ArticleTypes.Article
 
     // Объект с данными статьи
     export type ArticleSection = {
@@ -178,9 +179,16 @@ namespace StoreSitesTypes {
             id: null | DragFilesTreeType.Id
             type: null | DragFilesTreeType.ItemType
             name?: string
-            code?: string
+            code?: ArticleTypes.Article
             siteTemplateId?: null | number
         }
+    }
+
+    // Установка id выбранной папки или статьи
+    export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
+    export type SetCurrentArtItemIdAction = {
+        type: typeof SET_CURRENT_ART_ITEM_ID
+        payload: CurrentArtItemId
     }
 
 
@@ -196,6 +204,7 @@ namespace StoreSitesTypes {
 
         | SetCurrentCompAction
         | SetCurrentArtAction
+        | SetCurrentArtItemIdAction
 }
 
 export default StoreSitesTypes

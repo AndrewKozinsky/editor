@@ -60,7 +60,7 @@ function getTabData(
     isTabsDisabled: boolean,
     rightTabsMsg: any
 ): MainTabDataType[] {
-    // Сгенеривать данные четырёх вкладок
+    // Сгенерировать данные четырёх вкладок
     return tabsData.map((tabData, i) => {
         return {
             title: rightTabsMsg[tabData.titleIndex],

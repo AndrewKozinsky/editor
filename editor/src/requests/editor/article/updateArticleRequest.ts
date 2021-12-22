@@ -1,5 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { MiscTypes } from '../../../types/miscTypes'
 import {ArticleRowServerRespType} from './articleServerResponseType'
 
 
@@ -14,16 +16,20 @@ export async function updateArticleRequest(
     articleId: number,
     name?: string,
     siteTemplateId?: null | number,
-    content?: null | string
+    content?: ArticleTypes.Article
 ) {
+    const body: MiscTypes.ObjStringKeyAnyVal = {}
+
+    if (name !== undefined) body.name = name
+    if (siteTemplateId !== undefined) body.siteTemplateId = siteTemplateId
+    if (content !== undefined) body.content = JSON.stringify(content)
+
     const options = {
         method: 'PATCH',
-        body: JSON.stringify({
-            name,
-            siteTemplateId,
-            content
-        })
+        body: JSON.stringify(body)
     }
+
+    // options.body = "{\"content\": \"HELLO\"}"
 
     const response: ArticleRowServerRespType = await makeFetch(
         getApiUrl('article', articleId), options

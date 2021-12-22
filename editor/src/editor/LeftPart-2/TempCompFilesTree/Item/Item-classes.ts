@@ -6,7 +6,7 @@ import './Item.scss'
 // Корневой класс
 const CN = 'temp-comp-ft-item'
 
-function makeClasses(itemData?: TempCompFilesTreeType.Item) {
+export default function makeClasses(itemData?: TempCompFilesTreeType.Item) {
     return {
         root: CN,
         inner: CN + '__inner',
@@ -96,5 +96,3 @@ function getInsideBtnClasses(itemData?: TempCompFilesTreeType.Item) {
 
     return makeCN(classes)
 }
-
-export default makeClasses

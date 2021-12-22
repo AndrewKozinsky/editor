@@ -17,8 +17,8 @@ export function getPressedKeys(e: KeyboardEvent): PressedKeysObj {
     if (isMac) cmdKey = e.metaKey
     else cmdKey = e.ctrlKey
 
-    const keysObj: PressedKeysObj = {
-        esc: e.key === "Escape",
+    return {
+        esc: e.key === 'Escape',
         alt: e.altKey,
         cmd: cmdKey,
         shift: e.shiftKey,
@@ -26,8 +26,6 @@ export function getPressedKeys(e: KeyboardEvent): PressedKeysObj {
         s: e.key === 's',
         z: e.key === 'z'
     }
-
-    return keysObj
 }
 
 

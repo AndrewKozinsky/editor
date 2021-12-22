@@ -1,27 +1,24 @@
-//@import "../../../common/commonStyles/commonStyles";
+@import "../../../common/commonStyles/commonStyles";
 
-//$menuWrapperCN: article-menu-wrapper;
-//$btnCN: article-menu-button;
-//$menuCN: article-menu;
+$CN: article-menu;
 
-
-/*.#{$menuWrapperCN} {
+.#{$CN}__outer-wrapper {
     position: relative;
-
     display: flex;
+    background-color: aqua;
 
     &:hover {
-        .#{$menuCN} {
+        .#{$CN}__root {
             display: flex;
         }
 
-        .#{$btnCN} {
+        .#{$CN}__root {
             background-color: var(--bg-color);
         }
     }
-}*/
+}
 
-/*.#{$btnCN} {
+.#{$CN}__main-button {
     position: relative;
     z-index: 2;
     text-align: left;
@@ -41,10 +38,10 @@
     svg {
         fill-opacity: .8;
     }
-}*/
+}
 
 
-/*.#{$menuCN} {
+.#{$CN}__root {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -57,9 +54,9 @@
     padding: 15px;
     border-radius: 0 0 var(--radius) var(--radius);
     @include big-shadow;
-}*/
-/*.#{$menuCN}__inner {
+}
+.#{$CN}__section {
     display: flex;
     flex-direction: column;
     gap: 5px;
-}*/
+}

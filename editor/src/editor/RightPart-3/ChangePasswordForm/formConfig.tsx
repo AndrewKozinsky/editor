@@ -55,7 +55,6 @@ function getConfig(commonMsg: any, changePasswordSectionMsg: any) {
                 text: changePasswordSectionMsg.submitBtnText
             },
             align: 'left',
-            topOffset: 'small'
         },
         async requestFn(readyFieldValues) {
             const currentPassword = readyFieldValues.currentPassword.toString()

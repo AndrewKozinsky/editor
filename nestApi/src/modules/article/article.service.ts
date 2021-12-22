@@ -60,7 +60,6 @@ export class ArticleService {
             }
         }
 
-
         return await this.articleRepository.save(newArticle)
     }
 
@@ -68,6 +67,7 @@ export class ArticleService {
     async updateArticle(
         articleId: number, updateArticleDto: UpdateArticleDto
     ): Promise<ArticleEntity> {
+
         // Найти статью, которую нужно обновить
         const article = await this.articleRepository.findOne({ id: articleId })
 
@@ -78,7 +78,7 @@ export class ArticleService {
 
         // Если приходит пустая строка, то шаблон сайта не выбран,
         // поэтому поставлю null потому что поле принимает или число или null
-        if (!updateArticleDto.siteTemplateId) {
+        if (updateArticleDto.siteTemplateId === '') {
             updateArticleDto.siteTemplateId = null
         }
 

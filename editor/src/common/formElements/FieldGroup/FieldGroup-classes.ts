@@ -4,7 +4,7 @@ import './FieldGroup.scss'
 
 const appRootClass = 'field-wrapper'
 
-function makeClasses(vertical: boolean, gap?: number) {
+export default function makeClasses(vertical: boolean, gap?: number) {
     return {
         wrapper: getFieldGroupClasses(vertical, gap),
     }
@@ -25,5 +25,3 @@ export function getFieldGroupClasses(vertical: boolean, gap?: number) {
 
     return makeCN(classes)
 }
-
-export default makeClasses

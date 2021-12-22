@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк сохранения (дискета)
+// Значок сохранения (дискета)
 export default function BtnSignSave() {
     return (
         <g fillRule="evenodd">

@@ -6,8 +6,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 
 
-
-/** Хук возращает булево значение редактируется ли сейчас статья показываемая в форме */
+/** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */
 export function useIsArticleInEditor() {
     const [isArticleInEditor, setArticleInEditor] = useState(false)
 

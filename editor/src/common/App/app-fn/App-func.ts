@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import useGetUserSelectors from 'store/user/userSelectors'
 import { useHistory, useLocation } from 'react-router-dom'
 

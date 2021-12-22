@@ -2,7 +2,7 @@ import React, {useCallback} from 'react'
 import Button from 'common/formElements/Button/Button'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {siteSectionMessages} from 'messages/siteSectionMessages'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 
 /** Кнопка закрытия модального окна подтверждения удаления сайта */

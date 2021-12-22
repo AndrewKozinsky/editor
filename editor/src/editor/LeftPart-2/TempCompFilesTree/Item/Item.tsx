@@ -39,7 +39,7 @@ export default function Item(props: ItemPropType) {
         <div
             style={{paddingLeft: offset * 20}}
             className={CN.root}
-            // onClick={onItemClickHandler}
+            onClick={onItemClickHandler}
         >
             <div className={CN.inner}>
                 <Triangle items={items} itemData={itemData} after={after} />

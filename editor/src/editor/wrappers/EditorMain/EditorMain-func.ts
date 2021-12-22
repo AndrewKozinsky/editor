@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
-/** Функция возращает булево значение нужно ли отрисовывать редактор */
+/** Функция возвращает булево значение нужно ли отрисовывать редактор */
 export function useGetPageVisibility() {
 
     // Какой компонент должен быть отрисован

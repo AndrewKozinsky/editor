@@ -4,7 +4,7 @@ $CN: modal;
 
 .#{$CN}__outer-wrapper {
     position: relative;
-    z-index: 1;
+    z-index: 2;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,10 +15,16 @@ $CN: modal;
 
 .#{$CN} {
     position: relative;
+    display: flex;
     width: 320px;
     background-color: var(--bg-color);
     padding: 3.5rem 2rem 2rem 2rem;
     border-radius: var(--radius-2);
+}
+
+.#{$CN}--full {
+    width: calc(100vw - 100px);
+    max-height: calc(100vh - 100px);
 }
 
 .#{$CN}__close-btn {

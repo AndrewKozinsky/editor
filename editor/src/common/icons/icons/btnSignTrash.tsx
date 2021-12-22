@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк мусорной корзины
+// Значок мусорной корзины
 export default function BtnSignTrash() {
     return (
         <g transform="translate(0, 1)" fillRule="nonzero">

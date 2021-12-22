@@ -2,7 +2,7 @@ import { ReactElement } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
 /**
- * Хук принимает объект с текстами на разных языках и возращает объект с текстами на текущем языке.
+ * Хук принимает объект с текстами на разных языках и возвращает объект с текстами на текущем языке.
  * @param {Object} obj — объект с текстами на разных языках
  */
 export default function useGetMessages<T>(obj: T) {

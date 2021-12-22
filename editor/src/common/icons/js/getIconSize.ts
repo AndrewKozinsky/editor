@@ -1,6 +1,6 @@
 
 /**
- * Функция возращает атрибуты с размерами значка в SVG.
+ * Функция возвращает атрибуты с размерами значка в SVG.
  * В зависимости от типа значка будут возвращены разные названия размеры
  * @param {String} type — тип значка.
  */
@@ -14,9 +14,9 @@ export function getIconSize(type: string) {
                 height: '18px',
                 viewBox: '0 0 84 18'
             }
-        // Значёк успеха
+        // Значок успеха
         // case 'successCircle':
-        // Значёк ошибки
+        // Значок ошибки
         case 'errorTriangle':
             return {
                 width: '13px',
@@ -68,26 +68,25 @@ export function getIconSize(type: string) {
         case 'btnSignAdd':
         // case 'btnSignJson':
         case 'btnSignEdit':
-        case 'btnSignCancel':
             return {
                 width: '15px',
                 height: '15px',
                 viewBox: '0 0 15 15'
             }
         case 'btnSignTrash':
-        // case 'btnSignUndo':
-        // case 'btnSignRedo':
+        case 'btnSignUndo':
+        case 'btnSignRedo':
             return {
                 width: '14px',
                 height: '15px',
                 viewBox: '0 0 14 15'
             }
-        /*case 'btnSignCode':
+        case 'btnSignCode':
             return {
                 width: "16px",
                 height: "15px",
                 viewBox: "0 0 16 15"
-            }*/
+            }
 
         case 'btnSignClose':
             return {
@@ -134,12 +133,12 @@ export function getIconSize(type: string) {
                 height: '5px',
                 viewBox: '0 0 8 5'
             }
-        /*case 'articleMenu':
+        case 'articleMenu':
             return {
-                width: "18px",
-                height: "14px",
-                viewBox: "0 0 18 14"
-            }*/
+                width: '18px',
+                height: '14px',
+                viewBox: '0 0 18 14'
+            }
         case 'noticeInfo':
         case 'noticeError':
         case 'noticeSuccess':

@@ -25,7 +25,6 @@ function getConfig(userDataSectionMsg: any) {
             }
         },
         bottom: {
-            topOffset: 'small',
             submit: {
                 text: userDataSectionMsg.submitBtnText,
             },
@@ -33,7 +32,9 @@ function getConfig(userDataSectionMsg: any) {
         },
         afterSubmit(response, outerFns, formDetails) {
             const newEmail = formDetails.readyFieldValues.email.toString()
-            store.dispatch( actions.modal.openModal(<ModalContent newEmail={newEmail}/>) )
+            store.dispatch( actions.modal.openModal({
+                content: <ModalContent newEmail={newEmail}/>
+            }))
         },
     }
 

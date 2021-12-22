@@ -13,7 +13,7 @@ export type SvgIconPropType = {
     extraClass?: string // Класс значка если нужного нет в готовом наборе
 }
 
-/** Значёк */
+/** Значок */
 export default function SvgIcon(props: SvgIconPropType) {
 
     let {
@@ -22,7 +22,7 @@ export default function SvgIcon(props: SvgIconPropType) {
         extraClass, // Класс значка
     } = props
 
-    // Значёк
+    // Значок
     const Icon = getIcon(type)
     // Размеры
     const iconSizes = getIconSize(type)

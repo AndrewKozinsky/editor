@@ -1,11 +1,11 @@
 // import FilesTreeType from 'types/filesTree'
-// import {updateArticleCodeRequest} from 'requests/editor/article/updateArticleRequest'
-// import StoreArticleTypes from 'store/article/articleTypes'
-// import actions from 'store/rootAction'
-// import { store } from 'store/rootReducer'
-// import articleManager from './articleManager'
+import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
+import StoreArticleTypes from 'store/article/articleTypes'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import articleManager from '../articleManager'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-// import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 
 
 /*type MarksObj = {
@@ -23,13 +23,13 @@
  * The function saves code of an article to a server
  * @param {Array} historyArr — articles history array
  * @param {Number} historyCurrentIdx — current history item index
- * @param {String} articleUuId — article uuid which I have to save in a server
+ * @param {String} articleId — article uuid which I have to save in a server
  */
-/*export async function saveArticle(
+export async function saveArticle(
     this: typeof articleManager,
     historyArr: StoreArticleTypes.HistoryItems,
     historyCurrentIdx: number,
-    articleUuId: null | string
+    articleId: null | number
 ) {
     if (!articleId) return
 
@@ -40,17 +40,16 @@
     const historyItem = this.getCurrentHistoryItem(historyArr, historyCurrentIdx)
 
     // Save article code in a server
-    await updateArticleCodeRequest(articleUuId, historyItem.article)
-}*/
+    await updateArticleRequest(articleId, undefined, undefined, historyItem.article)
+}
 
 /**
  * The function saves code of an article to a server
- * @param {String} articleUuId — article uuid which I have to save in a server
+ * @param {String} articleId — article uuid which I have to save in a server
  */
-/*
-export async function deleteArticle( this: typeof articleManager, articleUuId: null | string ) {
-    if (!articleUuId) return
+export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
+    if (!articleId) return
 
     // Delete article in a server
-    await deleteArticleRequest(articleUuId)
-}*/
+    await deleteArticleRequest(articleId)
+}

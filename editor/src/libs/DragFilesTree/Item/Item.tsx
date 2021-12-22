@@ -142,7 +142,7 @@ type IconPropType = {
     itemData: DragFilesTreeType.Item
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
     const {
         itemData
@@ -159,7 +159,7 @@ type LoadingPropType = {
     itemData: DragFilesTreeType.Item
 }
 
-/** Значёк загрузки. */
+/** Значок загрузки. */
 function Loading(props: LoadingPropType) {
     const { itemData } = props
 
@@ -184,7 +184,7 @@ type RightButtonsPropType = {
     after: DragFilesTreeType.After
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function RightButtons(props: RightButtonsPropType) {
     const {
         items,

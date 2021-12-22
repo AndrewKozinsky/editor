@@ -2,7 +2,7 @@ import './CodeCheckInfo.scss'
 
 const rootClass = 'code-check-info'
 
-function makeClasses() {
+export default function makeClasses() {
     return {
         header: `${rootClass}__header`,
         itemsUl: `${rootClass}__items-ul`,
@@ -10,6 +10,3 @@ function makeClasses() {
         code: `${rootClass}__code`,
     }
 }
-
-
-export default makeClasses

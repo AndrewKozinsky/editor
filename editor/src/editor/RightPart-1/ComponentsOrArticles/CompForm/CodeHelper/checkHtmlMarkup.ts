@@ -20,6 +20,3 @@ export function isMarkupCorrect(htmlStr: string) {
         return ['Разметка или не соответствует HTML или есть более одного корневого элемента.']
     }
 }
-
-
-

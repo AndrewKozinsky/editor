@@ -3,14 +3,12 @@ import './Select.scss'
 
 const selectRootClass = 'select-input'
 
-function makeClasses(isFocus: boolean) {
+export default function makeClasses(isFocus: boolean) {
     return {
         wrapper: getWrapperClasses(isFocus),
         wrapperTip: selectRootClass + '__wrapper-tip'
     }
 }
-
-export default makeClasses
 
 /**
  * Функция возвращает классы обёртки выпадающего списка.

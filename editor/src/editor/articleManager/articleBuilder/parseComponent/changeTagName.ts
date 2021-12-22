@@ -24,7 +24,7 @@ function getTagName(dElem: ArticleTypes.ComponentElem, tempElem: TempCompTypes.E
     // If tag is a string, that is a ready tag name.
     if (typeof dElem.dCompElemTag === 'string') return dElem.dCompElemTag
 
-    // Otherwise tag id was passed. That's why I need to find tag name with this id in the component template...
+    // Otherwise, tag id was passed. That's why I need to find tag name with this id in the component template...
     // Its tags
     const tags = tempElem.elemTags.elemTagsValues
     // Get tag object by tag id

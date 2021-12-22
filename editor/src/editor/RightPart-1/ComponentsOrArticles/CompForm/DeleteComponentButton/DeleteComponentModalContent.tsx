@@ -1,8 +1,6 @@
 import React from 'react'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {componentFormMessages} from 'messages/componentTemplateFormMessages'
-// import useGetMessages from 'messages/fn/useGetMessages'
-// import {componentFolderFormMessages} from 'messages/componentFolderFormMessages'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'

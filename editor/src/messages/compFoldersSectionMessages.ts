@@ -1,5 +1,3 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
-
 
 // Структура папок и файлов шаблонов компонентов
 export const compFoldersSectionMessages = {

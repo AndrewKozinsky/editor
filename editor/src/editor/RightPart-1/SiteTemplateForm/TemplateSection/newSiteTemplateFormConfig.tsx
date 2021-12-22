@@ -1,5 +1,5 @@
 import * as yup from 'yup'
-import FCType from 'src/libs/FormConstructor/FCType'
+import FCType from 'libs/FormConstructor/FCType'
 import createSiteTemplateRequest, {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import { afterSubmit } from './siteTemplateForm-func'
 import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'

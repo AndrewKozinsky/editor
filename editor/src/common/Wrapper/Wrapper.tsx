@@ -9,6 +9,7 @@ export type WrapperPropType = {
     t?: TType // Отступ сверху
     b?: BType // Отступ снизу
     gap?: GapType // Отступы между элементами внутри обёртки
+    extraClass?: string // Дополнительный класс обёртке
     style?: object // Дополнительный стиль обёртке
 }
 
@@ -20,10 +21,11 @@ export type GapType = 10 | 20
 export default function Wrapper(props: WrapperPropType) {
     const {
         children, // Дети компонента
+        extraClass,
         style = {}
     } = props
 
-    const CN = makeClasses(props)
+    const CN = makeClasses(props, extraClass)
 
     return (
         <div className={CN.root} style={style}>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-// import { AppStateType, useAppSelector } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'

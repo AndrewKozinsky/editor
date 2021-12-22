@@ -4,7 +4,7 @@ import {MiscTypes} from 'types/miscTypes'
 
 
 /**
- * Функция возращает массив тегов <option>
+ * Функция возвращает массив тегов <option>
  * @param {Array} options — массив пунктов выпадающего списка
  */
 export function getOptions(options: OptionsType) {

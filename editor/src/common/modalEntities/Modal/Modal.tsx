@@ -1,6 +1,6 @@
 import React from 'react'
 import useGetModalSelectors from 'store/modal/modalSelectors'
-import makeClasses from './Modal-classes'
+import useMakeClasses from './Modal-classes'
 import {
     useGetIsModalOpen,
     useGetModalCloseHandler
@@ -16,10 +16,11 @@ export default function Modal() {
 
     // Обработчик закрытия модального окна
     const onModalClose = useGetModalCloseHandler()
+
     // Открыто ли модальное окно
     const isOpen = useGetIsModalOpen()
 
-    const CN = makeClasses()
+    const CN = useMakeClasses()
 
     // Ничего не отрисовывать если модальное окно закрыто
     if (!isOpen) return null

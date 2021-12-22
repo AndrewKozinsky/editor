@@ -24,7 +24,7 @@ export default function ModalContent(props: ModalContentPropType) {
         <ModalShortContent
             header={userDataSectionMsg.confirmModalHeader}
             text={userDataSectionMsg.confirmModalText}
-            bottomElem={<FormConstructor config={submitBtnFormConfig} state={formState} />}
+            bottomElems={<FormConstructor config={submitBtnFormConfig} state={formState} />}
         />
     )
 }

@@ -1,13 +1,26 @@
 import './Modal.scss'
+import useGetModalSelectors from 'store/modal/modalSelectors'
+import StoreModalTypes from 'store/modal/modalTypes'
+import { makeCN } from 'utils/StringUtils'
 
-const rootClass = 'modal'
+const CN = 'modal'
 
-function makeClasses() {
+export default function useMakeClasses() {
+    const modalType = useGetModalSelectors().type
+
     return {
-        root: rootClass,
-        outerWrapper: `${rootClass}__outer-wrapper`,
-        closeBtn: `${rootClass}__close-btn`
+        root: getRootClass(modalType),
+        outerWrapper: CN + `__outer-wrapper`,
+        closeBtn: CN + `__close-btn`,
     }
 }
 
-export default makeClasses
+function getRootClass(modalType: StoreModalTypes.Type) {
+    const classes  = [CN]
+
+    if (modalType === 'full') {
+        classes.push(CN + '--full')
+    }
+
+    return makeCN(classes)
+}

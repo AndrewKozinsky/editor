@@ -1,11 +1,11 @@
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import articleManager from 'editor/articleManager/articleManager'
 import {
     checkPressedKeys,
     getPressedKeys,
     PressedKeysObj
 } from './getPressedKeys'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 
 
 export default function setShortcutsHandler() {
@@ -26,7 +26,7 @@ function shortcutsHandler(e: KeyboardEvent) {
     closeModal(pressedKeys)
 
     // Making undo or redo history step in article
-    // undoRedoArticleHistory(pressedKeys)
+    undoRedoArticleHistory(pressedKeys)
 }
 
 
@@ -39,7 +39,7 @@ function closeModal(pressedKeys: PressedKeysObj) {
 
 
 // If you pressed Cmd + Z or Shift + Cmd + Z, then make undo or redo history step in article
-/*function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
+function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
 
     // Return the function if user is not on the article page
     if (store.getState().settings.mainTab !== 1) return
@@ -58,4 +58,4 @@ function closeModal(pressedKeys: PressedKeysObj) {
 
         store.dispatch( actions.article.makeHistoryStep('redo') )
     }
-}*/
+}

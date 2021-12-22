@@ -4,7 +4,7 @@ import './Button.scss'
 
 const buttonRootClass = 'btn'
 
-function makeClasses(buttonProps: ButtonPropType) {
+export default function makeClasses(buttonProps: ButtonPropType) {
     return {
         root: getButtonClasses(buttonProps),
         icon: `${buttonRootClass}__icon`
@@ -47,5 +47,3 @@ export function getButtonClasses(buttonProps: ButtonPropType) {
 
     return makeCN( classes )
 }
-
-export default makeClasses

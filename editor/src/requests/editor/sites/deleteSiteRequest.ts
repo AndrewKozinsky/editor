@@ -18,4 +18,3 @@ export default async function deleteSiteRequest(siteId: number) {
 
 // Тип данных с ответом от сервера
 type DeleteSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType
-

@@ -2,11 +2,8 @@ import React from 'react'
 import useGetShowModal from 'utils/hooksUtils'
 import Button from 'common/formElements/Button/Button'
 import useGetMessages from 'messages/fn/useGetMessages'
-import {articleFormMessages} from 'messages/articleFormMessages'
-import {DeleteArticleModalContent} from './DeleteArticleModalContent'
-// import useGetMessages from 'messages/fn/useGetMessages'
-// import {componentFormMessages} from 'messages/componentTemplateFormMessages'
-// import { DeleteComponentModalContent } from './DeleteComponentModalContent'
+import { articleFormMessages } from 'messages/articleFormMessages'
+import { DeleteArticleModalContent } from './DeleteArticleModalContent'
 
 
 /** Кнопка удаления сайта открывающая модальное окно подтверждения */

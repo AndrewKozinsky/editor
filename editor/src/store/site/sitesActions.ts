@@ -14,6 +14,7 @@ import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage
 import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 import TempCompTypes from '../article/codeType/tempCompCodeType'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import ArticleTypes from '../article/codeType/articleCodeType'
 
 
 const sitesActions = {
@@ -285,7 +286,7 @@ const sitesActions = {
         id: null | DragFilesTreeType.Id,
         type: null | DragFilesTreeType.ItemType,
         name?: string,
-        code?: string,
+        code?: ArticleTypes.Article,
         siteTemplateId?: null | number
     ): StoreSitesTypes.SetCurrentArtAction {
         return {
@@ -300,33 +301,13 @@ const sitesActions = {
         }
     },
 
-
-
-
-
-
-
-
-
-
-
-
-
     // Article item (folder or file) type setting
-    /*setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE,
-            payload
-        }
-    },*/
-
-    // Article item (folder or file) type setting
-    /*setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
+    setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART_ITEM_ID,
             payload
         }
-    },*/
+    },
 }
 
 export default sitesActions

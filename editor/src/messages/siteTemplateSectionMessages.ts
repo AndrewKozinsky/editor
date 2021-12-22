@@ -1,11 +1,6 @@
-// import { getMessagesObject } from 'messages/fn/getMessagesObject'
 
 // Содержимое вкладки «Шаблоны подключаемых файлов»
 export const siteTemplateSectionMessages = {
-    /*headerNewPlugin: {
-        eng: 'New template',
-        rus: 'Новый шаблон'
-    },*/
     newTemplateBtn: {
         eng: 'New site template',
         rus: 'Новый шаблон сайта'

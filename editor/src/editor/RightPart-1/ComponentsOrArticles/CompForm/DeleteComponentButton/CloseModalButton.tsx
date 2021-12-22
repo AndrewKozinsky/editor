@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import Button from 'common/formElements/Button/Button'
 import useGetMessages from 'messages/fn/useGetMessages'
-import {componentFormMessages} from 'messages/componentTemplateFormMessages'
+import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 
 
 export default function CloseModalButton() {

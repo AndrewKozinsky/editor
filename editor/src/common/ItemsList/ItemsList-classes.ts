@@ -3,13 +3,12 @@ import './ItemsList.scss'
 
 const rootClass = 'items-list__item'
 
-function makeClasses(isActive: boolean = false) {
+export default function makeClasses(isActive: boolean = false) {
     return {
         item: useGetItemClasses(isActive),
     }
 }
 
-export default makeClasses
 
 export function useGetItemClasses(isActive: boolean): string {
 

@@ -3,12 +3,12 @@ import {
     createCompAndSetInElem,
     createCompAndSetInRootOfArticle
 } from './methods/insert'
-// import {
-//     deleteArticle,
-//     saveArticle,
-// } from './methods/misc'
 import {
-//     getCurrentHistoryItem,
+    deleteArticle,
+    saveArticle,
+} from './methods/misc'
+import {
+    getCurrentHistoryItem,
     getComponent,
     getDataElemInDataComp,
     getDataElemInDataCompArr,
@@ -19,27 +19,31 @@ import {
     getCompParentArray
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
-import { turnArticleDataToJSX } from './articleBuilder/articleBuilder'
+import {
+    turnArticleDataToHTML,
+    turnArticleDataToJSX
+} from './articleBuilder/articleBuilder'
 import {
     createArticle,
     createComponent,
     createSimpleTextComponent
 } from './methods/create'
-// import {
+import {
 //     canComponentPutInElement,
 //     hasElemNestedElements,
-//     canMakeHistoryStep,
-//     isArticleSave
-// } from "./methods/check"
+    canMakeHistoryStep,
+    isArticleSave
+} from './methods/check'
 
 
 class ArticleManager {
     // BUILD ARTICLE
     turnArticleDataToJSX = turnArticleDataToJSX
+    turnArticleDataToHTML = turnArticleDataToHTML
 
     // GETTING RESOURCES
     // Finds current history item object
-    // getCurrentHistoryItem = getCurrentHistoryItem
+    getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
     // Finds element template in templates array
@@ -61,8 +65,8 @@ class ArticleManager {
     // The method returns boolean can pass component put in element
     // canComponentPutInElement = canComponentPutInElement
     // hasElemNestedElements = hasElemNestedElements
-    // canMakeHistoryStep = canMakeHistoryStep
-    // isArticleSave = isArticleSave
+    canMakeHistoryStep = canMakeHistoryStep
+    isArticleSave = isArticleSave
 
     // CREATE
     createArticle = createArticle
@@ -78,8 +82,8 @@ class ArticleManager {
     hooks = hooks
 
     // MISC
-    // saveArticle = saveArticle
-    // deleteArticle = deleteArticle
+    saveArticle = saveArticle
+    deleteArticle = deleteArticle
 }
 
 export default new ArticleManager()

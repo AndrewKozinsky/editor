@@ -2,7 +2,7 @@ import './Notice.scss'
 
 const noticeRootClass = 'notice'
 
-function makeClasses(bg?: boolean) {
+export default function makeClasses(bg?: boolean) {
     return {
         bg: getBgClass(bg),
         icon: noticeRootClass + '__icon',
@@ -16,5 +16,3 @@ function getBgClass(bg?: boolean) {
 
     return classes.join(' ')
 }
-
-export default makeClasses

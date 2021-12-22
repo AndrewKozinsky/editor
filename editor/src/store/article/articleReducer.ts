@@ -111,7 +111,7 @@ const initialState: ArticleReducerType = {
     articleDataPrepared: false
 }
 
-/*function clearArticle(
+function clearArticle(
     state: ArticleReducerType, action: StoreArticleTypes.ClearArticleAction
 ): ArticleReducerType {
     // Do not touch the document's links
@@ -121,7 +121,7 @@ const initialState: ArticleReducerType = {
     )
 
     return newState
-}*/
+}
 
 // Установка id редактируемой статьи. После редактор загружает все данные.
 function setArticleId(
@@ -304,7 +304,7 @@ function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticle
 }
 
 // The function changes a current history step
-/*function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
+function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
     let newStep = state.historyCurrentIdx
 
     if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
@@ -318,15 +318,15 @@ function createAndSetHistoryItem(state: ArticleReducerType, action: StoreArticle
         ...state,
         historyCurrentIdx: newStep
     }
-}*/
+}
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
-/*function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
     return {
         ...state,
         historyStepWhenWasSave: state.historyCurrentIdx
     }
-}*/
+}
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
 function setArticleDataPrepared(state: ArticleReducerType, action: StoreArticleTypes.SetArticleDataPreparedAction): ArticleReducerType {
@@ -393,8 +393,8 @@ export default function articleReducer(
 ): ArticleReducerType {
 
     switch (action.type) {
-        // case StoreArticleTypes.CLEAR_ARTICLE:
-        //     return clearArticle(state, action)
+        case StoreArticleTypes.CLEAR_ARTICLE:
+            return clearArticle(state, action)
         case StoreArticleTypes.SET_ARTICLE_ID:
             return setArticleId(state, action)
         case StoreArticleTypes.SET_ARTICLE:
@@ -411,10 +411,10 @@ export default function articleReducer(
             return setTempCompFolders(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
-        // case StoreArticleTypes.MAKE_HISTORY_STEP:
-        //     return makeHistoryStep(state, action)
-        // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
-        //     return setHistoryStepWhenArticleWasSaved(state, action)
+        case StoreArticleTypes.MAKE_HISTORY_STEP:
+            return makeHistoryStep(state, action)
+        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
+            return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.SET_ARTICLE_DATA_PREPARED:
             return setArticleDataPrepared(state, action)
         case StoreArticleTypes.SET_PRESSED_KEY:

@@ -285,47 +285,8 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Установка id выбранного подключаемых шаблонов
-/*function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorArticleType)
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorArticleType, action.payload)
-    }
-
-    return {
-        ...state,
-        articleSection: {
-            ...state.articleSection,
-            currentArtItemType: action.payload
-        }
-    }
-}*/
-
-// Установка id выбранного подключаемых шаблонов
-/*function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
+// Установка id открытой статьи в сайтах
+function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage(config.ls.editorArticleId)
@@ -342,7 +303,7 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
             currentArtItemId: action.payload
         }
     }
-}*/
+}
 
 // Редьюсер Store.sites
 export default function sitesReducer(
@@ -372,6 +333,8 @@ export default function sitesReducer(
             return setCurrentComp(state, action)
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
+        case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
+            return setCurrentArtItemId(state, action)
 
         default:
             // @ts-ignore

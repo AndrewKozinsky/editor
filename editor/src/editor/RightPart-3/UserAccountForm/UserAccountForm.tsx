@@ -9,7 +9,6 @@ import useGetMessages from 'messages/fn/useGetMessages'
 
 
 export default function UserAccountForm() {
-
     const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
 
     // Хук возвращает функцию открывающую модальное окно

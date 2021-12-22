@@ -3,7 +3,7 @@ import './TextInput.scss'
 
 const textInputRootClass = 'text-input'
 
-function makeClasses(maxWidth?: 250) {
+export default function makeClasses(maxWidth?: 250) {
     return {
         root: getTextInputClasses(maxWidth),
     }
@@ -24,5 +24,3 @@ export function getTextInputClasses(maxWidth?: 250) {
 
     return makeCN(classes)
 }
-
-export default makeClasses
