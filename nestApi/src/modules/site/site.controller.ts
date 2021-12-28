@@ -131,7 +131,6 @@ export class SiteController {
         @User() user: UserEntity,
     ): Promise<void> {
         const site = await this.siteService.createSite(createSiteDto, user)
-
         this.siteService.buildSiteResponse([site], response, HttpStatus.CREATED)
     }
 

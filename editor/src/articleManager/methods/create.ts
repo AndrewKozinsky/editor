@@ -1,23 +1,23 @@
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import articleManager from '../articleManager'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import articleManager from 'articleManager/articleManager'
 
 /**
  * Функция создаёт данные статьи. Если ничего не передать, то будут данные для новой статьи.
  * @param {Number} dMaxCompId — максимальный id компонента
  * @param {Array} dComps — массив компонентов статьи
  */
-/*export function createArticle(
+export function createArticle(
     dMaxCompId: number = 0, dComps: ArticleTypes.Components = []
 ): ArticleTypes.Article {
     return {
         dMeta: {
+            version: 1,
             dMaxCompId
         },
         dComps
     }
-}*/
+}
 
 /**
  * The function creates a new component data with passed tempCompId
@@ -25,7 +25,7 @@
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
-/*export function createComponent(
+export function createComponent(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
@@ -51,19 +51,19 @@
         compData,
         maxCompId
     }
-}*/
+}
 
-/*type CreateCompElementsReturnType = {
+type CreateCompElementsReturnType = {
     compElems: null | ArticleTypes.ComponentElems,
     maxCompId: number
-}*/
+}
 
 /**
  * The function creates elements in a new component
  * @param {Object} tempComp — a component template
  * @param {Number} maxCompId — a maximum component id in an article
  */
-/*function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number): CreateCompElementsReturnType {
+function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number): CreateCompElementsReturnType {
     let newMaxCompId = maxCompId
 
     if (!tempComp.content.elems?.length) {
@@ -90,11 +90,11 @@
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
 
         // Пока не знаю нужно ли это делать
-        /!*if (tElem.hidden) {
+        /*if (tElem.hidden) {
             newElemData.layer = {
                 hidden: true
             }
-        }*!/
+        }*/
 
         if (tElem.elemTextInside) {
             ++newMaxCompId
@@ -111,7 +111,7 @@
         compElems: newElemsArr,
         maxCompId: newMaxCompId
     }
-}*/
+}
 
 /**
  * Функция получает html-компонент, находит элемент с переданным идентификатором и возвращает имя группы,
@@ -119,7 +119,7 @@
  * @param {HTMLElement} $component — html-компонент
  * @param {String} tElemId — id шаблона элемента
  */
-/*function getElemGroupNameFromHTML($component: HTMLElement, tElemId: string) {
+function getElemGroupNameFromHTML($component: HTMLElement, tElemId: string) {
     const $wrapper = document.createElement('div')
     $wrapper.append($component)
 
@@ -128,7 +128,7 @@
     return $elem
         ? $elem.dataset.emGroup
         : null
-}*/
+}
 
 /**
  * Функция формирует массив атрибутов элемента с пустыми значениями.
@@ -136,7 +136,7 @@
  * чтобы при создании нужные значения уже были проставлены
  * @param {Object} tElem — a template element object
  */
-/*function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
+function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
     if (!tElem.elemAttrs) return null
 
     const dElemAttrs: ArticleTypes.Attribs = []
@@ -181,17 +181,16 @@
     }
 
     return dElemAttrs
-}*/
+}
 
 /**
  * Функция создаёт объект пустого текстового компонента
  * @param {Number} maxCompId — максимальный id компонента существующий в статье
  */
-/*
 export function createSimpleTextComponent(maxCompId: number): ArticleTypes.SimpleTextComponent {
     return {
         dCompType: 'simpleTextComponent',
         dCompId: maxCompId + 1,
         text: ''
     }
-}*/
+}

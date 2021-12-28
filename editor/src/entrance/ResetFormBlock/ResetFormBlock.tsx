@@ -5,11 +5,11 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import { commonMessages } from 'messages/commonMessages'
 import getConfig from './formConfig'
 import useGetMessages from 'messages/fn/useGetMessages'
 import { regMenuMessages } from 'messages/regMenuMessages'
 import { resetFormMessages } from 'messages/resetFormMessages'
+import { commonMessages } from 'messages/commonMessages'
 
 
 /** Форма сброса пароля */

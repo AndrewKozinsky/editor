@@ -1,8 +1,7 @@
 import { store } from 'store/rootReducer'
+import SiteTemplateResponseType from './siteTemplateServerResponseType'
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import SiteTemplateServerResponseType from './siteTemplateServerResponseType'
 
 /**
  * Функция создаёт новый шаблон подключаемых файлов
@@ -19,7 +18,7 @@ export default async function createSiteTemplateRequest(values: CreateNewSiteTem
         body: JSON.stringify(newTemplateData)
     }
 
-    const response: CreateSiteTemplateRequestServerResponse = await makeFetch(
+    const response: SiteTemplateResponseType = await makeFetch(
         getApiUrl('createSiteTemplate'), options
     )
 
@@ -30,6 +29,3 @@ export default async function createSiteTemplateRequest(values: CreateNewSiteTem
 export type CreateNewSiteTemplateValuesType = {
     content: string
 }
-
-// Тип данных с ответом от пользователя
-type CreateSiteTemplateRequestServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType

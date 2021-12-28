@@ -7,7 +7,7 @@ import useGetShowModal from 'utils/hooksUtils'
 import { ModalContent } from './deleteAccount'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/* Кнопки выхода и удаления учётной записи */
 export default function UserAccountForm() {
     const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
 

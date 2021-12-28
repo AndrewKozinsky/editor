@@ -7,6 +7,7 @@ import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { updateComponentRequest } from 'requests/editor/components/updateComponentRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import articleManager from '../../../../../articleManager/articleManager'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
 
@@ -65,6 +66,11 @@ function getFormConfig(componentFormMsg: any) {
             return await updateComponentRequest(
                 currentCompItemId, readyFieldValues.content.toString()
             )
+        },
+        afterSubmit() {
+            // Обновить компоненты у редактируемой статьи если отредактировали
+            // компонент сайта, к которому принадлежит редактируемая статья.
+            articleManager.remoteControl.updateTempComps()
         }
     }
 

@@ -9,7 +9,8 @@ import {
     useGetOnItemClick,
     afterAddingNewFile,
     saveFoldersOnServer,
-    afterDeleteItem, useGetNewItemsName
+    afterDeleteItem,
+    useGetNewItemsName
 } from './FoldersList-func'
 
 

@@ -1,12 +1,13 @@
 import './CodeCheckInfo.scss'
 
-const rootClass = 'code-check-info'
+const CN = 'code-check-info'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses() {
     return {
-        header: `${rootClass}__header`,
-        itemsUl: `${rootClass}__items-ul`,
-        itemsLi: `${rootClass}__items-li`,
-        code: `${rootClass}__code`,
+        header: CN + `__header`,
+        itemsUl: CN + `__items-ul`,
+        itemsLi: CN + `__items-li`,
+        code: CN + `__code`,
     }
 }

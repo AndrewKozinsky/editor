@@ -1,13 +1,13 @@
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import articleManager from '../../articleManager'
-// import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
-// import { setExtraAttribsToMainTag } from './setExtraAttribsToMainTag'
-// import { putRepeatedElems } from './putRepeatedElems'
-// import { getConsistObjArr } from './getConsistObjArr'
-// import { changeTagName } from './changeTagName'
-// import { setAttribs } from './setAttribs'
-// import { insertChildren } from './insertChildren'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import articleManager from 'articleManager/articleManager'
+import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
+import { setExtraAttribsToMainTag } from './setExtraAttribsToMainTag'
+import { putRepeatedElems } from './putRepeatedElems'
+import { getConsistObjArr } from './getConsistObjArr'
+import { changeTagName } from './changeTagName'
+import { setAttribs } from './setAttribs'
+import { insertChildren } from './insertChildren'
 
 /**
  * Функция получает данные компонента и сливает с шаблоном компонента. В результате получается HTML-объект.
@@ -15,13 +15,14 @@
  * @param {Object} compData — данные компонента
  * @param {Array} tempComps — массив шаблонов компонентов
  */
-/*export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
-
+export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
     // Get component template by its tmpCompId
     let template = articleManager.getTemplate(tempComps, compData.tCompId)
+    if (!template) debugger
 
     // Get html string
     let htmlStr = template.content.html.trim()
+    // debugger
 
     // Convert html string to html-object
     let htmlObjOriginal = htmlStringToObject(htmlStr)
@@ -46,4 +47,4 @@
     }
 
     return htmlObj
-}*/
+}

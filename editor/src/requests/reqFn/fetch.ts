@@ -29,7 +29,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
     const [error, setError] = useState(false)
 
     // Язык интерфейса
-    const { editorLanguage } = useGetSettingsSelectors()
+    const lang = store.getState().settings.editorLanguage
 
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {
@@ -41,7 +41,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
         if (!isLoading) return
 
         // Добавление заголовка языка интерфейса в параметры запроса
-        const extraOptions = setLanguageHeader(options, editorLanguage)
+        const extraOptions = setExtraOptions(options, lang)
 
         try {
             fetch(url, extraOptions)
@@ -73,7 +73,7 @@ export async function makeFetch(url: string, options: OptionsType) {
     const lang = store.getState().settings.editorLanguage
 
     // Добавление заголовка языка интерфейса в параметры запроса
-    const extraOptions = setLanguageHeader(options, lang)
+    const extraOptions = setExtraOptions(options, lang)
 
     try {
         const rowData = await fetch(url, extraOptions)
@@ -91,13 +91,13 @@ export async function makeFetch(url: string, options: OptionsType) {
  * @param {Object} optionsObj — объект параметров запроса
  * @param {String} lang — язык интерфейса пользователя
  */
-function setLanguageHeader(optionsObj: OptionsType, lang = 'eng') {
+function setExtraOptions(optionsObj: OptionsType, lang = 'eng') {
     return {
         ...optionsObj,
         headers: {
             ...optionsObj.headers,
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json; charset=utf-8',
             'Editor-Language': lang
         }
     }

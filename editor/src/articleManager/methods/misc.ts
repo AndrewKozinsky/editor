@@ -1,11 +1,15 @@
 // import FilesTreeType from 'types/filesTree'
-// import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
-// import StoreArticleTypes from 'store/article/articleTypes'
+import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
+import StoreArticleTypes from 'store/article/articleTypes'
 // import actions from 'store/rootAction'
 // import { store } from 'store/rootReducer'
-// import articleManager from '../articleManager'
+import articleManager from 'articleManager/articleManager'
+import actions from '../../store/rootAction'
+import { store } from '../../store/rootReducer'
 // import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-// import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
+import config from '../../utils/config'
+import { removeFromLocalStorage } from '../../utils/MiscUtils'
 
 
 /*type MarksObj = {
@@ -25,7 +29,7 @@
  * @param {Number} historyCurrentIdx — current history item index
  * @param {String} articleId — article uuid which I have to save in a server
  */
-/*export async function saveArticle(
+export async function saveArticle(
     this: typeof articleManager,
     historyArr: StoreArticleTypes.HistoryItems,
     historyCurrentIdx: number,
@@ -41,15 +45,27 @@
 
     // Save article code in a server
     await updateArticleRequest(articleId, undefined, undefined, historyItem.article)
-}*/
+}
+
+
+/** Функция очищающая редактируемую статью */
+export function clearArticle(this: typeof articleManager) {
+    store.dispatch(actions.article.clearArticle())
+}
 
 /**
  * The function saves code of an article to a server
- * @param {String} articleId — article uuid which I have to save in a server
+ * @param {String} articleId — article id which I have to save in a server
  */
-/*export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
+export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
     if (!articleId) return
+
+    // Удалить данные про id открытой статьи из LocalStorage
+    removeFromLocalStorage(config.ls.editArticleId)
+
+    // Очистить редактор от этой статьи
+    this.clearArticle()
 
     // Delete article in a server
     await deleteArticleRequest(articleId)
-}*/
+}

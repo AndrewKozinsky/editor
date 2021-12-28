@@ -1,13 +1,13 @@
-// import React, { ReactElement } from 'react'
-// import { convertToCamelCase } from 'utils/StringUtils'
-// import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
+import React, { ReactElement } from 'react'
+import { convertToCamelCase } from 'utils/StringUtils'
+import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
 
 /**
  * Функция получает массив со структурой HTML и преобразует его в JSX.
  * @param {Object} htmlStructure — объект с разобранной HTML-структурой компонента
  * @param {Number} key — key
  */
-/*export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement[] {
+export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement[] {
     //@ts-ignore
     return htmlStructure.map((htmlObj, i) => {
         if ('text' in htmlObj) {
@@ -17,11 +17,11 @@
             return handleTagObject(htmlObj, i)
         }
     })
-}*/
+}
 
-/*function handleTextObject(htmlObj: HTMLObjArrType.Text) {
+function handleTextObject(htmlObj: HTMLObjArrType.Text) {
     return htmlObj.text
-}*/
+}
 
 
 /**
@@ -29,7 +29,7 @@
  * @param {Object} htmlObj — object with html-structure
  * @param {Number} key — key property
  */
-/*function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
+function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
     let tagName = htmlObj.tag
 
     // Подготовлю атрибуты
@@ -42,7 +42,7 @@
 
     // Верну созданный компонент Реакта
     return React.createElement( tagName, attribs, children )
-}*/
+}
 
 /**
  * Функция подготовливает атрибуты текущего элемента
@@ -51,7 +51,7 @@
  * @param {Number} key — key
  * @returns {*}
  */
-/*function fixAttribs(htmlObj: HTMLObjArrType.Tag, tagName: string, key: number) {
+function fixAttribs(htmlObj: HTMLObjArrType.Tag, tagName: string, key: number) {
     const objAttribs = htmlObj.attrs
 
     // Если атрибутов нет, то вернуть объект с атрибутом key.
@@ -71,10 +71,10 @@
             // В переменной будет так: box-shadow: 0 30px 55px rgba(0, 0, 0, .2); transform: translateY(5px);
             let styleStr = objAttribs[propName].trim()
 
-            /!*[
+            /*[
                 "box-shadow: 0 30px 55px rgba(0, 0, 0, .2)",
                 "transform: translateY(5px);"
-            ]*!/
+            ]*/
             let styleArr = styleStr.split('; ')
 
             // Удалю последнюю точку с запятой
@@ -110,4 +110,4 @@
     objAttribs.key = key
 
     return objAttribs
-}*/
+}

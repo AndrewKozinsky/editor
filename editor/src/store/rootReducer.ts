@@ -10,7 +10,7 @@ import modalReducer from './modal/modalReducer'
 import { composeWithDevTools } from 'redux-devtools-extension'
 // @ts-ignore
 import ReduxThunk from 'redux-thunk'
-import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 
 // Корневой редьюсер
 const rootReducer = combineReducers({

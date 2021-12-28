@@ -8,37 +8,29 @@ export type UserReducerType = {
 // Изначальные значения
 const initialState: UserReducerType = {
     // Статус токена авторизации:
-    // 0 — неизвестно есть ли токен и правилен ли он
-    // 1 — токена нет
-    // 2 — токен есть и он правильный
-    authTokenStatus: 0,
+    // unknown — неизвестно есть ли токен и правилен ли он
+    // fail — токена нет или он неправильный
+    // success — токен есть и он правильный
+    authTokenStatus: 'unknown',
     // Почта пользователя
     email: ''
 }
 
 // Установка статуса токена авторизации
-function setAuthTokenStatus(state: UserReducerType, action: StoreUserTypes.SetAuthTokenStatusActionType): UserReducerType {
+function setUserData(state: UserReducerType, action: StoreUserTypes.SetUserDataActionType): UserReducerType {
     return {
         ...state,
-        authTokenStatus: action.payload
+        authTokenStatus: action.payload.tokenStatus,
+        email: action.payload.email
     }
 }
 
-// Set user's email
-function setEmail(state: UserReducerType, action: StoreUserTypes.SetEmailActionType): UserReducerType {
-    return {
-        ...state,
-        email: action.payload
-    }
-}
 
 // Редьюсер Store.user
 export default function userReducer( state = initialState, action: StoreUserTypes.UserActionTypes ): UserReducerType {
     switch (action.type) {
-        case StoreUserTypes.SET_AUTH_TOKEN_STATUS:
-            return setAuthTokenStatus(state, action)
-        case StoreUserTypes.SET_EMAIL:
-            return setEmail(state, action)
+        case StoreUserTypes.SET_USER_DATA:
+            return setUserData(state, action)
         default:
             // @ts-ignore
             const x: never = null

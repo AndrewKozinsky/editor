@@ -6,6 +6,7 @@ import './Item.scss'
 // Корневой класс
 const CN = 'temp-comp-ft-item'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(itemData?: TempCompFilesTreeType.Item) {
     return {
         root: CN,

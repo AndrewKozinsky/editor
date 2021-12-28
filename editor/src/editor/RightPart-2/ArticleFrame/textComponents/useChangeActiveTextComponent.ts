@@ -5,15 +5,19 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { store } from 'store/rootReducer'
-import articleManager from '../../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
+/**
+ * В зависимости от нажатой клавиши, которая хранится в Хранилище,
+ * хук обновляет текст активного текстового компонента.
+ */
 export default function useChangeActiveTextComponent() {
     const { pressedKey, $links } = useGetArticleSelectors()
-    const article = articleManager.hooks.getArticle()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     useEffect(function () {
         // id выделенного текстового компонента
-        const textCompId = article?.selectedTextComp?.dataCompId
+        const textCompId = historyItem?.selectedTextComp?.dataCompId
         if (!pressedKey.code || !textCompId || !$links) return
 
         const selection = $links.$document.getSelection()
@@ -30,9 +34,9 @@ export default function useChangeActiveTextComponent() {
         }
         // В остальных случаях обновить текст текстового компонента
         else {
-            updateTextComp(selection, article, textCompId, pressedKey, $links)
+            updateTextComp(selection, historyItem, textCompId, pressedKey, $links)
         }
-    }, [pressedKey, $links])
+    }, [pressedKey, $links, historyItem])
 }
 
 /**

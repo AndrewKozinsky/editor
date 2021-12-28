@@ -1,4 +1,5 @@
 import StoreSettingsTypes from 'store/settings/settingsTypes'
+import ErrorServerResponseType from '../errorServerResponseType'
 
 // Тип данных о пользователе от сервера
 type UserServerResponseType = {
@@ -15,4 +16,7 @@ type UserServerResponseType = {
     }
 }
 
-export default UserServerResponseType
+
+// Тип данных с ответом от сервера
+export type UserServerResponse =
+    ErrorServerResponseType | UserServerResponseType

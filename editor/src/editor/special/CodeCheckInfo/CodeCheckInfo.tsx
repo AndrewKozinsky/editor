@@ -12,7 +12,7 @@ type CodeCheckInfoPropType = {
 }
 
 /** Плашка с сообщениями о доработках кода или примером кода */
-function  CodeCheckInfo(props: CodeCheckInfoPropType) {
+export default function CodeCheckInfo(props: CodeCheckInfoPropType) {
     const CN = makeClasses()
 
     // Значок на плашке
@@ -27,14 +27,13 @@ function  CodeCheckInfo(props: CodeCheckInfoPropType) {
     )
 }
 
-export default CodeCheckInfo
 
 /** Плашка с сообщениями о доработках кода */
 function CodeCheck(props: CodeCheckInfoPropType) {
     const { items, checkStatus } = props
     const CN = makeClasses()
 
-    // Если успешный статус, то не нужно отрисовывать список ошибок
+    // Если успешный статус, то не нужно отрисовать список ошибок
     if (checkStatus === 'success') return null
 
     return (

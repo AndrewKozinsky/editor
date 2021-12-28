@@ -30,7 +30,7 @@ export default function MainTab(props: MainTabPropType) {
 
     const CN = makeClasses(active, position)
 
-    const buttonAttrs: MiscTypes.ObjStringKeyAnyVal = {
+    const buttonAttrs: MiscTypes.ObjStringKey<any> = {
         title,
         className: CN.tab,
         onClick

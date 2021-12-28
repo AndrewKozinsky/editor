@@ -1,21 +1,24 @@
-// import DragFilesTreeType from 'libs/DragFilesTree/types'
-// import ErrorServerResponseType from 'requests/errorServerResponseType'
+import ErrorServerResponseType from 'requests/errorServerResponseType'
 
-/*type CommonType<T> = {
+type SuccessServerResponseType = {
     status: 'success',
     statusCode: number,
     data: {
-        compFolders: CompFolderType<T>[]
+        sites: SiteType[]
     }
-}*/
+}
 
-/*export type CompFolderType<T> = {
-    id: number
-    content: T | null
-}*/
+type SiteType = {
+    status: 'success'
+    data: {
+        site: {
+            id: number // 7
+            name: string // "РУСХИТ"
+            userId: number // 2
+            defaultSiteTemplateId: null | number
+        }
+    }
+}
 
-// Типы ответов от сервера при операциях с папками компонентов
-// Неразобранный
-// export type CompFolderRowServerRespType = ErrorServerResponseType | CommonType<string>
-// Разобранный
-// export type CompFolderServerSuccessRespType = CommonType<DragFilesTreeType.Items>
+// Типы ответов от сервера при операциях с сайтами
+export type SitesServerResponseType = ErrorServerResponseType | SuccessServerResponseType

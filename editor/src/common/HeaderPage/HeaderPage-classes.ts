@@ -1,15 +1,16 @@
 import './HeaderPage.scss'
 
-const rootClass = 'header-page'
+const CN = 'header-page'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses() {
     return {
-        root: rootClass,
-        contentDivided: `${rootClass}__content-divided`,
-        contentDividedLeft: `${rootClass}__content-divided-left`,
-        contentDividedCenter: `${rootClass}__content-divided-center`,
-        contentDividedRight: `${rootClass}__content-divided-right`,
-        contentSingle: `${rootClass}__content-single`,
-        headerWrapper: `${rootClass}__header-wrapper`,
+        root: CN,
+        contentDivided: `${CN}__content-divided`,
+        contentDividedLeft: `${CN}__content-divided-left`,
+        contentDividedCenter: `${CN}__content-divided-center`,
+        contentDividedRight: `${CN}__content-divided-right`,
+        contentSingle: `${CN}__content-single`,
+        headerWrapper: `${CN}__header-wrapper`,
     }
 }

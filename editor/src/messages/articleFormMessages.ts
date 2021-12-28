@@ -25,6 +25,10 @@ export const articleFormMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    deleteArticleConfirmationHeaderInModal: {
+        eng: 'Are you sure you want to delete the article?',
+        rus: 'Хотите удалить статью?'
+    },
     deleteArticleConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the article?',
         rus: 'Вы уверены, что хотите удалить статью?'

@@ -2,6 +2,7 @@ import './AuthFormWrapper.scss'
 
 const AFWRootClass = 'auth-form-wrapper'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses() {
     return {
         root: AFWRootClass,

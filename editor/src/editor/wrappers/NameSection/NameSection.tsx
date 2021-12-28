@@ -9,7 +9,7 @@ type NameSectionPropType = {
 }
 
 /* Компонент блока с заголовком */
-function NameSection(props: NameSectionPropType) {
+export default function NameSection(props: NameSectionPropType) {
     const {
         type = 1,
         header,
@@ -28,5 +28,3 @@ function NameSection(props: NameSectionPropType) {
         </div>
     )
 }
-
-export default NameSection

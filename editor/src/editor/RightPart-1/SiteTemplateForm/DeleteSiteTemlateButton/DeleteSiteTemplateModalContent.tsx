@@ -1,8 +1,7 @@
 import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
 import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import getConfig from './formConfig'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
@@ -18,14 +17,12 @@ export function ModalContent() {
     const formState = useFormConstructorState(config)
 
     return (
-        <>
-            <p>{siteTemplateSectionMsg.deleteConfirmationTextInModal}</p>
-            <Wrapper t={10}>
-                <Hr/>
-            </Wrapper>
-            <Wrapper t={10}>
-                <FormConstructor config={config} state={formState} />
-            </Wrapper>
-        </>
+            <ModalShortContent
+                header={'Header'}
+                text={siteTemplateSectionMsg.deleteConfirmationTextInModal}
+                bottomElems={
+                    [<FormConstructor config={config} state={formState} />]
+                } />
+
     )
 }

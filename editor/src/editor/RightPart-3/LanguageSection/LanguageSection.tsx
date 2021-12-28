@@ -6,7 +6,7 @@ import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { languageSectionMessages } from 'messages/languageSectionMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/* Переключатели языка интерфейса */
 export default function LanguageSection() {
     // Язык интерфейса
     const { editorLanguage } = useGetSettingsSelectors()

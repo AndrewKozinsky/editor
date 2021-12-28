@@ -18,6 +18,8 @@ export default async function getArticleRequest(articleId: number) {
         try {
             // Составление массива объектов из массива строк
             const parsedArticles = rowResponse.data.articles.map(article => {
+                if (!article) return null
+
                 return {
                     ...article,
                     content: JSON5.parse(article.content)

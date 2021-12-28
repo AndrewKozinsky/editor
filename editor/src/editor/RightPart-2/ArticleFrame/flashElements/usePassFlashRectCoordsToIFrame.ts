@@ -25,7 +25,7 @@ export function usePassFlashRectCoordsToIFrame() {
     const [moveSelectRectCoords, setMoveSelectRectCoords] = useState(coordsInitialObj)
 
     useEffect(function () {
-        if (!$links.$body || !history.length) return
+        if (!history.length) return
 
         // Get data of the flashed element from an actual article
         const { hoveredElem, selectedElem, moveHoveredComp, moveSelectedComp } = history[historyCurrentIdx]
@@ -43,7 +43,7 @@ export function usePassFlashRectCoordsToIFrame() {
         if (moveHoveredComp.dataCompId !== moveSelectRectCoords.dataCompId) {
             setMoveSelectRectCoords(moveSelectedComp)
         }
-    }, [$links, history, historyCurrentIdx])
+    }, [history, historyCurrentIdx])
 
 
     // The useEffect is watches when coordinates of a flashed rectangle changed to write new coordinates to <body> as attribute

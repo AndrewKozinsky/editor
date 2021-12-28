@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 const JSON5 = require('json5')
 import actions from 'store/rootAction'
@@ -19,6 +19,8 @@ import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
 import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
+import articleManager from '../../../../articleManager/articleManager'
+import StoreSitesTypes from '../../../../store/site/sitesTypes'
 import { FolderType } from '../types'
 
 
@@ -36,8 +38,11 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
     useEffect(function () {
         // Если не передан id сайта, то обнулить папки в Хранилище
         if (!currentSiteId) {
-            dispatch(actions.sites.setCompFolder(null))
-            dispatch(actions.sites.setArtFolder(null))
+            const payload: StoreSitesTypes.SetCompFolderActionPayload = { id: null, folders: null }
+
+            dispatch(actions.sites.setCompFolder(payload))
+            dispatch(actions.sites.setArtFolder(payload))
+
             return
         }
 
@@ -122,6 +127,10 @@ export async function saveFoldersOnServer(type: FolderType, items: DragFilesTree
     if (type === 'components') {
         const { compFolderId } = store.getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedItems)
+
+        // Обновить папки компонентов у редактируемой статьи если отредактировали
+        // папки компонентов сайта, к которому принадлежит редактируемая статья.
+        articleManager.remoteControl.updateTempCompFolders()
     }
     else {
         const { artFolderId } = store.getState().sites.artFolderSection
@@ -174,12 +183,22 @@ export function afterDeleteItem(
             // Поставить новый массив открытых папок в LocalStorage
             setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
 
+            // id редактируемой статьи
+            const editedArticleId = store.getState().article.articleId
+
             filesIdsInside.forEach(innerFileId => {
-                deleteArticleRequest(innerFileId)
+                // Если удаляемая статья равна редактируемой статье, то удалить её через articleManager
+                if (innerFileId === editedArticleId) {
+                    articleManager.deleteArticle(innerFileId)
+                }
+                // В противном случае удалить через запрос на сервер
+                else {
+                    deleteArticleRequest(innerFileId)
+                }
             })
         }
         else {
-            // Сделать запрос на удаление компонента
+            // Сделать запрос на удаление статьи
             deleteArticleRequest(deletedItem.id)
         }
 
@@ -205,9 +224,10 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
 
     // Сохранить данные на сервере
     if (type === 'components') {
+        // Может создание нового компонента поместить в articleManager?
         const minCompContent: TempCompTypes.Content = {
             name: newFileName,
-            html: '<p>Text...</p>'
+            html: '<img src="https://st.depositphotos.com/2125603/2249/i/450/depositphotos_22490689-stock-photo-brown-baby-duck.jpg" alt="duck" />'
         }
         const serverResponse = await createComponentRequest(
             currentSiteId, JSON5.stringify(minCompContent)

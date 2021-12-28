@@ -31,7 +31,7 @@ export default function Radio(props: RadioPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты переключателя
-    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const inputAttribs: MiscTypes.ObjStringKey<any> = {
         type: 'radio',
         name,
         value,
@@ -44,7 +44,7 @@ export default function Radio(props: RadioPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const labelAttribs: MiscTypes.ObjStringKey<any> = {
         htmlFor: id,
         className: 'radio-label',
     }

@@ -1,7 +1,6 @@
-import {makeFetch} from 'requests/reqFn/fetch'
+import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
+import { UserServerResponse } from './userServerResponseType'
 
 /** Изменение текущего пароля */
 export default async function changePasswordRequest(currentPassword: string, newPassword: string) {
@@ -12,12 +11,9 @@ export default async function changePasswordRequest(currentPassword: string, new
             newPassword
         })
     }
-    const response: ChangePasswordRequestServerResponse = await makeFetch(
+    const response: UserServerResponse = await makeFetch(
         getApiUrl('changePassword'), options
     )
 
     return response
 }
-
-// Тип данных с ответом от пользователя
-type ChangePasswordRequestServerResponse = ErrorServerResponseType | UserServerResponseType

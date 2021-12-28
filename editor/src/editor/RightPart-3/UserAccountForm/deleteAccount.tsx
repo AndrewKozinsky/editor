@@ -6,7 +6,7 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import useGetMessages from 'messages/fn/useGetMessages'
 import getSubmitBtnFormConfig from './submitBtnFormConfig'
 
-
+/* Модальное окно с подверждением удаления учётной записи */
 export function ModalContent() {
     const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
     const submitBtnFormConfig = getSubmitBtnFormConfig(userAccountSectionMsg)
@@ -18,7 +18,7 @@ export function ModalContent() {
             header={userAccountSectionMsg.confirmModalHeader}
             text={userAccountSectionMsg.confirmModalText}
             bottomElems={
-                <FormConstructor config={submitBtnFormConfig} state={formState} />
+                [<FormConstructor config={submitBtnFormConfig} state={formState} key='1' />]
             }
         />
     )

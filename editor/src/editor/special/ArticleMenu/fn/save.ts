@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import articleManager from '../../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
 /** The hook returns boolean if Save article button is disabled */
 export function useIsSaveBtnDisabled() {

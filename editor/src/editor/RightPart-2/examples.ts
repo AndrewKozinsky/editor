@@ -1,6 +1,7 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 
+/*
 const gridTemplate: TempCompTypes.Content = {
     name: 'Grid',
     html: `<div class="grid">
@@ -46,8 +47,9 @@ const gridTemplate: TempCompTypes.Content = {
         }
     ]
 }
+*/
 
-const bannerTemplate: TempCompTypes.Content = {
+/*const bannerTemplate: TempCompTypes.Content = {
     name: 'Banner',
     html: `<div class="banner banner--pattern-1" data-em-id="banner" data-em-group="banner-first">
     <div class="banner__container" data-em-id="banner-container" data-em-group="banner-container-first"></div>
@@ -81,16 +83,14 @@ const bannerTemplate: TempCompTypes.Content = {
             elemName: 'Banner container'
         }
     ]
-}
+}*/
 
 const imageTemplate: TempCompTypes.Content = {
     name: 'Image',
-    html: `<img src="http://andrewkozinsky.ru/foreditor/duck3.jpg"
-             style="box-shadow: 0 4px 10px rgba(155, 0, 0, .3); width: 100%; max-width: 290px"
-             alt="Описание из шаблона" data-em-id="image">`
+    html: '<img src="http://volcano.ru/another/e/banknote.jpg" style="box-shadow: 0 4px 10px rgba(155, 0, 0, .3); width: 100%; max-width: 290px" alt="Описание из шаблона" data-em-id="image">'
 }
 
-const paragraphTemplate: TempCompTypes.Content = {
+/*const paragraphTemplate: TempCompTypes.Content = {
     name: 'Paragraph',
     html: `<p class="paragraph" data-em-id="paragraph" data-em-group="paragraph-first"></p>`,
     elems: [
@@ -100,7 +100,7 @@ const paragraphTemplate: TempCompTypes.Content = {
             elemTextInside: true
         }
     ]
-}
+}*/
 
 const burgerTemplate: TempCompTypes.Content = {
     name: 'Burger',
@@ -163,8 +163,69 @@ const burgerTemplate: TempCompTypes.Content = {
     ]
 }
 
+const burgerTemplate2: TempCompTypes.Content = {
+    name: 'Burger',
+    html: '<div class="burger burger--white" data-em-id="general" data-em-group="general-main"><div class="burger__top"><div class="burger__cell burger__cell--round" data-em-id="cell" data-em-group="cell-top"></div></div><div class="burger__mediterranean" data-em-id="mediterranean" data-em-group="mediterranean-main"></div><div class="burger__cell" data-em-id="cell" data-em-group="cell-bottom"></div></div>',
+    elems: [
+        {
+            elemId: 'general',
+            elemName: 'Главная обёртка',
+            elemAttrs: [
+                {
+                    elemAttrId: 1,
+                    elemAttrName: 'class',
+                    elemAttrAlt: 'Класс',
+                    elemAttrView: 'text',
+                    elemAttrLockedValue: 'burger ',
+                    elemAttrValues: [
+                        {
+                            elemAttrValueId: 1,
+                            elemAttrValueValue: 'burger--white',
+                            elemAttrValueAlt: 'Белая подложка',
+                            elemAttrValueChecked: true
+                        },
+                        {
+                            elemAttrValueId: 2,
+                            elemAttrValueValue: 'burger--green',
+                            elemAttrValueAlt: 'Зелёная подложка',
+                            elemAttrValueChecked: false
+                        },
+                    ]
+                },
+            ],
+            elemTags: {
+                elemTagsValues: [
+                    {elemTagValueId: 1, elemTagValueName: 'aside'},
+                    {elemTagValueId: 2, elemTagValueName: 'section'},
+                ]
+            }
+        },
+        {
+            elemId: 'cell',
+            elemName: 'Ячейка',
+            elemTags: {
+                elemTagsValues: [
+                    {elemTagValueId: 5, elemTagValueName: 'main'},
+                ]
+            },
+            elemTextInside: true
+        },
+        {
+            elemId: 'mediterranean',
+            elemName: 'Средняя часть'
+        },
+    ]
+}
+
+
 // ================================================
 
+const siteTemplate = {
+    name: "Действующие стили",
+    head: "<meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='http://volcano.ru/another/e/style.css'>",
+}
+
+/*
 const artData: ArticleTypes.Article = {
     dMeta: {
         dMaxCompId: 12
@@ -272,4 +333,4 @@ const artData: ArticleTypes.Article = {
             ],
         }
     ]
-}
+}*/

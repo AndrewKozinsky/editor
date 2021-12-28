@@ -9,7 +9,7 @@ import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 import { changePasswordSectionMessages } from 'messages/changePasswordSectionMessages'
 import {userAccountSectionMessages} from 'messages/userAccountSectionMessages'
 
-
+/* Вкладка с настройками пользователя */
 export default function SettingsUserTabContent() {
 
     const userDataSectionMsg = useGetMessages(userDataSectionMessages)

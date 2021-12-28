@@ -5,11 +5,11 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompFilesTreeType from '../TempCompFilesTree/types'
-import articleManager from 'editor/articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
+import { CreateCompFnReturnType } from 'articleManager/methods/insert'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
 import FilesTreeType from 'types/filesTree'
 import config from 'utils/config'
-import { CreateCompFnReturnType } from '../../articleManager/methods/insert'
 
 
 /** The hook gets component template folders array from Store, add required properties to items
@@ -20,7 +20,7 @@ export function useGetTempCompsFolders() {
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
-    const article = articleManager.hooks.getArticle()
+    const currentHistoryItem = articleManager.hooks.getCurrentHistoryItem()
 
     const [selectedElem, setSelectedElem] = useState<StoreArticleTypes.FlashedElem>(null)
 
@@ -32,27 +32,32 @@ export function useGetTempCompsFolders() {
         setSelectedElem(flashedElemCoords.selectedElem)
     }, [
         tempCompsFolders, tempComps,
-        flashedElemCoords, article
+        flashedElemCoords, currentHistoryItem
     ])
 
     useEffect(function () {
-        if (!tempCompsFolders || !flashedElemCoords || !selectedElem) return
+        if (!flashedElemCoords || !selectedElem) return
 
-        // Get opened component template folders id array to open these folders
-        const openFoldersIdsArr: FilesTreeType.IdArr =
-            getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+        if(tempCompsFolders) {
+            // Get opened component template folders id array to open these folders
+            const openFoldersIdsArr: FilesTreeType.IdArr =
+                getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
 
-        // Update component template array items
-        const updatedFolders = prepareFoldersAndItemsStructure(
-            tempCompsFolders,
-            openFoldersIdsArr,
-            selectedElem,
-            tempComps,
-            article
-        )
+            // Update component template array items
+            const updatedFolders = prepareFoldersAndItemsStructure(
+                tempCompsFolders,
+                openFoldersIdsArr,
+                selectedElem,
+                tempComps,
+                currentHistoryItem
+            )
 
-        // Sat updated folders and component templates structure
-        setFolders(updatedFolders)
+            // Sat updated folders and component templates structure
+            setFolders(updatedFolders)
+        }
+        else {
+            setFolders(null)
+        }
     }, [selectedElem, tempCompsFolders])
 
     return folders
@@ -64,14 +69,14 @@ export function useGetTempCompsFolders() {
  * @param {Array} openIdArr — ids of the opened folders in
  * @param {Object} selectedElem — object with coordinates of the selected component/element
  * @param {Array} tempCompsArr — component templates array
- * @param {Object} article — article object
+ * @param {Object} currentHistoryItem — article history item
  */
 function prepareFoldersAndItemsStructure(
     tempCompsFolders: FilesTreeType.Items,
     openIdArr: FilesTreeType.IdArr,
     selectedElem: StoreArticleTypes.FlashedElem,
     tempCompsArr: TempCompTypes.TempComps,
-    article: StoreArticleTypes.HistoryItem
+    currentHistoryItem: StoreArticleTypes.HistoryItem
 ): TempCompFilesTreeType.Items {
     return tempCompsFolders.map((item: TempCompFilesTreeType.Item) => {
         // If it is folder, and it must be open, then add open property
@@ -83,7 +88,7 @@ function prepareFoldersAndItemsStructure(
 
             if (item.content?.length) {
                 item.content = prepareFoldersAndItemsStructure(
-                    item.content, openIdArr, selectedElem, tempCompsArr, article
+                    item.content, openIdArr, selectedElem, tempCompsArr, currentHistoryItem
                 )
             }
 
@@ -99,7 +104,7 @@ function prepareFoldersAndItemsStructure(
                 afterButtonAllowed = true
             }
             // Если выделен компонент или корневой элемент, то разрешить вставлять новый компонент до или после
-            if (['component', 'rootElement'].indexOf(selectedElem.tagType) > -1 ) {
+            if (['component', 'rootElement'].includes(selectedElem.tagType)) {
                 afterButtonAllowed = true
             }
             // Если выделен элемент...
@@ -107,7 +112,7 @@ function prepareFoldersAndItemsStructure(
                 // Получить его шаблон, чтобы узнать, принимает ли он только текстовый компонент или обычные компоненты
 
                 const thisTempComp = articleManager.getTempElemByDataCompIdAndDataElemId(
-                    article.article.dComps, selectedElem.dataCompId, selectedElem.dataElemId, tempCompsArr
+                    currentHistoryItem.article.dComps, selectedElem.dataCompId, selectedElem.dataElemId, tempCompsArr
                 )
                 if (thisTempComp && !thisTempComp.elemTextInside) {
                     insideButtonAllowed = true
@@ -142,7 +147,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const dispatch = useDispatch()
 
     // Current article
-    const historyItem = articleManager.hooks.getArticle()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
@@ -182,7 +187,7 @@ export function useGetOnClickInsideBtn() {
     const dispatch = useDispatch()
 
     // Current article
-    const historyItem = articleManager.hooks.getArticle()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
@@ -203,5 +208,4 @@ export function useGetOnClickInsideBtn() {
             componentsAndMaxCompId
         ))
     }, [dispatch, historyItem, flashedElemCoords, tempComps])
-
 }

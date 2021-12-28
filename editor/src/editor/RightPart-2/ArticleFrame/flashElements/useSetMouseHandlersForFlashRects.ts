@@ -14,7 +14,7 @@ export function useSetMouseHandlersForFlashRects() {
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$document || !$links.$window || mouseMoveHandlerSet || !history.length) return
+        if (!$links.$document || mouseMoveHandlerSet || !history.length) return
 
         // Set handlers mousemove and mousedown
         $links.$document.addEventListener('mousemove', hoverHandler)
@@ -22,16 +22,7 @@ export function useSetMouseHandlersForFlashRects() {
 
         // Set flag that handlers were set
         setMouseMoveHandlerSet(true)
-    }, [$links, mouseMoveHandlerSet, history])
-
-    useEffect(function () {
-        if ($links.$document && !history.length) {
-            setMouseMoveHandlerSet(false)
-
-            $links.$document.removeEventListener('mousemove', hoverHandler)
-            $links.$document.removeEventListener('mousedown', selectHandler)
-        }
-    }, [history, $links])
+    }, [$links, mouseMoveHandlerSet])
 }
 
 function hoverHandler(e: MouseEvent) {
@@ -91,7 +82,6 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
             setFlashRectangle(actionType, elemAndTextComp.type, elemAndTextComp.dCompId, elemAndTextComp.dElemId)
         }
         else {
-            // console.log(elemAndTextComp)
             // Скрыть выделяющий прямоугольник
             setFlashRectangle(actionType, null, null, null)
 

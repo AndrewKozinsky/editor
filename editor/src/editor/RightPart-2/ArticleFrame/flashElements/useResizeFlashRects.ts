@@ -3,12 +3,15 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { FlashRectType, setSizeAndPosition } from './setSizeAndPosition'
 
-/** The hook sets resize and scroll handlers to IFrame document. */
-export function useSetResizeHandlersForFlashRects() {
+/** Хук отслеживает изменения в статье и пересчитывает положение подсвечивающих прямоугольников */
+export function useResizeFlashRects() {
     const { $links, history } = useGetArticleSelectors()
+
     // Were resize and scroll handlers set?
     const [handlersSet, setHandlerSet] = useState(false)
-    // Ссылка на подсвечивающие прямоугольники
+
+    // Ссылка на функцию, который нужно запускать для пересчёта положения
+    // и размера подсвечивающих прямоугольников
     const resizeHandler = useGetResizeHandler()
 
     useEffect(function () {
@@ -24,7 +27,7 @@ export function useSetResizeHandlersForFlashRects() {
     }, [resizeHandler, handlersSet, history.length])
 }
 
-
+/* Хук возвращает функцию, которая пересчитывает положение и размеры подсвечивающих прямоугольников */
 function useGetResizeHandler() {
     const { $links } = useGetArticleSelectors()
 

@@ -28,6 +28,8 @@ export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
     // Минимальная ширина главной обёртки
     const minWidth = useGetFilesTreeMinWidth(props.items)
 
+    if (!props.items?.length ) return null
+
     return (
         <div data-file-tree='true' style={{minWidth: minWidth}}>
             {generateItems(props.items, props.items, 0, after)}

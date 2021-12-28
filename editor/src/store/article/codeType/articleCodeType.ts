@@ -3,6 +3,7 @@ namespace ArticleTypes {
     export type Article = {
         // Additional information
         dMeta: {
+            version: 1
             // Max component id to understand what component id must be next
             dMaxCompId: Id
         }
@@ -85,7 +86,7 @@ namespace ArticleTypes {
 export default ArticleTypes
 
 
-export const emptyArticleData: ArticleTypes.Article = {
+/*export const emptyArticleData: ArticleTypes.Article = {
     dMeta: {
         // Max component id to understand what component id must be next
         dMaxCompId: 0
@@ -97,4 +98,4 @@ export const emptyArticleData: ArticleTypes.Article = {
         dCompId: 1,
         tCompId: 95,
     }]
-}
+}*/

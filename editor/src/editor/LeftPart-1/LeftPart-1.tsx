@@ -42,7 +42,7 @@ export default function LeftPart1(props: LeftPart1PropType) {
     )
 }
 
-/** Компонент кнопки создания нового сайта */
+/** Кнопка создания нового сайта */
 function NewSiteButton() {
     // id выделенного сайта
     const { currentSiteId } = useGetSitesSelectors()
@@ -53,7 +53,7 @@ function NewSiteButton() {
     const sitesPanelMsg = useGetMessages(sitesPanelMessages)
 
     // Атрибуты кнопки
-    const attrs: MiscTypes.ObjStringKeyAnyVal = {
+    const attrs: MiscTypes.ObjStringKey<any> = {
         text: sitesPanelMsg.newSiteBtn,
         icon: 'btnSignAdd',
         block: true,

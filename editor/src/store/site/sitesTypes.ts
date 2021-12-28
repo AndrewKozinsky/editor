@@ -4,6 +4,8 @@ import ArticleTypes from '../article/codeType/articleCodeType'
 namespace StoreSitesTypes {
 
     // САЙТЫ (ТИПЫ) ===================================================================
+    // Сайты
+    export type SitesType = SiteType[]
     // Сайт
     export type SiteType = {
         id: number,
@@ -11,8 +13,6 @@ namespace StoreSitesTypes {
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
         defaultSiteTemplateId: null | number
     }
-    // Сайты
-    export type SitesType = SiteType[]
     // id выбранного сайта
     export type CurrentSiteId = null | number | ''
 
@@ -33,6 +33,12 @@ namespace StoreSitesTypes {
     export type SiteTemplatesType = SiteTemplateType[]
     // id выбранного шаблона подключаемых файлов
     export type CurrentSiteTemplateId = null | number | ''
+
+    // ШАБЛОНЫ САЙТА (ТИПЫ)
+    export type SiteTemplatesSection = {
+        templates: SiteTemplatesType
+        currentTemplateId: CurrentSiteTemplateId
+    }
 
     // ПАПКИ С КОМПОНЕНТАМИ (ТИПЫ) ====================================================
 
@@ -184,13 +190,6 @@ namespace StoreSitesTypes {
         }
     }
 
-    // Установка id выбранной папки или статьи
-    export const SET_CURRENT_ART_ITEM_ID = 'SET_CURRENT_ART_ITEM_ID'
-    export type SetCurrentArtItemIdAction = {
-        type: typeof SET_CURRENT_ART_ITEM_ID
-        payload: CurrentArtItemId
-    }
-
 
     export type SitesAction =
         | SetSitesAction
@@ -204,7 +203,6 @@ namespace StoreSitesTypes {
 
         | SetCurrentCompAction
         | SetCurrentArtAction
-        | SetCurrentArtItemIdAction
 }
 
 export default StoreSitesTypes

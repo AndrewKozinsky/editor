@@ -23,6 +23,10 @@ $wrapper-class: select-input__wrapper;
 
     background-color: var(--text-placeholder-color);
 }
+.#{$wrapper-class}-tip--disabled {
+    //background-color: var(--button-color-hover);
+    opacity: .6;
+}
 
 // Класс добавляемый к обёртке при фокусировке на выпадающем списке
 .#{$wrapper-class}--focus {

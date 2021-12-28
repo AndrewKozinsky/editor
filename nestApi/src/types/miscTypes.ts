@@ -6,7 +6,10 @@ namespace MiscTypes {
         id: string, iat: number, exp: number
     }
 
-    /** Тип объекта с со строковыми ключами и строковыми значениями */
+    /** Тип объекта со строковыми ключами с любым значением */
+    export type ObjStringKey<T> = {[key: string]: T}
+
+    /** Тип объекта со строковыми ключами и строковыми значениями */
     export type ObjStringKeyStringVal = {[key: string]: string}
 }
 

@@ -2,8 +2,9 @@ import { makeCN } from 'utils/StringUtils'
 
 import './FieldGroup.scss'
 
-const appRootClass = 'field-wrapper'
+const CN = 'field-wrapper'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(vertical: boolean, gap?: number) {
     return {
         wrapper: getFieldGroupClasses(vertical, gap),
@@ -17,11 +18,11 @@ export default function makeClasses(vertical: boolean, gap?: number) {
  */
 export function getFieldGroupClasses(vertical: boolean, gap?: number) {
     // Классы
-    const classes = [appRootClass]
+    const classes = [CN]
 
     // Добавление класса дающего отступ между элементами внутри обёртки
-    if (vertical) classes.push(appRootClass + '--vertical')
-    if (gap) classes.push(appRootClass + '--gap' + gap)
+    if (vertical) classes.push(CN + '--vertical')
+    if (gap) classes.push(CN + '--gap' + gap)
 
     return makeCN(classes)
 }

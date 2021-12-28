@@ -27,7 +27,7 @@ export class ArticleService {
 
     /** Получение компонента (защищённый маршрут) */
     async getArticle(req: ExpressRequestInterface): Promise<ArticleEntity | null> {
-        return await this.articleRepository.findOne(req.params.articleId)
+        return await this.articleRepository.findOne(req.params.articleId) || null
     }
 
     /** Создание статьи (защищённый маршрут) */

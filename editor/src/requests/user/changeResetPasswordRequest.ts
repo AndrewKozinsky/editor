@@ -1,8 +1,8 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
+// import ErrorServerResponseType from 'requests/errorServerResponseType'
+// import UserServerResponseType from './userServerResponseType'
+import { UserServerResponse } from './userServerResponseType'
 
 /**
  * Отправка нового пароля после сброса забытого
@@ -15,11 +15,8 @@ export default async function changeResetPasswordRequest(password: string, passw
         method: 'PATCH',
         body: JSON.stringify({password})
     }
-    const response: ChangeResetPasswordRequestServerResponse = await makeFetch(
+    const response: UserServerResponse = await makeFetch(
         getApiUrl('changeResetPassword', token), options
     )
     return response
 }
-
-// Тип данных с ответом от пользователя
-type ChangeResetPasswordRequestServerResponse = ErrorServerResponseType | UserServerResponseType

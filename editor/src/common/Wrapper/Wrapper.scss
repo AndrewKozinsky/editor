@@ -63,10 +63,10 @@ $CN: wrapper;
 
 // Класс дающий отступ между элементами обёртки
 .#{$CN}--gap10 {
-    //display: flex;
+    display: flex;
     gap: 10px;
 }
 .#{$CN}--gap20 {
-    //display: flex;
+    display: flex;
     gap: 20px;
 }

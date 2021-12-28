@@ -6,7 +6,9 @@ import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
+import articleManager from '../../../../../articleManager/articleManager'
 import DeleteArticleButton from '../DeleteArticleButton/DeleteArticleButton'
+import actions from '../../../../../store/rootAction'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getFormConfig(artFormMsg: any) {
@@ -74,6 +76,13 @@ function getFormConfig(artFormMsg: any) {
             // Обновить статью на сервере
             return await updateArticleRequest(
                 currentArtItemId, articleName, articleTemplateId
+            )
+        },
+        afterSubmit(response, outerFns, formDetails) {
+            if (!formDetails.readyFieldValues.siteTemplateId) return
+            // Обновить id шаблона сайта у редактируемой статьи если указали другой.
+            articleManager.remoteControl.updateSiteTemp(
+                formDetails.readyFieldValues.siteTemplateId.toString()
             )
         }
     }

@@ -1,14 +1,14 @@
 import React from 'react'
-import useGetMessages from '../../../messages/fn/useGetMessages'
-import { notFoundMessages } from '../../../messages/notFoundMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
+// import { notFoundMessages } from 'messages/notFoundMessages'
 import makeClasses from './ArticleMenu-classes'
 import SvgIcon from 'common/icons/SvgIcon'
 import {
     useIsButtonVisible,
-    // useIsDataBtnDisabled,
+    useIsDataBtnDisabled,
     useIsHistoryBtnDisabled,
     useMakeHistoryStep,
-    // useShowData
+    useShowData
 } from './ArticleMenu-func'
 import Button from 'common/formElements/Button/Button'
 import { articleMenuMessages } from 'messages/articleMenuMessages'

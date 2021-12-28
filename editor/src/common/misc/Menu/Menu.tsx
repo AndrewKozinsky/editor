@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import makeClasses from './Menu-classes'
-import {makeCN} from 'utils/StringUtils'
+import { makeCN } from 'utils/StringUtils'
 
 
 // Тип props у компонента Menu
@@ -38,7 +38,6 @@ export default function Menu(props: MenuPropType) {
 
 /** Компонент ссылки меню */
 function MenuLink(props: MenuItem) {
-
     const {
         to, // Куда ведёт ссылка
         label // Текст ссылки

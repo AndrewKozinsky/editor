@@ -2,6 +2,7 @@ import './InputError.scss'
 
 const appRootClass = 'input-error'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses() {
     return {
         root: [appRootClass, appRootClass + '--error'].join(' '),

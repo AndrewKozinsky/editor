@@ -1,7 +1,7 @@
 import { MiscTypes } from 'types/miscTypes'
 
 
-const addresses: MiscTypes.ObjStringKeyAnyVal = {
+const addresses: MiscTypes.ObjStringKey<any> = {
     // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
@@ -33,13 +33,13 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Сайты
     sites: 'sites',
     // Конкретный сайт
-    site: function (siteId: string) {
+    site: function (siteId: number) {
         return 'sites/' + siteId
     },
 
     // SITE TEMPLATES
     // Шаблоны подключаемых файлов
-    siteTemplates: function (siteId: string) {
+    siteTemplates: function (siteId: number) {
         return 'sites/' + siteId + '/siteTemps'
     },
     createSiteTemplate: 'siteTemplates',
@@ -84,7 +84,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
 
 // Оборачивание объекта addresses чтобы при запросе
 // к началу каждого адреса добавлялась приставка /api/.
-function getApiUrl(url: string, ...args: any[]): string {
+export default function getApiUrl(url: string, ...args: any[]): string {
 
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
@@ -98,5 +98,3 @@ function getApiUrl(url: string, ...args: any[]): string {
     // @ts-ignore
     const x: never = null
 }
-
-export default getApiUrl

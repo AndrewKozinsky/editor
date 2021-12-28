@@ -1,4 +1,3 @@
-import { act } from 'react-dom/test-utils'
 import StoreModalTypes from './modalTypes'
 
 export type ModalReducerType = {

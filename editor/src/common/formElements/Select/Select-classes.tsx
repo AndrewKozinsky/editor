@@ -1,12 +1,14 @@
 import { makeCN } from 'utils/StringUtils'
 import './Select.scss'
 
-const selectRootClass = 'select-input'
+const CN = 'select-input'
+const wrapperClass = 'select-input__wrapper'
 
-export default function makeClasses(isFocus: boolean) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(isFocus: boolean, disabled: boolean) {
     return {
         wrapper: getWrapperClasses(isFocus),
-        wrapperTip: selectRootClass + '__wrapper-tip'
+        wrapperTip: getTipClasses(disabled)
     }
 }
 
@@ -14,13 +16,21 @@ export default function makeClasses(isFocus: boolean) {
  * Функция возвращает классы обёртки выпадающего списка.
  * @param {Boolean} isFocus — находится ли <select> в фокусе.
  */
-export function getWrapperClasses(isFocus: boolean) {
-
+function getWrapperClasses(isFocus: boolean) {
     // Классы обёртки
-    const classes = [selectRootClass + '__wrapper']
+    const classes = [CN + '__wrapper']
 
     // Если есть фокусировка
-    if (isFocus)  classes.push(`${selectRootClass}__wrapper--focus`)
+    if (isFocus)  classes.push(`${CN}__wrapper--focus`)
+
+    return makeCN(classes)
+}
+
+function getTipClasses(disabled: boolean) {
+    const classes = [wrapperClass + '-tip']
+
+    // Если есть фокусировка
+    if (disabled) classes.push(wrapperClass + `-tip--disabled`)
 
     return makeCN(classes)
 }

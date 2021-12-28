@@ -1,8 +1,8 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
+// import ErrorServerResponseType from 'requests/errorServerResponseType'
+// import UserServerResponseType from './userServerResponseType'
+import { UserServerResponse } from './userServerResponseType'
 
 /**
  * Функция отправляет данные для входа пользователя в редактор
@@ -13,7 +13,7 @@ export default async function loginRequest(values: LoginRequestValuesType) {
         method: 'POST',
         body: JSON.stringify(values)
     }
-    const response: LoginRequestServerResponse = await makeFetch(getApiUrl('login'), options)
+    const response: UserServerResponse = await makeFetch(getApiUrl('login'), options)
 
     return response
 }
@@ -25,4 +25,4 @@ export type LoginRequestValuesType = {
 }
 
 // Тип данных с ответом от пользователя
-type LoginRequestServerResponse = ErrorServerResponseType | UserServerResponseType
+// type LoginRequestServerResponse = ErrorServerResponseType | UserServerResponseType

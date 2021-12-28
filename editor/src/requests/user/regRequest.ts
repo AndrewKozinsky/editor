@@ -1,7 +1,6 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import UserServerResponseType from './userServerResponseType'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
+import { UserServerResponse } from './userServerResponseType'
 
 /**
  * Функция отправляет данные для регистрации пользователя
@@ -12,7 +11,7 @@ export default async function regRequest(values: RegRequestValuesType) {
         method: 'POST',
         body: JSON.stringify(values)
     }
-    const response: RegRequestServerResponse = await makeFetch(getApiUrl('signup'), options)
+    const response: UserServerResponse = await makeFetch(getApiUrl('signup'), options)
     return response
 }
 
@@ -22,5 +21,3 @@ export type RegRequestValuesType = {
     'password': number | string
 }
 
-// Тип данных с ответом от пользователя
-type RegRequestServerResponse = ErrorServerResponseType | UserServerResponseType

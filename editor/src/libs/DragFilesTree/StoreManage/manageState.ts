@@ -273,7 +273,7 @@ function getFolderNextId(items: DragFilesTreeType.Items) {
         if (!elems || !elems.length) return
 
         for (let i = 0; i < elems.length; i++) {
-            if (elems[i].type === 'folder' && elems[i].id > maxId) {
+            if (elems[i].type == 'folder' && elems[i].id > maxId) {
                 maxId = elems[i].id
 
                 if (elems[i].content) {

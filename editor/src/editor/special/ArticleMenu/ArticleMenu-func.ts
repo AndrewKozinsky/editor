@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
-import articleManager from '../../articleManager/articleManager'
+import articleManager from '../../../articleManager/articleManager'
 
 
 /** The hook returns is the Article menu button visible */
@@ -57,7 +56,7 @@ export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
 }
 
 
-/*export function useIsDataBtnDisabled() {
+export function useIsDataBtnDisabled() {
     // Is button disabled
     const [isDisabled, setIsDisabled] = useState(true)
 
@@ -66,13 +65,12 @@ export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
     }, [])
 
     return isDisabled
-}*/
+}
 
-/*
 export function useShowData() {
     const dispatch = useDispatch()
 
     return useCallback(function (){
 
     }, [])
-}*/
+}

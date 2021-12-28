@@ -18,7 +18,6 @@ export default function LeftPart4(props: LeftPart4PropType) {
 
     return (
         <div className={CN} style={style}>
-
         </div>
     )
 }

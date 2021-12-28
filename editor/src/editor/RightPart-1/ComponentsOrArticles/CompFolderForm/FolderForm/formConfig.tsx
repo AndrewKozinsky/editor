@@ -5,7 +5,9 @@ import sitesActions from 'store/site/sitesActions'
 import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import actions from '../../../../../store/rootAction'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
+import articleManager from '../../../../../articleManager/articleManager'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getFormConfig(componentFolderFormMsg: any) {
@@ -54,6 +56,11 @@ function getFormConfig(componentFolderFormMsg: any) {
             // Сохранить данные на сервере
             const { compFolderId } = store.getState().sites.compFolderSection
             return await putCompFolderRequest(compFolderId, preparedFolders)
+        },
+        afterSubmit() {
+            // Обновить папки компонентов у редактируемой статьи если отредактировали
+            // папки компонентов сайта, к которому принадлежит редактируемая статья.
+            articleManager.remoteControl.updateTempCompFolders()
         }
     }
 

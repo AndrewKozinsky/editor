@@ -22,7 +22,7 @@ export default function Modal() {
 
     const CN = useMakeClasses()
 
-    // Ничего не отрисовывать если модальное окно закрыто
+    // Ничего не отрисовать если модальное окно закрыто
     if (!isOpen) return null
 
     return (

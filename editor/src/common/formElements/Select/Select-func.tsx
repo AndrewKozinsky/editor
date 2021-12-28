@@ -13,7 +13,7 @@ export function getOptions(options: OptionsType) {
     return options.map(function (option, i) {
 
         // Атрибуты <option>
-        const optionAttrs: MiscTypes.ObjStringKeyAnyVal = {
+        const optionAttrs: MiscTypes.ObjStringKey<any> = {
             value: option.value,
             key: i
         }

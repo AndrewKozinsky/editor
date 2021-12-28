@@ -1,7 +1,6 @@
 const JSON5 = require('json5')
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
 import {
     ArtFolderRowServerRespType,
     ArtFolderServerSuccessRespType
@@ -11,7 +10,7 @@ import {
 export async function getArtFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 
-    const rowResponse: ArtFolderRowServerRespType | ErrorServerResponseType = await makeFetch(
+    const rowResponse: ArtFolderRowServerRespType = await makeFetch(
         getApiUrl('artFoldersBySite', siteId), options
     )
 

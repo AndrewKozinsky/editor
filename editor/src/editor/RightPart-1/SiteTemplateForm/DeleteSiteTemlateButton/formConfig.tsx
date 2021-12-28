@@ -1,6 +1,4 @@
-import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
-import CloseModalButton from './CloseModalButton'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import StoreSitesTypes from 'store/site/sitesTypes'
@@ -17,7 +15,6 @@ function getConfig(siteTemplateSectionMsg: any) {
             submit: {
                 text: siteTemplateSectionMsg.deleteBtnInModal,
             },
-            elems: [<CloseModalButton key={2} />]
         },
         async requestFn() {
             const { currentTemplateId } = store.getState().sites.siteTemplatesSection

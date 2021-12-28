@@ -6,25 +6,17 @@ import StoreArticleTypes from 'store/article/articleTypes'
 
 /** Хук ставит на document iFrame-а обработчик нажатий клавиш */
 export default function useSetKeyDownHandlerForText() {
-    const { $links, history } = useGetArticleSelectors()
+    const { $links } = useGetArticleSelectors()
     const [handlerSet, setHandlerSet] = useState(false)
 
     useEffect(function () {
-        if (!$links.$document || !$links.$window || handlerSet || !history.length) return
+        if (!$links.$document || handlerSet) return
 
         $links.$document.addEventListener('keydown', keyDownHandler)
         $links.$document.addEventListener('paste', pasteHandler)
 
         setHandlerSet(true)
-    }, [history, $links, handlerSet])
-
-    useEffect(function () {
-        if ($links.$document && !history.length) {
-            setHandlerSet(false)
-
-            $links.$document.removeEventListener('keydown', keyDownHandler)
-        }
-    }, [history, $links])
+    }, [$links, handlerSet])
 }
 
 /**
@@ -88,7 +80,7 @@ function getLetterObjData(e: KeyboardEvent): StoreArticleTypes.PressedKey {
         'IntlBackslash', 'KeyZ', 'KeyX', 'KeyC', 'KeyV', 'KeyB', 'KeyN', 'KeyM', 'Comma', 'Period', 'Slash',
     ]
 
-    if ( rightCodes.indexOf(e.code) > -1 ) {
+    if ( rightCodes.includes(e.code) ) {
         resultObj.code = 'Text' // Обозначить, что нажали символьную клавишу
         resultObj.value = e.key.toString()
     }

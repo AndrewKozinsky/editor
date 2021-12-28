@@ -37,10 +37,10 @@ export default function Select(props: SelectPropType) {
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
 
-    const CN = makeClasses(isFocus)
+    const CN = makeClasses(isFocus, disabled)
 
     // Атрибуты поля
-    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const inputAttribs: MiscTypes.ObjStringKey<any> = {
         name,
         className: 'select-input',
         value: value || '',
@@ -65,7 +65,7 @@ export default function Select(props: SelectPropType) {
                 <select {...inputAttribs}>
                     {getOptions(options)}
                 </select>
-                <div className='select-input__wrapper-tip'>
+                <div className={CN.wrapperTip}>
                     <SvgIcon type='selectInputArrows' baseClass='-icon-stroke' />
                 </div>
             </div>

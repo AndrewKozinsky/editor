@@ -2,7 +2,6 @@ import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import CloseModalButton from './CloseModalButton'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 
@@ -16,7 +15,6 @@ function getConfig(artFolderFormMsg: any) {
             submit: {
                 text: artFolderFormMsg.deleteFolderBtnInModal,
             },
-            elems: [<CloseModalButton key={2} />]
         },
         async requestFn(readyFieldValues) {
             const { currentArtItemId } = store.getState().sites.articleSection

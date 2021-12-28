@@ -6,7 +6,7 @@ import actions from 'store/rootAction'
 import ModalContent from '../modal/ModalContent'
 
 
-function getConfig(userDataSectionMsg: any) {
+export default function getConfig(userDataSectionMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -40,6 +40,3 @@ function getConfig(userDataSectionMsg: any) {
 
     return config
 }
-
-
-export default getConfig

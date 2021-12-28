@@ -73,7 +73,7 @@ export default function Button(props: ButtonPropType) {
     const CN = makeClasses(props)
 
     // Атрибуты кнопки
-    const btnAttrs: MiscTypes.ObjStringKeyAnyVal = {
+    const btnAttrs: MiscTypes.ObjStringKey<any> = {
         type,
         className: CN.root,
         disabled: disabled,
@@ -97,9 +97,10 @@ export default function Button(props: ButtonPropType) {
 type ButtonIconPropType = {
     iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
     color?: 'base' | 'accent' // Цвет заливки кнопки
-    CN: MiscTypes.ObjStringKeyStringVal
+    CN: MiscTypes.ObjStringKey<string>
 }
 
+/* Значок на кнопке */
 function ButtonIcon(props: ButtonIconPropType) {
     const { iconType, color, CN } = props
 
@@ -119,7 +120,7 @@ function ButtonIcon(props: ButtonIconPropType) {
 
 
 type ButtonLoaderPropType = {
-    loading?: boolean // Нужно ли отрисовывать загрузчик
+    loading?: boolean // Нужно ли отрисовать загрузчик
 }
 
 /** Компонент загрузчика кнопки */

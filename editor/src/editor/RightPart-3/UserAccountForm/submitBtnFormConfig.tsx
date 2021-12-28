@@ -4,8 +4,8 @@ import actions from 'store/rootAction'
 import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
 import deleteAccountRequest from 'requests/user/deleteAccountRequest'
 
-
-function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
+/* Функция возвращает объект настройки формы-кнопки удаления учётной записи */
+export default function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
     const submitBtnFormConfig: FCType.Config = {
         bottom: {
             submit: {
@@ -31,8 +31,8 @@ function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
                     smoothMoveToEntrance()
 
                     setTimeout(function() {
-                        // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
-                        store.dispatch(actions.user.setAuthTokenStatus(1))
+                        // Поставить authTokenStatus в 'fail' чтобы выкинуть пользователя из редактора
+                        store.dispatch(actions.user.setUserData('fail', null))
                     }, 600)
                 }, 1000)
             }
@@ -43,6 +43,3 @@ function getSubmitBtnFormConfig(userAccountSectionMsg: any) {
 
     return submitBtnFormConfig
 }
-
-
-export default getSubmitBtnFormConfig

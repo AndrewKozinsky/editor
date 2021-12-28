@@ -60,7 +60,7 @@ export default function TextInput(props: TextInputPropType) {
     const CN = makeClasses(maxWidth)
 
     // Аттрибуты поля
-    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const inputAttribs: MiscTypes.ObjStringKey<any> = {
         type,
         name,
         value,

@@ -10,9 +10,4 @@ export class CreateSiteDto {
         message: 'site_CreateSiteDto_nameTooLong'
     })
     name: string
-
-    @IsInt({
-        message: 'site_CreateSiteDto_defaultSiteTemplateIdIsNotANumber'
-    })
-    defaultSiteTemplateId: number
 }

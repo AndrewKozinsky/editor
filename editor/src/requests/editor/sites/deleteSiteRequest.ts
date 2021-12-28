@@ -1,7 +1,6 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import SiteServerResponseType from './siteServerResponseType'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
+import { SitesServerResponseType } from './sitesServerResponseType'
 
 /**
  * Запрос на удаление сайта
@@ -11,10 +10,6 @@ export default async function deleteSiteRequest(siteId: number) {
     // Параметры запроса
     const options = { method: 'DELETE' }
 
-    const response: DeleteSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
+    const response: SitesServerResponseType = await makeFetch(getApiUrl('site', siteId), options)
     return response
 }
-
-
-// Тип данных с ответом от сервера
-type DeleteSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

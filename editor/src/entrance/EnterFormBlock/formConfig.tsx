@@ -4,7 +4,6 @@ import loginRequest, { LoginRequestValuesType } from 'requests/user/loginRequest
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-import userActions from 'store/user/userActions'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -59,17 +58,11 @@ function getConfig(commonMsg: any, enterFormMsg: any) {
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {
 
-                // Поставить токен авторизации в Хранилище
-                store.dispatch(actions.user.setAuthTokenStatus(2))
+                const email = response.data.user.email
+                store.dispatch(actions.user.setUserData('success', email))
 
                 // Перебросить в редактор
                 if ('history' in outerFns ) outerFns.history.push('/')
-
-                // Set user's email to Store
-                if ('data' in response) {
-                    const email = response.data.user.email
-                    store.dispatch( userActions.setEmail(email) )
-                }
 
                 // Smooth hide entrance forms wrapper and show the editor
                 smoothMoveToEditor()

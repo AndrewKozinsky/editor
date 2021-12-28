@@ -4,19 +4,19 @@ import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import './EditorMain.scss'
 
 
-const rootClass = 'editor-main'
+const CN = 'editor-main'
 
-function useMakeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function useMakeClasses() {
     const rootClass = useGetRootClass()
 
     return {
         root: rootClass,
-        leftPart: rootClass + '__left',
-        rightPart: rootClass + '__right'
+        leftPart: CN + '__left',
+        rightPart: CN + '__right'
     }
 }
 
-export default useMakeClasses
 
 /** Функция возвращает классы главной обёртки редактора */
 export function useGetRootClass() {
@@ -34,7 +34,7 @@ export function useGetRootClass() {
         const scaleDownTransparencyClasses = getClasses('scaleDownTransparent')
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
-        // или он вообще не будет отрисовываться.
+        // или он вообще не будет отрисоваться.
         // Если нужно показать редактор
         if (entryAndEditorViewState === 'editor') {
             setClasses( normalClasses )
@@ -57,7 +57,7 @@ export function useGetRootClass() {
         else if (entryAndEditorViewState === 'entry') {
             setClasses( scaleDownTransparencyClasses )
         }
-        // В противном случае ничего не отрисовывать
+        // В противном случае ничего не отрисовать
         else {
             setClasses( scaleDownTransparencyClasses )
         }
@@ -73,10 +73,10 @@ export function useGetRootClass() {
  * scaleDownTransparent — редактор отдалён от зрителя и прозрачен
  */
 function getClasses( scaleDownType?: 'scaleDown' | 'scaleDownTransparent' ) {
-    const classes = [rootClass]
+    const classes = [CN]
 
-    if (scaleDownType === 'scaleDown') classes.push(`${rootClass}--scale-down`)
-    if (scaleDownType === 'scaleDownTransparent') classes.push(`${rootClass}--scale-down-transparent`)
+    if (scaleDownType === 'scaleDown') classes.push(`${CN}--scale-down`)
+    if (scaleDownType === 'scaleDownTransparent') classes.push(`${CN}--scale-down-transparent`)
 
     return classes
 }

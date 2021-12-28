@@ -1,15 +1,15 @@
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import { HTMLObjArrType } from './htmlStringToObject'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { HTMLObjArrType } from './htmlStringToObject'
 
-// type ConsistObjsArr = ConsistObj[]
-/*export type ConsistObj = {
+type ConsistObjsArr = ConsistObj[]
+export type ConsistObj = {
     dataComp: ArticleTypes.Component // Данные компонента
     dElem: ArticleTypes.ComponentElem // Данные элемента
     tempElem: TempCompTypes.Elem // Шаблон элемента
     htmlComp: HTMLObjArrType.Tag // html-компонент
     htmlElem: HTMLObjArrType.Tag
-}*/
+}
 
 /**
  * The function form an array of objects consists of objects with a correspondence between component template, data and html-object
@@ -17,7 +17,7 @@
  * @param {Object} compData — component data
  * @param {Object} htmlObj — component html-object
  */
-/*export function getConsistObjArr(
+export function getConsistObjArr(
     template: TempCompTypes.TempComp,
     compData: ArticleTypes.Component,
     htmlObj: HTMLObjArrType.Tag
@@ -34,16 +34,16 @@
             htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.dCompElemGroup, dElem.tCompElemId)
         }
     })
-}*/
+}
 
 /**
  * The function finds and returns element template based on an element template id
  * @param {Object} template — component template
  * @param {String} tCompElemId — an element template id
  */
-/*function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElemId: TempCompTypes.ElemId): TempCompTypes.Elem {
+function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElemId: TempCompTypes.ElemId): TempCompTypes.Elem {
     return template.content?.elems.find(tempElem => tempElem.elemId === tCompElemId)
-}*/
+}
 
 /**
  * The function finds and returns html-element object with passed dCompElemGroup name and tCompElemId
@@ -52,7 +52,7 @@
  * @param {String} dCompElemGroup — the name of the group to which the element belongs
  * @param {String} tCompElemId — element template name
  */
-/*function getHtmlElem(
+function getHtmlElem(
     htmlObj: HTMLObjArrType.Tag,
     dCompElemId: number,
     dCompElemGroup: string,
@@ -101,4 +101,4 @@
     }
 
     return htmlElem
-}*/
+}

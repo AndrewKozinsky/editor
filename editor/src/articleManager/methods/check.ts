@@ -1,7 +1,7 @@
 // import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import articleManager from '../articleManager'
+import articleManager from 'articleManager/articleManager'
 // import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import StoreArticleTypes from 'store/article/articleTypes'
+import StoreArticleTypes from 'store/article/articleTypes'
 
 /**
  * The function check can you insert a component into the target element
@@ -73,7 +73,7 @@
  * @param {Array} historyArr — articles history array
  * @param {Number} currentIdx — current history array index
  */
-/*export function canMakeHistoryStep(
+export function canMakeHistoryStep(
     this: typeof articleManager,
     step: 'undo' | 'redo',
     historyArr: StoreArticleTypes.HistoryItems,
@@ -83,7 +83,7 @@
         (step === 'undo' && currentIdx - 1 !== -1) ||
         (step === 'redo' && currentIdx + 1 < historyArr.length)
     )
-}*/
+}
 
 
 /**
@@ -91,10 +91,10 @@
  * @param historyStepWhenWasSave
  * @param historyCurrentIdx
  */
-/*export function isArticleSave(
+export function isArticleSave(
     this: typeof articleManager,
     historyStepWhenWasSave: number,
     historyCurrentIdx: number
 ) {
     return historyStepWhenWasSave === historyCurrentIdx
-}*/
+}

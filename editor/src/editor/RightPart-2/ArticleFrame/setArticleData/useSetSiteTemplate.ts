@@ -3,16 +3,19 @@ import { useDispatch } from 'react-redux'
 import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 
-/** Хук контролирует загрузку и очистку сценариев и стилей добавляемых в <head> и <body> */
+/**
+ * Хук контролирует загрузку и очистку сценариев и стилей добавляемых в <head> и <body>
+ * После загрузки данных статьи в Хранилище появляется свойство siteTemplateId.
+ * После того как получен его id можно загружать шаблон сайта
+ */
 export function useSetSiteTemplate() {
     const dispatch = useDispatch()
-    const { siteTemplateId, siteTemplateVersionHash, siteTemplateDownloadHash } = useGetArticleSelectors()
+    const { siteTemplateId, siteTemplateVersionHash } = useGetArticleSelectors()
 
     // При изменении siteTemplateId запустить экшен увеличивающий siteTemplateVersionHash
     // Это запустит скачивание новой версии шаблона сайта
     useEffect(function () {
         if (!siteTemplateId) return
-
         dispatch( articleActions.changeSiteTemplateVersionHash() )
     }, [siteTemplateId])
 
@@ -37,8 +40,8 @@ export function useSetUserScriptsAndStylesToIFrame() {
     useEffect(function () {
         if (siteTemplateDownloadHash) {
             // Удалить все сценарии и стили добавленные до этого
-            removeNodesFromIframe($links.$head, $headNodesArr)
-            removeNodesFromIframe($links.$body, $bodyNodesArr)
+            removeNodesFromIframe($headNodesArr)
+            removeNodesFromIframe($bodyNodesArr)
 
             // Set code in <head>
             if (siteTemplate.head) {
@@ -56,10 +59,20 @@ export function useSetUserScriptsAndStylesToIFrame() {
         }
         // Если значение 0, то удалить сценарии и стили потому что очистили редактор
         else {
-            removeNodesFromIframe($links.$head, $headNodesArr)
-            removeNodesFromIframe($links.$body, $bodyNodesArr)
+            removeNodesFromIframe($headNodesArr)
+            removeNodesFromIframe($bodyNodesArr)
         }
     }, [siteTemplateDownloadHash, $links])
+}
+
+/**
+ * Функция удаляет все сценарии и стили из <head> или <body>
+ * @param {Element[]} $nodesArr — массив ссылок на элементы, которые нужно удалить
+ */
+function removeNodesFromIframe($nodesArr: Element[]) {
+    for(let $node of $nodesArr) {
+        $node.remove()
+    }
 }
 
 /**
@@ -70,20 +83,6 @@ export function useSetUserScriptsAndStylesToIFrame() {
 function setNodesToIframe($rootElem: HTMLHeadElement | HTMLBodyElement, nodes: Node[]) {
     for (let node of nodes) {
         $rootElem.appendChild(node)
-    }
-}
-
-/**
- * Функция удаляет все сценарии и стили из <head> или <body>
- * @param {HTMLHeadElement | HTMLBodyElement} $rootElem — <head> или <body>
- * @param {Element[]} $nodesArr — массив ссылок на элементы, которые нужно удалить
- */
-function removeNodesFromIframe(
-    $rootElem: HTMLHeadElement | HTMLBodyElement,
-    $nodesArr: Element[]
-) {
-    for(let $node of $nodesArr) {
-        $rootElem.removeChild($node)
     }
 }
 

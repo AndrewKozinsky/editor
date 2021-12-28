@@ -1,11 +1,11 @@
-import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
-import FCType from 'libs/FormConstructor/FCType'
-import { changeEmailRequest } from 'requests/user/changeEmailRequest'
-import actions from 'store/rootAction'
-import { store } from 'store/rootReducer'
+// import { smoothMoveToEntrance } from 'entrance/EntrancePages/EntrancePages-func'
+// import FCType from 'libs/FormConstructor/FCType'
+// import { changeEmailRequest } from 'requests/user/changeEmailRequest'
+// import actions from 'store/rootAction'
+// import { store } from 'store/rootReducer'
 
 
-function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
+/*function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
     return {
         bottom: {
             submit: {
@@ -27,7 +27,7 @@ function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
 
                 setTimeout(function () {
                     // Выкинуть пользователя из редактора
-                    store.dispatch(actions.user.setAuthTokenStatus(1))
+                    store.dispatch(actions.user.setAuthTokenStatus('fail'))
                 }, 7000)
 
                 setTimeout(function () {
@@ -38,7 +38,7 @@ function getSubmitBtnFormConfig(userDataSectionMsg: any): FCType.Config {
         showCommonSuccess: true,
         commonSuccess: userDataSectionMsg.emailSuccessfullyChanged
     }
-}
+}*/
 
 
-export default getSubmitBtnFormConfig
+// export default getSubmitBtnFormConfig

@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { getFromLocalStorage } from 'utils/MiscUtils'
 import useGetUserSelectors from 'store/user/userSelectors'
-import userActions from 'store/user/userActions'
 import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'
-import { getFromLocalStorage } from 'utils/MiscUtils'
-import config from 'utils/config'
-import { useGetUserToken } from 'requests/user/getUserToken'
+import userActions from 'store/user/userActions'
 import articleActions from 'store/article/articleActions'
+import config from 'utils/config'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах
@@ -33,6 +32,8 @@ export function useGetAndSetEditorSettings() {
         let editArticleId = getFromLocalStorage(config.ls.editArticleId, null) // id редактируемой статьи
 
         // Поставить значения в Хранилище
+        // ПЕРЕД ТЕМ КАК СТАВИТЬ ДАННЫЕ В ХРАНИЛИЩЕ НУЖНО УБЕДИТЬСЯ, ЧТО ОНИ ВЕРНЫ.
+        // НАПРИМЕР editorSiteTemplateId МОЖЕТ БЫТЬ ПРОСТО НЕПРАВИЛЬНЫМ
         dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setMainTab(mainTab) )
@@ -42,6 +43,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
+
         dispatch( articleActions.setArticleId(editArticleId) )
     }, [])
 }
@@ -54,48 +56,25 @@ export function useGetAndSetEditorSettings() {
  * Поэтому делается запрос на сервер для его проверки. И в зависимости от этого статус становится
  * или 1 (токена нет или он неверный) или 2 (токен правильный)
  */
-export function useSetTokenStatus() {
+export function useGetUserDataAndStatus() {
     const dispatch = useDispatch()
 
-    // Получение статуса токена из Хранилища
+    // Статус токена
     const { authTokenStatus } = useGetUserSelectors()
 
-    // Токен пользователя и функция для его запроса
-    const { userToken, doFetch } = useGetUserToken()
+    // Проинициализировано ли приложение
+    const [isUserDataReceived, setIsUserDataReceived] = useState(false)
 
-    // При загрузке компонента...
     useEffect(function () {
         // Запрос токена пользователя с сервера если не известен его статус
-        if (!authTokenStatus) doFetch()
-    }, [])
-
-    // При обновлении значения данных по токену...
-    useEffect(function () {
-        if (!userToken) return
-
-        // Если ответ успешен, то поставить 2, в противном случае токена нет, поэтому 1
-        const userTokenStatus = userToken.status === 'success' ? 2 : 1
-
-        // Установка статуса токена в Хранилище
-        dispatch( userActions.setAuthTokenStatus(userTokenStatus) )
-
-        // Если успешно зашли, то поставить в Хранилище почту пользователя
-        if (userToken.status === 'success') {
-            dispatch( userActions.setEmail(userToken.data.user.email) )
+        if (authTokenStatus === 'unknown') {
+            dispatch(userActions.requestUserData())
         }
-    }, [userToken])
+        else if (['fail', 'success'].includes(authTokenStatus)) {
+            setIsUserDataReceived(true)
+        }
+    }, [authTokenStatus])
 
-    // Проинициализировано ли приложение
-    const [isTokenSet, setIsTokenSet] = useState(false)
-
-    // При изменении статуса токена
-    useEffect(function () {
-        if (!authTokenStatus) return
-
-        // Поставить переменную isTokenSet в true чтобы сообщить, что приложение проинициализировано.
-        setIsTokenSet(true)
-    }, [authTokenStatus, setIsTokenSet])
-
-    // Возратить проинициализировано ли приложение.
-    return isTokenSet
+    // Возвратить проинициализировано ли приложение.
+    return isUserDataReceived
 }

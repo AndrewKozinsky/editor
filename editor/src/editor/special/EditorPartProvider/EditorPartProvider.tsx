@@ -11,7 +11,7 @@ import RightPart4 from 'editor/RightPart-4/RightPart-4/RightPart-4'
 import { MiscTypes } from 'types/miscTypes'
 
 type EditorPartProviderPropType = {
-    position: 'left' | 'right' // С какой стороны отрисовывать часть редактора
+    position: 'left' | 'right' // С какой стороны отрисовать часть редактора
 }
 
 /**
@@ -19,7 +19,7 @@ type EditorPartProviderPropType = {
  * в левой или правой части редактора в зависимости от выбранной вкладки
  */
 export default function EditorPartProvider(props: EditorPartProviderPropType) {
-    // С какой стороны отрисовывать часть редактора
+    // С какой стороны отрисовать часть редактора
     const { position } = props
 
     // Номер активной вкладки
@@ -31,7 +31,7 @@ export default function EditorPartProvider(props: EditorPartProviderPropType) {
     useEffect(function () {
 
         // Список всех компонентов во всех вкладках
-        const components: MiscTypes.ObjStringKeyAnyVal = {
+        const components: MiscTypes.ObjStringKey<any> = {
             left0: LeftPart1,
             left1: LeftPart2,
             left2: LeftPart3,

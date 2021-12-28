@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from 'src/common/formElements/Button/Button'
-import { ModalContent } from './DeleteSiteModalContent'
+import DeleteSiteModalContent from './DeleteSiteModalContent'
 import useGetShowModal from 'utils/hooksUtils'
 import useGetMessages from 'messages/fn/useGetMessages'
 import { siteSectionMessages } from 'messages/siteSectionMessages'
@@ -12,7 +12,7 @@ export default function DeleteSiteButton() {
     const siteSectionMsg = useGetMessages(siteSectionMessages)
 
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
-    const openDeleteSiteConfirmation = useGetShowModal(<ModalContent />)
+    const openDeleteSiteConfirmation = useGetShowModal(<DeleteSiteModalContent />)
 
     return (
         <Button

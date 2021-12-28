@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
 import CodeCheckInfo from '../../../special/CodeCheckInfo/CodeCheckInfo'
 import useGetMessages from 'messages/fn/useGetMessages'
-import {siteTemplateSectionMessages} from 'messages/siteTemplateSectionMessages'
+import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
 import checkCodeSiteTemplate, {templateCodeExample} from './checkCodeSiteTemplate'
 
 type CodeHelperPropType = {

@@ -1,12 +1,12 @@
-// import { HTMLObjArrType } from './htmlStringToObject'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { HTMLObjArrType } from './htmlStringToObject'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /**
  * Функция ставит дополнительные атрибуты главной обёртке компонента в htmlObj
  * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
-/*export function setExtraAttribsToMainTag(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+export function setExtraAttribsToMainTag(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
     if (!htmlObj.attrs) htmlObj.attrs = {}
 
     // id компонента
@@ -22,15 +22,15 @@
         const dElemId = getDataElemId( dataComp.dElems, htmlObj.attrs['data-em-id'] )
         htmlObj.attrs['data-em-d-elem-id'] = dElemId.toString()
     }
-}*/
+}
 
 /**
  * Функция возвращает id данных элемента по id шаблона элемента
  * @param {Array} dElems — массив данных элементов
  * @param {String} tElemId — id шаблона элемента
  */
-/*function getDataElemId(dElems:  ArticleTypes.ComponentElems, tElemId: string): number {
+function getDataElemId(dElems:  ArticleTypes.ComponentElems, tElemId: string): number {
     const elemData = dElems.find(dElem => dElem.tCompElemId === tElemId)
 
     return elemData ? elemData.dCompElemId : 0
-}*/
+}

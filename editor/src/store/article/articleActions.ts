@@ -1,6 +1,4 @@
-// import { store } from '../rootReducer'
 const JSON5 = require('json5')
-import { CreateCompFnReturnType } from '../../editor/articleManager/methods/insert'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -10,22 +8,31 @@ import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
-import { ArticleType } from 'requests/editor/article/articleServerResponseType'
+import { ArticleType } from '../../requests/editor/article/articleServerResponseType'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
+import { CreateCompFnReturnType } from '../../articleManager/methods/insert'
 
 
 const articleActions = {
 
-    // Очистка статьи
-    clearArticle() {
-        // Remove editable article id in Local Storage
-        removeFromLocalStorage(config.ls.editArticleId)
-
+    // Action sets links to IFrame window, document, head and body to Store
+    setLinks(
+        $window: StoreArticleTypes.WindowLink,
+        $document: StoreArticleTypes.DocumentLink,
+        $head: StoreArticleTypes.HeadLink,
+        $body: StoreArticleTypes.BodyLink
+    ): StoreArticleTypes.SetLinksAction {
         return {
-            type: StoreArticleTypes.CLEAR_ARTICLE
+            type: StoreArticleTypes.SET_LINKS,
+            payload: {
+                $window,
+                $document,
+                $head,
+                $body
+            }
         }
     },
 
@@ -53,7 +60,8 @@ const articleActions = {
 
             // Request for an article and response from a server
             const response = await getArticleRequest(articleId)
-            if (response.status !== 'success') return
+
+            if (response.status !== 'success' || !response.data.articles[0]) return
 
             if (response.status === 'success') {
                 let articleData = response.data.articles[0]
@@ -72,6 +80,90 @@ const articleActions = {
                 siteId: articleFullData.siteId,
                 siteTemplateId: articleFullData.siteTemplateId
             }
+        }
+    },
+
+    changeSiteTemplateId(siteTemplateId: number): StoreArticleTypes.ChangeSiteTemplateIdAction {
+        return {
+            type: StoreArticleTypes.CHANGE_SITE_TEMPLATE_ID,
+            payload: siteTemplateId
+        }
+    },
+
+    // Увеличение хеша версии шаблона сайта.
+    // После этого хук запустит скачивание нового шаблона сайта.
+    // Затем удалит старые стили/сценарии и поставит новые.
+    changeSiteTemplateVersionHash(): StoreArticleTypes.ChangeSiteTemplateVersionHashAction {
+        return {
+            type: StoreArticleTypes.CHANGE_SITE_TEMPLATE_VERSION_HASH,
+        }
+    },
+
+    // Request for included files template and setting it in Store
+    requestSiteTemplate(siteTemplateId: number) {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            if (!siteTemplateId) return
+
+            // Request for an siteTemplate and get a response from a server
+            const response = await getSiteTemplateRequest(siteTemplateId)
+            if (response.status !== 'success') return
+
+            dispatch( articleActions.setSiteTemplate(
+                JSON5.parse(response.data.siteTemplates[0].content)
+            ))
+        }
+    },
+
+    // Установка в Хранилище шаблона сайта редактируемой статьи
+    setSiteTemplate(siteTemplate: SiteTemplateTypes.Template): StoreArticleTypes.SetSiteTemplateAction {
+        return {
+            type: StoreArticleTypes.SET_SITE_TEMPLATE,
+            payload: siteTemplate
+        }
+    },
+
+    // Увеличение хеша версии папок шаблонов компонентов. После редактор загрузит их и поставить в Хранилище.
+    changeTempCompsFoldersVersionHash(): StoreArticleTypes.ChangeTempCompsFoldersVersionHashAction {
+        return {
+            type: StoreArticleTypes.CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH,
+        }
+    },
+
+    // Увеличение хеша версии шаблонов компонентов. После редактор загрузит их и поставит в Хранилище.
+    changeTempCompsVersionHash(): StoreArticleTypes.ChangeTempCompsVersionHashAction {
+        return {
+            type: StoreArticleTypes.CHANGE_TEMP_COMPS_VERSION_HASH,
+        }
+    },
+
+    /**
+     * Request to template component folders and set they in Store
+     * @param {number} siteId — id сайта к которому принадлежат папки с шаблонами компонентов
+     */
+    requestTempCompsFolders(siteId: number) {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            if (!siteId) return
+
+            // Запрос и ответ от сервера
+            const response = await getCompFolderRequest(siteId)
+            if (response.status !== 'success') return
+
+            const foldersObj = response.data.compFolders[0].content
+            if (!foldersObj) return
+
+            // Set component template folders in the Store
+            dispatch( articleActions.setTempCompFolders(foldersObj) )
+        }
+    },
+
+    /**
+     * Set component template folders is the Store
+     * @param {Array} folders — component template folders array
+     */
+    setTempCompFolders( folders: null | DragFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+        return {
+            type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
+            payload: folders
         }
     },
 
@@ -108,79 +200,10 @@ const articleActions = {
         }
     },
 
-    // Request for included files template and setting it in Store
-    requestSiteTemplate(siteTemplateId: number) {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            if (!siteTemplateId) return
-
-            // Request for an siteTemplate and get a response from a server
-            const response = await getSiteTemplateRequest(siteTemplateId)
-            if (response.status !== 'success') return
-
-            dispatch( articleActions.setSiteTemplate(
-                JSON5.parse(response.data.siteTemplates[0].content)
-            ))
-        }
-    },
-
-    // Setting included files template in Store
-    setSiteTemplate(siteTemplate: SiteTemplateTypes.Template): StoreArticleTypes.SetSiteTemplateAction {
-        return {
-            type: StoreArticleTypes.SET_SITE_TEMPLATE,
-            payload: siteTemplate
-        }
-    },
-
-
-    // Request to template component folders and set they in Store
-    requestTempCompsFolders(siteId: number) {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            if (!siteId) return
-
-            // Запрос и ответ от сервера
-            const response = await getCompFolderRequest(siteId)
-            if (response.status !== 'success') return
-
-            const foldersObj = response.data.compFolders[0].content
-            if (!foldersObj) return
-
-            // Set component template folders in the Store
-            dispatch( articleActions.setTempCompFolders(foldersObj) )
-        }
-    },
-    /**
-     * Set component template folders is the Store
-     * @param {Array} folders — component template folders array
-     */
-    setTempCompFolders( folders: null | DragFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
-        return {
-            type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
-            payload: folders
-        }
-    },
-
-    // Action sets links to IFrame window, document, head and body to Store
-    setLinks(
-        $window: StoreArticleTypes.WindowLink,
-        $document: StoreArticleTypes.DocumentLink,
-        $head: StoreArticleTypes.HeadLink,
-        $body: StoreArticleTypes.BodyLink
-    ): StoreArticleTypes.SetLinksAction {
-        return {
-            type: StoreArticleTypes.SET_LINKS,
-            payload: {
-                $window,
-                $document,
-                $head,
-                $body
-            }
-        }
-    },
-
     /**
      * Экшен ставит данные для установки подсвечивающихся прямоугольников.
      * Но кроме этого в зависимости от переданных данных корректирует видимость подсвечивающихся прямоугольников.
-     * Например если элемент подсвечен выделяющим прямоугольником, то при наведении мыши около него
+     * Например, если элемент подсвечен выделяющим прямоугольником, то при наведении мыши около него
      * не будет отрисовываться прямоугольник при наведении и так далее.
      * @param {String} actionType — тип действия
      * @param {String} tagType —
@@ -281,6 +304,14 @@ const articleActions = {
         }
     },
 
+    // Setting included files template in Store
+    setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
+        return {
+            type: StoreArticleTypes.SET_TEXT_COMP_ID,
+            payload: textCompId
+        }
+    },
+
     /**
      * Action forms a new history item
      * @param {Object} itemDetails — данные для вставки нового элемента в массив статей
@@ -310,25 +341,6 @@ const articleActions = {
         }
     },
 
-    /**
-     * Установка id редактируемой статьи. После редактор загружает все данные.
-     * @param {Number} isPrepared — подготовлены ли данные статьи для соединения с шаблонами
-     */
-    setArticleDataPrepared(isPrepared: boolean): StoreArticleTypes.SetArticleDataPreparedAction {
-        return {
-            type: StoreArticleTypes.SET_ARTICLE_DATA_PREPARED,
-            payload: isPrepared
-        }
-    },
-
-    // Setting included files template in Store
-    setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
-        return {
-            type: StoreArticleTypes.SET_TEXT_COMP_ID,
-            payload: textCompId
-        }
-    },
-
     // Setting included files template in Store
     setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
         return {
@@ -342,6 +354,16 @@ const articleActions = {
         return {
             type: StoreArticleTypes.UPDATE_CURRENT_ARTICLE,
             payload: newArticle
+        }
+    },
+
+    // Очистка статьи
+    clearArticle() {
+        // Remove editable article id in Local Storage
+        removeFromLocalStorage(config.ls.editArticleId)
+
+        return {
+            type: StoreArticleTypes.CLEAR_ARTICLE
         }
     },
 }

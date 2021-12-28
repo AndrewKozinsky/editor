@@ -1,13 +1,14 @@
-// import { HTMLObjArrType } from './htmlStringToObject'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import { createDeepCopy } from 'utils/MiscUtils'
+import { MiscTypes } from '../../../types/miscTypes'
+import { HTMLObjArrType } from './htmlStringToObject'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { createDeepCopy } from 'utils/MiscUtils'
 
 /**
  * Function synchronize the number of elements in html object with number of elements in component data
  * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
-/*export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
     if (!dataComp.dElems) return
 
     // Создание объекта с данными по копиям элементов
@@ -15,10 +16,10 @@
 
     // Поставить копии элементов (если требуется) и в каждый элемент поставить дополнительные атрибуты
     setDuplicates(htmlObj.children, groupElemsMap, dataComp.dCompId)
-}*/
+}
 
 
-// type GroupElemsMapType = {[key: string]: {dCompElemId: number}[]}
+type GroupElemsMapType = MiscTypes.ObjStringKey<{dCompElemId: number}[]>
 
 /**
  * Функция формирует объект вида:
@@ -32,7 +33,7 @@
  * A key is a data element group name (elemGroup property), value is an object with data elem id
  * @param {Object} dataComp — element data object
  */
-/*function createGroupElemsMap(dataComp: ArticleTypes.Component) {
+function createGroupElemsMap(dataComp: ArticleTypes.Component) {
     const groupElemsMap: GroupElemsMapType = {}
 
     for (let dataElem of dataComp.dElems) {
@@ -48,7 +49,7 @@
     }
 
     return groupElemsMap
-}*/
+}
 
 /**
  * Функция ставит копии элементов (если требуется) и в каждый элемент ставит дополнительные атрибуты
@@ -56,7 +57,7 @@
  * @param {Array} groupElemsMap — массив с данными о количестве элементов каждой группы
  * @param {Number} dCompId — id данных компонента
  */
-/*function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, groupElemsMap: GroupElemsMapType, dCompId: number) {
+function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, groupElemsMap: GroupElemsMapType, dCompId: number) {
     if (!htmlParentArr) return
 
     for (let i = 0; i < htmlParentArr.length; i++) {
@@ -94,4 +95,4 @@
             setDuplicates(htmlChild.children, groupElemsMap, dCompId)
         }
     }
-}*/
+}

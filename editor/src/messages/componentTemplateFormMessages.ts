@@ -17,6 +17,10 @@ export const componentFormMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    deleteComponentConfirmationHeaderInModal: {
+        eng: 'Delete a component template?',
+        rus: 'Удалить шаблон компонента?'
+    },
     deleteComponentConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the component template?',
         rus: 'Вы уверены, что хотите удалить шаблон компонента?'

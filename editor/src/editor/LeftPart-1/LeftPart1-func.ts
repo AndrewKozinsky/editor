@@ -35,15 +35,10 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
                 onClick: () => {
                     dispatch( actions.sites.setCurrentSiteId(site.id) )
                     dispatch( actions.sites.setCurrentSiteTemplateId(null) )
-                    // Clear opened component item type (folder or file)
-                    // ...
-                    // Clear opened component item id (folder or file)
-                    // ...
-
-                    // Clear opened article item type (folder or file)
-                    //
+                    // Clear opened component item (folder or file)
+                    dispatch( actions.sites.setCurrentComp(null, null) )
                     // Clear opened article item id (folder or file)
-                    //
+                    dispatch( actions.sites.setCurrentArt(null, null) )
                 }
             }
         }),

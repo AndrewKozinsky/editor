@@ -17,6 +17,10 @@ export const articleFolderFormMessages = {
         eng: 'The folder name cannot be empty',
         rus: 'Название папки не может быть пустым'
     },
+    deleteFolderConfirmationHeaderInModal: {
+        eng: 'Do you want to delete the folder with articles?',
+        rus: 'Удалить папку со статьями?'
+    },
     deleteFolderConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the folder with articles?',
         rus: 'Вы уверены, что хотите удалить папку со статьями?'

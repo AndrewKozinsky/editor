@@ -104,4 +104,3 @@ export function checkForDifferentObjAttrValuesInArr(arr: unknown[], propName: st
         ? [`Свойства ${propName} должны иметь разные значения.`]
         : []
 }
-

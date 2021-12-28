@@ -1,8 +1,7 @@
 import React from 'react'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {componentFormMessages} from 'messages/componentTemplateFormMessages'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import getConfig from './formConfig'
@@ -18,14 +17,12 @@ export function DeleteComponentModalContent() {
     const formState = useFormConstructorState(config)
 
     return (
-        <>
-            <p>{componentFormMsg.deleteComponentConfirmationTextInModal}</p>
-            <Wrapper t={10}>
-                <Hr/>
-            </Wrapper>
-            <Wrapper t={10}>
-                <FormConstructor config={config} state={formState} />
-            </Wrapper>
-        </>
+        <ModalShortContent
+            header={componentFormMsg.deleteComponentConfirmationHeaderInModal}
+            text={componentFormMsg.deleteComponentConfirmationTextInModal}
+            bottomElems={
+                [<FormConstructor config={config} state={formState} key={1} />]
+            }
+        />
     )
 }

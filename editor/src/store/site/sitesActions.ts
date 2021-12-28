@@ -29,7 +29,7 @@ const sitesActions = {
 
             if (!response || response.status !== 'success') return
 
-            // Формированое массива сайтов для установки в Хранилище
+            // Формирование массива сайтов для установки в Хранилище
             const preparedSites = response.data.sites.map((site: any) => {
                 return {
                     id: site.id,
@@ -74,7 +74,6 @@ const sitesActions = {
     // Загрузка с сервера шаблонов сайта и установка в Хранилище
     requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
             // id текущего сайта для которого нужно получить шаблоны
             const siteId = store.getState().sites.currentSiteId
 
@@ -132,7 +131,7 @@ const sitesActions = {
 
             let foldersData = response.data.compFolders[0]
 
-            if (foldersData) {
+            if (foldersData && foldersData.content) {
                 const openedFoldersIds = getOpenedFoldersIds('components')
                 if (openedFoldersIds) {
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
@@ -172,7 +171,7 @@ const sitesActions = {
 
             let foldersData = response.data.artFolders[0]
 
-            if (foldersData) {
+            if (foldersData && foldersData.content) {
                 const openedFoldersIds = getOpenedFoldersIds('articles')
                 if (openedFoldersIds) {
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
@@ -298,14 +297,6 @@ const sitesActions = {
                 code,
                 siteTemplateId
             }
-        }
-    },
-
-    // Article item (folder or file) type setting
-    setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_ID,
-            payload
         }
     },
 }

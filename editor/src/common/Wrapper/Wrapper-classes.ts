@@ -4,6 +4,7 @@ import './Wrapper.scss'
 
 const wrapperRootClass = 'wrapper'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(wrapperProps: WrapperPropType, extraClass?: string) {
     return {
         root: getRootClass(wrapperProps, extraClass), // Обёртка
@@ -13,6 +14,7 @@ export default function makeClasses(wrapperProps: WrapperPropType, extraClass?: 
 /**
  * Функция возвращает классы универсальной обёртки
  * @param {Object} wrapperProps — props переданные в обёртку
+ * @param {String} extraClass — дополнительный класс
  */
 function getRootClass(wrapperProps: WrapperPropType, extraClass?: string) {
     const {

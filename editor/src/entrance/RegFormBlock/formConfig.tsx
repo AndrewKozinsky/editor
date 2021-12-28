@@ -1,14 +1,14 @@
 import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import regRequest, {RegRequestValuesType} from 'requests/user/regRequest'
+import regRequest, { RegRequestValuesType } from 'requests/user/regRequest'
 
 /**
  * Функция возвращает конфигурацию формы регистрации
  * @param {Object} commonMsg — объект с текстами ошибок
  * @param {Object} regFormMsg — объект с текстами ошибок
  */
-function getConfig(commonMsg: any, regFormMsg: any) {
+export default function getConfig(commonMsg: any, regFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -72,6 +72,3 @@ function getConfig(commonMsg: any, regFormMsg: any) {
 
     return config
 }
-
-
-export default getConfig

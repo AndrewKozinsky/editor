@@ -1,9 +1,8 @@
 import React from 'react'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {componentFolderFormMessages} from 'messages/componentFolderFormMessages'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import getConfig from './formConfig'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 
@@ -18,14 +17,10 @@ export function ModalContent() {
     const formState = useFormConstructorState(config)
 
     return (
-        <>
-            <p>{compFolderFormMsg.deleteFolderConfirmationTextInModal}</p>
-            <Wrapper t={10}>
-                <Hr/>
-            </Wrapper>
-            <Wrapper t={10}>
-                <FormConstructor config={config} state={formState} />
-            </Wrapper>
-        </>
+        <ModalShortContent
+            header={compFolderFormMsg.deleteFolderConfirmationHeaderInModal}
+            text={compFolderFormMsg.deleteFolderConfirmationTextInModal}
+            bottomElems={[<FormConstructor config={config} state={formState} key={1} />]}
+        />
     )
 }

@@ -2,7 +2,7 @@ import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { MiscTypes } from '../../../types/miscTypes'
-import {ArticleRowServerRespType} from './articleServerResponseType'
+import { ArticleRowServerRespType } from './articleServerResponseType'
 
 
 /**
@@ -18,7 +18,7 @@ export async function updateArticleRequest(
     siteTemplateId?: null | number,
     content?: ArticleTypes.Article
 ) {
-    const body: MiscTypes.ObjStringKeyAnyVal = {}
+    const body: MiscTypes.ObjStringKey<any> = {}
 
     if (name !== undefined) body.name = name
     if (siteTemplateId !== undefined) body.siteTemplateId = siteTemplateId

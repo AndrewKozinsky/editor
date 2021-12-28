@@ -2,8 +2,7 @@ const JSON5 = require('json5')
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { ArticleRowServerRespType } from './articleServerResponseType'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import articleManager from '../../../editor/articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
 /**
  * Функция создаёт новую статью

@@ -2,9 +2,9 @@ import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import CloseModalButton from './CloseModalButton'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import articleManager from '../../../../../articleManager/articleManager'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -16,7 +16,6 @@ function getConfig(compFolderFormMsg: any) {
             submit: {
                 text: compFolderFormMsg.deleteFolderBtnInModal,
             },
-            elems: [<CloseModalButton key={2} />]
         },
         async requestFn(readyFieldValues) {
             const { currentCompItemId } = store.getState().sites.componentSection
@@ -38,6 +37,10 @@ function getConfig(compFolderFormMsg: any) {
             if (response.status === 'success') {
                 // Закрыть модальное окно
                 store.dispatch(actions.modal.closeModal())
+
+                // Обновить папки компонентов у редактируемой статьи если отредактировали
+                // папки компонентов сайта, к которому принадлежит редактируемая статья.
+                articleManager.remoteControl.updateTempCompFolders()
             }
         },
     }

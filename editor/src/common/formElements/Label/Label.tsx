@@ -11,7 +11,7 @@ type LabelPropType = {
 }
 
 /** Компонент подписи полей формы */
-function Label(props: LabelPropType) {
+export default function Label(props: LabelPropType) {
     const {
         label, // Подпись поля ввода
         id, // id поля ввода
@@ -24,7 +24,7 @@ function Label(props: LabelPropType) {
     const CN = makeClasses(disabled, bold)
 
     // Атрибуты label
-    const labelAttrs: MiscTypes.ObjStringKeyStringVal = {}
+    const labelAttrs: MiscTypes.ObjStringKey<string> = {}
     // Классы подписи
     labelAttrs.className = CN.root
     // Добавить атрибут for равный id поля к которому должна быть привязана подпись
@@ -32,6 +32,3 @@ function Label(props: LabelPropType) {
 
     return <label {...labelAttrs}>{label}</label>
 }
-
-
-export default Label

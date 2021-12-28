@@ -1,10 +1,11 @@
+import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import { store } from 'store/rootReducer'
 import { afterSubmit } from './siteTemplateForm-func'
 import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
-import React from 'react'
+// import React from 'react'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
 import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
 
@@ -53,5 +54,3 @@ function getCurrentSiteTemplateFormConfig(siteTemplateSectionMsg: any) {
 }
 
 export default getCurrentSiteTemplateFormConfig
-
-

@@ -7,7 +7,7 @@ import DeleteSiteButton from '../DeleteSiteButton/DeleteSiteButton'
 import { afterSubmit } from './SiteSection-func'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
-function getCurrentSiteFormConfig(siteSectionMsg: any) {
+export default function getCurrentSiteFormConfig(siteSectionMsg: any) {
     const config: FCType.Config = {
         fields: {
             name: {
@@ -50,7 +50,3 @@ function getCurrentSiteFormConfig(siteSectionMsg: any) {
 
     return config
 }
-
-export default getCurrentSiteFormConfig
-
-

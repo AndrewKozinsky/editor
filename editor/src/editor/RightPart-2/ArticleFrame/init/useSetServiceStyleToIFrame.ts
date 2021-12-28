@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 
 /** Хук создаёт и ставит служебные стили в IFrame */
-export function useSetServiceStyleToIFrame() {
+export default function useSetServiceStyleToIFrame() {
     const { $links } = useGetArticleSelectors()
 
     // Was style installed?

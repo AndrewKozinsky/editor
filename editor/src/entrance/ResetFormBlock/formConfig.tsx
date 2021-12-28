@@ -7,7 +7,7 @@ import resetPasswordRequest from 'requests/user/resetPasswordRequest'
  * @param {Object} commonMsg — объект с текстами ошибок
  * @param {Object} resetFormMsg — объект с текстами ошибок
  */
-function getConfig(commonMsg: any, resetFormMsg: any) {
+export default function getConfig(commonMsg: any, resetFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -46,6 +46,3 @@ function getConfig(commonMsg: any, resetFormMsg: any) {
 
     return config
 }
-
-
-export default getConfig

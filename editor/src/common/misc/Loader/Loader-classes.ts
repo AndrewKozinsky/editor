@@ -2,10 +2,7 @@ import './Loader.scss'
 
 const loaderRootClass = 'loader'
 
-/**
- * Функция возвращает классы для компонента загрузчика
- * @param externalClasses
- */
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(externalClasses?: string) {
     return {
         root: getRootClass(externalClasses),

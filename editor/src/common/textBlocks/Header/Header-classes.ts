@@ -4,6 +4,7 @@ import './Header.scss'
 
 const headerRootClass = 'header'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(type?: HeaderTypeType) {
     return {
         root: getHeaderRootClass(type)

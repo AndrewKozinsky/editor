@@ -53,8 +53,7 @@ function isMarkupCorrect(htmlStr?: string) {
 
         // Если в elemsArr есть элементы, то значит пытаются добавить обычные теги
         // <script> и <style> к ним не относятся
-        if (elemsArr.length) return false
-        return true
+        return !elemsArr.length
     }
     catch (err) {
         return false

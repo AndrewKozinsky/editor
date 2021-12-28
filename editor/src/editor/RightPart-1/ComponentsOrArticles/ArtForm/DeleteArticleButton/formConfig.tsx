@@ -5,7 +5,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import CloseModalButton from './CloseModalButton'
+import articleManager from '../../../../../articleManager/articleManager'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -17,7 +17,6 @@ function getConfig(articleFormMsg: any) {
             submit: {
                 text: articleFormMsg.deleteArticleBtnInModal,
             },
-            elems: [<CloseModalButton key={2} />]
         },
         async requestFn(readyFieldValues) {
             const { artFolder, artFolderId } = store.getState().sites.artFolderSection
@@ -36,7 +35,7 @@ function getConfig(articleFormMsg: any) {
             await putArtFolderRequest(artFolderId, newFoldersArr)
 
             // Удалить статью на сервере
-            return await deleteArticleRequest(currentArtItemId)
+            return await articleManager.deleteArticle(currentArtItemId)
         },
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {

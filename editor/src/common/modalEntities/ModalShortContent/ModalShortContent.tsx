@@ -10,7 +10,7 @@ type ModalShortContentPropType = {
 }
 
 /* Modal content component with header, text and any number of buttons */
-function ModalShortContent(props: ModalShortContentPropType) {
+export default function ModalShortContent(props: ModalShortContentPropType) {
     const { header, text, bottomElems } = props
 
     const CN = useMakeClasses()
@@ -35,5 +35,3 @@ function ModalShortContent(props: ModalShortContentPropType) {
         </section>
     )
 }
-
-export default ModalShortContent

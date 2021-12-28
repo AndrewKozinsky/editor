@@ -5,6 +5,7 @@ import './ModalShortContent.scss'
 
 const CN = 'modal-short-content'
 
+/** Функция возвращающая классы для элементов */
 export default function useMakeClasses() {
     const modalType = useGetModalSelectors().type
 

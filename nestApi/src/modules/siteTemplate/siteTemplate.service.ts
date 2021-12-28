@@ -118,5 +118,6 @@ export class SiteTemplateService {
         }
 
         response.send(resBody)
+        return
     }
 }

@@ -79,6 +79,7 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
         mainTab: action.payload
     }
 }
+
 // Установка id вкладки в Настройках
 function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
@@ -89,7 +90,6 @@ function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTy
         settingsPanelTab: action.payload
     }
 }
-
 
 // Редьюсер Store.settings
 export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {

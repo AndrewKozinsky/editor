@@ -5,7 +5,7 @@ import { afterSubmit } from './SiteSection-func'
 
 
 /** Функция возвращает конфигурацию формы входа в сервис */
-function getNewSiteFormConfig(siteSectionMsg: any) {
+export default function getNewSiteFormConfig(siteSectionMsg: any) {
     const config: FCType.Config = {
         fields: {
             name: {
@@ -38,5 +38,3 @@ function getNewSiteFormConfig(siteSectionMsg: any) {
 
     return config
 }
-
-export default getNewSiteFormConfig

@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react'
+import React, { ReactElement, useState } from 'react'
 import { MiscTypes } from 'types/miscTypes'
 import {getRandomId} from 'utils/StringUtils'
 import './Checkbox.scss'
@@ -31,7 +31,7 @@ export default function Checkbox(props: CheckboxPropType) {
     const [id] = useState(getRandomId())
 
     // Атрибуты флага
-    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const inputAttribs: MiscTypes.ObjStringKey<any> = {
         type: 'checkbox',
         name,
         value,
@@ -44,7 +44,7 @@ export default function Checkbox(props: CheckboxPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const labelAttribs: MiscTypes.ObjStringKey<any> = {
         htmlFor: id,
         className: 'checkbox-label',
     }

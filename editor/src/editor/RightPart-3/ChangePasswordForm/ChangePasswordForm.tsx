@@ -6,7 +6,7 @@ import { changePasswordSectionMessages } from 'messages/changePasswordSectionMes
 import { commonMessages } from 'messages/commonMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/* Форма изменения пароля пользователя */
 export default function ChangePasswordForm() {
     const commonMsg = useGetMessages(commonMessages)
     const changePasswordSectionMsg = useGetMessages(changePasswordSectionMessages)

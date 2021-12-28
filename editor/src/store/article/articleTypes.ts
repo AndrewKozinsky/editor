@@ -2,7 +2,7 @@ import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-import { CreateCompFnReturnType } from '../../editor/articleManager/methods/insert'
+import { CreateCompFnReturnType } from '../../articleManager/methods/insert'
 
 namespace StoreArticleTypes {
 
@@ -37,14 +37,14 @@ namespace StoreArticleTypes {
     export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
-    // export type TempComps = TempComp[]
+    export type TempComps = TempComp[]
 
     // A component template
-    /*export type TempComp = {
+    export type TempComp = {
         id: number
         name: string
         code: TempCompTypes.TempComp
-    }*/
+    }
 
     export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
@@ -71,11 +71,23 @@ namespace StoreArticleTypes {
 
     // =============================================
 
-    // Типы типа и тип экшена
-    // Set components templates array
-    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
-    export type ClearArticleAction = {
-        type: typeof CLEAR_ARTICLE
+    // Set links to iFrame elements
+    export const SET_LINKS = 'SET_LINKS'
+    export type SetLinksAction = {
+        type: typeof SET_LINKS
+        payload: {
+            $window:   WindowLink
+            $document: DocumentLink
+            $head:     HeadLink
+            $body:     BodyLink
+        }
+    }
+
+    // Установка данных последней введённого символа
+    export const SET_PRESSED_KEY = 'SET_PRESSED_KEY'
+    export type SetPressedKeyAction = {
+        type: typeof SET_PRESSED_KEY,
+        payload: PressedKey
     }
 
     // Set components templates array
@@ -96,12 +108,15 @@ namespace StoreArticleTypes {
         }
     }
 
-    // Типы типа и тип экшена
-    // Set components templates array
-    export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
-    export type SetTempCompAction = {
-        type: typeof SET_TEMP_COMPS
-        payload: TempCompTypes.TempComps
+    export const CHANGE_SITE_TEMPLATE_ID = 'CHANGE_SITE_TEMPLATE_ID'
+    export type ChangeSiteTemplateIdAction = {
+        type: typeof CHANGE_SITE_TEMPLATE_ID
+        payload: number
+    }
+
+    export const CHANGE_SITE_TEMPLATE_VERSION_HASH = 'CHANGE_SITE_TEMPLATE_VERSION_HASH'
+    export type ChangeSiteTemplateVersionHashAction = {
+        type: typeof CHANGE_SITE_TEMPLATE_VERSION_HASH
     }
 
     // Set article object
@@ -111,16 +126,30 @@ namespace StoreArticleTypes {
         payload: SiteTemplateTypes.Template
     }
 
-    // Set links to iFrame elements
-    export const SET_LINKS = 'SET_LINKS'
-    export type SetLinksAction = {
-        type: typeof SET_LINKS
-        payload: {
-            $window:   WindowLink
-            $document: DocumentLink
-            $head:     HeadLink
-            $body:     BodyLink
-        }
+    // Увеличение хеша версии папок шаблонов компонентов. После этого хук запустит скачивание нового шаблона сайта
+    export const CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH = 'CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH'
+    export type ChangeTempCompsFoldersVersionHashAction = {
+        type: typeof CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH
+    }
+
+    // Увеличение хеша версии папок шаблонов компонентов. После этого хук запустит скачивание нового шаблона сайта
+    export const CHANGE_TEMP_COMPS_VERSION_HASH = 'CHANGE_TEMP_COMPS_VERSION_HASH'
+    export type ChangeTempCompsVersionHashAction = {
+        type: typeof CHANGE_TEMP_COMPS_VERSION_HASH
+    }
+
+    export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
+    export type SetTempCompFoldersAction = {
+        type: typeof SET_TEMP_COMP_FOLDERS
+        payload: DragFilesTreeType.Items
+    }
+
+    // Типы типа и тип экшена
+    // Set components templates array
+    export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
+    export type SetTempCompAction = {
+        type: typeof SET_TEMP_COMPS
+        payload: TempCompTypes.TempComps
     }
 
     export type FlashedElemType = 'hover' | 'select' | 'moveHover' | 'moveSelect'
@@ -135,11 +164,11 @@ namespace StoreArticleTypes {
         }
     }
 
-
-    export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
-    export type SetTempCompFoldersAction = {
-        type: typeof SET_TEMP_COMP_FOLDERS
-        payload: DragFilesTreeType.Items
+    // Установка id выделенного текстового компонента
+    export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
+    export type SetTextCompIdAction = {
+        type: typeof SET_TEXT_COMP_ID,
+        payload: number | null
     }
 
     export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
@@ -161,27 +190,6 @@ namespace StoreArticleTypes {
         type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
     }
 
-    // Set components templates array
-    export const SET_ARTICLE_DATA_PREPARED = 'SET_ARTICLE_DATA_PREPARED'
-    export type SetArticleDataPreparedAction = {
-        type: typeof SET_ARTICLE_DATA_PREPARED,
-        payload: boolean
-    }
-
-    // Установка данных последней введённого символа
-    export const SET_PRESSED_KEY = 'SET_PRESSED_KEY'
-    export type SetPressedKeyAction = {
-        type: typeof SET_PRESSED_KEY,
-        payload: PressedKey
-    }
-
-    // Установка id выделенного текстового компонента
-    export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
-    export type SetTextCompIdAction = {
-        type: typeof SET_TEXT_COMP_ID,
-        payload: number | null
-    }
-
     // Установка id выделенного текстового компонента
     export const UPDATE_CURRENT_ARTICLE = 'UPDATE_CURRENT_ARTICLE'
     export type UpdateCurrentArticleAction = {
@@ -189,23 +197,32 @@ namespace StoreArticleTypes {
         payload: HistoryItem
     }
 
+    // Очистка статьи
+    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
+    export type ClearArticleAction = {
+        type: typeof CLEAR_ARTICLE
+    }
+
 
     export type ArticleAction =
-        | ClearArticleAction
+        | SetLinksAction
+        | SetPressedKeyAction
         | SetArticleIdAction
         | SetArticleAction
-        | SetTempCompAction
+        | ChangeSiteTemplateIdAction
+        | ChangeSiteTemplateVersionHashAction
         | SetSiteTemplateAction
-        | SetLinksAction
-        | SetFlashedElementAction
+        | ChangeTempCompsFoldersVersionHashAction
+        | ChangeTempCompsVersionHashAction
         | SetTempCompFoldersAction
+        | SetTempCompAction
+        | SetFlashedElementAction
+        | SetTextCompIdAction
         | CreateAndSetHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
-        | SetArticleDataPreparedAction
-        | SetPressedKeyAction
-        | SetTextCompIdAction
         | UpdateCurrentArticleAction
+        | ClearArticleAction
 }
 
 export default StoreArticleTypes

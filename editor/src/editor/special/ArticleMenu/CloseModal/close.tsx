@@ -3,7 +3,7 @@ import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetShowModal from 'utils/hooksUtils'
-import articleManager from '../../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
 
 

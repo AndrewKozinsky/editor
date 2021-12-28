@@ -33,6 +33,10 @@ export const siteSectionMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    deleteSiteModalHeader: {
+        eng: 'Are you sure you want to delete the site?',
+        rus: 'Вы точно хотите удалить сайт?'
+    },
     deleteSiteConfirmationTextInModal: {
         eng: 'If you delete the site, all of its templates plugins, component templates and articles will also be deleted. Delete the site?',
         rus: 'При удалении сайта будут удалены и все его шаблоны подключаемых файлов, шаблоны компонентов и статьи. Удалить сайт?'

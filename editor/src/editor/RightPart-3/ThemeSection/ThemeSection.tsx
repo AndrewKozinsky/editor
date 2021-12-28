@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
 import actions from 'store/rootAction'
+import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { themeSectionMessages } from 'messages/themeSectionMessages'
@@ -18,7 +18,6 @@ export default function ThemeSection() {
     const onChangeHandler = useGetOnChangeHandler()
 
     return (
-        <>
             <FieldGroup
                 label={themeSectionMsg.themeRadiosHeader}
                 inputType='radio'
@@ -55,7 +54,6 @@ export default function ThemeSection() {
                     ]
                 }
             />
-        </>
     )
 }
 

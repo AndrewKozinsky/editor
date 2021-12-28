@@ -1,23 +1,23 @@
-import actions from 'store/rootAction'
-import { store } from 'store/rootReducer'
-import articleManager from 'editor/articleManager/articleManager'
-import {
-    checkPressedKeys,
-    getPressedKeys,
-    PressedKeysObj
-} from './getPressedKeys'
+// import actions from 'store/rootAction'
+// import { store } from 'store/rootReducer'
+// import articleManager from 'articleManager/articleManager'
+// import {
+//     checkPressedKeys,
+//     getPressedKeys,
+//     PressedKeysObj
+// } from './getPressedKeys'
 
 
-export default function setShortcutsHandler() {
+/*export default function setShortcutsHandler() {
     document.addEventListener('keydown', shortcutsHandler)
-}
+}*/
 
 
 /**
  * Обработчик нажатий клавиш
  * @param {Object} e — объект события
  */
-function shortcutsHandler(e: KeyboardEvent) {
+/*function shortcutsHandler(e: KeyboardEvent) {
 
     // Object of pressed keys
     const pressedKeys = getPressedKeys(e)
@@ -26,20 +26,20 @@ function shortcutsHandler(e: KeyboardEvent) {
     closeModal(pressedKeys)
 
     // Making undo or redo history step in article
-    undoRedoArticleHistory(pressedKeys)
-}
+    // undoRedoArticleHistory(pressedKeys)
+}*/
 
 
 // Close modal window if you press Esc
-function closeModal(pressedKeys: PressedKeysObj) {
-    if ( checkPressedKeys(pressedKeys, ['esc']) && store.getState().modal.isOpen) {
+// function closeModal(pressedKeys: PressedKeysObj) {
+    /*if ( checkPressedKeys(pressedKeys, ['esc']) && store.getState().modal.isOpen) {
         store.dispatch( actions.modal.closeModal() )
-    }
-}
+    }*/
+// }
 
 
 // If you pressed Cmd + Z or Shift + Cmd + Z, then make undo or redo history step in article
-function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
+/*function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
 
     // Return the function if user is not on the article page
     if (store.getState().settings.mainTab !== 1) return
@@ -58,4 +58,4 @@ function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
 
         store.dispatch( actions.article.makeHistoryStep('redo') )
     }
-}
+}*/

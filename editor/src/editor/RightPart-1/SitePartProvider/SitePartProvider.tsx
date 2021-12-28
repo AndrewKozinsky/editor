@@ -46,7 +46,7 @@ export default function SitePartProvider(): ReactElement {
                             <TemplatesList />
                         </>
                         {/*Если id текущего шаблона равен null, то ни выделен ни новый сайт, ни текущий,*/}
-                        {/*поэтому ничего не отрисовывать.*/}
+                        {/*поэтому ничего не отрисовать.*/}
                         {currentTemplateId !== null && <SiteTemplateForm />}
                     </HeaderPage>
                 )

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import useGetUserSelectors from 'store/user/userSelectors'
 
-
+/* Хук ставит почту пользователя в поле формы изменения почты пользователя */
 export function useUpdateEmailInForm(formState: FCType.StateFormReturn) {
     const { email } = useGetUserSelectors()
 

@@ -1,10 +1,11 @@
-import './Modal.scss'
 import useGetModalSelectors from 'store/modal/modalSelectors'
 import StoreModalTypes from 'store/modal/modalTypes'
 import { makeCN } from 'utils/StringUtils'
+import './Modal.scss'
 
 const CN = 'modal'
 
+/** Функция возвращающая классы для элементов */
 export default function useMakeClasses() {
     const modalType = useGetModalSelectors().type
 

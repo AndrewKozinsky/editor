@@ -10,24 +10,19 @@ import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
-import { useGetAndSetEditorSettings, useSetTokenStatus } from './app-fn/init'
+import { useGetAndSetEditorSettings, useGetUserDataAndStatus } from './app-fn/init'
 import { useRedirectPage } from './app-fn/App-func'
-import setShortcutsHandler from './shortcuts/shortcutsHandler'
+// import setShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
-import './css/reset.css'
-import './css/variables.scss'
-import './css/default.scss'
 
 
 /** Компонент всего приложения */
 export default function App() {
-    // TODO Нужно сделать чтобы модальные окна выглядели одинаково везде. Сейчас у меня есть два варианта окон. Думаю стоит чтобы они выглядели одинаково как окно удаления учётной записи.
-    // TODO При каждом открытии статьи нужно запускать сценарий исправляющий данные статьи в соответствии с шаблоном. Например в шаблоне тег перестал быть элементом, поэтому из данных нужно убрать сведения об этом элементе. Или сделали какой-то элемент способным содержать текст. И в данные нужно поставить пустой текстовый компонент. И так далее.
-    // TODO Что если данные статьи хранить в отдельном хуке в articleManager вне Редакса?
+    // TODO Папкам в DragFilesTree придётся задать строковые идентификаторы вида folder_12 чтобы не было пересечения с числовыми идентификаторами у файлов.
     // TODO В GET нельзя передать тело запроса, но дополнительные данные можно передать через запросы в URL: /compFolder?siteId=3. Поэтому я могу убрать обработчик /sites/3/compFolder из sites.
     // TODO На iFrame можно поставить какой-нибудь идентификатор, например #editorium чтобы в используемом CSS как-то изменять стили если статью редактируют в редакторе. Например добавить какой-нибудь фон чтобы элемент был виден только в редакторе или поставить минимальную высоту чтобы элемент можно было выделить если он имеет нулевую высоту.
 
-    // TODO В некотрых местах кода я формирую объект свойств, который затем передаю через оператор rest в тег в JSX. И в качестве типа пишу MiscTypes.StringKeyWithAnyValues потому что объект со свойствами формируется не сразу, а может дополняться по ходу кода. Поэтому я не могу зайдействовать автоматическое определение кода TypeScript-а. Так вот, в качестве типа этого объекта можно указать тип свойств принимаемых тегом. Не знаю как он называется.
+    // TODO В некоторых местах кода я формирую объект свойств, который затем передаю через оператор rest в тег в JSX. И в качестве типа пишу MiscTypes.StringKeyWithAnyValues потому что объект со свойствами формируется не сразу, а может дополняться по ходу кода. Поэтому я не могу зайдействовать автоматическое определение кода TypeScript-а. Так вот, в качестве типа этого объекта можно указать тип свойств принимаемых тегом. Не знаю как он называется.
     // TODO Figure out why the types from Store are not detected.
     // TODO Don't forgot to use eslint, prettier and stylelint.
     // TODO MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
@@ -65,16 +60,16 @@ export default function App() {
     // Shift + F6 // Переименовывание всех переменных разом
     // Cmd - / Cmd + // Сворачивание / разворачивание стека
     // Alt + Cmd + T // Оборачивание выделенных тегов в HTML  или в конструкцию if ... else, while, for...в JS
-    // Shift + Cmd + Fn + Del // Удаление оберти в HTML или  if ... else, while, for... в JS
+    // Shift + Cmd + Fn + Del // Удаление оберни в HTML или  if ... else, while, for... в JS
 
     // Поставить настройки редактора в Хранилище
     useGetAndSetEditorSettings()
 
     // Проинициализировать приложение и возвратить статус сделано ли это
-    const isTokenSet = useSetTokenStatus()
+    const isUserDataReceived = useGetUserDataAndStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    setShortcutsHandler()
+    // setShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет
@@ -83,8 +78,8 @@ export default function App() {
     // Классы компонента
     const CN = useGetClasses()
 
-    // Показать загрузчик если приложение еще не инициализировалось
-    if (!isTokenSet) {
+    // Показать загрузчик если приложение еще не проинициализировалось
+    if (!isUserDataReceived) {
         return <div className={CN.root}><Loader /></div>
     }
 

@@ -2,6 +2,7 @@ import './Notice.scss'
 
 const noticeRootClass = 'notice'
 
+/** Функция возвращающая классы для элементов */
 export default function makeClasses(bg?: boolean) {
     return {
         bg: getBgClass(bg),

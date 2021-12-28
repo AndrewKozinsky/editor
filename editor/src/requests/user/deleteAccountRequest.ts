@@ -1,17 +1,10 @@
-// import {useFetch} from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import { makeFetch } from '../reqFn/fetch'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
+import { makeFetch } from 'requests/reqFn/fetch'
+import { UserServerResponse } from './userServerResponseType'
 
-
-export default async function deleteAccountRequest() {
+/* Запрос на удаление пользователя */
+export default async function deleteAccountRequest(): Promise<UserServerResponse> {
     const options = { method: 'DELETE'}
 
-    const response: DeleteAccountServerResponse = await makeFetch(getApiUrl('me'), options)
-    return response
+    return await makeFetch(getApiUrl('me'), options)
 }
-
-
-// Тип данных с ответом от пользователя
-type DeleteAccountServerResponse = ErrorServerResponseType | UserServerResponseType

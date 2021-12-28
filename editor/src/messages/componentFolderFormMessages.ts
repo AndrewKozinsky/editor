@@ -21,6 +21,10 @@ export const componentFolderFormMessages = {
         eng: 'A folder name cannot be longer than 255 characters',
         rus: 'Название папки не может быть длиннее 255 символов'
     },
+    deleteFolderConfirmationHeaderInModal: {
+        eng: 'Delete the folder with the component templates?',
+        rus: 'Удалить папку с шаблонами компонентов?'
+    },
     deleteFolderConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the folder with the component templates?',
         rus: 'Вы уверены, что хотите удалить папку с шаблонами компонентов?'

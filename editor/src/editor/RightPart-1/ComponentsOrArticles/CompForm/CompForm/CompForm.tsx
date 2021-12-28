@@ -1,5 +1,5 @@
 import React from 'react'
-import useGetMessages from 'src/messages/fn/useGetMessages'
+import useGetMessages from 'messages/fn/useGetMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import { componentFormMessages } from 'messages/componentTemplateFormMessages'

@@ -1,15 +1,15 @@
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import articleManager from '../articleManager'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import articleManager from 'articleManager/articleManager'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 
 // Тип объекта возвращаемый функциями вставки новых компонентов
 // Заметь, что это не новая статья, а данные для экшена для вставки нового пункта
 // в массив истории и обновления счётчика id максимального компонента.
-/*export type CreateCompFnReturnType = {
+export type CreateCompFnReturnType = {
     components: ArticleTypes.ArticleArrayItem[] // Объект истории
     maxCompId: number // максимальный id
-}*/
+}
 
 /**
  *
@@ -19,7 +19,7 @@
  * @param targetDataCompId
  * @param targetDataElemId
  */
-/*export function createCompAndSetInElem(
+export function createCompAndSetInElem(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
@@ -48,7 +48,7 @@
         components: updatedComponents,
         maxCompId: newCompResult.maxCompId
     }
-}*/
+}
 
 
 /**
@@ -59,7 +59,7 @@
  * @param {String} tempCompId — component template id
  * @param {String} targetDataCompId — a target data component id relative with the a new component will be placed
  */
-/*export function createCompAndSetItNearComp(
+export function createCompAndSetItNearComp(
     this: typeof articleManager,
     place: 'before' | 'after',
     article: ArticleTypes.Article,
@@ -94,7 +94,7 @@
         components: updatedComponents,
         maxCompId: newCompResult.maxCompId
     }
-}*/
+}
 
 
 /**
@@ -104,7 +104,7 @@
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
-/*export function createCompAndSetInRootOfArticle(
+export function createCompAndSetInRootOfArticle(
     this: typeof articleManager,
     place: 'begin' | 'end',
     article: ArticleTypes.Article,
@@ -123,4 +123,4 @@
         components: artCompsArr,
         maxCompId: newCompResult.maxCompId
     }
-}*/
+}

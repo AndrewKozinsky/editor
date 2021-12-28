@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import useGetMessages from 'messages/fn/useGetMessages'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import useGetArticleSelectors from 'store/article/articleSelectors'

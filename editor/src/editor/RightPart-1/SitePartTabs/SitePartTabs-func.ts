@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { rightTabsMessages } from 'messages/rightTabsMessages'
 import useGetMessages from 'messages/fn/useGetMessages'

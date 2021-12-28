@@ -5,7 +5,8 @@ import './EntrancePages.scss'
 
 const appRootClass = 'entrance-pages'
 
-function useMakeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function useMakeClasses() {
     const wrapperClass = useGetWrapperClasses()
 
     return {
@@ -22,7 +23,7 @@ function useMakeClasses() {
 export function useGetWrapperClasses() {
     const CN = appRootClass + '__wrapper'
 
-    // Какой компонент должен быть отрисован
+    // Какой компонент должен быть нарисован
     const { entryAndEditorViewState } = useGetSettingsSelectors()
 
     const [classes, setClasses] = useState<string[]>([CN])
@@ -53,5 +54,3 @@ export function useGetWrapperClasses() {
 
     return makeCN(classes)
 }
-
-export default useMakeClasses

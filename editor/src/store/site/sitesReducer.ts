@@ -6,10 +6,7 @@ export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
-    siteTemplatesSection: {
-        templates: StoreSitesTypes.SiteTemplatesType
-        currentTemplateId: StoreSitesTypes.CurrentSiteTemplateId
-    },
+    siteTemplatesSection: StoreSitesTypes.SiteTemplatesSection,
     compFolderSection: StoreSitesTypes.CompFolderSection
     artFolderSection: StoreSitesTypes.ArtFolderSection
     componentSection: StoreSitesTypes.ComponentSection
@@ -285,25 +282,7 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
     }
 }
 
-// Установка id открытой статьи в сайтах
-function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorArticleId)
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorArticleId, action.payload)
-    }
 
-    return {
-        ...state,
-        articleSection: {
-            ...state.articleSection,
-            currentArtItemId: action.payload
-        }
-    }
-}
 
 // Редьюсер Store.sites
 export default function sitesReducer(
@@ -333,8 +312,6 @@ export default function sitesReducer(
             return setCurrentComp(state, action)
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
-        case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
-            return setCurrentArtItemId(state, action)
 
         default:
             // @ts-ignore
