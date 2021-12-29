@@ -234,7 +234,7 @@ const sitesActions = {
 
     // Установка id и типа выбранного шаблона компонента
     setCurrentComp(
-        id: null | DragFilesTreeType.Id,
+        id: null | DragFilesTreeType.ItemId,
         type: null | DragFilesTreeType.ItemType,
         name?: string,
         code?: string
@@ -282,7 +282,7 @@ const sitesActions = {
 
     // Установка id и типа выбранной статьи
     setCurrentArt(
-        id: null | DragFilesTreeType.Id,
+        id: null | DragFilesTreeType.ItemId,
         type: null | DragFilesTreeType.ItemType,
         name?: string,
         code?: ArticleTypes.Article,

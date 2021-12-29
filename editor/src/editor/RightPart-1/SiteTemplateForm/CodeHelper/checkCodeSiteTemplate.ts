@@ -43,6 +43,7 @@ export default function checkCodeSiteTemplate(code: string) {
     }
 }
 
+// TODO Что делает эта функция?
 function isMarkupCorrect(htmlStr?: string) {
     if (!htmlStr) return false
 

@@ -6,7 +6,7 @@ import { userDataSectionMessages } from 'messages/userDataSectionMessages'
 import getConfig from './formConfig'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+// TODO Что делает эта функция?
 export default function EmailForm() {
     const userDataSectionMsg = useGetMessages(userDataSectionMessages)
     const formConfig = getConfig(userDataSectionMsg)

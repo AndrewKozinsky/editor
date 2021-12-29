@@ -25,6 +25,7 @@ function useGetCurrentHistoryItem() {
 
     return currentHistoryItem
 }
+
 /** Hook returns current history item object */
 function useGetCurrentArticle() {
     // Templates component from the Store

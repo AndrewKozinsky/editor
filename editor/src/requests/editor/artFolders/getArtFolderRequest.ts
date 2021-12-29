@@ -6,7 +6,7 @@ import {
     ArtFolderServerSuccessRespType
 } from './artFolderServerResponseType'
 
-
+// TODO Что делает эта функция?
 export async function getArtFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 

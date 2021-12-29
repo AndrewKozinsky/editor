@@ -8,7 +8,7 @@ import { themeSectionMessages } from 'messages/themeSectionMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
-
+// TODO Что делает эта функция?
 export default function ThemeSection() {
     const themeSectionMsg = useGetMessages(themeSectionMessages)
 
@@ -18,42 +18,42 @@ export default function ThemeSection() {
     const onChangeHandler = useGetOnChangeHandler()
 
     return (
-            <FieldGroup
-                label={themeSectionMsg.themeRadiosHeader}
-                inputType='radio'
-                groupName='theme'
-                value={[editorTheme]}
-                gap={20}
-                vertical
-                onChange={onChangeHandler}
-                inputsArr={
-                    [
-                        {
-                            value: 'light',
-                            label: (
-                                <>
-                                    {themeSectionMsg.lightLabel}
-                                    <Wrapper t={5}>
-                                        <SvgIcon type='editorLightTheme'/>
-                                    </Wrapper>
+        <FieldGroup
+            label={themeSectionMsg.themeRadiosHeader}
+            inputType='radio'
+            groupName='theme'
+            value={[editorTheme]}
+            gap={20}
+            vertical
+            onChange={onChangeHandler}
+            inputsArr={
+                [
+                    {
+                        value: 'light',
+                        label: (
+                            <>
+                                {themeSectionMsg.lightLabel}
+                                <Wrapper t={5}>
+                                    <SvgIcon type='editorLightTheme'/>
+                                </Wrapper>
 
-                                </>
-                            )
-                        },
-                        {
-                            value: 'dark',
-                            label: (
-                                <>
-                                    {themeSectionMsg.darkLabel}
-                                    <Wrapper t={5}>
-                                        <SvgIcon type='editorDarkTheme'/>
-                                    </Wrapper>
-                                </>
-                            )
-                        }
-                    ]
-                }
-            />
+                            </>
+                        )
+                    },
+                    {
+                        value: 'dark',
+                        label: (
+                            <>
+                                {themeSectionMsg.darkLabel}
+                                <Wrapper t={5}>
+                                    <SvgIcon type='editorDarkTheme'/>
+                                </Wrapper>
+                            </>
+                        )
+                    }
+                ]
+            }
+        />
     )
 }
 

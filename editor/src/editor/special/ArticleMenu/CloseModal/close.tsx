@@ -6,7 +6,7 @@ import useGetShowModal from 'utils/hooksUtils'
 import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
 
-
+// TODO Что делает эта функция?
 export function useCloseArticle() {
     const { historyStepWhenWasSave, historyCurrentIdx } = useGetArticleSelectors()
     const openConfirmCloseModal = useGetShowModal(<CloseArticleConfirmModal />)

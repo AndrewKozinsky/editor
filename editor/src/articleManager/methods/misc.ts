@@ -54,7 +54,7 @@ export function clearArticle(this: typeof articleManager) {
 }
 
 /**
- * The function saves code of an article to a server
+ * Функция удаляющая редактируемую статью
  * @param {String} articleId — article id which I have to save in a server
  */
 export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
@@ -67,5 +67,6 @@ export async function deleteArticle( this: typeof articleManager, articleId: nul
     this.clearArticle()
 
     // Delete article in a server
-    await deleteArticleRequest(articleId)
+    // Возможно это не требуется
+    // await deleteArticleRequest(articleId)
 }

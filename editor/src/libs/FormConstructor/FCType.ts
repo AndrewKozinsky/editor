@@ -3,8 +3,7 @@ import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { ButtonPropType } from 'common/formElements/Button/Button'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from 'requests/user/userServerResponseType'
+import { UserServerResponse } from 'requests/user/userServerResponseType'
 
 
 namespace FCType {
@@ -60,7 +59,7 @@ namespace FCType {
     type FieldExcludedArgs = 'onChange' | 'value' | 'disabled' | 'error' | 'name'
     type ConfigSubmitButton = Omit<ButtonPropType, 'type'>
 
-    export type Response = ErrorServerResponseType | UserServerResponseType | {status: 'success'}
+    export type Response = UserServerResponse | {status: 'success'}
 
     // Fields' values for sending to the server
     export type ReadyFieldsValues = {

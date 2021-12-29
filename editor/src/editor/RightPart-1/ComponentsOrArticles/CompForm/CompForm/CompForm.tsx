@@ -10,6 +10,7 @@ import {
 } from './ComponentForm-func'
 import CodeHelper from '../CodeHelper/CodeHelper'
 
+// TODO Что делает эта функция?
 export default function CompForm() {
     // Сообщения формы
     const componentFormMsg = useGetMessages(componentFormMessages)

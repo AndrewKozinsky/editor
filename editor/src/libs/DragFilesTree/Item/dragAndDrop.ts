@@ -109,7 +109,7 @@ export function handleDragEnd(
  * @param {Object} itemData — данные перетаскиваемой папки или файла
  */
 function isDropAllowed(
-    itemBelowId: DragFilesTreeType.Id,
+    itemBelowId: DragFilesTreeType.ItemId,
     itemData: DragFilesTreeType.Item
 ) {
     // Ничего не делать если не передан id
@@ -131,10 +131,10 @@ function isDropAllowed(
 function getDropPlaceCoords(
     e: any,
     itemBelow: HTMLElement,
-    itemBelowId: DragFilesTreeType.Id,
+    itemBelowId: DragFilesTreeType.ItemId,
     items: DragFilesTreeType.Items,
     itemData: DragFilesTreeType.Item,
-): { itemId: DragFilesTreeType.Id, place: DragFilesTreeType.PlaceMark } {
+): { itemId: DragFilesTreeType.ItemId, place: DragFilesTreeType.PlaceMark } {
     // Расстояние до элемента с верха экрана и высота элемента под курсором
     const itemBelowY = itemBelow.getBoundingClientRect().top
     const itemBelowHeight = itemBelow.getBoundingClientRect().height

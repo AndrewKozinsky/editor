@@ -113,6 +113,7 @@ type CirclesPropType = {
     itemData: TempCompFilesTreeType.Item
 }
 
+// TODO Что делает эта функция?
 function Circles(props: CirclesPropType) {
     const { itemData } = props
 

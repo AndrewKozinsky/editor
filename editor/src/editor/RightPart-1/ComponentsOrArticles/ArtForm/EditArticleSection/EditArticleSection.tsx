@@ -7,6 +7,7 @@ import useGetMessages from 'messages/fn/useGetMessages'
 import { articleFormMessages } from 'messages/articleFormMessages'
 import makeClasses from './EditArticleSection-classes'
 
+// TODO Что делает эта функция?
 export default function EditArticleSection() {
     const isArticleInEditor = useIsArticleInEditor()
 
@@ -21,6 +22,7 @@ export default function EditArticleSection() {
     )
 }
 
+// TODO Что делает эта функция?
 function EditArticle() {
     const articleFormMsg = useGetMessages(articleFormMessages)
     const editArticleFn = useGetEditArticleFn()
@@ -32,6 +34,7 @@ function EditArticle() {
     />
 }
 
+// TODO Что делает эта функция?
 function InEditor() {
     const articleFormMsg = useGetMessages(articleFormMessages)
     const toEditorFn = useGetToEditorFn()

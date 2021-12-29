@@ -238,6 +238,7 @@ export function getCompParentArray(
     return parentArray
 }
 
+// TODO Что делает эта функция?
 function findParentArray(
     dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.Id
 ): null | ArticleTypes.Components {

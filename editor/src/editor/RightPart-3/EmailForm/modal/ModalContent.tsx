@@ -10,6 +10,7 @@ type ModalContentPropType = {
     newEmail: string
 }
 
+// TODO Что делает эта функция?
 export default function ModalContent(props: ModalContentPropType) {
     // const { newEmail } = props
     // const userDataSectionMsg = useGetMessages(userDataSectionMessages)

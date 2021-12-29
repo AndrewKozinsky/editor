@@ -6,7 +6,7 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import useGetMessages from 'messages/fn/useGetMessages'
 import getSubmitBtnFormConfig from './submitBtnFormConfig'
 
-/* Модальное окно с подверждением удаления учётной записи */
+/* Модальное окно с подтверждением удаления учётной записи */
 export function ModalContent() {
     const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
     const submitBtnFormConfig = getSubmitBtnFormConfig(userAccountSectionMsg)

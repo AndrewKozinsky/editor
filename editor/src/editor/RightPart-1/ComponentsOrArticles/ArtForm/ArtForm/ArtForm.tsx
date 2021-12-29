@@ -11,6 +11,7 @@ import {
 } from './ArtForm-func'
 import EditArticleSection from '../EditArticleSection/EditArticleSection'
 
+// TODO Что делает эта функция?
 export default function ArtForm() {
     // Сообщения формы
     const articleFormMsg = useGetMessages(articleFormMessages)

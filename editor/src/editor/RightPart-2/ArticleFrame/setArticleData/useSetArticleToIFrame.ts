@@ -23,7 +23,6 @@ export default function useSetArticleToIFrame() {
             const article = history[historyCurrentIdx].article
 
             if (lastDownloadHashVal !== tempCompsDownloadHash) {
-                console.log('Код скорректирован')
                 setLastDownloadHashVal(tempCompsDownloadHash)
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }

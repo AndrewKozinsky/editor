@@ -4,7 +4,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
-import articleManager from '../../../../../articleManager/articleManager'
+import bridge from '../../../../../bridge/bridge'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -43,7 +43,7 @@ function getConfig(componentFormMsg: any) {
 
                 // Обновить компоненты у редактируемой статьи если удалили
                 // компонент сайта, к которому принадлежит редактируемая статья.
-                articleManager.remoteControl.updateTempComps()
+                bridge.updateTempComps()
             }
         },
     }

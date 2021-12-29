@@ -4,6 +4,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import bridge from '../../../../../bridge/bridge'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -18,22 +19,12 @@ function getConfig(artFolderFormMsg: any) {
         },
         async requestFn(readyFieldValues) {
             const { currentArtItemId } = store.getState().sites.articleSection
-            const { artFolder, artFolderId } = store.getState().sites.artFolderSection
 
-            // Удалить папку из Хранилища и возвратить новый массив
-            const newFoldersArr = filesTreePublicMethods.deleteItem(artFolder, currentArtItemId)
-
-            // Сохранить новые данные в Хранилище
-            store.dispatch( actions.sites.setArtFolder({folders: newFoldersArr}) )
-
-            // Обнулить свойство указывающее на id активного пункта в папках и шаблонах компонентах потому что папка удалена
-            store.dispatch( actions.sites.setCurrentArt(null, null) )
-
-            // Сохранить новый массив папок и файлов на сервере
-            return await putArtFolderRequest(artFolderId, newFoldersArr)
+            await bridge.deleteResource('articles', 'folder', currentArtItemId)
+            return true
         },
         afterSubmit(response, outerFns, formDetails) {
-            if (response.status === 'success') {
+            if (response) {
                 // Закрыть модальное окно
                 store.dispatch(actions.modal.closeModal())
             }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// TODO Что делает эта функция?
 export default function FilesTreeTorus() {
     return (
         <g>

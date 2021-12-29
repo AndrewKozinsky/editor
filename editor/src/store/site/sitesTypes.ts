@@ -59,7 +59,7 @@ namespace StoreSitesTypes {
     // КОМПОНЕНТЫ (ТИПЫ) ==============================================================
 
     // id выбранного элемента: папки или компонента
-    export type CurrentCompItemId = null | number
+    export type CurrentCompItemId = null | DragFilesTreeType.ItemId
     // Тип выбранного шаблона компонента (папка или компонент)
     export type CurrentCompItemType = null | DragFilesTreeType.ItemType
     // Имя выбранного компонента
@@ -78,7 +78,7 @@ namespace StoreSitesTypes {
     // СТАТЬИ (ТИПЫ) ==================================================================
 
     // id выбранного элемента: папки или статьи
-    export type CurrentArtItemId = null | number
+    export type CurrentArtItemId = null | DragFilesTreeType.ItemId
     // Тип выбранного элемента (папка или компонент)
     export type CurrentArtItemType = null | DragFilesTreeType.ItemType
     // Имя выбранной статьи
@@ -168,7 +168,7 @@ namespace StoreSitesTypes {
     export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | DragFilesTreeType.Id
+            id: null | DragFilesTreeType.ItemId
             type: null | DragFilesTreeType.ItemType
             name?: string
             code?: string
@@ -182,7 +182,7 @@ namespace StoreSitesTypes {
     export type SetCurrentArtAction = {
         type: typeof SET_CURRENT_ART
         payload: {
-            id: null | DragFilesTreeType.Id
+            id: null | DragFilesTreeType.ItemId
             type: null | DragFilesTreeType.ItemType
             name?: string
             code?: ArticleTypes.Article

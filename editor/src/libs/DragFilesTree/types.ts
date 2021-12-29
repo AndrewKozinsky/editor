@@ -4,23 +4,34 @@ namespace DragFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
-    export interface Item {
-        id: Id // Folder or file uuid
-        type: ItemType // Item type: folder or file
+    export type Item = FileItem | FolderItem
+
+    export interface FileItem {
+        id: FileItemId
+        type: 'file'
         name: string // Item name
-        open?: boolean // Is folder open
-        content?: Items // Folder's content
         placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
         loading?: boolean // Стоит ли значёк загрузки у файла?
         active?: boolean // Выделен ли элемент
     }
 
-    // id папки или файла
-    export type Id = number
-    export type IdArr = Id[]
+    export interface FolderItem {
+        id: FolderItemId
+        type: 'folder'
+        name: string // Item name
+        open?: boolean // Is folder open
+        content?: Items // Folder's content
+        placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
+        active?: boolean // Выделен ли элемент
+    }
 
-    // Тип элемента: файл или папка
     export type ItemType = 'file' | 'folder'
+
+    // id папки или файла
+    export type FileItemId = number
+    export type FolderItemId = string
+    export type ItemId = FileItemId | FolderItemId
+    export type ItemIdArr = ItemId[]
 
     // Визуальная отметка куда будет помещён перемещаемый элемент:
     // null — отметка не ставится
@@ -38,7 +49,7 @@ namespace DragFilesTreeType {
 
     // Функция запускаемая после разворачивания/сворачивания папки
     // На вход получает массив идентификаторов раскрытых папок
-    export type AfterCollapseFolderFn = (openIdArr: IdArr) => void
+    export type AfterCollapseFolderFn = (openIdArr: FolderItemId[]) => void
 
     // Функция запускаемая после изменения дерева папок и файлов
     export type AfterChangingTreeFn = (items: Items) => void

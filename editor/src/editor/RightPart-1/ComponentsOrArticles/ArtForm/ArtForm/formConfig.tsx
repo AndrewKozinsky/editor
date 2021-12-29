@@ -6,9 +6,9 @@ import FCType from 'libs/FormConstructor/FCType'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
-import articleManager from '../../../../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
+import bridge from '../../../../../bridge/bridge'
 import DeleteArticleButton from '../DeleteArticleButton/DeleteArticleButton'
-import actions from '../../../../../store/rootAction'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 function getFormConfig(artFormMsg: any) {
@@ -43,6 +43,7 @@ function getFormConfig(artFormMsg: any) {
             hr: true
         },
         async requestFn(readyFieldValues, outerFns, formDetails) {
+
             // Массив папок и файлов из Хранилища
             const folders = store.getState().sites.artFolderSection.artFolder
 
@@ -81,7 +82,7 @@ function getFormConfig(artFormMsg: any) {
         afterSubmit(response, outerFns, formDetails) {
             if (!formDetails.readyFieldValues.siteTemplateId) return
             // Обновить id шаблона сайта у редактируемой статьи если указали другой.
-            articleManager.remoteControl.updateSiteTemp(
+            bridge.updateSiteTemp(
                 formDetails.readyFieldValues.siteTemplateId.toString()
             )
         }

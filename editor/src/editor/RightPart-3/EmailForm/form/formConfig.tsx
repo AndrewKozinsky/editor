@@ -5,7 +5,7 @@ import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import ModalContent from '../modal/ModalContent'
 
-
+// TODO Что делает эта функция?
 export default function getConfig(userDataSectionMsg: any) {
     const config: FCType.Config = {
         fields: {

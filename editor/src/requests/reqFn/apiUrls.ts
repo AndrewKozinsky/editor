@@ -37,6 +37,7 @@ const addresses: MiscTypes.ObjStringKey<any> = {
         return 'sites/' + siteId
     },
 
+
     // SITE TEMPLATES
     // Шаблоны подключаемых файлов
     siteTemplates: function (siteId: number) {

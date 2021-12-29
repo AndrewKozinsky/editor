@@ -35,6 +35,7 @@ export function useGetEditArticleFn() {
     }, [currentSiteId, currentTemplateId, currentArtItemId])
 }
 
+// TODO Что делает эта функция?
 export function useGetToEditorFn() {
     const dispatch = useDispatch()
 

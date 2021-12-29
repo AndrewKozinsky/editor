@@ -37,7 +37,6 @@ import {
     canMakeHistoryStep,
     isArticleSave
 } from './methods/check'
-import remoteControl from './methods/remoteControl'
 
 
 class ArticleManager {
@@ -90,9 +89,6 @@ class ArticleManager {
     deleteArticle = deleteArticle
     clearArticle = clearArticle
     correctArticle = correctArticle
-
-    // Обновление ресурсов статьи при обновлении ресурсов на вкладке «Сайты»
-    remoteControl = remoteControl
 }
 
 export default new ArticleManager()

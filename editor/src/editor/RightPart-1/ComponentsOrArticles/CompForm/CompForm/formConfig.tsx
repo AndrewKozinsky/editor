@@ -8,6 +8,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { updateComponentRequest } from 'requests/editor/components/updateComponentRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import articleManager from '../../../../../articleManager/articleManager'
+import bridge from '../../../../../bridge/bridge'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
 
@@ -70,7 +71,7 @@ function getFormConfig(componentFormMsg: any) {
         afterSubmit() {
             // Обновить компоненты у редактируемой статьи если отредактировали
             // компонент сайта, к которому принадлежит редактируемая статья.
-            articleManager.remoteControl.updateTempComps()
+            bridge.updateTempComps()
         }
     }
 

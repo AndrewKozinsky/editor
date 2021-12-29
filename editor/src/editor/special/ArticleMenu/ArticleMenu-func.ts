@@ -55,7 +55,7 @@ export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
     }, [])
 }
 
-
+// TODO Что делает эта функция?
 export function useIsDataBtnDisabled() {
     // Is button disabled
     const [isDisabled, setIsDisabled] = useState(true)
@@ -67,6 +67,7 @@ export function useIsDataBtnDisabled() {
     return isDisabled
 }
 
+// TODO Что делает эта функция?
 export function useShowData() {
     const dispatch = useDispatch()
 

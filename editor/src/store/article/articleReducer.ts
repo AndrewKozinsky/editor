@@ -1,10 +1,9 @@
-import { store } from '../rootReducer'
 import StoreArticleTypes from './articleTypes'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
-import articleManager from '../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
 export type ArticleReducerType = {
     articleId: null | number

@@ -5,7 +5,7 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import { notFoundMessages } from 'messages/notFoundMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/* Компонент «Страница не найдена» */
 export default function NotFound() {
     const notFoundMsg = useGetMessages(notFoundMessages)
 

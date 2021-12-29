@@ -20,7 +20,6 @@ import {
     Для элементов с data-ft-hover в CSS прописан подсвечивающий стиль.
 */
 export function useMarkItemElemWhenItHovered() {
-
     return useCallback(function (event: SyntheticEvent): void {
         const $target = <HTMLElement>event.target
         const $folder = $target.closest('[data-ft-item]').querySelector('[data-ft-inner]')
@@ -50,7 +49,7 @@ export function useMarkItemElemWhenItHovered() {
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
-    folderId: DragFilesTreeType.Id,
+    folderId: DragFilesTreeType.FolderItemId,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After
@@ -84,7 +83,7 @@ export function useGetToggleFolder(
  */
 export function createNewFolder(
     e: SyntheticEvent,
-    folderData: null | DragFilesTreeType.Item,
+    folderData: null | DragFilesTreeType.FolderItem,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After,
@@ -108,7 +107,7 @@ export function createNewFolder(
     }
 
     // Сделаю новый элемент текущим
-    // const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
+    const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
 
     // Запустить функцию, которая должна быть запущена после выделения элемента
     if (after.selectItem) after.selectItem(result.newItem)
@@ -128,7 +127,7 @@ export function createNewFolder(
  */
 export async function createNewFile(
     e: SyntheticEvent,
-    folderData: null | DragFilesTreeType.Item,
+    folderData: null | DragFilesTreeType.FolderItem,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After,
@@ -141,7 +140,7 @@ export async function createNewFile(
     // Обновить Состояние списка папок
     setItems(result.newState)
 
-    const normalFile = {...result.newItem}
+    const normalFile: DragFilesTreeType.FileItem = {...result.newItem}
     normalFile.id = await after.addingNewFile()
     delete normalFile.loading
 

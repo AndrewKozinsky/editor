@@ -28,7 +28,7 @@ export function isMarkupCorrect(htmlStr: string) {
     }
 }
 
-
+// TODO Что делает эта функция?
 function checkElems($elems: NodeListOf<Node>): string[] {
     const errors: string[] = []
 

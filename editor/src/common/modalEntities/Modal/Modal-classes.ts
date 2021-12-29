@@ -16,6 +16,7 @@ export default function useMakeClasses() {
     }
 }
 
+// TODO Что делает эта функция?
 function getRootClass(modalType: StoreModalTypes.Type) {
     const classes  = [CN]
 

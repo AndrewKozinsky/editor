@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+// TODO Что делает эта функция?
 export default function BtnSignAdd() {
     return (
         <g fillRule="evenodd">

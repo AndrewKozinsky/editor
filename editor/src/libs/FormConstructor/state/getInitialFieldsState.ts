@@ -34,6 +34,7 @@ export default function getInitialFieldsState(formConfig: FCType.Config): FCType
     return fields
 }
 
+// TODO Что делает эта функция?
 function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
     if (fieldConfig.fieldType === 'text') {
         return 'text'
@@ -49,6 +50,7 @@ function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
     }
 }
 
+// TODO Что делает эта функция?
 function getValueCount(fieldConfig: FCType.ConfigField): FCType.ValueCount {
     if (fieldConfig.fieldType === 'checkboxes') {
         return 'many'

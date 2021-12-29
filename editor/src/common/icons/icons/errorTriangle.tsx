@@ -1,5 +1,6 @@
 import React from 'react'
 
+// Значок красного треугольника с восклицательным знаком
 export default function ErrorTriangle() {
     return (
         <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">

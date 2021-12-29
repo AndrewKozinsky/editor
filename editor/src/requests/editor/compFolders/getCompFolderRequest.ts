@@ -6,6 +6,7 @@ import {
     CompFolderServerSuccessRespType
 } from './compFolderServerResponseType'
 
+// TODO Что делает эта функция?
 export async function getCompFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 

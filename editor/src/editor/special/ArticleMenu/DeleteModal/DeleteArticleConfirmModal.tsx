@@ -10,6 +10,7 @@ import actions from 'store/rootAction'
 import {articleMenuMessages} from 'messages/articleMenuMessages'
 import articleManager from 'articleManager/articleManager'
 import { deleteItem } from 'libs/DragFilesTree/StoreManage/manageState'
+import bridge from '../../../../bridge/bridge'
 import filesTreePublicMethods from '../../../../libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from '../../../../requests/editor/artFolders/putArtFolderRequest'
 import putCompFolderRequest from '../../../../requests/editor/compFolders/putCompFolderRequest'
@@ -24,32 +25,9 @@ export function DeleteArticleConfirmModal() {
 
     // Функция удаляющая выделенную папку
     const deleteArticle = useCallback(async function () {
-        // Если удаляют статью принадлежащую сайту, который открыт на панели сайтов...
-        if (store.getState().sites.currentSiteId === store.getState().article.siteId) {
-            // ...то удалить статью из списка папок статей
-            const articleFolders = store.getState().sites.artFolderSection.artFolder
-            const deletedArticleId = store.getState().article.articleId
-            const updatedArticleFolders = deleteItem(articleFolders, deletedArticleId)
-            // Сохранить новый массив папок статей в Хранилище чтобы обновить их на вкладке «Сайты»
-            store.dispatch(actions.sites.setArtFolder({folders: updatedArticleFolders}))
+        const { articleId } = store.getState().article
 
-            // Сохранить массив папок статей на сервере
-            // Подготовить сохраняемый массив папок и файлов
-            const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(updatedArticleFolders)
-            await putArtFolderRequest(store.getState().sites.artFolderSection.artFolderId, preparedItems)
-        }
-
-        // Удалить статью и очистить редактор
-        await articleManager.deleteArticle(articleId)
-
-        // If the editable article id is equal to an opened article id in Sites main tab,
-        // then clear opened article id in Sites main tab
-        if (articleId === currentArtItemId) {
-            store.dispatch( actions.sites.setCurrentArt(null, null))
-        }
-
-
-
+        await bridge.deleteResource('articles', 'file', articleId)
 
         // Закрыть модальное окно
         dispatch(actions.modal.closeModal())

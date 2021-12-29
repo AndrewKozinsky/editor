@@ -10,17 +10,13 @@ import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
 import config from 'utils/config'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
-import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
-import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import useGetMessages from 'messages/fn/useGetMessages'
 import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
 import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
 import articleManager from '../../../../articleManager/articleManager'
-import StoreSitesTypes from '../../../../store/site/sitesTypes'
+import bridge from '../../../../bridge/bridge'
+import StoreSitesTypes from 'store/site/sitesTypes'
 import { FolderType } from '../types'
 
 
@@ -56,6 +52,7 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
     }, [currentSiteId])
 }
 
+// TODO Что делает эта функция?
 export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items {
     if (type === 'components') {
         return useGetSitesSelectors().compFolderSection.compFolder
@@ -65,7 +62,7 @@ export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items 
     }
 }
 
-
+// TODO Что делает эта функция?
 export function useGetSetFolders(type: FolderType) {
     const dispatch = useDispatch()
 
@@ -115,109 +112,36 @@ export function useGetNewItemsName(type: FolderType) {
 
 
 /**
- * Функция сохраняет массив папок на сервере
- * @param {String} type — тип папок: компонентов или статей.
+ * Функция запускается после добавления папки или файла в массив папок. При удалении функция не обрабатывает.
+ * @param {String} category — категория папок: компонентов или статей.
  * @param {Array} items — массив папок и файлов.
  */
-export async function saveFoldersOnServer(type: FolderType, items: DragFilesTreeType.Items) {
-    // Подготовить сохраняемый массив папок и файлов
-    const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
-
-    // Сохранить данные на сервере
-    if (type === 'components') {
-        const { compFolderId } = store.getState().sites.compFolderSection
-        await putCompFolderRequest(compFolderId, preparedItems)
-
-        // Обновить папки компонентов у редактируемой статьи если отредактировали
-        // папки компонентов сайта, к которому принадлежит редактируемая статья.
-        articleManager.remoteControl.updateTempCompFolders()
-    }
-    else {
-        const { artFolderId } = store.getState().sites.artFolderSection
-        await putArtFolderRequest(artFolderId, preparedItems)
-    }
+export async function saveFoldersOnServer(category: FolderType, items: DragFilesTreeType.Items) {
+    await bridge.addResource(category, items)
 }
 
 /**
  * Функция запускаемая после удаления или папки или файла (статьми или компонента)
- * @param {String} type — тип папок: с компонентами или со статьями.
- * @param {Array} originalItems — массив данных по папкам и файлам.
- * @param {Array} newItems — массив данных по папкам и файлам.
+ * @param {String} category — тип папок: с компонентами или со статьями.
+ * @param {Array} originalFolders — массив данных по папкам и файлам.
+ * @param {Array} newFolders — массив данных по папкам и файлам.
  * @param {String} deletedItem — объект удаляемого элемента
  */
 export function afterDeleteItem(
-    type: FolderType,
-    originalItems: DragFilesTreeType.Items,
-    newItems: DragFilesTreeType.Items,
+    category: FolderType,
+    originalFolders: DragFilesTreeType.Items,
+    newFolders: DragFilesTreeType.Items,
     deletedItem: DragFilesTreeType.Item,
 ) {
-    // Массив id открытых папок в LocalStorage
-    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(newItems)
-
-    // Получить все id файлов внутри папки
-    const filesIdsInside = filesTreePublicMethods.getFilesIdsInFolder(originalItems, deletedItem.id)
-
-    // Обнулить данные выделенного элемента в Хранилище
-    if (type === 'components') {
-        // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( actions.sites.setCurrentComp(null, null) )
-
-        if (deletedItem.type === 'folder') {
-            // Поставить новый массив открытых папок в LocalStorage
-            setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
-
-            filesIdsInside.forEach(innerFileId => {
-                deleteComponentRequest(innerFileId)
-            })
-        }
-        else {
-            // Сделать запрос на удаление компонента
-            deleteComponentRequest(deletedItem.id)
-        }
-    }
-    else if (type === 'articles') {
-        // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( actions.sites.setCurrentArt(null, null) )
-
-        if (deletedItem.type === 'folder') {
-            // Поставить новый массив открытых папок в LocalStorage
-            setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
-
-            // id редактируемой статьи
-            const editedArticleId = store.getState().article.articleId
-
-            filesIdsInside.forEach(innerFileId => {
-                // Если удаляемая статья равна редактируемой статье, то удалить её через articleManager
-                if (innerFileId === editedArticleId) {
-                    articleManager.deleteArticle(innerFileId)
-                }
-                // В противном случае удалить через запрос на сервер
-                else {
-                    deleteArticleRequest(innerFileId)
-                }
-            })
-        }
-        else {
-            // Сделать запрос на удаление статьи
-            deleteArticleRequest(deletedItem.id)
-        }
-
-        // If the opened article is not in new items array then it is in the deleted folder,
-        // then clear article editor because the article will be deleted.
-        /*if ( filesTreePublicMethods.getItemById(items, store.getState().article.articleId) ) {
-            store.dispatch( actions.article.clearArticle() )
-        }*/
-    }
-
-    // Сохранить массив папок на сервере
-    saveFoldersOnServer(type, newItems)
+    bridge.deleteResource(category, deletedItem.type, deletedItem.id, originalFolders, newFolders)
 }
 
 
 /**
- * Функция запускаемая после добавления новой папки или файла (компонента или статьи)
+ * Функция запускаемая после добавления компонента или статьи.
+ * При добавлении папки эта функция не отрабатывает.
  * @param {String} type — тип папок: с компонентами или со статьями
- * @param {String} newFileName —
+ * @param {String} newFileName — название компонента или статьи.
  */
 export async function afterAddingNewFile(type: FolderType, newFileName: string): Promise<number> {
     const { currentSiteId } = store.getState().sites
@@ -258,7 +182,7 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
  * @param {String} type — тип папок: с компонентами или со статьями
  * @param {Array} idArr — массив id раскрытых папок
  */
-export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.IdArr) {
+export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.ItemIdArr) {
     // Массив id открытых папок
     const ids = JSON.stringify(idArr)
 

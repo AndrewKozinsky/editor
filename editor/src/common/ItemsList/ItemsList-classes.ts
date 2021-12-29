@@ -10,9 +10,8 @@ export default function makeClasses(isActive: boolean = false) {
     }
 }
 
-
+// TODO Что делает эта функция?
 export function useGetItemClasses(isActive: boolean): string {
-
     const classes = [CN]
 
     // Если кнопка выделена

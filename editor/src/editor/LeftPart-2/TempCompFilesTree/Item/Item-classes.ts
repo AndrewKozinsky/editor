@@ -54,6 +54,7 @@ export function getTriangleBtnClasses(itemData?: TempCompFilesTreeType.Item): st
     }
 }
 
+// TODO Что делает эта функция?
 function getAfterCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
     if (!itemData) return ''
 
@@ -65,6 +66,7 @@ function getAfterCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
     return makeCN(afterClasses)
 }
 
+// TODO Что делает эта функция?
 function getInsideCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
     if (!itemData) return ''
 
@@ -76,6 +78,7 @@ function getInsideCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
     return makeCN(insideClasses)
 }
 
+// TODO Что делает эта функция?
 function getAfterBtnClasses(itemData?: TempCompFilesTreeType.Item) {
     if (!itemData) return ''
 
@@ -87,6 +90,7 @@ function getAfterBtnClasses(itemData?: TempCompFilesTreeType.Item) {
     return makeCN(classes)
 }
 
+// TODO Что делает эта функция?
 function getInsideBtnClasses(itemData?: TempCompFilesTreeType.Item) {
     if (!itemData) return ''
 

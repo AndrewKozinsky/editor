@@ -8,7 +8,7 @@ import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
 import CommonNotice from 'libs/FormConstructor/misc/CommonNotice'
 import useGetMessages from 'messages/fn/useGetMessages'
-import {serverMessages} from 'messages/serverMessages'
+import { serverMessages } from 'messages/serverMessages'
 
 type FormConstructorPropType = {
     config: FCType.Config // Form config

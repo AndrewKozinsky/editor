@@ -21,6 +21,7 @@ export type FieldGroupPropType = {
 
 type InputDataType = { label: string | ReactElement, value: string }
 
+// TODO Что делает эта функция?
 export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
@@ -70,6 +71,7 @@ export type InputsWrapperType = {
     children: ReactNode
 }
 
+// TODO Что делает эта функция?
 function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,

@@ -4,7 +4,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import articleManager from '../../../../../articleManager/articleManager'
+import bridge from '../../../../../bridge/bridge'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -40,7 +40,7 @@ function getConfig(compFolderFormMsg: any) {
 
                 // Обновить папки компонентов у редактируемой статьи если отредактировали
                 // папки компонентов сайта, к которому принадлежит редактируемая статья.
-                articleManager.remoteControl.updateTempCompFolders()
+                bridge.updateTempCompFolders()
             }
         },
     }

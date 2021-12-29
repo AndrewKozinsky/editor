@@ -19,7 +19,6 @@ import {
 } from './dragAndDrop'
 
 
-
 type ItemPropType = {
     // Массив всех папок и файлов.
     items: DragFilesTreeType.Items
@@ -117,6 +116,7 @@ function Triangle(props: TrianglePropType) {
     } = props
 
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
+    // @ts-ignore
     const toggleFolder = useGetToggleFolder(itemData.id, items, setItems, after)
 
     const CN = makeClasses(itemData)
@@ -165,7 +165,7 @@ function Loading(props: LoadingPropType) {
 
     const CN = makeClasses(itemData)
 
-    if (!itemData.loading) return null
+    if (itemData.type !== 'file' || !itemData.loading) return null
     return (
         <div className={CN.loaderWrapper}>
             <Loader className={CN.loader} />
@@ -199,7 +199,9 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => createNewFile(e, itemData, items, setItems, after)}
+            onClick={(e: SyntheticEvent) => createNewFile(
+                e, itemData as DragFilesTreeType.FolderItem, items, setItems, after
+            )}
         >
             <SvgIcon type='filesTreePlus' />
         </button>
@@ -209,7 +211,9 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => createNewFolder(e, itemData, items, setItems, after)}
+            onClick={(e: SyntheticEvent) => createNewFolder(
+                e, itemData as DragFilesTreeType.FolderItem, items, setItems, after
+            )}
         >
             <SvgIcon type='filesTreeFolderPlus' />
         </button>
@@ -225,7 +229,7 @@ function RightButtons(props: RightButtonsPropType) {
         </button>
     )
 
-    if (itemData.loading) {
+    if (itemData.type === 'file' && itemData.loading) {
         return null
     }
     else if (itemData.type === 'file') {

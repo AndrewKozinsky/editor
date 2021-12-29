@@ -9,7 +9,6 @@ import ArtForm from './ArtForm/ArtForm/ArtForm'
  * или для редактирования статьи в зависимости от выбранного элемента
  */
 export default function ArticleFormProvider() {
-
     // Тип выбранного элемента в дереве папок и файлов
     const { currentArtItemType } = useGetSitesSelectors().articleSection
 

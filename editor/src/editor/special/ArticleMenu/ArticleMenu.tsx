@@ -1,6 +1,5 @@
 import React from 'react'
 import useGetMessages from 'messages/fn/useGetMessages'
-// import { notFoundMessages } from 'messages/notFoundMessages'
 import makeClasses from './ArticleMenu-classes'
 import SvgIcon from 'common/icons/SvgIcon'
 import {
@@ -15,12 +14,12 @@ import { articleMenuMessages } from 'messages/articleMenuMessages'
 import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
 import { useCloseArticle } from './CloseModal/close'
 import useGetShowModal from 'utils/hooksUtils'
-// import {CloseArticleConfirmModal} from './fn/CloseArticleConfirmModal'
 import { useIsMarkupBtnDisabled } from './fn/markup'
 import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
 import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
 
 
+// TODO Что делает эта функция?
 export default function ArticleMenuButton() {
     const CN = makeClasses()
 
@@ -37,7 +36,7 @@ export default function ArticleMenuButton() {
     )
 }
 
-
+// TODO Что делает эта функция?
 function ArticleMenu() {
     const CN = makeClasses()
 

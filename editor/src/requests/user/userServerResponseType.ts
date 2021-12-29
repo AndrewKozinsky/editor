@@ -18,5 +18,4 @@ type UserServerResponseType = {
 
 
 // Тип данных с ответом от сервера
-export type UserServerResponse =
-    ErrorServerResponseType | UserServerResponseType
+export type UserServerResponse = ErrorServerResponseType | UserServerResponseType

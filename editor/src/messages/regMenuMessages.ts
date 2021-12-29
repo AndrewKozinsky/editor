@@ -1,3 +1,4 @@
+// TODO Что делает эта функция?
 export const regMenuMessages = {
     // Пункт «Регистрация»
     reg: {

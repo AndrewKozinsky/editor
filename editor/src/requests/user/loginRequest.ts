@@ -1,7 +1,5 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-// import ErrorServerResponseType from 'requests/errorServerResponseType'
-// import UserServerResponseType from './userServerResponseType'
 import { UserServerResponse } from './userServerResponseType'
 
 /**
@@ -24,5 +22,3 @@ export type LoginRequestValuesType = {
     password: number | string
 }
 
-// Тип данных с ответом от пользователя
-// type LoginRequestServerResponse = ErrorServerResponseType | UserServerResponseType

@@ -1,14 +1,11 @@
 import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import articleManager from '../../../../../articleManager/articleManager'
+import bridge from '../../../../../bridge/bridge'
 
 /**
- * Функция возвращает конфигурацию формы входа в сервис
+ * Функция возвращает конфигурацию формы удаления статьи
  * @param {Object} articleFormMsg — объект с текстами ошибок
  */
 function getConfig(articleFormMsg: any) {
@@ -19,26 +16,13 @@ function getConfig(articleFormMsg: any) {
             },
         },
         async requestFn(readyFieldValues) {
-            const { artFolder, artFolderId } = store.getState().sites.artFolderSection
             const { currentArtItemId } = store.getState().sites.articleSection
 
-            // Удалить компонент из Хранилища и возвратить новый массив
-            const newFoldersArr = filesTreePublicMethods.deleteItem(artFolder, currentArtItemId)
-
-            // Сохранить новые данные в Хранилище
-            store.dispatch( actions.sites.setArtFolder({folders: newFoldersArr}) )
-
-            // Обнулить свойство указывающее на id активного пункта в папках и шаблонах статей потому что статья удалена
-            store.dispatch( actions.sites.setCurrentArt(null, null) )
-
-            // Сохранить новый массив папок и файлов на сервере
-            await putArtFolderRequest(artFolderId, newFoldersArr)
-
-            // Удалить статью на сервере
-            return await articleManager.deleteArticle(currentArtItemId)
+            await bridge.deleteResource('articles', 'file', currentArtItemId)
+            return true
         },
         afterSubmit(response, outerFns, formDetails) {
-            if (response.status === 'success') {
+            if (response) {
                 // Закрыть модальное окно
                 store.dispatch(actions.modal.closeModal())
             }

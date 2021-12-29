@@ -5,6 +5,7 @@ import './Item.scss'
 const CN = 'ft-item'
 const PlaceArrCN = 'ft-place-arrow'
 
+// TODO Что делает эта функция?
 export default function makeClasses(itemData: DragFilesTreeType.Item) {
     return {
         root: CN,
@@ -39,7 +40,7 @@ function getInnerWrapperClasses(itemData: DragFilesTreeType.Item) {
         classes.push(`${CN}__inner-active`)
     }
 
-    if (itemData.loading) {
+    if (itemData.type === 'file' && itemData.loading) {
         classes.push(`${CN}--loading`)
     }
 
@@ -77,6 +78,7 @@ function getTriangleBtnClasses(itemData: DragFilesTreeType.Item) {
     }
 }
 
+// TODO Что делает эта функция?
 function getPlaceArrow(itemData: DragFilesTreeType.Item) {
     const classes = [PlaceArrCN]
     if (itemData.placeMark === 'before') classes.push(PlaceArrCN + '--before')

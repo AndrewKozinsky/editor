@@ -53,6 +53,7 @@ function clearDefaultSiteTemplateIfTemplateWasDeleted() {
     }
 }
 
+// TODO Что делает эта функция?
 function getCurrentSiteTempId() {
     const { currentSiteId } = store.getState().sites
 
@@ -63,6 +64,7 @@ function getCurrentSiteTempId() {
     return currentSite?.defaultSiteTemplateId
 }
 
+// TODO Что делает эта функция?
 async function clearCurrentSiteDefaultTemplate() {
     const { currentSiteId } = store.getState().sites
 

@@ -32,6 +32,7 @@ export function turnArticleDataToHTML(articleData: ArticleTypes.Article, tempCom
     return createHTMLFromComponents(componentsArr)
 }
 
+// TODO Что делает эта функция?
 function createComponentsArr(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]) {
     // Переберу массив компонентов
     let componentsArr: HTMLObjArrType.Arr = articleData.dComps.map(

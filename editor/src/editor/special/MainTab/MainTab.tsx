@@ -17,6 +17,7 @@ type MainTabPropType = {
     tabData: MainTabDataType
 }
 
+// TODO Что делает эта функция?
 export default function MainTab(props: MainTabPropType) {
 
     const {

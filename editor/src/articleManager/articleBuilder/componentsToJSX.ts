@@ -19,6 +19,7 @@ export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Ar
     })
 }
 
+// TODO Что делает эта функция?
 function handleTextObject(htmlObj: HTMLObjArrType.Text) {
     return htmlObj.text
 }

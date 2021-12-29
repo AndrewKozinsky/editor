@@ -27,7 +27,6 @@ export default function CodeCheckInfo(props: CodeCheckInfoPropType) {
     )
 }
 
-
 /** Плашка с сообщениями о доработках кода */
 function CodeCheck(props: CodeCheckInfoPropType) {
     const { items, checkStatus } = props

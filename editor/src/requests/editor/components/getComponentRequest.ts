@@ -4,7 +4,7 @@ import {ComponentRequestServerResponse} from './componentServerResponseType'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 /** Функция получает данные компонента */
-export default async function getComponentRequest(componentId: DragFilesTreeType.Id) {
+export default async function getComponentRequest(componentId: DragFilesTreeType.FileItemId) {
 
     const options = { method: 'GET' }
     const response: ComponentRequestServerResponse = await makeFetch(

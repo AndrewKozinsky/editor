@@ -1,7 +1,4 @@
 import getApiUrl from 'requests/reqFn/apiUrls'
-// import { useFetch } from 'requests/reqFn/fetch'
-// import UserServerResponseType from './userServerResponseType'
-// import ErrorServerResponseType from 'requests/errorServerResponseType'
 import { makeFetch } from 'requests/reqFn/fetch'
 import { UserServerResponse } from './userServerResponseType'
 

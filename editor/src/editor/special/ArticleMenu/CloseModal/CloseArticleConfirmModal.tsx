@@ -8,7 +8,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import Button from 'common/formElements/Button/Button'
 import { articleMenuMessages } from 'messages/articleMenuMessages'
 
-
+// TODO Что делает эта функция?
 export default function CloseArticleConfirmModal() {
     const dispatch = useDispatch()
     const { history, historyCurrentIdx, articleId } = useGetArticleSelectors()

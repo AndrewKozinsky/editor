@@ -17,12 +17,11 @@ export function ModalContent() {
     const formState = useFormConstructorState(config)
 
     return (
-            <ModalShortContent
-                header={'Header'}
-                text={siteTemplateSectionMsg.deleteConfirmationTextInModal}
-                bottomElems={
-                    [<FormConstructor config={config} state={formState} />]
-                } />
-
+        <ModalShortContent
+            header={'Header'}
+            text={siteTemplateSectionMsg.deleteConfirmationTextInModal}
+            bottomElems={
+                [<FormConstructor config={config} state={formState} />]
+            } />
     )
 }
