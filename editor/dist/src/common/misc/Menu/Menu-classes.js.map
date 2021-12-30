@@ -1,1 +1,0 @@
-{"version":3,"file":"Menu-classes.js","sourceRoot":"","sources":["../../../../../src/common/misc/Menu/Menu-classes.ts"],"names":[],"mappings":"AAAA,OAAO,aAAa,CAAA;AAEpB,iBAAiB;AACjB,MAAM,EAAE,GAAG,MAAM,CAAA;AAEjB,gDAAgD;AAChD,MAAM,CAAC,OAAO,UAAU,WAAW;IAC/B,OAAO;QACH,IAAI,EAAE,EAAE;QACR,EAAE,EAAE,EAAE,GAAG,MAAM;QACf,EAAE,EAAE,EAAE,GAAG,MAAM;KAClB,CAAA;AACL,CAAC"}
