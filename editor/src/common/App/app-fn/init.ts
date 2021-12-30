@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getFromLocalStorage } from 'utils/MiscUtils'
+import { getFromLocalStorage } from 'src/utils/miscUtils'
 import useGetUserSelectors from 'store/user/userSelectors'
 import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'

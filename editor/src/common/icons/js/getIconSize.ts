@@ -147,6 +147,21 @@ export function getIconSize(type: string) {
                 height: '18px',
                 viewBox: '0 0 18 18'
             }
+        // Значки на кнопках работы с элементами внизу
+        case 'elBtnSignInside':
+        case 'elBtnSignUp':
+        case 'elBtnSignDown':
+        case 'elBtnSignClone1':
+        case 'elBtnSignClone2':
+        case 'elBtnSignClone3':
+        case 'elBtnSignRemove':
+        case 'elBtnSignHide':
+        case 'elBtnSignVisible':
+            return {
+                width: '17px',
+                height: '17px',
+                viewBox: '0 0 17 17'
+            }
         default: {
             return {}
         }

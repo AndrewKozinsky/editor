@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import ElBtnSignClone1 from '../icons/elBtnSignClone1'
+import ElBtnSignVisible from '../icons/elBtnSignVisible'
 import Logo from '../icons/logo'
 import NoticeError from '../icons/NoticeError'
 import NoticeInfo from '../icons/NoticeInfo'
@@ -38,6 +40,13 @@ import FilesTreeDown from '../icons/filesTreeDown'
 import ArticleMenu from '../icons/articleMenu'
 import BtnSignUndo from '../icons/btnSignUndo'
 import BtnSignRedo from '../icons/btnSignRedo'
+import ElBtnSignInside from '../icons/elBtnSignInside'
+import ElBtnSignUp from '../icons/elBtnSignUp'
+import ElBtnSignDown from '../icons/elBtnSignDown'
+import ElBtnSignClone2 from '../icons/elBtnSignClone2'
+import ElBtnSignClone3 from '../icons/elBtnSignClone3'
+import ElBtnSignHide from '../icons/elBtnSignHide'
+import ElBtnSignRemove from '../icons/elBtnSignRemove'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -115,6 +124,17 @@ export function getIcon(type: string): ReactNode {
         noticeInfo: NoticeInfo,
         noticeError: NoticeError,
         noticeSuccess: NoticeSuccess,
+
+        // Значки на кнопках работы с элементами внизу
+        elBtnSignInside: ElBtnSignInside,
+        elBtnSignUp: ElBtnSignUp,
+        elBtnSignDown: ElBtnSignDown,
+        elBtnSignClone1: ElBtnSignClone1,
+        elBtnSignClone2: ElBtnSignClone2,
+        elBtnSignClone3: ElBtnSignClone3,
+        elBtnSignRemove: ElBtnSignRemove,
+        elBtnSignHide: ElBtnSignHide,
+        elBtnSignVisible: ElBtnSignVisible
     }
 
     return components[type]

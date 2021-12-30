@@ -17,7 +17,7 @@ class Bridge {
     // Сохранение массива папок с компонентами или статьями на сервере
     saveFoldersOnServer = saveFoldersOnServer
     // Обновление хеша версии у папок компонентов в редактируемой статье.
-    // Это приведёт к перезакачке массива папок компонентов
+    // Это приведёт к перекачке массива папок компонентов
     updateTempCompFolders = updateTempCompFolders
     updateTempComps = updateTempComps
     updateSiteTemp = updateSiteTemp

@@ -1,0 +1,1 @@
+{"version":3,"file":"articleSelectors.js","sourceRoot":"","sources":["../../../../src/store/article/articleSelectors.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,gBAAgB,CAAA;AAG/C,kEAAkE;AAClE,MAAM,CAAC,OAAO,UAAU,sBAAsB;IAC1C,OAAO,cAAc,CAAqB,KAAK,CAAC,EAAE,CAAC,KAAK,CAAC,OAAO,CAAC,CAAA;AACrE,CAAC"}

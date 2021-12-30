@@ -1,0 +1,1 @@
+{"version":3,"file":"sitesPanelMessages.js","sourceRoot":"","sources":["../../../src/messages/sitesPanelMessages.js"],"names":[],"mappings":"AAAA,iBAAiB;AACjB,MAAM,CAAC,MAAM,kBAAkB,GAAG;IAC9B,MAAM,EAAE;QACJ,GAAG,EAAE,OAAO;QACZ,GAAG,EAAE,OAAO;KACf;IACD,UAAU,EAAE;QACR,GAAG,EAAE,UAAU;QACf,GAAG,EAAE,YAAY;KACpB;CACJ,CAAC;AACF,8CAA8C"}

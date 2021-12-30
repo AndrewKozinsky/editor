@@ -2,36 +2,36 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import StoreArticleTypes from '../../store/article/articleTypes'
 
 // Тип объекта возвращаемый функциями вставки новых компонентов
 // Заметь, что это не новая статья, а данные для экшена для вставки нового пункта
 // в массив истории и обновления счётчика id максимального компонента.
 export type CreateCompFnReturnType = {
-    components: ArticleTypes.ArticleArrayItem[] // Объект истории
+    components: ArticleTypes.Components // Объект истории
     maxCompId: number // максимальный id
 }
 
 /**
- *
- * @param article
- * @param tempCompArr
- * @param tempCompId
- * @param targetDataCompId
- * @param targetDataElemId
+ * Функция создаёт компонент и помещает его в указанный элемент
+ * @param {Object} article
+ * @param {Array} tempCompArr
+ * @param {Number} tempCompId
+ * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
+ * @param {Number} targetDataElemId
  */
 export function createCompAndSetInElem(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
-    targetDataCompId: ArticleTypes.Id,
-    targetDataElemId: ArticleTypes.Id
+    targetCompCoords: StoreArticleTypes.FlashedElem,
 ): CreateCompFnReturnType {
 
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
     // Get element which I am going to set the new component
-    const targetElemData = this.getDataElemInDataCompArr(article.dComps, targetDataCompId, targetDataElemId)
+    const targetElemData = this.getDataElemInDataCompArr(article.dComps, targetCompCoords.dataCompId, targetCompCoords.dataElemId)
 
     // Create a new components array
     let updatedComponents: ArticleTypes.Components

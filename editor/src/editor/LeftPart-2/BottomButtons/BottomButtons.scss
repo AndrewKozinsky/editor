@@ -1,0 +1,32 @@
+$CN: left-bottom-section;
+
+.#{$CN} {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 17px 3px 17px;
+    border-top: 1px solid var(--button-color);
+}
+
+.#{$CN}__group {
+
+}
+
+.#{$CN}__button {
+    cursor: pointer;
+    padding: 4px 6px 3px;
+    border: none;
+    border-radius: var(--radius);
+
+    &:hover {
+        background-color: var(--button-color);
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: .2;
+
+        &:hover {
+            background-color: var(--base-color);
+        }
+    }
+}

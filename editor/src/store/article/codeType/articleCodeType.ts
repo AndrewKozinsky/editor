@@ -11,8 +11,8 @@ namespace ArticleTypes {
         dComps: Components
     }
 
-    export type Components = ArticleArrayItem[]
-    export type ArticleArrayItem = Component | SimpleTextComponent
+    // Массив, в котором находятся компоненты
+    export type Components = Component[]
 
     // =================================================================================================================
 
@@ -70,6 +70,9 @@ namespace ArticleTypes {
     export type ComponentElemAttribValue = number[] | string // [4, 6] OR 'banner'
 
     export type ElemChildren = Component[] | SimpleTextComponent
+
+    // Обычный или текстовый компонент
+    export type MixComponent = Component | SimpleTextComponent
 
 
     // =================================================================================================================

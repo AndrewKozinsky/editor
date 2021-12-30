@@ -1,0 +1,1 @@
+{"version":3,"file":"settingsSelectors.js","sourceRoot":"","sources":["../../../../src/store/settings/settingsSelectors.js"],"names":[],"mappings":"AAAA,OAAO,EAAE,cAAc,EAAE,MAAM,gBAAgB,CAAC;AAChD,mEAAmE;AACnE,MAAM,CAAC,OAAO,UAAU,uBAAuB;IAC3C,OAAO,cAAc,CAAC,KAAK,CAAC,EAAE,CAAC,KAAK,CAAC,QAAQ,CAAC,CAAC;AACnD,CAAC;AACD,6CAA6C"}

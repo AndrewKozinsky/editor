@@ -80,7 +80,7 @@ export function getComponent(
     this: typeof articleManager,
     dataCompArr: ArticleTypes.Components,
     dataCompId: ArticleTypes.Id
-): null | ArticleTypes.ArticleArrayItem {
+): null | ArticleTypes.MixComponent {
 
     for (let i = 0; i < dataCompArr.length; i++) {
         const dataComp = dataCompArr[i]
@@ -125,7 +125,7 @@ export function getDataElemInDataCompArr(
     const component = this.getComponent(dataCompArr, dataCompId)
     if (!dataCompArr) return null
 
-    if (component.dCompType === 'component' && component.dElems) {
+    if (component.dCompType === 'component' && Array.isArray(component.dElems)) {
         return component.dElems.find(dElem => dElem.dCompElemId === dataElemId)
     }
     return null
@@ -133,18 +133,17 @@ export function getDataElemInDataCompArr(
 
 /**
  * Поиск данных элемента в данных компонента
- * @param {Object} dataComp — a data component id of the desired element
+ * @param {Object} dComp — a data component id of the desired element
  * @param {Number} dataElemId — a desired element id
  */
 export function getDataElemInDataComp(
     this: typeof articleManager,
-    dataComp: ArticleTypes.ArticleArrayItem,
+    dComp: ArticleTypes.Component,
     dataElemId: ArticleTypes.Id
 ): null | ArticleTypes.ComponentElem {
-    if (dataComp.dCompType === 'simpleTextComponent') return null
-    if (!dataComp.dElems.length) return null
+    if (!dComp.dElems.length) return null
 
-    return dataComp.dElems.find(dElem => dElem.dCompElemId === dataElemId)
+    return dComp.dElems.find(dElem => dElem.dCompElemId === dataElemId)
 }
 
 /**
@@ -187,13 +186,11 @@ export function getTempElemByDataCompIdAndDataElemId(
 
     // Get data component
     const foundedDataComp = this.getComponent(dataCompArr, dataCompId)
-    if (!foundedDataComp) return null
+    if (!foundedDataComp || foundedDataComp.dCompType === 'simpleTextComponent') return null
 
     // Get data element
     const foundedDataElem = this.getDataElemInDataComp(foundedDataComp, dataElemId)
     if (!foundedDataElem) return null
-
-    if (foundedDataComp.dCompType === 'simpleTextComponent') return null
 
     // Get element template
     const foundedTempComp =  this.getTemplate(tempCompArr, foundedDataComp.tCompId)
@@ -204,7 +201,7 @@ export function getTempElemByDataCompIdAndDataElemId(
 }
 
 
-type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
+// type ParentArrayType = null | ArticleTypes.Components | ArticleTypes.ElemChildren
 
 /**
  * The function finds an array in witch component is
@@ -215,8 +212,8 @@ export function getCompParentArray(
     this: typeof articleManager,
     dCompArr: ArticleTypes.Components,
     dCompId: ArticleTypes.Id,
-): ParentArrayType {
-    let parentArray: ParentArrayType = null
+): null | ArticleTypes.Components {
+    let parentArray: null | ArticleTypes.Components = null
 
     for (let i = 0; i < dCompArr.length; i++) {
         const dataComp = dCompArr[i]
@@ -225,8 +222,6 @@ export function getCompParentArray(
             parentArray = dCompArr
         }
         else {
-            if (dataComp.dCompType === 'simpleTextComponent') continue
-
             const foundedArr = findParentArray(dataComp, dCompId)
             if (foundedArr) {
                 parentArray = foundedArr
@@ -238,7 +233,12 @@ export function getCompParentArray(
     return parentArray
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция возвращает массив, в котором находится компонент
+ * @param {Object} dataComp — данные компонента, в котором находится другой компонент
+ * @param {Number} dataCompId — id компонента, у которого нужно найти массив, в который он вложен
+ * @returns {Array}
+ */
 function findParentArray(
     dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.Id
 ): null | ArticleTypes.Components {
@@ -260,4 +260,18 @@ function findParentArray(
             }
         }
     }
+}
+
+/**
+ * TODO Что делает эта функция
+ * @param {ArticleTypes.Components} array
+ * @param {ArticleTypes.Id} dCompId
+ * @returns {number}
+ */
+export function getDCompIdxInArray(
+    this: typeof articleManager,
+    array: ArticleTypes.Components,
+    dCompId: ArticleTypes.Id
+) {
+    return array.findIndex(dComp => dComp.dCompId === dCompId)
 }

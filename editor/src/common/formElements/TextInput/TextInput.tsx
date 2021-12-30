@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { getRandomId } from 'utils/StringUtils'
+import { getRandomId } from 'src/utils/stringUtils'
 import InputError from 'common/formElements/InputError/InputError'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { MiscTypes } from 'types/miscTypes'

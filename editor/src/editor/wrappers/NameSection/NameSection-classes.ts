@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import './NameSection.scss'
 
 const CN = 'name-section'

@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react'
 import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'utils/StringUtils'
+import { getRandomId } from 'src/utils/stringUtils'
 import './Radio.scss'
 
 

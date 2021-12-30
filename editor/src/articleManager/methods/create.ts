@@ -79,7 +79,6 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
     const $component = doc.body.childNodes[0] as HTMLElement
 
     const newElemsArr = tempComp.content.elems.map((tElem, i) => {
-
         const newElemData: ArticleTypes.ComponentElem = {
             dCompElemId: i + 1,
             tCompElemId: tElem.elemId,
@@ -185,12 +184,12 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
 
 /**
  * Функция создаёт объект пустого текстового компонента
- * @param {Number} maxCompId — максимальный id компонента существующий в статье
+ * @param {Number} compId — id компонента текстового компонента
  */
-export function createSimpleTextComponent(maxCompId: number): ArticleTypes.SimpleTextComponent {
+export function createSimpleTextComponent(compId: number): ArticleTypes.SimpleTextComponent {
     return {
         dCompType: 'simpleTextComponent',
-        dCompId: maxCompId + 1,
+        dCompId: compId,
         text: ''
     }
 }

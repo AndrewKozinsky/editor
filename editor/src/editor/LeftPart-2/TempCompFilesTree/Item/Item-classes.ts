@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import TempCompFilesTreeType from '../types'
 import './Item.scss'
 
@@ -56,7 +56,7 @@ export function getTriangleBtnClasses(itemData?: TempCompFilesTreeType.Item): st
 
 // TODO Что делает эта функция?
 function getAfterCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
-    if (!itemData) return ''
+    if (!itemData || itemData.type === 'folder') return ''
 
     let afterClasses = [CN + `__circle`]
     if (itemData.afterButtonAllowed) {
@@ -68,7 +68,7 @@ function getAfterCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
 
 // TODO Что делает эта функция?
 function getInsideCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
-    if (!itemData) return ''
+    if (!itemData || itemData.type === 'folder') return ''
 
     let insideClasses = [CN + `__circle`]
     if (itemData.insideButtonAllowed) {
@@ -80,7 +80,7 @@ function getInsideCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
 
 // TODO Что делает эта функция?
 function getAfterBtnClasses(itemData?: TempCompFilesTreeType.Item) {
-    if (!itemData) return ''
+    if (!itemData || itemData.type === 'folder') return ''
 
     let classes = [CN + `__btn`, CN + `__right-btn`]
     if (!itemData.afterButtonAllowed) {
@@ -92,7 +92,7 @@ function getAfterBtnClasses(itemData?: TempCompFilesTreeType.Item) {
 
 // TODO Что делает эта функция?
 function getInsideBtnClasses(itemData?: TempCompFilesTreeType.Item) {
-    if (!itemData) return ''
+    if (!itemData || itemData.type === 'folder') return ''
 
     let classes = [CN + `__btn`, CN + `__right-btn`]
     if (!itemData.insideButtonAllowed) {

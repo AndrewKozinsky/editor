@@ -4,6 +4,7 @@ import { componentsPanelMessages } from 'messages/componentsPanelMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 import TempCompList from '../TempCompList/TempCompList'
 import './LeftPart-2.scss'
+import BottomButtons from '../BottomButtons/BottomButtons'
 
 type LeftPart3PropType = {
     display?: boolean
@@ -28,7 +29,7 @@ export default function LeftPart2(props: LeftPart3PropType) {
                 </NameSection>
             </div>
             <div className={`${CN}__bottom`} >
-                2
+                <BottomButtons />
             </div>
         </div>
     )

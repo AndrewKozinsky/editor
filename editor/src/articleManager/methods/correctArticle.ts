@@ -168,7 +168,6 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
  * @param {Object} tElem — шаблон элемента
  */
 function setEmptyTextComponent(article: ArticleTypes.Article, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
-
     // Поставить пустой текстовый компонент в массив детей если в шаблоне указано свойство elemTextInside, а текстового компонента нет
     if (tElem.elemTextInside) {
         if ([undefined, null].includes(dElem.dCompElemChildren) || Array.isArray(dElem.dCompElemChildren)) {

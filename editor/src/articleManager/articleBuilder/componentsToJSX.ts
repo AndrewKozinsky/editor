@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { convertToCamelCase } from 'utils/StringUtils'
+import { convertToCamelCase } from 'src/utils/stringUtils'
 import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
 
 /**

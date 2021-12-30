@@ -4,7 +4,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
 import articleManager from 'articleManager/articleManager'
-import { removeFromLocalStorage } from 'utils/MiscUtils'
+import { removeFromLocalStorage } from 'src/utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию кнопки-формы удаления сайта

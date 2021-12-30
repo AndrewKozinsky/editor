@@ -72,7 +72,7 @@ function Triangle(props: TrianglePropType) {
     const CN = makeClasses(itemData)
 
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
-    const toggleFolder = useGetToggleFolder(itemData.id, items, after)
+    const toggleFolder = useGetToggleFolder(itemData, items, after)
 
     if (itemData.type === 'file') {
         return <div className={CN.triangleBtn} />

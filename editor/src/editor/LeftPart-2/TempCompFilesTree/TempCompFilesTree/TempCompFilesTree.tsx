@@ -58,7 +58,7 @@ function generateItems(
         // Массив файлов и папок вложенный в эту папку
         let innerItems: null | ReactNode = null
 
-        if (itemData.open && itemData.content) {
+        if (itemData.type === 'folder' && itemData.open && itemData.content) {
             innerItems = generateItems(
                 allItems,
                 itemData.content,

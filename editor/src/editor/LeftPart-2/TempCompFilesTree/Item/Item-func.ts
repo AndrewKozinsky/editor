@@ -13,21 +13,23 @@ import TempCompFilesTreeType from '../types'
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
-    folderId: TempCompFilesTreeType.Id,
+    itemData: TempCompFilesTreeType.Item,
     items: TempCompFilesTreeType.Items,
     after: TempCompFilesTreeType.After
 ) {
     return useCallback(function (e) {
         e.stopPropagation()
 
+        if (itemData.type === 'file') return
+
         // Свернуть/развернуть папку и возвратить новый массив папок и файлов
-        const newItems = toggleFolder(items, folderId)
+        const newItems = toggleFolder(items, itemData.id)
 
         // Получить id раскрытых папок
         const openedFoldersId = getOpenedFoldersId(newItems)
 
         after.afterCollapseFolder(newItems, openedFoldersId)
-    }, [items, folderId])
+    }, [items, itemData])
 }
 
 /**

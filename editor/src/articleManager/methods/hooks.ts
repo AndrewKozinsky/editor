@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
-import ArticleTypes from '../../store/article/codeType/articleCodeType'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 export const hooks = {
     getCurrentHistoryItem: useGetCurrentHistoryItem,
@@ -45,6 +44,8 @@ function useGetCurrentArticle() {
 type FlashedElemsCoords = {
     hoveredElem: StoreArticleTypes.FlashedElem
     selectedElem: StoreArticleTypes.FlashedElem
+    moveHoveredComp: StoreArticleTypes.MoveFlashedComp
+    moveSelectedComp: StoreArticleTypes.MoveFlashedComp
 }
 
 /** Hook returns object with coordinated hovered and selected component/element */
@@ -57,7 +58,9 @@ function useGetFlashedElemCoords() {
 
         setFlashedElemsCoords({
             hoveredElem: historyItem.hoveredElem,
-            selectedElem: historyItem.selectedElem
+            selectedElem: historyItem.selectedElem,
+            moveHoveredComp: historyItem.moveHoveredComp,
+            moveSelectedComp: historyItem.moveSelectedComp
         })
     }, [historyItem])
 

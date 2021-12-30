@@ -6,7 +6,7 @@ namespace DragFilesTreeType {
 
     export type Item = FileItem | FolderItem
 
-    export interface FileItem {
+    export type FileItem = {
         id: FileItemId
         type: 'file'
         name: string // Item name
@@ -15,7 +15,7 @@ namespace DragFilesTreeType {
         active?: boolean // Выделен ли элемент
     }
 
-    export interface FolderItem {
+    export type FolderItem = {
         id: FolderItemId
         type: 'folder'
         name: string // Item name

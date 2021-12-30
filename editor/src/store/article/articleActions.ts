@@ -6,7 +6,7 @@ import getSiteComponentsRequest from 'requests/editor/components/getSiteComponen
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
-import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
 import config from 'utils/config'
 import { ArticleType } from '../../requests/editor/article/articleServerResponseType'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
@@ -219,6 +219,9 @@ const articleActions = {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const { history, historyCurrentIdx} = getState().article
             const currentArticle = history[historyCurrentIdx]
+
+            // Ничего не делать если нет статьи
+            if (!currentArticle) return
 
             // Если на элемент навели мышью...
             if (actionType === 'hover') {

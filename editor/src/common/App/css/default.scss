@@ -64,9 +64,7 @@ a {
     }
 
     &:focus {
-        outline-color: var(--focus-color);
-        outline-style: dotted;
         outline-offset: 4px;
-        outline-width: 1px;
+        outline: var(--focus-color) dotted 1px;
     }
 }

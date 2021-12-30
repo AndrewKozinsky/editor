@@ -12,7 +12,7 @@ import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 // JS и CSS
 import { useGetAndSetEditorSettings, useGetUserDataAndStatus } from './app-fn/init'
 import { useRedirectPage } from './app-fn/App-func'
-// import setShortcutsHandler from './shortcuts/shortcutsHandler'
+import useSetShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
 
 
@@ -70,7 +70,7 @@ export default function App() {
     const isUserDataReceived = useGetUserDataAndStatus()
 
     // Установка обработчика горячих клавиш при запуске приложения
-    // setShortcutsHandler()
+    useSetShortcutsHandler()
 
     // Переадресовать пользователя на другую страницу в зависимости от того
     // зарегистрирован он или нет

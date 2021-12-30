@@ -221,7 +221,7 @@ const burgerTemplate2: TempCompTypes.Content = {
 // ================================================
 
 const siteTemplate = {
-    name: "Действующие стили",
+    name: 'Действующие стили',
     head: "<meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='http://volcano.ru/another/e/style.css'>",
 }
 

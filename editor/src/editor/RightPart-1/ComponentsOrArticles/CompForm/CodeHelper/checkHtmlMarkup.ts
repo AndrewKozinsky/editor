@@ -14,7 +14,6 @@ export function isMarkupCorrect(htmlStr: string) {
         if (elemsArr.length > 1) {
             return ['В разметке есть более одного корневого элемента.']
         }
-        // debugger
 
         const elemsCheckErrors = checkElems(elemsArr)
         if (elemsCheckErrors.length) {

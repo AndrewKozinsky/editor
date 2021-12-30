@@ -7,8 +7,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompFilesTreeType from '../TempCompFilesTree/types'
 import articleManager from 'articleManager/articleManager'
 import { CreateCompFnReturnType } from 'articleManager/methods/insert'
-import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
-import FilesTreeType from 'types/filesTree'
+import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
 import config from 'utils/config'
 
 
@@ -40,11 +39,12 @@ export function useGetTempCompsFolders() {
 
         if(tempCompsFolders) {
             // Get opened component template folders id array to open these folders
-            const openFoldersIdsArr: FilesTreeType.IdArr =
+            const openFoldersIdsArr: TempCompFilesTreeType.FolderItemId[] =
                 getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
 
             // Update component template array items
             const updatedFolders = prepareFoldersAndItemsStructure(
+                //@ts-ignore
                 tempCompsFolders,
                 openFoldersIdsArr,
                 selectedElem,
@@ -72,8 +72,8 @@ export function useGetTempCompsFolders() {
  * @param {Object} currentHistoryItem — article history item
  */
 function prepareFoldersAndItemsStructure(
-    tempCompsFolders: FilesTreeType.Items,
-    openIdArr: FilesTreeType.IdArr,
+    tempCompsFolders: TempCompFilesTreeType.Items,
+    openIdArr: TempCompFilesTreeType.FolderItemId[],
     selectedElem: StoreArticleTypes.FlashedElem,
     tempCompsArr: TempCompTypes.TempComps,
     currentHistoryItem: StoreArticleTypes.HistoryItem
@@ -132,7 +132,7 @@ function prepareFoldersAndItemsStructure(
 export function useGetAfterCollapseFolder() {
     const dispatch = useDispatch()
 
-    return useCallback(function (folders: TempCompFilesTreeType.Items, openIdArr: FilesTreeType.IdArr) {
+    return useCallback(function (folders: TempCompFilesTreeType.Items, openIdArr: TempCompFilesTreeType.FileItemId[]) {
         // Set a new folders structure list in the Store
         dispatch(actions.article.setTempCompFolders(folders))
 
@@ -156,7 +156,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const { tempComps } = useGetArticleSelectors()
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.Id) {
+    return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
         const selectedCompId = flashedElemCoords.selectedElem.dataCompId
 
         let compsAndMaxCompId: CreateCompFnReturnType
@@ -196,7 +196,7 @@ export function useGetOnClickInsideBtn() {
     const { tempComps } = useGetArticleSelectors()
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.Id) {
+    return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
         const {dataCompId, dataElemId} = flashedElemCoords.selectedElem
 
         const componentsAndMaxCompId = articleManager.createCompAndSetInElem(

@@ -1,27 +1,12 @@
 // import FilesTreeType from 'types/filesTree'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import StoreArticleTypes from 'store/article/articleTypes'
-// import actions from 'store/rootAction'
-// import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
-import actions from '../../store/rootAction'
-import { store } from '../../store/rootReducer'
-// import {getFromLocalStorage, setInLocalStorage} from 'utils/MiscUtils'
-import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import config from '../../utils/config'
-import { removeFromLocalStorage } from '../../utils/MiscUtils'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import config from 'utils/config'
+import { removeFromLocalStorage } from 'utils/miscUtils'
 
-
-/*type MarksObj = {
-    // Article site id
-    siteId?: string // '60ca102ef8cfcc002074b3da'
-    // Article uuid
-    articleId?: string // '1dc98c6c-c2fd-45bd-ad9d-25129045c818'
-    // id of included files template id
-    incFilesId?: string // '60cc62ab5405e00071442016'
-    // open component template folder uuids
-    openCompFoldersIds?: FilesTreeType.IdArr // ['1', '3']
-}*/
 
 /**
  * The function saves code of an article to a server
@@ -65,8 +50,4 @@ export async function deleteArticle( this: typeof articleManager, articleId: nul
 
     // Очистить редактор от этой статьи
     this.clearArticle()
-
-    // Delete article in a server
-    // Возможно это не требуется
-    // await deleteArticleRequest(articleId)
 }

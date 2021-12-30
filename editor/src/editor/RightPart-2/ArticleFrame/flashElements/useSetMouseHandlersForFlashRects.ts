@@ -13,8 +13,8 @@ export function useSetMouseHandlersForFlashRects() {
     // Were mouse move handlers set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
-    useEffect(function () {
-        if (!$links.$document || mouseMoveHandlerSet || !history.length) return
+    useEffect(function () {// || !history.length
+        if (!$links.$document || mouseMoveHandlerSet) return
 
         // Set handlers mousemove and mousedown
         $links.$document.addEventListener('mousemove', hoverHandler)

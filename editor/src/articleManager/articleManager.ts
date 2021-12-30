@@ -19,7 +19,8 @@ import {
     getTempElemByDataCompIdAndDataElemId,
     getTemplate,
     getTElemInTComp,
-    getCompParentArray
+    getCompParentArray,
+    getDCompIdxInArray
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -32,11 +33,20 @@ import {
     createSimpleTextComponent
 } from './methods/create'
 import {
-//     canComponentPutInElement,
-//     hasElemNestedElements,
+    canComponentPutInElement,
+    canMoveCompMoveToProperPosition,
+    hasElemNestedElements,
     canMakeHistoryStep,
-    isArticleSave
+    isArticleSave,
+    isCompInArticleRoot,
+    isCompsInTheSameArr, isCompInArray
 } from './methods/check'
+import {
+    moveComponentToProperPosition,
+    moveComponentToRoot,
+    moveCompNearComp,
+    moveComponentToElement
+} from './methods/move'
 
 
 class ArticleManager {
@@ -63,13 +73,23 @@ class ArticleManager {
     getTempElemByDataCompIdAndDataElemId = getTempElemByDataCompIdAndDataElemId
     // Finds an array in witch component is
     getCompParentArray = getCompParentArray
+    // idx компонента в переданном массиве
+    getDCompIdxInArray = getDCompIdxInArray
 
     // CHECK
+    // Функция проверяющая работоспособность кнопки перемещения перемещаемого компонента
+    canMoveCompMoveToProperPosition = canMoveCompMoveToProperPosition
     // The method returns boolean can pass component put in element
-    // canComponentPutInElement = canComponentPutInElement
-    // hasElemNestedElements = hasElemNestedElements
+    canComponentPutInElement = canComponentPutInElement
+    hasElemNestedElements = hasElemNestedElements
     canMakeHistoryStep = canMakeHistoryStep
     isArticleSave = isArticleSave
+    // Находится ли компонент в корне статьи?
+    isCompInArticleRoot = isCompInArticleRoot
+    // Находятся ли компоненты в одном массиве?
+    isCompsInTheSameArr = isCompsInTheSameArr
+    // Находится ли компонент в переданном массиве?
+    isCompInArray = isCompInArray
 
     // CREATE
     createArticle = createArticle
@@ -80,6 +100,12 @@ class ArticleManager {
     createCompAndSetInRootOfArticle = createCompAndSetInRootOfArticle
     createCompAndSetInElem = createCompAndSetInElem
     createCompAndSetItNearComp = createCompAndSetItNearComp
+
+    // MOVE
+    moveComponentToProperPosition = moveComponentToProperPosition
+    moveComponentToRoot = moveComponentToRoot
+    moveCompNearComp = moveCompNearComp
+    moveComponentToElement = moveComponentToElement
 
     // HOOKS (object with hooks)
     hooks = hooks

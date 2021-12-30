@@ -14,8 +14,8 @@ namespace StoreArticleTypes {
         // Flash rectangles coordinates
         hoveredElem: FlashedElem
         selectedElem: FlashedElem
-        moveHoveredComp: MoveFlashedElem
-        moveSelectedComp: MoveFlashedElem
+        moveHoveredComp: MoveFlashedComp
+        moveSelectedComp: MoveFlashedComp
         // Current text component
         selectedTextComp: SelectedTextComp
     }
@@ -26,7 +26,7 @@ namespace StoreArticleTypes {
         dataCompId: FlashedElemId
         dataElemId: FlashedElemId
     }
-    export type MoveFlashedElem = {
+    export type MoveFlashedComp = {
         dataCompId: FlashedElemId
     }
 

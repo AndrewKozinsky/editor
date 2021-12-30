@@ -7,7 +7,7 @@ import deleteComponentRequest from 'requests/editor/components/deleteComponentRe
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
-import { setInLocalStorage } from 'utils/MiscUtils'
+import { setInLocalStorage } from 'src/utils/miscUtils'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
 
@@ -148,7 +148,6 @@ async function deleteFilesInFolder(
 ) {
     // Получить все id файлов внутри папки
     const filesIdsInside = filesTreePublicMethods.getFilesIdsInFolder(originalFolders, resourceId)
-    // debugger
 
     // Обнулить данные выделенного элемента в Хранилище
     if (category === 'components') {
