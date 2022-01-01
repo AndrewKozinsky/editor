@@ -1,5 +1,7 @@
 
+import { cloneItem } from './methods/clone'
 import correctArticle from './methods/correctArticle'
+import { deleteComponent, deleteElement, deleteItem } from './methods/delete'
 import {
     createCompAndSetItNearComp,
     createCompAndSetInElem,
@@ -20,7 +22,9 @@ import {
     getTemplate,
     getTElemInTComp,
     getCompParentArray,
-    getDCompIdxInArray
+    getDCompIdxInArray,
+    getElemCount,
+    getTElemInTCompsArr
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -39,14 +43,18 @@ import {
     canMakeHistoryStep,
     isArticleSave,
     isCompInArticleRoot,
-    isCompsInTheSameArr, isCompInArray
+    isCompsInTheSameArr,
+    isCompInArray,
+    canDeleteElem, canMoveItemToUpOrDown, canClone
 } from './methods/check'
 import {
     moveComponentToProperPosition,
     moveComponentToRoot,
     moveCompNearComp,
-    moveComponentToElement
+    moveComponentToElement,
+    moveItemToUpOrDown
 } from './methods/move'
+import { changeVisibility } from './methods/visibility'
 
 
 class ArticleManager {
@@ -59,6 +67,7 @@ class ArticleManager {
     getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
+    getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     // Finds template in templates array
@@ -75,6 +84,7 @@ class ArticleManager {
     getCompParentArray = getCompParentArray
     // idx компонента в переданном массиве
     getDCompIdxInArray = getDCompIdxInArray
+    getElemCount = getElemCount
 
     // CHECK
     // Функция проверяющая работоспособность кнопки перемещения перемещаемого компонента
@@ -90,6 +100,10 @@ class ArticleManager {
     isCompsInTheSameArr = isCompsInTheSameArr
     // Находится ли компонент в переданном массиве?
     isCompInArray = isCompInArray
+    canDeleteElem = canDeleteElem
+    canMoveItemToUpOrDown = canMoveItemToUpOrDown
+    // Можно ли компонент/элемент клонировать и вставить следом
+    canClone = canClone
 
     // CREATE
     createArticle = createArticle
@@ -106,6 +120,18 @@ class ArticleManager {
     moveComponentToRoot = moveComponentToRoot
     moveCompNearComp = moveCompNearComp
     moveComponentToElement = moveComponentToElement
+    moveItemToUpOrDown = moveItemToUpOrDown
+
+    // CHANGE
+    changeVisibility = changeVisibility
+
+    // CLONE
+    cloneItem = cloneItem
+
+    // DELETE
+    deleteItem = deleteItem
+    deleteComponent = deleteComponent
+    deleteElement = deleteElement
 
     // HOOKS (object with hooks)
     hooks = hooks

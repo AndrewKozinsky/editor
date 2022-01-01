@@ -239,7 +239,7 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 1,
                     tCompElemId: 'general',
-                    dCompElemGroup: 'general-main',
+                    tCompElemGroup: 'general-main',
                     dCompElemTag: 2,
                     dCompElemAttrs: [
                         {dCompElemAttrId: 1, dCompElemAttrValue: [1, 2]},
@@ -248,7 +248,7 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 2,
                     tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-top',
+                    tCompElemGroup: 'cell-top',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 10,
@@ -258,13 +258,13 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 3,
                     tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-top',
+                    tCompElemGroup: 'cell-top',
                     dCompElemTag: 5,
                 },
                 {
                     dCompElemId: 4,
                     tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-top',
+                    tCompElemGroup: 'cell-top',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 11,
@@ -274,7 +274,7 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 5,
                     tCompElemId: 'mediterranean',
-                    dCompElemGroup: 'mediterranean-main',
+                    tCompElemGroup: 'mediterranean-main',
                     dCompElemChildren: [
                         {
                             dCompType: 'component',
@@ -284,7 +284,7 @@ const artData: ArticleTypes.Article = {
                                 {
                                     dCompElemId: 1,
                                     tCompElemId: 'general',
-                                    dCompElemGroup: 'general-main',
+                                    tCompElemGroup: 'general-main',
                                     dCompElemTag: 2,
                                     dCompElemAttrs: [
                                         {dCompElemAttrId: 1, dCompElemAttrValue: []},
@@ -293,28 +293,28 @@ const artData: ArticleTypes.Article = {
                                 {
                                     dCompElemId: 2,
                                     tCompElemId: 'cell',
-                                    dCompElemGroup: 'cell-top',
+                                    tCompElemGroup: 'cell-top',
                                 },
                                 {
                                     dCompElemId: 3,
                                     tCompElemId: 'cell',
-                                    dCompElemGroup: 'cell-top',
+                                    tCompElemGroup: 'cell-top',
                                     dCompElemTag: 5
                                 },
                                 {
                                     dCompElemId: 4,
                                     tCompElemId: 'cell',
-                                    dCompElemGroup: 'cell-top',
+                                    tCompElemGroup: 'cell-top',
                                 },
                                 {
                                     dCompElemId: 5,
                                     tCompElemId: 'mediterranean',
-                                    dCompElemGroup: 'mediterranean-main',
+                                    tCompElemGroup: 'mediterranean-main',
                                 },
                                 {
                                     dCompElemId: 6,
                                     tCompElemId: 'cell',
-                                    dCompElemGroup: 'cell-bottom',
+                                    tCompElemGroup: 'cell-bottom',
                                 },
                             ]
                         }
@@ -323,7 +323,7 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 6,
                     tCompElemId: 'cell',
-                    dCompElemGroup: 'cell-bottom',
+                    tCompElemGroup: 'cell-bottom',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 12,

@@ -29,7 +29,7 @@ export function useGetAnotherFolderData(formState: FCType.StateFormReturn) {
  */
 function setNewFolderName(
     foldersArr: DragFilesTreeType.Items,
-    currentItemId: DragFilesTreeType.Id,
+    currentItemId: DragFilesTreeType.ItemId,
     formState: FCType.StateFormReturn
 ) {
     if (!foldersArr || !currentItemId) return

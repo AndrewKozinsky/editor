@@ -83,9 +83,9 @@ export function getIconSize(type: string) {
             }
         case 'btnSignCode':
             return {
-                width: "16px",
-                height: "15px",
-                viewBox: "0 0 16 15"
+                width: '16px',
+                height: '15px',
+                viewBox: '0 0 16 15'
             }
 
         case 'btnSignClose':

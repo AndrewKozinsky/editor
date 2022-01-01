@@ -127,7 +127,7 @@ export function canMakeHistoryStep(
 
 /**
  * The function checks if an article is saved
- * @param historyStepWhenWasSave
+ * @param {Number} historyStepWhenWasSave — номер шага когда статья была сохранена.
  * @param historyCurrentIdx
  */
 export function isArticleSave(
@@ -173,7 +173,6 @@ export function isCompsInTheSameArr(
  * Находится ли компонент в переданном массиве?
  * @param {Array} array — массив, в котором, возможно, находится компонент
  * @param {Number} targetDCompId — id искомого компонента
- * @returns {Boolean} — находится ли компонент в переданном массиве?
  */
 export function isCompInArray(
     this: typeof articleManager,
@@ -182,4 +181,100 @@ export function isCompInArray(
 ) {
     if (!Array.isArray(array)) return false
     return !!(array.find(comp => comp.dCompId === targetDCompId))
+}
+
+/**
+ * Функция проверяет можно ли удалить компонент/элемент по переданным координатам
+ * @param {Array} dComps — массив компонентов статьи
+ * @param {Object} targetCompCoords — координаты компоненте который будут удалять
+ */
+export function canDeleteElem(
+    this: typeof articleManager,
+    dComps: ArticleTypes.Components,
+    targetCompCoords: StoreArticleTypes.FlashedElem,
+) {
+    // Если компонент не выделен, то удаление не работает
+    if (!targetCompCoords.dataCompId) {
+        return false
+    }
+
+    // Если выделен компонент или корневой элемент, то можно удалить весь компонент
+    if (['component', 'rootElement'].includes(targetCompCoords.tagType)) {
+        return true
+    }
+
+    // Если выделен элемент...
+    if (targetCompCoords.tagType === 'element') {
+        const dComp = this.getComponent(dComps, targetCompCoords.dataCompId)
+        if (dComp.dCompType === 'simpleTextComponent') return false
+
+        const dElem = this.getDataElemInDataComp(
+            dComp, targetCompCoords.dataElemId
+        )
+
+        // Получить количество таких же элементов как выделенный
+        const elemCount = this.getElemCount(dComp, dElem)
+        // Элемент можно удалить если его количество больше одного
+        return elemCount > 1
+    }
+
+    return false
+}
+
+/**
+ * Функция проверяет можно ли переместить компонент или элемент выше, или ниже в его массиве
+ * @param {Array} dComps — массив компонентов статьи
+ * @param {Object} targetCompCoords — координаты проверяемого компонента/элемента
+ * @param {String} direction — направление перемещения
+ */
+export function canMoveItemToUpOrDown(
+    this: typeof articleManager,
+    dComps: ArticleTypes.Components,
+    targetCompCoords: StoreArticleTypes.FlashedElem,
+    direction: 'up' | 'down'
+) {
+    const { dataCompId, dataElemId, tagType} = targetCompCoords
+
+    if (!tagType) return false
+
+    let idx: number
+    let parentArrLength: number
+
+    if (['component', 'rootElement'].includes(tagType )) {
+        const parentArr = this.getCompParentArray(dComps, dataCompId)
+
+        // Индекс положения компонента и длина массива
+        idx = parentArr.findIndex(dComp => dComp.dCompId === dataCompId)
+        parentArrLength = parentArr.length
+    }
+    else {
+        // Компонент содержащий выделенный элемент
+        const dComp = this.getComponent(dComps, dataCompId)
+        if (dComp.dCompType === 'simpleTextComponent') return false
+
+        // Данные выделенного элемента
+        const dElem = this.getDataElemInDataComp(dComp, dataElemId)
+
+        // Составить список элементов с таким же названием группы, что и выделенный
+        // потому что мне нужно проверить смогу ли я перемещать элемент в пределах элементов из его группы
+        const elemsGroupArr = dComp.dElems.filter(el => el.tCompElemGroup === dElem.tCompElemGroup)
+
+        // Индекс положения элемента и длина массива
+        idx = elemsGroupArr.findIndex(dElem => dElem.dCompElemId === dataElemId)
+        parentArrLength = elemsGroupArr.length
+    }
+
+    if (direction === 'up' && idx > 0) return true
+    else if (direction === 'down' && idx < parentArrLength - 1) return true
+
+    return false
+}
+
+
+/**
+ * Функция проверяет можно ли клонировать компонент/элемент и вставить после выделенного элемента
+ * @param {Object} compCoords — координаты выделенного компонента/элемента
+ */
+export function canClone(this: typeof articleManager, compCoords: StoreArticleTypes.FlashedElem) {
+    return !!compCoords.tagType
 }

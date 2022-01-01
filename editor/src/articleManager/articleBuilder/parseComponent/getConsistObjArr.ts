@@ -31,7 +31,7 @@ export function getConsistObjArr(
             dElem: dElem,
             tempElem: getTemplateElemByTempElemId(template, dElem.tCompElemId),
             htmlComp: htmlObj,
-            htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.dCompElemGroup, dElem.tCompElemId)
+            htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.tCompElemGroup, dElem.tCompElemId)
         }
     })
 }
@@ -49,13 +49,13 @@ function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElem
  * The function finds and returns html-element object with passed dCompElemGroup name and tCompElemId
  * @param {Object} htmlObj — component html-object
  * @param {Number} dCompElemId — an element id
- * @param {String} dCompElemGroup — the name of the group to which the element belongs
+ * @param {String} tCompElemGroup — the name of the group to which the element belongs
  * @param {String} tCompElemId — element template name
  */
 function getHtmlElem(
     htmlObj: HTMLObjArrType.Tag,
     dCompElemId: number,
-    dCompElemGroup: string,
+    tCompElemGroup: string,
     tCompElemId: string
 ): HTMLObjArrType.Tag {
     let htmlElem: HTMLObjArrType.Tag | null = null
@@ -67,7 +67,7 @@ function getHtmlElem(
 
         // If there is attr with a passed tCompElemId and a group name...
         if (htmlObj.attrs['data-em-id'] === tCompElemId
-            && htmlObj.attrs['data-em-group'] === dCompElemGroup
+            && htmlObj.attrs['data-em-group'] === tCompElemGroup
             && htmlObj.attrs['data-em-d-elem-id'] === dCompElemId.toString())
         {
             // The searches have finished
@@ -85,7 +85,7 @@ function getHtmlElem(
 
             // If there is attr with a passed tCompElemId and a group name...
             if (childObj.attrs['data-em-id'] === tCompElemId
-                && childObj.attrs['data-em-group'] === dCompElemGroup
+                && childObj.attrs['data-em-group'] === tCompElemGroup
                 && childObj.attrs['data-em-d-elem-id'] === dCompElemId.toString()
             ) {
                 // The searches have finished

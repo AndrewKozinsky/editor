@@ -94,13 +94,13 @@ function getCoordinates(
     const coords = articleElement.getBoundingClientRect()
 
     // Offset from flashed element in article to flashed rectangle depends on type
-    const offset = (type === 'hover' || type === 'movehover') ? 2 : 4
+    const offset = (type === 'hover' || type === 'movehover') ? 1 : 2
 
     return {
         top: coords.top - offset + scrollObj.top + 'px',
         left: coords.left - offset + scrollObj.left + 'px',
-        width: coords.width + offset + 'px',
-        height: coords.height + offset + 'px'
+        width: coords.width + 'px',
+        height: coords.height + 'px'
     }
 }
 

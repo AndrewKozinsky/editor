@@ -37,7 +37,7 @@ function createGroupElemsMap(dataComp: ArticleTypes.Component) {
     const groupElemsMap: GroupElemsMapType = {}
 
     for (let dataElem of dataComp.dElems) {
-        const groupName = dataElem.dCompElemGroup
+        const groupName = dataElem.tCompElemGroup
 
         if (!groupElemsMap[groupName]) {
             groupElemsMap[groupName] = []

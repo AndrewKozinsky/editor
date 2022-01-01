@@ -4,21 +4,13 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 import StoreArticleTypes from '../../store/article/articleTypes'
 
-// Тип объекта возвращаемый функциями вставки новых компонентов
-// Заметь, что это не новая статья, а данные для экшена для вставки нового пункта
-// в массив истории и обновления счётчика id максимального компонента.
-export type CreateCompFnReturnType = {
-    components: ArticleTypes.Components // Объект истории
-    maxCompId: number // максимальный id
-}
 
 /**
  * Функция создаёт компонент и помещает его в указанный элемент
  * @param {Object} article
- * @param {Array} tempCompArr
+ * @param {Array} tempCompArr — массив шаблонов компонентов
  * @param {Number} tempCompId
  * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
- * @param {Number} targetDataElemId
  */
 export function createCompAndSetInElem(
     this: typeof articleManager,
@@ -26,7 +18,7 @@ export function createCompAndSetInElem(
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
     targetCompCoords: StoreArticleTypes.FlashedElem,
-): CreateCompFnReturnType {
+): StoreArticleTypes.CreateNewHistoryItem {
 
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
@@ -66,7 +58,7 @@ export function createCompAndSetItNearComp(
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
     targetDataCompId: ArticleTypes.Id
-): CreateCompFnReturnType {
+): StoreArticleTypes.CreateNewHistoryItem {
 
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
@@ -110,7 +102,7 @@ export function createCompAndSetInRootOfArticle(
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
-): CreateCompFnReturnType {
+): StoreArticleTypes.CreateNewHistoryItem {
     // Create a new component
     const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
 

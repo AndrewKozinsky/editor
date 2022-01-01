@@ -47,7 +47,7 @@ namespace ArticleTypes {
         // Element template id
         tCompElemId: TempElemId // 1
         // Name of elements group with the same tempElemId. They may be several groups with the same tempElemId.
-        dCompElemGroup: ElemGroup // 'banner-1'
+        tCompElemGroup: ElemGroup // 'banner-1'
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
         dCompElemTag?: Tag
         dCompElemAttrs?: Attribs

@@ -1,46 +1,53 @@
+import { useCallback, useEffect, useState } from 'react'
+import articleManager from 'articleManager/articleManager'
+import { useDispatch } from 'react-redux'
+import { cloneItem } from '../../../../articleManager/methods/clone'
+import useGetArticleSelectors from '../../../../store/article/articleSelectors'
+import actions from '../../../../store/rootAction'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
-/*export function useIsClone1Disabled() {
+export function useIsCloneDisabled() {
     const [disabled, setDisabled] = useState(true)
 
-    return disabled
-}*/
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
-/** Хук возвращает обработчик нажатия на кнопку «Копировать элемент» */
-/*export function useGetClone1Handler() {
-    return useCallback(function () {
+    useEffect(function () {
+        // Кнопка заблокирована если статья не загружена
+        if (!historyItem) {
+            setDisabled(true)
+            return
+        }
+        const { selectedElem } = historyItem
 
-    }, [])
-}*/
+        const canClone = articleManager.canClone(selectedElem)
 
-// ================== >
-
-/** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент с атрибутами» */
-/*export function useIsClone2Disabled() {
-    const [disabled, setDisabled] = useState(true)
-
-    return disabled
-}*/
-
-/** Хук возвращает обработчик нажатия на кнопку «Копировать элемент с атрибутами» */
-/*export function useGetClone2Handler() {
-    return useCallback(function () {
-
-    }, [])
-}*/
-
-// ================== >
-
-/** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент с детьми» */
-/*export function useIsClone3Disabled() {
-    const [disabled, setDisabled] = useState(true)
+        setDisabled(!canClone)
+    }, [historyItem])
 
     return disabled
-}*/
+}
 
-/** Хук возвращает обработчик нажатия на кнопку «Копировать элемент с детьми» */
-/*export function useGetClone3Handler() {
+/**
+ * Хук возвращает обработчик нажатия на кнопку копирования компонента/элемента.
+ * @param {Number} deep — глубина копирования: 1 (компонент), 2 (с атрибутами), 3 (с атрибутами и детьми)
+ */
+export function useGetCloneHandler(deep: 1 | 2 | 3) {
+    const dispatch = useDispatch()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
+    const { tempComps } = useGetArticleSelectors()
+
     return useCallback(function () {
+        // Кнопка заблокирована если статья не загружена
+        if (!historyItem) return
+        const { selectedElem, moveSelectedComp } = historyItem
 
-    }, [])
-}*/
+        // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
+        const compsAndMaxCompId = articleManager.cloneItem(
+            tempComps, historyItem.article, selectedElem, deep
+        )
+
+        dispatch(actions.article.createAndSetHistoryItem(
+            compsAndMaxCompId
+        ))
+    }, [historyItem])
+}

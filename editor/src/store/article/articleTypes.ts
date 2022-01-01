@@ -2,7 +2,6 @@ import TempCompTypes from './codeType/tempCompCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-import { CreateCompFnReturnType } from '../../articleManager/methods/insert'
 
 namespace StoreArticleTypes {
 
@@ -66,6 +65,13 @@ namespace StoreArticleTypes {
         altKey: boolean
         ctrlKey: boolean
         shiftKey: boolean
+    }
+
+    // Тип объекта возвращаемый функциями манипуляции компонентами (вставки, удаления, клонирования)
+    // Этот объект требуется для экшена и редьюсера ставящий новый объект истории статьи
+    export type CreateNewHistoryItem = {
+        components: ArticleTypes.Components // Массив компонентов
+        maxCompId: number // максимальный id
     }
 
 
@@ -174,7 +180,7 @@ namespace StoreArticleTypes {
     export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
     export type CreateAndSetHistoryItemAction = {
         type: typeof CREATE_AND_SET_HISTORY_ITEM
-        payload: CreateCompFnReturnType
+        payload: StoreArticleTypes.CreateNewHistoryItem
     }
 
     // Action changes a current history step

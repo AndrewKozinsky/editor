@@ -13,7 +13,6 @@ import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderR
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
-import { CreateCompFnReturnType } from '../../articleManager/methods/insert'
 
 
 const articleActions = {
@@ -319,7 +318,7 @@ const articleActions = {
      * Action forms a new history item
      * @param {Object} itemDetails — данные для вставки нового элемента в массив статей
      */
-    createAndSetHistoryItem( itemDetails: CreateCompFnReturnType ) {
+    createAndSetHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
         return {
             type: StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM,
             payload: itemDetails

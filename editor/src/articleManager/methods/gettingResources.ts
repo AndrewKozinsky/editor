@@ -38,22 +38,21 @@ export function getTemplate(
  * @param {String} tempCompId — component template uuid
  * @param {String} tempElemId — element template uuid
  */
-/*export function getTemplateElement(
+export function getTElemInTCompsArr(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
-    tempElemId: TempCompTypes.TempElemId
+    tempElemId: TempCompTypes.ElemId
 ): null | TempCompTypes.Elem {
-    // const template = this.getTemplate(tempCompArr, tempCompId)
-    // if (!template) return null
+    const template = this.getTemplate(tempCompArr, tempCompId)
+    if (!template) return null
 
-    // if (!template.code.elems?.length) return null
+    if (!template.content.elems?.length) return null
 
-    // const tempElement = template.code.elems.find(elem => elem.tempElemId === tempElemId)
-    // if (!tempElement) return null
+    const tempElement = template.content.elems.find(elem => elem.elemId === tempElemId)
 
-    // return tempElement
-}*/
+    return tempElement || null
+}
 
 /**
  * Поиск шаблона элемента в шаблоне компонента
@@ -274,4 +273,28 @@ export function getDCompIdxInArray(
     dCompId: ArticleTypes.Id
 ) {
     return array.findIndex(dComp => dComp.dCompId === dCompId)
+}
+
+/**
+ * Возвращает количество элементов с таким же идентификатором и названием группы
+ * @param {Object} dComp — данные компонента
+ * @param {Object} dElem — данные элемента
+ * @returns {number}
+ */
+export function getElemCount(
+    this: typeof articleManager,
+    dComp: ArticleTypes.Component,
+    dElem: ArticleTypes.ComponentElem
+) {
+    const elemTId = dElem.tCompElemId
+    const elemTGroup = dElem.tCompElemGroup
+
+    const elemsTheSameGroup = dComp.dElems.filter(dElem => {
+        return (
+            dElem.tCompElemId === elemTId &&
+            dElem.tCompElemGroup === elemTGroup
+        )
+    })
+
+    return elemsTheSameGroup.length
 }

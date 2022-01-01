@@ -2,25 +2,14 @@ import React from 'react'
 import { bottomPanelMessages } from 'messages/bottomPanelMessages'
 import useGetMessages from 'messages/fn/useGetMessages'
 import SvgIcon from 'common/icons/SvgIcon'
-import { setUpperCaseForFirstLetter } from 'utils/stringUtils'
 import makeClasses from './BottomButtons-classes'
 import { useGetInsideHandler, useIsInsideDisabled } from './fn/insideBtnFns'
-// import {
-    // useGetClone1Handler,
-    // useGetClone2Handler,
-    // useGetClone3Handler,
-    // useGetDownHandler,
-    // useGetRemoveHandler,
-    // useGetUpHandler,
-    // useGetVisibleHandler,
-    // useIsClone1Disabled,
-    // useIsClone2Disabled,
-    // useIsClone3Disabled,
-    // useIsDownDisabled,
-    // useIsRemoveDisabled,
-    // useIsUpDisabled,
-    // useIsVisibleDisabled
-// } from './BottomButtons-func'
+import { useGetRemoveHandler, useIsRemoveDisabled } from './fn/removeBtnFns'
+import { useGetIconType } from './fn/BottomButtons-func'
+import { useGetVisibleHandler, useIsVisibleDisabled } from './fn/visibleBtnFns'
+import { useGetUpDownHandler, useIsUpDownDisabled } from './fn/upDownBtnFns'
+import { useGetCloneHandler, useIsCloneDisabled } from './fn/cloneBtnFns'
+
 
 /* Панель с кнопками манипулирования выделенным компонентом/элементом */
 export default function BottomButtons() {
@@ -31,30 +20,26 @@ export default function BottomButtons() {
     const insideDisabled = useIsInsideDisabled()
     const insideHandler = useGetInsideHandler()
 
-    // const upDisabled = useIsUpDisabled()
-    // const upHandler = useGetUpHandler()
+    const upDisabled = useIsUpDownDisabled('up')
+    const upHandler = useGetUpDownHandler('up')
 
-    // const downDisabled = useIsDownDisabled()
-    // const downHandler = useGetDownHandler()
-
-    // ================== >
-
-    // const clone1Disabled = useIsClone1Disabled()
-    // const clone1Handler = useGetClone1Handler()
-
-    // const clone2Disabled = useIsClone2Disabled()
-    // const clone2Handler = useGetClone2Handler()
-
-    // const clone3Disabled = useIsClone3Disabled()
-    // const clone3Handler = useGetClone3Handler()
+    const downDisabled = useIsUpDownDisabled('down')
+    const downHandler = useGetUpDownHandler('down')
 
     // ================== >
 
-    // const removeDisabled = useIsRemoveDisabled()
-    // const removeHandler = useGetRemoveHandler()
+    const cloneDisabled = useIsCloneDisabled()
+    const clone1Handler = useGetCloneHandler(1)
+    const clone2Handler = useGetCloneHandler(2)
+    const clone3Handler = useGetCloneHandler(3)
 
-    // const visibleDisabled = useIsVisibleDisabled()
-    // const visibleHandler = useGetVisibleHandler()
+    // ================== >
+
+    const removeDisabled = useIsRemoveDisabled()
+    const removeHandler = useGetRemoveHandler()
+
+    const visibleDisabled = useIsVisibleDisabled()
+    const visibleHandler = useGetVisibleHandler()
 
     // ================== >
 
@@ -62,17 +47,17 @@ export default function BottomButtons() {
         <section className={CN.root}>
             <div className={CN.group}>
                 <Button btnKey='inside' onClick={insideHandler} disabled={insideDisabled} />
-                {/*<Button btnKey='up' onClick={upHandler} disabled={upDisabled} />*/}
-                {/*<Button btnKey='down' onClick={downHandler} disabled={downDisabled} />*/}
+                <Button btnKey='up' onClick={upHandler} disabled={upDisabled} />
+                <Button btnKey='down' onClick={downHandler} disabled={downDisabled} />
             </div>
             <div className={CN.group}>
-                {/*<Button btnKey='clone1' onClick={clone1Handler} disabled={clone1Disabled} />*/}
-                {/*<Button btnKey='clone2' onClick={clone2Handler} disabled={clone2Disabled} />*/}
-                {/*<Button btnKey='clone3' onClick={clone3Handler} disabled={clone3Disabled} />*/}
+                <Button btnKey='clone1' onClick={clone1Handler} disabled={cloneDisabled} />
+                <Button btnKey='clone2' onClick={clone2Handler} disabled={cloneDisabled} />
+                <Button btnKey='clone3' onClick={clone3Handler} disabled={cloneDisabled} />
             </div>
             <div className={CN.group}>
-                {/*<Button btnKey='remove' onClick={removeHandler} disabled={removeDisabled} />*/}
-                {/*<Button btnKey='visible' onClick={visibleHandler} disabled={visibleDisabled} />*/}
+                <Button btnKey='remove' onClick={removeHandler} disabled={removeDisabled} />
+                <Button btnKey='visible' onClick={visibleHandler} disabled={visibleDisabled} />
             </div>
         </section>
     )
@@ -91,7 +76,8 @@ function Button(props: ButtonPropType) {
     const msg = useGetMessages(bottomPanelMessages)
     // @ts-ignore
     const title = msg[btnKey]
-    const iconType = 'elBtnSign' + setUpperCaseForFirstLetter(btnKey)
+
+    const iconType = useGetIconType(btnKey)
 
     const CN = makeClasses()
 

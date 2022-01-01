@@ -78,12 +78,23 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
     const doc = parser.parseFromString(tempComp.content.html, 'text/html')
     const $component = doc.body.childNodes[0] as HTMLElement
 
-    const newElemsArr = tempComp.content.elems.map((tElem, i) => {
+    // Так как в шаблоне могут использоваться элементы с одинаковым data-em-id, но разным data-em-group,
+    // то составлю объект, где будут об этом данные вида:
+    // [
+    //     {elemId: 'general', elemGroup: 'general-main', tElem: tElem},
+    //     {elemId: 'cell', elemGroup: 'cell-top', tElem: tElem},
+    //     {elemId: 'cell', elemGroup: 'cell-bottom', tElem: tElem}
+    // ],
+    const tElemsMap = getTElemsMap($component, tempComp.content.elems)
+
+    const newElemsArr = tElemsMap.map((tElemMapItem, i) => {
         const newElemData: ArticleTypes.ComponentElem = {
             dCompElemId: i + 1,
-            tCompElemId: tElem.elemId,
-            dCompElemGroup: getElemGroupNameFromHTML($component, tElem.elemId)
+            tCompElemId: tElemMapItem.elemId,
+            tCompElemGroup: tElemMapItem.elemGroup
         }
+
+        const { tElem } = tElemMapItem
 
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
@@ -112,21 +123,35 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
     }
 }
 
-/**
- * Функция получает html-компонент, находит элемент с переданным идентификатором и возвращает имя группы,
- * к которой принадлежит элемент
- * @param {HTMLElement} $component — html-компонент
- * @param {String} tElemId — id шаблона элемента
- */
-function getElemGroupNameFromHTML($component: HTMLElement, tElemId: string) {
+type TElemsMapItem = {
+    elemId: string,
+    elemGroup: string,
+    tElem: TempCompTypes.Elem
+}
+type TElemsMap = TElemsMapItem[]
+
+function getTElemsMap($component: HTMLElement, tempElems: TempCompTypes.Elems): TElemsMap {
     const $wrapper = document.createElement('div')
     $wrapper.append($component)
+    const $elems = $wrapper.querySelectorAll('[data-em-id]')
 
-    let $elem: HTMLElement = $wrapper.querySelector(`[data-em-id=${tElemId}]`)
+    const tElemsMap: TElemsMap = []
 
-    return $elem
-        ? $elem.dataset.emGroup
-        : null
+    for (let $elem of $elems) {
+        //@ts-ignore
+        const { emId, emGroup } = $elem.dataset
+
+        const tElemItem = {
+            elemId: emId,
+            elemGroup: emGroup,
+            tElem: tempElems.find(tElem => tElem.elemId === emId)
+        }
+
+        tElemsMap.push(tElemItem)
+    }
+
+    return tElemsMap
+
 }
 
 /**
@@ -184,12 +209,13 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
 
 /**
  * Функция создаёт объект пустого текстового компонента
- * @param {Number} compId — id компонента текстового компонента
+ * @param {Number} dCompId — id компонента текстового компонента
+ * @param {String} text — текст
  */
-export function createSimpleTextComponent(compId: number): ArticleTypes.SimpleTextComponent {
+export function createSimpleTextComponent(dCompId: number, text: string = ''): ArticleTypes.SimpleTextComponent {
     return {
         dCompType: 'simpleTextComponent',
-        dCompId: compId,
-        text: ''
+        dCompId,
+        text
     }
 }

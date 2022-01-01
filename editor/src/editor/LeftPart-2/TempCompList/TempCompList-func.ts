@@ -6,7 +6,6 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompFilesTreeType from '../TempCompFilesTree/types'
 import articleManager from 'articleManager/articleManager'
-import { CreateCompFnReturnType } from 'articleManager/methods/insert'
 import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
 import config from 'utils/config'
 
@@ -159,7 +158,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
         const selectedCompId = flashedElemCoords.selectedElem.dataCompId
 
-        let compsAndMaxCompId: CreateCompFnReturnType
+        let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
         if (selectedCompId) {
             compsAndMaxCompId = articleManager.createCompAndSetItNearComp(
                 direction, historyItem.article, tempComps, tempCompId, selectedCompId
@@ -197,11 +196,10 @@ export function useGetOnClickInsideBtn() {
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
-        const {dataCompId, dataElemId} = flashedElemCoords.selectedElem
+        const {selectedElem} = flashedElemCoords
 
         const componentsAndMaxCompId = articleManager.createCompAndSetInElem(
-            historyItem.article, tempComps, tempCompId,
-            dataCompId, dataElemId
+            historyItem.article, tempComps, tempCompId, selectedElem
         )
 
         dispatch(actions.article.createAndSetHistoryItem(

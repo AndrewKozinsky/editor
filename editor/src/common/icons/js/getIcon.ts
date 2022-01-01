@@ -137,5 +137,5 @@ export function getIcon(type: string): ReactNode {
         elBtnSignVisible: ElBtnSignVisible
     }
 
-    return components[type]
+    return components[type] || null
 }
