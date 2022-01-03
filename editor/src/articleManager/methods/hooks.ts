@@ -41,7 +41,7 @@ function useGetCurrentArticle() {
 }
 
 
-type FlashedElemsCoords = {
+export type FlashedElemsCoords = {
     hoveredElem: StoreArticleTypes.FlashedElem
     selectedElem: StoreArticleTypes.FlashedElem
     moveHoveredComp: StoreArticleTypes.MoveFlashedComp
@@ -49,6 +49,8 @@ type FlashedElemsCoords = {
 }
 
 /** Hook returns object with coordinated hovered and selected component/element */
+// Я СЧИТАЮ, ЧТО ЭТОТ ХУК НУЖНО ОПТИМИЗИРОВАТЬ ЧТОБЫ ОН ЗАПУСКАЛСЯ НЕ ПРИ ЛЮБОМ ИЗМЕНЕНИИ ТЕКУЩЕЙ СТАТЬИ,
+// А ТОЛЬКО КОГДА ПОМЕНЯЛИСЬ КООРДИНАТЫ В ОДНОМ ИЗ ПРЕДСТАВЛЕНИИ.
 function useGetFlashedElemCoords() {
     const historyItem = useGetCurrentHistoryItem()
     const [flashedElemsCoords, setFlashedElemsCoords] = useState<null | FlashedElemsCoords>(null)

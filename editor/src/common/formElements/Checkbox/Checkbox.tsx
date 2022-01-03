@@ -6,7 +6,8 @@ import './Checkbox.scss'
 
 export type CheckboxPropType = {
     label: string | ReactElement // Подпись флага
-    name: string // Имя группы флагов
+    grayText?: string
+    name: string | number // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
     disabled?: boolean // Заблокировано ли поле
@@ -19,6 +20,7 @@ export default function Checkbox(props: CheckboxPropType) {
 
     const {
         label, // Подпись выпадающего списка
+        grayText,
         name, // Имя группы флагов
         value, // Значение флага
         disabled = false, // Заблокировано ли поле
@@ -50,9 +52,10 @@ export default function Checkbox(props: CheckboxPropType) {
     }
 
     return (
-        <>
+        <div>
             <input {...inputAttribs} />
             <label {...labelAttribs}>{label}</label>
-        </>
+            {grayText && <p className='checkbox__gray-text'>{grayText}</p>}
+        </div>
     )
 }

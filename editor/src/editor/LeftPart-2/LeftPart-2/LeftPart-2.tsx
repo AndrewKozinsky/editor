@@ -5,6 +5,7 @@ import useGetMessages from 'messages/fn/useGetMessages'
 import TempCompList from '../TempCompList/TempCompList'
 import './LeftPart-2.scss'
 import BottomButtons from '../BottomButtons/BottomButtons'
+import Adjust from '../AdjustPanel/AdjustPanel'
 
 type LeftPart3PropType = {
     display?: boolean
@@ -27,6 +28,7 @@ export default function LeftPart2(props: LeftPart3PropType) {
                 <NameSection header={componentsPanelMsg.header}>
                     <TempCompList />
                 </NameSection>
+                <Adjust />
             </div>
             <div className={`${CN}__bottom`} >
                 <BottomButtons />

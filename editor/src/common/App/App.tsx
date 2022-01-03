@@ -18,23 +18,22 @@ import useGetClasses from './app-fn/App-classes'
 
 /** Компонент всего приложения */
 export default function App() {
+    // TODO Сейчас мои поля формы принимают функцию, которая ставится в качестве обработчика onChange. Туда, соответственно, передаётся объект события. И уже в этой функции я должен писать сценарий получающий введённое значение. Я считаю лучше чтобы в эту функцию вместо объекта события передавалось введённое значение.
+    // TODO Сейчас проверка шаблона компонента не учитывает тип поля изменения атрибута. Я могу написать text, а в качестве значений передать массив идентификаторов. Поправь это и все места, где есть аналогичная проблема.
     // TODO При создании нового файла сделай чтобы в поле названия статьи стояло какое-то значение.
     // TODO Папкам в DragFilesTree придётся задать строковые идентификаторы вида folder_12 чтобы не было пересечения с числовыми идентификаторами у файлов.
     // TODO В GET нельзя передать тело запроса, но дополнительные данные можно передать через запросы в URL: /compFolder?siteId=3. Поэтому я могу убрать обработчик /sites/3/compFolder из sites.
     // TODO На iFrame можно поставить какой-нибудь идентификатор, например #editorium чтобы в используемом CSS как-то изменять стили если статью редактируют в редакторе. Например добавить какой-нибудь фон чтобы элемент был виден только в редакторе или поставить минимальную высоту чтобы элемент можно было выделить если он имеет нулевую высоту.
 
     // TODO В некоторых местах кода я формирую объект свойств, который затем передаю через оператор rest в тег в JSX. И в качестве типа пишу MiscTypes.StringKeyWithAnyValues потому что объект со свойствами формируется не сразу, а может дополняться по ходу кода. Поэтому я не могу зайдействовать автоматическое определение кода TypeScript-а. Так вот, в качестве типа этого объекта можно указать тип свойств принимаемых тегом. Не знаю как он называется.
-    // TODO Figure out why the types from Store are not detected.
     // TODO Don't forgot to use eslint, prettier and stylelint.
     // TODO MAYBE BETTER USE ORDINARY JSON INSTEAD JSON6 BECAUSE IT WORKS BADLY WITH ARRAYS
-    // TODO If I have two Grid components and I put an image to the second grid's cell it appears in the first.
     // TODO Use a more specific name instead of id in the article data.
     // TODO User must pass array of objects with data about including files instead a single string.
     // TODO You didn't consider when user types text and element expands. Then flashed rectangle doesn't match element size. Yet it pages was is scrolled flashed rectangle set on a wrong position. Yet flashed rectangle set on a wrong position if pages is scrolled.
     // TODO Можно все запросы связанные с компонентами, которые зависимы от сайта (получение компонентов сайта, удаление компонента сайта и так далее) перенести в контроллер сайта. Так получится логичнее.
     // TODO Надо сделать отдельные файлы с типами присылаемых с сервера данных: сайт, компонент, шаблон файлов, статью и использовать их для типизации запросов.
     // TODO You can plug in Prettier and TSLint
-    // TODO Уточни в каком формате приходит список сайтов в editor/requests/sitesRequest.ts
     // TODO If a request for model data depends on site then you have to include site/:siteId in address.
     // TODO Если в сайте создать шаблоны компонентов, затем сайт удалить и перейти на вкладку шаблонов компонентов, то там будет форма редактирования существующего компонента потому что в localStorage остались данные по этому выделенному компоненту. Конечно при удалении сайта можно удалять из localStorage свойства  editorComponentType, editorComponentId и editorSiteTemplateId, но возможно они принадлежат компонентам сайта. Поэтому это не лучшее решение. Подумай как сделать чтобы при удалении сайта из localStorage удалялись данные относящиеся к нему.
     // TODO Сделай на вкладке сайта выпадающей список с шаблонами и выбранным шаблоном по умолчанию.

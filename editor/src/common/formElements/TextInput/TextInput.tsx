@@ -10,9 +10,10 @@ import makeClasses from './TextInput-classes'
 
 export type TextInputPropType = {
     label?: string // Подпись текстового поля
+    grayText?: string // Серый текст
     inputType?: 'text' | 'textarea' // Тип поля ввода
     type?: 'text' | 'email' | 'password' // Тип поля
-    name: string, // Аттрибут name текстового поля
+    name: string | number, // Аттрибут name текстового поля
     value: string, // Аттрибут value текстового поля
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
@@ -32,6 +33,7 @@ export type TextInputPropType = {
 export default function TextInput(props: TextInputPropType) {
     const {
         label, // Подпись текстового поля
+        grayText,
         inputType = 'text', // Тип поля ввода
         type = 'text', // Тип поля. Варианты: text, email
         name,          // Аттрибут name текстового поля
@@ -75,7 +77,7 @@ export default function TextInput(props: TextInputPropType) {
 
     return (
         <div>
-            <Label label={label} disabled={disabled} id={id} />
+            <Label label={label} disabled={disabled} id={id} grayText={grayText} />
             {inputType === 'text' &&
                 <input {...inputAttribs} disabled={disabled} id={id} ref={inputRef} />
             }

@@ -8,8 +8,9 @@ import makeClasses from './FieldGroup-classes'
 /** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
 export type FieldGroupPropType = {
     label?: string | ReactElement
+    grayText?: string // Серый текст
     inputType: 'radio' | 'checkbox'
-    groupName: string
+    groupName: string | number
     inputsArr: InputDataType[]
     value: string[]
     gap?: 20 // Отступы между элементами внутри обёртки
@@ -19,12 +20,17 @@ export type FieldGroupPropType = {
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
-type InputDataType = { label: string | ReactElement, value: string }
+type InputDataType = {
+    label: string | ReactElement,
+    value: string,
+    grayText?: string,
+}
 
 // TODO Что делает эта функция?
 export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
+        grayText,
         inputType,
         groupName,
         inputsArr,
@@ -36,7 +42,9 @@ export default function FieldGroup(props: FieldGroupPropType) {
         onBlur
     } = props
 
-    const $label = label ? <Label label={label} bold /> : null
+    const $label = label
+        ? <Label label={label} bold grayText={grayText} />
+        : null
 
     // Получение типа поля: переключатель или флаг
     let Component = (inputType == 'checkbox') ? Checkbox : Radio
@@ -50,6 +58,7 @@ export default function FieldGroup(props: FieldGroupPropType) {
                     const attrs = {
                         value: inputData.value,
                         label: inputData.label,
+                        grayText: inputData.grayText,
                         name: groupName,
                         checked: !!value.includes(inputData.value),
                         disabled,

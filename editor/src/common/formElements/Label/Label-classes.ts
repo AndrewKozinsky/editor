@@ -7,7 +7,8 @@ const CN = 'label'
 /** Функция возвращающая классы для элементов */
 export default function makeClasses(disabled?: boolean, bold?: boolean) {
     return {
-        root: getLabelClasses(disabled, bold)
+        root: getLabelClasses(disabled, bold),
+        gray: CN + '__gray'
     }
 }
 

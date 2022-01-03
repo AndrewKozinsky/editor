@@ -10,7 +10,8 @@ import SvgIcon from '../../icons/SvgIcon'
 
 export type SelectPropType = {
     label?: string // Подпись выпадающего списка
-    name: string // Имя выпадающего списка
+    grayText?: string // Серый текст
+    name: string | number // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
     onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
@@ -23,6 +24,7 @@ export default function Select(props: SelectPropType) {
 
     const {
         label, // Подпись выпадающего списка
+        grayText,
         name, // Имя выпадающего списка
         value, // Выбранное значение выпадающего списка
         options, // Массив для генерации тегов <option>
@@ -60,7 +62,7 @@ export default function Select(props: SelectPropType) {
 
     return (
         <>
-            <Label label={label} id={id} />
+            <Label label={label} id={id} grayText={grayText} />
             <div className={CN.wrapper}>
                 <select {...inputAttribs}>
                     {getOptions(options)}

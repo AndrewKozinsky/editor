@@ -6,7 +6,8 @@ import './Radio.scss'
 
 export type RadioPropType = {
     label: string | ReactElement // Подпись флага
-    name: string // Имя группы флагов
+    grayText?: string
+    name: string | number // Имя группы флагов
     value: string | number // Значение флага
     checked?: boolean // Отмечено ли поле
     disabled?: boolean // Заблокировано ли поле
@@ -19,6 +20,7 @@ export default function Radio(props: RadioPropType) {
 
     const {
         label, // Подпись выпадающего списка
+        grayText,
         name, // Имя группы флагов
         value, // Значение флага
         checked, // Отмечено ли поле
@@ -50,9 +52,10 @@ export default function Radio(props: RadioPropType) {
     }
 
     return (
-        <>
+        <div>
             <input {...inputAttribs} />
             <label {...labelAttribs}>{label}</label>
-        </>
+            {grayText && <p className='radio__gray-text'>{grayText}</p>}
+        </div>
     )
 }
