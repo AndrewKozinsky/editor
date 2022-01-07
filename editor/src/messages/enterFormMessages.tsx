@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import getMsgProxy from './fn/msgProxy'
 
 // Форма EnterFormBlock
-export const enterFormMessages = {
+const enterFormMessages = {
     // Заголовок формы входа
     formHeader: {
         eng: 'Log in',
@@ -12,10 +13,10 @@ export const enterFormMessages = {
         eng: 'E-mail *',
         rus: 'Электронная почта *'
     },
-    /*emailErrInvalid: {
+    emailErrInvalid: {
         eng: 'Invalid email address',
         rus: 'Почта написана неправильно'
-    },*/
+    },
     passwordField: {
         eng: 'Password *',
         rus: 'Пароль *'
@@ -28,10 +29,6 @@ export const enterFormMessages = {
         eng: 'Send another letter',
         rus: 'Отправить письмо еще раз'
     },
-    /*sentWrongData: {
-        eng: 'Incorrect email or password',
-        rus: 'Неправильная почта и пароль.'
-    },*/
     failedToSendAnotherConfirmationLetter: {
         eng: 'Failed to send another email with a mail confirmation link. Try again after a while.',
         rus: 'Не удалось отправить еще одно письмо со ссылкой на подтверждение почты. Попробуйте еще раз через некоторое время.'
@@ -53,3 +50,6 @@ export const enterFormMessages = {
         rus: <>Не помните пароль? <Link to='reset-password'>Сбросьте</Link>.</>
     }
 }
+
+const enterFormMsg = getMsgProxy<typeof enterFormMessages>(enterFormMessages)
+export default enterFormMsg

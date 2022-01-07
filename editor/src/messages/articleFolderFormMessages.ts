@@ -1,9 +1,14 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма редактирования выбранной папки шаблона компонента
-export const articleFolderFormMessages = {
+const articleFolderFormMessages = {
     folderNameInput: {
         eng: 'Folder name',
         rus: 'Название папки'
+    },
+    emailToLong: {
+        eng: 'Email is too long',
+        rus: 'Почта слишком длинная'
     },
     submitBtnTextSave: {
         eng: 'Save',
@@ -34,3 +39,6 @@ export const articleFolderFormMessages = {
         rus: 'Удалить'
     },
 }
+
+const articleFolderFormMsg = getMsgProxy<typeof articleFolderFormMessages>(articleFolderFormMessages)
+export default articleFolderFormMsg

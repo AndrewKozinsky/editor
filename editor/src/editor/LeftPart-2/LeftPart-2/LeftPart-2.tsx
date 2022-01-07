@@ -1,11 +1,10 @@
 import React from 'react'
 import NameSection from 'editor/wrappers/NameSection/NameSection'
-import { componentsPanelMessages } from 'messages/componentsPanelMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 import TempCompList from '../TempCompList/TempCompList'
-import './LeftPart-2.scss'
 import BottomButtons from '../BottomButtons/BottomButtons'
 import Adjust from '../AdjustPanel/AdjustPanel'
+import componentsPanelMsg from 'messages/componentsPanelMessages'
+import './LeftPart-2.scss'
 
 type LeftPart3PropType = {
     display?: boolean
@@ -16,8 +15,6 @@ export default function LeftPart2(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
-
-    const componentsPanelMsg = useGetMessages(componentsPanelMessages)
 
     const CN = 'left-part-2'
     const style = display ? {} : {display: 'none'}

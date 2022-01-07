@@ -46,7 +46,7 @@ function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElem
 }
 
 /**
- * The function finds and returns html-element object with passed dCompElemGroup name and tCompElemId
+ * The function finds and returns html-element object with passed tCompElemGroup name and tCompElemId
  * @param {Object} htmlObj — component html-object
  * @param {Number} dCompElemId — an element id
  * @param {String} tCompElemGroup — the name of the group to which the element belongs

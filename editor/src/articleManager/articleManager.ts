@@ -1,4 +1,3 @@
-
 import { cloneItem } from './methods/clone'
 import correctArticle from './methods/correctArticle'
 import { deleteComponent, deleteElement, deleteItem } from './methods/delete'
@@ -24,7 +23,7 @@ import {
     getCompParentArray,
     getDCompIdxInArray,
     getElemCount,
-    getTElemInTCompsArr
+//     getTElemInTCompsArr
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -42,10 +41,12 @@ import {
     hasElemNestedElements,
     canMakeHistoryStep,
     isArticleSave,
-    isCompInArticleRoot,
-    isCompsInTheSameArr,
-    isCompInArray,
-    canDeleteElem, canMoveItemToUpOrDown, canClone
+//     isCompInArticleRoot,
+//     isCompsInTheSameArr,
+//     isCompInArray,
+    canDeleteElem,
+    canMoveItemToUpOrDown,
+    canClone
 } from './methods/check'
 import {
     moveComponentToProperPosition,
@@ -67,7 +68,7 @@ class ArticleManager {
     getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
-    getTElemInTCompsArr = getTElemInTCompsArr
+    // getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     // Finds template in templates array
@@ -95,11 +96,11 @@ class ArticleManager {
     canMakeHistoryStep = canMakeHistoryStep
     isArticleSave = isArticleSave
     // Находится ли компонент в корне статьи?
-    isCompInArticleRoot = isCompInArticleRoot
+    // isCompInArticleRoot = isCompInArticleRoot
     // Находятся ли компоненты в одном массиве?
-    isCompsInTheSameArr = isCompsInTheSameArr
+    // isCompsInTheSameArr = isCompsInTheSameArr
     // Находится ли компонент в переданном массиве?
-    isCompInArray = isCompInArray
+    // isCompInArray = isCompInArray
     canDeleteElem = canDeleteElem
     canMoveItemToUpOrDown = canMoveItemToUpOrDown
     // Можно ли компонент/элемент клонировать и вставить следом

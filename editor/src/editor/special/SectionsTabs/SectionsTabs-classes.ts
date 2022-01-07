@@ -1,5 +1,4 @@
 import './SectionsTabs.scss'
-
 const CN = 'section-tabs'
 
 /** Функция возвращающая классы для элементов */

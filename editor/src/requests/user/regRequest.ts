@@ -20,4 +20,3 @@ export type RegRequestValuesType = {
     'email': string
     'password': number | string
 }
-

@@ -36,7 +36,7 @@ export default function useChangeActiveTextComponent() {
         else {
             updateTextComp(selection, historyItem, textCompId, pressedKey, $links)
         }
-    }, [pressedKey, $links, historyItem])
+    }, [pressedKey])
 }
 
 /**

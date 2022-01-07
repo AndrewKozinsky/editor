@@ -18,7 +18,6 @@ import { insertChildren } from './insertChildren'
 export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
     // Get component template by its tmpCompId
     let template = articleManager.getTemplate(tempComps, compData.tCompId)
-    // if (!template) debugger
 
     // Get html string
     let htmlStr = template.content.html.trim()

@@ -1,7 +1,10 @@
 const JSON5 = require('json5')
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import {ArticleRowServerRespType, ArticleServerSuccessRespType} from './articleServerResponseType'
+import {
+    ArticleRowServerRespType,
+    ArticleServerSuccessRespType
+} from './articleServerResponseType'
 
 
 /** Функция получает данные статьи */

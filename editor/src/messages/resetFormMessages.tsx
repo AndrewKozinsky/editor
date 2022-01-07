@@ -1,8 +1,8 @@
 import React from 'react'
-
+import getMsgProxy from './fn/msgProxy'
 
 // Тексты формы ResetFormBlock
-export const resetFormMessages = {
+const resetFormMessages = {
     // Заголовок формы сброса пароля
     formHeader: {
         eng: 'Reset password',
@@ -21,3 +21,6 @@ export const resetFormMessages = {
         rus: 'На почту выслано письмо со ссылкой на страницу сброса пароля.'
     }
 }
+
+const resetFormMsg = getMsgProxy<typeof resetFormMessages>(resetFormMessages)
+export default resetFormMsg

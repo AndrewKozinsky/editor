@@ -31,35 +31,24 @@ export function useInstallFlashRects() {
  * @param {HTMLHeadElement} $head — <head>
  */
 function setExtraStyle($head: HTMLHeadElement) {
-    // TODO ДУМАЮ ШИРИНУ И КООРДИНАТЫ МОЖНО СТЕРЕТЬ ПОТОМУ ЧТО ОНИ И ТАК ВЫСТАВЛЯЮТСЯ АВТОМАТИЧЕСКИ
     // Flash rectangles style
     const style = '.em-flash-rect {' +
         'display: none;' +
         'position: absolute;' +
-        // 'width: 100px;' +
-        // 'height: 100px;' +
         'pointer-events: none;' +
         'box-sizing: content-box;' +
         'border-radius: 2px;' +
     '}' +
     '.em-flash-rect__hover {' +
-        // 'top: 50px;' +
-        // 'left: 50px;' +
         'border: 1px solid rgba(1, 122, 255, 1);' +
     '}' +
     '.em-flash-rect__select {' +
-        // 'top: 100px;' +
-        // 'left: 100px;' +
         'border: 2px solid rgba(1, 122, 255, 1);' +
     '}' +
     '.em-flash-rect__move-hover {' +
-        // 'top: 150px;' +
-        // 'left: 150px;' +
         'border: 1px solid rgba(255, 0, 82, 1);' +
     '}' +
     '.em-flash-rect__move-select {' +
-        // 'top: 200px;' +
-        // 'left: 200px;' +
         'border: 2px solid rgba(255, 0, 82, 1);' +
     '}'
 

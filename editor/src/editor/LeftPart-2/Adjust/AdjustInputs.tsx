@@ -25,6 +25,7 @@ type AdjSelectInputType = {
     data: SelectPropType
 }
 
+/** Компонент генерирует поля ввода изменения атрибутов выделенного элемента */
 export default function AdjustInputs(props: AdjInputsPropType) {
     return (
         <>
@@ -39,6 +40,7 @@ type AdjustInputPropType = {
     inputConfig: AdjTextInputsType
 }
 
+/** Поле ввода изменения атрибута выделенного элемента */
 function AdjustInput(props: AdjustInputPropType) {
     const { inputConfig } = props
 

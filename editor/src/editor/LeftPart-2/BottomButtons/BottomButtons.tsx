@@ -1,6 +1,5 @@
 import React from 'react'
-import { bottomPanelMessages } from 'messages/bottomPanelMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+import bottomPanelMsg from 'messages/bottomPanelMessages'
 import SvgIcon from 'common/icons/SvgIcon'
 import makeClasses from './BottomButtons-classes'
 import { useGetInsideHandler, useIsInsideDisabled } from './fn/insideBtnFns'
@@ -73,9 +72,8 @@ type ButtonPropType = {
 function Button(props: ButtonPropType) {
     const { btnKey, onClick, disabled } = props
 
-    const msg = useGetMessages(bottomPanelMessages)
     // @ts-ignore
-    const title = msg[btnKey]
+    const title = bottomPanelMsg[btnKey]
 
     const iconType = useGetIconType(btnKey)
 

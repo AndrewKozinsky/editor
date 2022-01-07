@@ -11,7 +11,7 @@ namespace StoreUserTypes {
         type: typeof SET_USER_DATA
         payload: {
             tokenStatus: StoreUserTypes.AuthTokenStatusType
-            email: null | string
+            email: EmailType
         }
     }
 

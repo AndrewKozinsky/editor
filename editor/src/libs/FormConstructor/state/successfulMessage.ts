@@ -1,5 +1,6 @@
+import config from 'utils/config'
+import { getFromLocalStorage } from 'utils/miscUtils'
 import FCType from '../FCType'
-import { store } from 'store/rootReducer'
 
 /**
  * The function returns status of whether success message can be shown
@@ -14,7 +15,7 @@ export function getInitialShowCommonSuccess(formConfig: FCType.Config) {
  * @param {Object} formConfig — configuration form object
  */
 export function getInitialCommonSuccess(formConfig: FCType.Config) {
-    const lang = store.getState().settings.editorLanguage
+    const lang = getFromLocalStorage(config.ls.editorLanguage)
 
     if (formConfig.commonSuccess) {
         return formConfig.commonSuccess

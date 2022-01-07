@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Тексты панели с кнопками манипулирования выделенным компонентом/элементом
-export const bottomPanelMessages = {
+const bottomPanelMessages = {
     inside: {
         eng: 'Inserting a component inside an element',
         rus: 'Вставка компонента внутрь'
@@ -34,3 +35,6 @@ export const bottomPanelMessages = {
         rus: 'Скрыть / сделать элемент видимым'
     },
 }
+
+const bottomPanelMsg = getMsgProxy<typeof bottomPanelMessages>(bottomPanelMessages)
+export default bottomPanelMsg

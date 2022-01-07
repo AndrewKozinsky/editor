@@ -10,7 +10,7 @@ export default function makeClasses(isActive: boolean = false) {
     }
 }
 
-// TODO Что делает эта функция?
+/** Функция возращающая классы пункта списка */
 export function useGetItemClasses(isActive: boolean): string {
     const classes = [CN]
 

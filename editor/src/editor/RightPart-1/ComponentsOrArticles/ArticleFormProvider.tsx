@@ -13,6 +13,6 @@ export default function ArticleFormProvider() {
     const { currentArtItemType } = useGetSitesSelectors().articleSection
 
     if (currentArtItemType === 'folder') return <ArtFolderForm />
-    if (currentArtItemType === 'file') return <ArtForm />
+    else if (currentArtItemType === 'file') return <ArtForm />
     return null
 }

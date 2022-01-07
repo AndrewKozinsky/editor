@@ -1,4 +1,5 @@
 const JSON5 = require('json5')
+import FilesTreeType from '../../types/FilesTreeType'
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
@@ -9,7 +10,6 @@ import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplat
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
 import getComponentRequest from 'requests/editor/components/getComponentRequest'
-import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 import TempCompTypes from '../article/codeType/tempCompCodeType'
@@ -63,9 +63,12 @@ const sitesActions = {
 
     // Установка id текущей основной вкладки справа
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+        let rightMainTabNum = payload
+        if (rightMainTabNum < 0 || rightMainTabNum > 3) rightMainTabNum = 0
+
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
-            payload
+            payload: rightMainTabNum
         }
     },
 
@@ -75,18 +78,21 @@ const sitesActions = {
     requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // id текущего сайта для которого нужно получить шаблоны
-            const siteId = store.getState().sites.currentSiteId
+            const siteId: StoreSitesTypes.CurrentSiteId = store.getState().sites.currentSiteId
 
             // Если не передан id сайта, то обнулить массив шаблонов сайта
             // потому что выбрали новый сайт
-            if (!siteId) dispatch( sitesActions.setTemplates([]) )
+            if (!siteId) {
+                dispatch( sitesActions.setTemplates([]) )
+                return
+            }
 
             // Запрос и ответ от сервера
             const response = await getSiteTemplatesRequest(siteId)
 
             if (response.status !== 'success') return
 
-            // Формированое массива шаблонов для установки в Хранилище
+            // Формирование массива шаблонов для установки в Хранилище
             const preparedTemplates = response.data.siteTemplates.map(template => {
                 let templateName = JSON5.parse(template.content).name
 
@@ -129,11 +135,15 @@ const sitesActions = {
             const response = await getCompFolderRequest(currentSiteId)
             if (response.status !== 'success') return
 
+            // Данные по папкам
             let foldersData = response.data.compFolders[0]
 
+            // Если есть папки
             if (foldersData && foldersData.content) {
+                // Получить id открытых папок
                 const openedFoldersIds = getOpenedFoldersIds('components')
                 if (openedFoldersIds) {
+                    // Открыть папки id которых перечислены в openedFoldersIds
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
                 }
 
@@ -208,13 +218,19 @@ const sitesActions = {
             // id выбранного шаблона компонента, данные которого нужно скачать
             const { currentCompItemId } = store.getState().sites.componentSection
 
-            // Если id компонента не передан, то обнулить данные компонета в Хранилище
-            if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
+            // Если id компонента не передан, то обнулить данные компонента в Хранилище
+            if (!currentCompItemId) {
+                dispatch( sitesActions.setCurrentComp(null, null) )
+                return
+            }
 
             // Запрос и ответ от сервера
             const response = await getComponentRequest(currentCompItemId)
 
-            if (response.status !== 'success') return
+            if (response.status !== 'success') {
+                dispatch( sitesActions.setCurrentComp(null, null) )
+                return
+            }
 
             const responseData = response.data.components[0]
 
@@ -232,10 +248,10 @@ const sitesActions = {
         }
     },
 
-    // Установка id и типа выбранного шаблона компонента
+    // Установка id и типа выбранного шаблона компонента (шаблон или папка)
     setCurrentComp(
-        id: null | DragFilesTreeType.ItemId,
-        type: null | DragFilesTreeType.ItemType,
+        id: null | FilesTreeType.ItemId,
+        type: null | FilesTreeType.ItemType,
         name?: string,
         code?: string
     ): StoreSitesTypes.SetCurrentCompAction {
@@ -280,13 +296,13 @@ const sitesActions = {
         }
     },
 
-    // Установка id и типа выбранной статьи
+    // Установка id и типа выбранной статьи (статья или папка)
     setCurrentArt(
-        id: null | DragFilesTreeType.ItemId,
-        type: null | DragFilesTreeType.ItemType,
+        id: null | FilesTreeType.ItemId,
+        type: null | FilesTreeType.ItemType,
         name?: string,
         code?: ArticleTypes.Article,
-        siteTemplateId?: null | number
+        siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId
     ): StoreSitesTypes.SetCurrentArtAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART,

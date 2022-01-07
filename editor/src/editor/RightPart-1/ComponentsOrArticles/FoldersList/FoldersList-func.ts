@@ -11,13 +11,12 @@ import createComponentRequest from 'requests/editor/components/createComponentRe
 import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
 import config from 'utils/config'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
-import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
-import articleManager from '../../../../articleManager/articleManager'
 import bridge from '../../../../bridge/bridge'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { FolderType } from '../types'
+import FilesTreeType from '../../../../types/FilesTreeType'
+import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
+import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
 
 
 /**
@@ -52,8 +51,12 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
     }, [currentSiteId])
 }
 
-// TODO Что делает эта функция?
-export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items {
+/**
+ * Хук возвращает скачанные папки или компонентов или статей
+ * @param {String} type — тип папок: компоненты или папки
+ * @returns {FilesTreeType.Items | null}
+ */
+export function useGetFolders(type: FolderType): null | FilesTreeType.Items {
     if (type === 'components') {
         return useGetSitesSelectors().compFolderSection.compFolder
     }
@@ -62,14 +65,17 @@ export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items 
     }
 }
 
-// TODO Что делает эта функция?
+/**
+ * Хук возвращает функцию обновления папок компонентов или статей
+ * @param {String} type — тип папок: компоненты или папки
+ */
 export function useGetSetFolders(type: FolderType) {
     const dispatch = useDispatch()
 
     const { compFolderId } = useGetSitesSelectors().compFolderSection
     const { artFolderId } = useGetSitesSelectors().artFolderSection
 
-    return useCallback(function (newItems: DragFilesTreeType.Items) {
+    return useCallback(function (newItems: FilesTreeType.Items) {
         if (type === 'components') {
             return dispatch(sitesActions.setCompFolder({
                 id: compFolderId,
@@ -87,23 +93,20 @@ export function useGetSetFolders(type: FolderType) {
 
 /**
  * Хук возвращает тексты для кнопок создания нового файла и новой папки
- * @param type
+ * @param {String} type — тип папок: компоненты или папки
  */
 export function useGetNewItemsName(type: FolderType) {
     const [newFileName, setNewFileName] = useState('newFileName')
     const [newFolderName, setFolderName] = useState('newFolderName')
 
-    const compFoldersSectionMsg = useGetMessages(compFoldersSectionMessages)
-    const artFoldersSectionMsg = useGetMessages(artFoldersSectionMessages)
-
     useEffect(function () {
         if (type === 'components') {
-            setNewFileName(compFoldersSectionMsg.createNewFileBth.toString())
-            setFolderName(compFoldersSectionMsg.createNewFolderBth.toString())
+            setNewFileName(compFoldersSectionMsg.createNewFileBth)
+            setFolderName(compFoldersSectionMsg.createNewFolderBth)
         }
         else {
-            setNewFileName(artFoldersSectionMsg.createNewFileBth.toString())
-            setFolderName(artFoldersSectionMsg.createNewFolderBth.toString())
+            setNewFileName(artFoldersSectionMsg.createNewFileBth)
+            setFolderName(artFoldersSectionMsg.createNewFolderBth)
         }
     }, [type])
 
@@ -151,7 +154,7 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
         // Может создание нового компонента поместить в articleManager?
         const minCompContent: TempCompTypes.Content = {
             name: newFileName,
-            html: '<img src="https://st.depositphotos.com/2125603/2249/i/450/depositphotos_22490689-stock-photo-brown-baby-duck.jpg" alt="duck" />'
+            html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" />'
         }
         const serverResponse = await createComponentRequest(
             currentSiteId, JSON5.stringify(minCompContent)
@@ -172,7 +175,7 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
     }
 
     // Функция должна вернуть число. Пусть в случае неудачного ответа будет возвращено такое значение:
-    return 100000000
+    return Math.round(100000000 * Math.random())
 }
 
 /**
@@ -210,7 +213,7 @@ export function useGetOnItemClick(type: FolderType) {
     const dispatch = useDispatch()
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (item: DragFilesTreeType.Item) {
+    return useCallback(function (item: FilesTreeType.Item) {
         if (type === 'components') {
             dispatch(actions.sites.setCurrentComp(item.id, item.type))
         }

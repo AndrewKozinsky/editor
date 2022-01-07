@@ -1,4 +1,3 @@
-import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import regRequest, { RegRequestValuesType } from 'requests/user/regRequest'
@@ -8,7 +7,7 @@ import regRequest, { RegRequestValuesType } from 'requests/user/regRequest'
  * @param {Object} commonMsg — объект с текстами ошибок
  * @param {Object} regFormMsg — объект с текстами ошибок
  */
-export default function getConfig(commonMsg: any, regFormMsg: any) {
+export default function getRegFormConfig(commonMsg: any, regFormMsg: any) {
     const config: FCType.Config = {
         fields: {
             email: {

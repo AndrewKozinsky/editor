@@ -6,7 +6,11 @@ import {
     CompFolderServerSuccessRespType
 } from './compFolderServerResponseType'
 
-// TODO Что делает эта функция?
+/**
+ * Функция делает запрос на получение папок компонентов по определённому сайту.
+ * Строка с кодом папок разбирается.
+ * @param {Number} siteId — id сайта к которому нужно получить список папок с компонентами
+ */
 export async function getCompFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 

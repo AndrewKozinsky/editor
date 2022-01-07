@@ -1,5 +1,6 @@
 import React, {ReactElement, ReactNode, useEffect, useState} from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
+import rightTabsMsg from 'messages/rightTabsMessages'
 import SiteSection from '../SiteSection/SiteSection/SiteSection'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
 import { NewTemplateButton, TemplatesList } from '../SiteTemplateList/SiteTemplateList'
@@ -7,8 +8,6 @@ import SiteTemplateForm from '../SiteTemplateForm/TemplateSection/siteTemplateFo
 import FoldersList from '../ComponentsOrArticles/FoldersList/FoldersList'
 import ComponentFormProvider from '../ComponentsOrArticles/ComponentFormProvider'
 import ArticleFormProvider from '../ComponentsOrArticles/ArticleFormProvider'
-import { rightTabsMessages } from 'messages/rightTabsMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 
 
 /**
@@ -24,9 +23,6 @@ export default function SitePartProvider(): ReactElement {
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState<ReactElement>(null)
-
-    // Тексты названий вкладок на первой правой вкладке
-    const rightTabsMsg = useGetMessages(rightTabsMessages)
 
     useEffect(function () {
         // Составление массива из четырёх элементов. Элементу, который соответствует вкладке, задаётся видимость.

@@ -2,8 +2,6 @@ import { useEffect, useState } from 'react'
 import { useFetch, makeFetch } from 'requests/reqFn/fetch'
 import { UserServerResponse } from './userServerResponseType'
 import getApiUrl from 'requests/reqFn/apiUrls'
-// import ErrorServerResponseType from 'requests/errorServerResponseType'
-// import UserServerResponseType from './userServerResponseType'
 
 /**
  * Функция отправляет еще одно письмо для подтверждения почты пользователя

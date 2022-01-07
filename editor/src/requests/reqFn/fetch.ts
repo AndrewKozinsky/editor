@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { store } from 'store/rootReducer'
+import config from '../../utils/config'
+import { getFromLocalStorage } from '../../utils/miscUtils'
 
 
 // Тип параметров запроса
@@ -29,7 +30,7 @@ export function useFetch<T>(url: string, options: OptionsType) {
     const [error, setError] = useState(false)
 
     // Язык интерфейса
-    const lang = store.getState().settings.editorLanguage
+    const lang = getFromLocalStorage(config.ls.editorLanguage)
 
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {

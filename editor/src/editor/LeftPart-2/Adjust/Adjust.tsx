@@ -1,10 +1,7 @@
 import React from 'react'
-import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import FieldGroup, { FieldGroupPropType } from '../../../common/formElements/FieldGroup/FieldGroup'
-import Select, { SelectPropType } from '../../../common/formElements/Select/Select'
 import makeClasses from './Adjust-classes'
 import { getInputsConfigExample, useIsVisible } from './Adjust-func'
-import AdjustInputs, { AdjTextInputsType } from './AdjustInputs'
+import AdjustInputs from './AdjustInputs'
 import useGetInputsConfig from './useGetInputsConfig'
 
 export default function Adjust() {

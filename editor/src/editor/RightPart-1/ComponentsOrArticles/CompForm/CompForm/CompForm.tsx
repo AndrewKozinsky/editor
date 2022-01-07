@@ -1,23 +1,17 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import { componentFormMessages } from 'messages/componentTemplateFormMessages'
-import getFormConfig from './formConfig'
+import compFormConfig from './formConfig'
 import {
     useGetComDataFromServerAndSetInStore,
     useSetAnotherFormData
 } from './ComponentForm-func'
 import CodeHelper from '../CodeHelper/CodeHelper'
 
-// TODO Что делает эта функция?
+/** Форма редактирования компонента */
 export default function CompForm() {
-    // Сообщения формы
-    const componentFormMsg = useGetMessages(componentFormMessages)
-
-    // Объекты конфигурации и состояния формы
-    const config = getFormConfig(componentFormMsg)
-    const formState = useFormConstructorState(config)
+    // Объект состояния формы
+    const formState = useFormConstructorState(compFormConfig)
 
     // Скачать данные компонента с сервера и поставить в Хранилище
     useGetComDataFromServerAndSetInStore()
@@ -26,7 +20,7 @@ export default function CompForm() {
 
     return (
         <>
-            <FormConstructor config={config} state={formState} />
+            <FormConstructor config={compFormConfig} state={formState} />
             <CodeHelper code={formState.fields.content.value[0]} />
         </>
     )

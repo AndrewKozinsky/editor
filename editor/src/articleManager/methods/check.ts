@@ -144,13 +144,13 @@ export function isArticleSave(
  * @param {Number} targetDCompId — id проверяемого компонента
  * @returns {Boolean} — находится ли компонент в корне статьи?
  */
-export function isCompInArticleRoot(
+/*export function isCompInArticleRoot(
     this: typeof articleManager,
     dCompArr: ArticleTypes.Components,
     targetDCompId: ArticleTypes.Id,
 ) {
     return !!(dCompArr.find(dComp => dComp.dCompId === targetDCompId))
-}
+}*/
 
 /**
  * Находятся ли компоненты в одном массиве?
@@ -158,7 +158,7 @@ export function isCompInArticleRoot(
  * @param {Number} firstDCompId — id первого компонента
  * @param {Number} secondDCompId — id второго компонента
  */
-export function isCompsInTheSameArr(
+/*export function isCompsInTheSameArr(
     this: typeof articleManager,
     dCompArr: ArticleTypes.Components,
     firstDCompId: ArticleTypes.Id,
@@ -167,21 +167,21 @@ export function isCompsInTheSameArr(
     // Массив, в котором находится первый компонент
     const firstCompParentArr = this.getCompParentArray(dCompArr, firstDCompId)
     return this.isCompInArray(firstCompParentArr, secondDCompId)
-}
+}*/
 
 /**
  * Находится ли компонент в переданном массиве?
  * @param {Array} array — массив, в котором, возможно, находится компонент
  * @param {Number} targetDCompId — id искомого компонента
  */
-export function isCompInArray(
+/*export function isCompInArray(
     this: typeof articleManager,
     array: ArticleTypes.ElemChildren,
     targetDCompId: ArticleTypes.Id,
 ) {
     if (!Array.isArray(array)) return false
     return !!(array.find(comp => comp.dCompId === targetDCompId))
-}
+}*/
 
 /**
  * Функция проверяет можно ли удалить компонент/элемент по переданным координатам

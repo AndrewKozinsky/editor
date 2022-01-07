@@ -29,8 +29,6 @@ export async function updateArticleRequest(
         body: JSON.stringify(body)
     }
 
-    // options.body = "{\"content\": \"HELLO\"}"
-
     const response: ArticleRowServerRespType = await makeFetch(
         getApiUrl('article', articleId), options
     )

@@ -6,17 +6,17 @@ import getSiteComponentsRequest from 'requests/editor/components/getSiteComponen
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
-import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
+import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import { ArticleType } from '../../requests/editor/article/articleServerResponseType'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
+import { isCursorInTheSameElem } from './article-func'
 
 
 const articleActions = {
-
     // Action sets links to IFrame window, document, head and body to Store
     setLinks(
         $window: StoreArticleTypes.WindowLink,
@@ -39,7 +39,7 @@ const articleActions = {
      * Установка id редактируемой статьи. После редактор загружает все данные.
      * @param {Number} articleId — id статьи
      */
-    setArticleId(articleId: number): StoreArticleTypes.SetArticleIdAction {
+    setArticleId(articleId: null | number): StoreArticleTypes.SetArticleIdAction {
         // Set editable article id in Local Storage
         setInLocalStorage(config.ls.editArticleId, articleId)
 
@@ -219,8 +219,11 @@ const articleActions = {
             const { history, historyCurrentIdx} = getState().article
             const currentArticle = history[historyCurrentIdx]
 
-            // Ничего не делать если нет статьи
-            if (!currentArticle) return
+            // Ничего не делать если нет статьи или курсор мыши находится на уже подсвеченном элементе
+            if (
+                !currentArticle ||
+                isCursorInTheSameElem(actionType, dataCompId, dataElemId, currentArticle)
+            ) return
 
             // Если на элемент навели мышью...
             if (actionType === 'hover') {

@@ -4,25 +4,19 @@ import Header from 'common/textBlocks/Header/Header'
 import Menu from 'common/misc/Menu/Menu'
 import Button from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
+import enterFormMsg from 'messages/enterFormMessages'
 import { getMenuItems } from '../menuItems'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import getConfig from './formConfig'
+import getEnterFormConfig from './formConfig'
 import Notice from 'common/textBlocks/Notice/Notice'
 import { useGetSendConfirmLetter } from 'requests/user/sendConfirmLetterRequest'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
-import { enterFormMessages } from 'messages/enterFormMessages'
-import { commonMessages } from 'messages/commonMessages'
 
 
 /** Форма входа в сервис */
 export default function EnterFormBlock() {
     const history = useHistory()
-    const commonMsg = useGetMessages(commonMessages)
-    const enterFormMsg = useGetMessages(enterFormMessages)
-    const regMenuMsg = useGetMessages(regMenuMessages)
-    const config = getConfig(commonMsg, enterFormMsg)
+    const config = getEnterFormConfig()
 
     const [showConfirmEmailMessage, setShowConfirmEmailMessage] = useState(false)
     const formState = useFormConstructorState(config, {history, setShowConfirmEmailMessage})
@@ -30,7 +24,7 @@ export default function EnterFormBlock() {
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems(regMenuMsg)}/>
+                <Menu items={getMenuItems()}/>
             </Wrapper>
             <Wrapper b={10}>
                 <Header text={enterFormMsg.formHeader} type='h1' />
@@ -49,7 +43,6 @@ type ConfirmLetterMessagePropType = {
 /** Сообщение с просьбой подтвердить почту перед входом в редактор */
 function ConfirmLetterMessage(props: ConfirmLetterMessagePropType) {
     const { email } = props
-    const enterFormMsg = useGetMessages(enterFormMessages)
 
     // Обработчик щелчка по кнопке
     const { isLoading, success, error, doFetch } = useGetSendConfirmLetter(email)

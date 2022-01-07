@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма редактирования выбранного шаблона компонента
-export const componentFormMessages = {
+const componentFormMessages = {
     componentContentInput: {
         eng: 'Component template code',
         rus: 'Код шаблона компонента'
@@ -42,3 +43,6 @@ export const componentFormMessages = {
         rus: 'Шаблон написан верно'
     },
 }
+
+const componentFormMsg = getMsgProxy<typeof componentFormMessages>(componentFormMessages)
+export default componentFormMsg

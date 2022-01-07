@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import themeSectionMsg from 'messages/themeSectionMessages'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { themeSectionMessages } from 'messages/themeSectionMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
 
-// TODO Что делает эта функция?
+/** Форма изменения темы */
 export default function ThemeSection() {
-    const themeSectionMsg = useGetMessages(themeSectionMessages)
 
     // Тема интерфейса
     const { editorTheme } = useGetSettingsSelectors()
+
     // Обработчик изменения переключателя темы интерфейса
     const onChangeHandler = useGetOnChangeHandler()
 
@@ -58,11 +59,11 @@ export default function ThemeSection() {
 }
 
 // Обработчик изменения переключателя темы интерфейса
-function useGetOnChangeHandler() {
+function useGetOnChangeHandler(): OuterOnChangeHandlerType.FieldsHandler {
     const dispatch = useDispatch()
 
-    return function (e: React.BaseSyntheticEvent) {
-        const value = e.target.value
+    return useCallback(function (fieldData: OuterOnChangeHandlerType.FieldsData) {
+        const value = fieldData.fieldValue[0] as StoreSettingsTypes.EditorTheme
         dispatch(actions.settings.setEditorTheme(value))
-    }
+    }, [])
 }

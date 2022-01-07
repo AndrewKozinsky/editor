@@ -57,8 +57,8 @@ export function hasFolderAnItem(folderData: DragFilesTreeType.Item, itemId: Drag
 }
 
 /**
- * Функция вставляющая указатель помещения перетаскиваемого элемента
- * Возвращает новый массив папок и файлов
+ * Функция вставляющая указатель помещения перетаскиваемого элемента.
+ * Возвращает новый массив папок и файлов.
  * @param {Array} items — массив данных по папкам и файлам
  * @param {String} itemId — id элемента под которым находится курсор
  * @param {String} place — место, которое нужно подсветить. Три варианта: 'after' | 'inside' | 'before'
@@ -84,8 +84,7 @@ export function showPlaceMark(
 
 
 /**
- * Рекурсивная функция проходит по всем элементам массива items и у каждого элемента
- * удаляет свойство placeMark где написана позиция на которой должен быть подсвечивающая линия
+ * Рекурсивная функция проходит по всем элементам массива items и у каждого элемента удаляет указанное свойство
  * @param {Array} items — массив данных по папкам и файлам
  * @param {String} propName — имя свойства, значение которого нужно удалить
  */
@@ -307,18 +306,21 @@ function getFolderNextId(items: DragFilesTreeType.Items): string {
  */
 export function prepareItemsToSaveInServer(items: DragFilesTreeType.Items) {
     return items.map(item => {
-        const newItem = {...item}
-        delete newItem.placeMark
-        // @ts-ignore
-        delete newItem.open
-        delete newItem.active
-        // @ts-ignore
-        delete newItem.loading
+        const newItem: DragFilesTreeType.Item = {...item}
 
-        // @ts-ignore
-        if (newItem.content) {
-            // @ts-ignore
-            newItem.content = prepareItemsToSaveInServer(newItem.content)
+        delete newItem.placeMark
+        delete newItem.active
+
+
+        if (newItem.type === 'file') {
+            delete newItem.loading
+        }
+        else if (newItem.type === 'folder') {
+            delete newItem.open
+
+            if (newItem.content) {
+                newItem.content = prepareItemsToSaveInServer(newItem.content)
+            }
         }
 
         return  newItem

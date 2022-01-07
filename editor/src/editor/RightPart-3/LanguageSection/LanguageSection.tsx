@@ -1,45 +1,64 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useCallback, useState } from 'react'
 import FieldGroup from 'common/formElements/FieldGroup/FieldGroup'
-import actions from 'store/rootAction'
-import useGetSettingsSelectors from 'store/settings/settingsSelectors'
-import { languageSectionMessages } from 'messages/languageSectionMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Notice from 'common/textBlocks/Notice/Notice'
+import languageSectionMsg from 'messages/languageSectionMessages'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
+import config from 'utils/config'
+import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 
 /* Переключатели языка интерфейса */
 export default function LanguageSection() {
     // Язык интерфейса
-    const { editorLanguage } = useGetSettingsSelectors()
+    const lsLang = getFromLocalStorage(config.ls.editorLanguage)
+    const [ language, setLanguage ] = useState(lsLang)
+
+    const [showMessage, setShowMessage] = useState(false)
 
     // Обработчик выбора другого языка
-    const onChangeHandler = useGetOnChangeHandler()
-
-    const languageSectionMsg = useGetMessages(languageSectionMessages)
+    const onChangeHandler = useGetOnChangeHandler(setLanguage, setShowMessage)
 
     return (
-        <FieldGroup
-            label={languageSectionMsg.langRadiosHeader}
-            inputType='radio'
-            groupName='language'
-            value={[editorLanguage]}
-            onChange={onChangeHandler}
-            inputsArr={
-                [
-                    { value: 'eng', label: 'English' },
-                    { value: 'rus', label: 'Русский' }
-                ]
-            }
-        />
+        <>
+            <FieldGroup
+                label={languageSectionMsg.langRadiosHeader}
+                inputType='radio'
+                groupName='language'
+                value={[language]}
+                onChange={onChangeHandler}
+                inputsArr={
+                    [
+                        { value: 'eng', label: 'English' },
+                        { value: 'rus', label: 'Русский' }
+                    ]
+                }
+            />
+            {showMessage && <Message />}
+        </>
     )
 }
 
 /** Хук возвращает функцию-обработчик выбора другого языка */
-function useGetOnChangeHandler() {
-    const dispatch = useDispatch()
+function useGetOnChangeHandler(
+    setLanguage: (lang: 'eng' | 'rus') => void,
+    setShowMessage: (showMessage: boolean) => void
+) {
+    return useCallback(function (fieldData: OuterOnChangeHandlerType.FieldsData) {
+        const value = fieldData.fieldValue[0] as 'eng' | 'rus'
+        setLanguage(value)
+        setInLocalStorage(config.ls.editorLanguage, value)
 
-    return function (e: React.BaseSyntheticEvent) {
-        const value = e.target.value
+        setShowMessage(true)
+    }, [])
+}
 
-        dispatch(actions.settings.setEditorLanguage(value))
-    }
+function Message() {
+    return (
+        <Wrapper t={10}>
+            <Notice icon='info' bg>
+                <p>{languageSectionMsg.landWillChangeAfterReload}</p>
+            </Notice>
+        </Wrapper>
+    )
 }

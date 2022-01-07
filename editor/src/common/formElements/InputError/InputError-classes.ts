@@ -1,12 +1,12 @@
 import './InputError.scss'
 
-const appRootClass = 'input-error'
+const CN = 'input-error'
 
 /** Функция возвращающая классы для элементов */
 export default function makeClasses() {
     return {
-        root: [appRootClass, appRootClass + '--error'].join(' '),
-        icon: appRootClass + '__icon',
-        paragraph: appRootClass + '__paragraph'
+        root: [CN, CN + '--error'].join(' '),
+        icon: CN + '__icon',
+        paragraph: CN + '__paragraph'
     }
 }

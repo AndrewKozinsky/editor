@@ -31,11 +31,11 @@ export function useGetEditArticleFn() {
     const { currentTemplateId } = useGetSitesSelectors().siteTemplatesSection
 
     return useCallback(function () {
-        store.dispatch(actions.article.setArticleId(currentArtItemId))
+        store.dispatch(actions.article.setArticleId(currentArtItemId as number))
     }, [currentSiteId, currentTemplateId, currentArtItemId])
 }
 
-// TODO Что делает эта функция?
+/** Хук возвращает функцию нажатия на кнопку перехода в редактор */
 export function useGetToEditorFn() {
     const dispatch = useDispatch()
 

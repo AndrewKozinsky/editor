@@ -13,7 +13,7 @@ export type ItemsListPropType = {
     activeItemId: number | null | string // id выбранного пункта
 }
 
-// TODO Что делает эта функция?
+/** Список пунктов */
 export default function ItemsList(props: ItemsListPropType) {
     const {
         items,

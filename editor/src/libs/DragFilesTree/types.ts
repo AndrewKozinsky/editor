@@ -1,37 +1,31 @@
 
 // Типы компонента DragFilesTree
+import FilesTreeType from '../../types/FilesTreeType'
+
 namespace DragFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
-    export type Items = Item[]
+    export type Items = FilesTreeType.Items
 
     export type Item = FileItem | FolderItem
 
-    export type FileItem = {
-        id: FileItemId
-        type: 'file'
-        name: string // Item name
+    export interface FileItem extends FilesTreeType.FileItem {
         placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
         loading?: boolean // Стоит ли значёк загрузки у файла?
         active?: boolean // Выделен ли элемент
     }
 
-    export type FolderItem = {
-        id: FolderItemId
-        type: 'folder'
-        name: string // Item name
-        open?: boolean // Is folder open
-        content?: Items // Folder's content
+    export interface FolderItem extends FilesTreeType.FolderItem {
         placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
         active?: boolean // Выделен ли элемент
     }
 
-    export type ItemType = 'file' | 'folder'
-
     // id папки или файла
-    export type FileItemId = number
-    export type FolderItemId = string
-    export type ItemId = FileItemId | FolderItemId
-    export type ItemIdArr = ItemId[]
+    export type FileItemId = FilesTreeType.FileItemId
+    export type FolderItemId = FilesTreeType.FolderItemId
+    export type ItemId = FilesTreeType.ItemId
+    export type ItemIdArr = FilesTreeType.ItemIdArr
+
+    export type ItemType = FilesTreeType.ItemType
 
     // Визуальная отметка куда будет помещён перемещаемый элемент:
     // null — отметка не ставится

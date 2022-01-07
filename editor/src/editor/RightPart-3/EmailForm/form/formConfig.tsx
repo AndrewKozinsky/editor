@@ -1,12 +1,13 @@
 import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
+import userDataSectionMsg from 'messages/userDataSectionMessages'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import ModalContent from '../modal/ModalContent'
+import ChangeEmailModalContent from '../modal/ChangeEmailModalContent'
 
-// TODO Что делает эта функция?
-export default function getConfig(userDataSectionMsg: any) {
+/** Функция возвращает конфигурацию формы изменения почты пользователя */
+export default function getEmailFormConfig() {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -33,7 +34,7 @@ export default function getConfig(userDataSectionMsg: any) {
         afterSubmit(response, outerFns, formDetails) {
             const newEmail = formDetails.readyFieldValues.email.toString()
             store.dispatch( actions.modal.openModal({
-                content: <ModalContent newEmail={newEmail}/>
+                content: <ChangeEmailModalContent newEmail={newEmail}/>
             }))
         },
     }

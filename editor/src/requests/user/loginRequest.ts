@@ -19,6 +19,5 @@ export default async function loginRequest(values: LoginRequestValuesType) {
 // Данные для входа передаваемые в loginRequest
 export type LoginRequestValuesType = {
     email: string
-    password: number | string
+    password: string
 }
-

@@ -2,7 +2,7 @@ import { makeCN } from 'src/utils/stringUtils'
 import { HeaderTypeType } from './Header'
 import './Header.scss'
 
-const headerRootClass = 'header'
+const CN = 'header'
 
 /** Функция возвращающая классы для элементов */
 export default function makeClasses(type?: HeaderTypeType) {
@@ -17,12 +17,12 @@ export default function makeClasses(type?: HeaderTypeType) {
  */
 export function getHeaderRootClass(type?: HeaderTypeType) {
     // Классы
-    const classes = [headerRootClass]
+    const classes = [CN]
 
     // Размер заголовка.
     // Получится строка вида
     // header--h1 или header--h2
-    classes.push(`${headerRootClass}--${type}`)
+    classes.push(`${CN}--${type}`)
 
     return makeCN(classes)
 }

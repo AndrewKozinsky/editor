@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
+import articleFormMsg from 'messages/articleFormMessages'
 import FCType from 'libs/FormConstructor/FCType'
-import {articleFormMessages} from 'messages/articleFormMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+
 
 /** Хук отслеживает выбор другого компонента и скачивает данные по нему с сервера и ставит их в Хранилище */
 export function useGetArtDataFromServerAndSetInStore() {
@@ -25,7 +25,6 @@ export function useFillSiteTemplatesSelect(formState: FCType.StateFormReturn) {
     const { templates } = useGetSitesSelectors().siteTemplatesSection
     const { siteTemplateId } = useGetSitesSelectors().articleSection
     const { currentSiteId } = useGetSitesSelectors()
-    const articleFormMsg = useGetMessages(articleFormMessages)
 
     useEffect(function () {
         const options = templates.map(template => {

@@ -10,6 +10,7 @@ export function useSetRootDivToIFrame() {
         if (!$links.$body || wrapperInstalled) return
 
         const rootDiv = document.createElement('main')
+        rootDiv.id = 'editorium'
         $links.$body.append(rootDiv)
 
         setWrapperInstalled(true)

@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Подсказки вкладок
-export const mainTabsMessages = {
+const mainTabsMessages = {
     mainTabMaterials: {
         eng: 'Materials',
         rus: 'Материалы'
@@ -18,3 +19,6 @@ export const mainTabsMessages = {
         rus: 'Помощь'
     },
 }
+
+const mainTabsMsg = getMsgProxy<typeof mainTabsMessages>(mainTabsMessages)
+export default mainTabsMsg

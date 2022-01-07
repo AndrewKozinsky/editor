@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import useGetUserSelectors from 'store/user/userSelectors'
 import { useHistory, useLocation } from 'react-router-dom'
+import useGetUserSelectors from 'store/user/userSelectors'
 
 
 /** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */

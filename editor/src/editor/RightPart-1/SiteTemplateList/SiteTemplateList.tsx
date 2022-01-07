@@ -2,8 +2,7 @@ import React from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import Button, {ButtonPropType} from 'common/formElements/Button/Button'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
 import ItemsList from 'common/ItemsList/ItemsList'
 import {
     useFetchSiteTemplates,
@@ -16,8 +15,6 @@ import {
 export function NewTemplateButton() {
     // id выделенного сайта
     const { currentTemplateId } = useGetSitesSelectors().siteTemplatesSection
-
-    const siteTemplateSectionMsg = useGetMessages(siteTemplateSectionMessages)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewTemplateOnClickHandler()

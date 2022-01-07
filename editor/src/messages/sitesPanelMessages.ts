@@ -1,5 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
+
 // Панель «Сайты»
-export const sitesPanelMessages = {
+const sitesPanelMessages = {
     header: {
         eng: 'Sites',
         rus: 'Сайты'
@@ -10,3 +12,5 @@ export const sitesPanelMessages = {
     },
 }
 
+const sitesPanelMsg = getMsgProxy<typeof sitesPanelMessages>(sitesPanelMessages)
+export default sitesPanelMsg

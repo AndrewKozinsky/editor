@@ -26,6 +26,11 @@ function getWrapperClasses(isFocus: boolean) {
     return makeCN(classes)
 }
 
+/**
+ * Классы кончика выпадающего списка со стрелками
+ * @param {boolean} disabled
+ * @returns {string}
+ */
 function getTipClasses(disabled: boolean) {
     const classes = [wrapperClass + '-tip']
 

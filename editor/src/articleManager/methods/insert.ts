@@ -1,8 +1,8 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import StoreArticleTypes from 'store/article/articleTypes'
+import articleManager from 'articleManager/articleManager'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import StoreArticleTypes from '../../store/article/articleTypes'
 
 
 /**

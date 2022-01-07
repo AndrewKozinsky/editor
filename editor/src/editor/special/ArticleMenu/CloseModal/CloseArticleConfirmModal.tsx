@@ -1,19 +1,16 @@
 import React, { useCallback } from 'react'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
-import useGetMessages from 'messages/fn/useGetMessages'
 import { useDispatch } from 'react-redux'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import Button from 'common/formElements/Button/Button'
-import { articleMenuMessages } from 'messages/articleMenuMessages'
+import articleMenuMsg from 'messages/articleMenuMessages'
 
 // TODO Что делает эта функция?
 export default function CloseArticleConfirmModal() {
     const dispatch = useDispatch()
     const { history, historyCurrentIdx, articleId } = useGetArticleSelectors()
-
-    const articleMenuMsg = useGetMessages(articleMenuMessages)
 
     // Функция сохраняющая статью, очищающая редактор и закрывающая модальное окно
     const saveArticle = useCallback(async function () {

@@ -1,16 +1,13 @@
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import { mainTabsMessages } from 'messages/mainTabsMessages'
 import { MainTabDataType } from '../MainTab/MainTab'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import mainTabsMsg from 'messages/mainTabsMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
 export function useGetTabData(): MainTabDataType[] {
-
-    const mainTabsMsg = useGetMessages(mainTabsMessages)
 
     // Номер активной вкладки
     const { mainTab } = useGetSettingsSelectors()

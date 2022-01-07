@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма редактирования выбранной статьи
-export const articleFormMessages = {
+const articleFormMessages = {
     articleNameInput: {
         eng: 'Article name',
         rus: 'Название статьи'
@@ -58,3 +59,6 @@ export const articleFormMessages = {
         rus: 'Не выбрано'
     },
 }
+
+const articleFormMsg = getMsgProxy<typeof articleFormMessages>(articleFormMessages)
+export default articleFormMsg

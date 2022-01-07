@@ -1,9 +1,8 @@
-import { setInLocalStorage } from 'src/utils/miscUtils'
+import { setInLocalStorage } from 'utils/miscUtils'
 import StoreSettingsTypes from './settingsTypes'
 import config from 'utils/config'
 
 export type SettingsReducerType = {
-    editorLanguage: StoreSettingsTypes.EditorLanguage
     editorTheme: StoreSettingsTypes.EditorTheme
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
@@ -13,8 +12,6 @@ export type SettingsReducerType = {
 
 // Изначальные значения
 const initialState: SettingsReducerType = {
-    // Язык интерфейса: eng или rus
-    editorLanguage: 'eng',
     // Тема интерфейса: light или dark
     editorTheme: 'light',
     // Компоненты форм входа и редактор всегда отрисовываются.
@@ -29,17 +26,6 @@ const initialState: SettingsReducerType = {
     mainTab: 0,
     // Активная вкладка панели «Настройки»: user или editor
     settingsPanelTab: 'user'
-}
-
-// Установка языка интерфейса
-function setEditorLanguage(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLanguageAction): SettingsReducerType {
-    // Поставить язык в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage(config.ls.editorLanguage, action.payload)
-
-    return {
-        ...state,
-        editorLanguage: action.payload
-    }
 }
 
 // Установка темы интерфейса
@@ -95,8 +81,6 @@ function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTy
 export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
 
     switch (action.type) {
-        case StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE:
-            return setEditorLanguage(state, action)
         case StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME:
             return setEditorTheme(state, action)
         case StoreSettingsTypes.SETTINGS_SET_ENTRY_AND_EDITOR_VIEW_STATE:

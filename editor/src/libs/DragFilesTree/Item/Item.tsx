@@ -15,7 +15,6 @@ import {
     handleDragStart,
     handleDrag,
     handleDragOver,
-    handleDragEnd,
 } from './dragAndDrop'
 
 
@@ -63,11 +62,11 @@ export default function Item(props: ItemPropType) {
             onMouseOut={markItemElem}
             onDragStart={handleDragStart}
             onDrag={(e: SyntheticEvent) => {
-                handleDrag(e, itemData, items, setItems)
+                handleDrag(e, itemData, items, setItems, after, 'drag')
             }}
             onDragOver={handleDragOver}
             onDragEnd={(e: SyntheticEvent) => {
-                handleDragEnd(e, itemData, items, setItems, after)
+                handleDrag(e, itemData, items, setItems, after, 'dragEnd')
             }}
         >
             <div

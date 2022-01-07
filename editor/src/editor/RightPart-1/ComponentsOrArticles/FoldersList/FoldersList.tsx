@@ -37,7 +37,6 @@ export default function FoldersList(props: FoldersListPropType) {
     // Обработчик щелчка по папке или файлу
     const onItemClick = useGetOnItemClick(type)
 
-
     return (
         <DragFilesTree
             items={folders}

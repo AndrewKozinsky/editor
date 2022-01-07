@@ -6,7 +6,7 @@ import './EditorMain.scss'
 
 const CN = 'editor-main'
 
-/** Функция возвращающая классы для элементов */
+/** Функция возвращающая классы элементов */
 export default function useMakeClasses() {
     const rootClass = useGetRootClass()
 

@@ -1,5 +1,5 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /*
 const gridTemplate: TempCompTypes.Content = {
@@ -24,7 +24,7 @@ const gridTemplate: TempCompTypes.Content = {
             },
             elemAttrs: [
                 {
-                    elemAttrId: 1,
+                    elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrLockedValue: 'grid__cell',
@@ -60,7 +60,7 @@ const gridTemplate: TempCompTypes.Content = {
             elemName: 'Banner',
             elemAttrs: [
                 {
-                    elemAttrId: 1,
+                    elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrLockedValue: 'banner',
                     elemAttrView: 'checkbox',
@@ -85,10 +85,10 @@ const gridTemplate: TempCompTypes.Content = {
     ]
 }*/
 
-const imageTemplate: TempCompTypes.Content = {
+/*const imageTemplate: TempCompTypes.Content = {
     name: 'Image',
     html: '<img src="http://volcano.ru/another/e/banknote.jpg" style="box-shadow: 0 4px 10px rgba(155, 0, 0, .3); width: 100%; max-width: 290px" alt="Описание из шаблона" data-em-id="image">'
-}
+}*/
 
 /*const paragraphTemplate: TempCompTypes.Content = {
     name: 'Paragraph',
@@ -102,7 +102,7 @@ const imageTemplate: TempCompTypes.Content = {
     ]
 }*/
 
-const burgerTemplate: TempCompTypes.Content = {
+/*const burgerTemplate: TempCompTypes.Content = {
     name: 'Burger',
     html: `<div class="burger burger--white" data-em-id="general" data-em-group="general-main">
     <div class="burger__top">
@@ -118,20 +118,20 @@ const burgerTemplate: TempCompTypes.Content = {
             elemName: 'Главная обёртка',
             elemAttrs: [
                 {
-                    elemAttrId: 1,
+                    elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrView: 'text',
                     elemAttrLockedValue: 'burger ',
                     elemAttrValues: [
                         {
-                            elemAttrValueId: 1,
+                            elemAttrValueId: '1',
                             elemAttrValueValue: 'burger--white',
                             elemAttrValueAlt: 'Белая подложка',
                             elemAttrValueChecked: true
                         },
                         {
-                            elemAttrValueId: 2,
+                            elemAttrValueId: '2',
                             elemAttrValueValue: 'burger--green',
                             elemAttrValueAlt: 'Зелёная подложка',
                             elemAttrValueChecked: false
@@ -161,7 +161,7 @@ const burgerTemplate: TempCompTypes.Content = {
             elemName: 'Средняя часть'
         },
     ]
-}
+}*/
 
 const burgerTemplate2: TempCompTypes.Content = {
     name: 'Burger',
@@ -172,20 +172,20 @@ const burgerTemplate2: TempCompTypes.Content = {
             elemName: 'Главная обёртка',
             elemAttrs: [
                 {
-                    elemAttrId: 1,
+                    elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrView: 'text',
                     elemAttrLockedValue: 'burger ',
                     elemAttrValues: [
                         {
-                            elemAttrValueId: 1,
+                            elemAttrValueId: '1',
                             elemAttrValueValue: 'burger--white',
                             elemAttrValueAlt: 'Белая подложка',
                             elemAttrValueChecked: true
                         },
                         {
-                            elemAttrValueId: 2,
+                            elemAttrValueId: '2',
                             elemAttrValueValue: 'burger--green',
                             elemAttrValueAlt: 'Зелёная подложка',
                             elemAttrValueChecked: false
@@ -220,10 +220,10 @@ const burgerTemplate2: TempCompTypes.Content = {
 
 // ================================================
 
-const siteTemplate = {
+/*const siteTemplate = {
     name: 'Действующие стили',
     head: "<meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='http://volcano.ru/another/e/style.css'>",
-}
+}*/
 
 /*
 const artData: ArticleTypes.Article = {

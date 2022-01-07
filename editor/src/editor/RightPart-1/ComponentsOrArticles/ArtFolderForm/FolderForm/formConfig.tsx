@@ -3,61 +3,58 @@ import * as yup from 'yup'
 import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
 import FCType from 'libs/FormConstructor/FCType'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
-function getFormConfig(articleFolderFormMsg: any) {
-    const config: FCType.Config = {
-        fields: {
-            name: {
-                fieldType: 'text',
-                schema: (fields) => {
-                    return yup.string()
-                        .required(articleFolderFormMsg.formNameInputRequired)
-                        .max(100, articleFolderFormMsg.emailToLong)
-                },
-                fieldData: {
-                    label: articleFolderFormMsg.folderNameInput,
-                    autoFocus: true
-                }
-            }
-        },
-        bottom: {
-            submit: {
-                text: articleFolderFormMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
-                icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+const artFolderFormConfig: FCType.Config = {
+    fields: {
+        name: {
+            fieldType: 'text',
+            schema: (fields) => {
+                return yup.string()
+                    .required(articleFolderFormMsg.formNameInputRequired)
+                    .max(100, articleFolderFormMsg.emailToLong)
             },
-            elems: [<DeleteFolderButton key={2} />],
-            hr: true
-        },
-        async requestFn(readyFieldValues, outerFns, formDetails) {
-            // Массив папок и файлов из Хранилища
-            const folders = store.getState().sites.artFolderSection.artFolder
-            // id выбранной папки
-            const { currentArtItemId } = store.getState().sites.articleSection
-
-            // Изменить название папки на введённое и обновить Хранилище папок
-            const folderName = readyFieldValues.name.toString()
-            const result = filesTreePublicMethods.changeItemName(
-                folders, currentArtItemId, folderName
-            )
-
-            store.dispatch(sitesActions.setArtFolder({
-                folders: result.newItems
-            }))
-
-            // Подготовить массив папок и файлов для сохранения на сервере
-            const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
-
-            // Сохранить данные на сервере
-            const { artFolderId } = store.getState().sites.artFolderSection
-            return await putArtFolderRequest(artFolderId, preparedFolders)
+            fieldData: {
+                label: articleFolderFormMsg.folderNameInput,
+                autoFocus: true
+            }
         }
-    }
+    },
+    bottom: {
+        submit: {
+            text: articleFolderFormMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
+            icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+        },
+        elems: [<DeleteFolderButton key={2} />],
+        hr: true
+    },
+    async requestFn(readyFieldValues, outerFns, formDetails) {
+        // Массив папок и файлов из Хранилища
+        const folders = store.getState().sites.artFolderSection.artFolder
+        // id выбранной папки
+        const { currentArtItemId } = store.getState().sites.articleSection
 
-    return config
+        // Изменить название папки на введённое и обновить Хранилище папок
+        const folderName = readyFieldValues.name.toString()
+        const result = filesTreePublicMethods.changeItemName(
+            folders, currentArtItemId, folderName
+        )
+
+        store.dispatch(sitesActions.setArtFolder({
+            folders: result.newItems
+        }))
+
+        // Подготовить массив папок и файлов для сохранения на сервере
+        const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
+
+        // Сохранить данные на сервере
+        const { artFolderId } = store.getState().sites.artFolderSection
+        return await putArtFolderRequest(artFolderId, preparedFolders)
+    }
 }
 
-export default getFormConfig
+export default artFolderFormConfig

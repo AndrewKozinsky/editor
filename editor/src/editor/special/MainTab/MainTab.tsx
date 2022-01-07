@@ -17,7 +17,7 @@ type MainTabPropType = {
     tabData: MainTabDataType
 }
 
-// TODO Что делает эта функция?
+/** Главная вкладка */
 export default function MainTab(props: MainTabPropType) {
 
     const {

@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from 'react'
-import articleManager from 'articleManager/articleManager'
 import { useDispatch } from 'react-redux'
-import { cloneItem } from '../../../../articleManager/methods/clone'
-import useGetArticleSelectors from '../../../../store/article/articleSelectors'
-import actions from '../../../../store/rootAction'
+import articleManager from 'articleManager/articleManager'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import actions from 'store/rootAction'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {

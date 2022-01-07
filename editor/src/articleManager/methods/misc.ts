@@ -1,4 +1,3 @@
-// import FilesTreeType from 'types/filesTree'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from 'articleManager/articleManager'
@@ -35,7 +34,7 @@ export async function saveArticle(
 
 /** Функция очищающая редактируемую статью */
 export function clearArticle(this: typeof articleManager) {
-    store.dispatch(actions.article.clearArticle())
+    // store.dispatch(actions.article.clearArticle())
 }
 
 /**

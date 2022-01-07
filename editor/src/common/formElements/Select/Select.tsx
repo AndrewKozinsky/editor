@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
+import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import { getOptions } from './Select-func'
 import { OptionsType } from './SelectTypes'
 import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'src/utils/stringUtils'
+import { getRandomId } from 'utils/stringUtils'
 import makeClasses from './Select-classes'
 import Label from '../Label/Label'
 import SvgIcon from '../../icons/SvgIcon'
@@ -11,10 +12,10 @@ import SvgIcon from '../../icons/SvgIcon'
 export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     grayText?: string // Серый текст
-    name: string | number // Имя выпадающего списка
+    name: string // Имя выпадающего списка
     value?: string | string[] // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
-    onChange?: (e: React.BaseSyntheticEvent) => void, // Обработчик выбора пункта
+    onChange?: OuterOnChangeHandlerType.FieldsHandler, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     disabled?: boolean // Заблокировано ли поле
 }
@@ -53,7 +54,7 @@ export default function Select(props: SelectPropType) {
             // Если передали обработчик потерей фокуса, то запустить
             if (onBlur) onBlur(e)
         },
-        onChange
+        onChange: (e: React.BaseSyntheticEvent) => fieldOnChangeHandler(e, onChange),
     }
 
     // Если есть подпись, то добавить id чтобы связать подпись и выпадающий список

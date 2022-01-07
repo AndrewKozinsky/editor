@@ -1,52 +1,25 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import { FlashedElemsCoords } from '../../../articleManager/methods/hooks'
-import useGetArticleSelectors from '../../../store/article/articleSelectors'
-import ArticleTypes from '../../../store/article/codeType/articleCodeType'
-import TempCompTypes from '../../../store/article/codeType/tempCompCodeType'
 import { AdjTextInputsType } from './AdjustInputs'
 
+/** Хук возвращает булево значение нужно ли отрисовывать поля ввода
+ * изменения атрибутов выделенного элемента */
 export function useIsVisible() {
     const [isVisible, setIsVisible] = useState(false)
 
-    const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
-    const article = articleManager.hooks.getCurrentArticle()
-    const { tempComps } = useGetArticleSelectors()
+    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
 
     useEffect(function () {
-        if (!flashedElemCoords) return
+        const { tElem } = flashedElemInfo
 
-        const tElem = getTElem(article, flashedElemCoords, tempComps)
-
-        setIsVisible(
-            !!tElem?.elemAttrs?.length
-        )
-
-    }, [article, flashedElemCoords, tempComps])
+        setIsVisible(!!tElem)
+    }, [flashedElemInfo])
 
     return isVisible
 }
 
-function getTElem(
-    article: ArticleTypes.Article,
-    flashedElemCoords: FlashedElemsCoords,
-    tempComps: TempCompTypes.TempComps
-) {
-    const { dataCompId, dataElemId } = flashedElemCoords.selectedElem
-    if (!dataCompId || !dataElemId) return null
-
-    // Данные компонента и элемента
-    const dComp = articleManager.getComponent(article.dComps, dataCompId)
-    if (dComp.dCompType === 'simpleTextComponent') return null
-    const dElem = articleManager.getDataElemInDataComp(dComp, dataElemId)
-
-    if (dComp && dElem) {
-        return articleManager.getTElemInTCompsArr(tempComps, dComp.tCompId, dElem.tCompElemId)
-    }
-
-    return null
-}
-
+// Функция возвращает пример объекта конфигурации для отрисовки полей ввода
+// изменения атрибутов выделенного элемента. Потом можно удалить
 export function getInputsConfigExample(): AdjTextInputsType[] {
     return [
         {

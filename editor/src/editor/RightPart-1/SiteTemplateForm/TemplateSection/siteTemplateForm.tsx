@@ -1,11 +1,9 @@
 import React from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import { siteTemplateSectionMessages } from 'messages/siteTemplateSectionMessages'
-import getNewSiteTemplateFormConfig from './newSiteTemplateFormConfig'
-import getCurrentSiteTemplateFormConfig from './currentSiteTemplateFormConfig'
+import newSiteTemplateFormConfig from './newSiteTemplateFormConfig'
+import currentSiteTemplateFormConfig from './currentSiteTemplateFormConfig'
 import { useSetSiteTemplateCode } from './siteTemplateForm-func'
 import CodeHelper from '../CodeHelper/CodeHelper'
 
@@ -21,16 +19,12 @@ export default function SiteTemplateForm() {
 
 /* Форма создания нового шаблона сайта */
 function NewSiteTemplateForm() {
-    // Сообщения формы
-    const siteTemplateSectionMsg = useGetMessages(siteTemplateSectionMessages)
-
-    // Объекты конфигурации и состояния формы
-    const config = getNewSiteTemplateFormConfig(siteTemplateSectionMsg)
-    const formState = useFormConstructorState(config)
+    // Объект состояния формы
+    const formState = useFormConstructorState(newSiteTemplateFormConfig)
 
     return (
         <>
-            <FormConstructor config={config} state={formState} />
+            <FormConstructor config={newSiteTemplateFormConfig} state={formState} />
             <CodeHelper code={formState.fields.content.value[0]} />
         </>
     )
@@ -38,20 +32,15 @@ function NewSiteTemplateForm() {
 
 /* Форма редактирования существующего шаблона сайта */
 function ExistingSiteTemplateForm() {
-
-    // Сообщения формы
-    const siteTemplateSectionMsg = useGetMessages(siteTemplateSectionMessages)
-
     // Объекты конфигурации и состояния формы
-    const config = getCurrentSiteTemplateFormConfig(siteTemplateSectionMsg)
-    const formState = useFormConstructorState(config)
+    const formState = useFormConstructorState(currentSiteTemplateFormConfig)
 
     // Хук изменяет код шаблона сайта в поле Код шаблона при переключении шаблона
     useSetSiteTemplateCode(formState)
 
     return (
         <>
-            <FormConstructor config={config} state={formState} />
+            <FormConstructor config={currentSiteTemplateFormConfig} state={formState} />
             <CodeHelper code={formState.fields.content.value[0]} />
         </>
     )

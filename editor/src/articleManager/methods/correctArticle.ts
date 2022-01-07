@@ -131,7 +131,7 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
 
     for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
         const dAttr = dElem.dCompElemAttrs[i]
-        const dAttrId = dAttr.dCompElemAttrId
+        const dAttrId = dAttr.tCompElemAttrId
         const dAttrValue = dAttr.dCompElemAttrValue
 
         const tAttr = tAttrs.find(tAttr => {
@@ -151,7 +151,7 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
         // Если значение атрибута написано числом, то это id, поэтому проверить, что этот id есть в шаблоне
         else {
             const tAttrValue = tAttr.elemAttrValues.find(tAttrValue => {
-                return tAttrValue.elemAttrValueId === dAttr.dCompElemAttrId
+                return tAttrValue.elemAttrValueId === dAttr.tCompElemAttrId
             })
 
             if (!tAttrValue) {

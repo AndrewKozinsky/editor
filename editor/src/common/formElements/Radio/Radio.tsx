@@ -1,17 +1,18 @@
 import React, { ReactElement, useState } from 'react'
 import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'src/utils/stringUtils'
+import { getRandomId } from 'utils/stringUtils'
+import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import './Radio.scss'
 
 
 export type RadioPropType = {
     label: string | ReactElement // Подпись флага
     grayText?: string
-    name: string | number // Имя группы флагов
-    value: string | number // Значение флага
+    name: string // Имя группы флагов
+    value: string // Значение флага
     checked?: boolean // Отмечено ли поле
     disabled?: boolean // Заблокировано ли поле
-    onChange: (e: React.BaseSyntheticEvent) => void // Обработчик выбора пункта
+    onChange: OuterOnChangeHandlerType.FieldsHandler // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
@@ -40,7 +41,7 @@ export default function Radio(props: RadioPropType) {
         id,
         checked,
         className: 'radio-input',
-        onChange,
+        onChange: (e: React.BaseSyntheticEvent) => fieldOnChangeHandler(e, onChange)
     }
     if (onBlur) inputAttribs.onBlur = onBlur
     if (disabled) inputAttribs.disabled = true

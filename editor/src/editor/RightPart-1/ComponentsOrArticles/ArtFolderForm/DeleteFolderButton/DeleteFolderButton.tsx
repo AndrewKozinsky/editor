@@ -1,18 +1,14 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {articleFolderFormMessages} from 'messages/articleFolderFormMessages'
 import Button from 'common/formElements/Button/Button'
-import { ModalContent } from './DeleteFolderModalContent'
+import DeleteFolderModalContent from './DeleteFolderModalContent'
 import useGetShowModal from 'utils/hooksUtils'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 
 
 /** Кнопка удаления сайта открывающая модальное окно подтверждения */
 export default function DeleteFolderButton() {
-    // Сообщения
-    const articleFolderFormMsg = useGetMessages(articleFolderFormMessages)
-
     // Хук возвращает функцию открывающую модальное окно с подтверждением удаления сайта
-    const openDeleteSiteTemplateConfirmation = useGetShowModal(<ModalContent />)
+    const openDeleteSiteTemplateConfirmation = useGetShowModal(<DeleteFolderModalContent />)
 
     return (
         <Button

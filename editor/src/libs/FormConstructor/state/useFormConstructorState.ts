@@ -1,12 +1,13 @@
 import { useCallback, useState } from 'react'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import serverMsg from 'messages/serverMessages'
 import FCType from '../FCType'
 import getInitialFieldsState from './getInitialFieldsState'
 import fieldChangeHandler from '../handlers/fieldChangeHandler'
 import formSubmitHandler from '../handlers/formSubmitHandler'
 import updateFieldFn from './UpdateField'
 import { getInitialShowCommonSuccess, getInitialCommonSuccess } from './successfulMessage'
-import { serverMessages } from 'messages/serverMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+
 
 /**
  *
@@ -18,7 +19,6 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     const updateField = useCallback((fieldName: string, newFieldData: FCType.StateFieldsObj) => {
         updateFieldFn(fields, setFields, fieldName, newFieldData)
     }, [fields, setFields])
-
 
     const [submitCounter, setSubmitCounter] = useState(0)
     const [submitBtnLoading, setSubmitBtnLoading] = useState(false)
@@ -35,12 +35,14 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     // Данные пользователя хранимые формой
     const [formData, setFormData] = useState({})
 
-    const serverMsg = useGetMessages(serverMessages)
 
-
-    const onChangeFieldHandler = useCallback((e) => {
-        fieldChangeHandler(e, fields, setFields, submitCounter, formConfig, setSubmitBtnDisabled, setCommonError)
-    }, [fields, setFields, submitCounter, formConfig, setSubmitBtnDisabled, setCommonError])
+    const onChangeFieldHandler: OuterOnChangeHandlerType.FieldsHandler = useCallback((fieldData: OuterOnChangeHandlerType.FieldsData) => {
+        fieldChangeHandler(fieldData, fields, setFields, submitCounter, formConfig, setSubmitBtnDisabled, setCommonError
+        )
+    }, [
+        fields, setFields, submitCounter,
+        // formConfig, setSubmitBtnDisabled, setCommonError
+    ])
 
     const onFormSubmit = useCallback((e) => {
         formSubmitHandler(
@@ -51,7 +53,6 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
     }, [
         fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
         setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess,
-        serverMsg
     ])
 
     return {

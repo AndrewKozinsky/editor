@@ -3,8 +3,6 @@
 namespace StoreSettingsTypes {
 
     // Типы значений
-    // Язык интерфейса
-    export type EditorLanguage = 'eng' | 'rus'
     // Тема интерфейса
     export type EditorTheme = 'light' | 'dark'
     // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
@@ -17,12 +15,6 @@ namespace StoreSettingsTypes {
     export type SettingsPanelTab = 'user' | 'editor'
 
     // Типы типа и тип экшена
-    // Установка языка интерфейса
-    export const SETTINGS_SET_EDITOR_LANGUAGE = 'SETTINGS_SET_EDITOR_LANGUAGE'
-    export type SetEditorLanguageAction = {
-        type: typeof SETTINGS_SET_EDITOR_LANGUAGE
-        payload: EditorLanguage
-    }
 
     // Установка темы интерфейса
     export const SETTINGS_SET_EDITOR_THEME = 'SETTINGS_SET_EDITOR_THEME'
@@ -61,7 +53,6 @@ namespace StoreSettingsTypes {
 
 
     export type SettingsAction =
-        | SetEditorLanguageAction
         | SetEditorThemeAction
         | SetEntryAndEditorViewStateAction
         | SetLastAddressAction

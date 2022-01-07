@@ -1,6 +1,6 @@
 import React from 'react'
-import SitePartProvider from '../SitePartProvider/SitePartProvider'
 import SitePartTabs from '../SitePartTabs/SitePartTabs'
+import SitePartProvider from '../SitePartProvider/SitePartProvider'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import './RightPart-1.scss'
 

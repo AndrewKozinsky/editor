@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import LeftPart1 from 'editor/LeftPart-1/LeftPart-1'
 import LeftPart2 from 'editor/LeftPart-2/LeftPart-2/LeftPart-2'
@@ -31,7 +31,7 @@ export default function EditorPartProvider(props: EditorPartProviderPropType) {
     useEffect(function () {
 
         // Список всех компонентов во всех вкладках
-        const components: MiscTypes.ObjStringKey<any> = {
+        const components: MiscTypes.ObjStringKey<React.ElementType> = {
             left0: LeftPart1,
             left1: LeftPart2,
             left2: LeftPart3,

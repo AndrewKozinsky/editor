@@ -5,48 +5,47 @@ import updateSiteRequest, { UpdateSiteRequestValuesType } from 'requests/editor/
 import { store } from 'store/rootReducer'
 import DeleteSiteButton from '../DeleteSiteButton/DeleteSiteButton'
 import { afterSubmit } from './SiteSection-func'
+import siteSectionMsg from 'messages/siteSectionMessages'
 
-/** Функция возвращает конфигурацию формы входа в сервис */
-export default function getCurrentSiteFormConfig(siteSectionMsg: any) {
-    const config: FCType.Config = {
-        fields: {
-            name: {
-                fieldType: 'text',
-                schema: (fields) => {
-                    return yup.string()
-                        .required(siteSectionMsg.siteNameInputRequired)
-                        .max(255, siteSectionMsg.siteNameInputIsTooLong)
-                },
-                fieldData: {
-                    label: siteSectionMsg.siteNameInput,
-                    placeholder: siteSectionMsg.siteNamePlaceholder,
-                }
+/** Объект конфигурации формы редактирования существующего сайта */
+const currentSiteFormConfig: FCType.Config = {
+    fields: {
+        name: {
+            fieldType: 'text',
+            schema: (fields) => {
+                return yup.string()
+                    .required(siteSectionMsg.siteNameInputRequired)
+                    .max(255, siteSectionMsg.siteNameInputIsTooLong)
             },
-            defaultSiteTemplateId: {
-                fieldType: 'select',
-                fieldData: {
-                    label: siteSectionMsg.defaultTemplateInput,
-                    options: [],
-                }
-            },
+            fieldData: {
+                label: siteSectionMsg.siteNameInput,
+                placeholder: siteSectionMsg.siteNamePlaceholder,
+            }
         },
-        bottom: {
-            submit: {
-                text: siteSectionMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
-                icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
-            },
-            elems: [<DeleteSiteButton key={2} />],
-            hr: true
+        defaultSiteTemplateId: {
+            fieldType: 'select',
+            fieldData: {
+                label: siteSectionMsg.defaultTemplateInput,
+                options: [],
+            }
         },
-        async requestFn(readyFieldValues, outerFns, formDetails) {
-            // Обновить данные сайта
-            // id выбранного сайта
-            const siteId = store.getState().sites.currentSiteId
+    },
+    bottom: {
+        submit: {
+            text: siteSectionMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
+            icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+        },
+        elems: [<DeleteSiteButton key={2} />],
+        hr: true
+    },
+    async requestFn(readyFieldValues, outerFns, formDetails) {
+        // Обновить данные сайта
+        // id выбранного сайта
+        const siteId = store.getState().sites.currentSiteId
 
-            return await updateSiteRequest(readyFieldValues as UpdateSiteRequestValuesType, siteId)
-        },
-        afterSubmit
-    }
-
-    return config
+        return await updateSiteRequest(readyFieldValues as UpdateSiteRequestValuesType, siteId)
+    },
+    afterSubmit
 }
+
+export default currentSiteFormConfig

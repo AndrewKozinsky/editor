@@ -1,7 +1,7 @@
 import { MiscTypes } from '../../../types/miscTypes'
 import { HTMLObjArrType } from './htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { createDeepCopy } from 'src/utils/miscUtils'
+import { createDeepCopy } from 'utils/miscUtils'
 
 /**
  * Function synchronize the number of elements in html object with number of elements in component data

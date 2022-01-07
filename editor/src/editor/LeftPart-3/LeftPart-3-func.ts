@@ -1,13 +1,11 @@
 import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
+import settingsPanelMsg from '../../messages/settingsPanelMessages'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import { settingsPanelMessages } from 'messages/settingsPanelMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 
 /** Хук возвращает атрибуты для компонента ItemsList для формирования списка пунктов панели «Настройки» */
 export function useGetSettingsItemsListProps(): ItemsListPropType {
-    const settingsPanelMsg = useGetMessages(settingsPanelMessages)
 
     // Активная вкладка панели настроек
     const { settingsPanelTab } = useGetSettingsSelectors()

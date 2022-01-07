@@ -8,7 +8,6 @@ import './AdjustPanel.scss'
 export default function AdjustPanel() {
 
     const { compName, elemName } = useGetCompAndElemNames()
-
     if (!compName) return null
 
     return (

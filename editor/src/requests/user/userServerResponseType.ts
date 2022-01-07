@@ -1,4 +1,3 @@
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import ErrorServerResponseType from '../errorServerResponseType'
 
 // Тип данных о пользователе от сервера
@@ -10,7 +9,7 @@ type UserServerResponseType = {
             id: number, // 1
             name: string, // 'Andrew'
             email: string, // 'andkozinskiy@yandex.ru'
-            language: StoreSettingsTypes.EditorLanguage, // 'rus'
+            language: 'eng' | 'rus', // 'rus'
             token?: string // 'ewhjw643gjwfsht667GS'
         }
     }

@@ -20,6 +20,7 @@ export function useGetTempCompsFolders() {
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
     const currentHistoryItem = articleManager.hooks.getCurrentHistoryItem()
 
+    // Координаты выделенного элемента и его тип
     const [selectedElem, setSelectedElem] = useState<StoreArticleTypes.FlashedElem>(null)
 
     // Returned folders and component templates structure
@@ -131,7 +132,7 @@ function prepareFoldersAndItemsStructure(
 export function useGetAfterCollapseFolder() {
     const dispatch = useDispatch()
 
-    return useCallback(function (folders: TempCompFilesTreeType.Items, openIdArr: TempCompFilesTreeType.FileItemId[]) {
+    return useCallback(function (folders: TempCompFilesTreeType.Items, openIdArr: TempCompFilesTreeType.FolderItemId[]) {
         // Set a new folders structure list in the Store
         dispatch(actions.article.setTempCompFolders(folders))
 

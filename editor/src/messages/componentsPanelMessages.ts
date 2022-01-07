@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Components templates section in LeftPart-2
-export const componentsPanelMessages = {
+const componentsPanelMessages = {
     header: {
         eng: 'Components',
         rus: 'Компоненты'
@@ -18,3 +19,6 @@ export const componentsPanelMessages = {
         rus: 'Вставить внутрь элемента'
     },
 }
+
+const componentsPanelMsg = getMsgProxy<typeof componentsPanelMessages>(componentsPanelMessages)
+export default componentsPanelMsg

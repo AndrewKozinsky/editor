@@ -7,10 +7,7 @@ export type InputErrorPropType = {
     text?: ReactNode
 }
 
-/**
- * Компонент текстового уведомления.
- * Если передать тип, то это будет или сообщение об ошибке или об успехе.
- */
+/** Сообщение об ошибке в поле ввода */
 export default function InputError(props: InputErrorPropType) {
     const { text } = props
 

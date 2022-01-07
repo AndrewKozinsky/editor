@@ -1,16 +1,12 @@
 import React from 'react'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
+import userAccountSectionMsg from 'messages/userAccountSectionMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import { userAccountSectionMessages } from 'messages/userAccountSectionMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import useGetMessages from 'messages/fn/useGetMessages'
-import getSubmitBtnFormConfig from './submitBtnFormConfig'
+import submitBtnFormConfig from './submitBtnFormConfig'
 
 /* Модальное окно с подтверждением удаления учётной записи */
-export function ModalContent() {
-    const userAccountSectionMsg = useGetMessages(userAccountSectionMessages)
-    const submitBtnFormConfig = getSubmitBtnFormConfig(userAccountSectionMsg)
-
+export default function DeleteAccountModalContent() {
     const formState = useFormConstructorState(submitBtnFormConfig)
 
     return (

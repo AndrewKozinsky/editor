@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Содержимое вкладки «Шаблоны подключаемых файлов»
-export const siteTemplateSectionMessages = {
+const siteTemplateSectionMessages = {
     newTemplateBtn: {
         eng: 'New site template',
         rus: 'Новый шаблон сайта'
@@ -52,3 +53,6 @@ export const siteTemplateSectionMessages = {
 
     // Тексты ошибок при проверке кода
 }
+
+const siteTemplateSectionMsg = getMsgProxy<typeof siteTemplateSectionMessages>(siteTemplateSectionMessages)
+export default siteTemplateSectionMsg

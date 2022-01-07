@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import { useDispatch } from 'react-redux'
-import { deleteItem } from '../../../../articleManager/methods/delete'
-import actions from '../../../../store/rootAction'
+import actions from 'store/rootAction'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Удалить элемент» */
 export function useIsRemoveDisabled() {

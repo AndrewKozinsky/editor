@@ -2,6 +2,8 @@ import React, { ReactElement, useRef } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
+import config from '../../../utils/config'
+import { getFromLocalStorage } from '../../../utils/miscUtils'
 import { useSetFocus } from './Button-func'
 import makeClasses from './Button-classes'
 import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
@@ -46,9 +48,6 @@ export default function Button(props: ButtonPropType) {
         autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
 
-    // Язык интерфейса
-    const { editorLanguage } = useGetSettingsSelectors()
-
     // Ссылка на элемент
     const buttonRef = useRef(null)
     // Установка фокусировки при необходомости
@@ -60,6 +59,7 @@ export default function Button(props: ButtonPropType) {
 
     // При загрузке поменять текст кнопки
     if (btnText && loading) {
+        const editorLanguage = getFromLocalStorage(config.ls.editorLanguage)
         if (editorLanguage === 'eng') btnText = 'Sending...'
         if (editorLanguage === 'rus') btnText = 'Отправка...'
     }

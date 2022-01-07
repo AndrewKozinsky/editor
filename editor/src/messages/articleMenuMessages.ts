@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма редактирования выбранной папки шаблона компонента
-export const articleMenuMessages = {
+const articleMenuMessages = {
     undo: {
         eng: 'Undo',
         rus: 'Шаг назад'
@@ -65,3 +66,6 @@ export const articleMenuMessages = {
         rus: 'Удалить'
     },
 }
+
+const articleMenuMsg = getMsgProxy<typeof articleMenuMessages>(articleMenuMessages)
+export default articleMenuMsg

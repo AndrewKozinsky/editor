@@ -6,7 +6,11 @@ import {
     ArtFolderServerSuccessRespType
 } from './artFolderServerResponseType'
 
-// TODO Что делает эта функция?
+/**
+ * Функция делает запрос на получение папок статей по определённому сайту.
+ * Строка с кодом папок разбирается.
+ * @param {Number} siteId — id сайта к которому нужно получить список папок со статьями
+ */
 export async function getArtFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 

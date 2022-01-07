@@ -1,3 +1,5 @@
+import TempCompTypes from './tempCompCodeType'
+
 namespace ArticleTypes {
     // Article
     export type Article = {
@@ -45,7 +47,7 @@ namespace ArticleTypes {
         // Element data id
         dCompElemId: Id // 1
         // Element template id
-        tCompElemId: TempElemId // 1
+        tCompElemId: TempCompTypes.ElemId // 'banner'
         // Name of elements group with the same tempElemId. They may be several groups with the same tempElemId.
         tCompElemGroup: ElemGroup // 'banner-1'
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
@@ -55,19 +57,20 @@ namespace ArticleTypes {
         dCompElemChildren?: ElemChildren
     }
 
-    export type TempElemId = string // 'banner'
     export type ElemGroup = string // ''banner-1'
     export type Tag = number | string // 1 OR 'div'
 
     export type Attribs = Attrib[]
 
     export type Attrib = {
-        dCompElemAttrId: Id // 1
+        // id атрибута будет браться из шаблона
+        tCompElemAttrId: TempCompTypes.ElemAttrValueId // '1'
         // Array of attributes ids (if there are exact number of values) or exact value (if it value was written in text field)
         dCompElemAttrValue: ComponentElemAttribValue // [4, 6] OR 'banner'
     }
 
-    export type ComponentElemAttribValue = number[] | string // [4, 6] OR 'banner'
+    //
+    export type ComponentElemAttribValue = TempCompTypes.ElemAttrValueId[] | TempCompTypes.ElemAttrValueId // ['4', '6'] OR 'banner'
 
     export type ElemChildren = Component[] | SimpleTextComponent
 
@@ -89,8 +92,9 @@ namespace ArticleTypes {
 export default ArticleTypes
 
 
-/*export const emptyArticleData: ArticleTypes.Article = {
+export const emptyArticleData: ArticleTypes.Article = {
     dMeta: {
+        version: 1,
         // Max component id to understand what component id must be next
         dMaxCompId: 0
     },
@@ -101,4 +105,4 @@ export default ArticleTypes
         dCompId: 1,
         tCompId: 95,
     }]
-}*/
+}

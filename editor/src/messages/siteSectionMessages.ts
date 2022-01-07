@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Содержимое вкладки «Сайты»
-export const siteSectionMessages = {
+const siteSectionMessages = {
     siteNameInput: {
         eng: 'Name',
         rus: 'Название'
@@ -54,3 +55,6 @@ export const siteSectionMessages = {
         rus: 'Не выбрано'
     },
 }
+
+const siteSectionMsg = getMsgProxy<typeof siteSectionMessages>(siteSectionMessages)
+export default siteSectionMsg

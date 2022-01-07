@@ -16,7 +16,10 @@ export default function useMakeClasses() {
     }
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция возвращает классы корневого тега модального окна
+ * @param {String} modalType — тип модального окна
+ */
 function getRootClass(modalType: StoreModalTypes.Type) {
     const classes  = [CN]
 

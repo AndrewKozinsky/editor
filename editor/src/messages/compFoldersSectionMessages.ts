@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Структура папок и файлов шаблонов компонентов
-export const compFoldersSectionMessages = {
+const compFoldersSectionMessages = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -10,3 +11,6 @@ export const compFoldersSectionMessages = {
         rus: 'Новый компонент'
     },
 }
+
+const compFoldersSectionMsg = getMsgProxy<typeof compFoldersSectionMessages>(compFoldersSectionMessages)
+export default compFoldersSectionMsg

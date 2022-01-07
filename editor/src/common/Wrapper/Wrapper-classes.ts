@@ -1,8 +1,8 @@
-import {WrapperPropType} from './Wrapper'
+import { WrapperPropType } from './Wrapper'
 import { makeCN } from 'src/utils/stringUtils'
 import './Wrapper.scss'
 
-const wrapperRootClass = 'wrapper'
+const CN = 'wrapper'
 
 /** Функция возвращающая классы для элементов */
 export default function makeClasses(wrapperProps: WrapperPropType, extraClass?: string) {
@@ -24,20 +24,20 @@ function getRootClass(wrapperProps: WrapperPropType, extraClass?: string) {
         b      // Отступ снизу
     } = wrapperProps
 
-    let classes = [wrapperRootClass]
+    let classes = [CN]
 
     // Добавление класса дающую выравнивание
-    if (align) classes.push(wrapperRootClass + '--align-' + align)
-    if (verticalAlign) classes.push(wrapperRootClass + '--vertical-align-' + verticalAlign)
+    if (align) classes.push(CN + '--align-' + align)
+    if (verticalAlign) classes.push(CN + '--vertical-align-' + verticalAlign)
 
     // Добавление класса дающего верхний оступ
-    if (t) classes.push(wrapperRootClass + '--t' + t)
+    if (t) classes.push(CN + '--t' + t)
 
     // Добавление класса дающего нижний оступ
-    if (b) classes.push(wrapperRootClass + '--b' + b)
+    if (b) classes.push(CN + '--b' + b)
 
     // Добавление класса дающего отступ между элементами внутри обёртки
-    if (wrapperProps.gap) classes.push(wrapperRootClass + '--gap' + wrapperProps.gap)
+    if (wrapperProps.gap) classes.push(CN + '--gap' + wrapperProps.gap)
 
     if (extraClass) classes.push(extraClass)
 

@@ -1,11 +1,13 @@
-import { ReactElement } from 'react'
+import React, { ReactElement } from 'react'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import { ButtonPropType } from 'common/formElements/Button/Button'
 import { UserServerResponse } from 'requests/user/userServerResponseType'
+import { SitesServerResponseType } from '../../requests/editor/sites/sitesServerResponseType'
 
-
+/** Типы компонента FormConstructor */
 namespace FCType {
 
     // CONFIGURATION OBJECT  ===================================================
@@ -13,7 +15,6 @@ namespace FCType {
     export type Config = {
         fields?: ConfigFields
         bottom: {
-            // topOffset?: 'small' | 'big' // Думаю это лишнее
             submit: ConfigSubmitButton
             elems?: JSX.Element[]
             align?: 'left' | 'right',
@@ -37,13 +38,13 @@ namespace FCType {
         fieldData: Omit<TextInputPropType, FieldExcludedArgs>
     }
     type ConfigCheckboxesField = {
-        fieldType: 'checkboxes'
+        fieldType: 'checkbox'
         initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<FieldGroupPropType, FieldExcludedArgs>
     }
     type ConfigRadiosField = {
-        fieldType: 'radios'
+        fieldType: 'radio'
         initialValue?: string[]
         schema?: FieldSchema
         fieldData: Omit<FieldGroupPropType, FieldExcludedArgs>
@@ -59,7 +60,9 @@ namespace FCType {
     type FieldExcludedArgs = 'onChange' | 'value' | 'disabled' | 'error' | 'name'
     type ConfigSubmitButton = Omit<ButtonPropType, 'type'>
 
-    export type Response = UserServerResponse | {status: 'success'}
+    // Возможно сюда нужно добавить и типы остальных ответов от сервера
+    // Или же приделать обобщённый тип
+    export type Response = UserServerResponse | SitesServerResponseType | {status: 'success'}
 
     // Fields' values for sending to the server
     export type ReadyFieldsValues = {
@@ -157,7 +160,7 @@ namespace FCType {
         formData: FormData
         setFormData: SetFormData
 
-        onChangeFieldHandler: (e: React.BaseSyntheticEvent) => void
+        onChangeFieldHandler: OuterOnChangeHandlerType.FieldsHandler
         onFormSubmit: (e: React.BaseSyntheticEvent) => void
     }
 }

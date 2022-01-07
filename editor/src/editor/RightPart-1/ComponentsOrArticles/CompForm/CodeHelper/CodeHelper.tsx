@@ -1,19 +1,17 @@
 import React, {useEffect, useState} from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { componentFormMessages } from 'messages/componentTemplateFormMessages'
+// import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 import CodeCheckInfo from 'editor/special/CodeCheckInfo/CodeCheckInfo'
+import componentFormMsg from 'messages/componentTemplateFormMessages'
 import checkComponentCode, {componentCodeExample} from './checkComponentCode'
 
 type CodeHelperPropType = {
     code: string
 }
 
-// НАДО БЫ СДЕЛАТЬ ИЗ ВСЕХ КОМПОНЕНТОВ CodeHelper ОДИН УНИВЕРСАЛЬНЫЙ КОМПОНЕНТ. ЭТО БУДЕТ НЕТРУДНО.
+// TODO НАДО БЫ СДЕЛАТЬ ИЗ ВСЕХ КОМПОНЕНТОВ CodeHelper ОДИН УНИВЕРСАЛЬНЫЙ КОМПОНЕНТ. ЭТО БУДЕТ НЕТРУДНО.
 export default function CodeHelper(props: CodeHelperPropType) {
     const { code } = props
-
-    const componentFormMsg = useGetMessages(componentFormMessages)
 
     const [checkStatus, setCheckStatus] = useState<'error' | 'success'>('error')
     const [header, setHeader] = useState<string>()

@@ -7,8 +7,7 @@ import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import Hr from 'common/misc/Hr/Hr'
 import CommonNotice from 'libs/FormConstructor/misc/CommonNotice'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { serverMessages } from 'messages/serverMessages'
+import serverMsg from 'messages/serverMessages'
 
 type FormConstructorPropType = {
     config: FCType.Config // Form config
@@ -37,8 +36,6 @@ export default FormConstructor
 function Fields(props: FormConstructorPropType) {
     const { fields } = props.config
     const { state } = props
-
-    const serverMsg = useGetMessages(serverMessages)
 
     // A form may consists only submit button
     if (!fields) return null
@@ -75,7 +72,7 @@ function Fields(props: FormConstructorPropType) {
 
             field = <TextInput {...fieldData} />
         }
-        else if (fieldConfig.fieldType === 'checkboxes' || fieldConfig.fieldType === 'radios') {
+        else if (fieldConfig.fieldType === 'checkbox' || fieldConfig.fieldType === 'radio') {
             const fieldData = fieldConfig.fieldData as FieldGroupPropType
             fieldData.value = state.fields[fieldName].value
             fieldData.onChange = state.onChangeFieldHandler
@@ -111,6 +108,7 @@ function Fields(props: FormConstructorPropType) {
     return <>{fieldsMarkup}</>
 }
 
+/** Разделительная полоса между полями формы и кнопкой отправки */
 function BottomDivider(props: FormConstructorPropType) {
     if (!props.config.bottom?.hr) return null
 
@@ -151,7 +149,7 @@ function SubmitButton(props: FormConstructorPropType) {
     return <Button {...submitBtnConfig} />
 }
 
-/** A component with common succes or error message */
+/** A component with common success or error message */
 function Common(props: FormConstructorPropType) {
     const { state } = props
 

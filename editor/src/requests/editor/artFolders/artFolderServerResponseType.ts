@@ -1,5 +1,5 @@
-import DragFilesTreeType from 'libs/DragFilesTree/types'
 import ErrorServerResponseType from 'requests/errorServerResponseType'
+import FilesTreeType from '../../../types/FilesTreeType'
 
 type CommonType<T> = {
     status: 'success',
@@ -18,4 +18,4 @@ export type ArtFolderType<T> = {
 // Неразобранный
 export type ArtFolderRowServerRespType = ErrorServerResponseType | CommonType<string>
 // Разобранный
-export type ArtFolderServerSuccessRespType = CommonType<DragFilesTreeType.Items>
+export type ArtFolderServerSuccessRespType = CommonType<FilesTreeType.Items>

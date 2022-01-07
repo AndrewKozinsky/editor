@@ -1,16 +1,14 @@
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
+import commonMsg from 'messages/commonMessages'
+import enterFormMsg from 'messages/enterFormMessages'
 import loginRequest, { LoginRequestValuesType } from 'requests/user/loginRequest'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 
-/**
- * Функция возвращает конфигурацию формы входа в сервис
- * @param {Object} commonMsg — объект с текстами ошибок
- * @param {Object} enterFormMsg — объект с текстами ошибок
- */
-function getConfig(commonMsg: any, enterFormMsg: any) {
+/** Функция возвращает конфигурацию формы входа в сервис */
+function getEnterFormConfig() {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -57,7 +55,7 @@ function getConfig(commonMsg: any, enterFormMsg: any) {
         },
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {
-
+                // @ts-ignore
                 const email = response.data.user.email
                 store.dispatch(actions.user.setUserData('success', email))
 
@@ -80,4 +78,4 @@ function getConfig(commonMsg: any, enterFormMsg: any) {
     return config
 }
 
-export default getConfig
+export default getEnterFormConfig

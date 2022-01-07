@@ -4,29 +4,23 @@ import Menu from 'common/misc/Menu/Menu'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Notice from 'common/textBlocks/Notice/Notice'
 import { getMenuItems } from '../menuItems'
-import { regFormMessages } from 'messages/regFormMessages'
+import regMenuMsg from 'messages/regMenuMessages'
+import regFormMsg from 'messages/regFormMessages'
+import commonMsg from 'messages/commonMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import useGetMessages from 'messages/fn/useGetMessages'
-import getConfig from './formConfig'
-import { commonMessages } from 'messages/commonMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
+import getRegFormConfig from './formConfig'
 
 
 /** User Sign up form */
 export default function RegFormBlock() {
-    // Объекты с текстами интерфейса
-    const commonMsg = useGetMessages(commonMessages)
-    const regFormMsg = useGetMessages(regFormMessages)
-    const regMenuMsg = useGetMessages(regMenuMessages)
-
-    const config = getConfig(commonMsg, regFormMsg)
+    const config = getRegFormConfig(commonMsg, regFormMsg)
     const formState = useFormConstructorState(config)
 
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems(regMenuMsg)}/>
+                <Menu items={getMenuItems()}/>
             </Wrapper>
             <Wrapper b={10}>
                 <Header text={regFormMsg.formHeader} type='h1' />
@@ -43,8 +37,6 @@ type InfoPropType = {
 
 // Сообщение со ссылками на документы с правилами использования сервиса и ссылкой на страницу входа.
 function Info(props: InfoPropType) {
-    const regFormMsg = useGetMessages(regFormMessages)
-
     if (props.hide) return null
 
     return (

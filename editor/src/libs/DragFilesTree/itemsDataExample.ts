@@ -1,4 +1,4 @@
-import DragFilesTreeType from 'libs/DragFilesTree/types'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 // Пример данных получаемых компонентов FilesTree
 /*const itemsDataExample: DragFilesTreeType.Items = [

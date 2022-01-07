@@ -2,9 +2,12 @@ import React from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Hr from 'common/misc/Hr/Hr'
 import Button from 'common/formElements/Button/Button'
-import {useGetEditArticleFn, useGetToEditorFn, useIsArticleInEditor} from './EditArticleSection-func'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { articleFormMessages } from 'messages/articleFormMessages'
+import {
+    useGetEditArticleFn,
+    useGetToEditorFn,
+    useIsArticleInEditor
+} from './EditArticleSection-func'
+import articleFormMsg from '../../../../../messages/articleFormMessages'
 import makeClasses from './EditArticleSection-classes'
 
 // TODO Что делает эта функция?
@@ -24,7 +27,6 @@ export default function EditArticleSection() {
 
 // TODO Что делает эта функция?
 function EditArticle() {
-    const articleFormMsg = useGetMessages(articleFormMessages)
     const editArticleFn = useGetEditArticleFn()
 
     return <Button
@@ -36,7 +38,6 @@ function EditArticle() {
 
 // TODO Что делает эта функция?
 function InEditor() {
-    const articleFormMsg = useGetMessages(articleFormMessages)
     const toEditorFn = useGetToEditorFn()
 
     const CN = makeClasses()

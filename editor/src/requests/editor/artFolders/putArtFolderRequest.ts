@@ -1,19 +1,20 @@
 const JSON5 = require('json5')
-import DragFilesTreeType from 'libs/DragFilesTree/types'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import {
     ArtFolderRowServerRespType,
     ArtFolderServerSuccessRespType
 } from './artFolderServerResponseType'
+import FilesTreeType from '../../../types/FilesTreeType'
 
 /**
- * Функция отправляет данные для входа пользователя в редактор
+ * Функция отправляет запрос на сохранение массива папок статей
  * @param {Number} artFolderId — id папки с компонентами
  * @param {Array} folders — массив папок статей
  */
 export default async function putArtFolderRequest(
-    artFolderId: number, folders: DragFilesTreeType.Items
+    artFolderId: number, folders: FilesTreeType.Items
 ) {
     const jsonItems = JSON5.stringify(folders)
 

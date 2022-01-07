@@ -151,7 +151,6 @@ function getTElemsMap($component: HTMLElement, tempElems: TempCompTypes.Elems): 
     }
 
     return tElemsMap
-
 }
 
 /**
@@ -179,7 +178,7 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
         // Объект с данными id атрибута и его незаполненного значения.
         // Значения по умолчанию будут записываться ниже.
         dElemAttr = {
-            dCompElemAttrId: attribTemp.elemAttrId,
+            tCompElemAttrId: attribTemp.elemAttrId,
             dCompElemAttrValue: dElemAttrValue
         }
 

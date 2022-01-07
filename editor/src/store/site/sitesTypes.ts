@@ -1,13 +1,15 @@
-import DragFilesTreeType from 'libs/DragFilesTree/types'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
 import ArticleTypes from '../article/codeType/articleCodeType'
+
+import FilesTreeType from '../../types/FilesTreeType'
 
 namespace StoreSitesTypes {
 
     // САЙТЫ (ТИПЫ) ===================================================================
     // Сайты
-    export type SitesType = SiteType[]
+    export type SitesType = Site[]
     // Сайт
-    export type SiteType = {
+    export type Site = {
         id: number,
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
@@ -31,7 +33,7 @@ namespace StoreSitesTypes {
     }
     // Массив шаблонов подключаемых файлов
     export type SiteTemplatesType = SiteTemplateType[]
-    // id выбранного шаблона подключаемых файлов
+    // id выбранного шаблона подключаемых файлов (пустая строка ставится при создании нового шаблона)
     export type CurrentSiteTemplateId = null | number | ''
 
     // ШАБЛОНЫ САЙТА (ТИПЫ)
@@ -45,7 +47,7 @@ namespace StoreSitesTypes {
     // Объект с данными папки с компонентами
     export type CompFolderSection = {
         compFolderId: null | number
-        compFolder: DragFilesTreeType.Items
+        compFolder: FilesTreeType.Items
     }
 
     // ПАПКИ СО СТАТЬЯМИ (ТИПЫ) =======================================================
@@ -53,15 +55,15 @@ namespace StoreSitesTypes {
     // Объект с данными папки со статьями
     export type ArtFolderSection = {
         artFolderId: null | number
-        artFolder: DragFilesTreeType.Items
+        artFolder: FilesTreeType.Items
     }
 
     // КОМПОНЕНТЫ (ТИПЫ) ==============================================================
 
     // id выбранного элемента: папки или компонента
-    export type CurrentCompItemId = null | DragFilesTreeType.ItemId
+    export type CurrentCompItemId = null | FilesTreeType.ItemId
     // Тип выбранного шаблона компонента (папка или компонент)
-    export type CurrentCompItemType = null | DragFilesTreeType.ItemType
+    export type CurrentCompItemType = null | FilesTreeType.ItemType
     // Имя выбранного компонента
     export type ComponentName = null | string
     // Строка с кодом выбранного шаблона компонента
@@ -78,9 +80,9 @@ namespace StoreSitesTypes {
     // СТАТЬИ (ТИПЫ) ==================================================================
 
     // id выбранного элемента: папки или статьи
-    export type CurrentArtItemId = null | DragFilesTreeType.ItemId
+    export type CurrentArtItemId = null | FilesTreeType.ItemId
     // Тип выбранного элемента (папка или компонент)
-    export type CurrentArtItemType = null | DragFilesTreeType.ItemType
+    export type CurrentArtItemType = null | FilesTreeType.ItemType
     // Имя выбранной статьи
     export type ArticleName = null | string
     // Строка с кодом выбранной статьи
@@ -146,7 +148,7 @@ namespace StoreSitesTypes {
     }
     export type SetCompFolderActionPayload = {
         id?: number
-        folders: DragFilesTreeType.Items
+        folders: FilesTreeType.Items
     }
 
     // ПАПКИ СО СТАТЬЯМИ (ЭКШЕНЫ) =====================================================
@@ -158,7 +160,7 @@ namespace StoreSitesTypes {
     }
     export type SetArtFolderActionPayload = {
         id?: number
-        folders: DragFilesTreeType.Items
+        folders: FilesTreeType.Items
     }
 
     // КОМПОНЕНТЫ (ЭКШЕНЫ) ============================================================
@@ -168,8 +170,8 @@ namespace StoreSitesTypes {
     export type SetCurrentCompAction = {
         type: typeof SET_CURRENT_COMP
         payload: {
-            id: null | DragFilesTreeType.ItemId
-            type: null | DragFilesTreeType.ItemType
+            id: null | FilesTreeType.ItemId
+            type: null | FilesTreeType.ItemType
             name?: string
             code?: string
         }
@@ -182,11 +184,11 @@ namespace StoreSitesTypes {
     export type SetCurrentArtAction = {
         type: typeof SET_CURRENT_ART
         payload: {
-            id: null | DragFilesTreeType.ItemId
-            type: null | DragFilesTreeType.ItemType
+            id: null | FilesTreeType.ItemId
+            type: null | FilesTreeType.ItemType
             name?: string
             code?: ArticleTypes.Article
-            siteTemplateId?: null | number
+            siteTemplateId?: CurrentSiteTemplateId
         }
     }
 

@@ -1,7 +1,7 @@
 import articleManager from '../../articleManager/articleManager'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 /**
  * Функция обновляет хеш версии папок шаблонов компонентов в статье,

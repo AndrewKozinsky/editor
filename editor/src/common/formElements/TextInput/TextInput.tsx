@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
-import { getRandomId } from 'src/utils/stringUtils'
+import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import InputError from 'common/formElements/InputError/InputError'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { MiscTypes } from 'types/miscTypes'
 import Label from '../Label/Label'
 import { useSetFocus } from './TextInput-func'
 import makeClasses from './TextInput-classes'
+import { getRandomId } from 'utils/stringUtils'
 
 
 export type TextInputPropType = {
@@ -13,14 +14,14 @@ export type TextInputPropType = {
     grayText?: string // Серый текст
     inputType?: 'text' | 'textarea' // Тип поля ввода
     type?: 'text' | 'email' | 'password' // Тип поля
-    name: string | number, // Аттрибут name текстового поля
+    name: string, // Аттрибут name текстового поля
     value: string, // Аттрибут value текстового поля
     autocomplete?: 'email' | 'username' | 'current-password' | 'new-password', // Значение автозаполнения поля
     // Доступные значения для autocomplete: https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofilling-form-controls%3A-the-autocomplete-attribute
     maxWidth?: 250 // Максимальная ширина поля
     rows?: number // Количество рядов у текстового поля
     placeholder?: string, // Текстозаполнитель
-    onChange: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
+    onChange: OuterOnChangeHandlerType.FieldsHandler, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки
@@ -67,7 +68,7 @@ export default function TextInput(props: TextInputPropType) {
         name,
         value,
         className: CN.root,
-        onChange: onChange,
+        onChange: (e: React.BaseSyntheticEvent) => fieldOnChangeHandler(e, onChange),
     }
 
     if (autocomplete) inputAttribs.autoComplete = autocomplete

@@ -9,7 +9,7 @@ type HeaderPagePropType = {
     children: ReactElement | ReactElement[]
 }
 
-// TODO Что делает эта функция?
+/** Обёртка страницы с заголовком */
 export default function HeaderPage(props: HeaderPagePropType) {
     const {
         headerText,

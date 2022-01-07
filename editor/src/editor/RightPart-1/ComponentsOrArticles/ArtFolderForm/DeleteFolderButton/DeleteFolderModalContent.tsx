@@ -1,26 +1,20 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import getConfig from './formConfig'
+import deleteFolderArtFormConfig from './deleteFolderArtFormConfig'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 
-/** Содержимое модального окна с вопросом удалить ли шаблон сайта и кнопками отмены и удаления */
-export function ModalContent() {
-
-    // Сообщения формы
-    const artFolderFormMsg = useGetMessages(articleFolderFormMessages)
-
-    const config = getConfig(artFolderFormMsg)
-    const formState = useFormConstructorState(config)
+/** Содержимое модального окна с вопросом удалить ли статью */
+export default function DeleteFolderModalContent() {
+    const formState = useFormConstructorState(deleteFolderArtFormConfig)
 
     return (
         <ModalShortContent
-            header={artFolderFormMsg.deleteFolderConfirmationHeaderInModal}
-            text={artFolderFormMsg.deleteFolderConfirmationTextInModal}
+            header={articleFolderFormMsg.deleteFolderConfirmationHeaderInModal}
+            text={articleFolderFormMsg.deleteFolderConfirmationTextInModal}
             bottomElems={
-                [<FormConstructor config={config} state={formState} key={1} />]
+                [<FormConstructor config={deleteFolderArtFormConfig} state={formState} key={1} />]
             }
         />
     )

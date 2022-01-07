@@ -1,4 +1,4 @@
-import React, {Fragment, ReactNode} from 'react'
+import React, { Fragment, ReactNode } from 'react'
 import Item from '../Item/Item'
 import { useGetFilesTreeMinWidth } from './TempCompFilesTree-func'
 import TempCompFilesTreeType from '../types'

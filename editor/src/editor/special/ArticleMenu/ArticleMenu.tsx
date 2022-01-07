@@ -1,25 +1,19 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
 import makeClasses from './ArticleMenu-classes'
 import SvgIcon from 'common/icons/SvgIcon'
-import {
-    useIsButtonVisible,
-    useIsDataBtnDisabled,
-    useIsHistoryBtnDisabled,
-    useMakeHistoryStep,
-    useShowData
-} from './ArticleMenu-func'
+import { useIsButtonVisible } from './ArticleMenu-func'
 import Button from 'common/formElements/Button/Button'
-import { articleMenuMessages } from 'messages/articleMenuMessages'
+import articleMenuMsg from 'messages/articleMenuMessages'
 import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
 import { useCloseArticle } from './CloseModal/close'
 import useGetShowModal from 'utils/hooksUtils'
 import { useIsMarkupBtnDisabled } from './fn/markup'
 import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
 import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
+import { useIsHistoryBtnDisabled, useMakeHistoryStep } from './fn/history'
 
 
-// TODO Что делает эта функция?
+/** Меню в статье */
 export default function ArticleMenuButton() {
     const CN = makeClasses()
 
@@ -36,11 +30,9 @@ export default function ArticleMenuButton() {
     )
 }
 
-// TODO Что делает эта функция?
+/** Выпадающее меню статьи */
 function ArticleMenu() {
     const CN = makeClasses()
-
-    const articleMenuMsg = useGetMessages(articleMenuMessages)
 
     // Undo button
     const isUndoBtnDisabled = useIsHistoryBtnDisabled('undo')

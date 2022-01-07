@@ -1,9 +1,7 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import { articleFormMessages } from 'messages/articleFormMessages'
-import getFormConfig from './formConfig'
+import artFormConfig from './formConfig'
 import {
     useFillSiteTemplatesSelect,
     useGetArtDataFromServerAndSetInStore,
@@ -11,14 +9,10 @@ import {
 } from './ArtForm-func'
 import EditArticleSection from '../EditArticleSection/EditArticleSection'
 
-// TODO Что делает эта функция?
+/** Форма редактирования статьи */
 export default function ArtForm() {
-    // Сообщения формы
-    const articleFormMsg = useGetMessages(articleFormMessages)
-
     // Объекты конфигурации и состояния формы
-    const config = getFormConfig(articleFormMsg)
-    const formState = useFormConstructorState(config)
+    const formState = useFormConstructorState(artFormConfig)
 
     // Скачать данные статьи с сервера и поставить в Хранилище
     useGetArtDataFromServerAndSetInStore()
@@ -29,7 +23,7 @@ export default function ArtForm() {
 
     return (
         <>
-            <FormConstructor config={config} state={formState} />
+            <FormConstructor config={artFormConfig} state={formState} />
             <EditArticleSection />
         </>
     )

@@ -16,7 +16,7 @@ export function useGetAnotherFolderData(formState: FCType.StateFormReturn) {
     const { currentCompItemId } = useGetSitesSelectors().componentSection
 
     useEffect(function () {
-        setNewFolderName(foldersArr, currentCompItemId, formState)
+        setNewFolderName(foldersArr, currentCompItemId as string, formState)
     }, [foldersArr, currentCompItemId])
 }
 

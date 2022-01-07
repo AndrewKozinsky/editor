@@ -4,13 +4,13 @@ import confirmEmailRequest from 'requests/user/confirmEmailRequest'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
+import commonMsg from 'messages/commonMessages'
+import confirmEmailMsg from 'messages/confirmEmailMessages'
 
 /**
  * Функция возвращает конфигурацию формы подтверждения почты
- * @param {Object} commonMsg — объект с текстами ошибок
- * @param {Object} confirmEmailMsg — объект с текстами ошибок
  */
-export default function getConfig(commonMsg: any, confirmEmailMsg: any) {
+export default function getConfirmEmailFormConfig() {
     const config: FCType.Config = {
         fields: {
             token: {
@@ -39,6 +39,7 @@ export default function getConfig(commonMsg: any, confirmEmailMsg: any) {
         },
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {
+                // @ts-ignore
                 const email = response.data.user.email
                 store.dispatch(actions.user.setUserData('success', email))
 

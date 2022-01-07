@@ -1,6 +1,6 @@
 import React from 'react'
 import { OptionsType } from './SelectTypes'
-import {MiscTypes} from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 
 /**

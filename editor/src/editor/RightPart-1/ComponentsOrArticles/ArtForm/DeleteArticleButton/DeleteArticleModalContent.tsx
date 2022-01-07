@@ -1,27 +1,21 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {articleFormMessages} from 'messages/articleFormMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
-import getConfig from './formConfig'
+import articleFormMsg from 'messages/articleFormMessages'
+import deleteArticleModalConfig from './formConfig'
 
 
 /** Содержимое модального окна с вопросом удалить ли шаблон сайта и кнопками отмены и удаления */
 export function DeleteArticleModalContent() {
-
-    // Сообщения формы
-    const articleFormMsg = useGetMessages(articleFormMessages)
-
-    const config = getConfig(articleFormMsg)
-    const formState = useFormConstructorState(config)
+    const formState = useFormConstructorState(deleteArticleModalConfig)
 
     return (
         <ModalShortContent
             header={articleFormMsg.deleteArticleConfirmationHeaderInModal}
             text={articleFormMsg.deleteArticleConfirmationTextInModal}
             bottomElems={[
-                <FormConstructor config={config} state={formState} key={1} />
+                <FormConstructor config={deleteArticleModalConfig} state={formState} key={1} />
             ]}
         />
     )

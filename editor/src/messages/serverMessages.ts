@@ -1,7 +1,7 @@
-
+import getMsgProxy from './fn/msgProxy'
 
 // Сообщения не привязанные к конкретному месту
-export const serverMessages = {
+const serverMessages = {
     // NEXT TIME USE COMMON VALUES! FOR EXAMPLE: EMAILS, PASSWORD AND SO ON.
 
     authGuard_userIsNotAuthorized: {
@@ -404,3 +404,6 @@ export const serverMessages = {
         rus: 'Текущий пользователь не создавал удаляемую статью.'
     },
 }
+
+const serverMsg = getMsgProxy<typeof serverMessages>(serverMessages)
+export default serverMsg

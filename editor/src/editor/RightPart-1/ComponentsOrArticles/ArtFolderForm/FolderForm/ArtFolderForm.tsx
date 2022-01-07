@@ -1,24 +1,17 @@
 import React from 'react'
-import { articleFolderFormMessages } from 'messages/articleFolderFormMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import { useGetAnotherFolderData } from './ArticlesFolderForm-func'
-import getFormConfig from './formConfig'
+import artFolderFormConfig from './formConfig'
 
 
-/** Компонент формы редактирования папки */
+/** Компонент формы редактирования папки со статьями */
 export default function ArtFolderForm() {
-
-    // Сообщения формы
-    const compFolderFormMsg = useGetMessages(articleFolderFormMessages)
-
-    // Объекты конфигурации и состояния формы
-    const config = getFormConfig(compFolderFormMsg)
-    const formState = useFormConstructorState(config)
+    // Объект состояния формы
+    const formState = useFormConstructorState(artFolderFormConfig)
 
     // Хук изменяет код папки статьи в поле Название при переключении папки
     useGetAnotherFolderData(formState)
 
-    return <FormConstructor config={config} state={formState} />
+    return <FormConstructor config={artFolderFormConfig} state={formState} />
 }

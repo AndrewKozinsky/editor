@@ -6,7 +6,7 @@ import '../css/variables.scss'
 import '../css/default.scss'
 import '../css/app.scss'
 
-const appRootClass = 'app'
+const CN = 'app'
 
 // Хук формирует объект классов компонента App
 function useGetClasses() {
@@ -28,11 +28,11 @@ export function useGetAppClasses() {
     const [classes, setClasses] = useState<string[]>([])
 
     useEffect(function() {
-        let classesCopy = [appRootClass]
+        let classesCopy = [CN]
         if (editorTheme === 'dark') classesCopy.push('dark-theme')
 
         if (entryAndEditorViewState === 'toEntry' || entryAndEditorViewState === 'entry') {
-            classesCopy.push(appRootClass + '--second-bg')
+            classesCopy.push(CN + '--second-bg')
         }
 
         setClasses( classesCopy )

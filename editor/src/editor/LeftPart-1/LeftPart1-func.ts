@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
@@ -28,7 +29,7 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
     // Сформировать и вернуть объект с атрибутами списка пунктов
     return {
         // Список пунктов
-        items: sites.map((site: StoreSitesTypes.SiteType) => {
+        items: sites.map((site: StoreSitesTypes.Site) => {
             return {
                 id: site.id,
                 name: site.name,
@@ -52,10 +53,10 @@ export function useGetNewSiteOnClickHandler() {
 
     // Функция ставит в Хранилище пустое значение в качестве id выбранного сайта
     // чтобы программа понимала, что нужно показать форму создания нового сайта
-    return function () {
+    return useCallback(function () {
         // Поставить id сайта. Пустая строка обозначает id нового сайта.
         dispatch( actions.sites.setCurrentSiteId('') )
         // Поставить на первую правую вкладку
         dispatch( actions.sites.setRightMainTab(0) )
-    }
+    }, [])
 }

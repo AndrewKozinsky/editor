@@ -5,9 +5,8 @@ import {
     useGetToggleFolder,
     useGetOnClickHandler
 } from './Item-func'
-import { componentsPanelMessages } from 'messages/componentsPanelMessages'
 import TempCompFilesTreeType from '../types'
-import useGetMessages from 'messages/fn/useGetMessages'
+import componentsPanelMsg from 'messages/componentsPanelMessages'
 
 
 type ItemPropType = {
@@ -143,8 +142,6 @@ function RightButtons(props: RightButtonsPropType) {
     } = props
 
     const CN = makeClasses(itemData)
-
-    const componentsPanelMsg = useGetMessages(componentsPanelMessages)
 
     if (itemData.type === 'folder' || !itemData.afterButtonAllowed && !itemData.insideButtonAllowed) {
         return null

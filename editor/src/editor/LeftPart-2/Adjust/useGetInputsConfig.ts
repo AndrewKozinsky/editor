@@ -1,91 +1,58 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import { FlashedElemsCoords } from 'articleManager/methods/hooks'
-import useGetArticleSelectors from 'store/article/articleSelectors'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { FieldGroupPropType } from '../../../common/formElements/FieldGroup/FieldGroup'
-import { SelectPropType } from '../../../common/formElements/Select/Select'
-import { TextInputPropType } from '../../../common/formElements/TextInput/TextInput'
+import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+import { SelectPropType } from 'common/formElements/Select/Select'
+import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { AdjTextInputsType } from './AdjustInputs'
 
+// Тестовая функция. Потом нужно удалить.
 export default function useGetInputsConfig() {
     const [config, setConfig] = useState<AdjTextInputsType[]>([])
 
-    const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
-    const article = articleManager.hooks.getCurrentArticle()
-    const { tempComps } = useGetArticleSelectors()
+    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
 
     useEffect(function () {
-        if (!tempComps || !flashedElemCoords || !article) return
-
-        const getDElemAndTElemResult = getDElemAndTElem(article, flashedElemCoords, tempComps)
-        if (!getDElemAndTElemResult) return
-
-        const { dElem, tElem } = getDElemAndTElemResult
-        if (!dElem || !tElem) return
-
-        const inputsConfig = getInputsConfig(dElem, tElem)
-
-        setConfig(inputsConfig)
-    }, [article, flashedElemCoords, tempComps])
+        setConfig([])
+    }, [flashedElemInfo])
 
     return config
 }
 
-function getDElemAndTElem(
-    article: ArticleTypes.Article,
-    flashedElemCoords: FlashedElemsCoords,
-    tempComps: TempCompTypes.TempComps,
-) {
-    const { dComp, dElem } = getCompAndElemData(article, flashedElemCoords)
-    if (!dElem) return
 
-    const tElem = getElemTemplate(tempComps, dComp, dElem)
+/** Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента */
+/*export default function useGetInputsConfig() {
+    const [config, setConfig] = useState<AdjTextInputsType[]>([])
 
-    return { dElem, tElem }
-}
+    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
 
-function getCompAndElemData(article: ArticleTypes.Article, flashedElemCoords: FlashedElemsCoords) {
-    let dComp: null | ArticleTypes.Component = null
-    let dElem: null | ArticleTypes.ComponentElem = null
+    useEffect(function () {
+        const { dElem, tElem } = flashedElemInfo
+        if (!dElem || !tElem) return
 
-    const { dataCompId, dataElemId } = flashedElemCoords.selectedElem
+        const inputsConfig = getInputsConfig(dElem, tElem)
 
-    // Данные компонента
-    if (dataCompId) {
-        const dataComp = articleManager.getComponent(article.dComps, dataCompId)
-        if (dataComp.dCompType !== 'simpleTextComponent') {
-            dComp = dataComp
-        }
-    }
+        // setConfig(inputsConfig)
+    }, [flashedElemInfo])
 
-    // Данные элемента
-    if (dataElemId) {
-        dElem = articleManager.getDataElemInDataComp(dComp, dataElemId)
-    }
+    return config
+}*/
 
-    return { dComp, dElem }
-}
-
-function getElemTemplate(
-    tempComps: TempCompTypes.TempComps,
-    dComp: null | ArticleTypes.Component,
-    dElem: null | ArticleTypes.ComponentElem
-): null | TempCompTypes.Elem {
-
-    const tComp = articleManager.getTemplate(tempComps, dComp.tCompId)
-    return articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
-}
-
-function getInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AdjTextInputsType[] {
+/**
+ * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента
+ * @param {Object} dElem — данные выделенного элемента
+ * @param {Object} tElem — шаблон выделенного элемента
+ */
+/*function getInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AdjTextInputsType[] {
     if (!tElem.elemAttrs) return []
 
-    //@ts-ignore
+    // @ts-ignore
     return tElem.elemAttrs.map(elemAttr => {
         const inputType = getInputType(elemAttr)
+
         const dElemAttrObj = dElem.dCompElemAttrs.find(dCompElemAttr => {
-            return dCompElemAttr.dCompElemAttrId === elemAttr.elemAttrId
+            return dCompElemAttr.tCompElemAttrId === elemAttr.elemAttrId
         })
 
         return {
@@ -93,11 +60,15 @@ function getInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes
             data: getInputData(elemAttr, inputType, dElemAttrObj)
         }
     })
-}
+}*/
 
 type InputTypes = 'radio' | 'checkbox' | 'select' | 'text'
 
-function getInputType(tElemAttr: TempCompTypes.ElemAttr): InputTypes {
+/**
+ * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ */
+/*function getInputType(tElemAttr: TempCompTypes.ElemAttr): InputTypes {
     if (tElemAttr.elemAttrView === 'radio') {
         return 'radio'
     }
@@ -110,14 +81,22 @@ function getInputType(tElemAttr: TempCompTypes.ElemAttr): InputTypes {
     else {
         return 'text'
     }
-}
+}*/
 
-function getInputData(
+/**
+ * Функция возвращает данные, которые будут переданы в поле ввода изменения определённого атрибута для его отрисовки
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ * @param {String} inputType — тип поля
+ * @param {Object} dElemAttrObj — объект с данными об атрибуте элемента
+ */
+/*function getInputData(
     tElemAttr: TempCompTypes.ElemAttr,
     inputType: InputTypes,
     dElemAttrObj: ArticleTypes.Attrib
 ): TextInputPropType | FieldGroupPropType | SelectPropType {
+    // Текст в свойстве label и grayText у поля
     const { label, grayText } = getLabelAndGrayText(tElemAttr)
+    // Значение свойства value у атрибута
     const value = getAttrCurrentValue(dElemAttrObj, inputType)
 
     if (inputType === 'text') {
@@ -135,7 +114,7 @@ function getInputData(
             grayText,
             inputType: 'checkbox',
             groupName: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            inputsArr: getOptionsArr(tElemAttr),
+            inputsArr: getInputItems(tElemAttr),
             value,
             onChange: onChangeHandler,
         }
@@ -146,7 +125,7 @@ function getInputData(
             grayText,
             inputType: 'radio',
             groupName: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            inputsArr: getOptionsArr(tElemAttr),
+            inputsArr: getInputItems(tElemAttr),
             value,
             onChange: onChangeHandler,
         }
@@ -156,14 +135,18 @@ function getInputData(
             label,
             grayText,
             name: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            options: getOptionsArr(tElemAttr),
+            options: getInputItems(tElemAttr),
             value,
             onChange: onChangeHandler,
         }
     }
-}
+}*/
 
-function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
+/**
+ * Функция возвращает объект с данными что писать в названии поля ввода и значение серого текста (если его можно поставить)
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ */
+/*function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
     const attrName = tElemAttr.elemAttrName
     const attrAltName = tElemAttr.elemAttrAlt
 
@@ -177,9 +160,15 @@ function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
         label: attrAltName,
         grayText: attrName
     }
-}
+}*/
 
-function getAttrCurrentValue(dElemAttrObj: ArticleTypes.Attrib, inputType: InputTypes) {
+/**
+ *
+ * @param {ArticleTypes.Attrib} dElemAttrObj
+ * @param {InputTypes} inputType
+ * @returns {ArticleTypes.ComponentElemAttribValue | undefined}
+ */
+/*function getAttrCurrentValue(dElemAttrObj: ArticleTypes.Attrib, inputType: InputTypes) {
     if (inputType === 'text' || inputType === 'select') {
         return dElemAttrObj?.dCompElemAttrValue
             ? dElemAttrObj?.dCompElemAttrValue
@@ -190,9 +179,13 @@ function getAttrCurrentValue(dElemAttrObj: ArticleTypes.Attrib, inputType: Input
             ? dElemAttrObj?.dCompElemAttrValue
             : []
     }
-}
+}*/
 
-function getOptionsArr(tElemAttr: TempCompTypes.ElemAttr,) {
+/**
+ * Функция возвращает массив данных для генерирования флагов, переключателей или пунктов выпадающего списка
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ */
+/*function getInputItems(tElemAttr: TempCompTypes.ElemAttr,) {
     if (!tElemAttr?.elemAttrValues) return []
 
     return tElemAttr?.elemAttrValues.map(elemAttrValue => {
@@ -212,12 +205,9 @@ function getOptionsArr(tElemAttr: TempCompTypes.ElemAttr,) {
             grayText
         }
     })
-}
+}*/
 
-function onChangeHandler(e: React.BaseSyntheticEvent) {
-    const attrId = e.target.name // id изменённого атрибута
-    const value = e.target.value //
-
-    console.log(value)
-
-}
+// TODO Что делает эта функция?
+/*function onChangeHandler(data: {fieldName: string | number, fieldValue: (number | string)[]}) {
+    console.log(data)
+}*/

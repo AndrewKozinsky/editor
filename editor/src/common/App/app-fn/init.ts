@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getFromLocalStorage } from 'src/utils/miscUtils'
+import { getFromLocalStorage } from 'utils/miscUtils'
 import useGetUserSelectors from 'store/user/userSelectors'
 import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'
@@ -17,7 +17,6 @@ export function useGetAndSetEditorSettings() {
     // При отрисовке компонента...
     useEffect(function () {
         // Получение значения из LocalStorage
-        let language = getFromLocalStorage(config.ls.editorLanguage, 'eng') // Язык интерфейса: eng или rus
         let theme = getFromLocalStorage(config.ls.editorTheme, 'light') // Тема интерфейса
         let mainTab = getFromLocalStorage(config.ls.editorTab, 3) // id главной вкладки
         let siteId = getFromLocalStorage(config.ls.editorSiteId, '') // id сайта
@@ -33,8 +32,6 @@ export function useGetAndSetEditorSettings() {
 
         // Поставить значения в Хранилище
         // ПЕРЕД ТЕМ КАК СТАВИТЬ ДАННЫЕ В ХРАНИЛИЩЕ НУЖНО УБЕДИТЬСЯ, ЧТО ОНИ ВЕРНЫ.
-        // НАПРИМЕР editorSiteTemplateId МОЖЕТ БЫТЬ ПРОСТО НЕПРАВИЛЬНЫМ
-        dispatch( settingsActions.setEditorLanguage(language) )
         dispatch( settingsActions.setEditorTheme(theme) )
         dispatch( settingsActions.setMainTab(mainTab) )
         dispatch( sitesActions.setCurrentSiteId(siteId) )
@@ -50,11 +47,11 @@ export function useGetAndSetEditorSettings() {
 
 
 /**
- * Хук устанавливающий статус токена пользователя если он не известен (равен нулю).
- * Изначально токен статуса авторизации пользователя равен нулю.
+ * Хук устанавливающий статус токена пользователя если он не известен.
+ * Изначально токен статуса авторизации пользователя равен unknown.
  * Это значит не известно есть ли токен в куках и правилен ли он.
  * Поэтому делается запрос на сервер для его проверки. И в зависимости от этого статус становится
- * или 1 (токена нет или он неверный) или 2 (токен правильный)
+ * или fail (токена нет или он неверный) или success (токен правильный)
  */
 export function useGetUserDataAndStatus() {
     const dispatch = useDispatch()

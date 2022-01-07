@@ -227,9 +227,9 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 // Установка id выбранного подключаемых шаблонов
 function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
     if (action.payload.id) {
-        // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        // Поставить id статьи в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
         setInLocalStorage(config.ls.editorArticleId, action.payload.id)
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        // Поставить тип элемента (папка или статья) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
         setInLocalStorage(config.ls.editorArticleType, action.payload.type)
 
         let newArticleSection: StoreSitesTypes.ArticleSection

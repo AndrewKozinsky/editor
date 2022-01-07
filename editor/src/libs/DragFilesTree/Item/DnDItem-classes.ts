@@ -1,11 +1,10 @@
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import DragFilesTreeType from '../types'
 import './Item.scss'
 
 const CN = 'ft-item'
 const PlaceArrCN = 'ft-place-arrow'
 
-// TODO Что делает эта функция?
 export default function makeClasses(itemData: DragFilesTreeType.Item) {
     return {
         root: CN,
@@ -78,7 +77,10 @@ function getTriangleBtnClasses(itemData: DragFilesTreeType.Item) {
     }
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция возвращает классы для стрелки указывающей местоположение перетаскиваемого элемента после сброса
+ * @param {Object} itemData — данные папки или файла
+ */
 function getPlaceArrow(itemData: DragFilesTreeType.Item) {
     const classes = [PlaceArrCN]
     if (itemData.placeMark === 'before') classes.push(PlaceArrCN + '--before')

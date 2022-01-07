@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Сообщения не привязанные к конкретному месту
-export const commonMessages = {
+const commonMessages = {
     emailPlaceholder: {
         eng: 'For example: mail@gmail.com',
         rus: 'Например: mail@gmail.com'
@@ -26,3 +27,6 @@ export const commonMessages = {
         rus: 'Максимум можно ввести 50 символов'
     },
 }
+
+const commonMsg = getMsgProxy<typeof commonMessages>(commonMessages)
+export default commonMsg

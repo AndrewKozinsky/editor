@@ -1,26 +1,22 @@
 import React from 'react'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {componentFolderFormMessages} from 'messages/componentFolderFormMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
-import getConfig from './formConfig'
+import deleteFolderFormConfig from './formConfig'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import componentFolderFormMsg from 'messages/componentFolderFormMessages'
 
 
-/** Содержимое модального окна с вопросом удалить ли шаблон сайта и кнопками отмены и удаления */
-export function ModalContent() {
-
-    // Сообщения формы
-    const compFolderFormMsg = useGetMessages(componentFolderFormMessages)
-
-    const config = getConfig(compFolderFormMsg)
-    const formState = useFormConstructorState(config)
+/** Содержимое модального окна с вопросом удалить ли папку */
+export default function DeleteFolderModalContent() {
+    const formState = useFormConstructorState(deleteFolderFormConfig)
 
     return (
         <ModalShortContent
-            header={compFolderFormMsg.deleteFolderConfirmationHeaderInModal}
-            text={compFolderFormMsg.deleteFolderConfirmationTextInModal}
-            bottomElems={[<FormConstructor config={config} state={formState} key={1} />]}
+            header={componentFolderFormMsg.deleteFolderConfirmationHeaderInModal}
+            text={componentFolderFormMsg.deleteFolderConfirmationTextInModal}
+            bottomElems={[
+                <FormConstructor config={deleteFolderFormConfig} state={formState} key={1} />
+            ]}
         />
     )
 }

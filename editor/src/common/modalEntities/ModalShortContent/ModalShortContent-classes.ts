@@ -16,7 +16,7 @@ export default function useMakeClasses() {
     }
 }
 
-// TODO Что делает эта функция?
+/** Функция возвращает классы для элементы нижней части содержимого модального ока */
 function getBottom(modalType: StoreModalTypes.Type) {
     const classes = [CN + `__bottom`]
 

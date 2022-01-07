@@ -5,15 +5,6 @@ export namespace MiscTypes {
     /** Тип объекта со строковыми ключами с любым значением */
     export type ObjStringKey<T> = {[key: string]: T}
 
-    /** Тип объекта со строковыми ключами с любым значением */
-    // export type ObjStringKeyAnyVal = {[key: string]: any}
-
-    /** Тип объекта с со строковыми ключами и строковыми значениями */
-    // export type ObjStringKeyStringVal = {[key: string]: string}
-
-    /** Object type with string key and Тип объекта с со строковыми ключами и строковыми значениями */
-    // export type ObjStringKeyGenVal<T> = {[key: string]: T}
-
     /** Тип объекта с любыми строковыми ключами с любым значением */
     export type ReactRef = null | {current: HTMLElement}
 

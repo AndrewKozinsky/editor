@@ -79,7 +79,7 @@ export function checkElemAttrs(elemAttrs: any[]): string[] {
 
     elemAttrs.forEach(elemAttr => {
         // Проверка полей объекта elemAttr...
-        errorsArr.push(...checkProp(elemAttr.elemAttrId, 'elemAttrId', 'number', true))
+        errorsArr.push(...checkProp(elemAttr.elemAttrId, 'elemAttrId', 'string', true))
         errorsArr.push(...checkProp(elemAttr.elemAttrName, 'elemAttrName', 'string', true))
         errorsArr.push(...checkProp(elemAttr.elemAttrAlt, 'elemAttrAlt', 'string', false))
         errorsArr.push(...checkProp(elemAttr.elemAttrView, 'elemAttrView', 'input', false))
@@ -109,7 +109,7 @@ export function checkElemAttrValues(elemAttrValues: any[]): string[] {
 
     elemAttrValues.forEach(elemAttrValue => {
         // Проверка полей объекта elemAttrValue...
-        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueId, 'elemAttrValueId', 'number', true))
+        errorsArr.push(...checkProp(elemAttrValue.elemAttrValueId, 'elemAttrValueId', 'string', true))
         errorsArr.push(...checkProp(elemAttrValue.elemAttrValueValue, 'elemAttrValueValue', 'string', true))
         errorsArr.push(...checkProp(elemAttrValue.elemAttrValueAlt, 'elemAttrValueAlt', 'string', false))
         errorsArr.push(...checkProp(elemAttrValue.elemAttrValueChecked, 'elemAttrValueChecked', 'boolean', false))
@@ -187,7 +187,7 @@ export const componentCodeExample = `{
             elemName: 'Ячейка',
             elemAttrs: [
                 {
-                    elemAttrId: 1,
+                    elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrView: 'text',

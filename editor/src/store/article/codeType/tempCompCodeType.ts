@@ -49,7 +49,7 @@ namespace TempCompTypes {
 
     export type ElemAttr = {
         // id атрибута. Это требуется чтобы различать одинаковые атрибуты. Например два класса.
-        elemAttrId: number // 1
+        elemAttrId: string // '1'
         // Имя атрибута
         elemAttrName: string // 'class'
         // Alternative attribute name
@@ -66,7 +66,7 @@ namespace TempCompTypes {
 
     export type ElemAttrValue = {
         // Идентификатор атрибута. Он нужен чтобы можно было удалять и менять значения атрибутов не завися от самого значения. Можно ввести только цифры.
-        elemAttrValueId: number // 1
+        elemAttrValueId: ElemAttrValueId // '1'
         // Название класса
         elemAttrValueValue: string  // 'pattern-1'
         // Alternative class name
@@ -74,6 +74,8 @@ namespace TempCompTypes {
         // Отмечено ли данное значение атрибута при создании компонента
         elemAttrValueChecked?: boolean // true
     }
+
+    export type ElemAttrValueId = string
 
     export type ElemTagsValues = ElemTagsValue[]
 
@@ -83,7 +85,6 @@ namespace TempCompTypes {
         // Tag name
         elemTagValueName: string // 'h1'
     }
-
 
     export type InputType = 'text' | 'radio' | 'checkbox' | 'select'
 }

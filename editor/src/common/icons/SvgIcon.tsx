@@ -1,7 +1,7 @@
 import React from 'react'
 import { getIcon } from './js/getIcon'
 import { getIconSize } from './js/getIconSize'
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import './css/SvgIcon.scss'
 
 

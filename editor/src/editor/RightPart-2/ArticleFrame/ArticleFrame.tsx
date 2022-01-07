@@ -10,7 +10,10 @@ import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
 import useSetArticleDataInStore from './setArticleData/useSetArticleDataInStore'
-import { useSetSiteTemplate, useSetUserScriptsAndStylesToIFrame } from './setArticleData/useSetSiteTemplate'
+import {
+    useSetSiteTemplate,
+    useSetUserScriptsAndStylesToIFrame
+} from './setArticleData/useSetSiteTemplate'
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import './ArticleFrame.scss'

@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма ChangeResetPasswordFormBlock
-export const changeResetPasswordFormMessages = {
+const changeResetPasswordFormMessages = {
     // Заголовок формы ввода нового пароля
     formHeader: {
         eng: 'Password change',
@@ -36,3 +37,6 @@ export const changeResetPasswordFormMessages = {
         rus: 'В редактор'
     },
 }
+
+const changeResetPasswordFormMsg = getMsgProxy<typeof changeResetPasswordFormMessages>(changeResetPasswordFormMessages)
+export default changeResetPasswordFormMsg

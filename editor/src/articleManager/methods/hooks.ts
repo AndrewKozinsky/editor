@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import useGetFlashedElemDataAndTemplate from './useGetFlashedElemDataAndTemplate'
 
 export const hooks = {
     getCurrentHistoryItem: useGetCurrentHistoryItem,
     getCurrentArticle: useGetCurrentArticle,
-    getFlashedElemCoords: useGetFlashedElemCoords
+    getFlashedElemCoords: useGetFlashedElemCoords,
+    getFlashedElemDataAndTemplate: useGetFlashedElemDataAndTemplate
 }
 
 /** Hook returns current history item object */
@@ -49,8 +51,6 @@ export type FlashedElemsCoords = {
 }
 
 /** Hook returns object with coordinated hovered and selected component/element */
-// Я СЧИТАЮ, ЧТО ЭТОТ ХУК НУЖНО ОПТИМИЗИРОВАТЬ ЧТОБЫ ОН ЗАПУСКАЛСЯ НЕ ПРИ ЛЮБОМ ИЗМЕНЕНИИ ТЕКУЩЕЙ СТАТЬИ,
-// А ТОЛЬКО КОГДА ПОМЕНЯЛИСЬ КООРДИНАТЫ В ОДНОМ ИЗ ПРЕДСТАВЛЕНИИ.
 function useGetFlashedElemCoords() {
     const historyItem = useGetCurrentHistoryItem()
     const [flashedElemsCoords, setFlashedElemsCoords] = useState<null | FlashedElemsCoords>(null)
@@ -68,3 +68,4 @@ function useGetFlashedElemCoords() {
 
     return flashedElemsCoords
 }
+

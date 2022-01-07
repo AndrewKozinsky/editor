@@ -1,12 +1,18 @@
+// import React from 'react'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
  * Чтобы сохранить типы полученные данные, предварительно пропускаются через JSON.stringify
  * @param {String} propName — имя свойства
  * @param {String} value — значение свойства
+ * @param {Boolean} toJSON — нужно ли сохраняемое значение переводить в JSON
  */
-export function setInLocalStorage(propName: string, value: any) {
-    localStorage.setItem(propName, JSON.stringify(value))
+export function setInLocalStorage(propName: string, value: any, toJSON: boolean = false) {
+    const savedValue = toJSON
+        ? JSON.stringify(value)
+        : value
+
+    localStorage.setItem(propName, savedValue)
 }
 
 /**
