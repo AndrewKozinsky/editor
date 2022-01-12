@@ -165,7 +165,7 @@ const gridTemplate: TempCompTypes.Content = {
 
 const burgerTemplate2: TempCompTypes.Content = {
     name: 'Burger',
-    html: '<div class="burger burger--white" data-em-id="general" data-em-group="general-main"><div class="burger__top"><div class="burger__cell burger__cell--round" data-em-id="cell" data-em-group="cell-top"></div></div><div class="burger__mediterranean" data-em-id="mediterranean" data-em-group="mediterranean-main"></div><div class="burger__cell" data-em-id="cell" data-em-group="cell-bottom"></div></div>',
+    html: '<div class="burger burger--white" data-em-id="general"><div class="burger__top"><div class="burger__cell burger__cell--round" data-em-id="cell"></div></div><div class="burger__mediterranean" data-em-id="mediterranean"></div><div class="burger__bottom" data-em-id="bottom"><div class="burger__bottom-inner" data-em-id="bottom-inner">Text</div></div></div>',
     elems: [
         {
             elemId: 'general',
@@ -175,7 +175,7 @@ const burgerTemplate2: TempCompTypes.Content = {
                     elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
-                    elemAttrView: 'text',
+                    elemAttrView: 'checkbox',
                     elemAttrLockedValue: 'burger ',
                     elemAttrValues: [
                         {
@@ -192,11 +192,18 @@ const burgerTemplate2: TempCompTypes.Content = {
                         },
                     ]
                 },
+                {
+                    elemAttrId: '2',
+                    elemAttrName: 'data-title',
+                    elemAttrAlt: 'Data title',
+                    elemAttrView: 'text',
+                    elemAttrLockedValue: 'LockedValue ',
+                },
             ],
             elemTags: {
                 elemTagsValues: [
-                    {elemTagValueId: 1, elemTagValueName: 'aside'},
-                    {elemTagValueId: 2, elemTagValueName: 'section'},
+                    {elemTagValueId: '1', elemTagValueName: 'aside'},
+                    {elemTagValueId: '2', elemTagValueName: 'section'},
                 ]
             }
         },
@@ -205,7 +212,7 @@ const burgerTemplate2: TempCompTypes.Content = {
             elemName: 'Ячейка',
             elemTags: {
                 elemTagsValues: [
-                    {elemTagValueId: 5, elemTagValueName: 'main'},
+                    {elemTagValueId: '5', elemTagValueName: 'main'},
                 ]
             },
             elemTextInside: true
@@ -213,6 +220,15 @@ const burgerTemplate2: TempCompTypes.Content = {
         {
             elemId: 'mediterranean',
             elemName: 'Средняя часть'
+        },
+        {
+            elemId: 'bottom',
+            elemName: 'Нижняя часть часть',
+        },
+        {
+            elemId: 'bottom-inner',
+            elemName: 'Нижняя внутренняя часть',
+            elemTextInside: true
         },
     ]
 }
@@ -239,7 +255,6 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 1,
                     tCompElemId: 'general',
-                    tCompElemGroup: 'general-main',
                     dCompElemTag: 2,
                     dCompElemAttrs: [
                         {dCompElemAttrId: 1, dCompElemAttrValue: [1, 2]},
@@ -248,7 +263,6 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 2,
                     tCompElemId: 'cell',
-                    tCompElemGroup: 'cell-top',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 10,
@@ -258,13 +272,11 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 3,
                     tCompElemId: 'cell',
-                    tCompElemGroup: 'cell-top',
                     dCompElemTag: 5,
                 },
                 {
                     dCompElemId: 4,
                     tCompElemId: 'cell',
-                    tCompElemGroup: 'cell-top',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 11,
@@ -274,7 +286,6 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 5,
                     tCompElemId: 'mediterranean',
-                    tCompElemGroup: 'mediterranean-main',
                     dCompElemChildren: [
                         {
                             dCompType: 'component',
@@ -284,7 +295,6 @@ const artData: ArticleTypes.Article = {
                                 {
                                     dCompElemId: 1,
                                     tCompElemId: 'general',
-                                    tCompElemGroup: 'general-main',
                                     dCompElemTag: 2,
                                     dCompElemAttrs: [
                                         {dCompElemAttrId: 1, dCompElemAttrValue: []},
@@ -293,28 +303,23 @@ const artData: ArticleTypes.Article = {
                                 {
                                     dCompElemId: 2,
                                     tCompElemId: 'cell',
-                                    tCompElemGroup: 'cell-top',
                                 },
                                 {
                                     dCompElemId: 3,
                                     tCompElemId: 'cell',
-                                    tCompElemGroup: 'cell-top',
                                     dCompElemTag: 5
                                 },
                                 {
                                     dCompElemId: 4,
                                     tCompElemId: 'cell',
-                                    tCompElemGroup: 'cell-top',
                                 },
                                 {
                                     dCompElemId: 5,
                                     tCompElemId: 'mediterranean',
-                                    tCompElemGroup: 'mediterranean-main',
                                 },
                                 {
                                     dCompElemId: 6,
                                     tCompElemId: 'cell',
-                                    tCompElemGroup: 'cell-bottom',
                                 },
                             ]
                         }
@@ -323,7 +328,6 @@ const artData: ArticleTypes.Article = {
                 {
                     dCompElemId: 6,
                     tCompElemId: 'cell',
-                    tCompElemGroup: 'cell-bottom',
                     dCompElemChildren: {
                         dCompType: 'simpleTextComponent',
                         dCompId: 12,

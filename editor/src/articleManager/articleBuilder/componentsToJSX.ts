@@ -19,7 +19,10 @@ export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Ar
     })
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция превращает текстовый компонент данных в HTML
+ * @param {Object} htmlObj
+ */
 function handleTextObject(htmlObj: HTMLObjArrType.Text) {
     return htmlObj.text
 }
@@ -107,8 +110,7 @@ function fixAttribs(htmlObj: HTMLObjArrType.Tag, tagName: string, key: number) {
         }
     }
 
-    //@ts-ignore
-    objAttribs.key = key
+    objAttribs.key = key.toString()
 
     return objAttribs
 }

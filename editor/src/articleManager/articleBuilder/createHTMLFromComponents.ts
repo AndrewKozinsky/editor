@@ -56,7 +56,7 @@ function getAttribs(objAttribs: HTMLObjArrType.Attrs): string {
     let generalArr: string[] = []
 
     const unnecessaryProps = [
-        'data-em-id', 'data-em-group', 'data-em-d-gen-comp-id', 'data-em-d-comp-id',
+        'data-em-id', 'data-em-d-gen-comp-id', 'data-em-d-comp-id',
         'data-em-d-elem-id', 'data-em-d-text-comp-id'
     ]
 

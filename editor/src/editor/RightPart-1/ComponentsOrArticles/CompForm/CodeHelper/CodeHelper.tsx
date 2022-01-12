@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
-// import { componentFormMessages } from 'messages/componentTemplateFormMessages'
 import CodeCheckInfo from 'editor/special/CodeCheckInfo/CodeCheckInfo'
 import componentFormMsg from 'messages/componentTemplateFormMessages'
 import checkComponentCode, {componentCodeExample} from './checkComponentCode'

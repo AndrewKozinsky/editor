@@ -1,15 +1,19 @@
-import React from 'react'
 
-type Lang = 'eng' | 'rus'
+export type LangOptions = 'eng' | 'rus'
 
-type MsgType<MgsOrig, Lang> = {
-    // @ts-ignore
-    [Prop in keyof MgsOrig]: MgsOrig[Prop][Lang];
+type MessagesObjType = {
+    [key: string]: {
+        [key in LangOptions]: string
+    }
 }
 
-function getMsgProxy<T>(mgsOrigObj: any): MsgType<T, Lang>  {
+type MsgType<MgsOrig> = {
+    [Prop in keyof MessagesObjType]: MessagesObjType[Prop][LangOptions];
+}
+
+function getMsgProxy<T>(mgsOrigObj: any): MsgType<T>  {
     return new Proxy(mgsOrigObj, {
-        get(target, prop: string) {
+        get(target, prop) {
             const lsLang = localStorage.getItem('editorLanguage')
             let lang = ['eng', 'rus'].includes(lsLang)
                 ? lsLang : 'eng'

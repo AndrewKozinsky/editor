@@ -1,6 +1,10 @@
 import { cloneItem } from './methods/clone'
 import correctArticle from './methods/correctArticle'
-import { deleteComponent, deleteElement, deleteItem } from './methods/delete'
+import {
+    deleteComponent,
+    deleteElement,
+    deleteItem
+} from './methods/delete'
 import {
     createCompAndSetItNearComp,
     createCompAndSetInElem,
@@ -9,7 +13,7 @@ import {
 import {
     saveArticle,
     clearArticle,
-        deleteArticle,
+    deleteArticle,
 } from './methods/misc'
 import {
     getCurrentHistoryItem,

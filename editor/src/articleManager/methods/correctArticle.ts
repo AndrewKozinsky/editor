@@ -57,8 +57,7 @@ function makeMatchBetweenTCompsAndDComps(
 
         const tElem = tElems.find(tElem => {
             return dElem.tCompElemId === tElem.elemId
-            // НУЖНО ЕЩЁ ОБРАБОТАТЬ СЛУЧАЙ КОГДА ИМЯ ГРУППЫ В ШАБЛОНЕ НЕ СООТВЕТСТВУЕТ ИМЕНИ ГРУППЫ В ДАННЫХ, ХОТЯ ID элемента совпадают
-            // ТАК ЖЕ ИСПРАВЬ СИТУАЦИИ КОГДА В ШАБЛОНЕ ЕСТЬ ЭЛЕМЕНТЫ, А В ДАННЫХ ИХ НЕТ
+            // НУЖНО ЕЩЁ ОБРАБОТАТЬ СЛУЧАЙ КОГДА В ШАБЛОНЕ ЕСТЬ ЭЛЕМЕНТЫ, А В ДАННЫХ ИХ НЕТ
         })
 
         if (!tElem) {
@@ -171,7 +170,7 @@ function setEmptyTextComponent(article: ArticleTypes.Article, dElem: ArticleType
     // Поставить пустой текстовый компонент в массив детей если в шаблоне указано свойство elemTextInside, а текстового компонента нет
     if (tElem.elemTextInside) {
         if ([undefined, null].includes(dElem.dCompElemChildren) || Array.isArray(dElem.dCompElemChildren)) {
-            const newEmptyTextComp = articleManager.createSimpleTextComponent(article.dMeta.dMaxCompId)
+            const newEmptyTextComp = articleManager.createSimpleTextComponent(article.dMeta.dMaxCompId + 1)
 
             dElem.dCompElemChildren = newEmptyTextComp
             // Поставить значение максимального id компонента

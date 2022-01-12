@@ -15,7 +15,7 @@ export function useIsRemoveDisabled() {
             setDisabled(true)
             return
         }
-        const { selectedElem, moveSelectedComp } = historyItem
+        const { selectedElem } = historyItem
         const { dComps } = historyItem.article
 
         const canDeleteElem = articleManager.canDeleteElem(

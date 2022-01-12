@@ -257,7 +257,7 @@ export function canMoveItemToUpOrDown(
 
         // Составить список элементов с таким же названием группы, что и выделенный
         // потому что мне нужно проверить смогу ли я перемещать элемент в пределах элементов из его группы
-        const elemsGroupArr = dComp.dElems.filter(el => el.tCompElemGroup === dElem.tCompElemGroup)
+        const elemsGroupArr = dComp.dElems.filter(el => el.tCompElemId === dElem.tCompElemId)
 
         // Индекс положения элемента и длина массива
         idx = elemsGroupArr.findIndex(dElem => dElem.dCompElemId === dataElemId)

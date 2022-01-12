@@ -31,7 +31,7 @@ export function getConsistObjArr(
             dElem: dElem,
             tempElem: getTemplateElemByTempElemId(template, dElem.tCompElemId),
             htmlComp: htmlObj,
-            htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.tCompElemGroup, dElem.tCompElemId)
+            htmlElem: getHtmlElem(htmlObj, dElem.dCompElemId, dElem.tCompElemId)
         }
     })
 }
@@ -49,13 +49,11 @@ function getTemplateElemByTempElemId(template: TempCompTypes.TempComp, tCompElem
  * The function finds and returns html-element object with passed tCompElemGroup name and tCompElemId
  * @param {Object} htmlObj — component html-object
  * @param {Number} dCompElemId — an element id
- * @param {String} tCompElemGroup — the name of the group to which the element belongs
  * @param {String} tCompElemId — element template name
  */
 function getHtmlElem(
     htmlObj: HTMLObjArrType.Tag,
     dCompElemId: number,
-    tCompElemGroup: string,
     tCompElemId: string
 ): HTMLObjArrType.Tag {
     let htmlElem: HTMLObjArrType.Tag | null = null
@@ -65,9 +63,8 @@ function getHtmlElem(
     function find(htmlObj: HTMLObjArrType.Tag) {
         if ('text' in htmlObj) return
 
-        // If there is attr with a passed tCompElemId and a group name...
+        // If there is attr with a passed tCompElemId...
         if (htmlObj.attrs['data-em-id'] === tCompElemId
-            && htmlObj.attrs['data-em-group'] === tCompElemGroup
             && htmlObj.attrs['data-em-d-elem-id'] === dCompElemId.toString())
         {
             // The searches have finished
@@ -83,9 +80,8 @@ function getHtmlElem(
             let childObj = htmlObj.children[i]
             if ('text' in childObj) continue
 
-            // If there is attr with a passed tCompElemId and a group name...
+            // If there is attr with a passed tCompElemId...
             if (childObj.attrs['data-em-id'] === tCompElemId
-                && childObj.attrs['data-em-group'] === tCompElemGroup
                 && childObj.attrs['data-em-d-elem-id'] === dCompElemId.toString()
             ) {
                 // The searches have finished

@@ -10,3 +10,11 @@ $CN: adjust-panel;
     font-weight: bold;
     margin-top: -4px;
 }
+
+.#{$CN}__content {
+    margin-top: 5px;
+}
+
+.#{$CN}__content-hr {
+    margin: 10px 0;
+}

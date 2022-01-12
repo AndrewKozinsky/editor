@@ -1,4 +1,4 @@
-import './Adjust.scss'
+import './AdjustAttrs.scss'
 
 const CN = 'adjust'
 

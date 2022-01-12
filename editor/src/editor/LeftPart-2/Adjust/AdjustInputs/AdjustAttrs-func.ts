@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react'
-import articleManager from 'articleManager/articleManager'
-import { AdjTextInputsType } from './AdjustInputs'
+// import { useEffect, useState } from 'react'
+// import articleManager from 'articleManager/articleManager'
+import { AttrsAdjInputsType, TagAdjInputsType } from './AdjustInputs'
 
-/** Хук возвращает булево значение нужно ли отрисовывать поля ввода
- * изменения атрибутов выделенного элемента */
-export function useIsVisible() {
-    const [isVisible, setIsVisible] = useState(false)
-
-    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
-
-    useEffect(function () {
-        const { tElem } = flashedElemInfo
-
-        setIsVisible(!!tElem)
-    }, [flashedElemInfo])
-
-    return isVisible
+// Функция возвращает пример объекта конфигурации для отрисовки полей изменения атрибутов выделенного элемента.
+// Потом можно удалить
+export function getTagInputsConfigExample(): TagAdjInputsType[] {
+    return [
+        {
+            type: 'text',
+            data: {
+                label: 'Тег',
+                name: 'name',
+                value: 'value',
+                onChange: () => {},
+            }
+        }
+    ]
 }
 
-// Функция возвращает пример объекта конфигурации для отрисовки полей ввода
-// изменения атрибутов выделенного элемента. Потом можно удалить
-export function getInputsConfigExample(): AdjTextInputsType[] {
+
+export function getAttrsInputsConfigExample(): AttrsAdjInputsType[] {
     return [
         {
             type: 'text',

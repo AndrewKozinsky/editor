@@ -197,8 +197,8 @@ function getElementAndTextComponent($target: HTMLElement): ElementAndTextCompone
         }
 
         // @ts-ignore
-        $currentElem = $currentElem.parentNode
-            ? $currentElem.parentNode
+        $currentElem = $currentElem.parentElement
+            ? $currentElem.parentElement
             : null
     }
 

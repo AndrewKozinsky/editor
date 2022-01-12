@@ -199,7 +199,7 @@ function prepareElemClone(
             if ([1, 2].includes(deep)) {
                 dElem.dCompElemChildren = articleManager.createSimpleTextComponent(++newMaxCompId)
             }
-            // Для третьей текст будет такой же как и в клонируемом элементе
+            // Для третьей текст будет такой же, как и в клонируемом элементе
             else if (deep === 3) {
                 dElem.dCompElemChildren = articleManager.createSimpleTextComponent(
                     ++newMaxCompId, dElem.dCompElemChildren.text

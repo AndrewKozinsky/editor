@@ -48,8 +48,6 @@ namespace ArticleTypes {
         dCompElemId: Id // 1
         // Element template id
         tCompElemId: TempCompTypes.ElemId // 'banner'
-        // Name of elements group with the same tempElemId. They may be several groups with the same tempElemId.
-        tCompElemGroup: ElemGroup // 'banner-1'
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
         dCompElemTag?: Tag
         dCompElemAttrs?: Attribs
@@ -57,8 +55,7 @@ namespace ArticleTypes {
         dCompElemChildren?: ElemChildren
     }
 
-    export type ElemGroup = string // ''banner-1'
-    export type Tag = number | string // 1 OR 'div'
+    export type Tag = string // '1' OR 'div'
 
     export type Attribs = Attrib[]
 

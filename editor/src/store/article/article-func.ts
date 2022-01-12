@@ -36,7 +36,7 @@ export function isCursorInTheSameElem(
             flashedElem = historyItem.moveHoveredComp
         }
         else if (actionType === 'moveSelect') {
-            flashedElem = historyItem.moveHoveredComp
+            flashedElem = historyItem.moveSelectedComp
         }
 
         if (flashedElem.dataCompId === dataCompId) {

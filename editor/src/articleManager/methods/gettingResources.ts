@@ -276,7 +276,7 @@ export function getDCompIdxInArray(
 }
 
 /**
- * Возвращает количество элементов с таким же идентификатором и названием группы
+ * Возвращает количество элементов с переданным идентификатором
  * @param {Object} dComp — данные компонента
  * @param {Object} dElem — данные элемента
  * @returns {number}
@@ -287,14 +287,10 @@ export function getElemCount(
     dElem: ArticleTypes.ComponentElem
 ) {
     const elemTId = dElem.tCompElemId
-    const elemTGroup = dElem.tCompElemGroup
 
-    const elemsTheSameGroup = dComp.dElems.filter(dElem => {
-        return (
-            dElem.tCompElemId === elemTId &&
-            dElem.tCompElemGroup === elemTGroup
-        )
+    const elems = dComp.dElems.filter(dElem => {
+        return dElem.tCompElemId === elemTId
     })
 
-    return elemsTheSameGroup.length
+    return elems.length
 }

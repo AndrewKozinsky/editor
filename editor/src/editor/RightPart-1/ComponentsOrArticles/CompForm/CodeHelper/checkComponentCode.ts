@@ -1,11 +1,13 @@
 const JSON5 = require('json5')
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import {
-    checkForDifferentObjAttrValuesInArr,
+    checkElemAttrView,
+    checkElemTagsView,
+//     checkForDifferentObjAttrValuesInArr,
     checkForExtraProps,
     checkProp
 } from './checkFns'
 import { isMarkupCorrect } from './checkHtmlMarkup'
-import { checkMatchingMarkupWithElems } from './checkMatchingMarkupWithElems'
 
 /**
  * Код проверяющий правильность кода шаблона компонента.
@@ -16,21 +18,16 @@ export default function checkComponentCode(code: string) {
     const errorsArr: string[] = []
 
     try {
-        const codeObj = JSON5.parse(code)
+        const codeObj: TempCompTypes.Content = JSON5.parse(code)
 
         // Проверки полей name, html и elems
         errorsArr.push(...checkProp(codeObj.name, 'name', 'string', true))
-        errorsArr.push(...checkProp(codeObj.html, 'html', 'string', true, isMarkupCorrect.bind(this, codeObj.html)))
+        errorsArr.push(...checkProp(codeObj.html, 'html', 'string', true))
+        errorsArr.push(...isMarkupCorrect(codeObj))
         errorsArr.push(...checkProp(codeObj.elems, 'elems', 'arrayOfObjects', false, checkElems.bind(this, codeObj.elems)))
 
         // Проверка, что в объекте codeObj нет лишних полей
         errorsArr.push(...checkForExtraProps(codeObj, ['html', 'elems', 'name']))
-
-        // Если нет других ошибок и в свойстве elems находится массив, то проверить
-        // чтобы элементы в данных соответствовали элементам в разметке.
-        if (!errorsArr.length && Array.isArray(codeObj.elems)) {
-            errorsArr.push(...checkMatchingMarkupWithElems(codeObj))
-        }
 
         return errorsArr
     }
@@ -39,22 +36,23 @@ export default function checkComponentCode(code: string) {
     }
 }
 
+
 /**
  * Проверка массива code.elems.
  * @param {Array} elems — массив code.elems.
  */
-function checkElems(elems: any[]): string[] {
+function checkElems(elems: TempCompTypes.Elems): string[] {
     const errorsArr: string[] = []
 
     elems.forEach(elem => {
         // Проверка полей объекта elem...
         errorsArr.push(...checkProp(elem.elemId, 'elemId', 'string', true))
         errorsArr.push(...checkProp(elem.elemName, 'elemName', 'string', true))
+        errorsArr.push(...checkProp(elem.elemAttrs, 'elemAttrs', 'arrayOfObjects', false, checkElemAttrs.bind(this, elem.elemAttrs)))
+        errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
         errorsArr.push(...checkProp(elem.elemHidden, 'elemHidden', 'boolean', false))
         errorsArr.push(...checkProp(elem.elemCanDuplicate, 'elemCanDuplicate', 'boolean', false))
         errorsArr.push(...checkProp(elem.elemTextInside, 'elemTextInside', 'boolean', false))
-        errorsArr.push(...checkProp(elem.elemAttrs, 'elemAttrs', 'arrayOfObjects', false, checkElemAttrs.bind(this, elem.elemAttrs)))
-        errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
 
         // Проверка, что в объекте elem нет лишних полей
         errorsArr.push(
@@ -65,7 +63,7 @@ function checkElems(elems: any[]): string[] {
         )
     })
 
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elems, 'elemId'))
+    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elems, 'elemId'))
 
     return errorsArr
 }
@@ -74,7 +72,7 @@ function checkElems(elems: any[]): string[] {
  * Проверка массива code.elems[0].elemAttrs.
  * @param {Array} elemAttrs — массив code.elems[0].elemAttrs
  */
-export function checkElemAttrs(elemAttrs: any[]): string[] {
+export function checkElemAttrs(elemAttrs: TempCompTypes.ElemAttrs): string[] {
     const errorsArr: string[] = []
 
     elemAttrs.forEach(elemAttr => {
@@ -82,7 +80,7 @@ export function checkElemAttrs(elemAttrs: any[]): string[] {
         errorsArr.push(...checkProp(elemAttr.elemAttrId, 'elemAttrId', 'string', true))
         errorsArr.push(...checkProp(elemAttr.elemAttrName, 'elemAttrName', 'string', true))
         errorsArr.push(...checkProp(elemAttr.elemAttrAlt, 'elemAttrAlt', 'string', false))
-        errorsArr.push(...checkProp(elemAttr.elemAttrView, 'elemAttrView', 'input', false))
+        errorsArr.push(...checkElemAttrView(elemAttr))
         errorsArr.push(...checkProp(elemAttr.elemAttrLockedValue, 'elemAttrLockedValue', 'string', false))
         errorsArr.push(...checkProp(elemAttr.elemAttrValues, 'elemAttrValues', 'arrayOfObjects', false, checkElemAttrValues.bind(this, elemAttr.elemAttrValues)))
 
@@ -95,7 +93,7 @@ export function checkElemAttrs(elemAttrs: any[]): string[] {
         )
     })
 
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrs, 'elemAttrId'))
+    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrs, 'elemAttrId'))
 
     return errorsArr
 }
@@ -104,7 +102,7 @@ export function checkElemAttrs(elemAttrs: any[]): string[] {
  * Проверка массива code.elems[0].elemAttrs[0].elemAttrValues
  * @param {Array} elemAttrValues — массив code.elems[0].elemAttrs[0].elemAttrValues
  */
-export function checkElemAttrValues(elemAttrValues: any[]): string[] {
+export function checkElemAttrValues(elemAttrValues: TempCompTypes.ElemAttrValues): string[] {
     const errorsArr: string[] = []
 
     elemAttrValues.forEach(elemAttrValue => {
@@ -123,7 +121,7 @@ export function checkElemAttrValues(elemAttrValues: any[]): string[] {
         )
     })
 
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
+    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
 
     return errorsArr
 }
@@ -133,12 +131,13 @@ export function checkElemAttrValues(elemAttrValues: any[]): string[] {
  * Проверка массива code.elems[0].elemTags.
  * @param {Array} elemTagsObj — массив code.elems[0].elemTags.
  */
-export function checkElemTags(elemTagsObj: any): string[] {
+export function checkElemTags(elemTagsObj: TempCompTypes.ElemTags): string[] {
     const errorsArr: string[] = []
 
     // Проверка полей объекта elemTagsObj...
+    errorsArr.push(...checkProp(elemTagsObj.elemTagsView, 'elemTagsView', 'inputTag', false))
+    errorsArr.push(...checkElemTagsView(elemTagsObj))
     errorsArr.push(...checkProp(elemTagsObj.elemTagsValues, 'elemTagsValues', 'arrayOfObjects', false, checkElemTagsValues.bind(this, elemTagsObj.elemTagsValues)))
-    errorsArr.push(...checkProp(elemTagsObj.elemTagsView, 'elemTagsView', 'input', false))
 
     // Проверка, что в объекте elemTagsObj нет лишних полей
     errorsArr.push(
@@ -152,12 +151,12 @@ export function checkElemTags(elemTagsObj: any): string[] {
  * Проверка массива code.elems[0].elemTags[0].elemTagsValues.
  * @param {Array} elemTagsValues — массив code.elems[0].elemTags[0].elemTagsValues.
  */
-function checkElemTagsValues(elemTagsValues: any[]) {
+function checkElemTagsValues(elemTagsValues: TempCompTypes.ElemTagsValues) {
     const errorsArr: string[] = []
 
     elemTagsValues.forEach(elemTagsValue => {
         // Проверка полей объекта elemTagsValue...
-        errorsArr.push(...checkProp(elemTagsValue.elemTagValueId, 'elemTagValueId', 'number', true))
+        errorsArr.push(...checkProp(elemTagsValue.elemTagValueId, 'elemTagValueId', 'string', true))
         errorsArr.push(...checkProp(elemTagsValue.elemTagValueName, 'elemTagValueName', 'string', true))
 
         // Проверка, что в объекте elemTagsValue нет лишних полей
@@ -166,7 +165,7 @@ function checkElemTagsValues(elemTagsValues: any[]) {
         )
     })
 
-    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
+    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
 
     return errorsArr
 }
@@ -176,9 +175,9 @@ function checkElemTagsValues(elemTagsValues: any[]) {
 // Пример кода шаблона сайта (используется в примере шаблона)
 export const componentCodeExample = `{
     name: 'Banner',
-    html: '<div class="banner banner--pattern-1" data-em-id="banner" data-em-group="banner-1">
+    html: '<div class="banner banner--pattern-1" data-em-id="banner">
                <div class="banner__container">
-                   <div data-em-id="cell" data-em-group="cell-1"></div>
+                   <div data-em-id="cell"></div>
                </div>
            </div>',
     elems: [
@@ -190,7 +189,7 @@ export const componentCodeExample = `{
                     elemAttrId: '1',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
-                    elemAttrView: 'text',
+                    elemAttrView: 'radio',
                     elemAttrLockedValue: 'banner ',
                     elemAttrValues: [
                         {
@@ -204,9 +203,9 @@ export const componentCodeExample = `{
             ],
             elemTags: {
                 elemTagsValues: [
-                    { elemTagValueId: 1, elemTagValueName: 'h1' },
-                    { elemTagValueId: 2, elemTagValueName: 'h2' },
-                    { elemTagValueId: 3, elemTagValueName: 'h3' },
+                    { elemTagValueId: '1', elemTagValueName: 'h1' },
+                    { elemTagValueId: '2', elemTagValueName: 'h2' },
+                    { elemTagValueId: '3', elemTagValueName: 'h3' },
                 ],
                 elemTagsView: 'radio'
             },

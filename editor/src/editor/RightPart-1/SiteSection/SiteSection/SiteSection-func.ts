@@ -68,14 +68,14 @@ function getOptions(
     // Пункты выпадающего списка названий шаблонов сайта
     const options: OptionsType = templates.map(template => {
         return {
-            value: template.id,
+            value: template.id.toString(),
             label: template.name
         }
     })
 
     // Добавление пустого пункта
     options.unshift({
-        value: 0,
+        value: '0',
         label: siteSectionMsg.defaultSiteTemplateNotSelected.toString()
     })
 

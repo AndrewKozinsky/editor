@@ -2,7 +2,7 @@ import React from 'react'
 import NameSection from 'editor/wrappers/NameSection/NameSection'
 import TempCompList from '../TempCompList/TempCompList'
 import BottomButtons from '../BottomButtons/BottomButtons'
-import Adjust from '../AdjustPanel/AdjustPanel'
+import Adjust from '../Adjust/AdjustPanel/AdjustPanel'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import './LeftPart-2.scss'
 

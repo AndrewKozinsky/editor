@@ -68,4 +68,3 @@ function useGetFlashedElemCoords() {
 
     return flashedElemsCoords
 }
-

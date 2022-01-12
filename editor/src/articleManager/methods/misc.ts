@@ -34,7 +34,7 @@ export async function saveArticle(
 
 /** Функция очищающая редактируемую статью */
 export function clearArticle(this: typeof articleManager) {
-    // store.dispatch(actions.article.clearArticle())
+    store.dispatch(actions.article.clearArticle())
 }
 
 /**

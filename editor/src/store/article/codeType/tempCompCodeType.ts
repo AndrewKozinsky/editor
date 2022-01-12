@@ -31,10 +31,7 @@ namespace TempCompTypes {
         elemName: string // 'Ячейка'
         // Массив атрибутов
         elemAttrs?: ElemAttrs
-        elemTags?: {
-            elemTagsValues?: ElemTagsValues,
-            elemTagsView?: InputType
-        }
+        elemTags?: ElemTags
         //  Показывать ли данный элемент в статье по умолчанию
         elemHidden?: boolean // true
         // Можно ли дублировать данный элемент (true по умолчанию)
@@ -77,11 +74,16 @@ namespace TempCompTypes {
 
     export type ElemAttrValueId = string
 
+    export type ElemTags = {
+        elemTagsValues?: ElemTagsValues,
+        elemTagsView?: InputType
+    }
+
     export type ElemTagsValues = ElemTagsValue[]
 
     export type ElemTagsValue = {
         // Tag identifier. Он нужен чтобы можно было менять значения тега не завися от самого значения. Можно ввести только цифры.
-        elemTagValueId: number // 1
+        elemTagValueId: string // '1'
         // Tag name
         elemTagValueName: string // 'h1'
     }

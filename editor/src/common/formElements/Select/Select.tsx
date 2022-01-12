@@ -13,7 +13,7 @@ export type SelectPropType = {
     label?: string // Подпись выпадающего списка
     grayText?: string // Серый текст
     name: string // Имя выпадающего списка
-    value?: string | string[] // Выбранное значение выпадающего списка
+    value?: string // Выбранное значение выпадающего списка
     options: OptionsType // Массив для генерации тегов <option>
     onChange?: OuterOnChangeHandlerType.FieldsHandler, // Обработчик выбора пункта
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса

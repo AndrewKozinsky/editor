@@ -1,86 +1,48 @@
-import { useEffect, useState } from 'react'
-import articleManager from 'articleManager/articleManager'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-import { SelectPropType } from 'common/formElements/Select/Select'
-import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import { AdjTextInputsType } from './AdjustInputs'
-
-// Тестовая функция. Потом нужно удалить.
-export default function useGetInputsConfig() {
-    const [config, setConfig] = useState<AdjTextInputsType[]>([])
-
-    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
-
-    useEffect(function () {
-        setConfig([])
-    }, [flashedElemInfo])
-
-    return config
-}
-
-
-/** Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента */
-/*export default function useGetInputsConfig() {
-    const [config, setConfig] = useState<AdjTextInputsType[]>([])
-
-    const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
-
-    useEffect(function () {
-        const { dElem, tElem } = flashedElemInfo
-        if (!dElem || !tElem) return
-
-        const inputsConfig = getInputsConfig(dElem, tElem)
-
-        // setConfig(inputsConfig)
-    }, [flashedElemInfo])
-
-    return config
-}*/
+// import { useEffect, useState } from 'react'
+// import TempCompTypes from '../../../../store/article/codeType/tempCompCodeType'
+// import articleManager from 'articleManager/articleManager'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import { AttrsAdjInputsType } from '../AdjustInputs/AdjustInputs'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+// import { SelectPropType } from 'common/formElements/Select/Select'
+// import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента
  * @param {Object} dElem — данные выделенного элемента
  * @param {Object} tElem — шаблон выделенного элемента
  */
-/*function getInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AdjTextInputsType[] {
+/*export function getAttrsInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AttrsAdjInputsType[] {
     if (!tElem.elemAttrs) return []
 
-    // @ts-ignore
     return tElem.elemAttrs.map(elemAttr => {
         const inputType = getInputType(elemAttr)
 
-        const dElemAttrObj = dElem.dCompElemAttrs.find(dCompElemAttr => {
+        // Данные атрибута
+        /!*const dElemAttrObj = dElem.dCompElemAttrs.find(dCompElemAttr => {
             return dCompElemAttr.tCompElemAttrId === elemAttr.elemAttrId
-        })
+        })*!/
 
         return {
             type: inputType,
-            data: getInputData(elemAttr, inputType, dElemAttrObj)
+            // data: getInputData(elemAttr, inputType, dElemAttrObj)
         }
     })
 }*/
 
-type InputTypes = 'radio' | 'checkbox' | 'select' | 'text'
 
 /**
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  */
-/*function getInputType(tElemAttr: TempCompTypes.ElemAttr): InputTypes {
-    if (tElemAttr.elemAttrView === 'radio') {
-        return 'radio'
+/*function getInputType(tElemAttr: TempCompTypes.ElemAttr): TempCompTypes.InputType {
+    if (tElemAttr.elemAttrView) {
+        return tElemAttr.elemAttrView
     }
-    else if (tElemAttr.elemAttrView === 'checkbox') {
-        return 'checkbox'
-    }
-    else if (tElemAttr.elemAttrView === 'select') {
-        return 'select'
-    }
-    else {
-        return 'text'
-    }
+
+    return Array.isArray(tElemAttr.elemAttrValues)
+        ? 'radio' : 'text'
 }*/
 
 /**
@@ -93,7 +55,7 @@ type InputTypes = 'radio' | 'checkbox' | 'select' | 'text'
     tElemAttr: TempCompTypes.ElemAttr,
     inputType: InputTypes,
     dElemAttrObj: ArticleTypes.Attrib
-): TextInputPropType | FieldGroupPropType | SelectPropType {
+): TextInputPropType & FieldGroupPropType & SelectPropType {
     // Текст в свойстве label и grayText у поля
     const { label, grayText } = getLabelAndGrayText(tElemAttr)
     // Значение свойства value у атрибута

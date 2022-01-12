@@ -32,7 +32,7 @@ function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
             arr.push(obj)
         }
         // If this is text node...
-        else if (elems[i].nodeType === 1) {
+        else if (elems[i].nodeType === 3) {
             let elem = elems[0] as CharacterData
             // Get html-object
             const obj = getText(elem)
@@ -126,16 +126,15 @@ export namespace HTMLObjArrType {
     export type Attrs = { [key: string]: string }
 }
 
-/*const dataExample: HTMLObjArrType.Arr = [
+const dataExample: HTMLObjArrType.Arr = [
     {
-        tag: "div",
+        tag: 'div',
         attrs: { class: 'grid' },
         children: [
             {
                 tag: 'div',
                 attrs: {
                     class: 'grid__cell grid__cell--thin',
-                    'data-em-group': 'cell-top',
                     'data-em-id': 'cell'
                 },
                 children: [
@@ -147,10 +146,9 @@ export namespace HTMLObjArrType {
                 tag: 'div',
                 attrs: {
                     class: 'grid__cell grid__cell--thick',
-                    'data-em-group': 'cell-top',
                     'data-em-id': 'cell'
                 },
             }
         ]
     }
-]*/
+]

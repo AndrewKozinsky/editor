@@ -14,7 +14,7 @@ export const coordsInitialObj: CoordsObjType = {
     dataElemId: null
 }
 
-/** The hook gets coordinated of a flashed element from the Store and write its to <body> as a attribute */
+/** The hook gets coordinated of a flashed element from the Store and write they to <body> as a attribute */
 export function usePassFlashRectCoordsToIFrame() {
     const { $links, history, historyCurrentIdx } = useGetArticleSelectors()
 

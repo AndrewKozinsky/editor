@@ -78,23 +78,26 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
     const doc = parser.parseFromString(tempComp.content.html, 'text/html')
     const $component = doc.body.childNodes[0] as HTMLElement
 
-    // Так как в шаблоне могут использоваться элементы с одинаковым data-em-id, но разным data-em-group,
-    // то составлю объект, где будут об этом данные вида:
+    // Составлю объект, где будут данные id шаблона элемента и шаблон элемента:
     // [
-    //     {elemId: 'general', elemGroup: 'general-main', tElem: tElem},
-    //     {elemId: 'cell', elemGroup: 'cell-top', tElem: tElem},
-    //     {elemId: 'cell', elemGroup: 'cell-bottom', tElem: tElem}
+    //     {elemId: 'general', tElem: tElem},
+    //     {elemId: 'cell', tElem: tElem},
+    //     {elemId: 'cell', tElem: tElem}
     // ],
     const tElemsMap = getTElemsMap($component, tempComp.content.elems)
 
     const newElemsArr = tElemsMap.map((tElemMapItem, i) => {
+        // Объект с данными перебираемого элемента
         const newElemData: ArticleTypes.ComponentElem = {
             dCompElemId: i + 1,
             tCompElemId: tElemMapItem.elemId,
-            tCompElemGroup: tElemMapItem.elemGroup
         }
 
+        // Шаблон перебираемого элемента
         const { tElem } = tElemMapItem
+
+        // html перебираемого элемента
+        const $elem = $component.querySelector(`[data-em-id="${tElemMapItem.elemId}"]`) as HTMLElement
 
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
@@ -107,8 +110,11 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
         }*/
 
         if (tElem.elemTextInside) {
-            ++newMaxCompId
-            newElemData.dCompElemChildren = createSimpleTextComponent(newMaxCompId)
+            newElemData.dCompElemChildren = createSimpleTextComponent(
+                ++newMaxCompId,
+                // Предварительно заменить символы напоминающие пробел обычным пробелом
+                $elem.innerText.replace( /\s\s+/g, ' ' )
+            )
         }
         else {
             newElemData.dCompElemChildren = []
@@ -125,7 +131,6 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
 
 type TElemsMapItem = {
     elemId: string,
-    elemGroup: string,
     tElem: TempCompTypes.Elem
 }
 type TElemsMap = TElemsMapItem[]
@@ -138,12 +143,12 @@ function getTElemsMap($component: HTMLElement, tempElems: TempCompTypes.Elems): 
     const tElemsMap: TElemsMap = []
 
     for (let $elem of $elems) {
-        //@ts-ignore
-        const { emId, emGroup } = $elem.dataset
+        if (!($elem instanceof HTMLElement)) continue
+
+        const { emId } = $elem.dataset
 
         const tElemItem = {
             elemId: emId,
-            elemGroup: emGroup,
             tElem: tempElems.find(tElem => tElem.elemId === emId)
         }
 
@@ -182,19 +187,22 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
             dCompElemAttrValue: dElemAttrValue
         }
 
-        if (attribTemp.elemAttrValues?.length === 0) return
+        // Если поле ввода значения атрибута текстовое и есть значение по умолчанию...
+        if (attribTemp.elemAttrView === 'text' && attribTemp.elemAttrLockedValue) {
+            // ... то поставить значение по умолчанию в качестве значения атрибута
+            dElemAttr.dCompElemAttrValue = attribTemp.elemAttrLockedValue
+        }
 
-        // Перебор значений в шаблоне элемента
-        for (let i = 0; i < attribTemp.elemAttrValues.length; i++) {
-            // Ничего не делать если перебираемое значение не отмечено как значение по умолчанию
-            const tAttrValue = attribTemp.elemAttrValues[i]
-            if (!tAttrValue.elemAttrValueChecked) continue
+        // Если поле ввода значения атрибута предполагает массив предопределённых значений,
+        // то засунуть в массив идентификаторов установленных атрибутов те значения,
+        // которые обозначены как значения по умолчанию
+        if (Array.isArray(dElemAttr.dCompElemAttrValue)) {
+            for (let i = 0; i < attribTemp.elemAttrValues.length; i++) {
+                // Ничего не делать если перебираемое значение не отмечено как значение по умолчанию
+                const tAttrValue = attribTemp.elemAttrValues[i]
+                if (!tAttrValue.elemAttrValueChecked) continue
 
-            // Поставить значение по умолчанию в зависимости от формата хранения значений
-            if (attribTemp.elemAttrView === 'text') {
-                dElemAttr.dCompElemAttrValue = tAttrValue.elemAttrValueValue
-            }
-            else if (Array.isArray(dElemAttr.dCompElemAttrValue)) {
+                // Поставить значение по умолчанию
                 dElemAttr.dCompElemAttrValue.push(tAttrValue.elemAttrValueId)
             }
         }

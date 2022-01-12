@@ -16,7 +16,7 @@ import { insertChildren } from './insertChildren'
  * @param {Array} tempComps — массив шаблонов компонентов
  */
 export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
-    // Get component template by its tmpCompId
+    // Get component template by its tCompId
     let template = articleManager.getTemplate(tempComps, compData.tCompId)
 
     // Get html string
