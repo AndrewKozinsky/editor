@@ -126,11 +126,13 @@ $CN: ft-item;
 }
 
 
-// Значёк папки
+// Значок папки
 .#{$CN}__folder-sign {
     width: 15px;
     min-width: 15px;
     margin: 2px 5px 0 2px;
+    fill: var(--text-color);
+    opacity: 0.85;
 }
 
 
@@ -205,8 +207,6 @@ $CN: ft-item;
 .#{$CN}__inner-round-flash {
     border-color: var(--accent-color);
 }
-
-
 
 
 

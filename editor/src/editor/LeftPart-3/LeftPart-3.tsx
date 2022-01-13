@@ -1,9 +1,8 @@
 import React from 'react'
-import NameSection from '../wrappers/NameSection/NameSection'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
+import settingsPanelMsg from '../../messages/settingsPanelMessages'
 import ItemsList from 'common/ItemsList/ItemsList'
 import { useGetSettingsItemsListProps } from './LeftPart-3-func'
-import { settingsPanelMessages } from 'messages/settingsPanelMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 import './LeftPart-3.scss'
 
 
@@ -16,8 +15,6 @@ export default function LeftPart3(props: LeftPart3PropType) {
     const {
         display // Показывать ли обёртку
     } = props
-
-    const settingsPanelMsg = useGetMessages(settingsPanelMessages)
 
     // Аргументы для компонента выводящий список пунктов настроек
     const itemsListProps = useGetSettingsItemsListProps()

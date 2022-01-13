@@ -1,5 +1,5 @@
-import {useEffect, useState} from 'react'
-import {useDispatch, useSelector} from 'react-redux'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
@@ -7,7 +7,7 @@ import useGetUserSelectors from 'store/user/userSelectors'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
 /**
- * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
+ * Функция возвращает классы обёртки регистрационных форм в зависимости от адреса
  * Если перешли на страницу редактора, то добавить обёртке дополнительный класс
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
@@ -16,14 +16,14 @@ export function useIsComponentVisible() {
     // Статус токена авторизации
     const { authTokenStatus } = useGetUserSelectors()
 
-    // Какой компонент должен быть отрисован
+    // Какой компонент должен быть нарисован
     const { entryAndEditorViewState } = useGetSettingsSelectors()
 
     // Видны ли страницы входа?
     const [isVisible, setIsVisible] = useState(false)
 
     useEffect(function () {
-        if (authTokenStatus === 0) {
+        if (authTokenStatus === 'unknown') {
             setIsVisible(false)
         }
         else if (entryAndEditorViewState === 'editor') {
@@ -46,7 +46,7 @@ export function useIsComponentVisible() {
     return isVisible
 }
 
-/** Хук регулирует показ или окна редактора или окон входа в зависимости от различных условий. */
+/** Хук регулирует показ или окна редактора, или окон входа в зависимости от различных условий. */
 export function useViewStateChanger() {
     const dispatch = useDispatch()
 

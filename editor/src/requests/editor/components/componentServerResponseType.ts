@@ -9,7 +9,6 @@ type ComponentServerResponseType = {
     }
 }
 
-
 type ComponentType = {
     id: number
     content: string

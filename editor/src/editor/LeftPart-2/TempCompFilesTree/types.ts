@@ -1,32 +1,42 @@
-// import FilesTreeType from 'types/filesTree'
 
 // Типы компонента TempCompFilesTree
-/*namespace TempCompFilesTreeType {
+namespace TempCompFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
-    export interface Item extends FilesTreeType.Item {
-        // Is Insert inside button allowed
-        afterButtonAllowed?: boolean
-        insideButtonAllowed?: boolean
+    export type Item = FileItem | FolderItem
+
+    export type FileItem = {
+        id: FileItemId
+        type: 'file'
+        name: string // Item name
+        afterButtonAllowed: boolean
+        insideButtonAllowed: boolean
     }
 
-    // id папки или файла
-    export type UuId = string
+    export type FolderItem = {
+        id: FolderItemId
+        type: 'folder'
+        name: string // Item name
+        open?: boolean // Is folder open
+        content?: Items // Folder's content
+    }
 
-    // Массив uuid
-    export type UuIdArr = FilesTreeType.IdArr
+    export type FileItemId = number
+    export type FolderItemId = string
+    export type ItemId = FileItemId | FolderItemId
+    export type ItemIdArr = ItemId[]
+
 
     // Тип элемента: файл или папка
-    // export type ItemType = FilesTreeType.ItemType
+    export type ItemType = 'file' | 'folder'
 
-
-    export type AfterClickBeforeBtn = (ItemUuId: UuId) => void
-    export type AfterClickAfterBtn = (ItemUuId: UuId) => void
-    export type AfterClickInsideBtn = (ItemUuId: UuId) => void
+    export type AfterClickBeforeBtn = (ItemId: FileItemId) => void
+    export type AfterClickAfterBtn = (ItemId: FileItemId) => void
+    export type AfterClickInsideBtn = (ItemId: FileItemId) => void
 
     // Функция запускаемая после разворачивания/сворачивания папки
-    export type AfterCollapseFolder = (items: Items, openUuIdArr: UuIdArr) => void
+    export type AfterCollapseFolder = (items: Items, openIdArr: FolderItemId[]) => void
 
     export type After = {
         afterCollapseFolder: AfterCollapseFolder
@@ -34,6 +44,6 @@
         afterClickAfterBtn: AfterClickAfterBtn
         afterClickInsideBtn: AfterClickInsideBtn
     }
-}*/
+}
 
-// export default TempCompFilesTreeType
+export default TempCompFilesTreeType

@@ -1,14 +1,13 @@
 import './Menu.scss'
 
 // Корневой класс
-const menuRootClass = 'menu'
+const CN = 'menu'
 
-function makeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses() {
     return {
-        root: menuRootClass,
-        ul: `${menuRootClass}__ul`,
-        li: `${menuRootClass}__li`,
+        root: CN,
+        ul: CN + `__ul`,
+        li: CN + `__li`,
     }
 }
-
-export default makeClasses

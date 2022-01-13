@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Панель «Настройки»
-export const settingsPanelMessages = {
+const settingsPanelMessages = {
     header: {
         eng: 'Settings',
         rus: 'Настройки'
@@ -14,3 +15,6 @@ export const settingsPanelMessages = {
         rus: 'Редактор'
     },
 }
+
+const settingsPanelMsg = getMsgProxy<typeof settingsPanelMessages>(settingsPanelMessages)
+export default settingsPanelMsg

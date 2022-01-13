@@ -4,7 +4,7 @@ import MiscTypes from './miscTypes'
 export interface ExpressRequestInterface extends Request {
     user?: UserEntity
     headers: UpdatedHeaders
-    cookies: MiscTypes.ObjStringKeyStringVal
+    cookies: MiscTypes.ObjStringKey<string>
     params: { [key: string]: string }
 }
 

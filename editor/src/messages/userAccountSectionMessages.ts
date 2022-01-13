@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Секция «Учетная запись»
-export const userAccountSectionMessages = {
+const userAccountSectionMessages = {
     header: {
         eng: 'User account',
         rus: 'Учетная запись'
@@ -21,4 +22,11 @@ export const userAccountSectionMessages = {
         eng: 'If you delete your account, all articles created in the editor will also be deleted. Articles on your site will not be affected. Delete this account?',
         rus: 'С удалением учётной записи будут удалены и все статьи созданные в редакторе. Статьи на вашем сайте затронуты не будут. Удалить учётную запись?'
     },
+    accountSuccessfullyDeleted: {
+        eng: 'Account was deleted',
+        rus: 'Учётная запись удалена'
+    },
 }
+
+const userAccountSectionMsg = getMsgProxy<typeof userAccountSectionMessages>(userAccountSectionMessages)
+export default userAccountSectionMsg

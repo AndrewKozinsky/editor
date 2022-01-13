@@ -1,37 +1,46 @@
-// import TempCompTypes from './codeType/tempCompCodeType'
-// import ArticleTypes from './codeType/articleCodeType'
-// import FilesTreeType from 'libs/DragFilesTree/types'
-// import {CreateCompFnReturnType} from 'editor/RightPart-2/articleManager/insert'
+import TempCompTypes from './codeType/tempCompCodeType'
+import ArticleTypes from './codeType/articleCodeType'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 
-/*namespace StoreArticleTypes {
+namespace StoreArticleTypes {
 
     export type HistoryItems = HistoryItem[]
 
     export type HistoryItem = {
-        // Articles
+        // Article
         article: ArticleTypes.Article
-        // Hovered component/element coordinates
-        hoveredElem: HoveredElem
-        // Selected component/element coordinates
-        selectedElem: HoveredElem
+        // Flash rectangles coordinates
+        hoveredElem: FlashedElem
+        selectedElem: FlashedElem
+        moveHoveredComp: MoveFlashedComp
+        moveSelectedComp: MoveFlashedComp
+        // Current text component
+        selectedTextComp: SelectedTextComp
     }
 
-    export type HoveredElem = {
-        type: HoveredElementType
-        dataCompId: HoveredElementCompId
-        dataElemId: HoveredElementElemId
+    export type FlashedTagType = null | 'element' | 'rootElement' | 'component'
+    export type FlashedElem = {
+        tagType: FlashedTagType
+        dataCompId: FlashedElemId
+        dataElemId: FlashedElemId
+    }
+    export type MoveFlashedComp = {
+        dataCompId: FlashedElemId
     }
 
-    export type HoveredElementType = null | 'component' | 'element' | 'textComponent'
-    export type HoveredElementCompId = null | ArticleTypes.DataCompId
-    export type HoveredElementElemId = null | ArticleTypes.DataElemId
+    export type SelectedTextComp = {
+        dataCompId: FlashedElemId
+    }
+
+    export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
     export type TempComps = TempComp[]
 
     // A component template
     export type TempComp = {
-        uuid: string
+        id: number
         name: string
         code: TempCompTypes.TempComp
     }
@@ -49,50 +58,24 @@
     export type HeadLink = null | HTMLHeadElement
     export type BodyLink = null | HTMLBodyElement
 
+    export type PressedKeyType = null | string
+    export type PressedKey = {
+        code: PressedKeyType, // Тип клавиши. null обозначает необрабатываемую клавишу, Text символьная, остальные значения берутся из e.code
+        value?: string // Если code Letter, то сюда заносится значение символа
+        altKey: boolean
+        ctrlKey: boolean
+        shiftKey: boolean
+    }
+
+    // Тип объекта возвращаемый функциями манипуляции компонентами (вставки, удаления, клонирования)
+    // Этот объект требуется для экшена и редьюсера ставящий новый объект истории статьи
+    export type CreateNewHistoryItem = {
+        components: ArticleTypes.Components // Массив компонентов
+        maxCompId: number // максимальный id
+    }
+
 
     // =============================================
-
-    // Типы типа и тип экшена
-    // Set components templates array
-    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
-    export type ClearArticleAction = {
-        type: typeof CLEAR_ARTICLE
-    }
-
-    // Set components templates array
-    export const SET_ARTICLE_MARKS = 'SET_ARTICLE_MARKS'
-    export type SetArticleMarksAction = {
-        type: typeof SET_ARTICLE_MARKS
-        payload: {
-            siteId: string,
-            articleUuId: string
-        }
-    }
-
-    // Типы типа и тип экшена
-    // Set components templates array
-    export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
-    export type SetTempCompAction = {
-        type: typeof SET_TEMP_COMPS
-        payload: StoreArticleTypes.TempComps
-    }
-
-    // Set article object
-    export const SET_ARTICLE = 'SET_ARTICLE'
-    export type SetArticleAction = {
-        type: typeof SET_ARTICLE
-        payload: HistoryItems
-    }
-
-    // Set article object
-    export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
-    export type SetIncFilesTemplateAction = {
-        type: typeof SET_SITE_TEMPLATE
-        payload: {
-            inHead: string
-            beforeEndBody: string
-        }
-    }
 
     // Set links to iFrame elements
     export const SET_LINKS = 'SET_LINKS'
@@ -106,30 +89,98 @@
         }
     }
 
-    // Set links to iFrame elements
-    export const SET_HOVERED_ELEMENT = 'SET_HOVERED_ELEMENT'
-    export type SetHoveredElementAction = {
-        type: typeof SET_HOVERED_ELEMENT
+    // Установка данных последней введённого символа
+    export const SET_PRESSED_KEY = 'SET_PRESSED_KEY'
+    export type SetPressedKeyAction = {
+        type: typeof SET_PRESSED_KEY,
+        payload: PressedKey
+    }
+
+    // Set components templates array
+    export const SET_ARTICLE_ID = 'SET_ARTICLE_ID'
+    export type SetArticleIdAction = {
+        type: typeof SET_ARTICLE_ID,
+        payload: number
+    }
+
+    // Set article object
+    export const SET_ARTICLE = 'SET_ARTICLE'
+    export type SetArticleAction = {
+        type: typeof SET_ARTICLE
         payload: {
-            actionType: 'hover' | 'select',
-            type: StoreArticleTypes.HoveredElementType,
-            dataCompId: StoreArticleTypes.HoveredElementCompId,
-            dataElemId: StoreArticleTypes.HoveredElementElemId
+            article: ArticleTypes.Article,
+            siteId: number,
+            siteTemplateId: number
         }
     }
 
-    // Set links to iFrame elements
+    export const CHANGE_SITE_TEMPLATE_ID = 'CHANGE_SITE_TEMPLATE_ID'
+    export type ChangeSiteTemplateIdAction = {
+        type: typeof CHANGE_SITE_TEMPLATE_ID
+        payload: number
+    }
+
+    export const CHANGE_SITE_TEMPLATE_VERSION_HASH = 'CHANGE_SITE_TEMPLATE_VERSION_HASH'
+    export type ChangeSiteTemplateVersionHashAction = {
+        type: typeof CHANGE_SITE_TEMPLATE_VERSION_HASH
+    }
+
+    // Set article object
+    export const SET_SITE_TEMPLATE = 'SET_SITE_TEMPLATE'
+    export type SetSiteTemplateAction = {
+        type: typeof SET_SITE_TEMPLATE
+        payload: SiteTemplateTypes.Template
+    }
+
+    // Увеличение хеша версии папок шаблонов компонентов. После этого хук запустит скачивание нового шаблона сайта
+    export const CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH = 'CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH'
+    export type ChangeTempCompsFoldersVersionHashAction = {
+        type: typeof CHANGE_TEMP_COMPS_FOLDERS_VERSION_HASH
+    }
+
+    // Увеличение хеша версии папок шаблонов компонентов. После этого хук запустит скачивание нового шаблона сайта
+    export const CHANGE_TEMP_COMPS_VERSION_HASH = 'CHANGE_TEMP_COMPS_VERSION_HASH'
+    export type ChangeTempCompsVersionHashAction = {
+        type: typeof CHANGE_TEMP_COMPS_VERSION_HASH
+    }
+
     export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
     export type SetTempCompFoldersAction = {
         type: typeof SET_TEMP_COMP_FOLDERS
-        payload: FilesTreeType.Items
+        payload: DragFilesTreeType.Items
     }
 
-    //
+    // Типы типа и тип экшена
+    // Set components templates array
+    export const SET_TEMP_COMPS = 'SET_TEMP_COMPS'
+    export type SetTempCompAction = {
+        type: typeof SET_TEMP_COMPS
+        payload: TempCompTypes.TempComps
+    }
+
+    export type FlashedElemType = 'hover' | 'select' | 'moveHover' | 'moveSelect'
+    export const SET_FLASHED_ELEMENT = 'SET_FLASHED_ELEMENT'
+    export type SetFlashedElementAction = {
+        type: typeof SET_FLASHED_ELEMENT
+        payload: {
+            actionType: FlashedElemType
+            tagType: StoreArticleTypes.FlashedTagType
+            dataCompId: StoreArticleTypes.FlashedElemId
+            dataElemId: StoreArticleTypes.FlashedElemId
+        }
+    }
+
+    // Установка id выделенного текстового компонента
+    export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
+    export type SetTextCompIdAction = {
+        type: typeof SET_TEXT_COMP_ID,
+        payload: number | null
+    }
+
     export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
     export type CreateAndSetHistoryItemAction = {
         type: typeof CREATE_AND_SET_HISTORY_ITEM
-        payload: CreateCompFnReturnType
+        payload: StoreArticleTypes.CreateNewHistoryItem
     }
 
     // Action changes a current history step
@@ -145,19 +196,39 @@
         type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
     }
 
+    // Установка id выделенного текстового компонента
+    export const UPDATE_CURRENT_ARTICLE = 'UPDATE_CURRENT_ARTICLE'
+    export type UpdateCurrentArticleAction = {
+        type: typeof UPDATE_CURRENT_ARTICLE,
+        payload: HistoryItem
+    }
+
+    // Очистка статьи
+    export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
+    export type ClearArticleAction = {
+        type: typeof CLEAR_ARTICLE
+    }
+
 
     export type ArticleAction =
-        | ClearArticleAction
-        | SetArticleMarksAction
-        | SetTempCompAction
-        | SetIncFilesTemplateAction
-        | SetArticleAction
         | SetLinksAction
-        | SetHoveredElementAction
+        | SetPressedKeyAction
+        | SetArticleIdAction
+        | SetArticleAction
+        | ChangeSiteTemplateIdAction
+        | ChangeSiteTemplateVersionHashAction
+        | SetSiteTemplateAction
+        | ChangeTempCompsFoldersVersionHashAction
+        | ChangeTempCompsVersionHashAction
         | SetTempCompFoldersAction
+        | SetTempCompAction
+        | SetFlashedElementAction
+        | SetTextCompIdAction
         | CreateAndSetHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
-}*/
+        | UpdateCurrentArticleAction
+        | ClearArticleAction
+}
 
-// export default StoreArticleTypes
+export default StoreArticleTypes

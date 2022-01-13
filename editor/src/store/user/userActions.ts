@@ -1,21 +1,37 @@
+import { MiscTypes } from 'types/miscTypes'
+import getUserToken from 'requests/user/getUserToken'
 import StoreUserTypes from './userTypes'
 
 const userActions = {
-    // Установка статуса токена авторизации пользователя
-    setAuthTokenStatus(payload: StoreUserTypes.AuthTokenStatusType): StoreUserTypes.SetAuthTokenStatusActionType {
-        return {
-            type: StoreUserTypes.SET_AUTH_TOKEN_STATUS,
-            payload,
+    // Запрос данных пользователя и установка в Хранилище
+    requestUserData() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Запрос на получение статуса токена
+            const response = await getUserToken()
+
+            if (!response || response.status !== 'success') {
+                dispatch( userActions.setUserData('fail', null) )
+                return
+            }
+
+            const { token, email } = response.data.user
+            const tokenStatus = token ? 'success' : 'fail'
+
+            // Установка сайтов в Хранилище
+            dispatch( userActions.setUserData(tokenStatus, email) )
         }
     },
 
-    // Установка почты пользователя
-    setEmail(payload: StoreUserTypes.EmailType): StoreUserTypes.SetEmailActionType {
+    // Установка данных пользователя в Хранилище
+    setUserData(tokenStatus: StoreUserTypes.AuthTokenStatusType, email: null | string): StoreUserTypes.SetUserDataActionType {
         return {
-            type: StoreUserTypes.SET_EMAIL,
-            payload,
+            type: StoreUserTypes.SET_USER_DATA,
+            payload: {
+                tokenStatus,
+                email
+            }
         }
-    }
+    },
 }
 
 export default userActions

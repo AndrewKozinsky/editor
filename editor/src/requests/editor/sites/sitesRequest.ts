@@ -1,16 +1,10 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import SiteServerResponseType from './siteServerResponseType'
+import { SitesServerResponseType } from './sitesServerResponseType'
 
 /** Функция получает список сайтов пользователя */
-export default async function sitesRequest() {
+export default async function sitesRequest(): Promise<SitesServerResponseType> {
     const options = { method: 'GET'}
-    const response: SitesRequestServerResponse = await makeFetch(getApiUrl('sites'), options)
 
-    return response
+    return await makeFetch(getApiUrl('sites'), options)
 }
-
-
-// Тип данных с ответом от пользователя
-type SitesRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

@@ -6,10 +6,11 @@ import disclaimerPdfLink from 'entrance/RegFormBlock/docs/Disclaimer.pdf'
 import policyOnPersonalDataProcessingPdfLink from 'entrance/RegFormBlock/docs/Policy_on_personal_data_processing.pdf'
 // @ts-ignore
 import consentToTheNewsletterPdfLink from 'entrance/RegFormBlock/docs/Consent_to_the_newsletter.pdf'
+import getMsgProxy from './fn/msgProxy'
 
 
 // Форма RegFormBlock
-export const regFormMessages = {
+const regFormMessages = {
     // Заголовок формы регистрации
     formHeader: {
         eng: 'Sign up',
@@ -52,3 +53,6 @@ export const regFormMessages = {
         rus: <>Регистрируясь на этом сайте вы подтверждаете принятие условий <a href={disclaimerPdfLink} target='_blank'>отказа от ответственности</a>, <a href={policyOnPersonalDataProcessingPdfLink} target='_blank'>политики в отношении обработки персональных данных</a> и <a href={consentToTheNewsletterPdfLink} target='_blank'>согласие с рассылкой</a>.</>
     },
 }
+
+const regFormMsg = getMsgProxy<typeof regFormMessages>(regFormMessages)
+export default regFormMsg

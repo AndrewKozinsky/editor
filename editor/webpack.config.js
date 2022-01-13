@@ -76,6 +76,7 @@ function getResolve() {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '.png', '.woff2'],
         alias: {
             src: path.resolve(__dirname, './src/'),
+            articleManager: path.resolve(__dirname, './src/articleManager'),
             common: path.resolve(__dirname, './src/common'),
             editor: path.resolve(__dirname, './src/editor'),
             entrance: path.resolve(__dirname, './src/entrance'),

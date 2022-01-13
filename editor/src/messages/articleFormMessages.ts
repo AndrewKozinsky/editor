@@ -1,17 +1,22 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма редактирования выбранной статьи
-/*export const articleFormMessages = {
+const articleFormMessages = {
     articleNameInput: {
         eng: 'Article name',
         rus: 'Название статьи'
     },
-    defaultTemplateInput: {
-        eng: 'The default template of the plug-in files',
-        rus: 'Шаблон подключаемых файлов по умолчанию'
-    },
     articleNameRequired: {
         eng: 'The article name cannot be empty',
         rus: 'Название статьи не может быть пустым'
+    },
+    articleNameIsTooLong: {
+        eng: 'An article name cannot be longer than 255 characters',
+        rus: 'Название статьи не может быть длиннее 255 символов'
+    },
+    defaultTemplateInput: {
+        eng: 'Site styles',
+        rus: 'Стили сайта'
     },
     submitBtnText: {
         eng: 'Save',
@@ -20,6 +25,10 @@
     deleteArticleBtnText: {
         eng: 'Delete',
         rus: 'Удалить'
+    },
+    deleteArticleConfirmationHeaderInModal: {
+        eng: 'Are you sure you want to delete the article?',
+        rus: 'Хотите удалить статью?'
     },
     deleteArticleConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the article?',
@@ -37,4 +46,19 @@
         eng: 'Edit',
         rus: 'Редактировать'
     },
-}*/
+    toEditor: {
+        eng: 'To the editor',
+        rus: 'В редактор'
+    },
+    articleIsAlreadyEdited: {
+        eng: 'The article is already being edited',
+        rus: 'Статья уже редактируется'
+    },
+    templateNotSelected: {
+        eng: 'Not selected',
+        rus: 'Не выбрано'
+    },
+}
+
+const articleFormMsg = getMsgProxy<typeof articleFormMessages>(articleFormMessages)
+export default articleFormMsg

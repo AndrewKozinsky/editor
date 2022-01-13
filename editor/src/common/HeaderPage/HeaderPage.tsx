@@ -9,8 +9,8 @@ type HeaderPagePropType = {
     children: ReactElement | ReactElement[]
 }
 
+/** Обёртка страницы с заголовком */
 export default function HeaderPage(props: HeaderPagePropType) {
-
     const {
         headerText,
         display = false, // Показывать ли компонент

@@ -1,8 +1,9 @@
 import React from 'react'
+import getMsgProxy from './fn/msgProxy'
 
 
 // Секция «Цветовая тема»
-export const themeSectionMessages = {
+const themeSectionMessages = {
     themeRadiosHeader: {
         eng: 'Color theme',
         rus: 'Цветовая схема'
@@ -20,3 +21,6 @@ export const themeSectionMessages = {
         rus: <>Страница не найдена</>
     }
 }
+
+const themeSectionMsg = getMsgProxy<typeof themeSectionMessages>(themeSectionMessages)
+export default themeSectionMsg

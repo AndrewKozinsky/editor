@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Названия вкладок на первой правой вкладке
-export const rightTabsMessages = {
+const rightTabsMessages = {
     sites: {
         eng: 'Site',
         rus: 'Сайт'
@@ -18,3 +19,6 @@ export const rightTabsMessages = {
         rus: 'Статьи'
     }
 }
+
+const rightTabsMsg = getMsgProxy<typeof rightTabsMessages>(rightTabsMessages)
+export default rightTabsMsg

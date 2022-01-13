@@ -1,41 +1,15 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import SiteTemplateResponseType from './siteTemplateServerResponseType'
 
 /**
  * Функция отправляет запрос на получение шаблонов подключаемых файлов определённого сайта
- * @param {String} siteId — id сайта у которого нужно получить шаблоны подключаемых файлов
  * @param {String} templateId — included files template id
  */
-/*export default async function getIncFilesTemplateRequest(siteId: string, templateId: string) {
-
+export default async function getSiteTemplateRequest(templateId: number): Promise<SiteTemplateResponseType> {
     const options = { method: 'GET' }
-    const response: GetIncFilesTemplatesRequestServerResponse = await makeFetch(
-        getApiUrl('siteTemplate', siteId, templateId), options
+
+    return await makeFetch(
+        getApiUrl('siteTemplate', templateId), options
     )
-
-    return response
-}*/
-
-
-// Тип данных с ответом от пользователя
-// type GetIncFilesTemplatesRequestServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType
-
-
-// Успешный ответ
-/*
-type SuccessResponse = {
-    status: "success"
-    data: {
-        template: {
-            codeInHead: {
-                code: string // "codeInHead 4"
-            },
-            codeBeforeEndBody: {
-                code: string // "codeBeforeEndBody 4"
-            },
-            _id: string // "60cc5dc35405e00071442014",
-            name: string // "Мой второй шаблон 50",
-            siteId: string // "60ca102ef8cfcc002074b3da"
-        }
-    }
-}*/
+}

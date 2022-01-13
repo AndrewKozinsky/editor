@@ -348,6 +348,7 @@ export class UserService {
         }
 
         response.send(resBody)
+        return
     }
 }
 

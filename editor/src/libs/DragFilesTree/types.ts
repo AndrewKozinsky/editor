@@ -1,28 +1,31 @@
 
 // Типы компонента DragFilesTree
-import {afterAddingNewFile} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+import FilesTreeType from '../../types/FilesTreeType'
 
 namespace DragFilesTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
-    export type Items = Item[]
+    export type Items = FilesTreeType.Items
 
-    export interface Item {
-        id: Id // Folder or file uuid
-        type: ItemType // Item type: folder or file
-        name: string // Item name
-        open?: boolean // Is folder open
-        content?: Items // Folder's content
+    export type Item = FileItem | FolderItem
+
+    export interface FileItem extends FilesTreeType.FileItem {
         placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
         loading?: boolean // Стоит ли значёк загрузки у файла?
         active?: boolean // Выделен ли элемент
     }
 
-    // id папки или файла
-    export type Id = number
-    export type IdArr = Id[]
+    export interface FolderItem extends FilesTreeType.FolderItem {
+        placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
+        active?: boolean // Выделен ли элемент
+    }
 
-    // Тип элемента: файл или папка
-    export type ItemType = 'file' | 'folder'
+    // id папки или файла
+    export type FileItemId = FilesTreeType.FileItemId
+    export type FolderItemId = FilesTreeType.FolderItemId
+    export type ItemId = FilesTreeType.ItemId
+    export type ItemIdArr = FilesTreeType.ItemIdArr
+
+    export type ItemType = FilesTreeType.ItemType
 
     // Визуальная отметка куда будет помещён перемещаемый элемент:
     // null — отметка не ставится
@@ -33,8 +36,6 @@ namespace DragFilesTreeType {
     export type SetItems = (items: Items) => void
 
     // Функция запускаемая после создания новой папки или файла
-    // export type AfterAddingNewFileFn = (...args: any) => Promise<number>
-    // export type AfterAddingNewFileFn = () => (...args: any) => Promise<number>
     export type AfterAddingNewFileFn = () => Promise<number>
 
     // Функция запускаемая после щелчка по папке или файлу
@@ -42,13 +43,13 @@ namespace DragFilesTreeType {
 
     // Функция запускаемая после разворачивания/сворачивания папки
     // На вход получает массив идентификаторов раскрытых папок
-    export type AfterCollapseFolderFn = (openIdArr: IdArr) => void
+    export type AfterCollapseFolderFn = (openIdArr: FolderItemId[]) => void
 
     // Функция запускаемая после изменения дерева папок и файлов
     export type AfterChangingTreeFn = (items: Items) => void
 
     // Функция запускаемая после удаления папки или файла
-    export type AfterDeleteItem = (items: Items, deletedItemUuid: Id) => void
+    export type AfterDeleteItem = (originalItems: Items, newItems: Items, deletedItem: Item) => void
 
     export type After = {
         newFolderName?: string

@@ -1,13 +1,14 @@
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import changeResetPasswordRequest from 'requests/user/changeResetPasswordRequest'
+import changeResetPasswordFormMsg from 'messages/changeResetPasswordFormMessages'
+import commonMsg from 'messages/commonMessages'
+
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
- * @param {Object} commonMsg — объект с текстами ошибок
- * @param {Object} changeResetPasswordFormMsg — объект с текстами ошибок
  */
-function getConfig(commonMsg: any,changeResetPasswordFormMsg: any) {
+export default function getChangeResetPasswordFormConfig() {
     const config: FCType.Config = {
         fields: {
             token: {
@@ -70,5 +71,3 @@ function getConfig(commonMsg: any,changeResetPasswordFormMsg: any) {
 
     return config
 }
-
-export default getConfig

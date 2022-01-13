@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'utils/stringUtils'
 import DragFilesTreeType from '../types'
 import './Item.scss'
 
@@ -39,7 +39,7 @@ function getInnerWrapperClasses(itemData: DragFilesTreeType.Item) {
         classes.push(`${CN}__inner-active`)
     }
 
-    if (itemData.loading) {
+    if (itemData.type === 'file' && itemData.loading) {
         classes.push(`${CN}--loading`)
     }
 
@@ -77,6 +77,10 @@ function getTriangleBtnClasses(itemData: DragFilesTreeType.Item) {
     }
 }
 
+/**
+ * Функция возвращает классы для стрелки указывающей местоположение перетаскиваемого элемента после сброса
+ * @param {Object} itemData — данные папки или файла
+ */
 function getPlaceArrow(itemData: DragFilesTreeType.Item) {
     const classes = [PlaceArrCN]
     if (itemData.placeMark === 'before') classes.push(PlaceArrCN + '--before')

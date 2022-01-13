@@ -24,7 +24,7 @@ export default function Notice(props: NoticePropType) {
 }
 
 
-/** Значёк левее содержимого */
+/** Значок левее содержимого */
 function Sign(props: NoticePropType) {
     const { icon } = props
 

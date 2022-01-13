@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import getMsgProxy from './fn/msgProxy'
 
 
 // Тексты страницы Not Found
-export const notFoundMessages = {
+const notFoundMessages = {
     header: {
-        eng: <>Page not found</>,
-        rus: <>Страница не найдена</>
+        eng: 'Page not found',
+        rus: 'Страница не найдена'
     },
     p1: {
         eng: <>If you think this page should be, write about the problem to <a href='mailto:andkozinsky@gmail.com'>andkozinsky@gmail.com</a>.</>,
@@ -17,3 +18,6 @@ export const notFoundMessages = {
         rus: <>Или перейдите на <Link to='/'>страницу редактора</Link>.</>
     },
 }
+
+const notFoundMsg = getMsgProxy<typeof notFoundMessages>(notFoundMessages)
+export default notFoundMsg

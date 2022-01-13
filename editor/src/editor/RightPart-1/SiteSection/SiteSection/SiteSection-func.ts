@@ -4,9 +4,9 @@ import { store } from 'store/rootReducer'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import FCType from 'libs/FormConstructor/FCType'
+import siteSectionMsg from 'messages/siteSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
+import { SitesServerResponseType } from '../../../../requests/editor/sites/sitesServerResponseType'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта
@@ -38,14 +38,12 @@ export function useSetSiteName(formState: FCType.StateFormReturn) {
  * @param {Object} formState — объект состояния формы
  */
 export function useSetSiteTemplates(formState: FCType.StateFormReturn) {
-    const siteSectionMsg = useGetMessages(siteSectionMessages)
-
     // id текущего сайта и массив сайтов
     const { templates } = useGetSitesSelectors().siteTemplatesSection
     const { sites, currentSiteId } = useGetSitesSelectors()
 
     // Формирование пунктов выпадающего списка
-    const options = getOptions(templates, siteSectionMsg)
+    const options = getOptions(templates)
 
     useEffect(function () {
         const valueFieldData = Object.assign(
@@ -63,23 +61,21 @@ export function useSetSiteTemplates(formState: FCType.StateFormReturn) {
 /**
  * Функция формирует пункты выпадающего списка «Шаблон сайта по умолчанию»
  * @param {Array} templates — массив шаблонов сайта
- * @param {Object} siteSectionMsg — объект с текстами интерфейса
  */
 function getOptions(
     templates: StoreSitesTypes.SiteTemplatesType,
-    siteSectionMsg: any
 ) {
     // Пункты выпадающего списка названий шаблонов сайта
     const options: OptionsType = templates.map(template => {
         return {
-            value: template.id,
+            value: template.id.toString(),
             label: template.name
         }
     })
 
     // Добавление пустого пункта
     options.unshift({
-        value: 0,
+        value: '0',
         label: siteSectionMsg.defaultSiteTemplateNotSelected.toString()
     })
 
@@ -105,16 +101,15 @@ function getValue(
  * при отправке формы создания нового сайта или изменения существующего
  * @param {Object} response — объект ответа от сервера
  */
-export async function afterSubmit(response: FCType.Response) {
+export async function afterSubmit(response: SitesServerResponseType) {
     // Если сайт успешно создан...
     if (response.status === 'success') {
         // Скачать новый список сайтов и поставить в Хранилище
         await store.dispatch(actions.sites.requestSites())
 
         // Найти в Хранилище сайт с таким же id как у только что созданного сайта
-        const newSite = store.getState().sites.sites.find((site: any) => {
-            // @ts-ignore
-            return site.id === response.data.sites[0].id
+        const newSite = store.getState().sites.sites.find((site: StoreSitesTypes.Site) => {
+            return site.id === response.data.sites[0].data.site.id
         })
         // Выделить созданный сайт
         store.dispatch(actions.sites.setCurrentSiteId(newSite.id))

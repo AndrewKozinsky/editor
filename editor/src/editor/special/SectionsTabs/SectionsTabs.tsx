@@ -2,10 +2,10 @@ import React from 'react'
 import makeClasses from './SectionsTabs-classes'
 import MainTab, { MainTabDataType } from '../MainTab/MainTab'
 import { useGetTabData } from './SectionsTabs-func'
-// import ArticleMenuButton from '../ArticleMenu/ArticleMenu'
+import ArticleMenuButton from '../ArticleMenu/ArticleMenu'
 
 
-/** Компонент вкладок переключающих разделы радактора */
+/** Компонент вкладок переключающих разделы редактора */
 export default function SectionsTabs() {
     const CN = makeClasses()
 
@@ -19,8 +19,7 @@ export default function SectionsTabs() {
                     return <MainTab tabData={tabData} key={tabData.title} />
                 })}
             </div>
-            {/*<ArticleMenuButton />*/}
+            <ArticleMenuButton />
         </div>
     )
 }
-

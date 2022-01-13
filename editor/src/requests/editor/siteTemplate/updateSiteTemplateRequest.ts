@@ -1,7 +1,6 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from '../../errorServerResponseType'
-import SiteTemplateServerResponseType from './siteTemplateServerResponseType'
+import SiteTemplateResponseType from './siteTemplateServerResponseType'
 
 /**
  * Функция обновляет существующий шаблон подключаемых файлов
@@ -13,7 +12,7 @@ export default async function updateSiteTemplateRequest(values: UpdateSiteTempla
         method: 'PATCH',
         body: JSON.stringify(values)
     }
-    const response: UpdateTemplateRequestServerResponse = await makeFetch(
+    const response: SiteTemplateResponseType = await makeFetch(
         getApiUrl('siteTemplate', templateId), options
     )
 
@@ -24,6 +23,3 @@ export default async function updateSiteTemplateRequest(values: UpdateSiteTempla
 export type UpdateSiteTemplateValuesType = {
     content: string
 }
-
-// Тип данных с ответом от пользователя
-type UpdateTemplateRequestServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType

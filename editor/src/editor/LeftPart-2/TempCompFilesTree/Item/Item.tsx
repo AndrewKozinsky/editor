@@ -1,19 +1,15 @@
-// import React, {ReactNode} from 'react'
-// import SvgIcon from 'common/icons/SvgIcon'
-/*import {
-    getTriangleBtnClasses,
+import React, {ReactNode} from 'react'
+import makeClasses from './Item-classes'
+import SvgIcon from 'common/icons/SvgIcon'
+import {
     useGetToggleFolder,
     useGetOnClickHandler
-} from './Item-func'*/
-// import { componentsPanelMessages } from 'messages/componentsPanelMessages'
-// import TempCompFilesTreeType from '../types'
-// import {makeCN} from 'utils/StringUtils'
-// import './Item.scss'
+} from './Item-func'
+import TempCompFilesTreeType from '../types'
+import componentsPanelMsg from 'messages/componentsPanelMessages'
 
 
-// const CN = 'temp-comp-ft-item'
-
-/*type ItemPropType = {
+type ItemPropType = {
     // Массив всех папок и файлов.
     items: TempCompFilesTreeType.Items
     // Данные папки или файла.
@@ -22,10 +18,10 @@
     offset: number
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}*/
+}
 
 /** Папка или файл в структуре папок */
-/*export default function Item(props: ItemPropType) {
+export default function Item(props: ItemPropType) {
     const {
         items,
         itemData,
@@ -33,127 +29,119 @@
         after
     } = props
 
+    const CN = makeClasses()
+
     // Хук возвращает обработчик щелчка по элементу
     const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
 
     return (
         <div
             style={{paddingLeft: offset * 20}}
-            className={CN}
+            className={CN.root}
             onClick={onItemClickHandler}
         >
-            <div className={`${CN}__inner`}>
+            <div className={CN.inner}>
                 <Triangle items={items} itemData={itemData} after={after} />
                 <Icon itemData={itemData} />
                 <Circles itemData={itemData} />
                 <p className={`${CN}__item-name`}>{itemData.name}</p>
-                <div className={`${CN}__right-part`}>
-                    <RightButtons itemData={itemData} after={after} />
-                </div>
+                <RightButtons itemData={itemData} after={after} />
             </div>
         </div>
     )
-}*/
+}
 
-/*type TrianglePropType = {
+type TrianglePropType = {
     // Массив всех папок и файлов.
     items: TempCompFilesTreeType.Items
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}*/
+}
 
 /** Кнопка сворачивания/разворачивания папки. Для файла возвращается пустой элемент. */
-/*function Triangle(props: TrianglePropType) {
+function Triangle(props: TrianglePropType) {
     const {
         items,
         itemData,
         after
     } = props
 
-    // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
-    const toggleFolder = useGetToggleFolder(itemData.uuid, items, after)
+    const CN = makeClasses(itemData)
 
-    // Классы кнопки сворачивания папки
-    const triangleBtnClasses = getTriangleBtnClasses(CN, itemData)
+    // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
+    const toggleFolder = useGetToggleFolder(itemData, items, after)
 
     if (itemData.type === 'file') {
-        return <div className={triangleBtnClasses} />
+        return <div className={CN.triangleBtn} />
     }
 
     return (
         <button
-            className={triangleBtnClasses}
+            className={CN.triangleBtn}
             onClick={toggleFolder}
             data-ft-item-btn='true'
         >
             <SvgIcon type='filesTreeTriangle' />
         </button>
     )
-}*/
+}
 
 
-/*type IconPropType = {
+type IconPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
-}*/
+}
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-/*function Icon(props: IconPropType) {
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
+function Icon(props: IconPropType) {
     const {
         itemData
     } = props
+
+    const CN = makeClasses()
 
     if (itemData.type === 'file') return null
-    return <SvgIcon type='filesTreeFolder' extraClass={`${CN}__folder-sign`} />
-}*/
+    return <SvgIcon type='filesTreeFolder' extraClass={CN.folderSign} />
+}
 
 
-/*type CirclesPropType = {
+type CirclesPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
-}*/
+}
 
-/*
+// TODO Что делает эта функция?
 function Circles(props: CirclesPropType) {
-    const {
-        itemData
-    } = props
+    const { itemData } = props
 
-    let afterClasses = [`${CN}__circle`]
-    if (itemData.afterButtonAllowed) {
-        afterClasses.push(`${CN}__circle--visible`)
-    }
-
-    let insideClasses = [`${CN}__circle`]
-    if (itemData.insideButtonAllowed) {
-        insideClasses.push(`${CN}__circle--visible`)
-    }
+    const CN = makeClasses(itemData)
 
     return (
-        <div className={`${CN}__circles`}>
-            <div className={ makeCN(afterClasses) } />
-            <div className={ makeCN(afterClasses) } />
-            <div className={ makeCN(insideClasses) } />
+        <div className={CN.circles}>
+            <div className={CN.afterCircle} />
+            <div className={CN.afterCircle} />
+            <div className={CN.insideCircle} />
         </div>
     )
 }
-*/
 
-/*type RightButtonsPropType = {
+type RightButtonsPropType = {
     // Данные папки или файла.
     itemData: TempCompFilesTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
     after: TempCompFilesTreeType.After
-}*/
+}
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
-/*function RightButtons(props: RightButtonsPropType) {
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
+function RightButtons(props: RightButtonsPropType) {
     const {
         itemData,
         after,
     } = props
+
+    const CN = makeClasses(itemData)
 
     if (itemData.type === 'folder' || !itemData.afterButtonAllowed && !itemData.insideButtonAllowed) {
         return null
@@ -163,9 +151,9 @@ function Circles(props: CirclesPropType) {
     if (itemData.afterButtonAllowed) {
         afterButtons.push(
             <button
-                className={`${CN}__btn ${CN}__right-btn`}
-                onClick={(e) => after.afterClickBeforeBtn(itemData.uuid)}
-                title={componentsPanelMessages.beforeButton}
+                className={CN.afterBtn}
+                onClick={(e) => after.afterClickBeforeBtn(itemData.id)}
+                title={componentsPanelMsg.beforeButton.toString()}
                 key={1}
             >
                 <SvgIcon type='filesTreeUp' />
@@ -173,9 +161,9 @@ function Circles(props: CirclesPropType) {
         )
         afterButtons.push(
             <button
-                className={`${CN}__btn ${CN}__right-btn`}
-                onClick={(e) => after.afterClickAfterBtn(itemData.uuid)}
-                title={componentsPanelMessages.afterButton}
+                className={CN.afterBtn}
+                onClick={(e) => after.afterClickAfterBtn(itemData.id)}
+                title={componentsPanelMsg.afterButton.toString()}
                 key={2}
             >
                 <SvgIcon type='filesTreeDown' />
@@ -183,16 +171,11 @@ function Circles(props: CirclesPropType) {
         )
     }
 
-    let insideButtonClasses = [`${CN}__btn`, `${CN}__right-btn`]
-    if (!itemData.insideButtonAllowed) {
-        insideButtonClasses.push(`${CN}__right-btn--invisible`)
-    }
-
     const insideButton = (
         <button
-            className={ makeCN(insideButtonClasses) }
-            onClick={(e) => after.afterClickInsideBtn(itemData.uuid)}
-            title={componentsPanelMessages.insideButton}
+            className={ CN.insideBtn }
+            onClick={(e) => after.afterClickInsideBtn(itemData.id)}
+            title={componentsPanelMsg.insideButton.toString()}
             key={3}
         >
             <SvgIcon type='filesTreeTorus' />
@@ -200,9 +183,9 @@ function Circles(props: CirclesPropType) {
     )
 
     return (
-        <>
+        <div className={CN.rightPart}>
             {afterButtons}
             {insideButton}
-        </>
+        </div>
     )
-}*/
+}

@@ -5,13 +5,12 @@ import { ComponentRequestServerResponse } from './componentServerResponseType'
 
 /** Функция удаляет шаблон компонента */
 export default async function deleteComponentRequest(
-    articleId: StoreSitesTypes.CurrentCompItemId
+    compId: StoreSitesTypes.CurrentCompItemId
 ) {
     const options = { method: 'DELETE' }
     const response: ComponentRequestServerResponse = await makeFetch(
-        getApiUrl('articles', articleId), options
+        getApiUrl('component', compId), options
     )
 
     return response
 }
-

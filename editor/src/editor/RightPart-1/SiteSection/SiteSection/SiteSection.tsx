@@ -1,18 +1,16 @@
 import React from 'react'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import getNewSiteFormConfig from './newSiteFormConfig'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
+import newSiteFormConfig from './newSiteFormConfig'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import getCurrentSiteFormConfig from './currentSiteFormConfig'
-import {useSetSiteName, useSetSiteTemplates} from './SiteSection-func'
+import currentSiteFormConfig from './currentSiteFormConfig'
+import { useSetSiteName, useSetSiteTemplates } from './SiteSection-func'
 import './SiteSection.scss'
 
 
 /** Блок с формой изменения данных выбранного сайта */
 export default function SiteSection() {
-    // id выбранного сайта. В зависимости от значения будет отрисовываться
+    // id выбранного сайта. В зависимости от значения будет отрисоваться
     // или форма создания нового сайта или редактирования существующего.
     const { currentSiteId } = useGetSitesSelectors()
 
@@ -25,31 +23,20 @@ export default function SiteSection() {
 
 /* Форма создания нового сайта */
 function NewSiteForm() {
-    // Сообщения формы
-    const siteSectionMsg = useGetMessages(siteSectionMessages)
-
-    // Объекты конфигурации и состояния формы
-    const config = getNewSiteFormConfig(siteSectionMsg)
-    const formState = useFormConstructorState(config)
-
-    return <FormConstructor config={config} state={formState} />
+    const formState = useFormConstructorState(newSiteFormConfig)
+    return <FormConstructor config={newSiteFormConfig} state={formState} />
 }
 
 /* Форма редактирования существующего сайта */
 function ExistingSiteForm() {
-
-    // Сообщения формы
-    const siteSectionMsg = useGetMessages(siteSectionMessages)
-
-    // Объекты конфигурации и состояния формы
-    const config = getCurrentSiteFormConfig(siteSectionMsg)
-    const formState = useFormConstructorState(config)
+    // Объект состояния формы
+    const formState = useFormConstructorState(currentSiteFormConfig)
 
     // Хук изменяет имя сайта в поле Название при переключении сайта
     useSetSiteName(formState)
 
-    // Хук добавляет в форму выпадающий список шаблонов сайта если он имеется
+    // Хук добавляет в форму выпадающий список шаблонов сайта, если он имеется
     useSetSiteTemplates(formState)
 
-    return <FormConstructor config={config} state={formState} />
+    return <FormConstructor config={currentSiteFormConfig} state={formState} />
 }

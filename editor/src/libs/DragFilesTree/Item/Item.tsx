@@ -15,9 +15,7 @@ import {
     handleDragStart,
     handleDrag,
     handleDragOver,
-    handleDragEnd,
 } from './dragAndDrop'
-
 
 
 type ItemPropType = {
@@ -63,20 +61,34 @@ export default function Item(props: ItemPropType) {
             onMouseOver={markItemElem}
             onMouseOut={markItemElem}
             onDragStart={handleDragStart}
-            onDrag={(e: SyntheticEvent) => handleDrag(e, itemData, items, setItems)}
+            onDrag={(e: SyntheticEvent) => {
+                handleDrag(e, itemData, items, setItems, after, 'drag')
+            }}
             onDragOver={handleDragOver}
-            onDragEnd={(e: SyntheticEvent) => handleDragEnd(e, itemData, items, setItems, after)}
+            onDragEnd={(e: SyntheticEvent) => {
+                handleDrag(e, itemData, items, setItems, after, 'dragEnd')
+            }}
         >
             <div
                 className={CN.innerWrapper}
                 data-ft-inner='true'
             >
                 <PlaceArrow itemData={itemData} />
-                <Triangle items={items} setItems={setItems} itemData={itemData} after={after} />
+                <Triangle
+                    items={items}
+                    setItems={setItems}
+                    itemData={itemData}
+                    after={after}
+                />
                 <Icon itemData={itemData} />
                 { itemData.name }
                 <Loading itemData={itemData} />
-                <RightButtons items={items} setItems={setItems} itemData={itemData} after={after} />
+                <RightButtons
+                    items={items}
+                    setItems={setItems}
+                    itemData={itemData}
+                    after={after}
+                />
             </div>
         </div>
     )
@@ -103,6 +115,7 @@ function Triangle(props: TrianglePropType) {
     } = props
 
     // Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
+    // @ts-ignore
     const toggleFolder = useGetToggleFolder(itemData.id, items, setItems, after)
 
     const CN = makeClasses(itemData)
@@ -128,7 +141,7 @@ type IconPropType = {
     itemData: DragFilesTreeType.Item
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
     const {
         itemData
@@ -145,13 +158,13 @@ type LoadingPropType = {
     itemData: DragFilesTreeType.Item
 }
 
-/** Значёк загрузки. */
+/** Значок загрузки. */
 function Loading(props: LoadingPropType) {
     const { itemData } = props
 
     const CN = makeClasses(itemData)
 
-    if (!itemData.loading) return null
+    if (itemData.type !== 'file' || !itemData.loading) return null
     return (
         <div className={CN.loaderWrapper}>
             <Loader className={CN.loader} />
@@ -170,7 +183,7 @@ type RightButtonsPropType = {
     after: DragFilesTreeType.After
 }
 
-/** Значёк типа элемента. Если файл, то ничего не отрисовывается. */
+/** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function RightButtons(props: RightButtonsPropType) {
     const {
         items,
@@ -185,7 +198,9 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => createNewFile(e, itemData, items, setItems, after)}
+            onClick={(e: SyntheticEvent) => createNewFile(
+                e, itemData as DragFilesTreeType.FolderItem, items, setItems, after
+            )}
         >
             <SvgIcon type='filesTreePlus' />
         </button>
@@ -195,7 +210,9 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => createNewFolder(e, itemData, items, setItems, after)}
+            onClick={(e: SyntheticEvent) => createNewFolder(
+                e, itemData as DragFilesTreeType.FolderItem, items, setItems, after
+            )}
         >
             <SvgIcon type='filesTreeFolderPlus' />
         </button>
@@ -205,13 +222,13 @@ function RightButtons(props: RightButtonsPropType) {
         <button
             className={CN.rightBtn}
             data-ft-item-btn='true'
-            onClick={(e: SyntheticEvent) => removeItem(e, items, setItems, itemData.id, after)}
+            onClick={(e: SyntheticEvent) => removeItem(e, items, setItems, itemData, after)}
         >
             <SvgIcon type='filesTreeTrash' />
         </button>
     )
 
-    if (itemData.loading) {
+    if (itemData.type === 'file' && itemData.loading) {
         return null
     }
     else if (itemData.type === 'file') {

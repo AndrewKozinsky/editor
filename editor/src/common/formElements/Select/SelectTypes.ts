@@ -1,7 +1,9 @@
+// Массив пунктов выпадающего списка
 export type OptionsType = OptionType[]
 
+// Тип пункта выпадающего списка
 export type OptionType = {
-    value: number | string
+    value: string
     label: string
     disabled?: boolean
 }

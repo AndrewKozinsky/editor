@@ -37,6 +37,7 @@ export function useSetSiteTemplateCode(formState: FCType.StateFormReturn) {
 export async function afterSubmit(response: SiteTemplateServerResponseType) {
     // Если сайт успешно создан...
     if (response.status === 'success') {
+
         // Скачать новый список шаблонов сайта и поставить в Хранилище
         await store.dispatch(actions.sites.requestSiteTemplates())
 
@@ -46,5 +47,11 @@ export async function afterSubmit(response: SiteTemplateServerResponseType) {
         })
         // Выделить созданный шаблон сайта
         store.dispatch(actions.sites.setCurrentSiteTemplateId(newSiteTemplate.id))
+
+        // Если отредактировали шаблон сайта, который используется в редактируемой статье...
+        if (store.getState().article.siteTemplateId === newSiteTemplate.id) {
+            // ... то обновить хеш версии шаблона сайта чтобы хук скачал новую версию шаблона и поставил в <head> и <body>
+            store.dispatch(actions.article.changeSiteTemplateVersionHash())
+        }
     }
 }

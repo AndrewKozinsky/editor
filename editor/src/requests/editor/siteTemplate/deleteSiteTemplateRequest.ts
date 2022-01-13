@@ -1,30 +1,6 @@
-// import {useFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
-import { makeFetch } from '../../reqFn/fetch'
-import getApiUrl from '../../reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import SiteTemplateServerResponseType from './siteTemplateServerResponseType'
-
-// Хук удаляет шаблон подключаемых файлов
-/*export function useDeleteIncFilesTemplate() {
-
-    // id выделенного шаблона, который нужно удалить
-    const { currentSiteId } = useSelector((store: AppStateType) => store.sites)
-    const { currentTemplateId } = useSelector((store: AppStateType) => store.sites.siteTemplatesSection)
-
-    // Параметры запроса
-    const options = { method: 'DELETE'}
-
-    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: response, doFetch} =
-        useFetch<DeleteIncFilesTemplateServerResponse>(
-            getApiUrl('siteTemplate', currentSiteId, currentTemplateId), options
-        )
-
-    return { response, doFetch }
-}*/
-
-
+import getApiUrl from 'requests/reqFn/apiUrls'
+import { makeFetch } from 'requests/reqFn/fetch'
+import SiteTemplateResponseType from './siteTemplateServerResponseType'
 
 /**
  * Функция удаляет шаблон сайта
@@ -35,13 +11,9 @@ export default async function deleteSiteTemplateRequest(templateId: number) {
         method: 'DELETE'
     }
 
-    const response: DeleteSiteTemplateServerResponse = await makeFetch(
+    const response: SiteTemplateResponseType = await makeFetch(
         getApiUrl('siteTemplate', templateId), options
     )
 
     return response
 }
-
-// Тип данных с ответом от пользователя
-type DeleteSiteTemplateServerResponse = ErrorServerResponseType | SiteTemplateServerResponseType
-

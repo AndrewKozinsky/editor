@@ -3,9 +3,9 @@ import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import HeaderPage from 'common/HeaderPage/HeaderPage'
 import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
 import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
-import { userTabContentMessages } from 'messages/userTabContentMessages'
-import { editorTabContentMessages } from 'messages/editorTabContentMessages'
+import userTabContentMsg from 'messages/userTabContentMessages'
 import './RightPart-3.scss'
+import editorTabContentMsg from 'messages/editorTabContentMessages'
 
 
 type RightPart3PropType = {
@@ -18,8 +18,8 @@ export default function RightPart3(props: RightPart3PropType) {
         display // Показывать ли обёртку
     } = props
 
-    // Язык и активная вкладка панели настроек
-    const { editorLanguage, settingsPanelTab } = useGetSettingsSelectors()
+    // Активная вкладка панели настроек
+    const { settingsPanelTab } = useGetSettingsSelectors()
 
     // Возвращаемые компоненты
     const [partComponents, setPartComponents] = useState(<></>)
@@ -30,7 +30,7 @@ export default function RightPart3(props: RightPart3PropType) {
             if (tabName === 'user') {
                 return (
                     <HeaderPage
-                        headerText={userTabContentMessages.header[editorLanguage]}
+                        headerText={userTabContentMsg.header}
                         display={tabName === settingsPanelTab}
                         key={tabName}
                     >
@@ -41,7 +41,7 @@ export default function RightPart3(props: RightPart3PropType) {
             else if (tabName === 'editor') {
                 return (
                     <HeaderPage
-                        headerText={editorTabContentMessages.header[editorLanguage]}
+                        headerText={editorTabContentMsg.header}
                         display={tabName === settingsPanelTab}
                         key={tabName}
                     >
@@ -53,7 +53,7 @@ export default function RightPart3(props: RightPart3PropType) {
 
         // Поставить элементы в Местное состояние чтобы компонент их вернул
         setPartComponents( <>{parts}</> )
-    }, [settingsPanelTab, editorLanguage])
+    }, [settingsPanelTab])
 
     const CN = 'right-part-3'
     const style = display ? {} : {display: 'none'}

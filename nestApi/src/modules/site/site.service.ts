@@ -46,25 +46,30 @@ export class SiteService {
             newSite,
             {
                 userId: user.id,
+                defaultSiteTemplateId: null,
                 ...createSiteDto
             }
         )
 
+        // Сохранение новой статьи и получение полных данных
+        const newSiteFullData =  await this.siteRepository.save(newSite)
+
         // Создание папки с компонентами
         await this.compFolderService.createCompFolder(
-            { siteId: newSite.id, content: null },
+            { siteId: newSiteFullData.id, content: null },
             user
         )
 
         // Создание папки со статьями
         await this.artFolderService.createArtFolder(
-            { siteId: newSite.id, content: null },
+            { siteId: newSiteFullData.id, content: null },
             user
         )
 
-        return await this.siteRepository.save(newSite)
+        return newSiteFullData
     }
 
+    /** Обновление сайта (защищённый маршрут) */
     async updateSite(id: number, updateSiteDto: UpdateSiteDto): Promise<SiteEntity> {
         // Найти сайт, который нужно обновить
         const site = await this.siteRepository.findOne({ id })
@@ -149,5 +154,6 @@ export class SiteService {
         }
 
         response.send(resBody)
+        return
     }
 }

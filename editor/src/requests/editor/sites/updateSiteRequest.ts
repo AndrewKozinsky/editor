@@ -1,7 +1,6 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import SiteServerResponseType from './siteServerResponseType'
+import { SitesServerResponseType } from './sitesServerResponseType'
 
 /**
  * Функция отправляет данные для обновления данных сайта
@@ -14,7 +13,7 @@ export default async function updateSiteRequest(values: UpdateSiteRequestValuesT
         body: JSON.stringify(values)
     }
 
-    const response: UpdateSiteRequestServerResponse = await makeFetch(getApiUrl('site', siteId), options)
+    const response: SitesServerResponseType = await makeFetch(getApiUrl('site', siteId), options)
 
     return response
 }
@@ -24,9 +23,3 @@ export type UpdateSiteRequestValuesType = {
     name?: string, // название сайта
     defaultSiteTemplateId?: null | number // id шаблона подключаемых файлов по умолчанию
 }
-
-
-//
-
-// Тип данных с ответом от сервера
-type UpdateSiteRequestServerResponse = ErrorServerResponseType | SiteServerResponseType

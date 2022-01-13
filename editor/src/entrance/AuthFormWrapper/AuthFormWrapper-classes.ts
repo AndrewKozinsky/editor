@@ -1,12 +1,11 @@
 import './AuthFormWrapper.scss'
 
-const AFWRootClass = 'auth-form-wrapper'
+const CN = 'auth-form-wrapper'
 
-function makeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses() {
     return {
-        root: AFWRootClass,
-        logoWrapper: `${AFWRootClass}__logo-wrapper`
+        root: CN,
+        logoWrapper: CN + `__logo-wrapper`
     }
 }
-
-export default makeClasses

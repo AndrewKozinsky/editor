@@ -1,11 +1,12 @@
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { useEffect, useState } from 'react'
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import './EntrancePages.scss'
 
 const appRootClass = 'entrance-pages'
 
-function useMakeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function useMakeClasses() {
     const wrapperClass = useGetWrapperClasses()
 
     return {
@@ -14,7 +15,7 @@ function useMakeClasses() {
 }
 
 /**
- * Функция возращает классы обёртки регистрационных форм в зависимости от адреса
+ * Функция возвращает классы обёртки регистрационных форм в зависимости от адреса
  * Если перешли на страницу редактора, то добавить обёртке дополнительный класс
  * плавно увеличивающий масштаб и увеличивающий прозрачность чтобы форма
  * анимированно исчезла когда пользователь перешёл на страницу редактора.
@@ -22,7 +23,7 @@ function useMakeClasses() {
 export function useGetWrapperClasses() {
     const CN = appRootClass + '__wrapper'
 
-    // Какой компонент должен быть отрисован
+    // Какой компонент должен быть нарисован
     const { entryAndEditorViewState } = useGetSettingsSelectors()
 
     const [classes, setClasses] = useState<string[]>([CN])
@@ -53,5 +54,3 @@ export function useGetWrapperClasses() {
 
     return makeCN(classes)
 }
-
-export default useMakeClasses

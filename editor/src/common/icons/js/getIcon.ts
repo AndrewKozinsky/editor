@@ -1,4 +1,6 @@
 import { ReactNode } from 'react'
+import ElBtnSignClone1 from '../icons/elBtnSignClone1'
+import ElBtnSignVisible from '../icons/elBtnSignVisible'
 import Logo from '../icons/logo'
 import NoticeError from '../icons/NoticeError'
 import NoticeInfo from '../icons/NoticeInfo'
@@ -15,7 +17,7 @@ import BtnSignSave from '../icons/btnSignSave'
 import BtnSignFolder from '../icons/btnSignFolder'
 import BtnSignTrash from '../icons/btnSignTrash'
 import BtnSignAdd from '../icons/btnSignAdd'
-// import BtnSignCode from '../icons/btnSignCode'
+import BtnSignCode from '../icons/btnSignCode'
 // import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
 import BtnSignExit from '../icons/btnSignExit'
@@ -31,14 +33,20 @@ import FilesTreePlus from '../icons/filesTreePlus'
 import FilesTreeFolder from '../icons/filesTreeFolder'
 import FilesTreePlaceMark from '../icons/filesTreePlaceMark'
 import FilesTreeTrash from '../icons/filesTreeTrash'
-// import BtnSignEdit from '../icons/btnSignEdit'
-// import FilesTreeTorus from '../icons/filesTreeTorus'
-// import FilesTreeUp from '../icons/filesTreeUp'
-// import FilesTreeDown from '../icons/filesTreeDown'
-// import ArticleMenu from '../icons/articleMenu'
-// import BtnSignUndo from '../icons/btnSignUndo'
-// import BtnSignRedo from '../icons/btnSignRedo'
-// import BtnSignCancel from '../icons/btnSignCancel'
+import BtnSignEdit from '../icons/btnSignEdit'
+import FilesTreeTorus from '../icons/filesTreeTorus'
+import FilesTreeUp from '../icons/filesTreeUp'
+import FilesTreeDown from '../icons/filesTreeDown'
+import ArticleMenu from '../icons/articleMenu'
+import BtnSignUndo from '../icons/btnSignUndo'
+import BtnSignRedo from '../icons/btnSignRedo'
+import ElBtnSignInside from '../icons/elBtnSignInside'
+import ElBtnSignUp from '../icons/elBtnSignUp'
+import ElBtnSignDown from '../icons/elBtnSignDown'
+import ElBtnSignClone2 from '../icons/elBtnSignClone2'
+import ElBtnSignClone3 from '../icons/elBtnSignClone3'
+import ElBtnSignHide from '../icons/elBtnSignHide'
+import ElBtnSignRemove from '../icons/elBtnSignRemove'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -54,10 +62,10 @@ export function getIcon(type: string): ReactNode {
         // Логотип редактора
         logo: Logo,
 
-        // Значёк ошибки
+        // Значок ошибки
         errorTriangle: ErrorTriangle,
 
-        // Значёк успеха
+        // Значок успеха
         // successCircle: SuccessCircle,
 
         // Стрелочки выпадающего списка
@@ -82,15 +90,14 @@ export function getIcon(type: string): ReactNode {
         btnSignSave: BtnSignSave,
         btnSignFolder: BtnSignFolder,
         btnSignTrash: BtnSignTrash,
-        // btnSignCode: BtnSignCode,
+        btnSignCode: BtnSignCode,
         btnSignAdd: BtnSignAdd,
         // btnSignJson: BtnSignJson,
         btnSignClose: BtnSignClose,
         btnSignExit: BtnSignExit,
-        // btnSignEdit: BtnSignEdit,
-        // btnSignUndo: BtnSignUndo,
-        // btnSignRedo: BtnSignRedo,
-        // btnSignCancel: BtnSignCancel,
+        btnSignEdit: BtnSignEdit,
+        btnSignUndo: BtnSignUndo,
+        btnSignRedo: BtnSignRedo,
 
         // Тема интерфейса
         editorLightTheme: EditorLightTheme,
@@ -101,23 +108,34 @@ export function getIcon(type: string): ReactNode {
         filesTreeFolder: FilesTreeFolder,
         filesTreeFolderPlus: FilesTreeFolderPlus,
         filesTreePlus: FilesTreePlus,
-        // filesTreeTorus: FilesTreeTorus,
-        // filesTreeUp: FilesTreeUp,
-        // filesTreeDown: FilesTreeDown,
+        filesTreeTorus: FilesTreeTorus,
+        filesTreeUp: FilesTreeUp,
+        filesTreeDown: FilesTreeDown,
 
-        // Значёк указателя помещения перетаскиваемого элемента
+        // Значок указателя помещения перетаскиваемого элемента
         filesTreePlaceMark: FilesTreePlaceMark,
 
-        // Значёк указателя помещения перетаскиваемого элемента
+        // Значок указателя помещения перетаскиваемого элемента
         filesTreeTrash: FilesTreeTrash,
         // Article menu sign on menu button
-        // articleMenu: ArticleMenu,
+        articleMenu: ArticleMenu,
 
         // Значки в Notice
         noticeInfo: NoticeInfo,
         noticeError: NoticeError,
         noticeSuccess: NoticeSuccess,
+
+        // Значки на кнопках работы с элементами внизу
+        elBtnSignInside: ElBtnSignInside,
+        elBtnSignUp: ElBtnSignUp,
+        elBtnSignDown: ElBtnSignDown,
+        elBtnSignClone1: ElBtnSignClone1,
+        elBtnSignClone2: ElBtnSignClone2,
+        elBtnSignClone3: ElBtnSignClone3,
+        elBtnSignRemove: ElBtnSignRemove,
+        elBtnSignHide: ElBtnSignHide,
+        elBtnSignVisible: ElBtnSignVisible
     }
 
-    return components[type]
+    return components[type] || null
 }

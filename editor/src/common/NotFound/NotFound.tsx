@@ -1,13 +1,11 @@
 import React from 'react'
+import notFoundMsg from '../../messages/notFoundMessages'
 import makeClasses from './NotFound-classes'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { notFoundMessages } from 'messages/notFoundMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 
-
+/* Компонент «Страница не найдена» */
 export default function NotFound() {
-    const notFoundMsg = useGetMessages(notFoundMessages)
 
     // Классы компонента
     const CN = makeClasses()

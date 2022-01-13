@@ -16,7 +16,7 @@ export default function useGetLogOut() {
 
             setTimeout(function() {
                 // Поставить authTokenStatus в 1 чтобы выкинуть пользователя из редактора
-                dispatch(actions.user.setAuthTokenStatus(1))
+                dispatch(actions.user.setUserData('fail', null))
             }, 600)
         }, 1000)
     }

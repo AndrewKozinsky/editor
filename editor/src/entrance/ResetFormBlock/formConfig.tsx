@@ -1,13 +1,13 @@
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import resetPasswordRequest from 'requests/user/resetPasswordRequest'
+import commonMsg from 'messages/commonMessages'
+import resetFormMsg from 'messages/resetFormMessages'
 
 /**
  * Функция возвращает конфигурацию формы сброса пароля
- * @param {Object} commonMsg — объект с текстами ошибок
- * @param {Object} resetFormMsg — объект с текстами ошибок
  */
-function getConfig(commonMsg: any, resetFormMsg: any) {
+export default function getResetFormConfig() {
     const config: FCType.Config = {
         fields: {
             email: {
@@ -46,6 +46,3 @@ function getConfig(commonMsg: any, resetFormMsg: any) {
 
     return config
 }
-
-
-export default getConfig

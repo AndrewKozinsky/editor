@@ -1,31 +1,22 @@
 import React from 'react'
-import Wrapper from 'common/Wrapper/Wrapper'
-import Hr from 'common/misc/Hr/Hr'
-import { siteSectionMessages } from 'messages/siteSectionMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
-import getConfig from './formConfig'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
+import siteSectionMsg from 'messages/siteSectionMessages'
+import deleteSiteFormConfig from './formConfig'
 
 
 /** Содержимое модального окна с вопросом удалить ли сайт и кнопками отмены и удаления */
-export function ModalContent() {
-
-    // Сообщения формы
-    const siteSectionMsg = useGetMessages(siteSectionMessages)
-
-    const config = getConfig(siteSectionMsg)
-    const formState = useFormConstructorState(config)
+export default function DeleteSiteModalContent() {
+    const formState = useFormConstructorState(deleteSiteFormConfig)
 
     return (
-        <>
-            <p>{siteSectionMsg.deleteSiteConfirmationTextInModal}</p>
-            <Wrapper t={10}>
-                <Hr/>
-            </Wrapper>
-            <Wrapper t={10}>
-                <FormConstructor config={config} state={formState} />
-            </Wrapper>
-        </>
+        <ModalShortContent
+            header={siteSectionMsg.deleteSiteModalHeader}
+            text={siteSectionMsg.deleteSiteConfirmationTextInModal}
+            bottomElems={
+                [<FormConstructor config={deleteSiteFormConfig} state={formState} key='1' />]
+            }
+        />
     )
 }

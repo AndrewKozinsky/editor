@@ -1,6 +1,6 @@
 import React from 'react'
-import NameSection from '../wrappers/NameSection/NameSection'
-import Button from 'common/formElements/Button/Button'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
+import Button, { ButtonPropType } from 'common/formElements/Button/Button'
 import {
     useFetchSites,
     useGetNewSiteOnClickHandler,
@@ -8,10 +8,8 @@ import {
 } from './LeftPart1-func'
 import ItemsList from 'common/ItemsList/ItemsList'
 import Wrapper from 'common/Wrapper/Wrapper'
-import { MiscTypes } from 'types/miscTypes'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { sitesPanelMessages } from 'messages/sitesPanelMessages'
+import sitesPanelMsg from 'messages/sitesPanelMessages'
 import './LeftPart-1.scss'
 
 
@@ -25,8 +23,6 @@ export default function LeftPart1(props: LeftPart1PropType) {
     const {
         display // Показывать ли компонент
     } = props
-
-    const sitesPanelMsg = useGetMessages(sitesPanelMessages)
 
     // Атрибуты обёртки панели
     const CN = 'left-part-1'
@@ -42,20 +38,16 @@ export default function LeftPart1(props: LeftPart1PropType) {
     )
 }
 
-/** Компонент кнопки создания нового сайта */
+/** Кнопка создания нового сайта */
 function NewSiteButton() {
-
     // id выделенного сайта
     const { currentSiteId } = useGetSitesSelectors()
-    // const {currentSiteId} = useSelector((store: AppStateType) => store.sites)
 
     // Обработчик щелчка по кнопке
     const onClickHandler = useGetNewSiteOnClickHandler()
 
-    const sitesPanelMsg = useGetMessages(sitesPanelMessages)
-
     // Атрибуты кнопки
-    const attrs: MiscTypes.ObjStringKeyAnyVal = {
+    const attrs: ButtonPropType = {
         text: sitesPanelMsg.newSiteBtn,
         icon: 'btnSignAdd',
         block: true,

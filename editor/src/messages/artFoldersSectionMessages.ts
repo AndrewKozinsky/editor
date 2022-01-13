@@ -1,8 +1,7 @@
-// import {getMessagesObject} from 'messages/fn/getMessagesObject'
-
+import getMsgProxy from './fn/msgProxy'
 
 // Структура папок и файлов статей
-export const artFoldersSectionMessages = {
+const artFoldersSectionMessages = {
     createNewFolderBth: {
         eng: 'New folder',
         rus: 'Новая папка'
@@ -12,3 +11,6 @@ export const artFoldersSectionMessages = {
         rus: 'Новая статья'
     },
 }
+
+const artFoldersSectionMsg = getMsgProxy<typeof artFoldersSectionMessages>(artFoldersSectionMessages)
+export default artFoldersSectionMsg

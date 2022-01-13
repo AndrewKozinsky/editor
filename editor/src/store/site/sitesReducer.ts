@@ -1,18 +1,16 @@
-import { removeFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
+import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
+import config from 'utils/config'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
-    siteTemplatesSection: {
-        templates: StoreSitesTypes.SiteTemplatesType
-        currentTemplateId: StoreSitesTypes.CurrentSiteTemplateId
-    },
+    siteTemplatesSection: StoreSitesTypes.SiteTemplatesSection,
     compFolderSection: StoreSitesTypes.CompFolderSection
     artFolderSection: StoreSitesTypes.ArtFolderSection
-    componentsSection: StoreSitesTypes.ComponentsSection
-    articlesSection: StoreSitesTypes.ArticlesSection
+    componentSection: StoreSitesTypes.ComponentSection
+    articleSection: StoreSitesTypes.ArticleSection
 }
 
 // Изначальные значения
@@ -41,7 +39,7 @@ const initialState: SitesReducerType = {
         artFolder: null // Код папки
     },
     // Данные по вкладке «Шаблоны компонентов»
-    componentsSection: {
+    componentSection: {
         // id выбранного элемента: папки или компонента
         currentCompItemId: null,
         // тип выбранного элемента: папка или компонент
@@ -52,13 +50,13 @@ const initialState: SitesReducerType = {
         currentCompCode: null,
     },
     // Данные по вкладке «Статьи»
-    articlesSection: {
+    articleSection: {
         // id выбранного элемента: папки или статьи
         currentArtItemId: null,
         // Тип выбранного элемента: папка или компонент
         currentArtItemType: null,
         // Имя выбранной статьи
-        currentArtName: '',
+        currentArtName: null,
         // Строка с кодом выбранной статьи
         currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
@@ -80,11 +78,11 @@ function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesActio
 function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
-        removeFromLocalStorage('editorSiteId')
+        removeFromLocalStorage(config.ls.editorSiteId)
     }
     else {
         // Поставить id сайта в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorSiteId', action.payload)
+        setInLocalStorage(config.ls.editorSiteId, action.payload)
     }
 
     return {
@@ -98,7 +96,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
 // Установка id текущей основной вкладки справа
 function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage('editorSitePartTab', action.payload)
+    setInLocalStorage(config.ls.editorSitePartTab, action.payload)
 
     return {
         ...state,
@@ -125,11 +123,11 @@ function setCurrentSiteTemplateId(
 ): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        removeFromLocalStorage('editorSiteTemplateId')
+        removeFromLocalStorage(config.ls.editorSiteTemplateId)
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorSiteTemplateId', action.payload)
+        setInLocalStorage(config.ls.editorSiteTemplateId, action.payload)
     }
 
     return {
@@ -148,7 +146,7 @@ function setCompFolder(state: SitesReducerType, action: StoreSitesTypes.SetCompF
         ...state,
         compFolderSection: {
             ...state.compFolderSection,
-            compFolderId: action.payload.id,
+            compFolderId: action.payload.id || state.compFolderSection.compFolderId,
             compFolder: action.payload.folders
         }
     }
@@ -161,7 +159,7 @@ function setArtFolder(state: SitesReducerType, action: StoreSitesTypes.SetArtFol
         ...state,
         artFolderSection: {
             ...state.artFolderSection,
-            artFolderId: action.payload.id,
+            artFolderId: action.payload.id || state.artFolderSection.artFolderId,
             artFolder: action.payload.folders
         }
     }
@@ -171,35 +169,18 @@ function setArtFolder(state: SitesReducerType, action: StoreSitesTypes.SetArtFol
 
 // Установка id выбранного компонента
 function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
-        removeFromLocalStorage('editorComponentId')
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorComponentType')
-
-        return {
-            ...state,
-            componentsSection: {
-                ...state.componentsSection,
-                currentCompItemId: null,
-                currentCompItemType: null,
-                currentCompName: null,
-                currentCompCode: null,
-            }
-        }
-    }
-    else {
+    if (action.payload.id) {
         // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorComponentId', action.payload.id)
+        setInLocalStorage(config.ls.editorComponentId, action.payload.id)
         // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorComponentType', action.payload.type)
+        setInLocalStorage(config.ls.editorComponentType, action.payload.type)
 
-        let newComponentSection: StoreSitesTypes.ComponentsSection
+        let newComponentSection: StoreSitesTypes.ComponentSection
 
         // Если выделили папку
         if (action.payload.type === 'folder') {
             newComponentSection = {
-                ...state.componentsSection,
+                ...state.componentSection,
                 currentCompItemId: action.payload.id,
                 currentCompItemType: action.payload.type,
                 currentCompName: null,
@@ -209,17 +190,34 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
         // Если если выделили компонент
         else if (action.payload.type === 'file') {
             newComponentSection = {
-                ...state.componentsSection,
+                ...state.componentSection,
                 currentCompItemId: action.payload.id,
                 currentCompItemType: action.payload.type,
-                currentCompName: action.payload.name || null,
-                currentCompCode: action.payload.code || null
+                currentCompName: action.payload.name || '',
+                currentCompCode: action.payload.code || ''
             }
         }
 
         return {
             ...state,
-            componentsSection: newComponentSection
+            componentSection: newComponentSection
+        }
+    }
+    else {
+        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
+        removeFromLocalStorage(config.ls.editorComponentId)
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage(config.ls.editorComponentType)
+
+        return {
+            ...state,
+            componentSection: {
+                ...state.componentSection,
+                currentCompItemId: null,
+                currentCompItemType: null,
+                currentCompName: null,
+                currentCompCode: null,
+            }
         }
     }
 }
@@ -228,16 +226,52 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 
 // Установка id выбранного подключаемых шаблонов
 function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
-        removeFromLocalStorage('editorArticleId')
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorArticleType')
+    if (action.payload.id) {
+        // Поставить id статьи в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage(config.ls.editorArticleId, action.payload.id)
+        // Поставить тип элемента (папка или статья) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage(config.ls.editorArticleType, action.payload.type)
+
+        let newArticleSection: StoreSitesTypes.ArticleSection
+
+        // Если ставят данные папки
+        if (action.payload.type === 'folder') {
+            newArticleSection = {
+                ...state.articleSection,
+                currentArtItemId: action.payload.id,
+                currentArtItemType: action.payload.type,
+                currentArtName: '',
+                currentArtCode: null,
+                siteTemplateId: null
+            }
+        }
+        // Если ставят данные статьи
+        else if (action.payload.type === 'file') {
+            newArticleSection = {
+                ...state.articleSection,
+                currentArtItemId: action.payload.id,
+                currentArtItemType: action.payload.type,
+                currentArtName: action.payload.name || '',
+                currentArtCode: action.payload.code || null,
+                siteTemplateId: action.payload.siteTemplateId || null
+            }
+        }
 
         return {
             ...state,
-            articlesSection: {
-                ...state.articlesSection,
+            articleSection: newArticleSection
+        }
+    }
+    else {
+        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
+        removeFromLocalStorage(config.ls.editorArticleId)
+        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
+        removeFromLocalStorage(config.ls.editorArticleType)
+
+        return {
+            ...state,
+            articleSection: {
+                ...state.articleSection,
                 currentArtItemId: null,
                 currentArtItemType: null,
                 currentArtName: '',
@@ -246,138 +280,9 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
             }
         }
     }
-    else {
-        // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorArticleId', action.payload.id)
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorArticleType', action.payload.type)
-
-        let newArticleSection: StoreSitesTypes.ArticlesSection
-
-        // Если ставят данные папки
-        if (action.payload.type === 'folder') {
-            newArticleSection = {
-                ...state.articlesSection,
-                currentArtItemId: action.payload.id,
-                currentArtItemType: action.payload.type,
-                currentArtName: action.payload.name,
-                currentArtCode: null,
-                siteTemplateId: null
-            }
-        }
-        // Если ставят данные статьи
-        else if (action.payload.type === 'file') {
-            newArticleSection = {
-                ...state.articlesSection,
-                currentArtItemId: action.payload.id,
-                currentArtItemType: action.payload.type,
-                currentArtName: action.payload.name,
-                currentArtCode: action.payload.code || null,
-                siteTemplateId: action.payload.siteTemplateId || null
-            }
-        }
-
-        return {
-            ...state,
-            articlesSection: newArticleSection
-        }
-    }
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Component Template item (folder or file) type setting
-/*function setCurrentCompItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemTypeAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorComponentType')
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorComponentType', action.payload)
-    }
-
-    return {
-        ...state,
-        componentsSection: {
-            ...state.componentsSection,
-            currentCompItemType: action.payload
-        }
-    }
-}*/
-
-// Component Template item id setting
-/*function setCurrentCompItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompItemIdAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorComponentId')
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorComponentId', action.payload)
-    }
-
-    return {
-        ...state,
-        componentsSection: {
-            ...state.componentsSection,
-            currentCompItemId: action.payload
-        }
-    }
-}*/
-
-// Установка id выбранного подключаемых шаблонов
-/*function setCurrentArtItemType(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemTypeAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorArticleType')
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorArticleType', action.payload)
-    }
-
-    return {
-        ...state,
-        articlesSection: {
-            ...state.articlesSection,
-            currentArtItemType: action.payload
-        }
-    }
-}*/
-
-// Установка id выбранного подключаемых шаблонов
-/*function setCurrentArtItemId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtItemIdAction): SitesReducerType {
-    if (action.payload === null) {
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage('editorArticleId')
-    }
-    else {
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage('editorArticleId', action.payload)
-    }
-
-    return {
-        ...state,
-        articlesSection: {
-            ...state.articlesSection,
-            currentArtItemId: action.payload
-        }
-    }
-}*/
 
 // Редьюсер Store.sites
 export default function sitesReducer(
@@ -395,6 +300,8 @@ export default function sitesReducer(
 
         case StoreSitesTypes.SET_SITE_TEMPLATES:
             return setTemplates(state, action)
+        case StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID:
+            return setCurrentSiteTemplateId(state, action)
 
         case StoreSitesTypes.SET_COMP_FOLDER:
             return setCompFolder(state, action)
@@ -406,21 +313,6 @@ export default function sitesReducer(
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
 
-
-        // case StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID:
-        //     return setCurrentSiteTemplateId(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE:
-        //     return setCurrentCompItemType(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID:
-        //     return setCurrentCompItemId(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE:
-        //     return setCurrentArtItemType(state, action)
-
-        // case StoreSitesTypes.SET_CURRENT_ART_ITEM_ID:
-        //     return setCurrentArtItemId(state, action)
         default:
             // @ts-ignore
             const x: never = null

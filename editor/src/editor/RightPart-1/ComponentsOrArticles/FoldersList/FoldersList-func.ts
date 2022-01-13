@@ -1,23 +1,22 @@
-import {useCallback, useEffect, useState} from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
-import { getFromLocalStorage, setInLocalStorage } from 'utils/MiscUtils'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
+import config from 'utils/config'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
-import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
-import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
-import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import useGetSitesSelectors from 'store/site/sitesSelectors'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {compFoldersSectionMessages} from 'messages/compFoldersSectionMessages'
-import {artFoldersSectionMessages} from 'messages/artFoldersSectionMessages'
+import bridge from '../../../../bridge/bridge'
+import StoreSitesTypes from 'store/site/sitesTypes'
 import { FolderType } from '../types'
+import FilesTreeType from '../../../../types/FilesTreeType'
+import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
+import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
 
 
 /**
@@ -34,8 +33,11 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
     useEffect(function () {
         // Если не передан id сайта, то обнулить папки в Хранилище
         if (!currentSiteId) {
-            dispatch(actions.sites.setCompFolder(null))
-            dispatch(actions.sites.setArtFolder(null))
+            const payload: StoreSitesTypes.SetCompFolderActionPayload = { id: null, folders: null }
+
+            dispatch(actions.sites.setCompFolder(payload))
+            dispatch(actions.sites.setArtFolder(payload))
+
             return
         }
 
@@ -49,7 +51,12 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
     }, [currentSiteId])
 }
 
-export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items {
+/**
+ * Хук возвращает скачанные папки или компонентов или статей
+ * @param {String} type — тип папок: компоненты или папки
+ * @returns {FilesTreeType.Items | null}
+ */
+export function useGetFolders(type: FolderType): null | FilesTreeType.Items {
     if (type === 'components') {
         return useGetSitesSelectors().compFolderSection.compFolder
     }
@@ -58,21 +65,24 @@ export function useGetFolders(type: FolderType): null | DragFilesTreeType.Items 
     }
 }
 
-
+/**
+ * Хук возвращает функцию обновления папок компонентов или статей
+ * @param {String} type — тип папок: компоненты или папки
+ */
 export function useGetSetFolders(type: FolderType) {
     const dispatch = useDispatch()
 
     const { compFolderId } = useGetSitesSelectors().compFolderSection
     const { artFolderId } = useGetSitesSelectors().artFolderSection
 
-    return useCallback(function (newItems: DragFilesTreeType.Items) {
+    return useCallback(function (newItems: FilesTreeType.Items) {
         if (type === 'components') {
             return dispatch(sitesActions.setCompFolder({
                 id: compFolderId,
                 folders: newItems
             }))
         }
-        else if (type === 'articles') {
+        else if (type == 'articles') {
             return dispatch(sitesActions.setArtFolder({
                 id: artFolderId,
                 folders: newItems
@@ -83,23 +93,20 @@ export function useGetSetFolders(type: FolderType) {
 
 /**
  * Хук возвращает тексты для кнопок создания нового файла и новой папки
- * @param type
+ * @param {String} type — тип папок: компоненты или папки
  */
 export function useGetNewItemsName(type: FolderType) {
     const [newFileName, setNewFileName] = useState('newFileName')
     const [newFolderName, setFolderName] = useState('newFolderName')
 
-    const compFoldersSectionMsg = useGetMessages(compFoldersSectionMessages)
-    const artFoldersSectionMsg = useGetMessages(artFoldersSectionMessages)
-
     useEffect(function () {
         if (type === 'components') {
-            setNewFileName(compFoldersSectionMsg.createNewFileBth.toString())
-            setFolderName(compFoldersSectionMsg.createNewFolderBth.toString())
+            setNewFileName(compFoldersSectionMsg.createNewFileBth)
+            setFolderName(compFoldersSectionMsg.createNewFolderBth)
         }
         else {
-            setNewFileName(artFoldersSectionMsg.createNewFileBth.toString())
-            setFolderName(artFoldersSectionMsg.createNewFolderBth.toString())
+            setNewFileName(artFoldersSectionMsg.createNewFileBth)
+            setFolderName(artFoldersSectionMsg.createNewFolderBth)
         }
     }, [type])
 
@@ -108,129 +115,96 @@ export function useGetNewItemsName(type: FolderType) {
 
 
 /**
- * Функция сохраняет массив папок на сервере
- * @param {String} type — тип папок: компонентов или статей.
+ * Функция запускается после добавления папки или файла в массив папок. При удалении функция не обрабатывает.
+ * @param {String} category — категория папок: компонентов или статей.
  * @param {Array} items — массив папок и файлов.
  */
-export async function saveFoldersOnServer(type: FolderType, items: DragFilesTreeType.Items) {
-    // Подготовить сохраняемый массив папок и файлов
-    const preparedItems = filesTreePublicMethods.prepareItemsToSaveInServer(items)
-
-    // Сохранить данные на сервере
-    if (type === 'components') {
-        const { compFolderId } = store.getState().sites.compFolderSection
-        await putCompFolderRequest(compFolderId, preparedItems)
-    }
-    else {
-        const { artFolderId } = store.getState().sites.artFolderSection
-        await putArtFolderRequest(artFolderId, preparedItems)
-    }
+export async function saveFoldersOnServer(category: FolderType, items: DragFilesTreeType.Items) {
+    await bridge.addResource(category, items)
 }
 
 /**
  * Функция запускаемая после удаления или папки или файла (статьми или компонента)
- * @param {String} type — тип папок: с компонентами или со статьями.
- * @param {Array} items — массив данных по папкам и файлам.
- * @param {String} deletedItemId — uuid удалённого элемента
+ * @param {String} category — тип папок: с компонентами или со статьями.
+ * @param {Array} originalFolders — массив данных по папкам и файлам.
+ * @param {Array} newFolders — массив данных по папкам и файлам.
+ * @param {String} deletedItem — объект удаляемого элемента
  */
 export function afterDeleteItem(
-    type: FolderType, items: DragFilesTreeType.Items, deletedItemId: DragFilesTreeType.Id
+    category: FolderType,
+    originalFolders: DragFilesTreeType.Items,
+    newFolders: DragFilesTreeType.Items,
+    deletedItem: DragFilesTreeType.Item,
 ) {
-    // Обнулить данные выделенного элемента в Хранилище
-    if (type === 'components') {
-        store.dispatch( actions.sites.setCurrentComp(null, null) )
-    }
-    else if (type === 'articles') {
-        store.dispatch( actions.sites.setCurrentArt(null, null) )
-
-        // If the opened article is not in new items array then it is in the deleted folder,
-        // then clear article editor because the article will be deleted.
-        /*if ( filesTreePublicMethods.getItemById(items, store.getState().article.articleUuId) ) {
-            store.dispatch( actions.article.clearArticle() )
-        }*/
-    }
-
-    // Обновить id открытых папок в LocalStorage
-    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(items)
-    if (type === 'components') {
-        setInLocalStorage('editorCompOpenedFolders', openedFoldersId)
-    }
-    else if (type === 'articles') {
-        setInLocalStorage('editorArtOpenedFolders', openedFoldersId)
-    }
-
-    // Сохранить массив папок на сервере
-    saveFoldersOnServer(type, items)
-
-    // Удалить компонент или статью на сервере
-    if (type === 'components') {
-        deleteComponentRequest(deletedItemId)
-    }
-    else if (type === 'articles') {
-        deleteArticleRequest(deletedItemId)
-    }
+    bridge.deleteResource(category, deletedItem.type, deletedItem.id, originalFolders, newFolders)
 }
 
 
 /**
- * Функция запускаемая после добавления новой папки или файла (компонента или статьи)
+ * Функция запускаемая после добавления компонента или статьи.
+ * При добавлении папки эта функция не отрабатывает.
  * @param {String} type — тип папок: с компонентами или со статьями
+ * @param {String} newFileName — название компонента или статьи.
  */
-export async function afterAddingNewFile(type: FolderType): Promise<number> {
+export async function afterAddingNewFile(type: FolderType, newFileName: string): Promise<number> {
     const { currentSiteId } = store.getState().sites
 
     // Сохранить данные на сервере
     if (type === 'components') {
+        // Может создание нового компонента поместить в articleManager?
+        const minCompContent: TempCompTypes.Content = {
+            name: newFileName,
+            html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" />'
+        }
         const serverResponse = await createComponentRequest(
-            currentSiteId, JSON5.stringify(null)
+            currentSiteId, JSON5.stringify(minCompContent)
         )
 
-        let newCompId = 100000000
         if (serverResponse.status === 'success') {
-            newCompId = serverResponse.data.components[0].id
+            return  serverResponse.data.components[0].id
         }
-        return newCompId
     }
     else {
         const serverResponse = await createArticleRequest(
-            currentSiteId, 'Название статьи...'
+            currentSiteId, newFileName
         )
 
-        let newArtId = 100000000
         if (serverResponse.status === 'success') {
-            newArtId = serverResponse.data.articles[0].id
+            return serverResponse.data.articles[0].id
         }
-        return newArtId
     }
+
+    // Функция должна вернуть число. Пусть в случае неудачного ответа будет возвращено такое значение:
+    return Math.round(100000000 * Math.random())
 }
 
 /**
  * Функция запускаемая после раскрытия/скрытия любой папки.
- * После этого массив uuid открытых папок записывается в localstorage
+ * После этого массив id открытых папок записывается в localstorage
  * чтобы при следующем запуске страницы эти папки бы отрисовывались открытыми.
  * @param {String} type — тип папок: с компонентами или со статьями
- * @param {Array} idArr — массив uuid раскрытых папок
+ * @param {Array} idArr — массив id раскрытых папок
  */
-export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.IdArr) {
-    // Массив uuid открытых папок
+export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.ItemIdArr) {
+    // Массив id открытых папок
     const ids = JSON.stringify(idArr)
 
     if (type === 'components') {
-        setInLocalStorage('editorCompOpenedFolders', ids)
+        setInLocalStorage(config.ls.editorCompOpenedFolders, ids)
     }
     else {
-        setInLocalStorage('editorArtOpenedFolders', ids)
+        setInLocalStorage(config.ls.editorArtOpenedFolders, ids)
     }
 }
 
-/** Функция получает из localStorage uuid открытых папок и возвращает
+/** Функция получает из localStorage id открытых папок и возвращает
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersIds(type: FolderType) {
     if (type === 'components') {
-        return getFromLocalStorage('editorCompOpenedFolders')
+        return getFromLocalStorage(config.ls.editorCompOpenedFolders)
     }
     else if (type === 'articles') {
-        return getFromLocalStorage('editorArtOpenedFolders')
+        return getFromLocalStorage(config.ls.editorArtOpenedFolders)
     }
 }
 
@@ -239,7 +213,7 @@ export function useGetOnItemClick(type: FolderType) {
     const dispatch = useDispatch()
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (item: DragFilesTreeType.Item) {
+    return useCallback(function (item: FilesTreeType.Item) {
         if (type === 'components') {
             dispatch(actions.sites.setCurrentComp(item.id, item.type))
         }

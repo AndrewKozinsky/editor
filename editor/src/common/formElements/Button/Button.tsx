@@ -2,6 +2,8 @@ import React, { ReactElement, useRef } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
+import config from '../../../utils/config'
+import { getFromLocalStorage } from '../../../utils/miscUtils'
 import { useSetFocus } from './Button-func'
 import makeClasses from './Button-classes'
 import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
@@ -26,7 +28,7 @@ export type ButtonPropType = {
 }
 
 export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash'| 'btnSignCode'
-    | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit' | 'btnSignEdit' | 'btnSignUndo' | 'btnSignRedo' | 'btnSignCancel'
+    | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit' | 'btnSignEdit' | 'btnSignUndo' | 'btnSignRedo'
 
 
 /** Компонент кнопки */
@@ -46,9 +48,6 @@ export default function Button(props: ButtonPropType) {
         autoFocus = false, // Нужно ли ставить фокус при загрузке
     } = props
 
-    // Язык интерфейса
-    const { editorLanguage } = useGetSettingsSelectors()
-
     // Ссылка на элемент
     const buttonRef = useRef(null)
     // Установка фокусировки при необходомости
@@ -60,6 +59,7 @@ export default function Button(props: ButtonPropType) {
 
     // При загрузке поменять текст кнопки
     if (btnText && loading) {
+        const editorLanguage = getFromLocalStorage(config.ls.editorLanguage)
         if (editorLanguage === 'eng') btnText = 'Sending...'
         if (editorLanguage === 'rus') btnText = 'Отправка...'
     }
@@ -73,7 +73,7 @@ export default function Button(props: ButtonPropType) {
     const CN = makeClasses(props)
 
     // Атрибуты кнопки
-    const btnAttrs: MiscTypes.ObjStringKeyAnyVal = {
+    const btnAttrs: MiscTypes.ObjStringKey<any> = {
         type,
         className: CN.root,
         disabled: disabled,
@@ -97,9 +97,10 @@ export default function Button(props: ButtonPropType) {
 type ButtonIconPropType = {
     iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
     color?: 'base' | 'accent' // Цвет заливки кнопки
-    CN: MiscTypes.ObjStringKeyStringVal
+    CN: MiscTypes.ObjStringKey<string>
 }
 
+/* Значок на кнопке */
 function ButtonIcon(props: ButtonIconPropType) {
     const { iconType, color, CN } = props
 
@@ -119,7 +120,7 @@ function ButtonIcon(props: ButtonIconPropType) {
 
 
 type ButtonLoaderPropType = {
-    loading?: boolean // Нужно ли отрисовывать загрузчик
+    loading?: boolean // Нужно ли отрисовать загрузчик
 }
 
 /** Компонент загрузчика кнопки */

@@ -1,19 +1,20 @@
-import JSON5 from 'json5'
+const JSON5 = require('json5')
+import FilesTreeType from '../../types/FilesTreeType'
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
+import config from 'utils/config'
+import { getFromLocalStorage } from 'src/utils/miscUtils'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
-import DragFilesTreeType from '../../libs/DragFilesTree/types'
-// import {addOpenPropToFolders, selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
-// import { getOpenedFoldersId } from '../../libs/DragFilesTree/StoreManage/manageState'
-// import filesTreePublicMethods from '../../libs/DragFilesTree/publicMethods'
-// import {getOpenedFoldersIds} from '../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
-// import {getFromLocalStorage} from '../../utils/MiscUtils'
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
-// import getArticleRequest, {ArticleDataType} from 'requests/editor/article/getArticleRequest'
-// import getComponentRequest, { ComponentDataType } from 'requests/editor/components/getComponentRequest'
+import getComponentRequest from 'requests/editor/components/getComponentRequest'
+import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
+import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+import TempCompTypes from '../article/codeType/tempCompCodeType'
+import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import ArticleTypes from '../article/codeType/articleCodeType'
 
 
 const sitesActions = {
@@ -28,7 +29,7 @@ const sitesActions = {
 
             if (!response || response.status !== 'success') return
 
-            // Формированое массива сайтов для установки в Хранилище
+            // Формирование массива сайтов для установки в Хранилище
             const preparedSites = response.data.sites.map((site: any) => {
                 return {
                     id: site.id,
@@ -62,9 +63,12 @@ const sitesActions = {
 
     // Установка id текущей основной вкладки справа
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
+        let rightMainTabNum = payload
+        if (rightMainTabNum < 0 || rightMainTabNum > 3) rightMainTabNum = 0
+
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
-            payload
+            payload: rightMainTabNum
         }
     },
 
@@ -73,20 +77,22 @@ const sitesActions = {
     // Загрузка с сервера шаблонов сайта и установка в Хранилище
     requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
             // id текущего сайта для которого нужно получить шаблоны
-            const siteId = store.getState().sites.currentSiteId
+            const siteId: StoreSitesTypes.CurrentSiteId = store.getState().sites.currentSiteId
 
             // Если не передан id сайта, то обнулить массив шаблонов сайта
             // потому что выбрали новый сайт
-            if (!siteId) dispatch( sitesActions.setTemplates([]) )
+            if (!siteId) {
+                dispatch( sitesActions.setTemplates([]) )
+                return
+            }
 
             // Запрос и ответ от сервера
             const response = await getSiteTemplatesRequest(siteId)
 
             if (response.status !== 'success') return
 
-            // Формированое массива шаблонов для установки в Хранилище
+            // Формирование массива шаблонов для установки в Хранилище
             const preparedTemplates = response.data.siteTemplates.map(template => {
                 let templateName = JSON5.parse(template.content).name
 
@@ -129,25 +135,25 @@ const sitesActions = {
             const response = await getCompFolderRequest(currentSiteId)
             if (response.status !== 'success') return
 
+            // Данные по папкам
             let foldersData = response.data.compFolders[0]
 
-            if (foldersData) {
-                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
-                // ОТДЕЛЬНЫЙ ЭКШЕН.
-                // const openedFoldersIds = getOpenedFoldersIds('components')
-                /*if (openedFoldersIds) {
-                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
-                }*/
+            // Если есть папки
+            if (foldersData && foldersData.content) {
+                // Получить id открытых папок
+                const openedFoldersIds = getOpenedFoldersIds('components')
+                if (openedFoldersIds) {
+                    // Открыть папки id которых перечислены в openedFoldersIds
+                    foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorComponentId = getFromLocalStorage('editorComponentId')
-
+                const editorComponentId = getFromLocalStorage(config.ls.editorComponentId)
                 // Выделить элемент, который должен быть выделен
-                // foldersData = selectItem(foldersData, editorComponentId).newItems
+                foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
-            // dispatch( sitesActions.setCompFolder(compFolder) )
             dispatch( sitesActions.setCompFolder({
                 id: foldersData.id,
                 folders: foldersData.content
@@ -175,19 +181,16 @@ const sitesActions = {
 
             let foldersData = response.data.artFolders[0]
 
-            if (foldersData) {
-                // Я СЧИТАЮ, ЧТО ДЛЯ ТОГО ЧТОБЫ ВЫДЕЛИТЬ ТЕКУЩИЙ ЭЛЕМЕНТ НУЖНО ТУТ ЗАПУСКАТЬ
-                // ОТДЕЛЬНЫЙ ЭКШЕН.
-                // const openedFoldersIds = getOpenedFoldersIds('articles')
-                /*if (openedFoldersIds) {
-                    foldersData = addOpenPropToFolders(foldersData, openedFoldersIds)
-                }*/
+            if (foldersData && foldersData.content) {
+                const openedFoldersIds = getOpenedFoldersIds('articles')
+                if (openedFoldersIds) {
+                    foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorArticleId = getFromLocalStorage('editorArticleId')
-
+                const editorArticleId = getFromLocalStorage(config.ls.editorArticleId)
                 // Выделить элемент, который должен быть выделен
-                // foldersData = selectItem(foldersData, editorArticleId).newItems
+                foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
@@ -198,7 +201,7 @@ const sitesActions = {
         }
     },
 
-    // Установка папки статей
+    // Установка папки со статьями
     setArtFolder(payload: StoreSitesTypes.SetArtFolderActionPayload): StoreSitesTypes.SetArtFolderAction {
         return {
             type: StoreSitesTypes.SET_ART_FOLDER,
@@ -208,10 +211,47 @@ const sitesActions = {
 
     // КОМПОНЕНТЫ ==================================================================================
 
-    // Установка id и типа выбранного шаблона компонента
+    // Загрузка с сервера шаблона компонента и установка в Хранилище
+    requestComponentTemplate() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // id выбранного шаблона компонента, данные которого нужно скачать
+            const { currentCompItemId } = store.getState().sites.componentSection
+
+            // Если id компонента не передан, то обнулить данные компонента в Хранилище
+            if (!currentCompItemId) {
+                dispatch( sitesActions.setCurrentComp(null, null) )
+                return
+            }
+
+            // Запрос и ответ от сервера
+            const response = await getComponentRequest(currentCompItemId)
+
+            if (response.status !== 'success') {
+                dispatch( sitesActions.setCurrentComp(null, null) )
+                return
+            }
+
+            const responseData = response.data.components[0]
+
+            if (!responseData) {
+                dispatch( sitesActions.setCurrentComp(responseData.id, 'file') )
+            }
+
+            const compData = responseData.content
+            const compDataParsed: TempCompTypes.Content = JSON5.parse(responseData.content)
+
+            // Установка данных шаблона компонента в Хранилище
+            dispatch( sitesActions.setCurrentComp(
+                responseData.id, 'file', compDataParsed.name, compData
+            ))
+        }
+    },
+
+    // Установка id и типа выбранного шаблона компонента (шаблон или папка)
     setCurrentComp(
-        id: null | DragFilesTreeType.Id,
-        type: null | DragFilesTreeType.ItemType,
+        id: null | FilesTreeType.ItemId,
+        type: null | FilesTreeType.ItemType,
         name?: string,
         code?: string
     ): StoreSitesTypes.SetCurrentCompAction {
@@ -228,13 +268,41 @@ const sitesActions = {
 
     // СТАТЬИ ======================================================================================
 
-    // Установка id и типа выбранного шаблона компонента
+    // Загрузка с сервера статьи и установка в Хранилище
+    requestArticle() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // id выбранной статьи, данные которой нужно скачать
+            const { currentArtItemId } = getState().sites.articleSection
+
+            // Если id статьи не передан, то обнулить данные статьи в Хранилище
+            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
+
+            // Запрос и ответ от сервера
+            const response = await getArticleRequest(currentArtItemId)
+
+            if (response.status !== 'success') return
+            const articleData = response.data.articles[0]
+
+            if (articleData) {
+                dispatch( sitesActions.setCurrentArt(
+                    articleData.id,
+                    'file',
+                    articleData.name,
+                    articleData.content,
+                    articleData.siteTemplateId
+                ))
+            }
+        }
+    },
+
+    // Установка id и типа выбранной статьи (статья или папка)
     setCurrentArt(
-        id: null | DragFilesTreeType.Id,
-        type: null | DragFilesTreeType.ItemType,
+        id: null | FilesTreeType.ItemId,
+        type: null | FilesTreeType.ItemType,
         name?: string,
-        code?: string,
-        siteTemplateId?: null | number
+        code?: ArticleTypes.Article,
+        siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId
     ): StoreSitesTypes.SetCurrentArtAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART,
@@ -247,93 +315,6 @@ const sitesActions = {
             }
         }
     },
-
-
-
-
-
-
-
-
-
-    // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestComponentTemplate() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
-            // uuid выбранного шаблона компонента, данные которого нужно скачать
-            const {currentCompItemId} = store.getState().sites.componentsSection
-
-            // Если uuid компонента не передан, то обнулить данные компонета в Хранилище
-            if (!currentCompItemId) dispatch( sitesActions.setCurrentComp(null, null) )
-
-            // Запрос и ответ от сервера
-            const response = await getComponentRequest(currentCompItemId)
-
-            if (response.status !== 'success') return
-            const compData = response.data.component
-
-            if (compData) {
-                // Установка данных шаблона компонента в Хранилище
-                dispatch( sitesActions.setCurrentComp(compData.uuid, 'file', compData) )
-            }
-        }
-    },*/
-
-    // Component Template item (folder or file) type setting
-    /*setCurrentCompItemType(payload: StoreSitesTypes.CurrentCompItemType): StoreSitesTypes.SetCurrentCompItemTypeAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_TYPE,
-            payload
-        }
-    },*/
-
-    // Component Template item id setting
-    /*setCurrentCompItemId(payload: StoreSitesTypes.CurrentCompItemId): StoreSitesTypes.SetCurrentCompItemIdAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_COMP_ITEM_ID,
-            payload
-        }
-    },*/
-
-
-
-    // Загрузка с сервера шаблона компонента и установка в Хранилище
-    /*requestArticle() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
-            // uuid выбранной статьи, данные которой нужно скачать
-            const {currentArtItemId} = getState().sites.articlesSection
-
-            // Если uuid статьи не передан, то обнулить данные статьи в Хранилище
-            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
-
-            // Запрос и ответ от сервера
-            const response = await getArticleRequest(currentArtItemId)
-
-            if (response.status !== 'success') return
-            const articleData = response.data.article
-
-            if (articleData) {
-                dispatch( sitesActions.setCurrentArt(articleData.uuid, 'file', articleData) )
-            }
-        }
-    },*/
-
-    // Article item (folder or file) type setting
-    /*setCurrentArtItemType(payload: StoreSitesTypes.CurrentArtItemType): StoreSitesTypes.SetCurrentArtItemTypeAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_TYPE,
-            payload
-        }
-    },*/
-
-    // Article item (folder or file) type setting
-    /*setCurrentArtItemId(payload: StoreSitesTypes.CurrentArtItemId): StoreSitesTypes.SetCurrentArtItemIdAction {
-        return {
-            type: StoreSitesTypes.SET_CURRENT_ART_ITEM_ID,
-            payload
-        }
-    },*/
 }
 
 export default sitesActions

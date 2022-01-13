@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import LeftPart1 from 'editor/LeftPart-1/LeftPart-1'
 import LeftPart2 from 'editor/LeftPart-2/LeftPart-2/LeftPart-2'
@@ -11,7 +11,7 @@ import RightPart4 from 'editor/RightPart-4/RightPart-4/RightPart-4'
 import { MiscTypes } from 'types/miscTypes'
 
 type EditorPartProviderPropType = {
-    position: 'left' | 'right' // С какой стороны отрисовывать часть редактора
+    position: 'left' | 'right' // С какой стороны отрисовать часть редактора
 }
 
 /**
@@ -19,7 +19,7 @@ type EditorPartProviderPropType = {
  * в левой или правой части редактора в зависимости от выбранной вкладки
  */
 export default function EditorPartProvider(props: EditorPartProviderPropType) {
-    // С какой стороны отрисовывать часть редактора
+    // С какой стороны отрисовать часть редактора
     const { position } = props
 
     // Номер активной вкладки
@@ -31,7 +31,7 @@ export default function EditorPartProvider(props: EditorPartProviderPropType) {
     useEffect(function () {
 
         // Список всех компонентов во всех вкладках
-        const components: MiscTypes.ObjStringKeyAnyVal = {
+        const components: MiscTypes.ObjStringKey<React.ElementType> = {
             left0: LeftPart1,
             left1: LeftPart2,
             left2: LeftPart3,

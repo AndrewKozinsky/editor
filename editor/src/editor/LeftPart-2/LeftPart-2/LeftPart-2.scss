@@ -11,6 +11,10 @@ $CN: left-part-2;
     flex-grow: 1;
     overflow: auto;
     padding: 1.5rem 2rem;
+
+    & > *:not(:first-child) {
+        margin-top: 20px;
+    }
 }
 .#{$CN}__bottom {
 

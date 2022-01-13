@@ -15,6 +15,9 @@ $CN: wrapper;
     display: flex;
     justify-content: space-between;
 }
+.#{$CN}--vertical-align-center {
+    align-items: center;
+}
 
 
 // Классы дающие верний оступ
@@ -62,4 +65,8 @@ $CN: wrapper;
 .#{$CN}--gap10 {
     display: flex;
     gap: 10px;
+}
+.#{$CN}--gap20 {
+    display: flex;
+    gap: 20px;
 }

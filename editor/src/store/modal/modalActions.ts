@@ -3,7 +3,7 @@ import StoreModalTypes from './modalTypes'
 
 const modalActions = {
     // Открытие модального окна
-    openModal(payload: StoreModalTypes.Content): StoreModalTypes.OpenModalAction {
+    openModal(payload: StoreModalTypes.OpenModalActionPayload): StoreModalTypes.OpenModalAction {
         return {
             type: StoreModalTypes.MODAL_OPEN,
             payload

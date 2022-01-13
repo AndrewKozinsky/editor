@@ -1,9 +1,12 @@
-import {useEffect, useState} from 'react'
-import { makeCN } from 'utils/StringUtils'
+import { useEffect, useState } from 'react'
+import { makeCN } from 'src/utils/stringUtils'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
+import '../css/reset.css'
+import '../css/variables.scss'
+import '../css/default.scss'
 import '../css/app.scss'
 
-const appRootClass = 'app'
+const CN = 'app'
 
 // Хук формирует объект классов компонента App
 function useGetClasses() {
@@ -19,17 +22,17 @@ function useGetClasses() {
 /** Хук возвращает классы обёртки компонента App */
 export function useGetAppClasses() {
 
-    // Получение текущей темы интерфейса и вида (вход в редактор или редактор)
+    // Получение текущей темы интерфейса и вида (вход в редактор или сам редактор)
     const { editorTheme, entryAndEditorViewState } = useGetSettingsSelectors()
 
     const [classes, setClasses] = useState<string[]>([])
 
     useEffect(function() {
-        let classesCopy = [appRootClass]
+        let classesCopy = [CN]
         if (editorTheme === 'dark') classesCopy.push('dark-theme')
 
         if (entryAndEditorViewState === 'toEntry' || entryAndEditorViewState === 'entry') {
-            classesCopy.push(appRootClass + '--second-bg')
+            classesCopy.push(CN + '--second-bg')
         }
 
         setClasses( classesCopy )

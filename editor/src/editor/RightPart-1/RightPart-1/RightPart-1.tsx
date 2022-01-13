@@ -1,6 +1,6 @@
 import React from 'react'
-import SitePartProvider from '../SitePartProvider/SitePartProvider'
 import SitePartTabs from '../SitePartTabs/SitePartTabs'
+import SitePartProvider from '../SitePartProvider/SitePartProvider'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import './RightPart-1.scss'
 
@@ -21,7 +21,7 @@ export default function RightPart1(props: RightPart1PropType) {
     const CN = 'right-part-1'
     const style = display ? {} : {display: 'none'}
 
-    // Ничего не отрисовывать если сайт не выделен
+    // Ничего не отрисовать если сайт не выделен
     if (currentSiteId === null) return null
 
     return (

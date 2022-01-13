@@ -1,17 +1,20 @@
-import JSON5 from 'json5'
+const JSON5 = require('json5')
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
 import {
     ArtFolderRowServerRespType,
     ArtFolderServerSuccessRespType
 } from './artFolderServerResponseType'
 
-
+/**
+ * Функция делает запрос на получение папок статей по определённому сайту.
+ * Строка с кодом папок разбирается.
+ * @param {Number} siteId — id сайта к которому нужно получить список папок со статьями
+ */
 export async function getArtFolderRequest(siteId: number) {
     const options = { method: 'GET' }
 
-    const rowResponse: ArtFolderRowServerRespType | ErrorServerResponseType = await makeFetch(
+    const rowResponse: ArtFolderRowServerRespType = await makeFetch(
         getApiUrl('artFoldersBySite', siteId), options
     )
 
@@ -43,21 +46,3 @@ export async function getArtFolderRequest(siteId: number) {
         return rowResponse
     }
 }
-
-
-// КОД НИЖЕ МОЖНО УДАЛИТЬ...
-// import { makeFetch } from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
-// import { ArtFoldersServerResponseType } from './artFoldersServerResponseType'
-
-// Функция запрашивает папку со статьями переданного сайта
-/*export async function getArtFolderRequest(siteId: number) {
-    // Параметры запроса
-    const options = { method: 'GET'}
-
-    const response: ArtFoldersServerResponseType = await makeFetch(
-        getApiUrl('artFoldersBySite', siteId), options
-    )
-
-    return response
-}*/

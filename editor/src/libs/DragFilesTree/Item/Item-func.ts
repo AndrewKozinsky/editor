@@ -9,7 +9,6 @@ import {
     selectItem,
     addNewLoadingFile
 } from '../StoreManage/manageState'
-import {afterAddingNewFile} from '../../../editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
 
 /*
     Хук возвращает обработчик наведения и увода мыши на главную обёртку папки.
@@ -21,7 +20,6 @@ import {afterAddingNewFile} from '../../../editor/RightPart-1/ComponentsOrArticl
     Для элементов с data-ft-hover в CSS прописан подсвечивающий стиль.
 */
 export function useMarkItemElemWhenItHovered() {
-
     return useCallback(function (event: SyntheticEvent): void {
         const $target = <HTMLElement>event.target
         const $folder = $target.closest('[data-ft-item]').querySelector('[data-ft-inner]')
@@ -51,7 +49,7 @@ export function useMarkItemElemWhenItHovered() {
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function useGetToggleFolder(
-    folderId: DragFilesTreeType.Id,
+    folderId: DragFilesTreeType.FolderItemId,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After
@@ -85,7 +83,7 @@ export function useGetToggleFolder(
  */
 export function createNewFolder(
     e: SyntheticEvent,
-    folderData: null | DragFilesTreeType.Item,
+    folderData: null | DragFilesTreeType.FolderItem,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After,
@@ -94,6 +92,14 @@ export function createNewFolder(
 
     // Добавить новую папку или файл и возвратить новый элемент и новое Состояние
     const result = addNewFolder(folderData, items, after)
+
+    // Если при добавлении файла папка была свёрнута,
+    // то после добавления она автоматически раскрывается, поэтому запущу функцию,
+    // которая должна быть запущена после раскрытия/скрытия папок
+    if (after.collapseFolder) {
+        const openedFoldersId = getOpenedFoldersId(result.newState)
+        after.collapseFolder(openedFoldersId)
+    }
 
     // Запустить функцию, которая должна быть запущена после изменения структуры папок
     if (after.changingTree) {
@@ -104,10 +110,10 @@ export function createNewFolder(
     const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
 
     // Запустить функцию, которая должна быть запущена после выделения элемента
-    if (after.selectItem) after.selectItem(newItem)
+    if (after.selectItem) after.selectItem(result.newItem)
 
     // Обновить Состояние списка папок
-    setItems(newItems)
+    setItems(result.newState)
 }
 
 
@@ -121,7 +127,7 @@ export function createNewFolder(
  */
 export async function createNewFile(
     e: SyntheticEvent,
-    folderData: null | DragFilesTreeType.Item,
+    folderData: null | DragFilesTreeType.FolderItem,
     items: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
     after: DragFilesTreeType.After,
@@ -134,7 +140,7 @@ export async function createNewFile(
     // Обновить Состояние списка папок
     setItems(result.newState)
 
-    const normalFile = {...result.newItem}
+    const normalFile: DragFilesTreeType.FileItem = {...result.newItem}
     normalFile.id = await after.addingNewFile()
     delete normalFile.loading
 
@@ -161,26 +167,26 @@ export async function createNewFile(
 /**
  * Обработчик щелчка по кнопке удаления элемента в массив папок и файлов.
  * @param {Object} e — объект события
- * @param {Array} items — массив данных по папкам и файлам.
+ * @param {Array} originalItems — массив данных по папкам и файлам.
  * @param {Function} setItems — функция устанавливающая новый массив папок и файлов в Хранилище
- * @param {String} itemId — id папки или файла, которую нужно удалить
+ * @param {String} item — объект папки или файла, которую нужно удалить
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
 export function removeItem(
     e: null | SyntheticEvent,
-    items: DragFilesTreeType.Items,
+    originalItems: DragFilesTreeType.Items,
     setItems: DragFilesTreeType.SetItems,
-    itemId: DragFilesTreeType.Id,
+    item: DragFilesTreeType.Item,
     after?: DragFilesTreeType.After,
 ) {
     if (e) e.stopPropagation()
 
     // Удалить переданный элемент и возвратить новый список папок и файлов
-    const newItems = deleteItem(items, itemId)
+    const newItems = deleteItem(originalItems, item.id)
 
     // Запустить функцию, которая должна быть запущена после удаления папки или файла
     if (after && after.deleteItem) {
-        after.deleteItem(newItems, itemId)
+        after.deleteItem(originalItems, newItems, item)
     }
 
     // Обновить Состояние списка папок

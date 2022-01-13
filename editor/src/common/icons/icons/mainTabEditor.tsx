@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк у вкладки редактора
+// Значок у вкладки редактора
 export default function MainTabEditor() {
     return (
         <g fillRule="evenodd">

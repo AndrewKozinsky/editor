@@ -1,15 +1,15 @@
-// import React from 'react'
-// import TempCompFilesTree from '../TempCompFilesTree/TempCompFilesTree/TempCompFilesTree'
-/*import {
+import React from 'react'
+import TempCompFilesTree from '../TempCompFilesTree/TempCompFilesTree/TempCompFilesTree'
+import {
     useGetTempCompsFolders,
     useGetAfterCollapseFolder,
     useGetOnClickBeforeBtn,
     useGetOnClickInsideBtn,
-} from './TempCompList-func'*/
+} from './TempCompList-func'
 
 
 /** Папки и файлы шаблонов компонентов выбранного сайта */
-/*export default function TempCompList() {
+export default function TempCompList() {
 
     // Get and prepare templates array for <TempCompFilesTree>
     const tempCompsFolders = useGetTempCompsFolders()
@@ -31,4 +31,4 @@
             afterClickInsideBtn={onClickInsideBtn}
         />
     )
-}*/
+}

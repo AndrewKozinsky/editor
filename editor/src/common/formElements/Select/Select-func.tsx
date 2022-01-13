@@ -1,10 +1,10 @@
 import React from 'react'
 import { OptionsType } from './SelectTypes'
-import {MiscTypes} from 'types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 
 
 /**
- * Функция возращает массив тегов <option>
+ * Функция возвращает массив тегов <option>
  * @param {Array} options — массив пунктов выпадающего списка
  */
 export function getOptions(options: OptionsType) {
@@ -13,7 +13,7 @@ export function getOptions(options: OptionsType) {
     return options.map(function (option, i) {
 
         // Атрибуты <option>
-        const optionAttrs: MiscTypes.ObjStringKeyAnyVal = {
+        const optionAttrs: MiscTypes.ObjStringKey<any> = {
             value: option.value,
             key: i
         }

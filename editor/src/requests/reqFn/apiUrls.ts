@@ -1,7 +1,7 @@
 import { MiscTypes } from 'types/miscTypes'
 
 
-const addresses: MiscTypes.ObjStringKeyAnyVal = {
+const addresses: MiscTypes.ObjStringKey<any> = {
     // ВХОД, РЕГИСТРАЦИЯ И ПРОЧЕЕ СВЯЗАННОЕ С АВТОРИЗАЦИЕЙ
     // Получение токена пользователя
     getUserToken: 'users/getTokenData',
@@ -33,26 +33,20 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     // Сайты
     sites: 'sites',
     // Конкретный сайт
-    site: function (siteId: string) {
+    site: function (siteId: number) {
         return 'sites/' + siteId
     },
 
+
     // SITE TEMPLATES
     // Шаблоны подключаемых файлов
-    siteTemplates: function (siteId: string) {
+    siteTemplates: function (siteId: number) {
         return 'sites/' + siteId + '/siteTemps'
     },
     createSiteTemplate: 'siteTemplates',
     siteTemplate: function (siteTemplateId: number) {
         return 'siteTemplates/' + siteTemplateId
     },
-
-
-    // SITE COMPONENTS
-    // Компоненты сайта
-    /*siteComponents: function (siteId: string) {
-        return 'sites/' + siteId + '/components'
-    },*/
 
     // Папка шаблонов компонентов
     compFoldersBySite: function (siteId: number) {
@@ -67,6 +61,10 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
     components: 'components',
     component: function (compId: number) {
         return 'components/' + compId
+    },
+    // Компоненты сайта
+    componentsBySite: function (siteId: number) {
+        return 'sites/' + siteId + '/components'
     },
     // Папки статей
     artFoldersBySite: function (siteId: number) {
@@ -87,7 +85,7 @@ const addresses: MiscTypes.ObjStringKeyAnyVal = {
 
 // Оборачивание объекта addresses чтобы при запросе
 // к началу каждого адреса добавлялась приставка /api/.
-function getApiUrl(url: string, ...args: any[]): string {
+export default function getApiUrl(url: string, ...args: any[]): string {
 
     if (addresses[url]) {
         if (typeof addresses[url] === 'string') {
@@ -101,5 +99,3 @@ function getApiUrl(url: string, ...args: any[]): string {
     // @ts-ignore
     const x: never = null
 }
-
-export default getApiUrl

@@ -74,3 +74,12 @@ $CN: radio;
 .#{$CN}-input:disabled + .#{$CN}-label {
     opacity: .5;
 }
+
+// Серый текст
+.#{$CN}__gray-text {
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    font-weight: normal;
+    opacity: .5;
+    padding: 0 0 0 20px;
+}

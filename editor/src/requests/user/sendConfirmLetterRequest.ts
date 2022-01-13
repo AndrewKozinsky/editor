@@ -1,22 +1,21 @@
-import {useEffect, useState} from 'react'
-import {useFetch, makeFetch} from 'requests/reqFn/fetch'
+import { useEffect, useState } from 'react'
+import { useFetch, makeFetch } from 'requests/reqFn/fetch'
+import { UserServerResponse } from './userServerResponseType'
 import getApiUrl from 'requests/reqFn/apiUrls'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
-import UserServerResponseType from './userServerResponseType'
 
 /**
  * Функция отправляет еще одно письмо для подтверждения почты пользователя
  * @param {Object} email — Почта пользователя, которую нужно подтвердить
  */
-export default async function sendConfirmLetterRequest(email: string) {
+/*export default async function sendConfirmLetterRequest(email: string) {
     const options = {
         method: 'POST',
         body: JSON.stringify({email: email})
     }
-    const response: SendConfirmLetterServerResponse = await makeFetch(getApiUrl('sendConfirmLetter'), options)
+    const response: UserServerResponse = await makeFetch(getApiUrl('sendConfirmLetter'), options)
 
     return response
-}
+}*/
 
 
 /**
@@ -34,7 +33,7 @@ export function useGetSendConfirmLetter(email: string) {
     }
 
     // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const { isLoading, data, error, doFetch } = useFetch<SendConfirmLetterServerResponse>(
+    const { isLoading, data, error, doFetch } = useFetch<UserServerResponse>(
         getApiUrl('sendConfirmLetter'), options
     )
 
@@ -54,7 +53,3 @@ export function useGetSendConfirmLetter(email: string) {
         doFetch // Функция делающая запрос
     }
 }
-
-
-// Тип данных с ответом от пользователя
-type SendConfirmLetterServerResponse = ErrorServerResponseType | UserServerResponseType

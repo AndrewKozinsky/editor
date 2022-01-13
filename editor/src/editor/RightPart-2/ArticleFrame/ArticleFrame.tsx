@@ -1,55 +1,58 @@
-// import React, {useRef} from 'react'
-/*import {
-    useSetArticleDataInStore,
-    useSetIFrameElemsLinks,
-    useSetRootDivToIFrame,
-    useSetArticleToIFrame,
-} from './ArticleFrame-func/ArticleFrame-func'*/
-// import { useSetUserScriptsAndStylesToIFrame } from './ArticleFrame-func/setUserScriptsAndStyles'
-// import { useManageEmptyTextSign } from './ArticleFrame-func/useManageEmptyTextSign'
-// import {useInstallFlashElements} from './flashElements/useInstallFlashElements'
-// import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
-// import { usePassFlashElemsCoordsToIFrame } from './flashElements/usePassFlashElemsCoordsToIFrame'
-// import {useChangeFlashElementsPosition} from './flashElements/useChangeFlashElementsPosition'
-// import { useRemoveUnwantedFocus } from './ArticleFrame-func/useRemoveUnwantedFocus'
-// import { useCleanIFrame } from './ArticleFrame-func/useCleanIFrame'
-// import './ArticleFrame.scss'
+import React, { useRef } from 'react'
+import { useInstallFlashRects } from './flashElements/useInstallFlashRects'
+import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
+import { usePassFlashRectCoordsToIFrame } from './flashElements/usePassFlashRectCoordsToIFrame'
+import { useChangeFlashRectanglesPosition } from './flashElements/useChangeFlashRectanglesPosition'
+import { useResizeFlashRects } from './flashElements/useResizeFlashRects'
+import useSetKeyDownHandlerForText from './textComponents/useSetKeyDownHandlerForText'
+import useChangeActiveTextComponent from './textComponents/useChangeActiveTextComponent'
+import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
+import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
+import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
+import useSetArticleDataInStore from './setArticleData/useSetArticleDataInStore'
+import {
+    useSetSiteTemplate,
+    useSetUserScriptsAndStylesToIFrame
+} from './setArticleData/useSetSiteTemplate'
+import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
+import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
+import './ArticleFrame.scss'
 
-
-/*
+/* IFrame куда помещается статья */
 export default function ArticleFrame() {
     const windowRef = useRef(null)
 
-    // Clean the iframe if an article was cleaned
-    useCleanIFrame()
-
-    // Hook sets article data in Store when IFrame rendered
-    useSetArticleDataInStore()
-
+    // ДЕЙСТВИЯ СОВЕРШАЕМЫЕ ПРИ ЗАГРУЗКЕ САЙТА
     // Hook sets links to IFrame window, document, head and body to Store when IFrame rendered
     useSetIFrameElemsLinks(windowRef)
+    // Установка контейнера в которую будет складываться разметка статьи
+    useSetRootDivToIFrame()
+    // Установка служебных стилей в IFrame
+    useSetServiceStyleToIFrame()
 
+    // Работа с текстом
+    useSetKeyDownHandlerForText()
+    useChangeActiveTextComponent()
+
+    // Подсвечивающие прямоугольники
+    useInstallFlashRects()
+    useSetMouseHandlersForFlashRects()
+    usePassFlashRectCoordsToIFrame()
+    useChangeFlashRectanglesPosition()
+    useResizeFlashRects()
+
+    // ДЕЙСТВИЯ СОВЕРШАЕМЫЕ ПРИ ОТРИСОВКИ/ОЧИСТКИ СТАТЬИ
+    // Загрузка данных статьи при изменении articleId
+    useSetArticleDataInStore()
+    // Установка/очистка шаблона сайта
+    useSetSiteTemplate()
     // Hook sets user's scripts and styles to IFrame
     useSetUserScriptsAndStylesToIFrame()
-
-    // Hook manages Empty text sign visibility
-    useManageEmptyTextSign()
-
-    // Hook sets <div> in IFrame to put an article in
-    useSetRootDivToIFrame()
+    // Установка шаблонов компонентов и папок
+    useSetComponentsTemplates()
 
     // Hook sets article JSX to IFrame
     useSetArticleToIFrame()
 
-    // Set and control hovered and selected rectangles in IFrame
-    useInstallFlashElements()
-    useSetMouseHandlersForFlashRects()
-    usePassFlashElemsCoordsToIFrame()
-    useChangeFlashElementsPosition()
-
-    // If a user clicks on a element containing a text component, it will get the focus.
-    // The hook sets a click handler removes unwanted focus.
-    useRemoveUnwantedFocus()
-
     return <iframe className="article-frame" ref={windowRef} />
-}*/
+}

@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Секция «Изменение пароля»
-export const changePasswordSectionMessages = {
+const changePasswordSectionMessages = {
     header: {
         eng: 'Change password',
         rus: 'Изменение пароля'
@@ -29,12 +30,7 @@ export const changePasswordSectionMessages = {
         eng: 'Password has changed.',
         rus: 'Пароль изменён.'
     },
-    /*cancelBtn: {
-        eng: 'Cancel',
-        rus: 'Отменить'
-    },*/
-    /*changeBtn: {
-        eng: 'Delete',
-        rus: 'Удалить'
-    },*/
 }
+
+const changePasswordSectionMsg = getMsgProxy<typeof changePasswordSectionMessages>(changePasswordSectionMessages)
+export default changePasswordSectionMsg

@@ -1,13 +1,14 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import { ButtonPropType } from './Button'
 import './Button.scss'
 
-const buttonRootClass = 'btn'
+const CN = 'btn'
 
-function makeClasses(buttonProps: ButtonPropType) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(buttonProps: ButtonPropType) {
     return {
         root: getButtonClasses(buttonProps),
-        icon: `${buttonRootClass}__icon`
+        icon: `${CN}__icon`
     }
 }
 
@@ -26,26 +27,24 @@ export function getButtonClasses(buttonProps: ButtonPropType) {
     } = buttonProps
 
     // Классы кнопки
-    const classes = [buttonRootClass]
+    const classes = [CN]
 
     // Вид кнопки.
     // standard (стандартная кнопка), onlyIcon (только значёк).
-    if (view === 'standard') classes.push(`${buttonRootClass}--standard-view`)
+    if (view === 'standard') classes.push(`${CN}--standard-view`)
 
     // Цвет кнопки.
     // base (стандартный цвет), accent (акцентный цвет)
-    if (color === 'base') classes.push(`${buttonRootClass}--base-color`)
-    if (color === 'accent') classes.push(`${buttonRootClass}--accent-color`)
+    if (color === 'base') classes.push(`${CN}--base-color`)
+    if (color === 'accent') classes.push(`${CN}--accent-color`)
 
     // Если кнопка должна быть блочным элементом на всю ширину
-    if (block) classes.push(`${buttonRootClass}--block`)
+    if (block) classes.push(`${CN}--block`)
     // Add class if button must be big
-    if (big) classes.push(`${buttonRootClass}--big`)
+    if (big) classes.push(`${CN}--big`)
 
-    if (align) classes.push(`${buttonRootClass}--${align}`)
+    if (align) classes.push(`${CN}--${align}`)
     if (extraClass) classes.push(extraClass)
 
     return makeCN( classes )
 }
-
-export default makeClasses

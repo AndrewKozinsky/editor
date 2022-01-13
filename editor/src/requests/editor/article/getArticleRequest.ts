@@ -1,36 +1,47 @@
-// import {makeFetch} from 'requests/reqFn/fetch'
-// import getApiUrl from 'requests/reqFn/apiUrls'
-// import FilesTreeType from 'types/filesTree'
+const JSON5 = require('json5')
+import { makeFetch } from 'requests/reqFn/fetch'
+import getApiUrl from 'requests/reqFn/apiUrls'
+import {
+    ArticleRowServerRespType,
+    ArticleServerSuccessRespType
+} from './articleServerResponseType'
 
 
 /** Функция получает данные статьи */
-/*export default async function getArticleRequest(articleUuid: FilesTreeType.Id) {
-
+export default async function getArticleRequest(articleId: number) {
     const options = { method: 'GET' }
-    const response: GetArticleRequestServerResponse = await makeFetch(
-        getApiUrl('article', articleUuid), options
+
+    const rowResponse: ArticleRowServerRespType = await makeFetch(
+        getApiUrl('article', articleId), options
     )
 
-    return response
-}*/
+    // При успешном ответе нужно превратить данные статьи из строк в массив данных.
+    // За это отвечает код ниже.
+    if (rowResponse.status === 'success') {
+        try {
+            // Составление массива объектов из массива строк
+            const parsedArticles = rowResponse.data.articles.map(article => {
+                if (!article) return null
 
-// Тип данных с ответом от пользователя
-// type GetArticleRequestServerResponse = ErrorServerResponseType | SuccessResponse
+                return {
+                    ...article,
+                    content: JSON5.parse(article.content)
+                }
+            })
 
+            // Собрать новый объект ответа сервера с объектами полученными из строк
+            let response: ArticleServerSuccessRespType = {
+                ...rowResponse,
+                data: {
+                    articles: parsedArticles
+                }
+            }
 
-// Успешный ответ
-/*type SuccessResponse = {
-    status: "success"
-    data: {
-        article: null | ArticleDataType
+            return response
+        }
+        catch (err) {}
     }
-}*/
-
-/*
-export type ArticleDataType = {
-    uuid: string // "7debef2a-327c-413e-994d-aa75b32ff596"
-    siteId: string // "60c6e368fd09180020febc9a"
-    name: string // "New article"
-    code: null | string
-    incFilesTemplateId?: null | string
-}*/
+    else if (rowResponse.status === 'fail') {
+        return rowResponse
+    }
+}

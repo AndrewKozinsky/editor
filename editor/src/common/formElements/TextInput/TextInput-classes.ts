@@ -1,9 +1,10 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import './TextInput.scss'
 
-const textInputRootClass = 'text-input'
+const CN = 'text-input'
 
-function makeClasses(maxWidth?: 250) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(maxWidth?: 250) {
     return {
         root: getTextInputClasses(maxWidth),
     }
@@ -15,14 +16,12 @@ function makeClasses(maxWidth?: 250) {
  */
 export function getTextInputClasses(maxWidth?: 250) {
     // Классы
-    const classes = [textInputRootClass]
+    const classes = [CN]
 
     // Добавление максимальной ширины при необходимости
     if (maxWidth) {
-        classes.push(`${textInputRootClass}--maxWidth-${maxWidth}`)
+        classes.push(`${CN}--maxWidth-${maxWidth}`)
     }
 
     return makeCN(classes)
 }
-
-export default makeClasses

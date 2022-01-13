@@ -1,20 +1,19 @@
 import './Notice.scss'
 
-const noticeRootClass = 'notice'
+const CN = 'notice'
 
-function makeClasses(bg?: boolean) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(bg?: boolean) {
     return {
         bg: getBgClass(bg),
-        icon: noticeRootClass + '__icon',
-        content: noticeRootClass + '__content',
+        icon: CN + '__icon',
+        content: CN + '__content',
     }
 }
 
 function getBgClass(bg?: boolean) {
-    const classes = [noticeRootClass]
-    if (bg) classes.push(noticeRootClass + '--bg')
+    const classes = [CN]
+    if (bg) classes.push(CN + '--bg')
 
     return classes.join(' ')
 }
-
-export default makeClasses

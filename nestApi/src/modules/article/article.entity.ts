@@ -1,9 +1,11 @@
 import {
     BeforeInsert,
+    BeforeUpdate,
     Column,
     CreateDateColumn,
     Entity,
-    PrimaryGeneratedColumn
+    PrimaryGeneratedColumn,
+    UpdateDateColumn
 } from 'typeorm'
 
 @Entity({name: 'articles'})
@@ -35,10 +37,20 @@ export class ArticleEntity {
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date
 
+    // Дата когда статья была обновлена. Проставляется автоматически.
+    @UpdateDateColumn({type: 'timestamp'})
+    updatedAt: Date
 
-    // Установка времени создания шаблона сайта при создании
+
+    // Установка времени создания статьи сайта при создании
     @BeforeInsert()
     async setCreatedAtData() {
         this.createdAt = new Date()
+    }
+
+    // Установка времени обновления статьи
+    @BeforeUpdate()
+    async setUpdatedAtData() {
+        this.updatedAt = new Date()
     }
 }

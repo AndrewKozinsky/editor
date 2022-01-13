@@ -1,7 +1,7 @@
-import DragFilesTreeType from 'libs/DragFilesTree/types'
+// import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 // Пример данных получаемых компонентов FilesTree
-const itemsDataExample: DragFilesTreeType.Items = [
+/*const itemsDataExample: DragFilesTreeType.Items = [
     {
         id: 1,
         type: 'folder',
@@ -63,9 +63,9 @@ const itemsDataExample: DragFilesTreeType.Items = [
         type: 'folder',
         name: 'Мнения'
     },
-]
+]*/
 
-export default itemsDataExample
+// export default itemsDataExample
 
 
 

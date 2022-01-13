@@ -1,40 +1,42 @@
-/*namespace ArticleTypes {
+import TempCompTypes from './tempCompCodeType'
+
+namespace ArticleTypes {
     // Article
     export type Article = {
         // Additional information
-        meta: {
+        dMeta: {
+            version: 1
             // Max component id to understand what component id must be next
-            maxComponentId: number
+            dMaxCompId: Id
         }
         // Components array
-        components: Components
+        dComps: Components
     }
 
-    export type Components = ArticleArrayItem[]
-    export type ArticleArrayItem = Component | TextComponent
+    // Массив, в котором находятся компоненты
+    export type Components = Component[]
 
     // =================================================================================================================
 
     // Component
     export type Component = {
         // Component type
-        type: 'component'
+        dCompType: 'component'
         // Component data id
-        dataCompId: DataCompId // 1
+        dCompId: Id // 1
         // Component template id
-        tempCompId: TempCompId // 'fhd-009-dfd-mvpo'
-        layer?: Layer
+        tCompId: Id
+        dCompLayer?: Layer
         // Component elements
-        elems?: ComponentElems
+        dElems?: ComponentElems
     }
 
-    export type DataCompId = number // 1
-    export type TempCompId = string // 'fhd-009-dfd-mvpo'
+    export type Id = number // 1
 
-    // Layers options
+    // Layer options
     export type Layer = {
-        collapsed?: boolean // true
-        hidden?: boolean // true
+        layerCollapsed?: boolean // true
+        layerHidden?: boolean // true
     }
 
     // Component elements
@@ -43,80 +45,61 @@
     // Component element
     export type ComponentElem = {
         // Element data id
-        dataElemId: DataElemId // 1
+        dCompElemId: Id // 1
         // Element template id
-        tempElemId: TempElemId // 1
-        // Name of elements group with the same tempElemId. They may be several groups with the same tempElemId.
-        elemGroup: ElemGroup // 'banner-1'
+        tCompElemId: TempCompTypes.ElemId // 'banner'
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
-        tag?: Tag
-        attribs?: Attribs
-        layer?: Layer
-        children?: ElemChildren
+        dCompElemTag?: Tag
+        dCompElemAttrs?: Attribs
+        dCompElemLayer?: Layer
+        dCompElemChildren?: ElemChildren
     }
 
-    export type DataElemId = number // 1
-    export type TempElemId = string // 'banner'
-    export type ElemGroup = string // ''banner-1'
-    export type Tag = number | string // 1 OR 'div'
+    export type Tag = string // '1' OR 'div'
 
     export type Attribs = Attrib[]
 
     export type Attrib = {
-        id: ComponentElemAttribId // 1
+        // id атрибута будет браться из шаблона
+        tCompElemAttrId: TempCompTypes.ElemAttrValueId // '1'
         // Array of attributes ids (if there are exact number of values) or exact value (if it value was written in text field)
-        value: ComponentElemAttribValue // [4, 6] OR 'banner'
+        dCompElemAttrValue: ComponentElemAttribValue // [4, 6] OR 'banner'
     }
 
-    export type ComponentElemAttribId = number // 1
-    export type ComponentElemAttribValue = number[] | string // [4, 6] OR 'banner'
+    //
+    export type ComponentElemAttribValue = TempCompTypes.ElemAttrValueId[] | TempCompTypes.ElemAttrValueId // ['4', '6'] OR 'banner'
 
-    export type ElemChildren = (Component | TextComponent)[]
+    export type ElemChildren = Component[] | SimpleTextComponent
+
+    // Обычный или текстовый компонент
+    export type MixComponent = Component | SimpleTextComponent
+
 
     // =================================================================================================================
 
 
-    // Text component
-    export type TextComponent = {
-        type: 'textComponent'
-        // Component data id
-        dataCompId: DataCompId // 2
-        // Component template id
-        tempCompId: TempCompId // 'fhd-009-dfd-mvpo'
-        // id элемента шаблона чтобы понимать откуда брать данные по тегам и атрибутам
-        tempElemId: TempElemId // 'banner'
-        // Layer settings
-        layer?: Layer
-        children?: TextChildren
-    }
-
-    export type TextChildren = TextChild[]
-    export type TextChild = Component | TagObject | TextObject
-
-    export type TagObject =  {
-        type: 'textTag'
-        // id тега, в который завернут контент
-        tag: Tag
-        attribs?: Attribs
-        children?: TextChildren
-    }
-
-    export type TextObject =  {
-        type: 'text'
+    // Simple Text component
+    export type SimpleTextComponent = {
+        dCompType: 'simpleTextComponent'
+        dCompId: Id // 1
         text: string
     }
-}*/
+}
 
-// export default ArticleTypes
+export default ArticleTypes
 
 
-/*export const emptyArticleData: ArticleTypes.Article = {
-    meta: {
+export const emptyArticleData: ArticleTypes.Article = {
+    dMeta: {
+        version: 1,
         // Max component id to understand what component id must be next
-        maxComponentId: 0
+        dMaxCompId: 0
     },
     // Components array
-    components: []
-}*/
-
-
+    dComps: [{
+        // Component type
+        dCompType: 'component',
+        dCompId: 1,
+        tCompId: 95,
+    }]
+}

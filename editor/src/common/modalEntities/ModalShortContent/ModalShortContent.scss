@@ -1,0 +1,24 @@
+$CN: modal-short-content;
+
+.#{$CN} {
+    display: flex;
+    flex-direction: column;
+}
+
+.#{$CN}__content {
+    overflow: auto;
+    padding: 0 10px 0 0;
+}
+
+.#{$CN}__bottom {
+
+}
+.#{$CN}__bottom--short {
+    display: grid;
+    gap: 5px;
+    justify-content: stretch;
+}
+.#{$CN}__bottom--full {
+    display: flex;
+    gap: 10px;
+}

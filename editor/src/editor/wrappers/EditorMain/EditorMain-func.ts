@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 
-/** Функция возращает булево значение нужно ли отрисовывать редактор */
+/** Функция возвращает булево значение нужно ли отрисовать редактор */
 export function useGetPageVisibility() {
 
     // Какой компонент должен быть отрисован
@@ -12,7 +12,7 @@ export function useGetPageVisibility() {
     useEffect(function () {
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
-        // или он вообще не будет отрисовываться.
+        // или он вообще не будет отрисоваться.
         // Если нужно показать редактор
         if (entryAndEditorViewState === 'editor') {
             setIsVisible(true)
@@ -29,7 +29,7 @@ export function useGetPageVisibility() {
         else if (entryAndEditorViewState === 'entry') {
             setIsVisible(false)
         }
-        // В противном случае ничего не отрисовывать
+        // В противном случае ничего не отрисовать
         else {
             setIsVisible(false)
         }

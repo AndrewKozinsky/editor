@@ -3,7 +3,8 @@ import {
     deleteItem,
     getItemDataById,
     prepareItemsToSaveInServer,
-    getOpenedFoldersId
+    getOpenedFoldersId,
+    getFilesIdsInFolder
 } from './StoreManage/manageState'
 
 
@@ -16,7 +17,8 @@ const filesTreePublicMethods = {
     // Функция находит в массиве объект данных с переданным id.
     getItemById: getItemDataById,
     prepareItemsToSaveInServer: prepareItemsToSaveInServer,
-    getOpenedFoldersId
+    getOpenedFoldersId,
+    getFilesIdsInFolder
 }
 
 export default filesTreePublicMethods

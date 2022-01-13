@@ -5,26 +5,19 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import { getMenuItems } from '../menuItems'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
-import { commonMessages } from 'messages/commonMessages'
-import getConfig from './formConfig'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
-import { resetFormMessages } from 'messages/resetFormMessages'
+import getResetFormConfig from './formConfig'
+import resetFormMsg from 'messages/resetFormMessages'
 
 
 /** Форма сброса пароля */
 export default function ResetFormBlock() {
-    const commonMsg = useGetMessages(commonMessages)
-    const resetFormMsg = useGetMessages(resetFormMessages)
-    const regMenuMsg = useGetMessages(regMenuMessages)
-
-    const config = getConfig(commonMsg, resetFormMsg)
+    const config = getResetFormConfig()
     const formState = useFormConstructorState(config)
 
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems(regMenuMsg)}/>
+                <Menu items={getMenuItems()}/>
             </Wrapper>
             <Wrapper b={10}>
                 <Header text={resetFormMsg.formHeader} type='h1' />

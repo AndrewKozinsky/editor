@@ -1,15 +1,17 @@
 import React, { useRef, useState } from 'react'
-import { getRandomId } from 'utils/StringUtils'
+import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import InputError from 'common/formElements/InputError/InputError'
 import Wrapper from 'common/Wrapper/Wrapper'
 import { MiscTypes } from 'types/miscTypes'
 import Label from '../Label/Label'
 import { useSetFocus } from './TextInput-func'
 import makeClasses from './TextInput-classes'
+import { getRandomId } from 'utils/stringUtils'
 
 
 export type TextInputPropType = {
     label?: string // Подпись текстового поля
+    grayText?: string // Серый текст
     inputType?: 'text' | 'textarea' // Тип поля ввода
     type?: 'text' | 'email' | 'password' // Тип поля
     name: string, // Аттрибут name текстового поля
@@ -19,7 +21,7 @@ export type TextInputPropType = {
     maxWidth?: 250 // Максимальная ширина поля
     rows?: number // Количество рядов у текстового поля
     placeholder?: string, // Текстозаполнитель
-    onChange: (e: React.BaseSyntheticEvent) => void, // Обработчик изменения поля
+    onChange: OuterOnChangeHandlerType.FieldsHandler, // Обработчик изменения поля
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
     onKeyDown?: (e: React.BaseSyntheticEvent) => void, // Обработчик нажатия клавиши
     error?: string, // Текст ошибки
@@ -32,6 +34,7 @@ export type TextInputPropType = {
 export default function TextInput(props: TextInputPropType) {
     const {
         label, // Подпись текстового поля
+        grayText,
         inputType = 'text', // Тип поля ввода
         type = 'text', // Тип поля. Варианты: text, email
         name,          // Аттрибут name текстового поля
@@ -60,12 +63,12 @@ export default function TextInput(props: TextInputPropType) {
     const CN = makeClasses(maxWidth)
 
     // Аттрибуты поля
-    const inputAttribs: MiscTypes.ObjStringKeyAnyVal = {
+    const inputAttribs: MiscTypes.ObjStringKey<any> = {
         type,
         name,
         value,
         className: CN.root,
-        onChange: onChange,
+        onChange: (e: React.BaseSyntheticEvent) => fieldOnChangeHandler(e, onChange),
     }
 
     if (autocomplete) inputAttribs.autoComplete = autocomplete
@@ -75,7 +78,7 @@ export default function TextInput(props: TextInputPropType) {
 
     return (
         <div>
-            <Label label={label} disabled={disabled} id={id} />
+            <Label label={label} disabled={disabled} id={id} grayText={grayText} />
             {inputType === 'text' &&
                 <input {...inputAttribs} disabled={disabled} id={id} ref={inputRef} />
             }

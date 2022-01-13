@@ -10,7 +10,7 @@ import ResetFormBlock from 'entrance/ResetFormBlock/ResetFormBlock'
 import ChangeResetPasswordFormBlock from 'entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 import { useViewStateChanger } from './EntrancePages-func'
 
-
+/** Обёртка для страниц входа */
 export default function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
@@ -20,8 +20,7 @@ export default function EntrancePages() {
     const CN = useMakeClasses()
 
     // Компонент видим?
-    const isVisible = useIsComponentVisible()
-    if (!isVisible) return null
+    if (!useIsComponentVisible()) return null
 
     return (
         <div className={CN.root}>

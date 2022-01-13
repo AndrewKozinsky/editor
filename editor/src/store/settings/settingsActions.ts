@@ -3,14 +3,6 @@ import StoreSettingsTypes from './settingsTypes'
 
 const settingsActions = {
 
-    // Установка языка интерфейса
-    setEditorLanguage(payload: StoreSettingsTypes.EditorLanguage): StoreSettingsTypes.SetEditorLanguageAction {
-        return {
-            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_LANGUAGE,
-            payload
-        }
-    },
-
     // Установка темы интерфейса
     setEditorTheme(payload: StoreSettingsTypes.EditorTheme): StoreSettingsTypes.SetEditorThemeAction {
         return {
@@ -37,17 +29,23 @@ const settingsActions = {
 
     // Установка номера главной вкладки
     setMainTab(payload: StoreSettingsTypes.MainTab): StoreSettingsTypes.SetMainTabAction {
+        let tabNumber = payload
+        if (tabNumber === undefined || tabNumber < 0 || tabNumber > 3) tabNumber = 3
+
         return {
             type: StoreSettingsTypes.SETTINGS_SET_MAIN_TAB,
-            payload
+            payload: tabNumber
         }
     },
 
     // Активная вкладка панели «Настройки»: user или editor
     setSettingsPanelTab(payload: StoreSettingsTypes.SettingsPanelTab): StoreSettingsTypes.SetSettingsPanelTabAction {
+        let panelTabId = payload
+        if (!(['user', 'editor'].includes(panelTabId))) panelTabId = 'user'
+
         return {
             type: StoreSettingsTypes.SETTINGS_SET_SETTINGS_PANEL_TAB,
-            payload
+            payload: panelTabId
         }
     },
 }

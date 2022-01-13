@@ -4,14 +4,13 @@ import confirmEmailRequest from 'requests/user/confirmEmailRequest'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-import userActions from 'store/user/userActions'
+import commonMsg from 'messages/commonMessages'
+import confirmEmailMsg from 'messages/confirmEmailMessages'
 
 /**
  * Функция возвращает конфигурацию формы подтверждения почты
- * @param {Object} commonMsg — объект с текстами ошибок
- * @param {Object} confirmEmailMsg — объект с текстами ошибок
  */
-function getConfig(commonMsg: any, confirmEmailMsg: any) {
+export default function getConfirmEmailFormConfig() {
     const config: FCType.Config = {
         fields: {
             token: {
@@ -40,18 +39,12 @@ function getConfig(commonMsg: any, confirmEmailMsg: any) {
         },
         afterSubmit(response, outerFns, formDetails) {
             if (response.status === 'success') {
-
-                // Поставить токен авторизации в Хранилище
-                store.dispatch(actions.user.setAuthTokenStatus(2))
+                // @ts-ignore
+                const email = response.data.user.email
+                store.dispatch(actions.user.setUserData('success', email))
 
                 // Перебросить в редактор
                 if ('history' in outerFns ) outerFns.history.push('/')
-
-                // Set user's email to Store
-                if ('data' in response) {
-                    const email = response.data.user.email
-                    store.dispatch( userActions.setEmail(email) )
-                }
 
                 // Smooth hide entrance forms wrapper and show the editor
                 smoothMoveToEditor()
@@ -61,6 +54,3 @@ function getConfig(commonMsg: any, confirmEmailMsg: any) {
 
     return config
 }
-
-
-export default getConfig

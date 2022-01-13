@@ -17,7 +17,7 @@ export default function getInitialFieldsState(formConfig: FCType.Config): FCType
 
             const fieldProps: FCType.StateFieldsObj = {
                 value: fieldConfig.initialValue || [''],
-                type: getFieldType(fieldConfig),
+                type: fieldConfig.fieldType,
                 valueCount: getValueCount(fieldConfig),
                 disabled: false,
                 loading: false
@@ -34,23 +34,13 @@ export default function getInitialFieldsState(formConfig: FCType.Config): FCType
     return fields
 }
 
-function getFieldType(fieldConfig: FCType.ConfigField): FCType.FieldType {
-    if (fieldConfig.fieldType === 'text') {
-        return 'text'
-    }
-    else if (fieldConfig.fieldType === 'checkboxes') {
-        return 'checkbox'
-    }
-    else if (fieldConfig.fieldType === 'radios') {
-        return 'radio'
-    }
-    else if (fieldConfig.fieldType === 'select') {
-        return 'select'
-    }
-}
 
+/**
+ * Функция возвращает количество значений, которое может вернуть поля/поля
+ * @param {Object} fieldConfig — объект с настройками формы
+ */
 function getValueCount(fieldConfig: FCType.ConfigField): FCType.ValueCount {
-    if (fieldConfig.fieldType === 'checkboxes') {
+    if (fieldConfig.fieldType === 'checkbox') {
         return 'many'
     }
     else {

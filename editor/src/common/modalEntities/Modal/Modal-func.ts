@@ -5,7 +5,7 @@ import { hasElemParentWithSelector } from 'utils/elementsUtils'
 import useGetModalSelectors from 'store/modal/modalSelectors'
 
 
-/** Хук возращает статус нужно ли отрисовывать окно */
+/** Хук возвращает статус нужно ли отрисовать окно */
 export function useGetIsModalOpen() {
     // Открыто ли модальное окно и его содержимое
     const { isOpen } = useGetModalSelectors()

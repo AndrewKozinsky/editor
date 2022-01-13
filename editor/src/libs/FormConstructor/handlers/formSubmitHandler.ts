@@ -1,9 +1,31 @@
 import React from 'react'
+import serverMsg from '../../../messages/serverMessages'
 import FCType from '../FCType'
 import getFirstInvalidFieldName from '../misc/getFirstInvalidFieldName'
 import getReadyFieldsValues from '../misc/getReadyFieldsValues'
 import setErrorsToFields from '../state/setErrorsToFields'
 
+/**
+ * Обработчик отправки формы
+ * @param {Object} e — объект события отправки формы
+ * @param {Array} fields — массив данных о полях формы из Состояния
+ * @param {Function} setFields — функцию изменяющая Состояние полей формы
+ * @param {Number} submitCounter — количество попыток отправки формы
+ * @param {Function} setSubmitCounter —
+ * @param {FCType.Config} formConfig — объект конфигурации формы
+ * @param {Function} setSubmitBtnDisabled — функция устанавливающая заблокированность кнопки отправки формы
+ * @param {Function} setFormDisabled — функция устанавливающая заблокированность формы
+ * @param {Function} setSubmitBtnLoading —
+ * @param {Function} setCommonError —
+ * @param {Function} setFormVisible — функция устанавливающая видимость формы
+ * @param {Function} setFormSentSuccessfully —
+ * @param {FCType.OuterFns} outerFns —
+ * @param {FCType.CommonSuccess} commonSuccess —
+ * @param {Function} showCommonSuccess —
+ * @param {FCType.FormData} formData —
+ * @param {Function} setFormData —
+ * @param {typeof serverMsg} serverMsg2 —
+ */
 export default async function formSubmitHandler(
     e: React.BaseSyntheticEvent, // Event object
     fields: FCType.FieldsState, // Fields data from Store
@@ -22,7 +44,7 @@ export default async function formSubmitHandler(
     showCommonSuccess: FCType.ShowCommonSuccess, // Show success message setting function
     formData: FCType.FormData, // Пользовательские данные формы
     setFormData: FCType.SetFormData, // Установка пользовательских данных формы
-    serverMsg: any // Error message from a server response
+    serverMsg2: typeof serverMsg// Error message from a server response
 ): Promise<void> {
     e.preventDefault()
 
@@ -49,7 +71,6 @@ export default async function formSubmitHandler(
         }
     }
 
-
     setFormDisabled(true)
     setSubmitBtnLoading(true)
     setSubmitBtnDisabled(true)
@@ -65,9 +86,10 @@ export default async function formSubmitHandler(
     }
 
     // Send data to a server and get response
-    let response: FCType.Response = formConfig.requestFn
-        ? await formConfig.requestFn(readyFieldValues, outerFns, formDetails)
-        : {status: 'success'}
+    let response: FCType.Response =
+        formConfig.requestFn
+            ? await formConfig.requestFn(readyFieldValues, outerFns, formDetails)
+            : {status: 'success'}
 
     // Unlock all fields. Remove loading status from the submit button
     setFormDisabled(false)
@@ -88,7 +110,8 @@ export default async function formSubmitHandler(
 
         // Show common message. It will be shown below a form
         if (response.commonError) {
-            setCommonError( serverMsg[response.commonError])
+            // @ts-ignore
+            setCommonError( serverMsg2[response.commonError])
         }
 
         if (response.errors) {

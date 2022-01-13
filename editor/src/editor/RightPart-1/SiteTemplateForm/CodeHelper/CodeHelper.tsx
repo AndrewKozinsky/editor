@@ -1,19 +1,16 @@
 import React, {useEffect, useState} from 'react'
 import Wrapper from 'common/Wrapper/Wrapper'
 import CodeCheckInfo from '../../../special/CodeCheckInfo/CodeCheckInfo'
-import {templateCodeExample} from './CodeHelper-func'
-import useGetMessages from 'messages/fn/useGetMessages'
-import {siteTemplateSectionMessages} from 'messages/siteTemplateSectionMessages'
-import checkCodeSiteTemplate from './checkCodeSiteTemplate'
+import checkCodeSiteTemplate, {templateCodeExample} from './checkCodeSiteTemplate'
+import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
 
 type CodeHelperPropType = {
     code: string
 }
 
+// TODO НАДО БЫ СДЕЛАТЬ ИЗ ВСЕХ КОМПОНЕНТОВ CodeHelper ОДИН УНИВЕРСАЛЬНЫЙ КОМПОНЕНТ. ЭТО БУДЕТ НЕТРУДНО.
 export default function CodeHelper(props: CodeHelperPropType) {
     const { code } = props
-
-    const siteTemplateSectionMsg = useGetMessages(siteTemplateSectionMessages)
 
     const [checkStatus, setCheckStatus] = useState<'error' | 'success'>('error')
     const [header, setHeader] = useState<string>()
@@ -44,6 +41,3 @@ export default function CodeHelper(props: CodeHelperPropType) {
         </>
     )
 }
-
-// DELETE THIS CODE
-// console.log( checkCodeSiteTemplate(`{"name": "Стандартная тема", "head": "<script src='https://mysite.com/js/224ca.js'></script>"}`) )

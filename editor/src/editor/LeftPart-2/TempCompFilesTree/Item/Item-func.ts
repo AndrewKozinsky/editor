@@ -1,40 +1,9 @@
-// import {SyntheticEvent, useCallback} from 'react'
-// import {makeCN} from 'utils/StringUtils'
-/*import {
-    getOpenedFoldersUuid,
+import { SyntheticEvent, useCallback } from 'react'
+import {
+    getOpenedFoldersId,
     toggleFolder
-} from '../StoreManage/manageState'*/
-// import TempCompFilesTreeType from '../types'
-
-
-
-/**
- * Функция возвращает классы кнопки сворачивания/разворачивания папки.
- * Если передан файл, то возвращает классы для невидимого элемента.
- * @param {String} CN — класс компонента
- * @param {Object} itemData — данные папки или файла
- */
-/*export function getTriangleBtnClasses(CN: string, itemData: TempCompFilesTreeType.Item) {
-
-    if (itemData.type === 'file') {
-        return `${CN}__btn-triangle--for-file`
-    }
-    else if (itemData.type === 'folder') {
-        const classes  = [`${CN}__btn`, `${CN}__btn-triangle`]
-
-        // Если папка открыта
-        if (itemData.open) {
-            classes.push(`${CN}__btn-triangle--open`)
-        }
-
-        // Если в папке нет данных, то сделать кнопку невидимой
-        if (!itemData.content || !itemData.content.length) {
-            classes.push(`${CN}__btn-triangle--invisible`)
-        }
-
-        return makeCN(classes)
-    }
-}*/
+} from '../StoreManage/manageState'
+import TempCompFilesTreeType from '../types'
 
 
 /**
@@ -43,33 +12,34 @@
  * @param {Array} items — массив с данными по папкам и файлам
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetToggleFolder(
-    folderId: TempCompFilesTreeType.Id,
+export function useGetToggleFolder(
+    itemData: TempCompFilesTreeType.Item,
     items: TempCompFilesTreeType.Items,
     after: TempCompFilesTreeType.After
 ) {
     return useCallback(function (e) {
         e.stopPropagation()
 
+        if (itemData.type === 'file') return
+
         // Свернуть/развернуть папку и возвратить новый массив папок и файлов
-        const newItems = toggleFolder(items, folderId)
+        const newItems = toggleFolder(items, itemData.id)
 
-        // Получить uuid раскрытых папок
-        const openedFoldersUuid = getOpenedFoldersUuid(newItems)
+        // Получить id раскрытых папок
+        const openedFoldersId = getOpenedFoldersId(newItems)
 
-        after.afterCollapseFolder(newItems, openedFoldersUuid)
-
-    }, [items, folderId])
-}*/
+        after.afterCollapseFolder(newItems, openedFoldersId)
+    }, [items, itemData])
+}
 
 /**
  * Хук возвращает обработчик щелчка по папке или файлу.
- * В местное состояние ставит uuid этой папки или файла.
+ * В местное состояние ставит id этой папки или файла.
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {Object} itemData — данные папки или файла.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
  */
-/*export function useGetOnClickHandler(
+export function useGetOnClickHandler(
     items: TempCompFilesTreeType.Items,
     itemData: TempCompFilesTreeType.Item,
     after: TempCompFilesTreeType.After
@@ -77,12 +47,12 @@
     return useCallback(function (e: SyntheticEvent) {
         // Toggle folder opening
         if (itemData.type === 'folder') {
-            const newItems = toggleFolder(items, itemData.uuid)
+            const newItems = toggleFolder(items, itemData.id)
 
-            // Получить uuid раскрытых папок
-            const openedFoldersUuid = getOpenedFoldersUuid(newItems)
+            // Получить id раскрытых папок
+            const openedFoldersUuid = getOpenedFoldersId(newItems)
 
             after.afterCollapseFolder(newItems, openedFoldersUuid)
         }
     }, [itemData, after])
-}*/
+}

@@ -2,11 +2,8 @@ import './Loader.scss'
 
 const loaderRootClass = 'loader'
 
-/**
- * Функция возвращает классы для компонента загрузчика
- * @param externalClasses
- */
-function makeClasses(externalClasses?: string) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(externalClasses?: string) {
     return {
         root: getRootClass(externalClasses),
         svg: loaderRootClass + '__svg',
@@ -27,5 +24,3 @@ function getRootClass(externalClasses?: string) {
 
     return classes.join(' ')
 }
-
-export default makeClasses

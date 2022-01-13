@@ -9,26 +9,20 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import Notice from 'common/textBlocks/Notice/Notice'
 import Button from 'common/formElements/Button/Button'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
-import getConfig from './formConfig'
-import { changeResetPasswordFormMessages } from 'messages/changeResetPasswordFormMessages'
-import { commonMessages } from 'messages/commonMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
-import { regMenuMessages } from 'messages/regMenuMessages'
+import getChangeResetPasswordFormConfig from './formConfig'
+import regMenuMsg from 'messages/regMenuMessages'
+import changeResetPasswordFormMsg from 'messages/changeResetPasswordFormMessages'
 
 
 /** Форма входа в сервис */
 export default function ChangeResetPasswordFormBlock() {
-    const commonMsg = useGetMessages(commonMessages)
-    const changeResetPasswordFormMsg = useGetMessages(changeResetPasswordFormMessages)
-    const regMenuMsg = useGetMessages(regMenuMessages)
-
-    const config = getConfig(commonMsg, changeResetPasswordFormMsg)
-    const formState = useFormConstructorState(config, changeResetPasswordFormMsg)
+    const config = getChangeResetPasswordFormConfig()
+    const formState = useFormConstructorState(config)
 
     return (
         <div>
             <Wrapper b={25}>
-                <Menu items={getMenuItems(regMenuMsg)}/>
+                <Menu items={getMenuItems()}/>
             </Wrapper>
             <Wrapper b={10}>
                 <Header text={changeResetPasswordFormMsg.formHeader} type='h1' />
@@ -43,7 +37,6 @@ export default function ChangeResetPasswordFormBlock() {
 /** Сообщение об изменённом пароле */
 function PasswordChangedMessage() {
     let history = useHistory()
-    const changeResetPasswordFormMsg = useGetMessages(changeResetPasswordFormMessages)
 
     const switchToEditor = useCallback(function() {
         // Smooth hide entrance forms wrapper and show the editor

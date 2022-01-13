@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import {MainTabDataType} from 'editor/special/MainTab/MainTab'
+import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import { rightTabsMessages } from 'messages/rightTabsMessages'
-import useGetMessages from 'messages/fn/useGetMessages'
+import rightTabsMsg from '../../../messages/rightTabsMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
@@ -12,8 +11,6 @@ export function useGetTabData(): MainTabDataType[] {
 
     // Текущая вкладка
     const { rightMainTab, currentSiteId } = useGetSitesSelectors()
-
-    const rightTabsMsg = useGetMessages(rightTabsMessages)
 
     // Возвращаемые функцией данные по вкладкам
     const [tabsData, setTabsData] = useState<MainTabDataType[]>([])
@@ -60,7 +57,7 @@ function getTabData(
     isTabsDisabled: boolean,
     rightTabsMsg: any
 ): MainTabDataType[] {
-    // Сгенеривать данные четырёх вкладок
+    // Сгенерировать данные четырёх вкладок
     return tabsData.map((tabData, i) => {
         return {
             title: rightTabsMsg[tabData.titleIndex],

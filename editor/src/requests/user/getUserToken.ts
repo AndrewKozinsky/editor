@@ -1,21 +1,14 @@
 import getApiUrl from 'requests/reqFn/apiUrls'
-import { useFetch } from 'requests/reqFn/fetch'
-import UserServerResponseType from './userServerResponseType'
-import ErrorServerResponseType from 'requests/errorServerResponseType'
+import { makeFetch } from 'requests/reqFn/fetch'
+import { UserServerResponse } from './userServerResponseType'
 
 
-// Функция возвращает токен пользователя
-export function useGetUserToken() {
-
-    // Параметры запроса
+/** Отправка запроса на получение данных пользователя */
+export default async function getUserToken() {
     const options = { method: 'POST' }
-
-    // Хук делающий запрос данных с сервера. В data приходят данные полученные с сервера
-    const {data: userToken, doFetch} =
-        useFetch<GetTokenDataServerResponse>(getApiUrl('getUserToken'), options)
-
-    return { userToken, doFetch }
+    const response: UserServerResponse = await makeFetch(
+        getApiUrl('getUserToken'), options
+    )
+    return response
 }
 
-// Тип данных с ответом от пользователя
-type GetTokenDataServerResponse = ErrorServerResponseType | UserServerResponseType

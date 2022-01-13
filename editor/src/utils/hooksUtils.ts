@@ -1,13 +1,15 @@
 import { ReactElement, useEffect, useState } from 'react'
-import useGetModalSelectors from '../store/modal/modalSelectors'
 import { useDispatch } from 'react-redux'
+import useGetModalSelectors from 'store/modal/modalSelectors'
 import actions from 'store/rootAction'
+import StoreModalTypes from 'store/modal/modalTypes'
 
 /**
  * Хук возвращает функцию показывающую модальное окно с переданным содержимым
- * @param modalContent
+ * @param {Object} modalContent — содержимое модального окна
+ * @param {String} modalType — тип окна: short (компактное окно) или full (окно на весь экран)
  */
-export default function useGetShowModal(modalContent: ReactElement) {
+export default function useGetShowModal(modalContent: ReactElement, modalType?: StoreModalTypes.Type) {
     const dispatch = useDispatch()
 
     // Открыто ли модальное окно
@@ -21,7 +23,7 @@ export default function useGetShowModal(modalContent: ReactElement) {
         if (isModalOpen) {
             // Открыть окно подтверждения удаления шаблона подключаемых файлов
             dispatch(actions.modal.openModal(
-                modalContent
+                { content: modalContent, type: modalType }
             ))
         }
 

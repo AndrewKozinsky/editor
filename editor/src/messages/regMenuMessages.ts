@@ -1,4 +1,6 @@
-export const regMenuMessages = {
+import getMsgProxy from './fn/msgProxy'
+
+const regMenuMessages = {
     // Пункт «Регистрация»
     reg: {
         eng: 'Sign up',
@@ -15,3 +17,6 @@ export const regMenuMessages = {
         rus: 'Сброс пароля'
     }
 }
+
+const regMenuMsg = getMsgProxy<typeof regMenuMessages>(regMenuMessages)
+export default regMenuMsg

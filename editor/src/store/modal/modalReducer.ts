@@ -3,6 +3,7 @@ import StoreModalTypes from './modalTypes'
 export type ModalReducerType = {
     isOpen: StoreModalTypes.IsOpen
     content: StoreModalTypes.Content
+    type: StoreModalTypes.Type
 }
 
 // Изначальные значения
@@ -10,12 +11,19 @@ const initialState: ModalReducerType = {
     // Язык интерфейса: eng или rus
     isOpen: false,
     // Содержимое модального окна
-    content: null
+    content: null,
+    // Тип окна: short или full
+    type: 'short'
 }
 
 // Открытие модального окна
 function openModal(state: ModalReducerType, action: StoreModalTypes.OpenModalAction): ModalReducerType {
-    return { ...state, isOpen: true, content: action.payload }
+    return {
+        ...state,
+        isOpen: true,
+        content: action.payload.content,
+        type: action.payload.type || 'short'
+    }
 }
 // Закрытие модального окна
 function closeModal(state: ModalReducerType, action: StoreModalTypes.CloseModalAction): ModalReducerType {

@@ -1,13 +1,16 @@
-import React, {ReactElement, ReactNode} from 'react'
+import React, { ReactElement, ReactNode, useState } from 'react'
+import { OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import Radio from '../Radio/Radio'
 import Checkbox from '../Checkbox/Checkbox'
 import Label from '../Label/Label'
 import makeClasses from './FieldGroup-classes'
+import { updateFieldValuesInState } from './FieldGroup-func'
 
 
 /** Компонент FieldGroup в зависимости от переданного объекта отрисовывает флаги или переключатели. */
 export type FieldGroupPropType = {
     label?: string | ReactElement
+    grayText?: string // Серый текст
     inputType: 'radio' | 'checkbox'
     groupName: string
     inputsArr: InputDataType[]
@@ -15,15 +18,21 @@ export type FieldGroupPropType = {
     gap?: 20 // Отступы между элементами внутри обёртки
     vertical?: boolean // Are the inputs arranged vertically?
     disabled?: boolean // Заблокировано ли поле
-    onChange: (e: React.BaseSyntheticEvent) => void
+    onChange: OuterOnChangeHandlerType.FieldsHandler // Функция, в которую будут передаваться данные о значении группы полей после их изменения
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
 
-type InputDataType = { label: string | ReactElement, value: string }
+type InputDataType = {
+    label: string | ReactElement,
+    value: string,
+    grayText?: string,
+}
 
+/** Компонент группирующий флаги или переключатели */
 export default function FieldGroup(props: FieldGroupPropType) {
     const {
         label,
+        grayText,
         inputType,
         groupName,
         inputsArr,
@@ -35,7 +44,29 @@ export default function FieldGroup(props: FieldGroupPropType) {
         onBlur
     } = props
 
-    const $label = label ? <Label label={label} bold /> : null
+    // В Состоянии находится объект с данными об отмеченных значениях переключателей или флагов
+    const [fieldsValues, setFieldsValues] = useState<OuterOnChangeHandlerType.FieldsData>(
+        // Чтобы сразу получить данные об изначальных значениях полей передаётся функция
+        function () {
+            // Изначальные значения полей
+            const fieldValues: OuterOnChangeHandlerType.FieldValues = []
+
+            // Наполнить массив проставленными значениями
+            inputsArr.forEach((inputData) => {
+                if (!!value.includes(inputData.value)) {
+                    fieldValues.push(inputData.value)
+                }
+            })
+
+            // Возврат объекта Состояния
+            return {fieldName: groupName, fieldValue: fieldValues}
+        }
+    )
+
+
+    const $label = label
+        ? <Label label={label} bold grayText={grayText} />
+        : null
 
     // Получение типа поля: переключатель или флаг
     let Component = (inputType == 'checkbox') ? Checkbox : Radio
@@ -49,10 +80,11 @@ export default function FieldGroup(props: FieldGroupPropType) {
                     const attrs = {
                         value: inputData.value,
                         label: inputData.label,
+                        grayText: inputData.grayText,
                         name: groupName,
                         checked: !!value.includes(inputData.value),
                         disabled,
-                        onChange,
+                        onChange: updateFieldValuesInState(fieldsValues, setFieldsValues, inputType, onChange),
                         onBlur
                     }
 
@@ -70,6 +102,7 @@ export type InputsWrapperType = {
     children: ReactNode
 }
 
+/** Обёртка пунктов */
 function InputsWrapper(props: InputsWrapperType) {
     const {
         gap,

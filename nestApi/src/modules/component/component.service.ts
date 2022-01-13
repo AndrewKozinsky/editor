@@ -10,6 +10,7 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { UpdateComponentDto } from './dto/updateComponent.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
 import { SiteEntity } from '../site/site.entity'
+import {CompFolderEntity} from '../compFolder/compFolder.entity'
 // import {sortByCreatedAt} from '../../utils/miscUtils'
 
 
@@ -22,6 +23,11 @@ export class ComponentService {
         @InjectRepository(SiteEntity)
         private readonly siteRepository: Repository<SiteEntity>
     ) {}
+
+    /** Получение компонентов сайта (защищённый маршрут) */
+    async getComponentsBySiteId(siteId: number): Promise<ComponentEntity[]> {
+        return await this.componentRepository.find({ siteId })
+    }
 
     /** Получение компонента (защищённый маршрут) */
     async getComponent(req: ExpressRequestInterface): Promise<ComponentEntity | null> {

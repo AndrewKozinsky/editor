@@ -20,15 +20,11 @@ export default function checkCodeSiteTemplate(code: string) {
             errorsArr.push('Добавьте имя шаблона в свойство name.')
         }
 
-        /*if (!codeObj.head && !codeObj.endBody) {
-            errorsArr.push('Можете добавить свойства head и endBody где прописать код вставляемый в <head> и в конце <body>. Это могут быть ссылки на файлы CSS и JavaScript.')
-        }*/
-
-        if (codeObj.head && !isCorrectMarkup(codeObj.head)) {
+        if (codeObj.head && !isMarkupCorrect(codeObj.head)) {
             errorsArr.push('В свойстве head должна быть строка с корректным HTML-кодом добавляемым в <head> статьи. Смотрите пример ниже.')
         }
 
-        if (codeObj.endBody && !isCorrectMarkup(codeObj.endBody)) {
+        if (codeObj.endBody && !isMarkupCorrect(codeObj.endBody)) {
             errorsArr.push('В свойстве endBody должна быть строка с корректным HTML-кодом добавляемым перед закрывающем </body> в статье. Смотрите пример ниже.')
         }
 
@@ -47,7 +43,8 @@ export default function checkCodeSiteTemplate(code: string) {
     }
 }
 
-function isCorrectMarkup(htmlStr?: string) {
+/** Функция проверяет правильность строки с разметкой */
+function isMarkupCorrect(htmlStr?: string) {
     if (!htmlStr) return false
 
     try {
@@ -57,19 +54,16 @@ function isCorrectMarkup(htmlStr?: string) {
 
         // Если в elemsArr есть элементы, то значит пытаются добавить обычные теги
         // <script> и <style> к ним не относятся
-        if (elemsArr.length) return false
-        return true
+        return !elemsArr.length
     }
     catch (err) {
         return false
     }
 }
 
-// Пример правильного кода:
-/*
-const json = {
-    name: "Стандартная тема",
-    head: "<meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://mysite.com/css/styles.css'>",
-    endBody: "<script src='https://mysite.com/js/224ca.js'></script>"
-}
-*/
+// Пример кода шаблона сайта
+export const templateCodeExample = `{
+    name: "Standard page",
+    head: "<meta name='viewport' content='width=device-width, initial-scale=1'><link rel='stylesheet' href='https://mysite.com/css/styles.css'><script src='https://www.gstatic.com/recaptcha.js'></script>",
+    endBody: "</script><script src='https://mysite.com/js/224ca.js'></script>"
+}`

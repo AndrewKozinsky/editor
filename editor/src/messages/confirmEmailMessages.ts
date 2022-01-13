@@ -1,6 +1,7 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Форма ConfirmEmailFormBlock
-export const confirmEmailMessages = {
+const confirmEmailMessages = {
     formHeader: {
         eng: 'Email confirm',
         rus: 'Подтверждение почты'
@@ -14,3 +15,6 @@ export const confirmEmailMessages = {
         rus: 'Подтвердить почту'
     },
 }
+
+const confirmEmailMsg = getMsgProxy<typeof confirmEmailMessages>(confirmEmailMessages)
+export default confirmEmailMsg

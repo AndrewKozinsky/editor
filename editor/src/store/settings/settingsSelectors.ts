@@ -1,5 +1,5 @@
 import { useAppSelector } from '../rootReducer'
-import {SettingsReducerType} from './settingsReducer'
+import { SettingsReducerType } from './settingsReducer'
 
 // Функция возвращает объект с выборщиками хранилища Store.settings
 export default function useGetSettingsSelectors() {

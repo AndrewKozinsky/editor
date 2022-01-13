@@ -14,4 +14,5 @@ type ArticleType = {
     content: string
     siteTemplateId: number
     createdAt: Date
+    updatedAt: Date
 }

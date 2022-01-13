@@ -1,8 +1,12 @@
+import getMsgProxy from './fn/msgProxy'
 
 // Содержимое вкладки «Редактор»
-export const editorTabContentMessages = {
+const editorTabContentMessages = {
     header: {
         eng: 'Editor',
         rus: 'Редактор'
     },
 }
+
+const editorTabContentMsg = getMsgProxy<typeof editorTabContentMessages>(editorTabContentMessages)
+export default editorTabContentMsg

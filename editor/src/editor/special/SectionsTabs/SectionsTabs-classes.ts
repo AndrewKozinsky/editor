@@ -1,11 +1,9 @@
 import './SectionsTabs.scss'
+const CN = 'section-tabs'
 
-const rootClass = 'section-tabs'
-
-function makeClasses() {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses() {
     return {
-        root: rootClass
+        root: CN
     }
 }
-
-export default makeClasses

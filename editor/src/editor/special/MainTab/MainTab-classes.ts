@@ -1,12 +1,13 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import './MainTab.scss'
 
-const rootClass = 'main-tab'
+const CN = 'main-tab'
 
-function makeClasses(active: boolean, position: 'top' | 'left') {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(active: boolean, position: 'top' | 'left') {
     return {
         tab: getTabClasses(active, position),
-        scion: `${rootClass}__scion`
+        scion: `${CN}__scion`
     }
 }
 
@@ -18,15 +19,13 @@ function makeClasses(active: boolean, position: 'top' | 'left') {
 export function getTabClasses(active: boolean, position: 'top' | 'left') {
 
     // Классы кнопки вкладки
-    const classes = [rootClass]
+    const classes = [CN]
 
     // Если активна
-    if (active) classes.push(`${rootClass}--active`)
+    if (active) classes.push(`${CN}--active`)
 
     // Позиция кнопки
-    classes.push(`${rootClass}--${position}-position`)
+    classes.push(`${CN}--${position}-position`)
 
     return makeCN(classes)
 }
-
-export default makeClasses

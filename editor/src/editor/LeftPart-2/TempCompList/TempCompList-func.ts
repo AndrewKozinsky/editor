@@ -1,83 +1,95 @@
-// import {useCallback, useEffect, useState} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
-// import actions from 'store/rootAction'
-// import {AppStateType} from 'store/rootReducer'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import StoreArticleTypes from 'store/article/articleTypes'
-// import TempCompFilesTreeType from '../TempCompFilesTree/types'
-// import articleManager from 'editor/RightPart-2/articleManager/articleManager'
-// import {getFromLocalStorage} from 'utils/MiscUtils'
-// import FilesTreeType from 'types/filesTree'
-// import { CreateCompFnReturnType } from 'editor/RightPart-2/articleManager/insert'
+import { useCallback, useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import actions from 'store/rootAction'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import StoreArticleTypes from 'store/article/articleTypes'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import TempCompFilesTreeType from '../TempCompFilesTree/types'
+import articleManager from 'articleManager/articleManager'
+import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
+import config from 'utils/config'
 
 
-/** The hooks gets component template folders array from Store, add required properties to items
+/** The hook gets component template folders array from Store, add required properties to items
  *  and returns updated array */
-/*export function useGetTempCompsFolders() {
-    // Component templates folders
-    const { tempCompsFolders } = useSelector((store: AppStateType) => store.article)
-
-    // Component templates array
-    const tempCompsArr = useSelector((store: AppStateType) => store.article.tempComps)
+export function useGetTempCompsFolders() {
+    // Component templates folders and Component templates array
+    const { tempCompsFolders, tempComps } = useGetArticleSelectors()
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
+    const currentHistoryItem = articleManager.hooks.getCurrentHistoryItem()
 
-    // Current article
-    const article = articleManager.hooks.getArticle()
+    // Координаты выделенного элемента и его тип
+    const [selectedElem, setSelectedElem] = useState<StoreArticleTypes.FlashedElem>(null)
 
     // Returned folders and component templates structure
     const [folders, setFolders] = useState<TempCompFilesTreeType.Items>([])
 
     useEffect(function () {
-        if (!flashedElemCoords) return
+        if (!tempCompsFolders || !flashedElemCoords) return
+        setSelectedElem(flashedElemCoords.selectedElem)
+    }, [
+        tempCompsFolders, tempComps,
+        flashedElemCoords, currentHistoryItem
+    ])
 
-        // Return function if data is not ready yet.
-        if (!tempCompsFolders) {
-            setFolders([])
-            return
+    useEffect(function () {
+        if (!flashedElemCoords || !selectedElem) return
+
+        if(tempCompsFolders) {
+            // Get opened component template folders id array to open these folders
+            const openFoldersIdsArr: TempCompFilesTreeType.FolderItemId[] =
+                getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+
+            // Update component template array items
+            const updatedFolders = prepareFoldersAndItemsStructure(
+                //@ts-ignore
+                tempCompsFolders,
+                openFoldersIdsArr,
+                selectedElem,
+                tempComps,
+                currentHistoryItem
+            )
+
+            // Sat updated folders and component templates structure
+            setFolders(updatedFolders)
         }
-
-        // Get opened component template folders uuid array to open these folders
-        const openUuIdArr: null | FilesTreeType.IdArr = getFromLocalStorage('article')?.openCompFoldersUuIds
-
-        // Update component template array items
-        const updatedFolders = prepareFoldersAndItemsStructure(
-            tempCompsFolders, openUuIdArr, flashedElemCoords.selectedElem, tempCompsArr, article
-        )
-
-        // Save updated folders and component templates structure
-        setFolders(updatedFolders)
-    }, [tempCompsFolders, tempCompsArr, flashedElemCoords, article])
+        else {
+            setFolders(null)
+        }
+    }, [selectedElem, tempCompsFolders])
 
     return folders
-}*/
+}
 
 /**
  * The function pass through folders and component templates structure and adds required properties.
  * @param {Array} tempCompsFolders — component templates folders component templates structure
- * @param {Array} openUuIdArr — uuis of the opened folders in
+ * @param {Array} openIdArr — ids of the opened folders in
  * @param {Object} selectedElem — object with coordinates of the selected component/element
  * @param {Array} tempCompsArr — component templates array
- * @param {Object} article — article object
+ * @param {Object} currentHistoryItem — article history item
  */
-/*function prepareFoldersAndItemsStructure(
-    tempCompsFolders: FilesTreeType.Items,
-    openUuIdArr: null | FilesTreeType.IdArr,
-    selectedElem: StoreArticleTypes.HoveredElem,
+function prepareFoldersAndItemsStructure(
+    tempCompsFolders: TempCompFilesTreeType.Items,
+    openIdArr: TempCompFilesTreeType.FolderItemId[],
+    selectedElem: StoreArticleTypes.FlashedElem,
     tempCompsArr: TempCompTypes.TempComps,
-    article: ArticleTypes.Article
+    currentHistoryItem: StoreArticleTypes.HistoryItem
 ): TempCompFilesTreeType.Items {
     return tempCompsFolders.map((item: TempCompFilesTreeType.Item) => {
-        // It it is folder and it must be open, then add open property
+        // If it is folder, and it must be open, then add open property
         if (item.type === 'folder') {
-            if (openUuIdArr.find(uuid => uuid === item.uuid)) {
+            // Если id этой папки есть в массиве с идентификаторами открытых папок, то открыть её.
+            if (openIdArr.find(id => id === item.id)) {
                 item.open = true
             }
 
             if (item.content?.length) {
-                item.content = prepareFoldersAndItemsStructure(item.content, openUuIdArr, selectedElem, tempCompsArr, article)
+                item.content = prepareFoldersAndItemsStructure(
+                    item.content, openIdArr, selectedElem, tempCompsArr, currentHistoryItem
+                )
             }
 
             return item
@@ -87,24 +99,24 @@
             let afterButtonAllowed = false
             let insideButtonAllowed = false
 
-            // It a no component selected I can insert a new component in the root of an article
-            if (!selectedElem.dataCompId && !selectedElem.dataElemId) {
+            // If a no component selected I can insert a new component in the root of an article
+            if (!selectedElem.tagType) {
                 afterButtonAllowed = true
             }
-            // If a component is selected...
-            else if (selectedElem.dataCompId && !selectedElem.dataElemId) {
-                // If selected component is not a text component, that I can insert component before or after it
-                if (selectedElem.type !== 'textComponent') {
-                    afterButtonAllowed = true
-                }
+            // Если выделен компонент или корневой элемент, то разрешить вставлять новый компонент до или после
+            if (['component', 'rootElement'].includes(selectedElem.tagType)) {
+                afterButtonAllowed = true
             }
-            // If an element is selected
-            else {
-                // Get to know can I insert component in this element
-                insideButtonAllowed = articleManager.canComponentPutInElement(
-                    tempCompsArr, article.components, selectedElem.dataCompId, selectedElem.dataElemId
+            // Если выделен элемент...
+            if (selectedElem.tagType === 'element') {
+                // Получить его шаблон, чтобы узнать, принимает ли он только текстовый компонент или обычные компоненты
+
+                const thisTempComp = articleManager.getTempElemByDataCompIdAndDataElemId(
+                    currentHistoryItem.article.dComps, selectedElem.dataCompId, selectedElem.dataElemId, tempCompsArr
                 )
-                afterButtonAllowed = true
+                if (thisTempComp && !thisTempComp.elemTextInside) {
+                    insideButtonAllowed = true
+                }
             }
 
             item.afterButtonAllowed = afterButtonAllowed
@@ -113,89 +125,86 @@
             return  item
         }
     })
-}*/
+}
 
 
 /** The hook returns a function runs after component template folder was threw opened or collapsed */
-/*export function useGetAfterCollapseFolder() {
+export function useGetAfterCollapseFolder() {
     const dispatch = useDispatch()
 
-    return useCallback(function (folders: TempCompFilesTreeType.Items, openUuIdArr: FilesTreeType.IdArr) {
+    return useCallback(function (folders: TempCompFilesTreeType.Items, openIdArr: TempCompFilesTreeType.FolderItemId[]) {
         // Set a new folders structure list in the Store
         dispatch(actions.article.setTempCompFolders(folders))
 
         // Save array of folder's id in the Local storage
-        articleManager.supplementArtMarksInLocalStorage({
-            openCompFoldersUuIds: openUuIdArr
-        })
+        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr)
     }, [])
-}*/
+}
 
 
 /** The hook returns Next btn click handler  */
-/*export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
+export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const dispatch = useDispatch()
 
     // Current article
-    const article = articleManager.hooks.getArticle()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component templates array
-    const {tempComps} = useSelector((store: AppStateType) => store.article)
+    const { tempComps } = useGetArticleSelectors()
 
-    // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.Id) {
+    // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
+    return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
         const selectedCompId = flashedElemCoords.selectedElem.dataCompId
 
-        let componentsAndMaxCompId: CreateCompFnReturnType
+        let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
         if (selectedCompId) {
-            componentsAndMaxCompId = articleManager.createCompAndSetItNearComp(
-                direction, article, tempComps, tempCompId, selectedCompId
+            compsAndMaxCompId = articleManager.createCompAndSetItNearComp(
+                direction, historyItem.article, tempComps, tempCompId, selectedCompId
             )
         }
         else {
-            let place: 'begin' | 'end' = direction === 'before' ? 'begin' : 'end'
-            componentsAndMaxCompId = articleManager.createCompAndSetInRootOfArticle(
-                place, article, tempComps, tempCompId
+            let place: 'begin' | 'end' =
+                direction === 'before'
+                    ? 'begin' : 'end'
+
+            compsAndMaxCompId = articleManager.createCompAndSetInRootOfArticle(
+                place, historyItem.article, tempComps, tempCompId
             )
         }
 
         dispatch(actions.article.createAndSetHistoryItem(
-            componentsAndMaxCompId
+            compsAndMaxCompId
         ))
-
-    }, [dispatch, article, flashedElemCoords, tempComps])
-}*/
+    }, [dispatch, historyItem, flashedElemCoords, tempComps])
+}
 
 
 /** The hook returns Inside btn click handler  */
-/*export function useGetOnClickInsideBtn() {
+export function useGetOnClickInsideBtn() {
     const dispatch = useDispatch()
 
     // Current article
-    const article = articleManager.hooks.getArticle()
+    const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     // Selected and hovered components/elements coordinates object
     const flashedElemCoords = articleManager.hooks.getFlashedElemCoords()
 
     // Component template array
-    const {tempComps} = useSelector((store: AppStateType) => store.article)
+    const { tempComps } = useGetArticleSelectors()
 
-    // Поставить uuid элемента и его тип (папка или файл) в качестве выбранного элемента
-    return useCallback(function (tempCompId: FilesTreeType.Id) {
-        const selectedElemCoords = flashedElemCoords.selectedElem
+    // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
+    return useCallback(function (tempCompId: TempCompFilesTreeType.FileItemId) {
+        const {selectedElem} = flashedElemCoords
 
         const componentsAndMaxCompId = articleManager.createCompAndSetInElem(
-            article, tempComps, tempCompId,
-            selectedElemCoords.dataCompId,
-            selectedElemCoords.dataElemId
+            historyItem.article, tempComps, tempCompId, selectedElem
         )
 
         dispatch(actions.article.createAndSetHistoryItem(
             componentsAndMaxCompId
         ))
-    }, [dispatch, article, flashedElemCoords, tempComps])
-
-}*/
+    }, [dispatch, historyItem, flashedElemCoords, tempComps])
+}

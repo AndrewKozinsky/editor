@@ -1,7 +1,7 @@
 import React from 'react'
-// import { useSelector } from 'react-redux'
-// import ComponentForm from './ComponentForm/ComponentForm'
-// import ComponentsFolderForm from './ComponentsFolderForm/ComponentsFolderForm'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import CompForm from './CompForm/CompForm/CompForm'
+import CompFolderForm from './CompFolderForm/FolderForm/CompFolderForm'
 
 
 /**
@@ -11,12 +11,9 @@ import React from 'react'
 export default function ComponentFormProvider() {
 
     // Тип выбранного элемента в дереве папок и файлов
-    // const {currentCompItemType} = useSelector((store: AppStateType) => store.sites.componentsSection)
+    const { currentCompItemType } = useGetSitesSelectors().componentSection
 
-    // if (currentCompItemType === 'folder') return <ComponentsFolderForm />
-    // if (currentCompItemType === 'file') return <ComponentForm />
-    // return null
-
-    // Delete this
-    return <p>ComponentFormProvider</p>
+    if (currentCompItemType === 'folder') return <CompFolderForm />
+    else if (currentCompItemType === 'file') return <CompForm />
+    return null
 }

@@ -1,12 +1,14 @@
-import { makeCN } from 'utils/StringUtils'
+import { makeCN } from 'src/utils/stringUtils'
 import './Label.scss'
 
 
-const labelRootClass = 'label'
+const CN = 'label'
 
-function makeClasses(disabled?: boolean, bold?: boolean) {
+/** Функция возвращающая классы для элементов */
+export default function makeClasses(disabled?: boolean, bold?: boolean) {
     return {
-        root: getLabelClasses(disabled, bold)
+        root: getLabelClasses(disabled, bold),
+        gray: CN + '__gray'
     }
 }
 
@@ -18,15 +20,13 @@ function makeClasses(disabled?: boolean, bold?: boolean) {
 export function getLabelClasses(disabled?: boolean, bold?: boolean) {
 
     // Классы кнопки
-    const classes = [labelRootClass]
+    const classes = [CN]
 
     // Если поле заблокировано
-    if (disabled) classes.push(`${labelRootClass}--disabled`)
+    if (disabled) classes.push(`${CN}--disabled`)
 
     // Если текст должен быть жирным
-    if (bold) classes.push(`${labelRootClass}--bold`)
+    if (bold) classes.push(`${CN}--bold`)
 
     return makeCN(classes)
 }
-
-export default makeClasses

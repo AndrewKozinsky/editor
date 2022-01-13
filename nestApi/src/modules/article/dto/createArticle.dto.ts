@@ -14,6 +14,11 @@ export class CreateArticleDto {
     })
     name: string
 
+    @IsString({
+        message: 'article_CreateArticleDto_contentIsNotAString'
+    })
+    content: string
+
     @IsOptional()
     @IsInt({
         message: 'article_CreateArticleDto_siteTemplateIdIsNotANumber'

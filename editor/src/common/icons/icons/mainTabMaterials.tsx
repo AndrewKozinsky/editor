@@ -1,6 +1,6 @@
 import React from 'react'
 
-// Значёк у вкладки сайтов
+// Значок у вкладки сайтов
 export default function MainTabMaterials() {
     return (
         <g fillRule="evenodd">

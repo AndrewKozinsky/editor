@@ -1,6 +1,7 @@
+import ErrorServerResponseType from '../../errorServerResponseType'
 
 // Успешный ответ от сервера при операциях с шаблонами сайта
-type SiteTemplateServerResponseType = {
+type SuccessResponseType = {
     status: 'success',
     statusCode: number,
     data: {
@@ -8,10 +9,11 @@ type SiteTemplateServerResponseType = {
     }
 }
 
-export default SiteTemplateServerResponseType
-
 type SiteTemplate = {
     id: number // 7
     content: string // Code
     createdAt: Date
 }
+
+type SiteTemplateResponseType = ErrorServerResponseType | SuccessResponseType
+export default SiteTemplateResponseType
