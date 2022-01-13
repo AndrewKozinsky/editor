@@ -28,7 +28,8 @@ function setAttribToHtmlElem(
     dataElem: ArticleTypes.ComponentElem,
     htmlElem: HTMLObjArrType.Tag
 ) {
-    const attrName = attrTemplate.elemAttrName
+    const attrName = attrTemplate.elemAttrName // 'class'
+    // if (attrName === 'class') debugger
 
     // Array with the attribute values
     let attrValue: string[] = []
@@ -43,9 +44,11 @@ function setAttribToHtmlElem(
         // Find object with current attribute data
         // Something like {id: 1, value: [1]} where id is an attrib id from elem template,
         // and value is array of ids of an attrib values from elem template. Instead of array of ids may be string with exact value
-        const dataElemAttr = dataElem.dCompElemAttrs.find(attr => {
-            return attr.tCompElemAttrId === attrTemplate.elemAttrId
+        const dataElemAttr = dataElem.dCompElemAttrs.find(dAttr => {
+            return dAttr.tCompElemAttrId === attrTemplate.elemAttrId
         })
+
+        if (!dataElemAttr) return
 
         // If in dataElemAttr.value is ready value...
         if (typeof dataElemAttr.dCompElemAttrValue === 'string') {

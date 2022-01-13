@@ -9,7 +9,7 @@ import articleManager from '../articleManager'
  * @param {Array} tComps — массив шаблонов компонентов
  */
 export default function correctArticle(article: ArticleTypes.Article, dComps: ArticleTypes.Components, tComps: TempCompTypes.TempComps) {
-    for (let i = 0; i < dComps.length; i++) {
+    /*for (let i = 0; i < dComps.length; i++) {
         const dComp = dComps[i]
 
         if (dComp.dCompType === 'component') {
@@ -37,7 +37,7 @@ export default function correctArticle(article: ArticleTypes.Article, dComps: Ar
                 }
             }
         }
-    }
+    }*/
 }
 
 /**

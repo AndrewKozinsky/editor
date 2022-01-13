@@ -172,20 +172,20 @@ const burgerTemplate2: TempCompTypes.Content = {
             elemName: 'Главная обёртка',
             elemAttrs: [
                 {
-                    elemAttrId: '1',
+                    elemAttrId: 'class-attr-id',
                     elemAttrName: 'class',
                     elemAttrAlt: 'Класс',
                     elemAttrView: 'checkbox',
-                    elemAttrLockedValue: 'burger ',
+                    elemAttrLockedValue: 'burger',
                     elemAttrValues: [
                         {
-                            elemAttrValueId: '1',
+                            elemAttrValueId: 'white',
                             elemAttrValueValue: 'burger--white',
                             elemAttrValueAlt: 'Белая подложка',
                             elemAttrValueChecked: true
                         },
                         {
-                            elemAttrValueId: '2',
+                            elemAttrValueId: 'green',
                             elemAttrValueValue: 'burger--green',
                             elemAttrValueAlt: 'Зелёная подложка',
                             elemAttrValueChecked: false
@@ -193,11 +193,11 @@ const burgerTemplate2: TempCompTypes.Content = {
                     ]
                 },
                 {
-                    elemAttrId: '2',
+                    elemAttrId: 'title',
                     elemAttrName: 'data-title',
                     elemAttrAlt: 'Data title',
                     elemAttrView: 'text',
-                    elemAttrLockedValue: 'LockedValue ',
+                    elemAttrLockedValue: 'My lockedValue 1',
                 },
             ],
             elemTags: {
@@ -230,6 +230,24 @@ const burgerTemplate2: TempCompTypes.Content = {
             elemName: 'Нижняя внутренняя часть',
             elemTextInside: true
         },
+    ]
+}
+
+const owl: TempCompTypes.Content = {
+    name: 'Owl',
+    html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" width="150" data-em-id="image" />',
+    elems: [
+        {
+            elemId: 'image',
+            elemName: 'Изображение',
+            elemAttrs: [
+                {
+                    elemAttrId: 'src-attr-id',
+                    elemAttrName: 'src',
+                    elemAttrAlt: 'Путь до изображения',
+                },
+            ],
+        }
     ]
 }
 

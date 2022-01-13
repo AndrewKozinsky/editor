@@ -1,65 +1,77 @@
-// import { useEffect, useState } from 'react'
-// import TempCompTypes from '../../../../store/article/codeType/tempCompCodeType'
-// import articleManager from 'articleManager/articleManager'
-// import ArticleTypes from 'store/article/codeType/articleCodeType'
-// import { AttrsAdjInputsType } from '../AdjustInputs/AdjustInputs'
-// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-// import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
-// import { SelectPropType } from 'common/formElements/Select/Select'
-// import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+import articleManager from 'articleManager/articleManager'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
+import { SelectPropType } from 'common/formElements/Select/Select'
+import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
+import { OptionsType } from 'common/formElements/Select/SelectTypes'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента
+ * @param {Object} dComp — данные выделенного компонента
  * @param {Object} dElem — данные выделенного элемента
  * @param {Object} tElem — шаблон выделенного элемента
  */
-/*export function getAttrsInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AttrsAdjInputsType[] {
-    if (!tElem.elemAttrs) return []
+export function getAttrsInputsConfig(dComp: ArticleTypes.Component, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AdjInputsType[] {
+    if (!tElem.elemAttrs) return null
 
     return tElem.elemAttrs.map(elemAttr => {
-        const inputType = getInputType(elemAttr)
+        // Тип поля изменения тега
+        const inputType: any = getInputType(elemAttr)
 
         // Данные атрибута
-        /!*const dElemAttrObj = dElem.dCompElemAttrs.find(dCompElemAttr => {
+        const dElemAttrObj = dElem.dCompElemAttrs.find(dCompElemAttr => {
             return dCompElemAttr.tCompElemAttrId === elemAttr.elemAttrId
-        })*!/
+        })
 
         return {
             type: inputType,
-            // data: getInputData(elemAttr, inputType, dElemAttrObj)
+            data: getInputData(dComp.dCompId, dElem.dCompElemId, elemAttr, inputType, dElemAttrObj)
         }
     })
-}*/
+}
 
 
 /**
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  */
-/*function getInputType(tElemAttr: TempCompTypes.ElemAttr): TempCompTypes.InputType {
+function getInputType(tElemAttr: TempCompTypes.ElemAttr): TempCompTypes.InputType {
     if (tElemAttr.elemAttrView) {
         return tElemAttr.elemAttrView
     }
 
     return Array.isArray(tElemAttr.elemAttrValues)
         ? 'radio' : 'text'
-}*/
+}
 
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemAttr: TempCompTypes.ElemAttr, inputType: 'text', dElemAttrObj: ArticleTypes.Attrib): TextInputPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemAttr: TempCompTypes.ElemAttr, inputType: 'checkbox', dElemAttrObj: ArticleTypes.Attrib): FieldGroupPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemAttr: TempCompTypes.ElemAttr, inputType: 'radio', dElemAttrObj: ArticleTypes.Attrib): FieldGroupPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemAttr: TempCompTypes.ElemAttr, inputType: 'select', dElemAttrObj: ArticleTypes.Attrib): SelectPropType
 /**
  * Функция возвращает данные, которые будут переданы в поле ввода изменения определённого атрибута для его отрисовки
+ * @param {Number} dCompId — id данных выделенного компонента
+ * @param {Number} dElemId — id данных выделенного элемента
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  * @param {String} inputType — тип поля
  * @param {Object} dElemAttrObj — объект с данными об атрибуте элемента
  */
-/*function getInputData(
+function getInputData(
+    dCompId: ArticleTypes.Id,
+    dElemId: ArticleTypes.Id,
     tElemAttr: TempCompTypes.ElemAttr,
-    inputType: InputTypes,
+    inputType: TempCompTypes.InputType,
     dElemAttrObj: ArticleTypes.Attrib
-): TextInputPropType & FieldGroupPropType & SelectPropType {
+): TextInputPropType | FieldGroupPropType | SelectPropType {
     // Текст в свойстве label и grayText у поля
     const { label, grayText } = getLabelAndGrayText(tElemAttr)
     // Значение свойства value у атрибута
-    const value = getAttrCurrentValue(dElemAttrObj, inputType)
+    const value = getInputValue(dElemAttrObj, inputType)
 
     if (inputType === 'text') {
         return {
@@ -67,8 +79,8 @@
             grayText,
             name: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
             value,
-            onChange: onChangeHandler,
-        }
+            onChange: onChangeHandler(dCompId, dElemId, inputType),
+        } as TextInputPropType
     }
     else if (inputType === 'checkbox') {
         return {
@@ -76,10 +88,10 @@
             grayText,
             inputType: 'checkbox',
             groupName: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            inputsArr: getInputItems(tElemAttr),
+            inputsArr: getInputItems(tElemAttr, inputType),
             value,
-            onChange: onChangeHandler,
-        }
+            onChange: onChangeHandler(dCompId, dElemId, inputType),
+        } as FieldGroupPropType
     }
     else if (inputType === 'radio') {
         return {
@@ -87,28 +99,28 @@
             grayText,
             inputType: 'radio',
             groupName: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            inputsArr: getInputItems(tElemAttr),
+            inputsArr: getInputItems(tElemAttr, inputType),
             value,
-            onChange: onChangeHandler,
-        }
+            onChange: onChangeHandler(dCompId, dElemId, inputType),
+        } as FieldGroupPropType
     }
     else if (inputType === 'select') {
         return {
             label,
             grayText,
             name: tElemAttr.elemAttrId, // В качестве имени поля будет выступать id атрибута
-            options: getInputItems(tElemAttr),
+            options: getInputItems(tElemAttr, inputType),
             value,
-            onChange: onChangeHandler,
-        }
+            onChange: onChangeHandler(dCompId, dElemId, inputType),
+        } as SelectPropType
     }
-}*/
+}
 
 /**
  * Функция возвращает объект с данными что писать в названии поля ввода и значение серого текста (если его можно поставить)
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  */
-/*function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
+function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
     const attrName = tElemAttr.elemAttrName
     const attrAltName = tElemAttr.elemAttrAlt
 
@@ -122,15 +134,16 @@
         label: attrAltName,
         grayText: attrName
     }
-}*/
+}
 
 /**
- *
- * @param {ArticleTypes.Attrib} dElemAttrObj
- * @param {InputTypes} inputType
+ * Функция возвращает выбранное value атрибута. Это может быть или строка или массив строк
+ * @param {Object} dElemAttrObj — данные атрибута
+ * @param {String} inputType — тип поля
  * @returns {ArticleTypes.ComponentElemAttribValue | undefined}
  */
-/*function getAttrCurrentValue(dElemAttrObj: ArticleTypes.Attrib, inputType: InputTypes) {
+function getInputValue(dElemAttrObj: ArticleTypes.Attrib, inputType: TempCompTypes.InputType) {
+
     if (inputType === 'text' || inputType === 'select') {
         return dElemAttrObj?.dCompElemAttrValue
             ? dElemAttrObj?.dCompElemAttrValue
@@ -141,16 +154,17 @@
             ? dElemAttrObj?.dCompElemAttrValue
             : []
     }
-}*/
+}
 
 /**
  * Функция возвращает массив данных для генерирования флагов, переключателей или пунктов выпадающего списка
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ * @param {String} inputType — тип поля
  */
-/*function getInputItems(tElemAttr: TempCompTypes.ElemAttr,) {
+function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTypes.InputType): OptionsType {
     if (!tElemAttr?.elemAttrValues) return []
 
-    return tElemAttr?.elemAttrValues.map(elemAttrValue => {
+    const options: OptionsType = tElemAttr.elemAttrValues.map(elemAttrValue => {
         let label = '', grayText = ''
 
         if (elemAttrValue.elemAttrValueAlt) {
@@ -167,9 +181,39 @@
             grayText
         }
     })
-}*/
 
-// TODO Что делает эта функция?
-/*function onChangeHandler(data: {fieldName: string | number, fieldValue: (number | string)[]}) {
-    console.log(data)
-}*/
+    if (['select', 'radio'].includes(inputType)) {
+        options.unshift({
+            label: 'Не выбрано',
+            value: '',
+        })
+    }
+
+    return options
+}
+
+/**
+ * Обработчик изменения поля изменения атрибута
+ * @param {Number} dCompId — id данных выделенного компонента
+ * @param {Number} dElemId — id данных выделенного элемента
+ * @param {String} inputType — тип поля
+ */
+function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, inputType: TempCompTypes.InputType) {
+    return function (data: OuterOnChangeHandlerType.FieldsData) {
+        const {history, historyCurrentIdx} = store.getState().article
+        const historyItem = history[historyCurrentIdx]
+
+        // Для текстового поля нужно взять первый элемент массива значений,
+        // для всех остальных взять весь массив
+        let fieldValue: string | string[] = data.fieldValue
+        if (inputType === 'text') fieldValue = data.fieldValue[0]
+
+        const compsAndMaxCompId = articleManager.changeElemAttr(
+            historyItem.article, dCompId, dElemId, data.fieldName, fieldValue
+        )
+
+        store.dispatch(actions.article.createAndSetHistoryItem(
+            compsAndMaxCompId
+        ))
+    }
+}

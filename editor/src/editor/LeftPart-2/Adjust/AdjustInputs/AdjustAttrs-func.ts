@@ -1,10 +1,10 @@
 // import { useEffect, useState } from 'react'
 // import articleManager from 'articleManager/articleManager'
-import { AttrsAdjInputsType, TagAdjInputsType } from './AdjustInputs'
+import { AdjInputsType } from './AdjustInputs'
 
 // Функция возвращает пример объекта конфигурации для отрисовки полей изменения атрибутов выделенного элемента.
 // Потом можно удалить
-export function getTagInputsConfigExample(): TagAdjInputsType[] {
+export function getTagInputsConfigExample(): AdjInputsType[] {
     return [
         {
             type: 'text',
@@ -19,7 +19,7 @@ export function getTagInputsConfigExample(): TagAdjInputsType[] {
 }
 
 
-export function getAttrsInputsConfigExample(): AttrsAdjInputsType[] {
+export function getAttrsInputsConfigExample(): AdjInputsType[] {
     return [
         {
             type: 'text',

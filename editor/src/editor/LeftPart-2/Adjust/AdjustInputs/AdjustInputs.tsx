@@ -4,25 +4,24 @@ import Select, { SelectPropType } from 'common/formElements/Select/Select'
 import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 
 type AdjInputsPropType = {
-    config: null | AttrsAdjInputsType[] | TagAdjInputsType[]
+    config: null | AdjInputsType[]
 }
 
-export type AttrsAdjInputsType = AdjTextInputType | AdjCheckboxInputType | AdjRadioInputType | AdjSelectInputType
-export type TagAdjInputsType = AdjTextInputType | AdjRadioInputType | AdjSelectInputType
+export type AdjInputsType = AdjTextInputType | AdjCheckboxInputType | AdjRadioInputType | AdjSelectInputType
 
-type AdjTextInputType = {
+export type AdjTextInputType = {
     type: 'text',
     data: TextInputPropType
 }
-type AdjCheckboxInputType = {
+export type AdjCheckboxInputType = {
     type: 'checkbox',
     data: FieldGroupPropType
 }
-type AdjRadioInputType = {
+export type AdjRadioInputType = {
     type: 'radio',
     data: FieldGroupPropType
 }
-type AdjSelectInputType = {
+export type AdjSelectInputType = {
     type: 'select',
     data: SelectPropType
 }
@@ -43,7 +42,7 @@ export default function AdjustInputs(props: AdjInputsPropType) {
 }
 
 type AdjustInputPropType = {
-    inputConfig: AttrsAdjInputsType | TagAdjInputsType
+    inputConfig: AdjInputsType
 }
 
 /** Поле ввода изменения атрибута выделенного элемента */

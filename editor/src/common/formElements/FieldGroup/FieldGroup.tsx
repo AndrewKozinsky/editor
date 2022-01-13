@@ -53,8 +53,8 @@ export default function FieldGroup(props: FieldGroupPropType) {
 
             // Наполнить массив проставленными значениями
             inputsArr.forEach((inputData) => {
-                if (!!value.includes(inputData.value[0])) {
-                    fieldValues.push(inputData.value[0])
+                if (!!value.includes(inputData.value)) {
+                    fieldValues.push(inputData.value)
                 }
             })
 

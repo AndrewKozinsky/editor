@@ -20,17 +20,21 @@ export function changeTagName(consistObj: ConsistObj) {
  */
 function getTagName(dElem: ArticleTypes.ComponentElem, tempElem: TempCompTypes.Elem): string | null {
     if (!dElem.dCompElemTag) return null
+    // debugger
 
-    // If tag is a string, that is a ready tag name.
-    if (typeof dElem.dCompElemTag === 'string') return dElem.dCompElemTag
+    // Если в шаблоне массив в свойстве elemTagsValues,
+    // то это массив идентификаторов.
+    if (Array.isArray(tempElem.elemTags.elemTagsValues)) {
+        // Поэтому найти имя тега по идентификатору
+        const tagInfo = tempElem.elemTags.elemTagsValues.find(elemTagObj => {
+            return elemTagObj.elemTagValueId === dElem.dCompElemTag
+        })
 
-    // Otherwise, tag id was passed. That's why I need to find tag name with this id in the component template...
-    // Its tags
-    const tags = tempElem.elemTags.elemTagsValues
-    // Get tag object by tag id
-    const tagData = tags.find(tagObj => tagObj.elemTagValueId === dElem.dCompElemTag)
-
-    // Return tag name
-    if (tagData) return tagData.elemTagValueName
-    return null
+        // Возвращу имя тега
+        return tagInfo.elemTagValueName
+    }
+    // В противном случае это готовое имя тега и его сразу можно вернуть
+    else {
+        return dElem.dCompElemTag
+    }
 }

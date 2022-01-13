@@ -16,6 +16,7 @@ $CN: left-bottom-section;
     padding: 4px 6px 3px;
     border: none;
     border-radius: var(--radius);
+    background-color: var(--bg-color);
 
     &:hover {
         background-color: var(--button-color);

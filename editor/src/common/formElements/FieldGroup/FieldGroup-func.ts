@@ -1,4 +1,4 @@
-import { OuterOnChangeHandlerType } from "../outerOnChangeFn"
+import { OuterOnChangeHandlerType } from '../outerOnChangeFn'
 
 /**
  * Обработчик изменения значения флага или переключателя.
@@ -19,7 +19,7 @@ export function updateFieldValuesInState(
         if (inputType === 'radio') {
             // Объект со значением выделенного поля, который будет сохранён в Состояние
             const fieldsStateObj = {
-                fieldName: fieldData.fieldName[0],
+                fieldName: fieldData.fieldName,
                 fieldValue: [fieldData.fieldValue[0]]
             }
             // Сохранить объект в Состояние

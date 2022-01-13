@@ -97,7 +97,10 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
         const { tElem } = tElemMapItem
 
         // html перебираемого элемента
-        const $elem = $component.querySelector(`[data-em-id="${tElemMapItem.elemId}"]`) as HTMLElement
+        // Он ищется и в верхнем теге компонента и в его дочерних тегах
+        let $elem: HTMLElement = $component.dataset.emId
+            ? $component
+            : $component.querySelector(`[data-em-id="${tElemMapItem.elemId}"]`)
 
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
@@ -170,27 +173,22 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
     const dElemAttrs: ArticleTypes.Attribs = []
 
     // Перебор атрибутов элемента
-    for (let attribTemp of tElem?.elemAttrs) {
+    for (let attribTemp of tElem.elemAttrs) {
 
         let dElemAttr: ArticleTypes.Attrib
 
         // В каком виде будет заноситься значение атрибута?
         // Если предполагается ввод через текстовое поле, то значение атрибута будет текстовым
         // В любых других случаях будет массив с идентификаторами готовых значений атрибута
-        let dElemAttrValue: string |  ArticleTypes.ComponentElemAttribValue =
-            attribTemp.elemAttrView === 'text' ? '' : []
+        let dElemAttrValue: string | ArticleTypes.ComponentElemAttribValue =
+            attribTemp.elemAttrView === 'text' || !Array.isArray(attribTemp.elemAttrValues)
+                ? '' : []
 
         // Объект с данными id атрибута и его незаполненного значения.
         // Значения по умолчанию будут записываться ниже.
         dElemAttr = {
             tCompElemAttrId: attribTemp.elemAttrId,
             dCompElemAttrValue: dElemAttrValue
-        }
-
-        // Если поле ввода значения атрибута текстовое и есть значение по умолчанию...
-        if (attribTemp.elemAttrView === 'text' && attribTemp.elemAttrLockedValue) {
-            // ... то поставить значение по умолчанию в качестве значения атрибута
-            dElemAttr.dCompElemAttrValue = attribTemp.elemAttrLockedValue
         }
 
         // Если поле ввода значения атрибута предполагает массив предопределённых значений,

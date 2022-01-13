@@ -59,7 +59,11 @@ import {
     moveComponentToElement,
     moveItemToUpOrDown
 } from './methods/move'
-import { changeVisibility } from './methods/visibility'
+import {
+    changeVisibility,
+    changeElemTag,
+    changeElemAttr
+} from './methods/visibility'
 
 
 class ArticleManager {
@@ -129,6 +133,8 @@ class ArticleManager {
 
     // CHANGE
     changeVisibility = changeVisibility
+    changeElemTag = changeElemTag
+    changeElemAttr = changeElemAttr
 
     // CLONE
     cloneItem = cloneItem

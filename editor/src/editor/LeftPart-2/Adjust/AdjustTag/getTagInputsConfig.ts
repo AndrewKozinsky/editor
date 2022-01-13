@@ -3,87 +3,97 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
-import { TagAdjInputsType } from '../AdjustInputs/AdjustInputs'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import articleManager from 'articleManager/articleManager'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения тега выделенного элемента
+ * @param {Object} dComp — данные выделенного компонента
  * @param {Object} dElem — данные выделенного элемента
  * @param {Object} tElem — шаблон выделенного элемента
  */
-/*export function getTagInputsConfig(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): TagAdjInputsType[] {
+export function getTagInputsConfig(dComp: ArticleTypes.Component, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): AdjInputsType[] {
     if (!tElem.elemTags) return null
 
-    // Тип поля изменения тега (text, radio, select)
-    const inputType = getInputType(tElem.elemTags)
+    // Тип поля изменения тега
+    const inputType: any = getInputType(tElem.elemTags)
 
     return [{
         type: inputType,
-        data: getInputData(tElem.elemTags, inputType, dElem.dCompElemTag)
+        data: getInputData(dComp.dCompId, dElem.dCompElemId, tElem.elemTags, inputType, dElem.dCompElemTag)
     }]
-}*/
+}
 
 
 /**
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemTags — данные о доступных тегах
  */
-/*function getInputType(tElemTags: TempCompTypes.ElemTags): 'select' | 'text' | 'radio' {
+function getInputType(tElemTags: TempCompTypes.ElemTags): TempCompTypes.InputType {
     if (tElemTags.elemTagsView) {
-        return tElemTags.elemTagsView as 'select' | 'text' | 'radio'
+        return tElemTags.elemTagsView
     }
 
     return Array.isArray(tElemTags.elemTagsValues)
         ? 'radio' : 'text'
-}*/
+}
 
+// Перегрузка функции getInputData
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemTags: TempCompTypes.ElemTags, inputType: 'text', currentTagValue: ArticleTypes.Tag): TextInputPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemTags: TempCompTypes.ElemTags, inputType: 'checkbox', currentTagValue: ArticleTypes.Tag): FieldGroupPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemTags: TempCompTypes.ElemTags, inputType: 'radio', currentTagValue: ArticleTypes.Tag): FieldGroupPropType
+function getInputData(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, tElemTags: TempCompTypes.ElemTags, inputType: 'select', currentTagValue: ArticleTypes.Tag): SelectPropType
 /**
  * Функция возвращает данные, которые будут переданы в поле ввода изменения определённого атрибута для его отрисовки
+ * @param {Number} dCompId — id данных выделенного компонента
+ * @param {Number} dElemId — id данных выделенного элемента
  * @param {Object} tElemTags — данные об изменении тега из шаблона элемента
  * @param {String} inputType — тип поля
  * @param {String} currentTagValue — или название тега, или id из массива вариантов возможных тегов ('1' OR 'div')
  */
-/*function getInputData(
+function getInputData(
+    dCompId: ArticleTypes.Id,
+    dElemId: ArticleTypes.Id,
     tElemTags: TempCompTypes.ElemTags,
     inputType: TempCompTypes.InputType,
     currentTagValue: ArticleTypes.Tag
-) {
+): TextInputPropType | FieldGroupPropType | SelectPropType {
     // Текст в свойстве label у поля изменения тега
     const label = 'Тег'
     // Значение тега
     const value = getInputValue(tElemTags, inputType, currentTagValue)
 
     if (inputType === 'text') {
-        const res: TextInputPropType = {
+        return {
             label,
             name: 'tag', // Атрибута name в поле изменения тега
             value: value,
-            onChange: onChangeHandler,
-        }
-        return res
+            onChange: onChangeHandler(dCompId, dElemId),
+        } as TextInputPropType
     }
     else if (inputType === 'radio') {
-        const res: FieldGroupPropType = {
+        return {
             label,
             inputType: 'radio',
             groupName: 'tag', // Атрибута name в поле изменения тега
             inputsArr: getInputItems(tElemTags),
             value: [value],
-            onChange: onChangeHandler,
-        }
-        return res
+            onChange: onChangeHandler(dCompId, dElemId),
+        } as FieldGroupPropType
     }
     else if (inputType === 'select') {
-        const res: SelectPropType = {
+        return {
             label,
             name: 'tag', // Атрибута name в поле изменения тега
             options: getInputItems(tElemTags),
             value,
-            onChange: onChangeHandler,
-        }
-
-        return res
+            onChange: onChangeHandler(dCompId, dElemId),
+        } as SelectPropType
     }
-}*/
+}
 
 /**
  * Функция возвращает или конкретное значение тега (если его написали в текстовом поле)
@@ -92,14 +102,16 @@ import { TagAdjInputsType } from '../AdjustInputs/AdjustInputs'
  * @param {String} inputType — тип поля ввода использованное для ввода или выбора тега
  * @param {String} currentTag — или название тега, или id из массива вариантов возможных тегов ('1' OR 'div')
  */
-/*function getInputValue(
+function getInputValue(
     tElemTags: TempCompTypes.ElemTags,
     inputType: TempCompTypes.InputType,
     currentTag: ArticleTypes.Tag
 ) {
+    if (!currentTag) return ''
+
     if (inputType === 'text') {
         // Вернуть конкретное значение тега
-        return currentTag || ''
+        return currentTag
     }
     else if (inputType === 'radio' || inputType === 'select') {
         // Найти и вернуть id выбранного тега
@@ -107,24 +119,47 @@ import { TagAdjInputsType } from '../AdjustInputs/AdjustInputs'
             return tElemTag.elemTagValueId === currentTag
         })
 
-        return foundedElemTag.elemTagValueId
+        return foundedElemTag?.elemTagValueId
     }
-}*/
+}
 
 /**
  * Функция возвращает массив данных для генерирования флагов, или пунктов выпадающего списка с выбором тега
  * @param {Object} tTagObj — данные о возможных тегах из шаблона элемента
  */
-/*function getInputItems(tTagObj: TempCompTypes.ElemTags) {
-    return tTagObj.elemTagsValues.map(elemTagValue => {
+function getInputItems(tTagObj: TempCompTypes.ElemTags) {
+    const options = tTagObj.elemTagsValues.map(elemTagValue => {
         return {
             label: elemTagValue.elemTagValueName,
             value: elemTagValue.elemTagValueId,
         }
     })
-}*/
 
-// TODO Что делает эта функция?
-/*function onChangeHandler(data: {fieldName: string | number, fieldValue: string[]}) {
-    console.log(data)
-}*/
+    // Пункт если ничего не выбрано
+    options.unshift({
+        label: 'Не выбрано',
+        value: '',
+    })
+
+    return options
+}
+
+/**
+ * Обработчик изменения поля изменения тега
+ * @param {Number} dCompId — id данных выделенного компонента
+ * @param {Number} dElemId — id данных выделенного элемента
+ */
+function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id) {
+    return function (data: OuterOnChangeHandlerType.FieldsData) {
+        const {history, historyCurrentIdx} = store.getState().article
+        const historyItem = history[historyCurrentIdx]
+
+        const compsAndMaxCompId = articleManager.changeElemTag(
+            historyItem.article, dCompId, dElemId, data.fieldValue[0]
+        )
+
+        store.dispatch(actions.article.createAndSetHistoryItem(
+            compsAndMaxCompId
+        ))
+    }
+}

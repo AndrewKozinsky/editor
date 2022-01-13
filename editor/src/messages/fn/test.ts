@@ -14,8 +14,3 @@ const result = get('str') // string
 const result2 = get('num') // number
 
 
-function double<T extends number | string>(x: T): T
-function double(x: any) {
-    return x + x
-}
-const res3 = double(5)

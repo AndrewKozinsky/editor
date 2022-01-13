@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { AttrsAdjInputsType, TagAdjInputsType } from './AdjustInputs/AdjustInputs'
-// import { getTagInputsConfig } from './AdjustTag/getTagInputsConfig'
-// import { getAttrsInputsConfig } from './AdjustAttrs/getAttrsFormConfig'
+import { AdjInputsType } from './AdjustInputs/AdjustInputs'
+import { getTagInputsConfig } from './AdjustTag/getTagInputsConfig'
+import { getAttrsInputsConfig } from './AdjustAttrs/getAttrsFormConfig'
 
 /** Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента */
-/*export default function useGetInputsConfig(configType: 'tag' | 'attrs') {
-    const [config, setConfig] = useState<AttrsAdjInputsType[] | TagAdjInputsType[]>([])
+export default function useGetInputsConfig(configType: 'tag' | 'attrs') {
+    const [config, setConfig] = useState<AdjInputsType[]>([])
 
     // Данные о выделенном элементе
     const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
@@ -18,50 +18,44 @@ import { AttrsAdjInputsType, TagAdjInputsType } from './AdjustInputs/AdjustInput
     // Проблема в том, что это приводит к циклическому вызову useGetInputsConfig потому что
     // getFlashedElemDataAndTemplate() всегда возвращает новый объект, а useEffect() проверяет на это
     // Поэтому хук useIsOldAndNewElemsEqual() проверяет что данные по выделенному элементу действительно изменились.
-    const isPrevAndNewElemsEqual = useIsPrevAndNewElemsEqual(flashedElemInfo.dElem, flashedElemInfo.tElem)
+    const isPrevAndNewElemsEqual = useIsPrevAndNewElemsEqual(flashedElemInfo.dElem)
 
     useEffect(function () {
-        const { dElem, tElem } = flashedElemInfo
+        const { dComp, dElem, tElem } = flashedElemInfo
         if (!dElem || !tElem || isPrevAndNewElemsEqual) return
 
         if (configType === 'tag') {
             setConfig(
-                getTagInputsConfig(dElem, tElem)
+                getTagInputsConfig(dComp, dElem, tElem)
             )
         }
-        /!*else if (configType === 'attrs') {
+        else if (configType === 'attrs') {
             setConfig(
-                getAttrsInputsConfig(dElem, tElem)
+                getAttrsInputsConfig(dComp, dElem, tElem)
             )
-        }*!/
+        }
 
     }, [flashedElemInfo])
 
     return config
-}*/
+}
 
 /**
- * Хук проверяет, что ранее выделенный элемент равняется переданному
- * @param {ArticleTypes.ComponentElem} dElem
- * @param {TempCompTypes.Elem} tElem
- * @returns {boolean}
+ * Хук проверяет, что ранее выделенный элемент равняется переданному.
+ * Если в элементе поменялось значение тега или атрибута, то такие элементы не считаются равными.
+ * @param {Object} dElem — данные элемента
  */
-/*function useIsPrevAndNewElemsEqual(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem): boolean {
-    const [prevDElemId, setPrevDElemId] = useState<null | ArticleTypes.Id>(null)
-    const [prevTElemId, setPrevTElemId] = useState<null | TempCompTypes.ElemId>(null)
-    const [isPrevAndNewElemsEqual, setIsPrevAndNewElemsEqual] = useState(false)
+function useIsPrevAndNewElemsEqual(dElem: ArticleTypes.ComponentElem): boolean {
+    const [prevDElem, setPrevDElem] = useState<null | ArticleTypes.ComponentElem>(null)
+
+    // Равны ли предыдущий и текущий выделенный элемент
+    const [isEqual, setIsEqual] = useState(false)
 
     useEffect(function () {
-        const newDElemId = dElem?.dCompElemId || null
-        const newTElemId = tElem?.elemId || null
+        setPrevDElem(dElem)
 
-        setIsPrevAndNewElemsEqual(
-            newDElemId === prevDElemId && newTElemId === prevTElemId
-        )
+        setIsEqual( prevDElem === dElem )
+    }, [dElem, prevDElem])
 
-        setPrevDElemId(newDElemId)
-        setPrevTElemId(newTElemId)
-    }, [dElem, tElem, prevDElemId, prevTElemId])
-
-    return isPrevAndNewElemsEqual
-}*/
+    return isEqual
+}

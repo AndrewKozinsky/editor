@@ -35,24 +35,15 @@ function SubHeader(props: SubHeaderPropType) {
 
 function Content() {
     // Какие компоненты можно показывать?
-    const contentType = useGetContentTypeVisible() //
+    const contentType = useGetContentTypeVisible()
 
-    if (contentType === 'none') {
-        return null
-    }
-    else if(contentType === 'tag') {
-        return <AdjustTag />
-    }
-    else if(contentType === 'attrs') {
-        return <AdjustAttrs />
-    }
-    else if(contentType === 'both') {
-        return (
-            <div className='adjust-panel__content'>
-                <AdjustTag />
-                <Hr extraClass='adjust-panel__content-hr' />
-                <AdjustAttrs />
-            </div>
-        )
-    }
+    if (contentType === 'none') return null
+
+    return (
+        <div className='adjust-panel__content'>
+            {['tag', 'both'].includes(contentType) && <AdjustTag />}
+            {contentType === 'both' && <Hr extraClass='adjust-panel__content-hr' />}
+            {['attrs', 'both'].includes(contentType) && <AdjustAttrs />}
+        </div>
+    )
 }
