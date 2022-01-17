@@ -12,6 +12,11 @@ export function setExtraAttribsToMainTag(htmlObj: HTMLObjArrType.Tag, dataComp: 
     // id компонента
     htmlObj.attrs['data-em-d-gen-comp-id'] = dataComp.dCompId.toString()
 
+    // Поставить атрибут data-em-display="hidden" если компонент является скрытым
+    if (dataComp.dCompLayer?.layerHidden) {
+        htmlObj.attrs['data-em-display'] = 'hidden'
+    }
+
     // Если главной обёртка является элементом
     if (htmlObj.attrs['data-em-id']) {
 

@@ -162,6 +162,23 @@ export function getIconSize(type: string) {
                 height: '17px',
                 viewBox: '0 0 17 17'
             }
+
+        // Значки в слоях
+        case 'layerComp':
+        case 'layerText':
+        case 'layerCollapse':
+            return {
+                width: '12px',
+                height: '12px',
+                viewBox: '0 0 12 12'
+            }
+        case 'layerVisible':
+        case 'layerHidden':
+            return {
+                width: '15px',
+                height: '16px',
+                viewBox: '0 0 15 16'
+            }
         default: {
             return {}
         }

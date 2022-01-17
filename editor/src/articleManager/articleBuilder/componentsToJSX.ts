@@ -14,7 +14,10 @@ export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Ar
             return handleTextObject(htmlObj)
         }
         else if ('tag' in htmlObj) {
-            return handleTagObject(htmlObj, i)
+            // Если тег скрыт, то ничего не отрисовывать
+            return htmlObj.attrs['data-em-display'] === 'hidden'
+                ? null
+                : handleTagObject(htmlObj, i)
         }
     })
 }
@@ -34,6 +37,8 @@ function handleTextObject(htmlObj: HTMLObjArrType.Text) {
  * @param {Number} key — key property
  */
 function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
+
+
     let tagName = htmlObj.tag
 
     // Подготовлю атрибуты

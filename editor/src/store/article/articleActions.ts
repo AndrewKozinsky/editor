@@ -243,7 +243,7 @@ const articleActions = {
 
                 // Спрятать рамку вокруг наведённого компонента для перемещения
                 dispatch( actions.article.setFlashedElement(
-                    'moveHover', tagType, null, null
+                    'moveHover', null, null, null
                 ))
             }
             // Если элемент выделили...
@@ -251,6 +251,18 @@ const articleActions = {
                 dispatch( actions.article.setFlashedElement(
                     'select', tagType, dataCompId, dataElemId
                 ))
+
+                // Очистить выделенный текстовый компонент потому что выделяют другой компонент/элемент
+                if (currentArticle.selectedTextComp.dataCompId) {
+                    dispatch( actions.article.setTextCompId(null))
+                }
+
+                // Если выделили компонент выделенный для перемещения, то очистить выделение для перемещения
+                if (currentArticle.moveSelectedComp.dataCompId === dataCompId && !dataElemId) {
+                    dispatch( actions.article.setFlashedElement(
+                        'moveSelect', null, null, null
+                    ))
+                }
             }
             // Если на компонент навели мышью для перемещения...
             else if (actionType === 'moveHover') {
@@ -306,6 +318,23 @@ const articleActions = {
         return {
             type: StoreArticleTypes.SET_FLASHED_ELEMENT,
             payload: { actionType, tagType, dataCompId, dataElemId }
+        }
+    },
+
+    setTextComp(textCompId: number | null) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            const { history, historyCurrentIdx} = getState().article
+            const currentArticle = history[historyCurrentIdx]
+
+            // Если выделен какой-то компонент/элемент, то убрать выделение
+            if (currentArticle.selectedElem.dataCompId) {
+                dispatch( actions.article.setFlashedElement(
+                    'select', null, null, null
+                ))
+            }
+
+            // Поставить выделение текстового компонента
+            dispatch( actions.article.setTextCompId(textCompId))
         }
     },
 

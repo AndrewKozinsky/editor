@@ -83,6 +83,7 @@ export function canComponentPutInElement(
  * @param {Number} tempCompId — component template id
  * @param {String} tempElemId — element template id
  */
+// НАЗВАНИЕ НУЖНО ОБОЗНАЧИТЬ КОНКРЕТНЕЕ. СЕЙЧАС НЕ ПОНЯТНО, ЧТО ФУНКЦИЯ РАБОТАЕТ С HTMl И ШАБЛОНАМИ
 export function hasElemNestedElements(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
@@ -277,4 +278,180 @@ export function canMoveItemToUpOrDown(
  */
 export function canClone(this: typeof articleManager, compCoords: StoreArticleTypes.FlashedElem) {
     return !!compCoords.tagType
+}
+
+/**
+ * Функция выясняет по id данных элемента является ли элемент корневым
+ * @param {Array} tempCompArr — массив шаблонов компонентов
+ * @param {Object} dComp — данные компонента
+ * @param {Object} dElem — данные выделенного элемента
+ */
+export function isElemIsRootByDElem(
+    this: typeof articleManager,
+    tempCompArr: TempCompTypes.TempComps,
+    dComp: ArticleTypes.Component,
+    dElem: ArticleTypes.ComponentElem,
+) {
+    // Get component html
+    const $component = this.get$component(tempCompArr, dComp.tCompId)
+    if (!$component || !$component.dataset.emId) return false
+
+    return $component.dataset.emId === dElem.tCompElemId
+}
+
+/**
+ * Функция проверяет скрыт ли один из родителей переданного компонента/элемента
+ * @param {Array} dItems — массив компонентов
+ * @param {Object} targetDComp — данные целевого компонента у которого проверяется наличие скрытого предка
+ * @param {Object} targetDElem — данные целевого элемента у которого проверяется наличие скрытого предка
+ * @param {Boolean} parentItemHidden — скрыт ли компонент/элемент находящийся выше в иерархии
+ * @param {Object} parentDComp — данные компонента к которому принадлежат перебираемый массив элементов
+ */
+export function isParentElemHidden(
+    this: typeof articleManager,
+    dItems: ArticleTypes.Components | ArticleTypes.ComponentElems | ArticleTypes.ElemChildren,
+    targetDComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
+    targetDElem: null | ArticleTypes.ComponentElem = null,
+    parentItemHidden: boolean = false,
+    parentDComp: null | ArticleTypes.Component = null,
+): boolean {
+    if (!Array.isArray(dItems)) return
+
+    // Перебор массива. Это может быть как массив компонентов, так и элементов
+    for (let i = 0; i < dItems.length; i++) {
+        // Перебираемый элемент
+        const dItem = dItems[i]
+
+        // Если это обычный компонент...
+        if ('dCompType' in dItem) {
+            if (dItem.dCompType === 'component') {
+
+                // Если нашли целевой компонент и родительский элемент скрыт, то возвратить правду
+                // чтобы показать, что целевой элемент имеет скрытого предка
+                if (dItem.dCompId === targetDComp.dCompId && !targetDElem) {
+                    if (parentItemHidden) return true
+                }
+
+                // Копия аргумента parentItemHidden чтобы не затирать значение этой переменной
+                // из аргумента потому что это повлияет на другие перебираемый элементы в массиве dItems
+                let thisParentItemHidden = parentItemHidden
+
+                if (dItem.dCompLayer?.layerHidden) {
+                    thisParentItemHidden = true
+                }
+
+                // Перебор массива элементов...
+                if (dItem.dElems) {
+                    // Поиск целевого компонента/элемента в элементах перебираемого компонента...
+                    const result = this.isParentElemHidden(dItem.dElems, targetDComp, targetDElem, thisParentItemHidden, dItem)
+                    // Завершить цикл если он найден
+                    if (result) return true
+                }
+            }
+        }
+
+        // Если это элемент...
+        else if ('dCompElemId' in dItem) {
+
+            // Если нашли целевой элемент
+            if (parentDComp.dCompId === targetDComp.dCompId && dItem.dCompElemId === targetDElem?.dCompElemId) {
+                if (parentItemHidden) return true
+            }
+
+            let thisParentItemHidden = parentItemHidden
+
+            if (dItem.dCompElemLayer?.layerHidden) {
+                thisParentItemHidden = true
+            }
+
+            // Если есть вложенные компоненты...
+            if (dItem.dCompElemChildren) {
+                // Если там массив компонентов
+                if (Array.isArray(dItem.dCompElemChildren)) {
+                    const result = this.isParentElemHidden(dItem.dCompElemChildren, targetDComp, targetDElem, thisParentItemHidden, null)
+                    if (result) return true
+                }
+                // Если там текстовый компонент
+                else if (dItem.dCompElemChildren.dCompType === 'simpleTextComponent') {
+                    if (dItem.dCompElemChildren.dCompId === targetDComp.dCompId && !targetDElem) {
+                        if (thisParentItemHidden) return true
+                    }
+                }
+            }
+        }
+    }
+
+    return false
+}
+
+/**
+ * Имеет ли компонент/элемент внутри другой компонент/элемент.
+ * @param {Array} dComps — массив компонентов статьи
+ * @param {Number} targetDCompId — id данных целевого компонента, где проверяется наличие дочернего компонента/элемента.
+ * @param {Number} targetDElemId — id данных целевого элемента, где проверяется наличие дочернего компонента/элемента.
+ * @param {Number} childDCompId — id данных искомого компонента (если передали без childDElemId)
+ * @param {Number} childDElemId — id данных искомого элемента
+ */
+export function hasItemAnotherItem(
+    this: typeof articleManager,
+    dComps: ArticleTypes.Components,
+    targetDCompId: ArticleTypes.Id,
+    targetDElemId: null | ArticleTypes.Id,
+    childDCompId: ArticleTypes.Id,
+    childDElemId: null | ArticleTypes.Id,
+): boolean {
+    // Получение целевого компонента/элемента.
+    let targetDItem = targetDElemId
+            ? this.getDataElemInDataCompArr(dComps, targetDCompId, targetDElemId)
+            : this.getComponent(dComps, targetDCompId)
+
+    // Если в качестве целевого компонента указывается текстовый компонент, то вернуть ложь
+    // потому что он не может содержать вложенные компоненты/элементы
+    if ('dCompType' in targetDItem && targetDItem.dCompType === 'simpleTextComponent') {
+        return false
+    }
+
+    // Если в качестве целевого компонента указывается обычный компонент
+    if ('dCompType' in targetDItem) {
+        if (!targetDItem.dElems?.length) return false
+
+        // Перебрать элементы и искать дочерний элемент там...
+        for (let i = 0; i < targetDItem.dElems.length; i++) {
+            const currentDElem = targetDItem.dElems[i]
+
+            const foundedChildItem = this.getItemInDElem(currentDElem, childDCompId, childDElemId)
+            if (foundedChildItem) return true
+        }
+    }
+    // Если в качестве целевого компонента указывается элемент
+    else if (targetDItem.dCompElemId) {
+        const foundedChildItem = this.getItemInDElem(targetDItem, childDCompId, childDElemId)
+        if (foundedChildItem) return true
+    }
+
+    return false
+}
+
+/**
+ * Поиск компонента/элемента в элементе
+ * @param {Object} dElem — элемент в котором нужно найти другой компонент/элемент.
+ * @param {Number} childDCompId — id данных искомого компонента (если передали без childDElemId)
+ * @param {Number} childDElemId — id данных искомого элемента
+ */
+export function getItemInDElem(
+    this: typeof articleManager,
+    dElem: ArticleTypes.ComponentElem,
+    childDCompId: ArticleTypes.Id,
+    childDElemId: null | ArticleTypes.Id,
+) {
+    if (Array.isArray(dElem.dCompElemChildren) && dElem.dCompElemChildren.length) {
+
+        const foundedChildItem = childDElemId
+            ? this.getDataElemInDataCompArr(dElem.dCompElemChildren, childDCompId, childDElemId)
+            : this.getComponent(dElem.dCompElemChildren, childDCompId)
+
+        return foundedChildItem || null
+    }
+
+    return null
 }

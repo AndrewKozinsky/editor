@@ -5,6 +5,7 @@ import BottomButtons from '../BottomButtons/BottomButtons'
 import Adjust from '../Adjust/AdjustPanel/AdjustPanel'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import './LeftPart-2.scss'
+import LayersPanel from '../Layers/LayersPanel/LayersPanel'
 
 type LeftPart3PropType = {
     display?: boolean
@@ -26,6 +27,7 @@ export default function LeftPart2(props: LeftPart3PropType) {
                     <TempCompList />
                 </NameSection>
                 <Adjust />
+                <LayersPanel />
             </div>
             <div className={`${CN}__bottom`} >
                 <BottomButtons />

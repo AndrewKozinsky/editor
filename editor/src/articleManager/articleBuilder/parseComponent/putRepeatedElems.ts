@@ -18,14 +18,14 @@ export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleT
     setDuplicates(htmlObj.children, groupElemsMap, dataComp.dCompId)
 }
 
-type ElemsMapType = MiscTypes.ObjStringKey<{dCompElemId: number}[]>
+type ElemsMapType = MiscTypes.ObjStringKey<{dCompElemId: number, hidden: boolean}[]>
 
 /**
  * Функция формирует объект вида:
  * {
- *     id шаблона элемента. В массиве количество копий элемента.
- *     'banner': [ {dCompElemId: 2}, {dCompElemId: 3} ],
- *     'cell': [ {dCompElemId: 4} ]
+ *     id данных элемента и является ли он скрытым. В массиве количество копий элемента.
+ *     'banner': [ {dCompElemId: 2, hidden: false}, {dCompElemId: 3, hidden: true} ],
+ *     'cell': [ {dCompElemId: 4, hidden: false} ]
  * }
  * The function forms array of objects like { 'banner-group': [...], 'cell-group': [...] }.
  * A key is a data element group name (elemGroup property), value is an object with data elem id
@@ -42,7 +42,10 @@ function createElemsMap(dataComp: ArticleTypes.Component) {
         }
 
         elemsMap[elemId].push(
-            {dCompElemId: dataElem.dCompElemId}
+            {
+                dCompElemId: dataElem.dCompElemId, // id данных элемента
+                hidden: dataElem.dCompElemLayer?.layerHidden || false // является ли элемент скрытым
+            }
         )
     }
 
@@ -65,22 +68,32 @@ function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, elemsMap: ElemsMapType
 
         const htmlElemId = htmlChild.attrs['data-em-id']
 
-        // if (htmlElemId === 'mediterranean') debugger
         if (elemsMap[htmlElemId]) {
-
             // Проход по всем элементам группы
             for (let k = 0; k < elemsMap[htmlElemId].length; k++) {
+                const elemMapItem = elemsMap[htmlElemId][k]
+
                 // Если первый элемент, то поставить html-элементу атрибуты с id данных компонента и элемента
                 if (k === 0) {
                     htmlChild.attrs['data-em-d-comp-id'] = dCompId.toString()
-                    htmlChild.attrs['data-em-d-elem-id'] = elemsMap[htmlElemId][0].dCompElemId.toString()
+                    htmlChild.attrs['data-em-d-elem-id'] = elemMapItem.dCompElemId.toString()
+
+                    // Поставить атрибут data-em-display="hidden" если элемент является скрытым
+                    if (elemMapItem.hidden) {
+                        htmlChild.attrs['data-em-display'] = 'hidden'
+                    }
                 }
                 // Остальные элементы создаются через клонирование htmlChild и вставку в массив где находится htmlChild
                 else {
                     const htmlChildObjClone = createDeepCopy(htmlChild)
 
                     htmlChildObjClone.attrs['data-em-d-comp-id'] = dCompId.toString()
-                    htmlChildObjClone.attrs['data-em-d-elem-id'] = elemsMap[htmlElemId][k].dCompElemId.toString()
+                    htmlChildObjClone.attrs['data-em-d-elem-id'] = elemMapItem.dCompElemId.toString()
+
+                    // Поставить атрибут data-em-display="hidden" если элемент является скрытым
+                    if (elemMapItem.hidden) {
+                        htmlChild.attrs['data-em-display'] = 'hidden'
+                    }
 
                     // Поставить элемент после перебираемого элемента
                     htmlParentArr.splice(i + 1, 0, htmlChildObjClone)

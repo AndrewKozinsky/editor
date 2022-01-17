@@ -70,6 +70,16 @@ export function getTElemInTComp(
     return tempElement || null
 }
 
+export function getTElemByTCompIdAndTElemId(
+    this: typeof articleManager,
+    tempCompArr: TempCompTypes.TempComps,
+    tempCompId: TempCompTypes.Id,
+    tempElemId: TempCompTypes.ElemId
+): null | TempCompTypes.Elem {
+    const tComp = articleManager.getTemplate(tempCompArr, tempCompId)
+    return articleManager.getTElemInTComp(tComp, tempElemId)
+}
+
 /**
  * The function finds component data in data components array
  * @param {Array} dataCompArr — array of data components
@@ -107,6 +117,8 @@ export function getComponent(
             if (foundedComp) return foundedComp
         }
     }
+
+    return null
 }
 
 /**
@@ -122,7 +134,7 @@ export function getDataElemInDataCompArr(
     dataElemId: ArticleTypes.Id
 ) {
     const component = this.getComponent(dataCompArr, dataCompId)
-    if (!dataCompArr) return null
+    if (!dataCompArr || !component) return null
 
     if (component.dCompType === 'component' && Array.isArray(component.dElems)) {
         return component.dElems.find(dElem => dElem.dCompElemId === dataElemId)
@@ -293,4 +305,24 @@ export function getElemCount(
     })
 
     return elems.length
+}
+
+/**
+ * Получение HTML-компонента
+ * @param {Array} tempCompArr — массив шаблонов компонентов
+ * @param {Number} tCompId — id шаблона компонента
+ */
+export function get$component(
+    this: typeof articleManager,
+    tempCompArr: TempCompTypes.TempComps,
+    tCompId: TempCompTypes.Id
+): null | HTMLElement {
+    // Get component template
+    const tempComp =  this.getTemplate(tempCompArr, tCompId)
+    if (!tempComp) return null
+
+    // Turn html-string to HTMLElement
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(tempComp.content.html, 'text/html')
+    return doc.body.childNodes[0] as HTMLElement
 }

@@ -3,6 +3,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import StoreArticleTypes from 'store/article/articleTypes'
+import { isCtrlPressed } from 'utils/domUtils'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
@@ -39,6 +40,7 @@ function selectHandler(e: MouseEvent) {
  * @param {String} actionType — mouse hovers or selects under element
  */
 function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
+    // @ts-ignore
     const ctrlPressed = isCtrlPressed(event)
 
     // Element under cursor
@@ -114,17 +116,10 @@ function setFlashRectangle(
  * @param {Number} dataCompId — id данных выделенного текстового компонента
  */
 function setTextCompId(dataCompId: number | null) {
-    store.dispatch( actions.article.setTextCompId(dataCompId))
+    store.dispatch( actions.article.setTextComp(dataCompId))
 }
 
-/**
- * Функция возвращает булево значение нажата ли клавиша ctrl (Win) или Cmd (Mac).
- * @param {Object} event — объект события
- */
-function isCtrlPressed(event: MouseEvent) {
-    const isMac = navigator.platform.startsWith('Mac')
-    return !isMac && event.ctrlKey || isMac && event.metaKey
-}
+
 
 type ElementAndTextComponentType = {
     // Над чем находится курсор:
