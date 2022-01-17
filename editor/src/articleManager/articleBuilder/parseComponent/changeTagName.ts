@@ -20,7 +20,6 @@ export function changeTagName(consistObj: ConsistObj) {
  */
 function getTagName(dElem: ArticleTypes.ComponentElem, tempElem: TempCompTypes.Elem): string | null {
     if (!dElem.dCompElemTag) return null
-    // debugger
 
     // Если в шаблоне массив в свойстве elemTagsValues,
     // то это массив идентификаторов.

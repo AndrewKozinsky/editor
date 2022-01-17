@@ -1,8 +1,8 @@
 import StoreArticleTypes from 'store/article/articleTypes'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
-import TempCompTypes from '../../store/article/codeType/tempCompCodeType'
-import { createDeepCopy } from '../../utils/miscUtils'
+import { createDeepCopy } from 'utils/miscUtils'
 import articleManager from '../articleManager'
 
 /**
@@ -18,11 +18,11 @@ export function changeVisibility(
 ): StoreArticleTypes.CreateNewHistoryItem {
     // Если выделен компонент или корневой элемент,
     if (['component', 'rootElement'].includes(compCoords.tagType)) {
-        // то удалить весь компонент
+        // то поменять видимость всего компонента
         return changeVisibilityOfComp(article, compCoords.dataCompId)
     }
     else {
-        // Если выделен элемент, то удалить его
+        // Если выделен элемент, то изменить его видимость
         return changeVisibilityOfElem(article, compCoords)
     }
 }

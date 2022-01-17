@@ -24,6 +24,16 @@
     // Акцентный цвет при наведении
     --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 55%);
 
+    // Части цвета ошибки
+    --error-h-part: 354;
+    --error-s-part: 100%;
+    --error-l-part: 44%;
+
+    // Цвет ошибки
+    --error-color: hsl(var(--error-h-part), var(--error-s-part), var(--error-l-part));
+    // Акцентный цвет при наведении
+    --error-color-hover: hsl(var(--error-h-part), var(--error-s-part), 48%);
+
 
     // ЦВЕТА ТЕКСТА
     // Цвет основного текста
@@ -84,6 +94,16 @@
     --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
     // Акцентный цвет при наведении
     --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 45%);
+
+    // Части цвета ошибки
+    --error-h-part: 354;
+    --error-s-part: 100%;
+    --error-l-part: 48%;
+
+    // Цвет ошибки
+    --error-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    // Акцентный цвет при наведении
+    --error-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 44%);
 
 
     // ЦВЕТА ТЕКСТА

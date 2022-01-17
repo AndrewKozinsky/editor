@@ -26,7 +26,7 @@ import {
     getTElemInTComp,
     getCompParentArray,
     getDCompIdxInArray,
-    getElemCount,
+    getElemCount, getTElemByTCompIdAndTElemId, get$component
 //     getTElemInTCompsArr
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
@@ -50,7 +50,10 @@ import {
 //     isCompInArray,
     canDeleteElem,
     canMoveItemToUpOrDown,
-    canClone
+    canClone, isElemIsRootByDElem,
+    isParentElemHidden,
+    hasItemAnotherItem,
+    getItemInDElem
 } from './methods/check'
 import {
     moveComponentToProperPosition,
@@ -79,6 +82,7 @@ class ArticleManager {
     // getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
+    getTElemByTCompIdAndTElemId = getTElemByTCompIdAndTElemId
     // Finds template in templates array
     getComponent = getComponent
     // Поиск элемента данных в компоненте данных
@@ -94,6 +98,8 @@ class ArticleManager {
     // idx компонента в переданном массиве
     getDCompIdxInArray = getDCompIdxInArray
     getElemCount = getElemCount
+    // Получение HTML-компонента
+    get$component = get$component
 
     // CHECK
     // Функция проверяющая работоспособность кнопки перемещения перемещаемого компонента
@@ -113,6 +119,14 @@ class ArticleManager {
     canMoveItemToUpOrDown = canMoveItemToUpOrDown
     // Можно ли компонент/элемент клонировать и вставить следом
     canClone = canClone
+    // Проверка является ли элемент корневым
+    isElemIsRootByDElem = isElemIsRootByDElem
+    // Проверка скрыт ли родительский компонент/элемент
+    isParentElemHidden = isParentElemHidden
+    // Имеет ли компонент/элемент внутри другой компонент/элемент
+    hasItemAnotherItem = hasItemAnotherItem
+    // Поиск компонента/элемента в элементе
+    getItemInDElem = getItemInDElem
 
     // CREATE
     createArticle = createArticle

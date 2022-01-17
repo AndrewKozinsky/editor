@@ -47,6 +47,11 @@ import ElBtnSignClone2 from '../icons/elBtnSignClone2'
 import ElBtnSignClone3 from '../icons/elBtnSignClone3'
 import ElBtnSignHide from '../icons/elBtnSignHide'
 import ElBtnSignRemove from '../icons/elBtnSignRemove'
+import LayerComp from '../icons/layerComp'
+import LayerText from '../icons/layerText'
+import LayerVisible from '../icons/layerVisible'
+import LayerHidden from '../icons/layerHidden'
+import LayerCollapse from '../icons/layerCollapse'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -134,7 +139,14 @@ export function getIcon(type: string): ReactNode {
         elBtnSignClone3: ElBtnSignClone3,
         elBtnSignRemove: ElBtnSignRemove,
         elBtnSignHide: ElBtnSignHide,
-        elBtnSignVisible: ElBtnSignVisible
+        elBtnSignVisible: ElBtnSignVisible,
+
+        // Слои
+        layerComp: LayerComp,
+        layerText: LayerText,
+        layerVisible: LayerVisible,
+        layerHidden: LayerHidden,
+        layerCollapse: LayerCollapse
     }
 
     return components[type] || null
