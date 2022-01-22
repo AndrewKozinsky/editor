@@ -6,7 +6,7 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 import FCType from 'libs/FormConstructor/FCType'
 import siteSectionMsg from 'messages/siteSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import { SitesServerResponseType } from '../../../../requests/editor/sites/sitesServerResponseType'
+import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта

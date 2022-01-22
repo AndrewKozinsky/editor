@@ -29,7 +29,10 @@ export function useIsUpDownDisabled(direction: 'up' | 'down') {
     return disabled
 }
 
-/** Хук возвращает обработчик нажатия на кнопку «Переместить выше» */
+/**
+ * Хук возвращает обработчик нажатия на кнопку «Переместить выше или ниже»
+ * @param {String} direction — направление перемещения
+ */
 export function useGetUpDownHandler(direction: 'up' | 'down') {
     const dispatch = useDispatch()
     const historyItem = articleManager.hooks.getCurrentHistoryItem()

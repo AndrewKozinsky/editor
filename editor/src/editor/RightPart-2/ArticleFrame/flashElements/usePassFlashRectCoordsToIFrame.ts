@@ -2,20 +2,16 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 
-// Type with coordinates of a flashed element
-export type CoordsObjType = {
-    dataCompId: null | number
-    dataElemId?: null | number
-}
 
 // Initial data with coordinates of a flashed element
-export const coordsInitialObj: CoordsObjType = {
+export const coordsInitialObj: StoreArticleTypes.FlashedElem = {
+    tagType: null,
     dataCompId: null,
     dataElemId: null
 }
 
 /** The hook gets coordinated of a flashed element from the Store and write they to <body> as a attribute */
-export function usePassFlashRectCoordsToIFrame() {
+export default function usePassFlashRectCoordsToIFrame() {
     const { $links, history, historyCurrentIdx } = useGetArticleSelectors()
 
     // Objects witch data is stored. I will update them if data from the Store is different
@@ -40,7 +36,7 @@ export function usePassFlashRectCoordsToIFrame() {
         if (moveHoveredComp.dataCompId !== moveHoverRectCoords.dataCompId) {
             setMoveHoverRectCoords(moveHoveredComp)
         }
-        if (moveHoveredComp.dataCompId !== moveSelectRectCoords.dataCompId) {
+        if (moveSelectedComp.dataCompId !== moveSelectRectCoords.dataCompId) {
             setMoveSelectRectCoords(moveSelectedComp)
         }
     }, [history, historyCurrentIdx])
@@ -49,13 +45,19 @@ export function usePassFlashRectCoordsToIFrame() {
     // The useEffect is watches when coordinates of a flashed rectangle changed to write new coordinates to <body> as attribute
     useEffect(function () {
         saveCoordsToBody($links, 'hoverrectcoords', hoverRectCoords)
+    }, [hoverRectCoords])
+
+    useEffect(function () {
         saveCoordsToBody($links, 'selectrectcoords', selectRectCoords)
-    }, [hoverRectCoords, selectRectCoords])
+    }, [selectRectCoords])
 
     useEffect(function () {
         saveCoordsToBody($links, 'movehoverrectcoords', moveHoverRectCoords)
+    }, [moveHoverRectCoords])
+
+    useEffect(function () {
         saveCoordsToBody($links, 'moveselectrectcoords', moveSelectRectCoords)
-    }, [moveHoverRectCoords, moveSelectRectCoords])
+    }, [moveSelectRectCoords])
 }
 
 /**
@@ -67,7 +69,7 @@ export function usePassFlashRectCoordsToIFrame() {
 function saveCoordsToBody(
     $links: StoreArticleTypes.LinksObj,
     attrName: 'hoverrectcoords' | 'selectrectcoords' | 'movehoverrectcoords' | 'moveselectrectcoords' ,
-    coordsObj: CoordsObjType
+    coordsObj: StoreArticleTypes.FlashedElem
 ) {
     if (!$links.$body) return
 

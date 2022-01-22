@@ -15,11 +15,11 @@ export function deleteItem(
     compCoords: StoreArticleTypes.FlashedElem,
 ): StoreArticleTypes.CreateNewHistoryItem {
     // Если выделен компонент или корневой элемент,
-    if (['component', 'rootElement'].includes(compCoords.tagType)) {
+    if (compCoords.tagType === 'rootElement') {
         // то удалить весь компонент
         return this.deleteComponent(article, compCoords.dataCompId)
     }
-    else {
+    else if (compCoords.tagType === 'element') {
         // Если выделен элемент, то удалить его
         return this.deleteElement(article, compCoords)
     }

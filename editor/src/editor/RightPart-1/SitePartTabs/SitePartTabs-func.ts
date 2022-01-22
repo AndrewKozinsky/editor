@@ -3,7 +3,7 @@ import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import rightTabsMsg from '../../../messages/rightTabsMessages'
+import rightTabsMsg from 'messages/rightTabsMessages'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */

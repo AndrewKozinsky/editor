@@ -1,11 +1,11 @@
 import React, { useRef } from 'react'
 import { useInstallFlashRects } from './flashElements/useInstallFlashRects'
-import { useSetMouseHandlersForFlashRects } from './flashElements/useSetMouseHandlersForFlashRects'
-import { usePassFlashRectCoordsToIFrame } from './flashElements/usePassFlashRectCoordsToIFrame'
-import { useChangeFlashRectanglesPosition } from './flashElements/useChangeFlashRectanglesPosition'
-import { useResizeFlashRects } from './flashElements/useResizeFlashRects'
-import useSetKeyDownHandlerForText from './textComponents/useSetKeyDownHandlerForText'
-import useChangeActiveTextComponent from './textComponents/useChangeActiveTextComponent'
+import useSetMouseHandlersForFlashRects from './flashElements/useSetMouseHandlersForFlashRects'
+import usePassFlashRectCoordsToIFrame from './flashElements/usePassFlashRectCoordsToIFrame'
+import useChangeFlashRectanglesPosition from './flashElements/useChangeFlashRectanglesPosition'
+import useResizeFlashRects from './flashElements/useResizeFlashRects'
+// import useSetKeyDownHandlerForText from './textComponents/useSetKeyDownHandlerForText'
+// import useChangeActiveTextComponent from './textComponents/useChangeActiveTextComponent'
 import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
@@ -30,9 +30,9 @@ export default function ArticleFrame() {
     // Установка служебных стилей в IFrame
     useSetServiceStyleToIFrame()
 
-    // Работа с текстом
-    useSetKeyDownHandlerForText()
-    useChangeActiveTextComponent()
+    // Работа с текстом (СКОРЕЕ ВСЕГО ЭТОТ КОД ПОТОМ НУЖНО УБРАТЬ ПОТОМУ ЧТО Я ПИШУ ТЕКСТ В СПЕЦИАЛЬНОЙ ПАНЕЛЕ)
+    // useSetKeyDownHandlerForText()
+    // useChangeActiveTextComponent()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

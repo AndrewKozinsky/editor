@@ -1,17 +1,17 @@
-import { useEffect } from 'react'
-import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
-import actions from 'store/rootAction'
-import useGetArticleSelectors from 'store/article/articleSelectors'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
-import StoreArticleTypes from 'store/article/articleTypes'
-import { store } from 'store/rootReducer'
-import articleManager from 'articleManager/articleManager'
+// import { useEffect } from 'react'
+// import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+// import actions from 'store/rootAction'
+// import useGetArticleSelectors from 'store/article/articleSelectors'
+// import ArticleTypes from 'store/article/codeType/articleCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes'
+// import { store } from 'store/rootReducer'
+// import articleManager from 'articleManager/articleManager'
 
 /**
  * В зависимости от нажатой клавиши, которая хранится в Хранилище,
  * хук обновляет текст активного текстового компонента.
  */
-export default function useChangeActiveTextComponent() {
+/*export default function useChangeActiveTextComponent() {
     const { pressedKey, $links } = useGetArticleSelectors()
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
@@ -37,14 +37,14 @@ export default function useChangeActiveTextComponent() {
             updateTextComp(selection, historyItem, textCompId, pressedKey, $links)
         }
     }, [pressedKey])
-}
+}*/
 
 /**
  * Функция регулирует положение курсора в зависимости от нажатых клавиш-стрелок
  * @param {Object} pressedKey — данные о нажатой клавише
  * @param {Object} selection — объект выделения на странице
  */
-function moveFocusStick(pressedKey: StoreArticleTypes.PressedKey, selection: Selection) {
+/*function moveFocusStick(pressedKey: StoreArticleTypes.PressedKey, selection: Selection) {
     const { anchorOffset, focusOffset } = selection
 
     // Текстовый узел, где есть выделение
@@ -88,13 +88,13 @@ function moveFocusStick(pressedKey: StoreArticleTypes.PressedKey, selection: Sel
             )
         }
     }
-}
+}*/
 
 /**
  * Функция выделяет весь текст в текстовом компоненте где сейчас стоит курсор
  * @param {Object} selection — объект выделения на странице
  */
-function selectAllText(selection: Selection) {
+/*function selectAllText(selection: Selection) {
     // Текстовый узел, где есть выделение
     const $text = selection.anchorNode as CharacterData
 
@@ -102,7 +102,7 @@ function selectAllText(selection: Selection) {
         $text, 0,
         $text, $text.length
     )
-}
+}*/
 
 /**
  * Функция, в зависимости от выделения в тексте и нажатой клавиши изменяет текст в статье и возвращает обновлённую статью
@@ -112,7 +112,7 @@ function selectAllText(selection: Selection) {
  * @param {Object} pressedKey — данные о нажатой клавише
  * @param {Object} $links — объект ссылок на элементы iFrame.
  */
-function updateTextComp(
+/*function updateTextComp(
     selection: Selection,
     article: StoreArticleTypes.HistoryItem,
     textCompId: number,
@@ -148,7 +148,7 @@ function updateTextComp(
     setTimeout(function () {
         setFocusToNewPosition($links.$document, dTextComp, pressedKey, anchorOffset, focusOffset)
     })
-}
+}*/
 
 /**
  * Функция, в зависимости от выделения в тексте и нажатой клавиши изменяет исходный текст и возвращает новый текст
@@ -156,7 +156,7 @@ function updateTextComp(
  * @param {String} currentText — текущий текст в текстовом компоненте
  * @param {Object} pressedKey — данные о нажатой клавише
  */
-function getNewText(selection: Selection, currentText: string, pressedKey: StoreArticleTypes.PressedKey): string {
+/*function getNewText(selection: Selection, currentText: string, pressedKey: StoreArticleTypes.PressedKey): string {
     // Если выделены символы и нажали клавишу удаления, то просто удалить выделенные символы
     if ((pressedKey.code === 'Backspace' || pressedKey.code === 'Delete') && !selection.isCollapsed) {
         return (
@@ -189,7 +189,7 @@ function getNewText(selection: Selection, currentText: string, pressedKey: Store
             currentText.slice(selection.focusOffset)
         )
     }
-}
+}*/
 
 /**
  * Функция ставит выделяющую палку в то место, где она должна оказаться после изменения текста
@@ -199,7 +199,7 @@ function getNewText(selection: Selection, currentText: string, pressedKey: Store
  * @param {Number} anchorOffset — значение смещения якоря
  * @param {Number} focusOffset — значение смещения фокуса
  */
-function setFocusToNewPosition(
+/*function setFocusToNewPosition(
     $document: Document,
     dTextComp:  ArticleTypes.SimpleTextComponent,
     pressedKey: StoreArticleTypes.PressedKey,
@@ -228,4 +228,4 @@ function setFocusToNewPosition(
     range.setEnd($text, cursorPosition)
 
     $document.getSelection().addRange(range)
-}
+}*/

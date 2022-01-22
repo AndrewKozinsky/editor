@@ -14,16 +14,21 @@ export default function useSetArticleToIFrame() {
         tempCompsDownloadHash
     } = useGetArticleSelectors()
 
-    const [lastDownloadHashVal, setLastDownloadHashVal] = useState(0)
+    // Последнее значение хеша загрузки шаблонов компонентов.
+    // Требуется, чтобы исправить статью, если изменится.
+    const [lastTempCompsDownloadHash, setLastTempCompsDownloadHash] = useState(0)
 
     useEffect(function () {
         if (!$links.$body?.firstChild) return
 
+        // Отрисовать статью если есть история
         if (tempCompsDownloadHash && history?.length) {
             const article = history[historyCurrentIdx].article
 
-            if (lastDownloadHashVal !== tempCompsDownloadHash) {
-                setLastDownloadHashVal(tempCompsDownloadHash)
+            // Если изменилось значение хеша загрузки шаблонов компонентов,
+            // то запустить сценарий исправления статьи.
+            if (lastTempCompsDownloadHash !== tempCompsDownloadHash) {
+                setLastTempCompsDownloadHash(tempCompsDownloadHash)
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }
 
@@ -33,6 +38,7 @@ export default function useSetArticleToIFrame() {
                 $links.$body.firstChild as Element
             )
         }
+        // Очистить статью если в истории ничего нет
         else {
             // Создать JSX новой статьи и поставить в iFrame.
             ReactDOM.render(

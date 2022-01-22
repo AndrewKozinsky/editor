@@ -25,19 +25,18 @@ export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.
     }
     // Если это простой текстовый компонент...
     else if (elemChildren && elemChildren.dCompType === 'simpleTextComponent') {
-        // Создать тег, оборачивающий текст. Сюда поставлены атрибуты позволяющие редактировать содержимое.
+        // Создать тег, оборачивающий текст. Он требуется, чтобы понимать, над каким компонентом располагается курсор.
         let editableTextTag = {
             tag: 'text-component',
             attrs: {
-                'data-em-d-text-comp-id': elemChildren.dCompId.toString(),
-                contentEditable: '',
-                suppressContentEditableWarning: ''
+                'data-em-d-gen-comp-id': elemChildren.dCompId.toString(),
             },
             children: [
                 getText(elemChildren.text)
             ]
         }
-        // Поставить созданный тег в список детей
+
+        // Поставить в список детей
         consistObj.htmlElem.children = [editableTextTag]
     }
 }
@@ -45,7 +44,7 @@ export function insertChildren(consistObj: ConsistObj, tempComps: TempCompTypes.
 /**
  * Функция возвращает объект, который должен быть вставлен на место текста:
  * если передан текст, то будет возращён этот текст, если текста нет, то будет возвращён значок пустого текста
- * @param text
+ * @param {String} text — текст в текстовом компоненте
  */
 function getText(text: string) {
     // Значок пустого текста

@@ -22,12 +22,12 @@ export function cloneItem(
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { tagType } = compCoords
 
-    // Если выделили компонент или корневой тег, то клонировать его...
-    if (['component', 'rootElement'].includes(tagType)) {
+    // Если выделили корневой тег, то клонировать его...
+    if (tagType === 'rootElement') {
         return cloneComponent(tempCompArr, article, compCoords.dataCompId, deep)
     }
     // Если выделили элемент
-    else {
+    else if (tagType === 'element') {
         return cloneElement(tempCompArr, article, compCoords, deep)
     }
 }
@@ -86,7 +86,7 @@ export function cloneElement(
 
     // Компонент, где находится клонируемый элемент, сам элемент и его позиция в массиве
     const dComp = articleManager.getComponent(dComps, compCoords.dataCompId) as ArticleTypes.Component
-    const dElem = articleManager.getDataElemInDataComp(dComp, compCoords.dataElemId)
+    const dElem = articleManager.getDElemInDComp(dComp, compCoords.dataElemId)
     const idx = dComp.dElems.findIndex(dElem => dElem.dCompElemId === compCoords.dataElemId)
 
     // Получение копии элемента
@@ -234,7 +234,7 @@ function prepareElemClone(
 }
 
 /**
- * Функция возвращает максимальный id данных элемента.
+ * Функция возвращает максимальный id данных элементов.
  * @param {Array} dComps — массив всех компонентов статьи
  * @param {Number} dCompId — id данных клонируемого компонента
  */

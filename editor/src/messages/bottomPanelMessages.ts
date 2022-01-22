@@ -2,9 +2,17 @@ import getMsgProxy from './fn/msgProxy'
 
 // Тексты панели с кнопками манипулирования выделенным компонентом/элементом
 const bottomPanelMessages = {
-    inside: {
-        eng: 'Inserting a component inside an element',
-        rus: 'Вставка компонента внутрь'
+    moveInside: {
+        eng: 'Move the component inside an element',
+        rus: 'Переместить компонент внутрь элемента'
+    },
+    moveLeft: {
+        eng: 'Move the component to the left',
+        rus: 'Переместить компонент левее'
+    },
+    moveRight: {
+        eng: 'Move the component to the right',
+        rus: 'Переместить компонент правее'
     },
     up: {
         eng: 'Moving up',

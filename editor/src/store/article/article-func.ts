@@ -30,7 +30,7 @@ export function isCursorInTheSameElem(
         }
     }
     else if (['moveHover', 'moveSelect'].includes(actionType)) {
-        let flashedElem: StoreArticleTypes.MoveFlashedComp
+        let flashedElem: StoreArticleTypes.FlashedElem
 
         if (actionType === 'moveHover') {
             flashedElem = historyItem.moveHoveredComp

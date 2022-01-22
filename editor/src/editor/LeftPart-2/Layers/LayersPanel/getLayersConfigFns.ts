@@ -14,20 +14,12 @@ import { isCtrlPressed } from 'utils/domUtils'
  * @param {Object} dComp — данные компонента
  * @param {Object} dElem — данные элемента
  */
-export function getKey(dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent, dElem?: ArticleTypes.ComponentElem): string {
+export function getKey(
+    dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent, dElem?: ArticleTypes.ComponentElem
+): string {
     return dElem
         ? dComp.dCompId + '_' + dElem.dCompElemId
         : dComp.dCompId.toString()
-}
-
-/**
- * Функция возвращает имя компонента
- * @param {Array} tComps — массив шаблонов компонентов
- * @param {Object} dComp — данные компонента
- */
-export function getComponentName(tComps: TempCompTypes.TempComps, dComp: ArticleTypes.Component): string {
-    const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
-    return tComp.content.name
 }
 
 /**
@@ -43,6 +35,21 @@ export function getElementName(
 ): string {
     const tComp = articleManager.getTElemByTCompIdAndTElemId(tComps, dComp.tCompId, dElem.tCompElemId)
     return tComp.elemName
+}
+
+/**
+ * Функция возвращает является ли элемент корневым:
+ * @param {Array} tComps — массив шаблонов компонентов
+ * @param {Number} tCompId — id шаблона компонента
+ * @param {String} tElemId — id шаблона элемента
+ */
+export function getItIsRootElem(
+    tComps: TempCompTypes.TempComps, tCompId: TempCompTypes.Id, tElemId: TempCompTypes.ElemId
+): boolean {
+    const tComp = articleManager.getTemplate(tComps, tCompId)
+    const rootTElem = articleManager.getRootTElem(tComp)
+
+    return tElemId === rootTElem.elemId
 }
 
 /**
@@ -132,19 +139,14 @@ export function getCollapseHandler(
  */
 export function isHidden(
     tComps: TempCompTypes.TempComps,
-    dComp: ArticleTypes.Component,
-    dElem?: ArticleTypes.ComponentElem
+    dComp: ArticleTypes.MixComponent,
+    dElem?: ArticleTypes.ComponentElem,
 ): boolean {
-    // Если это компонент...
-    if (!dElem) {
-        return dComp.dCompLayer?.layerHidden || false
+    if (dComp.dCompType === 'simpleTextComponent') {
+        return dComp.dCompLayer?.layerHidden
     }
-    // Если это элемент
     else {
-        // Является ли переданный элемент корневым?
-        const isElemRoot = articleManager.isElemIsRootByDElem(tComps, dComp, dElem)
-        // Слой скрыт если элемент является корневым и скрыт он либо компонент
-        return isElemRoot && dComp.dCompLayer?.layerHidden || dElem.dCompElemLayer?.layerHidden
+        return dElem.dCompElemLayer?.layerHidden
     }
 }
 
@@ -154,16 +156,20 @@ export function isHidden(
  * @param {Array} tComps — массив шаблонов компонентов
  * @param {Object} dComp — данные компонента
  * @param {Object} dElem — данные элемента
+ * @param {Boolean} isRootElem — это корневой элемент
  */
 export function getShowHideLayerHandler(
     historyItem: StoreArticleTypes.HistoryItem,
     tComps: TempCompTypes.TempComps,
     dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
-    dElem?: ArticleTypes.ComponentElem
+    dElem: null | ArticleTypes.ComponentElem,
+    isRootElem: boolean
 ) {
-    return function () {
-        // Получить объект с координатами компонента/элемента у которого нужно поменять видимость
-        const thisItemCoords = getShowHideLayerCoords(tComps, dComp, dElem)
+    return function (e: any) {
+        e.stopPropagation()
+
+        // Получить объект с координатами элемента у которого нужно поменять видимость
+        const thisItemCoords = getShowHideLayerCoords(tComps, dComp, dElem, isRootElem)
 
         const compsAndMaxCompId = articleManager.changeVisibility(
             historyItem.article, thisItemCoords
@@ -180,23 +186,23 @@ export function getShowHideLayerHandler(
  * @param {Array} tComps — массив шаблонов компонентов
  * @param {Object} dComp — данные компонента
  * @param {Object} dElem — данные элемента
+ * @param {Boolean} isRootElem — это корневой элемент
  */
 function getShowHideLayerCoords(
     tComps: TempCompTypes.TempComps,
     dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
-    dElem?: ArticleTypes.ComponentElem
+    dElem: null | ArticleTypes.ComponentElem,
+    isRootElem: boolean
 ): StoreArticleTypes.FlashedElem {
-    if (!dElem || dComp.dCompType === 'simpleTextComponent') {
+    if (dComp.dCompType === 'simpleTextComponent') {
         return {
-            tagType: 'component',
+            tagType: 'textComponent',
             dataCompId: dComp.dCompId,
             dataElemId: null
         }
     }
     else {
-        const tagType = articleManager.isElemIsRootByDElem(tComps, dComp, dElem)
-            ? 'rootElement'
-            : 'element'
+        const tagType = isRootElem ? 'rootElement' : 'element'
 
         return {
             tagType: tagType,
@@ -220,21 +226,12 @@ export function isFlashed(
     dElem?: ArticleTypes.ComponentElem
 ): boolean {
     const {
-        hoveredElem, selectedElem, moveHoveredComp, moveSelectedComp, selectedTextComp
+        hoveredElem, selectedElem, moveHoveredComp, moveSelectedComp
     } = historyItem
 
     // id данных переданного компонента/элемента
     const dCompId = dComp.dCompId
     const dElemId = dElem?.dCompElemId || null
-
-    // Проверка того, что выделен текстовый компонент.
-    // Остальные варианты подсветки для текстового компонента отсутствуют потому что
-    // в текст можно только поставить фокус, то есть выделить.
-    if (flashType === 'select') {
-        if (selectedTextComp.dataCompId === dCompId) {
-            return true
-        }
-    }
 
     if (flashType === 'hover') {
         return hoveredElem?.dataCompId === dCompId && hoveredElem.dataElemId === dElemId
@@ -243,10 +240,11 @@ export function isFlashed(
         return selectedElem?.dataCompId === dCompId && selectedElem.dataElemId === dElemId
     }
     else if (flashType === 'moveHover') {
-        return moveHoveredComp?.dataCompId === dCompId && !dElemId
+        return moveHoveredComp?.dataCompId === dCompId && moveHoveredComp?.dataElemId === dElemId
     }
     else if (flashType === 'moveSelect') {
-        return moveSelectedComp?.dataCompId === dCompId && !dElemId
+        // debugger
+        return moveSelectedComp?.dataCompId === dCompId && moveSelectedComp?.dataElemId === dElemId
     }
 }
 
@@ -288,53 +286,28 @@ export function hasSelectedChild(
  * Функция возвращает обработчики наведения и нажатия на слой.
  * Также там учитывается нажата ли клавиша CTRL.
  * В зависимости от наведения или нажатия и нажата ил CTRL компонент/элемент или подсвечиваются или выделяются.
- * @param {Array} tempCompArr — массив шаблонов компонентов
- * @param {Array} dComps — массив компонентов статьи
  * @param {String} actionType — тип действий: наведение или щелчок
  * @param {String} itemType — тип компонента/элемента
  * @param {Number} dCompId — id данных компонента
  * @param {Number} dElemId — id данных элементе
  */
 export function getMouseHandler(
-    tempCompArr: TempCompTypes.TempComps,
-    dComps: ArticleTypes.Components,
     actionType: 'hover' | 'select',
-    itemType: 'component' | 'element' | 'text',
+    itemType: 'rootElement' | 'element' | 'textComponent',
     dCompId: ArticleTypes.Id,
     dElemId: null | ArticleTypes.Id,
 ) {
     return function (e: React.MouseEvent) {
-
         // Тип действия изменяется в зависимости от того нажата ли клавиша CTRL
         const ctrlPressed = isCtrlPressed(e)
 
         if (ctrlPressed) {
-            if (actionType === 'hover') {
-                setFlashRectangle('moveHover', 'component', dCompId, null)
-            }
-            else if (actionType === 'select') {
-                setFlashRectangle('moveSelect', 'component', dCompId, null)
-            }
-
+            const moveType = actionType === 'hover' ? 'moveHover' : 'moveSelect'
+            setFlashRectangle(moveType, 'rootElement', dCompId, dElemId)
             return
         }
 
-        if (dElemId) {
-            const dComp = articleManager.getComponent(dComps, dCompId) as ArticleTypes.Component
-            const dElem = articleManager.getDataElemInDataComp(dComp, dElemId)
-            const isElemIsRoot = articleManager.isElemIsRootByDElem(tempCompArr, dComp, dElem)
-
-            const tagType = isElemIsRoot ? 'rootElement' : 'element'
-            setFlashRectangle(actionType, tagType, dCompId, dElemId)
-        }
-        else {
-            if (itemType === 'component') {
-                setFlashRectangle(actionType, 'component', dCompId, null)
-            }
-            else if (itemType === 'text') {
-                setTextCompId(dCompId)
-            }
-        }
+        setFlashRectangle(actionType, itemType, dCompId, dElemId)
     }
 }
 
@@ -355,14 +328,6 @@ function setFlashRectangle(
     store.dispatch( actions.article.setFlashRectangles(
         actionType, tagType, dataCompId, dataElemId
     ))
-}
-
-/**
- * Функция запускает экшен ставящий id данных выделенного текстового компонента
- * @param {Number} dataCompId — id данных выделенного текстового компонента
- */
-function setTextCompId(dataCompId: number | null) {
-    store.dispatch( actions.article.setTextComp(dataCompId))
 }
 
 /** Обработчик увода мыши из обёртки слоёв */

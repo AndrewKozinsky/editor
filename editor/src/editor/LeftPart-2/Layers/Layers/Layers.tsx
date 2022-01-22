@@ -54,13 +54,13 @@ function Layer(props: LayerPropType) {
     )
 }
 
-/** Значёк типа слоя */
+/** Значок типа слоя */
 function TypeIcon(props: LayerPropType) {
     const { config } = props
 
     const CN = makeClasses(config)
 
-    if (config.type === 'component') {
+    if (config.type === 'rootElement') {
         return <SvgIcon type='layerComp' baseClass='-icon-fill' extraClass={CN.typeIcon} />
     }
     else if (config.type === 'text') {
@@ -102,7 +102,7 @@ function Circles(props: LayerPropType) {
     )
 }
 
-/** Значёк скрытого слоя */
+/** Значок скрытого слоя */
 function HiddenLayerSign(props: LayerPropType) {
     const { config } = props
 
@@ -118,9 +118,6 @@ function RightPart(props: LayerPropType) {
     const { config } = props
 
     const CN = makeClasses(config)
-
-    // Не отрисовывать правую часть для текстовых слоёв
-    if (config.type === 'text') return null
 
     let Icon = config.hidden
         ? <SvgIcon type='layerHidden' extraClass={CN.rightPartBtnIcon} />

@@ -7,7 +7,7 @@ import { HTMLObjArrType } from './htmlStringToObject'
  * Set the assigned attributes to element
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  */
-export function setAttribs(consistObj: ConsistObj) {
+export default function setAttribs(consistObj: ConsistObj) {
     // Set attributes
     if (consistObj.tempElem.elemAttrs) {
         for (let attrTemplate of consistObj.tempElem.elemAttrs) {
@@ -29,7 +29,6 @@ function setAttribToHtmlElem(
     htmlElem: HTMLObjArrType.Tag
 ) {
     const attrName = attrTemplate.elemAttrName // 'class'
-    // if (attrName === 'class') debugger
 
     // Array with the attribute values
     let attrValue: string[] = []

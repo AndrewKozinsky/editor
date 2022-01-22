@@ -6,11 +6,11 @@ import Button from 'common/formElements/Button/Button'
 import articleMenuMsg from 'messages/articleMenuMessages'
 import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
 import { useCloseArticle } from './CloseModal/close'
-import useGetShowModal from 'utils/hooksUtils'
-import { useIsMarkupBtnDisabled } from './fn/markup'
-import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
-import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
-import { useIsHistoryBtnDisabled, useMakeHistoryStep } from './fn/history'
+// import useGetShowModal from 'utils/hooksUtils'
+// import { useIsMarkupBtnDisabled } from './fn/markup'
+// import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
+// import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
+// import { useIsHistoryBtnDisabled, useMakeHistoryStep } from './fn/history'
 
 
 /** Меню в статье */
@@ -35,16 +35,16 @@ function ArticleMenu() {
     const CN = makeClasses()
 
     // Undo button
-    const isUndoBtnDisabled = useIsHistoryBtnDisabled('undo')
-    const makeUndoStep = useMakeHistoryStep('undo')
+    // const isUndoBtnDisabled = useIsHistoryBtnDisabled('undo')
+    // const makeUndoStep = useMakeHistoryStep('undo')
 
     // Redo function
-    const isRedoBtnDisabled = useIsHistoryBtnDisabled('redo')
-    const makeRedoStep = useMakeHistoryStep('redo')
+    // const isRedoBtnDisabled = useIsHistoryBtnDisabled('redo')
+    // const makeRedoStep = useMakeHistoryStep('redo')
 
     // Show markup button
-    const isMarkupBtnDisabled = useIsMarkupBtnDisabled()
-    const openMarkupModal = useGetShowModal(<ArticleMarkupModal />, 'full')
+    // const isMarkupBtnDisabled = useIsMarkupBtnDisabled()
+    // const openMarkupModal = useGetShowModal(<ArticleMarkupModal />, 'full')
 
     // Show data button functions
     // const isDataBtnDisabled = useIsDataBtnDisabled()
@@ -58,31 +58,31 @@ function ArticleMenu() {
     const closeArticle = useCloseArticle()
 
     // Delete article button
-    const deleteArticle = useGetShowModal(<DeleteArticleConfirmModal />)
+    // const deleteArticle = useGetShowModal(<DeleteArticleConfirmModal />)
 
     return (
         <div className={CN.menuRoot}>
             <div className={CN.menuSection}>
-                <Button
+                {/*<Button
                     text={articleMenuMsg.undo}
                     icon='btnSignUndo'
                     onClick={makeUndoStep}
                     disabled={isUndoBtnDisabled}
-                />
-                <Button
+                />*/}
+                {/*<Button
                     text={articleMenuMsg.redo}
                     icon='btnSignRedo'
                     onClick={makeRedoStep}
                     disabled={isRedoBtnDisabled}
-                />
+                />*/}
             </div>
             <div className={CN.menuSection}>
-                <Button
+                {/*<Button
                     text={articleMenuMsg.markup}
                     icon='btnSignCode'
                     onClick={openMarkupModal}
                     disabled={isMarkupBtnDisabled}
-                />
+                />*/}
                 {/*<Button
                     text={articleMenuMsg.data}
                     icon='btnSignJson'
@@ -102,11 +102,11 @@ function ArticleMenu() {
                     icon='btnSignClose'
                     onClick={closeArticle}
                 />
-                <Button
+                {/*<Button
                     text={articleMenuMsg.delete}
                     icon='btnSignTrash'
                     onClick={deleteArticle}
-                />
+                />*/}
             </div>
         </div>
     )

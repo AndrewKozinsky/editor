@@ -30,7 +30,6 @@ export function useGetRootClass() {
 
         // Классы редактора: нормальный вид и отдалённый от зрителя
         const normalClasses = getClasses()
-        const scaleDownClasses = getClasses('scaleDown')
         const scaleDownTransparencyClasses = getClasses('scaleDownTransparent')
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый

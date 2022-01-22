@@ -117,7 +117,7 @@ export function checkForExtraProps(parentObj: object, validProps: string[]) {
 /**
  * Функция проверяет свойство elemAttrView чтобы оно соответствовало значениям написанным в elemAttrValues.
  * Другими словами если свойства elemAttrValues нет, то elemAttrView или тоже не должно быть указано (по умолчанию равно text) или прямо должно быть указано text.
- * Если в elemAttrValues дан массив значений атрибута, то elemAttrView должно иметь значение checkbox, radio или select.
+ * Если в elemAttrValues дан массив значений атрибута, то elemAttrView должно иметь значение checkbox, radio или select. Если его нет, то по умолчанию будет radio.
  * @param {Object} elemAttr — шаблон атрибута элемента
  */
 export function checkElemAttrView(elemAttr: TempCompTypes.ElemAttr) {
@@ -142,7 +142,7 @@ export function checkElemAttrView(elemAttr: TempCompTypes.ElemAttr) {
 /**
  * Функция проверяет свойство elemAttrView чтобы оно соответствовало значениям написанным в elemAttrValues.
  * Другими словами если свойства elemAttrValues нет, то elemAttrView или тоже не должно быть указано (по умолчанию равно text) или прямо должно быть указано text.
- * Если в elemAttrValues дан массив значений атрибута, то elemAttrView должно иметь значение checkbox, radio или select.
+ * Если в elemAttrValues дан массив значений атрибута, то elemAttrView должно иметь значение checkbox, radio или select. Если его нет, то по умолчанию будет radio.
  * @param {Object} elemTag — шаблон тега элемента
  */
 export function checkElemTagsView(elemTag: TempCompTypes.ElemTags) {
@@ -164,3 +164,25 @@ export function checkElemTagsView(elemTag: TempCompTypes.ElemTags) {
     return errorsArr
 }
 
+/**
+ * Проверка массива code.elems[0].elemTags[0].elemTagsValues.
+ * @param {Array} elemTagsValues — массив code.elems[0].elemTags[0].elemTagsValues.
+ */
+export function checkElemTagsValues(elemTagsValues: TempCompTypes.ElemTagsValues) {
+    const errorsArr: string[] = []
+
+    elemTagsValues.forEach(elemTagsValue => {
+        // Проверка полей объекта elemTagsValue...
+        errorsArr.push(...checkProp(elemTagsValue.elemTagValueId, 'elemTagValueId', 'string', true))
+        errorsArr.push(...checkProp(elemTagsValue.elemTagValueName, 'elemTagValueName', 'string', true))
+
+        // Проверка, что в объекте elemTagsValue нет лишних полей
+        errorsArr.push(
+            ...checkForExtraProps( elemTagsValue, ['elemTagValueId', 'elemTagValueName'] )
+        )
+    })
+
+    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
+
+    return errorsArr
+}

@@ -34,7 +34,7 @@ export default function useGetFlashedElemDataAndTemplate() {
 }
 
 /**
- * Функция возвращает данные выделенного компонента и элемента (если доступно)
+ * Функция возвращает данные выделенного компонента и элемента
  * @param {Object} article — объект данных статьи
  * @param {Object} flashedElemCoords — координаты выделенного компонента/элемента
  */
@@ -58,7 +58,7 @@ function getCompAndElemData(article: ArticleTypes.Article, flashedElemCoords: Fl
 
     // Данные элемента
     if (dataElemId) {
-        dElem = articleManager.getDataElemInDataComp(dComp, dataElemId)
+        dElem = articleManager.getDElemInDComp(dComp, dataElemId)
     }
 
     return { dComp, dElem }

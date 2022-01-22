@@ -1,4 +1,4 @@
-import articleManager from '../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import DragFilesTreeType from 'libs/DragFilesTree/types'

@@ -8,7 +8,6 @@ import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
  * @param {Number} key — key
  */
 export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Arr, key?: number): ReactElement[] {
-    //@ts-ignore
     return htmlStructure.map((htmlObj, i) => {
         if ('text' in htmlObj) {
             return handleTextObject(htmlObj)
@@ -19,7 +18,7 @@ export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Ar
                 ? null
                 : handleTagObject(htmlObj, i)
         }
-    })
+    }) as ReactElement[]
 }
 
 /**
@@ -37,8 +36,6 @@ function handleTextObject(htmlObj: HTMLObjArrType.Text) {
  * @param {Number} key — key property
  */
 function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
-
-
     let tagName = htmlObj.tag
 
     // Подготовлю атрибуты
@@ -54,7 +51,7 @@ function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
 }
 
 /**
- * Функция подготовливает атрибуты текущего элемента
+ * Функция подготавливает атрибуты текущего элемента
  * @param {Object} htmlObj — object with html-structure
  * @param {String} tagName — имя тега
  * @param {Number} key — key
@@ -105,13 +102,6 @@ function fixAttribs(htmlObj: HTMLObjArrType.Tag, tagName: string, key: number) {
 
             //@ts-ignore
             objAttribs.style = styleObj
-        }
-
-        // Если tagName равен text-component, то он содержит текст
-        // Поэтому поставить ему атрибут редактирования
-        if (tagName === 'text-component') {
-            objAttribs.suppressContentEditableWarning = ''
-            objAttribs.contentEditable = ''
         }
     }
 

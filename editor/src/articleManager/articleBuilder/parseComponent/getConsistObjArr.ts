@@ -17,13 +17,11 @@ export type ConsistObj = {
  * @param {Object} compData — component data
  * @param {Object} htmlObj — component html-object
  */
-export function getConsistObjArr(
+export default function getConsistObjArr(
     template: TempCompTypes.TempComp,
     compData: ArticleTypes.Component,
     htmlObj: HTMLObjArrType.Tag
 ): null | ConsistObjsArr {
-    if (!compData.dElems) return null
-
     // Перебрать все элементы в данных
     return compData.dElems.map((dElem) => {
         return {

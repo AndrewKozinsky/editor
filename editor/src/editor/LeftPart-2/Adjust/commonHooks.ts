@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import { AdjInputsType } from './AdjustInputs/AdjustInputs'
 import { getTagInputsConfig } from './AdjustTag/getTagInputsConfig'
 import { getAttrsInputsConfig } from './AdjustAttrs/getAttrsFormConfig'
@@ -17,7 +16,7 @@ export default function useGetInputsConfig(configType: 'tag' | 'attrs') {
     // В useEffect стоит зависимость на отслеживание изменения flashedElemInfo.
     // Проблема в том, что это приводит к циклическому вызову useGetInputsConfig потому что
     // getFlashedElemDataAndTemplate() всегда возвращает новый объект, а useEffect() проверяет на это
-    // Поэтому хук useIsOldAndNewElemsEqual() проверяет что данные по выделенному элементу действительно изменились.
+    // Поэтому хук isPrevAndNewElemsEqual() проверяет что данные по выделенному элементу действительно изменились.
     const isPrevAndNewElemsEqual = useIsPrevAndNewElemsEqual(flashedElemInfo.dElem)
 
     useEffect(function () {

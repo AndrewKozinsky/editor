@@ -44,7 +44,6 @@ export function useGetTempCompsFolders() {
 
             // Update component template array items
             const updatedFolders = prepareFoldersAndItemsStructure(
-                //@ts-ignore
                 tempCompsFolders,
                 openFoldersIdsArr,
                 selectedElem,
@@ -111,7 +110,7 @@ function prepareFoldersAndItemsStructure(
             if (selectedElem.tagType === 'element') {
                 // Получить его шаблон, чтобы узнать, принимает ли он только текстовый компонент или обычные компоненты
 
-                const thisTempComp = articleManager.getTempElemByDataCompIdAndDataElemId(
+                const thisTempComp = articleManager.getTElemByDCompIdAndDElemId(
                     currentHistoryItem.article.dComps, selectedElem.dataCompId, selectedElem.dataElemId, tempCompsArr
                 )
                 if (thisTempComp && !thisTempComp.elemTextInside) {
@@ -137,7 +136,7 @@ export function useGetAfterCollapseFolder() {
         dispatch(actions.article.setTempCompFolders(folders))
 
         // Save array of folder's id in the Local storage
-        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr)
+        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
     }, [])
 }
 

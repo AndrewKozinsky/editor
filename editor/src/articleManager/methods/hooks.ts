@@ -46,8 +46,8 @@ function useGetCurrentArticle() {
 export type FlashedElemsCoords = {
     hoveredElem: StoreArticleTypes.FlashedElem
     selectedElem: StoreArticleTypes.FlashedElem
-    moveHoveredComp: StoreArticleTypes.MoveFlashedComp
-    moveSelectedComp: StoreArticleTypes.MoveFlashedComp
+    moveHoveredComp: StoreArticleTypes.FlashedElem
+    moveSelectedComp: StoreArticleTypes.FlashedElem
 }
 
 /** Hook returns object with coordinated hovered and selected component/element */

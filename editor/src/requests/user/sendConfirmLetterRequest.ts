@@ -7,7 +7,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
  * Функция отправляет еще одно письмо для подтверждения почты пользователя
  * @param {Object} email — Почта пользователя, которую нужно подтвердить
  */
-/*export default async function sendConfirmLetterRequest(email: string) {
+export default async function sendConfirmLetterRequest(email: string) {
     const options = {
         method: 'POST',
         body: JSON.stringify({email: email})
@@ -15,7 +15,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
     const response: UserServerResponse = await makeFetch(getApiUrl('sendConfirmLetter'), options)
 
     return response
-}*/
+}
 
 
 /**

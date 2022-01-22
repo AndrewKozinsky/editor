@@ -26,7 +26,6 @@ namespace ArticleTypes {
         dCompId: Id // 1
         // Component template id
         tCompId: Id
-        dCompLayer?: Layer
         // Component elements
         dElems?: ComponentElems
     }
@@ -82,7 +81,10 @@ namespace ArticleTypes {
     export type SimpleTextComponent = {
         dCompType: 'simpleTextComponent'
         dCompId: Id // 1
-        text: string
+        text: string,
+        dCompLayer?: {
+            layerHidden?: boolean // true
+        }
     }
 }
 

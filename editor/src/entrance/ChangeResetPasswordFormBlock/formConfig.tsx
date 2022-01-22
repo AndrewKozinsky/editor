@@ -5,9 +5,7 @@ import changeResetPasswordFormMsg from 'messages/changeResetPasswordFormMessages
 import commonMsg from 'messages/commonMessages'
 
 
-/**
- * Функция возвращает конфигурацию формы входа в сервис
- */
+/** Функция возвращает конфигурацию формы входа в сервис */
 export default function getChangeResetPasswordFormConfig() {
     const config: FCType.Config = {
         fields: {
@@ -58,7 +56,6 @@ export default function getChangeResetPasswordFormConfig() {
             },
         },
         async requestFn(readyFieldValues) {
-            // @ts-ignore
             return await changeResetPasswordRequest(
                 readyFieldValues.password.toString(),
                 readyFieldValues.passwordConfirm.toString(),

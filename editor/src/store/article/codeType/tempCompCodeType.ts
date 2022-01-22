@@ -12,10 +12,8 @@ namespace TempCompTypes {
     // Component template id
     export type Id = number
 
-    // Код компонента
+    // Код шаблона компонента
     export type Content = {
-        // Название компонента
-        name: string, // 'Banner'
         // HTML шаблона. В атрибуте data-em-id указывается идентификатор элемента
         html: string // `<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>`
         elems?: Elems
@@ -52,7 +50,7 @@ namespace TempCompTypes {
         // Alternative attribute name
         elemAttrAlt?: string // 'Класс'
         // В каком виде значения атрибута будут показываться на панеле выделенного элемента. Пока есть такие варианты: checkbox, radio, select, text
-        elemAttrView?: InputType // 'text'
+        elemAttrView?: InputViewType // 'text'
         // Значение атрибута, которое всегда будет присутствовать.
         elemAttrLockedValue?: string // 'banner '
         // Массив с предопределенными значениями атрибута. Они будут показаны если в качесте отображения используются поле любого типа кроме text.
@@ -76,7 +74,7 @@ namespace TempCompTypes {
 
     export type ElemTags = {
         elemTagsValues?: ElemTagsValues,
-        elemTagsView?: InputType
+        elemTagsView?: InputTagViewType
     }
 
     export type ElemTagsValues = ElemTagsValue[]
@@ -88,7 +86,8 @@ namespace TempCompTypes {
         elemTagValueName: string // 'h1'
     }
 
-    export type InputType = 'text' | 'radio' | 'checkbox' | 'select'
+    export type InputViewType = 'text' | 'radio' | 'checkbox' | 'select'
+    export type InputTagViewType = 'text' | 'radio' | 'select'
 }
 
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
-import config from '../../utils/config'
-import { getFromLocalStorage } from '../../utils/miscUtils'
+import config from 'utils/config'
+import { getFromLocalStorage } from 'utils/miscUtils'
 
 
 // Тип параметров запроса

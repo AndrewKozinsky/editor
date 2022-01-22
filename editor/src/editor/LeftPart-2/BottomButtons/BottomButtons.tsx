@@ -2,7 +2,10 @@ import React from 'react'
 import bottomPanelMsg from 'messages/bottomPanelMessages'
 import SvgIcon from 'common/icons/SvgIcon'
 import makeClasses from './BottomButtons-classes'
-import { useGetInsideHandler, useIsInsideDisabled } from './fn/insideBtnFns'
+import {
+    useIsMoveBtnDisabled,
+    useGetMoveHandler,
+} from './fn/moveBtnFns'
 import { useGetRemoveHandler, useIsRemoveDisabled } from './fn/removeBtnFns'
 import { useGetIconType } from './fn/BottomButtons-func'
 import { useGetVisibleHandler, useIsVisibleDisabled } from './fn/visibleBtnFns'
@@ -16,8 +19,16 @@ export default function BottomButtons() {
 
     // ================== >
 
-    const insideDisabled = useIsInsideDisabled()
-    const insideHandler = useGetInsideHandler()
+    const moveInsideDisabled = useIsMoveBtnDisabled('inside')
+    const moveInsideHandler = useGetMoveHandler('inside')
+
+    const moveLeftDisabled = useIsMoveBtnDisabled('left')
+    const moveLeftHandler = useGetMoveHandler('left')
+
+    const moveRightDisabled = useIsMoveBtnDisabled('right')
+    const moveRightHandler = useGetMoveHandler('right')
+
+    // ================== >
 
     const upDisabled = useIsUpDownDisabled('up')
     const upHandler = useGetUpDownHandler('up')
@@ -45,7 +56,11 @@ export default function BottomButtons() {
     return (
         <section className={CN.root}>
             <div className={CN.group}>
-                <Button btnKey='inside' onClick={insideHandler} disabled={insideDisabled} />
+                <Button btnKey='moveInside' onClick={moveInsideHandler} disabled={moveInsideDisabled} />
+                <Button btnKey='moveLeft' onClick={moveLeftHandler} disabled={moveLeftDisabled} />
+                <Button btnKey='moveRight' onClick={moveRightHandler} disabled={moveRightDisabled} />
+            </div>
+            <div className={CN.group}>
                 <Button btnKey='up' onClick={upHandler} disabled={upDisabled} />
                 <Button btnKey='down' onClick={downHandler} disabled={downDisabled} />
             </div>
@@ -64,17 +79,15 @@ export default function BottomButtons() {
 
 type ButtonPropType = {
     btnKey: string
-    onClick: () => void
-    disabled: boolean
+    onClick?: () => void
+    disabled?: boolean
 }
 
 /* Кнопка */
 function Button(props: ButtonPropType) {
     const { btnKey, onClick, disabled } = props
 
-    // @ts-ignore
     const title = bottomPanelMsg[btnKey]
-
     const iconType = useGetIconType(btnKey)
 
     const CN = makeClasses()

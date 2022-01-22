@@ -6,7 +6,6 @@ import NoticeError from '../icons/NoticeError'
 import NoticeInfo from '../icons/NoticeInfo'
 import NoticeSuccess from '../icons/NoticeSuccess'
 import ErrorTriangle from '../icons/errorTriangle'
-// import SuccessCircle from '../icons/successCircle'
 import SelectInputArrows from '../icons/selectInputArrows'
 import MainTabMaterials from '../icons/mainTabMaterials'
 import MainTabEditor from '../icons/mainTabEditor'
@@ -40,7 +39,7 @@ import FilesTreeDown from '../icons/filesTreeDown'
 import ArticleMenu from '../icons/articleMenu'
 import BtnSignUndo from '../icons/btnSignUndo'
 import BtnSignRedo from '../icons/btnSignRedo'
-import ElBtnSignInside from '../icons/elBtnSignInside'
+import ElBtnSignMoveInside from '../icons/elBtnSignMoveInside'
 import ElBtnSignUp from '../icons/elBtnSignUp'
 import ElBtnSignDown from '../icons/elBtnSignDown'
 import ElBtnSignClone2 from '../icons/elBtnSignClone2'
@@ -52,6 +51,8 @@ import LayerText from '../icons/layerText'
 import LayerVisible from '../icons/layerVisible'
 import LayerHidden from '../icons/layerHidden'
 import LayerCollapse from '../icons/layerCollapse'
+import ElBtnSignMoveLeft from '../icons/elBtnSignMoveLeft'
+import ElBtnSignMoveRight from '../icons/elBtnSignMoveRight'
 
 /**
  * Функция возвращает внутренную часть значка SVG в зависимости от типа
@@ -69,9 +70,6 @@ export function getIcon(type: string): ReactNode {
 
         // Значок ошибки
         errorTriangle: ErrorTriangle,
-
-        // Значок успеха
-        // successCircle: SuccessCircle,
 
         // Стрелочки выпадающего списка
         selectInputArrows: SelectInputArrows,
@@ -131,7 +129,9 @@ export function getIcon(type: string): ReactNode {
         noticeSuccess: NoticeSuccess,
 
         // Значки на кнопках работы с элементами внизу
-        elBtnSignInside: ElBtnSignInside,
+        elBtnSignMoveInside: ElBtnSignMoveInside,
+        elBtnSignMoveLeft: ElBtnSignMoveLeft,
+        elBtnSignMoveRight: ElBtnSignMoveRight,
         elBtnSignUp: ElBtnSignUp,
         elBtnSignDown: ElBtnSignDown,
         elBtnSignClone1: ElBtnSignClone1,

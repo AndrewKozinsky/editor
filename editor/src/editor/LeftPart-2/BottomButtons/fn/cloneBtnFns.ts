@@ -32,13 +32,14 @@ export function useIsCloneDisabled() {
  */
 export function useGetCloneHandler(deep: 1 | 2 | 3) {
     const dispatch = useDispatch()
+
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
     const { tempComps } = useGetArticleSelectors()
 
     return useCallback(function () {
         // Кнопка заблокирована если статья не загружена
         if (!historyItem) return
-        const { selectedElem, moveSelectedComp } = historyItem
+        const { selectedElem } = historyItem
 
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(

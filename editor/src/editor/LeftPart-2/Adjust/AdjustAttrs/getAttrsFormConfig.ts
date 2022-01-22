@@ -40,7 +40,7 @@ export function getAttrsInputsConfig(dComp: ArticleTypes.Component, dElem: Artic
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  */
-function getInputType(tElemAttr: TempCompTypes.ElemAttr): TempCompTypes.InputType {
+function getInputType(tElemAttr: TempCompTypes.ElemAttr): TempCompTypes.InputViewType {
     if (tElemAttr.elemAttrView) {
         return tElemAttr.elemAttrView
     }
@@ -65,7 +65,7 @@ function getInputData(
     dCompId: ArticleTypes.Id,
     dElemId: ArticleTypes.Id,
     tElemAttr: TempCompTypes.ElemAttr,
-    inputType: TempCompTypes.InputType,
+    inputType: TempCompTypes.InputViewType,
     dElemAttrObj: ArticleTypes.Attrib
 ): TextInputPropType | FieldGroupPropType | SelectPropType {
     // Текст в свойстве label и grayText у поля
@@ -142,7 +142,7 @@ function getLabelAndGrayText(tElemAttr: TempCompTypes.ElemAttr) {
  * @param {String} inputType — тип поля
  * @returns {ArticleTypes.ComponentElemAttribValue | undefined}
  */
-function getInputValue(dElemAttrObj: ArticleTypes.Attrib, inputType: TempCompTypes.InputType) {
+function getInputValue(dElemAttrObj: ArticleTypes.Attrib, inputType: TempCompTypes.InputViewType) {
 
     if (inputType === 'text' || inputType === 'select') {
         return dElemAttrObj?.dCompElemAttrValue
@@ -161,7 +161,7 @@ function getInputValue(dElemAttrObj: ArticleTypes.Attrib, inputType: TempCompTyp
  * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
  * @param {String} inputType — тип поля
  */
-function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTypes.InputType): OptionsType {
+function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTypes.InputViewType): OptionsType {
     if (!tElemAttr?.elemAttrValues) return []
 
     const options: OptionsType = tElemAttr.elemAttrValues.map(elemAttrValue => {
@@ -198,7 +198,7 @@ function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTyp
  * @param {Number} dElemId — id данных выделенного элемента
  * @param {String} inputType — тип поля
  */
-function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, inputType: TempCompTypes.InputType) {
+function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, inputType: TempCompTypes.InputViewType) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
         const {history, historyCurrentIdx} = store.getState().article
         const historyItem = history[historyCurrentIdx]

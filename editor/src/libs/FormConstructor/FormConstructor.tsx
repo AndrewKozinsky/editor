@@ -1,11 +1,11 @@
 import React from 'react'
 import FCType from './FCType'
+import Hr from 'common/misc/Hr/Hr'
 import TextInput, { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import FieldGroup, { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import Select, { SelectPropType } from 'common/formElements/Select/Select'
 import Wrapper, { WrapperPropType } from 'common/Wrapper/Wrapper'
 import Button, { ButtonPropType } from 'common/formElements/Button/Button'
-import Hr from 'common/misc/Hr/Hr'
 import CommonNotice from 'libs/FormConstructor/misc/CommonNotice'
 import serverMsg from 'messages/serverMessages'
 

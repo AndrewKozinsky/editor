@@ -1,16 +1,16 @@
 const JSON5 = require('json5')
+import TempCompFilesTreeType from '../../editor/LeftPart-2/TempCompFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import { ArticleType } from 'requests/editor/article/articleServerResponseType'
 import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
-import { ArticleType } from '../../requests/editor/article/articleServerResponseType'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
-import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
@@ -151,6 +151,7 @@ const articleActions = {
             if (!foldersObj) return
 
             // Set component template folders in the Store
+            // @ts-ignore
             dispatch( articleActions.setTempCompFolders(foldersObj) )
         }
     },
@@ -159,7 +160,7 @@ const articleActions = {
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
      */
-    setTempCompFolders( folders: null | DragFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+    setTempCompFolders( folders: null | TempCompFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
             payload: folders
@@ -252,9 +253,10 @@ const articleActions = {
                     'select', tagType, dataCompId, dataElemId
                 ))
 
-                // Очистить выделенный текстовый компонент потому что выделяют другой компонент/элемент
-                if (currentArticle.selectedTextComp.dataCompId) {
-                    dispatch( actions.article.setTextCompId(null))
+                if (currentArticle.hoveredElem.dataCompId === dataCompId && !dataElemId) {
+                    dispatch( actions.article.setFlashedElement(
+                        'hover', null, null, null
+                    ))
                 }
 
                 // Если выделили компонент выделенный для перемещения, то очистить выделение для перемещения
@@ -288,12 +290,12 @@ const articleActions = {
             // Если компонент выделили для перемещения...
             else if (actionType === 'moveSelect') {
                 dispatch( actions.article.setFlashedElement(
-                    'moveSelect', tagType, dataCompId, null
+                    'moveSelect', tagType, dataCompId, dataElemId
                 ))
 
                 // Если на этом элементе есть рамка наведения...
                 if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
-                    // Спрятать наводящую рамку
+                    // Спрятать рамку вокруг элемента наведённого для перемещения
                     dispatch( actions.article.setFlashedElement(
                         'moveHover', tagType, null, null
                     ))
@@ -321,7 +323,7 @@ const articleActions = {
         }
     },
 
-    setTextComp(textCompId: number | null) {
+    /*setTextComp(textCompId: number | null) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             const { history, historyCurrentIdx} = getState().article
             const currentArticle = history[historyCurrentIdx]
@@ -336,15 +338,15 @@ const articleActions = {
             // Поставить выделение текстового компонента
             dispatch( actions.article.setTextCompId(textCompId))
         }
-    },
+    },*/
 
     // Setting included files template in Store
-    setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
+    /*setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
         return {
             type: StoreArticleTypes.SET_TEXT_COMP_ID,
             payload: textCompId
         }
-    },
+    },*/
 
     /**
      * Action forms a new history item
@@ -361,12 +363,12 @@ const articleActions = {
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
      */
-    makeHistoryStep( step: 'undo' | 'redo' ) {
+    /*makeHistoryStep( step: 'undo' | 'redo' ) {
         return {
             type: StoreArticleTypes.MAKE_HISTORY_STEP,
             payload: step
         }
-    },
+    },*/
 
     /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
     setHistoryStepWhenArticleWasSaved() {
@@ -376,20 +378,20 @@ const articleActions = {
     },
 
     // Setting included files template in Store
-    setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
+    /*setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
         return {
             type: StoreArticleTypes.SET_PRESSED_KEY,
             payload: pressedKeyData
         }
-    },
+    },*/
 
     // Setting included files template in Store
-    updateCurrentArticle(newArticle: StoreArticleTypes.HistoryItem): StoreArticleTypes.UpdateCurrentArticleAction {
+    /*updateCurrentArticle(newArticle: StoreArticleTypes.HistoryItem): StoreArticleTypes.UpdateCurrentArticleAction {
         return {
             type: StoreArticleTypes.UPDATE_CURRENT_ARTICLE,
             payload: newArticle
         }
-    },
+    },*/
 
     // Очистка статьи
     clearArticle() {

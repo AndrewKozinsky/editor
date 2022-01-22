@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import useGetArticleSelectors from 'store/article/articleSelectors'
-import articleActions from 'store/article/articleActions'
-import { store } from 'store/rootReducer'
-import StoreArticleTypes from 'store/article/articleTypes'
+// import React, { useEffect, useState } from 'react'
+// import useGetArticleSelectors from 'store/article/articleSelectors'
+// import articleActions from 'store/article/articleActions'
+// import { store } from 'store/rootReducer'
+// import StoreArticleTypes from 'store/article/articleTypes'
 
 /** Хук ставит на document iFrame-а обработчик нажатий клавиш */
-export default function useSetKeyDownHandlerForText() {
+/*export default function useSetKeyDownHandlerForText() {
     const { $links } = useGetArticleSelectors()
     const [handlerSet, setHandlerSet] = useState(false)
 
@@ -17,13 +17,13 @@ export default function useSetKeyDownHandlerForText() {
 
         setHandlerSet(true)
     }, [$links, handlerSet])
-}
+}*/
 
 /**
  * Обработчик нажатия клавиши на документе iFrame-а
  * @param {KeyboardEvent} e — объект события
  */
-function keyDownHandler(e: KeyboardEvent) {
+/*function keyDownHandler(e: KeyboardEvent) {
     if (
         // Если текст копируют или вставляют...
         (e.metaKey && (e.code == 'KeyC' || e.code == 'KeyV')) ||
@@ -47,13 +47,13 @@ function keyDownHandler(e: KeyboardEvent) {
     store.dispatch(
         articleActions.setPressedKey(letterObjData)
     )
-}
+}*/
 
 /**
  * Функция создаёт и возвращает объект с данными о нажатой клавише
  * @param {Object} e — объект события нажатия клавиши
  */
-function getLetterObjData(e: KeyboardEvent): StoreArticleTypes.PressedKey {
+/*function getLetterObjData(e: KeyboardEvent): StoreArticleTypes.PressedKey {
     const resultObj: StoreArticleTypes.PressedKey = {
         code: e.code,
         altKey: e.altKey || false,
@@ -86,9 +86,9 @@ function getLetterObjData(e: KeyboardEvent): StoreArticleTypes.PressedKey {
     }
 
     return resultObj
-}
+}*/
 
-function pasteHandler(e: ClipboardEvent) {
+/*function pasteHandler(e: ClipboardEvent) {
     const clipboardData = e.clipboardData.getData('text/plain')
     e.preventDefault()
 
@@ -103,4 +103,4 @@ function pasteHandler(e: ClipboardEvent) {
     store.dispatch(
         articleActions.setPressedKey(letterObjData)
     )
-}
+}*/

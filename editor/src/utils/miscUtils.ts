@@ -1,4 +1,3 @@
-// import React from 'react'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.

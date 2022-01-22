@@ -4,41 +4,6 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from '../articleManager'
 
 /**
- * Перемещение компонента в какую-то часть статьи в зависимости от вводных параметров.
- * Функцию можно запускать если известно, что эта операция возможна.
- * @param {Object} article — данные статьи
- * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
- * @param {Number} moveCompId — id данных перемещаемого компонента
- */
-export function moveComponentToProperPosition(
-    this: typeof articleManager,
-    article: ArticleTypes.Article,
-    targetCompCoords: StoreArticleTypes.FlashedElem,
-    moveCompId: ArticleTypes.Id
-) {
-    // Если целевой компонент не выделен, то переместить компонент в нижнюю часть статьи
-    if (!targetCompCoords.dataCompId) {
-        return this.moveComponentToRoot(article, moveCompId, 'bottom')
-    }
-    // Если целевой компонент выделен, то поместить следом за ним
-    else if (targetCompCoords.dataCompId && !targetCompCoords.dataElemId) {
-        return this.moveCompNearComp(article, targetCompCoords, moveCompId, 'down')
-    }
-    // Если выделен элемент не содержащий другие элементы, то переместить в него.
-    else if (targetCompCoords.dataCompId && targetCompCoords.dataElemId) {
-        // Если элемент является корневым и содержит вложенные элементы,
-        // то поместить компонент ниже целевого компонента
-        if (targetCompCoords.tagType === 'rootElement') {
-            return this.moveCompNearComp(article, targetCompCoords, moveCompId, 'down')
-        }
-        // В остальных случаях поместить компонент внутрь целевого элемента
-        else {
-            return this.moveComponentToElement(article, targetCompCoords, moveCompId)
-        }
-    }
-}
-
-/**
  * Функция перемещает компонент в корень статьи (наверх или вниз)
  * @param {Object} article — статья
  * @param {Number} moveCompId — id данных перемещаемого компонента
@@ -48,7 +13,7 @@ export function moveComponentToRoot(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     moveCompId: ArticleTypes.Id,
-    place: 'top' | 'bottom' = 'bottom'
+    place: 'left' | 'right'
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { dComps } = article
 
@@ -56,30 +21,30 @@ export function moveComponentToRoot(
     const movedDComp = this.getComponent(dComps, moveCompId) as ArticleTypes.Component
 
     // Массив, где находится перемещаемый компонент
-    const parentArr = this.getCompParentArray(dComps, movedDComp.dCompId)
+    const moveCompParentArr = this.getCompParentArray(dComps, movedDComp.dCompId)
 
     // idx позиции компонента в массиве
-    const movedDCompIdx = parentArr.findIndex(dComp => dComp.dCompId === moveCompId)
+    const movedDCompIdx = moveCompParentArr.findIndex(dComp => dComp.dCompId === moveCompId)
 
     let updatedDComps = dComps.slice()
 
     // Если перемещаемый компонент находится в корневом массиве...
-    if (dComps === parentArr) {
+    if (dComps === moveCompParentArr) {
         // Удалить компонент из корневого массива
         updatedDComps.splice(movedDCompIdx, 1)
     }
     else {
         // Убрать перемещаемый компонент из массива, где он сейчас находится
-        const updatedParentArr = parentArr.slice()
-        updatedParentArr.splice(movedDCompIdx, 1)
+        const updatedMoveCompParentArr = moveCompParentArr.slice()
+        updatedMoveCompParentArr.splice(movedDCompIdx, 1)
 
         // Поставить изменённый массив в updatedDComps
-        updatedDComps = makeImmutableCopy(updatedDComps, parentArr, updatedParentArr)
+        updatedDComps = makeImmutableCopy(updatedDComps, moveCompParentArr, updatedMoveCompParentArr)
     }
 
     // Поставить перемещаемый компонент или наверх, или вниз
-    if (place === 'top') updatedDComps.unshift(movedDComp)
-    else if (place === 'bottom') updatedDComps.push(movedDComp)
+    if (place === 'left') updatedDComps.unshift(movedDComp)
+    else if (place === 'right') updatedDComps.push(movedDComp)
 
     return {
         maxCompId: article.dMeta.dMaxCompId,
@@ -90,16 +55,16 @@ export function moveComponentToRoot(
 /**
  * Функция перемещает компонент выше или ниже целевого компонента
  * @param {Object} article — статья
- * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
+ * @param {Object} targetCompId — id данных целевого компонента (к которому перемещают перемещаемый компонент)
  * @param {Number} moveCompId — id данных перемещаемого компонента
- * @param {String} place — в каком направлении переместить компонент: top (выше) или bottom (ниже)
+ * @param {String} direction — в каком направлении переместить компонент: top (выше) или bottom (ниже)
  */
 export function moveCompNearComp(
     this: typeof articleManager,
     article: ArticleTypes.Article,
-    targetCompCoords: StoreArticleTypes.FlashedElem,
+    targetCompId: ArticleTypes.Id,
     moveCompId: ArticleTypes.Id,
-    place: 'up' | 'down' = 'down'
+    direction: 'left' | 'right'
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { dComps } = article
 
@@ -120,14 +85,21 @@ export function moveCompNearComp(
 
     // ========================
 
-    // Получение массива, в котором находится перемещаемый компонент и его индекса
-    const targetCompParentArr = this.getCompParentArray(dComps, targetCompCoords.dataCompId)
-    const targetCompIdx = this.getDCompIdxInArray(targetCompParentArr, targetCompCoords.dataCompId)
+    // Получение массива, в котором находится целевой компонент и его индекса
+    const targetCompParentArr = this.getCompParentArray(updatedDComps, targetCompId)
+    // debugger
+    const targetCompIdx = this.getDCompIdxInArray(targetCompParentArr, targetCompId)
 
-    // Поместить перемещаемый компонент в копию целевого массива
+    // Позиция в массиве, в которую будет перемещён компонент в зависимости от направления перемещения
+    const positionIdx = direction === 'left'
+        ? targetCompIdx // left // МОЖЕТ ТУТ НУЖНО НАПИСАТЬ - 1?
+        : targetCompIdx + 1     // right
+
+    // Скопировать целевой массив и переместить туда перемещаемый компонент
     let updatedTargetCompParentArr = targetCompParentArr.slice()
-    if (place === 'up') updatedTargetCompParentArr.splice(targetCompIdx - 1, 0, moveDComp)
-    else if (place === 'down') updatedTargetCompParentArr.splice(targetCompIdx, 0, moveDComp)
+    updatedTargetCompParentArr.splice(positionIdx, 0, moveDComp)
+
+    // ========================
 
     updatedDComps = makeImmutableCopy(updatedDComps, targetCompParentArr, updatedTargetCompParentArr)
 
@@ -156,14 +128,14 @@ export function moveComponentToElement(
     const movedDComp = this.getComponent(dComps, moveCompId) as ArticleTypes.Component
 
     // Массив, где находится перемещаемый компонент
-    const parentArr = this.getCompParentArray(dComps, movedDComp.dCompId)
-    if (!parentArr || !Array.isArray(parentArr)) return
+    const moveCompParentArr = this.getCompParentArray(dComps, movedDComp.dCompId)
+    if (!moveCompParentArr || !Array.isArray(moveCompParentArr)) return
 
     // Удалить перемещаемый компонент из родительского массива
-    const updatedParentArr = parentArr.filter(dComp => dComp.dCompId !== movedDComp.dCompId)
+    const updatedMoveCompParentArr = moveCompParentArr.filter(dComp => dComp.dCompId !== movedDComp.dCompId)
 
     // Сделать новый объект истории статьи без перемещаемого компонента
-    let updatedDComps = makeImmutableCopy(dComps, parentArr, updatedParentArr)
+    let updatedDComps = makeImmutableCopy(dComps, moveCompParentArr, updatedMoveCompParentArr)
 
     // Целевой элемент
     const targetDElem = this.getDataElemInDataCompArr(dComps, targetCompCoords.dataCompId, targetCompCoords.dataElemId)
@@ -172,8 +144,7 @@ export function moveComponentToElement(
     if (!Array.isArray(targetDElemChildren)) return
 
     // Скопировать массив детей целевого элемента и поставить перемещаемый компонент
-    const targetDElemChildrenCopy = targetDElemChildren.concat()
-    targetDElemChildrenCopy.push(movedDComp)
+    const targetDElemChildrenCopy = [...targetDElemChildren, movedDComp]
 
     // Поставить новый массив детей целевого элемента в объект истории статьи
     updatedDComps = makeImmutableCopy(updatedDComps, targetDElemChildren, targetDElemChildrenCopy)
@@ -205,31 +176,36 @@ export function moveItemToUpOrDown(
     // Сюда будет присвоен обновлённый массив компонентов
     let updatedDComps: ArticleTypes.Components
 
-    if (['component', 'rootElement'].includes(tagType )) {
+    if (tagType === 'rootElement') {
         const parentArr = this.getCompParentArray(dComps, dataCompId)
         const updatedParentArr = parentArr.slice()
 
-        // Индекс положения компонента
+        // Индекс положения перемещаемого компонента
         const idx = parentArr.findIndex(dComp => dComp.dCompId === dataCompId)
+        // Удалить перемещаемый компонент из массива
         updatedParentArr.splice(idx, 1)
 
-        if (direction === 'up') {
-            updatedParentArr.splice(idx - 1, 0, dComp)
-        }
-        else if (direction === 'down') {
-            updatedParentArr.splice(idx + 1, 0, dComp)
-        }
+        // Позиция в массиве, в которую будет перемещён компонент в зависимости от направления перемещения
+        const newIdx = direction === 'up'
+            ? idx - 1  // up
+            : idx + 1  // down
+
+        // Переместить компонент в новое положение
+        updatedParentArr.splice(newIdx, 0, dComp)
 
         // Поставить новый массив детей в объект истории статьи
         updatedDComps = makeImmutableCopy(dComps, parentArr, updatedParentArr)
     }
     else {
         // Данные выделенного элемента
-        const dElem = this.getDataElemInDataComp(dComp, dataElemId)
+        const dElem = this.getDElemInDComp(dComp, dataElemId)
 
         // Индекс положения элемента
         const idx = dComp.dElems.findIndex(dElem => dElem.dCompElemId === dataElemId)
         const updatedElemsArr = dComp.dElems.slice()
+
+        // Удалить элемент
+        updatedElemsArr.splice(idx, 1)
 
         if (direction === 'up') {
             updatedElemsArr.splice(idx - 1, 0, dElem)

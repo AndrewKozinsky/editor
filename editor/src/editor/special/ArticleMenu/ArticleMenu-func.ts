@@ -1,9 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
+import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
-import articleManager from 'articleManager/articleManager'
 
 
 /** The hook returns is the Article menu button visible */

@@ -35,6 +35,17 @@
     --error-color-hover: hsl(var(--error-h-part), var(--error-s-part), 48%);
 
 
+    // Части цвета успеха
+    --success-h-part: 133;
+    --success-s-part: 87%;
+    --success-l-part: 42%;
+
+    // Цвет успеха
+    --success-color: hsl(var(--success-h-part), var(--success-s-part), var(--success-l-part));
+    // Цвет успеха при наведении
+    --success-color-hover: hsl(var(--success-h-part), var(--success-s-part), 48%);
+
+
     // ЦВЕТА ТЕКСТА
     // Цвет основного текста
     --text-color-naked: var(--base-h-part), var(--base-s-part), 20%;
@@ -101,9 +112,20 @@
     --error-l-part: 48%;
 
     // Цвет ошибки
-    --error-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
-    // Акцентный цвет при наведении
-    --error-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 44%);
+    --error-color: hsl(var(--error-h-part), var(--error-s-part), var(--error-l-part));
+    // Цвет ошибки при наведении
+    --error-color-hover: hsl(var(--error-h-part), var(--error-s-part), 44%);
+
+
+    // Части цвета успеха
+    --success-h-part: 133;
+    --success-s-part: 87%;
+    --success-l-part: 42%;
+
+    // Цвет успеха
+    --success-color: hsl(var(--success-h-part), var(--success-s-part), var(--success-l-part));
+    // Цвет успеха при наведении
+    --success-color-hover: hsl(var(--success-h-part), var(--success-s-part), 48%);
 
 
     // ЦВЕТА ТЕКСТА

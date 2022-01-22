@@ -4,8 +4,8 @@ import TempCompList from '../TempCompList/TempCompList'
 import BottomButtons from '../BottomButtons/BottomButtons'
 import Adjust from '../Adjust/AdjustPanel/AdjustPanel'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
-import './LeftPart-2.scss'
 import LayersPanel from '../Layers/LayersPanel/LayersPanel'
+import './LeftPart-2.scss'
 
 type LeftPart3PropType = {
     display?: boolean

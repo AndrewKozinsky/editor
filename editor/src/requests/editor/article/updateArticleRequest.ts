@@ -1,7 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { MiscTypes } from '../../../types/miscTypes'
+import { MiscTypes } from 'types/miscTypes'
 import { ArticleRowServerRespType } from './articleServerResponseType'
 
 

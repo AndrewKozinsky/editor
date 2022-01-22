@@ -16,14 +16,14 @@ export function changeVisibility(
     article: ArticleTypes.Article,
     compCoords: StoreArticleTypes.FlashedElem,
 ): StoreArticleTypes.CreateNewHistoryItem {
-    // Если выделен компонент или корневой элемент,
-    if (['component', 'rootElement'].includes(compCoords.tagType)) {
-        // то поменять видимость всего компонента
-        return changeVisibilityOfComp(article, compCoords.dataCompId)
+    // Если выделен корневой элемент,
+    if (compCoords.tagType === 'textComponent') {
+        // то поменять видимость текстового компонента
+        return this.changeVisibilityOfTextComp(article, compCoords.dataCompId)
     }
     else {
         // Если выделен элемент, то изменить его видимость
-        return changeVisibilityOfElem(article, compCoords)
+        return this.changeVisibilityOfElem(article, compCoords)
     }
 }
 
@@ -33,7 +33,8 @@ export function changeVisibility(
  * @param {Number} dataCompId — id данных выделенного компонента
  * @returns {StoreArticleTypes.CreateNewHistoryItem}
  */
-function changeVisibilityOfComp(
+export function changeVisibilityOfTextComp(
+    this: typeof articleManager,
     article: ArticleTypes.Article,
     dataCompId: ArticleTypes.Id
 ): StoreArticleTypes.CreateNewHistoryItem {
@@ -42,7 +43,7 @@ function changeVisibilityOfComp(
     const dComp = articleManager.getComponent(dComps, dataCompId)
     const updatedDComp = Object.assign({}, dComp)
 
-    if (updatedDComp.dCompType === 'simpleTextComponent') return
+    if (updatedDComp.dCompType === 'component') return
 
     if (!updatedDComp.dCompLayer) {
         updatedDComp.dCompLayer = {layerHidden: true}
@@ -66,7 +67,8 @@ function changeVisibilityOfComp(
  * @param {Object} compCoords — координаты элемента у которого нужно переключить видимость.
  * @returns {StoreArticleTypes.CreateNewHistoryItem}
  */
-function changeVisibilityOfElem(
+export function changeVisibilityOfElem(
+    this: typeof articleManager,
     article: ArticleTypes.Article,
     compCoords: StoreArticleTypes.FlashedElem,
 ): StoreArticleTypes.CreateNewHistoryItem {
@@ -158,5 +160,4 @@ export function changeElemAttr(
         maxCompId: article.dMeta.dMaxCompId,
         components: updatedDComps
     }
-
 }

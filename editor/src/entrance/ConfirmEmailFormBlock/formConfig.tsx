@@ -7,9 +7,7 @@ import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 import commonMsg from 'messages/commonMessages'
 import confirmEmailMsg from 'messages/confirmEmailMessages'
 
-/**
- * Функция возвращает конфигурацию формы подтверждения почты
- */
+/** Функция возвращает конфигурацию формы подтверждения почты */
 export default function getConfirmEmailFormConfig() {
     const config: FCType.Config = {
         fields: {

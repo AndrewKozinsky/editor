@@ -28,4 +28,3 @@ export default function fieldChangeHandler(
     setFields(updatedFields)
     setCommonError(null)
 }
-

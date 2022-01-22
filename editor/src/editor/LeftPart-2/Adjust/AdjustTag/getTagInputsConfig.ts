@@ -32,7 +32,7 @@ export function getTagInputsConfig(dComp: ArticleTypes.Component, dElem: Article
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemTags — данные о доступных тегах
  */
-function getInputType(tElemTags: TempCompTypes.ElemTags): TempCompTypes.InputType {
+function getInputType(tElemTags: TempCompTypes.ElemTags): TempCompTypes.InputViewType {
     if (tElemTags.elemTagsView) {
         return tElemTags.elemTagsView
     }
@@ -58,7 +58,7 @@ function getInputData(
     dCompId: ArticleTypes.Id,
     dElemId: ArticleTypes.Id,
     tElemTags: TempCompTypes.ElemTags,
-    inputType: TempCompTypes.InputType,
+    inputType: TempCompTypes.InputViewType,
     currentTagValue: ArticleTypes.Tag
 ): TextInputPropType | FieldGroupPropType | SelectPropType {
     // Текст в свойстве label у поля изменения тега
@@ -104,7 +104,7 @@ function getInputData(
  */
 function getInputValue(
     tElemTags: TempCompTypes.ElemTags,
-    inputType: TempCompTypes.InputType,
+    inputType: TempCompTypes.InputViewType,
     currentTag: ArticleTypes.Tag
 ) {
     if (!currentTag) return ''

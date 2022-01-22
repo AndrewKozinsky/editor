@@ -8,7 +8,7 @@ import TempCompFilesTreeType from '../types'
 
 /**
  * Обработчик щелчка по треугольной кнопке сворачивания/разворачивания содержимого папки
- * @param {String} folderId — id папки которую нужно свернуть/развернуть
+ * @param {Object} itemData —
  * @param {Array} items — массив с данными по папкам и файлам
  * @param {Object} after — с различными свойствами и методами переданными в параметрах FilesTree.
  */

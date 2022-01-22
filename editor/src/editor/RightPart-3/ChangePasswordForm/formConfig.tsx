@@ -1,9 +1,8 @@
-// import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import changePasswordRequest from 'requests/user/changePasswordRequest'
-import commonMsg from '../../../messages/commonMessages'
-import changePasswordSectionMsg from '../../../messages/changePasswordSectionMessages'
+import commonMsg from 'messages/commonMessages'
+import changePasswordSectionMsg from 'messages/changePasswordSectionMessages'
 
 /** Объект конфигурации формы изменения пароля */
     const getChangePasswordFormConfig: FCType.Config = {

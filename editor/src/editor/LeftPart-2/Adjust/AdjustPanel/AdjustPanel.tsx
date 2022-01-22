@@ -27,7 +27,6 @@ type SubHeaderPropType = {
 /** Название выделенного элемента */
 function SubHeader(props: SubHeaderPropType) {
     const { subheader } = props
-
     if (!subheader) return null
 
     return <h3 className='adjust-panel__subheader'>{subheader}</h3>

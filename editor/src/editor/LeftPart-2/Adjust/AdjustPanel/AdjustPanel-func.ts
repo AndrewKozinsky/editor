@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import articleManager from 'src/articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
 /** Функция возвращает название выделенного компонента и элемента (если выделено) */
 export function useGetCompAndElemNames() {
@@ -11,8 +11,22 @@ export function useGetCompAndElemNames() {
     useEffect(function () {
         const { tComp, tElem } = flashedElemInfo
 
-        setCompName(tComp?.content?.name || '')
-        setElemName(tElem?.elemName || '')
+        if (!tComp) {
+            setCompName('')
+            setElemName('')
+            return
+        }
+
+        // В качестве имени компонента поставить название корневого тега
+        const rootTElem = articleManager.getRootTElem(tComp)
+        setCompName(rootTElem.elemName)
+
+        // Имя элемента нужно писать только если выделенный элемент не является корневым
+        const elemName = rootTElem.elemId !== tElem.elemId
+            ? tElem?.elemName
+            : ''
+
+        setElemName(elemName)
     }, [flashedElemInfo])
 
     return {
@@ -20,7 +34,6 @@ export function useGetCompAndElemNames() {
         elemName
     }
 }
-
 
 
 /** Хук возвращает булево значение нужно ли отрисовывать формы изменения тега и атрибутов */
@@ -33,7 +46,7 @@ export function useGetContentTypeVisible() {
     const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
 
     useEffect(function () {
-        // Шаблон выделенного тега
+        // Шаблон выделенного элемента
         const { tElem } = flashedElemInfo
 
         // Если элемент не выделен, то ничего не отрисовывать

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import { convertToSnakeCase, setUpperCaseForFirstLetter } from 'src/utils/stringUtils'
+import { convertToSnakeCase, setUpperCaseForFirstLetter } from 'utils/stringUtils'
 
 /** The hook sets flash rectangles into IFrame */
 export function useInstallFlashRects() {
@@ -46,10 +46,10 @@ function setExtraStyle($head: HTMLHeadElement) {
         'border: 2px solid rgba(1, 122, 255, 1);' +
     '}' +
     '.em-flash-rect__move-hover {' +
-        'border: 1px solid rgba(255, 0, 82, 1);' +
+        'border: 1px solid rgba(14, 201, 55, 1);' +
     '}' +
     '.em-flash-rect__move-select {' +
-        'border: 2px solid rgba(255, 0, 82, 1);' +
+        'border: 2px solid rgba(14, 201, 55, 1);' +
     '}'
 
     // Create and set <style> into <head>
@@ -66,7 +66,7 @@ function setExtraStyle($head: HTMLHeadElement) {
 function createFlashElement($body: HTMLBodyElement, type: 'hover' | 'select' | 'moveHover' | 'moveSelect') {
     const flashRect = document.createElement('div')
 
-    // Add attribute to find it in an another function
+    // Add attribute to find it in another function
     // data-em-hover-rect OR data-em-select-rect OR
     // data-em-move-hover-rect OR data-em-move-select-rect
     const typeWithFirstBigLetter = setUpperCaseForFirstLetter(type)

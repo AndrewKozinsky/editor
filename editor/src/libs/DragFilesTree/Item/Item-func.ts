@@ -24,17 +24,15 @@ export function useMarkItemElemWhenItHovered() {
         const $target = <HTMLElement>event.target
         const $folder = $target.closest('[data-ft-item]').querySelector('[data-ft-inner]')
 
-        if (!$target || !$folder) return
+        if (!$target || !$folder || !($folder instanceof HTMLElement)) return
 
         // Если на элемент навели и это не кнопка...
         if (event.type === 'mouseover' && !$target.closest('[data-ft-item-btn]')) {
             // То поставить обёртке data-ft-hover
-            //@ts-ignore
             $folder.dataset.ftHover = 'true'
         }
         // В остальных случаях убрать data-ft-hover
         else {
-            //@ts-ignore
             delete $folder.dataset.ftHover
         }
     }, [])

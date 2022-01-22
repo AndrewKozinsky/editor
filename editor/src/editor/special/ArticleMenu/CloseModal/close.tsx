@@ -6,7 +6,7 @@ import useGetShowModal from 'utils/hooksUtils'
 import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
 
-// TODO Что делает эта функция?
+/** Обработчик кнопки закрытия редактируемой статьи */
 export function useCloseArticle() {
     const { historyStepWhenWasSave, historyCurrentIdx } = useGetArticleSelectors()
     const openConfirmCloseModal = useGetShowModal(<CloseArticleConfirmModal />)
@@ -17,6 +17,7 @@ export function useCloseArticle() {
         if (isArticleSaved) {
             // Clear an article data in Store
             store.dispatch( actions.article.clearArticle() )
+            store.dispatch( actions.settings.setMainTab(0) )
         }
         else {
             // Show confirmation modal

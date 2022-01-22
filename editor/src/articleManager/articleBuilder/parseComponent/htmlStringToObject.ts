@@ -126,7 +126,7 @@ export namespace HTMLObjArrType {
     export type Attrs = { [key: string]: string }
 }
 
-const dataExample: HTMLObjArrType.Arr = [
+/*const dataExample: HTMLObjArrType.Arr = [
     {
         tag: 'div',
         attrs: { class: 'grid' },
@@ -151,4 +151,4 @@ const dataExample: HTMLObjArrType.Arr = [
             }
         ]
     }
-]
+]*/

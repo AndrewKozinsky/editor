@@ -3,7 +3,7 @@ $CN: left-bottom-section;
 .#{$CN} {
     display: flex;
     justify-content: space-between;
-    padding: 3px 17px 3px 17px;
+    padding: 3px 12px 3px 12px;
     border-top: 1px solid var(--button-color);
 }
 
@@ -13,7 +13,7 @@ $CN: left-bottom-section;
 
 .#{$CN}__button {
     cursor: pointer;
-    padding: 4px 6px 3px;
+    padding: 4px 3px 3px;
     border: none;
     border-radius: var(--radius);
     background-color: var(--bg-color);

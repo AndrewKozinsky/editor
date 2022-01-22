@@ -105,13 +105,6 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
 
-        // Пока не знаю нужно ли это делать
-        /*if (tElem.hidden) {
-            newElemData.layer = {
-                hidden: true
-            }
-        }*/
-
         if (tElem.elemTextInside) {
             newElemData.dCompElemChildren = createSimpleTextComponent(
                 ++newMaxCompId,

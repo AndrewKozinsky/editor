@@ -4,7 +4,7 @@ import { applyMiddleware, combineReducers, createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 // @ts-ignore
 import ReduxThunk from 'redux-thunk'
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { TypedUseSelectorHook, useSelector } from 'react-redux'
 // Reducers
 import userReducer from './user/userReducer'
 import sitesReducer from './site/sitesReducer'
