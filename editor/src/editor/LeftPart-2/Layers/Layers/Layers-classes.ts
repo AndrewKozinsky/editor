@@ -16,6 +16,7 @@ export default function makeClasses(config: LayersConfigType.Layer) {
         collapseIcon: getCollapseIcon(config),
 
         typeIcon: getTypeIcon(config),
+        emptyTypeIcon: CN + '__empty-type-icon',
         text: getText(config),
 
         circles: CN + '__circles',

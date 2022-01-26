@@ -5,7 +5,7 @@ import {
     checkPressedKeys,
     getPressedKeys,
     PressedKeysObj
-} from './getPressedKeys'
+} from 'utils/getPressedKeys'
 
 /* Хук ставит обработчик горячих клавиш на всё приложение */
 import { useEffect } from 'react'
@@ -27,9 +27,6 @@ function shortcutsHandler(e: KeyboardEvent) {
 
     // Close modal window
     closeModal(pressedKeys)
-
-    // Making undo or redo history step in article
-    // undoRedoArticleHistory(pressedKeys)
 }
 
 
@@ -39,25 +36,3 @@ function closeModal(pressedKeys: PressedKeysObj) {
         store.dispatch( actions.modal.closeModal() )
     }
 }
-
-
-// If you pressed Cmd + Z or Shift + Cmd + Z, then make undo or redo history step in article
-/*function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
-    // Return the function if user is not on the article page
-    if (store.getState().settings.mainTab !== 1) return
-
-    const { history, historyCurrentIdx } = store.getState().article
-
-    if (checkPressedKeys(pressedKeys, ['cmd', 'z'])) {
-        const canMakeStep = articleManager.canMakeHistoryStep('undo', history, historyCurrentIdx)
-        if (!canMakeStep) return
-
-        store.dispatch( actions.article.makeHistoryStep('undo') )
-    }
-    else if (checkPressedKeys(pressedKeys, ['cmd', 'shift', 'z'])) {
-        const canMakeStep = articleManager.canMakeHistoryStep('redo', history, historyCurrentIdx)
-        if (!canMakeStep) return
-
-        store.dispatch( actions.article.makeHistoryStep('redo') )
-    }
-}*/

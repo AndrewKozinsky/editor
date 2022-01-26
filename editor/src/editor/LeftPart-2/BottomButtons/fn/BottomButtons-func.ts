@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { setUpperCaseForFirstLetter } from 'utils/stringUtils'
 import articleManager from 'articleManager/articleManager'
-import ArticleTypes from '../../../../store/article/codeType/articleCodeType'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /**
  * Хук возвращает тип значка у кнопок

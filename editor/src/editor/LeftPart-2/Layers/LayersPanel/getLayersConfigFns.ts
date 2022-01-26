@@ -37,20 +37,6 @@ export function getElementName(
     return tComp.elemName
 }
 
-/**
- * Функция возвращает является ли элемент корневым:
- * @param {Array} tComps — массив шаблонов компонентов
- * @param {Number} tCompId — id шаблона компонента
- * @param {String} tElemId — id шаблона элемента
- */
-export function getItIsRootElem(
-    tComps: TempCompTypes.TempComps, tCompId: TempCompTypes.Id, tElemId: TempCompTypes.ElemId
-): boolean {
-    const tComp = articleManager.getTemplate(tComps, tCompId)
-    const rootTElem = articleManager.getRootTElem(tComp)
-
-    return tElemId === rootTElem.elemId
-}
 
 /**
  * Функция возвращает начало текста в текстовом компоненте

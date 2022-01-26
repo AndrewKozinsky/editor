@@ -62,7 +62,7 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
             setFlashRectangle(moveActionType, 'rootElement', dataCompId, dataElemId)
         }
         else {
-            setFlashRectangle(moveActionType, 'rootElement', null, null)
+            setFlashRectangle(moveActionType, null, null, null)
         }
     }
     // Если клавиша CTRL не нажата, то хотят поставить выделяющий прямоугольник

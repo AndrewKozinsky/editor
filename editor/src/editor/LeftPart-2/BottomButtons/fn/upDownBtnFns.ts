@@ -39,7 +39,7 @@ export function useGetUpDownHandler(direction: 'up' | 'down') {
 
     return useCallback(function () {
         if (!historyItem) return
-        const { selectedElem, moveSelectedComp } = historyItem
+        const { selectedElem } = historyItem
 
         // Поставить перемещаемый компонент в правильное положение и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.moveItemToUpOrDown(

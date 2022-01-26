@@ -1,3 +1,5 @@
+import TempCompTypes from '../../../store/article/codeType/tempCompCodeType'
+import articleManager from '../../articleManager'
 import { HTMLObjArrType } from './htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 
@@ -5,8 +7,11 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
  * Функция ставит дополнительные атрибуты главной обёртке компонента в htmlObj
  * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
+ * @param {Object} tComp — шаблон компонента
  */
-export function setExtraAttribsToRootTag(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+export function setExtraAttribsToRootTag(
+    htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component, tComp: TempCompTypes.TempComp
+) {
     if (!htmlObj.attrs) htmlObj.attrs = {}
 
     // id компонента
@@ -21,8 +26,9 @@ export function setExtraAttribsToRootTag(htmlObj: HTMLObjArrType.Tag, dataComp: 
 
     // Поставить атрибут data-em-display="hidden" если элемент является скрытым
     // При переводе в JSX такие элементы не будут отрисовываться
-    // TODO Тут нужно брать не первый элемент, а разбирать compDataParsed.html в HTML и получать
-    const rootDElem = dataComp.dElems[0]
+    const rootTElem = articleManager.getRootTElem(tComp)
+    const rootDElem = articleManager.getDElemByTElem(dataComp, rootTElem.elemId)
+
     if (rootDElem.dCompElemLayer?.layerHidden) {
         htmlObj.attrs['data-em-display'] = 'hidden'
     }

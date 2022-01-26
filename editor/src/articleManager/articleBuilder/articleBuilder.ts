@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createJsxFromComponents from './componentsToJSX'
-// import createHTMLFromComponents from './createHTMLFromComponents'
+import createHTMLFromComponents from './createHTMLFromComponents'
 import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
 import { parseComponent } from './parseComponent/parseComponent'
 
@@ -25,12 +25,12 @@ export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComp
  * @param {Object} articleData — данные статьи.
  * @param tempComps — массив шаблонов компонентов.
  */
-/*export function turnArticleDataToHTML(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): string {
+export function turnArticleDataToHTML(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): string {
     const componentsArr = createComponentsArr(articleData, tempComps)
 
     // Create HTML from components array
     return createHTMLFromComponents(componentsArr)
-}*/
+}
 
 /**
  * Функция превращает данные статьи и шаблоны компонентов в массив html-подобных объектов.

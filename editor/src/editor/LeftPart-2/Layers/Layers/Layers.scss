@@ -10,6 +10,7 @@ $CN: layer;
     display: flex;
     align-items: flex-start;
     user-select: none;
+    overflow: hidden;
     border-radius: var(--radius);
 }
 .#{$CN}__wrapper--hover, .#{$CN}__wrapper--move-hover {
@@ -85,6 +86,10 @@ $CN: layer;
 }
 .#{$CN}__type-icon--white {
     fill: white;
+}
+.#{$CN}__empty-type-icon {
+    display: inline-block;
+    width: 16px;
 }
 
 // Текст

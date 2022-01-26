@@ -1,4 +1,5 @@
 const JSON5 = require('json5')
+import articleManager from '../../articleManager/articleManager'
 import TempCompFilesTreeType from '../../editor/LeftPart-2/TempCompFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
@@ -293,6 +294,16 @@ const articleActions = {
                     'moveSelect', tagType, dataCompId, dataElemId
                 ))
 
+                // Если выделен элемент, который выделили для перемещения, то убрать выделение
+                if (
+                    currentArticle.selectedElem.dataCompId === dataCompId &&
+                    currentArticle.selectedElem.dataElemId === dataElemId
+                ) {
+                    dispatch( actions.article.setFlashedElement(
+                        'select', null, null, null
+                    ))
+                }
+
                 // Если на этом элементе есть рамка наведения...
                 if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
                     // Спрятать рамку вокруг элемента наведённого для перемещения
@@ -323,31 +334,6 @@ const articleActions = {
         }
     },
 
-    /*setTextComp(textCompId: number | null) {
-        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const { history, historyCurrentIdx} = getState().article
-            const currentArticle = history[historyCurrentIdx]
-
-            // Если выделен какой-то компонент/элемент, то убрать выделение
-            if (currentArticle.selectedElem.dataCompId) {
-                dispatch( actions.article.setFlashedElement(
-                    'select', null, null, null
-                ))
-            }
-
-            // Поставить выделение текстового компонента
-            dispatch( actions.article.setTextCompId(textCompId))
-        }
-    },*/
-
-    // Setting included files template in Store
-    /*setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
-        return {
-            type: StoreArticleTypes.SET_TEXT_COMP_ID,
-            payload: textCompId
-        }
-    },*/
-
     /**
      * Action forms a new history item
      * @param {Object} itemDetails — данные для вставки нового элемента в массив статей
@@ -363,12 +349,12 @@ const articleActions = {
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
      */
-    /*makeHistoryStep( step: 'undo' | 'redo' ) {
+    makeHistoryStep( step: 'undo' | 'redo' ) {
         return {
             type: StoreArticleTypes.MAKE_HISTORY_STEP,
             payload: step
         }
-    },*/
+    },
 
     /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
     setHistoryStepWhenArticleWasSaved() {
@@ -377,22 +363,6 @@ const articleActions = {
         }
     },
 
-    // Setting included files template in Store
-    /*setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
-        return {
-            type: StoreArticleTypes.SET_PRESSED_KEY,
-            payload: pressedKeyData
-        }
-    },*/
-
-    // Setting included files template in Store
-    /*updateCurrentArticle(newArticle: StoreArticleTypes.HistoryItem): StoreArticleTypes.UpdateCurrentArticleAction {
-        return {
-            type: StoreArticleTypes.UPDATE_CURRENT_ARTICLE,
-            payload: newArticle
-        }
-    },*/
-
     // Очистка статьи
     clearArticle() {
         // Remove editable article id in Local Storage
@@ -400,6 +370,14 @@ const articleActions = {
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
+        }
+    },
+
+    // Обновление данных о тексте и положении курсора в выделенном текстовом компоненте
+    updateFocusTextProof(focusTextProofObj: StoreArticleTypes.FocusTextProofObj) {
+        return {
+            type: StoreArticleTypes.UPDATE_FOCUS_TEXT_PROOF,
+            payload: focusTextProofObj
         }
     },
 }

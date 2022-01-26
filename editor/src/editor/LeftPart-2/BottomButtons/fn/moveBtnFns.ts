@@ -87,6 +87,3 @@ export function useGetMoveHandler(direction: 'inside' | 'left' | 'right') {
         ))
     }, [historyItem])
 }
-
-
-

@@ -22,7 +22,7 @@ export function changeVisibility(
         return this.changeVisibilityOfTextComp(article, compCoords.dataCompId)
     }
     else {
-        // Если выделен элемент, то изменить его видимость
+        // Если выделен корневой элемент или обычный элемент, то изменить его видимость
         return this.changeVisibilityOfElem(article, compCoords)
     }
 }
@@ -45,11 +45,16 @@ export function changeVisibilityOfTextComp(
 
     if (updatedDComp.dCompType === 'component') return
 
-    if (!updatedDComp.dCompLayer) {
-        updatedDComp.dCompLayer = {layerHidden: true}
+    if (updatedDComp?.dCompLayer?.layerHidden) {
+        delete updatedDComp.dCompLayer.layerHidden
     }
     else {
-        updatedDComp.dCompLayer.layerHidden = !updatedDComp.dCompLayer.layerHidden
+        if (!updatedDComp.dCompLayer) {
+            updatedDComp.dCompLayer = {layerHidden: true}
+        }
+        else if (!updatedDComp.dCompLayer.layerHidden) {
+            updatedDComp.dCompLayer.layerHidden = true
+        }
     }
 
     // Поставить изменённый массив в updatedDComps

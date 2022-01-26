@@ -15,7 +15,9 @@ import { insertChildren } from './insertChildren'
  * @param {Object} compData — данные компонента
  * @param {Array} tempComps — массив шаблонов компонентов
  */
-export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
+export function parseComponent(
+    compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps
+): HTMLObjArrType.Tag {
     // Get component template by its tCompId
     let template = articleManager.getTemplate(tempComps, compData.tCompId)
 
@@ -28,7 +30,7 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
 
     // Поставить главной обёртке htmlObj дополнительные атрибуты
-    setExtraAttribsToRootTag(htmlObj, compData)
+    setExtraAttribsToRootTag(htmlObj, compData, template)
 
     // Based on information from dataComp I will find elements that should have duplicates and put they into html-object.
     putRepeatedElems(htmlObj, compData)

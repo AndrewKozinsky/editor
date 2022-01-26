@@ -5,7 +5,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 
 
 /**
- * Функция проверяющая работоспособность кнопки перемещения перемещаемого компонента
+ * Функция проверяет можно ли перемещать компонент выделенный для перемещения
  * @param {String} direction — направление перемещения компонента: левее или правее.
  * @param {Array} tempCompArr — массив шаблонов компонентов
  * @param {Array} dataCompArr — массив всех компонентов
@@ -120,7 +120,7 @@ export function has$ElemNested$Elements(
  * @param {Array} historyArr — articles history array
  * @param {Number} currentIdx — current history array index
  */
-/*export function canMakeHistoryStep(
+export function canMakeHistoryStep(
     this: typeof articleManager,
     step: 'undo' | 'redo',
     historyArr: StoreArticleTypes.HistoryItems,
@@ -130,7 +130,7 @@ export function has$ElemNested$Elements(
         (step === 'undo' && currentIdx - 1 !== -1) ||
         (step === 'redo' && currentIdx + 1 < historyArr.length)
     )
-}*/
+}
 
 
 /**
@@ -208,7 +208,7 @@ export function canMoveItemToUpOrDown(
         idx = parentArr.findIndex(dComp => dComp.dCompId === dataCompId)
         parentArrLength = parentArr.length
     }
-    else {
+    else if (tagType === 'element') {
         // Компонент содержащий выделенный элемент
         const dComp = this.getComponent(dComps, dataCompId)
         if (dComp.dCompType === 'simpleTextComponent') return false

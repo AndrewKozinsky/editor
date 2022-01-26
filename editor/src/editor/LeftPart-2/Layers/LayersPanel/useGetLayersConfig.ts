@@ -11,7 +11,7 @@ import {
     getTextComponentName,
     hasElementChildren,
     isItemCollapsed,
-    getCollapseHandler, getItIsRootElem,
+    getCollapseHandler,
     getShowHideLayerHandler,
     isHidden,
     isFlashed,
@@ -32,11 +32,16 @@ export default function useGetLayersConfig() {
     useEffect(function () {
         if (!historyItem || !tempComps?.length) return
 
-        const layersConfig = getLayersConfig(
-            historyItem, tempComps, historyItem.article.dComps, [], 0, null, collapsedItems, setCollapsedItems
-        )
+        // setTimeout нужен чтобы успел отработать код добавляющий в статью данные о корневом элементе у каждого компонента
+        // Как только сделаешь свойство allowRender, то от этого можно будет избавиться.
+        setTimeout(function () {
+            const layersConfig = getLayersConfig(
+                historyItem, tempComps, historyItem.article.dComps, [], 0, null, collapsedItems, setCollapsedItems
+            )
 
-        setLayersConfig(layersConfig)
+            setLayersConfig(layersConfig)
+        }, 0)
+
     }, [historyItem, tempComps, collapsedItems])
 
     return layersConfig
@@ -85,7 +90,13 @@ function getLayersConfig(
         // Если это элемент...
         if ('dCompElemId' in dItem) {
             const isCollapsed = isItemCollapsed(collapsedItems, dComp, dItem)
-            const isRootElem = getItIsRootElem(tComps, dComp.tCompId, dItem.tCompElemId)
+
+            // Получение данных корневого элемента
+            const rootTElem = articleManager.getRootTElemByTComps(tComps, dComp.tCompId)
+            const rootDElem = articleManager.getDElemByTElem(dComp, rootTElem.elemId)
+
+            // Является ли текущий элемент корневым?
+            const isRootElem = rootDElem.dCompElemId === dItem.dCompElemId
             const itemType = isRootElem ? 'rootElement' : 'element'
 
             configArr.push(
@@ -96,7 +107,7 @@ function getLayersConfig(
                     dElemId: dItem.dCompElemId,
                     name: getElementName(tComps, dComp, dItem),
                     collapsed: isCollapsed,
-                    offset: isRootElem ? offset - 1 : offset,
+                    offset,
                     hasChildren: hasElementChildren(dItem),
                     hidden: isHidden(tComps, dComp, dItem),
                     hovered: isFlashed(historyItem, 'hover', dComp, dItem),
@@ -136,16 +147,16 @@ function getLayersConfig(
                             dElemId: null,
                             name: getTextComponentName(dItem.dCompElemChildren),
                             collapsed: false,
-                            offset: offset + 1,
+                            offset: offset + 2,
                             hasChildren: false,
                             hidden: isHidden(tComps, dItem.dCompElemChildren),
                             hovered: isFlashed(historyItem, 'hover', dItem.dCompElemChildren),
                             selected: isFlashed(historyItem, 'select', dItem.dCompElemChildren),
                             moveHovered: false,
                             moveSelected: false,
-                            // parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
-                            // hasSelectedChild: false,
-                            // hasMovedChild: false,
+                            parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
+                            hasSelectedChild: false,
+                            hasMovedChild: false,
                             showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem.dCompElemChildren, null, false),
                             onClickHandler: getMouseHandler(
                                 'select', 'textComponent', dItem.dCompElemChildren.dCompId, null

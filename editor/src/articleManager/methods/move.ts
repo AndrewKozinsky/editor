@@ -71,6 +71,7 @@ export function moveCompNearComp(
     // Перемещаемый компонент
     const moveDComp = this.getComponent(dComps, moveCompId)
     if (moveDComp.dCompType === 'simpleTextComponent') return
+    // debugger
 
     // Получение массива, в котором находится перемещаемый компонент и его индекса
     const moveCompParentArr = this.getCompParentArray(dComps, moveCompId)
@@ -87,7 +88,6 @@ export function moveCompNearComp(
 
     // Получение массива, в котором находится целевой компонент и его индекса
     const targetCompParentArr = this.getCompParentArray(updatedDComps, targetCompId)
-    // debugger
     const targetCompIdx = this.getDCompIdxInArray(targetCompParentArr, targetCompId)
 
     // Позиция в массиве, в которую будет перемещён компонент в зависимости от направления перемещения
@@ -182,6 +182,7 @@ export function moveItemToUpOrDown(
 
         // Индекс положения перемещаемого компонента
         const idx = parentArr.findIndex(dComp => dComp.dCompId === dataCompId)
+
         // Удалить перемещаемый компонент из массива
         updatedParentArr.splice(idx, 1)
 
@@ -196,15 +197,15 @@ export function moveItemToUpOrDown(
         // Поставить новый массив детей в объект истории статьи
         updatedDComps = makeImmutableCopy(dComps, parentArr, updatedParentArr)
     }
-    else {
+    else if (tagType === 'element') {
         // Данные выделенного элемента
         const dElem = this.getDElemInDComp(dComp, dataElemId)
 
         // Индекс положения элемента
         const idx = dComp.dElems.findIndex(dElem => dElem.dCompElemId === dataElemId)
-        const updatedElemsArr = dComp.dElems.slice()
 
         // Удалить элемент
+        const updatedElemsArr = dComp.dElems.slice()
         updatedElemsArr.splice(idx, 1)
 
         if (direction === 'up') {

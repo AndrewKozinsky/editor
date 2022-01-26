@@ -1,6 +1,6 @@
 import React from 'react'
 import Hr from 'common/misc/Hr/Hr'
-import NameSection from '../../../wrappers/NameSection/NameSection'
+import NameSection from 'editor/wrappers/NameSection/NameSection'
 import AdjustAttrs from '../AdjustAttrs/AdjustAttrs'
 import AdjustTag from '../AdjustTag/AdjustTag'
 import { useGetCompAndElemNames, useGetContentTypeVisible } from './AdjustPanel-func'

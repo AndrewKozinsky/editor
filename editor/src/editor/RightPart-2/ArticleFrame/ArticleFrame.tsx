@@ -17,6 +17,12 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import './ArticleFrame.scss'
+import useSetShortcutsHandler from './keydownHandler/keydownHandler'
+import {
+    useTrackSelectedElemToUpdateFocusTextProof,
+    useUpdateFocusPosition
+} from './textCompsTracking/useUpdateFocusTextProof'
+
 
 /* IFrame куда помещается статья */
 export default function ArticleFrame() {
@@ -30,9 +36,12 @@ export default function ArticleFrame() {
     // Установка служебных стилей в IFrame
     useSetServiceStyleToIFrame()
 
-    // Работа с текстом (СКОРЕЕ ВСЕГО ЭТОТ КОД ПОТОМ НУЖНО УБРАТЬ ПОТОМУ ЧТО Я ПИШУ ТЕКСТ В СПЕЦИАЛЬНОЙ ПАНЕЛЕ)
-    // useSetKeyDownHandlerForText()
-    // useChangeActiveTextComponent()
+    // Установка обработчика нажатия клавиш
+    useSetShortcutsHandler()
+
+    // Работа с текстом
+    useTrackSelectedElemToUpdateFocusTextProof()
+    useUpdateFocusPosition()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

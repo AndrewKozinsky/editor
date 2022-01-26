@@ -26,9 +26,9 @@ export default function useSetArticleToIFrame() {
             const article = history[historyCurrentIdx].article
 
             // Если изменилось значение хеша загрузки шаблонов компонентов,
-            // то запустить сценарий исправления статьи.
             if (lastTempCompsDownloadHash !== tempCompsDownloadHash) {
                 setLastTempCompsDownloadHash(tempCompsDownloadHash)
+                // ... запустить сценарий исправления статьи.
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }
 

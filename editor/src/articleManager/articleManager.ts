@@ -32,14 +32,15 @@ import {
     get$elem,
     getDElemByTElem,
     getMaxDElemsId,
-//     getTElemInTCompsArr,
+    getTElemInTCompsArr,
+    getRootTElemByTComps,
     getRootTElem,
     getItemInDElem,
     getItemInDComp,
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
-//     turnArticleDataToHTML,
+    turnArticleDataToHTML,
     turnArticleDataToJSX
 } from './articleBuilder/articleBuilder'
 import {
@@ -51,7 +52,7 @@ import {
     canComponentPutInElement,
     canMoveCompMoveToLeftOrRight,
     has$ElemNested$Elements,
-//     canMakeHistoryStep,
+    canMakeHistoryStep,
     isArticleSave,
     canDeleteElem,
     canMoveItemToUpOrDown,
@@ -78,14 +79,14 @@ import {
 class ArticleManager {
     // BUILD ARTICLE
     turnArticleDataToJSX = turnArticleDataToJSX
-    // turnArticleDataToHTML = turnArticleDataToHTML
+    turnArticleDataToHTML = turnArticleDataToHTML
 
     // GETTING RESOURCES
     // Finds current history item object
     getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
-    // getTElemInTCompsArr = getTElemInTCompsArr
+    getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     getTElemByTCompIdAndTElemId = getTElemByTCompIdAndTElemId
@@ -111,6 +112,7 @@ class ArticleManager {
     get$componentByTComp = get$componentByTComp
     get$elem = get$elem
     getMaxDElemsId = getMaxDElemsId
+    getRootTElemByTComps = getRootTElemByTComps
     getRootTElem = getRootTElem
     // Поиск компонента/элемента в элементе
     getItemInDElem = getItemInDElem
@@ -122,7 +124,7 @@ class ArticleManager {
     // The method returns boolean can pass component put in element
     canComponentPutInElement = canComponentPutInElement
     has$ElemNested$Elements = has$ElemNested$Elements
-    // canMakeHistoryStep = canMakeHistoryStep
+    canMakeHistoryStep = canMakeHistoryStep
     isArticleSave = isArticleSave
     canDeleteElem = canDeleteElem
     canMoveItemToUpOrDown = canMoveItemToUpOrDown

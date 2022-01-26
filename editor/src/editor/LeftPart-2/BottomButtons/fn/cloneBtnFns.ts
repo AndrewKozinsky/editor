@@ -28,7 +28,7 @@ export function useIsCloneDisabled() {
 
 /**
  * Хук возвращает обработчик нажатия на кнопку копирования компонента/элемента.
- * @param {Number} deep — глубина копирования: 1 (компонент), 2 (с атрибутами), 3 (с атрибутами и детьми)
+ * @param {Number} deep — глубина копирования: 1 (компонент без атрибутов), 2 (с атрибутами), 3 (с атрибутами и детьми)
  */
 export function useGetCloneHandler(deep: 1 | 2 | 3) {
     const dispatch = useDispatch()

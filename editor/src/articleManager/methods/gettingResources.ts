@@ -2,18 +2,24 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
+import { store } from 'store/rootReducer'
 
 /**
  * The function finds current history item object
  * @param {Array} historyArr — articles history array
- * @param {Number} historyCurrentIdx — current history item index
+ * @param {Number} historyIdx — current history item index
  */
 export function getCurrentHistoryItem(
     this: typeof articleManager,
-    historyArr: StoreArticleTypes.HistoryItems,
-    historyCurrentIdx: number
+    historyArr?: StoreArticleTypes.HistoryItems,
+    historyIdx?: number
 ): StoreArticleTypes.HistoryItem {
-    return historyArr[historyCurrentIdx]
+    if (historyArr && historyIdx) {
+        return historyArr[historyIdx]
+    }
+
+    const { history, historyCurrentIdx } = store.getState().article
+    return history[historyCurrentIdx]
 }
 
 /**
@@ -320,7 +326,7 @@ export function get$componentByTComp(
 /**
  * Функция возвращает html-элемент компонента
  * @param {Array} tComps — components templates array
- * @param {Number} tCompId — component template id
+ * @param {Number} tCompId — id шаблона компонента
  * @param {String} tElemId — id шаблона элемента
  */
 export function get$elem(
@@ -431,6 +437,21 @@ export function getItemInDComp(
 
 /**
  * Функция возвращает шаблон корневого элемента
+ * @param {Array} tComps — массив шаблонов компонентов
+ * @param {Number} tCompId — id шаблона компонента
+ */
+export function getRootTElemByTComps(
+    this: typeof articleManager,
+    tComps: TempCompTypes.TempComps,
+    tCompId: TempCompTypes.Id,
+): TempCompTypes.Elem {
+    const tComp = this.getTemplate(tComps, tCompId)
+
+    return this.getRootTElem(tComp)
+}
+
+/**
+ * Функция возвращает шаблон корневого элемента
  * @param {Object} tComp — шаблон компонента
  */
 export function getRootTElem(
@@ -445,3 +466,5 @@ export function getRootTElem(
     // Поиск элемента с id как у корневого тега
     return tComp.content.elems.find(tElem => tElem.elemId === rootTElemId)
 }
+
+

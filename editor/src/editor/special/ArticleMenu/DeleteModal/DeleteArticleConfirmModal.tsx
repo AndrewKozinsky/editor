@@ -1,16 +1,16 @@
-// import React, { useCallback } from 'react'
-// import Button from 'common/formElements/Button/Button'
-// import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
-// import useGetArticleSelectors from 'store/article/articleSelectors'
-// import useGetSitesSelectors from 'store/site/sitesSelectors'
-// import { useDispatch } from 'react-redux'
-// import { store } from 'store/rootReducer'
-// import actions from 'store/rootAction'
-// import bridge from '../../../../bridge/bridge'
-// import articleMenuMsg from 'messages/articleMenuMessages'
+import React, { useCallback } from 'react'
+import Button from 'common/formElements/Button/Button'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import { useDispatch } from 'react-redux'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import bridge from '../../../../bridge/bridge'
+import articleMenuMsg from 'messages/articleMenuMessages'
 
 /** Модальное окно с вопросом действительно ли удалить редактируемую статью */
-/*export function DeleteArticleConfirmModal() {
+export function DeleteArticleConfirmModal() {
     const dispatch = useDispatch()
     const { articleId } = useGetArticleSelectors()
     const { currentArtItemId } = useGetSitesSelectors().articleSection
@@ -39,4 +39,4 @@
             ]}
         />
     )
-}*/
+}

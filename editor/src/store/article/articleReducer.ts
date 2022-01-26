@@ -1,16 +1,16 @@
-import StoreArticleTypes from './articleTypes'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
 import TempCompFilesTreeType from 'editor/LeftPart-2/TempCompFilesTree/types'
 import articleManager from 'articleManager/articleManager'
+import StoreArticleTypes from './articleTypes'
 
 export type ArticleReducerType = {
     articleId: null | number
     siteId: null | number
 
     // id шаблона сайта
-    siteTemplateId: null | number
+    siteTemplateId: null | TempCompTypes.Id
     // Шаблон сайта
     siteTemplate: null | SiteTemplateTypes.Template
     // Хеш версии шаблона сайта. При изменении значения шаблон сайта будет заново скачан.
@@ -33,6 +33,9 @@ export type ArticleReducerType = {
     // Хеш загружены ли шаблоны компонентов. После загрузки это значение увеличивается чтобы хук
     // корректировки данных статьи знал когда можно приводить код шаблонов и данных статьи к одному формату
     tempCompsDownloadHash: number
+
+    // Данные по тексту и координатам текстового курсора в текстовом компоненте
+    focusTextProof: StoreArticleTypes.FocusTextProof
 
     // Ссылки на window, document IFrame-а
     $links: StoreArticleTypes.LinksObj
@@ -65,6 +68,12 @@ const stateExample: ArticleReducerType = {
     }],
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
+
+    focusTextProof: {
+        text: null,
+        cursorStart: null,
+        cursorEnd: null
+    },
 
     $links: {
         $window:   window,
@@ -120,6 +129,12 @@ const initialState: ArticleReducerType = {
     tempComps: [],
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
+
+    focusTextProof: {
+        text: null,
+        cursorStart: null,
+        cursorEnd: null
+    },
 
     $links: {
         $window: null,
@@ -232,7 +247,9 @@ function changeTempCompsVersionHash(state: ArticleReducerType): ArticleReducerTy
 }
 
 /** Установка папок шаблонов компонентов */
-function setTempCompFolders(state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction): ArticleReducerType {
+function setTempCompFolders(
+    state: ArticleReducerType, action: StoreArticleTypes.SetTempCompFoldersAction
+): ArticleReducerType {
     return {
         ...state,
         tempCompsFolders: action.payload,
@@ -347,21 +364,21 @@ function createAndSetHistoryItem(
 }
 
 // The function changes a current history step
-/*function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
-    let newStep = state.historyCurrentIdx
+function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
+    let newStepNum = state.historyCurrentIdx
 
     if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
-        newStep--
+        newStepNum--
     }
     else if (action.payload === 'redo' && state.historyCurrentIdx + 1 < state.history.length) {
-        newStep++
+        newStepNum++
     }
 
     return {
         ...state,
-        historyCurrentIdx: newStep
+        historyCurrentIdx: newStepNum
     }
-}*/
+}
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
 function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
@@ -371,27 +388,22 @@ function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: St
     }
 }
 
-
-/* Функция обновляет текущую статью */
-/*function updateCurrentArticle(state: ArticleReducerType, action: StoreArticleTypes.UpdateCurrentArticleAction): ArticleReducerType {
-    const { history, historyCurrentIdx } = state
-
-    // Set the new article to history array
-    const updatedHistoryArr = [...history]
-    updatedHistoryArr[historyCurrentIdx] = action.payload
-
-    return {
-        ...state,
-        history: updatedHistoryArr
-    }
-}*/
-
 /* Функция очищает статью от данных */
 function clearArticle(state: ArticleReducerType): ArticleReducerType {
     return Object.assign(
         initialState,
         { $links: state.$links } // Do not touch the document's links
     )
+}
+
+/* Функция очищает статью от данных */
+function updateFocusTextProof(state: ArticleReducerType, action: StoreArticleTypes.UpdateFocusTextProofAction): ArticleReducerType {
+    const newFocusTextProof = Object.assign(state.focusTextProof, action.payload)
+
+    return {
+        ...state,
+        focusTextProof: newFocusTextProof
+    }
 }
 
 
@@ -425,14 +437,14 @@ export default function articleReducer(
             return setFlashedElement(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
-        // case StoreArticleTypes.MAKE_HISTORY_STEP:
-        //     return makeHistoryStep(state, action)
+        case StoreArticleTypes.MAKE_HISTORY_STEP:
+            return makeHistoryStep(state, action)
         case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
             return setHistoryStepWhenArticleWasSaved(state, action)
-        // case StoreArticleTypes.UPDATE_CURRENT_ARTICLE:
-        //     return updateCurrentArticle(state, action)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
+        case StoreArticleTypes.UPDATE_FOCUS_TEXT_PROOF:
+            return updateFocusTextProof(state, action)
         default:
             // @ts-ignore
             const x: never = null

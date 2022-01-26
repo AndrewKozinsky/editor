@@ -1,6 +1,8 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import articleManager from 'articleManager/articleManager'
+import makeImmutableCopy from '../../libs/makeImmutableCopy/makeImmutableCopy'
+import StoreArticleTypes from '../../store/article/articleTypes'
 
 /**
  * Функция создаёт данные статьи. Если ничего не передать, то будут данные для новой статьи.
@@ -217,3 +219,4 @@ export function createSimpleTextComponent(dCompId: number, text: string = ''): A
         text
     }
 }
+

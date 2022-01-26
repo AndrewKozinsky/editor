@@ -87,3 +87,11 @@ export function createDeepCopy<T>(data: T): T {
 
     return f(data)
 }
+
+export function wait(waitTime: number = 0) {
+    return new Promise(function (resolve: (value: unknown) => void) {
+        setTimeout(function () {
+            resolve(0)
+        }, waitTime)
+    })
+}

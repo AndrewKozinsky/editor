@@ -66,8 +66,8 @@ function TypeIcon(props: LayerPropType) {
     else if (config.type === 'text') {
         return <SvgIcon type='layerText' baseClass='-icon-fill' extraClass={CN.typeIcon} />
     }
-    else {
-        return null
+    else if (config.type === 'element') {
+        return <div className={CN.emptyTypeIcon} />
     }
 }
 
