@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
-import articleManager from 'articleManager/articleManager'
-import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
-import useGetArticleSelectors from 'store/article/articleSelectors'
-import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import StoreArticleTypes from 'store/article/articleTypes'
-import { isCtrlPressed } from '../../../../utils/domUtils'
+// import { useEffect, useState } from 'react'
+// import articleManager from 'articleManager/articleManager'
+// import { store } from 'store/rootReducer'
+// import actions from 'store/rootAction'
+// import useGetArticleSelectors from 'store/article/articleSelectors'
+// import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+// import StoreArticleTypes from 'store/article/articleTypes'
+// import { isCtrlPressed } from 'utils/domUtils'
 
 /** Хук отслеживает выделенный компонент.
  * Если это текстовый компонент, то ставит его текст в свойство focusTextProof.text в Хранилище. */
-export function useTrackSelectedElemToUpdateFocusTextProof() {
+/*export function useTrackSelectedElemToUpdateFocusTextProof() {
     const flashedElems = articleManager.hooks.getFlashedElemCoords()
     const article = articleManager.hooks.getCurrentArticle()
 
@@ -42,12 +42,11 @@ export function useTrackSelectedElemToUpdateFocusTextProof() {
             text: dTextComp.text
         }))
     }, [flashedElems, oldTextCompId])
-}
+}*/
 
 
 
-
-export function useUpdateFocusPosition() {
+/*export function useUpdateFocusPosition() {
     const { $links } = useGetArticleSelectors()
     const flashedElems = articleManager.hooks.getFlashedElemCoords()
     const article = articleManager.hooks.getCurrentArticle()
@@ -61,9 +60,9 @@ export function useUpdateFocusPosition() {
         $document.addEventListener('keyup', getUpdateFocusPositionAfterClick($document, selectedElem))
         // $document.addEventListener('keyup', updateFocusPositionAfterKeyUp)
     }, [$links, flashedElems])
-}
+}*/
 
-function getUpdateFocusPositionAfterClick(
+/*function getUpdateFocusPositionAfterClick(
     $document: StoreArticleTypes.DocumentLink,
     selectedElem: StoreArticleTypes.FlashedElem
 ) {
@@ -80,7 +79,7 @@ function getUpdateFocusPositionAfterClick(
             cursorEnd: focusOffset
         }))
     }
-}
+}*/
 
 /*
 function updateFocusPositionAfterKeyUp(e: KeyboardEvent) {

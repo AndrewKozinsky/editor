@@ -34,9 +34,6 @@ export type ArticleReducerType = {
     // корректировки данных статьи знал когда можно приводить код шаблонов и данных статьи к одному формату
     tempCompsDownloadHash: number
 
-    // Данные по тексту и координатам текстового курсора в текстовом компоненте
-    focusTextProof: StoreArticleTypes.FocusTextProof
-
     // Ссылки на window, document IFrame-а
     $links: StoreArticleTypes.LinksObj
 
@@ -68,12 +65,6 @@ const stateExample: ArticleReducerType = {
     }],
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
-
-    focusTextProof: {
-        text: null,
-        cursorStart: null,
-        cursorEnd: null
-    },
 
     $links: {
         $window:   window,
@@ -129,12 +120,6 @@ const initialState: ArticleReducerType = {
     tempComps: [],
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
-
-    focusTextProof: {
-        text: null,
-        cursorStart: null,
-        cursorEnd: null
-    },
 
     $links: {
         $window: null,
@@ -278,8 +263,8 @@ function setFlashedElement(state: ArticleReducerType, action: StoreArticleTypes.
     // Hovered/selected element coordinates
     const flashedElem = {
         tagType: action.payload.tagType,
-        dataCompId: action.payload.dataCompId,
-        dataElemId: action.payload.dataElemId
+        dataCompId: action.payload.dataCompId || null,
+        dataElemId: action.payload.dataElemId || null
     }
 
     // Update hovered/selected/move element coordinates in article
@@ -396,16 +381,6 @@ function clearArticle(state: ArticleReducerType): ArticleReducerType {
     )
 }
 
-/* Функция очищает статью от данных */
-function updateFocusTextProof(state: ArticleReducerType, action: StoreArticleTypes.UpdateFocusTextProofAction): ArticleReducerType {
-    const newFocusTextProof = Object.assign(state.focusTextProof, action.payload)
-
-    return {
-        ...state,
-        focusTextProof: newFocusTextProof
-    }
-}
-
 
 // Редьюсер Store.article
 export default function articleReducer(
@@ -443,8 +418,6 @@ export default function articleReducer(
             return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
-        case StoreArticleTypes.UPDATE_FOCUS_TEXT_PROOF:
-            return updateFocusTextProof(state, action)
         default:
             // @ts-ignore
             const x: never = null

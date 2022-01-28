@@ -37,6 +37,7 @@ import {
     getRootTElem,
     getItemInDElem,
     getItemInDComp,
+    get$elemBy$body,
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -67,6 +68,7 @@ import {
     moveComponentToElement,
     moveItemToUpOrDown
 } from './methods/move'
+import { updateTextInComponent } from './methods/text'
 import {
     changeVisibility,
     changeVisibilityOfTextComp,
@@ -118,6 +120,7 @@ class ArticleManager {
     getItemInDElem = getItemInDElem
     // Поиск компонента/элемента в компоненте
     getItemInDComp = getItemInDComp
+    get$elemBy$body = get$elemBy$body
 
     // CHECK
     canMoveCompMoveToLeftOrRight = canMoveCompMoveToLeftOrRight
@@ -167,6 +170,9 @@ class ArticleManager {
     deleteItem = deleteItem
     deleteComponent = deleteComponent
     deleteElement = deleteElement
+
+    // TEXT
+    updateTextInComponent = updateTextInComponent
 
     // HOOKS (object with hooks)
     hooks = hooks

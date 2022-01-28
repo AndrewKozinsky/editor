@@ -18,10 +18,7 @@ import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemp
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import './ArticleFrame.scss'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
-import {
-    useTrackSelectedElemToUpdateFocusTextProof,
-    useUpdateFocusPosition
-} from './textCompsTracking/useUpdateFocusTextProof'
+import { useTrackSelectedElemForText } from './textCompsTracking/useTrackSelectedElemForText'
 
 
 /* IFrame куда помещается статья */
@@ -40,8 +37,7 @@ export default function ArticleFrame() {
     useSetShortcutsHandler()
 
     // Работа с текстом
-    useTrackSelectedElemToUpdateFocusTextProof()
-    useUpdateFocusPosition()
+    useTrackSelectedElemForText()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

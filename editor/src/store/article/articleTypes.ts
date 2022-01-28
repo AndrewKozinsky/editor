@@ -35,13 +35,6 @@ namespace StoreArticleTypes {
         code: TempCompTypes.TempComp
     }
 
-    // Данные выделенного текстового компонента
-    export type FocusTextProof = {
-        text: null | string
-        cursorStart: null | number
-        cursorEnd: null | number
-    }
-
     export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
         $document: StoreArticleTypes.DocumentLink

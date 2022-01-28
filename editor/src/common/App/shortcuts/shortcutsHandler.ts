@@ -1,15 +1,15 @@
+import { useEffect } from 'react'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import articleManager from 'articleManager/articleManager'
+import { undoRedoArticleHistory } from 'editor/RightPart-2/ArticleFrame/keydownHandler/hotKeys'
 import {
     checkPressedKeys,
     getPressedKeys,
     PressedKeysObj
 } from 'utils/getPressedKeys'
 
-/* Хук ставит обработчик горячих клавиш на всё приложение */
-import { useEffect } from 'react'
 
+/* Хук ставит обработчик горячих клавиш на всё приложение */
 export default function useSetShortcutsHandler() {
     useEffect(function () {
         document.addEventListener('keydown', shortcutsHandler)
@@ -27,6 +27,11 @@ function shortcutsHandler(e: KeyboardEvent) {
 
     // Close modal window
     closeModal(pressedKeys)
+
+    if (store.getState().settings.mainTab === 1) {
+        // Making undo or redo history step in article
+        undoRedoArticleHistory(pressedKeys)
+    }
 }
 
 

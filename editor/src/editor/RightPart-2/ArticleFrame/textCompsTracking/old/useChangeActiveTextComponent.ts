@@ -50,10 +50,6 @@
     // Текстовый узел, где есть выделение
     const $text = selection.anchorNode as CharacterData
 
-    // @ts-ignore
-    // Если курсор находится в знаке пустого текста, то ничего не делать
-    if ($text.tagName === 'EMPTY-TEXT-SIGN') return
-
     if (pressedKey.code === 'ArrowLeft') {
         // Запрет перемещения фокуса на несуществующую позицию
         if (focusOffset - 1 < 0) return

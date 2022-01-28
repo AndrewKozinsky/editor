@@ -325,8 +325,8 @@ const articleActions = {
     setFlashedElement(
         actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
         tagType: StoreArticleTypes.FlashedTagType,
-        dataCompId: StoreArticleTypes.FlashedElemId,
-        dataElemId: StoreArticleTypes.FlashedElemId
+        dataCompId?: StoreArticleTypes.FlashedElemId,
+        dataElemId?: StoreArticleTypes.FlashedElemId
     ) {
         return {
             type: StoreArticleTypes.SET_FLASHED_ELEMENT,
@@ -370,14 +370,6 @@ const articleActions = {
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
-        }
-    },
-
-    // Обновление данных о тексте и положении курсора в выделенном текстовом компоненте
-    updateFocusTextProof(focusTextProofObj: StoreArticleTypes.FocusTextProofObj) {
-        return {
-            type: StoreArticleTypes.UPDATE_FOCUS_TEXT_PROOF,
-            payload: focusTextProofObj
         }
     },
 }

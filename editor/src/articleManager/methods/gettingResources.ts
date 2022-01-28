@@ -467,4 +467,21 @@ export function getRootTElem(
     return tComp.content.elems.find(tElem => tElem.elemId === rootTElemId)
 }
 
+/**
+ * Функция ищет и возвращает html-элемент по переданным id компонента и элемента
+ * @param {StoreArticleTypes.BodyLink} $body
+ * @param {ArticleTypes.Id | null} dCompId
+ * @param {ArticleTypes.Id | null} dElemId
+ * @returns {NodeListOf<Element>}
+ */
+export function get$elemBy$body(
+    $body: StoreArticleTypes.BodyLink,
+    dCompId: null | ArticleTypes.Id,
+    dElemId?: null | ArticleTypes.Id,
+) {
+    const queryStr = dElemId
+        ? `[data-em-d-comp-id="${dCompId}"][data-em-d-elem-id="${dCompId}"]`
+        : `[data-em-d-gen-comp-id="${dCompId}"]`
 
+    return $body.querySelector(queryStr)
+}
