@@ -1,6 +1,6 @@
 import useGetModalSelectors from 'store/modal/modalSelectors'
 import StoreModalTypes from 'store/modal/modalTypes'
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import './Modal.scss'
 
 const CN = 'modal'

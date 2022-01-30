@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Переместить выше» */
@@ -46,7 +46,7 @@ export function useGetUpDownHandler(direction: 'up' | 'down') {
             historyItem.article, selectedElem, direction
         )
 
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }, [historyItem])

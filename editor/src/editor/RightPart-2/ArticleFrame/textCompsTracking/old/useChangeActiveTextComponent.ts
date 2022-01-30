@@ -137,7 +137,7 @@
     selection.empty()
 
     // 5. Запустить экшен для обновления статьи
-    store.dispatch(actions.article.updateCurrentArticle(newArticle))
+    store.dispatch(articleActions.updateCurrentArticle(newArticle))
 
     // 6. Поставить фокус после уставленного текста.
     // Задержка нужна чтобы Реакт успел перерисовать статью

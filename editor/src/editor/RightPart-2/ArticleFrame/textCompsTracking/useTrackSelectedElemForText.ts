@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
@@ -13,6 +13,7 @@ export function useTrackSelectedElemForText() {
     const flashedElems = articleManager.hooks.getFlashedElemCoords()
     const article = articleManager.hooks.getCurrentArticle()
 
+    // id выделенного текстового компонента
     const [textCompId, setTextCompId] = useState<null | ArticleTypes.Id>(null)
 
     useEffect(function () {
@@ -23,7 +24,10 @@ export function useTrackSelectedElemForText() {
         if (selectedElem.dataCompId === textCompId) return
         else setTextCompId(selectedElem.dataCompId)
 
+        // Если раннее был выделен текстовый компонент...
         if (textCompId) {
+            // ... то проверить разнится ли текст из HTML с данными.
+            // Если да, то обновить данные в соответствии с текстом из HTML.
             updateTextComp(textCompId, $links.$body, article)
         }
 
@@ -38,6 +42,13 @@ export function useTrackSelectedElemForText() {
     }, [flashedElems, textCompId])
 }
 
+/**
+ * Функция ищет в $body элемент содержащий текст текстового компонента, сравнивает его с текстом в данных.
+ * Если строки разнятся, то ставит текст из HTML в данные через создание нового элемента истоии
+ * @param {Number} textCompId — id выделенного текстового компонента
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
+ * @param {Object} article — данные статьи
+ */
 function updateTextComp(
     textCompId: null | ArticleTypes.Id,
     $body: StoreArticleTypes.BodyLink,
@@ -58,7 +69,7 @@ function updateTextComp(
         article, dTextComp, $textComp.textContent
     )
 
-    store.dispatch(actions.article.createAndSetHistoryItem(
+    store.dispatch(articleActions.createAndSetHistoryItem(
         compsAndMaxCompId
     ))
 }
@@ -67,6 +78,8 @@ function updateTextComp(
 export function forceCreateHistoryItemWithNewText() {
     // Ничего не делать если нет выделенного текстового компонента
     const historyItem = articleManager.getCurrentHistoryItem()
+    if (!historyItem) return
+
     const selectedElem = historyItem.selectedElem
     if (selectedElem.tagType !== 'textComponent') return
 
@@ -75,12 +88,12 @@ export function forceCreateHistoryItemWithNewText() {
     const { anchorOffset, focusOffset } = $document.getSelection()
 
     // Убрать выделение компонента в данных статьи
-    store.dispatch(actions.article.setFlashedElement('select', null))
+    store.dispatch(articleActions.setFlashedElement('select', null))
 
     // Потом снова поставить чтобы создался новый объект истории.
     // Так как текст заменился, то выделение перейдёт в нулевую позицию
     setTimeout(function () {
-        store.dispatch(actions.article.setFlashedElement(
+        store.dispatch(articleActions.setFlashedElement(
             'select', 'textComponent', selectedElem.dataCompId
         ))
     }, 0)

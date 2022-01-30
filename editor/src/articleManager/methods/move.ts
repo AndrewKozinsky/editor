@@ -70,7 +70,6 @@ export function moveCompNearComp(
 
     // Перемещаемый компонент
     const moveDComp = this.getComponent(dComps, moveCompId)
-    if (moveDComp.dCompType === 'simpleTextComponent') return
     // debugger
 
     // Получение массива, в котором находится перемещаемый компонент и его индекса
@@ -125,11 +124,11 @@ export function moveComponentToElement(
     const { dComps } = article
 
     // Перемещаемый компонент
-    const movedDComp = this.getComponent(dComps, moveCompId) as ArticleTypes.Component
+    const movedDComp = this.getComponent(dComps, moveCompId)
 
     // Массив, где находится перемещаемый компонент
     const moveCompParentArr = this.getCompParentArray(dComps, movedDComp.dCompId)
-    if (!moveCompParentArr || !Array.isArray(moveCompParentArr)) return
+    if (!moveCompParentArr) return
 
     // Удалить перемещаемый компонент из родительского массива
     const updatedMoveCompParentArr = moveCompParentArr.filter(dComp => dComp.dCompId !== movedDComp.dCompId)
@@ -137,11 +136,10 @@ export function moveComponentToElement(
     // Сделать новый объект истории статьи без перемещаемого компонента
     let updatedDComps = makeImmutableCopy(dComps, moveCompParentArr, updatedMoveCompParentArr)
 
-    // Целевой элемент
+    // Целевой элемент в который будет поставлен перемещаемый компонент
     const targetDElem = this.getDataElemInDataCompArr(dComps, targetCompCoords.dataCompId, targetCompCoords.dataElemId)
     // Массив детей целевого элемента
     const targetDElemChildren = targetDElem.dCompElemChildren
-    if (!Array.isArray(targetDElemChildren)) return
 
     // Скопировать массив детей целевого элемента и поставить перемещаемый компонент
     const targetDElemChildrenCopy = [...targetDElemChildren, movedDComp]
@@ -171,12 +169,11 @@ export function moveItemToUpOrDown(
     const { dataCompId, dataElemId, tagType} = compCoords
 
     const dComp = this.getComponent(dComps, dataCompId)
-    if (dComp.dCompType === 'simpleTextComponent') return
 
     // Сюда будет присвоен обновлённый массив компонентов
     let updatedDComps: ArticleTypes.Components
 
-    if (tagType === 'rootElement') {
+    if (['rootElement', 'textComponent'].includes(tagType)) {
         const parentArr = this.getCompParentArray(dComps, dataCompId)
         const updatedParentArr = parentArr.slice()
 
@@ -197,7 +194,7 @@ export function moveItemToUpOrDown(
         // Поставить новый массив детей в объект истории статьи
         updatedDComps = makeImmutableCopy(dComps, parentArr, updatedParentArr)
     }
-    else if (tagType === 'element') {
+    else if (tagType === 'element' && dComp.dCompType === 'component') {
         // Данные выделенного элемента
         const dElem = this.getDElemInDComp(dComp, dataElemId)
 

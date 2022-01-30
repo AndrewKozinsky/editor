@@ -1,10 +1,10 @@
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
 import { removeFromLocalStorage } from 'utils/miscUtils'
+import articleActions from 'store/article/articleActions'
 
 
 /**
@@ -22,7 +22,7 @@ export async function saveArticle(
     if (!articleId) return
 
     // Set current history step to historyStepWhenWasSave to know what step the article was saved
-    store.dispatch( actions.article.setHistoryStepWhenArticleWasSaved() )
+    store.dispatch( articleActions.setHistoryStepWhenArticleWasSaved() )
 
     // Get current history item object
     const historyItem = this.getCurrentHistoryItem(historyArr, historyCurrentIdx)
@@ -34,7 +34,7 @@ export async function saveArticle(
 
 /** Функция очищающая редактируемую статью */
 export function clearArticle(this: typeof articleManager) {
-    store.dispatch(actions.article.clearArticle())
+    store.dispatch(articleActions.clearArticle())
 }
 
 /**

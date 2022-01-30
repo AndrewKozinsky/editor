@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import { MiscTypes } from 'types/miscTypes'
+import articleActions from 'store/article/articleActions'
 
 /**
  * Hook gets links to IFrame window, document, head and body to Store when IFrame rendered
@@ -19,7 +19,7 @@ export default function useSetIFrameElemsLinks(iFrameRef: MiscTypes.ReactRef) {
 
         // Set links to Store
         store.dispatch(
-            actions.article.setLinks( $window, $document, $head, $body )
+            articleActions.setLinks( $window, $document, $head, $body )
         )
     }, [iFrameRef.current])
 }

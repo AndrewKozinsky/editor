@@ -26,7 +26,7 @@ export default function useChangeFlashRectanglesPosition() {
         observeReactCoordsProps($links, 'moveselect', $moveSelectRect)
 
         // Set the flag that Observers were set.
-        // setObserversHaveBeenSet(true)
+        setObserversHaveBeenSet(true)
     }, [$links, observersHaveBeenSet])
 }
 

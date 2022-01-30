@@ -97,7 +97,7 @@ const gridTemplate: TempCompTypes.Content = {
         {
             elemId: 'paragraph',
             elemName: 'Paragraph',
-            elemTextInside: true
+            addTextComponent: true
         }
     ]
 }*/
@@ -154,7 +154,7 @@ const gridTemplate: TempCompTypes.Content = {
                     {elemTagValueId: 5, elemTagValueName: 'main'},
                 ]
             },
-            elemTextInside: true
+            addTextComponent: true
         },
         {
             elemId: 'mediterranean',
@@ -214,7 +214,7 @@ const burgerTemplate2: TempCompTypes.Content = {
                     {elemTagValueId: '5', elemTagValueName: 'main'},
                 ]
             },
-            elemTextInside: true
+            addTextComponent: true
         },
         {
             elemId: 'mediterranean',
@@ -227,13 +227,12 @@ const burgerTemplate2: TempCompTypes.Content = {
         {
             elemId: 'bottom-inner',
             elemName: 'Нижняя внутренняя часть',
-            elemTextInside: true
+            addTextComponent: true
         },
     ]
 }
 
 /*const owl: TempCompTypes.Content = {
-    name: 'Owl',
     html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" width="150" data-em-id="image" />',
     elems: [
         {

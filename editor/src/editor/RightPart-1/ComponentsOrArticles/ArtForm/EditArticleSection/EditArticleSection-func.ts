@@ -4,6 +4,7 @@ import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import useGetArticleSelectors from 'store/article/articleSelectors'
+import articleActions from 'store/article/articleActions'
 
 
 /** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */
@@ -31,7 +32,7 @@ export function useGetEditArticleFn() {
     const { currentTemplateId } = useGetSitesSelectors().siteTemplatesSection
 
     return useCallback(function () {
-        store.dispatch(actions.article.setArticleId(currentArtItemId as number))
+        store.dispatch(articleActions.setArticleId(currentArtItemId as number))
     }, [currentSiteId, currentTemplateId, currentArtItemId])
 }
 

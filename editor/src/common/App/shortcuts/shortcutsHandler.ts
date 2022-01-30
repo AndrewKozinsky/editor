@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
-import { undoRedoArticleHistory } from 'editor/RightPart-2/ArticleFrame/keydownHandler/hotKeys'
+import {
+    undoRedoArticleHistory
+} from 'editor/RightPart-2/ArticleFrame/keydownHandler/hotKeys'
 import {
     checkPressedKeys,
     getPressedKeys,

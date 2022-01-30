@@ -15,7 +15,7 @@ export function deleteItem(
     compCoords: StoreArticleTypes.FlashedElem,
 ): StoreArticleTypes.CreateNewHistoryItem {
     // Если выделен компонент или корневой элемент,
-    if (compCoords.tagType === 'rootElement') {
+    if (['rootElement', 'textComponent'].includes(compCoords.tagType)) {
         // то удалить весь компонент
         return this.deleteComponent(article, compCoords.dataCompId)
     }

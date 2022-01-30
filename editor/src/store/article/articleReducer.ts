@@ -1,7 +1,7 @@
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
-import TempCompFilesTreeType from 'editor/LeftPart-2/TempCompFilesTree/types'
+import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import articleManager from 'articleManager/articleManager'
 import StoreArticleTypes from './articleTypes'
 
@@ -21,7 +21,7 @@ export type ArticleReducerType = {
     siteTemplateDownloadHash: number
 
     // Components template folders
-    tempCompsFolders: null | TempCompFilesTreeType.Items
+    tempCompsFolders: null | TempCompsTreeType.Items
     tempCompsFoldersVersionHash: number
     // Components templates array
     tempComps: null | TempCompTypes.TempComps
@@ -303,7 +303,7 @@ function setFlashedElement(state: ArticleReducerType, action: StoreArticleTypes.
     }
 }
 
-// Редьюсер ставит новую версию статьи в массив истории
+/** Редьюсер ставит новую версию статьи в массив истории */
 function createAndSetHistoryItem(
     state: ArticleReducerType, action: StoreArticleTypes.CreateAndSetHistoryItemAction
 ): ArticleReducerType {
@@ -374,12 +374,12 @@ function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: St
 }
 
 /* Функция очищает статью от данных */
-function clearArticle(state: ArticleReducerType): ArticleReducerType {
+/*function clearArticle(state: ArticleReducerType): ArticleReducerType {
     return Object.assign(
         initialState,
         { $links: state.$links } // Do not touch the document's links
     )
-}
+}*/
 
 
 // Редьюсер Store.article
@@ -416,8 +416,8 @@ export default function articleReducer(
             return makeHistoryStep(state, action)
         case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
             return setHistoryStepWhenArticleWasSaved(state, action)
-        case StoreArticleTypes.CLEAR_ARTICLE:
-            return clearArticle(state)
+        // case StoreArticleTypes.CLEAR_ARTICLE:
+        //     return clearArticle(state)
         default:
             // @ts-ignore
             const x: never = null

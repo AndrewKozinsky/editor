@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
@@ -46,7 +46,7 @@ export function useGetCloneHandler(deep: 1 | 2 | 3) {
             tempComps, historyItem.article, selectedElem, deep
         )
 
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }, [historyItem])

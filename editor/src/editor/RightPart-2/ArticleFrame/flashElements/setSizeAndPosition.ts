@@ -40,7 +40,7 @@ export default function setSizeAndPosition(
 
 /**
  * The function finds element by dataCompId, dataElemId and type
- * @param {HTMLBodyElement} $body — <body>
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
  * @param {String} type — тип подсветки: hover | select | movehover | moveselect
  * @param {Object} rectCoords — id данных элемента и компонента над которым стоит курсор
  */
@@ -60,7 +60,7 @@ function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectT
         }
     }
     else if (type === 'movehover' || type === 'moveselect') {
-        queryStr = `[data-em-d-comp-id="${rectCoords.dataCompId}"]`
+        queryStr = `[data-em-d-gen-comp-id="${rectCoords.dataCompId}"]`
     }
 
     // Return a founded element

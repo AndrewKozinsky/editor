@@ -14,7 +14,10 @@ namespace ArticleTypes {
     }
 
     // Массив, в котором находятся компоненты
-    export type Components = Component[]
+    export type Components = MixComponent[]
+
+    // Обычный или текстовый компонент
+    export type MixComponent = Component | SimpleTextComponent
 
     // =================================================================================================================
 
@@ -68,10 +71,7 @@ namespace ArticleTypes {
     //
     export type ComponentElemAttribValue = TempCompTypes.ElemAttrValueId[] | TempCompTypes.ElemAttrValueId // ['4', '6'] OR 'banner'
 
-    export type ElemChildren = Component[] | SimpleTextComponent
-
-    // Обычный или текстовый компонент
-    export type MixComponent = Component | SimpleTextComponent
+    export type ElemChildren = MixComponent[]
 
 
     // =================================================================================================================

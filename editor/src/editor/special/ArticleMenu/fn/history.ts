@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 /**
  * The hook checks if I can make undo or redo history step
@@ -30,6 +30,6 @@ export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
     const dispatch = useDispatch()
 
     return useCallback(function (){
-        dispatch(actions.article.makeHistoryStep(stepType))
+        dispatch(articleActions.makeHistoryStep(stepType))
     }, [])
 }

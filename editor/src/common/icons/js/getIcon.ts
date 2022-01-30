@@ -17,6 +17,7 @@ import BtnSignFolder from '../icons/btnSignFolder'
 import BtnSignTrash from '../icons/btnSignTrash'
 import BtnSignAdd from '../icons/btnSignAdd'
 import BtnSignCode from '../icons/btnSignCode'
+import BtnSignText from '../icons/btnSignText'
 // import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
 import BtnSignExit from '../icons/btnSignExit'
@@ -94,6 +95,7 @@ export function getIcon(type: string): ReactNode {
         btnSignFolder: BtnSignFolder,
         btnSignTrash: BtnSignTrash,
         btnSignCode: BtnSignCode,
+        btnSignText: BtnSignText,
         btnSignAdd: BtnSignAdd,
         // btnSignJson: BtnSignJson,
         btnSignClose: BtnSignClose,

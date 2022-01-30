@@ -25,7 +25,7 @@
 
         // Если текстовый компонент не выделен, то обнулять focusTextProof
         if (selectedElem.tagType !== 'textComponent') {
-            store.dispatch( actions.article.updateFocusTextProof({
+            store.dispatch( articleActions.updateFocusTextProof({
                 cursorStart: null,
                 cursorEnd: null
             }))
@@ -38,7 +38,7 @@
         if (dTextComp.dCompType !== 'simpleTextComponent') return
 
         // Обновить текст в сведениях о выделенном текстовом компоненте
-        store.dispatch( actions.article.updateFocusTextProof({
+        store.dispatch( articleActions.updateFocusTextProof({
             text: dTextComp.text
         }))
     }, [flashedElems, oldTextCompId])
@@ -74,7 +74,7 @@
         const { anchorOffset, focusOffset } = selection
 
         // Обновить сведения о выделенном текстовом компоненте
-        store.dispatch( actions.article.updateFocusTextProof({
+        store.dispatch( articleActions.updateFocusTextProof({
             cursorStart: anchorOffset,
             cursorEnd: focusOffset
         }))
@@ -123,7 +123,7 @@ function updateFocusPositionAfterKeyUp(e: KeyboardEvent) {
     if (newCursorEnd > dTextComp.text.length) newCursorEnd = dTextComp.text.length
 
     // Обновить сведения о выделенном текстовом компоненте
-    store.dispatch( actions.article.updateFocusTextProof({
+    store.dispatch( articleActions.updateFocusTextProof({
         cursorStart: newCursorStart,
         cursorEnd: newCursorEnd
     }))

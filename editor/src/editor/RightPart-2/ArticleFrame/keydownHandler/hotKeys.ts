@@ -1,12 +1,10 @@
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
 import {
     checkPressedKeys,
     PressedKeysObj
 } from 'utils/getPressedKeys'
-import { getCurrentHistoryItem } from '../../../../articleManager/methods/gettingResources'
-import StoreArticleTypes from '../../../../store/article/articleTypes'
+import articleActions from 'store/article/articleActions'
 
 
 /**
@@ -20,13 +18,13 @@ export function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
         const canMakeStep = articleManager.canMakeHistoryStep('undo', history, historyCurrentIdx)
         if (!canMakeStep) return
 
-        store.dispatch( actions.article.makeHistoryStep('undo') )
+        store.dispatch( articleActions.makeHistoryStep('undo') )
     }
     else if (checkPressedKeys(pressedKeys, ['cmd', 'shift', 'z'])) {
         const canMakeStep = articleManager.canMakeHistoryStep('redo', history, historyCurrentIdx)
         if (!canMakeStep) return
 
-        store.dispatch( actions.article.makeHistoryStep('redo') )
+        store.dispatch( articleActions.makeHistoryStep('redo') )
     }
 }
 

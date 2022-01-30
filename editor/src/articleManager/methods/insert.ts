@@ -3,6 +3,7 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from 'articleManager/articleManager'
 import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
+import { CreateNewCompResultType } from './create'
 
 
 /**
@@ -15,26 +16,31 @@ import makeImmutableObj from 'libs/makeImmutableCopy/makeImmutableCopy'
 export function createCompAndSetInElem(
     this: typeof articleManager,
     article: ArticleTypes.Article,
-    tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.Id,
+    tempCompArr: null | TempCompTypes.TempComps,
+    tempCompId: 'text' | TempCompTypes.Id,
     targetCompCoords: StoreArticleTypes.FlashedElem,
 ): StoreArticleTypes.CreateNewHistoryItem {
 
-    // Create a new component
-    const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    // Создание нового компонента
+    let newCompResult: CreateNewCompResultType
+    if (tempCompId === 'text') {
+        newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
+    }
+    else {
+        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    }
+
     // Get element which I am going to set the new component
     const targetElemData = this.getDataElemInDataCompArr(article.dComps, targetCompCoords.dataCompId, targetCompCoords.dataElemId)
 
     // Create a new components array
     let updatedComponents: ArticleTypes.Components
 
-    // If the target element has a children array, put a new component to it
-    if (Array.isArray(targetElemData.dCompElemChildren)) {
-        // Set the new component into element children
-        const elemChildrenArrCopy = [...targetElemData.dCompElemChildren, newCompResult.compData]
-        // Get updates components array
-        updatedComponents = makeImmutableObj(article.dComps, targetElemData.dCompElemChildren, elemChildrenArrCopy)
-    }
+    // Set the new component into element children
+    const elemChildrenArrCopy = [...targetElemData.dCompElemChildren, newCompResult.compData]
+
+    // Get updates components array
+    updatedComponents = makeImmutableObj(article.dComps, targetElemData.dCompElemChildren, elemChildrenArrCopy)
 
     return {
         components: updatedComponents,
@@ -48,20 +54,27 @@ export function createCompAndSetInElem(
  * @param {String} place — a place where to put a created component: before or after
  * @param {Object} article — article object
  * @param {Array} tempCompArr — components templates array
- * @param {String} tempCompId — component template id
- * @param {String} targetDataCompId — a target data component id relative with the a new component will be placed
+ * @param {String} tempCompId — id шаблона компонента или text если хотят создать текстовый компонент
+ * @param {String} targetDataCompId — a target data component id relative with the new component will be placed
  */
 export function createCompAndSetItNearComp(
     this: typeof articleManager,
     place: 'before' | 'after',
     article: ArticleTypes.Article,
-    tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.Id,
+    tempCompArr: null | TempCompTypes.TempComps,
+    tempCompId: 'text' | TempCompTypes.Id,
     targetDataCompId: ArticleTypes.Id
 ): StoreArticleTypes.CreateNewHistoryItem {
 
-    // Create a new component
-    const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    // Создание нового компонента
+    let newCompResult: CreateNewCompResultType
+    if (tempCompId === 'text') {
+        newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
+    }
+    else {
+        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    }
+
     const parentArray = this.getCompParentArray(article.dComps, targetDataCompId)
     if (!Array.isArray(parentArray)) return
 
@@ -98,18 +111,24 @@ export function createCompAndSetItNearComp(
  */
 export function createCompAndSetInRootOfArticle(
     this: typeof articleManager,
-    place: 'begin' | 'end',
+    place: 'before' | 'after',
     article: ArticleTypes.Article,
-    tempCompArr: TempCompTypes.TempComps,
-    tempCompId: TempCompTypes.Id,
+    tempCompArr: null | TempCompTypes.TempComps,
+    tempCompId: 'text' | TempCompTypes.Id,
 ): StoreArticleTypes.CreateNewHistoryItem {
     // Create a new component
-    const newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    let newCompResult: CreateNewCompResultType
+    if (tempCompId === 'text') {
+        newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
+    }
+    else {
+        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+    }
 
-    // Put the new component in the beginning OR to the end of components array
+    // Put the new component in the beginning OR to the end of the components array
     const artCompsArr = [...article.dComps]
-    if (place === 'begin') artCompsArr.unshift(newCompResult.compData)
-    else if (place === 'end') artCompsArr.push(newCompResult.compData)
+    if (place === 'before') artCompsArr.unshift(newCompResult.compData)
+    else if (place === 'after') artCompsArr.push(newCompResult.compData)
 
     return {
         components: artCompsArr,

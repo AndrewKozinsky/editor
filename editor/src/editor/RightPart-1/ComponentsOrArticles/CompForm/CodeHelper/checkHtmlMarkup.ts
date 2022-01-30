@@ -77,7 +77,7 @@ function checkUniqueElemsByDataEmId($elems: HTMLCollection, emIdArr: string[] = 
 
 /**
  * Функция проверяет чтобы у html-элементах были соответствия с данными и наоборот
- * @param {HTMLElement} $body — ссылка на <body> с разметкой шаблона
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
  * @param {Object} templateObj — шаблон компонента
  */
 function matchHtmlElemsAndDataElems($body: HTMLElement, templateObj: TempCompTypes.Content): string[] {
@@ -108,8 +108,8 @@ function matchHtmlElemsAndDataElems($body: HTMLElement, templateObj: TempCompTyp
         }
 
         // Бросить ошибку если в шаблоне указано, что элемент принимает текстовый компонент, но там есть дочерние элементы
-        if (tElem.elemTextInside && $elem.children?.length) {
-            errors.push(`Элементу с идентификатором ${htmlElemId} нельзя ставить свойство elemTextInside так как в нём присутствуют другие элементы.`)
+        if (tElem.addTextComponent && $elem.children?.length) {
+            errors.push(`Элементу с идентификатором ${htmlElemId} нельзя ставить свойство addTextComponent так как в нём присутствуют другие элементы.`)
         }
     }
 

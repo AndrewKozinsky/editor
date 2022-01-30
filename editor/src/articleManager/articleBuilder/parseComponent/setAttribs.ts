@@ -1,7 +1,7 @@
 import { ConsistObj } from './getConsistObjArr'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { HTMLObjArrType } from './htmlStringToObject'
+import { HTMLObjArrType } from '../htmlStringToObject'
 
 /**
  * Set the assigned attributes to element

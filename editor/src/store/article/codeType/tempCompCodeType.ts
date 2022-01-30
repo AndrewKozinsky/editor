@@ -35,7 +35,7 @@ namespace TempCompTypes {
         // Можно ли дублировать данный элемент (true по умолчанию)
         elemCanDuplicate?: boolean // false
         // Нужно ли в элемент добавить пустой текстовый компонент для удобного набора
-        elemTextInside?: boolean // true
+        addTextComponent?: boolean // true
     }
 
     export type ElemId = string // 'banner'

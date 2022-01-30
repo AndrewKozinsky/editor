@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
 import { convertToCamelCase } from 'utils/stringUtils'
-import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
+import { HTMLObjArrType } from './htmlStringToObject'
 
 /**
  * Функция получает массив со структурой HTML и преобразует его в JSX.

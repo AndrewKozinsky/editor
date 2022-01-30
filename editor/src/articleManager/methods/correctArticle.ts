@@ -3,7 +3,8 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../articleManager'
 
 /**
- * Функция проходится по всем компонентам в данных статьи и удаляет те компоненты, для которых нет шаблонов
+ * Функция проходится по всем компонентам в данных статьи и правит данные.
+ * Например, удаляет те компоненты, для которых нет шаблонов
  * @param {Object} article — данные статьи
  * @param {Array} dComps — массив данных компонентов
  * @param {Array} tComps — массив шаблонов компонентов
@@ -136,12 +137,13 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
     // Ничего не делать если в данных нет информации об атрибутах
     if (!dElem.dCompElemAttrs) return
 
-    // Если в данных сказано про атрибуты, но в шаблоне про это нет, то удалить данные атрибутов
+    // Если в шаблоне ничего не сказано про атрибуты, но удалить данные атрибутов
     if (!tElem.elemAttrs || !tElem.elemAttrs.length) {
         delete dElem.dCompElemAttrs
         return
     }
 
+    // Массив атрибутов из шаблона
     const tAttrs = tElem.elemAttrs
 
     for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
@@ -160,6 +162,15 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
             continue
         }
 
+        // Если в шаблоне нет свойства tAttr.elemAttrValues, то значит атрибут принимает точное значение
+        // И если в данных в качестве значения находится массив идентификаторов, то его нужно удалить
+        if (!tAttr.elemAttrValues && Array.isArray(dAttrValues)) {
+            delete dAttr.dCompElemAttrValue
+        }
+
+        // Ничего не делать если в шаблоне не указан массив значений
+        if (!tAttr.elemAttrValues) continue
+
         // Если в tAttr в качестве значений указан массив, то и в значении dAttr тоже должен быть массив
         if (Array.isArray(tAttr.elemAttrValues) && !Array.isArray(dAttrValues)) {
             dElem.dCompElemAttrs.splice(i, 1)
@@ -169,6 +180,7 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
         // Так как и в tAttr и в dAttr в качестве значений указан массив, то проверить,
         // что значения в массиве в dAttr имеются в массиве значений tAttr
         for (let k = 0; k < dAttrValues.length; k++) {
+            if (!tAttr.elemAttrValues) debugger
             const tAttrValue = tAttr.elemAttrValues.find(tAttrValue => {
                 return tAttrValue.elemAttrValueId === dAttrValues[k]
             })
@@ -188,21 +200,16 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
  */
 function setEmptyTextComponent(article: ArticleTypes.Article, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
     // Поставить пустой текстовый компонент в массив детей если в шаблоне указано свойство elemTextInside, а текстового компонента нет
-    if (tElem.elemTextInside) {
-        if ([undefined, null].includes(dElem.dCompElemChildren) || Array.isArray(dElem.dCompElemChildren)) {
-            const newEmptyTextComp = articleManager.createSimpleTextComponent(article.dMeta.dMaxCompId + 1)
+    if (tElem.addTextComponent) {
+        // Найти текстовый компонент в массиве
+        const textCompInChildrenArr = dElem.dCompElemChildren.find(dComp => dComp.dCompType === 'simpleTextComponent')
 
-            dElem.dCompElemChildren = newEmptyTextComp
+        if (!textCompInChildrenArr) {
+            const newEmptyTextComp = articleManager.createSimpleTextComponent('',article.dMeta.dMaxCompId + 1)
+            dElem.dCompElemChildren.unshift(newEmptyTextComp.compData)
+
             // Поставить значение максимального id компонента
-            article.dMeta.dMaxCompId = newEmptyTextComp.dCompId
-        }
-    }
-    // Если текст не предусмотрен...
-    else {
-        // Если у dCompElemChildren нет значения или это не массив (тогда там находится текстовый компонент),
-        // то поставить пустой массив
-        if (!dElem.dCompElemChildren || !Array.isArray(dElem.dCompElemChildren)) {
-            dElem.dCompElemChildren = []
+            article.dMeta.dMaxCompId = newEmptyTextComp.maxCompId
         }
     }
 }

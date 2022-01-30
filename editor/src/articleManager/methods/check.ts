@@ -33,7 +33,7 @@ export function canMoveCompMoveToLeftOrRight(
  * Для кнопки Вставка перемещаемого компонента в другой элемент используется функция
  * @param {Array} tComps — components templates array
  * @param {Array} dComps — array of data components
- * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
+ * @param {Object} targetCompCoords — координаты целевого компоненте в который будет перемещаться компонент
  * @param {Number} moveCompId — id данных перемещаемого компонента
  */
 export function canComponentPutInElement(
@@ -44,11 +44,11 @@ export function canComponentPutInElement(
     moveCompId: ArticleTypes.Id
 ) {
     // Если не выделен целевой элемент и перемещаемый компонент, то нельзя вставить перемещаемый компонент
-    if (!targetCompCoords.dataElemId || !moveCompId) return false
+    if (!targetCompCoords.dataElemId || moveCompId === null) return false
 
     // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
     const movedDComp = this.getComponent(dComps, moveCompId)
-    if (movedDComp.dCompType === 'component') {
+    if (movedDComp && movedDComp.dCompType === 'component') {
         // Найти выделенный элемент внутри перемещаемого
         if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
             return false
@@ -61,21 +61,18 @@ export function canComponentPutInElement(
     )
     if (!targetTElem) return false
 
-    // Перемещаемый компонент нельзя поместить в элемент, который может содержать только текстовый компонент
-    if (targetTElem.elemTextInside) return false
-
-    // Если html-элемент имеет вложенные html-элементы, то туда нельзя вставить перемещаемый компонент
-    const targetDComp = this.getComponent(dComps, targetCompCoords.dataCompId) as ArticleTypes.Component
+    // Получение данных щелевого элемента
+    const targetDComp = this.getComponent(dComps, targetCompCoords.dataCompId)
+    if (targetDComp.dCompType === 'simpleTextComponent') return false
     const targetDElem = this.getDElemInDComp(targetDComp, targetCompCoords.dataElemId)
 
-    if (targetDComp.dCompType === 'component') {
-        const has$ElemNested$Elements = this.has$ElemNested$Elements(tComps, targetDComp.tCompId, targetTElem.elemId)
-        if (has$ElemNested$Elements) return false
-    }
+    // Если html-элемент имеет вложенные html-элементы, то туда нельзя вставить перемещаемый компонент
+    const has$ElemNested$Elements = this.has$ElemNested$Elements(tComps, targetDComp.tCompId, targetTElem.elemId)
+    if (has$ElemNested$Elements) return false
 
     // Если целевой элемент является одиночным тегом (<img />, например), то туда нельзя вставить перемещаемый компонент
     const $elem = this.get$elem(tComps, targetDComp.tCompId, targetDElem.tCompElemId)
-    const elemTagName = $elem.tagName.toLowerCase()
+    const elemTagName = $elem?.tagName?.toLowerCase()
     if (['img', 'br', 'hr', 'meta', 'input', 'option'].includes(elemTagName)) {
         return false
     }
@@ -157,15 +154,14 @@ export function canDeleteElem(
     dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
 ) {
-    // Если выделен компонент или корневой элемент, то можно удалить весь компонент
-    if (targetCompCoords.tagType === 'rootElement') {
+    // Если выделен текствоый компонент или корневой элемент, то можно удалить весь компонент
+    if (['rootElement', 'textComponent'].includes(targetCompCoords.tagType)) {
         return true
     }
 
     // Если выделен элемент...
     if (targetCompCoords.tagType === 'element') {
-        const dComp = this.getComponent(dComps, targetCompCoords.dataCompId)
-        if (dComp.dCompType === 'simpleTextComponent') return false
+        const dComp = this.getComponent(dComps, targetCompCoords.dataCompId) as ArticleTypes.Component
 
         const dElem = this.getDElemInDComp(
             dComp, targetCompCoords.dataElemId
@@ -201,7 +197,7 @@ export function canMoveItemToUpOrDown(
     let idx: number
     let parentArrLength: number
 
-    if (tagType === 'rootElement') {
+    if (['rootElement', 'textComponent'].includes(tagType)) {
         const parentArr = this.getCompParentArray(dComps, dataCompId)
 
         // Индекс положения компонента и длина массива
@@ -237,7 +233,7 @@ export function canMoveItemToUpOrDown(
  * @param {Object} compCoords — координаты выделенного компонента/элемента
  */
 export function canClone(this: typeof articleManager, compCoords: StoreArticleTypes.FlashedElem) {
-    return !!compCoords.tagType
+    return !!compCoords.dataCompId
 }
 
 /**
@@ -311,16 +307,9 @@ export function isParentElemHidden(
             // Если есть вложенные компоненты...
             if (dItem.dCompElemChildren) {
                 // Если там массив компонентов
-                if (Array.isArray(dItem.dCompElemChildren)) {
-                    const result = this.isParentElemHidden(dItem.dCompElemChildren, targetDComp, targetDElem, thisParentItemHidden, null)
-                    if (result) return true
-                }
-                // Если там текстовый компонент
-                else if (dItem.dCompElemChildren.dCompType === 'simpleTextComponent') {
-                    if (dItem.dCompElemChildren.dCompId === targetDComp.dCompId && !targetDElem) {
-                        if (thisParentItemHidden) return true
-                    }
-                }
+
+                const result = this.isParentElemHidden(dItem.dCompElemChildren, targetDComp, targetDElem, thisParentItemHidden, null)
+                if (result) return true
             }
         }
     }

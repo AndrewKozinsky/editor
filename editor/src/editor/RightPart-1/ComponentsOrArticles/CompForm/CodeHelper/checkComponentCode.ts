@@ -52,13 +52,13 @@ function checkElems(elems: TempCompTypes.Elems): string[] {
         errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
         errorsArr.push(...checkProp(elem.elemHidden, 'elemHidden', 'boolean', false))
         errorsArr.push(...checkProp(elem.elemCanDuplicate, 'elemCanDuplicate', 'boolean', false))
-        errorsArr.push(...checkProp(elem.elemTextInside, 'elemTextInside', 'boolean', false))
+        errorsArr.push(...checkProp(elem.addTextComponent, 'addTextComponent', 'boolean', false))
 
         // Проверка, что в объекте elem нет лишних полей
         errorsArr.push(
             ...checkForExtraProps(
                 elem,
-                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside']
+                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'addTextComponent']
             )
         )
     })
@@ -187,7 +187,7 @@ export const componentCodeExample = `{
             },
             elemHidden: true,
             elemCanDuplicate: false,
-            elemTextInside: true
+            addTextComponent: true
         }
     ]
 }`

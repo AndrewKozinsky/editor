@@ -1,6 +1,4 @@
 const JSON5 = require('json5')
-import articleManager from '../../articleManager/articleManager'
-import TempCompFilesTreeType from '../../editor/LeftPart-2/TempCompFilesTree/types'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -15,6 +13,7 @@ import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderR
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
+import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
 
 
 const articleActions = {
@@ -161,7 +160,7 @@ const articleActions = {
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
      */
-    setTempCompFolders( folders: null | TempCompFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+    setTempCompFolders( folders: null | TempCompsTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
             payload: folders
@@ -232,37 +231,37 @@ const articleActions = {
                 // Если навели на элемент, но он уже выделен...
                 if (currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'hover', tagType, null, null
                     ))
                 }
                 // В противном случае выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'hover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого компонента для перемещения
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'moveHover', null, null, null
                 ))
             }
             // Если элемент выделили...
             else if (actionType === 'select') {
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'select', tagType, dataCompId, dataElemId
                 ))
 
                 if (currentArticle.hoveredElem.dataCompId === dataCompId && !dataElemId) {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'hover', null, null, null
                     ))
                 }
 
                 // Если выделили компонент выделенный для перемещения, то очистить выделение для перемещения
                 if (currentArticle.moveSelectedComp.dataCompId === dataCompId && !dataElemId) {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveSelect', null, null, null
                     ))
                 }
@@ -272,25 +271,25 @@ const articleActions = {
                 // Если навели на элемент, но он уже выделен...
                 if (currentArticle.moveSelectedComp.dataCompId === dataCompId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, null, null
                     ))
                 }
                 // Выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого элемента
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'hover', tagType, null, null
                 ))
             }
             // Если компонент выделили для перемещения...
             else if (actionType === 'moveSelect') {
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'moveSelect', tagType, dataCompId, dataElemId
                 ))
 
@@ -299,7 +298,7 @@ const articleActions = {
                     currentArticle.selectedElem.dataCompId === dataCompId &&
                     currentArticle.selectedElem.dataElemId === dataElemId
                 ) {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'select', null, null, null
                     ))
                 }
@@ -307,7 +306,7 @@ const articleActions = {
                 // Если на этом элементе есть рамка наведения...
                 if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
                     // Спрятать рамку вокруг элемента наведённого для перемещения
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, null, null
                     ))
                 }

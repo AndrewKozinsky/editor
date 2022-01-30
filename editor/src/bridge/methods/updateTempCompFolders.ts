@@ -1,6 +1,6 @@
 import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import articleActions from 'store/article/articleActions'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 
 /**
@@ -17,7 +17,7 @@ export function updateTempCompFolders() {
 
     if (editedArtSiteId === currentSiteId) {
         // ...то изменить хеш списка папок компонентов чтобы хук загрузил новый список папок
-        store.dispatch(actions.article.changeTempCompsFoldersVersionHash())
+        store.dispatch(articleActions.changeTempCompsFoldersVersionHash())
     }
 }
 
@@ -35,7 +35,7 @@ export function updateTempComps() {
 
     if (editedArtSiteId === currentSiteId) {
         // ...то изменить хеш списка папок компонентов чтобы хук загрузил новый список папок
-        store.dispatch(actions.article.changeTempCompsVersionHash())
+        store.dispatch(articleActions.changeTempCompsVersionHash())
     }
 }
 
@@ -68,6 +68,6 @@ export function updateSiteTemp(newSiteTemplateId: string) {
     // Если изменили id шаблона сайта через отправленную форму и он отличается от того, который указан в редактируемой статье...
     if (editArtId === artIdInSiteSection && editArtSiteTempId !== siteTempIdInSiteSection) {
         // ... то обновить версию шаблона сайта чтобы хук скачал новую версию шаблона и поставил в <head> и <body>
-        store.dispatch(actions.article.changeSiteTemplateId(siteTempIdInSiteSection))
+        store.dispatch(articleActions.changeSiteTemplateId(siteTempIdInSiteSection))
     }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import './EditorMain.scss'
 

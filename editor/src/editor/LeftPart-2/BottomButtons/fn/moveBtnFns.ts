@@ -2,8 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import actions from 'store/rootAction'
 import StoreArticleTypes from 'store/article/articleTypes'
+import articleActions from 'store/article/articleActions'
 
 /**
  * Хук возвращает булево значение заблокирована ли одна из кнопок перемещения компонента
@@ -82,7 +82,7 @@ export function useGetMoveHandler(direction: 'inside' | 'left' | 'right') {
         }
 
 
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }, [historyItem])

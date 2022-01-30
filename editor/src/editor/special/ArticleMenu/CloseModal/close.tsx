@@ -5,6 +5,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetShowModal from 'utils/hooksUtils'
 import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
+import articleActions from 'store/article/articleActions'
 
 /** Обработчик кнопки закрытия редактируемой статьи */
 export function useCloseArticle() {
@@ -16,7 +17,7 @@ export function useCloseArticle() {
 
         if (isArticleSaved) {
             // Clear an article data in Store
-            store.dispatch( actions.article.clearArticle() )
+            store.dispatch( articleActions.clearArticle() )
             store.dispatch( actions.settings.setMainTab(0) )
         }
         else {

@@ -1,5 +1,5 @@
-import { makeCN } from 'src/utils/stringUtils'
-import TempCompFilesTreeType from '../types'
+import { makeCN } from 'utils/stringUtils'
+import TempCompsTreeType from '../types'
 import './Item.scss'
 
 
@@ -7,7 +7,7 @@ import './Item.scss'
 const CN = 'temp-comp-ft-item'
 
 /** Функция возвращающая классы для элементов */
-export default function makeClasses(itemData?: TempCompFilesTreeType.Item) {
+export default function makeClasses(itemData: TempCompsTreeType.Item, btnInsideAllowed?: boolean) {
     return {
         root: CN,
         inner: CN + '__inner',
@@ -15,10 +15,10 @@ export default function makeClasses(itemData?: TempCompFilesTreeType.Item) {
         folderSign: CN + '__folder-sign',
         circles: CN + '__circles',
         afterCircle: getAfterCircleClasses(itemData),
-        insideCircle: getInsideCircleClasses(itemData),
+        insideCircle: getInsideCircleClasses(itemData, btnInsideAllowed),
         rightPart: CN + '__right-part',
         afterBtn: getAfterBtnClasses(itemData),
-        insideBtn: getInsideBtnClasses(itemData),
+        insideBtn: getInsideBtnClasses(itemData, btnInsideAllowed),
     }
 }
 
@@ -28,7 +28,7 @@ export default function makeClasses(itemData?: TempCompFilesTreeType.Item) {
  * Если передан файл, то возвращает классы для невидимого элемента.
  * @param {Object} itemData — данные папки или файла
  */
-export function getTriangleBtnClasses(itemData?: TempCompFilesTreeType.Item): string {
+export function getTriangleBtnClasses(itemData?: TempCompsTreeType.Item): string {
     if (!itemData) return ''
 
     if (itemData.type === 'file') {
@@ -54,48 +54,41 @@ export function getTriangleBtnClasses(itemData?: TempCompFilesTreeType.Item): st
     }
 }
 
-// TODO Что делает эта функция?
-function getAfterCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
+function getAfterCircleClasses(itemData?: TempCompsTreeType.Item): string {
     if (!itemData || itemData.type === 'folder') return ''
 
-    let afterClasses = [CN + `__circle`]
-    if (itemData.afterButtonAllowed) {
-        afterClasses.push(CN + `__circle--visible`)
-    }
+    let afterClasses = [
+        CN + `__circle`,
+        CN + `__circle--visible`
+    ]
 
     return makeCN(afterClasses)
 }
 
-// TODO Что делает эта функция?
-function getInsideCircleClasses(itemData?: TempCompFilesTreeType.Item): string {
+function getInsideCircleClasses(itemData: TempCompsTreeType.Item, btnInsideAllowed?: boolean): string {
     if (!itemData || itemData.type === 'folder') return ''
 
     let insideClasses = [CN + `__circle`]
-    if (itemData.insideButtonAllowed) {
+    if (btnInsideAllowed) {
         insideClasses.push(CN + `__circle--visible`)
     }
 
     return makeCN(insideClasses)
 }
 
-// TODO Что делает эта функция?
-function getAfterBtnClasses(itemData?: TempCompFilesTreeType.Item) {
+function getAfterBtnClasses(itemData?: TempCompsTreeType.Item) {
     if (!itemData || itemData.type === 'folder') return ''
 
     let classes = [CN + `__btn`, CN + `__right-btn`]
-    if (!itemData.afterButtonAllowed) {
-        classes.push(CN + `__right-btn--invisible`)
-    }
 
     return makeCN(classes)
 }
 
-// TODO Что делает эта функция?
-function getInsideBtnClasses(itemData?: TempCompFilesTreeType.Item) {
+function getInsideBtnClasses(itemData: TempCompsTreeType.Item, btnInsideAllowed?: boolean) {
     if (!itemData || itemData.type === 'folder') return ''
 
     let classes = [CN + `__btn`, CN + `__right-btn`]
-    if (!itemData.insideButtonAllowed) {
+    if (!btnInsideAllowed) {
         classes.push(CN + `__right-btn--invisible`)
     }
 

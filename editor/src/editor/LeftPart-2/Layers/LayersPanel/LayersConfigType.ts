@@ -25,7 +25,7 @@ namespace LayersConfigType {
         hasSelectedChild?: boolean // Содержит выделенный слой
         hasMovedChild?: boolean // Содержит перемещаемый слой
 
-        collapseHandler?: () => void // Обработчик щелчка по кнопке сворачивания/разворачивания слоя
+        collapseHandler?: (e: any) => void // Обработчик щелчка по кнопке сворачивания/разворачивания слоя
         showHideHandler?: (e: any) => void // Обработчик щелчка по кнопке скрытия/раскрытия слоя
         onClickHandler?: (e: any) => void // Обработчик щелчка по слою
         onMouseEnterHandler?: (e: any) => void // Обработчик щелчка по слою

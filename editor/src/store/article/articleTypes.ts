@@ -1,5 +1,5 @@
 import TempCompTypes from './codeType/tempCompCodeType'
-import TempCompFilesTreeType from 'editor/LeftPart-2/TempCompFilesTree/types'
+import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import ArticleTypes from './codeType/articleCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 
@@ -26,14 +26,14 @@ namespace StoreArticleTypes {
     export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
-    export type TempComps = TempComp[]
+    // export type TempComps = TempComp[]
 
     // A component template
-    export type TempComp = {
+    /*export type TempComp = {
         id: TempCompTypes.Id
         name: string
         code: TempCompTypes.TempComp
-    }
+    }*/
 
     export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
@@ -121,7 +121,7 @@ namespace StoreArticleTypes {
     export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
     export type SetTempCompFoldersAction = {
         type: typeof SET_TEMP_COMP_FOLDERS
-        payload: TempCompFilesTreeType.Items
+        payload: TempCompsTreeType.Items
     }
 
     // Типы типа и тип экшена
@@ -169,18 +169,6 @@ namespace StoreArticleTypes {
         type: typeof CLEAR_ARTICLE
     }
 
-    // Обновление данных о тексте и положении курсора в выделенном текстовом компоненте
-    export type FocusTextProofObj = {
-        text?: null | string
-        cursorStart?: null | number
-        cursorEnd?: null | number
-    }
-    export const UPDATE_FOCUS_TEXT_PROOF = 'UPDATE_FOCUS_TEXT_PROOF'
-    export type UpdateFocusTextProofAction = {
-        type: typeof UPDATE_FOCUS_TEXT_PROOF,
-        payload: FocusTextProofObj
-    }
-
 
     export type ArticleAction =
         | SetLinksAction
@@ -198,7 +186,6 @@ namespace StoreArticleTypes {
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
         | ClearArticleAction
-        | UpdateFocusTextProofAction
 }
 
 export default StoreArticleTypes

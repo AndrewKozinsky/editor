@@ -5,9 +5,9 @@ import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
+import articleActions from 'store/article/articleActions'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения тега выделенного элемента
@@ -151,14 +151,14 @@ function getInputItems(tTagObj: TempCompTypes.ElemTags) {
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const {history, historyCurrentIdx} = store.getState().article
+        const { history, historyCurrentIdx } = store.getState().article
         const historyItem = history[historyCurrentIdx]
 
         const compsAndMaxCompId = articleManager.changeElemTag(
             historyItem.article, dCompId, dElemId, data.fieldValue[0]
         )
 
-        store.dispatch(actions.article.createAndSetHistoryItem(
+        store.dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }

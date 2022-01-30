@@ -1,9 +1,7 @@
 import React from 'react'
-import NameSection from 'editor/wrappers/NameSection/NameSection'
-import TempCompList from '../TempCompList/TempCompList'
+import TempCompList from '../TempComps/TempCompList/TempCompList'
 import BottomButtons from '../BottomButtons/BottomButtons'
 import Adjust from '../Adjust/AdjustPanel/AdjustPanel'
-import componentsPanelMsg from 'messages/componentsPanelMessages'
 import LayersPanel from '../Layers/LayersPanel/LayersPanel'
 import './LeftPart-2.scss'
 
@@ -22,10 +20,8 @@ export default function LeftPart2(props: LeftPart3PropType) {
 
     return (
         <div className={CN} style={style}>
-            <div className={`${CN}__top`} >
-                <NameSection header={componentsPanelMsg.header}>
-                    <TempCompList />
-                </NameSection>
+            <div className={`${CN}__top`}>
+                <TempCompList />
                 <Adjust />
                 <LayersPanel />
             </div>

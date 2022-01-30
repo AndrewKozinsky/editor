@@ -4,8 +4,6 @@ import useSetMouseHandlersForFlashRects from './flashElements/useSetMouseHandler
 import usePassFlashRectCoordsToIFrame from './flashElements/usePassFlashRectCoordsToIFrame'
 import useChangeFlashRectanglesPosition from './flashElements/useChangeFlashRectanglesPosition'
 import useResizeFlashRects from './flashElements/useResizeFlashRects'
-// import useSetKeyDownHandlerForText from './textComponents/useSetKeyDownHandlerForText'
-// import useChangeActiveTextComponent from './textComponents/useChangeActiveTextComponent'
 import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
@@ -16,9 +14,9 @@ import {
 } from './setArticleData/useSetSiteTemplate'
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
-import './ArticleFrame.scss'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
 import { useTrackSelectedElemForText } from './textCompsTracking/useTrackSelectedElemForText'
+import './ArticleFrame.scss'
 
 
 /* IFrame куда помещается статья */

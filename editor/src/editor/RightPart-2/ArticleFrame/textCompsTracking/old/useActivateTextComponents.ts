@@ -14,7 +14,7 @@
         if (selectedElem.tagType !== 'textComponent') return
 
         if (!addedExtraHistoryItemForText) {
-            store.dispatch( actions.article.makeHistoryStepForText())
+            store.dispatch( articleActions.makeHistoryStepForText())
         }
     }, [flashedElems])
 }*/

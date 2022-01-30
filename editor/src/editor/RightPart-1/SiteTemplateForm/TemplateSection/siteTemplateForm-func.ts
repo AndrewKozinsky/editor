@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 import FCType from 'libs/FormConstructor/FCType'
 import SiteTemplateServerResponseType from 'requests/editor/siteTemplate/siteTemplateServerResponseType'
 
@@ -51,7 +52,7 @@ export async function afterSubmit(response: SiteTemplateServerResponseType) {
         // Если отредактировали шаблон сайта, который используется в редактируемой статье...
         if (store.getState().article.siteTemplateId === newSiteTemplate.id) {
             // ... то обновить хеш версии шаблона сайта чтобы хук скачал новую версию шаблона и поставил в <head> и <body>
-            store.dispatch(actions.article.changeSiteTemplateVersionHash())
+            store.dispatch(articleActions.changeSiteTemplateVersionHash())
         }
     }
 }

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Изменить видимость элемента» */
 export function useIsVisibleDisabled() {
@@ -36,7 +36,7 @@ export function useGetVisibleHandler() {
             historyItem.article, selectedElem
         )
 
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }, [historyItem])

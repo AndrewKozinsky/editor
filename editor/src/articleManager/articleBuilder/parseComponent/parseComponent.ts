@@ -1,13 +1,14 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
-import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
+import htmlStringToObject, { HTMLObjArrType } from '../htmlStringToObject'
 import { setExtraAttribsToRootTag } from './setExtraAttribsToRootTag'
 import putRepeatedElems from './putRepeatedElems'
 import getConsistObjArr from './getConsistObjArr'
 import changeTagName from './changeTagName'
 import setAttribs from './setAttribs'
 import { insertChildren } from './insertChildren'
+import removeTextNodes from './removeTextNodes'
 
 /**
  * Функция получает данные компонента и сливает с шаблоном компонента. В результате получается HTML-объект.
@@ -15,7 +16,7 @@ import { insertChildren } from './insertChildren'
  * @param {Object} compData — данные компонента
  * @param {Array} tempComps — массив шаблонов компонентов
  */
-export function parseComponent(
+export default function parseComponent(
     compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps
 ): HTMLObjArrType.Tag {
     // Get component template by its tCompId
@@ -26,8 +27,11 @@ export function parseComponent(
 
     // Convert html string to html-object
     let htmlObjOriginal = htmlStringToObject(htmlStr)
-
     const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
+
+    // Удалить из htmlObj текстовые узлы потому что на этапе создания данных компонента
+    // они уже превращены в текстовые компоненты
+    removeTextNodes(htmlObj)
 
     // Поставить главной обёртке htmlObj дополнительные атрибуты
     setExtraAttribsToRootTag(htmlObj, compData, template)

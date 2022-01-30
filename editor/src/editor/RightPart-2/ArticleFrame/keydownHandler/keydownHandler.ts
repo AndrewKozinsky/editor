@@ -1,5 +1,5 @@
-import { getPressedKeys } from 'src/utils/getPressedKeys'
 import { useEffect } from 'react'
+import { getPressedKeys } from 'utils/getPressedKeys'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { undoRedoArticleHistory } from './hotKeys'

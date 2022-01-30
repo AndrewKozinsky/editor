@@ -1,12 +1,11 @@
-import React from 'react'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import StoreArticleTypes from 'store/article/articleTypes'
-import LayersConfigType from './LayersConfigType'
+import articleActions from 'store/article/articleActions'
+import articleManager from 'articleManager/articleManager'
 import { isCtrlPressed } from 'utils/domUtils'
+import LayersConfigType from './LayersConfigType'
 
 /**
  * Функция возвращает строковое представление id компонента и элемента. Вроде '4_2'.
@@ -74,13 +73,7 @@ export function isItemCollapsed(
  * @param {Object} dElem — данные элемента
  */
 export function hasElementChildren(dElem: ArticleTypes.ComponentElem) {
-    if (Array.isArray(dElem?.dCompElemChildren)) {
-        if (dElem.dCompElemChildren.length) {
-            return true
-        }
-    }
-
-    return false
+    return !!dElem.dCompElemChildren.length
 }
 
 /**
@@ -97,7 +90,9 @@ export function getCollapseHandler(
     dComp: ArticleTypes.Component,
     dElem?: ArticleTypes.ComponentElem
 ) {
-    return function () {
+    return function (e: any) {
+        e.stopPropagation()
+
         const isCollapsed = isItemCollapsed(collapsedItems, dComp, dElem)
         // Строка где написаны id данных компонента и элемента
         const key = getKey(dComp, dElem)
@@ -161,7 +156,7 @@ export function getShowHideLayerHandler(
             historyItem.article, thisItemCoords
         )
 
-        store.dispatch(actions.article.createAndSetHistoryItem(
+        store.dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }
@@ -276,20 +271,25 @@ export function hasSelectedChild(
  * @param {String} itemType — тип компонента/элемента
  * @param {Number} dCompId — id данных компонента
  * @param {Number} dElemId — id данных элементе
+ * @param {Boolean} isRootElem — является ли элемент корневым
  */
 export function getMouseHandler(
     actionType: 'hover' | 'select',
     itemType: 'rootElement' | 'element' | 'textComponent',
     dCompId: ArticleTypes.Id,
     dElemId: null | ArticleTypes.Id,
+    isRootElem: boolean
 ) {
     return function (e: React.MouseEvent) {
         // Тип действия изменяется в зависимости от того нажата ли клавиша CTRL
         const ctrlPressed = isCtrlPressed(e)
 
         if (ctrlPressed) {
-            const moveType = actionType === 'hover' ? 'moveHover' : 'moveSelect'
-            setFlashRectangle(moveType, 'rootElement', dCompId, dElemId)
+            if (isRootElem) {
+                const moveType = actionType === 'hover' ? 'moveHover' : 'moveSelect'
+                setFlashRectangle(moveType, 'rootElement', dCompId, dElemId)
+            }
+
             return
         }
 
@@ -311,7 +311,7 @@ function setFlashRectangle(
     dataCompId: number | null,
     dataElemId: number | null
 ) {
-    store.dispatch( actions.article.setFlashRectangles(
+    store.dispatch( articleActions.setFlashRectangles(
         actionType, tagType, dataCompId, dataElemId
     ))
 }

@@ -1,6 +1,6 @@
-import TempCompTypes from '../../../store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from '../../articleManager'
-import { HTMLObjArrType } from './htmlStringToObject'
+import { HTMLObjArrType } from '../htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /**

@@ -1,6 +1,6 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { HTMLObjArrType } from './htmlStringToObject'
+import { HTMLObjArrType } from '../htmlStringToObject'
 
 type ConsistObjsArr = ConsistObj[]
 export type ConsistObj = {

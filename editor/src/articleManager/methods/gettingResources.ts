@@ -44,7 +44,7 @@ export function getTemplate(
  * @param {String} tempCompId — component template uuid
  * @param {String} tempElemId — element template uuid
  */
-export function getTElemInTCompsArr(
+/*export function getTElemInTCompsArr(
     this: typeof articleManager,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id,
@@ -58,7 +58,7 @@ export function getTElemInTCompsArr(
     const tempElement = template.content.elems.find(elem => elem.elemId === tempElemId)
 
     return tempElement || null
-}
+}*/
 
 /**
  * Поиск шаблона элемента в шаблоне компонента
@@ -113,17 +113,11 @@ export function getComponent(
             continue
         }
 
+        // Перебор элементов компонента
         for (let k = 0; k < dataComp.dElems.length; k++) {
             const elem = dataComp.dElems[k]
 
-            if (!Array.isArray(elem.dCompElemChildren)) {
-                if (elem.dCompElemChildren.dCompId === dataCompId) {
-                    return elem.dCompElemChildren
-                }
-
-                continue
-            }
-
+            // Поиск компонента в массиве детей элемента
             const foundedComp = this.getComponent(elem.dCompElemChildren, dataCompId)
             if (foundedComp) return foundedComp
         }
@@ -147,7 +141,7 @@ export function getDataElemInDataCompArr(
     const component = this.getComponent(dataCompArr, dataCompId)
     if (!dataCompArr || !component) return null
 
-    if (component.dCompType === 'component' && Array.isArray(component.dElems)) {
+    if (component.dCompType === 'component' && component.dElems.length) {
         return component.dElems.find(dElem => dElem.dCompElemId === dataElemId)
     }
     return null
@@ -237,13 +231,14 @@ export function getCompParentArray(
  * @returns {Array}
  */
 function findParentArray(
-    dataComp: ArticleTypes.Component, dataCompId: ArticleTypes.Id
+    dataComp: ArticleTypes.MixComponent,
+    dataCompId: ArticleTypes.Id
 ): null | ArticleTypes.Components {
-    if (!dataComp.dElems) return null
+    if (dataComp.dCompType === 'simpleTextComponent' || !dataComp.dElems) return null
 
     for (let i = 0; i < dataComp.dElems.length; i++) {
         const dElem = dataComp.dElems[i]
-        if (!Array.isArray(dElem.dCompElemChildren) || !dElem.dCompElemChildren.length) continue
+        if (!dElem.dCompElemChildren.length) continue
 
         for (let j = 0; j < dElem.dCompElemChildren.length; j++) {
             const innerDataComp = dElem.dCompElemChildren[j]
@@ -387,7 +382,7 @@ export function getItemInDElem(
     childDCompId: ArticleTypes.Id,
     childDElemId: null | ArticleTypes.Id,
 ) {
-    if (Array.isArray(dElem.dCompElemChildren) && dElem.dCompElemChildren.length) {
+    if (dElem.dCompElemChildren.length) {
         const foundedChildItem = childDElemId
             ? this.getDataElemInDataCompArr(dElem.dCompElemChildren, childDCompId, childDElemId)
             : this.getComponent(dElem.dCompElemChildren, childDCompId)
@@ -420,7 +415,6 @@ export function getItemInDComp(
 
     // Если компоненты разные, то перебрать элементы целевого компонента
     for (let targetDElem of targetDComp.dElems) {
-        if (!(Array.isArray(targetDElem.dCompElemChildren))) continue
 
         // Если не передали id дочернего элемента, то найти компонент
         const foundedItem = childDElemId
@@ -469,7 +463,7 @@ export function getRootTElem(
 
 /**
  * Функция ищет и возвращает html-элемент по переданным id компонента и элемента
- * @param {StoreArticleTypes.BodyLink} $body
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
  * @param {ArticleTypes.Id | null} dCompId
  * @param {ArticleTypes.Id | null} dElemId
  * @returns {NodeListOf<Element>}

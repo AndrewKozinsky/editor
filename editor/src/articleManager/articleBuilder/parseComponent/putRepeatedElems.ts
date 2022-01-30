@@ -1,5 +1,5 @@
 import { MiscTypes } from 'types/miscTypes'
-import { HTMLObjArrType } from './htmlStringToObject'
+import { HTMLObjArrType } from '../htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { createDeepCopy } from 'utils/miscUtils'
 

@@ -71,7 +71,6 @@ function getLayersConfig(
     if (!Array.isArray(dItems)) return
 
     dItems.forEach(dItem => {
-
         // Если это компонент...
         if ('dCompType' in dItem) {
             // Обычный компонент
@@ -84,6 +83,35 @@ function getLayersConfig(
                         collapsedItems, setCollapsedItems
                     )
                 }
+            }
+            else if (dItem.dCompType === 'simpleTextComponent') {
+                configArr.push(
+                    {
+                        key: getKey(dItem),
+                        type: 'text',
+                        dCompId: dItem.dCompId,
+                        dElemId: null,
+                        name: getTextComponentName(dItem),
+                        collapsed: false,
+                        offset: offset + 2,
+                        hasChildren: false,
+                        hidden: isHidden(tComps, dItem),
+                        hovered: isFlashed(historyItem, 'hover', dItem),
+                        selected: isFlashed(historyItem, 'select', dItem),
+                        moveHovered: isFlashed(historyItem, 'moveHover', dItem, null),
+                        moveSelected: isFlashed(historyItem, 'moveSelect', dItem, null),
+                        // parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
+                        hasSelectedChild: false,
+                        hasMovedChild: false,
+                        showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem, null, false),
+                        onClickHandler: getMouseHandler(
+                            'select', 'textComponent', dItem.dCompId, null, true
+                        ),
+                        onMouseEnterHandler: getMouseHandler(
+                            'hover', 'textComponent', dItem.dCompId, null, true
+                        ),
+                    }
+                )
             }
         }
 
@@ -120,53 +148,20 @@ function getLayersConfig(
                     collapseHandler: getCollapseHandler(collapsedItems, setCollapsedItems, dComp, dItem),
                     showHideHandler: getShowHideLayerHandler(historyItem, tComps, dComp, dItem, isRootElem),
                     onClickHandler: getMouseHandler(
-                        'select', itemType, dComp.dCompId, dItem.dCompElemId
+                        'select', itemType, dComp.dCompId, dItem.dCompElemId, isRootElem
                     ),
                     onMouseEnterHandler: getMouseHandler(
-                        'hover', itemType, dComp.dCompId, dItem.dCompElemId
+                        'hover', itemType, dComp.dCompId, dItem.dCompElemId, isRootElem
                     ),
                 }
             )
 
             // Если есть вложенные компоненты
             if (dItem.dCompElemChildren && !isCollapsed) {
-                // Если там массив компонентов
-                if (Array.isArray(dItem.dCompElemChildren)) {
-                    getLayersConfig(
-                        historyItem, tComps, dItem.dCompElemChildren, configArr, offset + 1, null,
-                        collapsedItems, setCollapsedItems
-                    )
-                }
-                // Если там текстовый компонент
-                else {
-                    configArr.push(
-                        {
-                            key: getKey(dItem.dCompElemChildren),
-                            type: 'text',
-                            dCompId: dItem.dCompElemChildren.dCompId,
-                            dElemId: null,
-                            name: getTextComponentName(dItem.dCompElemChildren),
-                            collapsed: false,
-                            offset: offset + 2,
-                            hasChildren: false,
-                            hidden: isHidden(tComps, dItem.dCompElemChildren),
-                            hovered: isFlashed(historyItem, 'hover', dItem.dCompElemChildren),
-                            selected: isFlashed(historyItem, 'select', dItem.dCompElemChildren),
-                            moveHovered: false,
-                            moveSelected: false,
-                            parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
-                            hasSelectedChild: false,
-                            hasMovedChild: false,
-                            showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem.dCompElemChildren, null, false),
-                            onClickHandler: getMouseHandler(
-                                'select', 'textComponent', dItem.dCompElemChildren.dCompId, null
-                            ),
-                            onMouseEnterHandler: getMouseHandler(
-                                'hover', 'textComponent', dItem.dCompElemChildren.dCompId, null
-                            ),
-                        }
-                    )
-                }
+                getLayersConfig(
+                    historyItem, tComps, dItem.dCompElemChildren, configArr, offset + 1, null,
+                    collapsedItems, setCollapsedItems
+                )
             }
         }
     })

@@ -30,6 +30,10 @@ export function cloneItem(
     else if (tagType === 'element') {
         return cloneElement(tempCompArr, article, compCoords, deep)
     }
+    // Если выделили элемент
+    else if (tagType === 'textComponent') {
+        return cloneTextComponent(article, compCoords.dataCompId, deep)
+    }
 }
 
 /**
@@ -48,11 +52,11 @@ export function cloneComponent(
     const { dComps } = article
 
     // Клонируемый компонент и его копия
-    const dComp = articleManager.getComponent(dComps, dCompId) as ArticleTypes.Component
-    const cloneDComp = createDeepCopy(dComp)
+    const dComp = articleManager.getComponent(dComps, dCompId)
+    const cloneDComp = createDeepCopy(dComp) as ArticleTypes.Component
 
     // Подготовить копию (обновить id компонента и вложенных компонентов, сохранить или убрать атрибуты)
-    const newComponentResult = prepareCompClone(dComps, cloneDComp, tempCompArr, deep, article.dMeta.dMaxCompId)
+    let newComponentResult = prepareCompClone(dComps, cloneDComp, tempCompArr, deep, article.dMeta.dMaxCompId)
 
     // Массив, где находится клонируемый компонент и его позиция
     const parentArr = articleManager.getCompParentArray(dComps, dCompId)
@@ -68,6 +72,8 @@ export function cloneComponent(
         components: makeImmutableCopy(dComps, parentArr, updatedParentArr)
     }
 }
+
+type NewCompResultType = { maxCompId: number, newItem: ArticleTypes.MixComponent }
 
 /**
  * Функция подготавливает данные и запускает клонирование элемента
@@ -108,6 +114,34 @@ export function cloneElement(
     return {
         maxCompId: newElemResult.maxCompId,
         components: makeImmutableCopy(dComps, dComp.dElems, updatedDElems)
+    }
+}
+
+/**
+ * Функция подготавливает скопированный компонент в зависимости от глубины копирования.
+ * @param {Object} dComp — данные компонента
+ * @param {Number} dMaxCompId — максимальный id компонента в статье
+ * @param {Number} deep — глубина копирования: 1 и 2 (компонент без текста), 3 (с текстом)
+ */
+function prepareTextCompClone(
+    dComp: ArticleTypes.SimpleTextComponent,
+    dMaxCompId: number,
+    deep: 1 | 2 | 3,
+) {
+    // Максимальный id компонента, который будет увеличиваться после прохода всех вложенных компонентов
+    let newMaxCompId = dMaxCompId + 1
+
+    dComp.dCompId = newMaxCompId
+
+    // Если делают не глубокую копию, то стереть текст
+    if ([1, 2].includes(deep)) {
+        dComp.text = ''
+    }
+
+    // Возвратить данные для вставки нового пункта массива истории
+    return {
+        maxCompId: newMaxCompId,
+        newItem: dComp
     }
 }
 
@@ -165,8 +199,8 @@ function prepareCompClone(
  * @param {Array} tempCompArr — массив шаблонов компонентов
  * @param {Object} tElem — шаблон элемента
  * @param {Number} deep — глубина копирования: 1 (голый компонент), 2 (с атрибутами), 3 (с атрибутами и детьми)
- * @param {number} dMaxCompId — максимальный id данных компонента в статье
- * @param {number} elemId — id данных элемента. Если он передан, то его нужно задать.
+ * @param {Number} dMaxCompId — максимальный id данных компонента в статье
+ * @param {Number} elemId — id данных элемента. Если он передан, то его нужно задать.
  */
 function prepareElemClone(
     dComps: ArticleTypes.Components,
@@ -191,38 +225,28 @@ function prepareElemClone(
 
     // Для всех остальных групп копирования...
     if ([1, 2, 3].includes(deep)) {
-        // Если в элементе должен быть текстовый компонент...
-        if (tElem.elemTextInside) {
-            if (Array.isArray(dElem.dCompElemChildren)) return
 
-            // Для 1 и 2 настройки копирования весь текст обнуляется
-            if ([1, 2].includes(deep)) {
-                dElem.dCompElemChildren = articleManager.createSimpleTextComponent(++newMaxCompId)
-            }
-            // Для третьей текст будет такой же, как и в клонируемом элементе
-            else if (deep === 3) {
-                dElem.dCompElemChildren = articleManager.createSimpleTextComponent(
-                    ++newMaxCompId, dElem.dCompElemChildren.text
-                )
-            }
+        // Для 1 и 2 настройки копирования все вложенные компоненты удаляются
+        if ([1, 2].includes(deep)) {
+            dElem.dCompElemChildren = []
         }
-        // Если в элемент принимает другие компоненты в качестве детей...
-        else {
-            // Для 1 и 2 настройки копирования все вложенные компоненты удаляются
-            if ([1, 2].includes(deep)) {
-                dElem.dCompElemChildren = []
-            }
-            // Для третьей вложенные компоненты остаются
-            else if (deep === 3) {
-                if (!Array.isArray(dElem.dCompElemChildren)) return
+        // Для третьей вложенные компоненты остаются
+        else if (deep === 3) {
+            for (let dComp of dElem.dCompElemChildren) {
+                let prepareCompCloneResult: NewCompResultType
 
-                for (let dComp of dElem.dCompElemChildren) {
-                    const prepareCompCloneResult = prepareCompClone(
+                if (dComp.dCompType === 'component') {
+                    prepareCompCloneResult = prepareCompClone(
                         dComps, dComp, tempCompArr, deep, newMaxCompId
                     )
-
-                    newMaxCompId = prepareCompCloneResult.maxCompId
                 }
+                else if (dComp.dCompType === 'simpleTextComponent') {
+                    prepareCompCloneResult = prepareTextCompClone(
+                        dComp, newMaxCompId, deep
+                    )
+                }
+
+                newMaxCompId = prepareCompCloneResult.maxCompId
             }
         }
     }
@@ -254,4 +278,40 @@ function getMaxElemId(
     }
 
     return maxElemId
+}
+
+
+/**
+ * Функция подготавливает данные и запускает клонирование компонента
+ * @param {Object} article — статья
+ * @param {Number} dCompId — id данных клонируемого компонента
+ * @param {Number} deep — глубина копирования: 1 и 2 (компонент без текста), 3 (с текстом)
+ */
+export function cloneTextComponent(
+    article: ArticleTypes.Article,
+    dCompId: ArticleTypes.Id,
+    deep: 1 | 2 | 3,
+): StoreArticleTypes.CreateNewHistoryItem {
+    const { dComps } = article
+
+    // Клонируемый текстовый компонент и его копия
+    const dComp = articleManager.getComponent(dComps, dCompId)
+    const cloneDComp = createDeepCopy(dComp) as ArticleTypes.SimpleTextComponent
+
+    // Подготовить копию (обновить id компонента и вложенных компонентов, сохранить или убрать атрибуты)
+    let newComponentResult: NewCompResultType = prepareTextCompClone(cloneDComp, article.dMeta.dMaxCompId, deep)
+
+    // Массив, где находится клонируемый компонент и его позиция
+    const parentArr = articleManager.getCompParentArray(dComps, dCompId)
+    const idx = parentArr.findIndex(dComp => dComp.dCompId === dCompId)
+
+    // Поставить скопированный компонент в копию массива
+    let updatedParentArr = parentArr.slice()
+    updatedParentArr.splice(idx + 1, 0, newComponentResult.newItem)
+
+    // Возвратить данные для вставки нового пункта массива истории
+    return {
+        maxCompId: newComponentResult.maxCompId,
+        components: makeImmutableCopy(dComps, parentArr, updatedParentArr)
+    }
 }

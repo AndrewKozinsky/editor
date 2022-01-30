@@ -32,7 +32,7 @@ import {
     get$elem,
     getDElemByTElem,
     getMaxDElemsId,
-    getTElemInTCompsArr,
+//     getTElemInTCompsArr,
     getRootTElemByTComps,
     getRootTElem,
     getItemInDElem,
@@ -58,7 +58,7 @@ import {
     canDeleteElem,
     canMoveItemToUpOrDown,
     canClone,
-    // isElemIsRootByDElem,
+//     isElemIsRootByDElem,
     isParentElemHidden,
     hasItemAnotherItem,
 } from './methods/check'
@@ -76,7 +76,7 @@ import {
     changeElemTag,
     changeElemAttr
 } from './methods/visibility'
-
+//
 
 class ArticleManager {
     // BUILD ARTICLE
@@ -88,7 +88,7 @@ class ArticleManager {
     getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
-    getTElemInTCompsArr = getTElemInTCompsArr
+    // getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     getTElemByTCompIdAndTElemId = getTElemByTCompIdAndTElemId

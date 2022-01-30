@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { isCtrlPressed } from 'utils/domUtils'
+import articleActions from 'store/article/articleActions'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
@@ -48,8 +48,8 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 
     // Если нажата клавиша CTRL, то хотят поставить перемещающий прямоугольник
     if (ctrlPressed) {
-        // Поиск компонента не являющийся текстовым
-        const $component: HTMLElement = $target.closest('[data-em-d-gen-comp-id][data-em-d-elem-id]')
+        // Поиск компонента
+        const $component: HTMLElement = $target.closest('[data-em-d-gen-comp-id]')
 
         // Тип выделенного компонента: move
         let moveActionType: StoreArticleTypes.FlashedElemType =
@@ -87,7 +87,7 @@ function setFlashRectangle(
     dataCompId: number | null,
     dataElemId: number | null
 ) {
-    store.dispatch( actions.article.setFlashRectangles(
+    store.dispatch( articleActions.setFlashRectangles(
         actionType, tagType, dataCompId, dataElemId
     ))
 }
