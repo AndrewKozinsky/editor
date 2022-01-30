@@ -4,7 +4,7 @@ import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
-import { getFromLocalStorage } from 'src/utils/miscUtils'
+import { getFromLocalStorage } from 'utils/miscUtils'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
@@ -235,15 +235,23 @@ const sitesActions = {
             const responseData = response.data.components[0]
 
             if (!responseData) {
+                // Зачем в Хранилище ставится id шаблона компонента и тип file?
                 dispatch( sitesActions.setCurrentComp(responseData.id, 'file') )
+                return
             }
 
             const compData = responseData.content
             const compDataParsed: TempCompTypes.Content = JSON5.parse(responseData.content)
 
+            // Имя компонента равняется имени корневого тега компонента
+            // TODO Тут нужно брать не первый элемент, а разбирать compDataParsed.html в HTML и получать
+            // data-em-id корневого тега. Затем искать данные элемента по значениюdata-em-id.
+            // И уже брать его elemName. Код ниже пусть пока будет временным.
+            const compName = compDataParsed.elems[0].elemName
+
             // Установка данных шаблона компонента в Хранилище
             dispatch( sitesActions.setCurrentComp(
-                responseData.id, 'file', compDataParsed.name, compData
+                responseData.id, 'file', compName, compData
             ))
         }
     },

@@ -4,7 +4,6 @@ import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Notice from 'common/textBlocks/Notice/Notice'
 import languageSectionMsg from 'messages/languageSectionMessages'
-import StoreSettingsTypes from 'store/settings/settingsTypes'
 import config from 'utils/config'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 

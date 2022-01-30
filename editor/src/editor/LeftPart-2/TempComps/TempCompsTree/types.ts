@@ -1,6 +1,6 @@
 
 // Типы компонента TempCompFilesTree
-namespace TempCompFilesTreeType {
+namespace TempCompsTreeType {
     // Передаваемый в FilesTree массив с папками и файлами
     export type Items = Item[]
 
@@ -10,8 +10,6 @@ namespace TempCompFilesTreeType {
         id: FileItemId
         type: 'file'
         name: string // Item name
-        afterButtonAllowed: boolean
-        insideButtonAllowed: boolean
     }
 
     export type FolderItem = {
@@ -46,4 +44,4 @@ namespace TempCompFilesTreeType {
     }
 }
 
-export default TempCompFilesTreeType
+export default TempCompsTreeType

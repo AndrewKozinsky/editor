@@ -5,9 +5,9 @@ import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import articleManager from 'articleManager/articleManager'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
+import articleActions from 'store/article/articleActions'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения тега выделенного элемента
@@ -32,7 +32,7 @@ export function getTagInputsConfig(dComp: ArticleTypes.Component, dElem: Article
  * Функция возвращает тип поля ввода для объекта конфигурации генерирования полей ввода
  * @param {Object} tElemTags — данные о доступных тегах
  */
-function getInputType(tElemTags: TempCompTypes.ElemTags): TempCompTypes.InputType {
+function getInputType(tElemTags: TempCompTypes.ElemTags): TempCompTypes.InputViewType {
     if (tElemTags.elemTagsView) {
         return tElemTags.elemTagsView
     }
@@ -58,7 +58,7 @@ function getInputData(
     dCompId: ArticleTypes.Id,
     dElemId: ArticleTypes.Id,
     tElemTags: TempCompTypes.ElemTags,
-    inputType: TempCompTypes.InputType,
+    inputType: TempCompTypes.InputViewType,
     currentTagValue: ArticleTypes.Tag
 ): TextInputPropType | FieldGroupPropType | SelectPropType {
     // Текст в свойстве label у поля изменения тега
@@ -104,7 +104,7 @@ function getInputData(
  */
 function getInputValue(
     tElemTags: TempCompTypes.ElemTags,
-    inputType: TempCompTypes.InputType,
+    inputType: TempCompTypes.InputViewType,
     currentTag: ArticleTypes.Tag
 ) {
     if (!currentTag) return ''
@@ -151,14 +151,14 @@ function getInputItems(tTagObj: TempCompTypes.ElemTags) {
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const {history, historyCurrentIdx} = store.getState().article
+        const { history, historyCurrentIdx } = store.getState().article
         const historyItem = history[historyCurrentIdx]
 
         const compsAndMaxCompId = articleManager.changeElemTag(
             historyItem.article, dCompId, dElemId, data.fieldValue[0]
         )
 
-        store.dispatch(actions.article.createAndSetHistoryItem(
+        store.dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }

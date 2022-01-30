@@ -16,6 +16,7 @@ export default function makeClasses(config: LayersConfigType.Layer) {
         collapseIcon: getCollapseIcon(config),
 
         typeIcon: getTypeIcon(config),
+        emptyTypeIcon: CN + '__empty-type-icon',
         text: getText(config),
 
         circles: CN + '__circles',
@@ -106,7 +107,7 @@ function getText(config: LayersConfigType.Layer) {
     const cls = CN + '__text'
     const classes = [cls]
 
-    if (['component', 'text'].includes(config.type)) {
+    if (['rootElement', 'text'].includes(config.type)) {
         classes.push(cls + '--bold')
     }
     if (config.selected || config.moveSelected) {

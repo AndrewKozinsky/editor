@@ -1,4 +1,4 @@
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import { ButtonPropType } from './Button'
 import './Button.scss'
 
@@ -18,7 +18,7 @@ export default function makeClasses(buttonProps: ButtonPropType) {
  */
 export function getButtonClasses(buttonProps: ButtonPropType) {
     const {
-        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
+        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значок)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         block,
         big = false,
@@ -30,7 +30,7 @@ export function getButtonClasses(buttonProps: ButtonPropType) {
     const classes = [CN]
 
     // Вид кнопки.
-    // standard (стандартная кнопка), onlyIcon (только значёк).
+    // standard (стандартная кнопка), onlyIcon (только значок).
     if (view === 'standard') classes.push(`${CN}--standard-view`)
 
     // Цвет кнопки.

@@ -1,5 +1,5 @@
-import { MiscTypes } from '../../../types/miscTypes'
-import { HTMLObjArrType } from './htmlStringToObject'
+import { MiscTypes } from 'types/miscTypes'
+import { HTMLObjArrType } from '../htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { createDeepCopy } from 'utils/miscUtils'
 
@@ -8,9 +8,7 @@ import { createDeepCopy } from 'utils/miscUtils'
  * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
-export function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
-    if (!dataComp.dElems) return
-
+export default function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
     // Создание объекта с данными по копиям элементов
     let groupElemsMap = createElemsMap(dataComp)
 
@@ -79,6 +77,7 @@ function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, elemsMap: ElemsMapType
                     htmlChild.attrs['data-em-d-elem-id'] = elemMapItem.dCompElemId.toString()
 
                     // Поставить атрибут data-em-display="hidden" если элемент является скрытым
+                    // При переводе в JSX такие элементы не будут отрисовываться
                     if (elemMapItem.hidden) {
                         htmlChild.attrs['data-em-display'] = 'hidden'
                     }
@@ -96,14 +95,14 @@ function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, elemsMap: ElemsMapType
                     }
 
                     // Поставить элемент после перебираемого элемента
-                    htmlParentArr.splice(i + 1, 0, htmlChildObjClone)
+                    htmlParentArr.splice(i + k, 0, htmlChildObjClone)
                 }
             }
 
             i += elemsMap[htmlElemId].length - 1
         }
 
-        if (htmlChild.children && htmlChild.children.length) {
+        if (htmlChild.children?.length) {
             setDuplicates(htmlChild.children, elemsMap, dCompId)
         }
     }

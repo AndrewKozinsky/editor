@@ -18,16 +18,26 @@ import {
 import {
     getCurrentHistoryItem,
     getComponent,
-    getDataElemInDataComp,
+    getDElemInDComp,
     getDataElemInDataCompArr,
-//     getTempCompByDataCompId,
-    getTempElemByDataCompIdAndDataElemId,
+    getTElemByDCompIdAndDElemId,
     getTemplate,
     getTElemInTComp,
     getCompParentArray,
     getDCompIdxInArray,
-    getElemCount, getTElemByTCompIdAndTElemId, get$component
-//     getTElemInTCompsArr
+    getElemCount,
+    getTElemByTCompIdAndTElemId,
+    get$componentByTComps,
+    get$componentByTComp,
+    get$elem,
+    getDElemByTElem,
+    getMaxDElemsId,
+//     getTElemInTCompsArr,
+    getRootTElemByTComps,
+    getRootTElem,
+    getItemInDElem,
+    getItemInDComp,
+    get$elemBy$body,
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -41,33 +51,32 @@ import {
 } from './methods/create'
 import {
     canComponentPutInElement,
-    canMoveCompMoveToProperPosition,
-    hasElemNestedElements,
+    canMoveCompMoveToLeftOrRight,
+    has$ElemNested$Elements,
     canMakeHistoryStep,
     isArticleSave,
-//     isCompInArticleRoot,
-//     isCompsInTheSameArr,
-//     isCompInArray,
     canDeleteElem,
     canMoveItemToUpOrDown,
-    canClone, isElemIsRootByDElem,
+    canClone,
+//     isElemIsRootByDElem,
     isParentElemHidden,
     hasItemAnotherItem,
-    getItemInDElem
 } from './methods/check'
 import {
-    moveComponentToProperPosition,
     moveComponentToRoot,
     moveCompNearComp,
     moveComponentToElement,
     moveItemToUpOrDown
 } from './methods/move'
+import { updateTextInComponent } from './methods/text'
 import {
     changeVisibility,
+    changeVisibilityOfTextComp,
+    changeVisibilityOfElem,
     changeElemTag,
     changeElemAttr
 } from './methods/visibility'
-
+//
 
 class ArticleManager {
     // BUILD ARTICLE
@@ -83,50 +92,53 @@ class ArticleManager {
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     getTElemByTCompIdAndTElemId = getTElemByTCompIdAndTElemId
+    getDElemByTElem = getDElemByTElem
     // Finds template in templates array
     getComponent = getComponent
     // Поиск элемента данных в компоненте данных
-    getDataElemInDataComp = getDataElemInDataComp
+    getDElemInDComp = getDElemInDComp
     // Поиск данных элемента в массиве данных компонентов
     getDataElemInDataCompArr = getDataElemInDataCompArr
     // Finds component template by data component id
     // getTempCompByDataCompId = getTempCompByDataCompId
     // Finds element template by data component id and data element id
-    getTempElemByDataCompIdAndDataElemId = getTempElemByDataCompIdAndDataElemId
+    getTElemByDCompIdAndDElemId = getTElemByDCompIdAndDElemId
     // Finds an array in witch component is
     getCompParentArray = getCompParentArray
     // idx компонента в переданном массиве
     getDCompIdxInArray = getDCompIdxInArray
     getElemCount = getElemCount
-    // Получение HTML-компонента
-    get$component = get$component
+    // Получение HTML-компонента по массиву шаблонов компонентов
+    get$componentByTComps = get$componentByTComps
+    // Получение HTML-компонента из переданного шаблона компонента
+    get$componentByTComp = get$componentByTComp
+    get$elem = get$elem
+    getMaxDElemsId = getMaxDElemsId
+    getRootTElemByTComps = getRootTElemByTComps
+    getRootTElem = getRootTElem
+    // Поиск компонента/элемента в элементе
+    getItemInDElem = getItemInDElem
+    // Поиск компонента/элемента в компоненте
+    getItemInDComp = getItemInDComp
+    get$elemBy$body = get$elemBy$body
 
     // CHECK
-    // Функция проверяющая работоспособность кнопки перемещения перемещаемого компонента
-    canMoveCompMoveToProperPosition = canMoveCompMoveToProperPosition
+    canMoveCompMoveToLeftOrRight = canMoveCompMoveToLeftOrRight
     // The method returns boolean can pass component put in element
     canComponentPutInElement = canComponentPutInElement
-    hasElemNestedElements = hasElemNestedElements
+    has$ElemNested$Elements = has$ElemNested$Elements
     canMakeHistoryStep = canMakeHistoryStep
     isArticleSave = isArticleSave
-    // Находится ли компонент в корне статьи?
-    // isCompInArticleRoot = isCompInArticleRoot
-    // Находятся ли компоненты в одном массиве?
-    // isCompsInTheSameArr = isCompsInTheSameArr
-    // Находится ли компонент в переданном массиве?
-    // isCompInArray = isCompInArray
     canDeleteElem = canDeleteElem
     canMoveItemToUpOrDown = canMoveItemToUpOrDown
     // Можно ли компонент/элемент клонировать и вставить следом
     canClone = canClone
     // Проверка является ли элемент корневым
-    isElemIsRootByDElem = isElemIsRootByDElem
+    // isElemIsRootByDElem = isElemIsRootByDElem
     // Проверка скрыт ли родительский компонент/элемент
     isParentElemHidden = isParentElemHidden
     // Имеет ли компонент/элемент внутри другой компонент/элемент
     hasItemAnotherItem = hasItemAnotherItem
-    // Поиск компонента/элемента в элементе
-    getItemInDElem = getItemInDElem
 
     // CREATE
     createArticle = createArticle
@@ -139,7 +151,6 @@ class ArticleManager {
     createCompAndSetItNearComp = createCompAndSetItNearComp
 
     // MOVE
-    moveComponentToProperPosition = moveComponentToProperPosition
     moveComponentToRoot = moveComponentToRoot
     moveCompNearComp = moveCompNearComp
     moveComponentToElement = moveComponentToElement
@@ -147,6 +158,8 @@ class ArticleManager {
 
     // CHANGE
     changeVisibility = changeVisibility
+    changeVisibilityOfTextComp = changeVisibilityOfTextComp
+    changeVisibilityOfElem = changeVisibilityOfElem
     changeElemTag = changeElemTag
     changeElemAttr = changeElemAttr
 
@@ -157,6 +170,9 @@ class ArticleManager {
     deleteItem = deleteItem
     deleteComponent = deleteComponent
     deleteElement = deleteElement
+
+    // TEXT
+    updateTextInComponent = updateTextInComponent
 
     // HOOKS (object with hooks)
     hooks = hooks

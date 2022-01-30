@@ -9,6 +9,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { updateComponentRequest } from 'requests/editor/components/updateComponentRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import bridge from '../../../../../bridge/bridge'
+import TempCompTypes from '../../../../../store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
 
@@ -46,10 +47,13 @@ const compFormConfig: FCType.Config = {
         // id выбранной папки
         const { currentCompItemId } = store.getState().sites.componentSection
 
+        // Получить массив elems из шаблона компонента, чтобы получить первый элемент
+        const templateElemsArr: TempCompTypes.Elems = JSON5.parse( readyFieldValues.content.toString() ).elems
+
         // Изменить название компонента на введённое и обновить Хранилище папок
-        const { name } = JSON5.parse(readyFieldValues.content.toString())
+        const rootElemName = templateElemsArr[0].elemName
         const result = filesTreePublicMethods.changeItemName(
-            folders, currentCompItemId, name
+            folders, currentCompItemId, rootElemName
         )
 
         store.dispatch(sitesActions.setCompFolder({

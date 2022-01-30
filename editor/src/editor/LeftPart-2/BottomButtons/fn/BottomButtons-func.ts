@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { setUpperCaseForFirstLetter } from 'utils/stringUtils'
 import articleManager from 'articleManager/articleManager'
+import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /**
  * Хук возвращает тип значка у кнопок
- * @param {string} btnKey — тип кнопки
+ * @param {String} btnKey — тип кнопки
  */
 export function useGetIconType(btnKey: string) {
     const [iconType, setIconType] = useState('elBtnSignVisible')
@@ -50,7 +51,7 @@ export function useGetVisibleIconType() {
 
         let isHidden = true
 
-        if (selectedElem.tagType === 'element') {
+        if (['rootElement', 'element'].includes(selectedElem.tagType)) {
             // Получение элемента
             const dElem = articleManager.getDataElemInDataCompArr(
                 dComps, selectedElem.dataCompId, selectedElem.dataElemId
@@ -58,15 +59,13 @@ export function useGetVisibleIconType() {
 
             isHidden = !([undefined, false].includes(dElem?.dCompElemLayer?.layerHidden))
         }
-        else {
+        else if (selectedElem.tagType === 'textComponent') {
             // Получение компонента
-            const dComp = articleManager.getComponent(
+            const dTextComp = articleManager.getComponent(
                 dComps, selectedElem.dataCompId
-            )
+            ) as ArticleTypes.SimpleTextComponent
 
-            if (dComp.dCompType === 'simpleTextComponent') return
-
-            isHidden = !([undefined, false].includes(dComp?.dCompLayer?.layerHidden))
+            isHidden = !([undefined, false].includes(dTextComp?.dCompLayer?.layerHidden))
         }
 
         setIconType( isHidden ? 'hide' : 'visible' )

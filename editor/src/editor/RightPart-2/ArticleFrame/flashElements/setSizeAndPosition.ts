@@ -1,5 +1,4 @@
 import StoreArticleTypes from 'store/article/articleTypes'
-import { CoordsObjType } from './usePassFlashRectCoordsToIFrame'
 
 export type FlashRectType = 'hover' | 'select' | 'movehover' | 'moveselect'
 type ScrollObjType = { top: number, left: number }
@@ -11,10 +10,10 @@ type ScrollObjType = { top: number, left: number }
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {Element} $flashRect — a link to a flashed rectangle
  */
-export function setSizeAndPosition(
+export default function setSizeAndPosition(
     $links: StoreArticleTypes.LinksObj,
     type: FlashRectType,
-    rectCoords: CoordsObjType,
+    rectCoords: StoreArticleTypes.FlashedElem,
     $flashRect: HTMLElement,
 ) {
     // 1. Get element by coordinates
@@ -41,11 +40,11 @@ export function setSizeAndPosition(
 
 /**
  * The function finds element by dataCompId, dataElemId and type
- * @param {HTMLBodyElement} $body — <body>
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
  * @param {String} type — тип подсветки: hover | select | movehover | moveselect
  * @param {Object} rectCoords — id данных элемента и компонента над которым стоит курсор
  */
-function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectType, rectCoords: CoordsObjType): null | HTMLElement {
+function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectType, rectCoords: StoreArticleTypes.FlashedElem): null | HTMLElement {
     // Return null if cursor is not on component/element
     if (!rectCoords.dataCompId) return null
 
@@ -53,11 +52,11 @@ function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectT
     let queryStr = ''
 
     if (type === 'hover' || type === 'select') {
-        if (rectCoords.dataElemId) {
-            queryStr = `[data-em-d-comp-id="${rectCoords.dataCompId}"][data-em-d-elem-id="${rectCoords.dataElemId}"]`
-        }
-        else {
+        if (['textComponent', 'rootElement'].includes(rectCoords.tagType)) {
             queryStr = `[data-em-d-gen-comp-id="${rectCoords.dataCompId}"]`
+        }
+        else if (rectCoords.tagType === 'element') {
+            queryStr = `[data-em-d-comp-id="${rectCoords.dataCompId}"][data-em-d-elem-id="${rectCoords.dataElemId}"]`
         }
     }
     else if (type === 'movehover' || type === 'moveselect') {
@@ -87,20 +86,20 @@ function hideRect(type: FlashRectType, $flashRect: HTMLElement) {
 function getCoordinates(
     articleElement: HTMLElement,
     type: FlashRectType,
-    rectCoords: CoordsObjType,
+    rectCoords: StoreArticleTypes.FlashedElem,
     scrollObj: ScrollObjType
 ): CoordsType {
     // Get a flashed element's coordinates object
     const coords = articleElement.getBoundingClientRect()
 
     // Offset from flashed element in article to flashed rectangle depends on type
-    const offset = (type === 'hover' || type === 'movehover') ? 1 : 2
+    const lineWidth = (type === 'hover' || type === 'movehover') ? 1 : 2
 
     return {
-        top: coords.top - offset + scrollObj.top + 'px',
-        left: coords.left - offset + scrollObj.left + 'px',
-        width: coords.width + 'px',
-        height: coords.height + 'px'
+        top: coords.top + scrollObj.top + 'px',
+        left: coords.left + scrollObj.left + 'px',
+        width: coords.width - lineWidth * 2 + 'px',
+        height: coords.height - lineWidth * 2 + 'px'
     }
 }
 
@@ -117,7 +116,7 @@ type CoordsType = {
  * @param {Object} coords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  */
-function positionFlashRect($flashRect: HTMLElement, coords: CoordsType, rectCoords: CoordsObjType) {
+function positionFlashRect($flashRect: HTMLElement, coords: CoordsType, rectCoords: StoreArticleTypes.FlashedElem) {
     // Make rectangle visible
     $flashRect.style.display = 'block'
 

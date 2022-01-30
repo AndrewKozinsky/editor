@@ -1,23 +1,21 @@
-import React, {ReactNode} from 'react'
+import React from 'react'
 import makeClasses from './Item-classes'
 import SvgIcon from 'common/icons/SvgIcon'
-import {
-    useGetToggleFolder,
-    useGetOnClickHandler
-} from './Item-func'
-import TempCompFilesTreeType from '../types'
+import { useGetToggleFolder } from './Item-func'
+import TempCompsTreeType from '../types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 
 
 type ItemPropType = {
     // Массив всех папок и файлов.
-    items: TempCompFilesTreeType.Items
+    items: TempCompsTreeType.Items
     // Данные папки или файла.
-    itemData: TempCompFilesTreeType.Item
+    itemData: TempCompsTreeType.Item
     // Уровень вложенности папки или файла.
     offset: number
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
-    after: TempCompFilesTreeType.After
+    after: TempCompsTreeType.After
+    btnInsideAllowed: boolean
 }
 
 /** Папка или файл в структуре папок */
@@ -26,13 +24,14 @@ export default function Item(props: ItemPropType) {
         items,
         itemData,
         offset,
-        after
+        after,
+        btnInsideAllowed
     } = props
 
-    const CN = makeClasses()
+    const CN = makeClasses(itemData)
 
     // Хук возвращает обработчик щелчка по элементу
-    const onItemClickHandler = useGetOnClickHandler(items, itemData, after)
+    const onItemClickHandler = useGetToggleFolder(itemData, items, after)
 
     return (
         <div
@@ -43,9 +42,9 @@ export default function Item(props: ItemPropType) {
             <div className={CN.inner}>
                 <Triangle items={items} itemData={itemData} after={after} />
                 <Icon itemData={itemData} />
-                <Circles itemData={itemData} />
-                <p className={`${CN}__item-name`}>{itemData.name}</p>
-                <RightButtons itemData={itemData} after={after} />
+                <Circles itemData={itemData} btnInsideAllowed={btnInsideAllowed} />
+                <p>{itemData.name}</p>
+                <RightButtons itemData={itemData} after={after} btnInsideAllowed={btnInsideAllowed} />
             </div>
         </div>
     )
@@ -53,11 +52,11 @@ export default function Item(props: ItemPropType) {
 
 type TrianglePropType = {
     // Массив всех папок и файлов.
-    items: TempCompFilesTreeType.Items
+    items: TempCompsTreeType.Items
     // Данные папки или файла.
-    itemData: TempCompFilesTreeType.Item
+    itemData: TempCompsTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
-    after: TempCompFilesTreeType.After
+    after: TempCompsTreeType.After
 }
 
 /** Кнопка сворачивания/разворачивания папки. Для файла возвращается пустой элемент. */
@@ -91,7 +90,7 @@ function Triangle(props: TrianglePropType) {
 
 type IconPropType = {
     // Данные папки или файла.
-    itemData: TempCompFilesTreeType.Item
+    itemData: TempCompsTreeType.Item
 }
 
 /** Значок типа элемента. Если файл, то ничего не отрисовывается. */
@@ -100,7 +99,7 @@ function Icon(props: IconPropType) {
         itemData
     } = props
 
-    const CN = makeClasses()
+    const CN = makeClasses(itemData)
 
     if (itemData.type === 'file') return null
     return <SvgIcon type='filesTreeFolder' extraClass={CN.folderSign} />
@@ -109,14 +108,15 @@ function Icon(props: IconPropType) {
 
 type CirclesPropType = {
     // Данные папки или файла.
-    itemData: TempCompFilesTreeType.Item
+    itemData: TempCompsTreeType.Item
+    btnInsideAllowed: boolean
 }
 
 // TODO Что делает эта функция?
 function Circles(props: CirclesPropType) {
-    const { itemData } = props
+    const { itemData, btnInsideAllowed } = props
 
-    const CN = makeClasses(itemData)
+    const CN = makeClasses(itemData, btnInsideAllowed)
 
     return (
         <div className={CN.circles}>
@@ -129,9 +129,10 @@ function Circles(props: CirclesPropType) {
 
 type RightButtonsPropType = {
     // Данные папки или файла.
-    itemData: TempCompFilesTreeType.Item
+    itemData: TempCompsTreeType.Item
     // Объект с различными свойствами и методами переданными в параметрах FilesTree.
-    after: TempCompFilesTreeType.After
+    after: TempCompsTreeType.After
+    btnInsideAllowed: boolean
 }
 
 /** Значок типа элемента. Если файл, то ничего не отрисовывается. */
@@ -139,17 +140,15 @@ function RightButtons(props: RightButtonsPropType) {
     const {
         itemData,
         after,
+        btnInsideAllowed
     } = props
 
-    const CN = makeClasses(itemData)
+    const CN = makeClasses(itemData, btnInsideAllowed)
 
-    if (itemData.type === 'folder' || !itemData.afterButtonAllowed && !itemData.insideButtonAllowed) {
-        return null
-    }
+    if (itemData.type === 'folder') return null
 
-    const afterButtons: ReactNode[] = []
-    if (itemData.afterButtonAllowed) {
-        afterButtons.push(
+    return (
+        <div className={CN.rightPart}>
             <button
                 className={CN.afterBtn}
                 onClick={(e) => after.afterClickBeforeBtn(itemData.id)}
@@ -158,8 +157,6 @@ function RightButtons(props: RightButtonsPropType) {
             >
                 <SvgIcon type='filesTreeUp' />
             </button>
-        )
-        afterButtons.push(
             <button
                 className={CN.afterBtn}
                 onClick={(e) => after.afterClickAfterBtn(itemData.id)}
@@ -168,24 +165,14 @@ function RightButtons(props: RightButtonsPropType) {
             >
                 <SvgIcon type='filesTreeDown' />
             </button>
-        )
-    }
-
-    const insideButton = (
-        <button
-            className={ CN.insideBtn }
-            onClick={(e) => after.afterClickInsideBtn(itemData.id)}
-            title={componentsPanelMsg.insideButton.toString()}
-            key={3}
-        >
-            <SvgIcon type='filesTreeTorus' />
-        </button>
-    )
-
-    return (
-        <div className={CN.rightPart}>
-            {afterButtons}
-            {insideButton}
+            <button
+                className={ CN.insideBtn }
+                onClick={(e) => after.afterClickInsideBtn(itemData.id)}
+                title={componentsPanelMsg.insideButton.toString()}
+                key={3}
+            >
+                <SvgIcon type='filesTreeTorus' />
+            </button>
         </div>
     )
 }

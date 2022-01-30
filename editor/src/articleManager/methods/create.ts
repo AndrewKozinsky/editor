@@ -19,9 +19,14 @@ export function createArticle(
     }
 }
 
+export type CreateNewCompResultType = {
+    compData: ArticleTypes.MixComponent
+    maxCompId: number
+}
+
 /**
  * The function creates a new component data with passed tempCompId
- * @param {Object} article — article object
+ * @param {Object} article — объект статьи
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
@@ -30,9 +35,8 @@ export function createComponent(
     article: ArticleTypes.Article,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id
-) {
+): CreateNewCompResultType {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
-
     let maxCompId = article.dMeta.dMaxCompId
 
     const compData: ArticleTypes.Component = {
@@ -66,19 +70,9 @@ type CreateCompElementsReturnType = {
 function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number): CreateCompElementsReturnType {
     let newMaxCompId = maxCompId
 
-    if (!tempComp.content.elems?.length) {
-        return {
-            compElems: null,
-            maxCompId: newMaxCompId
-        }
-    }
+    const $component = articleManager.get$componentByTComp(tempComp)
 
-    // Turn html-string to HTMLElement
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(tempComp.content.html, 'text/html')
-    const $component = doc.body.childNodes[0] as HTMLElement
-
-    // Составлю объект, где будут данные id шаблона элемента и шаблон элемента:
+    // Составлю массив объектов, где будут данные id шаблона элемента и шаблон элемента:
     // [
     //     {elemId: 'general', tElem: tElem},
     //     {elemId: 'cell', tElem: tElem},
@@ -105,22 +99,16 @@ function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number)
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
 
-        // Пока не знаю нужно ли это делать
-        /*if (tElem.hidden) {
-            newElemData.layer = {
-                hidden: true
-            }
-        }*/
+        newElemData.dCompElemChildren = []
 
-        if (tElem.elemTextInside) {
-            newElemData.dCompElemChildren = createSimpleTextComponent(
-                ++newMaxCompId,
+        if (tElem.addTextComponent) {
+            const textComponent = createSimpleTextComponent(
                 // Предварительно заменить символы напоминающие пробел обычным пробелом
-                $elem.innerText.replace( /\s\s+/g, ' ' )
+                $elem.innerText.replace( /\s\s+/g, ' ' ),
+                ++newMaxCompId,
             )
-        }
-        else {
-            newElemData.dCompElemChildren = []
+
+            newElemData.dCompElemChildren.push(textComponent.compData)
         }
 
         return newElemData
@@ -138,6 +126,17 @@ type TElemsMapItem = {
 }
 type TElemsMap = TElemsMapItem[]
 
+/**
+ * Функция составляет массив объектов, где будут данные id шаблона элемента и шаблон элемента. Например:
+ * [
+ *     { elemId: 'general', tElem: tElem },
+ *     { elemId: 'cell', tElem: tElem },
+ *     { elemId: 'cell', tElem: tElem }
+ * ],
+ * @param {HTMLElement} $component
+ * @param {TempCompTypes.Elems} tempElems
+ * @returns {TElemsMap}
+ */
 function getTElemsMap($component: HTMLElement, tempElems: TempCompTypes.Elems): TElemsMap {
     const $wrapper = document.createElement('div')
     $wrapper.append($component)
@@ -214,13 +213,22 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
 
 /**
  * Функция создаёт объект пустого текстового компонента
- * @param {Number} dCompId — id компонента текстового компонента
- * @param {String} text — текст
+ * @param {String} text — текст в создаваемом компоненте
+ * @param {Number} dCompId — id нового текстового компонента
  */
-export function createSimpleTextComponent(dCompId: number, text: string = ''): ArticleTypes.SimpleTextComponent {
-    return {
+export function createSimpleTextComponent(
+    text: string = '',
+    dCompId?: number,
+): CreateNewCompResultType {
+    const compData: ArticleTypes.SimpleTextComponent = {
         dCompType: 'simpleTextComponent',
         dCompId,
         text
     }
+
+    return {
+        compData,
+        maxCompId: dCompId
+    }
 }
+

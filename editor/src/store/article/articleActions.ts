@@ -2,18 +2,18 @@ const JSON5 = require('json5')
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import { ArticleType } from 'requests/editor/article/articleServerResponseType'
 import getSiteComponentsRequest from 'requests/editor/components/getSiteComponentsRequest'
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
 import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
-import { ArticleType } from '../../requests/editor/article/articleServerResponseType'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
-import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
+import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
 
 
 const articleActions = {
@@ -151,6 +151,7 @@ const articleActions = {
             if (!foldersObj) return
 
             // Set component template folders in the Store
+            // @ts-ignore
             dispatch( articleActions.setTempCompFolders(foldersObj) )
         }
     },
@@ -159,7 +160,7 @@ const articleActions = {
      * Set component template folders is the Store
      * @param {Array} folders — component template folders array
      */
-    setTempCompFolders( folders: null | DragFilesTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
+    setTempCompFolders( folders: null | TempCompsTreeType.Items ): StoreArticleTypes.SetTempCompFoldersAction {
         return {
             type: StoreArticleTypes.SET_TEMP_COMP_FOLDERS,
             payload: folders
@@ -230,36 +231,37 @@ const articleActions = {
                 // Если навели на элемент, но он уже выделен...
                 if (currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'hover', tagType, null, null
                     ))
                 }
                 // В противном случае выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'hover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого компонента для перемещения
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'moveHover', null, null, null
                 ))
             }
             // Если элемент выделили...
             else if (actionType === 'select') {
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'select', tagType, dataCompId, dataElemId
                 ))
 
-                // Очистить выделенный текстовый компонент потому что выделяют другой компонент/элемент
-                if (currentArticle.selectedTextComp.dataCompId) {
-                    dispatch( actions.article.setTextCompId(null))
+                if (currentArticle.hoveredElem.dataCompId === dataCompId && !dataElemId) {
+                    dispatch( articleActions.setFlashedElement(
+                        'hover', null, null, null
+                    ))
                 }
 
                 // Если выделили компонент выделенный для перемещения, то очистить выделение для перемещения
                 if (currentArticle.moveSelectedComp.dataCompId === dataCompId && !dataElemId) {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveSelect', null, null, null
                     ))
                 }
@@ -269,32 +271,42 @@ const articleActions = {
                 // Если навели на элемент, но он уже выделен...
                 if (currentArticle.moveSelectedComp.dataCompId === dataCompId) {
                     // Спрятать наводящую рамку
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, null, null
                     ))
                 }
                 // Выделить элемент наводящей рамкой...
                 else {
-                    dispatch( actions.article.setFlashedElement(
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, dataCompId, dataElemId
                     ))
                 }
 
                 // Спрятать рамку вокруг наведённого элемента
-                dispatch( actions.article.setFlashedElement(
+                dispatch( articleActions.setFlashedElement(
                     'hover', tagType, null, null
                 ))
             }
             // Если компонент выделили для перемещения...
             else if (actionType === 'moveSelect') {
-                dispatch( actions.article.setFlashedElement(
-                    'moveSelect', tagType, dataCompId, null
+                dispatch( articleActions.setFlashedElement(
+                    'moveSelect', tagType, dataCompId, dataElemId
                 ))
+
+                // Если выделен элемент, который выделили для перемещения, то убрать выделение
+                if (
+                    currentArticle.selectedElem.dataCompId === dataCompId &&
+                    currentArticle.selectedElem.dataElemId === dataElemId
+                ) {
+                    dispatch( articleActions.setFlashedElement(
+                        'select', null, null, null
+                    ))
+                }
 
                 // Если на этом элементе есть рамка наведения...
                 if (currentArticle.moveHoveredComp.dataCompId === dataCompId) {
-                    // Спрятать наводящую рамку
-                    dispatch( actions.article.setFlashedElement(
+                    // Спрятать рамку вокруг элемента наведённого для перемещения
+                    dispatch( articleActions.setFlashedElement(
                         'moveHover', tagType, null, null
                     ))
                 }
@@ -312,37 +324,12 @@ const articleActions = {
     setFlashedElement(
         actionType: 'hover' | 'select' | 'moveHover' | 'moveSelect',
         tagType: StoreArticleTypes.FlashedTagType,
-        dataCompId: StoreArticleTypes.FlashedElemId,
-        dataElemId: StoreArticleTypes.FlashedElemId
+        dataCompId?: StoreArticleTypes.FlashedElemId,
+        dataElemId?: StoreArticleTypes.FlashedElemId
     ) {
         return {
             type: StoreArticleTypes.SET_FLASHED_ELEMENT,
             payload: { actionType, tagType, dataCompId, dataElemId }
-        }
-    },
-
-    setTextComp(textCompId: number | null) {
-        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            const { history, historyCurrentIdx} = getState().article
-            const currentArticle = history[historyCurrentIdx]
-
-            // Если выделен какой-то компонент/элемент, то убрать выделение
-            if (currentArticle.selectedElem.dataCompId) {
-                dispatch( actions.article.setFlashedElement(
-                    'select', null, null, null
-                ))
-            }
-
-            // Поставить выделение текстового компонента
-            dispatch( actions.article.setTextCompId(textCompId))
-        }
-    },
-
-    // Setting included files template in Store
-    setTextCompId(textCompId: number | null): StoreArticleTypes.SetTextCompIdAction {
-        return {
-            type: StoreArticleTypes.SET_TEXT_COMP_ID,
-            payload: textCompId
         }
     },
 
@@ -372,22 +359,6 @@ const articleActions = {
     setHistoryStepWhenArticleWasSaved() {
         return {
             type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
-        }
-    },
-
-    // Setting included files template in Store
-    setPressedKey(pressedKeyData: StoreArticleTypes.PressedKey): StoreArticleTypes.SetPressedKeyAction {
-        return {
-            type: StoreArticleTypes.SET_PRESSED_KEY,
-            payload: pressedKeyData
-        }
-    },
-
-    // Setting included files template in Store
-    updateCurrentArticle(newArticle: StoreArticleTypes.HistoryItem): StoreArticleTypes.UpdateCurrentArticleAction {
-        return {
-            type: StoreArticleTypes.UPDATE_CURRENT_ARTICLE,
-            payload: newArticle
         }
     },
 

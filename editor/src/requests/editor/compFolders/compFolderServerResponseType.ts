@@ -1,5 +1,5 @@
 import ErrorServerResponseType from 'requests/errorServerResponseType'
-import FilesTreeType from '../../../types/FilesTreeType'
+import FilesTreeType from 'types/FilesTreeType'
 
 type CommonType<T> = {
     status: 'success',

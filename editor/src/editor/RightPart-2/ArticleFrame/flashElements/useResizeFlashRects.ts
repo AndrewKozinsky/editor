@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
-import { FlashRectType, setSizeAndPosition } from './setSizeAndPosition'
+import setSizeAndPosition, { FlashRectType } from './setSizeAndPosition'
 
 /** Хук отслеживает изменения в статье и пересчитывает положение подсвечивающих прямоугольников */
-export function useResizeFlashRects() {
+export default function useResizeFlashRects() {
     const { $links, history } = useGetArticleSelectors()
 
     // Were resize and scroll handlers set?
@@ -24,7 +24,7 @@ export function useResizeFlashRects() {
         }
 
         setTimeout(resizeHandler, 0)
-    }, [resizeHandler, handlersSet, history.length])
+    }, [handlersSet, history.length])
 }
 
 /* Хук возвращает функцию, которая пересчитывает положение и размеры подсвечивающих прямоугольников */

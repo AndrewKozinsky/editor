@@ -1,24 +1,25 @@
 import React, { Fragment, ReactNode } from 'react'
 import Item from '../Item/Item'
 import { useGetFilesTreeMinWidth } from './TempCompFilesTree-func'
-import TempCompFilesTreeType from '../types'
+import TempCompsTreeType from '../types'
 
 
 type TempCompFilesTreePropType = {
     // Массив данных списка папок и файлов
-    items: null | TempCompFilesTreeType.Items
+    items: null | TempCompsTreeType.Items
+    btnInsideAllowed: boolean
     // Функция запускаемая после разворачивания/сворачивания папки
-    afterCollapseFolder: TempCompFilesTreeType.AfterCollapseFolder
+    afterCollapseFolder: TempCompsTreeType.AfterCollapseFolder
     // Обработчики щелчков по кнопкам вставки компонента до, после и внутрь выделенного компонента
-    afterClickBeforeBtn: TempCompFilesTreeType.AfterClickBeforeBtn
-    afterClickAfterBtn: TempCompFilesTreeType.AfterClickAfterBtn
-    afterClickInsideBtn: TempCompFilesTreeType.AfterClickInsideBtn
+    afterClickBeforeBtn: TempCompsTreeType.AfterClickBeforeBtn
+    afterClickAfterBtn: TempCompsTreeType.AfterClickAfterBtn
+    afterClickInsideBtn: TempCompsTreeType.AfterClickInsideBtn
 }
 
 /** Список папок и файлов */
 export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
 
-    const after: TempCompFilesTreeType.After = {
+    const after: TempCompsTreeType.After = {
         afterCollapseFolder: props.afterCollapseFolder,
         afterClickBeforeBtn: props.afterClickBeforeBtn,
         afterClickAfterBtn: props.afterClickAfterBtn,
@@ -31,8 +32,8 @@ export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
     if (!props.items?.length ) return null
 
     return (
-        <div data-file-tree='true' style={{minWidth: minWidth}}>
-            {generateItems(props.items, props.items, 0, after)}
+        <div style={{minWidth: minWidth}}>
+            {generateItems(props.items, props.items, 0, after, props.btnInsideAllowed)}
         </div>
     )
 }
@@ -44,12 +45,14 @@ export default function TempCompFilesTree(props: TempCompFilesTreePropType) {
  * Так как функция рекурсивная, то сюда будут поступать разные массивы.
  * @param {Number} offset — на каком уровне вложенности находится элемент. От этого зависит величина отступа слева.
  * @param {Object} after — объект с различными свойствами и методами переданными в параметрах FilesTree.
+ * @param btnInsideAllowed
  */
 function generateItems(
-    allItems: TempCompFilesTreeType.Items,
-    innerItems: TempCompFilesTreeType.Items,
+    allItems: TempCompsTreeType.Items,
+    innerItems: TempCompsTreeType.Items,
     offset: number,
-    after: TempCompFilesTreeType.After
+    after: TempCompsTreeType.After,
+    btnInsideAllowed: boolean
 ): ReactNode {
     if (!allItems) return null
 
@@ -63,7 +66,8 @@ function generateItems(
                 allItems,
                 itemData.content,
                 offset + 1,
-                after
+                after,
+                btnInsideAllowed
             )
         }
 
@@ -74,6 +78,7 @@ function generateItems(
                     itemData={itemData}
                     offset={offset}
                     after={after}
+                    btnInsideAllowed={btnInsideAllowed}
                 />
                 {innerItems}
             </Fragment>

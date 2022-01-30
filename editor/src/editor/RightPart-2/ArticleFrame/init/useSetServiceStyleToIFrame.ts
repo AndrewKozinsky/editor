@@ -14,7 +14,7 @@ export default function useSetServiceStyleToIFrame() {
         // Create and set <style> into <head>
         const styleElem = document.createElement('style')
         // Стиль изменяющий тег, в котором находится текст, который пользователь может редактировать
-        styleElem.innerText = `text-component {display:block;}text-component:focus {outline:none;}`
+        styleElem.innerText = `text-component {display:inline-block;cursor:text}text-component:focus {outline:none;}*[contenteditable]:empty:after {content:attr(placeholder);color: rgba(0, 0, 0, .3);}`
 
         $links.$head.appendChild(styleElem)
 

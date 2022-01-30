@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { isCtrlPressed } from 'utils/domUtils'
+import articleActions from 'store/article/articleActions'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
  * They save information about component/element under cursor in Store
  */
-export function useSetMouseHandlersForFlashRects() {
-    const { $links, history } = useGetArticleSelectors()
+export default function useSetMouseHandlersForFlashRects() {
+    const { $links } = useGetArticleSelectors()
     // Were mouse move handlers set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
@@ -48,6 +48,7 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 
     // Если нажата клавиша CTRL, то хотят поставить перемещающий прямоугольник
     if (ctrlPressed) {
+        // Поиск компонента
         const $component: HTMLElement = $target.closest('[data-em-d-gen-comp-id]')
 
         // Тип выделенного компонента: move
@@ -56,40 +57,20 @@ function mouseHandler(event: MouseEvent, actionType: 'hover' | 'select') {
 
         if ($component) {
             const dataCompId = parseInt($component.dataset.emDGenCompId) || null
-            setFlashRectangle(moveActionType, 'component', dataCompId, null)
+            const dataElemId = parseInt($component.dataset.emDElemId) || null
+
+            setFlashRectangle(moveActionType, 'rootElement', dataCompId, dataElemId)
         }
         else {
-            setFlashRectangle(moveActionType, 'component', null, null)
+            setFlashRectangle(moveActionType, null, null, null)
         }
     }
     // Если клавиша CTRL не нажата, то хотят поставить выделяющий прямоугольник
     else {
-        // Получить объект с данными курсор стоит над текстовым компонентом или элементом
-        let elemAndTextComp = getElementAndTextComponent($target)
+        // Получить координаты компонента/элемента над которым стоит курсор
+        let elemFlashCoords = getElemFlashCoords($target)
 
-        // Если курсор стоит над текстовым компонентом и нажали кнопку мыши, то убрать выделяющий прямоугольник
-        if (elemAndTextComp.type === 'textComponent' && actionType === 'select') {
-            // Запустить экшен ставящий id текстового компонента в Хранилище
-            setTextCompId(elemAndTextComp.dCompId)
-
-            // Скрыть выделяющий прямоугольник
-            setFlashRectangle(actionType, null, null, null)
-        }
-        // Если курсор стоит над корневым тегом компонента не являющийся элементом
-        else if (elemAndTextComp.type === 'component') {
-            setFlashRectangle(actionType, elemAndTextComp.type, elemAndTextComp.dCompId, null)
-        }
-        // Если курсор стоит над элементом
-        else if (elemAndTextComp.type === 'element' || elemAndTextComp.type === 'rootElement') {
-            setFlashRectangle(actionType, elemAndTextComp.type, elemAndTextComp.dCompId, elemAndTextComp.dElemId)
-        }
-        else {
-            // Скрыть выделяющий прямоугольник
-            setFlashRectangle(actionType, null, null, null)
-
-            // Запустить экшен обнуляющий id текстового компонента в Хранилище
-            if (actionType === 'select') setTextCompId(null)
-        }
+        setFlashRectangle(actionType, elemFlashCoords.tagType, elemFlashCoords.dataCompId, elemFlashCoords.dataElemId)
     }
 }
 
@@ -106,45 +87,25 @@ function setFlashRectangle(
     dataCompId: number | null,
     dataElemId: number | null
 ) {
-    store.dispatch( actions.article.setFlashRectangles(
+    store.dispatch( articleActions.setFlashRectangles(
         actionType, tagType, dataCompId, dataElemId
     ))
 }
 
-/**
- * Функция запускает экшен ставящий id данных выделенного текстового компонента
- * @param {Number} dataCompId — id данных выделенного текстового компонента
- */
-function setTextCompId(dataCompId: number | null) {
-    store.dispatch( actions.article.setTextComp(dataCompId))
-}
-
-
-
-type ElementAndTextComponentType = {
-    // Над чем находится курсор:
-    type:
-        null |             // Тип элемента не относится к другим разрешённым значениям
-        'textComponent' |  // Текстовый компонент),
-        'element' |        // Элемент, который не является корневым тегом
-        'rootElement' |    // Элемент, который является корневым тегом
-        'component'        // Корневой тег, не являющийся элементом
-    dCompId: null | number // id данных компонента
-    dElemId: null | number // id данных элемента
-}
 
 /**
  * Функция пробегается вверх от переданного $target и находит элемент подходящий под селектор [data-em-d-text-comp-id]
  * При этом игнорируются текстовые компоненты.
  * @param {HTMLElement} $target — изначальный элемент от которого нужно искать элемент
  */
-function getElementAndTextComponent($target: HTMLElement): ElementAndTextComponentType {
+function getElemFlashCoords($target: HTMLElement): StoreArticleTypes.FlashedElem {
     let $currentElem: HTMLElement = $target
 
-    const resultObj: ElementAndTextComponentType = {
-        type: null,
-        dCompId: null,
-        dElemId: null
+    // Над чем находится курсор:
+    const resultObj: StoreArticleTypes.FlashedElem = {
+        tagType: null, // Тип элемента: Текстовый компонент, Элемент, который не является корневым тегом или Элемент, который является корневым тегом
+        dataCompId: null, // id данных компонента
+        dataElemId: null // id данных элемента
     }
 
     for (;$currentElem;) {
@@ -156,42 +117,32 @@ function getElementAndTextComponent($target: HTMLElement): ElementAndTextCompone
             return resultObj
         }
 
-        const textDCompId = $currentElem.dataset.emDTextCompId
         const dGenCompId = $currentElem.dataset.emDGenCompId
         const dCompId = $currentElem.dataset.emDCompId
         const dElemId = $currentElem.dataset.emDElemId
 
-        // Завершить поиск если наткнулись на текстовый компонент
-        if (textDCompId) {
-            resultObj.type = 'textComponent'
-            resultObj.dCompId = parseInt(textDCompId)
-            return resultObj
+        // Если это текстовый компонент
+        if (dGenCompId && !dCompId && !dElemId) {
+            resultObj.tagType = 'textComponent'
+            resultObj.dataCompId = parseInt(dGenCompId)
+            break
+        }
+        // Если корневой тег
+        else if (dGenCompId && dCompId) {
+            resultObj.tagType = 'rootElement'
+            resultObj.dataCompId = parseInt(dCompId)
+            resultObj.dataElemId = parseInt(dElemId)
+            break
+        }
+        // Если элемент не являющийся корневым
+        else if (!dGenCompId && dCompId && dElemId) {
+            resultObj.tagType = 'element'
+            resultObj.dataCompId = parseInt(dCompId)
+            resultObj.dataElemId = parseInt(dElemId)
+            break
         }
 
-        // Если курсор стоит над корневым тегом компонента, который не является элементом
-        if (dGenCompId && !dCompId) {
-            resultObj.type = 'component'
-            resultObj.dCompId = parseInt(dGenCompId)
-            return resultObj
-        }
-
-        // Если курсор стоит над корневым тегом компонента, который является элементом
-        if (dGenCompId && dCompId) {
-            resultObj.type = 'rootElement'
-            resultObj.dCompId = parseInt(dCompId)
-            resultObj.dElemId = parseInt(dElemId)
-            return resultObj
-        }
-
-        // Если курсор стоит не над корневым тегом компонента, который является элементом
-        if (!dGenCompId && dCompId) {
-            resultObj.type = 'element'
-            resultObj.dCompId = parseInt(dCompId)
-            resultObj.dElemId = parseInt(dElemId)
-            return resultObj
-        }
-
-        // @ts-ignore
+        // Сделать текущим элементом предка этого элемента
         $currentElem = $currentElem.parentElement
             ? $currentElem.parentElement
             : null

@@ -10,7 +10,7 @@ namespace DragFilesTreeType {
 
     export interface FileItem extends FilesTreeType.FileItem {
         placeMark?: PlaceMark // Визуальная отметка куда будет помещён перемещаемый элемент
-        loading?: boolean // Стоит ли значёк загрузки у файла?
+        loading?: boolean // Стоит ли значок загрузки у файла?
         active?: boolean // Выделен ли элемент
     }
 

@@ -21,8 +21,11 @@ export function isMarkupCorrect(templateObj: TempCompTypes.Content) {
             return errorsArr
         }
 
+        // Проверка, что в корневом теге есть атрибут data-em-id
+        errorsArr.push(...hasRootElemEmId(elemsCollection[0] as HTMLElement))
+
         // Проверка уникальности значений элементов с атрибутами data-em-id
-        errorsArr.push(...checkUniqueElems(elemsCollection))
+        errorsArr.push(...checkUniqueElemsByDataEmId(elemsCollection))
         if (errorsArr.length) return errorsArr
 
         // Проверка того, что если в разметке есть элементы, то в массиве elems они должны быть описаны
@@ -35,13 +38,20 @@ export function isMarkupCorrect(templateObj: TempCompTypes.Content) {
     return errorsArr
 }
 
+function hasRootElemEmId($elems: HTMLElement): string[] {
+    const dataEmIdInRootElem = $elems.dataset.emId
+
+    return dataEmIdInRootElem
+    ? [] : ['В корневом элементе должно быть свойство data-em-id.']
+}
+
 /**
  * Функция проверяет чтобы элементы с data-em-id имеют уникальное значение.
  * Возвращается массив с текстами найденных ошибок.
  * @param {Array} $elems — коллекция HTML-элементов
  * @param {Array} emIdArr — массив с id элементов встречающихся в разметке
  */
-function checkUniqueElems($elems: HTMLCollection, emIdArr: string[] = []): string[] {
+function checkUniqueElemsByDataEmId($elems: HTMLCollection, emIdArr: string[] = []): string[] {
     const errors: string[] = []
 
     for (let i = 0; i < $elems.length; i++) {
@@ -58,7 +68,7 @@ function checkUniqueElems($elems: HTMLCollection, emIdArr: string[] = []): strin
         }
 
         if ($elem.children.length) {
-            errors.push(...checkUniqueElems($elem.children, emIdArr))
+            errors.push(...checkUniqueElemsByDataEmId($elem.children, emIdArr))
         }
     }
 
@@ -66,60 +76,40 @@ function checkUniqueElems($elems: HTMLCollection, emIdArr: string[] = []): strin
 }
 
 /**
- * Функция проверяет чтобы у html-элементах были соответствия с данными
- * @param {HTMLElement} $body — ссылка на <body> с разметкой шаблона
+ * Функция проверяет чтобы у html-элементах были соответствия с данными и наоборот
+ * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
  * @param {Object} templateObj — шаблон компонента
  */
 function matchHtmlElemsAndDataElems($body: HTMLElement, templateObj: TempCompTypes.Content): string[] {
     const errors: string[] = []
 
+    // Элементы из разметки
     const $elems = $body.querySelectorAll('[data-em-id] ')
 
-    if (!$elems.length) {
-        if (templateObj.elems?.length) {
-            return ['В массиве elems есть описание элементов, но их нет в html.']
-        }
+    // Если массив elems пуст, то это ошибка потому что там должно быть описание как минимум одного корневого элемента
+    if (templateObj.elems?.length === 0) {
+        return ['В массиве elems должно быть описание хотя бы корневого элемент.']
     }
-    else {
-        if (!templateObj.elems) {
-            return ['Создайте массив elems и опишите все элементы присутствующие в разметке.']
-        }
-        else if (!templateObj.elems.length) {
-            return ['Опишите элементы присутствующие в разметке в массиве elems.']
-        }
-        else {
-            return matchHtmlElemsAndData($elems, templateObj)
-        }
-    }
-
-    return errors
-}
-
-/**
- * Функция проверяет чтобы элементы в html соответствовали элементам в данных и наоборот
- * @param {HTMLCollection} $elems — html-элементы с атрибутом data-em-id
- * @param {Object} templateObj — шаблон компонента
- */
-function matchHtmlElemsAndData($elems: NodeListOf<Element>, templateObj: TempCompTypes.Content): string[] {
-    const errors: string[] = []
 
     // Перебор html-элементов с целью найти на них данные
     for (let $elem of $elems) {
-        if ($elem instanceof HTMLElement) {
-            // id элемента в разметке
-            const htmlElemId = $elem.dataset.emId
+        if (!($elem instanceof HTMLElement)) continue
 
-            // id элемента в данных
-            const tElem = templateObj.elems.find(tElem => tElem.elemId === htmlElemId)
+        // id элемента в разметке
+        const htmlElemId = $elem.dataset.emId
 
-            // Бросить ошибку если в данных не описан перебираемый элемент
-            if (!tElem) {
-                errors.push(`В разметке присутствует элемент с data-em-id ${htmlElemId}, но в массиве elems он не описан.`)
-            }
+        // id элемента в данных
+        const tElem = templateObj.elems.find(tElem => tElem.elemId === htmlElemId)
 
-            if (tElem.elemTextInside && $elem.children?.length) {
-                errors.push(`Элементу с идентификатором ${htmlElemId} нельзя ставить свойство elemTextInside так как в нём присутствуют другие элементы.`)
-            }
+        // Бросить ошибку если в данных не описан перебираемый элемент
+        if (!tElem) {
+            errors.push(`В разметке присутствует элемент с data-em-id ${htmlElemId}, но в массиве elems он не описан.`)
+            continue
+        }
+
+        // Бросить ошибку если в шаблоне указано, что элемент принимает текстовый компонент, но там есть дочерние элементы
+        if (tElem.addTextComponent && $elem.children?.length) {
+            errors.push(`Элементу с идентификатором ${htmlElemId} нельзя ставить свойство addTextComponent так как в нём присутствуют другие элементы.`)
         }
     }
 
@@ -132,11 +122,11 @@ function matchHtmlElemsAndData($elems: NodeListOf<Element>, templateObj: TempCom
         let isElemInHtmlFound = false
 
         for (let $elem of $elems) {
-            if ($elem instanceof HTMLElement) {
-                // id элемента в разметке
-                const htmlElemId = $elem.dataset.emId
-                if (tElemId === htmlElemId) isElemInHtmlFound = true
-            }
+            if (!($elem instanceof HTMLElement)) continue
+
+            // id элемента в разметке
+            const htmlElemId = $elem.dataset.emId
+            if (tElemId === htmlElemId) isElemInHtmlFound = true
         }
 
         if (!isElemInHtmlFound) {

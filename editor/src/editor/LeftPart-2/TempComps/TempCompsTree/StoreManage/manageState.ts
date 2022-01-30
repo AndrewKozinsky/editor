@@ -1,5 +1,5 @@
 import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
-import TempCompFilesTreeType from '../types'
+import TempCompsTreeType from '../types'
 
 
 /**
@@ -7,9 +7,9 @@ import TempCompFilesTreeType from '../types'
  * @param {Array} items — массив данных по папкам и файлам.
  * @param {String} folderId — id папки, которую нужно развернуть/свернуть
  */
-export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempCompFilesTreeType.FolderItemId) {
+export function toggleFolder(items: TempCompsTreeType.Items, folderId: TempCompsTreeType.FolderItemId) {
     // Получение папки с заданным идентификатором
-    const folder = getItemDataById(items, folderId) as TempCompFilesTreeType.FolderItem
+    const folder = getItemDataById(items, folderId) as TempCompsTreeType.FolderItem
     if (!folder) return
 
     // Перевернуть значение открыта ли папка
@@ -26,8 +26,8 @@ export function toggleFolder(items: TempCompFilesTreeType.Items, folderId: TempC
  * @param {String} itemId — id папки или файла, которую нужно найти
  */
 export function getItemDataById(
-    items: TempCompFilesTreeType.Items, itemId: TempCompFilesTreeType.ItemId
-): null | TempCompFilesTreeType.Item {
+    items: TempCompsTreeType.Items, itemId: TempCompsTreeType.ItemId
+): null | TempCompsTreeType.Item {
     for (let i = 0; i < items.length; i++) {
         const item = items[i]
 
@@ -49,9 +49,9 @@ export function getItemDataById(
  * @param {Array} arr — массив с id открытых папок (требуется внутри работы функции, в саму функцию передавать не нужно)
  */
 export function getOpenedFoldersId(
-    items: TempCompFilesTreeType.Items, arr: TempCompFilesTreeType.FolderItemId[] = []
+    items: TempCompsTreeType.Items, arr: TempCompsTreeType.FolderItemId[] = []
 ) {
-    items.forEach((item: TempCompFilesTreeType.Item) => {
+    items.forEach((item: TempCompsTreeType.Item) => {
         if (item.type === 'folder' && item.open) {
             arr.push(item.id)
 
@@ -69,11 +69,11 @@ export function getOpenedFoldersId(
  * Функция возвращает максимальную глубину вложенности файлов
  * @param {Array} items — массив с данными по папкам и файлам
  */
-export function getMaxDeep(items: TempCompFilesTreeType.Items) {
+export function getMaxDeep(items: TempCompsTreeType.Items) {
     let maxDeep = 0
 
-    function crawler(items: TempCompFilesTreeType.Items, prevDeep = -1) {
-        items.forEach((item: TempCompFilesTreeType.Item) => {
+    function crawler(items: TempCompsTreeType.Items, prevDeep = -1) {
+        items.forEach((item: TempCompsTreeType.Item) => {
             const currentDeep = prevDeep + 1
             if (maxDeep < currentDeep) maxDeep = currentDeep
 

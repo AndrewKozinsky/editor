@@ -1,5 +1,5 @@
 import React from 'react'
-import Button from 'src/common/formElements/Button/Button'
+import Button from 'common/formElements/Button/Button'
 import siteSectionMsg from 'messages/siteSectionMessages'
 import DeleteSiteModalContent from './DeleteSiteModalContent'
 import useGetShowModal from 'utils/hooksUtils'

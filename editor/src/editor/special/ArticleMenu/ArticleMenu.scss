@@ -5,7 +5,6 @@ $CN: article-menu;
 .#{$CN}__outer-wrapper {
     position: relative;
     display: flex;
-    background-color: aqua;
 
     &:hover {
         .#{$CN}__root {

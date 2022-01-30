@@ -7,7 +7,6 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import LayersConfigType from './LayersConfigType'
 import {
     getKey,
-    getComponentName,
     getElementName,
     getTextComponentName,
     hasElementChildren,
@@ -33,11 +32,16 @@ export default function useGetLayersConfig() {
     useEffect(function () {
         if (!historyItem || !tempComps?.length) return
 
-        const layersConfig = getLayersConfig(
-            historyItem, tempComps, historyItem.article.dComps, [], 0, null, collapsedItems, setCollapsedItems
-        )
+        // setTimeout нужен чтобы успел отработать код добавляющий в статью данные о корневом элементе у каждого компонента
+        // Как только сделаешь свойство allowRender, то от этого можно будет избавиться.
+        setTimeout(function () {
+            const layersConfig = getLayersConfig(
+                historyItem, tempComps, historyItem.article.dComps, [], 0, null, collapsedItems, setCollapsedItems
+            )
 
-        setLayersConfig(layersConfig)
+            setLayersConfig(layersConfig)
+        }, 0)
+
     }, [historyItem, tempComps, collapsedItems])
 
     return layersConfig
@@ -67,45 +71,47 @@ function getLayersConfig(
     if (!Array.isArray(dItems)) return
 
     dItems.forEach(dItem => {
-
         // Если это компонент...
         if ('dCompType' in dItem) {
             // Обычный компонент
             if (dItem.dCompType === 'component') {
-                const isCollapsed = isItemCollapsed(collapsedItems, dItem)
-
-                configArr.push(
-                    {
-                        key: getKey(dItem),
-                        type: 'component',
-                        dCompId: dItem.dCompId,
-                        dElemId: null,
-                        name: getComponentName(tComps, dItem),
-                        collapsed: isCollapsed,
-                        offset: offset,
-                        hasChildren: !!(dItem.dElems?.length),
-                        hidden: isHidden(tComps, dItem),
-                        hovered: isFlashed(historyItem, 'hover', dItem),
-                        selected: isFlashed(historyItem, 'select', dItem),
-                        moveHovered: isFlashed(historyItem, 'moveHover', dItem),
-                        moveSelected: isFlashed(historyItem, 'moveSelect', dItem),
-                        parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem, ),
-                        hasSelectedChild: hasSelectedChild(historyItem, 'select', dItem.dCompId, null),
-                        hasMovedChild: hasSelectedChild(historyItem, 'moveSelect', dItem.dCompId, null),
-                        collapseHandler: getCollapseHandler(collapsedItems, setCollapsedItems, dItem),
-                        showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem),
-                        onClickHandler: getMouseHandler(tComps, historyItem.article.dComps, 'select', 'component', dItem.dCompId, null),
-                        onMouseEnterHandler: getMouseHandler(tComps, historyItem.article.dComps, 'hover', 'component', dItem.dCompId, null),
-                    }
-                )
 
                 // Перебор массива элементов...
-                if (dItem.dElems && !isCollapsed) {
+                if (dItem.dElems) {
                     getLayersConfig(
                         historyItem, tComps, dItem.dElems, configArr, offset + 1, dItem,
                         collapsedItems, setCollapsedItems
                     )
                 }
+            }
+            else if (dItem.dCompType === 'simpleTextComponent') {
+                configArr.push(
+                    {
+                        key: getKey(dItem),
+                        type: 'text',
+                        dCompId: dItem.dCompId,
+                        dElemId: null,
+                        name: getTextComponentName(dItem),
+                        collapsed: false,
+                        offset: offset + 2,
+                        hasChildren: false,
+                        hidden: isHidden(tComps, dItem),
+                        hovered: isFlashed(historyItem, 'hover', dItem),
+                        selected: isFlashed(historyItem, 'select', dItem),
+                        moveHovered: isFlashed(historyItem, 'moveHover', dItem, null),
+                        moveSelected: isFlashed(historyItem, 'moveSelect', dItem, null),
+                        // parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
+                        hasSelectedChild: false,
+                        hasMovedChild: false,
+                        showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem, null, false),
+                        onClickHandler: getMouseHandler(
+                            'select', 'textComponent', dItem.dCompId, null, true
+                        ),
+                        onMouseEnterHandler: getMouseHandler(
+                            'hover', 'textComponent', dItem.dCompId, null, true
+                        ),
+                    }
+                )
             }
         }
 
@@ -113,71 +119,49 @@ function getLayersConfig(
         if ('dCompElemId' in dItem) {
             const isCollapsed = isItemCollapsed(collapsedItems, dComp, dItem)
 
+            // Получение данных корневого элемента
+            const rootTElem = articleManager.getRootTElemByTComps(tComps, dComp.tCompId)
+            const rootDElem = articleManager.getDElemByTElem(dComp, rootTElem.elemId)
+
+            // Является ли текущий элемент корневым?
+            const isRootElem = rootDElem.dCompElemId === dItem.dCompElemId
+            const itemType = isRootElem ? 'rootElement' : 'element'
+
             configArr.push(
                 {
                     key: getKey(dComp, dItem),
-                    type: 'element',
+                    type: itemType,
                     dCompId: dComp.dCompId,
                     dElemId: dItem.dCompElemId,
                     name: getElementName(tComps, dComp, dItem),
                     collapsed: isCollapsed,
-                    offset: offset,
+                    offset,
                     hasChildren: hasElementChildren(dItem),
                     hidden: isHidden(tComps, dComp, dItem),
                     hovered: isFlashed(historyItem, 'hover', dComp, dItem),
                     selected: isFlashed(historyItem, 'select', dComp, dItem),
                     moveHovered: isFlashed(historyItem, 'moveHover', dComp, dItem),
                     moveSelected: isFlashed(historyItem, 'moveSelect', dComp, dItem),
-                    parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dComp, dItem, ),
+                    parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dComp, dItem),
                     hasSelectedChild: hasSelectedChild(historyItem, 'select', dComp.dCompId, dItem.dCompElemId),
                     hasMovedChild: hasSelectedChild(historyItem, 'moveSelect', dComp.dCompId, dItem.dCompElemId),
                     collapseHandler: getCollapseHandler(collapsedItems, setCollapsedItems, dComp, dItem),
-                    showHideHandler: getShowHideLayerHandler(historyItem, tComps, dComp, dItem),
+                    showHideHandler: getShowHideLayerHandler(historyItem, tComps, dComp, dItem, isRootElem),
                     onClickHandler: getMouseHandler(
-                        tComps, historyItem.article.dComps, 'select', 'element', dComp.dCompId, dItem.dCompElemId
+                        'select', itemType, dComp.dCompId, dItem.dCompElemId, isRootElem
                     ),
                     onMouseEnterHandler: getMouseHandler(
-                        tComps, historyItem.article.dComps, 'hover', 'element', dComp.dCompId, dItem.dCompElemId
+                        'hover', itemType, dComp.dCompId, dItem.dCompElemId, isRootElem
                     ),
                 }
             )
 
             // Если есть вложенные компоненты
             if (dItem.dCompElemChildren && !isCollapsed) {
-                // Если там массив компонентов
-                if (Array.isArray(dItem.dCompElemChildren)) {
-                    getLayersConfig(
-                        historyItem, tComps, dItem.dCompElemChildren, configArr, offset + 1, null,
-                        collapsedItems, setCollapsedItems
-                    )
-                }
-                // Если там текстовый компонент
-                else {
-                    configArr.push(
-                        {
-                            key: getKey(dItem.dCompElemChildren),
-                            type: 'text',
-                            dCompId: dItem.dCompElemChildren.dCompId,
-                            dElemId: null,
-                            name: getTextComponentName(dItem.dCompElemChildren),
-                            collapsed: false,
-                            offset: offset + 1,
-                            hasChildren: false,
-                            hidden: false,
-                            hovered: false,
-                            selected: isFlashed(historyItem, 'select', dItem.dCompElemChildren),
-                            moveHovered: false,
-                            moveSelected: false,
-                            parentLayerHidden: articleManager.isParentElemHidden(historyItem.article.dComps, dItem.dCompElemChildren),
-                            hasSelectedChild: false,
-                            hasMovedChild: false,
-                            showHideHandler: getShowHideLayerHandler(historyItem, tComps, dItem.dCompElemChildren),
-                            onClickHandler: getMouseHandler(
-                                tComps, historyItem.article.dComps, 'select', 'text', dItem.dCompElemChildren.dCompId, null
-                            ),
-                        }
-                    )
-                }
+                getLayersConfig(
+                    historyItem, tComps, dItem.dCompElemChildren, configArr, offset + 1, null,
+                    collapsedItems, setCollapsedItems
+                )
             }
         }
     })

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 /**
  * Хук при необходимости устанавливает фокус на поле ввода

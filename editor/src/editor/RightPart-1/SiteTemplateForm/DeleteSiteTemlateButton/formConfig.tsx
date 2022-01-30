@@ -3,7 +3,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import deleteSiteTemplateRequest from 'requests/editor/siteTemplate/deleteSiteTemplateRequest'
-import updateSiteRequest, {UpdateSiteRequestValuesType} from 'requests/editor/sites/updateSiteRequest'
+import updateSiteRequest from 'requests/editor/sites/updateSiteRequest'
 import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
 
 /**

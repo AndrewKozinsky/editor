@@ -8,13 +8,13 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
-import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils'
+import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import bridge from '../../../../bridge/bridge'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { FolderType } from '../types'
-import FilesTreeType from '../../../../types/FilesTreeType'
+import FilesTreeType from 'types/FilesTreeType'
 import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
 import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
 
@@ -144,17 +144,22 @@ export function afterDeleteItem(
  * Функция запускаемая после добавления компонента или статьи.
  * При добавлении папки эта функция не отрабатывает.
  * @param {String} type — тип папок: с компонентами или со статьями
- * @param {String} newFileName — название компонента или статьи.
+ * @param {String} newArticleName — название компонента или статьи.
  */
-export async function afterAddingNewFile(type: FolderType, newFileName: string): Promise<number> {
+export async function afterAddingNewFile(type: FolderType, newArticleName?: string): Promise<number> {
     const { currentSiteId } = store.getState().sites
 
     // Сохранить данные на сервере
     if (type === 'components') {
         // Может создание нового компонента поместить в articleManager?
         const minCompContent: TempCompTypes.Content = {
-            name: newFileName,
-            html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" />'
+            html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" data-em-id="image" />',
+            elems: [
+                {
+                    elemId: 'image',
+                    elemName: 'Image'
+                }
+            ]
         }
         const serverResponse = await createComponentRequest(
             currentSiteId, JSON5.stringify(minCompContent)
@@ -164,9 +169,9 @@ export async function afterAddingNewFile(type: FolderType, newFileName: string):
             return  serverResponse.data.components[0].id
         }
     }
-    else {
+    else if (type === 'articles') {
         const serverResponse = await createArticleRequest(
-            currentSiteId, newFileName
+            currentSiteId, newArticleName
         )
 
         if (serverResponse.status === 'success') {

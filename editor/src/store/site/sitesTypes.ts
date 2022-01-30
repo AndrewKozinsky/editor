@@ -1,7 +1,5 @@
-// import DragFilesTreeType from 'libs/DragFilesTree/types'
 import ArticleTypes from '../article/codeType/articleCodeType'
-
-import FilesTreeType from '../../types/FilesTreeType'
+import FilesTreeType from 'types/FilesTreeType'
 
 namespace StoreSitesTypes {
 

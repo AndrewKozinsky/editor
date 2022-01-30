@@ -14,10 +14,9 @@ export function getIconSize(type: string) {
                 height: '18px',
                 viewBox: '0 0 84 18'
             }
-        // Значок успеха
-        // case 'successCircle':
         // Значок ошибки
         case 'errorTriangle':
+        case 'btnSignText':
             return {
                 width: '13px',
                 height: '13px',
@@ -148,7 +147,9 @@ export function getIconSize(type: string) {
                 viewBox: '0 0 18 18'
             }
         // Значки на кнопках работы с элементами внизу
-        case 'elBtnSignInside':
+        case 'elBtnSignMoveInside':
+        case 'elBtnSignMoveLeft':
+        case 'elBtnSignMoveRight':
         case 'elBtnSignUp':
         case 'elBtnSignDown':
         case 'elBtnSignClone1':

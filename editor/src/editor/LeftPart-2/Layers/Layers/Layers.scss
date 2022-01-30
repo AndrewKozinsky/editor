@@ -10,6 +10,7 @@ $CN: layer;
     display: flex;
     align-items: flex-start;
     user-select: none;
+    overflow: hidden;
     border-radius: var(--radius);
 }
 .#{$CN}__wrapper--hover, .#{$CN}__wrapper--move-hover {
@@ -19,7 +20,7 @@ $CN: layer;
     background-color: var(--accent-color);
 }
 .#{$CN}__wrapper--move-select {
-    background-color: var(--error-color);
+    background-color: var(--success-color);
 }
 .#{$CN}__wrapper--hidden {
     opacity: .4;
@@ -66,13 +67,14 @@ $CN: layer;
 }
 .#{$CN}__collapse--move-select {
     &:hover {
-        background-color: var(--error-color-hover);
+        background-color: var(--success-color-hover);
     }
 }
 
 // Значок на кнопке сворачивания слоя
 .#{$CN}__collapse-icon {
     display: block;
+    fill: var(--text-color);
 }
 .#{$CN}__collapse-icon--white {
     fill: white;
@@ -84,6 +86,10 @@ $CN: layer;
 }
 .#{$CN}__type-icon--white {
     fill: white;
+}
+.#{$CN}__empty-type-icon {
+    display: inline-block;
+    width: 16px;
 }
 
 // Текст
@@ -116,7 +122,7 @@ $CN: layer;
     border-radius: 50%;
 }
 .#{$CN}__move-circle {
-    background-color: var(--error-color);
+    background-color: var(--success-color);
 }
 .#{$CN}__select-circle {
     background-color: var(--accent-color);
@@ -170,10 +176,10 @@ $CN: layer;
     }
 }
 .#{$CN}__right-part--move-select {
-    background-color: var(--error-color);
+    background-color: var(--success-color);
 
     &:before {
-        background: linear-gradient(90deg, hsla(var(--error-h-part), var(--error-s-part), var(--error-l-part), 0) 0%, var(--error-color) 100%);
+        background: linear-gradient(90deg, hsla(var(--success-h-part), var(--success-s-part), var(--success-l-part), 0) 0%, var(--success-color) 100%);
     }
 }
 
@@ -204,10 +210,10 @@ $CN: layer;
     }
 }
 .#{$CN}__right-part-btn--move-select {
-    background-color: var(--error-color);
+    background-color: var(--success-color);
 
     &:hover {
-        background-color: var(--error-color-hover);
+        background-color: var(--success-color-hover);
     }
 }
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
-import { setSizeAndPosition } from './setSizeAndPosition'
+import setSizeAndPosition from './setSizeAndPosition'
 
 
 /** The hooks create Observers to watch for a flashed rectangles attributes */
-export function useChangeFlashRectanglesPosition() {
+export default function useChangeFlashRectanglesPosition() {
     const { $links } = useGetArticleSelectors()
     const [observersHaveBeenSet, setObserversHaveBeenSet] = useState(false)
 

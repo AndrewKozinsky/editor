@@ -18,6 +18,10 @@ const componentsPanelMessages = {
         eng: 'Insert in element',
         rus: 'Вставить внутрь элемента'
     },
+    textComponent: {
+        eng: 'Text',
+        rus: 'Текст'
+    },
 }
 
 const componentsPanelMsg = getMsgProxy<typeof componentsPanelMessages>(componentsPanelMessages)

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Удалить элемент» */
 export function useIsRemoveDisabled() {
@@ -44,12 +44,12 @@ export function useGetRemoveHandler() {
         )
 
         // Поставить новый элемент истории
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
 
         // Убрать выделение с этого компонента потому что он удалён
-        dispatch(actions.article.setFlashedElement(
+        dispatch(articleActions.setFlashedElement(
             'select', null, null, null
         ))
     }, [historyItem])

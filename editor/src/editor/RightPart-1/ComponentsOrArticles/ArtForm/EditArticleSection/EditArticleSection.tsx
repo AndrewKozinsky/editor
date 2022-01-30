@@ -7,7 +7,7 @@ import {
     useGetToEditorFn,
     useIsArticleInEditor
 } from './EditArticleSection-func'
-import articleFormMsg from '../../../../../messages/articleFormMessages'
+import articleFormMsg from 'messages/articleFormMessages'
 import makeClasses from './EditArticleSection-classes'
 
 // TODO Что делает эта функция?

@@ -1,5 +1,5 @@
 import React from 'react'
-import serverMsg from '../../../messages/serverMessages'
+import serverMsg from 'messages/serverMessages'
 import FCType from '../FCType'
 import getFirstInvalidFieldName from '../misc/getFirstInvalidFieldName'
 import getReadyFieldsValues from '../misc/getReadyFieldsValues'

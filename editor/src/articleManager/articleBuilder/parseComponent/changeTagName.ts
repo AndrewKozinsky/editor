@@ -6,7 +6,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
  * The function set a tag name to html element if it necessary
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  */
-export function changeTagName(consistObj: ConsistObj) {
+export default function changeTagName(consistObj: ConsistObj) {
     const tagName = getTagName(consistObj.dElem, consistObj.tempElem)
     if (tagName) {
         consistObj.htmlElem.tag = tagName

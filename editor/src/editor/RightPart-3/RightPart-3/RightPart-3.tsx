@@ -4,8 +4,8 @@ import HeaderPage from 'common/HeaderPage/HeaderPage'
 import SettingsUserTabContent from '../SettingsUserTabContent/SettingsUserTabContent'
 import SettingsEditorTabContent from '../SettingsEditorTabContent/SettingsEditorTabContent'
 import userTabContentMsg from 'messages/userTabContentMessages'
-import './RightPart-3.scss'
 import editorTabContentMsg from 'messages/editorTabContentMessages'
+import './RightPart-3.scss'
 
 
 type RightPart3PropType = {

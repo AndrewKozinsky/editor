@@ -6,7 +6,6 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { useDispatch } from 'react-redux'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-// import {articleMenuMessages} from 'messages/articleMenuMessages'
 import bridge from '../../../../bridge/bridge'
 import articleMenuMsg from 'messages/articleMenuMessages'
 

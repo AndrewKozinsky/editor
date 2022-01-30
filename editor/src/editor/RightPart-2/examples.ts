@@ -97,7 +97,7 @@ const gridTemplate: TempCompTypes.Content = {
         {
             elemId: 'paragraph',
             elemName: 'Paragraph',
-            elemTextInside: true
+            addTextComponent: true
         }
     ]
 }*/
@@ -154,7 +154,7 @@ const gridTemplate: TempCompTypes.Content = {
                     {elemTagValueId: 5, elemTagValueName: 'main'},
                 ]
             },
-            elemTextInside: true
+            addTextComponent: true
         },
         {
             elemId: 'mediterranean',
@@ -164,12 +164,11 @@ const gridTemplate: TempCompTypes.Content = {
 }*/
 
 const burgerTemplate2: TempCompTypes.Content = {
-    name: 'Burger',
-    html: '<div class="burger burger--white" data-em-id="general"><div class="burger__top"><div class="burger__cell burger__cell--round" data-em-id="cell"></div></div><div class="burger__mediterranean" data-em-id="mediterranean"></div><div class="burger__bottom" data-em-id="bottom"><div class="burger__bottom-inner" data-em-id="bottom-inner">Text</div></div></div>',
+    html: '<div class="burger burger--white" data-em-id="root"><div class="burger__top"><div class="burger__cell burger__cell--round" data-em-id="cell"></div></div><div class="burger__mediterranean" data-em-id="mediterranean"></div><div class="burger__bottom" data-em-id="bottom"><div class="burger__bottom-inner" data-em-id="bottom-inner">Text</div></div></div>',
     elems: [
         {
-            elemId: 'general',
-            elemName: 'Главная обёртка',
+            elemId: 'root',
+            elemName: 'Бургер',
             elemAttrs: [
                 {
                     elemAttrId: 'class-attr-id',
@@ -215,7 +214,7 @@ const burgerTemplate2: TempCompTypes.Content = {
                     {elemTagValueId: '5', elemTagValueName: 'main'},
                 ]
             },
-            elemTextInside: true
+            addTextComponent: true
         },
         {
             elemId: 'mediterranean',
@@ -228,13 +227,12 @@ const burgerTemplate2: TempCompTypes.Content = {
         {
             elemId: 'bottom-inner',
             elemName: 'Нижняя внутренняя часть',
-            elemTextInside: true
+            addTextComponent: true
         },
     ]
 }
 
-const owl: TempCompTypes.Content = {
-    name: 'Owl',
+/*const owl: TempCompTypes.Content = {
     html: '<img src="https://sun1-21.userapi.com/s/v1/if1/bsJdaymTpLw6t5n_OJVsEPCo23C6WjziDFitWPJvsquJimvK-49oDC6p9doAoP7gFP9hi9fq.jpg?size=200x200&quality=96&crop=165,1,439,439&ava=1" alt="duck" width="150" data-em-id="image" />',
     elems: [
         {
@@ -249,7 +247,7 @@ const owl: TempCompTypes.Content = {
             ],
         }
     ]
-}
+}*/
 
 
 // ================================================

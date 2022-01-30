@@ -1,9 +1,8 @@
 import React, { ReactElement, useRef } from 'react'
-import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
-import config from '../../../utils/config'
-import { getFromLocalStorage } from '../../../utils/miscUtils'
+import config from 'utils/config'
+import { getFromLocalStorage } from 'utils/miscUtils'
 import { useSetFocus } from './Button-func'
 import makeClasses from './Button-classes'
 import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
@@ -27,7 +26,7 @@ export type ButtonPropType = {
     autoFocus?: boolean | number, // Нужно ли ставить фокус при загрузке. Если передаётся число, то фокусировка будет поставлена через указанное количество миллисекунд
 }
 
-export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash'| 'btnSignCode'
+export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash' | 'btnSignCode' | 'btnSignText'
     | 'btnSignAdd' | 'btnSignJson' | 'btnSignClose' | 'btnSignExit' | 'btnSignEdit' | 'btnSignUndo' | 'btnSignRedo'
 
 
@@ -35,8 +34,8 @@ export type ButtonIconType = 'btnSignSave' | 'btnSignFolder' | 'btnSignTrash'| '
 export default function Button(props: ButtonPropType) {
 
     let {
-        type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
-        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значёк)
+        type = 'button', // Тип кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значок)
+        view = 'standard', // Вид кнопки. Варианты: standard (стандартная кнопка), onlyIcon (только значок)
         color = 'base', // Цвет кнопки. Варианты: base (стандартный цвет), accent (акцентный цвет)
         icon, // Тип значка
         text, // Текст на кнопке
@@ -64,7 +63,7 @@ export default function Button(props: ButtonPropType) {
         if (editorLanguage === 'rus') btnText = 'Отправка...'
     }
 
-    // Если включена загрузка, то заблокировать кнопку и убрать значёк
+    // Если включена загрузка, то заблокировать кнопку и убрать значок
     if (loading) {
         disabled = true
         icon = undefined

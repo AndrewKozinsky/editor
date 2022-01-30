@@ -1,6 +1,7 @@
 const JSON5 = require('json5')
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import {
+    checkElemTagsValues,
     checkElemAttrView,
     checkElemTagsView,
 //     checkForDifferentObjAttrValuesInArr,
@@ -20,14 +21,13 @@ export default function checkComponentCode(code: string) {
     try {
         const codeObj: TempCompTypes.Content = JSON5.parse(code)
 
-        // Проверки полей name, html и elems
-        errorsArr.push(...checkProp(codeObj.name, 'name', 'string', true))
+        // Проверки полей html и elems
         errorsArr.push(...checkProp(codeObj.html, 'html', 'string', true))
         errorsArr.push(...isMarkupCorrect(codeObj))
-        errorsArr.push(...checkProp(codeObj.elems, 'elems', 'arrayOfObjects', false, checkElems.bind(this, codeObj.elems)))
+        errorsArr.push(...checkProp(codeObj.elems, 'elems', 'arrayOfObjects', true, checkElems.bind(this, codeObj.elems)))
 
         // Проверка, что в объекте codeObj нет лишних полей
-        errorsArr.push(...checkForExtraProps(codeObj, ['html', 'elems', 'name']))
+        errorsArr.push(...checkForExtraProps(codeObj, ['html', 'elems']))
 
         return errorsArr
     }
@@ -52,13 +52,13 @@ function checkElems(elems: TempCompTypes.Elems): string[] {
         errorsArr.push(...checkProp(elem.elemTags, 'elemTags', 'object', false, checkElemTags.bind(this, elem.elemTags)))
         errorsArr.push(...checkProp(elem.elemHidden, 'elemHidden', 'boolean', false))
         errorsArr.push(...checkProp(elem.elemCanDuplicate, 'elemCanDuplicate', 'boolean', false))
-        errorsArr.push(...checkProp(elem.elemTextInside, 'elemTextInside', 'boolean', false))
+        errorsArr.push(...checkProp(elem.addTextComponent, 'addTextComponent', 'boolean', false))
 
         // Проверка, что в объекте elem нет лишних полей
         errorsArr.push(
             ...checkForExtraProps(
                 elem,
-                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'elemTextInside']
+                ['elemId', 'elemName', 'elemAttrs', 'elemTags', 'elemHidden', 'elemCanDuplicate', 'addTextComponent']
             )
         )
     })
@@ -147,34 +147,10 @@ export function checkElemTags(elemTagsObj: TempCompTypes.ElemTags): string[] {
     return errorsArr
 }
 
-/**
- * Проверка массива code.elems[0].elemTags[0].elemTagsValues.
- * @param {Array} elemTagsValues — массив code.elems[0].elemTags[0].elemTagsValues.
- */
-function checkElemTagsValues(elemTagsValues: TempCompTypes.ElemTagsValues) {
-    const errorsArr: string[] = []
-
-    elemTagsValues.forEach(elemTagsValue => {
-        // Проверка полей объекта elemTagsValue...
-        errorsArr.push(...checkProp(elemTagsValue.elemTagValueId, 'elemTagValueId', 'string', true))
-        errorsArr.push(...checkProp(elemTagsValue.elemTagValueName, 'elemTagValueName', 'string', true))
-
-        // Проверка, что в объекте elemTagsValue нет лишних полей
-        errorsArr.push(
-            ...checkForExtraProps( elemTagsValue, ['elemTagValueId', 'elemTagValueName'] )
-        )
-    })
-
-    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
-
-    return errorsArr
-}
-
 
 
 // Пример кода шаблона сайта (используется в примере шаблона)
 export const componentCodeExample = `{
-    name: 'Banner',
     html: '<div class="banner banner--pattern-1" data-em-id="banner">
                <div class="banner__container">
                    <div data-em-id="cell"></div>
@@ -211,7 +187,7 @@ export const componentCodeExample = `{
             },
             elemHidden: true,
             elemCanDuplicate: false,
-            elemTextInside: true
+            addTextComponent: true
         }
     ]
 }`

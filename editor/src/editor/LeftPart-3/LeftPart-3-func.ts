@@ -1,5 +1,5 @@
 import { ItemsListPropType, ItemType } from 'common/ItemsList/ItemsList'
-import settingsPanelMsg from '../../messages/settingsPanelMessages'
+import settingsPanelMsg from 'messages/settingsPanelMessages'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'

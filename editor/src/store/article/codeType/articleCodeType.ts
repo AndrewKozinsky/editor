@@ -14,7 +14,10 @@ namespace ArticleTypes {
     }
 
     // Массив, в котором находятся компоненты
-    export type Components = Component[]
+    export type Components = MixComponent[]
+
+    // Обычный или текстовый компонент
+    export type MixComponent = Component | SimpleTextComponent
 
     // =================================================================================================================
 
@@ -26,7 +29,6 @@ namespace ArticleTypes {
         dCompId: Id // 1
         // Component template id
         tCompId: Id
-        dCompLayer?: Layer
         // Component elements
         dElems?: ComponentElems
     }
@@ -69,10 +71,7 @@ namespace ArticleTypes {
     //
     export type ComponentElemAttribValue = TempCompTypes.ElemAttrValueId[] | TempCompTypes.ElemAttrValueId // ['4', '6'] OR 'banner'
 
-    export type ElemChildren = Component[] | SimpleTextComponent
-
-    // Обычный или текстовый компонент
-    export type MixComponent = Component | SimpleTextComponent
+    export type ElemChildren = MixComponent[]
 
 
     // =================================================================================================================
@@ -82,7 +81,10 @@ namespace ArticleTypes {
     export type SimpleTextComponent = {
         dCompType: 'simpleTextComponent'
         dCompId: Id // 1
-        text: string
+        text: string,
+        dCompLayer?: {
+            layerHidden?: boolean // true
+        }
     }
 }
 

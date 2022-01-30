@@ -1,4 +1,4 @@
-import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
+import { HTMLObjArrType } from './htmlStringToObject'
 
 /**
  * The function gets html structure objects array and turns it to HTML-string

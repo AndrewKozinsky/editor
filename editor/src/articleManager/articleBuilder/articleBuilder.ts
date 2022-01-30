@@ -3,16 +3,17 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createJsxFromComponents from './componentsToJSX'
 import createHTMLFromComponents from './createHTMLFromComponents'
-import { HTMLObjArrType } from './parseComponent/htmlStringToObject'
-import { parseComponent } from './parseComponent/parseComponent'
+import { HTMLObjArrType } from './htmlStringToObject'
+import parseTextComponent from './parseTextComponent'
+import parseComponent from './parseComponent/parseComponent'
 
 /**
  * Функция превращает данные статьи и шаблоны компонентов в JSX для отрисовки в IFrame-е.
  * @param {Object} articleData — данные статьи.
- * @param tempComps — масссив шаблонов компонентов.
+ * @param tempComps — массив шаблонов компонентов.
  */
 export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): ReactElement[] {
-    const componentsArr = createComponentsArr(articleData, tempComps)
+    const componentsArr = createComponentsArr(articleData.dComps, tempComps)
 
     // Create JSX from components array
     return createJsxFromComponents(componentsArr)
@@ -26,18 +27,29 @@ export function turnArticleDataToJSX(articleData: ArticleTypes.Article, tempComp
  * @param tempComps — массив шаблонов компонентов.
  */
 export function turnArticleDataToHTML(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]): string {
-    const componentsArr = createComponentsArr(articleData, tempComps)
+    const componentsArr = createComponentsArr(articleData.dComps, tempComps)
 
     // Create HTML from components array
     return createHTMLFromComponents(componentsArr)
 }
 
-// TODO Что делает эта функция?
-function createComponentsArr(articleData: ArticleTypes.Article, tempComps: TempCompTypes.TempComp[]) {
+/**
+ * Функция превращает данные статьи и шаблоны компонентов в массив html-подобных объектов.
+ * В других сценариях его можно превратить в JSX.
+ * @param {Array} dComps — массив с данными компонентов.
+ * @param {Array} tempComps — массив шаблонов компонентов
+ */
+export function createComponentsArr(dComps: ArticleTypes.Components, tempComps: TempCompTypes.TempComp[]): HTMLObjArrType.Arr {
     // Переберу массив компонентов
-    let componentsArr: HTMLObjArrType.Arr = articleData.dComps.map(
-        compObj => parseComponent(<ArticleTypes.Component>compObj, tempComps)
+    let componentsArr = dComps.map(compObj => {
+            if (compObj.dCompType === 'simpleTextComponent') {
+                return parseTextComponent(compObj)
+            }
+            else if (compObj.dCompType === 'component') {
+                return parseComponent(<ArticleTypes.Component>compObj, tempComps)
+            }
+        }
     )
 
-    return componentsArr
+    return componentsArr as HTMLObjArrType.Arr
 }

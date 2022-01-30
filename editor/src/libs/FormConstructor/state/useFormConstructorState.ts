@@ -41,7 +41,7 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
         )
     }, [
         fields, setFields, submitCounter,
-        // formConfig, setSubmitBtnDisabled, setCommonError
+        formConfig, setSubmitBtnDisabled, setCommonError
     ])
 
     const onFormSubmit = useCallback((e) => {

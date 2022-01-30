@@ -1,6 +1,6 @@
-import LayersConfigType from './LayersConfigType'
+// import LayersConfigType from './LayersConfigType'
 
-const layersConfigExample: LayersConfigType.Layers = [
+/*const layersConfigExample: LayersConfigType.Layers = [
     {
         key: '1',
         type: 'component',
@@ -106,5 +106,5 @@ const layersConfigExample: LayersConfigType.Layers = [
         hasChildren: true,
         moveHovered: true
     }
-]
-export default layersConfigExample
+]*/
+// export default layersConfigExample

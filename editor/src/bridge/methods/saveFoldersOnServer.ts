@@ -1,6 +1,5 @@
-import { FolderType } from '../../editor/RightPart-1/ComponentsOrArticles/types'
+import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-// import DragFilesTreeType from 'libs/DragFilesTree/types'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import { store } from 'store/rootReducer'

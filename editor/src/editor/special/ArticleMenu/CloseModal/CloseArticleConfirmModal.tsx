@@ -6,8 +6,9 @@ import actions from 'store/rootAction'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import Button from 'common/formElements/Button/Button'
 import articleMenuMsg from 'messages/articleMenuMessages'
+import articleActions from 'store/article/articleActions'
 
-// TODO Что делает эта функция?
+/** Модальное окно с вопросом нужно ли закрывать не сохранённую статью */
 export default function CloseArticleConfirmModal() {
     const dispatch = useDispatch()
     const { history, historyCurrentIdx, articleId } = useGetArticleSelectors()
@@ -15,14 +16,16 @@ export default function CloseArticleConfirmModal() {
     // Функция сохраняющая статью, очищающая редактор и закрывающая модальное окно
     const saveArticle = useCallback(async function () {
         // await articleManager.saveArticle(history, historyCurrentIdx, articleId)
-        store.dispatch( actions.article.clearArticle() )
+
+        store.dispatch( articleActions.clearArticle() )
         dispatch(actions.modal.closeModal())
-    }, [])
+    }, [history, historyCurrentIdx, articleId])
 
     // Функция очищающая редактор от статьи и закрывающая модальное окно
     const clearArticle = useCallback(function () {
-        store.dispatch( actions.article.clearArticle() )
+        store.dispatch( articleActions.clearArticle() )
         dispatch(actions.modal.closeModal())
+        store.dispatch( actions.settings.setMainTab(0) )
     }, [])
 
     const bottomButtons = [

@@ -1,13 +1,14 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
-import htmlStringToObject, { HTMLObjArrType } from './htmlStringToObject'
-import { setExtraAttribsToMainTag } from './setExtraAttribsToMainTag'
-import { putRepeatedElems } from './putRepeatedElems'
-import { getConsistObjArr } from './getConsistObjArr'
-import { changeTagName } from './changeTagName'
-import { setAttribs } from './setAttribs'
+import htmlStringToObject, { HTMLObjArrType } from '../htmlStringToObject'
+import { setExtraAttribsToRootTag } from './setExtraAttribsToRootTag'
+import putRepeatedElems from './putRepeatedElems'
+import getConsistObjArr from './getConsistObjArr'
+import changeTagName from './changeTagName'
+import setAttribs from './setAttribs'
 import { insertChildren } from './insertChildren'
+import removeTextNodes from './removeTextNodes'
 
 /**
  * Функция получает данные компонента и сливает с шаблоном компонента. В результате получается HTML-объект.
@@ -15,7 +16,9 @@ import { insertChildren } from './insertChildren'
  * @param {Object} compData — данные компонента
  * @param {Array} tempComps — массив шаблонов компонентов
  */
-export function parseComponent(compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps): HTMLObjArrType.Tag {
+export default function parseComponent(
+    compData: ArticleTypes.Component, tempComps: TempCompTypes.TempComps
+): HTMLObjArrType.Tag {
     // Get component template by its tCompId
     let template = articleManager.getTemplate(tempComps, compData.tCompId)
 
@@ -24,11 +27,14 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
 
     // Convert html string to html-object
     let htmlObjOriginal = htmlStringToObject(htmlStr)
-
     const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
 
+    // Удалить из htmlObj текстовые узлы потому что на этапе создания данных компонента
+    // они уже превращены в текстовые компоненты
+    removeTextNodes(htmlObj)
+
     // Поставить главной обёртке htmlObj дополнительные атрибуты
-    setExtraAttribsToMainTag(htmlObj, compData)
+    setExtraAttribsToRootTag(htmlObj, compData, template)
 
     // Based on information from dataComp I will find elements that should have duplicates and put they into html-object.
     putRepeatedElems(htmlObj, compData)
@@ -36,7 +42,6 @@ export function parseComponent(compData: ArticleTypes.Component, tempComps: Temp
     // Array of objects consists of objects with correspondence between component template, data and html-object
     // Другими словами массив объектов с шаблонами элементов и данными элементов.
     const consistObj = getConsistObjArr(template, compData, htmlObj)
-    if (!consistObj) return htmlObj
 
     for(let consistData of consistObj) {
         changeTagName(consistData)

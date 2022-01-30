@@ -10,7 +10,6 @@ import Notice from 'common/textBlocks/Notice/Notice'
 import Button from 'common/formElements/Button/Button'
 import { smoothMoveToEditor } from '../EntrancePages/EntrancePages-func'
 import getChangeResetPasswordFormConfig from './formConfig'
-import regMenuMsg from 'messages/regMenuMessages'
 import changeResetPasswordFormMsg from 'messages/changeResetPasswordFormMessages'
 
 

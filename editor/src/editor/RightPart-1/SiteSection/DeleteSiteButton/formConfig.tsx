@@ -1,4 +1,3 @@
-// import React from 'react'
 import FCType from 'libs/FormConstructor/FCType'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'

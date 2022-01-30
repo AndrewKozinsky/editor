@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'

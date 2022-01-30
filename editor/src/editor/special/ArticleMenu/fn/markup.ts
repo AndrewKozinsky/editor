@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 
-// TODO Что делает эта функция?
+/** Функция проверяет заблокирована ли кнопка показа разметки статьи */
 export function useIsMarkupBtnDisabled() {
     const { articleId } = useGetArticleSelectors()
     const historyItem = articleManager.hooks.getCurrentHistoryItem()

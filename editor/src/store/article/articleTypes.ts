@@ -1,10 +1,9 @@
 import TempCompTypes from './codeType/tempCompCodeType'
+import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import ArticleTypes from './codeType/articleCodeType'
-import DragFilesTreeType from 'libs/DragFilesTree/types'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 
 namespace StoreArticleTypes {
-
     export type HistoryItems = HistoryItem[]
 
     export type HistoryItem = {
@@ -13,37 +12,28 @@ namespace StoreArticleTypes {
         // Flash rectangles coordinates
         hoveredElem: FlashedElem
         selectedElem: FlashedElem
-        moveHoveredComp: MoveFlashedComp
-        moveSelectedComp: MoveFlashedComp
-        // Current text component
-        selectedTextComp: SelectedTextComp
+        moveHoveredComp: FlashedElem
+        moveSelectedComp: FlashedElem
     }
 
-    export type FlashedTagType = null | 'element' | 'rootElement' | 'component'
+    export type FlashedTagType = null | 'element' | 'rootElement' | 'textComponent'
     export type FlashedElem = {
         tagType: FlashedTagType
         dataCompId: FlashedElemId
         dataElemId: FlashedElemId
     }
-    export type MoveFlashedComp = {
-        dataCompId: FlashedElemId
-    }
-
-    export type SelectedTextComp = {
-        dataCompId: FlashedElemId
-    }
 
     export type FlashedElemId = null | ArticleTypes.Id
 
     // Components
-    export type TempComps = TempComp[]
+    // export type TempComps = TempComp[]
 
     // A component template
-    export type TempComp = {
-        id: number
+    /*export type TempComp = {
+        id: TempCompTypes.Id
         name: string
         code: TempCompTypes.TempComp
-    }
+    }*/
 
     export type LinksObj = {
         $window:   StoreArticleTypes.WindowLink
@@ -57,15 +47,6 @@ namespace StoreArticleTypes {
     export type DocumentLink = null | HTMLDocument
     export type HeadLink = null | HTMLHeadElement
     export type BodyLink = null | HTMLBodyElement
-
-    export type PressedKeyType = null | string
-    export type PressedKey = {
-        code: PressedKeyType, // Тип клавиши. null обозначает необрабатываемую клавишу, Text символьная, остальные значения берутся из e.code
-        value?: string // Если code Letter, то сюда заносится значение символа
-        altKey: boolean
-        ctrlKey: boolean
-        shiftKey: boolean
-    }
 
     // Тип объекта возвращаемый функциями манипуляции компонентами (вставки, удаления, клонирования)
     // Этот объект требуется для экшена и редьюсера ставящий новый объект истории статьи
@@ -87,13 +68,6 @@ namespace StoreArticleTypes {
             $head:     HeadLink
             $body:     BodyLink
         }
-    }
-
-    // Установка данных последней введённого символа
-    export const SET_PRESSED_KEY = 'SET_PRESSED_KEY'
-    export type SetPressedKeyAction = {
-        type: typeof SET_PRESSED_KEY,
-        payload: PressedKey
     }
 
     // Set components templates array
@@ -147,7 +121,7 @@ namespace StoreArticleTypes {
     export const SET_TEMP_COMP_FOLDERS = 'SET_TEMP_COMP_FOLDERS'
     export type SetTempCompFoldersAction = {
         type: typeof SET_TEMP_COMP_FOLDERS
-        payload: DragFilesTreeType.Items
+        payload: TempCompsTreeType.Items
     }
 
     // Типы типа и тип экшена
@@ -170,13 +144,6 @@ namespace StoreArticleTypes {
         }
     }
 
-    // Установка id выделенного текстового компонента
-    export const SET_TEXT_COMP_ID = 'SET_TEXT_COMP_ID'
-    export type SetTextCompIdAction = {
-        type: typeof SET_TEXT_COMP_ID,
-        payload: number | null
-    }
-
     export const CREATE_AND_SET_HISTORY_ITEM = 'CREATE_AND_SET_HISTORY_ITEM'
     export type CreateAndSetHistoryItemAction = {
         type: typeof CREATE_AND_SET_HISTORY_ITEM
@@ -196,13 +163,6 @@ namespace StoreArticleTypes {
         type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
     }
 
-    // Установка id выделенного текстового компонента
-    export const UPDATE_CURRENT_ARTICLE = 'UPDATE_CURRENT_ARTICLE'
-    export type UpdateCurrentArticleAction = {
-        type: typeof UPDATE_CURRENT_ARTICLE,
-        payload: HistoryItem
-    }
-
     // Очистка статьи
     export const CLEAR_ARTICLE = 'CLEAR_ARTICLE'
     export type ClearArticleAction = {
@@ -212,7 +172,6 @@ namespace StoreArticleTypes {
 
     export type ArticleAction =
         | SetLinksAction
-        | SetPressedKeyAction
         | SetArticleIdAction
         | SetArticleAction
         | ChangeSiteTemplateIdAction
@@ -223,11 +182,9 @@ namespace StoreArticleTypes {
         | SetTempCompFoldersAction
         | SetTempCompAction
         | SetFlashedElementAction
-        | SetTextCompIdAction
         | CreateAndSetHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
-        | UpdateCurrentArticleAction
         | ClearArticleAction
 }
 

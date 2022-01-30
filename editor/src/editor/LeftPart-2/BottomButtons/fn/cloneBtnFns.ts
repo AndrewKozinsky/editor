@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import actions from 'store/rootAction'
+import articleActions from 'store/article/articleActions'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
@@ -28,24 +28,25 @@ export function useIsCloneDisabled() {
 
 /**
  * Хук возвращает обработчик нажатия на кнопку копирования компонента/элемента.
- * @param {Number} deep — глубина копирования: 1 (компонент), 2 (с атрибутами), 3 (с атрибутами и детьми)
+ * @param {Number} deep — глубина копирования: 1 (компонент без атрибутов), 2 (с атрибутами), 3 (с атрибутами и детьми)
  */
 export function useGetCloneHandler(deep: 1 | 2 | 3) {
     const dispatch = useDispatch()
+
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
     const { tempComps } = useGetArticleSelectors()
 
     return useCallback(function () {
         // Кнопка заблокирована если статья не загружена
         if (!historyItem) return
-        const { selectedElem, moveSelectedComp } = historyItem
+        const { selectedElem } = historyItem
 
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(
             tempComps, historyItem.article, selectedElem, deep
         )
 
-        dispatch(actions.article.createAndSetHistoryItem(
+        dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
     }, [historyItem])

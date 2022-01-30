@@ -25,13 +25,13 @@ namespace LayersConfigType {
         hasSelectedChild?: boolean // Содержит выделенный слой
         hasMovedChild?: boolean // Содержит перемещаемый слой
 
-        collapseHandler?: () => void // Обработчик щелчка по кнопке сворачивания/разворачивания слоя
-        showHideHandler?: () => void // Обработчик щелчка по кнопке скрытия/раскрытия слоя
+        collapseHandler?: (e: any) => void // Обработчик щелчка по кнопке сворачивания/разворачивания слоя
+        showHideHandler?: (e: any) => void // Обработчик щелчка по кнопке скрытия/раскрытия слоя
         onClickHandler?: (e: any) => void // Обработчик щелчка по слою
         onMouseEnterHandler?: (e: any) => void // Обработчик щелчка по слою
     }
 
-    export type LayerType = 'component' | 'element' | 'text'
+    export type LayerType = 'rootElement' | 'element' | 'text'
 
     // Массив с ключами свёрнутых компонентов/элементов
     export type CollapsedItems = string[]

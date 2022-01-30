@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { makeCN } from 'src/utils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import './EditorMain.scss'
 
@@ -30,7 +30,6 @@ export function useGetRootClass() {
 
         // Классы редактора: нормальный вид и отдалённый от зрителя
         const normalClasses = getClasses()
-        const scaleDownClasses = getClasses('scaleDown')
         const scaleDownTransparencyClasses = getClasses('scaleDownTransparent')
 
         // В зависимости от вида показывать или нормальный вид редактора или отдалённый
