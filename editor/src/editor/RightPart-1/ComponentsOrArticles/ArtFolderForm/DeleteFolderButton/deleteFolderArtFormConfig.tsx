@@ -3,6 +3,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import articleFolderFormMsg from 'messages/articleFolderFormMessages'
+import { getState } from '../../../../../utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис
@@ -19,7 +20,7 @@ const deleteFolderArtFormConfig: FCType.Config = {
         },
     },
     async requestFn(readyFieldValues) {
-        const { currentArtItemId } = store.getState().sites.articleSection
+        const { currentArtItemId } = getState().sites.articleSection
 
         await bridge.deleteResource('articles', 'folder', currentArtItemId)
         return {status: 'success'}

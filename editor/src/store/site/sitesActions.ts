@@ -2,7 +2,6 @@ const JSON5 = require('json5')
 import FilesTreeType from '../../types/FilesTreeType'
 import StoreSitesTypes from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
-import { store } from 'store/rootReducer'
 import config from 'utils/config'
 import { getFromLocalStorage } from 'utils/miscUtils'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
@@ -78,7 +77,7 @@ const sitesActions = {
     requestSiteTemplates() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // id текущего сайта для которого нужно получить шаблоны
-            const siteId: StoreSitesTypes.CurrentSiteId = store.getState().sites.currentSiteId
+            const siteId: StoreSitesTypes.CurrentSiteId = getState().sites.currentSiteId
 
             // Если не передан id сайта, то обнулить массив шаблонов сайта
             // потому что выбрали новый сайт
@@ -216,7 +215,7 @@ const sitesActions = {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
             // id выбранного шаблона компонента, данные которого нужно скачать
-            const { currentCompItemId } = store.getState().sites.componentSection
+            const { currentCompItemId } = getState().sites.componentSection
 
             // Если id компонента не передан, то обнулить данные компонента в Хранилище
             if (!currentCompItemId) {

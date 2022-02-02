@@ -1,6 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { ComponentRequestServerResponse } from './componentServerResponseType'
+import StoreSitesTypes from 'store/site/sitesTypes'
 
 /**
  * Функция сохраняет шаблон компонента
@@ -8,7 +9,7 @@ import { ComponentRequestServerResponse } from './componentServerResponseType'
  * @param {Number} content — код компонента
  */
 export async function updateComponentRequest(
-    compItemId: number, content: string
+    compItemId: StoreSitesTypes.CurrentCompItemId, content: string
 ) {
     const options = {
         method: 'PATCH',

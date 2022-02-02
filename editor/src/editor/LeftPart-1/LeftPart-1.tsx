@@ -9,7 +9,7 @@ import {
 import ItemsList from 'common/ItemsList/ItemsList'
 import Wrapper from 'common/Wrapper/Wrapper'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
-import sitesPanelMsg from 'messages/sitesPanelMessages'
+import sitesPanelMsg from 'messages/groupsPanelMessages'
 import './LeftPart-1.scss'
 
 

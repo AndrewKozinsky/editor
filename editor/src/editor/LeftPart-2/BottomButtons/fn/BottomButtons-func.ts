@@ -2,13 +2,14 @@ import { useEffect, useState } from 'react'
 import { setUpperCaseForFirstLetter } from 'utils/stringUtils'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import iconsCollector from '../../../../common/icons/js/getIcon'
 
 /**
  * Хук возвращает тип значка у кнопок
  * @param {String} btnKey — тип кнопки
  */
 export function useGetIconType(btnKey: string) {
-    const [iconType, setIconType] = useState('elBtnSignVisible')
+    const [iconType, setIconType] = useState<keyof typeof iconsCollector>('elBtnSignVisible')
     const visibleIconType = useGetVisibleIconType()
 
     useEffect(function () {
@@ -18,9 +19,8 @@ export function useGetIconType(btnKey: string) {
             resultType = visibleIconType
         }
 
-        setIconType(
-            'elBtnSign' + setUpperCaseForFirstLetter(resultType)
-        )
+        // @ts-ignore
+        setIconType('elBtnSign' + setUpperCaseForFirstLetter(resultType))
     }, [btnKey, visibleIconType])
 
     return iconType

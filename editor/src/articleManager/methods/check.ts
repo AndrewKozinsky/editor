@@ -8,7 +8,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
  * Функция проверяет можно ли перемещать компонент выделенный для перемещения
  * @param {String} direction — направление перемещения компонента: левее или правее.
  * @param {Array} tempCompArr — массив шаблонов компонентов
- * @param {Array} dataCompArr — массив всех компонентов
+ * @param {Array} dComps — массив всех компонентов
  * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
  * @param {Number} moveCompId — id данных перемещаемого компонента
  */
@@ -16,12 +16,23 @@ export function canMoveCompMoveToLeftOrRight(
     this: typeof articleManager,
     direction: 'left' | 'right',
     tempCompArr: TempCompTypes.TempComps,
-    dataCompArr: ArticleTypes.Components,
+    dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
     moveCompId: ArticleTypes.Id
 ) {
     // Нельзя перемещать если перемещаемый компонент не выделен
-    return moveCompId
+    if(!moveCompId) return false
+
+    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
+    const movedDComp = this.getComponent(dComps, moveCompId)
+    if (movedDComp && movedDComp.dCompType === 'component') {
+        // Найти выделенный элемент внутри перемещаемого
+        if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
+            return false
+        }
+    }
+
+    return true
 
     // После можно дописать код и определять, что если перемещаемый компонент после перемещения
     // будет находиться в том же месте, что и раньше, то такие перемещения запрещать

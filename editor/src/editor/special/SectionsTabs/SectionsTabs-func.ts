@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
+import iconsCollector from '../../../common/icons/js/getIcon'
 import { MainTabDataType } from '../MainTab/MainTab'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import mainTabsMsg from 'messages/mainTabsMessages'
@@ -23,14 +24,18 @@ export function useGetTabData(): MainTabDataType[] {
     return tabsData
 }
 
+type TabNameType = (keyof typeof iconsCollector)
+type TabNameTypeArr = TabNameType[]
+const tabNamesArr: TabNameTypeArr = ['mainTabMaterials', 'mainTabEditor', 'mainTabSettings', 'mainTabHelp']
+
 /**
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} activeTabNum — номер активной вкладки
  * @param {Object} mainTabsMsg — номер активной вкладки
  */
 function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[] {
-    // Сгенеривать данные трёх вкладок
-    return ['mainTabMaterials', 'mainTabEditor', 'mainTabSettings', 'mainTabHelp']
+    // Сгенерировать данные трёх вкладок
+    return tabNamesArr
         .map((type, i) => {
             return {
                 title: mainTabsMsg[type],

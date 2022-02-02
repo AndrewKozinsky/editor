@@ -129,7 +129,7 @@ export function useGetAfterCollapseFolder() {
 }
 
 
-/** The hook returns Next btn click handler  */
+/** Хук возвращает обработчики для кнопок вставки нового компонента до или после выделенного  */
 export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const dispatch = useDispatch()
 

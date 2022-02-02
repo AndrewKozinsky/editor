@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
-import siteSectionMsg from 'messages/siteSectionMessages'
+import siteSectionMsg from 'messages/groupSectionMessages'
 import createSiteRequest, { CreateSiteRequestValuesType } from 'requests/editor/sites/createSiteRequest'
 import { afterSubmit } from './SiteSection-func'
 

@@ -5,6 +5,7 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 import deleteSiteTemplateRequest from 'requests/editor/siteTemplate/deleteSiteTemplateRequest'
 import updateSiteRequest from 'requests/editor/sites/updateSiteRequest'
 import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
+import { getState } from '../../../../utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления сайта
@@ -17,7 +18,7 @@ const deleteSiteTemplateModalConfig: FCType.Config = {
         },
     },
     async requestFn() {
-        const { currentTemplateId } = store.getState().sites.siteTemplatesSection
+        const { currentTemplateId } = getState().sites.siteTemplatesSection
         return await deleteSiteTemplateRequest(currentTemplateId)
     },
     afterSubmit(response, outerFns, formDetails) {
@@ -43,7 +44,7 @@ export default deleteSiteTemplateModalConfig
 /** Функция вычисляет является ли удаляемый шаблон сайта шаблоном по умолчанию.
  * Если является, то делается запрос на сервер чтобы очистить id шаблона сайта по умолчанию */
 function clearDefaultSiteTemplateIfTemplateWasDeleted() {
-    const deletedTempId = store.getState().sites.siteTemplatesSection.currentTemplateId
+    const deletedTempId = getState().sites.siteTemplatesSection.currentTemplateId
     const currentSiteTempId = getCurrentSiteTempId()
 
     if (deletedTempId === currentSiteTempId) {
@@ -53,9 +54,9 @@ function clearDefaultSiteTemplateIfTemplateWasDeleted() {
 
 /** Функция возвращает id шаблона текущего сайта */
 function getCurrentSiteTempId() {
-    const { currentSiteId } = store.getState().sites
+    const { currentSiteId } = getState().sites
 
-    const currentSite = store.getState().sites.sites.find((site: StoreSitesTypes.Site) => {
+    const currentSite = getState().sites.sites.find((site: StoreSitesTypes.Site) => {
         return site.id === currentSiteId
     })
 
@@ -64,7 +65,7 @@ function getCurrentSiteTempId() {
 
 /** Функция делает запрос на обнуление шаблона текущего сайта */
 async function clearCurrentSiteDefaultTemplate() {
-    const { currentSiteId } = store.getState().sites
+    const { currentSiteId } = getState().sites
 
     await updateSiteRequest({ defaultSiteTemplateId: null }, currentSiteId)
 

@@ -3,6 +3,7 @@ $CN: modal-short-content;
 .#{$CN} {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .#{$CN}__content {

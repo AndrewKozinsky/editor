@@ -14,9 +14,9 @@ export function DeleteArticleModalContent() {
         <ModalShortContent
             header={articleFormMsg.deleteArticleConfirmationHeaderInModal}
             text={articleFormMsg.deleteArticleConfirmationTextInModal}
-            bottomElems={[
-                <FormConstructor config={deleteArticleModalConfig} state={formState} key={1} />
-            ]}
+            bottomElems={
+                [<FormConstructor config={deleteArticleModalConfig} state={formState} key={1} />]
+            }
         />
     )
 }

@@ -4,10 +4,10 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { useDispatch } from 'react-redux'
-import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import bridge from '../../../../bridge/bridge'
 import articleMenuMsg from 'messages/articleMenuMessages'
+import { getState } from 'utils/miscUtils'
 
 /** Модальное окно с вопросом действительно ли удалить редактируемую статью */
 export function DeleteArticleConfirmModal() {
@@ -17,7 +17,7 @@ export function DeleteArticleConfirmModal() {
 
     // Функция удаляющая выделенную папку
     const deleteArticle = useCallback(async function () {
-        const { articleId } = store.getState().article
+        const { articleId } = getState().article
 
         await bridge.deleteResource('articles', 'file', articleId)
 

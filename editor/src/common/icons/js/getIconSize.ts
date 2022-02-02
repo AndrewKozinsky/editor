@@ -34,10 +34,10 @@ export function getIconSize(type: string) {
         case 'mainTabEditor':
         case 'mainTabSettings':
         // Значки на вкладках сайта
-        case 'siteTabSite':
-        case 'siteTabTemplates':
-        case 'siteTabComponents':
-        case 'siteTabArticle':
+        case 'groupTabGroup':
+        case 'groupTabTemplates':
+        case 'groupTabComponents':
+        case 'groupTabArticle':
             return {
                 width: '31px',
                 height: '26px',

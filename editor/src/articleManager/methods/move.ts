@@ -70,7 +70,6 @@ export function moveCompNearComp(
 
     // Перемещаемый компонент
     const moveDComp = this.getComponent(dComps, moveCompId)
-    // debugger
 
     // Получение массива, в котором находится перемещаемый компонент и его индекса
     const moveCompParentArr = this.getCompParentArray(dComps, moveCompId)

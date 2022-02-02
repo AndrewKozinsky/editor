@@ -2,6 +2,7 @@ import articleManager from 'articleManager/articleManager'
 import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
+import { getState } from '../../utils/miscUtils'
 
 /**
  * Функция обновляет хеш версии папок шаблонов компонентов в статье,
@@ -11,9 +12,9 @@ import DragFilesTreeType from 'libs/DragFilesTree/types'
  */
 export function updateTempCompFolders() {
     // id сайта у редактируемой статьи
-    const editedArtSiteId = store.getState().article.siteId
+    const editedArtSiteId = getState().article.siteId
     // id сайта
-    const { currentSiteId } = store.getState().sites
+    const { currentSiteId } = getState().sites
 
     if (editedArtSiteId === currentSiteId) {
         // ...то изменить хеш списка папок компонентов чтобы хук загрузил новый список папок
@@ -29,9 +30,9 @@ export function updateTempCompFolders() {
  */
 export function updateTempComps() {
     // id сайта у редактируемой статьи
-    const editedArtSiteId = store.getState().article.siteId
+    const editedArtSiteId = getState().article.siteId
     // id сайта
-    const { currentSiteId } = store.getState().sites
+    const { currentSiteId } = getState().sites
 
     if (editedArtSiteId === currentSiteId) {
         // ...то изменить хеш списка папок компонентов чтобы хук загрузил новый список папок
@@ -45,7 +46,7 @@ export function updateTempComps() {
  * @param {number} someArtId — id удаляемой статьи
  */
 export function clearEditableArticle(someArtId: DragFilesTreeType.FileItemId) {
-    const editArticleId = store.getState().article.articleId
+    const editArticleId = getState().article.articleId
 
     if (editArticleId == someArtId) {
         articleManager.clearArticle()
@@ -58,11 +59,11 @@ export function clearEditableArticle(someArtId: DragFilesTreeType.FileItemId) {
  */
 export function updateSiteTemp(newSiteTemplateId: string) {
     // Получение id статьи и шаблона сайта в редактируемой статье
-    const editArtId = store.getState().article.articleId
-    const editArtSiteTempId = store.getState().article.siteTemplateId
+    const editArtId = getState().article.articleId
+    const editArtSiteTempId = getState().article.siteTemplateId
 
     // Получение id статьи и шаблона сайта в форме, которая только что была отправлена
-    const artIdInSiteSection = store.getState().sites.articleSection.currentArtItemId
+    const artIdInSiteSection = getState().sites.articleSection.currentArtItemId
     const siteTempIdInSiteSection = parseInt(newSiteTemplateId)
 
     // Если изменили id шаблона сайта через отправленную форму и он отличается от того, который указан в редактируемой статье...

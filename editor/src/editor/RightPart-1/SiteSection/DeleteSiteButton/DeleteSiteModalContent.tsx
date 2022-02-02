@@ -2,7 +2,7 @@ import React from 'react'
 import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
-import siteSectionMsg from 'messages/siteSectionMessages'
+import siteSectionMsg from 'messages/groupSectionMessages'
 import deleteSiteFormConfig from './formConfig'
 
 

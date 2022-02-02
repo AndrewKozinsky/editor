@@ -9,9 +9,10 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { updateComponentRequest } from 'requests/editor/components/updateComponentRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import bridge from '../../../../../bridge/bridge'
-import TempCompTypes from '../../../../../store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const compFormConfig: FCType.Config = {
@@ -43,9 +44,9 @@ const compFormConfig: FCType.Config = {
     },
     async requestFn(readyFieldValues, outerFns, formDetails) {
         // Массив папок и файлов из Хранилища
-        const folders = store.getState().sites.compFolderSection.compFolder
+        const folders = getState().sites.compFolderSection.compFolder
         // id выбранной папки
-        const { currentCompItemId } = store.getState().sites.componentSection
+        const { currentCompItemId } = getState().sites.componentSection
 
         // Получить массив elems из шаблона компонента, чтобы получить первый элемент
         const templateElemsArr: TempCompTypes.Elems = JSON5.parse( readyFieldValues.content.toString() ).elems
@@ -64,7 +65,7 @@ const compFormConfig: FCType.Config = {
         const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
         // Сохранить данные на сервере
-        const { compFolderId } = store.getState().sites.compFolderSection
+        const { compFolderId } = getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedFolders)
 
         return await updateComponentRequest(

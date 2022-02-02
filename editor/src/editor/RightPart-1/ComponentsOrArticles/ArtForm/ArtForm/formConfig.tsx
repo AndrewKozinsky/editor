@@ -9,6 +9,7 @@ import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import bridge from '../../../../../bridge/bridge'
 import DeleteArticleButton from '../DeleteArticleButton/DeleteArticleButton'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const artFormConfig: FCType.Config = {
@@ -44,13 +45,13 @@ const artFormConfig: FCType.Config = {
     async requestFn(readyFieldValues, outerFns, formDetails) {
 
         // Массив папок и файлов из Хранилища
-        const folders = store.getState().sites.artFolderSection.artFolder
+        const folders = getState().sites.artFolderSection.artFolder
 
         // id главной папки в базе данных
-        const { artFolderId } = store.getState().sites.artFolderSection
+        const { artFolderId } = getState().sites.artFolderSection
 
         // id выбранной папки
-        const { currentArtItemId } = store.getState().sites.articleSection
+        const { currentArtItemId } = getState().sites.articleSection
 
         // Название статьи и id выбранного шаблона сайта
         const articleName = readyFieldValues.name.toString()

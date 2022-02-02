@@ -2,13 +2,13 @@ import getMsgProxy from './fn/msgProxy'
 
 // Названия вкладок на первой правой вкладке
 const rightTabsMessages = {
-    sites: {
-        eng: 'Site',
-        rus: 'Сайт'
+    groups: {
+        eng: 'Group',
+        rus: 'Группа'
     },
-    siteTemplates: {
-        eng: 'Site style templates',
-        rus: 'Шаблоны стилей сайта'
+    groupTemplates: {
+        eng: 'Group style templates',
+        rus: 'Шаблоны стилей группы'
     },
     components: {
         eng: 'Component templates',

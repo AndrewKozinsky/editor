@@ -29,14 +29,14 @@ export default function SitePartProvider(): ReactElement {
         const parts: ReactNode = [0, 1, 2, 3].map((num) => {
             if (num === 0) {
                 return (
-                    <HeaderPage headerText={rightTabsMsg.sites} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMsg.groups} display={num === rightMainTab} key={num}>
                         <SiteSection />
                     </HeaderPage>
                 )
             }
             else if (num === 1) {
                 return (
-                    <HeaderPage headerText={rightTabsMsg.siteTemplates} display={num === rightMainTab} key={num}>
+                    <HeaderPage headerText={rightTabsMsg.groupTemplates} display={num === rightMainTab} key={num}>
                         <>
                             <NewTemplateButton />
                             <TemplatesList />

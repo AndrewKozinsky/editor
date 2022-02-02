@@ -8,6 +8,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import bridge from '../../../../../bridge/bridge'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
+import { getState } from 'utils/miscUtils'
 
 
 /** Функция возвращает конфигурацию формы входа в сервис */
@@ -36,9 +37,9 @@ const compFolderFormConfig: FCType.Config = {
     },
     async requestFn(readyFieldValues, outerFns, formDetails) {
         // Массив папок и файлов из Хранилища
-        const folders = store.getState().sites.compFolderSection.compFolder
+        const folders = getState().sites.compFolderSection.compFolder
         // id выбранной папки
-        const { currentCompItemId } = store.getState().sites.componentSection
+        const { currentCompItemId } = getState().sites.componentSection
 
         // Изменить название папки на введённое и обновить Хранилище папок
         const folderName = readyFieldValues.name.toString()
@@ -54,7 +55,7 @@ const compFolderFormConfig: FCType.Config = {
         const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
         // Сохранить данные на сервере
-        const { compFolderId } = store.getState().sites.compFolderSection
+        const { compFolderId } = getState().sites.compFolderSection
         return await putCompFolderRequest(compFolderId, preparedFolders)
     },
     afterSubmit() {

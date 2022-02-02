@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { LangOptions } from '../../../messages/fn/msgProxy'
 import ElBtnSignClone1 from '../icons/elBtnSignClone1'
 import ElBtnSignVisible from '../icons/elBtnSignVisible'
 import Logo from '../icons/logo'
@@ -23,10 +24,10 @@ import BtnSignClose from '../icons/btnSignClose'
 import BtnSignExit from '../icons/btnSignExit'
 import EditorLightTheme from '../icons/editorLightTheme'
 import EditorDarkTheme from '../icons/editorDarkTheme'
-import SiteTabSite from '../icons/siteTabSite'
-import SiteTabTemplates from '../icons/siteTemplates'
-import SiteTabArticle from '../icons/siteTabArticle'
-import SiteTabComponents from '../icons/siteTabComponents'
+import GroupTabGroup from '../icons/groupTabGroup'
+import GroupTabTemplates from '../icons/groupTemplates'
+import GroupTabArticle from '../icons/groupTabArticle'
+import GroupTabComponents from '../icons/groupTabComponents'
 import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
 import FilesTreeTriangle from '../icons/filesTreeTriangle'
 import FilesTreePlus from '../icons/filesTreePlus'
@@ -55,101 +56,90 @@ import LayerCollapse from '../icons/layerCollapse'
 import ElBtnSignMoveLeft from '../icons/elBtnSignMoveLeft'
 import ElBtnSignMoveRight from '../icons/elBtnSignMoveRight'
 
-/**
- * Функция возвращает внутренную часть значка SVG в зависимости от типа
- * @param {String} type — тип значка.
- */
-export function getIcon(type: string): ReactNode {
+const iconsCollector = {
+    // Логотип редактора
+    logo: Logo,
 
-    type componentsType = {
-        [key: string]: ReactNode
-    }
+    // Значок ошибки
+    errorTriangle: ErrorTriangle,
 
-    const components: componentsType = {
-        // Логотип редактора
-        logo: Logo,
+    // Стрелочки выпадающего списка
+    selectInputArrows: SelectInputArrows,
 
-        // Значок ошибки
-        errorTriangle: ErrorTriangle,
+    // Значки главных вкладок
+    mainTabMaterials: MainTabMaterials,
+    mainTabEditor: MainTabEditor,
+    mainTabSettings: MainTabSettings,
+    mainTabHelp: MainTabHelp,
 
-        // Стрелочки выпадающего списка
-        selectInputArrows: SelectInputArrows,
+    // Значки на вкладках сайта
+    groupTabGroup: GroupTabGroup,
+    groupTabTemplates: GroupTabTemplates,
+    groupTabComponents: GroupTabComponents,
+    groupTabArticle: GroupTabArticle,
 
-        // Значки главных вкладок
-        mainTabMaterials: MainTabMaterials,
-        mainTabEditor: MainTabEditor,
-        mainTabSettings: MainTabSettings,
-        mainTabHelp: MainTabHelp,
+    // Закругляемая часть в кнопки вкладки
+    mainTabRoundScion: MainTabRoundScion,
 
-        // Значки на вкладках сайта
-        siteTabSite: SiteTabSite,
-        siteTabTemplates: SiteTabTemplates,
-        siteTabComponents: SiteTabComponents,
-        siteTabArticle: SiteTabArticle,
+    // Значки на кнопках
+    btnSignSave: BtnSignSave,
+    btnSignFolder: BtnSignFolder,
+    btnSignTrash: BtnSignTrash,
+    btnSignCode: BtnSignCode,
+    btnSignText: BtnSignText,
+    btnSignAdd: BtnSignAdd,
+    // btnSignJson: BtnSignJson,
+    btnSignClose: BtnSignClose,
+    btnSignExit: BtnSignExit,
+    btnSignEdit: BtnSignEdit,
+    btnSignUndo: BtnSignUndo,
+    btnSignRedo: BtnSignRedo,
 
-        // Закругляемая часть в кнопки вкладки
-        mainTabRoundScion: MainTabRoundScion,
+    // Тема интерфейса
+    editorLightTheme: EditorLightTheme,
+    editorDarkTheme: EditorDarkTheme,
 
-        // Значки на кнопках
-        btnSignSave: BtnSignSave,
-        btnSignFolder: BtnSignFolder,
-        btnSignTrash: BtnSignTrash,
-        btnSignCode: BtnSignCode,
-        btnSignText: BtnSignText,
-        btnSignAdd: BtnSignAdd,
-        // btnSignJson: BtnSignJson,
-        btnSignClose: BtnSignClose,
-        btnSignExit: BtnSignExit,
-        btnSignEdit: BtnSignEdit,
-        btnSignUndo: BtnSignUndo,
-        btnSignRedo: BtnSignRedo,
+    // Значки на FilesTree
+    filesTreeTriangle: FilesTreeTriangle,
+    filesTreeFolder: FilesTreeFolder,
+    filesTreeFolderPlus: FilesTreeFolderPlus,
+    filesTreePlus: FilesTreePlus,
+    filesTreeTorus: FilesTreeTorus,
+    filesTreeUp: FilesTreeUp,
+    filesTreeDown: FilesTreeDown,
 
-        // Тема интерфейса
-        editorLightTheme: EditorLightTheme,
-        editorDarkTheme: EditorDarkTheme,
+    // Значок указателя помещения перетаскиваемого элемента
+    filesTreePlaceMark: FilesTreePlaceMark,
 
-        // Значки на FilesTree
-        filesTreeTriangle: FilesTreeTriangle,
-        filesTreeFolder: FilesTreeFolder,
-        filesTreeFolderPlus: FilesTreeFolderPlus,
-        filesTreePlus: FilesTreePlus,
-        filesTreeTorus: FilesTreeTorus,
-        filesTreeUp: FilesTreeUp,
-        filesTreeDown: FilesTreeDown,
+    // Значок указателя помещения перетаскиваемого элемента
+    filesTreeTrash: FilesTreeTrash,
+    // Article menu sign on menu button
+    articleMenu: ArticleMenu,
 
-        // Значок указателя помещения перетаскиваемого элемента
-        filesTreePlaceMark: FilesTreePlaceMark,
+    // Значки в Notice
+    noticeInfo: NoticeInfo,
+    noticeError: NoticeError,
+    noticeSuccess: NoticeSuccess,
 
-        // Значок указателя помещения перетаскиваемого элемента
-        filesTreeTrash: FilesTreeTrash,
-        // Article menu sign on menu button
-        articleMenu: ArticleMenu,
+    // Значки на кнопках работы с элементами внизу
+    elBtnSignMoveInside: ElBtnSignMoveInside,
+    elBtnSignMoveLeft: ElBtnSignMoveLeft,
+    elBtnSignMoveRight: ElBtnSignMoveRight,
+    elBtnSignUp: ElBtnSignUp,
+    elBtnSignDown: ElBtnSignDown,
+    elBtnSignClone1: ElBtnSignClone1,
+    elBtnSignClone2: ElBtnSignClone2,
+    elBtnSignClone3: ElBtnSignClone3,
+    elBtnSignRemove: ElBtnSignRemove,
+    elBtnSignHide: ElBtnSignHide,
+    elBtnSignVisible: ElBtnSignVisible,
 
-        // Значки в Notice
-        noticeInfo: NoticeInfo,
-        noticeError: NoticeError,
-        noticeSuccess: NoticeSuccess,
-
-        // Значки на кнопках работы с элементами внизу
-        elBtnSignMoveInside: ElBtnSignMoveInside,
-        elBtnSignMoveLeft: ElBtnSignMoveLeft,
-        elBtnSignMoveRight: ElBtnSignMoveRight,
-        elBtnSignUp: ElBtnSignUp,
-        elBtnSignDown: ElBtnSignDown,
-        elBtnSignClone1: ElBtnSignClone1,
-        elBtnSignClone2: ElBtnSignClone2,
-        elBtnSignClone3: ElBtnSignClone3,
-        elBtnSignRemove: ElBtnSignRemove,
-        elBtnSignHide: ElBtnSignHide,
-        elBtnSignVisible: ElBtnSignVisible,
-
-        // Слои
-        layerComp: LayerComp,
-        layerText: LayerText,
-        layerVisible: LayerVisible,
-        layerHidden: LayerHidden,
-        layerCollapse: LayerCollapse
-    }
-
-    return components[type] || null
+    // Слои
+    layerComp: LayerComp,
+    layerText: LayerText,
+    layerVisible: LayerVisible,
+    layerHidden: LayerHidden,
+    layerCollapse: LayerCollapse
 }
+
+export default iconsCollector

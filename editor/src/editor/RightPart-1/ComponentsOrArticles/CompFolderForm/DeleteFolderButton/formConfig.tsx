@@ -5,6 +5,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import componentFolderFormMsg from 'messages/componentFolderFormMessages'
+import { getState } from '../../../../../utils/miscUtils'
 
 
 /** Конфигурация формы входа в сервис */
@@ -19,8 +20,8 @@ const deleteFolderFormConfig: FCType.Config = {
         },
     },
     async requestFn(readyFieldValues) {
-        const { currentCompItemId } = store.getState().sites.componentSection
-        const { compFolder, compFolderId } = store.getState().sites.compFolderSection
+        const { currentCompItemId } = getState().sites.componentSection
+        const { compFolder, compFolderId } = getState().sites.compFolderSection
 
         // Удалить папку из Хранилища и возвратить новый массив
         const newFoldersArr = filesTreePublicMethods.deleteItem(compFolder, currentCompItemId)

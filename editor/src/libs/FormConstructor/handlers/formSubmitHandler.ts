@@ -24,7 +24,6 @@ import setErrorsToFields from '../state/setErrorsToFields'
  * @param {Function} showCommonSuccess —
  * @param {FCType.FormData} formData —
  * @param {Function} setFormData —
- * @param {typeof serverMsg} serverMsg2 —
  */
 export default async function formSubmitHandler(
     e: React.BaseSyntheticEvent, // Event object
@@ -44,7 +43,6 @@ export default async function formSubmitHandler(
     showCommonSuccess: FCType.ShowCommonSuccess, // Show success message setting function
     formData: FCType.FormData, // Пользовательские данные формы
     setFormData: FCType.SetFormData, // Установка пользовательских данных формы
-    serverMsg2: typeof serverMsg// Error message from a server response
 ): Promise<void> {
     e.preventDefault()
 
@@ -111,7 +109,7 @@ export default async function formSubmitHandler(
         // Show common message. It will be shown below a form
         if (response.commonError) {
             // @ts-ignore
-            setCommonError( serverMsg2[response.commonError])
+            setCommonError(serverMsg[response.commonError])
         }
 
         if (response.errors) {

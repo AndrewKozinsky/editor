@@ -14,6 +14,7 @@ import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
 import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
+import StoreSitesTypes from '../site/sitesTypes'
 
 
 const articleActions = {
@@ -99,7 +100,7 @@ const articleActions = {
     },
 
     // Request for included files template and setting it in Store
-    requestSiteTemplate(siteTemplateId: number) {
+    requestSiteTemplate(siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             if (!siteTemplateId) return
 

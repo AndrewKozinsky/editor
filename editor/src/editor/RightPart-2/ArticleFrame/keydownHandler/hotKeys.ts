@@ -5,6 +5,7 @@ import {
     PressedKeysObj
 } from 'utils/getPressedKeys'
 import articleActions from 'store/article/articleActions'
+import { getState } from '../../../../utils/miscUtils'
 
 
 /**
@@ -12,7 +13,7 @@ import articleActions from 'store/article/articleActions'
  * @param {Object} pressedKeys — объект с данными о нажатых клавишах
  */
 export function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
-    const { history, historyCurrentIdx } = store.getState().article
+    const { history, historyCurrentIdx } = getState().article
 
     if (checkPressedKeys(pressedKeys, ['cmd', 'z'])) {
         const canMakeStep = articleManager.canMakeHistoryStep('undo', history, historyCurrentIdx)

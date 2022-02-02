@@ -4,6 +4,7 @@ import actions from 'store/rootAction'
 import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import rightTabsMsg from 'messages/rightTabsMessages'
+import iconsCollector from '../../../common/icons/js/getIcon'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
@@ -26,22 +27,28 @@ export function useGetTabData(): MainTabDataType[] {
     return tabsData
 }
 
+type TabDataType = {
+    iconType: keyof typeof iconsCollector,
+    titleIndex: string
+}
+type TabDataTypeArr = TabDataType[]
+
 // Массив с данными вкладок
-const tabsData = [
+const tabsData: TabDataTypeArr = [
     {
-        iconType: 'siteTabSite', // тип значка
-        titleIndex: 'sites' // название свойства для получения названия в messages
+        iconType: 'groupTabGroup', // тип значка
+        titleIndex: 'groups' // название свойства для получения названия в messages
     },
     {
-        iconType: 'siteTabTemplates',
-        titleIndex: 'siteTemplates'
+        iconType: 'groupTabTemplates',
+        titleIndex: 'groupTemplates'
     },
     {
-        iconType: 'siteTabComponents',
+        iconType: 'groupTabComponents',
         titleIndex: 'components',
     },
     {
-        iconType: 'siteTabArticle',
+        iconType: 'groupTabArticle',
         titleIndex: 'articles',
     },
 ]
@@ -50,7 +57,7 @@ const tabsData = [
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} rightMainTab — номер активной вкладки
  * @param {Boolean} isTabsDisabled — должны ли все вкладки кроме первой быть заблокированы
- * @param {Object} rightTabsMsg — объкт с текстами подсказок при наведение на вкладки
+ * @param {Object} rightTabsMsg — объект с текстами подсказок при наведении на вкладки
  */
 function getTabData(
     rightMainTab: number,

@@ -7,7 +7,7 @@ import deleteComponentRequest from 'requests/editor/components/deleteComponentRe
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
-import { setInLocalStorage } from 'utils/miscUtils'
+import { getState, setInLocalStorage } from 'utils/miscUtils'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
 
@@ -86,10 +86,10 @@ function getFolders(
 
     let originalFolders2: DragFilesTreeType.Items
     if (category == 'components') {
-        originalFolders2 = store.getState().sites.compFolderSection.compFolder
+        originalFolders2 = getState().sites.compFolderSection.compFolder
     }
     else if (category == 'articles') {
-        originalFolders2 = store.getState().sites.artFolderSection.artFolder
+        originalFolders2 = getState().sites.artFolderSection.artFolder
     }
 
     let updatedFolders2 = deleteItem(originalFolders2, resourceId)
@@ -159,7 +159,7 @@ async function deleteFilesInFolder(
     }
     else if (category === 'articles') {
         // id редактируемой статьи
-        const editedArticleId = store.getState().article.articleId
+        const editedArticleId = getState().article.articleId
 
         // Проход по массиву идентификаторов удаляемых статей
         filesIdsInside.forEach(articleId => {

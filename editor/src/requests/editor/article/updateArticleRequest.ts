@@ -1,6 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import StoreSitesTypes from 'store/site/sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import { ArticleRowServerRespType } from './articleServerResponseType'
 
@@ -13,7 +14,7 @@ import { ArticleRowServerRespType } from './articleServerResponseType'
  * @param {String} content — код статьи
  */
 export async function updateArticleRequest(
-    articleId: number,
+    articleId: StoreSitesTypes.CurrentArtItemId,
     name?: string,
     siteTemplateId?: null | number,
     content?: ArticleTypes.Article

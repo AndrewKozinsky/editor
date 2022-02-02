@@ -88,7 +88,7 @@ function updateFocusPositionAfterKeyUp(e: KeyboardEvent) {
     const dTextComp = articleManager.getComponent(article.dComps, selectedElem.dataCompId)
     if (dTextComp.dCompType !== 'simpleTextComponent') return
 
-    const { cursorStart, cursorEnd } = store.getState().article.focusTextProof
+    const { cursorStart, cursorEnd } = getState().article.focusTextProof
 
     let newCursorStart: number = cursorStart
     let newCursorEnd: number = cursorEnd

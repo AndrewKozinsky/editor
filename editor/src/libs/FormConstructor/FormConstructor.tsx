@@ -63,7 +63,7 @@ function Fields(props: FormConstructorPropType) {
             // Тогда он будет вида site_CreateSiteDto_nameTooLong
             // Поэтому проверю есть ли человекочитаемый эквивалент в объекте serverMsg
             //@ts-ignore
-            if (serverMsg[errorText]) errorText = serverMsg[errorText]
+            if (errorText && serverMsg[errorText]) errorText = serverMsg[errorText]
             // Назначу текст ошибки
             fieldData.error = errorText
 

@@ -9,6 +9,7 @@ import {
     getPressedKeys,
     PressedKeysObj
 } from 'utils/getPressedKeys'
+import { getState } from '../../../utils/miscUtils'
 
 
 /* Хук ставит обработчик горячих клавиш на всё приложение */
@@ -30,7 +31,7 @@ function shortcutsHandler(e: KeyboardEvent) {
     // Close modal window
     closeModal(pressedKeys)
 
-    if (store.getState().settings.mainTab === 1) {
+    if (getState().settings.mainTab === 1) {
         // Making undo or redo history step in article
         undoRedoArticleHistory(pressedKeys)
     }
@@ -39,7 +40,7 @@ function shortcutsHandler(e: KeyboardEvent) {
 
 // Close modal window if you press Esc
 function closeModal(pressedKeys: PressedKeysObj) {
-    if ( checkPressedKeys(pressedKeys, ['esc']) && store.getState().modal.isOpen) {
+    if ( checkPressedKeys(pressedKeys, ['esc']) && getState().modal.isOpen) {
         store.dispatch( actions.modal.closeModal() )
     }
 }

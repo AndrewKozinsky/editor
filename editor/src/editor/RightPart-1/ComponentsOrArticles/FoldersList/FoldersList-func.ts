@@ -8,7 +8,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
-import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
+import { getFromLocalStorage, getState, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import bridge from '../../../../bridge/bridge'
@@ -147,7 +147,8 @@ export function afterDeleteItem(
  * @param {String} newArticleName — название компонента или статьи.
  */
 export async function afterAddingNewFile(type: FolderType, newArticleName?: string): Promise<number> {
-    const { currentSiteId } = store.getState().sites
+    const { currentSiteId } = getState().sites
+    const currentSite = getState().sites.sites.find(site => site.id === currentSiteId)
 
     // Сохранить данные на сервере
     if (type === 'components') {
@@ -171,7 +172,7 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
     }
     else if (type === 'articles') {
         const serverResponse = await createArticleRequest(
-            currentSiteId, newArticleName
+            currentSiteId, newArticleName, currentSite.defaultSiteTemplateId
         )
 
         if (serverResponse.status === 'success') {

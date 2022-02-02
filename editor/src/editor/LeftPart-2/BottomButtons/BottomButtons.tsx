@@ -87,6 +87,7 @@ type ButtonPropType = {
 function Button(props: ButtonPropType) {
     const { btnKey, onClick, disabled } = props
 
+    // @ts-ignore
     const title = bottomPanelMsg[btnKey]
     const iconType = useGetIconType(btnKey)
 

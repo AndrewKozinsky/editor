@@ -3,6 +3,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import articleFormMsg from 'messages/articleFormMessages'
+import { getState } from '../../../../../utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления статьи
@@ -19,7 +20,7 @@ const deleteArticleModalConfig: FCType.Config = {
         },
     },
     async requestFn(readyFieldValues) {
-        const { currentArtItemId } = store.getState().sites.articleSection
+        const { currentArtItemId } = getState().sites.articleSection
 
         await bridge.deleteResource('articles', 'file', currentArtItemId)
         return {status: 'success'}

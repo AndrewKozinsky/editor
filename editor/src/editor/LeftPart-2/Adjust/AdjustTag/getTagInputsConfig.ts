@@ -8,6 +8,7 @@ import articleManager from 'articleManager/articleManager'
 import { store } from 'store/rootReducer'
 import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
 import articleActions from 'store/article/articleActions'
+import { getState } from '../../../../utils/miscUtils'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения тега выделенного элемента
@@ -151,7 +152,7 @@ function getInputItems(tTagObj: TempCompTypes.ElemTags) {
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const { history, historyCurrentIdx } = store.getState().article
+        const { history, historyCurrentIdx } = getState().article
         const historyItem = history[historyCurrentIdx]
 
         const compsAndMaxCompId = articleManager.changeElemTag(

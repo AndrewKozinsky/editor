@@ -1,3 +1,4 @@
+import StoreSitesTypes from '../site/sitesTypes'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
@@ -10,7 +11,7 @@ export type ArticleReducerType = {
     siteId: null | number
 
     // id шаблона сайта
-    siteTemplateId: null | TempCompTypes.Id
+    siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId
     // Шаблон сайта
     siteTemplate: null | SiteTemplateTypes.Template
     // Хеш версии шаблона сайта. При изменении значения шаблон сайта будет заново скачан.

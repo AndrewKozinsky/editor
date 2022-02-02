@@ -224,7 +224,6 @@ export function isFlashed(
         return moveHoveredComp?.dataCompId === dCompId && moveHoveredComp?.dataElemId === dElemId
     }
     else if (flashType === 'moveSelect') {
-        // debugger
         return moveSelectedComp?.dataCompId === dCompId && moveSelectedComp?.dataElemId === dElemId
     }
 }

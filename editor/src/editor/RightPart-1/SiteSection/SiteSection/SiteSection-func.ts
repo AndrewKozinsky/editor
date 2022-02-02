@@ -4,9 +4,10 @@ import { store } from 'store/rootReducer'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import FCType from 'libs/FormConstructor/FCType'
-import siteSectionMsg from 'messages/siteSectionMessages'
+import siteSectionMsg from 'messages/groupSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта
@@ -108,8 +109,8 @@ export async function afterSubmit(response: SitesServerResponseType) {
         await store.dispatch(actions.sites.requestSites())
 
         // Найти в Хранилище сайт с таким же id как у только что созданного сайта
-        const newSite = store.getState().sites.sites.find((site: StoreSitesTypes.Site) => {
-            return site.id === response.data.sites[0].data.site.id
+        const newSite = getState().sites.sites.find(site => {
+            return site.id === response.data.sites[0].id
         })
         // Выделить созданный сайт
         store.dispatch(actions.sites.setCurrentSiteId(newSite.id))

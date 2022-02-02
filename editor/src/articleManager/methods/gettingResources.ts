@@ -3,6 +3,7 @@ import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { store } from 'store/rootReducer'
+import { getState } from '../../utils/miscUtils'
 
 /**
  * The function finds current history item object
@@ -18,7 +19,7 @@ export function getCurrentHistoryItem(
         return historyArr[historyIdx]
     }
 
-    const { history, historyCurrentIdx } = store.getState().article
+    const { history, historyCurrentIdx } = getState().article
     return history[historyCurrentIdx]
 }
 

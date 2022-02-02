@@ -6,6 +6,7 @@ import { store } from 'store/rootReducer'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import bridge from '../../../../../bridge/bridge'
+import { getState } from '../../../../../utils/miscUtils'
 
 /**
  * Конфигурация формы удаления компонента
@@ -22,8 +23,8 @@ const deleteComponentFormConfig: FCType.Config = {
         },
     },
     async requestFn(readyFieldValues) {
-        const { compFolder, compFolderId } = store.getState().sites.compFolderSection
-        const { currentCompItemId } = store.getState().sites.componentSection
+        const { compFolder, compFolderId } = getState().sites.compFolderSection
+        const { currentCompItemId } = getState().sites.componentSection
 
         // Удалить компонент из Хранилища и возвратить новый массив
         const newFoldersArr = filesTreePublicMethods.deleteItem(compFolder, currentCompItemId)

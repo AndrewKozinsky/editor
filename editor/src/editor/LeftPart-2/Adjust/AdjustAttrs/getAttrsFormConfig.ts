@@ -9,7 +9,8 @@ import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import articleActions from '../../../../store/article/articleActions'
+import articleActions from 'store/article/articleActions'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента
@@ -201,7 +202,7 @@ function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTyp
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, inputType: TempCompTypes.InputViewType) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const { history, historyCurrentIdx } = store.getState().article
+        const { history, historyCurrentIdx } = getState().article
         const historyItem = history[historyCurrentIdx]
 
         // Для текстового поля нужно взять первый элемент массива значений,

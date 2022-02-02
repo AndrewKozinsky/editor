@@ -1,6 +1,6 @@
 import ErrorServerResponseType from 'requests/errorServerResponseType'
 
-type SuccessServerResponseType = {
+export type SuccessServerResponseType = {
     status: 'success',
     statusCode: number,
     data: {
@@ -9,15 +9,11 @@ type SuccessServerResponseType = {
 }
 
 type SiteType = {
-    status: 'success'
-    data: {
-        site: {
-            id: number // 7
-            name: string // "РУСХИТ"
-            userId: number // 2
-            defaultSiteTemplateId: null | number
-        }
-    }
+    id: number
+    name: string // "РУСХИТ"
+    userId: number // 2
+    createdAt: string
+    defaultSiteTemplateId: null | number
 }
 
 // Типы ответов от сервера при операциях с сайтами

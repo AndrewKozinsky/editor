@@ -8,6 +8,7 @@ import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/crea
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
 import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
+import { getState } from '../../../../utils/miscUtils'
 
 /** Объект конфигурации формы входа в сервис */
 const currentSiteTemplateFormConfig: FCType.Config = {
@@ -39,7 +40,7 @@ const currentSiteTemplateFormConfig: FCType.Config = {
         hr: true
     },
     async requestFn(readyFieldValues, outerFns, formDetails) {
-        const { currentTemplateId } = store.getState().sites.siteTemplatesSection
+        const { currentTemplateId } = getState().sites.siteTemplatesSection
 
         // Обновить данные шаблона сайта
         return await updateSiteTemplateRequest(

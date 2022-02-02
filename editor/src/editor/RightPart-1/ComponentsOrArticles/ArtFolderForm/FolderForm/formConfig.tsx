@@ -7,6 +7,7 @@ import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const artFolderFormConfig: FCType.Config = {
@@ -34,9 +35,9 @@ const artFolderFormConfig: FCType.Config = {
     },
     async requestFn(readyFieldValues, outerFns, formDetails) {
         // Массив папок и файлов из Хранилища
-        const folders = store.getState().sites.artFolderSection.artFolder
+        const folders = getState().sites.artFolderSection.artFolder
         // id выбранной папки
-        const { currentArtItemId } = store.getState().sites.articleSection
+        const { currentArtItemId } = getState().sites.articleSection
 
         // Изменить название папки на введённое и обновить Хранилище папок
         const folderName = readyFieldValues.name.toString()
@@ -52,7 +53,7 @@ const artFolderFormConfig: FCType.Config = {
         const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
 
         // Сохранить данные на сервере
-        const { artFolderId } = store.getState().sites.artFolderSection
+        const { artFolderId } = getState().sites.artFolderSection
         return await putArtFolderRequest(artFolderId, preparedFolders)
     }
 }

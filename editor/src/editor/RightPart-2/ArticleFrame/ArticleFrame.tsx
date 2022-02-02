@@ -15,6 +15,7 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
+import { usePreventInsertForbiddenText } from './textCompsTracking/preventInsertForbiddenCharacters'
 import { useTrackSelectedElemForText } from './textCompsTracking/useTrackSelectedElemForText'
 import './ArticleFrame.scss'
 
@@ -36,6 +37,7 @@ export default function ArticleFrame() {
 
     // Работа с текстом
     useTrackSelectedElemForText()
+    usePreventInsertForbiddenText()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

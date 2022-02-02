@@ -1,3 +1,9 @@
+import { ArticleReducerType } from '../store/article/articleReducer'
+import { ModalReducerType } from '../store/modal/modalReducer'
+import { AppStateType, store } from '../store/rootReducer'
+import { SettingsReducerType } from '../store/settings/settingsReducer'
+import { SitesReducerType } from '../store/site/sitesReducer'
+import { UserReducerType } from '../store/user/userReducer'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -94,4 +100,26 @@ export function wait(waitTime: number = 0) {
             resolve(0)
         }, waitTime)
     })
+}
+
+/**
+ * Псевдоним для функции store.getState().
+ * Только дополнительно возвращаемые данные будет иметь правильный тип, а не any.
+ */
+export function getState() {
+    const myStore: AppStateType = store.getState()
+    const userStore: UserReducerType = myStore.user
+
+    const sitesStore: SitesReducerType = myStore.sites
+    const settingsStore: SettingsReducerType = myStore.settings
+    const articleStore: ArticleReducerType = myStore.article
+    const modalStore: ModalReducerType = myStore.modal
+
+    return {
+        user: userStore,
+        sites: sitesStore,
+        settings: settingsStore,
+        article: articleStore,
+        modal: modalStore
+    }
 }

@@ -1,7 +1,7 @@
 import getMsgProxy from './fn/msgProxy'
 
 // Содержимое вкладки «Сайты»
-const siteSectionMessages = {
+const groupSectionMessages = {
     siteNameInput: {
         eng: 'Name',
         rus: 'Название'
@@ -19,8 +19,8 @@ const siteSectionMessages = {
         rus: 'Название сайта не может быть длиннее 255 символов'
     },
     defaultTemplateInput: {
-        eng: 'The default site template',
-        rus: 'Шаблон сайта по умолчанию'
+        eng: 'The default group template',
+        rus: 'Шаблон группы по умолчанию'
     },
     submitBtnTextNewSite: {
         eng: 'Create',
@@ -35,12 +35,12 @@ const siteSectionMessages = {
         rus: 'Удалить'
     },
     deleteSiteModalHeader: {
-        eng: 'Are you sure you want to delete the site?',
-        rus: 'Вы точно хотите удалить сайт?'
+        eng: 'Are you sure you want to delete the group?',
+        rus: 'Вы точно хотите удалить группу?'
     },
     deleteSiteConfirmationTextInModal: {
-        eng: 'If you delete the site, all of its templates plugins, component templates and articles will also be deleted. Delete the site?',
-        rus: 'При удалении сайта будут удалены и все его шаблоны подключаемых файлов, шаблоны компонентов и статьи. Удалить сайт?'
+        eng: 'If you delete the group, all of its templates plugins, component templates and articles will also be deleted. Delete the group?',
+        rus: 'При удалении группы будут удалены и все его шаблоны подключаемых файлов, шаблоны компонентов и статьи. Удалить группу?'
     },
     closeDeleteSiteModalBtn: {
         eng: 'Cancel',
@@ -56,5 +56,5 @@ const siteSectionMessages = {
     },
 }
 
-const siteSectionMsg = getMsgProxy<typeof siteSectionMessages>(siteSectionMessages)
+const siteSectionMsg = getMsgProxy<typeof groupSectionMessages>(groupSectionMessages)
 export default siteSectionMsg

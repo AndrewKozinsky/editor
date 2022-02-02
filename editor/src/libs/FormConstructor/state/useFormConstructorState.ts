@@ -48,7 +48,7 @@ export default function useFormConstructorState(formConfig: FCType.Config, outer
         formSubmitHandler(
             e, fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,
             setSubmitBtnLoading, setCommonError, setFormVisible, setFormSentSuccessfully, outerFns, commonSuccess, showCommonSuccess,
-            formData, setFormData, serverMsg
+            formData, setFormData
         )
     }, [
         fields, setFields, submitCounter, setSubmitCounter, formConfig, setSubmitBtnDisabled, setFormDisabled,

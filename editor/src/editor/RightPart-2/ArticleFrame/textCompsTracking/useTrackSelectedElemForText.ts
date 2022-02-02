@@ -5,6 +5,7 @@ import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
+import { getState } from '../../../../utils/miscUtils'
 
 /** Хук отслеживает выделенный компонент.
  * Если это текстовый компонент, то ставит его текст в свойство focusTextProof.text в Хранилище. */
@@ -84,7 +85,7 @@ export function forceCreateHistoryItemWithNewText() {
     if (selectedElem.tagType !== 'textComponent') return
 
     // Получить координаты выделения
-    const { $document, $body } = store.getState().article.$links
+    const { $document, $body } = getState().article.$links
     const { anchorOffset, focusOffset } = $document.getSelection()
 
     // Убрать выделение компонента в данных статьи
