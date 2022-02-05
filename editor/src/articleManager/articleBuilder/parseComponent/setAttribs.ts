@@ -47,7 +47,9 @@ function setAttribToHtmlElem(
             return dAttr.tCompElemAttrId === attrTemplate.elemAttrId
         })
 
-        if (!dataElemAttr) return
+        if (!dataElemAttr || !dataElemAttr.dCompElemAttrValue.length) {
+            return
+        }
 
         // If in dataElemAttr.value is ready value...
         if (typeof dataElemAttr.dCompElemAttrValue === 'string') {
@@ -60,11 +62,17 @@ function setAttribToHtmlElem(
                 const attrValue2 = attrTemplate.elemAttrValues.find(tElemAttrValue => {
                     return tElemAttrValue.elemAttrValueId === dElemAttrValueId
                 })
-                attrValue.push(attrValue2.elemAttrValueValue)
+
+                if (attrValue2) {
+                    attrValue.push(attrValue2.elemAttrValueValue)
+                }
             }
         }
     }
 
     // Join all attributes values to a string
-    htmlElem.attrs[attrName] = attrValue.join(' ')
+    const attrValueFullString = attrValue.join(' ')
+    if (attrValueFullString) {
+        htmlElem.attrs[attrName] = attrValueFullString
+    }
 }

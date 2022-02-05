@@ -480,3 +480,40 @@ export function get$elemBy$body(
 
     return $body.querySelector(queryStr)
 }
+
+/**
+ * Функция находит шаблон элемента в массиве шаблонов элементов по переданному id
+ * @param {String} tElemId — id шаблона элемента
+ * @param {Array} tElems — массив шаблонов элементов
+ */
+export function getTElemInTElems(
+    this: typeof articleManager,
+    tElemId: TempCompTypes.ElemId,
+    tElems: TempCompTypes.Elems
+): TempCompTypes.Elem {
+    return tElems.find(tElem => tElem.elemId === tElemId)
+}
+
+/**
+ * Функция возвращает пустое значение данных атрибута в зависимости от шаблона атрибута элемента
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ */
+export function getDElemAttrEmptyValue(
+    this: typeof articleManager,
+    tElemAttr: TempCompTypes.ElemAttr
+): ArticleTypes.ComponentElemAttribValue {
+    // Если значение атрибута будут вводить в текстовом поле, то в значении поставить пустую строку.
+    // Все остальные поля ставят идентификаторы в массив, поэтому поставлю пустой массив.
+
+    // Если в elemAttrView не определено поле ввода значения атрибута,
+    // то нужно посмотреть на то указан ли в tElemAttr.elemAttrValues массив.
+    // Если массив, то значит id значений будут писаться в массив. В противном случае будут писать точное значение в строку.
+    if (!tElemAttr.elemAttrView) {
+        return Array.isArray(tElemAttr.elemAttrValues) ? [] : ''
+    }
+        // Если определено поле ввода значения атрибута, то если это текст, то поставить пустую строку,
+    // во всех остальных случаях это будет массив для идентификаторов значений.
+    else {
+        return tElemAttr.elemAttrView === 'text' ? '' : []
+    }
+}

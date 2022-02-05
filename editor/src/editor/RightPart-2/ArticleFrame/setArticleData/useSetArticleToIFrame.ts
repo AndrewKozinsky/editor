@@ -29,6 +29,7 @@ export default function useSetArticleToIFrame() {
             if (lastTempCompsDownloadHash !== tempCompsDownloadHash) {
                 setLastTempCompsDownloadHash(tempCompsDownloadHash)
                 // ... запустить сценарий исправления статьи.
+                // console.log('correctArticle')
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }
 

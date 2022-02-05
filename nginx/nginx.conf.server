@@ -8,6 +8,9 @@ http {
         listen 443;
         server_name editorium.net www.editorium.net;
 
+        location / {
+            proxy_pass http://next:3003;
+        }
         location /api2 {
             proxy_pass http://nest:3002;
             rewrite ^\/api2\/(.*) /$1 break;

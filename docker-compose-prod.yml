@@ -9,6 +9,7 @@ services:
       - editor
       - nest
       - postgres
+      - next
     ports:
       - "80:80"
     volumes:
@@ -51,6 +52,17 @@ services:
       POSTGRES_DB: editor
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  # Сайт про редактор (Next)
+  next:
+    build:
+      context: ./next
+      dockerfile: Dockerfile.prod
+    container_name: editor-next
+    command: npm run start
+    restart: unless-stopped
+    volumes:
+      - ./next:/app
 
 
 volumes:

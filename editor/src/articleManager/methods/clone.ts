@@ -218,9 +218,20 @@ function prepareElemClone(
     // Если передали новый id данных элемента, то поставить его
     if (elemId) dElem.dCompElemId = elemId
 
-    // Если первая глубина копирования, то удалить все атрибуты, если нет, то оставить
+    // Если первая глубина копирования, то очистить все атрибуты, если нет, то оставить
     if (deep === 1) {
-        delete dElem.dCompElemAttrs
+        // Перебрать все данные атрибутов
+        for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
+            // Данные перебираемого атрибута
+            const dElemAttr = dElem.dCompElemAttrs[i]
+
+            // Получение шаблона перебираемого атрибута
+            const tElemAttr = tElem.elemAttrs.find(tElemAttr => {
+                return tElemAttr.elemAttrId === dElemAttr.tCompElemAttrId
+            })
+            // Получение и установка пустого значения данных перебираемого атрибута
+            dElem.dCompElemAttrs[i].dCompElemAttrValue = articleManager.getDElemAttrEmptyValue(tElemAttr)
+        }
     }
 
     // Для всех остальных групп копирования...
@@ -255,6 +266,10 @@ function prepareElemClone(
         maxCompId: newMaxCompId,
         newItem: dElem
     }
+}
+
+function clearElemAttrs() {
+
 }
 
 /**

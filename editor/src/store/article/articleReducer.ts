@@ -375,12 +375,12 @@ function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: St
 }
 
 /* Функция очищает статью от данных */
-/*function clearArticle(state: ArticleReducerType): ArticleReducerType {
+function clearArticle(state: ArticleReducerType): ArticleReducerType {
     return Object.assign(
         initialState,
         { $links: state.$links } // Do not touch the document's links
     )
-}*/
+}
 
 
 // Редьюсер Store.article
@@ -417,8 +417,8 @@ export default function articleReducer(
             return makeHistoryStep(state, action)
         case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
             return setHistoryStepWhenArticleWasSaved(state, action)
-        // case StoreArticleTypes.CLEAR_ARTICLE:
-        //     return clearArticle(state)
+        case StoreArticleTypes.CLEAR_ARTICLE:
+            return clearArticle(state)
         default:
             // @ts-ignore
             const x: never = null

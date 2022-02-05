@@ -38,6 +38,8 @@ import {
     getItemInDElem,
     getItemInDComp,
     get$elemBy$body,
+    getTElemInTElems,
+    getDElemAttrEmptyValue,
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -121,6 +123,8 @@ class ArticleManager {
     // Поиск компонента/элемента в компоненте
     getItemInDComp = getItemInDComp
     get$elemBy$body = get$elemBy$body
+    getTElemInTElems = getTElemInTElems
+    getDElemAttrEmptyValue = getDElemAttrEmptyValue
 
     // CHECK
     canMoveCompMoveToLeftOrRight = canMoveCompMoveToLeftOrRight

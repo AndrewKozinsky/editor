@@ -11,7 +11,14 @@ import { getState, setInLocalStorage } from 'utils/miscUtils'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
 
-// TODO Что делает эта функция?
+/**
+ * Функция делает действия при удалении папки статей/компонентов или статью/компонент
+ * @param {String} category — категория удаляемого ресурса: components или articles
+ * @param {String} type — тип удаляемого ресурса: file или folder
+ * @param {Number} resourceId — id удаляемого ресурса
+ * @param {Array} originalFolders — массив папок/элементов до удаления папки/элемента
+ * @param {Array} updatedFolders — обновлённый массив папок/элементов после удаления папки/элемента
+ */
 export async function deleteResource(
     this: typeof bridge,
     category: FolderType,

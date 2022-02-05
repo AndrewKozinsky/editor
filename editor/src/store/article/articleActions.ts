@@ -1,4 +1,5 @@
 const JSON5 = require('json5')
+import articleManager from '../../articleManager/articleManager'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -61,7 +62,10 @@ const articleActions = {
             // Request for an article and response from a server
             const response = await getArticleRequest(articleId)
 
-            if (response.status !== 'success' || !response.data.articles[0]) return
+            if (response.status !== 'success' || !response.data.articles[0]) {
+                articleManager.clearArticle()
+                return
+            }
 
             if (response.status === 'success') {
                 let articleData = response.data.articles[0]

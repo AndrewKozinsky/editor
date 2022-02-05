@@ -24,34 +24,36 @@ export default function correctArticle(
                 continue
             }
 
-            // Добавление недостающих данных элементов в соответствии с элементами из шаблона
-            addMissingDElems(dComp, tComp.content.elems)
+            // Функция удаляет данные элементов если под них нет шаблонов и добавляет если данных нет, но есть шаблоны
+            makeMatchBetweenElems(dComp, tComp.content.elems)
 
-            // Сделать чтобы элементы в данных соответствовали элементам в шаблоне компонента
-            makeMatchBetweenTCompsAndDComps(article, dComp.dElems, tComp.content.elems)
+            // Сделать соответствие в тегах, атрибутах и детях элементов между данными и шаблонами элементов
+            makeMatchBetweenElemTagAttrsAndText(article, dComp.dElems, tComp.content.elems)
 
             // Пройтись по элементам и исправить их дочерние компоненты
-            for (let k = 0; k < dComp.dElems.length; k++) {
+            /*for (let k = 0; k < dComp.dElems.length; k++) {
                 const dElem = dComp.dElems[k]
 
                 if (Array.isArray(dElem.dCompElemChildren)) {
                     correctArticle(article, dElem.dCompElemChildren, tComps)
                 }
-            }
+            }*/
         }
     }
 }
 
 /**
- * Функция добавляет недостающие данные элементов в соответствии с элементами из шаблона.
+ * Функция соотносит данные элементов в соответствии с элементами из шаблона.
  * @param {Object} dComp — данные компонента
  * @param {Array} tElems — массив элементов шаблона
  */
-function addMissingDElems(dComp: ArticleTypes.Component, tElems: TempCompTypes.Elems) {
+function makeMatchBetweenElems(dComp: ArticleTypes.Component, tElems: TempCompTypes.Elems) {
+
     // Получение максимального id данных элемента.
     // Он потребуется для задания новых идентификаторов
     let maxDElemId = articleManager.getMaxDElemsId(dComp)
 
+    // Если в шаблоне есть элемент, который нет в данных, то создать данные этого элемента и добавить
     for (let i = 0; i < tElems.length; i++) {
         const tElem = tElems[i]
 
@@ -60,37 +62,42 @@ function addMissingDElems(dComp: ArticleTypes.Component, tElems: TempCompTypes.E
         if (!dElem) {
             dComp.dElems.push({
                 dCompElemId: ++maxDElemId,
-                tCompElemId: tElem.elemId
+                tCompElemId: tElem.elemId,
+                dCompElemChildren: []
             })
+        }
+    }
+
+    // Если в данных есть элемент для которого нет шаблона, то удалить его из данных
+    for (let i = 0; i < dComp.dElems.length; i++) {
+        const dElem = dComp.dElems[i]
+
+        const tElem = articleManager.getTElemInTElems(dElem.tCompElemId, tElems)
+
+        if (!tElem) {
+            dComp.dElems.splice(i, 1)
+            --i
         }
     }
 }
 
 /**
- * Функция настраивает соответствие (убирает противоречия) между шаблоном и данными компонента
+ * Функция настраивает соответствие в тегах, атрибутах и детях элементов между данными и шаблонами элементов
  * @param {Object} article — данные статьи
  * @param {Array} dElems — массив данных элементов
  * @param {Array} tElems — массив элементов шаблона
  */
-function makeMatchBetweenTCompsAndDComps(
+function makeMatchBetweenElemTagAttrsAndText(
     article: ArticleTypes.Article, dElems: ArticleTypes.ComponentElems, tElems: TempCompTypes.Elems
 ) {
-    // Удалить из данных элементы, для которых нет элементов в шаблоне
+    // Перебрать все элементы
     for (let i = 0; i < dElems.length; i++) {
         const dElem = dElems[i]
-
-        const tElem = tElems.find(tElem => {
-            return dElem.tCompElemId === tElem.elemId
-        })
-
-        if (!tElem) {
-            dElems.splice(i, 1)
-            --i
-            continue
-        }
+        const tElem = articleManager.getTElemInTElems(dElem.tCompElemId, tElems)
 
         // Настроить соответствие между тегами в шаблоне и данными элемента
         makeMatchInTags(dElem, tElem)
+
         // Настроить соответствие между атрибутами в шаблоне и данными элемента
         makeMatchInAttrs(dElem, tElem)
 
@@ -134,8 +141,6 @@ function makeMatchInTags(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes
  * @param {Object} tElem — шаблон элемента
  */
 function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
-    // Ничего не делать если в данных нет информации об атрибутах
-    if (!dElem.dCompElemAttrs) return
 
     // Если в шаблоне ничего не сказано про атрибуты, но удалить данные атрибутов
     if (!tElem.elemAttrs || !tElem.elemAttrs.length) {
@@ -143,9 +148,37 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
         return
     }
 
+    // Добавить пустой массив данных по атрибутам элемента если его нет
+    if (!dElem.dCompElemAttrs) dElem.dCompElemAttrs = []
+
+    // Поставить пустые значения недостающих атрибутов в данных
+    for (let i = 0; i < tElem.elemAttrs.length; i++) {
+        const tElemAttr = tElem.elemAttrs[i]
+
+        // Найти данные атрибута
+        const currentDElemAttr = dElem.dCompElemAttrs.find(dCompElemAttr => {
+            return dCompElemAttr.tCompElemAttrId === tElemAttr.elemAttrId
+        })
+
+        // Если данные есть, то ничего не делать
+        if (currentDElemAttr) continue
+
+        // В противном случае поставить пустое значение...
+        // Если значение атрибута будут вводить в текстовом поле, то в значении поставить пустую строку.
+        // Все остальные поля ставят идентификаторы в массив, поэтому поставлю пустой массив.
+        let dAttrValue = articleManager.getDElemAttrEmptyValue(tElemAttr)
+
+        // Поставить в массив данных атрибутов id атрибута из шаблона и пустое значение
+        dElem.dCompElemAttrs.push({
+            tCompElemAttrId: tElemAttr.elemAttrId,
+            dCompElemAttrValue: dAttrValue
+        })
+    }
+
     // Массив атрибутов из шаблона
     const tAttrs = tElem.elemAttrs
 
+    // Перебрать данные атрибутов, чтобы соотнести данные и шаблоны элементов
     for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
         const dAttr = dElem.dCompElemAttrs[i]
         const dAttrId = dAttr.tCompElemAttrId

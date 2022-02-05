@@ -7,6 +7,7 @@ const config = {
         editorTheme: 'editorTheme',
         editorTab: 'editorTab',
         editorSettingsTabId: 'editorSettingsTabId',
+        editorHelpTabId: 'editorHelpTabId',
         editorArtOpenedFolders: 'editorArtOpenedFolders',
         editorSiteId: 'editorSiteId',
         editorSitePartTab: 'editorSitePartTab',

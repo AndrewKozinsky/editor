@@ -9,6 +9,7 @@ import { createDeepCopy } from 'utils/miscUtils'
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
 export default function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
+
     // Создание объекта с данными по копиям элементов
     let groupElemsMap = createElemsMap(dataComp)
 

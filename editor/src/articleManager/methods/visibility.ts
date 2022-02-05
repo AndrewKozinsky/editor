@@ -130,7 +130,7 @@ export function changeElemTag(
 }
 
 /**
- * Функция изменяет тег элемента на переданный
+ * Функция изменяет атрибут элемента на переданный
  * @param {Object} article — данные статьи
  * @param {Number} dCompId — id данных компонента
  * @param {Number} dElemId — id данных элемента, в котором нужно поменять тег

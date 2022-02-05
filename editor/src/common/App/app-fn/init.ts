@@ -7,6 +7,7 @@ import sitesActions from 'store/site/sitesActions'
 import userActions from 'store/user/userActions'
 import articleActions from 'store/article/articleActions'
 import config from 'utils/config'
+import helpActions from '../../../store/help/helpActions'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах
@@ -21,6 +22,7 @@ export function useGetAndSetEditorSettings() {
         let mainTab = getFromLocalStorage(config.ls.editorTab, 3) // id главной вкладки
         let siteId = getFromLocalStorage(config.ls.editorSiteId, '') // id сайта
         let settingsTabId = getFromLocalStorage(config.ls.editorSettingsTabId, 'user') // id вкладки в Настройках
+        let helpTabId = getFromLocalStorage(config.ls.editorHelpTabId, 'reg') // id вкладки в Настройках
         let sitePartTab = getFromLocalStorage(config.ls.editorSitePartTab, 0) // id вкладки в Сайтах
         let editorSiteTemplateId = getFromLocalStorage(config.ls.editorSiteTemplateId, null) // id выбранного шаблона подключаемых файлов
         let editorComponentId = getFromLocalStorage(config.ls.editorComponentId, null) // id выбранного шаблона компонента
@@ -36,6 +38,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( settingsActions.setMainTab(mainTab) )
         dispatch( sitesActions.setCurrentSiteId(siteId) )
         dispatch( settingsActions.setSettingsPanelTab(settingsTabId) )
+        dispatch( helpActions.setHelpPanelTab(helpTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
         dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
