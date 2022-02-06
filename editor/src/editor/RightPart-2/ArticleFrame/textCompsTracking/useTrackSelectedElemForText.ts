@@ -5,42 +5,38 @@ import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { getState } from '../../../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
-/** Хук отслеживает выделенный компонент.
- * Если это текстовый компонент, то ставит его текст в свойство focusTextProof.text в Хранилище. */
+/** Хук отслеживает предыдущий и текущий выделенный компонент.
+ * Если предыдущий выделенный компонент был текстовым компонентом, то хук получает его текст из html и сравнивает с текстом в данных.
+ * Если тексты не совпадают, то текст из html будет вставлен в данные текстового компонента, который был выделен ранее. */
 export function useTrackSelectedElemForText() {
     const { $links } = useGetArticleSelectors()
     const flashedElems = articleManager.hooks.getFlashedElemCoords()
     const article = articleManager.hooks.getCurrentArticle()
 
-    // id выделенного текстового компонента
-    const [textCompId, setTextCompId] = useState<null | ArticleTypes.Id>(null)
+    // id выделенного компонента и его тип
+    const [lastSelectedCompId, setLastSelectedCompId] = useState<null | ArticleTypes.Id>(null)
+    const [lastSelectedCompType, setLastSelectedCompType] = useState<StoreArticleTypes.FlashedTagType>(null)
 
     useEffect(function () {
         if (!$links || !flashedElems || !article) return
         const { selectedElem } = flashedElems
 
-        // Выполнять код ниже только если изменился id выделенного компонента.
-        if (selectedElem.dataCompId === textCompId) return
-        else setTextCompId(selectedElem.dataCompId)
+        // Если компонент не изменился, то ничего не делать
+        if (selectedElem.dataCompId === lastSelectedCompId) return
+
+        // Поставить новый id выделенного компонента и его тип
+        setLastSelectedCompId(selectedElem.dataCompId)
+        setLastSelectedCompType(selectedElem.tagType)
 
         // Если раннее был выделен текстовый компонент...
-        if (textCompId) {
+        if (lastSelectedCompType === 'textComponent') {
             // ... то проверить разнится ли текст из HTML с данными.
             // Если да, то обновить данные в соответствии с текстом из HTML.
-            updateTextComp(textCompId, $links.$body, article)
+            updateTextComp(lastSelectedCompId, $links.$body, article)
         }
-
-        // Если выделили текстовый компонент
-        if (selectedElem.tagType === 'textComponent') {
-            setTextCompId(selectedElem.dataCompId)
-        }
-        else {
-            setTextCompId(null)
-        }
-
-    }, [flashedElems, textCompId])
+    }, [flashedElems])
 }
 
 /**
@@ -51,7 +47,7 @@ export function useTrackSelectedElemForText() {
  * @param {Object} article — данные статьи
  */
 function updateTextComp(
-    textCompId: null | ArticleTypes.Id,
+    textCompId: ArticleTypes.Id,
     $body: StoreArticleTypes.BodyLink,
     article: ArticleTypes.Article
 ) {
@@ -65,22 +61,29 @@ function updateTextComp(
     // Если текст не отличается, то ничего не делать
     if ($textComp.textContent === dTextComp.text) return
 
-    // В противном случае обновить текст и сохранить новый объект истории
+    const newText = $textComp.textContent
+
+    // Получить новый объект истории с новым текстом в текстовом слое
     const compsAndMaxCompId = articleManager.updateTextInComponent(
-        article, dTextComp, $textComp.textContent
+        article, dTextComp, newText
     )
 
+    // Сохранить новый объект истории
     store.dispatch(articleActions.createAndSetHistoryItem(
         compsAndMaxCompId
     ))
+
+    // Приходится принудительно ставить новый текст потому что после обновления текста в данных
+    // они вставляются до введённого текста и текст двоится.
+    $textComp.textContent = newText
 }
 
 /** Функция принудительно создаёт новый элемент истории если есть отредактированный текст */
 export function forceCreateHistoryItemWithNewText() {
-    // Ничего не делать если нет выделенного текстового компонента
     const historyItem = articleManager.getCurrentHistoryItem()
     if (!historyItem) return
 
+    // Ничего не делать если нет выделенного текстового компонента
     const selectedElem = historyItem.selectedElem
     if (selectedElem.tagType !== 'textComponent') return
 
@@ -99,11 +102,18 @@ export function forceCreateHistoryItemWithNewText() {
         ))
     }, 0)
 
-    // Выделить те буквы, которые были выделены изначально
     setTimeout(function () {
         // Получить html-объект компонента
         const $textComp = articleManager.get$elemBy$body($body, selectedElem.dataCompId)
 
+        // Поставить текст из данных чтобы не было сложения текста из данных и текста в contenteditable
+        const { dComps } = articleManager.getCurrentHistoryItem().article
+        const dTextComp = articleManager.getComponent(dComps, selectedElem.dataCompId)
+        if (dTextComp.dCompType === 'simpleTextComponent') {
+            $textComp.textContent = dTextComp.text
+        }
+
+        // Выделить те буквы, которые были выделены изначально
         $document.getSelection().setBaseAndExtent(
             $textComp.firstChild, anchorOffset, $textComp.firstChild, focusOffset
         )

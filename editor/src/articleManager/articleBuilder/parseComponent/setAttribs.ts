@@ -10,69 +10,79 @@ import { HTMLObjArrType } from '../htmlStringToObject'
 export default function setAttribs(consistObj: ConsistObj) {
     // Set attributes
     if (consistObj.tempElem.elemAttrs) {
-        for (let attrTemplate of consistObj.tempElem.elemAttrs) {
-            // Set an attribute to element
-            setAttribToHtmlElem(attrTemplate, consistObj.dElem, consistObj.htmlElem)
+
+        // Перебрать массив атрибутов из данных
+        for (let dAttr of consistObj.dElem.dCompElemAttrs) {
+            // Получение шаблона атрибута
+            const tElemAttr = consistObj.tempElem.elemAttrs.find(tElemAttr => {
+                return tElemAttr.elemAttrId === dAttr.tCompElemAttrId
+            })
+
+            // Временно все значения атрибутов я буду записывать в массив и ставить в атрибут элемента в html-объекте.
+            // Ниже по сценарию он будет превращён в строку.
+            if (!(Array.isArray(consistObj.htmlElem.attrs[tElemAttr.elemAttrName]))) {
+                // Если в атрибуте элемента не стоит пустой массив, то поставить
+                // @ts-ignore
+                consistObj.htmlElem.attrs[tElemAttr.elemAttrName] = []
+            }
+
+            // Поставить в массив значений атрибута html-элемента заблокированное значение
+            if (tElemAttr.elemAttrLockedValue) {
+                // @ts-ignore
+                consistObj.htmlElem.attrs[tElemAttr.elemAttrName].push(tElemAttr.elemAttrLockedValue)
+            }
+
+            // Добавить в массив значений атрибута html-элемента другие значения
+            setAttribToHtmlElem(tElemAttr, dAttr, consistObj.htmlElem)
+        }
+
+        // Перебор всех атрибутов html-элемента
+        for (let key in consistObj.htmlElem.attrs) {
+            // Значение перебираемого атрибута в html-элементе
+            const htmlAttr = consistObj.htmlElem.attrs[key]
+
+            // Если там находится массив, то слить его в одну строку. А значения разделить пробелами.
+            // В будущем для шаблона можно сделать свойство задающее разделительный символ для значений атрибута
+            // Если он не указан, то значения разделяются пробелом. Если указан, то этим символом.
+            if (Array.isArray(htmlAttr)) {
+                consistObj.htmlElem.attrs[key] = htmlAttr.join(' ')
+            }
         }
     }
 }
 
 /**
- * Set an attribute to element
- * @param {Object} attrTemplate — attr object from element template
- * @param {Object} dataElem — element data object
+ * Функция помещает значения атрибута в массив значений атрибута html-элемента
+ * @param {Object} tElemAttr — шаблон атрибута элемента
+ * @param {Object} dAttr — данные атрибута элемента
  * @param {Object} htmlElem — html-element object
  */
 function setAttribToHtmlElem(
-    attrTemplate: TempCompTypes.ElemAttr,
-    dataElem: ArticleTypes.ComponentElem,
+    tElemAttr: TempCompTypes.ElemAttr,
+    dAttr: ArticleTypes.Attrib,
     htmlElem: HTMLObjArrType.Tag
 ) {
-    const attrName = attrTemplate.elemAttrName // 'class'
+    const attrName = tElemAttr.elemAttrName // 'class'
 
-    // Array with the attribute values
-    let attrValue: string[] = []
-    // Set locked value if it exists
-    if (attrTemplate.elemAttrLockedValue) {
-        attrValue.push(attrTemplate.elemAttrLockedValue)
-    }
+    // Если в данных атрибута находится массив, то там находятся идентификаторы значений атрибута
+    if (Array.isArray(dAttr.dCompElemAttrValue)) {
+        for (let i = 0; i < dAttr.dCompElemAttrValue.length; i++) {
+            // id значения
+            const dAttrValueId = dAttr.dCompElemAttrValue[i]
 
-    // If there are attributes in element data...
-    if (dataElem.dCompElemAttrs?.length) {
+            // Найти шаблон выбранного атрибута элемента
+            const tElemAttrValueObj =  tElemAttr.elemAttrValues.find(tElemAttrValueObj => tElemAttrValueObj.elemAttrValueId === dAttrValueId)
 
-        // Find object with current attribute data
-        // Something like {id: 1, value: [1]} where id is an attrib id from elem template,
-        // and value is array of ids of an attrib values from elem template. Instead of array of ids may be string with exact value
-        const dataElemAttr = dataElem.dCompElemAttrs.find(dAttr => {
-            return dAttr.tCompElemAttrId === attrTemplate.elemAttrId
-        })
-
-        if (!dataElemAttr || !dataElemAttr.dCompElemAttrValue.length) {
-            return
-        }
-
-        // If in dataElemAttr.value is ready value...
-        if (typeof dataElemAttr.dCompElemAttrValue === 'string') {
-            attrValue.push(dataElemAttr.dCompElemAttrValue)
-        }
-        // If in dataElemAttr.value is array of values ids...
-        else if (Array.isArray(dataElemAttr.dCompElemAttrValue)) {
-            // Go through all ids and get string values
-            for(let dElemAttrValueId of dataElemAttr.dCompElemAttrValue) {
-                const attrValue2 = attrTemplate.elemAttrValues.find(tElemAttrValue => {
-                    return tElemAttrValue.elemAttrValueId === dElemAttrValueId
-                })
-
-                if (attrValue2) {
-                    attrValue.push(attrValue2.elemAttrValueValue)
-                }
+            if (tElemAttrValueObj) {
+                // Поставить значение атрибута в массив значений атрибута html-элемента
+                // @ts-ignore
+                htmlElem.attrs[attrName].push(tElemAttrValueObj.elemAttrValueValue)
             }
         }
     }
-
-    // Join all attributes values to a string
-    const attrValueFullString = attrValue.join(' ')
-    if (attrValueFullString) {
-        htmlElem.attrs[attrName] = attrValueFullString
+    // Если в данных атрибута находится строка, то поставить её в массив значений атрибута html-элемента
+    else {
+        // @ts-ignore
+        htmlElem.attrs[attrName].push(dAttr.dCompElemAttrValue)
     }
 }

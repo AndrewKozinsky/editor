@@ -154,7 +154,7 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
     if (type === 'components') {
         // Может создание нового компонента поместить в articleManager?
         const minCompContent: TempCompTypes.Content = {
-            html: '<img src="/misc/started-component-image.jpg" style="max-width: 300px" alt="image" data-em-id="image" />',
+            html: '<img src="/misc/example-image.jpg" alt="image" data-em-id="image" />',
             elems: [
                 {
                     elemId: 'image',
@@ -228,48 +228,3 @@ export function useGetOnItemClick(type: FolderType) {
         }
     }, [dispatch])
 }
-
-
-const x: TempCompTypes.Content = {
-    html: '<img src="/misc/started-component-image.jpg" style="max-width: 300px" alt="image" data-em-id="image" />',
-    elems: [
-        {
-            elemId: 'image',
-            elemName: 'Image',
-            elemAttrs: [
-                {
-                    elemAttrId: 'image-link',
-                    elemAttrName: 'src',
-                },
-                {
-                    elemAttrId: 'shadow-class',
-                    elemAttrAlt: 'Класс',
-                    elemAttrName: 'class',
-                    elemAttrValues: [
-                        {
-                            elemAttrValueId: 'small-shadow',
-                            elemAttrValueAlt: 'Маленькая тень',
-                            elemAttrValueValue: 'image--shadow-small'
-                        },
-                        {
-                            elemAttrValueId: 'standard-shadow',
-                            elemAttrValueAlt: 'Обычная тень',
-                            elemAttrValueValue: 'image--shadow-standard'
-                        },
-                        {
-                            elemAttrValueId: 'big-shadow',
-                            elemAttrValueAlt: 'Большая тень',
-                            elemAttrValueValue: 'image--shadow-big'
-                        },
-                    ]
-                },
-            ]
-        }
-    ]
-}
-
-
-// let g = {'dMeta': {'version': 1, 'dMaxCompId': 1},'dComps': [{'dCompType': 'component','dCompId': 1,'tCompId': 52,'dElems': [{'dCompElemId': 1, 'tCompElemId': 'image', 'dCompElemChildren': []},{'dCompElemId': 2, 'tCompElemId': 'image2', 'dCompElemChildren': []},]}]}
-
-// let g = {html:'<div style="background: red" data-em-id="wrapper"><div data-em-id="left"></div></div>',elems:[{elemId:'wrapper',elemName:'Wrapper'},{elemId:'left',elemName:'Left'}]}
-// let g = {html:'<div style="background: red" data-em-id="wrapper"><div data-em-id="left"></div><div data-em-id="right"></div></div>',elems:[{elemId:'wrapper',elemName:'Wrapper'},{elemId:'left',elemName:'Left'},{elemId:'right',elemName:'Right'}]}

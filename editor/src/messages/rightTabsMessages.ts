@@ -7,8 +7,8 @@ const rightTabsMessages = {
         rus: 'Группа'
     },
     groupTemplates: {
-        eng: 'Group style templates',
-        rus: 'Шаблоны стилей группы'
+        eng: 'Connectable files in the group',
+        rus: 'Подключаемые файлы группы'
     },
     components: {
         eng: 'Component templates',

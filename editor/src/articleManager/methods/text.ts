@@ -18,10 +18,8 @@ export function updateTextInComponent(
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { dComps } = article
 
-    const updatedDTextComp = Object.assign(
-        dTextComp,
-        {text: newText}
-    )
+    const updatedDTextComp = Object.assign({}, dTextComp)
+    updatedDTextComp.text = newText
 
     // Возвратить данные для вставки нового пункта массива истории
     return {
