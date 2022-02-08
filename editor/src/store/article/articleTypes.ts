@@ -150,6 +150,12 @@ namespace StoreArticleTypes {
         payload: StoreArticleTypes.CreateNewHistoryItem
     }
 
+    export const UPDATE_CURRENT_HISTORY_ITEM = 'UPDATE_CURRENT_HISTORY_ITEM'
+    export type UpdateCurrentHistoryItemAction = {
+        type: typeof UPDATE_CURRENT_HISTORY_ITEM
+        payload: StoreArticleTypes.CreateNewHistoryItem
+    }
+
     // Action changes a current history step
     export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
     export type MakeHistoryStepAction = {
@@ -183,6 +189,7 @@ namespace StoreArticleTypes {
         | SetTempCompAction
         | SetFlashedElementAction
         | CreateAndSetHistoryItemAction
+        | UpdateCurrentHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
         | ClearArticleAction

@@ -219,7 +219,7 @@ function prepareElemClone(
     if (elemId) dElem.dCompElemId = elemId
 
     // Если первая глубина копирования, то очистить все атрибуты, если нет, то оставить
-    if (deep === 1) {
+    if (deep === 1 && dElem.dCompElemAttrs) {
         // Перебрать все данные атрибутов
         for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
             // Данные перебираемого атрибута

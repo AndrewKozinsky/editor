@@ -350,6 +350,17 @@ const articleActions = {
     },
 
     /**
+     * Замена последнего объекта истории на переданный
+     * @param {Object} itemDetails — данные для обновления текущего элемента в массиве статей
+     */
+    updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
+        return {
+            type: StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM,
+            payload: itemDetails
+        }
+    },
+
+    /**
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
      */

@@ -23,24 +23,24 @@ const bottomPanelMessages = {
         rus: 'Перемещение вниз'
     },
     clone1: {
-        eng: 'Copy element',
-        rus: 'Скопировать элемент'
+        eng: 'Copy',
+        rus: 'Скопировать'
     },
     clone2: {
-        eng: 'Copy element with attributes',
-        rus: 'Скопировать элемент с атрибутами'
+        eng: 'Copy with attributes',
+        rus: 'Скопировать с атрибутами'
     },
     clone3: {
-        eng: 'Copy the element with the children',
-        rus: 'Скопировать элемент с детьми'
+        eng: 'Copy with the children',
+        rus: 'Скопировать с детьми'
     },
     remove: {
-        eng: 'Deleting an item',
-        rus: 'Удаление элемента'
+        eng: 'Deleting',
+        rus: 'Удаление'
     },
     visible: {
-        eng: 'Make the element visible',
-        rus: 'Скрыть / сделать элемент видимым'
+        eng: 'Change visibility',
+        rus: 'Изменить видимость'
     },
 }
 

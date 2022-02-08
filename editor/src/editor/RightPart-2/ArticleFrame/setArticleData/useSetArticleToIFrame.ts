@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
+import { getState } from '../../../../utils/miscUtils'
+import textManagerData from '../textCompsTracking/textManagerData'
 
 
 /** Hook sets article JSX to IFrame */
@@ -11,7 +13,8 @@ export default function useSetArticleToIFrame() {
         history,
         historyCurrentIdx,
         tempComps,
-        tempCompsDownloadHash
+        tempCompsDownloadHash,
+        renderIsAllowed
     } = useGetArticleSelectors()
 
     // Последнее значение хеша загрузки шаблонов компонентов.
@@ -29,7 +32,6 @@ export default function useSetArticleToIFrame() {
             if (lastTempCompsDownloadHash !== tempCompsDownloadHash) {
                 setLastTempCompsDownloadHash(tempCompsDownloadHash)
                 // ... запустить сценарий исправления статьи.
-                // console.log('correctArticle')
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }
 
@@ -53,6 +55,6 @@ export default function useSetArticleToIFrame() {
         $links,
         history,
         historyCurrentIdx,
-        tempComps,
+        tempComps
     ])
 }

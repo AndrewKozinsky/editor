@@ -14,7 +14,7 @@ export default function createJsxFromComponents(htmlStructure: HTMLObjArrType.Ar
         }
         else if ('tag' in htmlObj) {
             // Если тег скрыт, то ничего не отрисовывать
-            return htmlObj.attrs['data-em-display'] === 'hidden'
+            return htmlObj.attrs?.['data-em-display'] === 'hidden'
                 ? null
                 : handleTagObject(htmlObj, i)
         }

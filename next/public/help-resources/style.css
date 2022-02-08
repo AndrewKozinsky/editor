@@ -31,3 +31,26 @@
     padding: 5px 10px;
     border-radius: 2px;
 }
+
+
+.table {
+    font-family: Arial, sans-serif;
+}
+
+.table__caption {
+
+}
+
+.table__head-th-inner {
+    font-family: Graphik,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    padding: 0 0 4px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+
+.table__body-td-inner {
+    text-align: left;
+    background-color: tomato;
+}

@@ -62,8 +62,8 @@ function getHtmlElem(
         if ('text' in htmlObj) return
 
         // If there is attr with a passed tCompElemId...
-        if (htmlObj.attrs['data-em-id'] === tCompElemId
-            && htmlObj.attrs['data-em-d-elem-id'] === dCompElemId.toString())
+        if (htmlObj.attrs?.['data-em-id'] === tCompElemId
+            && htmlObj.attrs?.['data-em-d-elem-id'] === dCompElemId.toString())
         {
             // The searches have finished
             htmlElem = htmlObj
@@ -79,7 +79,7 @@ function getHtmlElem(
             if ('text' in childObj) continue
 
             // If there is attr with a passed tCompElemId...
-            if (childObj.attrs['data-em-id'] === tCompElemId
+            if (childObj.attrs?.['data-em-id'] === tCompElemId
                 && childObj.attrs['data-em-d-elem-id'] === dCompElemId.toString()
             ) {
                 // The searches have finished

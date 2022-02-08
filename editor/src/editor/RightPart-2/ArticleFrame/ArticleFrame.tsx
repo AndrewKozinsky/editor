@@ -15,9 +15,12 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
-import { usePreventInsertForbiddenText } from './textCompsTracking/preventInsertForbiddenCharacters'
-import { useTrackSelectedElemForText } from './textCompsTracking/useTrackSelectedElemForText'
+import {
+    useUpdateArticleDataForText,
+    useSetTextDetails,
+} from './textCompsTracking/useUpdateArticleDataForText'
 import './ArticleFrame.scss'
+import { usePreventDefaultLinkBehavior } from './textCompsTracking/usePreventDefaultLinkBehavior'
 
 
 /* IFrame куда помещается статья */
@@ -34,10 +37,13 @@ export default function ArticleFrame() {
 
     // Установка обработчика нажатия клавиш
     useSetShortcutsHandler()
+    useSetTextDetails()
 
     // Работа с текстом
-    useTrackSelectedElemForText()
-    usePreventInsertForbiddenText()
+    useUpdateArticleDataForText()
+
+    // Запрет действия по умолчанию при щелчке по ссылке
+    usePreventDefaultLinkBehavior()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

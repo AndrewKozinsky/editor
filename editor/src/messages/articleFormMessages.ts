@@ -51,8 +51,8 @@ const articleFormMessages = {
         rus: 'В редактор'
     },
     articleIsAlreadyEdited: {
-        eng: 'The article is already being edited',
-        rus: 'Статья уже редактируется'
+        eng: 'It is already being edited',
+        rus: 'Уже редактируется'
     },
     templateNotSelected: {
         eng: 'Not selected',

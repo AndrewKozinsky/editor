@@ -9,7 +9,6 @@ import { createDeepCopy } from 'utils/miscUtils'
  * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
  */
 export default function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
-
     // Создание объекта с данными по копиям элементов
     let groupElemsMap = createElemsMap(dataComp)
 
@@ -65,9 +64,9 @@ function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, elemsMap: ElemsMapType
 
         if ('text' in htmlChild) continue
 
-        const htmlElemId = htmlChild.attrs['data-em-id']
+        let htmlElemId = htmlChild.attrs?.['data-em-id']
 
-        if (elemsMap[htmlElemId]) {
+        if (htmlElemId && elemsMap[htmlElemId]) {
             // Проход по всем элементам группы
             for (let k = 0; k < elemsMap[htmlElemId].length; k++) {
                 const elemMapItem = elemsMap[htmlElemId][k]

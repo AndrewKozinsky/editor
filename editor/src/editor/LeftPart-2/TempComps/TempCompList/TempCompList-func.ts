@@ -6,9 +6,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
-import {
-    forceCreateHistoryItemWithNewText
-} from '../../../RightPart-2/ArticleFrame/textCompsTracking/useTrackSelectedElemForText'
+// import {forceCreateHistoryItemWithNewText} from '../../../RightPart-2/ArticleFrame/textCompsTracking/old2/useTrackSelectedElemForText'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'

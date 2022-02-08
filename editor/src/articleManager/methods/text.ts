@@ -14,12 +14,14 @@ export function updateTextInComponent(
     this: typeof articleManager,
     article: ArticleTypes.Article,
     dTextComp: ArticleTypes.SimpleTextComponent,
-    newText: string
+    newText?: string
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { dComps } = article
 
     const updatedDTextComp = Object.assign({}, dTextComp)
-    updatedDTextComp.text = newText
+    if (newText) {
+        updatedDTextComp.text = newText
+    }
 
     // Возвратить данные для вставки нового пункта массива истории
     return {

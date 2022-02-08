@@ -65,10 +65,79 @@ const header: TempCompTypes.Content = {
         {
             elemId: 'header',
             elemName: 'Заголовок',
+            elemTags: {
+                elemTagsValues: [
+                    {
+                        elemTagValueId: 'h1',
+                        elemTagValueName: 'h1'
+                    },
+                    {
+                        elemTagValueId: 'h2',
+                        elemTagValueName: 'h2'
+                    },
+                    {
+                        elemTagValueId: 'h3',
+                        elemTagValueName: 'h3',
+                    },
+                ]
+            }
         },
         {
             elemId: 'header-inner',
             elemName: 'Обёртка для текста',
+            addTextComponent: true
+        },
+    ]
+}
+
+const link: TempCompTypes.Content = {
+    html: '<a href="" data-em-id="link"></a>',
+    elems: [
+        {
+            elemId: 'link',
+            elemName: 'Ссылка',
+            elemAttrs: [
+                {
+                    elemAttrId: 'href',
+                    elemAttrName: 'href',
+                }
+            ],
+            addTextComponent: true
+        },
+    ]
+}
+
+const table: TempCompTypes.Content = {
+    html: '<table class="table" data-em-id="table"><caption class="table__caption" data-em-id="caption"></caption><thead><tr><th scope="col" data-em-id="table-head-th"><div class="table__head-th-inner" data-em-id="table-head-th-inner"></div></th></tr></thead><tbody><tr data-em-id="table-body-tr"><td data-em-id="table-body-td"><div class="table__body-td-inner" data-em-id="table-body-td-inner"></div></td></tr></tbody></table>',
+    elems: [
+        {
+            elemId: 'table',
+            elemName: 'Таблица'
+        },
+        {
+            elemId: 'caption',
+            elemName: 'Заголовок таблицы'
+        },
+        {
+            elemId: 'table-head-th',
+            elemName: 'Ячейка заголовка ряда',
+        },
+        {
+            elemId: 'table-head-th-inner',
+            elemName: 'Ячейка заголовка ряда ВНУТРЕННЯЯ',
+            addTextComponent: true
+        },
+        {
+            elemId: 'table-body-tr',
+            elemName: 'Ряд'
+        },
+        {
+            elemId: 'table-body-td',
+            elemName: 'Ячейка'
+        },
+        {
+            elemId: 'table-body-td-inner',
+            elemName: 'Ячейка ВНУТРЕННЯЯ',
             addTextComponent: true
         },
     ]
