@@ -72,7 +72,7 @@ export function canComponentPutInElement(
     )
     if (!targetTElem) return false
 
-    // Получение данных щелевого элемента
+    // Получение данных целевого элемента
     const targetDComp = this.getComponent(dComps, targetCompCoords.dataCompId)
     if (targetDComp.dCompType === 'simpleTextComponent') return false
     const targetDElem = this.getDElemInDComp(targetDComp, targetCompCoords.dataElemId)
@@ -110,9 +110,7 @@ export function has$ElemNested$Elements(
     if (!tempComp) return true
 
     // Turn html-string to HTMLElement
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(tempComp.content.html, 'text/html')
-    const $component = doc.body.childNodes[0] as HTMLElement
+    const $component = this.get$componentByTComp(tempComp)
 
     let $elem: HTMLElement = $component.closest(`[data-em-id=${tElemId}]`)
     if (!$elem) $elem = $component.querySelector(`[data-em-id=${tElemId}]`)
@@ -165,7 +163,7 @@ export function canDeleteElem(
     dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
 ) {
-    // Если выделен текствоый компонент или корневой элемент, то можно удалить весь компонент
+    // Если выделен текстовый компонент или корневой элемент, то можно удалить весь компонент
     if (['rootElement', 'textComponent'].includes(targetCompCoords.tagType)) {
         return true
     }
@@ -174,12 +172,14 @@ export function canDeleteElem(
     if (targetCompCoords.tagType === 'element') {
         const dComp = this.getComponent(dComps, targetCompCoords.dataCompId) as ArticleTypes.Component
 
-        const dElem = this.getDElemInDComp(
-            dComp, targetCompCoords.dataElemId
-        )
+        // Поиск массива dCompElemInnerElems где находится удаляемый элемент
+        const dElemInnerElemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, targetCompCoords.dataElemId)
+        if (!dElemInnerElemsArr) return false
+
+        const dElem = this.getDElemInDComp(dComp, targetCompCoords.dataElemId)
 
         // Получить количество таких же элементов как выделенный
-        const elemCount = this.getElemCount(dComp, dElem)
+        const elemCount = this.getElemCountInInnerElemsArr(dElemInnerElemsArr, dElem)
         // Элемент можно удалить если его количество больше одного
         return elemCount > 1
     }
@@ -225,7 +225,8 @@ export function canMoveItemToUpOrDown(
 
         // Составить массив элементов с таким же id шаблона элемента
         // потому что мне нужно проверить смогу ли я перемещать элемент в пределах элементов из его группы
-        const elemsGroupArr = dComp.dElems.filter(el => el.tCompElemId === dElem.tCompElemId)
+        const dElemInnerElemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, dElem.dCompElemId)
+        const elemsGroupArr = dElemInnerElemsArr.filter(el => el.tCompElemId === dElem.tCompElemId)
 
         // Индекс положения элемента и длина массива
         idx = elemsGroupArr.findIndex(dElem => dElem.dCompElemId === dataElemId)
@@ -274,7 +275,7 @@ export function canClone(this: typeof articleManager, compCoords: StoreArticleTy
  * @param {Boolean} parentItemHidden — скрыт ли компонент/элемент находящийся выше в иерархии
  * @param {Object} parentDComp — данные компонента к которому принадлежат перебираемый массив элементов
  */
-export function isParentElemHidden(
+/*export function isParentElemHidden(
     this: typeof articleManager,
     dItems: ArticleTypes.Components | ArticleTypes.ComponentElems | ArticleTypes.ElemChildren,
     targetDComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
@@ -326,7 +327,7 @@ export function isParentElemHidden(
     }
 
     return false
-}
+}*/
 
 /**
  * Имеет ли компонент/элемент внутри другой компонент/элемент.
@@ -336,7 +337,7 @@ export function isParentElemHidden(
  * @param {Number} childDCompId — id данных искомого компонента (если передали без childDElemId)
  * @param {Number} childDElemId — id данных искомого элемента
  */
-export function hasItemAnotherItem(
+/*export function hasItemAnotherItem(
     this: typeof articleManager,
     dComps: ArticleTypes.Components,
     targetDCompId: ArticleTypes.Id,
@@ -374,4 +375,4 @@ export function hasItemAnotherItem(
     }
 
     return false
-}
+}*/

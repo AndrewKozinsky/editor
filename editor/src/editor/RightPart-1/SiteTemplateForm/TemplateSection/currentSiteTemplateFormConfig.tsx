@@ -2,13 +2,12 @@ import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
-import { store } from 'store/rootReducer'
 import { afterSubmit } from './siteTemplateForm-func'
 import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
 import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
-import { getState } from '../../../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы входа в сервис */
 const currentSiteTemplateFormConfig: FCType.Config = {

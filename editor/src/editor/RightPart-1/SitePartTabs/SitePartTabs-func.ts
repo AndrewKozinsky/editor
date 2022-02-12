@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
+import sitesActions from 'store/site/sitesActions'
 import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import rightTabsMsg from 'messages/rightTabsMessages'
@@ -72,7 +72,7 @@ function getTabData(
             active: i === rightMainTab,
             position: <'top'|'left'>'left',
             disabled: (i !== 0 && isTabsDisabled),
-            onClick: () => store.dispatch(actions.sites.setRightMainTab(i))
+            onClick: () => store.dispatch(sitesActions.setRightMainTab(i))
         }
     })
 }

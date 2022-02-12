@@ -44,7 +44,6 @@ export type ArticleReducerType = {
     historyCurrentIdx: number
     // A history step when the article was saved
     historyStepWhenWasSave: number
-    renderIsAllowed: boolean
 }
 
 // Article reducer state example
@@ -105,7 +104,6 @@ const stateExample: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
-    renderIsAllowed: true
 }
 
 // Initial values
@@ -136,7 +134,6 @@ const initialState: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
-    renderIsAllowed: true
 }
 
 /** Установка ссылок на элементы IFrame-а. */
@@ -353,7 +350,7 @@ function createAndSetHistoryItem(
 }
 
 /** Редьюсер ставит новую версию статьи в массив истории */
-function updateCurrentHistoryItem(
+/*function updateCurrentHistoryItem(
     state: ArticleReducerType, action: StoreArticleTypes.UpdateCurrentHistoryItemAction
 ): ArticleReducerType {
     const historyArr = [...state.history]
@@ -366,7 +363,7 @@ function updateCurrentHistoryItem(
         ...state,
         history: historyArr,
     }
-}
+}*/
 
 // The function changes a current history step
 function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
@@ -386,12 +383,12 @@ function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.Ma
 }
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
-function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+/*function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
     return {
         ...state,
         historyStepWhenWasSave: state.historyCurrentIdx
     }
-}
+}*/
 
 /* Функция очищает статью от данных */
 function clearArticle(state: ArticleReducerType): ArticleReducerType {
@@ -400,15 +397,6 @@ function clearArticle(state: ArticleReducerType): ArticleReducerType {
         { $links: state.$links } // Do not touch the document's links
     )
 }
-
-// ЭТО МОЖНО УДАЛИТЬ
-/* Установка флага можно ли отрисовывать статью */
-/*function setRenderIsAllowed(state: ArticleReducerType, action: StoreArticleTypes.SetRenderIsAllowedAction): ArticleReducerType {
-    return {
-        ...state,
-        renderIsAllowed: action.payload
-    }
-}*/
 
 
 // Редьюсер Store.article
@@ -441,12 +429,12 @@ export default function articleReducer(
             return setFlashedElement(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
-        case StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM:
-            return updateCurrentHistoryItem(state, action)
+        // case StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM:
+        //     return updateCurrentHistoryItem(state, action)
         case StoreArticleTypes.MAKE_HISTORY_STEP:
             return makeHistoryStep(state, action)
-        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
-            return setHistoryStepWhenArticleWasSaved(state, action)
+        // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
+        //     return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
         default:

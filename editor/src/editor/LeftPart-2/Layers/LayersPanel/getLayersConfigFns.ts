@@ -5,21 +5,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
 import articleManager from 'articleManager/articleManager'
 import { isCtrlPressed } from 'utils/domUtils'
-import LayersConfigType from './LayersConfigType'
 
-/**
- * Функция возвращает строковое представление id компонента и элемента. Вроде '4_2'.
- * Это используется для атрибута key компонента <Layer /> и в массиве свёрнутых компонентов/элементов
- * @param {Object} dComp — данные компонента
- * @param {Object} dElem — данные элемента
- */
-export function getKey(
-    dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent, dElem?: ArticleTypes.ComponentElem
-): string {
-    return dElem
-        ? dComp.dCompId + '_' + dElem.dCompElemId
-        : dComp.dCompId.toString()
-}
 
 /**
  * Функция возвращает имя элемента
@@ -43,71 +29,13 @@ export function getElementName(
  */
 export function getTextComponentName(dTextComp: ArticleTypes.SimpleTextComponent): string {
     if (!dTextComp.text.length) {
-        return ''
+        return '_'
     }
-    else if (dTextComp.text.length < 10) {
+    else if (dTextComp.text.length <= 10) {
         return dTextComp.text
     }
     else {
         return dTextComp.text.slice(0, 10) + '...'
-    }
-}
-
-/**
- * Функция возвращает булево значение свёрнут ли слой на панели слоёв
- * @param {Array} collapsedItems — массив ключей по которым можно определить свёрнутые компоненты/элементы
- * @param {Object} dComp — данные компонента
- * @param {Object} dElem — данные элемента
- */
-export function isItemCollapsed(
-    collapsedItems: LayersConfigType.CollapsedItems,
-    dComp: ArticleTypes.Component,
-    dElem?: ArticleTypes.ComponentElem
-) {
-    const key = getKey(dComp, dElem)
-    return collapsedItems.includes(key)
-}
-
-/**
- * Функция возвращает булево значение имеет ли элемент вложенные компоненты
- * @param {Object} dElem — данные элемента
- */
-export function hasElementChildren(dElem: ArticleTypes.ComponentElem) {
-    return !!dElem.dCompElemChildren.length
-}
-
-/**
- * Функция возвращает обработчик сворачивания/разворачивания слоя
- * @param {Array} collapsedItems — массив ключей по которым можно определить свёрнутые компоненты/элементы
- * @param {Function} setCollapsedItems — функция изменяющая массив ключей свёрнутых компонентов/элементов
- * @param {Object} dComp — данные компонента
- * @param {Object} dElem — данные элемента
- * @returns {() => void}
- */
-export function getCollapseHandler(
-    collapsedItems: LayersConfigType.CollapsedItems,
-    setCollapsedItems: LayersConfigType.SetCollapsedItems,
-    dComp: ArticleTypes.Component,
-    dElem?: ArticleTypes.ComponentElem
-) {
-    return function (e: any) {
-        e.stopPropagation()
-
-        const isCollapsed = isItemCollapsed(collapsedItems, dComp, dElem)
-        // Строка где написаны id данных компонента и элемента
-        const key = getKey(dComp, dElem)
-
-        // Поставить или убрать ключ компонента/элемента в массив ключей свёрнутых слоёв
-        if (isCollapsed) {
-            setCollapsedItems(
-                collapsedItems.filter(item => item !== key)
-            )
-        }
-        else {
-            setCollapsedItems(
-                [...collapsedItems, key]
-            )
-        }
     }
 }
 
@@ -227,40 +155,6 @@ export function isFlashed(
         return moveSelectedComp?.dataCompId === dCompId && moveSelectedComp?.dataElemId === dElemId
     }
 }
-
-/**
- * Функция возвращает булево значение содержится ли внутри переданного компонента/элемента выделенный компонент/элемент
- * @param {Object} historyItem — объект истории статьи
- * @param {String} selectionType — тип выделения: обычное или для перемещения
- * @param {Number} targetDCompId — данные компонента в котором требуется найти выделенный компонент/элемент
- * @param {Number} targetDElemId — данные элемента в котором требуется найти выделенный компонент/элемент
- */
-export function hasSelectedChild(
-    historyItem: StoreArticleTypes.HistoryItem,
-    selectionType: 'select' | 'moveSelect',
-    targetDCompId: ArticleTypes.Id,
-    targetDElemId: null | ArticleTypes.Id,
-): boolean {
-    const { selectedElem, moveSelectedComp, article } = historyItem
-
-    // Получение id данных компонента и элемента, который нужно найти
-    let childDCompId: ArticleTypes.Id = null
-    let childDElemId: ArticleTypes.Id = null
-
-    if (selectionType === 'select') {
-        childDCompId = selectedElem.dataCompId
-        childDElemId = selectedElem.dataElemId
-    }
-    else if (selectionType === 'moveSelect') {
-        childDCompId = moveSelectedComp.dataCompId
-    }
-
-    return articleManager.hasItemAnotherItem(
-        article.dComps, targetDCompId, targetDElemId,
-        childDCompId, childDElemId
-    )
-}
-
 
 /**
  * Функция возвращает обработчики наведения и нажатия на слой.

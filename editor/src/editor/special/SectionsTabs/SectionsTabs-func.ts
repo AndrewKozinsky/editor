@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
-import iconsCollector from '../../../common/icons/js/getIcon'
+import iconsCollector from 'common/icons/js/getIcon'
 import { MainTabDataType } from '../MainTab/MainTab'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import mainTabsMsg from 'messages/mainTabsMessages'

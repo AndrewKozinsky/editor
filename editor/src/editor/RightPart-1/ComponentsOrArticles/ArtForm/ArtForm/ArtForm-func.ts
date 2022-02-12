@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
+import sitesActions from 'store/site/sitesActions'
 import articleFormMsg from 'messages/articleFormMessages'
 import FCType from 'libs/FormConstructor/FCType'
 
@@ -13,7 +13,7 @@ export function useGetArtDataFromServerAndSetInStore() {
 
     // Скачать данные при выделении другой статьи
     useEffect(function () {
-        dispatch( actions.sites.requestArticle() )
+        dispatch( sitesActions.requestArticle() )
     }, [currentArtItemId])
 }
 

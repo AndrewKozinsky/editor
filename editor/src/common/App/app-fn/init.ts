@@ -6,8 +6,8 @@ import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'
 import userActions from 'store/user/userActions'
 import articleActions from 'store/article/articleActions'
+import helpActions from 'store/help/helpActions'
 import config from 'utils/config'
-import helpActions from '../../../store/help/helpActions'
 
 
 /** Хук получающий из LocalStorage данные о языке интерфейса, теме, открытой вкладке и прочих вещах

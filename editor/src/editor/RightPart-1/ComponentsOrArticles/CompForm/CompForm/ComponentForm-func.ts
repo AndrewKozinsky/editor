@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import FCType from 'libs/FormConstructor/FCType'
-import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
+import sitesActions from 'store/site/sitesActions'
 
 
 /** Хук отслеживает выбор другого компонента и скачивает данные по нему с сервера и ставит их в Хранилище */
@@ -12,7 +12,7 @@ export function useGetComDataFromServerAndSetInStore() {
 
     // Скачать данные при выделении другого компонента
     useEffect(function () {
-        dispatch( actions.sites.requestComponentTemplate() )
+        dispatch( sitesActions.requestComponentTemplate() )
     }, [currentCompItemId])
 }
 

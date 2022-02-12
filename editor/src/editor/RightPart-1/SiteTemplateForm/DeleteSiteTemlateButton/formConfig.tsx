@@ -2,10 +2,11 @@ import FCType from 'libs/FormConstructor/FCType'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import StoreSitesTypes from 'store/site/sitesTypes'
+import sitesActions from 'store/site/sitesActions'
 import deleteSiteTemplateRequest from 'requests/editor/siteTemplate/deleteSiteTemplateRequest'
 import updateSiteRequest from 'requests/editor/sites/updateSiteRequest'
 import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
-import { getState } from '../../../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления сайта
@@ -31,10 +32,10 @@ const deleteSiteTemplateModalConfig: FCType.Config = {
             store.dispatch(actions.modal.closeModal())
 
             // Скачать новый список шаблонов сайта и поставить в Хранилище
-            store.dispatch(actions.sites.requestSiteTemplates())
+            store.dispatch(sitesActions.requestSiteTemplates())
 
             // Обнулить id выбранного шаблона сайта
-            store.dispatch(actions.sites.setCurrentSiteTemplateId(null))
+            store.dispatch(sitesActions.setCurrentSiteTemplateId(null))
         }
     },
 }
@@ -70,5 +71,5 @@ async function clearCurrentSiteDefaultTemplate() {
     await updateSiteRequest({ defaultSiteTemplateId: null }, currentSiteId)
 
     // Скачать новый список сайтов и поставить в Хранилище
-    await store.dispatch(actions.sites.requestSites())
+    await store.dispatch(sitesActions.requestSites())
 }

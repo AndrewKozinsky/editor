@@ -5,7 +5,7 @@ import {
     PressedKeysObj
 } from 'utils/getPressedKeys'
 import articleActions from 'store/article/articleActions'
-import { getState } from '../../../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 
 /**
@@ -28,4 +28,3 @@ export function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
         store.dispatch( articleActions.makeHistoryStep('redo') )
     }
 }
-

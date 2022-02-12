@@ -1,7 +1,7 @@
 import React from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
+import iconsCollector from 'common/icons/js/getIcon'
 import { MiscTypes } from 'types/miscTypes'
-import iconsCollector from '../../../common/icons/js/getIcon'
 import makeClasses from './MainTab-classes'
 
 

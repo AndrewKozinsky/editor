@@ -95,9 +95,7 @@ type IconPropType = {
 
 /** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
-    const {
-        itemData
-    } = props
+    const { itemData } = props
 
     const CN = makeClasses(itemData)
 

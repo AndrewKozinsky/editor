@@ -1,11 +1,10 @@
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-import { store } from 'store/rootReducer'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
-import { getState } from '../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 // TODO Что делает эта функция?
 export async function addResource(

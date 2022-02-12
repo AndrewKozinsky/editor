@@ -3,10 +3,11 @@ import componentFormMsg from 'messages/componentTemplateFormMessages'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import bridge from '../../../../../bridge/bridge'
-import { getState } from '../../../../../utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Конфигурация формы удаления компонента
@@ -30,10 +31,10 @@ const deleteComponentFormConfig: FCType.Config = {
         const newFoldersArr = filesTreePublicMethods.deleteItem(compFolder, currentCompItemId)
 
         // Сохранить новые данные в Хранилище
-        store.dispatch( actions.sites.setCompFolder({folders: newFoldersArr}) )
+        store.dispatch( sitesActions.setCompFolder({folders: newFoldersArr}) )
 
         // Обнулить свойство указывающее на id активного пункта в папках и шаблонах компонентах потому что компонент удален
-        store.dispatch( actions.sites.setCurrentComp(null, null) )
+        store.dispatch( sitesActions.setCurrentComp(null, null) )
 
         // Сохранить новый массив папок и файлов на сервере
         await putCompFolderRequest(compFolderId, newFoldersArr)

@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 const JSON5 = require('json5')
-import actions from 'store/rootAction'
-import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
@@ -35,18 +33,18 @@ export function useGetFoldersFromServerAndPutInStore(type: FolderType) {
         if (!currentSiteId) {
             const payload: StoreSitesTypes.SetCompFolderActionPayload = { id: null, folders: null }
 
-            dispatch(actions.sites.setCompFolder(payload))
-            dispatch(actions.sites.setArtFolder(payload))
+            dispatch(sitesActions.setCompFolder(payload))
+            dispatch(sitesActions.setArtFolder(payload))
 
             return
         }
 
         // Скачать новый массив папок компонентов и статей
         if (type === 'components') {
-            dispatch(actions.sites.requestCompFolder())
+            dispatch(sitesActions.requestCompFolder())
         }
         if (type === 'articles') {
-            dispatch(actions.sites.requestArtFolder())
+            dispatch(sitesActions.requestArtFolder())
         }
     }, [currentSiteId])
 }
@@ -221,10 +219,10 @@ export function useGetOnItemClick(type: FolderType) {
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (item: FilesTreeType.Item) {
         if (type === 'components') {
-            dispatch(actions.sites.setCurrentComp(item.id, item.type))
+            dispatch(sitesActions.setCurrentComp(item.id, item.type))
         }
         else if (type === 'articles') {
-            dispatch(actions.sites.setCurrentArt(item.id, item.type))
+            dispatch(sitesActions.setCurrentArt(item.id, item.type))
         }
     }, [dispatch])
 }

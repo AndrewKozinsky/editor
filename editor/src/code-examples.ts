@@ -142,3 +142,108 @@ const table: TempCompTypes.Content = {
         },
     ]
 }
+
+
+
+
+const pseudoTable: TempCompTypes.Content = {
+    html: '<section class="general" data-em-id="general"><div class="row" data-em-id="row"><div class="cell" data-em-id="cell"></div></div></section>',
+    elems: [
+        {
+            elemId: 'general',
+            elemName: 'General'
+        },
+        {
+            elemId: 'row',
+            elemName: 'Row',
+            elemTags: {
+                elemTagsValues: [
+                    {
+                        elemTagValueId: 'aside',
+                        elemTagValueName: 'aside'
+                    },
+                    {
+                        elemTagValueId: 'section',
+                        elemTagValueName: 'section'
+                    },
+                ]
+            },
+            elemAttrs: [
+                {
+                    elemAttrId: 'class',
+                    elemAttrName: 'class',
+                    elemAttrAlt: 'Класс',
+                    elemAttrView: 'checkbox',
+                    elemAttrLockedValue: 'row',
+                    elemAttrValues: [
+                        {
+                            elemAttrValueId: 'shadow',
+                            elemAttrValueValue: 'shadow',
+                            elemAttrValueAlt: 'Тень'
+                        },
+                        {
+                            elemAttrValueId: 'round',
+                            elemAttrValueValue: 'round',
+                            elemAttrValueAlt: 'Закругление'
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            elemId: 'cell',
+            elemName: 'Cell'
+        },
+    ]
+}
+
+const pseudoTableChanged: TempCompTypes.Content = {
+    html: '<section class="general" data-em-id="general"><div class="row" data-em-id="row"></div><div class="cell" data-em-id="cell"></div></section>',
+    elems: [
+        {
+            elemId: 'general',
+            elemName: 'General'
+        },
+        {
+            elemId: 'row',
+            elemName: 'Row',
+            elemTags: {
+                elemTagsValues: [
+                    {
+                        elemTagValueId: 'aside',
+                        elemTagValueName: 'aside'
+                    },
+                    {
+                        elemTagValueId: 'section',
+                        elemTagValueName: 'section'
+                    },
+                ]
+            },
+            elemAttrs: [
+                {
+                    elemAttrId: 'class',
+                    elemAttrName: 'class',
+                    elemAttrAlt: 'Класс',
+                    elemAttrView: 'checkbox',
+                    elemAttrLockedValue: 'row',
+                    elemAttrValues: [
+                        {
+                            elemAttrValueId: 'shadow',
+                            elemAttrValueValue: 'shadow',
+                            elemAttrValueAlt: 'Тень'
+                        },
+                        {
+                            elemAttrValueId: 'round',
+                            elemAttrValueValue: 'round',
+                            elemAttrValueAlt: 'Закругление'
+                        },
+                    ]
+                }
+            ]
+        },
+        {
+            elemId: 'cell',
+            elemName: 'Cell'
+        },
+    ]
+}

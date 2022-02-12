@@ -12,9 +12,8 @@ import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
-import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
+import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import StoreSitesTypes from '../site/sitesTypes'
 
 
@@ -234,7 +233,12 @@ const articleActions = {
             // Если на элемент навели мышью...
             if (actionType === 'hover') {
                 // Если навели на элемент, но он уже выделен...
-                if (currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
+                if (
+                    currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId &&
+                    currentArticle.selectedElem.dataElemId === dataElemId ||
+                    currentArticle.moveSelectedComp.dataCompId === dataCompId &&
+                    currentArticle.moveSelectedComp.dataElemId === dataElemId
+                ) {
                     // Спрятать наводящую рамку
                     dispatch( articleActions.setFlashedElement(
                         'hover', tagType, null, null
@@ -258,7 +262,7 @@ const articleActions = {
                     'select', tagType, dataCompId, dataElemId
                 ))
 
-                if (currentArticle.hoveredElem.dataCompId === dataCompId && !dataElemId) {
+                if (currentArticle.hoveredElem.dataCompId === dataCompId) {
                     dispatch( articleActions.setFlashedElement(
                         'hover', null, null, null
                     ))
@@ -353,12 +357,12 @@ const articleActions = {
      * Замена последнего объекта истории на переданный
      * @param {Object} itemDetails — данные для обновления текущего элемента в массиве статей
      */
-    updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
+    /*updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
         return {
             type: StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM,
             payload: itemDetails
         }
-    },
+    },*/
 
     /**
      * Action changes a current history step

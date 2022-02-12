@@ -1,10 +1,10 @@
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import StoreArticleTypes from 'store/article/articleTypes'
-import articleManager from 'articleManager/articleManager'
+import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
+import articleManager from 'articleManager/articleManager'
 import config from 'utils/config'
 import { removeFromLocalStorage } from 'utils/miscUtils'
-import articleActions from 'store/article/articleActions'
 
 
 /**

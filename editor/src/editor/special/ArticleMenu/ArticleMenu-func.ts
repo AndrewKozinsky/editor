@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
-// import {forceCreateHistoryItemWithNewText} from 'src/editor/RightPart-2/ArticleFrame/textCompsTracking/old2/useTrackSelectedElemForText'
 
 
 /** The hook returns is the Article menu button visible */
@@ -21,11 +20,4 @@ export function useIsButtonVisible() {
     }, [mainTab, articleId])
 
     return isVisible
-}
-
-/** Обработчик наведения на кнопку открывающую меню */
-export function onArticleMenuMouseEnter() {
-    // Если отредактировали текст, то принудительно создать новый элемент истории
-    // где будет новый текст текстового элемента
-    // forceCreateHistoryItemWithNewText()
 }

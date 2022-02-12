@@ -1,5 +1,6 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import { wrap$elemWithDiv } from 'utils/domUtils'
 import articleManager from '../articleManager'
 
 /**
@@ -18,81 +19,185 @@ export default function correctArticle(
         if (dComp.dCompType === 'component') {
             // Шаблон компонента
             const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
+            // Получение html-компонента из шаблона.
+            const $component = articleManager.get$componentByTComp(tComp)
 
             if (!tComp) {
                 dComps.splice(i, 1)
                 continue
             }
 
-            // Функция удаляет данные элементов если под них нет шаблонов и добавляет если данных нет, но есть шаблоны
-            makeMatchBetweenElems(dComp, tComp.content.elems)
+            // Создание эталонной структуры данных, которая должна быть у текущего компонента
+            const referenceDElems = getReferenceDElemsStructure(
+                [], wrap$elemWithDiv($component).children, tComp
+            )
+
+            // Добавление в данные элементы, которые должны присутствовать исходя из эталонного массива данных
+            addRequiredDElems([dComp.dElems], referenceDElems)
+
+            // Удаление из данных лишних элементов (не присутствующих в эталонном массиве данных)
+            removeUnnecessaryDElems([dComp.dElems], referenceDElems)
 
             // Сделать соответствие в тегах, атрибутах и детях элементов между данными и шаблонами элементов
-            makeMatchBetweenElemTagAttrsAndText(article, dComp.dElems, tComp.content.elems)
-
-            // Пройтись по элементам и исправить их дочерние компоненты
-            /*for (let k = 0; k < dComp.dElems.length; k++) {
-                const dElem = dComp.dElems[k]
-
-                if (Array.isArray(dElem.dCompElemChildren)) {
-                    correctArticle(article, dElem.dCompElemChildren, tComps)
-                }
-            }*/
+            makeMatchBetweenElemTagAttrsAndText(article, [dComp.dElems], tComp.content.elems, tComps)
         }
     }
+}
+
+type ReferenceDElemStructureType = {
+    tCompElemId: string,
+    dCompElemInnerElems?: ReferenceDElemStructureType[]
 }
 
 /**
- * Функция соотносит данные элементов в соответствии с элементами из шаблона.
- * @param {Object} dComp — данные компонента
- * @param {Array} tElems — массив элементов шаблона
+ * Функция рекурсивно формирует массив с данными элементов.
+ * @param {Array} resultArr — массив с данными элементов
+ * @param {HTMLCollection} $children — html-коллекция с перебираемыми детьми
+ * @param {Object} tempComp — шаблон компонента
  */
-function makeMatchBetweenElems(dComp: ArticleTypes.Component, tElems: TempCompTypes.Elems) {
+function getReferenceDElemsStructure(
+    resultArr: ReferenceDElemStructureType[], $children: HTMLCollection, tempComp: TempCompTypes.TempComp
+): null | ReferenceDElemStructureType[] {
+    if (!$children) return null
 
-    // Получение максимального id данных элемента.
-    // Он потребуется для задания новых идентификаторов
-    let maxDElemId = articleManager.getMaxDElemsId(dComp)
+    // Перебор html-коллекции
+    for(let i = 0; i < $children.length; i++) {
+        const $child = $children[i] as HTMLElement
 
-    // Если в шаблоне есть элемент, который нет в данных, то создать данные этого элемента и добавить
-    for (let i = 0; i < tElems.length; i++) {
-        const tElem = tElems[i]
+        // Найти элемент с data-em-id
+        const $elemWithDataEmId: HTMLElement = $child.matches(`[data-em-id]`)
+            ? $child
+            : $child.querySelector(`[data-em-id]`) as HTMLElement
 
-        const dElem = articleManager.getDElemByTElem(dComp, tElem.elemId)
+        if (!$elemWithDataEmId) continue
 
-        if (!dElem) {
-            dComp.dElems.push({
-                dCompElemId: ++maxDElemId,
-                tCompElemId: tElem.elemId,
-                dCompElemChildren: []
-            })
+        // Данные элемента
+        const elemData: ReferenceDElemStructureType = {
+            tCompElemId: $elemWithDataEmId.dataset.emId
         }
+
+        // Формирование массива вложенных элементов
+        const dInnerElems = getReferenceDElemsStructure([], $elemWithDataEmId.children, tempComp)
+        if (dInnerElems) {
+            elemData.dCompElemInnerElems = dInnerElems
+        }
+
+        resultArr.push(elemData)
     }
 
-    // Если в данных есть элемент для которого нет шаблона, то удалить его из данных
-    for (let i = 0; i < dComp.dElems.length; i++) {
-        const dElem = dComp.dElems[i]
+    return resultArr.length ? resultArr : null
+}
 
-        const tElem = articleManager.getTElemInTElems(dElem.tCompElemId, tElems)
 
-        if (!tElem) {
-            dComp.dElems.splice(i, 1)
-            --i
+/**
+ * Функция добавляет в данные элементы, которые должны присутствовать исходя из эталонного массива данных
+ * @param {Array} dElems — массив данных элементов
+ * @param {Array} referenceDElems — массив эталонных данных элементов для понимания какие элементы должны присутствовать в данных
+ */
+function addRequiredDElems(
+    dElems: ArticleTypes.ComponentElems,
+    referenceDElems: ReferenceDElemStructureType[]
+) {
+    // Перебор эталонного массива элементов
+    for (let i = 0; i < referenceDElems.length; i++) {
+        const refElem = referenceDElems[i]
+
+        // Найти в данных элемент с таким же id шаблона элемента как в эталонном элементе
+        const foundedDElem = dElems.find(dElem => dElem.tCompElemId === refElem.tCompElemId)
+
+        // Если в данных нет такого элемента...
+        if (!foundedDElem) {
+            // Найти элементы с требуемым id шаблона в других местах
+            let necessaryDElems: ArticleTypes.ComponentElems = []
+
+            articleManager.dElemsEnumeration(dElems, (dElem) => {
+                if (dElem.tCompElemId === refElem.tCompElemId) {
+                    necessaryDElems.push(dElem)
+                }
+            })
+
+            // Если элементы найдены, то добавить в dElems
+            if (necessaryDElems.length) {
+                dElems.push(...necessaryDElems)
+            }
+            // Если не найдены, то создать новый пустой элемент и добавить в dElems
+            else {
+                const newDElem: ArticleTypes.ComponentElem = {
+                    dCompElemId: articleManager.getMaxElemId(dElems) + 1,
+                    tCompElemId: refElem.tCompElemId,
+                    dCompElemChildren: []
+                }
+
+                dElems.push(newDElem)
+            }
+        }
+
+        // Найти все элементы в данных с шаблоном как у эталонного элемента
+        const foundedDElems = dElems.filter(dElem => dElem.tCompElemId === refElem.tCompElemId)
+
+        // Если у эталонного элемента есть массив вложенных элементов...
+        if (refElem.dCompElemInnerElems) {
+            // Рекурсивно запустить функцию addRequiredDElems для всех текущих элементов
+            for (let j = 0; j < foundedDElems.length; j++) {
+                if (!foundedDElems[j].dCompElemInnerElems) {
+                    foundedDElems[j].dCompElemInnerElems = []
+                }
+
+                addRequiredDElems(foundedDElems[j].dCompElemInnerElems, refElem.dCompElemInnerElems)
+            }
         }
     }
 }
+
+
+/**
+ * Функция удаляет из данных элементы не предусмотренные в шаблоне
+ * @param {Array} dElems — массив данных элементов
+ * @param {Array} referenceDElems — массив эталонных данных элементов для понимания какие элементы должны присутствовать в данных
+ */
+function removeUnnecessaryDElems(
+    dElems: ArticleTypes.ComponentElems,
+    referenceDElems: ReferenceDElemStructureType[]
+) {
+    // Перебор массива данных элементов
+    for (let i = 0; i < dElems.length; i++) {
+        const dElem = dElems[i]
+
+        // Найти в эталонных данных элемент с таким же шаблоном
+        const foundedRefElem = referenceDElems.find(refElem => refElem.tCompElemId === dElem.tCompElemId)
+
+        if (!foundedRefElem) {
+            dElems.splice(i, 1)
+            --i
+            continue
+        }
+
+        // Если есть массив вложенных элементов...
+        if (foundedRefElem.dCompElemInnerElems) {
+            removeUnnecessaryDElems(dElem.dCompElemInnerElems, foundedRefElem.dCompElemInnerElems)
+        }
+        else {
+            delete dElem.dCompElemInnerElems
+        }
+    }
+}
+
 
 /**
  * Функция настраивает соответствие в тегах, атрибутах и детях элементов между данными и шаблонами элементов
  * @param {Object} article — данные статьи
  * @param {Array} dElems — массив данных элементов
  * @param {Array} tElems — массив элементов шаблона
+ * @param {Array} tComps — массив шаблонов компонентов
  */
 function makeMatchBetweenElemTagAttrsAndText(
-    article: ArticleTypes.Article, dElems: ArticleTypes.ComponentElems, tElems: TempCompTypes.Elems
+    article: ArticleTypes.Article,
+    dElems: ArticleTypes.ComponentElems,
+    tElems: TempCompTypes.Elems,
+    tComps: TempCompTypes.TempComps
 ) {
     // Перебрать все элементы
-    for (let i = 0; i < dElems.length; i++) {
-        const dElem = dElems[i]
+    articleManager.dElemsEnumeration(dElems, (dElem) => {
         const tElem = articleManager.getTElemInTElems(dElem.tCompElemId, tElems)
 
         // Настроить соответствие между тегами в шаблоне и данными элемента
@@ -103,7 +208,12 @@ function makeMatchBetweenElemTagAttrsAndText(
 
         // Поправить отсутствие/наличие текстового компонента в зависимости от того требуется ли он
         setEmptyTextComponent(article, dElem, tElem)
-    }
+
+        // Исправить дочерние компоненты элемента
+        if (dElem.dCompElemChildren) {
+            correctArticle(article, dElem.dCompElemChildren, tComps)
+        }
+    })
 }
 
 /**
@@ -134,6 +244,7 @@ function makeMatchInTags(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes
         if (!tTag) delete dElem.dCompElemTag
     }
 }
+
 
 /**
  * Функция настраивает соответствие между атрибутами в шаблоне и в данных

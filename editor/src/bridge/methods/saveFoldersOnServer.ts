@@ -2,9 +2,8 @@ import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import { store } from 'store/rootReducer'
-import FilesTreeType from '../../types/FilesTreeType'
-import { getState } from '../../utils/miscUtils'
+import FilesTreeType from 'types/FilesTreeType'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция сохраняет массив папок на сервере

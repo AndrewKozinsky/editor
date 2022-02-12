@@ -25,21 +25,24 @@ import {
     getTElemInTComp,
     getCompParentArray,
     getDCompIdxInArray,
-    getElemCount,
+    getElemCountInInnerElemsArr,
     getTElemByTCompIdAndTElemId,
     get$componentByTComps,
     get$componentByTComp,
     get$elem,
-    getDElemByTElem,
-    getMaxDElemsId,
-//     getTElemInTCompsArr,
-    getRootTElemByTComps,
+//     getDElemByTElem,
+    getTElemInTCompsArr,
+//     getRootTElemByTComps,
     getRootTElem,
-    getItemInDElem,
+//     getItemInDElem,
     getItemInDComp,
     get$elemBy$body,
     getTElemInTElems,
     getDElemAttrEmptyValue,
+    dElemsEnumeration,
+    findParentArray,
+    getDElemInnerElemsArrByElemId,
+    getMaxElemId
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -61,8 +64,8 @@ import {
     canMoveItemToUpOrDown,
     canClone,
 //     isElemIsRootByDElem,
-    isParentElemHidden,
-    hasItemAnotherItem,
+//     isParentElemHidden,
+//     hasItemAnotherItem,
 } from './methods/check'
 import {
     moveComponentToRoot,
@@ -75,10 +78,12 @@ import {
     changeVisibility,
     changeVisibilityOfTextComp,
     changeVisibilityOfElem,
+} from './methods/visibility'
+import {
     changeElemTag,
     changeElemAttr
-} from './methods/visibility'
-//
+} from './methods/change'
+
 
 class ArticleManager {
     // BUILD ARTICLE
@@ -90,11 +95,11 @@ class ArticleManager {
     getCurrentHistoryItem = getCurrentHistoryItem
     // Finds template in templates array
     getTemplate = getTemplate
-    // getTElemInTCompsArr = getTElemInTCompsArr
+    getTElemInTCompsArr = getTElemInTCompsArr
     // Finds element template in templates array
     getTElemInTComp = getTElemInTComp
     getTElemByTCompIdAndTElemId = getTElemByTCompIdAndTElemId
-    getDElemByTElem = getDElemByTElem
+    // getDElemByTElem = getDElemByTElem
     // Finds template in templates array
     getComponent = getComponent
     // Поиск элемента данных в компоненте данных
@@ -109,22 +114,25 @@ class ArticleManager {
     getCompParentArray = getCompParentArray
     // idx компонента в переданном массиве
     getDCompIdxInArray = getDCompIdxInArray
-    getElemCount = getElemCount
+    getElemCountInInnerElemsArr = getElemCountInInnerElemsArr
     // Получение HTML-компонента по массиву шаблонов компонентов
     get$componentByTComps = get$componentByTComps
     // Получение HTML-компонента из переданного шаблона компонента
     get$componentByTComp = get$componentByTComp
     get$elem = get$elem
-    getMaxDElemsId = getMaxDElemsId
-    getRootTElemByTComps = getRootTElemByTComps
+    // getRootTElemByTComps = getRootTElemByTComps
     getRootTElem = getRootTElem
     // Поиск компонента/элемента в элементе
-    getItemInDElem = getItemInDElem
+    // getItemInDElem = getItemInDElem
     // Поиск компонента/элемента в компоненте
     getItemInDComp = getItemInDComp
     get$elemBy$body = get$elemBy$body
     getTElemInTElems = getTElemInTElems
     getDElemAttrEmptyValue = getDElemAttrEmptyValue
+    dElemsEnumeration = dElemsEnumeration
+    findParentArray = findParentArray
+    getDElemInnerElemsArrByElemId = getDElemInnerElemsArrByElemId
+    getMaxElemId = getMaxElemId
 
     // CHECK
     canMoveCompMoveToLeftOrRight = canMoveCompMoveToLeftOrRight
@@ -140,9 +148,9 @@ class ArticleManager {
     // Проверка является ли элемент корневым
     // isElemIsRootByDElem = isElemIsRootByDElem
     // Проверка скрыт ли родительский компонент/элемент
-    isParentElemHidden = isParentElemHidden
+    // isParentElemHidden = isParentElemHidden
     // Имеет ли компонент/элемент внутри другой компонент/элемент
-    hasItemAnotherItem = hasItemAnotherItem
+    // hasItemAnotherItem = hasItemAnotherItem
 
     // CREATE
     createArticle = createArticle
@@ -160,10 +168,12 @@ class ArticleManager {
     moveComponentToElement = moveComponentToElement
     moveItemToUpOrDown = moveItemToUpOrDown
 
-    // CHANGE
+    // VISIBILITY
     changeVisibility = changeVisibility
     changeVisibilityOfTextComp = changeVisibilityOfTextComp
     changeVisibilityOfElem = changeVisibilityOfElem
+
+    // CHANGE
     changeElemTag = changeElemTag
     changeElemAttr = changeElemAttr
 

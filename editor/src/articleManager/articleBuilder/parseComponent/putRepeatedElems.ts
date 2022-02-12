@@ -1,109 +1,64 @@
-import { MiscTypes } from 'types/miscTypes'
 import { HTMLObjArrType } from '../htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { createDeepCopy } from 'utils/miscUtils'
 
 /**
- * Function synchronize the number of elements in html object with number of elements in component data
- * @param {Object} htmlObj — html-объект в который требуется добавить копии элементов
- * @param {Object} dataComp — объект с информацией о конфигурации элемента в статье
- */
-export default function putRepeatedElems(htmlObj: HTMLObjArrType.Tag, dataComp: ArticleTypes.Component) {
-    // Создание объекта с данными по копиям элементов
-    let groupElemsMap = createElemsMap(dataComp)
-
-    // Поставить копии элементов (если требуется) и в каждый элемент поставить дополнительные атрибуты
-    setDuplicates(htmlObj.children, groupElemsMap, dataComp.dCompId)
-}
-
-type ElemsMapType = MiscTypes.ObjStringKey<{dCompElemId: number, hidden: boolean}[]>
-
-/**
- * Функция формирует объект вида:
- * {
- *     id данных элемента и является ли он скрытым. В массиве количество копий элемента.
- *     'banner': [ {dCompElemId: 2, hidden: false}, {dCompElemId: 3, hidden: true} ],
- *     'cell': [ {dCompElemId: 4, hidden: false} ]
- * }
- * The function forms array of objects like { 'banner-group': [...], 'cell-group': [...] }.
- * A key is a data element group name (elemGroup property), value is an object with data elem id
- * @param {Object} dataComp — element data object
- */
-function createElemsMap(dataComp: ArticleTypes.Component) {
-    const elemsMap: ElemsMapType = {}
-
-    for (let dataElem of dataComp.dElems) {
-        const elemId = dataElem.tCompElemId
-
-        if (!elemsMap[elemId]) {
-            elemsMap[elemId] = []
-        }
-
-        elemsMap[elemId].push(
-            {
-                dCompElemId: dataElem.dCompElemId, // id данных элемента
-                hidden: dataElem.dCompElemLayer?.layerHidden || false // является ли элемент скрытым
-            }
-        )
-    }
-
-    return elemsMap
-}
-
-/**
- * Функция ставит копии элементов (если требуется) и в каждый элемент ставит дополнительные атрибуты
- * @param {Array} htmlParentArr — массив детей htmlObj
- * @param {Array} elemsMap — массив с данными о количестве элементов каждой группы
+ * Ставит в разметку дополнительные элементы на основе данных компонента
+ * @param {Array} htmlObjArr — массив html-объектов
+ * @param {Array} dataElems — массив с данными элементов
  * @param {Number} dCompId — id данных компонента
  */
-function setDuplicates(htmlParentArr: HTMLObjArrType.Arr, elemsMap: ElemsMapType, dCompId: number) {
-    if (!htmlParentArr) return
+export default function putRepeatedElems(
+    htmlObjArr: HTMLObjArrType.Arr, dataElems: ArticleTypes.ComponentElems, dCompId: ArticleTypes.Id
+) {
+    // Пройти элементы из массива html-объектов
+    for(let i = 0; i < htmlObjArr.length; i++) {
+        const htmlObj = htmlObjArr[i]
+        if ('text' in htmlObj) continue
 
-    for (let i = 0; i < htmlParentArr.length; i++) {
-        const htmlChild = htmlParentArr[i]
+        // Если перебираемый элемент имеет data-em-id, то это элемент.
+        // Если в данных есть копии элемента, то поставить их
+        // Дополнительно каждому элементу поставить id компонента и элемента
+        if (htmlObj.attrs['data-em-id']) {
+            // Шаблон элемента
+            const tElemId = htmlObj.attrs['data-em-id']
+            // Получить данные элементов для этого шаблона элемента
+            const dElems = dataElems.filter(dElem => dElem.tCompElemId === tElemId)
 
-        if ('text' in htmlChild) continue
+            // Составление массива элементов с таким же шаблоном элемента
+            const newHtmlElems: HTMLObjArrType.Arr = []
 
-        let htmlElemId = htmlChild.attrs?.['data-em-id']
+            // Перебор данных элементов с таким же шаблоном элемента
+            for (let j = 0; j < dElems.length; j++) {
+                // Скопировать html-элемент
+                const htmlElemCopy = createDeepCopy(htmlObj)
 
-        if (htmlElemId && elemsMap[htmlElemId]) {
-            // Проход по всем элементам группы
-            for (let k = 0; k < elemsMap[htmlElemId].length; k++) {
-                const elemMapItem = elemsMap[htmlElemId][k]
+                // Поставить id компонента и элемента
+                htmlElemCopy.attrs['data-em-d-comp-id'] = dCompId.toString()
+                htmlElemCopy.attrs['data-em-d-elem-id'] = dElems[j].dCompElemId.toString()
 
-                // Если первый элемент, то поставить html-элементу атрибуты с id данных компонента и элемента
-                if (k === 0) {
-                    htmlChild.attrs['data-em-d-comp-id'] = dCompId.toString()
-                    htmlChild.attrs['data-em-d-elem-id'] = elemMapItem.dCompElemId.toString()
-
-                    // Поставить атрибут data-em-display="hidden" если элемент является скрытым
-                    // При переводе в JSX такие элементы не будут отрисовываться
-                    if (elemMapItem.hidden) {
-                        htmlChild.attrs['data-em-display'] = 'hidden'
-                    }
+                // Поставить свойство data-em-display если элемент должен быть скрыт
+                if (dElems[j].dCompElemLayer?.layerHidden) {
+                    htmlElemCopy.attrs['data-em-display'] = 'hidden'
                 }
-                // Остальные элементы создаются через клонирование htmlChild и вставку в массив где находится htmlChild
-                else {
-                    const htmlChildObjClone = createDeepCopy(htmlChild)
 
-                    htmlChildObjClone.attrs['data-em-d-comp-id'] = dCompId.toString()
-                    htmlChildObjClone.attrs['data-em-d-elem-id'] = elemMapItem.dCompElemId.toString()
-
-                    // Поставить атрибут data-em-display="hidden" если элемент является скрытым
-                    if (elemMapItem.hidden) {
-                        htmlChild.attrs['data-em-display'] = 'hidden'
-                    }
-
-                    // Поставить элемент после перебираемого элемента
-                    htmlParentArr.splice(i + k, 0, htmlChildObjClone)
+                // Рекурсивно пройтись по детям
+                if (htmlElemCopy.children) {
+                    putRepeatedElems( htmlElemCopy.children, dElems[j].dCompElemInnerElems, dCompId )
                 }
+
+                newHtmlElems.push(htmlElemCopy)
             }
 
-            i += elemsMap[htmlElemId].length - 1
-        }
+            // Замена перебираемого элемента на копии элементов
+            htmlObjArr.splice(i, 1, ...newHtmlElems)
 
-        if (htmlChild.children?.length) {
-            setDuplicates(htmlChild.children, elemsMap, dCompId)
+            i += newHtmlElems.length - 1
+        }
+        else {
+            if (htmlObj.children) {
+                putRepeatedElems( htmlObj.children, dataElems, dCompId )
+            }
         }
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import makeClasses from './ArticleMenu-classes'
 import SvgIcon from 'common/icons/SvgIcon'
-import { onArticleMenuMouseEnter, useIsButtonVisible } from './ArticleMenu-func'
+import { useIsButtonVisible } from './ArticleMenu-func'
 import Button from 'common/formElements/Button/Button'
 import articleMenuMsg from 'messages/articleMenuMessages'
 import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
@@ -22,7 +22,7 @@ export default function ArticleMenuButton() {
 
     return (
         <div className={CN.outerWrapper}>
-            <button className={CN.mainButton} onMouseEnter={onArticleMenuMouseEnter}>
+            <button className={CN.mainButton}>
                 <SvgIcon type='articleMenu' />
             </button>
             <ArticleMenu />

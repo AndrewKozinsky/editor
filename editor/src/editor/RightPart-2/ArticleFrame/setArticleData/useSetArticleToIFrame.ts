@@ -2,8 +2,6 @@ import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
-import { getState } from '../../../../utils/miscUtils'
-import textManagerData from '../textCompsTracking/textManagerData'
 
 
 /** Hook sets article JSX to IFrame */
@@ -13,8 +11,7 @@ export default function useSetArticleToIFrame() {
         history,
         historyCurrentIdx,
         tempComps,
-        tempCompsDownloadHash,
-        renderIsAllowed
+        tempCompsDownloadHash
     } = useGetArticleSelectors()
 
     // Последнее значение хеша загрузки шаблонов компонентов.

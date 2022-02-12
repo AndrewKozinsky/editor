@@ -8,6 +8,7 @@ import siteSectionMsg from 'messages/groupSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
 import { getState } from 'utils/miscUtils'
+import sitesActions from '../../../../store/site/sitesActions'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта
@@ -106,13 +107,13 @@ export async function afterSubmit(response: SitesServerResponseType) {
     // Если сайт успешно создан...
     if (response.status === 'success') {
         // Скачать новый список сайтов и поставить в Хранилище
-        await store.dispatch(actions.sites.requestSites())
+        await store.dispatch(sitesActions.requestSites())
 
         // Найти в Хранилище сайт с таким же id как у только что созданного сайта
         const newSite = getState().sites.sites.find(site => {
             return site.id === response.data.sites[0].id
         })
         // Выделить созданный сайт
-        store.dispatch(actions.sites.setCurrentSiteId(newSite.id))
+        store.dispatch(sitesActions.setCurrentSiteId(newSite.id))
     }
 }

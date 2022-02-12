@@ -1,6 +1,7 @@
 import FCType from 'libs/FormConstructor/FCType'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
 import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
 import articleManager from 'articleManager/articleManager'
 import { getState, removeFromLocalStorage } from 'utils/miscUtils'
@@ -42,10 +43,10 @@ function afterSuccessSiteDeleting() {
     store.dispatch(actions.modal.closeModal())
 
     // Скачать новый список сайтов и поставить в Хранилище
-    store.dispatch(actions.sites.requestSites())
+    store.dispatch(sitesActions.requestSites())
 
     // Обнулить id выбранного сайта
-    store.dispatch(actions.sites.setCurrentSiteId(null))
+    store.dispatch(sitesActions.setCurrentSiteId(null))
 
     // Удалить данные из LocalStorage потому что они относятся к удаляемому сайту
     const siteDataInLS = ['editorComponentType', 'editorArtOpenedFolders', 'editorCompOpenedFolders', 'editorArticleType', 'editorComponentId', 'editorSiteId', 'editorSiteTemplateId']
