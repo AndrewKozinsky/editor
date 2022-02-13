@@ -19,7 +19,7 @@ import BtnSignTrash from '../icons/btnSignTrash'
 import BtnSignAdd from '../icons/btnSignAdd'
 import BtnSignCode from '../icons/btnSignCode'
 import BtnSignText from '../icons/btnSignText'
-// import BtnSignJson from '../icons/btnSignJson'
+import BtnSignJson from '../icons/btnSignJson'
 import BtnSignClose from '../icons/btnSignClose'
 import BtnSignExit from '../icons/btnSignExit'
 import EditorLightTheme from '../icons/editorLightTheme'
@@ -88,7 +88,7 @@ const iconsCollector = {
     btnSignCode: BtnSignCode,
     btnSignText: BtnSignText,
     btnSignAdd: BtnSignAdd,
-    // btnSignJson: BtnSignJson,
+    btnSignJson: BtnSignJson,
     btnSignClose: BtnSignClose,
     btnSignExit: BtnSignExit,
     btnSignEdit: BtnSignEdit,

@@ -59,7 +59,7 @@ export function getTElemInTCompsArr(
 
 /**
  * Поиск шаблона элемента в шаблоне компонента
- * @param {String} tComp — component template
+ * @param {Object} tComp — шаблон компонента
  * @param {String} tempElemId — element template id
  */
 export function getTElemInTComp(

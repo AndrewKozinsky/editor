@@ -9,6 +9,7 @@ import StoreArticleTypes from './articleTypes'
 export type ArticleReducerType = {
     articleId: null | number
     siteId: null | number
+    name: string
 
     // id шаблона сайта
     siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId
@@ -50,6 +51,7 @@ export type ArticleReducerType = {
 const stateExample: ArticleReducerType = {
     articleId: 2,
     siteId: 10,
+    name: 'Article ame',
 
     siteTemplateId: 4,
     siteTemplate: null,
@@ -61,7 +63,10 @@ const stateExample: ArticleReducerType = {
     tempComps: [{
         id: 9,
         content: {
-            html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>'
+            html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>',
+            elems: [{
+                elemId: 'banner', elemName: 'Banner',
+            }]
         }
     }],
     tempCompsVersionHash: 0,
@@ -110,6 +115,7 @@ const stateExample: ArticleReducerType = {
 const initialState: ArticleReducerType = {
     articleId: null,
     siteId: null,
+    name: '',
 
     siteTemplateId: null,
     siteTemplate: null,
@@ -158,6 +164,7 @@ function setArticleId(
 function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
     return {
         ...state,
+        name: action.payload.name,
         siteId: action.payload.siteId,
         siteTemplateId: action.payload.siteTemplateId || null,
         history: [
@@ -383,12 +390,12 @@ function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.Ma
 }
 
 // The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
-/*function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
     return {
         ...state,
         historyStepWhenWasSave: state.historyCurrentIdx
     }
-}*/
+}
 
 /* Функция очищает статью от данных */
 function clearArticle(state: ArticleReducerType): ArticleReducerType {
@@ -433,8 +440,8 @@ export default function articleReducer(
         //     return updateCurrentHistoryItem(state, action)
         case StoreArticleTypes.MAKE_HISTORY_STEP:
             return makeHistoryStep(state, action)
-        // case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
-        //     return setHistoryStepWhenArticleWasSaved(state, action)
+        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
+            return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
         default:

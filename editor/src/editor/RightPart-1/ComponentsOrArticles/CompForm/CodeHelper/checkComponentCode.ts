@@ -21,7 +21,8 @@ export default function checkComponentCode(code: string) {
     try {
         const codeObj: TempCompTypes.Content = JSON5.parse(code)
 
-        // Проверки полей html и elems
+        // Проверки полей
+        errorsArr.push(...checkProp(codeObj.templateId, 'templateId', 'string', false))
         errorsArr.push(...checkProp(codeObj.html, 'html', 'string', true))
         errorsArr.push(...isMarkupCorrect(codeObj))
         errorsArr.push(...checkProp(codeObj.elems, 'elems', 'arrayOfObjects', true, checkElems.bind(this, codeObj.elems)))

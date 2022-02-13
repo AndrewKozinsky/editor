@@ -80,6 +80,7 @@ const articleActions = {
             payload: {
                 // Article
                 article: articleFullData.content,
+                name: articleFullData.name,
                 siteId: articleFullData.siteId,
                 siteTemplateId: articleFullData.siteTemplateId
             }

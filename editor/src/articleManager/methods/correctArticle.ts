@@ -33,7 +33,7 @@ export default function correctArticle(
             )
 
             // Добавление в данные элементы, которые должны присутствовать исходя из эталонного массива данных
-            addRequiredDElems([dComp.dElems], referenceDElems)
+            addRequiredDElems(dComp, [dComp.dElems], referenceDElems)
 
             // Удаление из данных лишних элементов (не присутствующих в эталонном массиве данных)
             removeUnnecessaryDElems([dComp.dElems], referenceDElems)
@@ -91,10 +91,12 @@ function getReferenceDElemsStructure(
 
 /**
  * Функция добавляет в данные элементы, которые должны присутствовать исходя из эталонного массива данных
+ * @param {Object} dComp — данные компонента
  * @param {Array} dElems — массив данных элементов
  * @param {Array} referenceDElems — массив эталонных данных элементов для понимания какие элементы должны присутствовать в данных
  */
 function addRequiredDElems(
+    dComp: ArticleTypes.Component,
     dElems: ArticleTypes.ComponentElems,
     referenceDElems: ReferenceDElemStructureType[]
 ) {
@@ -123,7 +125,7 @@ function addRequiredDElems(
             // Если не найдены, то создать новый пустой элемент и добавить в dElems
             else {
                 const newDElem: ArticleTypes.ComponentElem = {
-                    dCompElemId: articleManager.getMaxElemId(dElems) + 1,
+                    dCompElemId: articleManager.getMaxElemId([dComp.dElems]) + 1,
                     tCompElemId: refElem.tCompElemId,
                     dCompElemChildren: []
                 }
@@ -143,7 +145,7 @@ function addRequiredDElems(
                     foundedDElems[j].dCompElemInnerElems = []
                 }
 
-                addRequiredDElems(foundedDElems[j].dCompElemInnerElems, refElem.dCompElemInnerElems)
+                addRequiredDElems(dComp, foundedDElems[j].dCompElemInnerElems, refElem.dCompElemInnerElems)
             }
         }
     }

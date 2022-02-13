@@ -83,6 +83,7 @@ namespace StoreArticleTypes {
         type: typeof SET_ARTICLE
         payload: {
             article: ArticleTypes.Article,
+            name: string,
             siteId: number,
             siteTemplateId: number
         }
