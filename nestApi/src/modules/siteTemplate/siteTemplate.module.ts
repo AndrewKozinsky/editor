@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { SiteEntity } from '../site/site.entity'
 import { SiteTemplateController } from './siteTemplate.controller'
 import { SiteTemplateService } from './siteTemplate.service'
 import { SiteTemplateEntity } from './siteTemplate.entity'
 import { AuthGuard } from '../user/guards/auth.guard'
 
 @Module({
-    imports: [TypeOrmModule.forFeature([SiteTemplateEntity])],
+    imports: [TypeOrmModule.forFeature([SiteTemplateEntity, SiteEntity])],
     controllers: [SiteTemplateController],
     providers: [SiteTemplateService, AuthGuard],
     exports: [SiteTemplateService]

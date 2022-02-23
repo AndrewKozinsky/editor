@@ -12,6 +12,8 @@ export class UpdateSiteDto {
     name: string
 
     @IsOptional()
-    // Тут нужно как-то проверить, что присылают или число или строку
     defaultSiteTemplateId: number | ''
+
+    @IsOptional()
+    defaultMetaTemplateId: number | ''
 }

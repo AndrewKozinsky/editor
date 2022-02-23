@@ -4,7 +4,7 @@ import sitesActions from 'store/site/sitesActions'
 import { MainTabDataType } from 'editor/special/MainTab/MainTab'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import rightTabsMsg from 'messages/rightTabsMessages'
-import iconsCollector from '../../../common/icons/js/getIcon'
+import iconsCollector from 'common/icons/js/getIcon'
 
 
 /** Хук возвращает данные для генерирования вкладок разделов */
@@ -21,7 +21,7 @@ export function useGetTabData(): MainTabDataType[] {
         const isTabsDisabled = !currentSiteId
 
         // Сгенерировать данные и поставить в Местное состояние
-        setTabsData( getTabData(rightMainTab, isTabsDisabled, rightTabsMsg) )
+        setTabsData( getTabData(rightMainTab, isTabsDisabled) )
     }, [rightMainTab, currentSiteId])
 
     return tabsData
@@ -29,7 +29,7 @@ export function useGetTabData(): MainTabDataType[] {
 
 type TabDataType = {
     iconType: keyof typeof iconsCollector,
-    titleIndex: string
+    titleIndex: keyof typeof rightTabsMsg
 }
 type TabDataTypeArr = TabDataType[]
 
@@ -42,6 +42,10 @@ const tabsData: TabDataTypeArr = [
     {
         iconType: 'groupTabTemplates',
         titleIndex: 'groupTemplates'
+    },
+    {
+        iconType: 'groupTabMeta',
+        titleIndex: 'meta'
     },
     {
         iconType: 'groupTabComponents',
@@ -57,12 +61,10 @@ const tabsData: TabDataTypeArr = [
  * Функция возвращает данные для генерирования вкладок разделов
  * @param {Number} rightMainTab — номер активной вкладки
  * @param {Boolean} isTabsDisabled — должны ли все вкладки кроме первой быть заблокированы
- * @param {Object} rightTabsMsg — объект с текстами подсказок при наведении на вкладки
  */
 function getTabData(
     rightMainTab: number,
     isTabsDisabled: boolean,
-    rightTabsMsg: any
 ): MainTabDataType[] {
     // Сгенерировать данные четырёх вкладок
     return tabsData.map((tabData, i) => {

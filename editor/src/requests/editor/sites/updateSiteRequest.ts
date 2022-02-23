@@ -7,6 +7,7 @@ import StoreSitesTypes from 'store/site/sitesTypes'
 export type UpdateSiteRequestValuesType = {
     name?: string, // название сайта
     defaultSiteTemplateId?: null | number // id шаблона подключаемых файлов по умолчанию
+    defaultMetaTemplateId?: null | number // id шаблона метаданных по умолчанию
 }
 
 /**

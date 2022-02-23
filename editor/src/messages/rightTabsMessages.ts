@@ -10,6 +10,10 @@ const rightTabsMessages = {
         eng: 'Connectable files in the group',
         rus: 'Подключаемые файлы группы'
     },
+    meta: {
+        eng: 'Metadata templates',
+        rus: 'Шаблоны метаданных'
+    },
     components: {
         eng: 'Component templates',
         rus: 'Шаблоны компонентов'

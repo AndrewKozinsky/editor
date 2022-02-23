@@ -25,7 +25,8 @@ export default async function getArticleRequest(articleId: number) {
 
                 return {
                     ...article,
-                    content: JSON5.parse(article.content)
+                    content: JSON5.parse(article.content),
+                    meta: JSON5.parse(article.meta),
                 }
             })
 

@@ -49,7 +49,7 @@ function afterSuccessSiteDeleting() {
     store.dispatch(sitesActions.setCurrentSiteId(null))
 
     // Удалить данные из LocalStorage потому что они относятся к удаляемому сайту
-    const siteDataInLS = ['editorComponentType', 'editorArtOpenedFolders', 'editorCompOpenedFolders', 'editorArticleType', 'editorComponentId', 'editorSiteId', 'editorSiteTemplateId']
+    const siteDataInLS = ['editorComponentType', 'editorArtOpenedFolders', 'editorCompOpenedFolders', 'editorArticleType', 'editorComponentId', 'editorSiteId', 'editorSiteTemplateId', 'editorMetaTemplateId']
     siteDataInLS.forEach(function (propName) {
         removeFromLocalStorage(propName)
     })

@@ -52,11 +52,36 @@ export function useSetSiteTemplates(formState: FCType.StateFormReturn) {
             formState.fields['defaultSiteTemplateId'],
             {
                 options,
-                value: getValue(sites, currentSiteId),
+                value: getValue(sites, currentSiteId, 'defaultSiteTemplateId'),
                 disabled: options.length == 1
             }
         )
         formState.updateField('defaultSiteTemplateId', valueFieldData)
+    }, [sites, currentSiteId, templates])
+}
+
+/**
+ * Хук добавляет в выпадающий список «Шаблон метаданных по умолчанию» пункты сформированные из шаблонов метаданных
+ * @param {Object} formState — объект состояния формы
+ */
+export function useSetMetaTemplates(formState: FCType.StateFormReturn) {
+    // id текущего шаблона метаданных и массив метаданных
+    const { templates } = useGetSitesSelectors().metaTemplatesSection
+    const { sites, currentSiteId } = useGetSitesSelectors()
+
+    // Формирование пунктов выпадающего списка
+    const options = getOptions(templates)
+
+    useEffect(function () {
+        const valueFieldData = Object.assign(
+            formState.fields['defaultMetaTemplateId'],
+            {
+                options,
+                value: getValue(sites, currentSiteId, 'defaultMetaTemplateId'),
+                disabled: options.length == 1
+            }
+        )
+        formState.updateField('defaultMetaTemplateId', valueFieldData)
     }, [sites, currentSiteId, templates])
 }
 
@@ -85,16 +110,21 @@ function getOptions(
 }
 
 /**
- * Формирование значения (текущий пункт) выпадающего списка «Шаблон сайта по умолчанию»
+ * Получение текущего значения (текущий пункт) для выпадающего списка «Шаблон сайта по умолчанию»
+ * или «Шаблон метаданных по умолчанию»
  * @param {Array} sites — массив сайтов
  * @param {Number} currentSiteId — id текущего сайта
+ * @param {String} templateName — название свойства хранящее или id шаблона сайта или id шаблона метаданных
  */
 function getValue(
-    sites: StoreSitesTypes.SitesType, currentSiteId: StoreSitesTypes.CurrentSiteId
+    sites: StoreSitesTypes.SitesType,
+    currentSiteId: StoreSitesTypes.CurrentSiteId,
+    templateName: 'defaultSiteTemplateId' | 'defaultMetaTemplateId'
 ) {
     const currentSite = sites.find(site => site.id === currentSiteId)
+    if (!currentSite) return [null]
 
-    let value = currentSite?.defaultSiteTemplateId?.toString() || ''
+    let value = currentSite[templateName]?.toString() || ''
     return [value]
 }
 

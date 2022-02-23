@@ -1,3 +1,4 @@
+import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import ArticleTypes from '../article/codeType/articleCodeType'
 import FilesTreeType from 'types/FilesTreeType'
 
@@ -12,6 +13,8 @@ namespace StoreSitesTypes {
         name: string,
         // id шаблона подключаемого файла применяемый по умолчанию при создании статьи для этого сайта
         defaultSiteTemplateId: null | number
+        // id шаблона метаданных применяемый по умолчанию при создании статьи для этого сайта
+        defaultMetaTemplateId: null | number
     }
     // id выбранного сайта
     export type CurrentSiteId = null | number | ''
@@ -38,6 +41,23 @@ namespace StoreSitesTypes {
     export type SiteTemplatesSection = {
         templates: SiteTemplatesType
         currentTemplateId: CurrentSiteTemplateId
+    }
+
+    // МЕТАДАННЫЕ (ТИПЫ)
+    // Шаблон подключаемых файлов
+    export type MetaTemplateType = {
+        id: number,
+        name: string
+        content: string
+    }
+    // Массив шаблонов подключаемых файлов
+    export type MetaTemplatesType = MetaTemplateType[]
+    // id выбранного шаблона подключаемых файлов (пустая строка ставится при создании нового шаблона)
+    export type CurrentMetaTemplateId = null | number | ''
+
+    export type MetaTemplatesSection = {
+        templates: MetaTemplatesType
+        currentTemplateId: CurrentMetaTemplateId
     }
 
     // ПАПКИ С КОМПОНЕНТАМИ (ТИПЫ) ====================================================
@@ -92,7 +112,9 @@ namespace StoreSitesTypes {
         currentArtItemType: CurrentArtItemType
         currentArtName: ArticleName
         currentArtCode: ArticleCode,
-        siteTemplateId: CurrentSiteTemplateId
+        siteTemplateId: CurrentSiteTemplateId,
+        metaTemplateId: CurrentMetaTemplateId
+        meta: null | MetaType.Items
     }
 
     // САЙТЫ (ЭКШЕНЫ) =================================================================
@@ -135,6 +157,23 @@ namespace StoreSitesTypes {
     export type SetCurrentSiteTemplateIdAction = {
         type: typeof SET_CURRENT_SITE_TEMPLATE_ID
         payload: CurrentSiteTemplateId
+    }
+
+
+    // ШАБЛОНЫ МЕТАДАННЫХ (ЭКШЕНЫ) ===========================================
+
+    // Установка массива шаблонов метаданных
+    export const SET_META_TEMPLATES = 'SET_META_TEMPLATES'
+    export type SetMetaTemplatesAction = {
+        type: typeof SET_META_TEMPLATES
+        payload: MetaTemplatesType
+    }
+
+    // Установка id выбранного шаблона метаданных
+    export const SET_CURRENT_META_TEMPLATE_ID = 'SET_CURRENT_META_TEMPLATE_ID'
+    export type SetCurrentMetaTemplateIdAction = {
+        type: typeof SET_CURRENT_META_TEMPLATE_ID
+        payload: CurrentMetaTemplateId
     }
 
     // ПАПКИ С КОМПОНЕНТАМИ (ЭКШЕНЫ) ==================================================
@@ -187,7 +226,23 @@ namespace StoreSitesTypes {
             name?: string
             code?: ArticleTypes.Article
             siteTemplateId?: CurrentSiteTemplateId
+            metaTemplateId?: CurrentMetaTemplateId
+            meta: null | MetaType.Items
         }
+    }
+
+    // Установка id выбранной папки или статьи
+    export const SET_ARTICLE_META_TEMPLATE_ID = 'SET_ARTICLE_META_TEMPLATE_ID'
+    export type SetArticleMetaTemplateIdAction = {
+        type: typeof SET_ARTICLE_META_TEMPLATE_ID
+        payload: CurrentMetaTemplateId
+    }
+
+    // Установка id выбранной папки или статьи
+    export const SET_ARTICLE_META = 'SET_ARTICLE_META'
+    export type SetArticleMetaAction = {
+        type: typeof SET_ARTICLE_META
+        payload: null | MetaType.Items
     }
 
 
@@ -195,14 +250,21 @@ namespace StoreSitesTypes {
         | SetSitesAction
         | SetCurrentSiteIdAction
         | SetRightMainTabAction
+
         | SetSiteTemplatesAction
         | SetCurrentSiteTemplateIdAction
+
+        | SetMetaTemplatesAction
+        | SetCurrentMetaTemplateIdAction
 
         | SetCompFolderAction
         | SetArtFolderAction
 
         | SetCurrentCompAction
         | SetCurrentArtAction
+
+        | SetArticleMetaTemplateIdAction
+        | SetArticleMetaAction
 }
 
 export default StoreSitesTypes

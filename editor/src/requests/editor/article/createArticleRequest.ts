@@ -10,9 +10,13 @@ import StoreSitesTypes from 'store/site/sitesTypes'
  * @param {Number} siteId — id сайта, к которому принадлежит статья
  * @param {String} name — имя шаблона компонента
  * @param {Number} siteTemplateId — id шаблона сайта по умолчанию
+ * @param {Number} metaTemplateId — id шаблона метаданных по умолчанию
  */
 export default async function createArticleRequest(
-    siteId: StoreSitesTypes.CurrentSiteId, name: string, siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId
+    siteId: StoreSitesTypes.CurrentSiteId,
+    name: string,
+    siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId,
+    metaTemplateId: StoreSitesTypes.CurrentMetaTemplateId
 ) {
     // При создании новой статьи будет вставляться пустое содержимое
     const newArticleContent = articleManager.createArticle()
@@ -23,13 +27,16 @@ export default async function createArticleRequest(
             siteId,
             name,
             content: JSON5.stringify(newArticleContent),
-            siteTemplateId
+            siteTemplateId,
+            metaTemplateId
         })
     }
 
     const response: ArticleRowServerRespType = await makeFetch(
         getApiUrl('articles'), options
     )
+
+    console.log(response)
 
     return response
 }

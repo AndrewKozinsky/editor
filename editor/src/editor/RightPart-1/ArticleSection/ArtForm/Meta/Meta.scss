@@ -1,0 +1,21 @@
+$CN: 'meta';
+
+.#{$CN} {
+    //display: grid;
+    //gap: 15px;
+}
+
+.#{$CN}__header {
+    font-size: 17px;
+    line-height: 23px;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.#{$CN}__input-wrapper + .#{$CN}__header{
+    margin-top: 20px;
+}
+
+.#{$CN}__input-wrapper + .#{$CN}__input-wrapper {
+    margin-top: 12px;
+}

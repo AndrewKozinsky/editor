@@ -55,7 +55,7 @@ export function canComponentPutInElement(
     moveCompId: ArticleTypes.Id
 ) {
     // Если не выделен целевой элемент и перемещаемый компонент, то нельзя вставить перемещаемый компонент
-    if (!targetCompCoords.dataElemId || moveCompId === null) return false
+    if (targetCompCoords.dataElemId === null || moveCompId === null) return false
 
     // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
     const movedDComp = this.getComponent(dComps, moveCompId)

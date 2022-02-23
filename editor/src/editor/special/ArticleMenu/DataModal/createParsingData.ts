@@ -1,28 +1,74 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
-import ParsingData from '../MarkupModal/ParsingDataType'
+import ParsingData, { ParsingDataComponents, ParsingDataMeta } from '../MarkupModal/ParsingDataType'
+import MetaType from '../../../RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 
 /**
- * Функция формирует JSON с данными статьи. Он будет использоваться пользователем для формирования разметки на своём сайте
- @param {Array} dComps — массив компонентов статьи
+ * Функция формирует JSON с данными статьи.
+ * Он будет использоваться пользователем для формирования разметки на своём сайте.
+ * @param {Array} dComps — массив компонентов статьи
  * @param {string} articleName — название статьи.
  * @param {Array} tComps — массив шаблонов компонентов
+ * @param meta
  */
 export function createParsingData(
     dComps: ArticleTypes.Components,
     articleName: string,
-    tComps: TempCompTypes.TempComp[]
+    tComps: TempCompTypes.TempComp[],
+    meta: MetaType.Items
 ) {
     const obj: ParsingData.Article = {
-        meta: {
+        general: {
             articleName: articleName
         },
+        meta: getMetaData(meta),
         components: getComponentsData(dComps, tComps)
     }
 
     return JSON.stringify(obj)
 }
+
+
+/**
+ * Функция формирует массив метаданных
+ * @param {Array} meta — массив метаданных
+ */
+function getMetaData(meta: MetaType.Items): ParsingDataMeta.Inputs {
+    const parsedMetaItemsArr: ParsingDataMeta.Inputs = []
+
+    meta.forEach(metaObj => {
+        if (metaObj.type === 'header') return
+
+        parsedMetaItemsArr.push({
+            label: metaObj.label,
+            name: metaObj.name,
+            value: getMetaInputValue(metaObj)
+        })
+    })
+
+    return parsedMetaItemsArr
+}
+
+/**
+ * Функция возвращает выбранное значение поля ввода
+ * @param {Object} metaInput — данные поля ввода
+ */
+function getMetaInputValue(metaInput: MetaType.Input): string {
+    if (metaInput.values) {
+        const readyValues: string[] = []
+
+        metaInput.value.forEach(valueId => {
+            const valueObj = metaInput.values.find(valObj => valObj.id === valueId)
+            readyValues.push(valueObj.value)
+        })
+
+        return readyValues.join(' ')
+    }
+
+    return metaInput.value[0]
+}
+
 
 /**
  * Функция формирует массив компонентов с данными
@@ -32,7 +78,7 @@ export function createParsingData(
 function getComponentsData(
     dComps: ArticleTypes.Components,
     tComps: TempCompTypes.TempComps
-): ParsingData.MixComponents {
+): ParsingDataComponents.MixComponents {
     return dComps.map(dComp => {
         if (dComp.dCompType === 'component') {
             const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
@@ -62,12 +108,12 @@ function getCompElementsData(
     tComps: TempCompTypes.TempComps,
     tComp: TempCompTypes.TempComp,
     dElems: ArticleTypes.ComponentElems
-): ParsingData.ComponentElems {
+): ParsingDataComponents.ComponentElems {
     return dElems.map(dElem => {
         const tElem = articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
 
         // Объект с данными перебираемого элемента
-        const elemParsedData: ParsingData.ComponentElem = {
+        const elemParsedData: ParsingDataComponents.ComponentElem = {
             elemTemplateId: dElem.tCompElemId, // 'banner'
         }
 
@@ -131,11 +177,11 @@ function getElemTag(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem
  */
 function getElemAttrs(
     dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem
-): ParsingData.Attribs {
+): ParsingDataComponents.Attribs {
     // Set attributes
     if (!dElem.dCompElemAttrs?.length) return
 
-    const dElemAttrsValues: ParsingData.Attribs = []
+    const dElemAttrsValues: ParsingDataComponents.Attribs = []
 
     // Перебрать массив атрибутов из данных
     for (let dAttr of dElem.dCompElemAttrs) {
@@ -185,7 +231,7 @@ function getInnerElems(
     dElem: ArticleTypes.ComponentElem,
     tComp: TempCompTypes.TempComp,
     tComps: TempCompTypes.TempComps,
-): ParsingData.ComponentElems {
+): ParsingDataComponents.ComponentElems {
     if (!dElem.dCompElemInnerElems.length) return null
 
     return getCompElementsData(tComps, tComp, dElem.dCompElemInnerElems)

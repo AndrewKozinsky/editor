@@ -6,7 +6,7 @@ import { afterSubmit } from './siteTemplateForm-func'
 import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
-import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
+import checkCodeSiteTemplate from '../checkCodeFn/checkCodeSiteTemplate'
 import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы входа в сервис */
@@ -32,8 +32,8 @@ const currentSiteTemplateFormConfig: FCType.Config = {
     },
     bottom: {
         submit: {
-            text: siteTemplateSectionMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
-            icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+            text: siteTemplateSectionMsg.submitBtnTextSave,
+            icon: 'btnSignSave'
         },
         elems: [<DeleteSiteTemplateButton key={2} />],
         hr: true

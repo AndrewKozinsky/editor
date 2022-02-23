@@ -82,10 +82,16 @@ export class SiteService {
             )
         }
 
-        // Если приходит пустая строка, то шаблон по умолчанию не выбран,
-        // поэтому поставлю null потому что поле принимает или число или null
+        // Если приходит пустая строка, то id шаблона сайта по умолчанию не выбран,
+        // поэтому поставлю null потому что поле принимает или число, или null
         if (updateSiteDto.defaultSiteTemplateId === '') {
             updateSiteDto.defaultSiteTemplateId = null
+        }
+
+        // Если приходит пустая строка, то id шаблон метаданных по умолчанию не выбран,
+        // поэтому поставлю null потому что поле принимает или число, или null
+        if (updateSiteDto.defaultMetaTemplateId === '') {
+            updateSiteDto.defaultMetaTemplateId = null
         }
 
         const updatedSite = Object.assign(site, updateSiteDto)

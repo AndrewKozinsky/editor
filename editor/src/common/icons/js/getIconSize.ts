@@ -36,6 +36,7 @@ export function getIconSize(type: string) {
         // Значки на вкладках сайта
         case 'groupTabGroup':
         case 'groupTabTemplates':
+        case 'groupTabMeta':
         case 'groupTabComponents':
         case 'groupTabArticle':
             return {

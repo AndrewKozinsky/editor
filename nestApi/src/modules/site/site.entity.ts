@@ -19,9 +19,13 @@ export class SiteEntity {
     @Column({type: 'integer'})
     userId: number
 
-    // id шаблона сайта по умолчанию.
+    // id шаблона сайта по умолчанию
     @Column({type: 'integer', default: null})
     defaultSiteTemplateId: number
+
+    // id шаблона метаданных по умолчанию
+    @Column({type: 'integer', default: null})
+    defaultMetaTemplateId: number
 
     // Date when site was created. It set automatically.
     @CreateDateColumn({type: 'timestamp'})

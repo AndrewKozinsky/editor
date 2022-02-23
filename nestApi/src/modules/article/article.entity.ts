@@ -33,6 +33,14 @@ export class ArticleEntity {
     @Column({type: 'integer', default: null})
     siteTemplateId: number
 
+    // id шаблона метаданных
+    @Column({type: 'integer', default: null})
+    metaTemplateId: number
+
+    // JSON объекта с метаданными статьи
+    @Column({type: 'text', default: null})
+    meta: string
+
     // Date when an article was created. It set automatically.
     @CreateDateColumn({type: 'timestamp'})
     createdAt: Date

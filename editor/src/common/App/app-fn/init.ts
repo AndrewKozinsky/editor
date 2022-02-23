@@ -25,6 +25,7 @@ export function useGetAndSetEditorSettings() {
         let helpTabId = getFromLocalStorage(config.ls.editorHelpTabId, 'reg') // id вкладки в Настройках
         let sitePartTab = getFromLocalStorage(config.ls.editorSitePartTab, 0) // id вкладки в Сайтах
         let editorSiteTemplateId = getFromLocalStorage(config.ls.editorSiteTemplateId, null) // id выбранного шаблона подключаемых файлов
+        let editorMetaTemplateId = getFromLocalStorage(config.ls.editorMetaTemplateId, null) // id выбранного шаблона метаданных
         let editorComponentId = getFromLocalStorage(config.ls.editorComponentId, null) // id выбранного шаблона компонента
         let editorComponentType = getFromLocalStorage(config.ls.editorComponentType, null) // тип выбранного элемента: папка или компонент
         let editorArticleId = getFromLocalStorage(config.ls.editorArticleId, null) // id выбранной папки или статьи
@@ -41,6 +42,7 @@ export function useGetAndSetEditorSettings() {
         dispatch( helpActions.setHelpPanelTab(helpTabId) )
         dispatch( sitesActions.setRightMainTab(sitePartTab) )
         dispatch( sitesActions.setCurrentSiteTemplateId(editorSiteTemplateId) )
+        dispatch( sitesActions.setCurrentMetaTemplateId(editorMetaTemplateId) )
         dispatch( sitesActions.setCurrentComp(editorComponentId, editorComponentType) )
         dispatch( sitesActions.setCurrentArt(editorArticleId, editorArticleType) )
 

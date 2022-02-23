@@ -12,6 +12,7 @@ const config = {
         editorSiteId: 'editorSiteId',
         editorSitePartTab: 'editorSitePartTab',
         editorSiteTemplateId: 'editorSiteTemplateId',
+        editorMetaTemplateId: 'editorMetaTemplateId',
         editorComponentId: 'editorComponentId',
         editorComponentType: 'editorComponentType',
         editorArticleId: 'editorArticleId',

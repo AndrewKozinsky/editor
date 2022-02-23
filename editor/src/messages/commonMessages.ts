@@ -26,6 +26,11 @@ const commonMessages = {
         eng: 'Must be 50 characters or less',
         rus: 'Максимум можно ввести 50 символов'
     },
+    // Пункт без значения в выпадающие списки и переключатели
+    optionNotSelected: {
+        eng: 'Not selected',
+        rus: 'Не выбрано'
+    },
 }
 
 const commonMsg = getMsgProxy<typeof commonMessages>(commonMessages)

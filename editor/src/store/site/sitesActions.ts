@@ -1,6 +1,8 @@
 const JSON5 = require('json5')
+import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import getMetaTemplateRequest from '../../requests/editor/metaTemplate/getMetaTemplateRequest'
 import FilesTreeType from '../../types/FilesTreeType'
-import StoreSitesTypes from './sitesTypes'
+import StoreSitesTypes  from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
 import config from 'utils/config'
 import { getFromLocalStorage } from 'utils/miscUtils'
@@ -10,10 +12,11 @@ import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderR
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
 import getComponentRequest from 'requests/editor/components/getComponentRequest'
 import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
-import { getOpenedFoldersIds } from 'editor/RightPart-1/ComponentsOrArticles/FoldersList/FoldersList-func'
+import { getOpenedFoldersIds } from 'editor/RightPart-1/FoldersList/FoldersList-func'
 import TempCompTypes from '../article/codeType/tempCompCodeType'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import ArticleTypes from '../article/codeType/articleCodeType'
+import getMetaTemplatesRequest from '../../requests/editor/metaTemplate/getMetaTemplatesRequest'
 
 
 const sitesActions = {
@@ -26,14 +29,18 @@ const sitesActions = {
             // Запрос на получение списка сайтов
             const response = await sitesRequest()
 
-            if (!response || response.status !== 'success') return
+            if (!response || response.status !== 'success') {
+                dispatch( sitesActions.setCurrentSiteId(null) )
+                return
+            }
 
             // Формирование массива сайтов для установки в Хранилище
             const preparedSites = response.data.sites.map((site: any) => {
                 return {
                     id: site.id,
                     name: site.name,
-                    defaultSiteTemplateId: site.defaultSiteTemplateId || null
+                    defaultSiteTemplateId: site.defaultSiteTemplateId || null,
+                    defaultMetaTemplateId: site.defaultMetaTemplateId || null
                 }
             })
 
@@ -63,7 +70,7 @@ const sitesActions = {
     // Установка id текущей основной вкладки справа
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         let rightMainTabNum = payload
-        if (rightMainTabNum < 0 || rightMainTabNum > 3) rightMainTabNum = 0
+        if (rightMainTabNum < 0 || rightMainTabNum > 4) rightMainTabNum = 0
 
         return {
             type: StoreSitesTypes.SET_RIGHT_MAIN_TAB,
@@ -82,7 +89,7 @@ const sitesActions = {
             // Если не передан id сайта, то обнулить массив шаблонов сайта
             // потому что выбрали новый сайт
             if (!siteId) {
-                dispatch( sitesActions.setTemplates([]) )
+                dispatch( sitesActions.setSiteTemplates([]) )
                 return
             }
 
@@ -104,7 +111,7 @@ const sitesActions = {
             })
 
             // Установка шаблонов подключаемых файлов в Хранилище
-            dispatch( sitesActions.setTemplates(preparedTemplates) )
+            dispatch( sitesActions.setSiteTemplates(preparedTemplates) )
         }
     },
 
@@ -117,12 +124,67 @@ const sitesActions = {
     },
 
     // Установка массива шаблонов сайта
-    setTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {
+    setSiteTemplates(payload: StoreSitesTypes.SiteTemplatesType): StoreSitesTypes.SetSiteTemplatesAction {
         return {
             type: StoreSitesTypes.SET_SITE_TEMPLATES,
             payload
         }
     },
+
+
+    // ШАБЛОНЫ МЕТАДАННЫХ ==================================================================================
+
+    // Загрузка с сервера шаблонов метаданных и установка в Хранилище
+    requestMetaTemplates() {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // id текущего сайта для которого нужно получить шаблоны метаданных
+            const siteId: StoreSitesTypes.CurrentSiteId = getState().sites.currentSiteId
+
+            // Если не передан id сайта, то обнулить массив шаблонов метаданных
+            // потому что выбрали новый сайт
+            if (!siteId) {
+                dispatch( sitesActions.setMetaTemplates([]) )
+                return
+            }
+
+            // Запрос и ответ от сервера
+            const response = await getMetaTemplatesRequest(siteId)
+
+            if (response.status !== 'success') return
+
+            // Формирование массива шаблонов для установки в Хранилище
+            const preparedTemplates = response.data.metaTemplates.map(template => {
+                let templateName = JSON5.parse(template.content).name
+
+                // Формирование возвращаемого объекта с данными шаблона подключаемых файлов
+                return  {
+                    id: template.id,
+                    name: templateName,
+                    content: template.content
+                }
+            })
+
+            // Установка шаблонов метаданных в Хранилище
+            dispatch( sitesActions.setMetaTemplates(preparedTemplates) )
+        }
+    },
+
+    // Установка массива шаблонов метаданных
+    setMetaTemplates(payload: StoreSitesTypes.MetaTemplatesType): StoreSitesTypes.SetMetaTemplatesAction {
+        return {
+            type: StoreSitesTypes.SET_META_TEMPLATES,
+            payload
+        }
+    },
+
+    // Установка id выбранного шаблона сайта
+    setCurrentMetaTemplateId(payload: StoreSitesTypes.CurrentMetaTemplateId): StoreSitesTypes.SetCurrentMetaTemplateIdAction {
+        return {
+            type: StoreSitesTypes.SET_CURRENT_META_TEMPLATE_ID,
+            payload
+        }
+    },
+
 
     // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
 
@@ -243,9 +305,6 @@ const sitesActions = {
             const compDataParsed: TempCompTypes.Content = JSON5.parse(responseData.content)
 
             // Имя компонента равняется имени корневого тега компонента
-            // TODO Тут нужно брать не первый элемент, а разбирать compDataParsed.html в HTML и получать
-            // data-em-id корневого тега. Затем искать данные элемента по значениюdata-em-id.
-            // И уже брать его elemName. Код ниже пусть пока будет временным.
             const compName = compDataParsed.elems[0].elemName
 
             // Установка данных шаблона компонента в Хранилище
@@ -297,7 +356,9 @@ const sitesActions = {
                     'file',
                     articleData.name,
                     articleData.content,
-                    articleData.siteTemplateId
+                    articleData.siteTemplateId,
+                    articleData.metaTemplateId,
+                    articleData.meta
                 ))
             }
         }
@@ -309,7 +370,9 @@ const sitesActions = {
         type: null | FilesTreeType.ItemType,
         name?: string,
         code?: ArticleTypes.Article,
-        siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId
+        siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId,
+        metaTemplateId?: StoreSitesTypes.CurrentMetaTemplateId,
+        meta?: null | MetaType.Items
     ): StoreSitesTypes.SetCurrentArtAction {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART,
@@ -318,10 +381,51 @@ const sitesActions = {
                 type,
                 name,
                 code,
-                siteTemplateId
+                siteTemplateId,
+                metaTemplateId,
+                meta,
             }
         }
     },
+
+    setArticleMetaTemplateId(
+        id: StoreSitesTypes.CurrentMetaTemplateId
+    ): StoreSitesTypes.SetArticleMetaTemplateIdAction {
+        return {
+            type: StoreSitesTypes.SET_ARTICLE_META_TEMPLATE_ID,
+            payload: id
+        }
+    },
+
+    // Загрузка с сервера шаблона метаданных и установка в store.sites.articleSection.meta
+    requestArticleMetaTemplate(metaTempId: StoreSitesTypes.CurrentMetaTemplateId) {
+        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Если id шаблона метаданных null, то обнулить данные в store.sites.articleSection.meta
+            if (!metaTempId) {
+                dispatch( sitesActions.setArticleMeta(null) )
+                return
+            }
+
+            // Запрос и ответ от сервера
+            const response = await getMetaTemplateRequest(metaTempId)
+            if (response.status !== 'success') return
+
+            // Установка шаблона метаданных в Хранилище
+            const preparedTemplate: MetaType.MetaTemplate = JSON5.parse(response.data.metaTemplates[0].content)
+            dispatch( sitesActions.setArticleMeta(preparedTemplate.items) )
+        }
+    },
+
+    // Установка разобранных данных в store.sites.articleSection.meta
+    setArticleMeta(
+        meta: null | MetaType.Items
+    ): StoreSitesTypes.SetArticleMetaAction {
+        return {
+            type: StoreSitesTypes.SET_ARTICLE_META,
+            payload: meta
+        }
+    }
 }
 
 export default sitesActions

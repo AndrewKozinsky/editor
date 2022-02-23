@@ -11,9 +11,9 @@ import { updateFieldValuesInState } from './FieldGroup-func'
 export type FieldGroupPropType = {
     label?: string | ReactElement
     grayText?: string // Серый текст
-    inputType: 'radio' | 'checkbox'
+    inputType: FieldGroupInputType
     groupName: string
-    inputsArr: InputDataType[]
+    inputsArr: FieldGroupInputDataType[]
     value: string[]
     gap?: 20 // Отступы между элементами внутри обёртки
     vertical?: boolean // Are the inputs arranged vertically?
@@ -21,8 +21,8 @@ export type FieldGroupPropType = {
     onChange: OuterOnChangeHandlerType.FieldsHandler // Функция, в которую будут передаваться данные о значении группы полей после их изменения
     onBlur?: (e: React.BaseSyntheticEvent) => void, // Обработчик потерей полем фокуса
 }
-
-type InputDataType = {
+export type FieldGroupInputType = 'radio' | 'checkbox'
+export type FieldGroupInputDataType = {
     label: string | ReactElement,
     value: string,
     grayText?: string,

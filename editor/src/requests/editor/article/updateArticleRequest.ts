@@ -3,27 +3,32 @@ import getApiUrl from 'requests/reqFn/apiUrls'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
+import MetaType from '../../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import { ArticleRowServerRespType } from './articleServerResponseType'
 
 
 /**
  * Функция сохраняет имя статьи и id шаблона подключаемых файлов этой статьи
  * @param {String} articleId — id сохраняемой статьи
- * @param {String} name — название статьи
- * @param {String} siteTemplateId — id шаблона подключаемых файлов
- * @param {String} content — код статьи
+ * @param {Object} details — данные статьи
  */
 export async function updateArticleRequest(
     articleId: StoreSitesTypes.CurrentArtItemId,
-    name?: string,
-    siteTemplateId?: null | number,
-    content?: ArticleTypes.Article
+    details: {
+        name?: string, // название статьи
+        siteTemplateId?: null | number, // id шаблона подключаемых файлов
+        metaTemplateId?: number | '', //
+        meta?: MetaType.Items
+        content?: ArticleTypes.Article // код статьи
+    }
 ) {
     const body: MiscTypes.ObjStringKey<any> = {}
 
-    if (name !== undefined) body.name = name
-    if (siteTemplateId !== undefined) body.siteTemplateId = siteTemplateId
-    if (content !== undefined) body.content = JSON.stringify(content)
+    if (details.name !== undefined) body.name = details.name
+    if (details.siteTemplateId !== undefined) body.siteTemplateId = details.siteTemplateId
+    if (details.metaTemplateId !== undefined) body.metaTemplateId = details.metaTemplateId
+    if (details.meta !== undefined) body.meta = JSON.stringify(details.meta)
+    if (details.content !== undefined) body.content = JSON.stringify(details.content)
 
     const options = {
         method: 'PATCH',

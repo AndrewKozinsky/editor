@@ -26,6 +26,7 @@ import EditorLightTheme from '../icons/editorLightTheme'
 import EditorDarkTheme from '../icons/editorDarkTheme'
 import GroupTabGroup from '../icons/groupTabGroup'
 import GroupTabTemplates from '../icons/groupTemplates'
+import GroupTabMeta from '../icons/groupMeta'
 import GroupTabArticle from '../icons/groupTabArticle'
 import GroupTabComponents from '../icons/groupTabComponents'
 import FilesTreeFolderPlus from '../icons/filesTreeFolderPlus'
@@ -75,6 +76,7 @@ const iconsCollector = {
     // Значки на вкладках сайта
     groupTabGroup: GroupTabGroup,
     groupTabTemplates: GroupTabTemplates,
+    groupTabMeta: GroupTabMeta,
     groupTabComponents: GroupTabComponents,
     groupTabArticle: GroupTabArticle,
 

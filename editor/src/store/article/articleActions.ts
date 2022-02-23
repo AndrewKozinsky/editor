@@ -1,5 +1,6 @@
 const JSON5 = require('json5')
 import articleManager from '../../articleManager/articleManager'
+import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -74,7 +75,7 @@ const articleActions = {
     },
 
     // Set an article after receiving the data. Action return history array with single article
-    setArticle(articleFullData: ArticleType<ArticleTypes.Article>): StoreArticleTypes.SetArticleAction {
+    setArticle(articleFullData: ArticleType<ArticleTypes.Article, null | MetaType.Items>): StoreArticleTypes.SetArticleAction {
         return {
             type: StoreArticleTypes.SET_ARTICLE,
             payload: {

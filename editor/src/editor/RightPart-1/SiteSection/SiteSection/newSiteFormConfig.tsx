@@ -24,8 +24,8 @@ const newSiteFormConfig: FCType.Config = {
     },
     bottom: {
         submit: {
-            text: siteSectionMsg.submitBtnTextNewSite, // Это значение должен изменять хук в зависимости от типа формы!!!
-            icon: 'btnSignAdd' // Это значение должен изменять хук в зависимости от типа формы!!!
+            text: siteSectionMsg.submitBtnTextNewSite,
+            icon: 'btnSignAdd'
         },
         hr: true
     },

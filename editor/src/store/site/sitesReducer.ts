@@ -7,6 +7,7 @@ export type SitesReducerType = {
     currentSiteId: StoreSitesTypes.CurrentSiteId
     rightMainTab: StoreSitesTypes.RightMainTab
     siteTemplatesSection: StoreSitesTypes.SiteTemplatesSection,
+    metaTemplatesSection: StoreSitesTypes.MetaTemplatesSection,
     compFolderSection: StoreSitesTypes.CompFolderSection
     artFolderSection: StoreSitesTypes.ArtFolderSection
     componentSection: StoreSitesTypes.ComponentSection
@@ -23,6 +24,13 @@ const initialState: SitesReducerType = {
     rightMainTab: 0,
     // Данные по вкладке «Шаблоны сайта»
     siteTemplatesSection: {
+        // Массив шаблонов сайта
+        templates: [],
+        // id выбранного шаблона сайта
+        currentTemplateId: null,
+    },
+    // Данные по вкладке «Шаблоны метаданных»
+    metaTemplatesSection: {
         // Массив шаблонов сайта
         templates: [],
         // id выбранного шаблона сайта
@@ -60,7 +68,10 @@ const initialState: SitesReducerType = {
         // Строка с кодом выбранной статьи
         currentArtCode: null,
         // id шаблона подключаемых компонентов у выбранной статьи
-        siteTemplateId: null
+        siteTemplateId: null,
+        // id шаблона метаданных у выбранной статьи
+        metaTemplateId: null,
+        meta: null
     }
 }
 
@@ -107,7 +118,7 @@ function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRig
 // ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ==================================================================================
 
 // Установка массива шаблонов сайта
-function setTemplates(state: SitesReducerType, action: StoreSitesTypes.SetSiteTemplatesAction): SitesReducerType {
+function setSiteTemplates(state: SitesReducerType, action: StoreSitesTypes.SetSiteTemplatesAction): SitesReducerType {
     return {
         ...state,
         siteTemplatesSection: {
@@ -134,6 +145,42 @@ function setCurrentSiteTemplateId(
         ...state,
         siteTemplatesSection: {
             ...state.siteTemplatesSection,
+            currentTemplateId: action.payload
+        }
+    }
+}
+
+
+// ШАБЛОНЫ ПОДКЛЮЧАЕМЫХ ФАЙЛОВ ==================================================================================
+
+// Установка массива шаблонов сайта
+function setMetaTemplates(state: SitesReducerType, action: StoreSitesTypes.SetMetaTemplatesAction): SitesReducerType {
+    return {
+        ...state,
+        metaTemplatesSection: {
+            ...state.metaTemplatesSection,
+            templates: action.payload
+        }
+    }
+}
+
+// Установка id выбранного шаблона текущего сайта
+function setCurrentMetaTemplateId(
+    state: SitesReducerType, action: StoreSitesTypes.SetCurrentMetaTemplateIdAction
+): SitesReducerType {
+    if (action.payload === null) {
+        // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
+        removeFromLocalStorage(config.ls.editorMetaTemplateId)
+    }
+    else {
+        // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        setInLocalStorage(config.ls.editorMetaTemplateId, action.payload)
+    }
+
+    return {
+        ...state,
+        metaTemplatesSection: {
+            ...state.metaTemplatesSection,
             currentTemplateId: action.payload
         }
     }
@@ -242,7 +289,9 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
                 currentArtItemType: action.payload.type,
                 currentArtName: '',
                 currentArtCode: null,
-                siteTemplateId: null
+                siteTemplateId: null,
+                metaTemplateId: null,
+                meta: null
             }
         }
         // Если ставят данные статьи
@@ -253,7 +302,9 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
                 currentArtItemType: action.payload.type,
                 currentArtName: action.payload.name || '',
                 currentArtCode: action.payload.code || null,
-                siteTemplateId: action.payload.siteTemplateId || null
+                siteTemplateId: action.payload.siteTemplateId || null,
+                metaTemplateId: action.payload.metaTemplateId || null,
+                meta: action.payload.meta || null
             }
         }
 
@@ -263,7 +314,7 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
         }
     }
     else {
-        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
+        // Удалить из LocalStorage id шаблона компонента потому что ничего не выбрано.
         removeFromLocalStorage(config.ls.editorArticleId)
         // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
         removeFromLocalStorage(config.ls.editorArticleType)
@@ -276,12 +327,35 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
                 currentArtItemType: null,
                 currentArtName: '',
                 currentArtCode: null,
-                siteTemplateId: null
+                siteTemplateId: null,
+                metaTemplateId: null,
+                meta: null,
             }
         }
     }
 }
 
+// Установка id выбранного подключаемых шаблонов
+function setArticleMetaTemplateId(state: SitesReducerType, action: StoreSitesTypes.SetArticleMetaTemplateIdAction): SitesReducerType {
+    return {
+        ...state,
+        articleSection: {
+            ...state.articleSection,
+            metaTemplateId: action.payload
+        }
+    }
+}
+
+// Установка метаданных статьи
+function setArticleMeta(state: SitesReducerType, action: StoreSitesTypes.SetArticleMetaAction): SitesReducerType {
+    return {
+        ...state,
+        articleSection: {
+            ...state.articleSection,
+            meta: action.payload
+        }
+    }
+}
 
 
 // Редьюсер Store.sites
@@ -299,9 +373,14 @@ export default function sitesReducer(
             return setRightMainTab(state, action)
 
         case StoreSitesTypes.SET_SITE_TEMPLATES:
-            return setTemplates(state, action)
+            return setSiteTemplates(state, action)
         case StoreSitesTypes.SET_CURRENT_SITE_TEMPLATE_ID:
             return setCurrentSiteTemplateId(state, action)
+
+        case StoreSitesTypes.SET_META_TEMPLATES:
+            return setMetaTemplates(state, action)
+        case StoreSitesTypes.SET_CURRENT_META_TEMPLATE_ID:
+            return setCurrentMetaTemplateId(state, action)
 
         case StoreSitesTypes.SET_COMP_FOLDER:
             return setCompFolder(state, action)
@@ -312,6 +391,11 @@ export default function sitesReducer(
             return setCurrentComp(state, action)
         case StoreSitesTypes.SET_CURRENT_ART:
             return setCurrentArt(state, action)
+
+        case StoreSitesTypes.SET_ARTICLE_META_TEMPLATE_ID:
+            return setArticleMetaTemplateId(state, action)
+        case StoreSitesTypes.SET_ARTICLE_META:
+            return setArticleMeta(state, action)
 
         default:
             // @ts-ignore

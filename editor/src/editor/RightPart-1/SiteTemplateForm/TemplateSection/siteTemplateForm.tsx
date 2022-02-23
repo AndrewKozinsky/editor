@@ -5,7 +5,8 @@ import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import newSiteTemplateFormConfig from './newSiteTemplateFormConfig'
 import currentSiteTemplateFormConfig from './currentSiteTemplateFormConfig'
 import { useSetSiteTemplateCode } from './siteTemplateForm-func'
-import CodeHelper from '../CodeHelper/CodeHelper'
+import checkCodeSiteTemplate, { templateCodeExample } from '../checkCodeFn/checkCodeSiteTemplate'
+import CodeHelper from 'editor/special/CodeHelper/CodeHelper/CodeHelper'
 
 
 /** Форма создания или редактирования шаблона подключаемых файлов */
@@ -25,7 +26,11 @@ function NewSiteTemplateForm() {
     return (
         <>
             <FormConstructor config={newSiteTemplateFormConfig} state={formState} />
-            <CodeHelper code={formState.fields.content.value[0]} />
+            <CodeHelper
+                code={formState.fields.content.value[0]}
+                checkCodeFn={checkCodeSiteTemplate}
+                codeExample={templateCodeExample}
+            />
         </>
     )
 }
@@ -41,7 +46,11 @@ function ExistingSiteTemplateForm() {
     return (
         <>
             <FormConstructor config={currentSiteTemplateFormConfig} state={formState} />
-            <CodeHelper code={formState.fields.content.value[0]} />
+            <CodeHelper
+                code={formState.fields.content.value[0]}
+                checkCodeFn={checkCodeSiteTemplate}
+                codeExample={templateCodeExample}
+            />
         </>
     )
 }

@@ -1,0 +1,82 @@
+import React from 'react'
+const JSON5 = require('json5')
+import * as yup from 'yup'
+import { store } from 'src/store/rootReducer'
+import sitesActions from 'src/store/site/sitesActions'
+import FCType from 'src/libs/FormConstructor/FCType'
+import componentFormMsg from 'src/messages/componentTemplateFormMessages'
+import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
+import { updateComponentRequest } from 'src/requests/editor/components/updateComponentRequest'
+import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
+import bridge from '../../../../../bridge/bridge'
+import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+import checkComponentCode from '../CodeHelper/checkComponentCode'
+import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
+import { getState } from 'src/utils/miscUtils'
+
+/** Функция возвращает конфигурацию формы входа в сервис */
+const compFormConfig: FCType.Config = {
+    fields: {
+        content: {
+            fieldType: 'text',
+            schema: (fields) => {
+                return yup.string()
+                    .test('check-code', componentFormMsg.componentContentInputIsWrong,
+                        function(code) {
+                            return checkComponentCode(code).length === 0
+                        }
+                    )
+            },
+            fieldData: {
+                inputType: 'textarea',
+                label: componentFormMsg.componentContentInput,
+                autoFocus: true
+            }
+        }
+    },
+    bottom: {
+        submit: {
+            text: componentFormMsg.submitBtnTextSave,
+            icon: 'btnSignSave'
+        },
+        elems: [<DeleteComponentButton key={2} />],
+        hr: true
+    },
+    async requestFn(readyFieldValues, outerFns, formDetails) {
+        // Массив папок и файлов из Хранилища
+        const folders = getState().sites.compFolderSection.compFolder
+        // id выбранной папки
+        const { currentCompItemId } = getState().sites.componentSection
+
+        // Получить массив elems из шаблона компонента, чтобы получить первый элемент
+        const templateElemsArr: TempCompTypes.Elems = JSON5.parse( readyFieldValues.content.toString() ).elems
+
+        // Изменить название компонента на введённое и обновить Хранилище папок
+        const rootElemName = templateElemsArr[0].elemName
+        const result = filesTreePublicMethods.changeItemName(
+            folders, currentCompItemId, rootElemName
+        )
+
+        store.dispatch(sitesActions.setCompFolder({
+            folders: result.newItems
+        }))
+
+        // Подготовить массив папок и файлов для сохранения на сервере
+        const preparedFolders = filesTreePublicMethods.prepareItemsToSaveInServer(result.newItems)
+
+        // Сохранить данные на сервере
+        const { compFolderId } = getState().sites.compFolderSection
+        await putCompFolderRequest(compFolderId, preparedFolders)
+
+        return await updateComponentRequest(
+            currentCompItemId, readyFieldValues.content.toString()
+        )
+    },
+    afterSubmit() {
+        // Обновить компоненты у редактируемой статьи если отредактировали
+        // компонент сайта, к которому принадлежит редактируемая статья.
+        bridge.updateTempComps()
+    }
+}
+
+export default compFormConfig

@@ -1,6 +1,7 @@
 import { Response } from 'express'
 import { Repository } from 'typeorm'
 import { HttpStatus, Injectable } from '@nestjs/common'
+import { SiteEntity } from '../site/site.entity'
 import { CreateSiteTemplateDto } from './dto/createSiteTemplate.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { SiteTemplateEntity } from './siteTemplate.entity'
@@ -17,7 +18,9 @@ export class SiteTemplateService {
 
     constructor(
         @InjectRepository(SiteTemplateEntity)
-        private readonly siteTemplateRepository: Repository<SiteTemplateEntity>
+        private readonly siteTemplateRepository: Repository<SiteTemplateEntity>,
+        @InjectRepository(SiteEntity)
+        private readonly siteRepository: Repository<SiteEntity>
     ) {}
 
     /** Получение шаблонов сайта (защищённый маршрут) */
@@ -45,6 +48,12 @@ export class SiteTemplateService {
             }
         )
 
+        // Бросить ошибку если указанный сайт не существует
+        const site = await this.siteRepository.findOne({ id: newSiteTemplate.siteId })
+        if (!site) {
+            responseCommonError('siteTemplate_CreateSiteTemplate_SiteIsNotExist', HttpStatus.BAD_REQUEST)
+        }
+
         return await this.siteTemplateRepository.save(newSiteTemplate)
     }
 
@@ -57,7 +66,7 @@ export class SiteTemplateService {
         // Throw an error if site template is not exist
         if (!siteTemplate) {
             responseCommonError(
-                'siteTemplate_UpdateSiteTemplate_SiteIsNotExist',
+                'siteTemplate_UpdateSiteTemplate_SiteTemplateIsNotExist',
                 HttpStatus.BAD_REQUEST
             )
         }

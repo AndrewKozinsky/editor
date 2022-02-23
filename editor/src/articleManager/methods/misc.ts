@@ -28,7 +28,7 @@ export async function saveArticle(
     const historyItem = this.getCurrentHistoryItem(historyArr, historyCurrentIdx)
 
     // Save article code in a server
-    await updateArticleRequest(articleId, undefined, undefined, historyItem.article)
+    await updateArticleRequest(articleId, {content: historyItem.article})
 }
 
 

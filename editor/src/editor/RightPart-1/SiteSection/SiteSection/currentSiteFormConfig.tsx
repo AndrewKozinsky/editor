@@ -25,15 +25,22 @@ const currentSiteFormConfig: FCType.Config = {
         defaultSiteTemplateId: {
             fieldType: 'select',
             fieldData: {
-                label: siteSectionMsg.defaultTemplateInput,
+                label: siteSectionMsg.defaultSiteTemplateIdInput,
+                options: [],
+            }
+        },
+        defaultMetaTemplateId: {
+            fieldType: 'select',
+            fieldData: {
+                label: siteSectionMsg.defaultMetaTemplateIdInput,
                 options: [],
             }
         },
     },
     bottom: {
         submit: {
-            text: siteSectionMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
-            icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+            text: siteSectionMsg.submitBtnTextSave,
+            icon: 'btnSignSave'
         },
         elems: [<DeleteSiteButton key={2} />],
         hr: true

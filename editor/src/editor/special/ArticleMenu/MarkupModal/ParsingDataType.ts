@@ -1,15 +1,34 @@
 
 namespace ParsingData {
     export type Article = {
-        meta: {
+        general: {
             articleName: string
-        }
-        components: MixComponents
+        },
+        meta?: null | ParsingDataMeta.Inputs
+        components: ParsingDataComponents.MixComponents
     }
+}
 
+export default ParsingData
+
+
+// МЕТАДАННЫЕ
+export namespace ParsingDataMeta {
+    export type Inputs = Input[]
+
+    // Поле ввода
+    export type Input = {
+        label: string // Текст над полем ввода
+        name: string // Значение атрибута name у поля ввода
+        value: null | string // введённое значение поля ввода
+    }
+}
+
+
+// ДАННЫЕ КОМПОНЕНТОВ
+export namespace ParsingDataComponents {
     export type MixComponents = MixComponent[]
     type MixComponent = Component | SimpleTextComponent
-
 
     // Component
     export type Component = {
@@ -50,5 +69,3 @@ namespace ParsingData {
         text: string,
     }
 }
-
-export default ParsingData

@@ -14,6 +14,7 @@ type SiteType = {
     userId: number // 2
     createdAt: string
     defaultSiteTemplateId: null | number
+    defaultMetaTemplateId: null | number
 }
 
 // Типы ответов от сервера при операциях с сайтами

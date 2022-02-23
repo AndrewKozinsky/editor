@@ -37,8 +37,6 @@ const addresses: MiscTypes.ObjStringKey<any> = {
         return 'sites/' + siteId
     },
 
-
-    // SITE TEMPLATES
     // Шаблоны подключаемых файлов
     siteTemplates: function (siteId: number) {
         return 'sites/' + siteId + '/siteTemps'
@@ -46,6 +44,15 @@ const addresses: MiscTypes.ObjStringKey<any> = {
     createSiteTemplate: 'siteTemplates',
     siteTemplate: function (siteTemplateId: number) {
         return 'siteTemplates/' + siteTemplateId
+    },
+
+    // Шаблоны метаданных
+    metaTemplates: function (siteId: number) {
+        return 'sites/' + siteId + '/metaTemps'
+    },
+    createMetaTemplate: 'metaTemplates',
+    metaTemplate: function (metaTemplateId: number) {
+        return 'metaTemplates/' + metaTemplateId
     },
 
     // Папка шаблонов компонентов

@@ -18,9 +18,13 @@ const groupSectionMessages = {
         eng: 'Site name can not be longer than 255 characters',
         rus: 'Название сайта не может быть длиннее 255 символов'
     },
-    defaultTemplateInput: {
+    defaultSiteTemplateIdInput: {
         eng: 'The default group template',
         rus: 'Шаблон группы по умолчанию'
+    },
+    defaultMetaTemplateIdInput: {
+        eng: 'The default metadata template',
+        rus: 'Шаблон метаданных по умолчанию'
     },
     submitBtnTextNewSite: {
         eng: 'Create',
