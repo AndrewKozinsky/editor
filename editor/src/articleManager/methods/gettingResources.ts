@@ -268,22 +268,6 @@ export function findParentArray(
     })
 
     return foundedParentArr || null
-    /*for (let i = 0; i < dataComp.dElems.length; i++) {
-        const dElem = dataComp.dElems[i]
-        if (!dElem.dCompElemChildren.length) continue
-
-        for (let j = 0; j < dElem.dCompElemChildren.length; j++) {
-            const innerDataComp = dElem.dCompElemChildren[j]
-
-            if (innerDataComp.dCompId === dataCompId) {
-                return dElem.dCompElemChildren
-            }
-            else {
-                const res = findParentArray(innerDataComp, dataCompId)
-                if (res) return res
-            }
-        }
-    }*/
 }
 
 /**

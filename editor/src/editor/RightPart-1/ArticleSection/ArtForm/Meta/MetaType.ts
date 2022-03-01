@@ -41,103 +41,39 @@ namespace MetaType {
 export default MetaType
 
 
-// Пример формы изменения метаданных статьи
-export const articleMetaExample: MetaType.Items = [
-    {
-        id: 1,
-        type: 'header',
-        text: 'Общие сведения'
-    },
-    {
-        id: 2,
-        type: 'input',
-        label: 'Название статьи',
-        name: 'articleName'
-    },
-    {
-        id: 3,
-        type: 'input',
-        label: 'Подзаголовок статьи',
-        name: 'articleDescription'
-    },
-    {
-        id: 4,
-        type: 'input',
-        label: 'Автор',
-        name: 'authorName',
-        view: 'select',
-        values: [
-            {
-                id: '10',
-                label: 'Виктория Кулькова',
-                value: 'VK'
-            },
-            {
-                id: '11',
-                label: 'Юлия Кулькова',
-                value: 'YK'
-            },
-            {
-                id: '12',
-                label: 'Андрей Яковлев',
-                value: 'AYA'
-            },
-        ]
-    },
-    {
-        id: 5,
-        type: 'input',
-        label: 'Теги',
-        name: 'tags',
-        view: 'radio',
-        values: [
-            {
-                id: '10',
-                label: 'Увлечения',
-                value: 'enthusiasm'
-            },
-            {
-                id: '11',
-                label: 'Путешествия',
-                value: 'travel'
-            },
-            {
-                id: '12',
-                label: 'Работа',
-                value: 'job'
-            },
-        ]
-    },
-
-    {
-        id: 6,
-        type: 'header',
-        text: 'Шапка'
-    },
-    {
-        id: 7,
-        type: 'input',
-        label: 'Путь до изображения',
-        name: 'headerImgSrc',
-        view: 'text'
-    },
-    {
-        id: 8,
-        type: 'input',
-        label: 'Расположение изображения',
-        name: 'headerImgPosition',
-        view: 'checkbox',
-        values: [
-            {
-                id: '10',
-                label: 'Фон',
-                value: 'background'
-            },
-            {
-                id: '11',
-                label: 'Внутри',
-                value: 'inside'
-            },
-        ]
-    }
-]
+// Example
+export const articleMetaExample: MetaType.MetaTemplate = {
+    name: 'Standard article',
+    items: [
+        {
+            id: 1,
+            type: 'header',
+            text: 'General'
+        },
+        {
+            id: 2,
+            type: 'input',
+            label: 'Article name',
+            name: 'articleName'
+        },
+        {
+            id: 4,
+            type: 'input',
+            label: 'Author',
+            name: 'authorName',
+            view: 'select',
+            values: [
+                {
+                    id: '10',
+                    label: 'Father McKenzie',
+                    value: 'McKenzie'
+                },
+                {
+                    id: '11',
+                    label: 'Eleanor Rigby',
+                    value: 'Rigby'
+                }
+            ]
+        }
+    ]
+}

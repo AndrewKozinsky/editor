@@ -1,4 +1,4 @@
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 
 // Значения для типа input
 const inputView = ['text', 'radio', 'checkbox', 'select']

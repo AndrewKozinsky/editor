@@ -1,5 +1,5 @@
 import React from 'react'
-import DragFilesTree from 'src/libs/DragFilesTree/DragFilesTree/DragFilesTree'
+import DragFilesTree from 'libs/DragFilesTree/DragFilesTree/DragFilesTree'
 import { FolderType } from './types'
 import {
     useGetFolders,

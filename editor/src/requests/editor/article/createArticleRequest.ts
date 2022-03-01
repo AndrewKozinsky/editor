@@ -36,7 +36,5 @@ export default async function createArticleRequest(
         getApiUrl('articles'), options
     )
 
-    console.log(response)
-
     return response
 }

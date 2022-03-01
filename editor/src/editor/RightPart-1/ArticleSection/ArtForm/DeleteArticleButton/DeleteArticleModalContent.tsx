@@ -1,8 +1,8 @@
 import React from 'react'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import ModalShortContent from 'src/common/modalEntities/ModalShortContent/ModalShortContent'
-import articleFormMsg from 'src/messages/articleFormMessages'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
+import articleFormMsg from 'messages/articleFormMessages'
 import deleteArticleModalConfig from './formConfig'
 
 
@@ -15,7 +15,7 @@ export function DeleteArticleModalContent() {
             header={articleFormMsg.deleteArticleConfirmationHeaderInModal}
             text={articleFormMsg.deleteArticleConfirmationTextInModal}
             bottomElems={
-                [<FormConstructor config={deleteArticleModalConfig} state={formState} key={1} />]
+                [<FormConstructor config={deleteArticleModalConfig} state={formState} key='1' />]
             }
         />
     )

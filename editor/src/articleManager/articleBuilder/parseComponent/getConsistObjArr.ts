@@ -4,10 +4,10 @@ import articleManager from '../../articleManager'
 import { HTMLObjArrType } from '../htmlStringToObject'
 
 export type ConsistObj = {
-    dataComp: ArticleTypes.Component // Данные компонента
+    dataComp: ArticleTypes.Component  // Данные компонента
     dElem: ArticleTypes.ComponentElem // Данные элемента
-    tempElem: TempCompTypes.Elem // Шаблон элемента
-    htmlComp: HTMLObjArrType.Tag // html-компонент
+    tempElem: TempCompTypes.Elem      // Шаблон элемента
+    htmlComp: HTMLObjArrType.Tag      // html-компонент
     htmlElem: HTMLObjArrType.Tag
 }
 

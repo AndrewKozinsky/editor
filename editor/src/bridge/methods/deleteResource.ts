@@ -9,7 +9,7 @@ import config from 'utils/config'
 import { getState, setInLocalStorage } from 'utils/miscUtils'
 import sitesActions from '../../store/site/sitesActions'
 import bridge from '../bridge'
-import { FolderType } from 'src/editor/RightPart-1/FoldersList/types'
+import { FolderType } from 'editor/RightPart-1/FoldersList/types'
 
 /**
  * Функция делает действия при удалении папки статей/компонентов или статью/компонент

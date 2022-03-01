@@ -1,6 +1,6 @@
 import React from 'react'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import { useGetAnotherFolderData } from './ArticlesFolderForm-func'
 import artFolderFormConfig from './formConfig'
 

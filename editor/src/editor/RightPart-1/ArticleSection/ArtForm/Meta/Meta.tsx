@@ -89,6 +89,7 @@ function MetaTextInput(props: MetaInputPropType) {
     return <TextInput {...fieldData} />
 }
 
+/** Группа переключателей или флагов */
 function MetaRadioCheckboxInput(props: MetaInputPropType) {
     const { inputData, items } = props
 
@@ -96,8 +97,10 @@ function MetaRadioCheckboxInput(props: MetaInputPropType) {
         return {label: valueObj.label, value: valueObj.id}
     })
 
-    // Добавление пустого пункта
-    valuesArr.unshift({label: commonMsg.optionNotSelected, value: ''})
+    // Добавление пустого пункта если это переключатели
+    if (inputData.view === 'radio') {
+        valuesArr.unshift({label: commonMsg.optionNotSelected, value: ''})
+    }
 
     const onChangeHandler = useGetOnChangeInputHandler(items, inputData.id)
 

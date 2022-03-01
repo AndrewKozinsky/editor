@@ -1,12 +1,13 @@
 import { useEffect } from 'react'
-import useGetSitesSelectors from 'src/store/site/sitesSelectors'
-import FCType from 'src/libs/FormConstructor/FCType'
-import DragFilesTreeType from 'src/libs/DragFilesTree/types'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import FCType from 'libs/FormConstructor/FCType'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 
 
 /**
- * Хук отслеживает выделение другой папки с компонентами и изменяет форму чтобы отражать данные выделенной папки
+ * Хук отслеживает выделение другой папки с компонентами и изменяет форму,
+ * чтобы отражать данные выделенной папки
  * @param {Object} formState — объект состояния формы
  */
 export function useGetAnotherFolderData(formState: FCType.StateFormReturn) {
@@ -36,6 +37,7 @@ function setNewFolderName(
 
     // Найти папку с указанным id в массиве папок и файлов
     const folder = filesTreePublicMethods.getItemById(foldersArr, currentItemId)
+    if (!folder) return
 
     // Поставить новое значение поля имени папки
     const valueFieldData = Object.assign(

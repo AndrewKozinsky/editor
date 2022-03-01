@@ -1,8 +1,8 @@
 import React from 'react'
-import Button from 'src/common/formElements/Button/Button'
+import Button from 'common/formElements/Button/Button'
+import useGetShowModal from 'utils/hooksUtils'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 import DeleteFolderModalContent from './DeleteFolderModalContent'
-import useGetShowModal from 'src/utils/hooksUtils'
-import articleFolderFormMsg from 'src/messages/articleFolderFormMessages'
 
 
 /** Кнопка удаления сайта открывающая модальное окно подтверждения */

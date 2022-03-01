@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
-import useGetSitesSelectors from 'src/store/site/sitesSelectors'
-import FCType from 'src/libs/FormConstructor/FCType'
-import DragFilesTreeType from 'src/libs/DragFilesTree/types'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import FCType from 'libs/FormConstructor/FCType'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 
 
 /**

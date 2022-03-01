@@ -1,9 +1,9 @@
-import FCType from 'src/libs/FormConstructor/FCType'
-import actions from 'src/store/rootAction'
-import { store } from 'src/store/rootReducer'
+import FCType from 'libs/FormConstructor/FCType'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
-import articleFormMsg from 'src/messages/articleFormMessages'
-import { getState } from 'src/utils/miscUtils'
+import articleFormMsg from 'messages/articleFormMessages'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления статьи

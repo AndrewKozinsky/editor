@@ -176,7 +176,7 @@ export const componentCodeExample = `{
                     elemAttrLockedValue: 'banner ',
                     elemAttrValues: [
                         {
-                            elemAttrValueId: 1,
+                            elemAttrValueId: '1',
                             elemAttrValueValue: 'pattern-1',
                             elemAttrValueAlt: 'Восточный узор',
                             elemAttrValueChecked: true

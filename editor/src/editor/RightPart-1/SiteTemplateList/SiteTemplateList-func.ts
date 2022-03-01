@@ -1,10 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
-import sitesActions from '../../../store/site/sitesActions'
+import sitesActions from 'store/site/sitesActions'
 
 
 /** Хук скачивает с сервера массив шаблонов подключаемых файлов и ставит в Хранилище */

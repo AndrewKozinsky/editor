@@ -61,7 +61,6 @@ export function useGetTempCompsFolders() {
 
             // Update component template array items
             const updatedFolders = prepareFoldersAndItemsStructure(
-                //@ts-ignore
                 tempCompsFolders,
                 openFoldersIdsArr,
                 tempComps,

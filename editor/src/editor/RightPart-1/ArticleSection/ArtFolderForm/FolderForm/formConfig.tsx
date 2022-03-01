@@ -1,13 +1,13 @@
 import React from 'react'
 import * as yup from 'yup'
-import { store } from 'src/store/rootReducer'
-import sitesActions from 'src/store/site/sitesActions'
-import FCType from 'src/libs/FormConstructor/FCType'
-import articleFolderFormMsg from 'src/messages/articleFolderFormMessages'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import putArtFolderRequest from 'src/requests/editor/artFolders/putArtFolderRequest'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import FCType from 'libs/FormConstructor/FCType'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
+import { getState } from 'utils/miscUtils'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
-import { getState } from 'src/utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const artFolderFormConfig: FCType.Config = {

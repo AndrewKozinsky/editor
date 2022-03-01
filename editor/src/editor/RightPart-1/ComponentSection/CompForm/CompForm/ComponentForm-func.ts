@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import FCType from 'src/libs/FormConstructor/FCType'
-import useGetSitesSelectors from 'src/store/site/sitesSelectors'
-import sitesActions from 'src/store/site/sitesActions'
+import FCType from 'libs/FormConstructor/FCType'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import sitesActions from 'store/site/sitesActions'
 
 
 /** Хук отслеживает выбор другого компонента и скачивает данные по нему с сервера и ставит их в Хранилище */

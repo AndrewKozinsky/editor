@@ -15,6 +15,10 @@ import { getState } from 'utils/miscUtils'
 const deleteSiteTemplateModalConfig: FCType.Config = {
     bottom: {
         submit: {
+            block: true,
+            align: 'center',
+            color: 'accent',
+            icon: 'btnSignTrash',
             text: siteTemplateSectionMsg.deleteBtnInModal,
         },
     },

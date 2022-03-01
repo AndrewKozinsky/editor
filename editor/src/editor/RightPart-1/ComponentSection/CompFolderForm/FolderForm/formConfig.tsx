@@ -1,14 +1,14 @@
 import React from 'react'
 import * as yup from 'yup'
-import { store } from 'src/store/rootReducer'
-import sitesActions from 'src/store/site/sitesActions'
-import FCType from 'src/libs/FormConstructor/FCType'
-import componentFolderFormMsg from 'src/messages/componentFolderFormMessages'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import FCType from 'libs/FormConstructor/FCType'
+import componentFolderFormMsg from 'messages/componentFolderFormMessages'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import { getState } from 'utils/miscUtils'
 import bridge from '../../../../../bridge/bridge'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
-import { getState } from 'src/utils/miscUtils'
 
 
 /** Функция возвращает конфигурацию формы входа в сервис */

@@ -46,7 +46,8 @@ function checkItems(items: MetaType.Items): string[] {
     items.forEach(item => {
         errorsArr.push(...checkProp(item.type, 'type', 'string', true))
 
-        checkIdPropForUniques(items, item.id)
+        // Проверка, что все id уникальные
+        errorsArr.push(...checkIdPropForUniques(items, item.id))
 
         if (item.type === 'header') {
             errorsArr.push(...checkProp(item.id, 'id', 'number', true))
@@ -84,7 +85,10 @@ function checkItems(items: MetaType.Items): string[] {
  * @param {Array} items — массив объектов
  * @param {String} verifiableId — значение проверяемого идентификатора
  */
-function checkIdPropForUniques<Items, ItemId>(items: MetaType.Items, verifiableId: number): string[] {
+function checkIdPropForUniques(
+    items: MetaType.Items | MetaType.InputValues,
+    verifiableId: number | string
+): string[] {
     // Поиск элемента с таким же идентификатором
     let thisIdCount = 0
 
@@ -132,7 +136,8 @@ export function checkInputValues(inputValues: MetaType.InputValues): string[] {
 
     inputValues.forEach(inputValue => {
         // Поиск элемента с таким же идентификатором
-        checkIdPropForUniquesInValues(inputValues, inputValue.id)
+        // errorsArr.push(...checkIdPropForUniquesInValues(inputValues, inputValue.id))
+        errorsArr.push(...checkIdPropForUniques(inputValues, inputValue.id))
 
         errorsArr.push(...checkProp(inputValue.id, 'id', 'string', true))
         errorsArr.push(...checkProp(inputValue.label, 'label', 'string', true))
@@ -154,7 +159,7 @@ export function checkInputValues(inputValues: MetaType.InputValues): string[] {
  * @param {Array} items — массив объектов
  * @param {String} verifiableId — значение проверяемого идентификатора
  */
-function checkIdPropForUniquesInValues(items: MetaType.InputValues, verifiableId: string): string[] {
+/*function checkIdPropForUniquesInValues(items: MetaType.InputValues, verifiableId: string): string[] {
     // Поиск элемента с таким же идентификатором
     let thisIdCount = 0
 
@@ -167,114 +172,45 @@ function checkIdPropForUniquesInValues(items: MetaType.InputValues, verifiableId
     }
 
     return []
-}
+}*/
 
 
 
 // Пример кода шаблона метаданных (используется в примере шаблона)
 // const metaTemplateCodeExample: MetaType.MetaTemplate = {
 export const metaTemplateCodeExample = `{
-    name: 'Работа речных шлюзов',
+    name: 'Standard article',
     items: [
-        // Основные сведения
         {
             id: 1,
             type: 'header',
-            text: 'Общие сведения'
+            text: 'General'
         },
         {
             id: 2,
             type: 'input',
-            label: 'Название статьи',
+            label: 'Article name',
             name: 'articleName'
-        },
-        {
-            id: 3,
-            type: 'input',
-            label: 'Подзаголовок статьи',
-            name: 'articleDescription'
         },
         {
             id: 4,
             type: 'input',
-            label: 'Автор',
+            label: 'Author',
             name: 'authorName',
             view: 'select',
             values: [
                 {
-                    id: 10,
-                    label: 'Виктория Кулькова',
-                    value: 'VK'
+                    id: '10',
+                    label: 'Father McKenzie',
+                    value: 'McKenzie'
                 },
                 {
-                    id: 11,
-                    label: 'Юлия Кулькова',
-                    value: 'YK'
-                },
-                {
-                    id: 12,
-                    label: 'Андрей Яковлев',
-                    value: 'AYA'
-                },
+                    id: '11',
+                    label: 'Eleanor Rigby',
+                    value: 'Rigby'
+                }
             ]
-        },
-        {
-            id: 5,
-            type: 'input',
-            label: 'Теги',
-            name: 'tags',
-            view: 'radio',
-            values: [
-                {
-                    id: 10,
-                    label: 'Увлечения',
-                    value: 'enthusiasm'
-                },
-                {
-                    id: 11,
-                    label: 'Путешествия',
-                    value: 'travel'
-                },
-                {
-                    id: 12,
-                    label: 'Работа',
-                    value: 'job'
-                },
-            ]
-        },
-    
-        // Шапка
-        {
-            id: 6,
-            type: 'header',
-            text: 'Шапка'
-        },
-        {
-            id: 7,
-            type: 'input',
-            label: 'Путь до изображения',
-            name: 'headerImgSrc',
-            view: 'text'
-        },
-        {
-            id: 8,
-            type: 'input',
-            label: 'Расположение изображения',
-            name: 'headerImgPosition',
-            view: 'radio',
-            values: [
-                {
-                    id: 10,
-                    label: 'Фон',
-                    value: 'background'
-                },
-                {
-                    id: 11,
-                    label: 'Внутри',
-                    value: 'inside'
-                },
-            ]
-        },
+        }
     ]
 }`
 

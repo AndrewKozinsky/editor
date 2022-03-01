@@ -1,7 +1,7 @@
 import React from 'react'
-import Wrapper from 'src/common/Wrapper/Wrapper'
-import Hr from 'src/common/misc/Hr/Hr'
-import Button from 'src/common/formElements/Button/Button'
+import Wrapper from 'common/Wrapper/Wrapper'
+import Hr from 'common/misc/Hr/Hr'
+import Button from 'common/formElements/Button/Button'
 import {
     useGetEditArticleFn,
     useGetToEditorFn,

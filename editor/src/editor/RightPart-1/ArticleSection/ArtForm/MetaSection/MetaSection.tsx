@@ -20,7 +20,7 @@ function MetaSection() {
     // Отрабатывает 1 раз после загрузки данных
     useSetInitialMeta()
 
-    // Хук следит когда в Хранилище загрузилась мета дата,
+    // Хук следит когда в Хранилище загрузилась метаданные,
     // скачивает выбранный шаблон метаданных
     // и правит данные чтобы они соответствовали шаблону
     useCorrectMetaData()
@@ -39,6 +39,7 @@ function MetaSection() {
     return (
         <form onSubmit={onFormSubmit}>
             <Select
+                label={articleSectionMsg.selectMetaTempSelectLabel}
                 name='metaTemplateId'
                 options={selectOptions}
                 value={selectValue}

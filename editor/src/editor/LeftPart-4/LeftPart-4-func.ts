@@ -24,6 +24,6 @@ function getItemsListProps(): ItemType[] {
             id: 'reg',
             name: helpPanelMsg.leftMenuItemReg,
             onClick: () => store.dispatch( helpActions.setHelpPanelTab('reg') )
-        },
+        }
     ]
 }

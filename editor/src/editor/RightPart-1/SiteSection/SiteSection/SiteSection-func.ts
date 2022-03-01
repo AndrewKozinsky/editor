@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
@@ -8,7 +7,7 @@ import siteSectionMsg from 'messages/groupSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
 import { getState } from 'utils/miscUtils'
-import sitesActions from '../../../../store/site/sitesActions'
+import sitesActions from 'store/site/sitesActions'
 
 /**
  * Хук изменяет имя сайта в поле Название при переключении сайта

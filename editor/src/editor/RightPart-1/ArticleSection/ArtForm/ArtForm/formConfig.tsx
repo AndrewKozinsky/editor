@@ -1,15 +1,15 @@
 import React from 'react'
 import * as yup from 'yup'
-import { store } from 'src/store/rootReducer'
-import sitesActions from 'src/store/site/sitesActions'
-import FCType from 'src/libs/FormConstructor/FCType'
-import articleFormMsg from 'src/messages/articleFormMessages'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import putArtFolderRequest from 'src/requests/editor/artFolders/putArtFolderRequest'
-import { updateArticleRequest } from 'src/requests/editor/article/updateArticleRequest'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import FCType from 'libs/FormConstructor/FCType'
+import articleFormMsg from 'messages/articleFormMessages'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
+import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import bridge from '../../../../../bridge/bridge'
 import DeleteArticleButton from '../DeleteArticleButton/DeleteArticleButton'
-import { getState } from 'src/utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const artFormConfig: FCType.Config = {

@@ -1,8 +1,8 @@
 import React from 'react'
-import useGetShowModal from 'src/utils/hooksUtils'
-import Button from 'src/common/formElements/Button/Button'
+import useGetShowModal from 'utils/hooksUtils'
+import Button from 'common/formElements/Button/Button'
+import componentFormMsg from 'messages/componentTemplateFormMessages'
 import { DeleteComponentModalContent } from './DeleteComponentModalContent'
-import componentFormMsg from 'src/messages/componentTemplateFormMessages'
 
 
 /** Кнопка удаления сайта открывающая модальное окно подтверждения */

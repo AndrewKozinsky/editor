@@ -1,13 +1,13 @@
 import React from 'react'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
 import artFormConfig from './formConfig'
 import {
     useFillSiteTemplatesSelect,
     useGetArtDataFromServerAndSetInStore,
     useSetAnotherFormData
 } from './ArtForm-func'
-import EditArticleSection from '../EditArticleSection/EditArticleSection'
+
 
 /** Форма редактирования статьи */
 export default function ArtForm() {

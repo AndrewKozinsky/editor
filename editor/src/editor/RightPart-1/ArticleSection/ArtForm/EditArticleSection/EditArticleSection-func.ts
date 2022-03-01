@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { store } from 'src/store/rootReducer'
-import actions from 'src/store/rootAction'
-import useGetSitesSelectors from 'src/store/site/sitesSelectors'
-import useGetArticleSelectors from 'src/store/article/articleSelectors'
-import articleActions from 'src/store/article/articleActions'
-import settingsActions from 'src/store/settings/settingsActions'
+import { store } from 'store/rootReducer'
+import actions from 'store/rootAction'
+import useGetSitesSelectors from 'store/site/sitesSelectors'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import articleActions from 'store/article/articleActions'
+import settingsActions from 'store/settings/settingsActions'
 
 
 /** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */

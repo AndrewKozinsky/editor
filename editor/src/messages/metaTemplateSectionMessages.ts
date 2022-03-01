@@ -30,18 +30,22 @@ const metaTemplateSectionMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
-    /*deleteConfirmationTextInModal: {
-        eng: 'Are you sure you want to delete the site template?',
-        rus: 'Вы уверены, что хотите удалить шаблон сайта?'
-    },*/
+    deleteConfirmationHeaderInModal: {
+        eng: 'Deleting the metadata template',
+        rus: 'Удаление шаблона метаданных?'
+    },
+    deleteConfirmationTextInModal: {
+        eng: 'Are you sure you want to delete the metadata template?',
+        rus: 'Вы уверены, что хотите удалить шаблон метаданных?'
+    },
     /*closeDeleteModalBtn: {
         eng: 'Cancel',
         rus: 'Отменить'
     },*/
-    /*deleteBtnInModal: {
+    deleteBtnInModal: {
         eng: 'Delete',
         rus: 'Удалить'
-    },*/
+    },
     /*checkCodeErrorHeader: {
         eng: 'The template needs to be refined',
         rus: 'Шаблон требует доработки'

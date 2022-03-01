@@ -2,6 +2,7 @@ import {
     Req, Res, Get, Post, Patch, Param, Body,
     Controller, HttpStatus, UseGuards, UsePipes, Delete
 } from '@nestjs/common'
+import { SiteService } from '../site/site.service'
 import { SiteTemplateService } from './siteTemplate.service'
 import { Response } from 'express'
 import { ExpressRequestInterface } from '../../types/expressRequest.interface'
@@ -15,7 +16,10 @@ import { UpdateSiteTemplateDto } from './dto/updateSiteTemplate.dto'
 
 @Controller('siteTemplates')
 export class SiteTemplateController {
-    constructor(private readonly siteTemplateService: SiteTemplateService) {}
+    constructor(
+        // private readonly siteService: SiteService,
+        private readonly siteTemplateService: SiteTemplateService,
+    ) {}
 
     // Получение шаблона сайта
     @UseGuards(AuthGuard)

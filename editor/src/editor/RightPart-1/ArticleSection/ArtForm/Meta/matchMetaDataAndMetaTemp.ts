@@ -1,4 +1,4 @@
-import { createDeepCopy, getState } from 'utils/miscUtils'
+import { createDeepCopy } from 'utils/miscUtils'
 import MetaType from './MetaType'
 
 

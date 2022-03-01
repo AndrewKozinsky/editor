@@ -3,8 +3,7 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import articleMenuMsg from 'messages/articleMenuMessages'
-import getArticleRequest from '../../../../requests/editor/article/getArticleRequest'
-import MetaType from '../../../RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import { createParsingData } from './createParsingData'
 
 /** Компонент окна с разметкой статьи */

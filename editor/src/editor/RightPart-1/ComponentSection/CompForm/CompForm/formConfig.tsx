@@ -1,18 +1,18 @@
 import React from 'react'
 const JSON5 = require('json5')
 import * as yup from 'yup'
-import { store } from 'src/store/rootReducer'
-import sitesActions from 'src/store/site/sitesActions'
-import FCType from 'src/libs/FormConstructor/FCType'
-import componentFormMsg from 'src/messages/componentTemplateFormMessages'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import { updateComponentRequest } from 'src/requests/editor/components/updateComponentRequest'
-import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import FCType from 'libs/FormConstructor/FCType'
+import componentFormMsg from 'messages/componentTemplateFormMessages'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import { updateComponentRequest } from 'requests/editor/components/updateComponentRequest'
+import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import bridge from '../../../../../bridge/bridge'
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
-import { getState } from 'src/utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const compFormConfig: FCType.Config = {

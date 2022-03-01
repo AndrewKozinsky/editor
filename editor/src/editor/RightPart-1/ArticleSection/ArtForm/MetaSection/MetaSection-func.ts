@@ -112,7 +112,7 @@ export function useCorrectMetaData() {
 
         // Скачать указанный шаблон метаданных...
         getMetaTemplateRequest(metaTemplateId).then(response => {
-            if (response.status === 'success') {
+            if (response.status === 'success' && response.data.metaTemplates[0]) {
                 const metaDataTemplate: MetaType.MetaTemplate = JSON5.parse(response.data.metaTemplates[0].content)
 
                 // Сделать соответствие шаблона метаданных и самих метаданных в статье
@@ -138,5 +138,5 @@ export function useUpdateMetaDependsOnTemplateId() {
         if (!hookIsReady) return
 
         dispatch(sitesActions.requestArticleMetaTemplate(metaTemplateId))
-    }, [metaTemplateId])
+    }, [metaTemplateId, hookIsReady])
 }

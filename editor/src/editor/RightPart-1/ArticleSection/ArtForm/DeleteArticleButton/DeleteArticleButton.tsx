@@ -1,7 +1,7 @@
 import React from 'react'
-import useGetShowModal from 'src/utils/hooksUtils'
-import Button from 'src/common/formElements/Button/Button'
-import articleFormMsg from 'src/messages/articleFormMessages'
+import useGetShowModal from 'utils/hooksUtils'
+import Button from 'common/formElements/Button/Button'
+import articleFormMsg from 'messages/articleFormMessages'
 import { DeleteArticleModalContent } from './DeleteArticleModalContent'
 
 

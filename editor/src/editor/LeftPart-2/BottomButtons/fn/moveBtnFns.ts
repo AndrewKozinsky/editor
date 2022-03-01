@@ -81,7 +81,6 @@ export function useGetMoveHandler(direction: 'inside' | 'left' | 'right') {
             }
         }
 
-
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))

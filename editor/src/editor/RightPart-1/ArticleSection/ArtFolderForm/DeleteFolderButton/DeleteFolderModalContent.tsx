@@ -1,9 +1,9 @@
 import React from 'react'
-import articleFolderFormMsg from 'src/messages/articleFolderFormMessages'
-import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
+import articleFolderFormMsg from 'messages/articleFolderFormMessages'
+import FormConstructor from 'libs/FormConstructor/FormConstructor'
+import useFormConstructorState from 'libs/FormConstructor/state/useFormConstructorState'
+import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import deleteFolderArtFormConfig from './deleteFolderArtFormConfig'
-import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
-import ModalShortContent from 'src/common/modalEntities/ModalShortContent/ModalShortContent'
 
 /** Содержимое модального окна с вопросом удалить ли статью */
 export default function DeleteFolderModalContent() {
@@ -14,7 +14,7 @@ export default function DeleteFolderModalContent() {
             header={articleFolderFormMsg.deleteFolderConfirmationHeaderInModal}
             text={articleFolderFormMsg.deleteFolderConfirmationTextInModal}
             bottomElems={
-                [<FormConstructor config={deleteFolderArtFormConfig} state={formState} key={1} />]
+                [<FormConstructor config={deleteFolderArtFormConfig} state={formState} key='1' />]
             }
         />
     )

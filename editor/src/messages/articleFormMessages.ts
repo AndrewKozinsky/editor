@@ -15,8 +15,8 @@ const articleFormMessages = {
         rus: 'Название статьи не может быть длиннее 255 символов'
     },
     defaultTemplateInput: {
-        eng: 'Group styles',
-        rus: 'Стили группы'
+        eng: 'Group',
+        rus: 'Группа'
     },
     submitBtnText: {
         eng: 'Save',

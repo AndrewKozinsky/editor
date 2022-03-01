@@ -1,12 +1,12 @@
-import FCType from 'src/libs/FormConstructor/FCType'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
-import actions from 'src/store/rootAction'
-import { store } from 'src/store/rootReducer'
+import FCType from 'libs/FormConstructor/FCType'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import componentFolderFormMsg from 'src/messages/componentFolderFormMessages'
-import sitesActions from 'src/store/site/sitesActions'
-import { getState } from 'src/utils/miscUtils'
+import sitesActions from 'store/site/sitesActions'
+import { getState } from 'utils/miscUtils'
 
 
 /** Конфигурация формы входа в сервис */

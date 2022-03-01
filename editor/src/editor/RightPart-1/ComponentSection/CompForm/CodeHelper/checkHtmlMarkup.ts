@@ -1,4 +1,4 @@
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 
 /**
  * Функция проверяет соответствие переданной строки коду HTML.

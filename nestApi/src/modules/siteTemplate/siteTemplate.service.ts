@@ -95,6 +95,13 @@ export class SiteTemplateService {
             )
         }
 
+        // Если удаляемый шаблон сайта является шаблоном сайта по умолчанию, то обнулить его
+        // const site = await this.siteRepository.findOne({id: siteTemplate.siteId})
+        // if (site.defaultSiteTemplateId === siteTemplateId) {
+        //     await this.siteService.updateSite(site.id, {defaultSiteTemplateId: ''})
+        // }
+
+        // Удалить шаблон сайта
         await this.siteTemplateRepository.delete({id: siteTemplateId})
 
         return null

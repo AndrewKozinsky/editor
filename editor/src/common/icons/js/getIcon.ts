@@ -1,5 +1,3 @@
-import { ReactNode } from 'react'
-import { LangOptions } from '../../../messages/fn/msgProxy'
 import ElBtnSignClone1 from '../icons/elBtnSignClone1'
 import ElBtnSignVisible from '../icons/elBtnSignVisible'
 import Logo from '../icons/logo'

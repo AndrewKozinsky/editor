@@ -39,7 +39,7 @@ export default function Menu(props: MenuPropType) {
 /** Компонент ссылки меню */
 function MenuLink(props: MenuItem) {
     const {
-        to, // Куда ведёт ссылка
+        to,   // Куда ведёт ссылка
         label // Текст ссылки
     } = props
 

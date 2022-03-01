@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import articleManager from 'articleManager/articleManager'
 import { useDispatch } from 'react-redux'
+import articleManager from 'articleManager/articleManager'
 import articleActions from 'store/article/articleActions'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Изменить видимость элемента» */

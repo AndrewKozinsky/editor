@@ -409,7 +409,10 @@ const sitesActions = {
 
             // Запрос и ответ от сервера
             const response = await getMetaTemplateRequest(metaTempId)
-            if (response.status !== 'success') return
+            if (response.status !== 'success' || !response.data.metaTemplates[0]) {
+                dispatch( sitesActions.setArticleMeta(null) )
+                return
+            }
 
             // Установка шаблона метаданных в Хранилище
             const preparedTemplate: MetaType.MetaTemplate = JSON5.parse(response.data.metaTemplates[0].content)

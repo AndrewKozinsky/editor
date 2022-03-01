@@ -18,6 +18,10 @@ const articleSectionMessages = {
         eng: 'Not selected',
         rus: 'Не выбрано'
     },
+    selectMetaTempSelectLabel: {
+        eng: 'Metadata template',
+        rus: 'Шаблон метаданных'
+    },
 }
 
 const articleSectionMsg = getMsgProxy<typeof articleSectionMessages>(articleSectionMessages)

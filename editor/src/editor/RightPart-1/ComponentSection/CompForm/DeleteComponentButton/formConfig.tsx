@@ -1,13 +1,13 @@
-import FCType from 'src/libs/FormConstructor/FCType'
-import componentFormMsg from 'src/messages/componentTemplateFormMessages'
-import filesTreePublicMethods from 'src/libs/DragFilesTree/publicMethods'
-import actions from 'src/store/rootAction'
-import { store } from 'src/store/rootReducer'
-import sitesActions from 'src/store/site/sitesActions'
-import putCompFolderRequest from 'src/requests/editor/compFolders/putCompFolderRequest'
-import deleteComponentRequest from 'src/requests/editor/components/deleteComponentRequest'
+import FCType from 'libs/FormConstructor/FCType'
+import componentFormMsg from 'messages/componentTemplateFormMessages'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
+import actions from 'store/rootAction'
+import { store } from 'store/rootReducer'
+import sitesActions from 'store/site/sitesActions'
+import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import bridge from '../../../../../bridge/bridge'
-import { getState } from 'src/utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Конфигурация формы удаления компонента
