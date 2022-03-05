@@ -51,6 +51,7 @@ function MetaHeader(props: MetaHeaderPropType) {
 type MetaInputPropType = {
     inputData: MetaType.Input
     items: MetaType.Items
+    inputView?: 'text' | 'radio' | 'checkbox' | 'select'
 }
 
 function MetaInput(props: MetaInputPropType) {
@@ -65,7 +66,7 @@ function MetaInput(props: MetaInputPropType) {
                 <MetaTextInput inputData={inputData} items={items} />
             }
             {['radio', 'checkbox'].includes(inputView)  &&
-                <MetaRadioCheckboxInput inputData={inputData} items={items} />
+                <MetaRadioCheckboxInput inputData={inputData} items={items} inputView={inputView} />
             }
             {inputView === 'select' &&
                 <MetaSelectInput inputData={inputData} items={items} />
@@ -91,21 +92,21 @@ function MetaTextInput(props: MetaInputPropType) {
 
 /** Группа переключателей или флагов */
 function MetaRadioCheckboxInput(props: MetaInputPropType) {
-    const { inputData, items } = props
+    const { inputData, items, inputView } = props
 
     const valuesArr: FieldGroupInputDataType[] = inputData.values.map(valueObj => {
         return {label: valueObj.label, value: valueObj.id}
     })
 
     // Добавление пустого пункта если это переключатели
-    if (inputData.view === 'radio') {
+    if (inputView === 'radio') {
         valuesArr.unshift({label: commonMsg.optionNotSelected, value: ''})
     }
 
     const onChangeHandler = useGetOnChangeInputHandler(items, inputData.id)
 
     const fieldData: FieldGroupPropType = {
-        inputType: inputData.view as FieldGroupInputType,
+        inputType: inputView as FieldGroupInputType,
         label: inputData.label,
         groupName: inputData.name,
         value: inputData.value || [''],
@@ -123,6 +124,9 @@ function MetaSelectInput(props: MetaInputPropType) {
     const optionsArr: OptionsType = inputData.values.map(valueObj => {
         return {label: valueObj.label, value: valueObj.id}
     })
+
+    // Добавление пустого пункта
+    optionsArr.unshift({label: commonMsg.optionNotSelected, value: ''})
 
     const onChangeHandler = useGetOnChangeInputHandler(items, inputData.id)
 

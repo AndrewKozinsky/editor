@@ -19,13 +19,15 @@ import {ArticleService} from '../article/article.service'
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([SiteEntity]),
-        TypeOrmModule.forFeature([SiteTemplateEntity]),
-        TypeOrmModule.forFeature([MetaTemplateEntity]),
-        TypeOrmModule.forFeature([CompFolderEntity]),
-        TypeOrmModule.forFeature([ComponentEntity]),
-        TypeOrmModule.forFeature([ArtFolderEntity]),
-        TypeOrmModule.forFeature([ArticleEntity]),
+        TypeOrmModule.forFeature([
+            SiteEntity,
+            SiteTemplateEntity,
+            MetaTemplateEntity,
+            CompFolderEntity,
+            ComponentEntity,
+            ArtFolderEntity,
+            ArticleEntity
+        ]),
     ],
     controllers: [SiteController],
     providers: [

@@ -79,6 +79,8 @@ export function useGetOnChangeSelectInput(): OuterOnChangeHandlerType.FieldsHand
     }, [])
 }
 
+
+
 /**
  * Хук устанавливает метаданные в статью если указан шаблон метаданных по умолчанию, но данных нет.
  * Отрабатывает 1 раз после загрузки данных.
@@ -91,15 +93,15 @@ export function useSetInitialMeta() {
     const [hookIsWorkedOut, setHookIsWorkedOut] = useState(false)
 
     useEffect(function () {
-        // Если в метаданных ничего, но указан шаблон метаданных по умолчанию,
+        // Если в метаданных ничего, но указан шаблон метаданных по умолчанию...
+        if (!currentArtName || !metaTemplateId || meta || hookIsWorkedOut) return
+
         // то загрузить метаданные и поставить в store.sites.articleSection.meta
-        if (!hookIsWorkedOut && !meta && metaTemplateId) {
-            dispatch(sitesActions.requestArticleMetaTemplate(metaTemplateId))
-        }
+        dispatch(sitesActions.requestArticleMetaTemplate(metaTemplateId))
 
         // Если данные статьи загружены (это вычисляется по свойству currentArtName),
         // то значит хук отработал выше и более загружать не требуется
-        if (currentArtName) setHookIsWorkedOut(true)
+        setHookIsWorkedOut(true)
     }, [currentArtName])
 }
 
@@ -107,8 +109,11 @@ export function useSetInitialMeta() {
 export function useCorrectMetaData() {
     const { meta, metaTemplateId, currentArtName } = useGetSitesSelectors().articleSection
 
+    // Отработал ли уже хук
+    const [hookIsWorkedOut, setHookIsWorkedOut] = useState(false)
+
     useEffect(function () {
-        if (!currentArtName || !metaTemplateId) return
+        if (!currentArtName || !metaTemplateId || hookIsWorkedOut) return
 
         // Скачать указанный шаблон метаданных...
         getMetaTemplateRequest(metaTemplateId).then(response => {
@@ -120,6 +125,7 @@ export function useCorrectMetaData() {
             }
         })
 
+        setHookIsWorkedOut(true)
     }, [currentArtName])
 }
 
@@ -132,11 +138,14 @@ export function useUpdateMetaDependsOnTemplateId() {
     const [hookIsReady, setHookIsReady] = useState(false)
 
     useEffect(function () {
+        if (!currentArtName) return
         // Хук не должен отрабатывать до тех пор, пока данные не загрузились.
         // Это отслеживается по значению имени статьи. Если имя есть, то данные загружены.
         if (currentArtName) setHookIsReady(true)
         if (!hookIsReady) return
 
         dispatch(sitesActions.requestArticleMetaTemplate(metaTemplateId))
-    }, [metaTemplateId, hookIsReady])
+    }, [metaTemplateId])
 }
+
+

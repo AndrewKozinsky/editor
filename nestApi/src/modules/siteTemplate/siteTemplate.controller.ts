@@ -17,7 +17,6 @@ import { UpdateSiteTemplateDto } from './dto/updateSiteTemplate.dto'
 @Controller('siteTemplates')
 export class SiteTemplateController {
     constructor(
-        // private readonly siteService: SiteService,
         private readonly siteTemplateService: SiteTemplateService,
     ) {}
 

@@ -1,4 +1,4 @@
-
+// ДАННЫЕ ДЛЯ ОТРИСОВКИ СТАТЬИ НА САЙТЕ ПОЛЬЗОВАТЕЛЯ
 namespace ParsingData {
     export type Article = {
         general: {
@@ -14,12 +14,13 @@ export default ParsingData
 
 // МЕТАДАННЫЕ
 export namespace ParsingDataMeta {
-    export type Inputs = Input[]
+    export type Inputs = {
+        [inputName: string]: Input // В ключе будет значение атрибута name у поля ввода, в значении данные поля
+    }
 
     // Поле ввода
     export type Input = {
         label: string // Текст над полем ввода
-        name: string // Значение атрибута name у поля ввода
         value: null | string // введённое значение поля ввода
     }
 }

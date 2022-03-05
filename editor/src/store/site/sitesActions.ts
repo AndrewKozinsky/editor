@@ -400,7 +400,6 @@ const sitesActions = {
     // Загрузка с сервера шаблона метаданных и установка в store.sites.articleSection.meta
     requestArticleMetaTemplate(metaTempId: StoreSitesTypes.CurrentMetaTemplateId) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-
             // Если id шаблона метаданных null, то обнулить данные в store.sites.articleSection.meta
             if (!metaTempId) {
                 dispatch( sitesActions.setArticleMeta(null) )

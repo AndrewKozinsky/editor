@@ -1,6 +1,7 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
 import { join } from 'path'
 import ormconfig from '../ormconfig'
+import { SiteService } from './site/site.service'
 import { UserModule } from './user/user.module'
 import { SiteModule } from './site/site.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -33,7 +34,7 @@ import { ArticleModule } from './article/article.module'
       ArticleModule,
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer) {

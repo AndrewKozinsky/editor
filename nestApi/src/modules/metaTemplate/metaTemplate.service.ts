@@ -1,4 +1,5 @@
 import { Response } from 'express'
+import { type } from 'os'
 import { Repository } from 'typeorm'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { SiteEntity } from '../site/site.entity'
@@ -11,6 +12,7 @@ import { ExpressRequestInterface } from 'src/types/expressRequest.interface'
 import { UpdateMetaTemplateDto } from './dto/updateMetaTemplate.dto'
 import responseCommonError from 'src/utils/error/responseCommonError'
 import { sortByCreatedAt } from '../../utils/miscUtils'
+import { SiteService } from '../site/site.service'
 
 
 @Injectable()
@@ -20,7 +22,8 @@ export class MetaTemplateService {
         @InjectRepository(MetaTemplateEntity)
         private readonly metaTemplateRepository: Repository<MetaTemplateEntity>,
         @InjectRepository(SiteEntity)
-        private readonly siteRepository: Repository<SiteEntity>
+        private readonly siteRepository: Repository<SiteEntity>,
+        private readonly siteService: SiteService
     ) {}
 
     /** Получение шаблонов метаданных для переданного сайта (защищённый маршрут) */
@@ -77,6 +80,7 @@ export class MetaTemplateService {
 
     /** Удаление шаблон сайта (защищённый маршрут) */
     async deleteMetaTemplate(metaTemplateId: number, currentUser: UserEntity): Promise<null> {
+        // По каким-то причинам metaTemplateId приходит строкой. Имей это в виду.
         const metaTemplate = await this.metaTemplateRepository.findOne({id: metaTemplateId})
 
         // Throw an error if meta template is not exist
@@ -93,6 +97,12 @@ export class MetaTemplateService {
                 'metaTemplate_DeleteMetaTemplate_CurrentUserIsNotAuthor',
                 HttpStatus.FORBIDDEN
             )
+        }
+
+        // Если удаляемый шаблон сайта является шаблоном сайта по умолчанию, то обнулить его
+        const site = await this.siteRepository.findOne({id: metaTemplate.siteId})
+        if (site.defaultMetaTemplateId == metaTemplateId) {
+            await this.siteService.updateSite(site.id, {defaultMetaTemplateId: ''})
         }
 
         await this.metaTemplateRepository.delete({id: metaTemplateId})

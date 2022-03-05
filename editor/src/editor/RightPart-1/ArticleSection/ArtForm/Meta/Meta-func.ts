@@ -12,7 +12,11 @@ export function getInputView(inputData: MetaType.Input): MetaType.InputViewType 
     return inputData.values ? 'radio' : 'text'
 }
 
-
+/**
+ * Хук возвращает обработчик изменения поля ввода
+ * @param {Array} metaItems — предопределённые значения полей
+ * @param {Number} inputId — id поля ввода
+ */
 export function useGetOnChangeInputHandler(metaItems: MetaType.Items, inputId: number) {
     const dispatch = useDispatch()
 

@@ -35,19 +35,18 @@ export function createParsingData(
  * @param {Array} meta — массив метаданных
  */
 function getMetaData(meta: MetaType.Items): ParsingDataMeta.Inputs {
-    const parsedMetaItemsArr: ParsingDataMeta.Inputs = []
+    const parsedMetaItems: ParsingDataMeta.Inputs = {}
 
     meta.forEach(metaObj => {
         if (metaObj.type === 'header') return
 
-        parsedMetaItemsArr.push({
+        parsedMetaItems[metaObj.name] = {
             label: metaObj.label,
-            name: metaObj.name,
             value: getMetaInputValue(metaObj)
-        })
+        }
     })
 
-    return parsedMetaItemsArr
+    return parsedMetaItems
 }
 
 /**
@@ -55,15 +54,21 @@ function getMetaData(meta: MetaType.Items): ParsingDataMeta.Inputs {
  * @param {Object} metaInput — данные поля ввода
  */
 function getMetaInputValue(metaInput: MetaType.Input): string {
+    if (!metaInput.value) return null
+
     if (metaInput.values) {
-        const readyValues: string[] = []
+        if (metaInput.value) {
+            const readyValues: string[] = []
+            metaInput.value.forEach(valueId => {
+                const valueObj = metaInput.values.find(valObj => valObj.id === valueId)
+                readyValues.push(valueObj.value)
+            })
 
-        metaInput.value.forEach(valueId => {
-            const valueObj = metaInput.values.find(valObj => valObj.id === valueId)
-            readyValues.push(valueObj.value)
-        })
-
-        return readyValues.join(' ')
+            return readyValues.join(' ')
+        }
+        else {
+            return ''
+        }
     }
 
     return metaInput.value[0]
