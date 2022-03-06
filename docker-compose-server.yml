@@ -58,7 +58,7 @@ services:
   next:
     build:
       context: ./next
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.prod
     container_name: editor-next
     command: npm run start
     restart: unless-stopped
