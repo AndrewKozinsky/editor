@@ -56,9 +56,7 @@ services:
 
   # Сайт про редактор (Next)
   next:
-    build:
-      context: ./next
-      dockerfile: Dockerfile.prod
+    image: editor-next
     container_name: editor-next
     command: npm run start
     restart: unless-stopped

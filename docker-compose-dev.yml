@@ -34,7 +34,7 @@ services:
       context: ./nestApi
       dockerfile: Dockerfile.dev
     container_name: editor-nest
-    command: npm run start:dev
+    command: npm run dev
     restart: unless-stopped
     environment:
       - MODE=development
