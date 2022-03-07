@@ -56,8 +56,7 @@
 3. Проверьте название активной ветки: ```git branch```.
 4. Если стоит не верная ветка, то перейдите в правильную. Например в develop: ```git checkout develop```.
 5. Остановите запущенные контейнеры: ```docker-compose -f docker-compose-server.yml down```.
-6. Собрать образ Некста с сайтом про редактор: ```docker build -t editor-next ./next/Dockerfile.prod```.
-7. Запустите docker-compose по указанному файлу конфигурации: ```docker-compose -f docker-compose-server.yml up```
+7. Запустите docker-compose по указанному файлу конфигурации: ```docker-compose -f docker-compose-server.yml up --build```
 
 ### Полезные команды для взаимодействия с базой данных
 Соединение с базой данных: ```\c editor```
