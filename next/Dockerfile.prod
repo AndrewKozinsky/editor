@@ -1,15 +1,12 @@
 FROM node:14.15.3-alpine3.12
 WORKDIR /app
 
-COPY package.json ./
+ADD package.json package.json
 
 RUN npm install
-RUN npm install -D @swc/cli @swc/core
-
-COPY . .
-
+ADD . .
+ENV NODE_ENV production
 RUN npm run build
 RUN npm prune --production
 
-CMD ["npm", "start"]
 EXPOSE 3003

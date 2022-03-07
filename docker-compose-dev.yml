@@ -34,7 +34,7 @@ services:
       context: ./nestApi
       dockerfile: Dockerfile.dev
     container_name: editor-nest
-    command: npm run dev
+    command: npm run start:dev
     restart: unless-stopped
     environment:
       - MODE=development
@@ -62,17 +62,17 @@ services:
       - "4000:5432"
 
   # Сайт про редактор (Next)
-  next:
-    build:
-      context: ./next
-      dockerfile: Dockerfile.dev
-    container_name: editor-next
-    command: npm run dev
-    restart: unless-stopped
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./next:/app
+#  next:
+#    build:
+#      context: ./next
+#      dockerfile: Dockerfile.dev
+#    container_name: editor-next
+#    command: npm run dev
+#    restart: unless-stopped
+#    stdin_open: true
+#    tty: true
+#    volumes:
+#      - ./next:/app
 
 
 volumes:
