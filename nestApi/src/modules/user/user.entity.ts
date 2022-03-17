@@ -1,4 +1,3 @@
-const simplecrypt = require('simplecrypt')
 import {
     BeforeInsert,
     BeforeUpdate,
@@ -8,6 +7,7 @@ import {
     PrimaryGeneratedColumn
 } from 'typeorm'
 import MiscTypes from '../../types/miscTypes'
+import { getHash } from '../../utils/miscUtils'
 
 @Entity({name: 'users'})
 export class UserEntity {
@@ -58,7 +58,7 @@ export class UserEntity {
         if (!this.password) return
 
         // Hash password before insert
-        this.password = simplecrypt().encrypt(this.password)
+        this.password = getHash(this.password)
 
         // Set a new date when the password was changed
         this.passwordChangedAt = new Date()

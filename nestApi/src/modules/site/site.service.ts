@@ -139,6 +139,16 @@ export class SiteService {
         return null
     }
 
+    /** Удаление сайтов пользователя (защищённый маршрут) */
+    async deleteUserSites(user: UserEntity): Promise<null> {
+        const userSites = await this.getAllSites(user)
+        for (let userSite of userSites) {
+            await this.deleteSite(userSite.id, user)
+        }
+
+        return null
+    }
+
 
     /**
      * The function form response and send it to client

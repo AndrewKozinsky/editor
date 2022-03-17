@@ -30,7 +30,6 @@
     "rimraf": "^3.0.2",
     "rxjs": "^7.5.5",
     "sendpulse-api": "^1.1.5",
-    "simplecrypt": "^0.1.0",
     "typeorm": "^0.2.34"
   },
   "devDependencies": {

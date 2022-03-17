@@ -1,6 +1,7 @@
-const simplecrypt = require('simplecrypt')
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
+import { getHash } from '../../utils/miscUtils'
+import { ArtFolderService } from '../artFolder/artFolder.service'
 import { UserEntity } from './user.entity'
 import { Repository } from 'typeorm'
 import { sign, verify } from 'jsonwebtoken'
@@ -19,13 +20,15 @@ import { ResetPasswordDto } from './dto/resetPassword.dto'
 import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 import { ChangeEmailDto } from './dto/changeEmail.dto'
 import { ChangePasswordDto } from './dto/changePassword.dto'
+import { SiteService } from '../site/site.service'
 const crypto = require('crypto')
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(UserEntity)
-        private readonly userRepository: Repository<UserEntity>
+        private readonly userRepository: Repository<UserEntity>,
+        private readonly siteService: SiteService,
     ) {}
 
     async getTokenData(request: ExpressRequestInterface): Promise<UserEntity> {
@@ -86,7 +89,14 @@ export class UserService {
         const user = await this.getUserByEmail(loginDto.email)
         if (!user) responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
 
-        const isPasswordMatch = await simplecrypt().encrypt(loginDto.password) === user.password
+        const isPasswordMatch = getHash(loginDto.password) === user.password
+        // console.log(simplecrypt().encrypt(loginDto.password))
+        // console.log(user.password)
+        // console.log(isPasswordMatch)
+        // console.log('-----')
+
+        // console.log(loginDto.password)
+        // console.log(simplecrypt().decrypt(user.password))
         if (!isPasswordMatch) {
             responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
         }
@@ -234,14 +244,14 @@ export class UserService {
     async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
 
         // Compare user password in DB and the password which user passed in body
-        const isPasswordsMatch = await simplecrypt().encrypt(changePasswordDto.currentPassword) === user.password
+        const isPasswordsMatch = getHash(changePasswordDto.currentPassword) === user.password
 
         // Throw an error if they are not match
         if (!isPasswordsMatch) {
             responseCommonError('user_changePassword_PasswordsIsNotMatch', HttpStatus.BAD_REQUEST)
         }
 
-        const hashedPassword = simplecrypt().encrypt(changePasswordDto.newPassword)
+        const hashedPassword = getHash(changePasswordDto.newPassword)
         const updatedUser = { ...user, password: hashedPassword }
 
         // Поставить новый пароль в данные пользователя
@@ -254,22 +264,7 @@ export class UserService {
         this.userRepository.delete(user)
 
         // Удалить все сайты созданные пользователем
-        // await SiteModel.deleteMany({ userId: req.user.id })
-
-        // Удалить шаблоны подключения внешних файлов
-        // await IncFilesTemplateModel.deleteMany({userId: req.user.id})
-
-        // Удалить папки шаблонов компонентов
-        // await ComponentsFoldersModel.deleteMany({userId: req.user.id})
-
-        // Удалить шаблоны компонентов
-        // await ComponentModel.deleteMany({userId: req.user.id})
-
-        // Удалить все папки статей созданных пользователем
-        // await ArticlesFoldersModel.deleteMany({userId: req.params.siteId})
-
-        // Удалить все статьи созданные пользователем
-        // await ArticleModel.deleteMany({userId: req.params.siteId})
+        this.siteService.deleteUserSites(user)
 
         return user
     }

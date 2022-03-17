@@ -153,10 +153,6 @@ function SubmitButton(props: FormConstructorPropType) {
 function Common(props: FormConstructorPropType) {
     const { state } = props
 
-    console.log('state.commonSuccess: ' + state.commonSuccess)
-    console.log('state.showCommonSuccess: ' + state.showCommonSuccess)
-    console.log('state.formSentSuccessfully: ' + state.formSentSuccessfully)
-
     if (state.commonError && state.showCommonError) {
         return <CommonNotice type='error' text={state.commonError} />
     }

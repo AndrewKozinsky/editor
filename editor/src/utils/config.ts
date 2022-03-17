@@ -17,6 +17,7 @@ const config = {
         editorComponentType: 'editorComponentType',
         editorArticleId: 'editorArticleId',
         editorArticleType: 'editorArticleType',
+        editorLastUserEmail: 'editorLastUserEmail', // Почта пользователя, который входил в учётную запись в предыдущий раз
 
         editArticleId: 'editArticleId', // id редактируемой статьи
         editOpenCompFoldersIds: 'editOpenCompFoldersIds' // Массив идентификаторов открытых папок компонентов в редактируемой статье
