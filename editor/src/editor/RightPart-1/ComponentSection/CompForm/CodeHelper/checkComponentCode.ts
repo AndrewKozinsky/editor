@@ -1,5 +1,5 @@
 const JSON5 = require('json5')
-import TempCompTypes from 'src/store/article/codeType/tempCompCodeType'
+import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import {
     checkElemTagsValues,
     checkElemAttrView,
@@ -12,7 +12,7 @@ import { isMarkupCorrect } from './checkHtmlMarkup'
 
 /**
  * Код проверяющий правильность кода шаблона компонента.
- * Возвращает массив ошибок.Если ошибок нет, то массив будет пустым.
+ * Возвращает массив ошибок. Если ошибок нет, то массив будет пустым.
  * @param {String} code — код шаблона сайта введённый пользователем в поле ввода
  */
 export default function checkComponentCode(code: string) {

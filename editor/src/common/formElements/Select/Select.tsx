@@ -3,7 +3,7 @@ import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChange
 import { getOptions } from './Select-func'
 import { OptionsType } from './SelectTypes'
 import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'utils/stringUtils'
+import { getRandomId } from 'src/utils/stringUtils/stringUtils'
 import makeClasses from './Select-classes'
 import Label from '../Label/Label'
 import SvgIcon from '../../icons/SvgIcon'

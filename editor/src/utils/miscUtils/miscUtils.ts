@@ -1,9 +1,9 @@
-import { ArticleReducerType } from '../store/article/articleReducer'
-import { ModalReducerType } from '../store/modal/modalReducer'
-import { AppStateType, store } from '../store/rootReducer'
-import { SettingsReducerType } from '../store/settings/settingsReducer'
-import { SitesReducerType } from '../store/site/sitesReducer'
-import { UserReducerType } from '../store/user/userReducer'
+import { ArticleReducerType } from 'store/article/articleReducer'
+import { ModalReducerType } from 'store/modal/modalReducer'
+import { AppStateType, store } from 'store/rootReducer'
+import { SettingsReducerType } from 'store/settings/settingsReducer'
+import { SitesReducerType } from 'store/site/sitesReducer'
+import { UserReducerType } from 'store/user/userReducer'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.

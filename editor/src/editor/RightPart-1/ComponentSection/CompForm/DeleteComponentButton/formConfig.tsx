@@ -7,7 +7,7 @@ import sitesActions from 'store/site/sitesActions'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import bridge from '../../../../../bridge/bridge'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 /**
  * Конфигурация формы удаления компонента

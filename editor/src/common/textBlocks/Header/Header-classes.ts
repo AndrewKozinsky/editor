@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/stringUtils'
+import { makeCN } from 'src/utils/stringUtils/stringUtils'
 import { HeaderTypeType } from './Header'
 import './Header.scss'
 

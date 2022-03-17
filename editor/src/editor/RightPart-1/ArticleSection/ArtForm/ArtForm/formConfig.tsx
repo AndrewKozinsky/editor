@@ -9,7 +9,7 @@ import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import bridge from '../../../../../bridge/bridge'
 import DeleteArticleButton from '../DeleteArticleButton/DeleteArticleButton'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const artFormConfig: FCType.Config = {

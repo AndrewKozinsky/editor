@@ -6,7 +6,7 @@ import FCType from 'libs/FormConstructor/FCType'
 import articleFolderFormMsg from 'messages/articleFolderFormMessages'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
 
 /** Функция возвращает конфигурацию формы входа в сервис */

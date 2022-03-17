@@ -6,7 +6,7 @@ import { MiscTypes } from 'types/miscTypes'
 import Label from '../Label/Label'
 import { useSetFocus } from './TextInput-func'
 import makeClasses from './TextInput-classes'
-import { getRandomId } from 'utils/stringUtils'
+import { getRandomId } from 'src/utils/stringUtils/stringUtils'
 
 
 export type TextInputPropType = {

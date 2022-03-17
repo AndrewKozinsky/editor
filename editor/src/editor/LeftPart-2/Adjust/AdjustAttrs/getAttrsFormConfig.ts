@@ -10,7 +10,7 @@ import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента

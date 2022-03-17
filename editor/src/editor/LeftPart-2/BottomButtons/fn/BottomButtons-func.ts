@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { setUpperCaseForFirstLetter } from 'utils/stringUtils'
+import { setUpperCaseForFirstLetter } from 'src/utils/stringUtils/stringUtils'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import iconsCollector from 'common/icons/js/getIcon'

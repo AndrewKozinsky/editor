@@ -1,6 +1,6 @@
 import { HTMLObjArrType } from '../htmlStringToObject'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { createDeepCopy } from 'utils/miscUtils'
+import { createDeepCopy } from 'src/utils/miscUtils/miscUtils'
 
 /**
  * Ставит в разметку дополнительные элементы на основе данных компонента

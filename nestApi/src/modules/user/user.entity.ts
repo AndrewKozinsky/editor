@@ -1,4 +1,4 @@
-import simpleCrypt from 'simplecrypt'
+const simplecrypt = require('simplecrypt')
 import {
     BeforeInsert,
     BeforeUpdate,
@@ -58,7 +58,7 @@ export class UserEntity {
         if (!this.password) return
 
         // Hash password before insert
-        this.password = simpleCrypt.encrypt(this.password)
+        this.password = simplecrypt().encrypt(this.password)
 
         // Set a new date when the password was changed
         this.passwordChangedAt = new Date()

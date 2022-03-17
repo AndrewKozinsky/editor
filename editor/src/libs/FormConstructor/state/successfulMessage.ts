@@ -1,5 +1,5 @@
 import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/miscUtils'
+import { getFromLocalStorage } from 'src/utils/miscUtils/miscUtils'
 import FCType from '../FCType'
 
 /**

@@ -5,7 +5,7 @@ import {
     PressedKeysObj
 } from 'utils/getPressedKeys'
 import articleActions from 'store/article/articleActions'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 
 /**

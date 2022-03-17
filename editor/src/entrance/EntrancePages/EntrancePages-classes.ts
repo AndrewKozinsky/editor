@@ -1,6 +1,6 @@
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import { useEffect, useState } from 'react'
-import { makeCN } from 'utils/stringUtils'
+import { makeCN } from 'src/utils/stringUtils/stringUtils'
 import './EntrancePages.scss'
 
 const appRootClass = 'entrance-pages'

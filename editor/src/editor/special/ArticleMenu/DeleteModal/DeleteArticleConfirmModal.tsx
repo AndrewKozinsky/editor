@@ -4,7 +4,7 @@ import Button from 'common/formElements/Button/Button'
 import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShortContent'
 import actions from 'store/rootAction'
 import articleMenuMsg from 'messages/articleMenuMessages'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 import bridge from '../../../../bridge/bridge'
 
 /** Модальное окно с вопросом действительно ли удалить редактируемую статью */

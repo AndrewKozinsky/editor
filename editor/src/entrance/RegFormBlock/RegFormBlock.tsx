@@ -25,7 +25,7 @@ export default function RegFormBlock() {
                 <Header text={regFormMsg.formHeader} type='h1' />
             </Wrapper>
             <FormConstructor config={config} state={formState} />
-            {/*<Info hide={ formState.formSentSuccessfully } />*/}
+            <Info hide={ formState.formSentSuccessfully } />
         </div>
     )
 }
@@ -35,17 +35,17 @@ type InfoPropType = {
 }
 
 // Сообщение со ссылками на документы с правилами использования сервиса и ссылкой на страницу входа.
-/*function Info(props: InfoPropType) {
+function Info(props: InfoPropType) {
     if (props.hide) return null
 
     return (
         <>
-            <Wrapper t={20}>
+            {/*<Wrapper t={20}>
                 <Notice>{regFormMsg.legal}</Notice>
-            </Wrapper>
+            </Wrapper>*/}
             <Wrapper t={20}>
                 <Notice>{regFormMsg.doYouHaveAccount}</Notice>
             </Wrapper>
         </>
     )
-}*/
+}

@@ -6,7 +6,7 @@ import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import componentFolderFormMsg from 'src/messages/componentFolderFormMessages'
 import sitesActions from 'store/site/sitesActions'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 
 /** Конфигурация формы входа в сервис */

@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/stringUtils'
+import { makeCN } from 'src/utils/stringUtils/stringUtils'
 import './Select.scss'
 
 const CN = 'select-input'

@@ -1,4 +1,4 @@
-import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
+import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
 import config from 'utils/config'
 import StoreSitesTypes from './sitesTypes'
 

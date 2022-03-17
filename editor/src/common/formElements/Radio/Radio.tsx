@@ -1,6 +1,6 @@
 import React, { ReactElement, useState } from 'react'
 import { MiscTypes } from 'types/miscTypes'
-import { getRandomId } from 'utils/stringUtils'
+import { getRandomId } from 'src/utils/stringUtils/stringUtils'
 import { fieldOnChangeHandler, OuterOnChangeHandlerType } from '../outerOnChangeFn'
 import './Radio.scss'
 

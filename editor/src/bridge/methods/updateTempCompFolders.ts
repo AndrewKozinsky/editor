@@ -2,7 +2,7 @@ import articleManager from 'articleManager/articleManager'
 import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 /**
  * Функция обновляет хеш версии папок шаблонов компонентов в статье,

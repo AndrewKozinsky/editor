@@ -1,4 +1,4 @@
-import { makeCN } from 'utils/stringUtils'
+import { makeCN } from 'src/utils/stringUtils/stringUtils'
 import { ButtonPropType } from './Button'
 import './Button.scss'
 

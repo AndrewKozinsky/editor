@@ -5,7 +5,7 @@ import articleActions from 'store/article/articleActions'
 import FCType from 'libs/FormConstructor/FCType'
 import SiteTemplateServerResponseType from 'requests/editor/siteTemplate/siteTemplateServerResponseType'
 import sitesActions from 'store/site/sitesActions'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 
 /**

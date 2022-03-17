@@ -4,7 +4,7 @@ import {
     OuterOnChangeHandlerType
 } from '../outerOnChangeFn'
 import { MiscTypes } from 'types/miscTypes'
-import {getRandomId} from 'utils/stringUtils'
+import {getRandomId} from 'src/utils/stringUtils/stringUtils'
 import './Checkbox.scss'
 
 

@@ -3,7 +3,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import articleFormMsg from 'messages/articleFormMessages'
-import { getState } from 'utils/miscUtils'
+import { getState } from 'src/utils/miscUtils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления статьи
