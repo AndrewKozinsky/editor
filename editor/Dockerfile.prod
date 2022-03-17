@@ -8,8 +8,10 @@ RUN npm install && npm install -g serve
 
 COPY . .
 
+# Создать папку если не существует
+RUN mkdir -p dist
+
 # Скопировать файл serve.json
-RUN mkdir dist
 COPY ./serve.json /app/dist
 
 # Собрать пакет
