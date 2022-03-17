@@ -61,8 +61,6 @@ services:
     container_name: editor-next
     command: npm run start
     restart: unless-stopped
-    volumes:
-      - ./next:/app
 
 
 volumes:

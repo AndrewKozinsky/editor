@@ -1,3 +1,4 @@
+import simpleCrypt from 'simplecrypt'
 import {
     BeforeInsert,
     BeforeUpdate,
@@ -6,7 +7,6 @@ import {
     Entity,
     PrimaryGeneratedColumn
 } from 'typeorm'
-import { hash } from 'bcrypt'
 import MiscTypes from '../../types/miscTypes'
 
 @Entity({name: 'users'})
@@ -58,7 +58,7 @@ export class UserEntity {
         if (!this.password) return
 
         // Hash password before insert
-        this.password = await hash(this.password, 10)
+        this.password = simpleCrypt.encrypt(this.password)
 
         // Set a new date when the password was changed
         this.passwordChangedAt = new Date()

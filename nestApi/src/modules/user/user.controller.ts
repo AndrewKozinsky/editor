@@ -135,4 +135,3 @@ export class UserController {
         this.userService.buildUserResponse(updatedUser, response, undefined, 'clear')
     }
 }
-

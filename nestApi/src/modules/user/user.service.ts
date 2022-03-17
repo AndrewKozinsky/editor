@@ -1,4 +1,4 @@
-import { compare } from 'bcrypt'
+import simpleCrypt from 'simplecrypt'
 import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { UserEntity } from './user.entity'
@@ -20,7 +20,6 @@ import { ChangeResetPasswordDto } from './dto/changeResetPassword.dto'
 import { ChangeEmailDto } from './dto/changeEmail.dto'
 import { ChangePasswordDto } from './dto/changePassword.dto'
 const crypto = require('crypto')
-import { hash } from 'bcrypt'
 
 
 @Injectable()
@@ -88,7 +87,7 @@ export class UserService {
         const user = await this.getUserByEmail(loginDto.email)
         if (!user) responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
 
-        const isPasswordMatch = await compare(loginDto.password, user.password)
+        const isPasswordMatch = await simpleCrypt.encrypt(loginDto.password) === user.password
         if (!isPasswordMatch) {
             responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
         }
@@ -236,14 +235,14 @@ export class UserService {
     async changePassword(user: UserEntity, changePasswordDto: ChangePasswordDto) {
 
         // Compare user password in DB and the password which user passed in body
-        const isPasswordsMatch = await compare(changePasswordDto.currentPassword, user.password)
+        const isPasswordsMatch = await simpleCrypt.encrypt(changePasswordDto.currentPassword) === user.password
 
         // Throw an error if they are not match
         if (!isPasswordsMatch) {
             responseCommonError('user_changePassword_PasswordsIsNotMatch', HttpStatus.BAD_REQUEST)
         }
 
-        const hashedPassword = await hash(changePasswordDto.newPassword, 10)
+        const hashedPassword = simpleCrypt.encrypt(changePasswordDto.newPassword)
         const updatedUser = { ...user, password: hashedPassword }
 
         // Поставить новый пароль в данные пользователя
