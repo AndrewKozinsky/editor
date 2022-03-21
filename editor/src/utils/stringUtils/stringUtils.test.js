@@ -2,7 +2,8 @@ const {
     makeCN,
     convertToCamelCase,
     convertToSnakeCase,
-    setUpperCaseForFirstLetter
+    setUpperCaseForFirstLetter,
+    getRandomId
 } = require('./stringUtils')
 
 describe('Функция makeCN', () => {
@@ -56,5 +57,11 @@ describe('Функция setUpperCaseForFirstLetter', () => {
     })
     test('Передача строки', () => {
         expect(setUpperCaseForFirstLetter('box')).toBe('Box')
+    })
+})
+
+describe('Функция getRandomId', () => {
+    test('Получение правильного значения', () => {
+        expect(getRandomId()).toMatch(/id[0-9]{5}/)
     })
 })

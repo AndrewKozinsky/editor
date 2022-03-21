@@ -90,13 +90,6 @@ export class UserService {
         if (!user) responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
 
         const isPasswordMatch = getHash(loginDto.password) === user.password
-        // console.log(simplecrypt().encrypt(loginDto.password))
-        // console.log(user.password)
-        // console.log(isPasswordMatch)
-        // console.log('-----')
-
-        // console.log(loginDto.password)
-        // console.log(simplecrypt().decrypt(user.password))
         if (!isPasswordMatch) {
             responseCommonError('user_login_userDoesNotExist', HttpStatus.BAD_REQUEST)
         }
