@@ -6,7 +6,7 @@ import sitesActions from 'store/site/sitesActions'
 import deleteMetaTemplateRequest from 'requests/editor/metaTemplate/deleteMetaTemplateRequest'
 import updateSiteRequest from 'requests/editor/sites/updateSiteRequest'
 import metaTemplateSectionMsg from 'messages/metaTemplateSectionMessages'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы удаления сайта

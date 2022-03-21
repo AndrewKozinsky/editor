@@ -4,7 +4,7 @@ const {
     convertToSnakeCase,
     setUpperCaseForFirstLetter,
     getRandomId
-} = require('./stringUtils')
+} = require('../stringUtils')
 
 describe('Функция makeCN', () => {
     test('Массив ["class1", "class2"] должен преобразоваться в строку "class1 class2"', () => {
@@ -62,6 +62,6 @@ describe('Функция setUpperCaseForFirstLetter', () => {
 
 describe('Функция getRandomId', () => {
     test('Получение правильного значения', () => {
-        expect(getRandomId()).toMatch(/id[0-9]{5}/)
+        expect(getRandomId()).toMatch(/id[0-9]{2,5}/)
     })
 })

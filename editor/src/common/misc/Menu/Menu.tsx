@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useRouteMatch } from 'react-router-dom'
 import makeClasses from './Menu-classes'
-import { makeCN } from 'src/utils/stringUtils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 
 
 // Тип props у компонента Menu

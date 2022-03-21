@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "webpack serve",
-    "test": "jest",
+    "test": "jest --config=jest.config.js",
     "build": "webpack --env mode=production"
   },
   "author": "",
@@ -55,8 +55,10 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@testing-library/react": "^12.1.4",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
+    "babel-jest": "^27.5.1",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.26.1",
     "jest": "^27.5.1"

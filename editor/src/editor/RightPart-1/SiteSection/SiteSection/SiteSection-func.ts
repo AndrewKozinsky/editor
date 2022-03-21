@@ -6,7 +6,7 @@ import FCType from 'libs/FormConstructor/FCType'
 import siteSectionMsg from 'messages/groupSectionMessages'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
 import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 import sitesActions from 'store/site/sitesActions'
 
 /**

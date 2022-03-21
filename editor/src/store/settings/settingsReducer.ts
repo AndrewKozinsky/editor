@@ -1,4 +1,4 @@
-import { setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { setInLocalStorage } from 'utils/miscUtils'
 import StoreSettingsTypes from './settingsTypes'
 import config from 'utils/config'
 

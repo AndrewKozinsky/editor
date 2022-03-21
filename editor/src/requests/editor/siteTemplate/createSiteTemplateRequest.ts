@@ -1,4 +1,4 @@
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 import SiteTemplateResponseType from './siteTemplateServerResponseType'
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'

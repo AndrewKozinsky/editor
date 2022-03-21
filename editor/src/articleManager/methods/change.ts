@@ -3,7 +3,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import articleManager from '../articleManager'
-import { createDeepCopy } from 'src/utils/miscUtils/miscUtils'
+import { createDeepCopy } from 'utils/miscUtils'
 
 /**
  * Функция изменяет тег элемента на переданный

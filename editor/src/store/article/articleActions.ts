@@ -9,7 +9,7 @@ import getSiteComponentsRequest from 'requests/editor/components/getSiteComponen
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
-import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'

@@ -7,7 +7,7 @@ import {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/crea
 import updateSiteTemplateRequest from 'requests/editor/siteTemplate/updateSiteTemplateRequest'
 import DeleteSiteTemplateButton from '../DeleteSiteTemlateButton/DeleteSiteTemplateButton'
 import checkCodeSiteTemplate from '../checkCodeFn/checkCodeSiteTemplate'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы входа в сервис */
 const currentSiteTemplateFormConfig: FCType.Config = {

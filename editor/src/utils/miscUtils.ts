@@ -1,9 +1,9 @@
-import { ArticleReducerType } from 'store/article/articleReducer'
-import { ModalReducerType } from 'store/modal/modalReducer'
-import { SettingsReducerType } from 'store/settings/settingsReducer'
-import { SitesReducerType } from 'store/site/sitesReducer'
-import { UserReducerType } from 'store/user/userReducer'
-import { AppStateType, store } from '../../store/rootReducer'
+import { ArticleReducerType } from 'src/store/article/articleReducer'
+import { ModalReducerType } from 'src/store/modal/modalReducer'
+import { SettingsReducerType } from 'src/store/settings/settingsReducer'
+import { SitesReducerType } from 'src/store/site/sitesReducer'
+import { UserReducerType } from 'src/store/user/userReducer'
+import { AppStateType, store } from '../store/rootReducer'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -92,14 +92,6 @@ export function createDeepCopy<T>(data: T): T {
     }
 
     return f(data)
-}
-
-export function wait(waitTime: number = 0) {
-    return new Promise(function (resolve: (value: unknown) => void) {
-        setTimeout(function () {
-            resolve(0)
-        }, waitTime)
-    })
 }
 
 /**

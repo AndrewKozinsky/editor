@@ -5,7 +5,7 @@ import Wrapper from 'common/Wrapper/Wrapper'
 import Notice from 'common/textBlocks/Notice/Notice'
 import languageSectionMsg from 'messages/languageSectionMessages'
 import config from 'utils/config'
-import { getFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 
 /* Переключатели языка интерфейса */
 export default function LanguageSection() {

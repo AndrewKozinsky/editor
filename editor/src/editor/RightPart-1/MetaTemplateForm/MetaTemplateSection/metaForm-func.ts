@@ -4,7 +4,7 @@ import { store } from 'store/rootReducer'
 import FCType from 'libs/FormConstructor/FCType'
 import MetaTemplateServerResponseType from 'requests/editor/metaTemplate/metaTemplateServerResponseType'
 import sitesActions from 'store/site/sitesActions'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 
 /**

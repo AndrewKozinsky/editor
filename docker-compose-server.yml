@@ -18,18 +18,14 @@ services:
 
   # Клиентская часть редактора
   editor:
-    build:
-      context: ./editor
-      dockerfile: Dockerfile.prod
+    image: editor-editor
     container_name: editor-editor
     command: serve /app/dist -l 3000
     restart: unless-stopped
 
   # API редактора (Nest)
   nest:
-    build:
-      context: ./nestApi
-      dockerfile: Dockerfile.prod
+    image: editor-nest
     container_name: editor-nest
     command: npm run start:prod
     restart: unless-stopped
@@ -56,12 +52,19 @@ services:
 
   # Сайт про редактор (Next)
   next:
-    build:
-      context: ./next
-      dockerfile: Dockerfile.prod
+    image: editor-next
     container_name: editor-next
     command: npm run start
     restart: unless-stopped
+
+  # Хранилище файлов
+  staticFileServer:
+    image: halverneus/static-file-server
+    environment:
+      PORT: 4000
+      FOLDER: /staticFileServer
+    volumes:
+      - ./staticFileServer:/staticFileServer
 
 
 volumes:

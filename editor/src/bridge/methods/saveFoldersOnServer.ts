@@ -3,7 +3,7 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
 import FilesTreeType from 'types/FilesTreeType'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция сохраняет массив папок на сервере

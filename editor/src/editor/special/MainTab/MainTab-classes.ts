@@ -1,4 +1,4 @@
-import { makeCN } from 'src/utils/stringUtils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import './MainTab.scss'
 
 const CN = 'main-tab'

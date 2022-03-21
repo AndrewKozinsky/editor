@@ -1,5 +1,5 @@
 import { WrapperPropType } from './Wrapper'
-import { makeCN } from 'src/utils/stringUtils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import './Wrapper.scss'
 
 const CN = 'wrapper'

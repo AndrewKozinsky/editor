@@ -1,5 +1,6 @@
-import { removeFromLocalStorage, setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
+
 import config from 'utils/config'
+import { removeFromLocalStorage, setInLocalStorage } from '../../utils/miscUtils'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {

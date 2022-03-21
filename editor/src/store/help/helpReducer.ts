@@ -1,4 +1,4 @@
-import { setInLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { setInLocalStorage } from 'utils/miscUtils'
 import StoreHelpTypes from './helpTypes'
 import config from 'utils/config'
 

@@ -9,7 +9,7 @@ import {
     getPressedKeys,
     PressedKeysObj
 } from 'utils/getPressedKeys'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 
 /* Хук ставит обработчик горячих клавиш на всё приложение */

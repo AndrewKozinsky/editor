@@ -5,7 +5,7 @@ import updateSiteRequest, { UpdateSiteRequestValuesType } from 'requests/editor/
 import DeleteSiteButton from '../DeleteSiteButton/DeleteSiteButton'
 import { afterSubmit } from './SiteSection-func'
 import siteSectionMsg from 'messages/groupSectionMessages'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы редактирования существующего сайта */
 const currentSiteFormConfig: FCType.Config = {

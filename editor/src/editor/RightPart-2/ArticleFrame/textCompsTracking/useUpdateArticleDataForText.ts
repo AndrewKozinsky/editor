@@ -4,7 +4,7 @@ import articleManager from 'articleManager/articleManager'
 import textManagerData from './textManagerData'
 import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Хук отслеживает выделение компонентов. Если это текстовый компонент, то ставит его id в Хранилище textManagerData.

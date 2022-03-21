@@ -2,7 +2,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * The function finds current history item object

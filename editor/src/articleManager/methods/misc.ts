@@ -4,7 +4,7 @@ import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
 import config from 'utils/config'
-import { removeFromLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { removeFromLocalStorage } from 'utils/miscUtils'
 
 
 /**

@@ -3,7 +3,7 @@ import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import bridge from '../../../../../bridge/bridge'
 import articleFolderFormMsg from 'src/messages/articleFolderFormMessages'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает конфигурацию формы входа в сервис

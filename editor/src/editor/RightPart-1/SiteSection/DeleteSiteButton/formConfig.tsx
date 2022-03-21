@@ -4,7 +4,7 @@ import { store } from 'store/rootReducer'
 import sitesActions from 'store/site/sitesActions'
 import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
 import articleManager from 'articleManager/articleManager'
-import { getState, removeFromLocalStorage } from 'src/utils/miscUtils/miscUtils'
+import { getState, removeFromLocalStorage } from 'utils/miscUtils'
 import siteSectionMsg from 'messages/groupSectionMessages'
 
 

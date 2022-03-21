@@ -4,7 +4,7 @@ import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderReque
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import bridge from '../bridge'
 import { FolderType } from 'src/editor/RightPart-1/FoldersList/types'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 // TODO Что делает эта функция?
 export async function addResource(

@@ -10,7 +10,7 @@ import {CreateNewMetaTemplateValuesType} from 'requests/editor/metaTemplate/crea
 import updateMetaTemplateRequest from 'requests/editor/metaTemplate/updateMetaTemplateRequest'
 import DeleteMetaTemplateButton from '../DeleteMetaTemplateButton/DeleteMetaTemplateButton'
 import checkMetaTemplateCode from '../checkCodeFn/checkMetaTemplateCode'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы входа в сервис */
 const currentMetaTemplateFormConfig: FCType.Config = {

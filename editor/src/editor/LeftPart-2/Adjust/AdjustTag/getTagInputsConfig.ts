@@ -8,7 +8,7 @@ import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import articleManager from 'articleManager/articleManager'
 import attrPanelMsg from 'messages/attrsPanelMessages'
 import articleActions from 'store/article/articleActions'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
 
 /**

@@ -6,7 +6,7 @@ import FCType from 'libs/FormConstructor/FCType'
 import componentFolderFormMsg from 'messages/componentFolderFormMessages'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 import bridge from '../../../../../bridge/bridge'
 import DeleteFolderButton from '../DeleteFolderButton/DeleteFolderButton'
 

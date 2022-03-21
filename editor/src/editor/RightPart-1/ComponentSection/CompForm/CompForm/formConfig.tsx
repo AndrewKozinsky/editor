@@ -12,7 +12,7 @@ import bridge from '../../../../../bridge/bridge'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
-import { getState } from 'src/utils/miscUtils/miscUtils'
+import { getState } from 'utils/miscUtils'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const compFormConfig: FCType.Config = {

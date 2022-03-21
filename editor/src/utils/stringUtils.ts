@@ -30,7 +30,8 @@ export function makeCN(classesArr: string[]): string{
 
 /** Функция возвращает случайный идентификатор */
 export function getRandomId() {
-    const randomNum = Math.random() * 100000
+    let randomNum = Math.random() * 100000
+
     return 'id' + Math.round(randomNum)
 }
 

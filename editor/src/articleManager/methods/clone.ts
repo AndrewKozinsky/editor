@@ -2,7 +2,7 @@ import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { createDeepCopy } from 'src/utils/miscUtils/miscUtils'
+import { createDeepCopy } from 'utils/miscUtils'
 import articleManager from '../articleManager'
 
 /**

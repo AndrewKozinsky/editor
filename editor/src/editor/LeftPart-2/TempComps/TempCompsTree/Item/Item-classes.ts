@@ -1,4 +1,4 @@
-import { makeCN } from 'src/utils/stringUtils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 import TempCompsTreeType from '../types'
 import './Item.scss'
 

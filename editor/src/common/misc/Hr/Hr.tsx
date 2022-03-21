@@ -1,6 +1,6 @@
 import React from 'react'
 import './Hr.scss'
-import { makeCN } from 'src/utils/stringUtils/stringUtils'
+import { makeCN } from 'utils/stringUtils'
 
 type HrPropType = {
     extraClass?: string
