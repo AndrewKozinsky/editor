@@ -10,6 +10,7 @@ services:
       - nest
       - postgres
       - next
+      - staticFileServer
     ports:
       - "80:80"
     volumes:
@@ -60,6 +61,16 @@ services:
       dockerfile: Dockerfile.prod
     container_name: editor-next
     command: npm run start
+    restart: unless-stopped
+
+  # Хранилище файлов
+  staticFileServer:
+    image: halverneus/static-file-server
+    environment:
+      PORT: 4000
+      FOLDER: /staticFileServer
+    volumes:
+      - ./staticFileServer:/staticFileServer
     restart: unless-stopped
 
 

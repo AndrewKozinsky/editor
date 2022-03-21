@@ -9,7 +9,8 @@ services:
       - editor
       - nest
       - postgres
-#      - next
+      - next
+      - staticFileServer
     ports:
       - "80:80"
     volumes:
@@ -73,6 +74,16 @@ services:
     tty: true
     volumes:
       - ./next:/app
+
+  # Хранилище файлов
+  staticFileServer:
+    image: halverneus/static-file-server
+    environment:
+      PORT: 4000
+      FOLDER: /staticFileServer
+    volumes:
+      - ./staticFileServer:/staticFileServer
+    restart: unless-stopped
 
 
 volumes:

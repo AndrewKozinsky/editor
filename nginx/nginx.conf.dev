@@ -27,6 +27,11 @@ http {
             proxy_set_header Connection "upgrade";
         }
 
+        location /sfs/ {
+            proxy_pass http://staticFileServer:4000/;
+            rewrite ^\/sfs\/(.*) /$1 break;
+        }
+
         location /test {
             return 200 'Hello from Test';
         }

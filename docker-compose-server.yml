@@ -13,6 +13,7 @@ services:
       - nest
       - postgres
       - next
+      - staticFileServer
     volumes:
       - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
 
@@ -65,6 +66,7 @@ services:
       FOLDER: /staticFileServer
     volumes:
       - ./staticFileServer:/staticFileServer
+    restart: unless-stopped
 
 
 volumes:
