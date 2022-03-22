@@ -1,7 +1,9 @@
+const { setInLocalStorage } = require('../miscUtils')
 const {
-    setInLocalStorage,
-} = require('../miscUtils')
-const {getFromLocalStorage, removeFromLocalStorage, createDeepCopy} = require("utils/miscUtils");
+    getFromLocalStorage,
+    removeFromLocalStorage,
+    createDeepCopy
+} = require('utils/miscUtils')
 
 describe('Функция setInLocalStorage', () => {
     afterEach(() => {

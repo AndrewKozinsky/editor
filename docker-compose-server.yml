@@ -19,14 +19,18 @@ services:
 
   # Клиентская часть редактора
   editor:
-    image: editor-editor
+    build:
+      context: ./editor
+      dockerfile: Dockerfile.prod
     container_name: editor-editor
     command: serve /app/dist -l 3000
     restart: unless-stopped
 
   # API редактора (Nest)
   nest:
-    image: editor-nest
+    build:
+      context: ./nestApi
+      dockerfile: Dockerfile.prod
     container_name: editor-nest
     command: npm run start:prod
     restart: unless-stopped
@@ -53,7 +57,9 @@ services:
 
   # Сайт про редактор (Next)
   next:
-    image: editor-next
+    build:
+      context: ./next
+      dockerfile: Dockerfile.prod
     container_name: editor-next
     command: npm run start
     restart: unless-stopped

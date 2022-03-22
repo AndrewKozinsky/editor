@@ -10,7 +10,7 @@ type Keys = 'esc' | 'alt' | 'cmd' | 'shift' | 's' | 'z'
  */
 export function getPressedKeys(e: KeyboardEvent): PressedKeysObj {
     // Is it MacOS?
-    let isMac = navigator.platform === 'MacIntel'
+    let isMac = navigator.platform.startsWith('Mac')
 
     // In MacOS you have to press Cmd key, but in Windows is Ctrl
     let cmdKey: boolean

@@ -7,7 +7,7 @@ export function hasElemParentWithSelector($targetElem: HTMLElement, selector: st
     let hasParent = false
 
     let currentParent = $targetElem
-    for(;;) {
+    for(;currentParent;) {
         if (currentParent.tagName.toLowerCase() === 'body') {
             break
         }
