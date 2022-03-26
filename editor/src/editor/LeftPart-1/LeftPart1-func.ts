@@ -5,6 +5,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
+import articleActions from '../../store/article/articleActions'
 
 
 // Хук скачивает с сервера массив сайтов и ставит в Хранилище
@@ -40,6 +41,8 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
                     dispatch( sitesActions.setCurrentComp(null, null) )
                     // Clear opened article item id (folder or file)
                     dispatch( sitesActions.setCurrentArt(null, null) )
+                    // Обнулить id редактируемой статьи
+                    dispatch(articleActions.setArticleId(null) )
                 }
             }
         }),

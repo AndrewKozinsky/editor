@@ -29,7 +29,7 @@ export function getElementName(
  */
 export function getTextComponentName(dTextComp: ArticleTypes.SimpleTextComponent): string {
     if (!dTextComp.text.length) {
-        return '_'
+        return 'Text...'
     }
     else if (dTextComp.text.length <= 10) {
         return dTextComp.text

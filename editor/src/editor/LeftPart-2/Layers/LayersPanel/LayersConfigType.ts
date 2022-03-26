@@ -6,7 +6,8 @@ namespace LayersConfigType {
         type: LayerType // Тип слоя
         name: string // Имя компонента или элемента
 
-        hidden: boolean // Показывается ли слой?
+        hidden: boolean // Скрыт ли слой на панели слоёв?
+        parentLayerHidden: boolean
         offset: number // Уровень вложенности слоя относительно его предков
 
         selected: boolean // Слой выделен?

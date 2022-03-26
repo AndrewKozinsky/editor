@@ -124,7 +124,7 @@ const initialState: ArticleReducerType = {
 
     tempCompsFolders: null,
     tempCompsFoldersVersionHash: 0,
-    tempComps: [],
+    tempComps: null,
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
 

@@ -3,6 +3,7 @@ $CN: layer;
 // Первая обёртка слоя
 .#{$CN} {
     position: relative;
+    cursor: default;
 }
 .#{$CN}--hidden {
     opacity: .4;

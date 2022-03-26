@@ -25,6 +25,9 @@ $CN: temp-comp-ft-item;
     }
 }
 
+.#{$CN}__name {
+    position: relative;
+}
 
 // Общие стили для всех кнопок
 .#{$CN}__btn {

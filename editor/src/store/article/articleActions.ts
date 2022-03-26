@@ -153,11 +153,9 @@ const articleActions = {
             const response = await getCompFolderRequest(siteId)
             if (response.status !== 'success') return
 
-            const foldersObj = response.data.compFolders[0].content
-            if (!foldersObj) return
+            const foldersObj = response.data.compFolders[0].content || []
 
             // Set component template folders in the Store
-            // @ts-ignore
             dispatch( articleActions.setTempCompFolders(foldersObj) )
         }
     },

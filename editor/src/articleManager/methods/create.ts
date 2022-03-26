@@ -96,6 +96,13 @@ function createCompElements(
             tCompElemId: $elemWithDataEmId.dataset.emId
         }
 
+        // Если по умолчанию элемент должен быть скрыт, то скрыть его в слоях
+        if (tElem.elemHidden) {
+            elemData.dCompElemLayer = {
+                layerHidden: true
+            }
+        }
+
         const elemAttrs = createElemAttribs(tElem)
         if (elemAttrs) elemData.dCompElemAttrs = elemAttrs
 

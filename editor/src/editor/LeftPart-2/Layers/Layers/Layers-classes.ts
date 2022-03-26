@@ -22,7 +22,7 @@ export default function makeClasses(config: LayersConfigType.Layer) {
 function getRoot(config: LayersConfigType.Layer) {
     const classes = [CN]
 
-    if (config.hidden) {
+    if (config.hidden || config.parentLayerHidden) {
         classes.push(CN + '--hidden')
     }
 

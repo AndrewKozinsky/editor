@@ -5,7 +5,14 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import LayersConfigType from './LayersConfigType'
-import { getElementName, getMouseHandler, getShowHideLayerHandler, getTextComponentName, isFlashed, isHidden } from './getLayersConfigFns'
+import {
+    getElementName,
+    getMouseHandler,
+    getShowHideLayerHandler,
+    getTextComponentName,
+    isFlashed,
+    isHidden
+} from './getLayersConfigFns'
 
 /** Хук возвращает массив с конфигурацией слоёв */
 export default function useGetLayersConfig() {
@@ -15,7 +22,7 @@ export default function useGetLayersConfig() {
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     useEffect(function () {
-        if (!historyItem || !tempComps?.length) return
+        if (!historyItem || !tempComps) return
 
         const layersConfig = getLayersConfig(
             historyItem,
@@ -23,7 +30,8 @@ export default function useGetLayersConfig() {
             historyItem.article.dComps,
             0,
             tempComps,
-            null
+            null,
+            false
         )
 
         setLayersConfig(layersConfig)
@@ -34,13 +42,14 @@ export default function useGetLayersConfig() {
 }
 
 /**
- * Функция возвращает массив с конфигурациями всех слоёв
+ * Функция возвращает массив с данными по отрисовки всех слоёв
  * @param {Object} historyItem — объект истории статьи
- * @param {Array} dItems — массив данных компонентов/элементов
  * @param {Array} configArr — массив с объектами конфигурации слоёв
- * @param tempComps
+ * @param {Array} dItems — массив данных компонентов/элементов
+ * @param {Array} tempComps — шаблоны компонентов
  * @param {Number} offset — уровень вложенности слоя
- * @param dComp
+ * @param {Object} dComp
+ * @param {Boolean} isParentItemHidden — скрыт ли слой выше по иерархии
  */
 function getLayersConfig(
     historyItem: StoreArticleTypes.HistoryItem,
@@ -48,74 +57,41 @@ function getLayersConfig(
     dItems: ArticleTypes.Components | ArticleTypes.ComponentElems | ArticleTypes.ElemChildren,
     offset: number,
     tempComps: TempCompTypes.TempComps,
-    dComp: null | ArticleTypes.Component
+    dComp: null | ArticleTypes.Component,
+    isParentItemHidden: boolean
 ): LayersConfigType.Layers {
     if (!Array.isArray(dItems)) return
 
     dItems.forEach(dItem => {
-        // Если это обычный компонент
+        // Если это обычный компонент...
         if ('dCompType' in dItem && dItem.dCompType === 'component') {
-            getCompLayersConfig(historyItem, configArr, dItem, offset, tempComps)
+            getElemLayersConfig(historyItem, configArr, dItem.dElems, offset, tempComps, dItem, true, isParentItemHidden)
         }
-        // Если это текстовый компонент
+        // Если это текстовый компонент...
         else if ('dCompType' in dItem && dItem.dCompType === 'simpleTextComponent') {
-            getTextLayersConfig(historyItem, configArr, dItem, offset, tempComps)
+            getTextLayersConfig(historyItem, configArr, dItem, offset, tempComps, isParentItemHidden)
         }
         // Если это элемент...
         else if ('dCompElemId' in dItem) {
-            getElemLayersConfig(historyItem, configArr, dItem, offset, tempComps, dComp, false)
+            getElemLayersConfig(historyItem, configArr, dItem, offset, tempComps, dComp, false, isParentItemHidden)
         }
     })
 
     return configArr
 }
 
-function getCompLayersConfig(
-    historyItem: StoreArticleTypes.HistoryItem,
-    configArr: LayersConfigType.Layers,
-    dComp: ArticleTypes.Component,
-    offset: number,
-    tempComps: TempCompTypes.TempComps,
-) {
-    getElemLayersConfig(
-        historyItem,
-        configArr,
-        dComp.dElems,
-        offset,
-        tempComps,
-        dComp,
-        true,
-    )
-}
 
-function getTextLayersConfig(
-    historyItem: StoreArticleTypes.HistoryItem,
-    configArr: LayersConfigType.Layers,
-    dComp: ArticleTypes.SimpleTextComponent,
-    offset: number,
-    tempComps: TempCompTypes.TempComps,
-) {
-    configArr.push(
-        {
-            type: 'text',
-            name: getTextComponentName(dComp),
-            hidden: isHidden(tempComps, dComp),
-            offset,
-            hovered: isFlashed(historyItem, 'hover', dComp),
-            selected: isFlashed(historyItem, 'select', dComp),
-            moveHovered: isFlashed(historyItem, 'moveHover', dComp, null),
-            moveSelected: isFlashed(historyItem, 'moveSelect', dComp, null),
-            showHideHandler: getShowHideLayerHandler(historyItem, tempComps, dComp, null, false),
-            onClickHandler: getMouseHandler(
-                'select', 'textComponent', dComp.dCompId, null, true
-            ),
-            onMouseEnterHandler: getMouseHandler(
-                'hover', 'textComponent', dComp.dCompId, null, true
-            ),
-        }
-    )
-}
-
+/*
+* Создание из элемента компонента объекта данных для отрисовки слоя
+* @param {Object} historyItem — объект истории
+* @param {Array} configArr — массив с объектами конфигураций для отрисовки слоёв (наполняется в результате работы функций)
+* @param {Object} dElem — данные элемента
+* @param {Number} offset — уровень смещения элемента в слоях
+* @param {Array} tempComps — массив шаблонов компонентов
+* @param {Object} dComp — данные компонента которому принадлежит элемент
+* @param {Boolean} isRootElem — является ли элемент корневым
+* @param {Boolean} isParentItemHidden — скрыт ли слой выше по иерархии
+ */
 function getElemLayersConfig(
     historyItem: StoreArticleTypes.HistoryItem,
     configArr: LayersConfigType.Layers,
@@ -123,15 +99,19 @@ function getElemLayersConfig(
     offset: number,
     tempComps: TempCompTypes.TempComps,
     dComp: ArticleTypes.Component,
-    isRootElem: boolean
+    isRootElem: boolean,
+    isParentItemHidden: boolean
 ) {
+    // Тип элемента: корневой или вложенный
     const itemType = isRootElem ? 'rootElement' : 'element'
+    const isThisLayerHidden = isHidden(tempComps, dComp, dElem)
 
     configArr.push(
         {
             type: itemType,
             name: getElementName(tempComps, dComp, dElem),
-            hidden: isHidden(tempComps, dComp, dElem),
+            parentLayerHidden: isParentItemHidden,
+            hidden: isThisLayerHidden,
             offset,
             hovered: isFlashed(historyItem, 'hover', dComp, dElem),
             selected: isFlashed(historyItem, 'select', dComp, dElem),
@@ -155,7 +135,8 @@ function getElemLayersConfig(
             dElem.dCompElemInnerElems,
             offset + 1,
             tempComps,
-            dComp
+            dComp,
+            isParentItemHidden || isThisLayerHidden
         )
     }
 
@@ -168,6 +149,48 @@ function getElemLayersConfig(
             offset + 1,
             tempComps,
             null,
+            isParentItemHidden || isThisLayerHidden
         )
     }
 }
+
+
+/**
+ * Создание из текстового компонента объекта данных для отрисовки слоя
+ * @param {Object} historyItem — объект истории
+ * @param {Array} configArr — массив с объектами конфигураций для отрисовки слоёв (наполняется в результате работы функций)
+ * @param {Object} dComp — данные текстового компонента
+ * @param {Number} offset — уровень смещения компонента в слоях
+ * @param {Array} tempComps — массив шаблонов компонентов
+ * @param {Boolean} isParentItemHidden — скрыт ли слой выше по иерархии
+ */
+function getTextLayersConfig(
+    historyItem: StoreArticleTypes.HistoryItem,
+    configArr: LayersConfigType.Layers,
+    dComp: ArticleTypes.SimpleTextComponent,
+    offset: number,
+    tempComps: TempCompTypes.TempComps,
+    isParentItemHidden: boolean
+) {
+    configArr.push(
+        {
+            type: 'text',
+            name: getTextComponentName(dComp),
+            parentLayerHidden: isParentItemHidden,
+            hidden: isHidden(tempComps, dComp),
+            offset,
+            hovered: isFlashed(historyItem, 'hover', dComp),
+            selected: isFlashed(historyItem, 'select', dComp),
+            moveHovered: isFlashed(historyItem, 'moveHover', dComp, null),
+            moveSelected: isFlashed(historyItem, 'moveSelect', dComp, null),
+            showHideHandler: getShowHideLayerHandler(historyItem, tempComps, dComp, null, false),
+            onClickHandler: getMouseHandler(
+                'select', 'textComponent', dComp.dCompId, null, true
+            ),
+            onMouseEnterHandler: getMouseHandler(
+                'hover', 'textComponent', dComp.dCompId, null, true
+            ),
+        }
+    )
+}
+

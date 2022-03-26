@@ -49,33 +49,30 @@ export function useGetTempCompsFolders() {
     const [folders, setFolders] = useState<TempCompsTreeType.Items>([])
 
     useEffect(function () {
+        if (!tempCompsFolders) return
+
         // Текстовый компонент
         const textCompTemp: TempCompsTreeType.Item = {
             id: 0, type: 'file', name: componentsPanelMsg.textComponent
         }
 
-        if(tempCompsFolders) {
-            // Get opened component template folders id array to open these folders
-            const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
-                getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+        // Get opened component template folders id array to open these folders
+        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
+            getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
 
-            // Update component template array items
-            const updatedFolders = prepareFoldersAndItemsStructure(
-                tempCompsFolders,
-                openFoldersIdsArr,
-                tempComps,
-                currentHistoryItem
-            )
+        // Update component template array items
+        const updatedFolders = prepareFoldersAndItemsStructure(
+            tempCompsFolders,
+            openFoldersIdsArr,
+            tempComps,
+            currentHistoryItem
+        )
 
-            // Добавление в массив текстовый компонент
-            updatedFolders.unshift(textCompTemp)
+        // Добавление в массив текстовый компонент
+        updatedFolders.unshift(textCompTemp)
 
-            // Sat updated folders and component templates structure
-            setFolders(updatedFolders)
-        }
-        else {
-            setFolders([textCompTemp])
-        }
+        // Sat updated folders and component templates structure
+        setFolders(updatedFolders)
     }, [tempCompsFolders])
 
     return folders
