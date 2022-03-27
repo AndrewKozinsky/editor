@@ -7,6 +7,7 @@ import useResizeFlashRects from './flashElements/useResizeFlashRects'
 import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
+import { useClearUnwantedFocus } from './misc/useClearUnwantedFocus'
 import useSetArticleDataInStore from './setArticleData/useSetArticleDataInStore'
 import {
     useSetSiteTemplate,
@@ -44,6 +45,9 @@ export default function ArticleFrame() {
 
     // Запрет действия по умолчанию при щелчке по ссылке
     usePreventDefaultLinkBehavior()
+
+    // Хук убирает фокусировку с текста если не выбран текстовый компонент
+    useClearUnwantedFocus()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

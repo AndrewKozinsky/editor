@@ -51,11 +51,6 @@ export function useGetTempCompsFolders() {
     useEffect(function () {
         if (!tempCompsFolders) return
 
-        // Текстовый компонент
-        const textCompTemp: TempCompsTreeType.Item = {
-            id: 0, type: 'file', name: componentsPanelMsg.textComponent
-        }
-
         // Get opened component template folders id array to open these folders
         const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
             getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
@@ -68,8 +63,15 @@ export function useGetTempCompsFolders() {
             currentHistoryItem
         )
 
-        // Добавление в массив текстовый компонент
-        updatedFolders.unshift(textCompTemp)
+        // Текстовый компонент
+        const textCompTemp: TempCompsTreeType.Item = {
+            id: 0, type: 'file', name: componentsPanelMsg.textComponent
+        }
+
+        // Добавление в массив текстовый компонент если его там нет
+        if (updatedFolders[0].id !== 0) {
+            updatedFolders.unshift(textCompTemp)
+        }
 
         // Sat updated folders and component templates structure
         setFolders(updatedFolders)
@@ -120,7 +122,7 @@ export function useGetAfterCollapseFolder() {
         dispatch(articleActions.setTempCompFolders(folders))
 
         // Save array of folder's id in the Local storage
-        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr)
+        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
     }, [])
 }
 
