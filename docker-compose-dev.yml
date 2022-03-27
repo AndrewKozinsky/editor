@@ -79,6 +79,7 @@ services:
   staticFileServer:
     image: halverneus/static-file-server
     environment:
+      CORS: false
       PORT: 4000
       FOLDER: /staticFileServer
     volumes:

@@ -107,8 +107,9 @@ export function cloneElement(
 
     // Подготовить копию (сохранить или убрать атрибуты, подготовить вложенные компоненты)
     const tComp = articleManager.getTemplate(tempCompArr, dComp.tCompId)
-    const tElem = articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
-    const newElemResult = prepareElemClone(article.dComps, dComp, cloneDElem, tempCompArr, tElem, deep, article.dMeta.dMaxCompId, maxElemId + 1)
+    const newElemResult = prepareElemClone(
+        article.dComps, dComp, cloneDElem, tempCompArr, tComp, deep, article.dMeta.dMaxCompId, maxElemId + 1
+    )
 
     // Добавить элемент в новый массив элементов компонента
     let updatedDElems = dElemInnerElemsArr.slice()
@@ -174,12 +175,9 @@ function prepareCompClone(
 
     // Перебор элементов компонента
     articleManager.dElemsEnumeration([dComp.dElems], (dElem: ArticleTypes.ComponentElem) => {
-        // Получение шаблона элемента
-        const tElem = articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
-
         // Подготовить каждый элемент и вложенные в него компоненты
         const prepareElemCloneResult = prepareElemClone(
-            dComps, dComp, dElem, tempCompArr, tElem, deep, newMaxCompId
+            dComps, dComp, dElem, tempCompArr, tComp, deep, newMaxCompId
         )
 
         newMaxCompId = prepareElemCloneResult.maxCompId
@@ -198,17 +196,17 @@ function prepareCompClone(
  * @param {Object} dComp — данные компонента
  * @param {Object} dElem — данные элемента
  * @param {Array} tempCompArr — массив шаблонов компонентов
- * @param {Object} tElem — шаблон элемента
+ * @param {Object} tComp — шаблон компонента
  * @param {Number} deep — глубина копирования: 1 (голый компонент), 2 (с атрибутами), 3 (с атрибутами и детьми)
  * @param {Number} dMaxCompId — максимальный id данных компонента в статье
- * @param {Number} elemId — id данных элемента. Если он передан, то его нужно задать.
+ * @param {Number} elemId — id данных элемента. Если он передан, то его нужно задать. Он задаётся только если нужно изменить существующий id элемента (при клонировании элемента)
  */
 function prepareElemClone(
     dComps: ArticleTypes.Components,
     dComp: ArticleTypes.Component,
     dElem: ArticleTypes.ComponentElem,
     tempCompArr: TempCompTypes.TempComps,
-    tElem: TempCompTypes.Elem,
+    tComp: TempCompTypes.TempComp,
     deep: 1 | 2 | 3,
     dMaxCompId: number,
     elemId?: number
@@ -216,14 +214,17 @@ function prepareElemClone(
     // Счётчик максимального значения id данных компонентов в статье
     let newMaxCompId = dMaxCompId
     // Счётчик максимального id данных элементов
-    let newMaxElemId = elemId
+    let newMaxElemId = elemId || dElem.dCompElemId
 
-    // Если передали новый id данных элемента, то поставить его
-    if (elemId) dElem.dCompElemId = elemId
+    // Поставить или переданный id данных элемента или новый
+    dElem.dCompElemId = newMaxElemId
 
     // Пройтись по всем вложенным элементам
     articleManager.dElemsEnumeration([dElem], (dElem) => {
-        dElem.dCompElemId = ++newMaxElemId
+        dElem.dCompElemId = newMaxElemId++
+
+        // Получение шаблона элемента
+        const tElem = articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
 
         // Если первая глубина копирования, то очистить все атрибуты, если нет, то оставить
         if (deep === 1 && dElem.dCompElemAttrs) {
