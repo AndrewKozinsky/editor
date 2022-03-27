@@ -5,6 +5,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
 import articleManager from 'articleManager/articleManager'
 import { isCtrlPressed } from 'utils/domUtils'
+import { setFocusInTextComponent } from '../../../../articleManager/methods/misc'
 
 
 /**
@@ -184,6 +185,12 @@ export function getMouseHandler(
             }
 
             return
+        }
+
+        // Если щёлкнули по слою текстового компонента, то поставить фокус на текстовый компонент в статье
+        if (itemType === 'textComponent' && actionType === 'select') {
+            const $iFrameDoc = document.querySelector('iframe').contentWindow.document
+            articleManager.setFocusInTextComponent($iFrameDoc, dCompId)
         }
 
         setFlashRectangle(actionType, itemType, dCompId, dElemId)

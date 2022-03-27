@@ -8,9 +8,9 @@ class TextManagerData {
     textCompId: ArticleTypes.Id | null = null
     // Создан ли новый объект истории для внесения текста текстового компонента
     newHistoryItemCreated: boolean = false
-    // id таймера после которого данные ставятся в текстовый компонент
-    // Таймер нужен чтобы лишний раз не нагружать Хранилище
-    timerId: NodeJS.Timeout
+
+    // Можно ли обновить статью
+    allowToRenderArticle: boolean = true
 
     constructor() {
         makeAutoObservable(this)
@@ -27,8 +27,8 @@ class TextManagerData {
     }
 
     // Установщик значения timerId
-    setTimerId(id: NodeJS.Timeout) {
-        this.timerId = id
+    setAllowToRenderArticle(isAllow: boolean) {
+        this.allowToRenderArticle = isAllow
     }
 }
 const textManagerData = new TextManagerData()

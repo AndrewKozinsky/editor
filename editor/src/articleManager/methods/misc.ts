@@ -50,3 +50,25 @@ export async function deleteArticle( this: typeof articleManager, articleId: nul
     // Очистить редактор от этой статьи
     this.clearArticle()
 }
+
+/**
+ * Функция ставит фокус в текстовый компонент в редактируемой статье
+ * @param {Document} $iFrameDoc — iFrame в котором находится статья
+ * @param {number} textCompId — id данных текстового компонента
+ */
+export function setFocusInTextComponent(
+    this: typeof articleManager,
+    $iFrameDoc: StoreArticleTypes.DocumentLink,
+    textCompId: number
+) {
+    // Текстовый компонент
+    const $textComponent: HTMLElement = $iFrameDoc.querySelector(`[data-em-d-gen-comp-id="${textCompId}"]`)
+    if (!$textComponent) return
+
+    // Поставить фокус (будет на нулевом символе)
+    $textComponent.focus()
+
+    // Получить объект выделения и поставить в конец
+    const selection = $iFrameDoc.getSelection()
+    selection.collapse($textComponent, 1)
+}

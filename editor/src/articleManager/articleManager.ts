@@ -14,6 +14,7 @@ import {
     saveArticle,
     clearArticle,
     deleteArticle,
+    setFocusInTextComponent,
 } from './methods/misc'
 import {
     getCurrentHistoryItem,
@@ -194,6 +195,7 @@ class ArticleManager {
     // MISC
     saveArticle = saveArticle
     deleteArticle = deleteArticle
+    setFocusInTextComponent = setFocusInTextComponent
     clearArticle = clearArticle
     correctArticle = correctArticle
 }

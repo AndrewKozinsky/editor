@@ -19,3 +19,8 @@ $CN: left-part-2;
 .#{$CN}__bottom {
 
 }
+
+.#{$CN}__adjust-wrapper {
+    height: 200px;
+    overflow: auto;
+}

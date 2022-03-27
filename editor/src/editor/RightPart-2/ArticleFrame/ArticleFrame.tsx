@@ -19,8 +19,8 @@ import {
     useUpdateArticleDataForText,
     useSetTextDetails,
 } from './textCompsTracking/useUpdateArticleDataForText'
+import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
 import './ArticleFrame.scss'
-import { usePreventDefaultLinkBehavior } from './textCompsTracking/usePreventDefaultLinkBehavior'
 
 
 /* IFrame куда помещается статья */
@@ -37,9 +37,9 @@ export default function ArticleFrame() {
 
     // Установка обработчика нажатия клавиш
     useSetShortcutsHandler()
-    useSetTextDetails()
 
     // Работа с текстом
+    useSetTextDetails()
     useUpdateArticleDataForText()
 
     // Запрет действия по умолчанию при щелчке по ссылке

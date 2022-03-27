@@ -7,8 +7,11 @@ import articleActions from 'store/article/articleActions'
 import { getState } from 'utils/miscUtils'
 
 /**
- * Хук отслеживает выделение компонентов. Если это текстовый компонент, то ставит его id в Хранилище textManagerData.
- * Также обнуляет newHistoryItemCreated и
+ * Хук отслеживает выделение компонентов.
+ * Если это текстовый компонент, то ставит его id в Хранилище textManagerData.
+ * Это требуется для функций ниже для понимания, что выделен текстовый компонент
+ * и тогда текст текстового компонента должен сохраняться в данные.
+ * Также сохраняются данные нужно ли создавать новый объект истории при изменении текстового компонента.
  */
 export function useSetTextDetails() {
     const { $links } = useGetArticleSelectors()
@@ -25,9 +28,13 @@ export function useSetTextDetails() {
         // Занести id текстового компонента в textManagerData или обнулить
         if (selectedElem.tagType === 'textComponent') {
             textManagerData.setTextCompId(selectedElem.dataCompId)
+            // Запретить перерисовку статьи
+            textManagerData.setAllowToRenderArticle(false)
         }
         else {
             textManagerData.setTextCompId(null)
+            // Разрешить перерисовку статьи
+            textManagerData.setAllowToRenderArticle(true)
         }
 
         // Поставить флаг, что новый элемент истории для занесения нового текста ещё не поставлен.
@@ -63,6 +70,7 @@ function updateArticleDataForText() {
         const dTextComp = articleManager.getComponent(article.dComps, textManagerData.textCompId)
         if (dTextComp.dCompType !== 'simpleTextComponent') return
 
+        // Создать новый объект истории с ссылкой на копию тексового компонента
         const compsAndMaxCompId = articleManager.updateTextInComponent(
             article, dTextComp
         )
@@ -75,17 +83,11 @@ function updateArticleDataForText() {
         textManagerData.setNewHistoryItemCreated(true)
     }
 
-    // Очистить таймер, который был поставлен в прошлый раз.
-    // Это требуется, чтобы уменьшить нагрузку на Редакс при обновлении данных текстового компонента.
-    // Чтобы данные обновлялись не чаще обозначенного времени
-    clearTimeout(textManagerData.timerId)
-
-    const timerId = setTimeout(function () {
+    // Таймер чтобы браузер успел обновить текст, который я забираю
+    setTimeout(function () {
         // Обновить данные выделенного текстового компонента
         updateTextCompDataWithTextInHtml()
-    }, 200)
-
-    textManagerData.setTimerId(timerId)
+    }, 100)
 }
 
 /** Функция обновляет текст выделенные текстового компонента в данных */
@@ -97,8 +99,7 @@ function updateTextCompDataWithTextInHtml() {
     const dTextComp = articleManager.getComponent(article.dComps, selectedElem.dataCompId)
     if (dTextComp.dCompType !== 'simpleTextComponent') return
 
-    const { $document, $body } = getState().article.$links
-    const { anchorOffset, focusOffset } = $document.getSelection()
+    const { $body } = getState().article.$links
 
     // html-объект компонента
     const $textComp = articleManager.get$elemBy$body(
@@ -107,13 +108,4 @@ function updateTextCompDataWithTextInHtml() {
 
     // Поставить новый текст в текстовый компонент
     dTextComp.text = $textComp.textContent
-    // Сделать обратную операцию чтобы текст не двоился
-    $textComp.textContent = dTextComp.text
-
-    // Выделить те буквы, которые были выделены изначально
-    setTimeout(function () {
-        $document.getSelection().setBaseAndExtent(
-            $textComp.firstChild, anchorOffset, $textComp.firstChild, focusOffset
-        )
-    }, 15)
 }

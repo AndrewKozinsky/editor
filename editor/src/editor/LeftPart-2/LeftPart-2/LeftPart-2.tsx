@@ -22,7 +22,9 @@ export default function LeftPart2(props: LeftPart3PropType) {
         <div className={CN} style={style}>
             <div className={`${CN}__top`}>
                 <TempCompList />
-                <Adjust />
+                <div className={`${CN}__adjust-wrapper`}>
+                    <Adjust />
+                </div>
                 <LayersPanel />
             </div>
             <div className={`${CN}__bottom`} >
