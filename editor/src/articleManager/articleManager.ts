@@ -43,7 +43,7 @@ import {
     dElemsEnumeration,
     findParentArray,
     getDElemInnerElemsArrByElemId,
-    getMaxElemId
+    getMaxElemId, getFlashedElemCoords
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -94,6 +94,8 @@ class ArticleManager {
     // GETTING RESOURCES
     // Finds current history item object
     getCurrentHistoryItem = getCurrentHistoryItem
+    // Получение данных о подсвеченных элементах
+    getFlashedElemCoords = getFlashedElemCoords
     // Finds template in templates array
     getTemplate = getTemplate
     getTElemInTCompsArr = getTElemInTCompsArr

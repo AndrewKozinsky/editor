@@ -39,7 +39,7 @@ export function cloneItem (deep: 1 | 2 | 3): BottomBtnCallbackType {
     return (dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
         // Разрешить отрисовку статьи если выделен текстовый компонент
         // При выделении текстового компонента отрисовка запрещается
-        setArticleRenderIfTextCompSelected(selectedElem, true)
+        setArticleRenderIfTextCompSelected(true)
 
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(

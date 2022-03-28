@@ -6,6 +6,7 @@ import {
 } from 'utils/getPressedKeys'
 import articleActions from 'store/article/articleActions'
 import { getState } from 'utils/miscUtils'
+import fireEvent from '../../../../events/fireEvent'
 
 
 /**
@@ -19,12 +20,20 @@ export function undoRedoArticleHistory(pressedKeys: PressedKeysObj) {
         const canMakeStep = articleManager.canMakeHistoryStep('undo', history, historyCurrentIdx)
         if (!canMakeStep) return
 
-        store.dispatch( articleActions.makeHistoryStep('undo') )
+        // Запустить события перемещения по истории если это возможно
+        fireEvent({
+            event: 'makeHistoryStep',
+            direction: 'undo',
+        })
     }
     else if (checkPressedKeys(pressedKeys, ['cmd', 'shift', 'z'])) {
         const canMakeStep = articleManager.canMakeHistoryStep('redo', history, historyCurrentIdx)
         if (!canMakeStep) return
 
-        store.dispatch( articleActions.makeHistoryStep('redo') )
+        // Запустить события перемещения по истории если это возможно
+        fireEvent({
+            event: 'makeHistoryStep',
+            direction: 'redo',
+        })
     }
 }

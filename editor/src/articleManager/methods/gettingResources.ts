@@ -3,6 +3,7 @@ import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { getState } from 'utils/miscUtils'
+import { FlashedElemsCoords } from './hooks'
 
 /**
  * The function finds current history item object
@@ -20,6 +21,22 @@ export function getCurrentHistoryItem(
 
     const { history, historyCurrentIdx } = getState().article
     return history[historyCurrentIdx]
+}
+
+/** Функция возвращает объект с координатами подсвеченных элементов */
+export function getFlashedElemCoords(
+    this: typeof articleManager
+) {
+    const historyItem = this.getCurrentHistoryItem()
+
+    if (!historyItem) return null
+
+    return {
+        hoveredElem: historyItem.hoveredElem,
+        selectedElem: historyItem.selectedElem,
+        moveHoveredComp: historyItem.moveHoveredComp,
+        moveSelectedComp: historyItem.moveSelectedComp
+    }
 }
 
 /**

@@ -58,7 +58,7 @@ export function moveItem(direction: 'inside' | 'left' | 'right'): BottomBtnCallb
     return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
         // Разрешить отрисовку статьи если выделен текстовый компонент
         // При выделении текстового компонента отрисовка запрещается
-        setArticleRenderIfTextCompSelected(selectedElem, true)
+        setArticleRenderIfTextCompSelected(true)
 
         let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
 

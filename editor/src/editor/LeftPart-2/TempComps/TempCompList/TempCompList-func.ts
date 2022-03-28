@@ -9,6 +9,7 @@ import config from 'utils/config'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
+import { setArticleRenderIfTextCompSelected } from '../../../RightPart-2/ArticleFrame/textCompsTracking/useUpdateArticleDataForText'
 
 export function useIsInsideButtonAllowed() {
     const { tempComps } = useGetArticleSelectors()
@@ -143,6 +144,10 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
 
+        // Разрешить отрисовку статьи если выделен текстовый компонент
+        // При выделении текстового компонента отрисовка запрещается
+        setArticleRenderIfTextCompSelected(true)
+
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
 
@@ -163,6 +168,9 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
+
+        // Снова запретить отрисовку статьи если выбран текстовый компонент
+        setArticleRenderIfTextCompSelected(false)
     }, [flashedElemCoords, historyItem, tempComps])
 }
 
@@ -182,6 +190,10 @@ export function useGetOnClickInsideBtn() {
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
+        // Разрешить отрисовку статьи если выделен текстовый компонент
+        // При выделении текстового компонента отрисовка запрещается
+        setArticleRenderIfTextCompSelected(true)
+
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
 
@@ -194,5 +206,8 @@ export function useGetOnClickInsideBtn() {
         dispatch(articleActions.createAndSetHistoryItem(
             componentsAndMaxCompId
         ))
+
+        // Снова запретить отрисовку статьи если выбран текстовый компонент
+        setArticleRenderIfTextCompSelected(false)
     }, [dispatch, historyItem, flashedElemCoords, tempComps])
 }

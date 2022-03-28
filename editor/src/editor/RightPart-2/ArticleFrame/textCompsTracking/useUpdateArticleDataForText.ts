@@ -117,14 +117,14 @@ function updateTextCompDataWithTextInHtml() {
  * Вспомогательная функция позволяющая или запрещает отрисовывать статью если выделен текстовый компонент.
  * Требуется если нужно отрисовать статью при выделенном текстовом компоненте потому что в этом случае отрисовка запрещается.
  * Применяется в кнопках левой нижней части редактора.
- * @param {Object} selectedElem — данные выделенного элемента
- * @param needToRender
+ * @param {Boolean} allowToRender — разрешить ли отрисовывать статью
  */
-export function setArticleRenderIfTextCompSelected(selectedElem: StoreArticleTypes.FlashedElem, needToRender: boolean) {
+export function setArticleRenderIfTextCompSelected(allowToRender: boolean) {
+    const { selectedElem } = articleManager.getFlashedElemCoords()
     if (selectedElem.tagType !== 'textComponent') return
 
     // Если требуется разрешить отрисовку статьи
-    if (needToRender) {
+    if (allowToRender) {
         textManagerData.setAllowToRenderArticle(true)
     }
     // Если нужно запретить, то сделаю небольшую задержку чтобы успели отработать сценарии отрисовывающие статью
@@ -132,6 +132,6 @@ export function setArticleRenderIfTextCompSelected(selectedElem: StoreArticleTyp
         setTimeout(function () {
             // Запретить отрисовку статьи
             textManagerData.setAllowToRenderArticle(false)
-        }, 10)
+        }, 100)
     }
 }
