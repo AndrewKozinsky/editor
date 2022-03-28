@@ -4,6 +4,10 @@ import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
+import {
+    setArticleRenderIfTextCompSelected
+} from '../../../RightPart-2/ArticleFrame/textCompsTracking/useUpdateArticleDataForText'
+import { BottomBtnCallbackType } from './universalHandler'
 
 /**
  * Хук возвращает булево значение заблокирована ли одна из кнопок перемещения компонента
@@ -46,17 +50,15 @@ export function useIsMoveBtnDisabled(direction: 'inside' | 'left' | 'right'): bo
 
 
 /**
- * Хук возвращает обработчик нажатия на кнопку перемещения компонента
+ * Функция возвращает обработчик нажатия на кнопку перемещения компонента
  * @param {String} direction — направление перемещения: inside (внутрь выделенного элемента),
  * left и right (левее или правее выделенного компонента)
  */
-export function useGetMoveHandler(direction: 'inside' | 'left' | 'right') {
-    const dispatch = useDispatch()
-    const historyItem = articleManager.hooks.getCurrentHistoryItem()
-
-    return useCallback(function () {
-        if (!historyItem) return
-        const { selectedElem, moveSelectedComp } = historyItem
+export function moveItem(direction: 'inside' | 'left' | 'right'): BottomBtnCallbackType {
+    return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+        // Разрешить отрисовку статьи если выделен текстовый компонент
+        // При выделении текстового компонента отрисовка запрещается
+        setArticleRenderIfTextCompSelected(selectedElem, true)
 
         let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
 
@@ -84,5 +86,6 @@ export function useGetMoveHandler(direction: 'inside' | 'left' | 'right') {
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
-    }, [historyItem])
+    }
 }
+

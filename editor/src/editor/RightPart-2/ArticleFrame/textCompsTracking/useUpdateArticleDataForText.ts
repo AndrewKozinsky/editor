@@ -4,6 +4,7 @@ import articleManager from 'articleManager/articleManager'
 import textManagerData from './textManagerData'
 import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
+import StoreArticleTypes from 'store/article/articleTypes'
 import { getState } from 'utils/miscUtils'
 
 /**
@@ -42,7 +43,7 @@ export function useSetTextDetails() {
     }, [flashedElems])
 }
 
-/** Хук ставит обработчик ввода текста */
+/** Хук ставит обработчики изменения текста */
 export function useUpdateArticleDataForText() {
     const { $links } = useGetArticleSelectors()
     // Were mouse move handlers set?
@@ -51,15 +52,17 @@ export function useUpdateArticleDataForText() {
     useEffect(function () {
         if (!$links.$document || handlerWasSet) return
 
-        // Set handlers
+        // Поставить обработчики на изменение текста
         $links.$document.addEventListener('keydown', updateArticleDataForText)
+        $links.$document.addEventListener('paste', updateArticleDataForText)
+        $links.$document.addEventListener('cut', updateArticleDataForText)
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
     }, [$links, handlerWasSet])
 }
 
-/* Обработчик ввода текста */
+/* Обработчик изменения текста */
 function updateArticleDataForText() {
     // Ничего не делать если выделен не текстовый компонент
     if (!textManagerData.textCompId) return
@@ -85,12 +88,12 @@ function updateArticleDataForText() {
 
     // Таймер чтобы браузер успел обновить текст, который я забираю
     setTimeout(function () {
-        // Обновить данные выделенного текстового компонента
+        // Взять текст из документа и обновить данные выделенного текстового компонента
         updateTextCompDataWithTextInHtml()
     }, 100)
 }
 
-/** Функция обновляет текст выделенные текстового компонента в данных */
+/** Функция получает текст выделенного текстового компонента из документа и ставит его в данные. */
 function updateTextCompDataWithTextInHtml() {
     // Получение данных выделенного компонента
     const { article, selectedElem } = articleManager.getCurrentHistoryItem()
@@ -108,4 +111,27 @@ function updateTextCompDataWithTextInHtml() {
 
     // Поставить новый текст в текстовый компонент
     dTextComp.text = $textComp.textContent
+}
+
+/**
+ * Вспомогательная функция позволяющая или запрещает отрисовывать статью если выделен текстовый компонент.
+ * Требуется если нужно отрисовать статью при выделенном текстовом компоненте потому что в этом случае отрисовка запрещается.
+ * Применяется в кнопках левой нижней части редактора.
+ * @param {Object} selectedElem — данные выделенного элемента
+ * @param needToRender
+ */
+export function setArticleRenderIfTextCompSelected(selectedElem: StoreArticleTypes.FlashedElem, needToRender: boolean) {
+    if (selectedElem.tagType !== 'textComponent') return
+
+    // Если требуется разрешить отрисовку статьи
+    if (needToRender) {
+        textManagerData.setAllowToRenderArticle(true)
+    }
+    // Если нужно запретить, то сделаю небольшую задержку чтобы успели отработать сценарии отрисовывающие статью
+    else {
+        setTimeout(function () {
+            // Запретить отрисовку статьи
+            textManagerData.setAllowToRenderArticle(false)
+        }, 10)
+    }
 }

@@ -57,7 +57,6 @@ export default function useSetArticleToIFrame() {
         $links,
         history,
         historyCurrentIdx,
-        tempComps,
-        allowToRenderArticle
+        tempComps
     ])
 }

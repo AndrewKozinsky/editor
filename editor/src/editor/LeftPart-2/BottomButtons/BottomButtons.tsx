@@ -3,14 +3,15 @@ import bottomPanelMsg from 'messages/bottomPanelMessages'
 import SvgIcon from 'common/icons/SvgIcon'
 import makeClasses from './BottomButtons-classes'
 import {
-    useIsMoveBtnDisabled,
-    useGetMoveHandler,
+    moveItem,
+    useIsMoveBtnDisabled
 } from './fn/moveBtnFns'
-import { useGetRemoveHandler, useIsRemoveDisabled } from './fn/removeBtnFns'
+import { removeItem, useIsRemoveDisabled } from './fn/removeBtnFns'
 import { useGetIconType } from './fn/BottomButtons-func'
-import { useGetVisibleHandler, useIsVisibleDisabled } from './fn/visibleBtnFns'
-import { useGetUpDownHandler, useIsUpDownDisabled } from './fn/upDownBtnFns'
-import { useGetCloneHandler, useIsCloneDisabled } from './fn/cloneBtnFns'
+import { useGetUniversalHandler } from './fn/universalHandler'
+import { useIsVisibleDisabled, visibleItem } from './fn/visibleBtnFns'
+import { upDownItem, useIsUpDownDisabled } from './fn/upDownBtnFns'
+import { cloneItem, useIsCloneDisabled } from './fn/cloneBtnFns'
 
 
 /* Панель с кнопками манипулирования выделенным компонентом/элементом */
@@ -20,36 +21,36 @@ export default function BottomButtons() {
     // ================== >
 
     const moveInsideDisabled = useIsMoveBtnDisabled('inside')
-    const moveInsideHandler = useGetMoveHandler('inside')
+    const moveInsideHandler = useGetUniversalHandler(moveItem('inside'))
 
     const moveLeftDisabled = useIsMoveBtnDisabled('left')
-    const moveLeftHandler = useGetMoveHandler('left')
+    const moveLeftHandler = useGetUniversalHandler(moveItem('left'))
 
     const moveRightDisabled = useIsMoveBtnDisabled('right')
-    const moveRightHandler = useGetMoveHandler('right')
+    const moveRightHandler = useGetUniversalHandler(moveItem('right'))
 
     // ================== >
 
     const upDisabled = useIsUpDownDisabled('up')
-    const upHandler = useGetUpDownHandler('up')
+    const upHandler = useGetUniversalHandler(upDownItem('up'))
 
     const downDisabled = useIsUpDownDisabled('down')
-    const downHandler = useGetUpDownHandler('down')
+    const downHandler = useGetUniversalHandler(upDownItem('down'))
 
     // ================== >
 
     const cloneDisabled = useIsCloneDisabled()
-    const clone1Handler = useGetCloneHandler(1)
-    const clone2Handler = useGetCloneHandler(2)
-    const clone3Handler = useGetCloneHandler(3)
+    const clone1Handler = useGetUniversalHandler(cloneItem(1))
+    const clone2Handler = useGetUniversalHandler(cloneItem(2))
+    const clone3Handler = useGetUniversalHandler(cloneItem(3))
 
     // ================== >
 
     const removeDisabled = useIsRemoveDisabled()
-    const removeHandler = useGetRemoveHandler()
+    const removeHandler = useGetUniversalHandler(removeItem)
 
     const visibleDisabled = useIsVisibleDisabled()
-    const visibleHandler = useGetVisibleHandler()
+    const visibleHandler = useGetUniversalHandler(visibleItem)
 
     // ================== >
 

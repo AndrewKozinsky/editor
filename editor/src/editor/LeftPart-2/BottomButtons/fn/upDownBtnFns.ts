@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import articleActions from 'store/article/articleActions'
+import { BottomBtnCallbackType } from './universalHandler'
 
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Переместить выше» */
@@ -30,17 +30,11 @@ export function useIsUpDownDisabled(direction: 'up' | 'down') {
 }
 
 /**
- * Хук возвращает обработчик нажатия на кнопку «Переместить выше или ниже»
+ * Функция возвращает обработчик нажатия на кнопку «Переместить выше или ниже»
  * @param {String} direction — направление перемещения
  */
-export function useGetUpDownHandler(direction: 'up' | 'down') {
-    const dispatch = useDispatch()
-    const historyItem = articleManager.hooks.getCurrentHistoryItem()
-
-    return useCallback(function () {
-        if (!historyItem) return
-        const { selectedElem } = historyItem
-
+export function upDownItem(direction: 'up' | 'down'): BottomBtnCallbackType {
+    return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
         // Поставить перемещаемый компонент в правильное положение и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.moveItemToUpOrDown(
             historyItem.article, selectedElem, direction
@@ -49,5 +43,5 @@ export function useGetUpDownHandler(direction: 'up' | 'down') {
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
-    }, [historyItem])
+    }
 }
