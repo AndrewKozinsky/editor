@@ -6,6 +6,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleActions from 'store/article/articleActions'
 import settingsActions from 'store/settings/settingsActions'
+import articleManager from '../../../../../articleManager/articleManager'
 
 
 /** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */
@@ -27,8 +28,14 @@ export function useIsArticleInEditor() {
 /** Hook returns edit Article button onClick handler */
 export function useGetEditArticleFn() {
     const { currentArtItemId } = useGetSitesSelectors().articleSection
+    const currentArticleId = useGetArticleSelectors().articleId
 
     return useCallback(function () {
+        // Если другая статья редактируется, то закрыть её
+        if (currentArticleId) {
+            articleManager.clearArticle()
+        }
+
         // Поставить id редактируемой статьи чтобы редактор начал загружать ресурсы и отрисовал статью.
         store.dispatch(articleActions.setArticleId(currentArtItemId as number))
         // Перейти на вкладку с редактором

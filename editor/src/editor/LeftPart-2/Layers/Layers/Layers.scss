@@ -51,9 +51,15 @@ $CN: layer;
     display: inline;
     font-size: 14px;
     line-height: 18px;
+    font-weight: 300;
+    color: var(--text-placeholder-color);
 }
 .#{$CN}__text--bold {
-    font-weight: bolder;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.#{$CN}__text--white {
+    color: white;
 }
 
 // Значок скрытого слоя

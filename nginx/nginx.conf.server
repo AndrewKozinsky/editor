@@ -21,9 +21,9 @@ http {
             rewrite ^\/editor\/(.*) /$1 break;
         }
 
-        location /sfs/ {
+        location /fs/ {
             proxy_pass http://staticFileServer:4000/;
-            rewrite ^\/sfs\/(.*) /$1 break;
+            rewrite ^\/fs\/(.*) /$1 break;
         }
 
         location /test {
