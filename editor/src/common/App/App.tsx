@@ -1,6 +1,13 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
+// @ts-ignore. Подключение Хранилищ MobX чтобы они отображались в  инструментах разработчика
+import {injectStores} from '@mobx-devtools/tools'
+import textManagerData from 'editor/RightPart-2/ArticleFrame/textCompsTracking/textManagerData'
+injectStores({
+    textManagerData
+})
+
 // Компоненты
 import Loader from 'common/misc/Loader/Loader'
 import NotFound from '../NotFound/NotFound'
@@ -14,6 +21,7 @@ import { useGetAndSetEditorSettings, useGetUserDataAndStatus } from './app-fn/in
 import { useRedirectPage } from './app-fn/App-func'
 import useSetShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
+
 
 
 /** Компонент всего приложения */

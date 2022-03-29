@@ -356,8 +356,8 @@ function createAndSetHistoryItem(
     }
 }
 
-/** Редьюсер ставит новую версию статьи в массив истории */
-/*function updateCurrentHistoryItem(
+/** Редьюсер заменяет элемент в массиве истории статьи */
+function updateCurrentHistoryItem(
     state: ArticleReducerType, action: StoreArticleTypes.UpdateCurrentHistoryItemAction
 ): ArticleReducerType {
     const historyArr = [...state.history]
@@ -370,7 +370,7 @@ function createAndSetHistoryItem(
         ...state,
         history: historyArr,
     }
-}*/
+}
 
 // The function changes a current history step
 function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
@@ -436,8 +436,8 @@ export default function articleReducer(
             return setFlashedElement(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
-        // case StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM:
-        //     return updateCurrentHistoryItem(state, action)
+        case StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM:
+            return updateCurrentHistoryItem(state, action)
         case StoreArticleTypes.MAKE_HISTORY_STEP:
             return makeHistoryStep(state, action)
         case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:

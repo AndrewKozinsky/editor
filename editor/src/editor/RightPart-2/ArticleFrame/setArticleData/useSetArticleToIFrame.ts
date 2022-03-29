@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom'
 import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
-import textManagerData from '../textCompsTracking/textManagerData'
 
 
 /** Hook sets article JSX to IFrame */
@@ -19,8 +18,6 @@ export default function useSetArticleToIFrame() {
     // Требуется, чтобы исправить статью, если изменится.
     const [lastTempCompsDownloadHash, setLastTempCompsDownloadHash] = useState(0)
 
-    const {allowToRenderArticle} = textManagerData
-
     useEffect(function () {
         if (!$links.$body?.firstChild) return
 
@@ -35,13 +32,12 @@ export default function useSetArticleToIFrame() {
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }
 
-            if (allowToRenderArticle) {
-                // Создать JSX новой статьи и поставить в iFrame.
-                ReactDOM.render(
-                    articleManager.turnArticleDataToJSX(article, tempComps),
-                    $links.$body.firstChild as Element
-                )
-            }
+            // Создать JSX новой статьи и поставить в iFrame.
+            ReactDOM.render(
+                articleManager.turnArticleDataToJSX(article, tempComps),
+                $links.$body.firstChild as Element
+            )
+
         }
         // Очистить статью если в истории ничего нет
         else {

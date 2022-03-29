@@ -1,13 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleActions from 'store/article/articleActions'
-import {
-    setArticleRenderIfTextCompSelected
-} from '../../../RightPart-2/ArticleFrame/textCompsTracking/useUpdateArticleDataForText'
 import { BottomBtnCallbackType } from './universalHandler'
-import { upDownItem } from './upDownBtnFns'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
@@ -37,10 +31,6 @@ export function useIsCloneDisabled() {
  */
 export function cloneItem (deep: 1 | 2 | 3): BottomBtnCallbackType {
     return (dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
-        // Разрешить отрисовку статьи если выделен текстовый компонент
-        // При выделении текстового компонента отрисовка запрещается
-        setArticleRenderIfTextCompSelected(true)
-
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(
             tempComps, historyItem.article, selectedElem, deep

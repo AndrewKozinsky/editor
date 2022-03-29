@@ -3,14 +3,16 @@ import { makeAutoObservable } from 'mobx'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 
 /* Хранилище сведений жизненного цикла редактирования текстового компонента */
-class TextManagerData {
+export class TextManagerData {
     // id выделенного текстового компонента (другие компоненты не учитываются)
     textCompId: ArticleTypes.Id | null = null
     // Создан ли новый объект истории для внесения текста текстового компонента
     newHistoryItemCreated: boolean = false
 
-    // Можно ли обновить статью
-    allowToRenderArticle: boolean = true
+    // Изначальное значение текста компонента
+    initialText: string = ''
+    // Новое значение текста компонента
+    newText: string = ''
 
     constructor() {
         makeAutoObservable(this)
@@ -26,9 +28,13 @@ class TextManagerData {
         this.newHistoryItemCreated = wasCreated
     }
 
-    // Установщик значения timerId
-    setAllowToRenderArticle(isAllow: boolean) {
-        this.allowToRenderArticle = isAllow
+    // Установщик изначального значения текста компонента
+    setInitialText(text: string) {
+        this.initialText = text
+    }
+    // Установщик изначального значения текста компонента
+    setNewText(text: string) {
+        this.newText = text
     }
 }
 const textManagerData = new TextManagerData()

@@ -74,6 +74,7 @@ function getResolve() {
     return {
         // Почему-то без этой настройки TypeScript не работает
         extensions: ['.tsx', '.ts', '.jsx', '.js', '.png', '.woff2'],
+        modules: ['node_modules'],
         alias: {
             src: path.resolve(__dirname, './src/'),
             articleManager: path.resolve(__dirname, './src/articleManager'),

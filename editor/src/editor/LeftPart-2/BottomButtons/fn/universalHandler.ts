@@ -3,11 +3,9 @@ import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { MiscTypes } from 'types/miscTypes'
-import {
-    setArticleRenderIfTextCompSelected
-} from '../../../RightPart-2/ArticleFrame/textCompsTracking/useUpdateArticleDataForText'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import { updateTextCompInArticleData } from '../../../RightPart-2/ArticleFrame/textCompsTracking/manageUpdatingDTextComp'
 
 export type BottomBtnCallbackType = (
     dispatch: MiscTypes.AppDispatch,
@@ -31,14 +29,13 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
         if (!historyItem) return
         const { selectedElem, moveSelectedComp } = historyItem
 
-        // Разрешить отрисовку статьи если выделен текстовый компонент
-        // При выделении текстового компонента отрисовка запрещается
-        setArticleRenderIfTextCompSelected(true)
+        // Обновить данные в текстовом компоненте если это требуется
+        updateTextCompInArticleData()
 
         // Запуск функции, обрабатывающей нажатие на кнопку
         callback(dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)
 
-        // Снова запретить отрисовку статьи если выбран текстовый компонент
-        setArticleRenderIfTextCompSelected(false)
+        // Обновить данные в текстовом компоненте если это требуется
+        updateTextCompInArticleData()
     }, [historyItem])
 }

@@ -1,12 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
-import {
-    setArticleRenderIfTextCompSelected
-} from '../../../RightPart-2/ArticleFrame/textCompsTracking/useUpdateArticleDataForText'
 import { BottomBtnCallbackType } from './universalHandler'
 
 /**
@@ -56,10 +52,6 @@ export function useIsMoveBtnDisabled(direction: 'inside' | 'left' | 'right'): bo
  */
 export function moveItem(direction: 'inside' | 'left' | 'right'): BottomBtnCallbackType {
     return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
-        // Разрешить отрисовку статьи если выделен текстовый компонент
-        // При выделении текстового компонента отрисовка запрещается
-        setArticleRenderIfTextCompSelected(true)
-
         let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
 
         if (direction === 'inside') {
