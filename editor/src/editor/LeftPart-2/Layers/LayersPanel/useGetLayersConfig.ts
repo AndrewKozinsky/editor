@@ -46,7 +46,7 @@ export default function useGetLayersConfig() {
  * @param {Object} historyItem — объект истории статьи
  * @param {Array} configArr — массив с объектами конфигурации слоёв
  * @param {Array} dItems — массив данных компонентов/элементов
- * @param {Array} tempComps — шаблоны компонентов
+ * * @param {Array} tempComps — массив шаблонов компонентов
  * @param {Number} offset — уровень вложенности слоя
  * @param {Object} dComp
  * @param {Boolean} isParentItemHidden — скрыт ли слой выше по иерархии

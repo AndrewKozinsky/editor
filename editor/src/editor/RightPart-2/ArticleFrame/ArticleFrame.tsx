@@ -16,7 +16,6 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
-// import { useManageUpdatingDTextComp } from './textTracking/manageUpdatingDTextComp'
 import {
     useSetTextDetails, useSetHandlersToTrackText
 } from './textTracking/useUpdateArticleDataForText'
@@ -42,7 +41,6 @@ export default function ArticleFrame() {
     // Работа с текстом
     useSetTextDetails()
     useSetHandlersToTrackText()
-    // useManageUpdatingDTextComp()
 
     // Запрет действия по умолчанию при щелчке по ссылке
     usePreventDefaultLinkBehavior()

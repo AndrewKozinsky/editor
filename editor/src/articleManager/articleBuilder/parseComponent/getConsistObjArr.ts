@@ -19,6 +19,7 @@ export default function getConsistObjArr(
 ) {
     for(let i = 0; i < htmlObjArr.length; i++) {
         const htmlObj = htmlObjArr[i]
+        // debugger
         if ('text' in htmlObj) continue
 
         if (htmlObj.attrs['data-em-id']) {
@@ -34,15 +35,10 @@ export default function getConsistObjArr(
             }
 
             consistObjArr.push(consistObj)
-
-            if (htmlObj.children) {
-                getConsistObjArr(htmlObj.children, template, consistObjArr, compData)
-            }
         }
-        else {
-            if (htmlObj.children) {
-                getConsistObjArr(htmlObjArr, template, consistObjArr, compData)
-            }
+
+        if (htmlObj.children) {
+            getConsistObjArr(htmlObj.children, template, consistObjArr, compData)
         }
     }
 

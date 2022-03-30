@@ -242,10 +242,33 @@ export function canMoveItemToUpOrDown(
 
 /**
  * Функция проверяет можно ли клонировать компонент/элемент и вставить после выделенного элемента
+ * @param {Array} dComps — массив компонентов статьи
  * @param {Object} compCoords — координаты выделенного компонента/элемента
+ * * @param {Array} tempComps — массив шаблонов компонентов
  */
-export function canClone(this: typeof articleManager, compCoords: StoreArticleTypes.FlashedElem) {
-    return !!compCoords.dataCompId
+export function canClone(
+    this: typeof articleManager,
+    dComps: ArticleTypes.Components,
+    compCoords: StoreArticleTypes.FlashedElem,
+    tempComps: TempCompTypes.TempComps
+) {
+    // Разрешить клонирование если выделили текст, корневой элемент
+    if (['textComponent', 'rootElement'].includes(compCoords.tagType)) {
+        return true
+    }
+    // Запретить если ничего не выделили
+    if (!compCoords.dataCompId) {
+        return false
+    }
+
+    // Выделен элемент...
+    // Получение данных и шаблона элемента
+    const dComp = articleManager.getComponent(dComps, compCoords.dataCompId) as  ArticleTypes.Component
+    const dElem = articleManager.getDElemInDComp(dComp, compCoords.dataElemId)
+    const tElem = articleManager.getTElemByTCompIdAndTElemId(tempComps, dComp.tCompId, dElem.tCompElemId)
+
+    // Если в шаблоне не запрещено делать копии, то разрешено.
+    return !(tElem.elemCanDuplicate === false)
 }
 
 /**
