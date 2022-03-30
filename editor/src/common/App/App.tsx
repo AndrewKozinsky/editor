@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom'
 
 // @ts-ignore. Подключение Хранилищ MobX чтобы они отображались в  инструментах разработчика
 import {injectStores} from '@mobx-devtools/tools'
-import textManagerData from 'editor/RightPart-2/ArticleFrame/textCompsTracking/textManagerData'
+import textManagerData from 'editor/RightPart-2/ArticleFrame/textTracking/textManagerData'
 injectStores({
     textManagerData
 })

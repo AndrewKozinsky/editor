@@ -9,7 +9,7 @@ import config from 'utils/config'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
-import { updateTextCompInArticleData } from 'editor/RightPart-2/ArticleFrame/textCompsTracking/manageUpdatingDTextComp'
+import { updateTextCompInArticleData } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
 export function useIsInsideButtonAllowed() {

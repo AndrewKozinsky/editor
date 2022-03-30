@@ -102,7 +102,7 @@ export function checkForExtraProps(parentObj: object, validProps: string[]) {
  * @param {Array} arr — массив объектов
  * @param {String} propName — название проверяемого свойства
  */
-/*export function checkForDifferentObjAttrValuesInArr(arr: unknown[], propName: string) {
+export function checkForDifferentObjAttrValuesInArr(arr: unknown[], propName: string) {
     const result: any = {}
 
     arr.forEach((arrItem: any) => {
@@ -112,7 +112,7 @@ export function checkForExtraProps(parentObj: object, validProps: string[]) {
     return arr.length !== Object.keys(result).length
         ? [`Свойства ${propName} должны иметь разные значения.`]
         : []
-}*/
+}
 
 /**
  * Функция проверяет свойство elemAttrView чтобы оно соответствовало значениям написанным в elemAttrValues.
@@ -182,7 +182,7 @@ export function checkElemTagsValues(elemTagsValues: TempCompTypes.ElemTagsValues
         )
     })
 
-    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemTagsValues, 'elemTagValueId'))
 
     return errorsArr
 }

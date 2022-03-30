@@ -5,7 +5,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import { MiscTypes } from 'types/miscTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { updateTextCompInArticleData } from '../../../RightPart-2/ArticleFrame/textCompsTracking/manageUpdatingDTextComp'
+import { updateTextCompInArticleData } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 export type BottomBtnCallbackType = (
     dispatch: MiscTypes.AppDispatch,

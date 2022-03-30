@@ -4,7 +4,7 @@ import {
     checkElemTagsValues,
     checkElemAttrView,
     checkElemTagsView,
-//     checkForDifferentObjAttrValuesInArr,
+    checkForDifferentObjAttrValuesInArr,
     checkForExtraProps,
     checkProp
 } from './checkFns'
@@ -70,7 +70,7 @@ function checkElems(elems: TempCompTypes.Elems): string[] {
         )
     })
 
-    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elems, 'elemId'))
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elems, 'elemId'))
 
     return errorsArr
 }
@@ -100,7 +100,7 @@ export function checkElemAttrs(elemAttrs: TempCompTypes.ElemAttrs): string[] {
         )
     })
 
-    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrs, 'elemAttrId'))
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrs, 'elemAttrId'))
 
     return errorsArr
 }
@@ -128,7 +128,7 @@ export function checkElemAttrValues(elemAttrValues: TempCompTypes.ElemAttrValues
         )
     })
 
-    // errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
+    errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
 
     return errorsArr
 }
@@ -158,11 +158,7 @@ export function checkElemTags(elemTagsObj: TempCompTypes.ElemTags): string[] {
 
 // Пример кода шаблона сайта (используется в примере шаблона)
 export const componentCodeExample = `{
-    html: '<div class="banner banner--pattern-1" data-em-id="banner">
-               <div class="banner__container">
-                   <div data-em-id="cell"></div>
-               </div>
-           </div>',
+    html: '<div class="banner banner--pattern-1" data-em-id="banner"><div class="banner__container"><div data-em-id="cell"></div></div></div>',
     elems: [
         {
             elemId: 'banner',
@@ -192,8 +188,12 @@ export const componentCodeExample = `{
                 ],
                 elemTagsView: 'radio'
             },
-            elemHidden: true,
             elemCanDuplicate: false,
+        },
+        {
+            elemId: 'cell',
+            elemName: 'Ячейка',
+            elemHidden: true,
             addTextComponent: true
         }
     ]

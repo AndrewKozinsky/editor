@@ -16,10 +16,10 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
-import { useManageUpdatingDTextComp } from './textCompsTracking/manageUpdatingDTextComp'
+// import { useManageUpdatingDTextComp } from './textTracking/manageUpdatingDTextComp'
 import {
     useSetTextDetails, useSetHandlersToTrackText
-} from './textCompsTracking/useUpdateArticleDataForText'
+} from './textTracking/useUpdateArticleDataForText'
 import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
 import './ArticleFrame.scss'
 
@@ -42,7 +42,7 @@ export default function ArticleFrame() {
     // Работа с текстом
     useSetTextDetails()
     useSetHandlersToTrackText()
-    useManageUpdatingDTextComp()
+    // useManageUpdatingDTextComp()
 
     // Запрет действия по умолчанию при щелчке по ссылке
     usePreventDefaultLinkBehavior()

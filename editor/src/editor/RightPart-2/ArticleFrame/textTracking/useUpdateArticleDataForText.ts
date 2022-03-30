@@ -3,6 +3,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { getState } from 'utils/miscUtils'
+import { updateTextCompInArticleData } from './manageUpdatingDTextComp'
 import textManagerData from './textManagerData'
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
@@ -25,6 +26,12 @@ export function useSetTextDetails() {
 
         // Если выделили текстовый компонент
         if (selectedElem.tagType === 'textComponent') {
+
+            // Если раньше был выделен текстовый компонент, то поставить новый текст в данные.
+            if (textManagerData.textCompId) {
+                updateTextCompInArticleData()
+            }
+
             // Сохранить id выделенного текстового элемента
             textManagerData.setTextCompId(selectedElem.dataCompId)
 
@@ -32,7 +39,12 @@ export function useSetTextDetails() {
             const dTextComp = articleManager.getComponent(article.dComps, selectedElem.dataCompId) as ArticleTypes.SimpleTextComponent
 
             // Сохранить изначальный текст компонента
-            textManagerData.setInitialText(dTextComp.text.toString())
+            textManagerData.setInitialText(dTextComp.text)
+            textManagerData.setNewText(dTextComp.text)
+        }
+        // Обновить данные текстового компонента если он был ранее выделен и выделение сняли
+        else if (!selectedElem.tagType) {
+            updateTextCompInArticleData()
         }
 
         // Поставить флаг, что новый элемент истории для занесения нового текста ещё не поставлен.
@@ -50,7 +62,7 @@ export function useSetHandlersToTrackText() {
         if (!$links.$document || handlerWasSet) return
 
         // Поставить обработчики на изменение текста
-        $links.$document.addEventListener('keydown', trackTextChanges)
+        $links.$document.addEventListener('keypress', trackTextChanges)
         $links.$document.addEventListener('paste', trackTextChanges)
         $links.$document.addEventListener('cut', trackTextChanges)
 

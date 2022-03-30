@@ -326,6 +326,10 @@ function createAndSetHistoryItem(
 
     function createHistoryArr() {
         const historyArrCopy =  [...state.history]
+        // Уменьшить длину массива до текущего значения,
+        // то есть если сделали несколько шагов назад и затем создали новый объект истории,
+        // то все шаги дальше будут удалены.
+        historyArrCopy.length = state.historyCurrentIdx + 1
 
         historyArrCopy.push(
             createHistoryItem()
