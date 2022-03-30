@@ -63,12 +63,20 @@ export function useSetHandlersToTrackText() {
 
         // Поставить обработчики на изменение текста
         $links.$document.addEventListener('keypress', trackTextChanges)
+        $links.$document.addEventListener('keydown', trackTextDeleteChange)
         $links.$document.addEventListener('paste', trackTextChanges)
         $links.$document.addEventListener('cut', trackTextChanges)
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
     }, [$links])
+}
+
+/* Обработчик удаления текста в текстовом компоненте. Если текст удаляют, то запускается другой обработчик. */
+function trackTextDeleteChange(e: any) {
+    if (e.key === 'Backspace' || e.key === 'Delete') {
+        trackTextChanges()
+    }
 }
 
 /* Обработчик изменения текста в текстовом компоненте. */

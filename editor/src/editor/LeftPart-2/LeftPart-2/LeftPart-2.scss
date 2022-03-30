@@ -20,7 +20,15 @@ $CN: left-part-2;
 
 }
 
-.#{$CN}__adjust-wrapper {
-    height: 200px;
+.#{$CN}__temp-comps-wrapper, .#{$CN}__adjust-wrapper, .#{$CN}__layers-wrapper {
     overflow: auto;
+}
+.#{$CN}__temp-comps-wrapper {
+    height: calc(41% - 15px);
+}
+.#{$CN}__adjust-wrapper {
+    height: calc(18% - 15px);
+}
+.#{$CN}__layers-wrapper {
+    height: calc(41% - 15px);
 }

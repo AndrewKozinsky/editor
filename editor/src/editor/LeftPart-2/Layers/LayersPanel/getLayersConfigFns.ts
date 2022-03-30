@@ -5,7 +5,6 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
 import articleManager from 'articleManager/articleManager'
 import { isCtrlPressed } from 'utils/domUtils'
-import { setFocusInTextComponent } from '../../../../articleManager/methods/misc'
 
 
 /**

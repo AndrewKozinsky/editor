@@ -21,11 +21,15 @@ export default function LeftPart2(props: LeftPart3PropType) {
     return (
         <div className={CN} style={style}>
             <div className={`${CN}__top`}>
-                <TempCompList />
+                <div className={`${CN}__temp-comps-wrapper`}>
+                    <TempCompList />
+                </div>
                 <div className={`${CN}__adjust-wrapper`}>
                     <Adjust />
                 </div>
-                <LayersPanel />
+                <div className={`${CN}__layers-wrapper`}>
+                    <LayersPanel />
+                </div>
             </div>
             <div className={`${CN}__bottom`} >
                 <BottomButtons />

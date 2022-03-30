@@ -70,5 +70,10 @@ export function setFocusInTextComponent(
 
     // Получить объект выделения и поставить в конец
     const selection = $iFrameDoc.getSelection()
-    selection.collapse($textComponent, 1)
+
+    // В текстовом компоненте могут быть несколько текстовых узлов.
+    // Требуется получить последний текстовый узел и поставить фокус на его последний символ.
+    const nodeLength = $textComponent.childNodes
+    const textNode = $textComponent.childNodes[nodeLength.length - 1]
+    selection.collapse(textNode, textNode.textContent.length)
 }

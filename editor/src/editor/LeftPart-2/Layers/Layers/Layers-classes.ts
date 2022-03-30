@@ -66,7 +66,7 @@ function getText(config: LayersConfigType.Layer) {
     if (['rootElement', 'text'].includes(config.type)) {
         classes.push(cls + '--bold')
 
-        if (config.selected) {
+        if (config.selected || config.moveSelected) {
             classes.push(cls + '--white')
         }
     }
