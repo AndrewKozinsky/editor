@@ -5,7 +5,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import { MiscTypes } from 'types/miscTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
-import { updateTextCompInArticleData } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 export type BottomBtnCallbackType = (
     dispatch: MiscTypes.AppDispatch,
@@ -30,12 +30,9 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
         const { selectedElem, moveSelectedComp } = historyItem
 
         // Обновить данные в текстовом компоненте если это требуется
-        updateTextCompInArticleData()
+        updateDataInTextComp()
 
         // Запуск функции, обрабатывающей нажатие на кнопку
         callback(dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)
-
-        // Обновить данные в текстовом компоненте если это требуется
-        updateTextCompInArticleData()
     }, [historyItem])
 }

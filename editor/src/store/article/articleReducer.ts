@@ -380,10 +380,12 @@ function updateCurrentHistoryItem(
 function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
     let newStepNum = state.historyCurrentIdx
 
-    if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
+    // debugger
+
+    if (action.payload === 'undo' && state.historyCurrentIdx >= 0) {
         newStepNum--
     }
-    else if (action.payload === 'redo' && state.historyCurrentIdx + 1 < state.history.length) {
+    else if (action.payload === 'redo' && state.historyCurrentIdx <= state.history.length) {
         newStepNum++
     }
 

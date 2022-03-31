@@ -1,7 +1,7 @@
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import articleManager from '../../articleManager/articleManager'
-import { updateTextCompInArticleData } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import { getState } from 'utils/miscUtils'
 import EventDataTypes from '../EventDataTypes'
 
@@ -16,10 +16,10 @@ export function makeHistoryStep(stepConfig: EventDataTypes.makeHistoryStep) {
     const canMakeStep = articleManager.canMakeHistoryStep(stepConfig.direction, history, historyCurrentIdx)
 
     if (canMakeStep) {
-
+        if (stepConfig.direction === 'undo') {
             // Обновить данные в текстовом компоненте если это требуется
-            updateTextCompInArticleData()
-
+            updateDataInTextComp(true, null, true)
+        }
 
         store.dispatch(
             articleActions.makeHistoryStep(stepConfig.direction)

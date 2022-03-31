@@ -17,7 +17,7 @@ import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemp
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
 import {
-    useSetTextDetails, useSetHandlersToTrackText
+    useTrackCompSelection, useSetHandlersToTrackText
 } from './textTracking/useUpdateArticleDataForText'
 import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
 import './ArticleFrame.scss'
@@ -39,7 +39,7 @@ export default function ArticleFrame() {
     useSetShortcutsHandler()
 
     // Работа с текстом
-    useSetTextDetails()
+    useTrackCompSelection()
     useSetHandlersToTrackText()
 
     // Запрет действия по умолчанию при щелчке по ссылке

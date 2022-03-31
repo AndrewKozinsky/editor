@@ -9,7 +9,7 @@ import config from 'utils/config'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
-import { updateTextCompInArticleData } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
 export function useIsInsideButtonAllowed() {
@@ -146,7 +146,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
 
         // Обновить данные в текстовом компоненте если это требуется
-        updateTextCompInArticleData()
+        updateDataInTextComp()
 
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
@@ -188,7 +188,7 @@ export function useGetOnClickInsideBtn() {
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
         // Обновить данные в текстовом компоненте если это требуется
-        updateTextCompInArticleData()
+        updateDataInTextComp()
 
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
