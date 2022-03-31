@@ -11,10 +11,6 @@ $CN: left-part-2;
     flex-grow: 1;
     overflow: auto;
     padding: 1.5rem 2rem;
-
-    & > *:not(:first-child) {
-        margin-top: 20px;
-    }
 }
 .#{$CN}__bottom {
 
@@ -24,11 +20,12 @@ $CN: left-part-2;
     overflow: auto;
 }
 .#{$CN}__temp-comps-wrapper {
-    height: calc(41% - 15px);
+    height: calc(40% - 15px);
 }
 .#{$CN}__adjust-wrapper {
-    height: calc(18% - 15px);
+    height: calc(20% - 15px);
+    margin: 20px 0 20px 0;
 }
 .#{$CN}__layers-wrapper {
-    height: calc(41% - 15px);
+    height: calc(40% - 15px);
 }

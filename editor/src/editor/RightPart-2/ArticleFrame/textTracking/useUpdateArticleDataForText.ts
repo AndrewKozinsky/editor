@@ -64,7 +64,7 @@ export function useSetHandlersToTrackText() {
         // Поставить обработчики на изменение текста
         $links.$document.addEventListener('keypress', trackTextChanges)
         $links.$document.addEventListener('keydown', trackTextDeleteChange)
-        $links.$document.addEventListener('paste', trackTextChanges)
+        $links.$document.addEventListener('paste', trackPasteText)
         $links.$document.addEventListener('cut', trackTextChanges)
 
         // Set flag that handlers were set
@@ -79,6 +79,43 @@ function trackTextDeleteChange(e: any) {
     }
 }
 
+/* Обработчик вставки текста.
+ * Убирает с вставленного текста всё форматирование и контролирует положение фокуса. */
+function trackPasteText(e: any) {
+    e.preventDefault()
+
+    // Ничего не делать если не выделен текстовый компонент
+    if (!textManagerData.textCompId) return
+
+    const { $body, $document, $window } = getState().article.$links
+
+    // html-объект компонента
+    const $textComp = articleManager.get$elemBy$body(
+        $body, textManagerData.textCompId
+    )
+
+    const oldText = $textComp.textContent
+
+    //@ts-ignore
+    let paste = (e.clipboardData || window.clipboardData).getData('text')
+
+    const selection = $window.getSelection()
+    const {anchorOffset, focusOffset} = selection
+
+    const newText = oldText.substring(0, anchorOffset) + paste + oldText.substring(focusOffset)
+
+    createNewHistoryItem()
+
+    updateTextDataWithTextInHtml(newText)
+    updateTextCompInArticleData()
+
+    setTimeout(function () {
+        const selection = $window.getSelection()
+        selection.collapse($textComp.firstChild, anchorOffset + paste.length)
+    }, 100)
+}
+
+
 /* Обработчик изменения текста в текстовом компоненте. */
 function trackTextChanges() {
     // Ничего не делать если не выделен текстовый компонент
@@ -86,20 +123,7 @@ function trackTextChanges() {
 
     // Создать новый объект истории для текста если он ещё не создан
     if (!textManagerData.newHistoryItemCreated) {
-        const { article } = articleManager.getCurrentHistoryItem()
-        const dTextComp = articleManager.getComponent(article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
-
-        // Создать новый объект истории со ссылкой на копию текстового компонента
-        const compsAndMaxCompId = articleManager.updateTextInComponent(
-            article, dTextComp
-        )
-
-        // Сохранить новый объект истории
-        store.dispatch(articleActions.createAndSetHistoryItem(
-            compsAndMaxCompId
-        ))
-
-        textManagerData.setNewHistoryItemCreated(true)
+        createNewHistoryItem()
     }
 
     // Таймер чтобы браузер успел обновить текст, который я сохраняю
@@ -107,7 +131,7 @@ function trackTextChanges() {
 }
 
 /** Функция получает текст выделенного текстового компонента из документа и сохраняет его в textManagerData. */
-function updateTextDataWithTextInHtml() {
+function updateTextDataWithTextInHtml(newText?: string) {
     const { $body } = getState().article.$links
 
     // html-объект компонента
@@ -116,5 +140,22 @@ function updateTextDataWithTextInHtml() {
     )
 
     // Запомнить новый текст
-    textManagerData.setNewText($textComp.textContent)
+    textManagerData.setNewText(newText || $textComp.textContent)
+}
+
+function createNewHistoryItem() {
+    const { article } = articleManager.getCurrentHistoryItem()
+    const dTextComp = articleManager.getComponent(article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
+
+    // Создать новый объект истории со ссылкой на копию текстового компонента
+    const compsAndMaxCompId = articleManager.updateTextInComponent(
+        article, dTextComp
+    )
+
+    // Сохранить новый объект истории
+    store.dispatch(articleActions.createAndSetHistoryItem(
+        compsAndMaxCompId
+    ))
+
+    textManagerData.setNewHistoryItemCreated(true)
 }
