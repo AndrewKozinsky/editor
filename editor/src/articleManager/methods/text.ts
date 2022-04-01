@@ -19,7 +19,7 @@ export function updateTextInComponent(
     const { dComps } = article
 
     const updatedDTextComp = Object.assign({}, dTextComp)
-    if (newText) {
+    if (typeof newText === 'string') {
         updatedDTextComp.text = newText
     }
 

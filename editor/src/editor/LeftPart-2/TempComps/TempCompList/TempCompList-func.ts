@@ -146,7 +146,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
 
         // Обновить данные в текстовом компоненте если это требуется
-        updateDataInTextComp()
+        updateDataInTextComp('common')
 
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
@@ -188,7 +188,7 @@ export function useGetOnClickInsideBtn() {
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
         // Обновить данные в текстовом компоненте если это требуется
-        updateDataInTextComp()
+        updateDataInTextComp('common')
 
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'

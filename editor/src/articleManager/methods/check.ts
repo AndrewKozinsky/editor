@@ -122,19 +122,19 @@ export function has$ElemNested$Elements(
 
 /**
  * The function checks if I can make undo or redo history step
- * @param {String} step — step direction: undo OR redo
+ * @param {String} direction — step direction: undo OR redo
  * @param {Array} historyArr — articles history array
  * @param {Number} currentIdx — current history array index
  */
 export function canMakeHistoryStep(
     this: typeof articleManager,
-    step: 'undo' | 'redo',
+    direction: 'undo' | 'redo',
     historyArr: StoreArticleTypes.HistoryItems,
     currentIdx: number
 ) {
     return (
-        (step === 'undo' && currentIdx - 1 !== -1) ||
-        (step === 'redo' && currentIdx + 1 < historyArr.length)
+        (direction === 'undo' && currentIdx - 1 !== -1) ||
+        (direction === 'redo' && currentIdx + 1 < historyArr.length)
     )
 }
 

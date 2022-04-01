@@ -33,7 +33,7 @@ function shortcutsHandler(e: KeyboardEvent) {
 
     if (getState().settings.mainTab === 1) {
         // Making undo or redo history step in article
-        undoRedoArticleHistory(pressedKeys)
+        undoRedoArticleHistory(e, pressedKeys)
     }
 }
 

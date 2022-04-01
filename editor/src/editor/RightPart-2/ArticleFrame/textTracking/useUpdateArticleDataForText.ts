@@ -17,14 +17,13 @@ export function useTrackCompSelection() {
     useEffect(function () {
         if (!article) return
 
+        // Обновить данные текстового компонента если он был ранее выделен
+        if (textManagerData.textCompId) {
+            updateDataInTextComp('common')
+        }
+
         // Если выделили текстовый компонент
         if (selectedElem.tagType === 'textComponent') {
-            // Если в textManagerData есть id ранее выбранного текстового компонента,
-            // то поставить в статью новый текст компонента и отрисовать новый текст в статье.
-            if (textManagerData.textCompId) {
-                updateDataInTextComp(true)
-            }
-
             // Сохранить id выделенного текстового элемента
             textManagerData.setTextCompId(selectedElem.dataCompId)
 
@@ -35,14 +34,6 @@ export function useTrackCompSelection() {
             textManagerData.setInitialText(dTextComp.text)
             textManagerData.setNewText(dTextComp.text)
         }
-        // Обновить данные текстового компонента если он был ранее выделен
-        // и выделили обычный компонент или выделение сняли
-        else {
-            updateDataInTextComp(true)
-        }
-
-        // Поставить флаг, что новый элемент истории для занесения нового текста ещё не поставлен.
-        textManagerData.setNewHistoryItemCreated(false)
     }, [selectedElem])
 }
 
@@ -74,9 +65,9 @@ function textChangeHandler(e: any) {
     // Ничего не делать если не выбран текстовый компонент
     if (!textManagerData.textCompId) return
 
-    // Встановить новый объект истории если не стоит флаг, что он уже создан или вставляют текст
-    if (!textManagerData.newHistoryItemCreated || e.type === 'paste') {
-        createNewHistoryItem()
+    // Вставить новый объект истории если требуется
+    if (['keypress', 'cut', 'paste'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+        if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
     }
 
     const { $body } = getState().article.$links
@@ -86,12 +77,12 @@ function textChangeHandler(e: any) {
         $body, textManagerData.textCompId
     )
 
-    // Если нажали клавиши Backspace и Delete, то поставить новый текст в данные и Реакт обновит текст компонента
-    if (e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+    // Если нажали символьную клавишу, то поставить новый текст в данные и Реакт обновит текст компонента
+    if (['keypress', 'cut'].includes(e.type)) {
         setTimeout(() => textManagerData.setNewText($textComp.textContent), 50)
     }
-    // Если нажали символьную клавишу, то поставить новый текст в данные и Реакт обновит текст компонента
-    else if (['keypress', 'cut'].includes(e.type)) {
+    // Если нажали клавиши Backspace и Delete, то поставить новый текст в данные и Реакт обновит текст компонента
+    else if (e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
         setTimeout(() => textManagerData.setNewText($textComp.textContent), 50)
     }
     // Если вставили текст
@@ -102,7 +93,7 @@ function textChangeHandler(e: any) {
         textManagerData.setNewText(newText)
 
         // Поставить новый текст в данные и Реакт обновит текст компонента
-        updateDataInTextComp(false, $textComp)
+        updateDataInTextComp('paste', $textComp)
     }
 }
 

@@ -30,7 +30,7 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
         const { selectedElem, moveSelectedComp } = historyItem
 
         // Обновить данные в текстовом компоненте если это требуется
-        updateDataInTextComp()
+        updateDataInTextComp('common')
 
         // Запуск функции, обрабатывающей нажатие на кнопку
         callback(dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)

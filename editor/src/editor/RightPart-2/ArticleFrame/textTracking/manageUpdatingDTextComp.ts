@@ -11,13 +11,12 @@ import textManagerData from './textManagerData'
  * Когда пользователь изменяет текстовый компонент новый текст записывается в textManagerData. Но в данных отсутствует.
  * Эту функцию нужно запускать когда требуется поставить новый текст в данные текстового компонента.
  * Сначала удаляется новый текст и ставится старый, затем новый текст записывается в данные, после Реакт перерисует статью.
- * @param {Boolean} clearNewText — нужно ли очищать текст? Если текст вставляют через вставку, то там есть запрет на вставку текста, поэтому этот параметр нужно поставить в false.
- * В других случаях новый текст записывается прямо в текстовый компонент, но Реакт про это не знает, поэтому после того, как я обновлю данные, то он вставит новый и текст и получится, что он будет двоиться.
- * Поэтому в этом случае требуется поставить true чтобы он очистил новый текст перед обновлением данных.
- * @param {Element} $textComp — ссылка на html-объект компонента.
- * @param {Boolean} getTextFromArtData — должен ли новый текст компонента быть взят из данных статьи. Требуется при перемещении по истории.
+ * {String} type — тип обновления текста в текстовом компоненте
  */
-export function updateDataInTextComp(clearNewText: boolean = true, $textComp?: Element, getTextFromArtData: boolean = false) {
+export function updateDataInTextComp(
+    type: 'common' | 'paste' | 'history',
+    $textComp?: Element
+) {
     if (!textManagerData.textCompId) return
     if (textManagerData.initialText === textManagerData.newText) return
 
@@ -26,8 +25,8 @@ export function updateDataInTextComp(clearNewText: boolean = true, $textComp?: E
         $textComp = articleManager.get$elemBy$body($body, textManagerData.textCompId)
     }
 
-    if (clearNewText) {
-        // Найти html-элемент и удалить его текст (после поставлю новый)
+    // Найти html-элемент и удалить его текст (после поставится новый)
+    if ($textComp.firstChild) {
         $textComp.firstChild.textContent = ''
     }
 
@@ -35,8 +34,7 @@ export function updateDataInTextComp(clearNewText: boolean = true, $textComp?: E
     const currentHistoryItem = articleManager.getCurrentHistoryItem()
     const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
 
-    // В зависимости от условия getTextFromArtData новым текстом будет или существующие данные из статьи или данные из textManagerData
-    const newText = getTextFromArtData ? dTextComp.text : textManagerData.newText
+    let newText = textManagerData.newText
 
     // Поставить в данные текстового компонента новый текст чтобы Реакт поставил его в HTML.
     // Создать новый объект истории со ссылкой на копию текстового компонента
@@ -47,9 +45,28 @@ export function updateDataInTextComp(clearNewText: boolean = true, $textComp?: E
     // Обновить текущий объект истории
     store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
 
-    // Обнулить textManagerData
-    textManagerData.setInitialText('')
-    textManagerData.setNewText('')
-    textManagerData.setNewHistoryItemCreated(false)
-    textManagerData.setTextCompId(null)
+    if (type === 'common') {
+        // Обнулить textManagerData
+        textManagerData.setInitialText('')
+        textManagerData.setNewText('')
+        // Поставить флаг, что новый элемент истории для занесения нового текста ещё не поставлен.
+        textManagerData.setNewHistoryItemCreated(false)
+        textManagerData.setTextCompId(null)
+    }
+    else if (type === 'paste') {
+        // Обновить textManagerData
+        textManagerData.setInitialText(newText)
+    }
+    else if (type === 'history') {
+        // Подождать пока загрузятся новые данные выделенного текстового компонента
+        setTimeout(function () {
+            const currentHistoryItem = articleManager.getCurrentHistoryItem()
+            const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
+
+            textManagerData.setInitialText(dTextComp.text)
+            textManagerData.setNewText(dTextComp.text)
+            textManagerData.setNewHistoryItemCreated(false)
+            textManagerData.setTextCompId(dTextComp.dCompId)
+        }, 60)
+    }
 }

@@ -17,10 +17,13 @@ export function makeHistoryStep(stepConfig: EventDataTypes.makeHistoryStep) {
 
     if (canMakeStep) {
         // Обновить данные в текстовом компоненте если это требуется
-        updateDataInTextComp(true, null, true)
+        updateDataInTextComp('history')
 
-        store.dispatch(
-            articleActions.makeHistoryStep(stepConfig.direction)
-        )
+        // Подождать пока применится новый текст если его редактировали
+        setTimeout(() => {
+            store.dispatch(
+                articleActions.makeHistoryStep(stepConfig.direction)
+            )
+        }, 10)
     }
 }
