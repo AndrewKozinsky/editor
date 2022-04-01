@@ -20,11 +20,13 @@ export default function NameSection(props: NameSectionPropType) {
     const CN = makeClasses(type)
 
     return (
-        <div>
+        <div className={CN.root}>
             <h3 className={CN.header}>
                 <span className={CN.bg}>{header}</span>
             </h3>
-            {children}
+            <div className={CN.content}>
+                {children}
+            </div>
         </div>
     )
 }

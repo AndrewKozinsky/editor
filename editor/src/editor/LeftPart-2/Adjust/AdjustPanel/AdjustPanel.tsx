@@ -13,7 +13,7 @@ import './AdjustPanel.scss'
 export default function AdjustPanel() {
     // Название выделенного компонента и элемента
     const { compName, elemName } = useGetCompAndElemNames()
-    if (!compName) return null
+    if (!compName) return <div></div>
 
     return (
         <NameSection header={compName}>

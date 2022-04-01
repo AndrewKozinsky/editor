@@ -16,10 +16,8 @@ export function makeHistoryStep(stepConfig: EventDataTypes.makeHistoryStep) {
     const canMakeStep = articleManager.canMakeHistoryStep(stepConfig.direction, history, historyCurrentIdx)
 
     if (canMakeStep) {
-        if (stepConfig.direction === 'undo') {
-            // Обновить данные в текстовом компоненте если это требуется
-            updateDataInTextComp(true, null, true)
-        }
+        // Обновить данные в текстовом компоненте если это требуется
+        updateDataInTextComp(true, null, true)
 
         store.dispatch(
             articleActions.makeHistoryStep(stepConfig.direction)

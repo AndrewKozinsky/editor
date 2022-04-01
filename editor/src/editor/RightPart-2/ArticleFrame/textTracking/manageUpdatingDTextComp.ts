@@ -19,6 +19,7 @@ import textManagerData from './textManagerData'
  */
 export function updateDataInTextComp(clearNewText: boolean = true, $textComp?: Element, getTextFromArtData: boolean = false) {
     if (!textManagerData.textCompId) return
+    if (textManagerData.initialText === textManagerData.newText) return
 
     if (!$textComp) {
         const { $body } = getState().article.$links
