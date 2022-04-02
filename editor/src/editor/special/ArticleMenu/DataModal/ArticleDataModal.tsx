@@ -4,6 +4,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import articleMenuMsg from 'messages/articleMenuMessages'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
+import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import { createParsingData } from './createParsingData'
 
 /** Компонент окна с разметкой статьи */

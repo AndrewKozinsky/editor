@@ -5,6 +5,7 @@ import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
 import config from 'utils/config'
 import { removeFromLocalStorage } from 'utils/miscUtils'
+import { updateDataInTextComp } from '../../editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
 /**
@@ -20,6 +21,9 @@ export async function saveArticle(
     articleId: null | number
 ) {
     if (!articleId) return
+
+    // Поставить текст текстового компонента в данные если он выделен и его отредактировали
+    updateDataInTextComp('common')
 
     // Set current history step to historyStepWhenWasSave to know what step the article was saved
     store.dispatch( articleActions.setHistoryStepWhenArticleWasSaved() )

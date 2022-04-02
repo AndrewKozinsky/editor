@@ -51,6 +51,8 @@ export function useSetHandlersToTrackText() {
         $links.$document.addEventListener('keydown', textChangeHandler)
         $links.$document.addEventListener('paste', textChangeHandler)
         $links.$document.addEventListener('cut', textChangeHandler)
+        // Событие чтобы отловить вставку эмоджи
+        $links.$document.addEventListener('DOMCharacterDataModified', textChangeHandler)
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
@@ -66,7 +68,7 @@ function textChangeHandler(e: any) {
     if (!textManagerData.textCompId) return
 
     // Вставить новый объект истории если требуется
-    if (['keypress', 'cut', 'paste'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+    if (['keypress', 'cut', 'paste', 'DOMCharacterDataModified'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
         if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
     }
 
@@ -78,7 +80,7 @@ function textChangeHandler(e: any) {
     )
 
     // Если нажали символьную клавишу, то поставить новый текст в данные и Реакт обновит текст компонента
-    if (['keypress', 'cut'].includes(e.type)) {
+    if (['keypress', 'cut', 'DOMCharacterDataModified'].includes(e.type)) {
         setTimeout(() => textManagerData.setNewText($textComp.textContent), 50)
     }
     // Если нажали клавиши Backspace и Delete, то поставить новый текст в данные и Реакт обновит текст компонента
