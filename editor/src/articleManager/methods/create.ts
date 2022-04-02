@@ -55,6 +55,8 @@ export function createComponent(
         [], wrap$elemWithDiv($component).children, metaObj, tempComp
     )[0]
 
+    console.log(compData)
+
     return {
         compData,
         maxCompId: metaObj.maxCompId
@@ -78,22 +80,21 @@ function createCompElements(
     for(let i = 0; i < $children.length; i++) {
         const $child = $children[i] as HTMLElement
 
-        // Найти элемент с data-em-id
-        const $elemWithDataEmId: HTMLElement = $child.matches(`[data-em-id]`)
-            ? $child
-            : $child.querySelector(`[data-em-id]`) as HTMLElement
-
-        if (!$elemWithDataEmId) continue
+        // Если это не элемент с data-em-id, то проверить его детей
+        if (!$child.matches(`[data-em-id]`)) {
+            createCompElements(resultArr, $child.children, metaObj, tempComp)
+            continue
+        }
 
         // Шаблон элемента
         const tElem = tempComp.content.elems.find(tElem => {
-            return tElem.elemId === $elemWithDataEmId.dataset.emId
+            return tElem.elemId === $child.dataset.emId
         })
 
         // Данные элемента
         const elemData: ArticleTypes.ComponentElem = {
             dCompElemId: ++metaObj.maxElemId,
-            tCompElemId: $elemWithDataEmId.dataset.emId
+            tCompElemId: $child.dataset.emId
         }
 
         // Если по умолчанию элемент должен быть скрыт, то скрыть его в слоях
@@ -111,7 +112,7 @@ function createCompElements(
         if (tElem.addTextComponent) {
             const textComponent = createSimpleTextComponent(
                 // Предварительно заменить символы напоминающие пробел обычным пробелом
-                $elemWithDataEmId.innerText.replace( /\s\s+/g, ' ' ),
+                $child.innerText.replace( /\s\s+/g, ' ' ),
                 ++metaObj.maxCompId,
             )
 
@@ -119,7 +120,7 @@ function createCompElements(
         }
 
         // Формирование массива вложенных элементов
-        const dInnerElems = createCompElements([], $elemWithDataEmId.children, metaObj, tempComp)
+        const dInnerElems = createCompElements([], $child.children, metaObj, tempComp)
         if (dInnerElems) {
             elemData.dCompElemInnerElems = dInnerElems
         }

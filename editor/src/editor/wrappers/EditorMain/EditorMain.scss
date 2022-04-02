@@ -6,6 +6,8 @@ $CN: editor-main;
     grid-auto-flow: column;
     grid-template-columns: 30rem 1fr;
 
+    top: 0;
+    left: 0;
     height: 100vh;
     width: 100%;
     background-color: var(--base-color-color);

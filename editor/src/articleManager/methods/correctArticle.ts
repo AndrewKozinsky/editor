@@ -326,7 +326,6 @@ function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompType
         // Так как и в tAttr и в dAttr в качестве значений указан массив, то проверить,
         // что значения в массиве в dAttr имеются в массиве значений tAttr
         for (let k = 0; k < dAttrValues.length; k++) {
-            if (!tAttr.elemAttrValues) debugger
             const tAttrValue = tAttr.elemAttrValues.find(tAttrValue => {
                 return tAttrValue.elemAttrValueId === dAttrValues[k]
             })

@@ -19,10 +19,10 @@ export default function getConsistObjArr(
 ) {
     for(let i = 0; i < htmlObjArr.length; i++) {
         const htmlObj = htmlObjArr[i]
-        // debugger
+
         if ('text' in htmlObj) continue
 
-        if (htmlObj.attrs['data-em-id']) {
+        if (htmlObj.attrs && htmlObj.attrs['data-em-id']) {
             const tElemId = htmlObj.attrs['data-em-id']
             const tElem = template.content?.elems.find(tempElem => tempElem.elemId === tElemId)
 

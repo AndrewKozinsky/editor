@@ -19,7 +19,8 @@ export default function putRepeatedElems(
         // Если перебираемый элемент имеет data-em-id, то это элемент.
         // Если в данных есть копии элемента, то поставить их
         // Дополнительно каждому элементу поставить id компонента и элемента
-        if (htmlObj.attrs['data-em-id']) {
+
+        if (htmlObj.attrs && htmlObj.attrs['data-em-id']) {
             // Шаблон элемента
             const tElemId = htmlObj.attrs['data-em-id']
             // Получить данные элементов для этого шаблона элемента
