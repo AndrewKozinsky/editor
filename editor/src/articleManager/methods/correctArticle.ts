@@ -19,13 +19,14 @@ export default function correctArticle(
         if (dComp.dCompType === 'component') {
             // Шаблон компонента
             const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
-            // Получение html-компонента из шаблона.
-            const $component = articleManager.get$componentByTComp(tComp)
 
             if (!tComp) {
                 dComps.splice(i, 1)
                 continue
             }
+
+            // Получение html-компонента из шаблона.
+            const $component = articleManager.get$componentByTComp(tComp)
 
             // Создание эталонной структуры данных, которая должна быть у текущего компонента
             const referenceDElems = getReferenceDElemsStructure(
@@ -201,6 +202,8 @@ function makeMatchBetweenElemTagAttrsAndText(
     // Перебрать все элементы
     articleManager.dElemsEnumeration(dElems, (dElem) => {
         const tElem = articleManager.getTElemInTElems(dElem.tCompElemId, tElems)
+
+        if (!tElem) return
 
         // Настроить соответствие между тегами в шаблоне и данными элемента
         makeMatchInTags(dElem, tElem)

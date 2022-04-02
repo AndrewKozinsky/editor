@@ -46,12 +46,9 @@ export function useSetHandlersToTrackText() {
     useEffect(function () {
         if (!$links.$document || handlerWasSet) return
 
-        // Поставить обработчик
-        $links.$document.addEventListener('keypress', textChangeHandler)
-        $links.$document.addEventListener('keydown', textChangeHandler)
+        // Поставить обработчик на вставку текста
         $links.$document.addEventListener('paste', textChangeHandler)
-        $links.$document.addEventListener('cut', textChangeHandler)
-        // Событие чтобы отловить вставку эмоджи
+        // Событие изменения текста
         $links.$document.addEventListener('DOMCharacterDataModified', textChangeHandler)
 
         // Set flag that handlers were set
@@ -68,27 +65,15 @@ function textChangeHandler(e: any) {
     if (!textManagerData.textCompId) return
 
     // Вставить новый объект истории если требуется
-    if (['keypress', 'cut', 'paste', 'DOMCharacterDataModified'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
-        if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
-    }
-
-    const { $body } = getState().article.$links
+    if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
 
     // html-объект компонента
     const $textComp = articleManager.get$elemBy$body(
-        $body, textManagerData.textCompId
+        getState().article.$links.$body, textManagerData.textCompId
     )
 
-    // Если нажали символьную клавишу, то поставить новый текст в данные и Реакт обновит текст компонента
-    if (['keypress', 'cut', 'DOMCharacterDataModified'].includes(e.type)) {
-        setTimeout(() => textManagerData.setNewText($textComp.textContent), 50)
-    }
-    // Если нажали клавиши Backspace и Delete, то поставить новый текст в данные и Реакт обновит текст компонента
-    else if (e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
-        setTimeout(() => textManagerData.setNewText($textComp.textContent), 50)
-    }
     // Если вставили текст
-    else if (e.type === 'paste') {
+    if (e.type === 'paste') {
         e.preventDefault()
         // Получить новый текст и вставить в textManagerData
         const newText = getPastedText(e)
@@ -96,6 +81,10 @@ function textChangeHandler(e: any) {
 
         // Поставить новый текст в данные и Реакт обновит текст компонента
         updateDataInTextComp('paste', $textComp)
+    }
+    // Если изменили текст, то поставить новый текст в данные и Реакт обновит текст компонента
+    else if (['DOMCharacterDataModified'].includes(e.type)) {
+        setTimeout(() => textManagerData.setNewText($textComp.textContent), 30)
     }
 }
 

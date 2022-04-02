@@ -28,6 +28,7 @@ export default function useSetArticleToIFrame() {
             // Если изменилось значение хеша загрузки шаблонов компонентов,
             if (lastTempCompsDownloadHash !== tempCompsDownloadHash) {
                 setLastTempCompsDownloadHash(tempCompsDownloadHash)
+
                 // ... запустить сценарий исправления статьи.
                 articleManager.correctArticle(article, article.dComps, tempComps)
             }

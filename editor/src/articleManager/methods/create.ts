@@ -55,8 +55,6 @@ export function createComponent(
         [], wrap$elemWithDiv($component).children, metaObj, tempComp
     )[0]
 
-    console.log(compData)
-
     return {
         compData,
         maxCompId: metaObj.maxCompId
