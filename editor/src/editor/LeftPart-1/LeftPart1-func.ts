@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
+import articleActions from 'store/article/articleActions'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
-import articleActions from '../../store/article/articleActions'
 
 
 // Хук скачивает с сервера массив сайтов и ставит в Хранилище

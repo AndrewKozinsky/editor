@@ -7,7 +7,7 @@ import deleteComponentRequest from 'requests/editor/components/deleteComponentRe
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
 import { getState, setInLocalStorage } from 'utils/miscUtils'
-import sitesActions from '../../store/site/sitesActions'
+import sitesActions from 'store/site/sitesActions'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/FoldersList/types'
 

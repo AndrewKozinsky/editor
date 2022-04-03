@@ -3,7 +3,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
-import MetaType from '../../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import { ArticleRowServerRespType } from './articleServerResponseType'
 
 

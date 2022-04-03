@@ -176,6 +176,13 @@ namespace StoreArticleTypes {
         type: typeof CLEAR_ARTICLE
     }
 
+    // Скорректированы ли данные статьи (чтобы данные соответствовали шаблонам)
+    export const SET_IS_ART_DATA_CORRECT = 'SET_IS_ART_DATA_CORRECT'
+    export type SetIsArtDataCorrectAction = {
+        type: typeof SET_IS_ART_DATA_CORRECT
+        payload: boolean
+    }
+
 
     export type ArticleAction =
         | SetLinksAction
@@ -194,6 +201,7 @@ namespace StoreArticleTypes {
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
         | ClearArticleAction
+        | SetIsArtDataCorrectAction
 }
 
 export default StoreArticleTypes

@@ -18,11 +18,11 @@ import {
 export default function useGetLayersConfig() {
     const [layersConfig, setLayersConfig] = useState<LayersConfigType.Layers>([])
 
-    const { tempComps } = useGetArticleSelectors()
+    const { tempComps, isArtDataCorrect } = useGetArticleSelectors()
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
 
     useEffect(function () {
-        if (!historyItem || !tempComps) return
+        if (!historyItem || !tempComps || !isArtDataCorrect) return
 
         const layersConfig = getLayersConfig(
             historyItem,
@@ -36,7 +36,7 @@ export default function useGetLayersConfig() {
 
         setLayersConfig(layersConfig)
 
-    }, [historyItem, tempComps])
+    }, [historyItem, tempComps, isArtDataCorrect])
 
     return layersConfig
 }

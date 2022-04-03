@@ -3,7 +3,6 @@ import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import { getState } from 'utils/miscUtils'
-import { FlashedElemsCoords } from './hooks'
 
 /**
  * The function finds current history item object
@@ -301,7 +300,8 @@ export function getDCompIdxInArray(
 }
 
 /**
- * Возвращает количество элементов с переданным идентификатором
+ * Возвращает количество элементов с переданным id шаблона в переданном массиве.
+ * Функция не ищет во всём компоненте.
  * @param {Array} innerElemsArr — массив элементов
  * @param {Object} dElem — данные элемента
  * @returns {number}
@@ -477,9 +477,8 @@ export function getRootTElem(
 /**
  * Функция ищет и возвращает html-элемент по переданным id компонента и элемента
  * @param {HTMLBodyElement} $body — ссылка на <body> с разметкой шаблона
- * @param {ArticleTypes.Id | null} dCompId
- * @param {ArticleTypes.Id | null} dElemId
- * @returns {NodeListOf<Element>}
+ * @param {Number} dCompId — id данных компонента
+ * @param {Number} dElemId — id данных элемента
  */
 export function get$elemBy$body(
     $body: StoreArticleTypes.BodyLink,
@@ -588,11 +587,31 @@ export function getMaxElemId(
 ) {
     let maxElemId = 1
     articleManager.dElemsEnumeration(dElems, (dElem: ArticleTypes.ComponentElem) => {
-        // const res = articleManager.getComponent(dElem.dCompElemChildren, dCompId)
         if (dElem.dCompElemId > maxElemId) {
             maxElemId = dElem.dCompElemId
         }
     })
 
     return maxElemId
+}
+
+/**
+ * Получение количества элементов с определённым id шаблона элемента в данных
+ * @param {Array} dElems — элементы массив dElems
+ * @param {String} tElemId — id шаблона элемента
+ */
+export function getAmountOfElems(
+    this: typeof articleManager,
+    dElems: ArticleTypes.ComponentElems,
+    tElemId: TempCompTypes.ElemId,
+) {
+    let elemsCount = 0
+
+    this.dElemsEnumeration(dElems, (dElem) => {
+        if (dElem.tCompElemId === tElemId) {
+            elemsCount++
+        }
+    })
+
+    return elemsCount
 }

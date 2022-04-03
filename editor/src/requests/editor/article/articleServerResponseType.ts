@@ -1,4 +1,4 @@
-import MetaType from '../../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import ErrorServerResponseType from '../../errorServerResponseType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 

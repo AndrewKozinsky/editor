@@ -18,11 +18,12 @@ export function useSetComponentsTemplates() {
     // При изменении хешей папок и шаблонов компонентов скачать из заново
     // После скачивания изменится значение siteTemplateDownloadHash
     useEffect(function () {
-        if (tempCompsFoldersVersionHash) {
-            dispatch( articleActions.requestTempCompsFolders(siteId) )
-        }
-        if (tempCompsVersionHash) {
-            dispatch( articleActions.requestSiteComponents(siteId) )
-        }
-    }, [tempCompsFoldersVersionHash, tempCompsVersionHash])
+        if (!tempCompsFoldersVersionHash) return
+        dispatch( articleActions.requestTempCompsFolders(siteId) )
+    }, [tempCompsFoldersVersionHash])
+
+    useEffect(function () {
+        if (!tempCompsVersionHash) return
+        dispatch( articleActions.requestSiteComponents(siteId) )
+    }, [tempCompsVersionHash])
 }

@@ -32,7 +32,7 @@ export default function parseComponent(
     // они уже превращены в текстовые компоненты
     removeTextNodes(htmlObjArr[0] as HTMLObjArrType.Tag)
 
-    // Поставить в разметку дополнительные элементы на основе данных компонента
+    // Поставить в разметку повторяющиеся элементы на основе данных компонента
     putRepeatedElems(htmlObjArr, [compData.dElems], compData.dCompId)
 
     // Поставить главной обёртке дополнительные атрибуты

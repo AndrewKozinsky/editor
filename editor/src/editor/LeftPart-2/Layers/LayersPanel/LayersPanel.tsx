@@ -1,7 +1,7 @@
 import React from 'react'
 import layersPanelMsg from 'messages/layersPanelMessages'
 import NameSection from 'editor/wrappers/NameSection/NameSection'
-import useGetArticleSelectors from '../../../../store/article/articleSelectors'
+import useGetArticleSelectors from 'store/article/articleSelectors'
 import Layers from '../Layers/Layers'
 import useGetLayersConfig from './useGetLayersConfig'
 

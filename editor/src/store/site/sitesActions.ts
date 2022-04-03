@@ -1,5 +1,5 @@
 const JSON5 = require('json5')
-import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import getMetaTemplateRequest from '../../requests/editor/metaTemplate/getMetaTemplateRequest'
 import FilesTreeType from '../../types/FilesTreeType'
 import StoreSitesTypes  from './sitesTypes'

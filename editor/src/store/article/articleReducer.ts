@@ -45,6 +45,8 @@ export type ArticleReducerType = {
     historyCurrentIdx: number
     // A history step when the article was saved
     historyStepWhenWasSave: number
+    // Данные скорректированы (данные статьи соответствуют шаблонам)?
+    isArtDataCorrect: boolean
 }
 
 // Article reducer state example
@@ -109,6 +111,7 @@ const stateExample: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
+    isArtDataCorrect: false
 }
 
 // Initial values
@@ -140,6 +143,7 @@ const initialState: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
+    isArtDataCorrect: false
 }
 
 /** Установка ссылок на элементы IFrame-а. */
@@ -249,14 +253,16 @@ function setTempCompFolders(
     }
 }
 
-/** Installing of components array */
+/** Установка массива шаблонов компонентов */
 function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
 ): ArticleReducerType {
     return {
         ...state,
         tempComps: action.payload,
-        tempCompsDownloadHash: state.tempCompsDownloadHash + 1
+        tempCompsDownloadHash: state.tempCompsDownloadHash + 1,
+        // Сообщить, что данные не проверены чтобы запустился хук проверки данных статьи
+        isArtDataCorrect: false
     }
 }
 
@@ -410,6 +416,15 @@ function clearArticle(state: ArticleReducerType): ArticleReducerType {
 }
 
 
+/* Функция ставит значение флага скорректированы ли данные статьи (чтобы данные соответствовали шаблонам) */
+function setIsArtDataCorrect(state: ArticleReducerType, action: StoreArticleTypes.SetIsArtDataCorrectAction): ArticleReducerType {
+    return {
+        ...state,
+        isArtDataCorrect: action.payload
+    }
+}
+
+
 // Редьюсер Store.article
 export default function articleReducer(
     state = initialState, action: StoreArticleTypes.ArticleAction
@@ -448,6 +463,8 @@ export default function articleReducer(
             return setHistoryStepWhenArticleWasSaved(state, action)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
+        case StoreArticleTypes.SET_IS_ART_DATA_CORRECT:
+            return setIsArtDataCorrect(state, action)
         default:
             // @ts-ignore
             const x: never = null

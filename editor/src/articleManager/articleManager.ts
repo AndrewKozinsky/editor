@@ -43,7 +43,7 @@ import {
     dElemsEnumeration,
     findParentArray,
     getDElemInnerElemsArrByElemId,
-    getMaxElemId, getFlashedElemCoords
+    getMaxElemId, getFlashedElemCoords, getAmountOfElems
 } from './methods/gettingResources'
 import { hooks } from './methods/hooks'
 import {
@@ -117,6 +117,7 @@ class ArticleManager {
     getCompParentArray = getCompParentArray
     // idx компонента в переданном массиве
     getDCompIdxInArray = getDCompIdxInArray
+    // Возвращает количество элементов с переданным id шаблона в переданном массиве.
     getElemCountInInnerElemsArr = getElemCountInInnerElemsArr
     // Получение HTML-компонента по массиву шаблонов компонентов
     get$componentByTComps = get$componentByTComps
@@ -136,6 +137,8 @@ class ArticleManager {
     findParentArray = findParentArray
     getDElemInnerElemsArrByElemId = getDElemInnerElemsArrByElemId
     getMaxElemId = getMaxElemId
+    // Получение количества элементов с определённым id шаблона элемента в данных
+    getAmountOfElems = getAmountOfElems
 
     // CHECK
     canMoveCompMoveToLeftOrRight = canMoveCompMoveToLeftOrRight

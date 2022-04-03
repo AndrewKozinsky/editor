@@ -15,7 +15,7 @@ export function usePreventDefaultLinkBehavior() {
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
-    }, [$links, handlerWasSet])
+    }, [$links])
 }
 
 /**

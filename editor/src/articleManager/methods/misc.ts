@@ -5,7 +5,7 @@ import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
 import config from 'utils/config'
 import { removeFromLocalStorage } from 'utils/miscUtils'
-import { updateDataInTextComp } from '../../editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
 /**

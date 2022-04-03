@@ -37,7 +37,9 @@ function setExtraStyle($head: HTMLHeadElement) {
         'position: absolute;' +
         'pointer-events: none;' +
         'box-sizing: content-box;' +
-        'border-radius: 2px;' +
+        //'border-radius: 1px;' +
+        'background: transparent !important;' +
+        'padding: 0 !important;' +
     '}' +
     '.em-flash-rect__hover {' +
         'border: 1px solid rgba(1, 122, 255, 1);' +

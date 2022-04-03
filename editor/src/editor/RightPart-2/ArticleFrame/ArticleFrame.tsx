@@ -20,6 +20,7 @@ import {
     useTrackCompSelection, useSetHandlersToTrackText
 } from './textTracking/useUpdateArticleDataForText'
 import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
+import { useCorrectArticleData } from './misc/correctArtData'
 import './ArticleFrame.scss'
 
 
@@ -67,6 +68,8 @@ export default function ArticleFrame() {
 
     // Hook sets article JSX to IFrame
     useSetArticleToIFrame()
+    // Запуск функции исправления данных статьи при необходимости
+    useCorrectArticleData()
 
     return <iframe className="article-frame" ref={windowRef} />
 }

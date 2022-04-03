@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import articleActions from 'store/article/articleActions'
-import useGetArticleSelectors from '../../../../store/article/articleSelectors'
+import useGetArticleSelectors from 'store/article/articleSelectors'
 import { BottomBtnCallbackType } from './universalHandler'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */

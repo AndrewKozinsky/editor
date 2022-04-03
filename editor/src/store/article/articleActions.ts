@@ -1,6 +1,6 @@
 const JSON5 = require('json5')
 import articleManager from '../../articleManager/articleManager'
-import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -389,6 +389,14 @@ const articleActions = {
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
+        }
+    },
+
+    /* Экшен ставит значение флага скорректированы ли данные статьи (чтобы данные соответствовали шаблонам) */
+    setIsArtDataCorrect(isCorrect: boolean) {
+        return {
+            type: StoreArticleTypes.SET_IS_ART_DATA_CORRECT,
+            payload: isCorrect
         }
     },
 }

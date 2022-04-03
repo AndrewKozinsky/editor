@@ -42,7 +42,6 @@ export function useGetAndSetEditorSettings() {
             removeFromLocalStorage(config.ls.editorArticleType) // тип выбранного элемента: папка или статья
 
             removeFromLocalStorage(config.ls.editArticleId) // id редактируемой статьи
-
             return
         }
 

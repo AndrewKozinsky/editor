@@ -1,4 +1,4 @@
-import MetaType from '../../editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import ArticleTypes from '../article/codeType/articleCodeType'
 import FilesTreeType from 'types/FilesTreeType'
 
