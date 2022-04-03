@@ -83,7 +83,7 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
         refDElem.dCompElemId = ++maxElemId
 
         // Количество дублей этого элемента в оригинальном компоненте
-        const amountOfElems = articleManager.getAmountOfElems(originDElems, refDElem.tCompElemId)
+        const amountOfElems = articleManager.getElemCountInInnerElemsArr(originDElems, refDElem)
         if (amountOfElems <= 1) continue
 
         // Если более одного элемента с этим шаблоном, то добавить копии.
@@ -104,7 +104,7 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
 
         if (!refDElem.dCompElemInnerElems) continue
 
-        addRepeatedElems(originDElems, refDElem.dCompElemInnerElems, maxElemId)
+        addRepeatedElems(originDElems[i].dCompElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
     }
 }
 
