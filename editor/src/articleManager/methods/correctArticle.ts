@@ -1,18 +1,37 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import StoreArticleTypes from 'store/article/articleTypes'
 import { createDeepCopy } from 'utils/miscUtils'
 import articleManager from '../articleManager'
+
+
+export default function getCorrectedArticle(
+    article: ArticleTypes.Article, tComps: TempCompTypes.TempComps
+): StoreArticleTypes.CreateNewHistoryItem {
+    const refDComps: ArticleTypes.Components = []
+
+    iterateOverComponents(article, article.dComps, refDComps, tComps)
+
+    return {
+        components: refDComps,
+        maxCompId: article.dMeta.dMaxCompId
+    }
+}
 
 /**
  * Функция проходится по всем компонентам в данных статьи, генерирует данные компонентов, соответствующие текущему шаблону,
  * и изменяет их по оригинальным данным попутно проверяя, что данные соответствуют шаблону.
  * Эта функция запускается при открытии статьи и изменении шаблона компонента. Поэтому данные гарантированно будут соответствовать шаблонам.
  * @param {Object} article — данные статьи
- * @param {Array} originDComps — массив данных компонентов
+ * @param {Array} originDComps — массив оригинальных компонентов
+ * @param {Array} refDComps — массив эталонных компонентов
  * @param {Array} tComps — массив шаблонов компонентов
  */
-export default function correctArticle(
-    article: ArticleTypes.Article, originDComps: ArticleTypes.Components, tComps: TempCompTypes.TempComps
+function iterateOverComponents(
+    article: ArticleTypes.Article,
+    originDComps: ArticleTypes.Components,
+    refDComps: ArticleTypes.Components,
+    tComps: TempCompTypes.TempComps
 ) {
     for (let i = 0; i < originDComps.length; i++) {
         const dCompOrigin = originDComps[i]
@@ -21,10 +40,7 @@ export default function correctArticle(
             // Шаблон компонента
             const tComp = articleManager.getTemplate(tComps, dCompOrigin.tCompId)
 
-            if (!tComp) {
-                originDComps.splice(i, 1)
-                continue
-            }
+            if (!tComp) continue
 
             // Создание эталонной структуры данных, которая должна быть у текущего компонента
             const refDComp = articleManager.createComponent(article, tComps, tComp.id).compData as  ArticleTypes.Component
@@ -42,7 +58,10 @@ export default function correctArticle(
             synchronizeElems(matchElemsObj, article, tComps)
 
             // Поставить новые данные в originDComps
-            originDComps[i] = refDComp
+            refDComps.push(refDComp)
+        }
+        else if (dCompOrigin.dCompType === 'simpleTextComponent') {
+            originDComps.push(dCompOrigin)
         }
     }
 }
@@ -168,7 +187,7 @@ function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleType
                 refDElem.dCompElemChildren = []
 
                 // Обойти дочерние компоненты элемента
-                correctArticle(article, originDElem.dCompElemChildren, tComps)
+                iterateOverComponents(article, originDElem.dCompElemChildren, refDElem.dCompElemChildren, tComps)
             }
         }
     }

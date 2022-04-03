@@ -6,7 +6,7 @@ import articleManager from 'articleManager/articleManager'
 
 /**
  * Хук отлеживает изменение свойства isArtDataCorrect у данных статьи.
- * Если оно в false, то запускает функцию исправляющую статью.
+ * Если оно в false, то запускает функцию исправляющую статью и заменяющую исправленную версию вместо текущей.
  */
 export function useCorrectArticleData() {
     const { isArtDataCorrect, tempComps } = useGetArticleSelectors()
@@ -16,9 +16,11 @@ export function useCorrectArticleData() {
     useEffect(function () {
         if (isArtDataCorrect || !article || !tempComps) return
 
-        // Запуск сценария исправления статьи
-        articleManager.correctArticle(article, article.dComps, tempComps)
+        // Получить новую версию статью с исправленными данными и заменить текущий объект истории
+        const dataToUpdateHistoryStep = articleManager.getCorrectedArticle(article, tempComps)
+        dispatch( articleActions.updateCurrentHistoryItem(dataToUpdateHistoryStep) )
 
+        // Поставить, что данные статьи исправлены и можно их использовать
         dispatch(articleActions.setIsArtDataCorrect(true))
     }, [isArtDataCorrect, tempComps, article])
 }

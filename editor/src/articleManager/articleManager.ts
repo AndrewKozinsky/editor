@@ -1,5 +1,5 @@
 import { cloneItem } from './methods/clone'
-import correctArticle from './methods/correctArticle'
+import getCorrectedArticle from './methods/correctArticle'
 import {
     deleteComponent,
     deleteElement,
@@ -202,7 +202,7 @@ class ArticleManager {
     deleteArticle = deleteArticle
     setFocusInTextComponent = setFocusInTextComponent
     clearArticle = clearArticle
-    correctArticle = correctArticle
+    getCorrectedArticle = getCorrectedArticle
 }
 
 export default new ArticleManager()
