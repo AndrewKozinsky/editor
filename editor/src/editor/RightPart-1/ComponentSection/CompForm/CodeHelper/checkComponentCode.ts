@@ -89,7 +89,12 @@ export function checkElemAttrs(elemAttrs: TempCompTypes.ElemAttrs): string[] {
         errorsArr.push(...checkProp(elemAttr.elemAttrAlt, 'elemAttrAlt', 'string', false))
         errorsArr.push(...checkElemAttrView(elemAttr))
         errorsArr.push(...checkProp(elemAttr.elemAttrLockedValue, 'elemAttrLockedValue', 'string', false))
-        errorsArr.push(...checkProp(elemAttr.elemAttrValues, 'elemAttrValues', 'arrayOfObjects', false, checkElemAttrValues.bind(this, elemAttr.elemAttrValues)))
+        errorsArr.push(...checkProp(elemAttr.elemAttrValues, 'elemAttrValues', 'arrayOfObjects', false, checkElemAttrValues.bind(this, elemAttr.elemAttrValues, elemAttr)))
+
+        // Проверить, что свойство elemAttrValueChecked указано не более 1 раза если предполагается только одно значение
+        if (elemAttr.elemAttrValues) {
+            errorsArr.push(...checkElemAttrValueChecked(elemAttr.elemAttrValues, elemAttr))
+        }
 
         // Проверка, что в объекте elemAttr нет лишних полей
         errorsArr.push(
@@ -108,8 +113,12 @@ export function checkElemAttrs(elemAttrs: TempCompTypes.ElemAttrs): string[] {
 /**
  * Проверка массива code.elems[0].elemAttrs[0].elemAttrValues
  * @param {Array} elemAttrValues — массив code.elems[0].elemAttrs[0].elemAttrValues
+ * @param {Array} elemAttr — данные атрибута
  */
-export function checkElemAttrValues(elemAttrValues: TempCompTypes.ElemAttrValues): string[] {
+function checkElemAttrValues(
+    elemAttrValues: TempCompTypes.ElemAttrValues,
+    elemAttr: TempCompTypes.ElemAttr
+): string[] {
     const errorsArr: string[] = []
 
     elemAttrValues.forEach(elemAttrValue => {
@@ -129,6 +138,38 @@ export function checkElemAttrValues(elemAttrValues: TempCompTypes.ElemAttrValues
     })
 
     errorsArr.push(...checkForDifferentObjAttrValuesInArr(elemAttrValues, 'elemAttrValueId'))
+
+    return errorsArr
+}
+
+/**
+ * Функция проверяющая, что свойство elemAttrValueChecked в true есть только у одного объекта с описанием значения
+ * если позволено выбрать только одно значение атрибута (если elemAttrView не указан или равен radio)
+ * @param {Array} elemAttrValues — массив code.elems[0].elemAttrs[0].elemAttrValues
+ * @param {Array} elemAttr — данные атрибута
+ */
+function checkElemAttrValueChecked(
+    elemAttrValues: TempCompTypes.ElemAttrValues, elemAttr: TempCompTypes.ElemAttr
+): string[] {
+    const errorsArr: string[] = []
+
+    // Счётчик считающий сколько значений по умолчанию должно быть выбрано
+    let checkedValuesCount = 0
+
+    // Если elemAttrView не указан или равен radio, то можно выбрать только одно значение
+    if (!elemAttr.elemAttrView || elemAttr.elemAttrView === 'radio') {
+        // Перебрать все возможные значения атрибута
+        elemAttrValues.forEach(elemAttrValue => {
+            // Если должно быть выбрано, то увеличить счётчик.
+            if (elemAttrValue.elemAttrValueChecked) {
+                checkedValuesCount++
+            }
+        })
+    }
+
+    if (checkedValuesCount > 1) {
+        errorsArr.push(`В атрибуте ${elemAttr.elemAttrName} только одно значение может иметь свойство elemAttrValueChecked. Если хотите чтобы по умолчанию были отмечено несколько значений, то в свойстве elemAttrView укажите значение checkbox.`)
+    }
 
     return errorsArr
 }

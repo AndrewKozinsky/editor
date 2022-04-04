@@ -71,7 +71,7 @@ export function useGetTempCompsFolders() {
         }
 
         // Добавление в массив текстовый компонент если его там нет
-        if (updatedFolders[0].id !== 0) {
+        if (updatedFolders[0]?.id !== 0) {
             updatedFolders.unshift(textCompTemp)
         }
 

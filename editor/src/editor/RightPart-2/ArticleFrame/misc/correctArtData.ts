@@ -17,7 +17,6 @@ export function useCorrectArticleData() {
         if (isArtDataCorrect || !article || !tempComps) return
 
         // Получить новую версию статью с исправленными данными и заменить текущий объект истории
-        // console.log(article)
         const dataToUpdateHistoryStep = articleManager.getCorrectedArticle(article, tempComps)
         dispatch( articleActions.updateCurrentHistoryItem(dataToUpdateHistoryStep) )
 

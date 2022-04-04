@@ -19,7 +19,6 @@ function getMsgProxy<T extends MessagesObjType>(mgsOrigObj: T): MsgType<T>  {
 
     return new Proxy(mgsOrigObj, {
         get(target: T, prop: string) {
-
             try {
                 return target[prop][lang] || null
             }

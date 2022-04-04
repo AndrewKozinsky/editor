@@ -79,5 +79,8 @@ export function setFocusInTextComponent(
     // Требуется получить последний текстовый узел и поставить фокус на его последний символ.
     const nodeLength = $textComponent.childNodes
     const textNode = $textComponent.childNodes[nodeLength.length - 1]
-    selection.collapse(textNode, textNode.textContent.length)
+
+    if (textNode) {
+        selection.collapse(textNode, textNode.textContent.length)
+    }
 }

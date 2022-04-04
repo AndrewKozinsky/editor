@@ -48,8 +48,11 @@ function iterateOverComponents(
             // Поставить dCompId из оригинального компонента
             refDComp.dCompId = dCompOrigin.dCompId
 
+            // Объект, где хранится  максимальное id элемента данных эталонной структуры
+            const maxElemId = {id: 1}
+
             // Добавление в эталонный компонент повторяющиеся элементы исходя из данных оригинального компонента
-            addRepeatedElems([dCompOrigin.dElems], [refDComp.dElems])
+            addRepeatedElems([dCompOrigin.dElems], [refDComp.dElems], maxElemId)
 
             // Создать массив объектов с соответствием оригинального элемента и эталонного
             const matchElemsObj = makeMatchArr([dCompOrigin.dElems], [refDComp.dElems], tComp)
@@ -61,7 +64,7 @@ function iterateOverComponents(
             refDComps.push(refDComp)
         }
         else if (dCompOrigin.dCompType === 'simpleTextComponent') {
-            originDComps.push(dCompOrigin)
+            refDComps.push(dCompOrigin)
         }
     }
 }
@@ -73,14 +76,14 @@ function iterateOverComponents(
  * @param {Array} refDElems — элементы эталонного компонента (который создался по актуальному шаблону)
  * @param {Number} maxElemId — максимальный id данных элемента
  */
-function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, maxElemId = 0) {
+function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, maxElemId: {id: number}) {
     // Перебор эталонного массива элементов
     for (let i = 0; i < refDElems.length; i++) {
         const refDElem = refDElems[i]
 
         // Поставить максимальный id элемента потому что это рекурсивная функция добавляющая новые элементы.
         // Поэтому id данных элементов нужно обновить
-        refDElem.dCompElemId = ++maxElemId
+        refDElem.dCompElemId = maxElemId.id++
 
         // Количество дублей этого элемента в оригинальном компоненте
         const amountOfElems = articleManager.getElemCountInInnerElemsArr(originDElems, refDElem)
@@ -89,7 +92,7 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
         // Если более одного элемента с этим шаблоном, то добавить копии.
         for (let j = 0; j < amountOfElems - 1; j++) {
             const refDElemCopy = createDeepCopy(refDElem)
-            refDElemCopy.dCompElemId = ++maxElemId
+            refDElemCopy.dCompElemId = maxElemId.id++
 
             // Добавить копию после текущего элемента
             refDElems.splice(i + j, 0, refDElemCopy)
@@ -182,8 +185,13 @@ function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleType
             // Настроить соответствие между атрибутами в шаблоне и данными элемента
             makeMatchInAttrs(refDElem, originDElem, tElem)
 
+            // Поставить настройки слоя
+            if (originDElem.dCompElemLayer) {
+                refDElem.dCompElemLayer = {...originDElem.dCompElemLayer}
+            }
+
             // Исправить дочерние компоненты элемента
-            if (originDElem.dCompElemChildren) {
+            if (originDElem.dCompElemChildren?.length) {
                 refDElem.dCompElemChildren = []
 
                 // Обойти дочерние компоненты элемента
@@ -236,10 +244,13 @@ function makeMatchInTags(
 function makeMatchInAttrs(
     refDElem: ArticleTypes.ComponentElem, originDElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem
 ) {
+    // Если в шаблоне элемента описаны атрибуты, то поставить в dCompElemAttrs пустой массив
+    if (tElem.elemAttrs?.length && !refDElem.dCompElemAttrs) {
+        refDElem.dCompElemAttrs = []
+    }
+
     // Ничего не делать если в оригинальных данных ничего не сказано про атрибуты или их нет в шаблоне
     if (!originDElem.dCompElemAttrs?.length || !tElem.elemAttrs?.length) return
-
-    if (!refDElem.dCompElemAttrs) refDElem.dCompElemAttrs = []
 
     // Перебрать массив атрибутов шаблона элемента
     for (let i = 0; i < tElem.elemAttrs.length; i++) {

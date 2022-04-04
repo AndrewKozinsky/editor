@@ -169,25 +169,15 @@ export function getDElemInDComp(
     dataElemId: ArticleTypes.Id
 ): null | ArticleTypes.ComponentElem {
 
-    return finder([dComp.dElems])
+    let foundedDElem: ArticleTypes.ComponentElem = null
 
-    function finder(dElems: ArticleTypes.ComponentElems): ArticleTypes.ComponentElem {
-        for (let i = 0; i < dElems.length; i++) {
-            const dElem = dElems[i]
-
-            if (dElem.dCompElemId === dataElemId) {
-                return dElem
-            }
-            else if (dElem.dCompElemInnerElems?.length) {
-                const foundedDElem = finder(dElem.dCompElemInnerElems)
-                if (foundedDElem) {
-                    return foundedDElem
-                }
-            }
+    this.dElemsEnumeration([dComp.dElems], dElem => {
+        if (dElem.dCompElemId === dataElemId) {
+            foundedDElem = dElem
         }
+    })
 
-        return null
-    }
+    return foundedDElem
 }
 
 /**

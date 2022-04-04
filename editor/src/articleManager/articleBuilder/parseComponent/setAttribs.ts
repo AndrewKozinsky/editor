@@ -8,8 +8,9 @@ import { HTMLObjArrType } from '../htmlStringToObject'
  * @param {Object} consistObj — an object with link to dataComp, dataElem, tempElem and htmlElem
  */
 export default function setAttribs(consistObj: ConsistObj) {
+
     // Set attributes
-    if (!consistObj.tempElem.elemAttrs) return
+    if (!consistObj.tempElem.elemAttrs?.length) return
 
     // Перебрать массив атрибутов из данных
     for (let dAttr of consistObj.dElem.dCompElemAttrs) {
@@ -35,6 +36,7 @@ export default function setAttribs(consistObj: ConsistObj) {
         // Добавить в массив значений атрибута html-элемента другие значения
         setAttribToHtmlElem(tElemAttr, dAttr, consistObj.htmlElem)
     }
+
 
     // Перебор всех атрибутов html-элемента
     for (let key in consistObj.htmlElem.attrs) {

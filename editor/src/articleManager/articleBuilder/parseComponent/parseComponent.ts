@@ -38,7 +38,7 @@ export default function parseComponent(
     // Поставить главной обёртке дополнительные атрибуты
     setExtraAttribsToRootTag(htmlObjArr, compData, template)
 
-    // Массив объектов с данными для изменения тега элемента, вставки атрибутов и  делей.
+    // Массив объектов с данными для изменения тега элемента, вставки атрибутов и детей.
     const consistObjArr = getConsistObjArr(htmlObjArr, template, [], compData)
 
     for(let consistObj of consistObjArr) {

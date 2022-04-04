@@ -46,9 +46,11 @@ export function useSetHandlersToTrackText() {
     useEffect(function () {
         if (!$links.$document || handlerWasSet) return
 
-        // Поставить обработчик на вставку текста
+        // Поставить обработчик
+        $links.$document.addEventListener('keypress', textChangeHandler)
+        $links.$document.addEventListener('keydown', textChangeHandler)
         $links.$document.addEventListener('paste', textChangeHandler)
-        // Событие изменения текста
+        // Событие чтобы отловить вставку эмоджи
         $links.$document.addEventListener('DOMCharacterDataModified', textChangeHandler)
 
         // Set flag that handlers were set
@@ -65,7 +67,12 @@ function textChangeHandler(e: any) {
     if (!textManagerData.textCompId) return
 
     // Вставить новый объект истории если требуется
-    if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
+    if (
+        ['paste', 'DOMCharacterDataModified', 'keypress'].includes(e.type) ||
+        e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)
+    ) {
+        if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
+    }
 
     // html-объект компонента
     const $textComp = articleManager.get$elemBy$body(
@@ -75,6 +82,7 @@ function textChangeHandler(e: any) {
     // Если вставили текст
     if (e.type === 'paste') {
         e.preventDefault()
+
         // Получить новый текст и вставить в textManagerData
         const newText = getPastedText(e)
         textManagerData.setNewText(newText)
@@ -83,8 +91,11 @@ function textChangeHandler(e: any) {
         updateDataInTextComp('paste', $textComp)
     }
     // Если изменили текст, то поставить новый текст в данные и Реакт обновит текст компонента
-    else if (['DOMCharacterDataModified'].includes(e.type)) {
-        setTimeout(() => textManagerData.setNewText($textComp.textContent), 30)
+    else if (['DOMCharacterDataModified', 'keypress'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+        setTimeout(() => {
+            if (!$textComp) return
+            textManagerData.setNewText($textComp.textContent)
+        }, 30)
     }
 }
 
