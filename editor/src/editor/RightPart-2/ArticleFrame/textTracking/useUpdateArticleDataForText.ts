@@ -50,7 +50,7 @@ export function useSetHandlersToTrackText() {
         $links.$document.addEventListener('keypress', textChangeHandler)
         $links.$document.addEventListener('keydown', textChangeHandler)
         $links.$document.addEventListener('paste', textChangeHandler)
-        // Событие чтобы отловить вставку эмоджи
+        // Событие, чтобы отловить вставку эмоджи
         $links.$document.addEventListener('DOMCharacterDataModified', textChangeHandler)
 
         // Set flag that handlers were set
@@ -65,6 +65,9 @@ export function useSetHandlersToTrackText() {
 function textChangeHandler(e: any) {
     // Ничего не делать если не выбран текстовый компонент
     if (!textManagerData.textCompId) return
+
+    // Ничего не делать если нажали недопустимую клавишу
+    if (isPressedWrongKey(e)) e.preventDefault()
 
     // Вставить новый объект истории если требуется
     if (
@@ -97,6 +100,15 @@ function textChangeHandler(e: any) {
             textManagerData.setNewText($textComp.textContent)
         }, 30)
     }
+}
+
+/**
+ * Функция возвращает булево значение введен ли недопустимый символ.
+ * @param {Object} e — объект события
+ */
+function isPressedWrongKey(e: any): boolean {
+    // Ничего не делать если нажали не символьные клавиши, которые не являются кнопками удаления влево или вправо
+    if (e.type === 'keydown' && e.key === 'Enter') return true
 }
 
 /**

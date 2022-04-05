@@ -90,14 +90,14 @@ export function cloneElement(
 ): StoreArticleTypes.CreateNewHistoryItem {
     const { dComps } = article
 
-    // Компонент, где находится клонируемый элемент, сам элемент
+    // Компонент, где находится клонируемый элемент, и он сам
     const dComp = articleManager.getComponent(dComps, compCoords.dataCompId) as ArticleTypes.Component
     const dElem = articleManager.getDElemInDComp(dComp, compCoords.dataElemId)
 
-    // Позиция элемента в его массиве
+    // Позиция клонируемого элемента в его массиве
     const dElemInnerElemsArr = articleManager.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, dElem.dCompElemId)
-    const elemsGroupArr = dElemInnerElemsArr.filter(el => el.tCompElemId === dElem.tCompElemId)
-    const idx = elemsGroupArr.findIndex(dElem => dElem.dCompElemId === compCoords.dataElemId)
+    // Получить idx позиции копируемого элемента
+    const idx = dElemInnerElemsArr.findIndex(dElem => dElem.dCompElemId === compCoords.dataElemId)
 
     // Получение глубокой копии элемента
     const cloneDElem = createDeepCopy(dElem)
