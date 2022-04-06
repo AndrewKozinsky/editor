@@ -37,6 +37,8 @@ export function createParsingData(
 function getMetaData(meta: MetaType.Items): ParsingDataMeta.Inputs {
     const parsedMetaItems: ParsingDataMeta.Inputs = {}
 
+    if (!meta) return null
+
     meta.forEach(metaObj => {
         if (metaObj.type === 'header') return
 
@@ -237,7 +239,7 @@ function getInnerElems(
     tComp: TempCompTypes.TempComp,
     tComps: TempCompTypes.TempComps,
 ): ParsingDataComponents.ComponentElems {
-    if (!dElem.dCompElemInnerElems.length) return null
+    if (!dElem.dCompElemInnerElems?.length) return null
 
     return getCompElementsData(tComps, tComp, dElem.dCompElemInnerElems)
 }

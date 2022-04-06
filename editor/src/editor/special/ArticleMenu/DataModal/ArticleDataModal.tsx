@@ -7,7 +7,7 @@ import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import { createParsingData } from './createParsingData'
 
-/** Компонент окна с разметкой статьи */
+/** Компонент окна с данными статьи для сборки */
 export default function ArticleDataModal() {
     const { tempComps, articleId } = useGetArticleSelectors()
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
