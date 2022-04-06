@@ -222,7 +222,7 @@ const sitesActions = {
         }
     },
 
-    // Установка папки компонентов
+    // Установка массива папок с компонентами
     setCompFolder(payload: StoreSitesTypes.SetCompFolderActionPayload): StoreSitesTypes.SetCompFolderAction {
         return {
             type: StoreSitesTypes.SET_COMP_FOLDER,

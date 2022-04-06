@@ -15,6 +15,8 @@ import { FolderType } from './types'
 import FilesTreeType from 'types/FilesTreeType'
 import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
 import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
+import {selectItem} from '../../../libs/DragFilesTree/StoreManage/manageState'
+import { store } from '../../../store/rootReducer'
 
 
 /**
@@ -113,12 +115,31 @@ export function useGetNewItemsName(type: FolderType) {
 
 
 /**
- * Функция запускается после добавления папки или файла в массив папок. При удалении функция не обрабатывает.
+ * Функция запускается после добавления папки или файла в массив папок.
+ * После добавления выделяется
+ * При удалении функция не обрабатывает.
  * @param {String} category — категория папок: компонентов или статей.
  * @param {Array} items — массив папок и файлов.
  */
 export async function saveFoldersOnServer(category: FolderType, items: DragFilesTreeType.Items) {
     await bridge.addResource(category, items)
+
+    // После получения нового списка папок и файлов нужно выделить текущую папку или файл
+
+    if (category === 'components') {
+        const itemId = getState().sites.componentSection.currentCompItemId
+        // Выделить текущую папку и получить обновлённый массив папок
+        const updatedFolders = selectItem(items, itemId).newItems
+        // Сохранить новый массив в Хранилище.
+        store.dispatch(sitesActions.setCompFolder({folders: updatedFolders}))
+    }
+    else if (category === 'articles') {
+        const itemId = getState().sites.articleSection.currentArtItemId
+        // Выделить текущую папку и получить обновлённый массив папок
+        const updatedFolders = selectItem(items, itemId).newItems
+        // Сохранить новый массив в Хранилище.
+        store.dispatch(sitesActions.setArtFolder({folders: updatedFolders}))
+    }
 }
 
 /**
@@ -142,7 +163,7 @@ export function afterDeleteItem(
  * Функция запускаемая после добавления компонента или статьи.
  * При добавлении папки эта функция не отрабатывает.
  * @param {String} type — тип папок: с компонентами или со статьями
- * @param {String} newArticleName — название компонента или статьи.
+ * @param {String} newArticleName — название статьи.
  */
 export async function afterAddingNewFile(type: FolderType, newArticleName?: string): Promise<number> {
     const { currentSiteId } = getState().sites
@@ -164,9 +185,13 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
             currentSiteId, JSON5.stringify(minCompContent)
         )
 
-        if (serverResponse.status === 'success') {
-            return  serverResponse.data.components[0].id
-        }
+        if (serverResponse.status !== 'success') return
+
+        const addedCompId = serverResponse.data.components[0].id
+        // Выделить добавленный компонент
+        store.dispatch(sitesActions.setCurrentComp(addedCompId, 'file'))
+
+        return addedCompId
     }
     else if (type === 'articles') {
         const serverResponse = await createArticleRequest(
@@ -174,9 +199,13 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
             currentSite.defaultMetaTemplateId
         )
 
-        if (serverResponse.status === 'success') {
-            return serverResponse.data.articles[0].id
-        }
+        if (serverResponse.status !== 'success') return
+
+        const addedArtId = serverResponse.data.articles[0].id
+        // Выделить добавленную статью
+        store.dispatch(sitesActions.setCurrentArt(addedArtId, 'file'))
+
+        return addedArtId
     }
 
     // Функция должна вернуть число. Пусть в случае неудачного ответа будет возвращено такое значение:

@@ -104,9 +104,6 @@ export function createNewFolder(
         after.changingTree(result.newState)
     }
 
-    // Сделаю новый элемент текущим
-    const { newItem, newItems } = selectItem(result.newState, result.newItem.id)
-
     // Запустить функцию, которая должна быть запущена после выделения элемента
     if (after.selectItem) after.selectItem(result.newItem)
 
