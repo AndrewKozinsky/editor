@@ -1,6 +1,13 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 
+// @ts-ignore. Подключение Хранилищ MobX чтобы они отображались в инструментах разработчика
+import {injectStores} from '@mobx-devtools/tools'
+import textManagerData from 'editor/RightPart-2/ArticleFrame/textTracking/textManagerData'
+injectStores({
+    textManagerData
+})
+
 // Компоненты
 import Loader from 'common/misc/Loader/Loader'
 import NotFound from '../NotFound/NotFound'
@@ -11,9 +18,10 @@ import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
 import { useGetAndSetEditorSettings, useGetUserDataAndStatus } from './app-fn/init'
-import { useRedirectPage } from './app-fn/App-func'
 import useSetShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
+import { useManageFavicon } from './app-fn/useManageFavicon'
+import { useRedirectPage } from './app-fn/useRedirectPage'
 
 
 /** Компонент всего приложения */
@@ -48,6 +56,9 @@ export default function App() {
     // Cmd - / Cmd + // Сворачивание / разворачивание стека
     // Alt + Cmd + T // Оборачивание выделенных тегов в HTML  или в конструкцию if ... else, while, for...в JS
     // Shift + Cmd + Fn + Del // Удаление оберни в HTML или  if ... else, while, for... в JS
+
+    // Изменение фавиконки в зависимости от темы и плотности пикселей
+    useManageFavicon()
 
     // Поставить настройки редактора в Хранилище
     useGetAndSetEditorSettings()

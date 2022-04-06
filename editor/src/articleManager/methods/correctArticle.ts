@@ -1,215 +1,308 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import StoreArticleTypes from 'store/article/articleTypes'
+import { createDeepCopy } from 'utils/miscUtils'
 import articleManager from '../articleManager'
 
+
+export default function getCorrectedArticle(
+    article: ArticleTypes.Article, tComps: TempCompTypes.TempComps
+): StoreArticleTypes.CreateNewHistoryItem {
+    const refDComps: ArticleTypes.Components = []
+
+    iterateOverComponents(article, article.dComps, refDComps, tComps)
+
+    return {
+        components: refDComps,
+        maxCompId: article.dMeta.dMaxCompId
+    }
+}
+
 /**
- * Функция проходится по всем компонентам в данных статьи и правит данные.
- * Например, удаляет те компоненты, для которых нет шаблонов
+ * Функция проходится по всем компонентам в данных статьи, генерирует данные компонентов, соответствующие текущему шаблону,
+ * и изменяет их по оригинальным данным попутно проверяя, что данные соответствуют шаблону.
+ * Эта функция запускается при открытии статьи и изменении шаблона компонента. Поэтому данные гарантированно будут соответствовать шаблонам.
  * @param {Object} article — данные статьи
- * @param {Array} dComps — массив данных компонентов
+ * @param {Array} originDComps — массив оригинальных компонентов
+ * @param {Array} refDComps — массив эталонных компонентов
  * @param {Array} tComps — массив шаблонов компонентов
  */
-export default function correctArticle(
-    article: ArticleTypes.Article, dComps: ArticleTypes.Components, tComps: TempCompTypes.TempComps
+function iterateOverComponents(
+    article: ArticleTypes.Article,
+    originDComps: ArticleTypes.Components,
+    refDComps: ArticleTypes.Components,
+    tComps: TempCompTypes.TempComps
 ) {
-    for (let i = 0; i < dComps.length; i++) {
-        const dComp = dComps[i]
+    for (let i = 0; i < originDComps.length; i++) {
+        const dCompOrigin = originDComps[i]
 
-        if (dComp.dCompType === 'component') {
+        if (dCompOrigin.dCompType === 'component') {
             // Шаблон компонента
-            const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
+            const tComp = articleManager.getTemplate(tComps, dCompOrigin.tCompId)
 
-            if (!tComp) {
-                dComps.splice(i, 1)
-                continue
-            }
+            if (!tComp) continue
 
-            // Добавление недостающих данных элементов в соответствии с элементами из шаблона
-            addMissingDElems(dComp, tComp.content.elems)
+            // Создание эталонной структуры данных, которая должна быть у текущего компонента
+            const refDComp = articleManager.createComponent(article, tComps, tComp.id).compData as  ArticleTypes.Component
 
-            // Сделать чтобы элементы в данных соответствовали элементам в шаблоне компонента
-            makeMatchBetweenTCompsAndDComps(article, dComp.dElems, tComp.content.elems)
+            // Поставить dCompId из оригинального компонента
+            refDComp.dCompId = dCompOrigin.dCompId
 
-            // Пройтись по элементам и исправить их дочерние компоненты
-            for (let k = 0; k < dComp.dElems.length; k++) {
-                const dElem = dComp.dElems[k]
+            // Объект, где хранится  максимальное id элемента данных эталонной структуры
+            const maxElemId = {id: 1}
 
-                if (Array.isArray(dElem.dCompElemChildren)) {
-                    correctArticle(article, dElem.dCompElemChildren, tComps)
-                }
-            }
+            // Добавление в эталонный компонент повторяющиеся элементы исходя из данных оригинального компонента
+            addRepeatedElems([dCompOrigin.dElems], [refDComp.dElems], maxElemId)
+
+            // Создать массив объектов с соответствием оригинального элемента и эталонного
+            const matchElemsObj = makeMatchArr([dCompOrigin.dElems], [refDComp.dElems], tComp)
+
+            // Сделать соответствие в тегах, атрибутах и детях элементов между оригинальными элементами и эталонными
+            synchronizeElems(matchElemsObj, article, tComps)
+
+            // Поставить новые данные в originDComps
+            refDComps.push(refDComp)
+        }
+        else if (dCompOrigin.dCompType === 'simpleTextComponent') {
+            refDComps.push(dCompOrigin)
         }
     }
 }
 
+
 /**
- * Функция добавляет недостающие данные элементов в соответствии с элементами из шаблона.
- * @param {Object} dComp — данные компонента
- * @param {Array} tElems — массив элементов шаблона
+ * Функция добавляет дублированные элементы в эталонный компонент
+ * @param {Array} originDElems — элементы оригинального компонента
+ * @param {Array} refDElems — элементы эталонного компонента (который создался по актуальному шаблону)
+ * @param {Number} maxElemId — максимальный id данных элемента
  */
-function addMissingDElems(dComp: ArticleTypes.Component, tElems: TempCompTypes.Elems) {
-    // Получение максимального id данных элемента.
-    // Он потребуется для задания новых идентификаторов
-    let maxDElemId = articleManager.getMaxDElemsId(dComp)
+function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, maxElemId: {id: number}) {
+    // Перебор эталонного массива элементов
+    for (let i = 0; i < refDElems.length; i++) {
+        const refDElem = refDElems[i]
 
-    for (let i = 0; i < tElems.length; i++) {
-        const tElem = tElems[i]
+        // Поставить максимальный id элемента потому что это рекурсивная функция добавляющая новые элементы.
+        // Поэтому id данных элементов нужно обновить
+        refDElem.dCompElemId = maxElemId.id++
 
-        const dElem = articleManager.getDElemByTElem(dComp, tElem.elemId)
+        // Количество дублей этого элемента в оригинальном компоненте
+        const amountOfElems = articleManager.getElemCountInInnerElemsArr(originDElems, refDElem)
+        if (amountOfElems <= 1) continue
 
-        if (!dElem) {
-            dComp.dElems.push({
-                dCompElemId: ++maxDElemId,
-                tCompElemId: tElem.elemId
-            })
+        // Если более одного элемента с этим шаблоном, то добавить копии.
+        for (let j = 0; j < amountOfElems - 1; j++) {
+            const refDElemCopy = createDeepCopy(refDElem)
+            refDElemCopy.dCompElemId = maxElemId.id++
+
+            // Добавить копию после текущего элемента
+            refDElems.splice(i + j, 0, refDElemCopy)
         }
+
+        i += amountOfElems - 1
+    }
+
+    // Обойти получившиеся элементы и запустить эту функцию для вложенных элементов
+    for (let i = 0; i < refDElems.length; i++) {
+        const refDElem = refDElems[i]
+
+        if (!refDElem.dCompElemInnerElems) continue
+
+        addRepeatedElems(originDElems[i].dCompElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
+    }
+}
+
+
+// Тип объекта в который записывается сопоставление оригинальных элементов и эталонных
+type MatchElemsObjType = {
+    [tElemId: string]: { // id шаблона элемента
+        tElem: TempCompTypes.Elem // шаблон элемента
+        originDElems: ArticleTypes.ComponentElem[] // Массив оригинальных данных элементов с этим tElemId
+        refDElems: ArticleTypes.ComponentElem[] // Массив эталонных данных элементов с этим tElemId
     }
 }
 
 /**
- * Функция настраивает соответствие (убирает противоречия) между шаблоном и данными компонента
+ * Функция создаёт объект сопоставления оригинальных элементов и эталонных.
+ * После через перебор этого объекта в эталонные элементы будут записываться данные из оригинальных
+ * @param {Array} originDElems — элементы оригинального компонента
+ * @param {Array} refDElems — элементы эталонного компонента (который создался по актуальному шаблону)
+ * @param {Object} tComp — шаблон компонента
+ */
+function makeMatchArr(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, tComp: TempCompTypes.TempComp): MatchElemsObjType {
+    // Объект, куда будут складываться соответствия элементов
+    const matchElemsObj: MatchElemsObjType = {}
+
+    // Перебор элементов эталонного компонента
+    articleManager.dElemsEnumeration(refDElems, function (refDElem) {
+        // id шаблона перебираемого элемента
+        const refTElemId = refDElem.tCompElemId
+
+        // Если в объекте нет такого свойства, то создать с пустым значением
+        if (!matchElemsObj[refTElemId]) {
+            matchElemsObj[refTElemId] = {
+                tElem: articleManager.getTElemInTComp(tComp, refTElemId),
+                originDElems: [], // оригинальные элементы с указанным refTElemId
+                refDElems: [], // эталонные элементы с указанным refTElemId
+            }
+        }
+
+        // Поставить туда эталонные элементы
+        matchElemsObj[refTElemId].refDElems.push(refDElem)
+    })
+
+    // Перебрать оригинальные элементы и заполнить matchElemsObj
+    articleManager.dElemsEnumeration(originDElems, function (originDElem) {
+        const originDElemId = originDElem.tCompElemId
+
+        if (!matchElemsObj[originDElemId]) return
+
+        matchElemsObj[originDElemId].originDElems.push(originDElem)
+    })
+
+    return matchElemsObj
+}
+
+
+/**
+ * Функция настраивает соответствие в тегах, атрибутах и детях элементов между данными и шаблонами элементов
+ * @param {MatchElemsObjType} matchElemsObj
  * @param {Object} article — данные статьи
- * @param {Array} dElems — массив данных элементов
- * @param {Array} tElems — массив элементов шаблона
+ * @param {Array} tComps — массив шаблонов компонентов
  */
-function makeMatchBetweenTCompsAndDComps(
-    article: ArticleTypes.Article, dElems: ArticleTypes.ComponentElems, tElems: TempCompTypes.Elems
-) {
-    // Удалить из данных элементы, для которых нет элементов в шаблоне
-    for (let i = 0; i < dElems.length; i++) {
-        const dElem = dElems[i]
+function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleTypes.Article, tComps: TempCompTypes.TempComps) {
+    for (let refTElemId in matchElemsObj) {
+        const { originDElems, refDElems, tElem } = matchElemsObj[refTElemId]
 
-        const tElem = tElems.find(tElem => {
-            return dElem.tCompElemId === tElem.elemId
-        })
+        for (let i = 0; i < refDElems.length; i++) {
+            const originDElem = originDElems[i]
+            const refDElem = refDElems[i]
 
-        if (!tElem) {
-            dElems.splice(i, 1)
-            --i
-            continue
+            if (!originDElem) continue
+
+            // Настроить соответствие между тегами в шаблоне и данными элемента
+            makeMatchInTags(refDElem, originDElem, tElem)
+
+            // Настроить соответствие между атрибутами в шаблоне и данными элемента
+            makeMatchInAttrs(refDElem, originDElem, tElem)
+
+            // Поставить настройки слоя
+            if (originDElem.dCompElemLayer) {
+                refDElem.dCompElemLayer = {...originDElem.dCompElemLayer}
+            }
+
+            // Исправить дочерние компоненты элемента
+            if (originDElem.dCompElemChildren?.length) {
+                refDElem.dCompElemChildren = []
+
+                // Обойти дочерние компоненты элемента
+                iterateOverComponents(article, originDElem.dCompElemChildren, refDElem.dCompElemChildren, tComps)
+            }
         }
-
-        // Настроить соответствие между тегами в шаблоне и данными элемента
-        makeMatchInTags(dElem, tElem)
-        // Настроить соответствие между атрибутами в шаблоне и данными элемента
-        makeMatchInAttrs(dElem, tElem)
-
-        // Поправить отсутствие/наличие текстового компонента в зависимости от того требуется ли он
-        setEmptyTextComponent(article, dElem, tElem)
     }
 }
 
+
 /**
- * Функция настраивает соответствие между тегами в шаблоне и данными элемента
- * @param {Object} dElem — данные элемента
+ * Функция добавляет id или значение выбранного тега в эталонный тег из оригинального если в шаблоне он предусмотрен.
+ * @param {Object} refDElem — данные эталонного элемента
+ * @param {Object} originDElem — данные оригинального элемента
  * @param {Object} tElem — шаблон элемента
  */
-function makeMatchInTags(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
-    const dTag = dElem.dCompElemTag
+function makeMatchInTags(
+    refDElem: ArticleTypes.ComponentElem, originDElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem
+) {
+    const originDTag = originDElem.dCompElemTag
 
-    // Ничего не делать если про тег не сказано в данных
-    if (!dTag) return
+    // Ничего не делать если про тег не сказано в оригинальных данных
+    if (!originDTag) return
 
-    // Если в шаблоне ничего не сказано про тег, то удалить данные про тег
-    else if (!tElem.elemTags || !tElem.elemTags.elemTagsValues.length) {
-        delete dElem.dCompElemTag
-        return
-    }
-
-    // Если в шаблоне элемента находится массив значений, то значит в данных должен быть id.
-    // Найти этот id в tElem.elemTags.elemTagsValues.
-    // Если такого нет, то удалить.
+    // Если в шаблоне элемента находится массив значений, то значит в оригинальных данных указан id значения.
     if (Array.isArray(tElem.elemTags.elemTagsValues)) {
-        const tTag = tElem.elemTags.elemTagsValues.find(tTag => {
-            return tTag.elemTagValueId === dTag
+        // Проверить, что указанный id есть в шаблоне.
+        const foundedTag = tElem.elemTags.elemTagsValues.find(tagValueObj => {
+            return tagValueObj.elemTagValueId === originDTag
         })
 
-        if (!tTag) delete dElem.dCompElemTag
+        // Если есть, то поставить его id в данные эталонного элемента.
+        if (foundedTag) {
+            refDElem.dCompElemTag = originDElem.dCompElemTag
+        }
+    }
+    // В противном случае это точное значение
+    else {
+        refDElem.dCompElemTag = originDElem.dCompElemTag
     }
 }
+
 
 /**
  * Функция настраивает соответствие между атрибутами в шаблоне и в данных
- * @param {Object} dElem — данные элемента
+ * @param {Object} refDElem — данные эталонного элемента
+ * @param {Object} originDElem — данные оригинального элемента
  * @param {Object} tElem — шаблон элемента
  */
-function makeMatchInAttrs(dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
-    // Ничего не делать если в данных нет информации об атрибутах
-    if (!dElem.dCompElemAttrs) return
-
-    // Если в шаблоне ничего не сказано про атрибуты, но удалить данные атрибутов
-    if (!tElem.elemAttrs || !tElem.elemAttrs.length) {
-        delete dElem.dCompElemAttrs
-        return
+function makeMatchInAttrs(
+    refDElem: ArticleTypes.ComponentElem, originDElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem
+) {
+    // Если в шаблоне элемента описаны атрибуты, то поставить в dCompElemAttrs пустой массив
+    if (tElem.elemAttrs?.length && !refDElem.dCompElemAttrs) {
+        refDElem.dCompElemAttrs = []
     }
 
-    // Массив атрибутов из шаблона
-    const tAttrs = tElem.elemAttrs
+    // Ничего не делать если в оригинальных данных ничего не сказано про атрибуты или их нет в шаблоне
+    if (!originDElem.dCompElemAttrs?.length || !tElem.elemAttrs?.length) return
 
-    for (let i = 0; i < dElem.dCompElemAttrs.length; i++) {
-        const dAttr = dElem.dCompElemAttrs[i]
-        const dAttrId = dAttr.tCompElemAttrId
-        const dAttrValues = dAttr.dCompElemAttrValue
+    // Перебрать массив атрибутов шаблона элемента
+    for (let i = 0; i < tElem.elemAttrs.length; i++) {
+        const tElemAttr = tElem.elemAttrs[i]
 
-        // Найти шаблон этого атрибута
-        const tAttr = tAttrs.find(tAttr => {
-            return tAttr.elemAttrId === dAttrId
+        // Данные этого атрибута из оригинального элемента
+        const origDElemAttr = originDElem.dCompElemAttrs.find(origDElemAttr => {
+            return origDElemAttr.tCompElemAttrId === tElemAttr.elemAttrId
         })
 
-        // Если такого шаблона нет, то удалить данные об атрибуте
-        if (!tAttr) {
-            dElem.dCompElemAttrs.splice(i, 1)
-            continue
-        }
+        // Пропустить если в данных оригинального элемента нет данных этого атрибута
+        if (!origDElemAttr) continue
 
-        // Если в шаблоне нет свойства tAttr.elemAttrValues, то значит атрибут принимает точное значение
-        // И если в данных в качестве значения находится массив идентификаторов, то его нужно удалить
-        if (!tAttr.elemAttrValues && Array.isArray(dAttrValues)) {
-            delete dAttr.dCompElemAttrValue
-        }
-
-        // Ничего не делать если в шаблоне не указан массив значений
-        if (!tAttr.elemAttrValues) continue
-
-        // Если в tAttr в качестве значений указан массив, то и в значении dAttr тоже должен быть массив
-        if (Array.isArray(tAttr.elemAttrValues) && !Array.isArray(dAttrValues)) {
-            dElem.dCompElemAttrs.splice(i, 1)
-            continue
-        }
-
-        // Так как и в tAttr и в dAttr в качестве значений указан массив, то проверить,
-        // что значения в массиве в dAttr имеются в массиве значений tAttr
-        for (let k = 0; k < dAttrValues.length; k++) {
-            if (!tAttr.elemAttrValues) debugger
-            const tAttrValue = tAttr.elemAttrValues.find(tAttrValue => {
-                return tAttrValue.elemAttrValueId === dAttrValues[k]
-            })
-
-            if (!tAttrValue) {
-                dElem.dCompElemAttrs.splice(i, 1)
-            }
-        }
+        makeMatchInAttr(refDElem, origDElemAttr, tElemAttr)
     }
 }
 
+
 /**
- * Функция регулирует текстовые компоненты в массиве дочерних компонентов элемента данных
- * @param {Object} article — данные статьи
- * @param {Object} dElem — данные элемента
- * @param {Object} tElem — шаблон элемента
+ * Функция ставит значения атрибута оригинального элемента эталонному если эти значения предусмотрены в шаблоне атрибута.
+ * @param {Object} refDElem — данные эталонного элемента
+ * @param {Object} origDElemAttr — объект атрибута оригинального элемента
+ * @param {Object} tElemAttr — шаблон атрибута
  */
-function setEmptyTextComponent(article: ArticleTypes.Article, dElem: ArticleTypes.ComponentElem, tElem: TempCompTypes.Elem) {
-    // Поставить пустой текстовый компонент в массив детей если в шаблоне указано свойство elemTextInside, а текстового компонента нет
-    if (tElem.addTextComponent) {
-        // Найти текстовый компонент в массиве
-        const textCompInChildrenArr = dElem.dCompElemChildren.find(dComp => dComp.dCompType === 'simpleTextComponent')
+function makeMatchInAttr(
+    refDElem: ArticleTypes.ComponentElem, origDElemAttr: ArticleTypes.Attrib, tElemAttr: TempCompTypes.ElemAttr
+) {
+    // Если в шаблоне атрибута находится массив значений, то значит в оригинальных данных указан id значения.
+    if (Array.isArray(tElemAttr.elemAttrValues) && Array.isArray(origDElemAttr.dCompElemAttrValue)) {
+        // Получить массив указанных id значений атрибута оригинального элемента, которые существуют в шаблоне
+        const attrValuesIds: string[] = []
 
-        if (!textCompInChildrenArr) {
-            const newEmptyTextComp = articleManager.createSimpleTextComponent('',article.dMeta.dMaxCompId + 1)
-            dElem.dCompElemChildren.unshift(newEmptyTextComp.compData)
+        origDElemAttr.dCompElemAttrValue.forEach(origDAttrValId => {
+            tElemAttr.elemAttrValues.find(tElemAttrObj => {
+                if (tElemAttrObj.elemAttrValueId === origDAttrValId) {
+                    attrValuesIds.push(origDAttrValId)
+                }
+            })
+        })
 
-            // Поставить значение максимального id компонента
-            article.dMeta.dMaxCompId = newEmptyTextComp.maxCompId
-        }
+        if (!attrValuesIds.length) return
+
+        // Из эталонного элемента получить объект с данными о текущем атрибуте
+        const refDAttrObj = refDElem.dCompElemAttrs.find(refDAttrObj => refDAttrObj.tCompElemAttrId === tElemAttr.elemAttrId)
+        // Поставить значение текущего атрибута эталонному элементу
+        refDAttrObj.dCompElemAttrValue = attrValuesIds
+    }
+    // В противном случае это точное значение
+    else {
+        // Из эталонного элемента получить объект с данными о текущем атрибуте
+        const refDAttrObj = refDElem.dCompElemAttrs.find(refDAttrObj => refDAttrObj.tCompElemAttrId === tElemAttr.elemAttrId)
+        // Поставить значение текущего атрибута эталонному элементу
+        refDAttrObj.dCompElemAttrValue = origDElemAttr.dCompElemAttrValue
     }
 }

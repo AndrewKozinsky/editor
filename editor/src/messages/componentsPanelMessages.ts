@@ -7,16 +7,16 @@ const componentsPanelMessages = {
         rus: 'Компоненты'
     },
     beforeButton: {
-        eng: 'Insert before component',
-        rus: 'Вставить до компонента'
+        eng: 'Insert before',
+        rus: 'Вставить до'
     },
     afterButton: {
-        eng: 'Insert after component',
-        rus: 'Вставить после компонента'
+        eng: 'Insert after',
+        rus: 'Вставить после'
     },
     insideButton: {
-        eng: 'Insert in element',
-        rus: 'Вставить внутрь элемента'
+        eng: 'Insert in',
+        rus: 'Вставить внутрь'
     },
     textComponent: {
         eng: 'Text',

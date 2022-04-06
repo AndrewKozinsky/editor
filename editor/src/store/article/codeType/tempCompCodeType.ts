@@ -14,9 +14,12 @@ namespace TempCompTypes {
 
     // Код шаблона компонента
     export type Content = {
+        // Идентификатор шаблона. Он задаётся программистом и нужен, чтобы сопоставить данные компонента с его шаблоном при создании разметки из данных.
+        // В редакторе нигде не используется.
+        templateId?: string
         // HTML шаблона. В атрибуте data-em-id указывается идентификатор элемента
         html: string // `<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>`
-        elems?: Elems
+        elems: Elems
     }
 
     // Массив элементов компонента

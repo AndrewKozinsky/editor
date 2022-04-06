@@ -73,7 +73,7 @@ export function deleteElement(
     if (!dComp || dComp.dCompType === 'simpleTextComponent') return
 
     // Массив, где находится удаляемый элемент
-    const elemsArr = dComp.dElems
+    const elemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, compCoords.dataElemId)
 
     // Скопировать массив и удалить элемент
     const updatedElemsArr = elemsArr.concat()

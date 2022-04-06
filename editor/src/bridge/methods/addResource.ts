@@ -1,10 +1,10 @@
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
-import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
-import { store } from 'store/rootReducer'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
+import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import bridge from '../bridge'
-import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
+import { FolderType } from 'editor/RightPart-1/FoldersList/types'
+import { getState } from 'utils/miscUtils'
 
 // TODO Что делает эта функция?
 export async function addResource(
@@ -17,7 +17,7 @@ export async function addResource(
 
     // Сохранить данные на сервере
     if (category === 'components') {
-        const { compFolderId } = store.getState().sites.compFolderSection
+        const { compFolderId } = getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedFolders)
 
         // Обновить папки компонентов у редактируемой статьи если отредактировали
@@ -25,7 +25,7 @@ export async function addResource(
         this.updateTempCompFolders()
     }
     else if (category === 'articles') {
-        const { artFolderId } = store.getState().sites.artFolderSection
+        const { artFolderId } = getState().sites.artFolderSection
         await putArtFolderRequest(artFolderId, preparedFolders)
     }
 }

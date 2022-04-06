@@ -5,7 +5,7 @@ import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import { ButtonPropType } from 'common/formElements/Button/Button'
 import { UserServerResponse } from 'requests/user/userServerResponseType'
-import { SitesServerResponseType } from '../../requests/editor/sites/sitesServerResponseType'
+import { SitesServerResponseType } from 'requests/editor/sites/sitesServerResponseType'
 
 /** Типы компонента FormConstructor */
 namespace FCType {

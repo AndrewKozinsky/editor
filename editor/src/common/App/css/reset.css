@@ -50,3 +50,7 @@ blockquote, q {
 li {
     list-style-type: none;
 }
+input, select, textarea {
+    -webkit-appearance: none;
+    margin: 0;
+}

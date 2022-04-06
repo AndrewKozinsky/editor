@@ -1,6 +1,9 @@
 $CN: name-section;
 
-.#{$CN} {}
+.#{$CN} {
+    display: flex;
+    flex-direction: column;
+}
 
 .#{$CN}__header {
     position: relative;
@@ -43,4 +46,9 @@ $CN: name-section;
         width: 5px;
         background-color: dodgerblue;
     }
+}
+
+.#{$CN}__content {
+    overflow: auto;
+    padding: 0 1px 4px 1px;
 }

@@ -30,6 +30,10 @@ const siteTemplateSectionMessages = {
         eng: 'Delete',
         rus: 'Удалить'
     },
+    deleteConfirmationHeaderInModal: {
+        eng: 'Deleting the group template',
+        rus: 'Удаление шаблон группы?'
+    },
     deleteConfirmationTextInModal: {
         eng: 'Are you sure you want to delete the site template?',
         rus: 'Вы уверены, что хотите удалить шаблон сайта?'

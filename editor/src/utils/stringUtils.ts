@@ -30,7 +30,8 @@ export function makeCN(classesArr: string[]): string{
 
 /** Функция возвращает случайный идентификатор */
 export function getRandomId() {
-    const randomNum = Math.random() * 100000
+    let randomNum = Math.random() * 100000
+
     return 'id' + Math.round(randomNum)
 }
 
@@ -78,5 +79,6 @@ export function convertToSnakeCase(str: string) {
  * @param {String} str — строка, в которой первую букву нужно сделать заглавной.
  */
 export function setUpperCaseForFirstLetter(str: string) {
+    if (!str) return null
     return str.slice(0, 1).toUpperCase() + str.slice(1)
 }

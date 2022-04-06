@@ -1,10 +1,11 @@
 import { updateArticleRequest } from 'requests/editor/article/updateArticleRequest'
 import StoreArticleTypes from 'store/article/articleTypes'
-import articleManager from 'articleManager/articleManager'
+import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
+import articleManager from 'articleManager/articleManager'
 import config from 'utils/config'
 import { removeFromLocalStorage } from 'utils/miscUtils'
-import articleActions from 'store/article/articleActions'
+import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
 /**
@@ -21,6 +22,9 @@ export async function saveArticle(
 ) {
     if (!articleId) return
 
+    // Поставить текст текстового компонента в данные если он выделен и его отредактировали
+    updateDataInTextComp('common')
+
     // Set current history step to historyStepWhenWasSave to know what step the article was saved
     store.dispatch( articleActions.setHistoryStepWhenArticleWasSaved() )
 
@@ -28,7 +32,7 @@ export async function saveArticle(
     const historyItem = this.getCurrentHistoryItem(historyArr, historyCurrentIdx)
 
     // Save article code in a server
-    await updateArticleRequest(articleId, undefined, undefined, historyItem.article)
+    await updateArticleRequest(articleId, {content: historyItem.article})
 }
 
 
@@ -49,4 +53,34 @@ export async function deleteArticle( this: typeof articleManager, articleId: nul
 
     // Очистить редактор от этой статьи
     this.clearArticle()
+}
+
+/**
+ * Функция ставит фокус в текстовый компонент в редактируемой статье
+ * @param {Document} $iFrameDoc — iFrame в котором находится статья
+ * @param {number} textCompId — id данных текстового компонента
+ */
+export function setFocusInTextComponent(
+    this: typeof articleManager,
+    $iFrameDoc: StoreArticleTypes.DocumentLink,
+    textCompId: number
+) {
+    // Текстовый компонент
+    const $textComponent: HTMLElement = $iFrameDoc.querySelector(`[data-em-d-gen-comp-id="${textCompId}"]`)
+    if (!$textComponent) return
+
+    // Поставить фокус (будет на нулевом символе)
+    $textComponent.focus()
+
+    // Получить объект выделения и поставить в конец
+    const selection = $iFrameDoc.getSelection()
+
+    // В текстовом компоненте могут быть несколько текстовых узлов.
+    // Требуется получить последний текстовый узел и поставить фокус на его последний символ.
+    const nodeLength = $textComponent.childNodes
+    const textNode = $textComponent.childNodes[nodeLength.length - 1]
+
+    if (textNode) {
+        selection.collapse(textNode, textNode.textContent.length)
+    }
 }

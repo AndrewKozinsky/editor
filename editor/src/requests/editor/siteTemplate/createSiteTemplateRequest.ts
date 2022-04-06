@@ -1,4 +1,4 @@
-import { store } from 'store/rootReducer'
+import { getState } from 'utils/miscUtils'
 import SiteTemplateResponseType from './siteTemplateServerResponseType'
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
@@ -9,7 +9,7 @@ import getApiUrl from 'requests/reqFn/apiUrls'
  */
 export default async function createSiteTemplateRequest(values: CreateNewSiteTemplateValuesType) {
     const newTemplateData = {
-        siteId: store.getState().sites.currentSiteId,
+        siteId: getState().sites.currentSiteId,
         content: values.content
     }
 

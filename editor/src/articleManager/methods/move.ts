@@ -70,7 +70,6 @@ export function moveCompNearComp(
 
     // Перемещаемый компонент
     const moveDComp = this.getComponent(dComps, moveCompId)
-    // debugger
 
     // Получение массива, в котором находится перемещаемый компонент и его индекса
     const moveCompParentArr = this.getCompParentArray(dComps, moveCompId)
@@ -138,6 +137,7 @@ export function moveComponentToElement(
 
     // Целевой элемент в который будет поставлен перемещаемый компонент
     const targetDElem = this.getDataElemInDataCompArr(dComps, targetCompCoords.dataCompId, targetCompCoords.dataElemId)
+
     // Массив детей целевого элемента
     const targetDElemChildren = targetDElem.dCompElemChildren
 
@@ -198,11 +198,13 @@ export function moveItemToUpOrDown(
         // Данные выделенного элемента
         const dElem = this.getDElemInDComp(dComp, dataElemId)
 
+        // Массив, где находится удаляемый элемент
+        const elemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, compCoords.dataElemId)
         // Индекс положения элемента
-        const idx = dComp.dElems.findIndex(dElem => dElem.dCompElemId === dataElemId)
+        const idx = elemsArr.findIndex(dElem => dElem.dCompElemId === dataElemId)
 
         // Удалить элемент
-        const updatedElemsArr = dComp.dElems.slice()
+        const updatedElemsArr = elemsArr.slice()
         updatedElemsArr.splice(idx, 1)
 
         if (direction === 'up') {
@@ -213,7 +215,7 @@ export function moveItemToUpOrDown(
         }
 
         // Поставить новый массив детей в объект истории статьи
-        updatedDComps = makeImmutableCopy(dComps, dComp.dElems, updatedElemsArr)
+        updatedDComps = makeImmutableCopy(dComps, elemsArr, updatedElemsArr)
     }
 
     return {

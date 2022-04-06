@@ -14,7 +14,7 @@ export type WrapperPropType = {
 }
 
 export type TType = 5 | 10 | 15 | 20 | 25 | 30
-export type BType = 5 | 10 | 15 | 25
+export type BType = 5 | 10 | 15 | 20 | 25
 export type GapType = 10 | 20
 
 /** Компонент-обёртка. Можно указать отступ и выключку */

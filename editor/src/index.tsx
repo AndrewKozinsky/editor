@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import App from './common/App/App'
 
 
+
 ReactDOM.render(
     <Provider store={store}>
         <Router basename='/editor'>

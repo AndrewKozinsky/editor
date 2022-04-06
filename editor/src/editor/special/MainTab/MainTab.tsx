@@ -1,12 +1,13 @@
 import React from 'react'
 import SvgIcon from 'common/icons/SvgIcon'
+import iconsCollector from 'common/icons/js/getIcon'
 import { MiscTypes } from 'types/miscTypes'
 import makeClasses from './MainTab-classes'
 
 
 export type MainTabDataType = {
     title?: string // Подсказка при наведении на вкладку
-    iconType: string // Тип значка
+    iconType: keyof typeof iconsCollector // Тип значка
     active?: boolean // Выделена ли вкладка
     disabled?: boolean // Заблокирована ли вкладка
     position?: 'top' | 'left' // Положение вкладки влияет на расположение полукруглых элементов

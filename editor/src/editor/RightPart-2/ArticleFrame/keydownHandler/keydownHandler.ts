@@ -27,6 +27,6 @@ function keydownHandler($document: StoreArticleTypes.DocumentLink) {
         const pressedKeys = getPressedKeys(e)
 
         // Making undo or redo history step in article
-        undoRedoArticleHistory(pressedKeys)
+        undoRedoArticleHistory(e, pressedKeys)
     }
 }

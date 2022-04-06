@@ -2,10 +2,10 @@ import React from 'react'
 import * as yup from 'yup'
 import FCType from 'libs/FormConstructor/FCType'
 import updateSiteRequest, { UpdateSiteRequestValuesType } from 'requests/editor/sites/updateSiteRequest'
-import { store } from 'store/rootReducer'
 import DeleteSiteButton from '../DeleteSiteButton/DeleteSiteButton'
 import { afterSubmit } from './SiteSection-func'
-import siteSectionMsg from 'messages/siteSectionMessages'
+import siteSectionMsg from 'messages/groupSectionMessages'
+import { getState } from 'utils/miscUtils'
 
 /** Объект конфигурации формы редактирования существующего сайта */
 const currentSiteFormConfig: FCType.Config = {
@@ -25,15 +25,22 @@ const currentSiteFormConfig: FCType.Config = {
         defaultSiteTemplateId: {
             fieldType: 'select',
             fieldData: {
-                label: siteSectionMsg.defaultTemplateInput,
+                label: siteSectionMsg.defaultSiteTemplateIdInput,
+                options: [],
+            }
+        },
+        defaultMetaTemplateId: {
+            fieldType: 'select',
+            fieldData: {
+                label: siteSectionMsg.defaultMetaTemplateIdInput,
                 options: [],
             }
         },
     },
     bottom: {
         submit: {
-            text: siteSectionMsg.submitBtnTextSave, // Это значение должен изменять хук в зависимости от типа формы!!!
-            icon: 'btnSignSave' // Это значение должен изменять хук в зависимости от типа формы!!!
+            text: siteSectionMsg.submitBtnTextSave,
+            icon: 'btnSignSave'
         },
         elems: [<DeleteSiteButton key={2} />],
         hr: true
@@ -41,7 +48,7 @@ const currentSiteFormConfig: FCType.Config = {
     async requestFn(readyFieldValues, outerFns, formDetails) {
         // Обновить данные сайта
         // id выбранного сайта
-        const siteId = store.getState().sites.currentSiteId
+        const siteId = getState().sites.currentSiteId
 
         return await updateSiteRequest(readyFieldValues as UpdateSiteRequestValuesType, siteId)
     },

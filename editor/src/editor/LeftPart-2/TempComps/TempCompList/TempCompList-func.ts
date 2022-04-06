@@ -9,6 +9,8 @@ import config from 'utils/config'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
+import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+
 
 export function useIsInsideButtonAllowed() {
     const { tempComps } = useGetArticleSelectors()
@@ -49,34 +51,32 @@ export function useGetTempCompsFolders() {
     const [folders, setFolders] = useState<TempCompsTreeType.Items>([])
 
     useEffect(function () {
+        if (!tempCompsFolders) return
+
+        // Get opened component template folders id array to open these folders
+        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
+            getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+
+        // Update component template array items
+        const updatedFolders = prepareFoldersAndItemsStructure(
+            tempCompsFolders,
+            openFoldersIdsArr,
+            tempComps,
+            currentHistoryItem
+        )
+
         // Текстовый компонент
         const textCompTemp: TempCompsTreeType.Item = {
             id: 0, type: 'file', name: componentsPanelMsg.textComponent
         }
 
-        if(tempCompsFolders) {
-            // Get opened component template folders id array to open these folders
-            const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
-                getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
-
-            // Update component template array items
-            const updatedFolders = prepareFoldersAndItemsStructure(
-                //@ts-ignore
-                tempCompsFolders,
-                openFoldersIdsArr,
-                tempComps,
-                currentHistoryItem
-            )
-
-            // Добавление в массив текстовый компонент
+        // Добавление в массив текстовый компонент если его там нет
+        if (updatedFolders[0]?.id !== 0) {
             updatedFolders.unshift(textCompTemp)
+        }
 
-            // Sat updated folders and component templates structure
-            setFolders(updatedFolders)
-        }
-        else {
-            setFolders([textCompTemp])
-        }
+        // Sat updated folders and component templates structure
+        setFolders(updatedFolders)
     }, [tempCompsFolders])
 
     return folders
@@ -124,12 +124,12 @@ export function useGetAfterCollapseFolder() {
         dispatch(articleActions.setTempCompFolders(folders))
 
         // Save array of folder's id in the Local storage
-        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr)
+        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
     }, [])
 }
 
 
-/** The hook returns Next btn click handler  */
+/** Хук возвращает обработчики для кнопок вставки нового компонента до или после выделенного  */
 export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
     const dispatch = useDispatch()
 
@@ -144,6 +144,10 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
+
+        // Обновить данные в текстовом компоненте если это требуется
+        updateDataInTextComp('common')
+
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
 
@@ -164,7 +168,7 @@ export function useGetOnClickBeforeBtn(direction: 'before' | 'after') {
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
-    }, [dispatch, historyItem, flashedElemCoords, tempComps])
+    }, [flashedElemCoords, historyItem, tempComps])
 }
 
 
@@ -183,10 +187,13 @@ export function useGetOnClickInsideBtn() {
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (tempCompId: TempCompsTreeType.FileItemId) {
+        // Обновить данные в текстовом компоненте если это требуется
+        updateDataInTextComp('common')
+
         // Если число больше нуля, то хотят вставить обычный компонент, если 0, то текстовый
         const tempCompIdUpdated = tempCompId > 0 ? tempCompId : 'text'
 
-        const {selectedElem} = flashedElemCoords
+        const { selectedElem } = flashedElemCoords
 
         const componentsAndMaxCompId = articleManager.createCompAndSetInElem(
             historyItem.article, tempComps, tempCompIdUpdated, selectedElem

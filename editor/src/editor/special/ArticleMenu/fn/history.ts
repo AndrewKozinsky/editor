@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import articleActions from 'store/article/articleActions'
+import fireEvent from '../../../../events/fireEvent'
 
 /**
  * The hook checks if I can make undo or redo history step
@@ -27,9 +26,11 @@ export function useIsHistoryBtnDisabled(stepType: 'undo' | 'redo') {
  * @param {Object} stepType — step direction: undo OR redo
  */
 export function useMakeHistoryStep(stepType: 'undo' | 'redo') {
-    const dispatch = useDispatch()
-
-    return useCallback(function (){
-        dispatch(articleActions.makeHistoryStep(stepType))
+    return useCallback(function () {
+        // Запустить события перемещения по истории если это возможно
+        fireEvent({
+            event: 'makeHistoryStep',
+            direction: stepType,
+        })
     }, [])
 }

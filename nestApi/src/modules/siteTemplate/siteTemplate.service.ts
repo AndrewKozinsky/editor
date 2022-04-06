@@ -1,6 +1,9 @@
 import { Response } from 'express'
 import { Repository } from 'typeorm'
-import { HttpStatus, Injectable } from '@nestjs/common'
+import { forwardRef, HttpStatus, Inject, Injectable } from '@nestjs/common'
+import { SiteController } from '../site/site.controller'
+import { SiteEntity } from '../site/site.entity'
+import { SiteService } from '../site/site.service'
 import { CreateSiteTemplateDto } from './dto/createSiteTemplate.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { SiteTemplateEntity } from './siteTemplate.entity'
@@ -14,10 +17,14 @@ import {sortByCreatedAt} from '../../utils/miscUtils'
 
 @Injectable()
 export class SiteTemplateService {
-
     constructor(
         @InjectRepository(SiteTemplateEntity)
-        private readonly siteTemplateRepository: Repository<SiteTemplateEntity>
+        private readonly siteTemplateRepository: Repository<SiteTemplateEntity>,
+        @InjectRepository(SiteEntity)
+        private readonly siteRepository: Repository<SiteEntity>,
+        // Такое подключение чтобы не было циклических зависимостей
+        @Inject(forwardRef(() => SiteService))
+        private siteService: SiteService,
     ) {}
 
     /** Получение шаблонов сайта (защищённый маршрут) */
@@ -45,6 +52,12 @@ export class SiteTemplateService {
             }
         )
 
+        // Бросить ошибку если указанный сайт не существует
+        const site = await this.siteRepository.findOne({ id: newSiteTemplate.siteId })
+        if (!site) {
+            responseCommonError('siteTemplate_CreateSiteTemplate_SiteIsNotExist', HttpStatus.BAD_REQUEST)
+        }
+
         return await this.siteTemplateRepository.save(newSiteTemplate)
     }
 
@@ -57,7 +70,7 @@ export class SiteTemplateService {
         // Throw an error if site template is not exist
         if (!siteTemplate) {
             responseCommonError(
-                'siteTemplate_UpdateSiteTemplate_SiteIsNotExist',
+                'siteTemplate_UpdateSiteTemplate_SiteTemplateIsNotExist',
                 HttpStatus.BAD_REQUEST
             )
         }
@@ -86,6 +99,13 @@ export class SiteTemplateService {
             )
         }
 
+        // Если удаляемый шаблон сайта является шаблоном сайта по умолчанию, то обнулить его
+        const site = await this.siteRepository.findOne({id: siteTemplate.siteId})
+        if (site.defaultSiteTemplateId === siteTemplateId) {
+            await this.siteService.updateSite(site.id, {defaultSiteTemplateId: ''})
+        }
+
+        // Удалить шаблон сайта
         await this.siteTemplateRepository.delete({id: siteTemplateId})
 
         return null

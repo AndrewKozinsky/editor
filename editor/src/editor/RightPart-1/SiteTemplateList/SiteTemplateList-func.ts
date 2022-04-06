@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import actions from 'store/rootAction'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
+import sitesActions from 'store/site/sitesActions'
 
 
 /** Хук скачивает с сервера массив шаблонов подключаемых файлов и ставит в Хранилище */
@@ -17,7 +17,7 @@ export function useFetchSiteTemplates() {
         if (!currentSiteId) return
 
         // Запрос на получение шаблонов подключаемых файлов и установка в Хранилище
-        dispatch( actions.sites.requestSiteTemplates() )
+        dispatch( sitesActions.requestSiteTemplates() )
     }, [currentSiteId])
 }
 
@@ -36,7 +36,7 @@ export function useGetTemplatesItemsListProps(): ItemsListPropType {
             return {
                 id: template.id,
                 name: template.name,
-                onClick: () => dispatch( actions.sites.setCurrentSiteTemplateId(template.id) )
+                onClick: () => dispatch( sitesActions.setCurrentSiteTemplateId(template.id) )
             }
         }),
         activeItemId: currentTemplateId // id активного пункта
@@ -51,6 +51,6 @@ export function useGetNewTemplateOnClickHandler() {
     // чтобы программа понимала, что нужно показать форму создания нового шаблона подключаемых файлов
     return function () {
         // Поставить id шаблона подключаемых файлов. Пустая строка обозначает id нового шаблона.
-        dispatch( actions.sites.setCurrentSiteTemplateId('') )
+        dispatch( sitesActions.setCurrentSiteTemplateId('') )
     }
 }

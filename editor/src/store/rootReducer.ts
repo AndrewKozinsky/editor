@@ -11,15 +11,17 @@ import sitesReducer from './site/sitesReducer'
 import settingsReducer from './settings/settingsReducer'
 import articleReducer from './article/articleReducer'
 import modalReducer from './modal/modalReducer'
+import helpReducer from './help/helpReducer'
 
 
 // Корневой редьюсер
 const rootReducer = combineReducers({
-    user:  userReducer, // Данные пользователя
-    sites:  sitesReducer,
-    settings:  settingsReducer, // Настройки приложения
+    user: userReducer, // Данные пользователя
+    sites: sitesReducer,
+    settings: settingsReducer, // Настройки приложения
     article: articleReducer,
-    modal:  modalReducer
+    modal: modalReducer,
+    help: helpReducer,
 })
 
 export const store = createStore(

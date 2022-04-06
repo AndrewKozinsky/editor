@@ -1,6 +1,7 @@
 import { makeFetch } from 'requests/reqFn/fetch'
 import getApiUrl from 'requests/reqFn/apiUrls'
 import { ComponentRequestServerResponse } from './componentServerResponseType'
+import StoreSitesTypes from 'store/site/sitesTypes'
 
 
 /**
@@ -8,7 +9,7 @@ import { ComponentRequestServerResponse } from './componentServerResponseType'
  * @param {Number} siteId — id сайта компонента
  * @param {String} content — код шаблона компонента
  */
-export default async function createComponentRequest(siteId: number, content: null | string) {
+export default async function createComponentRequest(siteId: StoreSitesTypes.CurrentSiteId, content: null | string) {
 
     const options = {
         method: 'POST',

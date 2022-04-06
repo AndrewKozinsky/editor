@@ -9,9 +9,12 @@ export class UpdateSiteDto {
     @MaxLength( 255, {
         message: 'site_UpdateSiteDto_nameTooLong'
     })
-    name: string
+    @IsOptional()
+    name?: string
 
     @IsOptional()
-    // Тут нужно как-то проверить, что присылают или число или строку
-    defaultSiteTemplateId: number | ''
+    defaultSiteTemplateId?: number | ''
+
+    @IsOptional()
+    defaultMetaTemplateId?: number | ''
 }

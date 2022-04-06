@@ -13,6 +13,8 @@ type ArticleType = {
     name: string
     content: string
     siteTemplateId: number
+    metaTemplateId: number
+    meta: string
     createdAt: Date
     updatedAt: Date
 }

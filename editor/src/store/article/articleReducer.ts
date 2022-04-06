@@ -1,3 +1,4 @@
+import StoreSitesTypes from '../site/sitesTypes'
 import TempCompTypes from './codeType/tempCompCodeType'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import ArticleTypes from './codeType/articleCodeType'
@@ -8,9 +9,10 @@ import StoreArticleTypes from './articleTypes'
 export type ArticleReducerType = {
     articleId: null | number
     siteId: null | number
+    name: string
 
     // id шаблона сайта
-    siteTemplateId: null | TempCompTypes.Id
+    siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId
     // Шаблон сайта
     siteTemplate: null | SiteTemplateTypes.Template
     // Хеш версии шаблона сайта. При изменении значения шаблон сайта будет заново скачан.
@@ -43,12 +45,15 @@ export type ArticleReducerType = {
     historyCurrentIdx: number
     // A history step when the article was saved
     historyStepWhenWasSave: number
+    // Данные скорректированы (данные статьи соответствуют шаблонам)?
+    isArtDataCorrect: boolean
 }
 
 // Article reducer state example
 const stateExample: ArticleReducerType = {
     articleId: 2,
     siteId: 10,
+    name: 'Article ame',
 
     siteTemplateId: 4,
     siteTemplate: null,
@@ -60,7 +65,10 @@ const stateExample: ArticleReducerType = {
     tempComps: [{
         id: 9,
         content: {
-            html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>'
+            html: '<div class="banner" data-em-id="banner"><div><div data-em-id="cell"></div></div></div>',
+            elems: [{
+                elemId: 'banner', elemName: 'Banner',
+            }]
         }
     }],
     tempCompsVersionHash: 0,
@@ -103,12 +111,14 @@ const stateExample: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
+    isArtDataCorrect: false
 }
 
 // Initial values
 const initialState: ArticleReducerType = {
     articleId: null,
     siteId: null,
+    name: '',
 
     siteTemplateId: null,
     siteTemplate: null,
@@ -117,7 +127,7 @@ const initialState: ArticleReducerType = {
 
     tempCompsFolders: null,
     tempCompsFoldersVersionHash: 0,
-    tempComps: [],
+    tempComps: null,
     tempCompsVersionHash: 0,
     tempCompsDownloadHash: 0,
 
@@ -133,6 +143,7 @@ const initialState: ArticleReducerType = {
     historyCurrentIdx: 0,
     // A history step when the article was saved
     historyStepWhenWasSave: 0,
+    isArtDataCorrect: false
 }
 
 /** Установка ссылок на элементы IFrame-а. */
@@ -157,6 +168,7 @@ function setArticleId(
 function setArticle(state: ArticleReducerType, action: StoreArticleTypes.SetArticleAction): ArticleReducerType {
     return {
         ...state,
+        name: action.payload.name,
         siteId: action.payload.siteId,
         siteTemplateId: action.payload.siteTemplateId || null,
         history: [
@@ -241,14 +253,16 @@ function setTempCompFolders(
     }
 }
 
-/** Installing of components array */
+/** Установка массива шаблонов компонентов */
 function setTempComps(
     state: ArticleReducerType, action: StoreArticleTypes.SetTempCompAction
 ): ArticleReducerType {
     return {
         ...state,
         tempComps: action.payload,
-        tempCompsDownloadHash: state.tempCompsDownloadHash + 1
+        tempCompsDownloadHash: state.tempCompsDownloadHash + 1,
+        // Сообщить, что данные не проверены чтобы запустился хук проверки данных статьи
+        isArtDataCorrect: false
     }
 }
 
@@ -318,6 +332,10 @@ function createAndSetHistoryItem(
 
     function createHistoryArr() {
         const historyArrCopy =  [...state.history]
+        // Уменьшить длину массива до текущего значения,
+        // то есть если сделали несколько шагов назад и затем создали новый объект истории,
+        // то все шаги дальше будут удалены.
+        historyArrCopy.length = state.historyCurrentIdx + 1
 
         historyArrCopy.push(
             createHistoryItem()
@@ -348,14 +366,30 @@ function createAndSetHistoryItem(
     }
 }
 
+/** Редьюсер заменяет элемент в массиве истории статьи */
+function updateCurrentHistoryItem(
+    state: ArticleReducerType, action: StoreArticleTypes.UpdateCurrentHistoryItemAction
+): ArticleReducerType {
+    const historyArr = [...state.history]
+
+    const updatedCurrentHistoryItem = {...historyArr[state.historyCurrentIdx]}
+    updatedCurrentHistoryItem.article.dComps = action.payload.components
+    historyArr[state.historyCurrentIdx] = updatedCurrentHistoryItem
+
+    return {
+        ...state,
+        history: historyArr,
+    }
+}
+
 // The function changes a current history step
 function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.MakeHistoryStepAction): ArticleReducerType {
     let newStepNum = state.historyCurrentIdx
 
-    if (action.payload === 'undo' && state.historyCurrentIdx - 1 !== -1) {
+    if (action.payload === 'undo' && state.historyCurrentIdx >= 0) {
         newStepNum--
     }
-    else if (action.payload === 'redo' && state.historyCurrentIdx + 1 < state.history.length) {
+    else if (action.payload === 'redo' && state.historyCurrentIdx <= state.history.length) {
         newStepNum++
     }
 
@@ -374,12 +408,21 @@ function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: St
 }
 
 /* Функция очищает статью от данных */
-/*function clearArticle(state: ArticleReducerType): ArticleReducerType {
+function clearArticle(state: ArticleReducerType): ArticleReducerType {
     return Object.assign(
         initialState,
         { $links: state.$links } // Do not touch the document's links
     )
-}*/
+}
+
+
+/* Функция ставит значение флага скорректированы ли данные статьи (чтобы данные соответствовали шаблонам) */
+function setIsArtDataCorrect(state: ArticleReducerType, action: StoreArticleTypes.SetIsArtDataCorrectAction): ArticleReducerType {
+    return {
+        ...state,
+        isArtDataCorrect: action.payload
+    }
+}
 
 
 // Редьюсер Store.article
@@ -412,12 +455,16 @@ export default function articleReducer(
             return setFlashedElement(state, action)
         case StoreArticleTypes.CREATE_AND_SET_HISTORY_ITEM:
             return createAndSetHistoryItem(state, action)
+        case StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM:
+            return updateCurrentHistoryItem(state, action)
         case StoreArticleTypes.MAKE_HISTORY_STEP:
             return makeHistoryStep(state, action)
         case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
             return setHistoryStepWhenArticleWasSaved(state, action)
-        // case StoreArticleTypes.CLEAR_ARTICLE:
-        //     return clearArticle(state)
+        case StoreArticleTypes.CLEAR_ARTICLE:
+            return clearArticle(state)
+        case StoreArticleTypes.SET_IS_ART_DATA_CORRECT:
+            return setIsArtDataCorrect(state, action)
         default:
             // @ts-ignore
             const x: never = null

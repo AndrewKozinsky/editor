@@ -2,95 +2,47 @@ $CN: layer;
 
 // Первая обёртка слоя
 .#{$CN} {
-
+    position: relative;
+    cursor: default;
 }
-
-// Вторая обёртка слоя
-.#{$CN}__wrapper {
-    display: flex;
-    align-items: flex-start;
-    user-select: none;
-    overflow: hidden;
-    border-radius: var(--radius);
-}
-.#{$CN}__wrapper--hover, .#{$CN}__wrapper--move-hover {
-    background-color: var(--bg-color-2);
-}
-.#{$CN}__wrapper--select {
-    background-color: var(--accent-color);
-}
-.#{$CN}__wrapper--move-select {
-    background-color: var(--success-color);
-}
-.#{$CN}__wrapper--hidden {
+.#{$CN}--hidden {
     opacity: .4;
 }
 
-// Третья обёртка слоя
-.#{$CN}__inner-wrapper {
-    position: relative;
-    flex-grow: 1;
-    padding: 3px 5px 3px 2px;
-}
-
-// Пустое место вместо кнопки сворачивания слоя
-.#{$CN}__collapse-empty {
+// Обёртка текста
+.#{$CN}__name-wrapper {
     display: inline-block;
-    width: 19px;
-    height: 10px;
-}
-// Кнопка сворачивания слоя
-.#{$CN}__collapse {
-    background-color: transparent;
-    cursor: pointer;
-    padding: 2px;
-    margin: 4px 0 0 3px;
-    border: none;
+    padding: 0 4px;
+    border: 1px solid transparent;
     border-radius: var(--radius);
-
-    &:hover {
-        background-color: var(--bg-color-2);
-    }
-}
-.#{$CN}__collapse--rotate {
-    transform: rotate(-90deg);
-}
-.#{$CN}__collapse--hover, .#{$CN}__collapse--move-hover {
-    &:hover {
-        background-color: var(--button-color-hover);
-    }
-}
-.#{$CN}__collapse--select {
-    &:hover {
-        background-color: var(--accent-color-hover);
-    }
-}
-.#{$CN}__collapse--move-select {
-    &:hover {
-        background-color: var(--success-color-hover);
-    }
 }
 
-// Значок на кнопке сворачивания слоя
-.#{$CN}__collapse-icon {
-    display: block;
-    fill: var(--text-color);
+.#{$CN}__name-wrapper--comp-hover {
+    background-color: var(--bg-color-2);
+    border-color: var(--bg-color-2);
 }
-.#{$CN}__collapse-icon--white {
-    fill: white;
+.#{$CN}__name-wrapper--comp-select {
+    color: white;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+.#{$CN}__name-wrapper--comp-move-hover {
+    background-color: var(--bg-color-2);
+    border-color: var(--bg-color-2);
+}
+.#{$CN}__name-wrapper--comp-move-select {
+    color: white;
+    background-color: var(--success-color);
+    border-color: var(--success-color);
 }
 
-// Значок типа слоя
-.#{$CN}__type-icon {
-    margin: 0 4px 0 0;
+.#{$CN}__name-wrapper--elem-hover {
+    border-color: var(--bg-color-2);
 }
-.#{$CN}__type-icon--white {
-    fill: white;
+.#{$CN}__name-wrapper--elem-select {
+    border-color: var(--accent-color);
 }
-.#{$CN}__empty-type-icon {
-    display: inline-block;
-    width: 16px;
-}
+
 
 // Текст
 .#{$CN}__text {
@@ -99,33 +51,15 @@ $CN: layer;
     display: inline;
     font-size: 14px;
     line-height: 18px;
+    font-weight: 300;
+    color: var(--text-placeholder-color);
 }
 .#{$CN}__text--bold {
-    font-weight: bolder;
+    font-weight: 500;
+    color: var(--text-color);
 }
 .#{$CN}__text--white {
     color: white;
-}
-
-// Круги
-.#{$CN}__circles {
-    position: absolute;
-    top: 5px;
-    right: 35px;
-    display: flex;
-    justify-content: space-between;
-    width: 32px;
-}
-.#{$CN}__circle {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-.#{$CN}__move-circle {
-    background-color: var(--success-color);
-}
-.#{$CN}__select-circle {
-    background-color: var(--accent-color);
 }
 
 // Значок скрытого слоя
@@ -137,7 +71,7 @@ $CN: layer;
 }
 
 // Правая часть
-.#{$CN}__wrapper:hover {
+.#{$CN}:hover {
     .#{$CN}__right-part {
         display: block;
     }
@@ -168,20 +102,6 @@ $CN: layer;
         background: linear-gradient(90deg, hsla(var(--base-h-part), var(--base-s-part), var(--base-l-part), 0) 0%, var(--bg-color-2) 100%);
     }
 }
-.#{$CN}__right-part--select {
-    background-color: var(--accent-color);
-
-    &:before {
-        background: linear-gradient(90deg, hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), 0) 0%, var(--accent-color) 100%);
-    }
-}
-.#{$CN}__right-part--move-select {
-    background-color: var(--success-color);
-
-    &:before {
-        background: linear-gradient(90deg, hsla(var(--success-h-part), var(--success-s-part), var(--success-l-part), 0) 0%, var(--success-color) 100%);
-    }
-}
 
 // Кнопка глаза
 .#{$CN}__right-part-btn {
@@ -195,33 +115,9 @@ $CN: layer;
         background-color: var(--bg-color-2);
     }
 }
-.#{$CN}__right-part-btn--hover, .#{$CN}__right-part-btn--move-hover {
-    background-color: var(--bg-color-2);
-
-    &:hover {
-        background-color: var(--bg-color);
-    }
-}
-.#{$CN}__right-part-btn--select {
-    background-color: var(--accent-color);
-
-    &:hover {
-        background-color: var(--accent-color-hover);
-    }
-}
-.#{$CN}__right-part-btn--move-select {
-    background-color: var(--success-color);
-
-    &:hover {
-        background-color: var(--success-color-hover);
-    }
-}
 
 // Значок на кнопке глаза
 .#{$CN}__right-part-btn-icon {
     display: block;
     fill: var(--text-color);
-}
-.#{$CN}__right-part-btn-icon--white {
-    fill: white;
 }

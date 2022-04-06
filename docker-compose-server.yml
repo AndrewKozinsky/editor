@@ -12,6 +12,8 @@ services:
       - editor
       - nest
       - postgres
+      - next
+      - staticFileServer
     volumes:
       - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
 
@@ -52,6 +54,25 @@ services:
       POSTGRES_DB: editor
     volumes:
       - postgres:/var/lib/postgresql/data
+
+  # Сайт про редактор (Next)
+  next:
+    build:
+      context: ./next
+      dockerfile: Dockerfile.prod
+    container_name: editor-next
+    command: npm run start
+    restart: unless-stopped
+
+  # Хранилище файлов
+  staticFileServer:
+    image: halverneus/static-file-server
+    environment:
+      PORT: 4000
+      FOLDER: /staticFileServer
+    volumes:
+      - ./staticFileServer:/staticFileServer
+    restart: unless-stopped
 
 
 volumes:

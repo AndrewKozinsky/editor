@@ -1,9 +1,10 @@
 import React from 'react'
 import makeClasses from './ArticleMenu-classes'
 import SvgIcon from 'common/icons/SvgIcon'
-import { onArticleMenuMouseEnter, useIsButtonVisible } from './ArticleMenu-func'
+import { useIsButtonVisible } from './ArticleMenu-func'
 import Button from 'common/formElements/Button/Button'
 import articleMenuMsg from 'messages/articleMenuMessages'
+import ArticleDataModal from './DataModal/ArticleDataModal'
 import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
 import { useCloseArticle } from './CloseModal/close'
 import useGetShowModal from 'utils/hooksUtils'
@@ -11,6 +12,7 @@ import { useIsMarkupBtnDisabled } from './fn/markup'
 import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
 import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
 import { useIsHistoryBtnDisabled, useMakeHistoryStep } from './fn/history'
+import { useIsDataBtnDisabled } from './fn/data'
 
 
 /** Меню в статье */
@@ -22,7 +24,7 @@ export default function ArticleMenuButton() {
 
     return (
         <div className={CN.outerWrapper}>
-            <button className={CN.mainButton} onMouseEnter={onArticleMenuMouseEnter}>
+            <button className={CN.mainButton}>
                 <SvgIcon type='articleMenu' />
             </button>
             <ArticleMenu />
@@ -47,8 +49,8 @@ function ArticleMenu() {
     const openMarkupModal = useGetShowModal(<ArticleMarkupModal />, 'full')
 
     // Show data button functions
-    // const isDataBtnDisabled = useIsDataBtnDisabled()
-    // const showData = useShowData()
+    const isDataBtnDisabled = useIsDataBtnDisabled()
+    const showData = useGetShowModal(<ArticleDataModal />, 'full')
 
     // Save button functions
     const isSaveBtnDisabled = useIsSaveBtnDisabled()
@@ -83,12 +85,12 @@ function ArticleMenu() {
                     onClick={openMarkupModal}
                     disabled={isMarkupBtnDisabled}
                 />
-                {/*<Button
+                <Button
                     text={articleMenuMsg.data}
                     icon='btnSignJson'
                     onClick={showData}
                     disabled={isDataBtnDisabled}
-                />*/}
+                />
             </div>
             <div className={CN.menuSection}>
                 <Button

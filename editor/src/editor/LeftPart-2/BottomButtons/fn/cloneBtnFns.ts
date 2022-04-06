@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleActions from 'store/article/articleActions'
+import useGetArticleSelectors from 'store/article/articleSelectors'
+import { BottomBtnCallbackType } from './universalHandler'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
     const [disabled, setDisabled] = useState(true)
 
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
+    const article = articleManager.hooks.getCurrentArticle()
+    const { tempComps } = useGetArticleSelectors()
 
     useEffect(function () {
         // Кнопка заблокирована если статья не загружена
@@ -18,7 +20,7 @@ export function useIsCloneDisabled() {
         }
         const { selectedElem } = historyItem
 
-        const canClone = articleManager.canClone(selectedElem)
+        const canClone = articleManager.canClone(article?.dComps, selectedElem, tempComps)
 
         setDisabled(!canClone)
     }, [historyItem])
@@ -27,20 +29,11 @@ export function useIsCloneDisabled() {
 }
 
 /**
- * Хук возвращает обработчик нажатия на кнопку копирования компонента/элемента.
+ * Функция возвращает обработчик нажатия на кнопку копирования компонента/элемента.
  * @param {Number} deep — глубина копирования: 1 (компонент без атрибутов), 2 (с атрибутами), 3 (с атрибутами и детьми)
  */
-export function useGetCloneHandler(deep: 1 | 2 | 3) {
-    const dispatch = useDispatch()
-
-    const historyItem = articleManager.hooks.getCurrentHistoryItem()
-    const { tempComps } = useGetArticleSelectors()
-
-    return useCallback(function () {
-        // Кнопка заблокирована если статья не загружена
-        if (!historyItem) return
-        const { selectedElem } = historyItem
-
+export function cloneItem (deep: 1 | 2 | 3): BottomBtnCallbackType {
+    return (dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(
             tempComps, historyItem.article, selectedElem, deep
@@ -49,5 +42,5 @@ export function useGetCloneHandler(deep: 1 | 2 | 3) {
         dispatch(articleActions.createAndSetHistoryItem(
             compsAndMaxCompId
         ))
-    }, [historyItem])
+    }
 }

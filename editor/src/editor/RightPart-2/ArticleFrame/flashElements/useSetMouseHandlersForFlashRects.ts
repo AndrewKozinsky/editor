@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import { store } from 'store/rootReducer'
 import StoreArticleTypes from 'store/article/articleTypes'
-import { isCtrlPressed } from 'utils/domUtils'
 import articleActions from 'store/article/articleActions'
+import { isCtrlPressed } from 'utils/domUtils'
 
 /**
  * The hook sets OnMove and OnClick mouse handlers to IFrame document.
@@ -14,7 +14,7 @@ export default function useSetMouseHandlersForFlashRects() {
     // Were mouse move handlers set?
     const [mouseMoveHandlerSet, setMouseMoveHandlerSet] = useState(false)
 
-    useEffect(function () {// || !history.length
+    useEffect(function () {
         if (!$links.$document || mouseMoveHandlerSet) return
 
         // Set handlers mousemove and mousedown

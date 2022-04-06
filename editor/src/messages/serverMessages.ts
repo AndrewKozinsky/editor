@@ -240,7 +240,11 @@ const serverMessages = {
         eng: 'The content field must be a string.',
         rus: 'Поле content должно быть строкой.'
     },
-    siteTemplate_UpdateSiteTemplate_SiteIsNotExist: {
+    siteTemplate_CreateSiteTemplate_SiteIsNotExist: {
+        eng: 'This site does not exist',
+        rus: 'Указанный сайт не существует.'
+    },
+    siteTemplate_UpdateSiteTemplate_SiteTemplateIsNotExist: {
         eng: 'The transferred website template does not exist.',
         rus: 'Переданный шаблон сайта не существует.'
     },
@@ -251,6 +255,43 @@ const serverMessages = {
     siteTemplate_DeleteSiteTemplate_CurrentUserIsNotAuthor: {
         eng: 'The current user did not create the deleted site template.',
         rus: 'Текущий пользователь не создавал удаляемый шаблон сайта.'
+    },
+
+    metaTemplate_CreateMetaTemplateDto_EmptySiteId: {
+        eng: 'The id of the site to which the metadata template belongs must be specified.',
+        rus: 'Должен быть указан id сайта которому принадлежит шаблон метаданных.'
+    },
+    metaTemplate_CreateMetaTemplateDto_EmptyContent: {
+        eng: 'You must specify the metadata template.',
+        rus: 'Должен быть указан код шаблона метаданных.'
+    },
+    metaTemplate_CreateMetaTemplateDto_contentIsNotAString: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
+    metaTemplate_UpdateMetaTemplateDto_EmptyContent: {
+        eng: 'You must specify the metadata template.',
+        rus: 'Должен быть указан код шаблона метаданных.'
+    },
+    metaTemplate_UpdateMetaTemplateDto_contentIsNotAStringEmptyContent: {
+        eng: 'The content field must be a string.',
+        rus: 'Поле content должно быть строкой.'
+    },
+    metaTemplate_CreateMetaTemplate_SiteIsNotExist: {
+        eng: 'This site does not exist',
+        rus: 'Указанный сайт не существует.'
+    },
+    metaTemplate_UpdateMetaTemplate_MetaTemplateIsNotExist: {
+        eng: 'The transferred metadata template does not exist.',
+        rus: 'Переданный шаблон метаданных не существует.'
+    },
+    metaTemplate_DeleteMetaTemplate_SiteIsNotExists: {
+        eng: 'This site does not exist',
+        rus: 'Указанный сайт не существует.'
+    },
+    metaTemplate_DeleteMetaTemplate_CurrentUserIsNotAuthor: {
+        eng: 'The current user did not create the deleted metadata template.',
+        rus: 'Текущий пользователь не создавал удаляемый шаблон метаданных.'
     },
 
     component_CreateComponentDto_EmptySiteId: {

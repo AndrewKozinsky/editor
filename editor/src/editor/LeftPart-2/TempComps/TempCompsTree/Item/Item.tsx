@@ -43,7 +43,7 @@ export default function Item(props: ItemPropType) {
                 <Triangle items={items} itemData={itemData} after={after} />
                 <Icon itemData={itemData} />
                 <Circles itemData={itemData} btnInsideAllowed={btnInsideAllowed} />
-                <p>{itemData.name}</p>
+                <p className={CN.name}>{itemData.name}</p>
                 <RightButtons itemData={itemData} after={after} btnInsideAllowed={btnInsideAllowed} />
             </div>
         </div>
@@ -95,9 +95,7 @@ type IconPropType = {
 
 /** Значок типа элемента. Если файл, то ничего не отрисовывается. */
 function Icon(props: IconPropType) {
-    const {
-        itemData
-    } = props
+    const { itemData } = props
 
     const CN = makeClasses(itemData)
 

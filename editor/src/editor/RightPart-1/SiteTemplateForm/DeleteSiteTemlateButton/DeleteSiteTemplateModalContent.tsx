@@ -12,10 +12,10 @@ export default function DeleteSiteTemplateModalContent() {
 
     return (
         <ModalShortContent
-            header={'Header'}
+            header={siteTemplateSectionMsg.deleteConfirmationHeaderInModal}
             text={siteTemplateSectionMsg.deleteConfirmationTextInModal}
             bottomElems={
-                [<FormConstructor config={deleteSiteTemplateModalConfig} state={formState} />]
+                [<FormConstructor config={deleteSiteTemplateModalConfig} state={formState} key='1' />]
             } />
     )
 }

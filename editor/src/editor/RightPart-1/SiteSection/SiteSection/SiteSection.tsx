@@ -4,7 +4,11 @@ import useFormConstructorState from 'libs/FormConstructor/state/useFormConstruct
 import newSiteFormConfig from './newSiteFormConfig'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import currentSiteFormConfig from './currentSiteFormConfig'
-import { useSetSiteName, useSetSiteTemplates } from './SiteSection-func'
+import {
+    useSetSiteName,
+    useSetSiteTemplates,
+    useSetMetaTemplates
+} from './SiteSection-func'
 import './SiteSection.scss'
 
 
@@ -35,8 +39,11 @@ function ExistingSiteForm() {
     // Хук изменяет имя сайта в поле Название при переключении сайта
     useSetSiteName(formState)
 
-    // Хук добавляет в форму выпадающий список шаблонов сайта, если он имеется
+    // Хук добавляет в форму выпадающий список шаблонов сайта, если они имеются
     useSetSiteTemplates(formState)
+
+    // Хук добавляет в форму выпадающий список шаблоны метаданных, если они имеются
+    useSetMetaTemplates(formState)
 
     return <FormConstructor config={currentSiteFormConfig} state={formState} />
 }

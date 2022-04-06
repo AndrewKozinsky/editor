@@ -40,9 +40,9 @@ function Info(props: InfoPropType) {
 
     return (
         <>
-            <Wrapper t={20}>
+            {/*<Wrapper t={20}>
                 <Notice>{regFormMsg.legal}</Notice>
-            </Wrapper>
+            </Wrapper>*/}
             <Wrapper t={20}>
                 <Notice>{regFormMsg.doYouHaveAccount}</Notice>
             </Wrapper>

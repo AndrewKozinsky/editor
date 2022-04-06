@@ -1,6 +1,7 @@
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import articleManager from 'articleManager/articleManager'
+import { wrap$elemWithDiv } from 'utils/domUtils'
 
 /**
  * Функция создаёт данные статьи. Если ничего не передать, то будут данные для новой статьи.
@@ -23,6 +24,7 @@ export type CreateNewCompResultType = {
     compData: ArticleTypes.MixComponent
     maxCompId: number
 }
+type MetaObj = { maxCompId: number, maxElemId: number }
 
 /**
  * The function creates a new component data with passed tempCompId
@@ -37,128 +39,98 @@ export function createComponent(
     tempCompId: TempCompTypes.Id
 ): CreateNewCompResultType {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
-    let maxCompId = article.dMeta.dMaxCompId
+    const metaObj: MetaObj = { maxCompId: article.dMeta.dMaxCompId, maxElemId: 0 }
 
     const compData: ArticleTypes.Component = {
         dCompType: 'component',
-        dCompId: ++maxCompId,
+        dCompId: ++metaObj.maxCompId,
         tCompId: tempComp.id
     }
 
-    const elementsFnResult = createCompElements(tempComp, maxCompId)
-    if (elementsFnResult.compElems) {
-        compData.dElems = elementsFnResult.compElems
-        maxCompId = elementsFnResult.maxCompId
-    }
+    // Получение html-компонента из шаблона.
+    const $component = articleManager.get$componentByTComp(tempComp)
+
+    // Данные элементов
+    compData.dElems = createCompElements(
+        [], wrap$elemWithDiv($component).children, metaObj, tempComp
+    )[0]
 
     return {
         compData,
-        maxCompId
+        maxCompId: metaObj.maxCompId
     }
 }
 
-type CreateCompElementsReturnType = {
-    compElems: null | ArticleTypes.ComponentElems,
-    maxCompId: number
-}
-
 /**
- * The function creates elements in a new component
- * @param {Object} tempComp — a component template
- * @param {Number} maxCompId — a maximum component id in an article
+ * Функция рекурсивно формирует массив с данными элементов.
+ * @param {Array} resultArr — массив с данными элементов
+ * @param {HTMLCollection} $children — html-коллекция с перебираемыми детьми
+ * @param {Object} metaObj — данные о максимальном id элемент и компонента
+ * @param {Object} tempComp — шаблон компонента
  */
-function createCompElements(tempComp: TempCompTypes.TempComp, maxCompId: number): CreateCompElementsReturnType {
-    let newMaxCompId = maxCompId
+function createCompElements(
+    resultArr: ArticleTypes.ComponentElems, $children: HTMLCollection, metaObj: MetaObj,
+    tempComp: TempCompTypes.TempComp
+): null | ArticleTypes.ComponentElems {
+    if (!$children) return null
 
-    const $component = articleManager.get$componentByTComp(tempComp)
+    // Перебор html-коллекции
+    for(let i = 0; i < $children.length; i++) {
+        const $child = $children[i] as HTMLElement
 
-    // Составлю массив объектов, где будут данные id шаблона элемента и шаблон элемента:
-    // [
-    //     {elemId: 'general', tElem: tElem},
-    //     {elemId: 'cell', tElem: tElem},
-    //     {elemId: 'cell', tElem: tElem}
-    // ],
-    const tElemsMap = getTElemsMap($component, tempComp.content.elems)
-
-    const newElemsArr = tElemsMap.map((tElemMapItem, i) => {
-        // Объект с данными перебираемого элемента
-        const newElemData: ArticleTypes.ComponentElem = {
-            dCompElemId: i + 1,
-            tCompElemId: tElemMapItem.elemId,
+        // Если это не элемент с data-em-id, то проверить его детей
+        if (!$child.matches(`[data-em-id]`)) {
+            createCompElements(resultArr, $child.children, metaObj, tempComp)
+            continue
         }
 
-        // Шаблон перебираемого элемента
-        const { tElem } = tElemMapItem
+        // Шаблон элемента
+        const tElem = tempComp.content.elems.find(tElem => {
+            return tElem.elemId === $child.dataset.emId
+        })
 
-        // html перебираемого элемента
-        // Он ищется и в верхнем теге компонента и в его дочерних тегах
-        let $elem: HTMLElement = $component.dataset.emId
-            ? $component
-            : $component.querySelector(`[data-em-id="${tElemMapItem.elemId}"]`)
+        // Данные элемента
+        const elemData: ArticleTypes.ComponentElem = {
+            dCompElemId: ++metaObj.maxElemId,
+            tCompElemId: $child.dataset.emId
+        }
+
+        // Если по умолчанию элемент должен быть скрыт, то скрыть его в слоях
+        if (tElem.elemHidden) {
+            elemData.dCompElemLayer = {
+                layerHidden: true
+            }
+        }
 
         const elemAttrs = createElemAttribs(tElem)
-        if (elemAttrs) newElemData.dCompElemAttrs = elemAttrs
+        if (elemAttrs) elemData.dCompElemAttrs = elemAttrs
 
-        newElemData.dCompElemChildren = []
+        elemData.dCompElemChildren = []
 
         if (tElem.addTextComponent) {
             const textComponent = createSimpleTextComponent(
                 // Предварительно заменить символы напоминающие пробел обычным пробелом
-                $elem.innerText.replace( /\s\s+/g, ' ' ),
-                ++newMaxCompId,
+                $child.innerText.replace( /\s\s+/g, ' ' ),
+                ++metaObj.maxCompId,
             )
 
-            newElemData.dCompElemChildren.push(textComponent.compData)
+            elemData.dCompElemChildren.push(textComponent.compData)
         }
 
-        return newElemData
-    })
-
-    return {
-        compElems: newElemsArr,
-        maxCompId: newMaxCompId
-    }
-}
-
-type TElemsMapItem = {
-    elemId: string,
-    tElem: TempCompTypes.Elem
-}
-type TElemsMap = TElemsMapItem[]
-
-/**
- * Функция составляет массив объектов, где будут данные id шаблона элемента и шаблон элемента. Например:
- * [
- *     { elemId: 'general', tElem: tElem },
- *     { elemId: 'cell', tElem: tElem },
- *     { elemId: 'cell', tElem: tElem }
- * ],
- * @param {HTMLElement} $component
- * @param {TempCompTypes.Elems} tempElems
- * @returns {TElemsMap}
- */
-function getTElemsMap($component: HTMLElement, tempElems: TempCompTypes.Elems): TElemsMap {
-    const $wrapper = document.createElement('div')
-    $wrapper.append($component)
-    const $elems = $wrapper.querySelectorAll('[data-em-id]')
-
-    const tElemsMap: TElemsMap = []
-
-    for (let $elem of $elems) {
-        if (!($elem instanceof HTMLElement)) continue
-
-        const { emId } = $elem.dataset
-
-        const tElemItem = {
-            elemId: emId,
-            tElem: tempElems.find(tElem => tElem.elemId === emId)
+        // Формирование массива вложенных элементов
+        const dInnerElems = createCompElements([], $child.children, metaObj, tempComp)
+        if (dInnerElems) {
+            elemData.dCompElemInnerElems = dInnerElems
         }
 
-        tElemsMap.push(tElemItem)
+        resultArr.push(elemData)
     }
 
-    return tElemsMap
+    return resultArr.length
+        ? resultArr
+        : null
 }
+
 
 /**
  * Функция формирует массив атрибутов элемента с пустыми значениями.
@@ -173,7 +145,6 @@ function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attri
 
     // Перебор атрибутов элемента
     for (let attribTemp of tElem.elemAttrs) {
-
         let dElemAttr: ArticleTypes.Attrib
 
         // В каком виде будет заноситься значение атрибута?
@@ -231,4 +202,3 @@ export function createSimpleTextComponent(
         maxCompId: dCompId
     }
 }
-

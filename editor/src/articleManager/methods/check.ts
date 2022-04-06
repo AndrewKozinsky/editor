@@ -8,7 +8,7 @@ import StoreArticleTypes from 'store/article/articleTypes'
  * Функция проверяет можно ли перемещать компонент выделенный для перемещения
  * @param {String} direction — направление перемещения компонента: левее или правее.
  * @param {Array} tempCompArr — массив шаблонов компонентов
- * @param {Array} dataCompArr — массив всех компонентов
+ * @param {Array} dComps — массив всех компонентов
  * @param {Object} targetCompCoords — координаты целевого компоненте по отношению к которому будет перемещаться компонент
  * @param {Number} moveCompId — id данных перемещаемого компонента
  */
@@ -16,12 +16,23 @@ export function canMoveCompMoveToLeftOrRight(
     this: typeof articleManager,
     direction: 'left' | 'right',
     tempCompArr: TempCompTypes.TempComps,
-    dataCompArr: ArticleTypes.Components,
+    dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
     moveCompId: ArticleTypes.Id
 ) {
     // Нельзя перемещать если перемещаемый компонент не выделен
-    return moveCompId
+    if(!moveCompId) return false
+
+    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
+    const movedDComp = this.getComponent(dComps, moveCompId)
+    if (movedDComp && movedDComp.dCompType === 'component') {
+        // Найти выделенный элемент внутри перемещаемого
+        if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
+            return false
+        }
+    }
+
+    return true
 
     // После можно дописать код и определять, что если перемещаемый компонент после перемещения
     // будет находиться в том же месте, что и раньше, то такие перемещения запрещать
@@ -44,7 +55,7 @@ export function canComponentPutInElement(
     moveCompId: ArticleTypes.Id
 ) {
     // Если не выделен целевой элемент и перемещаемый компонент, то нельзя вставить перемещаемый компонент
-    if (!targetCompCoords.dataElemId || moveCompId === null) return false
+    if (targetCompCoords.dataElemId === null || moveCompId === null) return false
 
     // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
     const movedDComp = this.getComponent(dComps, moveCompId)
@@ -61,7 +72,7 @@ export function canComponentPutInElement(
     )
     if (!targetTElem) return false
 
-    // Получение данных щелевого элемента
+    // Получение данных целевого элемента
     const targetDComp = this.getComponent(dComps, targetCompCoords.dataCompId)
     if (targetDComp.dCompType === 'simpleTextComponent') return false
     const targetDElem = this.getDElemInDComp(targetDComp, targetCompCoords.dataElemId)
@@ -99,9 +110,7 @@ export function has$ElemNested$Elements(
     if (!tempComp) return true
 
     // Turn html-string to HTMLElement
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(tempComp.content.html, 'text/html')
-    const $component = doc.body.childNodes[0] as HTMLElement
+    const $component = this.get$componentByTComp(tempComp)
 
     let $elem: HTMLElement = $component.closest(`[data-em-id=${tElemId}]`)
     if (!$elem) $elem = $component.querySelector(`[data-em-id=${tElemId}]`)
@@ -113,19 +122,19 @@ export function has$ElemNested$Elements(
 
 /**
  * The function checks if I can make undo or redo history step
- * @param {String} step — step direction: undo OR redo
+ * @param {String} direction — step direction: undo OR redo
  * @param {Array} historyArr — articles history array
  * @param {Number} currentIdx — current history array index
  */
 export function canMakeHistoryStep(
     this: typeof articleManager,
-    step: 'undo' | 'redo',
+    direction: 'undo' | 'redo',
     historyArr: StoreArticleTypes.HistoryItems,
     currentIdx: number
 ) {
     return (
-        (step === 'undo' && currentIdx - 1 !== -1) ||
-        (step === 'redo' && currentIdx + 1 < historyArr.length)
+        (direction === 'undo' && currentIdx - 1 !== -1) ||
+        (direction === 'redo' && currentIdx + 1 < historyArr.length)
     )
 }
 
@@ -154,7 +163,7 @@ export function canDeleteElem(
     dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
 ) {
-    // Если выделен текствоый компонент или корневой элемент, то можно удалить весь компонент
+    // Если выделен текстовый компонент или корневой элемент, то можно удалить весь компонент
     if (['rootElement', 'textComponent'].includes(targetCompCoords.tagType)) {
         return true
     }
@@ -163,12 +172,14 @@ export function canDeleteElem(
     if (targetCompCoords.tagType === 'element') {
         const dComp = this.getComponent(dComps, targetCompCoords.dataCompId) as ArticleTypes.Component
 
-        const dElem = this.getDElemInDComp(
-            dComp, targetCompCoords.dataElemId
-        )
+        // Поиск массива dCompElemInnerElems где находится удаляемый элемент
+        const dElemInnerElemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, targetCompCoords.dataElemId)
+        if (!dElemInnerElemsArr) return false
+
+        const dElem = this.getDElemInDComp(dComp, targetCompCoords.dataElemId)
 
         // Получить количество таких же элементов как выделенный
-        const elemCount = this.getElemCount(dComp, dElem)
+        const elemCount = this.getElemCountInInnerElemsArr(dElemInnerElemsArr, dElem)
         // Элемент можно удалить если его количество больше одного
         return elemCount > 1
     }
@@ -214,7 +225,8 @@ export function canMoveItemToUpOrDown(
 
         // Составить массив элементов с таким же id шаблона элемента
         // потому что мне нужно проверить смогу ли я перемещать элемент в пределах элементов из его группы
-        const elemsGroupArr = dComp.dElems.filter(el => el.tCompElemId === dElem.tCompElemId)
+        const dElemInnerElemsArr = this.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, dElem.dCompElemId)
+        const elemsGroupArr = dElemInnerElemsArr.filter(el => el.tCompElemId === dElem.tCompElemId)
 
         // Индекс положения элемента и длина массива
         idx = elemsGroupArr.findIndex(dElem => dElem.dCompElemId === dataElemId)
@@ -230,10 +242,33 @@ export function canMoveItemToUpOrDown(
 
 /**
  * Функция проверяет можно ли клонировать компонент/элемент и вставить после выделенного элемента
+ * @param {Array} dComps — массив компонентов статьи
  * @param {Object} compCoords — координаты выделенного компонента/элемента
+ * * @param {Array} tempComps — массив шаблонов компонентов
  */
-export function canClone(this: typeof articleManager, compCoords: StoreArticleTypes.FlashedElem) {
-    return !!compCoords.dataCompId
+export function canClone(
+    this: typeof articleManager,
+    dComps: ArticleTypes.Components,
+    compCoords: StoreArticleTypes.FlashedElem,
+    tempComps: TempCompTypes.TempComps
+) {
+    // Разрешить клонирование если выделили текст, корневой элемент
+    if (['textComponent', 'rootElement'].includes(compCoords.tagType)) {
+        return true
+    }
+    // Запретить если ничего не выделили
+    if (!compCoords.dataCompId) {
+        return false
+    }
+
+    // Выделен элемент...
+    // Получение данных и шаблона элемента
+    const dComp = articleManager.getComponent(dComps, compCoords.dataCompId) as  ArticleTypes.Component
+    const dElem = articleManager.getDElemInDComp(dComp, compCoords.dataElemId)
+    const tElem = articleManager.getTElemByTCompIdAndTElemId(tempComps, dComp.tCompId, dElem.tCompElemId)
+
+    // Если в шаблоне не запрещено делать копии, то разрешено.
+    return !(tElem.elemCanDuplicate === false)
 }
 
 /**
@@ -263,7 +298,7 @@ export function canClone(this: typeof articleManager, compCoords: StoreArticleTy
  * @param {Boolean} parentItemHidden — скрыт ли компонент/элемент находящийся выше в иерархии
  * @param {Object} parentDComp — данные компонента к которому принадлежат перебираемый массив элементов
  */
-export function isParentElemHidden(
+/*export function isParentElemHidden(
     this: typeof articleManager,
     dItems: ArticleTypes.Components | ArticleTypes.ComponentElems | ArticleTypes.ElemChildren,
     targetDComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
@@ -315,7 +350,7 @@ export function isParentElemHidden(
     }
 
     return false
-}
+}*/
 
 /**
  * Имеет ли компонент/элемент внутри другой компонент/элемент.
@@ -325,7 +360,7 @@ export function isParentElemHidden(
  * @param {Number} childDCompId — id данных искомого компонента (если передали без childDElemId)
  * @param {Number} childDElemId — id данных искомого элемента
  */
-export function hasItemAnotherItem(
+/*export function hasItemAnotherItem(
     this: typeof articleManager,
     dComps: ArticleTypes.Components,
     targetDCompId: ArticleTypes.Id,
@@ -363,4 +398,4 @@ export function hasItemAnotherItem(
     }
 
     return false
-}
+}*/

@@ -12,6 +12,7 @@ import { User } from '../user/decorators/user.decorator'
 import { AuthGuard } from '../user/guards/auth.guard'
 import { UpdateSiteDto } from './dto/updateSite.dto'
 import { SiteTemplateService } from '../siteTemplate/siteTemplate.service'
+import { MetaTemplateService } from '../metaTemplate/metaTemplate.service'
 import { CompFolderService } from '../compFolder/compFolder.service'
 import { ArtFolderService } from '../artFolder/artFolder.service'
 import { ComponentService } from '../component/component.service'
@@ -22,6 +23,7 @@ export class SiteController {
     constructor(
         private readonly siteService: SiteService,
         private readonly siteTemplateService: SiteTemplateService,
+        private readonly metaTemplateService: MetaTemplateService,
         private readonly compFolderService: CompFolderService,
         private readonly artFolderService: ArtFolderService,
         private readonly componentService: ComponentService,
@@ -38,6 +40,19 @@ export class SiteController {
     ): Promise<void> {
         const siteTemplates = await this.siteTemplateService.getSiteTemplates(siteId)
         this.siteTemplateService.buildSiteTemplateResponse(siteTemplates, response)
+    }
+
+
+    // ШАБЛОНЫ МЕТАДАННЫХ =========================================
+
+    // Получение всех шаблонов сайта
+    @Get(':siteId/metaTemps')
+    async getMetaTemplates(
+        @Param('siteId') siteId: number,
+        @Res({ passthrough: true }) response: Response
+    ): Promise<void> {
+        const metaTemplates = await this.metaTemplateService.getMetaTemplates(siteId)
+        this.metaTemplateService.buildMetaTemplateResponse(metaTemplates, response)
     }
 
 

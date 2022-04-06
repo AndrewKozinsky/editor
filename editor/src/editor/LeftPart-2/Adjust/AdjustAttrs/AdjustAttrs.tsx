@@ -3,6 +3,7 @@ import AdjustInputs from '../AdjustInputs/AdjustInputs'
 import useGetInputsConfig from '../commonHooks'
 import makeClasses from './AdjustAttrs-classes'
 
+
 export default function AdjustAttrs() {
     const CN = makeClasses()
 

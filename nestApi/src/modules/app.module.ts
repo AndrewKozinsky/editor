@@ -1,15 +1,17 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
 import { join } from 'path'
+import ormconfig from '../ormconfig'
+import { SiteService } from './site/site.service'
 import { UserModule } from './user/user.module'
 import { SiteModule } from './site/site.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import ormconfig from '../ormconfig'
 import { ServeStaticModule } from '@nestjs/serve-static'
 import { AuthMiddleware } from './user/middlewares/auth.middleware'
 import { LanguageMiddleware } from './user/middlewares/language.middleware'
-import {SiteTemplateModule} from './siteTemplate/siteTemplate.module'
-import { ComponentModule } from './component/component.module'
+import { SiteTemplateModule } from './siteTemplate/siteTemplate.module'
+import { MetaTemplateModule } from './metaTemplate/metaTemplate.module'
 import { CompFolderModule } from './compFolder/compFolder.module'
+import { ComponentModule } from './component/component.module'
 import { ArtFolderModule } from './artFolder/artFolder.module'
 import { ArticleModule } from './article/article.module'
 
@@ -25,13 +27,14 @@ import { ArticleModule } from './article/article.module'
       UserModule,
       SiteModule,
       SiteTemplateModule,
+      MetaTemplateModule,
       CompFolderModule,
       ComponentModule,
       ArtFolderModule,
       ArticleModule,
   ],
   controllers: [],
-  providers: [],
+  providers: []
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer) {

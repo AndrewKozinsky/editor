@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/miscUtils'
+import { getFromLocalStorage, getState } from 'utils/miscUtils'
 
 
 // Тип параметров запроса
@@ -71,10 +71,8 @@ export function useFetch<T>(url: string, options: OptionsType) {
  * @param {Object} options — параметры запроса
  */
 export async function makeFetch(url: string, options: OptionsType) {
-    const lang = store.getState().settings.editorLanguage
-
     // Добавление заголовка языка интерфейса в параметры запроса
-    const extraOptions = setExtraOptions(options, lang)
+    const extraOptions = setExtraOptions(options)
 
     try {
         const rowData = await fetch(url, extraOptions)
@@ -82,7 +80,6 @@ export async function makeFetch(url: string, options: OptionsType) {
     }
     catch (err) {
         let message = `Couldn't get data.`
-        if (lang === 'rus') message = 'Не удалось получить данные.'
         throw new Error(message)
     }
 }

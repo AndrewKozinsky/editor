@@ -15,8 +15,8 @@ const articleFormMessages = {
         rus: 'Название статьи не может быть длиннее 255 символов'
     },
     defaultTemplateInput: {
-        eng: 'Site styles',
-        rus: 'Стили сайта'
+        eng: 'Group',
+        rus: 'Группа'
     },
     submitBtnText: {
         eng: 'Save',
@@ -51,8 +51,8 @@ const articleFormMessages = {
         rus: 'В редактор'
     },
     articleIsAlreadyEdited: {
-        eng: 'The article is already being edited',
-        rus: 'Статья уже редактируется'
+        eng: 'It is already being edited',
+        rus: 'Уже редактируется'
     },
     templateNotSelected: {
         eng: 'Not selected',

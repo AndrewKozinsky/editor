@@ -34,10 +34,11 @@ export function getIconSize(type: string) {
         case 'mainTabEditor':
         case 'mainTabSettings':
         // Значки на вкладках сайта
-        case 'siteTabSite':
-        case 'siteTabTemplates':
-        case 'siteTabComponents':
-        case 'siteTabArticle':
+        case 'groupTabGroup':
+        case 'groupTabTemplates':
+        case 'groupTabMeta':
+        case 'groupTabComponents':
+        case 'groupTabArticle':
             return {
                 width: '31px',
                 height: '26px',
@@ -65,7 +66,7 @@ export function getIconSize(type: string) {
             }
         case 'btnSignFolder':
         case 'btnSignAdd':
-        // case 'btnSignJson':
+        case 'btnSignJson':
         case 'btnSignEdit':
             return {
                 width: '15px',

@@ -1,10 +1,11 @@
 import { useEffect } from 'react'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import { store } from 'store/rootReducer'
-import actions from 'store/rootAction'
 import articleActions from 'store/article/articleActions'
 import FCType from 'libs/FormConstructor/FCType'
 import SiteTemplateServerResponseType from 'requests/editor/siteTemplate/siteTemplateServerResponseType'
+import sitesActions from 'store/site/sitesActions'
+import { getState } from 'utils/miscUtils'
 
 
 /**
@@ -40,17 +41,17 @@ export async function afterSubmit(response: SiteTemplateServerResponseType) {
     if (response.status === 'success') {
 
         // Скачать новый список шаблонов сайта и поставить в Хранилище
-        await store.dispatch(actions.sites.requestSiteTemplates())
+        await store.dispatch(sitesActions.requestSiteTemplates())
 
         // Найти в Хранилище шаблон сайта с таким же id как у только что созданного
-        const newSiteTemplate = store.getState().sites.siteTemplatesSection.templates.find((template: any) => {
+        const newSiteTemplate = getState().sites.siteTemplatesSection.templates.find((template: any) => {
             return template.id === response.data.siteTemplates[0].id
         })
         // Выделить созданный шаблон сайта
-        store.dispatch(actions.sites.setCurrentSiteTemplateId(newSiteTemplate.id))
+        store.dispatch(sitesActions.setCurrentSiteTemplateId(newSiteTemplate.id))
 
         // Если отредактировали шаблон сайта, который используется в редактируемой статье...
-        if (store.getState().article.siteTemplateId === newSiteTemplate.id) {
+        if (getState().article.siteTemplateId === newSiteTemplate.id) {
             // ... то обновить хеш версии шаблона сайта чтобы хук скачал новую версию шаблона и поставил в <head> и <body>
             store.dispatch(articleActions.changeSiteTemplateVersionHash())
         }

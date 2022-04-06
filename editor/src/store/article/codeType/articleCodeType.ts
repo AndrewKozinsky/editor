@@ -30,7 +30,7 @@ namespace ArticleTypes {
         // Component template id
         tCompId: Id
         // Component elements
-        dElems?: ComponentElems
+        dElems?: ComponentElem
     }
 
     export type Id = number // 1
@@ -54,6 +54,7 @@ namespace ArticleTypes {
         dCompElemTag?: Tag
         dCompElemAttrs?: Attribs
         dCompElemLayer?: Layer
+        dCompElemInnerElems?: ComponentElems
         dCompElemChildren?: ElemChildren
     }
 

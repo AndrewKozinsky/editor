@@ -1,3 +1,9 @@
+import { ArticleReducerType } from 'store/article/articleReducer'
+import { ModalReducerType } from 'store/modal/modalReducer'
+import { SettingsReducerType } from 'store/settings/settingsReducer'
+import { SitesReducerType } from 'store/site/sitesReducer'
+import { UserReducerType } from 'store/user/userReducer'
+import { AppStateType, store } from 'store/rootReducer'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -88,10 +94,24 @@ export function createDeepCopy<T>(data: T): T {
     return f(data)
 }
 
-export function wait(waitTime: number = 0) {
-    return new Promise(function (resolve: (value: unknown) => void) {
-        setTimeout(function () {
-            resolve(0)
-        }, waitTime)
-    })
+/**
+ * Псевдоним для функции store.getState().
+ * Только дополнительно возвращаемые данные будет иметь правильный тип, а не any.
+ */
+export function getState() {
+    const myStore: AppStateType = store.getState()
+    const userStore: UserReducerType = myStore.user
+
+    const sitesStore: SitesReducerType = myStore.sites
+    const settingsStore: SettingsReducerType = myStore.settings
+    const articleStore: ArticleReducerType = myStore.article
+    const modalStore: ModalReducerType = myStore.modal
+
+    return {
+        user: userStore,
+        sites: sitesStore,
+        settings: settingsStore,
+        article: articleStore,
+        modal: modalStore
+    }
 }

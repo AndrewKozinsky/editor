@@ -21,7 +21,7 @@ $CN: header-page;
 }
 @media all and(min-width: 1000px) {
     .#{$CN}__content-divided {
-        grid-template-columns: 400px 1px 1fr;
+        grid-template-columns: 380px 1px 1fr;
     }
 }
 .#{$CN}__content-divided-left {

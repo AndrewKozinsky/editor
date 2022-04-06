@@ -3,6 +3,7 @@ import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
 import config from 'utils/config'
 import { getFromLocalStorage } from 'utils/miscUtils'
+import iconsCollector from '../../icons/js/getIcon'
 import { useSetFocus } from './Button-func'
 import makeClasses from './Button-classes'
 import SvgIcon, { SvgIconPropType } from '../../icons/SvgIcon'
@@ -85,6 +86,7 @@ export default function Button(props: ButtonPropType) {
 
     return (
         <button {...btnAttrs}>
+            {/*@ts-ignore*/}
             <ButtonIcon iconType={icon} color={color} CN={CN} />
             <ButtonLoader loading={loading} />
             {btnText}
@@ -94,7 +96,7 @@ export default function Button(props: ButtonPropType) {
 
 
 type ButtonIconPropType = {
-    iconType: string // Тип значка. Если не передан, то кнопка не будет отрисована
+    iconType: keyof typeof iconsCollector // Тип значка. Если не передан, то кнопка не будет отрисована
     color?: 'base' | 'accent' // Цвет заливки кнопки
     CN: MiscTypes.ObjStringKey<string>
 }

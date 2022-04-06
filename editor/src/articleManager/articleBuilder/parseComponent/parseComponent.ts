@@ -26,28 +26,26 @@ export default function parseComponent(
     let htmlStr = template.content.html.trim()
 
     // Convert html string to html-object
-    let htmlObjOriginal = htmlStringToObject(htmlStr)
-    const htmlObj = htmlObjOriginal[0] as HTMLObjArrType.Tag
+    let htmlObjArr = htmlStringToObject(htmlStr) as HTMLObjArrType.Arr
 
     // Удалить из htmlObj текстовые узлы потому что на этапе создания данных компонента
     // они уже превращены в текстовые компоненты
-    removeTextNodes(htmlObj)
+    removeTextNodes(htmlObjArr[0] as HTMLObjArrType.Tag)
 
-    // Поставить главной обёртке htmlObj дополнительные атрибуты
-    setExtraAttribsToRootTag(htmlObj, compData, template)
+    // Поставить в разметку повторяющиеся элементы на основе данных компонента
+    putRepeatedElems(htmlObjArr, [compData.dElems], compData.dCompId)
 
-    // Based on information from dataComp I will find elements that should have duplicates and put they into html-object.
-    putRepeatedElems(htmlObj, compData)
+    // Поставить главной обёртке дополнительные атрибуты
+    setExtraAttribsToRootTag(htmlObjArr, compData, template)
 
-    // Array of objects consists of objects with correspondence between component template, data and html-object
-    // Другими словами массив объектов с шаблонами элементов и данными элементов.
-    const consistObj = getConsistObjArr(template, compData, htmlObj)
+    // Массив объектов с данными для изменения тега элемента, вставки атрибутов и детей.
+    const consistObjArr = getConsistObjArr(htmlObjArr, template, [], compData)
 
-    for(let consistData of consistObj) {
-        changeTagName(consistData)
-        setAttribs(consistData)
-        insertChildren(consistData, tempComps)
+    for(let consistObj of consistObjArr) {
+        changeTagName(consistObj)
+        setAttribs(consistObj)
+        insertChildren(consistObj, tempComps)
     }
 
-    return htmlObj
+    return htmlObjArr[0] as HTMLObjArrType.Tag
 }

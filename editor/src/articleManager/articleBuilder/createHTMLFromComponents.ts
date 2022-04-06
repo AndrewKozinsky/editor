@@ -20,7 +20,10 @@ export default function createHTMLFromComponents(htmlStructure: HTMLObjArrType.A
     }, '')
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция возвращает текст текстового компонента
+ * @param {Object} htmlObj — объект текстового компонента
+ */
 function formHtmlStrFromTextComponent(htmlObj: HTMLObjArrType.Tag): string {
     const child = htmlObj.children[0]
 

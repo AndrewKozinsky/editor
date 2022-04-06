@@ -1,5 +1,5 @@
 import React from 'react'
-import notFoundMsg from '../../messages/notFoundMessages'
+import notFoundMsg from 'messages/notFoundMessages'
 import makeClasses from './NotFound-classes'
 import SvgIcon from 'common/icons/SvgIcon'
 import Wrapper from 'common/Wrapper/Wrapper'

@@ -82,10 +82,16 @@ export class SiteService {
             )
         }
 
-        // Если приходит пустая строка, то шаблон по умолчанию не выбран,
-        // поэтому поставлю null потому что поле принимает или число или null
+        // Если приходит пустая строка, то id шаблона сайта по умолчанию не выбран,
+        // поэтому поставлю null потому что поле принимает или число, или null
         if (updateSiteDto.defaultSiteTemplateId === '') {
             updateSiteDto.defaultSiteTemplateId = null
+        }
+
+        // Если приходит пустая строка, то id шаблон метаданных по умолчанию не выбран,
+        // поэтому поставлю null потому что поле принимает или число, или null
+        if (updateSiteDto.defaultMetaTemplateId === '') {
+            updateSiteDto.defaultMetaTemplateId = null
         }
 
         const updatedSite = Object.assign(site, updateSiteDto)
@@ -129,6 +135,16 @@ export class SiteService {
 
         // Удалить статьи
         await this.articleService.deleteArticles(siteId)
+
+        return null
+    }
+
+    /** Удаление сайтов пользователя (защищённый маршрут) */
+    async deleteUserSites(user: UserEntity): Promise<null> {
+        const userSites = await this.getAllSites(user)
+        for (let userSite of userSites) {
+            await this.deleteSite(userSite.id, user)
+        }
 
         return null
     }

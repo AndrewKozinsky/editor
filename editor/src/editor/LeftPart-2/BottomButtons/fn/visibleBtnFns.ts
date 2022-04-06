@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import { useDispatch } from 'react-redux'
 import articleActions from 'store/article/articleActions'
+import { BottomBtnCallbackType } from './universalHandler'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Изменить видимость элемента» */
 export function useIsVisibleDisabled() {
@@ -23,21 +23,13 @@ export function useIsVisibleDisabled() {
     return disabled
 }
 
-/** Хук возвращает обработчик нажатия на кнопку «Изменить видимость элемента» */
-export function useGetVisibleHandler() {
-    const dispatch = useDispatch()
-    const historyItem = articleManager.hooks.getCurrentHistoryItem()
+/** Функция возвращает обработчик нажатия на кнопку «Изменить видимость элемента» */
+export const visibleItem: BottomBtnCallbackType = (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+    const compsAndMaxCompId = articleManager.changeVisibility(
+        historyItem.article, selectedElem
+    )
 
-    return useCallback(function () {
-        if (!historyItem) return
-        const { selectedElem } = historyItem
-
-        const compsAndMaxCompId = articleManager.changeVisibility(
-            historyItem.article, selectedElem
-        )
-
-        dispatch(articleActions.createAndSetHistoryItem(
-            compsAndMaxCompId
-        ))
-    }, [historyItem])
+    dispatch(articleActions.createAndSetHistoryItem(
+        compsAndMaxCompId
+    ))
 }

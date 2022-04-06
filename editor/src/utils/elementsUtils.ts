@@ -7,7 +7,7 @@ export function hasElemParentWithSelector($targetElem: HTMLElement, selector: st
     let hasParent = false
 
     let currentParent = $targetElem
-    for(;;) {
+    for(;currentParent;) {
         if (currentParent.tagName.toLowerCase() === 'body') {
             break
         }
@@ -20,3 +20,25 @@ export function hasElemParentWithSelector($targetElem: HTMLElement, selector: st
 
     return hasParent
 }
+
+/**
+ * КАНДИДАТ НА УДАЛЕНИЕ
+ * Функция ищет в переданном элементе текстовый узел
+ * @param {Element} $elem — элемент, в котором ищется текстовый узел.
+ */
+/*
+export function getTextNodeWithText($elem: Element): null | ChildNode {
+    if (!$elem.childNodes) return null
+
+    for (let i = 0; i < $elem.childNodes.length; i++) {
+        const $child = $elem.childNodes[i]
+
+        if ($child.nodeType === 3) {
+            return $child
+        }
+        else if ($child.nodeType === 1) {
+            const result = getTextNodeWithText($child as Element)
+            if (result) return result
+        }
+    }
+}*/

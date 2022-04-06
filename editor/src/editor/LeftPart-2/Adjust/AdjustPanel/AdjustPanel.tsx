@@ -1,16 +1,19 @@
 import React from 'react'
 import Hr from 'common/misc/Hr/Hr'
 import NameSection from 'editor/wrappers/NameSection/NameSection'
-import AdjustAttrs from '../AdjustAttrs/AdjustAttrs'
 import AdjustTag from '../AdjustTag/AdjustTag'
-import { useGetCompAndElemNames, useGetContentTypeVisible } from './AdjustPanel-func'
+import AdjustAttrs from '../AdjustAttrs/AdjustAttrs'
+import {
+    useGetCompAndElemNames,
+    useGetContentTypeVisible
+} from './AdjustPanel-func'
 import './AdjustPanel.scss'
 
 /** Панель настройки выделенного элемента */
 export default function AdjustPanel() {
     // Название выделенного компонента и элемента
     const { compName, elemName } = useGetCompAndElemNames()
-    if (!compName) return null
+    if (!compName) return <div></div>
 
     return (
         <NameSection header={compName}>

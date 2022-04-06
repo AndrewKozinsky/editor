@@ -6,8 +6,10 @@ const CN = 'name-section'
 /** Функция возвращающая классы для элементов */
 export default function makeClasses(type: 1 | 2) {
     return {
+        root: CN,
         header: getHeaderClasses(type),
-        bg: `${CN}__header-bg`
+        bg: `${CN}__header-bg`,
+        content: `${CN}__content`,
     }
 }
 

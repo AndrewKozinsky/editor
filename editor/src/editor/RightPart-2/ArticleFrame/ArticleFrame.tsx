@@ -7,6 +7,7 @@ import useResizeFlashRects from './flashElements/useResizeFlashRects'
 import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
+import { useClearUnwantedFocus } from './misc/useClearUnwantedFocus'
 import useSetArticleDataInStore from './setArticleData/useSetArticleDataInStore'
 import {
     useSetSiteTemplate,
@@ -15,7 +16,11 @@ import {
 import { useSetComponentsTemplates } from './setArticleData/useSetComponentsTemplates'
 import useSetArticleToIFrame from './setArticleData/useSetArticleToIFrame'
 import useSetShortcutsHandler from './keydownHandler/keydownHandler'
-import { useTrackSelectedElemForText } from './textCompsTracking/useTrackSelectedElemForText'
+import {
+    useTrackCompSelection, useSetHandlersToTrackText
+} from './textTracking/useUpdateArticleDataForText'
+import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
+import { useCorrectArticleData } from './misc/correctArtData'
 import './ArticleFrame.scss'
 
 
@@ -35,7 +40,14 @@ export default function ArticleFrame() {
     useSetShortcutsHandler()
 
     // Работа с текстом
-    useTrackSelectedElemForText()
+    useTrackCompSelection()
+    useSetHandlersToTrackText()
+
+    // Запрет действия по умолчанию при щелчке по ссылке
+    usePreventDefaultLinkBehavior()
+
+    // Хук убирает фокусировку с текста если не выбран текстовый компонент
+    useClearUnwantedFocus()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()
@@ -56,6 +68,8 @@ export default function ArticleFrame() {
 
     // Hook sets article JSX to IFrame
     useSetArticleToIFrame()
+    // Запуск функции исправления данных статьи при необходимости
+    useCorrectArticleData()
 
     return <iframe className="article-frame" ref={windowRef} />
 }

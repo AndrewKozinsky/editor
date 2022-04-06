@@ -1,13 +1,15 @@
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
+import { store } from 'store/rootReducer'
 import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import articleManager from 'articleManager/articleManager'
-import { store } from 'store/rootReducer'
-import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
+import attrPanelMsg from 'messages/attrsPanelMessages'
 import articleActions from 'store/article/articleActions'
+import { getState } from 'utils/miscUtils'
+import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения тега выделенного элемента
@@ -137,7 +139,7 @@ function getInputItems(tTagObj: TempCompTypes.ElemTags) {
 
     // Пункт если ничего не выбрано
     options.unshift({
-        label: 'Не выбрано',
+        label: attrPanelMsg.notSelected,
         value: '',
     })
 
@@ -151,7 +153,7 @@ function getInputItems(tTagObj: TempCompTypes.ElemTags) {
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const { history, historyCurrentIdx } = store.getState().article
+        const { history, historyCurrentIdx } = getState().article
         const historyItem = history[historyCurrentIdx]
 
         const compsAndMaxCompId = articleManager.changeElemTag(

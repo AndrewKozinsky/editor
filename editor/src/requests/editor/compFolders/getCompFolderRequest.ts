@@ -42,7 +42,7 @@ export async function getCompFolderRequest(siteId: number) {
         }
         catch (err) {}
     }
-    else if (rowResponse.status === 'fail') {
+    else {
         return rowResponse
     }
 }

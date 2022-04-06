@@ -3,7 +3,7 @@ import FCType from 'libs/FormConstructor/FCType'
 import siteTemplateSectionMsg from 'messages/siteTemplateSectionMessages'
 import createSiteTemplateRequest, {CreateNewSiteTemplateValuesType} from 'requests/editor/siteTemplate/createSiteTemplateRequest'
 import { afterSubmit } from './siteTemplateForm-func'
-import checkCodeSiteTemplate from '../CodeHelper/checkCodeSiteTemplate'
+import checkCodeSiteTemplate from '../checkCodeFn/checkCodeSiteTemplate'
 
 
 /** Объект конфигурации формы создания нового шаблона сайта */
@@ -29,8 +29,8 @@ const newSiteTemplateFormConfig: FCType.Config = {
     },
     bottom: {
         submit: {
-            text: siteTemplateSectionMsg.submitBtnTextNew, // Это значение должен изменять хук в зависимости от типа формы!!!
-            icon: 'btnSignAdd' // Это значение должен изменять хук в зависимости от типа формы!!!
+            text: siteTemplateSectionMsg.submitBtnTextNew,
+            icon: 'btnSignAdd'
         },
     },
     async requestFn(readyFieldValues, outerFns, formDetails) {

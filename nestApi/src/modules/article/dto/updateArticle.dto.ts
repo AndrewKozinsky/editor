@@ -14,6 +14,8 @@ export class UpdateArticleDto {
     content: string
 
     @IsOptional()
-    @IsNumber()
     siteTemplateId: number | ''
+
+    @IsOptional()
+    metaTemplateId: number | ''
 }

@@ -83,6 +83,7 @@ namespace StoreArticleTypes {
         type: typeof SET_ARTICLE
         payload: {
             article: ArticleTypes.Article,
+            name: string,
             siteId: number,
             siteTemplateId: number
         }
@@ -150,6 +151,12 @@ namespace StoreArticleTypes {
         payload: StoreArticleTypes.CreateNewHistoryItem
     }
 
+    export const UPDATE_CURRENT_HISTORY_ITEM = 'UPDATE_CURRENT_HISTORY_ITEM'
+    export type UpdateCurrentHistoryItemAction = {
+        type: typeof UPDATE_CURRENT_HISTORY_ITEM
+        payload: StoreArticleTypes.CreateNewHistoryItem
+    }
+
     // Action changes a current history step
     export const MAKE_HISTORY_STEP = 'MAKE_HISTORY_STEP'
     export type MakeHistoryStepAction = {
@@ -169,6 +176,13 @@ namespace StoreArticleTypes {
         type: typeof CLEAR_ARTICLE
     }
 
+    // Скорректированы ли данные статьи (чтобы данные соответствовали шаблонам)
+    export const SET_IS_ART_DATA_CORRECT = 'SET_IS_ART_DATA_CORRECT'
+    export type SetIsArtDataCorrectAction = {
+        type: typeof SET_IS_ART_DATA_CORRECT
+        payload: boolean
+    }
+
 
     export type ArticleAction =
         | SetLinksAction
@@ -183,9 +197,11 @@ namespace StoreArticleTypes {
         | SetTempCompAction
         | SetFlashedElementAction
         | CreateAndSetHistoryItemAction
+        | UpdateCurrentHistoryItemAction
         | MakeHistoryStepAction
         | SetHistoryStepWhenArticleWasSavedAction
         | ClearArticleAction
+        | SetIsArtDataCorrectAction
 }
 
 export default StoreArticleTypes

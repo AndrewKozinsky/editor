@@ -11,6 +11,7 @@ export default function makeClasses(itemData: TempCompsTreeType.Item, btnInsideA
     return {
         root: CN,
         inner: CN + '__inner',
+        name: CN + '__name',
         triangleBtn: getTriangleBtnClasses(itemData),
         folderSign: CN + '__folder-sign',
         circles: CN + '__circles',

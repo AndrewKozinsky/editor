@@ -1,4 +1,6 @@
 const JSON5 = require('json5')
+import articleManager from '../../articleManager/articleManager'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import TempCompTypes from './codeType/tempCompCodeType'
 import { MiscTypes } from 'types/miscTypes'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
@@ -11,9 +13,9 @@ import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 import config from 'utils/config'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
-import actions from '../rootAction'
 import { isCursorInTheSameElem } from './article-func'
-import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
+import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
+import StoreSitesTypes from '../site/sitesTypes'
 
 
 const articleActions = {
@@ -60,7 +62,10 @@ const articleActions = {
             // Request for an article and response from a server
             const response = await getArticleRequest(articleId)
 
-            if (response.status !== 'success' || !response.data.articles[0]) return
+            if (response.status !== 'success' || !response.data.articles[0]) {
+                articleManager.clearArticle()
+                return
+            }
 
             if (response.status === 'success') {
                 let articleData = response.data.articles[0]
@@ -70,12 +75,13 @@ const articleActions = {
     },
 
     // Set an article after receiving the data. Action return history array with single article
-    setArticle(articleFullData: ArticleType<ArticleTypes.Article>): StoreArticleTypes.SetArticleAction {
+    setArticle(articleFullData: ArticleType<ArticleTypes.Article, null | MetaType.Items>): StoreArticleTypes.SetArticleAction {
         return {
             type: StoreArticleTypes.SET_ARTICLE,
             payload: {
                 // Article
                 article: articleFullData.content,
+                name: articleFullData.name,
                 siteId: articleFullData.siteId,
                 siteTemplateId: articleFullData.siteTemplateId
             }
@@ -99,7 +105,7 @@ const articleActions = {
     },
 
     // Request for included files template and setting it in Store
-    requestSiteTemplate(siteTemplateId: number) {
+    requestSiteTemplate(siteTemplateId: StoreSitesTypes.CurrentSiteTemplateId) {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             if (!siteTemplateId) return
 
@@ -147,11 +153,9 @@ const articleActions = {
             const response = await getCompFolderRequest(siteId)
             if (response.status !== 'success') return
 
-            const foldersObj = response.data.compFolders[0].content
-            if (!foldersObj) return
+            const foldersObj = response.data.compFolders[0].content || []
 
             // Set component template folders in the Store
-            // @ts-ignore
             dispatch( articleActions.setTempCompFolders(foldersObj) )
         }
     },
@@ -229,7 +233,12 @@ const articleActions = {
             // Если на элемент навели мышью...
             if (actionType === 'hover') {
                 // Если навели на элемент, но он уже выделен...
-                if (currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId && currentArticle.selectedElem.dataElemId === dataElemId) {
+                if (
+                    currentArticle.selectedElem.dataCompId && currentArticle.selectedElem.dataCompId === dataCompId &&
+                    currentArticle.selectedElem.dataElemId === dataElemId ||
+                    currentArticle.moveSelectedComp.dataCompId === dataCompId &&
+                    currentArticle.moveSelectedComp.dataElemId === dataElemId
+                ) {
                     // Спрятать наводящую рамку
                     dispatch( articleActions.setFlashedElement(
                         'hover', tagType, null, null
@@ -253,7 +262,7 @@ const articleActions = {
                     'select', tagType, dataCompId, dataElemId
                 ))
 
-                if (currentArticle.hoveredElem.dataCompId === dataCompId && !dataElemId) {
+                if (currentArticle.hoveredElem.dataCompId === dataCompId) {
                     dispatch( articleActions.setFlashedElement(
                         'hover', null, null, null
                     ))
@@ -345,6 +354,17 @@ const articleActions = {
     },
 
     /**
+     * Замена последнего объекта истории на переданный
+     * @param {Object} itemDetails — данные для обновления текущего элемента в массиве статей
+     */
+    updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
+        return {
+            type: StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM,
+            payload: itemDetails
+        }
+    },
+
+    /**
      * Action changes a current history step
      * @param {String} step — step direction: undo OR redo
      */
@@ -369,6 +389,14 @@ const articleActions = {
 
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
+        }
+    },
+
+    /* Экшен ставит значение флага скорректированы ли данные статьи (чтобы данные соответствовали шаблонам) */
+    setIsArtDataCorrect(isCorrect: boolean) {
+        return {
+            type: StoreArticleTypes.SET_IS_ART_DATA_CORRECT,
+            payload: isCorrect
         }
     },
 }

@@ -4,14 +4,21 @@ import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import { deleteItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import config from 'utils/config'
-import { setInLocalStorage } from 'utils/miscUtils'
+import { getState, setInLocalStorage } from 'utils/miscUtils'
+import sitesActions from 'store/site/sitesActions'
 import bridge from '../bridge'
-import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
+import { FolderType } from 'editor/RightPart-1/FoldersList/types'
 
-// TODO Что делает эта функция?
+/**
+ * Функция делает действия при удалении папки статей/компонентов или статью/компонент
+ * @param {String} category — категория удаляемого ресурса: components или articles
+ * @param {String} type — тип удаляемого ресурса: file или folder
+ * @param {Number} resourceId — id удаляемого ресурса
+ * @param {Array} originalFolders — массив папок/элементов до удаления папки/элемента
+ * @param {Array} updatedFolders — обновлённый массив папок/элементов после удаления папки/элемента
+ */
 export async function deleteResource(
     this: typeof bridge,
     category: FolderType,
@@ -86,10 +93,10 @@ function getFolders(
 
     let originalFolders2: DragFilesTreeType.Items
     if (category == 'components') {
-        originalFolders2 = store.getState().sites.compFolderSection.compFolder
+        originalFolders2 = getState().sites.compFolderSection.compFolder
     }
     else if (category == 'articles') {
-        originalFolders2 = store.getState().sites.artFolderSection.artFolder
+        originalFolders2 = getState().sites.artFolderSection.artFolder
     }
 
     let updatedFolders2 = deleteItem(originalFolders2, resourceId)
@@ -100,10 +107,10 @@ function getFolders(
 // TODO Что делает эта функция?
 function setFoldersInStore(category: FolderType, updatedFolders2: DragFilesTreeType.Items) {
     if (category === 'components') {
-        store.dispatch( actions.sites.setCompFolder({folders: updatedFolders2}) )
+        store.dispatch( sitesActions.setCompFolder({folders: updatedFolders2}) )
     }
     else if (category === 'articles') {
-        store.dispatch( actions.sites.setArtFolder({folders: updatedFolders2}) )
+        store.dispatch( sitesActions.setArtFolder({folders: updatedFolders2}) )
     }
 }
 
@@ -112,11 +119,11 @@ function clearDataFromStore(category: FolderType) {
     // Обнулить данные выделенного элемента в Хранилище
     if (category === 'components') {
         // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( actions.sites.setCurrentComp(null, null) )
+        store.dispatch( sitesActions.setCurrentComp(null, null) )
     }
     else if (category === 'articles') {
         // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( actions.sites.setCurrentArt(null, null) )
+        store.dispatch( sitesActions.setCurrentArt(null, null) )
     }
 }
 
@@ -159,7 +166,7 @@ async function deleteFilesInFolder(
     }
     else if (category === 'articles') {
         // id редактируемой статьи
-        const editedArticleId = store.getState().article.articleId
+        const editedArticleId = getState().article.articleId
 
         // Проход по массиву идентификаторов удаляемых статей
         filesIdsInside.forEach(articleId => {

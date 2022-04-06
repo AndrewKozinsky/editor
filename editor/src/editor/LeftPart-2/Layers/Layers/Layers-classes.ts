@@ -7,22 +7,10 @@ const CN = 'layer'
 /** Функция возвращающая классы для элементов */
 export default function makeClasses(config: LayersConfigType.Layer) {
     return {
-        root: CN,
-        wrapper: getWrapper(config),
-        innerWrapper: CN + '__inner-wrapper',
+        root: getRoot(config),
 
-        collapseEmpty: CN + '__collapse-empty',
-        collapse: getCollapse(config),
-        collapseIcon: getCollapseIcon(config),
-
-        typeIcon: getTypeIcon(config),
-        emptyTypeIcon: CN + '__empty-type-icon',
+        nameWrapper: getNameWrapper(config),
         text: getText(config),
-
-        circles: CN + '__circles',
-        moveCircle: getMoveCircle(config),
-        selectCircle: getSelectedCircle(config),
-
         hiddenLayerSign: CN + '__hidden-layer-sign',
 
         rightPart: getRightPart(config),
@@ -31,73 +19,41 @@ export default function makeClasses(config: LayersConfigType.Layer) {
     }
 }
 
-function getWrapper(config: LayersConfigType.Layer) {
-    const wrCls = CN + '__wrapper'
-    const classes = [wrCls]
-
-    if (config.selected) {
-        classes.push(wrCls + '--select')
-    }
-    else if (config.hovered) {
-        classes.push(wrCls + '--hover')
-    }
-
-    if (config.moveSelected) {
-        classes.push(wrCls + '--move-select')
-    }
-    else if (config.moveHovered) {
-        classes.push(wrCls + '--move-hover')
-    }
+function getRoot(config: LayersConfigType.Layer) {
+    const classes = [CN]
 
     if (config.hidden || config.parentLayerHidden) {
-        classes.push(wrCls + '--hidden')
+        classes.push(CN + '--hidden')
     }
 
     return makeCN(classes)
 }
 
-function getCollapse(config: LayersConfigType.Layer) {
-    const cls = CN + '__collapse'
-    const classes = [cls]
+function getNameWrapper(config: LayersConfigType.Layer) {
+    const wrCls = CN + '__name-wrapper'
+    const classes = [wrCls]
 
-    if (config.collapsed) {
-        classes.push(cls + '--rotate')
+    if (['rootElement', 'text'].includes(config.type)) {
+        if (config.selected) {
+            classes.push(wrCls + '--comp-select')
+        }
+        else if (config.hovered) {
+            classes.push(wrCls + '--comp-hover')
+        }
+        else if (config.moveSelected) {
+            classes.push(wrCls + '--comp-move-select')
+        }
+        else if (config.moveHovered) {
+            classes.push(wrCls + '--comp-move-hover')
+        }
     }
-
-    if (config.selected) {
-        classes.push(cls + '--select')
-    }
-    else if (config.hovered) {
-        classes.push(cls + '--hover')
-    }
-
-    if (config.moveSelected) {
-        classes.push(cls + '--move-select')
-    }
-    else if (config.moveHovered) {
-        classes.push(cls + '--move-hover')
-    }
-
-    return makeCN(classes)
-}
-
-function getCollapseIcon(config: LayersConfigType.Layer) {
-    const cls = CN + '__collapse-icon'
-    const classes = [cls]
-
-    if (config.selected || config.moveSelected) {
-        classes.push(cls + '--white')
-    }
-
-    return makeCN(classes)
-}
-
-function getTypeIcon(config: LayersConfigType.Layer) {
-    const cls = CN + '__type-icon'
-    const classes = [cls]
-
-    if (config.selected || config.moveSelected) {
-        classes.push(cls + '--white')
+    else if (config.type === 'element') {
+        if (config.selected) {
+            classes.push(wrCls + '--elem-select')
+        }
+        else if (config.hovered) {
+            classes.push(wrCls + '--elem-hover')
+        }
     }
 
     return makeCN(classes)
@@ -109,29 +65,10 @@ function getText(config: LayersConfigType.Layer) {
 
     if (['rootElement', 'text'].includes(config.type)) {
         classes.push(cls + '--bold')
-    }
-    if (config.selected || config.moveSelected) {
-        classes.push(cls + '--white')
-    }
 
-    return makeCN(classes)
-}
-
-function getMoveCircle(config: LayersConfigType.Layer) {
-    const classes = [CN + '__circle']
-
-    if (config.hasMovedChild && config.collapsed) {
-        classes.push(CN + '__move-circle')
-    }
-
-    return makeCN(classes)
-}
-
-function getSelectedCircle(config: LayersConfigType.Layer) {
-    const classes = [CN + '__circle']
-
-    if (config.hasSelectedChild && config.collapsed) {
-        classes.push(CN + '__select-circle')
+        if (config.selected || config.moveSelected) {
+            classes.push(cls + '--white')
+        }
     }
 
     return makeCN(classes)
@@ -141,20 +78,6 @@ function getRightPart(config: LayersConfigType.Layer) {
     const cls = CN + '__right-part'
     const classes = [cls]
 
-    if (config.selected) {
-        classes.push(cls + '--select')
-    }
-    else if (config.hovered) {
-        classes.push(cls + '--hover')
-    }
-
-    if (config.moveSelected) {
-        classes.push(cls + '--move-select')
-    }
-    else if (config.moveHovered) {
-        classes.push(cls + '--move-hover')
-    }
-
     return makeCN(classes)
 }
 
@@ -162,31 +85,12 @@ function getRightPartBtn(config: LayersConfigType.Layer) {
     const cls = CN + '__right-part-btn'
     const classes = [cls]
 
-
-    if (config.selected) {
-        classes.push(cls + '--select')
-    }
-    else if (config.hovered) {
-        classes.push(cls + '--hover')
-    }
-
-    if (config.moveSelected) {
-        classes.push(cls + '--move-select')
-    }
-    else if (config.moveHovered) {
-        classes.push(cls + '--move-hover')
-    }
-
     return makeCN(classes)
 }
 
 function getRightPartBtnIcon(config: LayersConfigType.Layer) {
     const cls = CN + '__right-part-btn-icon'
     const classes = [cls]
-
-    if (config.selected || config.moveSelected) {
-        classes.push(cls + '--white')
-    }
 
     return makeCN(classes)
 }

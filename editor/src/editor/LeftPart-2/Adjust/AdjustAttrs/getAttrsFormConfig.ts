@@ -1,15 +1,16 @@
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
-import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
-import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
+import articleActions from 'store/article/articleActions'
+import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
+import attrPanelMsg from 'messages/attrsPanelMessages'
 import { AdjInputsType } from '../AdjustInputs/AdjustInputs'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import { FieldGroupPropType } from 'common/formElements/FieldGroup/FieldGroup'
 import { SelectPropType } from 'common/formElements/Select/Select'
 import { TextInputPropType } from 'common/formElements/TextInput/TextInput'
 import { OptionsType } from 'common/formElements/Select/SelectTypes'
-import articleActions from '../../../../store/article/articleActions'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция возвращает объект конфигурации для генерирования полей ввода изменения атрибутов выделенного элемента
@@ -185,7 +186,7 @@ function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTyp
 
     if (['select', 'radio'].includes(inputType)) {
         options.unshift({
-            label: 'Не выбрано',
+            label: attrPanelMsg.notSelected,
             value: '',
         })
     }
@@ -201,7 +202,7 @@ function getInputItems(tElemAttr: TempCompTypes.ElemAttr, inputType: TempCompTyp
  */
 function onChangeHandler(dCompId: ArticleTypes.Id, dElemId: ArticleTypes.Id, inputType: TempCompTypes.InputViewType) {
     return function (data: OuterOnChangeHandlerType.FieldsData) {
-        const { history, historyCurrentIdx } = store.getState().article
+        const { history, historyCurrentIdx } = getState().article
         const historyItem = history[historyCurrentIdx]
 
         // Для текстового поля нужно взять первый элемент массива значений,

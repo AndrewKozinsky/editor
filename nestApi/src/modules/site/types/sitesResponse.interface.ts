@@ -12,5 +12,6 @@ type SiteType = {
     id: number
     name: string
     defaultSiteTemplateId: null | number
+    defaultMetaTemplateId: null | number
     createdAt: Date
 }

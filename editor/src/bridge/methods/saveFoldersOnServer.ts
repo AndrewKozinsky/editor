@@ -1,9 +1,9 @@
-import { FolderType } from 'editor/RightPart-1/ComponentsOrArticles/types'
+import { FolderType } from 'src/editor/RightPart-1/FoldersList/types'
 import filesTreePublicMethods from 'libs/DragFilesTree/publicMethods'
 import putArtFolderRequest from 'requests/editor/artFolders/putArtFolderRequest'
 import putCompFolderRequest from 'requests/editor/compFolders/putCompFolderRequest'
-import { store } from 'store/rootReducer'
-import FilesTreeType from '../../types/FilesTreeType'
+import FilesTreeType from 'types/FilesTreeType'
+import { getState } from 'utils/miscUtils'
 
 /**
  * Функция сохраняет массив папок на сервере
@@ -16,11 +16,11 @@ export default async function saveFoldersOnServer(type: FolderType, items: Files
 
     // Сохранить данные на сервере
     if (type === 'components') {
-        const { compFolderId } = store.getState().sites.compFolderSection
+        const { compFolderId } = getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedItems)
     }
     else {
-        const { artFolderId } = store.getState().sites.artFolderSection
+        const { artFolderId } = getState().sites.artFolderSection
         await putArtFolderRequest(artFolderId, preparedItems)
     }
 }

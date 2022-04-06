@@ -77,9 +77,15 @@ export class ArticleService {
         }
 
         // Если приходит пустая строка, то шаблон сайта не выбран,
-        // поэтому поставлю null потому что поле принимает или число или null
+        // поэтому поставлю null потому что поле принимает или число, или null
         if (updateArticleDto.siteTemplateId === '') {
             updateArticleDto.siteTemplateId = null
+        }
+
+        // Если приходит пустая строка, то id шаблона метаданных не выбран,
+        // поэтому поставлю null потому что поле принимает или число, или null
+        if (updateArticleDto.metaTemplateId === '') {
+            updateArticleDto.metaTemplateId = null
         }
 
         const updatedArticle = Object.assign(article, updateArticleDto)

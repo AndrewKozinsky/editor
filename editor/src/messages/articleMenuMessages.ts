@@ -14,10 +14,10 @@ const articleMenuMessages = {
         eng: 'Get mark up',
         rus: 'Разметка'
     },
-    /*data: {
+    data: {
         eng: 'Get data',
         rus: 'Данные'
-    },*/
+    },
     save: {
         eng: 'Save',
         rus: 'Сохранить'

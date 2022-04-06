@@ -6,8 +6,8 @@ import {
     Entity,
     PrimaryGeneratedColumn
 } from 'typeorm'
-import { hash } from 'bcrypt'
 import MiscTypes from '../../types/miscTypes'
+import { getHash } from '../../utils/miscUtils'
 
 @Entity({name: 'users'})
 export class UserEntity {
@@ -58,7 +58,7 @@ export class UserEntity {
         if (!this.password) return
 
         // Hash password before insert
-        this.password = await hash(this.password, 10)
+        this.password = getHash(this.password)
 
         // Set a new date when the password was changed
         this.passwordChangedAt = new Date()
