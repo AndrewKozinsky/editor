@@ -1,7 +1,14 @@
 import { useEffect } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import useGetUserSelectors from 'store/user/userSelectors'
-
+// @ts-ignore
+import faviconWhite_1x from '../favicons/faviconWhite@1x.png'
+// @ts-ignore
+import faviconWhite_2x from '../favicons/faviconWhite@2x.png'
+// @ts-ignore
+import faviconBlack_1x from '../favicons/faviconBlack@1x.png'
+// @ts-ignore
+import faviconBlack_2x from '../favicons/faviconBlack@2x.png'
 
 /** Хук перенаправляет на определённые страницы в зависимости от статуса токена авторизации. */
 export function useRedirectPage() {
