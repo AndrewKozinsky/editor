@@ -86,23 +86,33 @@ function getComponentsData(
     dComps: ArticleTypes.Components,
     tComps: TempCompTypes.TempComps
 ): ParsingDataComponents.MixComponents {
-    return dComps.map(dComp => {
+    const components: ParsingDataComponents.MixComponents = []
+
+    dComps.forEach(dComp => {
         if (dComp.dCompType === 'component') {
+            // Пропустить если главный элемент скрыт
+            if (dComp.dElems.dCompElemLayer?.layerHidden) return
+
             const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
 
-            return {
+            components.push({
                 compType: 'component',
                 compTemplateId: tComp.content.templateId,
                 compElements: getCompElementsData(tComps, tComp, [dComp.dElems])[0]
-            }
+            })
         }
         else if (dComp.dCompType === 'simpleTextComponent') {
-            return {
+            // Пропустить если текстовый компонент скрыт
+            if (dComp.dCompLayer?.layerHidden) return
+
+            components.push({
                 compType: 'text',
                 text: dComp.text,
-            }
+            })
         }
     })
+
+    return components
 }
 
 /**
@@ -116,7 +126,11 @@ function getCompElementsData(
     tComp: TempCompTypes.TempComp,
     dElems: ArticleTypes.ComponentElems
 ): ParsingDataComponents.ComponentElems {
-    return dElems.map(dElem => {
+    const elements: ParsingDataComponents.ComponentElems = []
+
+    dElems.forEach(dElem => {
+        if (dElem.dCompElemLayer?.layerHidden) return
+
         const tElem = articleManager.getTElemInTComp(tComp, dElem.tCompElemId)
 
         // Объект с данными перебираемого элемента
@@ -148,8 +162,10 @@ function getCompElementsData(
             elemParsedData.elemChildren = childrenParsedData
         }
 
-        return elemParsedData
+        elements.push(elemParsedData)
     })
+
+    return elements
 }
 
 /**

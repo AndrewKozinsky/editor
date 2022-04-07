@@ -256,3 +256,54 @@ export function useGetOnItemClick(type: FolderType) {
         }
     }, [dispatch])
 }
+
+
+let ff = [{
+    type: 'folder',
+    id: 'folder_4',
+    name: 'Строковые элементы',
+    content: [{id: 19, type: 'file', name: 'Ссылка'}, {id: 18, type: 'file', name: 'Жёлтый фон для текста'}, {
+        id: 17,
+        type: 'file',
+        name: 'Ссылка с рамкой'
+    }]
+}, {
+    type: 'folder',
+    id: 'folder_1',
+    name: 'Текстовые блоки',
+    content: [{id: 24, type: 'file', name: 'Заметка'}, {id: 23, type: 'file', name: 'Абзац'}, {
+        id: 22,
+        type: 'file',
+        name: 'Вводный текст'
+    }, {id: 21, type: 'file', name: 'Заголовок'}, {id: 20, type: 'file', name: 'Цитата'}]
+}, {
+    type: 'folder',
+    id: 'folder_3',
+    name: 'Обёртки',
+    content: [{id: 1000000915, type: 'file', name: 'Переключатель видимости'}, {
+        id: 28,
+        type: 'file',
+        name: 'C боковой частью'
+    }, {id: 1000000212, type: 'file', name: 'Блок для контента'}, {
+        id: 1000000736,
+        type: 'file',
+        name: 'Обёртка контента статьи'
+    }]
+}, {
+    type: 'folder',
+    id: 'folder_2',
+    name: 'Прочее',
+    content: [{id: 36, type: 'file', name: 'Опрос'}, {
+        id: 35,
+        type: 'file',
+        name: 'Блок с ссылкой на другую статью'
+    }, {id: 34, type: 'file', name: 'Аккордеон'}, {id: 33, type: 'file', name: 'Изображение'}, {
+        id: 32,
+        type: 'file',
+        name: 'Сетка'
+    }, {id: 31, type: 'file', name: 'Галерея'}, {id: 30, type: 'file', name: 'Таблица'}, {
+        id: 29,
+        type: 'file',
+        name: 'Якорные ссылки'
+    }]
+}]

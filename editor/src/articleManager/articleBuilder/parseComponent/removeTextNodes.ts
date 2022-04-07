@@ -13,6 +13,14 @@ export default function removeTextNodes(htmlObj: HTMLObjArrType.Tag) {
         }
 
         if ('tag' in child) {
+            // Если перебираемый тег не является элементом у которого есть текстовый потомок,
+            // то такой текст удалять не нужно, потому что он не будет преобразован в текстовый компонент.
+            if (!child.attrs || child.attrs && !child.attrs['data-em-id']) {
+                if (child.children && 'text' in child.children[0]) {
+                    continue
+                }
+            }
+
             removeTextNodes(child)
         }
     }

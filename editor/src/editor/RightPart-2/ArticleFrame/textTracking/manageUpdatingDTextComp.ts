@@ -56,6 +56,7 @@ export function updateDataInTextComp(
     else if (type === 'paste') {
         // Обновить textManagerData
         textManagerData.setInitialText(newText)
+        textManagerData.setNewHistoryItemCreated(false)
     }
     else if (type === 'history') {
         // Подождать пока загрузятся новые данные выделенного текстового компонента

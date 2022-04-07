@@ -66,15 +66,14 @@ function textChangeHandler(e: any) {
     // Ничего не делать если не выбран текстовый компонент
     if (!textManagerData.textCompId) return
 
-    // Ничего не делать если нажали недопустимую клавишу
-    if (isPressedWrongKey(e)) e.preventDefault()
+    // Не ставить символ в текстовое поле если нажали недопустимую клавишу
+    preventWrongKeys(e)
 
-    // Вставить новый объект истории если требуется
-    if (
-        ['paste', 'DOMCharacterDataModified', 'keypress'].includes(e.type) ||
-        e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)
-    ) {
-        if (!textManagerData.newHistoryItemCreated) createNewHistoryItem()
+    // Ставить новый объект истории если требуется
+    if (['paste', 'DOMCharacterDataModified', 'keypress'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+        if (!textManagerData.newHistoryItemCreated) {
+            createNewHistoryItem()
+        }
     }
 
     // html-объект компонента
@@ -103,12 +102,14 @@ function textChangeHandler(e: any) {
 }
 
 /**
- * Функция возвращает булево значение введен ли недопустимый символ.
+ * Функция отменяет установку в текстовое поле недопустимых символов.
  * @param {Object} e — объект события
  */
-function isPressedWrongKey(e: any): boolean {
+function preventWrongKeys(e: any) {
     // Ничего не делать если нажали не символьные клавиши, которые не являются кнопками удаления влево или вправо
-    if (e.type === 'keydown' && e.key === 'Enter') return true
+    if (e.type === 'keydown' && e.key === 'Enter') {
+        e.preventDefault()
+    }
 }
 
 /**
