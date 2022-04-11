@@ -2,6 +2,7 @@
 namespace ParsingData {
     export type Article = {
         general: {
+            articleId: number
             articleName: string
         },
         meta?: null | ParsingDataMeta.Inputs
@@ -33,9 +34,10 @@ export namespace ParsingDataComponents {
 
     // Component
     export type Component = {
+        compId: number
         compType: 'component'
         compTemplateId: string
-        compElements?: ComponentElem
+        compElems?: ComponentElem
     }
 
     // Component elements
@@ -46,9 +48,9 @@ export namespace ParsingDataComponents {
         elemTemplateId: string // 'banner'
         // Или идентификатор тега (если выбрали из списка тегов) или название тега (если написали название в текстовое поле)
         elemTag?: string
-        elemAttributes?: Attribs
+        elemAttrs: Attribs
         elemInnerElems?: ComponentElems
-        elemChildren?: ElemChildren
+        elemChildren: MixComponents
     }
 
     export type Attribs = Attrib[]
@@ -58,14 +60,13 @@ export namespace ParsingDataComponents {
         attrValue: string
     }
 
-    export type ElemChildren = MixComponent[]
-
 
     // =================================================================================================================
 
 
     // Simple Text component
     export type SimpleTextComponent = {
+        compId: number,
         compType: 'text'
         text: string,
     }

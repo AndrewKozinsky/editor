@@ -25,6 +25,9 @@ export function updateDataInTextComp(
         $textComp = articleManager.get$elemBy$body($body, textManagerData.textCompId)
     }
 
+    // Если сработает эта остановка, то посмотри что случилось. Это не обычное поведение.
+    if (!$textComp) debugger
+
     // Найти html-элемент и удалить его текст (после поставится новый)
     if ($textComp.firstChild) {
         $textComp.firstChild.textContent = ''

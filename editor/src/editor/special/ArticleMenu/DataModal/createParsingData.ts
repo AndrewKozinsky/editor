@@ -2,24 +2,27 @@ import ArticleTypes from 'store/article/codeType/articleCodeType'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ParsingData, { ParsingDataComponents, ParsingDataMeta } from '../MarkupModal/ParsingDataType'
-import MetaType from '../../../RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
+import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 
 /**
  * Функция формирует JSON с данными статьи.
  * Он будет использоваться пользователем для формирования разметки на своём сайте.
+ * @param {Number} articleId — id статьи
  * @param {Array} dComps — массив компонентов статьи
  * @param {string} articleName — название статьи.
  * @param {Array} tComps — массив шаблонов компонентов
  * @param meta
  */
 export function createParsingData(
+    articleId: number,
     dComps: ArticleTypes.Components,
     articleName: string,
     tComps: TempCompTypes.TempComp[],
     meta: MetaType.Items
-) {
+): string {
     const obj: ParsingData.Article = {
         general: {
+            articleId,
             articleName: articleName
         },
         meta: getMetaData(meta),
@@ -96,9 +99,10 @@ function getComponentsData(
             const tComp = articleManager.getTemplate(tComps, dComp.tCompId)
 
             components.push({
+                compId: dComp.dCompId,
                 compType: 'component',
                 compTemplateId: tComp.content.templateId,
-                compElements: getCompElementsData(tComps, tComp, [dComp.dElems])[0]
+                compElems: getCompElementsData(tComps, tComp, [dComp.dElems])[0]
             })
         }
         else if (dComp.dCompType === 'simpleTextComponent') {
@@ -106,6 +110,7 @@ function getComponentsData(
             if (dComp.dCompLayer?.layerHidden) return
 
             components.push({
+                compId: dComp.dCompId,
                 compType: 'text',
                 text: dComp.text,
             })
@@ -136,6 +141,8 @@ function getCompElementsData(
         // Объект с данными перебираемого элемента
         const elemParsedData: ParsingDataComponents.ComponentElem = {
             elemTemplateId: dElem.tCompElemId, // 'banner'
+            elemAttrs: [],
+            elemChildren: []
         }
 
         // Информация о теге
@@ -147,13 +154,16 @@ function getCompElementsData(
         // Информация об атрибутах
         const attrsParsedData = getElemAttrs(dElem, tElem)
         if (attrsParsedData) {
-            elemParsedData.elemAttributes = attrsParsedData
+            elemParsedData.elemAttrs = attrsParsedData
         }
 
         // Информация о вложенных тегах
         const innerElemsParsedData = getInnerElems(dElem, tComp, tComps)
         if (innerElemsParsedData) {
             elemParsedData.elemInnerElems = innerElemsParsedData
+        }
+        else {
+            elemParsedData.elemInnerElems = []
         }
 
         // Информация о дочерних компонентах
@@ -273,3 +283,4 @@ function getChildren(
 
     return getComponentsData(dComps, tComps)
 }
+

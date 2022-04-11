@@ -21,6 +21,11 @@ export class TextManagerData {
     // Установщик значения textCompId
     setTextCompId(textCompId: ArticleTypes.Id | null) {
         this.textCompId = textCompId
+
+        if (!textCompId) {
+            // this.initialText = ''
+            // this.newText = ''
+        }
     }
 
     // Установщик значения newHistoryItemCreated

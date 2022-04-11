@@ -2,6 +2,7 @@ import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from '../articleManager'
+import textManagerData from '../../editor/RightPart-2/ArticleFrame/textTracking/textManagerData'
 
 /**
  * Удаление компонента или элемента в зависимости от переданных параметров.
@@ -16,7 +17,7 @@ export function deleteItem(
 ): StoreArticleTypes.CreateNewHistoryItem {
     // Если выделен компонент или корневой элемент,
     if (['rootElement', 'textComponent'].includes(compCoords.tagType)) {
-        // то удалить весь компонент
+        // Удалить весь компонент
         return this.deleteComponent(article, compCoords.dataCompId)
     }
     else if (compCoords.tagType === 'element') {

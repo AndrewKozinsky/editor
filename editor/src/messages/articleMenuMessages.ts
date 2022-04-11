@@ -31,6 +31,10 @@ const articleMenuMessages = {
         eng: 'HTML article',
         rus: 'HTML статьи'
     },
+    dataModalHeader: {
+        eng: 'Article data',
+        rus: 'Данные статьи'
+    },
 
     closeArticleModalHeader: {
         eng: 'Are you really want to close the article?',

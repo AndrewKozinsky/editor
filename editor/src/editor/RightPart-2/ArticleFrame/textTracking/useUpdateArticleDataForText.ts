@@ -34,6 +34,10 @@ export function useTrackCompSelection() {
             textManagerData.setInitialText(dTextComp.text)
             textManagerData.setNewText(dTextComp.text)
         }
+        else {
+            // Очистить textCompId в TextManagerData если текстовый компонент не выделен
+            textManagerData.setTextCompId(null)
+        }
     }, [selectedElem])
 }
 

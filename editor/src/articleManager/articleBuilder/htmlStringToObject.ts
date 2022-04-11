@@ -24,6 +24,7 @@ function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
     const arr: HTMLObjArrType.Arr = []
 
     for (let i = 0; i < elems.length; i++) {
+
         // If this is tag...
         if (elems[i].nodeType === 1) {
             let elem = elems[i] as Element
@@ -33,7 +34,7 @@ function getObjects(elems: NodeListOf<ChildNode>): HTMLObjArrType.Arr {
         }
         // If this is text node...
         else if (elems[i].nodeType === 3) {
-            let elem = elems[0] as CharacterData
+            let elem = elems[i] as CharacterData
             // Get html-object
             const obj = getText(elem)
             arr.push(obj)
@@ -95,6 +96,7 @@ function getChildren(elem: Element): HTMLObjArrType.Arr {
  */
 function getText(elem: CharacterData): HTMLObjArrType.Text {
     let preparedString = elem.data
+
     // Remove all multiple spaces
     preparedString = preparedString.replace( /\s\s+/g, ' ' )
 

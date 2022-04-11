@@ -28,6 +28,7 @@ http {
         }
 
         location /fs/ {
+            add_header Access-Control-Allow-Origin "*";
             proxy_pass http://staticFileServer:4000/;
             rewrite ^\/fs\/(.*) /$1 break;
         }

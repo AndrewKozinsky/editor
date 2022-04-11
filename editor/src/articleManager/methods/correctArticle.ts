@@ -105,7 +105,7 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
     for (let i = 0; i < refDElems.length; i++) {
         const refDElem = refDElems[i]
 
-        if (!refDElem.dCompElemInnerElems) continue
+        if (!refDElem.dCompElemInnerElems || !originDElems[i]?.dCompElemInnerElems.length) continue
 
         addRepeatedElems(originDElems[i].dCompElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
     }
@@ -190,10 +190,12 @@ function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleType
                 refDElem.dCompElemLayer = {...originDElem.dCompElemLayer}
             }
 
+            // Стереть все дочерние компоненты у эталонного элемента.
+            // Если они есть у оригинального, то будут заполнены ими. Если нет, то пусть остаётся пустым.
+            refDElem.dCompElemChildren = []
+
             // Исправить дочерние компоненты элемента
             if (originDElem.dCompElemChildren?.length) {
-                refDElem.dCompElemChildren = []
-
                 // Обойти дочерние компоненты элемента
                 iterateOverComponents(article, originDElem.dCompElemChildren, refDElem.dCompElemChildren, tComps)
             }

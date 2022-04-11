@@ -4,7 +4,6 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import articleMenuMsg from 'messages/articleMenuMessages'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
-import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import { createParsingData } from './createParsingData'
 
 /** Компонент окна с данными статьи для сборки */
@@ -20,7 +19,7 @@ export default function ArticleDataModal() {
             if (!tempComps || !historyItem) return
 
             const meta = await getMeta(articleId)
-            const markupStr = createParsingData(historyItem.article.dComps, name, tempComps, meta)
+            const markupStr = createParsingData(articleId, historyItem.article.dComps, name, tempComps, meta)
             setMarkupStr(markupStr)
         }
 
@@ -29,7 +28,7 @@ export default function ArticleDataModal() {
 
     return (
         <ModalShortContent
-            header={articleMenuMsg.markupModalHeader}
+            header={articleMenuMsg.dataModalHeader}
             text={markupStr}
         />
     )

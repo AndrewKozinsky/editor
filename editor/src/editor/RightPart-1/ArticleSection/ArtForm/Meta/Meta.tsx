@@ -84,6 +84,7 @@ function MetaTextInput(props: MetaInputPropType) {
         label: inputData.label,
         name: inputData.name,
         value: inputData.value ? inputData.value[0] : '',
+        grayText: inputData.name,
         onChange: onChangeHandler
     }
 
@@ -110,6 +111,7 @@ function MetaRadioCheckboxInput(props: MetaInputPropType) {
         label: inputData.label,
         groupName: inputData.name,
         value: inputData.value || [''],
+        grayText: inputData.name,
         inputsArr: valuesArr,
         onChange: onChangeHandler
     }
