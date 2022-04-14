@@ -16,27 +16,27 @@ const bottomPanelMessages = {
     },
     up: {
         eng: 'Moving up',
-        rus: 'Перемещение вверх'
+        rus: 'Передвинуть вверх'
     },
     down: {
         eng: 'Moving down',
-        rus: 'Перемещение вниз'
+        rus: 'Передвинуть вниз'
     },
     clone1: {
-        eng: 'Copy',
-        rus: 'Скопировать'
+        eng: 'Duplicate',
+        rus: 'Дублировать'
     },
     clone2: {
-        eng: 'Copy with attributes',
-        rus: 'Скопировать с атрибутами'
+        eng: 'Duplicate with attributes',
+        rus: 'Дублировать с атрибутами'
     },
     clone3: {
-        eng: 'Copy with the children',
-        rus: 'Скопировать с детьми'
+        eng: 'Duplicate with the children',
+        rus: 'Дублировать с детьми'
     },
     remove: {
         eng: 'Deleting',
-        rus: 'Удаление'
+        rus: 'Удалить'
     },
     visible: {
         eng: 'Change visibility',

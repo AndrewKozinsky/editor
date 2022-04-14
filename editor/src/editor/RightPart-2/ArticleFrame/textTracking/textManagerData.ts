@@ -7,12 +7,12 @@ export class TextManagerData {
     // id выделенного текстового компонента (другие компоненты не учитываются)
     textCompId: ArticleTypes.Id | null = null
     // Создан ли новый объект истории для внесения текста текстового компонента
-    newHistoryItemCreated: boolean = false
+    newHistoryItemCreated = false
 
     // Изначальное значение текста компонента
-    initialText: string = ''
+    initialText = ''
     // Новое значение текста компонента
-    newText: string = ''
+    newText = ''
 
     constructor() {
         makeAutoObservable(this)
@@ -21,11 +21,6 @@ export class TextManagerData {
     // Установщик значения textCompId
     setTextCompId(textCompId: ArticleTypes.Id | null) {
         this.textCompId = textCompId
-
-        if (!textCompId) {
-            // this.initialText = ''
-            // this.newText = ''
-        }
     }
 
     // Установщик значения newHistoryItemCreated

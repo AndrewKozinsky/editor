@@ -15,8 +15,8 @@ const articleFormMessages = {
         rus: 'Название статьи не может быть длиннее 255 символов'
     },
     defaultTemplateInput: {
-        eng: 'Group',
-        rus: 'Группа'
+        eng: 'Group Include Files',
+        rus: 'Подключаемые файлы группы'
     },
     submitBtnText: {
         eng: 'Save',

@@ -3,8 +3,8 @@ import getMsgProxy from './fn/msgProxy'
 // Подсказки вкладок
 const mainTabsMessages = {
     mainTabMaterials: {
-        eng: 'Materials',
-        rus: 'Материалы'
+        eng: 'Groups',
+        rus: 'Группы'
     },
     mainTabEditor: {
         eng: 'Editor',

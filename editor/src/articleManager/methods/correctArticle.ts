@@ -101,13 +101,73 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
         i += amountOfElems - 1
     }
 
-    // Обойти получившиеся элементы и запустить эту функцию для вложенных элементов
+    /*
+    * Теперь нужно сделать соответствие между оригинальными и эталонными элементами.
+    * Эти данные будут храниться в объекте такого типа:
+    * {
+    *   tHead: {
+    *       origElems: [...],
+    *       refElems: [...]
+    *   },
+    *   tBody: {
+    *       origElems: [], // Возможно, что оригинальных элементов не будет под новый шаблон
+    *       refElems: [...]
+    *   },
+    * }
+    * */
+
+    type OrigAndRefElemsMatching = {
+        [tElemId: string]: {
+            origElems: ArticleTypes.ComponentElems,
+            refElems: ArticleTypes.ComponentElems,
+        }
+    }
+
+    // В этот объект будет наполнено соответствие между оригинальными и эталонными элементами.
+    const origAndRefElemsMatching: OrigAndRefElemsMatching = {}
+
+    // Перебор эталонных элементов, чтобы наполнить origAndRefElemsMatching
     for (let i = 0; i < refDElems.length; i++) {
         const refDElem = refDElems[i]
+        const tCompElemId = refDElem.tCompElemId
 
-        if (!refDElem.dCompElemInnerElems || !originDElems[i]?.dCompElemInnerElems.length) continue
+        // Поставить пустой объект если свойство с именем шаблона ещё не существует
+        // в объекте origAndRefElemsMatching
+        if (!origAndRefElemsMatching[tCompElemId]) {
+            origAndRefElemsMatching[tCompElemId] = {
+                origElems: [],
+                refElems: []
+            }
+        }
 
-        addRepeatedElems(originDElems[i].dCompElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
+        origAndRefElemsMatching[tCompElemId].refElems.push(refDElem)
+    }
+
+    // Перебор оригинальных элементов, чтобы наполнить origAndRefElemsMatching
+    for (let i = 0; i < originDElems.length; i++) {
+        const originDElem = originDElems[i]
+
+        if (!origAndRefElemsMatching[originDElem.tCompElemId]) {
+            continue
+        }
+
+        origAndRefElemsMatching[originDElem.tCompElemId].origElems.push(originDElem)
+    }
+
+    // Перебор всех элементов текущей вложенности и рекурсивный запуск addRepeatedElems() для вложенных элементов
+    for (let key in origAndRefElemsMatching) {
+        const origAndRefElemMatch = origAndRefElemsMatching[key]
+
+        for (let i = 0; i < origAndRefElemMatch.refElems.length; i++) {
+            const originDElem = origAndRefElemMatch.origElems[i]
+            const refDElem = origAndRefElemMatch.refElems[i]
+
+            if (!refDElem.dCompElemInnerElems) continue
+
+            const originDElemInnerElems = originDElem.dCompElemInnerElems || []
+
+            addRepeatedElems(originDElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
+        }
     }
 }
 

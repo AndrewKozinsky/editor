@@ -12,6 +12,7 @@ $CN: checkbox;
 // Вид label в зависимости от размера
 .#{$CN}-label {
     position: relative;
+    display: block;
     font-size: 1.4rem;
     line-height: 1.8rem;
     user-select: none;
@@ -71,6 +72,7 @@ $CN: checkbox;
     font-size: 1.3rem;
     line-height: 1.3rem;
     font-weight: normal;
+    overflow-wrap: anywhere;
     opacity: .5;
     padding: 0 0 0 20px;
 }

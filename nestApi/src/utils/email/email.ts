@@ -78,7 +78,6 @@ export class Email {
 
         // 3) Send email
         try {
-            console.log('HELLO')
             await transport.sendMail(mailOptions)
         }
         catch (err) {

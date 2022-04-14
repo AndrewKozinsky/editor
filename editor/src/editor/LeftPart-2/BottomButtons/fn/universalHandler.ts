@@ -6,6 +6,7 @@ import { MiscTypes } from 'types/miscTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import {useGetResizeHandler} from '../../../RightPart-2/ArticleFrame/flashElements/useResizeFlashRects'
 
 export type BottomBtnCallbackType = (
     dispatch: MiscTypes.AppDispatch,
@@ -25,6 +26,10 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
     const historyItem = articleManager.hooks.getCurrentHistoryItem()
     const { tempComps } = useGetArticleSelectors()
 
+    // Ссылка на функцию, который нужно запускать для пересчёта положения
+    // и размера подсвечивающих прямоугольников
+    const resizeHandler = useGetResizeHandler()
+
     return useCallback(function () {
         if (!historyItem) return
         const { selectedElem, moveSelectedComp } = historyItem
@@ -34,5 +39,8 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
 
         // Запуск функции, обрабатывающей нажатие на кнопку
         callback(dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)
+
+        // Пересчитать положение подсвечивающих прямоугольников
+        setTimeout(resizeHandler, 110)
     }, [historyItem])
 }

@@ -7,6 +7,7 @@ import { updateDataInTextComp } from './manageUpdatingDTextComp'
 import textManagerData from './textManagerData'
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
+import {useGetResizeHandler} from '../flashElements/useResizeFlashRects'
 
 /** Хук отслеживает выделение компонентов и организует отрисовку текста у текстовых компонентов */
 export function useTrackCompSelection() {
@@ -35,8 +36,11 @@ export function useTrackCompSelection() {
             textManagerData.setNewText(dTextComp.text)
         }
         else {
-            // Очистить textCompId в TextManagerData если текстовый компонент не выделен
+            // Очистить TextManagerData если текстовый компонент не выделен
             textManagerData.setTextCompId(null)
+            textManagerData.setInitialText('')
+            textManagerData.setNewText('')
+            textManagerData.setNewHistoryItemCreated(false)
         }
     }, [selectedElem])
 }
@@ -47,26 +51,28 @@ export function useSetHandlersToTrackText() {
     // Were mouse move handlers set?
     const [handlerWasSet, setHandlerWasSet] = useState(false)
 
+    // Ссылка на функцию, который нужно запускать для пересчёта положения
+    // и размера подсвечивающих прямоугольников
+    const resizeHandler = useGetResizeHandler()
+
     useEffect(function () {
-        if (!$links.$document || handlerWasSet) return
+        if (!$links.$document || handlerWasSet || !resizeHandler) return
 
         // Поставить обработчик
-        $links.$document.addEventListener('keypress', textChangeHandler)
-        $links.$document.addEventListener('keydown', textChangeHandler)
-        $links.$document.addEventListener('paste', textChangeHandler)
-        // Событие, чтобы отловить вставку эмоджи
-        $links.$document.addEventListener('DOMCharacterDataModified', textChangeHandler)
+        $links.$document.addEventListener('input', (e: any) => textChangeHandler(e, resizeHandler))
+        $links.$document.addEventListener('paste', (e: any) => textChangeHandler(e, resizeHandler))
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
-    }, [$links])
+    }, [$links, resizeHandler])
 }
 
 /**
  * Обработчик изменения текста выделенного текстового компонента
  * @param {Object} e — объект события
+ * @param resizeHandler
  */
-function textChangeHandler(e: any) {
+function textChangeHandler(e: any, resizeHandler: () => void) {
     // Ничего не делать если не выбран текстовый компонент
     if (!textManagerData.textCompId) return
 
@@ -74,33 +80,37 @@ function textChangeHandler(e: any) {
     preventWrongKeys(e)
 
     // Ставить новый объект истории если требуется
-    if (['paste', 'DOMCharacterDataModified', 'keypress'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
-        if (!textManagerData.newHistoryItemCreated) {
-            createNewHistoryItem()
-        }
+    if (!textManagerData.newHistoryItemCreated) {
+        createNewHistoryItem()
     }
 
     // html-объект компонента
     const $textComp = articleManager.get$elemBy$body(
         getState().article.$links.$body, textManagerData.textCompId
     )
+    if (!$textComp) return
 
     // Если вставили текст
     if (e.type === 'paste') {
         e.preventDefault()
 
-        // Получить новый текст и вставить в textManagerData
+        // Получить новый текст и
         const newText = getPastedText(e)
+
+        // Вставить в textManagerData
         textManagerData.setNewText(newText)
 
         // Поставить новый текст в данные и Реакт обновит текст компонента
         updateDataInTextComp('paste', $textComp)
+
+        setTimeout(resizeHandler, 10)
     }
     // Если изменили текст, то поставить новый текст в данные и Реакт обновит текст компонента
-    else if (['DOMCharacterDataModified', 'keypress'].includes(e.type) || e.type === 'keydown' && ['Backspace', 'Delete'].includes(e.code)) {
+    else if (e.type === 'input' && ['insertText', 'deleteByCut', 'deleteContentBackward'].includes(e.inputType)) {
         setTimeout(() => {
-            if (!$textComp) return
             textManagerData.setNewText($textComp.textContent)
+
+            setTimeout(resizeHandler, 10)
         }, 30)
     }
 }
@@ -130,8 +140,8 @@ function getPastedText(e: any) {
     const selection = $window.getSelection()
     const { anchorOffset, focusOffset } = selection
 
-    const { initialText } = textManagerData
-    return initialText.substring(0, anchorOffset) + paste + initialText.substring(focusOffset)
+    const { newText } = textManagerData
+    return newText.substring(0, anchorOffset) + paste + newText.substring(focusOffset)
 }
 
 /** Функция создаёт новый объект истории чтобы в него писать данные текстового компонента. */

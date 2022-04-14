@@ -94,6 +94,8 @@ export function cloneElement(
     const dComp = articleManager.getComponent(dComps, compCoords.dataCompId) as ArticleTypes.Component
     const dElem = articleManager.getDElemInDComp(dComp, compCoords.dataElemId)
 
+    // debugger
+
     // Позиция клонируемого элемента в его массиве
     const dElemInnerElemsArr = articleManager.getDElemInnerElemsArrByElemId(dComp.dElems.dCompElemInnerElems, dElem.dCompElemId)
     // Получить idx позиции копируемого элемента

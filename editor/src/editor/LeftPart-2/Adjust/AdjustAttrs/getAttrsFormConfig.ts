@@ -151,10 +151,15 @@ function getInputValue(dElemAttrObj: ArticleTypes.Attrib, inputType: TempCompTyp
             ? dElemAttrObj?.dCompElemAttrValue
             : ''
     }
-    else if (inputType === 'checkbox' || inputType === 'radio') {
+    else if (inputType === 'checkbox') {
         return dElemAttrObj?.dCompElemAttrValue
             ? dElemAttrObj?.dCompElemAttrValue
             : []
+    }
+    else if (inputType === 'radio') {
+        return dElemAttrObj?.dCompElemAttrValue?.length
+            ? dElemAttrObj?.dCompElemAttrValue
+            : [''] // Если нет значений атрибута, то поставить в значение Not selected
     }
 }
 

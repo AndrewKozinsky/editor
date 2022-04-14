@@ -37,6 +37,8 @@ export function useSetUserScriptsAndStylesToIFrame() {
     const [$headNodesArr, set$headNodesArr] = useState<Element[]>([])
     const [$bodyNodesArr, set$bodyNodesArr] = useState<Element[]>([])
 
+    // ПОСМОТРИ ПОЧЕМУ ОН НЕ СТАВИТ СТИЛИ В FIREFOX-е !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     useEffect(function () {
         if (siteTemplateDownloadHash) {
             // Удалить все сценарии и стили добавленные до этого

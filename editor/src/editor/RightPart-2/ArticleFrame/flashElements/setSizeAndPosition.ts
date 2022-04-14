@@ -73,6 +73,8 @@ function getArticleElementByCoordinates($body: HTMLBodyElement, type: FlashRectT
  * @param {HTMLElement} $flashRect — a link to a flashed rectangle
  */
 function hideRect(type: FlashRectType, $flashRect: HTMLElement) {
+    if (!$flashRect) return
+
     $flashRect.style.display = 'none'
 }
 
@@ -117,6 +119,8 @@ type CoordsType = {
  * @param {Object} rectCoords — object with coordinates of a flashed element: type, dataCompId, dataElemId
  */
 function positionFlashRect($flashRect: HTMLElement, coords: CoordsType, rectCoords: StoreArticleTypes.FlashedElem) {
+    if (!$flashRect) return
+
     // Make rectangle visible
     $flashRect.style.display = 'block'
 

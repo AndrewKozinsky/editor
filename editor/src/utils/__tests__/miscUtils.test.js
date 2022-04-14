@@ -19,7 +19,7 @@ describe('Функция setInLocalStorage', () => {
     test('Установка объекта в localStorage', () => {
         setInLocalStorage('testProp', {test: 'hello'}, true)
         const propValueFromLS = localStorage.getItem('testProp')
-        console.log(propValueFromLS)
+
         expect(propValueFromLS).toBe('{\"test\":\"hello\"}')
     })
 })

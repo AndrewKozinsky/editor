@@ -28,7 +28,7 @@ export default function useResizeFlashRects() {
 }
 
 /* Хук возвращает функцию, которая пересчитывает положение и размеры подсвечивающих прямоугольников */
-function useGetResizeHandler() {
+export function useGetResizeHandler() {
     const { $links } = useGetArticleSelectors()
 
     const [calcRectCoords, setCalcRectCoords] = useState<null | (() => void)>(null)
@@ -62,9 +62,18 @@ function getCalcRectCoords(
     $hoverRect: HTMLElement,
     $selectRect: HTMLElement,
     $moveHoverRect: HTMLElement,
-    $moveSelectRect: HTMLElement,
+    $moveSelectRect: HTMLElement
 ) {
     return function () {
+
+        // Я не понял почему, но после того, как я что-то напечатал в текстовом компоненте иногда исчезает ссылка на прямоугольники,
+        // поэтому приходится искать их снова. После нужно разобраться почему так происходит.
+        if (!$hoverRect) {
+            $hoverRect = $links.$body.querySelector('[data-em-hover-rect]') as HTMLElement
+        }
+        if (!$selectRect) {
+            $selectRect = $links.$body.querySelector('[data-em-select-rect]') as HTMLElement
+        }
 
         const rects: {type: FlashRectType, $rect: HTMLElement}[]  = [
             { type: 'hover', $rect: $hoverRect },
