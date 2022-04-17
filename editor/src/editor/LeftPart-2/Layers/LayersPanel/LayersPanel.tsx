@@ -13,7 +13,7 @@ export default function LayersPanel() {
     if (!articleId || !layersConfig.length) return null
 
     return (
-        <NameSection header={layersPanelMsg.header}>
+        <NameSection header={layersPanelMsg.header} contentId='layersContentWrapper'>
             <Layers config={layersConfig} />
         </NameSection>
     )

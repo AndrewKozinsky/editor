@@ -3,7 +3,7 @@ import { makeCN } from 'utils/stringUtils'
 import useGetSettingsSelectors from 'store/settings/settingsSelectors'
 import '../css/reset.css'
 import '../css/variables.scss'
-import '../css/default.scss'
+import '../css/general.scss'
 import '../css/app.scss'
 
 const CN = 'app'

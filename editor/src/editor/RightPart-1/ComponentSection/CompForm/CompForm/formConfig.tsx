@@ -13,6 +13,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
 import { getState } from 'utils/miscUtils'
+import articleActions from '../../../../../store/article/articleActions'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const compFormConfig: FCType.Config = {
@@ -30,7 +31,8 @@ const compFormConfig: FCType.Config = {
             fieldData: {
                 inputType: 'textarea',
                 label: componentFormMsg.componentContentInput,
-                autoFocus: true
+                autoFocus: true,
+                rows: 10
             }
         }
     },
@@ -67,6 +69,19 @@ const compFormConfig: FCType.Config = {
         // Сохранить данные на сервере
         const { compFolderId } = getState().sites.compFolderSection
         await putCompFolderRequest(compFolderId, preparedFolders)
+
+
+        // Получить id сайта, к которому принадлежит отредактированный шаблон компонента
+        // и id сайта редактируемой статьи
+        const { currentSiteId } = getState().sites
+        const editedArtSiteId = getState().article.siteId
+        // Если они совпадают, то изменить хеш списка папок компонентов чтобы хук загрузил новый список папок
+        if (currentSiteId === editedArtSiteId) {
+            // Это требуется на случай изменения имени компонента. Если не закачать новый список папок и файлов,
+            // то он останется со старым именем.
+            store.dispatch(articleActions.changeTempCompsFoldersVersionHash())
+        }
+
 
         return await updateComponentRequest(
             currentCompItemId, readyFieldValues.content.toString()

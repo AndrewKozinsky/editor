@@ -40,6 +40,7 @@ function setExtraStyle($head: HTMLHeadElement) {
         //'border-radius: 1px;' +
         'background: transparent !important;' +
         'padding: 0 !important;' +
+        'z-index: 1000;' +
     '}' +
     '.em-flash-rect__hover {' +
         'border: 1px solid rgba(1, 122, 255, 1);' +

@@ -22,6 +22,7 @@ import {
 import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
 import { useCorrectArticleData } from './misc/correctArtData'
 import './ArticleFrame.scss'
+import useScrollToSelectedLayerAfterClick from './misc/useScrollToSelectedLayerAfterClick'
 
 
 /* IFrame куда помещается статья */
@@ -48,6 +49,8 @@ export default function ArticleFrame() {
 
     // Хук убирает фокусировку с текста если не выбран текстовый компонент
     useClearUnwantedFocus()
+    // Хук следит за изменением выделенного элемента и прокручивает список слоёв чтобы он был виден в панели
+    useScrollToSelectedLayerAfterClick()
 
     // Подсвечивающие прямоугольники
     useInstallFlashRects()

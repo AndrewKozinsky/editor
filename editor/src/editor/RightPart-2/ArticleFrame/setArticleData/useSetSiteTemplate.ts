@@ -48,7 +48,10 @@ export function useSetUserScriptsAndStylesToIFrame() {
             // Set code in <head>
             if (siteTemplate.head) {
                 const nodes = createNodesFromString(siteTemplate.head)
+
+                // Поставить массив узлов в Состоянии чтобы удалить при необходимости
                 set$headNodesArr(nodes)
+                // Поставить стили и сценарии в Документ
                 setNodesToIframe($links.$head, nodes)
             }
 
@@ -79,6 +82,8 @@ function removeNodesFromIframe($nodesArr: Element[]) {
 
 /**
  * The function set <script> or <style> elements into <head> or <body>
+ * По какой-то причине приходится делать задержку перед установкой стилей и сценариев в <head> и <body>
+ * чтобы это вообще работало в ФФ и отрабатывала в указанной последовательности в Хроме.
  * @param {Document} $rootElem — document
  * @param {NodeListOf} nodes — nodes list
  */
@@ -114,6 +119,16 @@ function createNodesFromString(htmlStr: string): Element[] {
 function createNode(node: Element) {
     const newNode = document.createElement(node.tagName.toLowerCase())
 
+    // Если это сценарий, то при добавлении динамически в документ,
+    // они будут запущены как только файл будет загружен.
+    // То есть не будет соблюдаться порядок указанный в шаблоне.
+    // Но если поставить свойство async в false, то порядок будет сохраняться и сценарии будут запускаться по порядку.
+    if (newNode.tagName === 'SCRIPT') {
+        // @ts-ignore
+        newNode.async = false
+    }
+
+    // Поставить все атрибуты из присланного элемента
     for (let attr of node.attributes) {
         //@ts-ignore
         newNode[attr.name] = attr.value || true

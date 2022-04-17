@@ -1,11 +1,13 @@
-import React, { ReactElement, ReactNode } from 'react'
+import React, { ReactElement, ReactNode, RefObject } from 'react'
 import makeClasses from './NameSection-classes'
+import {MiscTypes} from '../../../types/miscTypes'
 
 
 type NameSectionPropType = {
     type?: 1 | 2 // Размер компонента: 1 (больше) или 2 (меньше)
     header: string | ReactElement // Текст заголовка
     children?: ReactNode // Дети компонента
+    contentId?: string
 }
 
 /* Компонент блока с заголовком */
@@ -14,6 +16,7 @@ export default function NameSection(props: NameSectionPropType) {
         type = 1,
         header,
         children,
+        contentId
     } = props
 
     // Классы
@@ -24,7 +27,7 @@ export default function NameSection(props: NameSectionPropType) {
             <h3 className={CN.header}>
                 <span className={CN.bg}>{header}</span>
             </h3>
-            <div className={CN.content}>
+            <div className={CN.content} id={contentId}>
                 {children}
             </div>
         </div>
