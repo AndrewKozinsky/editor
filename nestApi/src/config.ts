@@ -6,9 +6,9 @@ export const config = {
     port: Number(process.env.PORT),
 
     // Домен опубликованного сервиса
-    publishedSiteURL: 'http://editorium.net',
+    publishedSiteURL: 'http://e.editorium.net',
     // Домен разрабатываемого сервиса
-    devSiteURL: 'http://editorium.local',
+    devSiteURL: 'http://e.editorium.local',
 
     // Из какого адреса будут приходить письма от сервиса
     // YOU DON'T HAVE TO CHANGE EMAIL BECAUSE SENDPULSE REFUSED TO WORK

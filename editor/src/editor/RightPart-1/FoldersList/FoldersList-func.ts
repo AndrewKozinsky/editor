@@ -173,7 +173,7 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
     if (type === 'components') {
         // Может создание нового компонента поместить в articleManager?
         const minCompContent: TempCompTypes.Content = {
-            html: '<img src="https://editorium.net/fs/special/serenity.jpg" alt="image" data-em-id="image" />',
+            html: '<img src="https://e.editorium.net/fs/special/serenity.jpg" alt="image" data-em-id="image" />',
             elems: [
                 {
                     elemId: 'image',

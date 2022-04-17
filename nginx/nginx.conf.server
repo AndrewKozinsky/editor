@@ -6,25 +6,15 @@ http {
     server {
         listen 80;
         listen 443;
-        server_name editorium.net www.editorium.net;
+        server_name e.editorium.net www.e.editorium.net;
 
         location / {
-            proxy_pass http://next:3003;
+            proxy_pass http://editor:3000/;
+            rewrite ^\/editor\/(.*) /$1 break;
         }
         location /api2 {
             proxy_pass http://nest:3002;
             rewrite ^\/api2\/(.*) /$1 break;
-        }
-
-        location /editor/ {
-            proxy_pass http://editor:3000/;
-            rewrite ^\/editor\/(.*) /$1 break;
-        }
-
-        location /fs/ {
-            add_header Access-Control-Allow-Origin "*";
-            proxy_pass http://staticFileServer:4000/;
-            rewrite ^\/fs\/(.*) /$1 break;
         }
 
         location /test {
