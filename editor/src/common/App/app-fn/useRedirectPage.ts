@@ -27,7 +27,7 @@ export function useRedirectPage() {
         const pathname = window.location.pathname
 
         // Если нахожусь на странице редактора и у пользователя нет правильного токена авторизации...
-        if (pathname === '/editor/' && authTokenStatus === 'fail') {
+        if (pathname === '/' && authTokenStatus === 'fail') {
             // ...то перебросить на страницу входа
             history.push('/enter')
         }

@@ -9,7 +9,7 @@ import App from './common/App/App'
 
 ReactDOM.render(
     <Provider store={store}>
-        <Router basename='/editor'>
+        <Router basename='/'>
             <React.StrictMode>
                 <App/>
             </React.StrictMode>

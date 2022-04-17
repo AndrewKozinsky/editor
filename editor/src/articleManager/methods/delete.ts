@@ -2,7 +2,6 @@ import makeImmutableCopy from 'libs/makeImmutableCopy/makeImmutableCopy'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from '../articleManager'
-import textManagerData from '../../editor/RightPart-2/ArticleFrame/textTracking/textManagerData'
 
 /**
  * Удаление компонента или элемента в зависимости от переданных параметров.
