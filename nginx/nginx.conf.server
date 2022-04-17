@@ -10,7 +10,6 @@ http {
 
         location / {
             proxy_pass http://editor:3000/;
-            rewrite ^\/editor\/(.*) /$1 break;
         }
         location /api2 {
             proxy_pass http://nest:3002;

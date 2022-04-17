@@ -12,7 +12,6 @@ services:
       - editor
       - nest
       - postgres
-      - staticFileServer
     volumes:
       - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
 
