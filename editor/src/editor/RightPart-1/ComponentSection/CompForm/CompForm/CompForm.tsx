@@ -1,7 +1,7 @@
 import React from 'react'
 import useFormConstructorState from 'src/libs/FormConstructor/state/useFormConstructorState'
 import FormConstructor from 'src/libs/FormConstructor/FormConstructor'
-import CodeHelper from 'src/editor/special/CodeHelper/CodeHelper/CodeHelper'
+import CodeHelper from 'editor/special/CodeHelper/CodeHelper/CodeHelper'
 import checkComponentCode, { componentCodeExample } from '../CodeHelper/checkComponentCode'
 import compFormConfig from './formConfig'
 import {

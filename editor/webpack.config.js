@@ -103,7 +103,7 @@ function getDevServerSettings() {
         allowedHosts: 'all',
         hot: false,
         client: {
-            webSocketURL: 'auto://0.0.0.0:0/editor/ws'
+            webSocketURL: 'auto://0.0.0.0:0/ws'
         },
     }
 }

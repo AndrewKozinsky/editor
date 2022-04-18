@@ -13,7 +13,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import checkComponentCode from '../CodeHelper/checkComponentCode'
 import DeleteComponentButton from '../DeleteComponentButton/DeleteFolderButton'
 import { getState } from 'utils/miscUtils'
-import articleActions from '../../../../../store/article/articleActions'
+import articleActions from 'store/article/articleActions'
 
 /** Функция возвращает конфигурацию формы входа в сервис */
 const compFormConfig: FCType.Config = {

@@ -27,6 +27,7 @@ export default function useScrollToSelectedLayerAfterClick() {
  * @param {HTMLElement} $layersWrapper — обёртка всех слоёв
  */
 function scrollToSelectedLayerAfterClick(e: MouseEvent, $layersWrapper: HTMLElement) {
+    if (!$layersWrapper) return
 
     // Получить координаты относительно начала документа
     // верхней и нижней точки обёртки со слоями и половину видимой высоты обёртки слоёв (из панели Слоёв)

@@ -27,7 +27,8 @@ export function updateDataInTextComp(
 
     // Найти html-элемент и удалить его текст (после поставится новый)
     if ($textComp.firstChild) {
-        $textComp.firstChild.textContent = ''
+        // ПУСТЬ ПОКА ЭТА ЧАСТЬ ОСТАНЕТСЯ ЗАКОММЕНТИРОВАННОЙ ЧТОБЫ ИЗБЕЖАТЬ ПРОБЛЕМ С НАБОРОМ ТЕКСТА В ПУСТОЙ <text-component>
+        // $textComp.firstChild.textContent = ''
     }
 
     // Получение данных текстового компонента
@@ -46,7 +47,7 @@ export function updateDataInTextComp(
     store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
 
     if (type === 'common') {
-        // ПОКА НЕ РАСКОММЕНТИРУЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
+        // ПОКА НЕ ОТКРЫВАЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
         // Обнулить textManagerData
         // textManagerData.setInitialText('')
         // textManagerData.setNewText('')
@@ -58,9 +59,16 @@ export function updateDataInTextComp(
         // Обновить textManagerData
         textManagerData.setInitialText(newText)
         textManagerData.setNewHistoryItemCreated(false)
+
+        if (!$textComp.firstChild) {
+            const newTextNode = document.createTextNode('')
+            $textComp.appendChild(newTextNode)
+        }
+
+        $textComp.firstChild.textContent = textManagerData.newText
     }
     else if (type === 'history') {
-        // ПОКА НЕ РАСКОММЕНТИРУЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
+        // ПОКА НЕ ОТКРЫВАЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
         // Подождать пока загрузятся новые данные выделенного текстового компонента
         /*setTimeout(function () {
             const currentHistoryItem = articleManager.getCurrentHistoryItem()
