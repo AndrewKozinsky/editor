@@ -11,6 +11,8 @@ import {useGetResizeHandler} from '../flashElements/useResizeFlashRects'
 
 /** Хук отслеживает выделение компонентов и организует отрисовку текста у текстовых компонентов */
 export function useTrackCompSelection() {
+    const { $links } = useGetArticleSelectors()
+
     const article = articleManager.hooks.getCurrentArticle()
     const flashedElems = articleManager.hooks.getFlashedElemCoords()
     const selectedElem = flashedElems?.selectedElem
@@ -34,6 +36,17 @@ export function useTrackCompSelection() {
             // Сохранить изначальный текст компонента
             textManagerData.setInitialText(dTextComp.text)
             textManagerData.setNewText(dTextComp.text)
+
+            // Я столкнулся с проблемой когда при создании текстового компонента и написании туда текста он двоится.
+            // Но если текст уже был написан ранее, то такого эффекта не возникает.
+            // Как я считаю при создании текстового компонента туда помещается текстовый узел.
+            // А если текст уже изменили и обновили Хранилище, то он пропадает.
+            // Поэтому при выделении текстового компонента я проверяю, что если есть пустой текстовый узел, то удаляю его.
+            // Нужно проверять именно на пустоту текстового узла. По-другому не работает.
+            const $textComp = articleManager.get$elemBy$body($links.$body, textManagerData.textCompId)
+            if($textComp.firstChild?.textContent === '') {
+                $textComp.firstChild.remove()
+            }
         }
         else {
             // Очистить TextManagerData если текстовый компонент не выделен

@@ -25,12 +25,6 @@ export function updateDataInTextComp(
         $textComp = articleManager.get$elemBy$body($body, textManagerData.textCompId)
     }
 
-    // Найти html-элемент и удалить его текст (после поставится новый)
-    if ($textComp.firstChild) {
-        // ПУСТЬ ПОКА ЭТА ЧАСТЬ ОСТАНЕТСЯ ЗАКОММЕНТИРОВАННОЙ ЧТОБЫ ИЗБЕЖАТЬ ПРОБЛЕМ С НАБОРОМ ТЕКСТА В ПУСТОЙ <text-component>
-        // $textComp.firstChild.textContent = ''
-    }
-
     // Получение данных текстового компонента
     const currentHistoryItem = articleManager.getCurrentHistoryItem()
     const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
@@ -47,13 +41,7 @@ export function updateDataInTextComp(
     store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
 
     if (type === 'common') {
-        // ПОКА НЕ ОТКРЫВАЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
-        // Обнулить textManagerData
-        // textManagerData.setInitialText('')
-        // textManagerData.setNewText('')
-        // Поставить флаг, что новый элемент истории для занесения нового текста ещё не поставлен.
-        // textManagerData.setNewHistoryItemCreated(false)
-        // textManagerData.setTextCompId(null)
+
     }
     else if (type === 'paste') {
         // Обновить textManagerData
@@ -68,16 +56,6 @@ export function updateDataInTextComp(
         $textComp.firstChild.textContent = textManagerData.newText
     }
     else if (type === 'history') {
-        // ПОКА НЕ ОТКРЫВАЙ СТРОКИ НИЖЕ. МОЖЕТ И НЕ ПОТРЕБУЮТСЯ.
-        // Подождать пока загрузятся новые данные выделенного текстового компонента
-        /*setTimeout(function () {
-            const currentHistoryItem = articleManager.getCurrentHistoryItem()
-            const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
 
-            textManagerData.setInitialText(dTextComp.text)
-            textManagerData.setNewText(dTextComp.text)
-            textManagerData.setNewHistoryItemCreated(false)
-            textManagerData.setTextCompId(dTextComp.dCompId)
-        }, 60)*/
     }
 }
