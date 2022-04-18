@@ -93,9 +93,7 @@ function matchHtmlElemsAndDataElems($body: HTMLElement, templateObj: TempCompTyp
 
     // Перебор html-элементов с целью найти на них данные
     for (let $elem of $elems) {
-        if (!($elem instanceof HTMLElement || $elem instanceof SVGElement)) {
-            continue
-        }
+        if (!($elem instanceof HTMLElement)) continue
 
         // id элемента в разметке
         const htmlElemId = $elem.dataset.emId
@@ -124,7 +122,9 @@ function matchHtmlElemsAndDataElems($body: HTMLElement, templateObj: TempCompTyp
         let isElemInHtmlFound = false
 
         for (let $elem of $elems) {
-            if (!($elem instanceof HTMLElement)) continue
+            if (!($elem instanceof HTMLElement || $elem instanceof SVGElement)) {
+                continue
+            }
 
             // id элемента в разметке
             const htmlElemId = $elem.dataset.emId
