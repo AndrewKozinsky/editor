@@ -164,7 +164,7 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
 
             if (!refDElem.dCompElemInnerElems) continue
 
-            const originDElemInnerElems = originDElem.dCompElemInnerElems || []
+            const originDElemInnerElems = originDElem?.dCompElemInnerElems || []
 
             addRepeatedElems(originDElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
         }
