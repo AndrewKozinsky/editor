@@ -41,8 +41,10 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
                     dispatch( sitesActions.setCurrentComp(null, null) )
                     // Clear opened article item id (folder or file)
                     dispatch( sitesActions.setCurrentArt(null, null) )
-                    // Обнулить id редактируемой статьи
-                    dispatch(articleActions.setArticleId(null) )
+                    // Очистить редактируемую статью
+                    dispatch( articleActions.clearArticle() )
+
+
                 }
             }
         }),

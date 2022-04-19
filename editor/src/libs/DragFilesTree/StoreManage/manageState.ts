@@ -359,7 +359,7 @@ export function addNewFolder(
 
         // Поставить в него новый элемент
         newItem = createNewFolder(after, items)
-        folderDataCopy.content.unshift( newItem )
+        folderDataCopy.content.push( newItem )
 
         // Создать новый массив всех папок и файлов с учётом изменений
         newState = makeImmutableCopy(items, thisFolderData, folderDataCopy)
@@ -371,7 +371,7 @@ export function addNewFolder(
 
         // Поставить в корневой массив новый элемент
         newItem = createNewFolder(after, items)
-        newState.unshift( newItem )
+        newState.push( newItem )
     }
 
     // Возвратить созданный элемент и обновлённый массив папок и файлов
