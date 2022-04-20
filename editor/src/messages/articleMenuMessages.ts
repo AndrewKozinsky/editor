@@ -11,12 +11,12 @@ const articleMenuMessages = {
         rus: 'Шаг вперёд'
     },
     markup: {
-        eng: 'Get mark up',
-        rus: 'Разметка'
+        eng: 'Get HTML',
+        rus: 'Получить HTML'
     },
     data: {
         eng: 'Get data',
-        rus: 'Данные'
+        rus: 'Получить данные'
     },
     save: {
         eng: 'Save',

@@ -7,14 +7,19 @@ import { HTMLObjArrType } from './htmlStringToObject'
 export default function createHTMLFromComponents(htmlStructure: HTMLObjArrType.Arr): string {
     return htmlStructure.reduce((summaryHtmlStr, htmlObj) => {
         if ('text' in htmlObj) {
-            return summaryHtmlStr += htmlObj.text
+            return summaryHtmlStr + htmlObj.text
         }
         else if ('tag' in htmlObj) {
             if (htmlObj.tag === 'text-component') {
-                return summaryHtmlStr += formHtmlStrFromTextComponent(htmlObj)
+                return summaryHtmlStr + formHtmlStrFromTextComponent(htmlObj)
             }
             else {
-                return summaryHtmlStr += formHtmlStrFromTagObject(htmlObj)
+                // Если элемент скрыт, то не прибавлять его разметку к получаемой строке
+                if (htmlObj.attrs && htmlObj.attrs['data-em-display'] && htmlObj.attrs['data-em-display'] === 'hidden') {
+                    return summaryHtmlStr
+                }
+
+                return summaryHtmlStr + formHtmlStrFromTagObject(htmlObj)
             }
         }
     }, '')
@@ -45,8 +50,8 @@ function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
     const children = (htmlObj.children) ? createHTMLFromComponents(htmlObj.children) : ''
 
     return unpairedTags.includes(tagName)
-        ? `<${tagName} ${attribs} />`
-        : `<${tagName} ${attribs}>${children}</${tagName}>`
+        ? `<${tagName}${ attribs} />`
+        : `<${tagName}${ attribs}>${children}</${tagName}>`
 }
 
 
