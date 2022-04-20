@@ -1,4 +1,3 @@
-import ElBtnSignClone1 from '../icons/elBtnSignClone1'
 import ElBtnSignVisible from '../icons/elBtnSignVisible'
 import Logo from '../icons/logo'
 import NoticeError from '../icons/NoticeError'
@@ -43,8 +42,8 @@ import BtnSignRedo from '../icons/btnSignRedo'
 import ElBtnSignMoveInside from '../icons/elBtnSignMoveInside'
 import ElBtnSignUp from '../icons/elBtnSignUp'
 import ElBtnSignDown from '../icons/elBtnSignDown'
-import ElBtnSignClone2 from '../icons/elBtnSignClone2'
-import ElBtnSignClone3 from '../icons/elBtnSignClone3'
+import ElBtnSignClone from '../icons/elBtnSignClone'
+import ElBtnSignCloneWithChildren from '../icons/elBtnSignCloneWithChildren'
 import ElBtnSignHide from '../icons/elBtnSignHide'
 import ElBtnSignRemove from '../icons/elBtnSignRemove'
 import LayerComp from '../icons/layerComp'
@@ -127,9 +126,8 @@ const iconsCollector = {
     elBtnSignMoveRight: ElBtnSignMoveRight,
     elBtnSignUp: ElBtnSignUp,
     elBtnSignDown: ElBtnSignDown,
-    elBtnSignClone1: ElBtnSignClone1,
-    elBtnSignClone2: ElBtnSignClone2,
-    elBtnSignClone3: ElBtnSignClone3,
+    elBtnSignClone: ElBtnSignClone,
+    elBtnSignCloneWithChildren: ElBtnSignCloneWithChildren,
     elBtnSignRemove: ElBtnSignRemove,
     elBtnSignHide: ElBtnSignHide,
     elBtnSignVisible: ElBtnSignVisible,

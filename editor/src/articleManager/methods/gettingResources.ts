@@ -520,6 +520,29 @@ export function getDElemAttrEmptyValue(
 }
 
 /**
+ * Функция получает шаблон атрибута и возвращает значения, которые должны быть установлены по умолчанию при создании компонента
+ * @param {Object} tElemAttr — данные об атрибуте из шаблона элемента
+ */
+export function getTElemAttrDefaultCheckedValues(
+    this: typeof articleManager,
+    tElemAttr: TempCompTypes.ElemAttr
+): null | TempCompTypes.ElemAttrValueId[] {
+    // Возвратить null если нет массива предопределённых значений атрибута
+    if (!tElemAttr.elemAttrValues) return null
+
+    // Массив, куда попадут значения атрибуты, которые должны быть поставлены по умолчанию
+    const attrDefaultCheckedValues: TempCompTypes.ElemAttrValueId[] = []
+    
+    for (let valueObj of tElemAttr.elemAttrValues) {
+        if (valueObj.elemAttrValueChecked) {
+            attrDefaultCheckedValues.push(valueObj.elemAttrValueId)
+        }
+    }
+
+    return attrDefaultCheckedValues
+}
+
+/**
  * Функция проходит все элементы из объекта данных компонента
  * @param {Array} dElems — элементы массив dElems
  * @param {Function} callback — функция запускаемая при переборе элементов.

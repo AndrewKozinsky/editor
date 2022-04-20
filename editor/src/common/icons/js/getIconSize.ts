@@ -153,9 +153,8 @@ export function getIconSize(type: string) {
         case 'elBtnSignMoveRight':
         case 'elBtnSignUp':
         case 'elBtnSignDown':
-        case 'elBtnSignClone1':
-        case 'elBtnSignClone2':
-        case 'elBtnSignClone3':
+        case 'elBtnSignClone':
+        case 'elBtnSignCloneWithChildren':
         case 'elBtnSignRemove':
         case 'elBtnSignHide':
         case 'elBtnSignVisible':

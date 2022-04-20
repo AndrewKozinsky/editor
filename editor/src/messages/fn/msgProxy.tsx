@@ -23,6 +23,7 @@ function getMsgProxy<T extends MessagesObjType>(mgsOrigObj: T): MsgType<T>  {
                 return target[prop][lang] || null
             }
             catch (err) {
+                console.log('Prop: ' + prop)
                 console.log(err)
             }
         }

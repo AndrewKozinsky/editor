@@ -1,4 +1,5 @@
 import './BottomButtons.scss'
+import {makeCN} from 'utils/stringUtils'
 
 const CN = 'left-bottom-section'
 
@@ -9,4 +10,14 @@ export default function makeClasses() {
         group: CN + '__group',
         button: CN + '__button',
     }
+}
+
+/** Функция возвращающая классы для элементов */
+export function makeAttrBtnClasses(isActive: boolean) {
+    const classes = [CN + '__attr-btn']
+
+    // Если поле активно
+    if (isActive) classes.push(`${CN}__attr-btn--active`)
+
+    return makeCN(classes)
 }

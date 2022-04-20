@@ -40,6 +40,7 @@ import {
     get$elemBy$body,
     getTElemInTElems,
     getDElemAttrEmptyValue,
+    getTElemAttrDefaultCheckedValues,
     dElemsEnumeration,
     findParentArray,
     getDElemInnerElemsArrByElemId,
@@ -133,6 +134,7 @@ class ArticleManager {
     get$elemBy$body = get$elemBy$body
     getTElemInTElems = getTElemInTElems
     getDElemAttrEmptyValue = getDElemAttrEmptyValue
+    getTElemAttrDefaultCheckedValues = getTElemAttrDefaultCheckedValues
     dElemsEnumeration = dElemsEnumeration
     findParentArray = findParentArray
     getDElemInnerElemsArrByElemId = getDElemInnerElemsArrByElemId

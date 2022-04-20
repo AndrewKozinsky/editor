@@ -20,7 +20,8 @@ const config = {
         editorLastUserEmail: 'editorLastUserEmail', // Почта пользователя, который входил в учётную запись в предыдущий раз
 
         editArticleId: 'editArticleId', // id редактируемой статьи
-        editOpenCompFoldersIds: 'editOpenCompFoldersIds' // Массив идентификаторов открытых папок компонентов в редактируемой статье
+        editOpenCompFoldersIds: 'editOpenCompFoldersIds', // Массив идентификаторов открытых папок компонентов в редактируемой статье
+        editIsCloneAttrBtnOn: 'editIsCloneAttrBtnOn', // Нажата ли кнопка копирования выделенного элемента вместе с установленными атрибутами
     }
 }
 

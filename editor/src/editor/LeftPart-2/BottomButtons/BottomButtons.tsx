@@ -1,7 +1,7 @@
-import React from 'react'
+import React, {useState} from 'react'
 import bottomPanelMsg from 'messages/bottomPanelMessages'
 import SvgIcon from 'common/icons/SvgIcon'
-import makeClasses from './BottomButtons-classes'
+import makeClasses, {makeAttrBtnClasses} from './BottomButtons-classes'
 import {
     moveItem,
     useIsMoveBtnDisabled
@@ -11,7 +11,7 @@ import { useGetIconType } from './fn/BottomButtons-func'
 import { useGetUniversalHandler } from './fn/universalHandler'
 import { useIsVisibleDisabled, visibleItem } from './fn/visibleBtnFns'
 import { upDownItem, useIsUpDownDisabled } from './fn/upDownBtnFns'
-import { cloneItem, useIsCloneDisabled } from './fn/cloneBtnFns'
+import {cloneItem, useIsCloneDisabled, useManageAttrBtnStatus} from './fn/cloneBtnFns'
 
 
 /* Панель с кнопками манипулирования выделенным компонентом/элементом */
@@ -39,10 +39,15 @@ export default function BottomButtons() {
 
     // ================== >
 
+    const [isAttrsBtnOn, setIsAttrsBtnOn] = useManageAttrBtnStatus()
+
     const cloneDisabled = useIsCloneDisabled()
-    const clone1Handler = useGetUniversalHandler(cloneItem(1))
-    const clone2Handler = useGetUniversalHandler(cloneItem(2))
-    const clone3Handler = useGetUniversalHandler(cloneItem(3))
+    const cloneElemHandler = useGetUniversalHandler(
+        cloneItem({cloneAttrs: isAttrsBtnOn})
+    )
+    const cloneElemWithChildrenHandler = useGetUniversalHandler(
+        cloneItem({cloneChildren: true, cloneAttrs: isAttrsBtnOn})
+    )
 
     // ================== >
 
@@ -66,9 +71,9 @@ export default function BottomButtons() {
                 <Button btnKey='down' onClick={downHandler} disabled={downDisabled} />
             </div>
             <div className={CN.group}>
-                <Button btnKey='clone1' onClick={clone1Handler} disabled={cloneDisabled} />
-                <Button btnKey='clone2' onClick={clone2Handler} disabled={cloneDisabled} />
-                <Button btnKey='clone3' onClick={clone3Handler} disabled={cloneDisabled} />
+                <Button btnKey='clone' onClick={cloneElemHandler} disabled={cloneDisabled} />
+                <Button btnKey='cloneWithChildren' onClick={cloneElemWithChildrenHandler} disabled={cloneDisabled} />
+                <AttrsButton isAttrsBtnOn={isAttrsBtnOn} setIsAttrsBtnOn={setIsAttrsBtnOn} />
             </div>
             <div className={CN.group}>
                 <Button btnKey='remove' onClick={removeHandler} disabled={removeDisabled} />
@@ -79,12 +84,12 @@ export default function BottomButtons() {
 }
 
 type ButtonPropType = {
-    btnKey: string
-    onClick?: () => void
-    disabled?: boolean
+    btnKey: string // Тип значка/тип подсказки при наведении на кнопку
+    onClick?: () => void // Обработчик нажатия на кнопку
+    disabled?: boolean// Заблокирована ли кнопка
 }
 
-/* Кнопка */
+/* Стандартная кнопка */
 function Button(props: ButtonPropType) {
     const { btnKey, onClick, disabled } = props
 
@@ -97,6 +102,29 @@ function Button(props: ButtonPropType) {
     return (
         <button className={CN.button} title={title} onClick={onClick} disabled={disabled}>
             <SvgIcon type={iconType} />
+        </button>
+    )
+}
+
+
+type AttrsButtonPropType = {
+    isAttrsBtnOn: boolean // Включено ли копирование атрибутов
+    setIsAttrsBtnOn: (isBtnOn: boolean) => void // Обработчик нажатия на кнопку
+}
+
+/* Кнопка включающая/выключающая копирование атрибутов выделенного элемента при создании дубликата */
+function AttrsButton(props: AttrsButtonPropType) {
+    const { isAttrsBtnOn, setIsAttrsBtnOn } = props
+
+    return (
+        <button
+            className={makeAttrBtnClasses(isAttrsBtnOn)}
+            title={bottomPanelMsg.cloneWithAttrs}
+            onClick={() => {
+                setIsAttrsBtnOn(!isAttrsBtnOn)
+            }}
+        >
+            ATR
         </button>
     )
 }

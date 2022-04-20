@@ -8,7 +8,8 @@ $CN: left-bottom-section;
 }
 
 .#{$CN}__group {
-
+    display: flex;
+    align-items: center;
 }
 
 .#{$CN}__button {
@@ -29,5 +30,35 @@ $CN: left-bottom-section;
         &:hover {
             background-color: var(--base-color);
         }
+    }
+}
+
+
+// Кнопка-переключатель сообщающая будут ли скопированы атрибуты при копировании выделенного элемента
+// Стиль неактивной кнопки
+.#{$CN}__attr-btn {
+    font-size: 10px;
+    line-height: 12px;
+    font-weight: 700;
+    color: var(--text-color);
+    background-color: var(--base-color);
+    padding: 1px 3px 0 3px;
+    margin: -2px 0 0 3px;
+    border: 1px solid var(--text-color);
+    border-radius: var(--radius);
+
+    &:hover {
+        background-color: var(--base-color);
+    }
+}
+// Стиль активной кнопки
+.#{$CN}__attr-btn--active {
+    color: white;
+    background-color: var(--accent-color-hover);
+    border-color: var(--accent-color-hover);
+
+    &:hover {
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
     }
 }

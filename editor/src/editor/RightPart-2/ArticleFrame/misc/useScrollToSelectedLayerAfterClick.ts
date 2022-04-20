@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
+import {addNewLoadingFile} from '../../../../libs/DragFilesTree/StoreManage/manageState'
 
 export default function useScrollToSelectedLayerAfterClick() {
     const { $links } = useGetArticleSelectors()
@@ -26,12 +27,14 @@ export default function useScrollToSelectedLayerAfterClick() {
  * @param {Event} e — объект события
  * @param {HTMLElement} $layersWrapper — обёртка всех слоёв
  */
-function scrollToSelectedLayerAfterClick(e: MouseEvent, $layersWrapper: HTMLElement) {
-    if (!$layersWrapper) return
+function scrollToSelectedLayerAfterClick(e: MouseEvent, $layersWrapper: undefined | HTMLElement) {
 
     // Получить координаты относительно начала документа
     // верхней и нижней точки обёртки со слоями и половину видимой высоты обёртки слоёв (из панели Слоёв)
-    const {layersTop, layersBottom} = getLayersWrapperCoords($layersWrapper)
+    const layersWrapperCoords = getLayersWrapperCoords($layersWrapper)
+    if (!layersWrapperCoords) return
+
+    const {layersTop, layersBottom} = layersWrapperCoords
 
     // Получить координаты относительно начала документа верхней и нижней точки обёртки выделенного слоя + сам элемент слоя
     const {$selectedLayer, selectedElemTop, selectedElemBottom} = getSelectedElemCoords()
@@ -62,6 +65,10 @@ function scrollToSelectedLayerAfterClick(e: MouseEvent, $layersWrapper: HTMLElem
  */
 function getLayersWrapperCoords($layersWrapper: HTMLElement) {
     const $layersCoords = $layersWrapper.getClientRects()
+
+    // Если элемента нет, то $layersCoords будет иметь нулевую длину
+    // Просто проверить на наличие $layersWrapper не получилось
+    if (!$layersCoords.length) return
 
     // Верхняя и нижняя точка обёртки со слоями относительно начала документа
     const layersTop = $layersCoords[0].top
