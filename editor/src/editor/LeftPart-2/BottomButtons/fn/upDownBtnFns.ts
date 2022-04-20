@@ -34,7 +34,7 @@ export function useIsUpDownDisabled(direction: 'up' | 'down') {
  * @param {String} direction — направление перемещения
  */
 export function upDownItem(direction: 'up' | 'down'): BottomBtnCallbackType {
-    return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+    return (e: any, dispatch, historyItem, selectedElem, moveSelectedComp) => {
         // Поставить перемещаемый компонент в правильное положение и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.moveItemToUpOrDown(
             historyItem.article, selectedElem, direction

@@ -9,6 +9,7 @@ import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTrac
 import {useGetResizeHandler} from '../../../RightPart-2/ArticleFrame/flashElements/useResizeFlashRects'
 
 export type BottomBtnCallbackType = (
+    e: any,
     dispatch: MiscTypes.AppDispatch,
     historyItem: StoreArticleTypes.HistoryItem,
     selectedElem: StoreArticleTypes.FlashedElem,
@@ -30,7 +31,8 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
     // и размера подсвечивающих прямоугольников
     const resizeHandler = useGetResizeHandler()
 
-    return useCallback(function () {
+    return useCallback(function (e: any) {
+
         if (!historyItem) return
         const { selectedElem, moveSelectedComp } = historyItem
 
@@ -38,7 +40,7 @@ export function useGetUniversalHandler(callback: BottomBtnCallbackType) {
         updateDataInTextComp('common')
 
         // Запуск функции, обрабатывающей нажатие на кнопку
-        callback(dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)
+        callback(e, dispatch, historyItem, selectedElem, moveSelectedComp, tempComps)
 
         // Пересчитать положение подсвечивающих прямоугольников
         setTimeout(resizeHandler, 110)

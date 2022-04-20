@@ -23,16 +23,12 @@ const bottomPanelMessages = {
         rus: 'Передвинуть вниз'
     },
     clone: {
-        eng: 'Duplicate',
-        rus: 'Дублировать'
+        eng: 'Duplicate (alt — with attributes)',
+        rus: 'Дублировать (alt — с атрибутами)'
     },
     cloneWithChildren: {
-        eng: 'Duplicate with the children',
-        rus: 'Дублировать с детьми'
-    },
-    cloneWithAttrs: {
-        eng: 'Duplicate with the attributes',
-        rus: 'Дублировать с атрибутами'
+        eng: 'Duplicate with the children (alt — with attributes)',
+        rus: 'Дублировать с детьми (alt — с атрибутами)'
     },
     remove: {
         eng: 'Deleting',

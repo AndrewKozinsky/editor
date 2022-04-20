@@ -51,7 +51,7 @@ export function useIsMoveBtnDisabled(direction: 'inside' | 'left' | 'right'): bo
  * left и right (левее или правее выделенного компонента)
  */
 export function moveItem(direction: 'inside' | 'left' | 'right'): BottomBtnCallbackType {
-    return (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+    return (e: any, dispatch, historyItem, selectedElem, moveSelectedComp) => {
         let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
 
         if (direction === 'inside') {

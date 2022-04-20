@@ -24,7 +24,9 @@ export function useIsVisibleDisabled() {
 }
 
 /** Функция возвращает обработчик нажатия на кнопку «Изменить видимость элемента» */
-export const visibleItem: BottomBtnCallbackType = (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+export const visibleItem: BottomBtnCallbackType = (
+    e: any, dispatch, historyItem, selectedElem, moveSelectedComp
+) => {
     const compsAndMaxCompId = articleManager.changeVisibility(
         historyItem.article, selectedElem
     )

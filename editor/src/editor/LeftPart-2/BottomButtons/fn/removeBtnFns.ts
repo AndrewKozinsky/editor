@@ -29,8 +29,15 @@ export function useIsRemoveDisabled() {
     return disabled
 }
 
-/** Функция возвращает обработчик нажатия на кнопку «Удалить элемент» */
-export const removeItem: BottomBtnCallbackType = (dispatch, historyItem, selectedElem, moveSelectedComp) => {
+/**
+ * Функция возвращает обработчик нажатия на кнопку «Удалить элемент»
+ * @param {Object} e — объект события
+ * @param {Object} dispatch — функция dispatch()
+ * @param {Object} historyItem — объект истории статьи
+ * @param {Object} selectedElem — координаты выделенного элемента
+ * @param moveSelectedComp — координаты перемещаемого элемента
+ */
+export const removeItem: BottomBtnCallbackType = (e: any, dispatch, historyItem, selectedElem, moveSelectedComp) => {
     // Удалить компонент/элемент и возвратить новый объект истории
     const compsAndMaxCompId = articleManager.deleteItem(
         historyItem.article, selectedElem

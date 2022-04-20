@@ -36,7 +36,13 @@ export function useIsCloneDisabled() {
  * @param {Object} cloneOpts — параметры копирования
  */
 export function cloneItem (cloneOpts: CloneFnOptsType): BottomBtnCallbackType {
-    return (dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
+    return (e: any, dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
+
+        // Если зажали ALT, то нужно скопировать атрибуты
+        if (e.altKey) {
+            cloneOpts.cloneAttrs = true
+        }
+
         // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
         const compsAndMaxCompId = articleManager.cloneItem(
             tempComps, historyItem.article, selectedElem, cloneOpts
@@ -46,22 +52,4 @@ export function cloneItem (cloneOpts: CloneFnOptsType): BottomBtnCallbackType {
             compsAndMaxCompId
         ))
     }
-}
-
-/**
- * Хук хранит значение нажата ли кнопка сообщающая должен ли выделенный элемент быть скопирован с атрибута.
- * Возвращает это значение и функцию изменяющую это значение
- */
-export function useManageAttrBtnStatus(): [boolean, (isBtnOn: boolean) => void] {
-    const [isAttrsBtnOn, setIsAttrsBtnOn] = useState(
-        // Получить из LocalStorage нажата ли кнопка копирования выделенного элемента вместе с установленными атрибутами
-        getFromLocalStorage(config.ls.editIsCloneAttrBtnOn, false)
-    )
-
-    useEffect(function () {
-        // При изменении значения сохранить его в LocalStorage
-        setInLocalStorage(config.ls.editIsCloneAttrBtnOn, isAttrsBtnOn)
-    }, [isAttrsBtnOn])
-
-    return [isAttrsBtnOn, setIsAttrsBtnOn]
 }
