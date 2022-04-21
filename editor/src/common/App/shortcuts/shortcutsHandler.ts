@@ -2,7 +2,12 @@ import { useEffect } from 'react'
 import actions from 'store/rootAction'
 import { store } from 'store/rootReducer'
 import {
-    undoRedoArticleHistory
+    changeSelectedItemVisibility,
+    cloneSelectedItem,
+    deleteSelectedItem,
+    moveSelectedItem,
+    undoRedoArticleHistory,
+    upDownSelectedItem
 } from 'editor/RightPart-2/ArticleFrame/keydownHandler/hotKeys'
 import {
     checkPressedKeys,
@@ -34,6 +39,22 @@ function shortcutsHandler(e: KeyboardEvent) {
     if (getState().settings.mainTab === 1) {
         // Making undo or redo history step in article
         undoRedoArticleHistory(e, pressedKeys)
+
+        // Удаление выделенного компонента или элемента
+        deleteSelectedItem(e, pressedKeys)
+
+        // Изменение видимости выделенного компонента/элемента
+        changeSelectedItemVisibility(e, pressedKeys)
+
+        // Клонирование выделенного компонента или элемента
+        cloneSelectedItem(e, pressedKeys)
+
+        // Изменения порядка выделенного компонента или элемента
+        upDownSelectedItem(e, pressedKeys)
+
+        // Перемещение компонента выделенного для перемещения внутрь выделенного элемента
+        // или левее/правее выделенного компонента
+        moveSelectedItem(e, pressedKeys)
     }
 }
 

@@ -4,6 +4,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
 import { BottomBtnCallbackType } from './universalHandler'
+import fireEvent from '../../../../events/fireEvent'
 
 /**
  * Хук возвращает булево значение заблокирована ли одна из кнопок перемещения компонента
@@ -46,38 +47,14 @@ export function useIsMoveBtnDisabled(direction: 'inside' | 'left' | 'right'): bo
 
 
 /**
- * Функция возвращает обработчик нажатия на кнопку перемещения компонента
+ * Функция запускает событие перемещения компонента при нажатии на кнопку «Переместить элемент»
  * @param {String} direction — направление перемещения: inside (внутрь выделенного элемента),
  * left и right (левее или правее выделенного компонента)
  */
-export function moveItem(direction: 'inside' | 'left' | 'right'): BottomBtnCallbackType {
-    return (e: any, dispatch, historyItem, selectedElem, moveSelectedComp) => {
-        let compsAndMaxCompId: StoreArticleTypes.CreateNewHistoryItem
-
-        if (direction === 'inside') {
-            // Поставить перемещаемый компонент внутрь элемента и возвратить новый объект истории
-            compsAndMaxCompId = articleManager.moveComponentToElement(
-                historyItem.article, selectedElem, moveSelectedComp.dataCompId
-            )
-        }
-        else if (['left', 'right'].includes(direction)) {
-            if (selectedElem.dataCompId) {
-                // Поставить перемещаемый компонент после выделенного компонента
-                compsAndMaxCompId = articleManager.moveCompNearComp(
-                    historyItem.article, selectedElem.dataCompId, moveSelectedComp.dataCompId, direction
-                )
-            }
-            else {
-                // Поставить перемещаемый компонент в корневой массив компонентов статьи
-                compsAndMaxCompId = articleManager.moveComponentToRoot(
-                    historyItem.article, moveSelectedComp.dataCompId, direction
-                )
-            }
-        }
-
-        dispatch(articleActions.createAndSetHistoryItem(
-            compsAndMaxCompId
-        ))
-    }
+export function moveItem(direction: 'inside' | 'left' | 'right') {
+    fireEvent({
+        event: 'moveSelectedItem',
+        direction
+    })
 }
 

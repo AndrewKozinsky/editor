@@ -6,6 +6,7 @@ import { BottomBtnCallbackType } from './universalHandler'
 import { CloneFnOptsType } from '../../../../articleManager/methods/clone'
 import {getFromLocalStorage, setInLocalStorage} from '../../../../utils/miscUtils'
 import config from '../../../../utils/config'
+import fireEvent from '../../../../events/fireEvent'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
@@ -32,24 +33,13 @@ export function useIsCloneDisabled() {
 }
 
 /**
- * Функция возвращает обработчик нажатия на кнопку копирования компонента/элемента.
+ * Функция запускает событие клонирования выделенного элемента при нажатии на кнопку «Клонировать элемент»
  * @param {Object} cloneOpts — параметры копирования
  */
-export function cloneItem (cloneOpts: CloneFnOptsType): BottomBtnCallbackType {
-    return (e: any, dispatch, historyItem, selectedElem, moveSelectedComp, tempComps) => {
-
-        // Если зажали ALT, то нужно скопировать атрибуты
-        if (e.altKey) {
-            cloneOpts.cloneAttrs = true
-        }
-
-        // Клонировать выделенный компонент, поставить ниже и возвратить новый объект истории
-        const compsAndMaxCompId = articleManager.cloneItem(
-            tempComps, historyItem.article, selectedElem, cloneOpts
-        )
-
-        dispatch(articleActions.createAndSetHistoryItem(
-            compsAndMaxCompId
-        ))
-    }
+export function cloneItem (cloneOpts: CloneFnOptsType) {
+    fireEvent({
+        event: 'cloneSelectedItem',
+        cloneAttrs: !!cloneOpts.cloneAttrs,
+        cloneChildren: !!cloneOpts.cloneChildren,
+    })
 }

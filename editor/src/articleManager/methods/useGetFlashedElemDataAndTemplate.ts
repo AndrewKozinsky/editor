@@ -20,6 +20,15 @@ export default function useGetFlashedElemDataAndTemplate() {
     useEffect(function () {
         if (!article) return
 
+        if (!article.dComps.length) {
+            setDComp(null)
+            setDElem(null)
+            setTComp(null)
+            setTElem(null)
+
+            return
+        }
+
         const { dComp, dElem } = getCompAndElemData(article, flashedElemCoords)
         const { tComp, tElem } = getCompAndElemTemplate(tempComps, dComp, dElem)
 

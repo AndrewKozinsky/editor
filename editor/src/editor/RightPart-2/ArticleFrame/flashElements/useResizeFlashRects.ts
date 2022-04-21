@@ -36,16 +36,27 @@ export function useGetResizeHandler() {
     useEffect(function () {
         if (!$links.$document) return
 
-        const $hoverRect = $links.$body.querySelector('[data-em-hover-rect]') as HTMLElement
-        const $selectRect = $links.$body.querySelector('[data-em-select-rect]') as HTMLElement
-        const $moveHoverRect = $links.$body.querySelector('[data-em-move-hover-rect]') as HTMLElement
-        const $moveSelectRect = $links.$body.querySelector('[data-em-move-select-rect]') as HTMLElement
+        const fn = resizeFlashedElemsHandler($links)
 
-        const fn = getCalcRectCoords($links, $hoverRect, $selectRect, $moveHoverRect, $moveSelectRect)
         setCalcRectCoords(() => fn)
     }, [$links])
 
     return calcRectCoords
+}
+
+/**
+ * Функция возвращает функция, которая перерисовывает размеры подсвечивающих прямоугольников.
+ * @param {Object} $links — объект ссылок на элементы iFrame.
+ */
+export function resizeFlashedElemsHandler($links: StoreArticleTypes.LinksObj) {
+    if (!$links) return
+
+    const $hoverRect = $links.$body.querySelector('[data-em-hover-rect]') as HTMLElement
+    const $selectRect = $links.$body.querySelector('[data-em-select-rect]') as HTMLElement
+    const $moveHoverRect = $links.$body.querySelector('[data-em-move-hover-rect]') as HTMLElement
+    const $moveSelectRect = $links.$body.querySelector('[data-em-move-select-rect]') as HTMLElement
+
+    return getCalcRectCoords($links, $hoverRect, $selectRect, $moveHoverRect, $moveSelectRect)
 }
 
 /**

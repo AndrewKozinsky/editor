@@ -9,7 +9,7 @@ export function useGetCompAndElemNames() {
     const flashedElemInfo = articleManager.hooks.getFlashedElemDataAndTemplate()
 
     useEffect(function () {
-        const { tComp, tElem, dComp } = flashedElemInfo
+        const { tComp, tElem } = flashedElemInfo
 
         if (!tComp) {
             setCompName('')

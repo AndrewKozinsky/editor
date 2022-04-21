@@ -202,7 +202,7 @@ export function canMoveItemToUpOrDown(
     const { dataCompId, dataElemId, tagType} = targetCompCoords
 
     // Если компонент/элемент не выделен, то перемещение запрещено
-    if (!tagType) return false
+    if (!tagType || !dComps.length) return false
 
     // idx перемещаемого компонента/элемента в его массиве и длина этого массива
     let idx: number
