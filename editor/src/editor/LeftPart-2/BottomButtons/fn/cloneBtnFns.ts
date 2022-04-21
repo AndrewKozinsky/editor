@@ -1,11 +1,7 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import { BottomBtnCallbackType } from './universalHandler'
-import { CloneFnOptsType } from '../../../../articleManager/methods/clone'
-import {getFromLocalStorage, setInLocalStorage} from '../../../../utils/miscUtils'
-import config from '../../../../utils/config'
+import { CloneFnOptsType } from 'articleManager/methods/clone'
 import fireEvent from '../../../../events/fireEvent'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */

@@ -42,6 +42,11 @@ export const deleteSelectedItem: BottomBtnCallbackType = (
     fireEventArg
 ) => {
 
+    // Убрать выделение с этого компонента потому что его хотят удалить
+    dispatch(articleActions.setFlashedElement(
+        'select', null, null, null
+    ))
+
     // Удалить компонент/элемент и возвратить новый объект истории
     const compsAndMaxCompId = articleManager.deleteItem(
         historyItem.article, selectedElem
@@ -50,10 +55,5 @@ export const deleteSelectedItem: BottomBtnCallbackType = (
     // Поставить новый элемент истории
     dispatch(articleActions.createAndSetHistoryItem(
         compsAndMaxCompId
-    ))
-
-    // Убрать выделение с этого компонента потому что он удалён
-    dispatch(articleActions.setFlashedElement(
-        'select', null, null, null
     ))
 }

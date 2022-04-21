@@ -29,8 +29,8 @@ export default function fireEvent(eventData: FireDataEventArg) {
         case 'upDownSelectedItem':
             upDownSelectedItemIfAllow(eventData)
             break
-        // Перемещение компонента или элемента выделенного для перемещения внутрь выделенного элемента
-        // или левее/правее выделенного компонента
+        // Перемещение компонента выделенного для перемещения внутрь выделенного элемента
+        // или левее/правее компонента, содержащего выделенный элемент
         case 'moveSelectedItem':
             moveSelectedItemIfAllow(eventData)
             break

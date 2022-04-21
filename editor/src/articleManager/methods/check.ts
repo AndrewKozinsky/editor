@@ -210,6 +210,7 @@ export function canMoveItemToUpOrDown(
 
     if (['rootElement', 'textComponent'].includes(tagType)) {
         const parentArr = this.getCompParentArray(dComps, dataCompId)
+        if (!parentArr) return false
 
         // Индекс положения компонента и длина массива
         idx = parentArr.findIndex(dComp => dComp.dCompId === dataCompId)

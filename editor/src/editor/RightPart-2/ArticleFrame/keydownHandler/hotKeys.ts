@@ -2,8 +2,8 @@ import {
     checkPressedKeys,
     PressedKeysObj
 } from 'utils/getPressedKeys'
+import {getState} from 'utils/miscUtils'
 import fireEvent from '../../../../events/fireEvent'
-import {getState} from '../../../../utils/miscUtils'
 
 
 /**

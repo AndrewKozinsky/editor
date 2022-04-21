@@ -4,10 +4,11 @@ import { useGetPageVisibility } from './EditorMain-func'
 import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
 import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
 import Modal from 'common/modalEntities/Modal/Modal'
+import withErrorCatcher from '../../../common/ErrorCatcher/ErrorCatcher'
 
 
 /** Главная страница редактора. */
-export default function EditorMain(): ReactElement {
+function EditorMain(): ReactElement {
     const CN = useMakeClasses()
     // Видим ли редактор
     const isVisible = useGetPageVisibility()
@@ -30,3 +31,6 @@ export default function EditorMain(): ReactElement {
         </>
     )
 }
+
+
+export default withErrorCatcher(EditorMain)

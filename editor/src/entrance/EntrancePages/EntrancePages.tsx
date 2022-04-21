@@ -9,9 +9,10 @@ import ConfirmEmailFormBlock from 'entrance/ConfirmEmailFormBlock/ConfirmEmailFo
 import ResetFormBlock from 'entrance/ResetFormBlock/ResetFormBlock'
 import ChangeResetPasswordFormBlock from 'entrance/ChangeResetPasswordFormBlock/ChangeResetPasswordFormBlock'
 import { useViewStateChanger } from './EntrancePages-func'
+import withErrorCatcher from '../../common/ErrorCatcher/ErrorCatcher'
 
 /** Обёртка для страниц входа */
-export default function EntrancePages() {
+function EntrancePages() {
 
     // Переставлять свойство entryAndEditorViewState в зависимости от текущей страницы
     useViewStateChanger()
@@ -46,3 +47,5 @@ export default function EntrancePages() {
         </div>
     )
 }
+
+export default withErrorCatcher(EntrancePages)

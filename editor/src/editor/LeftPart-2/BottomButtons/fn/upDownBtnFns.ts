@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
-import articleActions from 'store/article/articleActions'
-import { BottomBtnCallbackType } from './universalHandler'
 import fireEvent from '../../../../events/fireEvent'
 
 
