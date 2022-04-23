@@ -1,7 +1,19 @@
 // Types
 import StoreSettingsTypes from './settingsTypes'
+import {MiscTypes} from '../../types/miscTypes'
+import permanentDataActions from '../permanentData/permanentDataActions'
 
 const settingsActions = {
+
+    // Установка темы интерфейса (обёрточный экшен)
+    setEditorThemeOuter(editorTheme: StoreSettingsTypes.EditorTheme) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить название темы интерфейса в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'theme', propValue: editorTheme }))
+            // Установка темы интерфейса
+            dispatch( settingsActions.setEditorTheme( editorTheme ))
+        }
+    },
 
     // Установка темы интерфейса
     setEditorTheme(payload: StoreSettingsTypes.EditorTheme): StoreSettingsTypes.SetEditorThemeAction {
@@ -27,6 +39,15 @@ const settingsActions = {
         }
     },
 
+    // Установка номера главной вкладки (обёрточный экшен)
+    setMainTabOuter(mainTabId: StoreSettingsTypes.MainTab) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить id выбранной главной вкладки в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'mainTab', propValue: mainTabId }))
+            dispatch( settingsActions.setMainTab( mainTabId ))
+        }
+    },
+
     // Установка номера главной вкладки
     setMainTab(payload: StoreSettingsTypes.MainTab): StoreSettingsTypes.SetMainTabAction {
         let tabNumber = payload
@@ -35,6 +56,15 @@ const settingsActions = {
         return {
             type: StoreSettingsTypes.SETTINGS_SET_MAIN_TAB,
             payload: tabNumber
+        }
+    },
+
+    // Активная вкладка панели «Настройки»: user или editor (обёрточный экшен)
+    setSettingsPanelTabOuter(settingsPartTab: StoreSettingsTypes.SettingsPanelTab) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить id выбранной вкладки в Настройках в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'settingsTab', propValue: settingsPartTab }))
+            dispatch( settingsActions.setSettingsPanelTab( settingsPartTab ))
         }
     },
 

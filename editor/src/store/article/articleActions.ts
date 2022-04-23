@@ -1,3 +1,5 @@
+import StoreSettingsTypes from '../settings/settingsTypes'
+
 const JSON5 = require('json5')
 import articleManager from '../../articleManager/articleManager'
 import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
@@ -9,13 +11,12 @@ import getSiteComponentsRequest from 'requests/editor/components/getSiteComponen
 import StoreArticleTypes from './articleTypes'
 import ArticleTypes from './codeType/articleCodeType'
 import getSiteTemplateRequest from 'requests/editor/siteTemplate/getSiteTemplateRequest'
-import { removeFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
-import config from 'utils/config'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import { isCursorInTheSameElem } from './article-func'
 import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import StoreSitesTypes from '../site/sitesTypes'
+import permanentDataActions from '../permanentData/permanentDataActions'
 
 
 const articleActions = {
@@ -37,14 +38,20 @@ const articleActions = {
         }
     },
 
+    // Установка id редактируемой статьи (обёрточный экшен)
+    setArticleIdOuter(articleId: null | number) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить id выбранной главной вкладки в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setEdit({propName: 'articleId', propValue: articleId }))
+            dispatch( articleActions.setArticleId( articleId ))
+        }
+    },
+
     /**
      * Установка id редактируемой статьи. После редактор загружает все данные.
      * @param {Number} articleId — id статьи
      */
     setArticleId(articleId: null | number): StoreArticleTypes.SetArticleIdAction {
-        // Set editable article id in Local Storage
-        setInLocalStorage(config.ls.editArticleId, articleId)
-
         return {
             type: StoreArticleTypes.SET_ARTICLE_ID,
             payload: articleId
@@ -384,9 +391,6 @@ const articleActions = {
 
     // Очистка статьи
     clearArticle() {
-        // Remove editable article id in Local Storage
-        removeFromLocalStorage(config.ls.editArticleId)
-
         return {
             type: StoreArticleTypes.CLEAR_ARTICLE
         }

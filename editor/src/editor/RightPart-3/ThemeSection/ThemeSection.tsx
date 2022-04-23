@@ -64,6 +64,6 @@ function useGetOnChangeHandler(): OuterOnChangeHandlerType.FieldsHandler {
 
     return useCallback(function (fieldData: OuterOnChangeHandlerType.FieldsData) {
         const value = fieldData.fieldValue[0] as StoreSettingsTypes.EditorTheme
-        dispatch(actions.settings.setEditorTheme(value))
+        dispatch(actions.settings.setEditorThemeOuter(value))
     }, [])
 }

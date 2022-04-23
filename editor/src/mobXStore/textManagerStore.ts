@@ -1,9 +1,9 @@
 // @ts-ignore
 import { makeAutoObservable } from 'mobx'
-import ArticleTypes from 'store/article/codeType/articleCodeType'
+import ArticleTypes from 'src/store/article/codeType/articleCodeType'
 
 /* Хранилище сведений жизненного цикла редактирования текстового компонента */
-export class TextManagerData {
+export class TextManagerStore {
     // id выделенного текстового компонента (другие компоненты не учитываются)
     textCompId: ArticleTypes.Id | null = null
     // Создан ли новый объект истории для внесения текста текстового компонента
@@ -37,5 +37,5 @@ export class TextManagerData {
         this.newText = text
     }
 }
-const textManagerData = new TextManagerData()
-export default textManagerData
+const textManagerStore = new TextManagerStore()
+export default textManagerStore

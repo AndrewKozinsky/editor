@@ -42,7 +42,7 @@ function getTabData( activeTabNum: number, mainTabsMsg: any ): MainTabDataType[]
                 iconType: type,
                 active: i === activeTabNum,
                 position: <'top'|'left'>'top',
-                onClick: () => store.dispatch(actions.settings.setMainTab(i))
+                onClick: () => store.dispatch(actions.settings.setMainTabOuter(i))
             }
         }
     )

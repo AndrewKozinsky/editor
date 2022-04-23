@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux'
 import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
-import articleActions from 'store/article/articleActions'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
+import {getState} from '../../utils/miscUtils'
+import { setGroupSettings } from '../../common/App/app-fn/permanentSettings'
 
 
 // Хук скачивает с сервера массив сайтов и ставит в Хранилище
@@ -35,16 +36,19 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
                 id: site.id,
                 name: site.name,
                 onClick: () => {
-                    dispatch( sitesActions.setCurrentSiteId(site.id) )
-                    dispatch( sitesActions.setCurrentSiteTemplateId(null) )
-                    // Clear opened component item (folder or file)
-                    dispatch( sitesActions.setCurrentComp(null, null) )
-                    // Clear opened article item id (folder or file)
-                    dispatch( sitesActions.setCurrentArt(null, null) )
-                    // Очистить редактируемую статью
-                    dispatch( articleActions.clearArticle() )
+                    // Поставить id этой группы в качестве выделенной группы
+                    dispatch( sitesActions.setCurrentSiteIdOuter(site.id) )
 
-
+                    // Найти в Хранилище настройки этой группы.
+                    // Это какой шаблон выделен и прочие настройки касающиеся выделенных элементов.
+                    const groupPermanentSettings = getState().permanentData.groups.find(group => {
+                        return group.groupId === site.id
+                    })
+                    // Если настройки найдены
+                    if (groupPermanentSettings) {
+                        // Выделить элементы, которые выделяли когда активной была эта группа
+                        setGroupSettings(groupPermanentSettings, dispatch)
+                    }
                 }
             }
         }),
@@ -60,8 +64,8 @@ export function useGetNewSiteOnClickHandler() {
     // чтобы программа понимала, что нужно показать форму создания нового сайта
     return useCallback(function () {
         // Поставить id сайта. Пустая строка обозначает id нового сайта.
-        dispatch( sitesActions.setCurrentSiteId('') )
+        dispatch( sitesActions.setCurrentSiteIdOuter('') )
         // Поставить на первую правую вкладку
-        dispatch( sitesActions.setRightMainTab(0) )
+        dispatch( sitesActions.setRightMainTabOuter(0) )
     }, [])
 }

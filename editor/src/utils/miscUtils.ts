@@ -4,6 +4,8 @@ import { SettingsReducerType } from 'store/settings/settingsReducer'
 import { SitesReducerType } from 'store/site/sitesReducer'
 import { UserReducerType } from 'store/user/userReducer'
 import { AppStateType, store } from 'store/rootReducer'
+import { HelpReducerType } from 'store/help/helpReducer'
+import {PermanentSettingsType} from 'store/permanentData/PermanentSettingsType'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -106,12 +108,16 @@ export function getState() {
     const settingsStore: SettingsReducerType = myStore.settings
     const articleStore: ArticleReducerType = myStore.article
     const modalStore: ModalReducerType = myStore.modal
+    const helpStore: HelpReducerType = myStore.help
+    const permanentDataStore: PermanentSettingsType = myStore.permanentData
 
     return {
         user: userStore,
         sites: sitesStore,
         settings: settingsStore,
         article: articleStore,
-        modal: modalStore
+        modal: modalStore,
+        help: helpStore,
+        permanentData: permanentDataStore,
     }
 }

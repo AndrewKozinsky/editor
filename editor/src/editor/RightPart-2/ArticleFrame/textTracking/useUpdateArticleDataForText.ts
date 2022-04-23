@@ -4,7 +4,7 @@ import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { getState } from 'utils/miscUtils'
 import { updateDataInTextComp } from './manageUpdatingDTextComp'
-import textManagerData from './textManagerData'
+import textManagerStore from '../../../../mobXStore/textManagerStore'
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import {useGetResizeHandler} from '../flashElements/useResizeFlashRects'
@@ -21,21 +21,21 @@ export function useTrackCompSelection() {
         if (!article) return
 
         // Обновить данные текстового компонента если он был ранее выделен
-        if (textManagerData.textCompId) {
+        if (textManagerStore.textCompId) {
             updateDataInTextComp('common')
         }
 
         // Если выделили текстовый компонент
         if (selectedElem.tagType === 'textComponent') {
             // Сохранить id выделенного текстового элемента
-            textManagerData.setTextCompId(selectedElem.dataCompId)
+            textManagerStore.setTextCompId(selectedElem.dataCompId)
 
             // Данные выделенного текстового компонента
             const dTextComp = articleManager.getComponent(article.dComps, selectedElem.dataCompId) as ArticleTypes.SimpleTextComponent
 
             // Сохранить изначальный текст компонента
-            textManagerData.setInitialText(dTextComp.text)
-            textManagerData.setNewText(dTextComp.text)
+            textManagerStore.setInitialText(dTextComp.text)
+            textManagerStore.setNewText(dTextComp.text)
 
             // Я столкнулся с проблемой когда при создании текстового компонента и написании туда текста он двоится.
             // Но если текст уже был написан ранее, то такого эффекта не возникает.
@@ -43,17 +43,17 @@ export function useTrackCompSelection() {
             // А если текст уже изменили и обновили Хранилище, то он пропадает.
             // Поэтому при выделении текстового компонента я проверяю, что если есть пустой текстовый узел, то удаляю его.
             // Нужно проверять именно на пустоту текстового узла. По-другому не работает.
-            const $textComp = articleManager.get$elemBy$body($links.$body, textManagerData.textCompId)
+            const $textComp = articleManager.get$elemBy$body($links.$body, textManagerStore.textCompId)
             if($textComp.firstChild?.textContent === '') {
                 $textComp.firstChild.remove()
             }
         }
         else {
             // Очистить TextManagerData если текстовый компонент не выделен
-            textManagerData.setTextCompId(null)
-            textManagerData.setInitialText('')
-            textManagerData.setNewText('')
-            textManagerData.setNewHistoryItemCreated(false)
+            textManagerStore.setTextCompId(null)
+            textManagerStore.setInitialText('')
+            textManagerStore.setNewText('')
+            textManagerStore.setNewHistoryItemCreated(false)
         }
     }, [selectedElem])
 }
@@ -87,19 +87,19 @@ export function useSetHandlersToTrackText() {
  */
 function textChangeHandler(e: any, resizeHandler: () => void) {
     // Ничего не делать если не выбран текстовый компонент
-    if (!textManagerData.textCompId) return
+    if (!textManagerStore.textCompId) return
 
     // Не ставить символ в текстовое поле если нажали недопустимую клавишу
     preventWrongKeys(e)
 
     // Ставить новый объект истории если требуется
-    if (!textManagerData.newHistoryItemCreated) {
+    if (!textManagerStore.newHistoryItemCreated) {
         createNewHistoryItem()
     }
 
     // html-объект компонента
     const $textComp = articleManager.get$elemBy$body(
-        getState().article.$links.$body, textManagerData.textCompId
+        getState().article.$links.$body, textManagerStore.textCompId
     )
     if (!$textComp) return
 
@@ -110,8 +110,8 @@ function textChangeHandler(e: any, resizeHandler: () => void) {
         // Получить новый текст и
         const newText = getPastedText(e)
 
-        // Вставить в textManagerData
-        textManagerData.setNewText(newText)
+        // Вставить в textManagerStore
+        textManagerStore.setNewText(newText)
 
         // Поставить новый текст в данные и Реакт обновит текст компонента
         updateDataInTextComp('paste', $textComp)
@@ -121,7 +121,7 @@ function textChangeHandler(e: any, resizeHandler: () => void) {
     // Если изменили текст, то поставить новый текст в данные и Реакт обновит текст компонента
     else if (e.type === 'input' && ['insertText', 'deleteByCut', 'deleteContentBackward'].includes(e.inputType)) {
         setTimeout(() => {
-            textManagerData.setNewText($textComp.textContent)
+            textManagerStore.setNewText($textComp.textContent)
 
             setTimeout(resizeHandler, 10)
         }, 30)
@@ -153,14 +153,14 @@ function getPastedText(e: any) {
     const selection = $window.getSelection()
     const { anchorOffset, focusOffset } = selection
 
-    const { newText } = textManagerData
+    const { newText } = textManagerStore
     return newText.substring(0, anchorOffset) + paste + newText.substring(focusOffset)
 }
 
 /** Функция создаёт новый объект истории чтобы в него писать данные текстового компонента. */
 function createNewHistoryItem() {
     const { article } = articleManager.getCurrentHistoryItem()
-    const dTextComp = articleManager.getComponent(article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
+    const dTextComp = articleManager.getComponent(article.dComps, textManagerStore.textCompId) as ArticleTypes.SimpleTextComponent
 
     // Создать новый объект истории со ссылкой на копию текстового компонента
     const compsAndMaxCompId = articleManager.updateTextInComponent(
@@ -172,5 +172,5 @@ function createNewHistoryItem() {
         compsAndMaxCompId
     ))
 
-    textManagerData.setNewHistoryItemCreated(true)
+    textManagerStore.setNewHistoryItemCreated(true)
 }

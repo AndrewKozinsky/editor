@@ -3,12 +3,12 @@ import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { getState } from 'utils/miscUtils'
-import textManagerData from './textManagerData'
+import textManagerStore from '../../../../mobXStore/textManagerStore'
 
 
 /**
  * Функция запускаемая когда нужно поставить в данные текстового компонента текст введённый в этом компоненте.
- * Когда пользователь изменяет текстовый компонент новый текст записывается в textManagerData. Но в данных отсутствует.
+ * Когда пользователь изменяет текстовый компонент новый текст записывается в textManagerStore. Но в данных отсутствует.
  * Эту функцию нужно запускать когда требуется поставить новый текст в данные текстового компонента.
  * Сначала удаляется новый текст и ставится старый, затем новый текст записывается в данные, после Реакт перерисует статью.
  * {String} type — тип обновления текста в текстовом компоненте
@@ -17,19 +17,19 @@ export function updateDataInTextComp(
     type: 'common' | 'paste' | 'history',
     $textComp?: Element
 ) {
-    if (!textManagerData.textCompId) return
-    if (textManagerData.initialText === textManagerData.newText) return
+    if (!textManagerStore.textCompId) return
+    if (textManagerStore.initialText === textManagerStore.newText) return
 
     if (!$textComp) {
         const { $body } = getState().article.$links
-        $textComp = articleManager.get$elemBy$body($body, textManagerData.textCompId)
+        $textComp = articleManager.get$elemBy$body($body, textManagerStore.textCompId)
     }
 
     // Получение данных текстового компонента
     const currentHistoryItem = articleManager.getCurrentHistoryItem()
-    const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerData.textCompId) as ArticleTypes.SimpleTextComponent
+    const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerStore.textCompId) as ArticleTypes.SimpleTextComponent
 
-    let newText = textManagerData.newText
+    let newText = textManagerStore.newText
 
     // Поставить в данные текстового компонента новый текст чтобы Реакт поставил его в HTML.
     // Создать новый объект истории со ссылкой на копию текстового компонента
@@ -44,16 +44,16 @@ export function updateDataInTextComp(
 
     }
     else if (type === 'paste') {
-        // Обновить textManagerData
-        textManagerData.setInitialText(newText)
-        textManagerData.setNewHistoryItemCreated(false)
+        // Обновить textManagerStore
+        textManagerStore.setInitialText(newText)
+        textManagerStore.setNewHistoryItemCreated(false)
 
         if (!$textComp.firstChild) {
             const newTextNode = document.createTextNode('')
             $textComp.appendChild(newTextNode)
         }
 
-        $textComp.firstChild.textContent = textManagerData.newText
+        $textComp.firstChild.textContent = textManagerStore.newText
     }
     else if (type === 'history') {
 

@@ -4,8 +4,6 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
-import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
-import config from 'utils/config'
 import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
@@ -54,8 +52,9 @@ export function useGetTempCompsFolders() {
         if (!tempCompsFolders) return
 
         // Get opened component template folders id array to open these folders
-        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
-            getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+        // const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
+        //     getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
+        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] = []
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(
@@ -124,7 +123,7 @@ export function useGetAfterCollapseFolder() {
         dispatch(articleActions.setTempCompFolders(folders))
 
         // Save array of folder's id in the Local storage
-        setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
+        // setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
     }, [])
 }
 

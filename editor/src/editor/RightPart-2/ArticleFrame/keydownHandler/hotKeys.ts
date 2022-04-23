@@ -42,21 +42,30 @@ export function deleteSelectedItem(e: KeyboardEvent, pressedKeys: PressedKeysObj
     // Разрешено ли удаление
     let allowDeleting = false
 
-    // Если нажали одно из этих сочетаний, то удалить выделенный компонент.
-    // Удалить текстовый компонент можно только если нажать 4 клавиши
+    const { history, historyCurrentIdx } = getState().article
+    const historyItem = history[historyCurrentIdx]
+    if (!historyItem) return
 
-    if (checkPressedKeys(pressedKeys, ['backspace'])) {
-        allowDeleting = true
+    const { selectedElem } = historyItem
+
+    // Удалить текстовый компонент можно только если нажать 4 клавиши
+    if (['textComponent', 'element', 'rootElement'].includes(selectedElem.tagType)) {
+        if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'backspace'])) {
+            allowDeleting = true
+        }
+        else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'delete'])) {
+            allowDeleting = true
+        }
     }
-    else if (checkPressedKeys(pressedKeys, ['delete'])) {
-        allowDeleting = true
+    else if (['element', 'rootElement'].includes(selectedElem.tagType)) {
+        if (checkPressedKeys(pressedKeys, ['backspace'])) {
+            allowDeleting = true
+        }
+        else if (checkPressedKeys(pressedKeys, ['delete'])) {
+            allowDeleting = true
+        }
     }
-    else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'backspace'])) {
-        allowDeleting = true
-    }
-    else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'delete'])) {
-        allowDeleting = true
-    }
+
 
     if (allowDeleting) {
         // Запустить события удаления выделенного элемента если это возможно

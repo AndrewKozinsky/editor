@@ -1,6 +1,3 @@
-
-import config from 'utils/config'
-import { removeFromLocalStorage, setInLocalStorage } from '../../utils/miscUtils'
 import StoreSitesTypes from './sitesTypes'
 
 export type SitesReducerType = {
@@ -89,12 +86,12 @@ function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesActio
 // Установка id выбранного сайта
 function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
-        // Удалить из LocalStorage id сайта потому что не выбран ни один сайт.
-        removeFromLocalStorage(config.ls.editorSiteId)
+        // Удалить из LocalStorage id сайта потому что не выбрана ни одна группа
+        // permanentSettingsStore.setCommonSetting('groupId', null)
     }
     else {
-        // Поставить id сайта в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorSiteId, action.payload)
+        // Поставить id группы в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
+        // permanentSettingsStore.setCommonSetting('groupId', action.payload)
     }
 
     return {
@@ -108,7 +105,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
 // Установка id текущей основной вкладки справа
 function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage(config.ls.editorSitePartTab, action.payload)
+    // permanentSettingsStore.setCommonSetting('groupPartTab', action.payload)
 
     return {
         ...state,
@@ -135,11 +132,11 @@ function setCurrentSiteTemplateId(
 ): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        removeFromLocalStorage(config.ls.editorSiteTemplateId)
+        // permanentSettingsStore.setCommonSetting('groupId', null)
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorSiteTemplateId, action.payload)
+        // permanentSettingsStore.setCommonSetting('groupId', action.payload)
     }
 
     return {
@@ -171,11 +168,11 @@ function setCurrentMetaTemplateId(
 ): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        removeFromLocalStorage(config.ls.editorMetaTemplateId)
+        // removeFromLocalStorage(config.ls.editorMetaTemplateId)
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorMetaTemplateId, action.payload)
+        // setInLocalStorage(config.ls.editorMetaTemplateId, action.payload)
     }
 
     return {
@@ -218,11 +215,6 @@ function setArtFolder(state: SitesReducerType, action: StoreSitesTypes.SetArtFol
 // Установка id выбранного компонента
 function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurrentCompAction): SitesReducerType {
     if (action.payload.id) {
-        // Поставить id шаблона компонента в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorComponentId, action.payload.id)
-        // Поставить тип элемента (папка или компонент) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorComponentType, action.payload.type)
-
         let newComponentSection: StoreSitesTypes.ComponentSection
 
         // Если выделили папку
@@ -235,7 +227,7 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
                 currentCompCode: null
             }
         }
-        // Если если выделили компонент
+        // Если выделили компонент
         else if (action.payload.type === 'file') {
             newComponentSection = {
                 ...state.componentSection,
@@ -252,11 +244,6 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
         }
     }
     else {
-        // Удалить из LocalStorage id шаблона компоненента потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorComponentId)
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorComponentType)
-
         return {
             ...state,
             componentSection: {
@@ -275,11 +262,6 @@ function setCurrentComp(state: SitesReducerType, action: StoreSitesTypes.SetCurr
 // Установка id выбранного подключаемых шаблонов
 function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurrentArtAction): SitesReducerType {
     if (action.payload.id) {
-        // Поставить id статьи в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorArticleId, action.payload.id)
-        // Поставить тип элемента (папка или статья) в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        setInLocalStorage(config.ls.editorArticleType, action.payload.type)
-
         let newArticleSection: StoreSitesTypes.ArticleSection
 
         // Если ставят данные папки
@@ -315,11 +297,6 @@ function setCurrentArt(state: SitesReducerType, action: StoreSitesTypes.SetCurre
         }
     }
     else {
-        // Удалить из LocalStorage id шаблона компонента потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorArticleId)
-        // Удалить из LocalStorage тип элемента (папка или компонент) потому что ничего не выбрано.
-        removeFromLocalStorage(config.ls.editorArticleType)
-
         return {
             ...state,
             articleSection: {

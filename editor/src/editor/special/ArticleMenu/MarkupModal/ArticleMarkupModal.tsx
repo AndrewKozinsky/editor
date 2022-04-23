@@ -3,7 +3,6 @@ import ModalShortContent from 'common/modalEntities/ModalShortContent/ModalShort
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import articleMenuMsg from 'messages/articleMenuMessages'
-import { updateDataInTextComp } from '../../../RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 /** Компонент окна с разметкой статьи */
 export function ArticleMarkupModal() {

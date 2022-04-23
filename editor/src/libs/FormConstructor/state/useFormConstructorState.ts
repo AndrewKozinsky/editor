@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
-import serverMsg from 'messages/serverMessages'
 import FCType from '../FCType'
 import getInitialFieldsState from './getInitialFieldsState'
 import fieldChangeHandler from '../handlers/fieldChangeHandler'

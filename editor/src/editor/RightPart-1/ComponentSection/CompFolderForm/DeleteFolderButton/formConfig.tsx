@@ -31,7 +31,8 @@ const deleteFolderFormConfig: FCType.Config = {
         store.dispatch( sitesActions.setCompFolder({folders: newFoldersArr}) )
 
         // Обнулить свойство указывающее на id активного пункта в папках и шаблонах компонентах потому что папка удалена
-        store.dispatch( sitesActions.setCurrentComp(null, null) )
+        const { currentSiteId } = getState().sites
+        store.dispatch( sitesActions.setCurrentCompOuter(currentSiteId, null, null) )
 
         // Сохранить новый массив папок и файлов на сервере
         return await putCompFolderRequest(compFolderId, newFoldersArr)

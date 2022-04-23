@@ -12,6 +12,7 @@ import settingsReducer from './settings/settingsReducer'
 import articleReducer from './article/articleReducer'
 import modalReducer from './modal/modalReducer'
 import helpReducer from './help/helpReducer'
+import permanentDataReducer from './permanentData/permanentDataReducer'
 
 
 // Корневой редьюсер
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
     article: articleReducer,
     modal: modalReducer,
     help: helpReducer,
+    permanentData: permanentDataReducer,
 })
 
 export const store = createStore(

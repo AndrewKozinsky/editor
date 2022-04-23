@@ -1,6 +1,4 @@
-import { setInLocalStorage } from 'utils/miscUtils'
 import StoreHelpTypes from './helpTypes'
-import config from 'utils/config'
 
 export type HelpReducerType = {
     helpPanelTab: StoreHelpTypes.HelpPanelTab
@@ -14,9 +12,6 @@ const initialState: HelpReducerType = {
 
 // Установка id вкладки в Настройках
 function setHelpPanelTab(state: HelpReducerType, action: StoreHelpTypes.SetHelpPanelTabAction): HelpReducerType {
-    // Поставить id вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    setInLocalStorage(config.ls.editorHelpTabId, action.payload)
-
     return {
         ...state,
         helpPanelTab: action.payload

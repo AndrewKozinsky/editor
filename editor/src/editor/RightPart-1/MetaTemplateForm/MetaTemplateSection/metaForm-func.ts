@@ -42,11 +42,13 @@ export async function afterSubmit(response: MetaTemplateServerResponseType) {
         // Скачать новый список шаблонов метаданных и поставить в Хранилище
         await store.dispatch(sitesActions.requestMetaTemplates())
 
+        const { currentSiteId } = getState().sites
+
         // Найти в Хранилище шаблон сайта с таким же id как у только что созданного
         const newMetaTemplate = getState().sites.metaTemplatesSection.templates.find((template: any) => {
             return template.id === response.data.metaTemplates[0].id
         })
         // Выделить созданный шаблон метаданных
-        store.dispatch(sitesActions.setCurrentMetaTemplateId(newMetaTemplate.id))
+        store.dispatch(sitesActions.setCurrentMetaTemplateIdOuter(currentSiteId, newMetaTemplate.id))
     }
 }

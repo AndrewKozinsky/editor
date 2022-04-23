@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux'
 import articleActions from 'store/article/articleActions'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from '../../../../articleManager/articleManager'
-import bridge from '../../../../bridge/bridge'
 
 /* Хук запускает загрузка данных статьи и установку в Хранилище при изменении id редактируемой статьи */
 export default function useSetArticleDataInStore() {

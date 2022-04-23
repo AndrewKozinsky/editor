@@ -23,12 +23,12 @@ function getItemsListProps(settingsPanelMsg: any): ItemType[] {
         {
             id: 'user',
             name: settingsPanelMsg.leftMenuItemUser,
-            onClick: () => store.dispatch( actions.settings.setSettingsPanelTab('user') )
+            onClick: () => store.dispatch( actions.settings.setSettingsPanelTabOuter('user') )
         },
         {
             id: 'editor',
             name: settingsPanelMsg.leftMenuItemEditor,
-            onClick: () => store.dispatch( actions.settings.setSettingsPanelTab('editor') )
+            onClick: () => store.dispatch( actions.settings.setSettingsPanelTabOuter('editor') )
         }
     ]
 }

@@ -143,6 +143,6 @@ export async function afterSubmit(response: SitesServerResponseType) {
             return site.id === response.data.sites[0].id
         })
         // Выделить созданный сайт
-        store.dispatch(sitesActions.setCurrentSiteId(newSite.id))
+        store.dispatch(sitesActions.setCurrentSiteIdOuter(newSite.id))
     }
 }

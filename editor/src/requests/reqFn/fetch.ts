@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { store } from 'store/rootReducer'
-import config from 'utils/config'
+// import config from 'utils/config'
 import { getFromLocalStorage, getState } from 'utils/miscUtils'
 
 
@@ -30,7 +30,8 @@ export function useFetch<T>(url: string, options: OptionsType) {
     const [error, setError] = useState(false)
 
     // Язык интерфейса
-    const lang = getFromLocalStorage(config.ls.editorLanguage)
+    // const lang = getFromLocalStorage(config.ls.editorLanguage)
+    const lang = 'rus'
 
     // Функция запускающая процесс загрузки данных с сервера
     function doFetch() {

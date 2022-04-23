@@ -48,7 +48,7 @@ export async function afterSubmit(response: SiteTemplateServerResponseType) {
             return template.id === response.data.siteTemplates[0].id
         })
         // Выделить созданный шаблон сайта
-        store.dispatch(sitesActions.setCurrentSiteTemplateId(newSiteTemplate.id))
+        // store.dispatch(sitesActions.setCurrentSiteTemplateIdOuter(newSiteTemplate.id))
 
         // Если отредактировали шаблон сайта, который используется в редактируемой статье...
         if (getState().article.siteTemplateId === newSiteTemplate.id) {

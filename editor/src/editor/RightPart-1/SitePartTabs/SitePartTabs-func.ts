@@ -74,7 +74,7 @@ function getTabData(
             active: i === rightMainTab,
             position: <'top'|'left'>'left',
             disabled: (i !== 0 && isTabsDisabled),
-            onClick: () => store.dispatch(sitesActions.setRightMainTab(i))
+            onClick: () => store.dispatch(sitesActions.setRightMainTabOuter(i))
         }
     })
 }

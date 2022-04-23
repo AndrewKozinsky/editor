@@ -1,8 +1,6 @@
 import React, { ReactElement, useRef } from 'react'
 import { MiscTypes } from 'types/miscTypes'
 import Loader from 'common/misc/Loader/Loader'
-import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/miscUtils'
 import iconsCollector from '../../icons/js/getIcon'
 import { useSetFocus } from './Button-func'
 import makeClasses from './Button-classes'
@@ -59,9 +57,9 @@ export default function Button(props: ButtonPropType) {
 
     // При загрузке поменять текст кнопки
     if (btnText && loading) {
-        const editorLanguage = getFromLocalStorage(config.ls.editorLanguage)
-        if (editorLanguage === 'eng') btnText = 'Sending...'
-        if (editorLanguage === 'rus') btnText = 'Отправка...'
+        // const editorLanguage = getFromLocalStorage(config.ls.editorLanguage)
+        // if (editorLanguage === 'eng') btnText = 'Sending...'
+        // if (editorLanguage === 'rus') btnText = 'Отправка...'
     }
 
     // Если включена загрузка, то заблокировать кнопку и убрать значок

@@ -27,6 +27,7 @@ export function useGetTemplatesItemsListProps(): ItemsListPropType {
     const dispatch = useDispatch()
 
     // id выбранного шаблона сайта и массив всех шаблонов
+    const { currentSiteId } = useGetSitesSelectors()
     const { currentTemplateId, templates } = useGetSitesSelectors().siteTemplatesSection
 
     // Сформировать и вернуть объект с атрибутами списка шаблонов
@@ -36,7 +37,9 @@ export function useGetTemplatesItemsListProps(): ItemsListPropType {
             return {
                 id: template.id,
                 name: template.name,
-                onClick: () => dispatch( sitesActions.setCurrentSiteTemplateId(template.id) )
+                onClick: () => {
+                    dispatch( sitesActions.setCurrentSiteTemplateIdOuter(currentSiteId, template.id) )
+                }
             }
         }),
         activeItemId: currentTemplateId // id активного пункта
@@ -51,6 +54,6 @@ export function useGetNewTemplateOnClickHandler() {
     // чтобы программа понимала, что нужно показать форму создания нового шаблона подключаемых файлов
     return function () {
         // Поставить id шаблона подключаемых файлов. Пустая строка обозначает id нового шаблона.
-        dispatch( sitesActions.setCurrentSiteTemplateId('') )
+        dispatch( sitesActions.setCurrentSiteTemplateIdOuter(null, '') )
     }
 }

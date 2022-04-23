@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom'
 
 // @ts-ignore. Подключение Хранилищ MobX чтобы они отображались в инструментах разработчика
 import {injectStores} from '@mobx-devtools/tools'
-import textManagerData from 'editor/RightPart-2/ArticleFrame/textTracking/textManagerData'
+import textManagerStore from 'src/mobXStore/textManagerStore'
 injectStores({
-    textManagerData
+    textManagerStore,
 })
 
 // Компоненты
@@ -17,11 +17,18 @@ import EditorMain from 'editor/wrappers/EditorMain/EditorMain'
 import EntrancePages from 'entrance/EntrancePages/EntrancePages'
 
 // JS и CSS
-import { useGetAndSetEditorSettings, useGetUserDataAndStatus } from './app-fn/init'
+import {
+    useSaveEditorSettingsInLocalStorage,
+    useGetEditorSettingsFromLocalStorage,
+    useUpdateStoreDependsOnEditorSettingsAfterStartUp
+} from './app-fn/permanentSettings'
 import useSetShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
 import { useManageFavicon } from './app-fn/useManageFavicon'
 import { useRedirectPage } from './app-fn/useRedirectPage'
+import { useGetUserDataAndStatus } from './app-fn/useGetUserDataAndStatus'
+
+
 
 
 /** Компонент всего приложения */
@@ -60,8 +67,11 @@ export default function App() {
     // Изменение фавиконки в зависимости от темы и плотности пикселей
     useManageFavicon()
 
-    // Поставить настройки редактора в Хранилище
-    useGetAndSetEditorSettings()
+    // Сохранить настройки редактора в LocalStorage при изменении
+    useSaveEditorSettingsInLocalStorage()
+    // При загрузке получить настройки приложения из LocalStorage
+    useGetEditorSettingsFromLocalStorage()
+    useUpdateStoreDependsOnEditorSettingsAfterStartUp()
 
     // Проинициализировать приложение и возвратить статус сделано ли это
     const isUserDataReceived = useGetUserDataAndStatus()

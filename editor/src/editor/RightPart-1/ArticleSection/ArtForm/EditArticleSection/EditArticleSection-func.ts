@@ -6,7 +6,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleActions from 'store/article/articleActions'
 import settingsActions from 'store/settings/settingsActions'
-import articleManager from '../../../../../articleManager/articleManager'
+import articleManager from 'articleManager/articleManager'
 
 
 /** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */
@@ -37,9 +37,9 @@ export function useGetEditArticleFn() {
         }
 
         // Поставить id редактируемой статьи чтобы редактор начал загружать ресурсы и отрисовал статью.
-        store.dispatch(articleActions.setArticleId(currentArtItemId as number))
+        store.dispatch(articleActions.setArticleIdOuter(currentArtItemId as number))
         // Перейти на вкладку с редактором
-        store.dispatch(settingsActions.setMainTab(1))
+        store.dispatch(settingsActions.setMainTabOuter(1))
     }, [currentArtItemId])
 }
 

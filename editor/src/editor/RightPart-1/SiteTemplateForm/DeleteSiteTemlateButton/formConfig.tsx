@@ -39,7 +39,7 @@ const deleteSiteTemplateModalConfig: FCType.Config = {
             store.dispatch(sitesActions.requestSiteTemplates())
 
             // Обнулить id выбранного шаблона сайта
-            store.dispatch(sitesActions.setCurrentSiteTemplateId(null))
+            // store.dispatch(sitesActions.setCurrentSiteTemplateIdOuter(null))
         }
     },
 }

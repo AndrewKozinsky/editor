@@ -46,7 +46,7 @@ function afterSuccessSiteDeleting() {
     store.dispatch(sitesActions.requestSites())
 
     // Обнулить id выбранного сайта
-    store.dispatch(sitesActions.setCurrentSiteId(null))
+    store.dispatch(sitesActions.setCurrentSiteIdOuter(null))
 
     // Удалить данные из LocalStorage потому что они относятся к удаляемому сайту
     const siteDataInLS = ['editorComponentType', 'editorArtOpenedFolders', 'editorCompOpenedFolders', 'editorArticleType', 'editorComponentId', 'editorSiteId', 'editorSiteTemplateId', 'editorMetaTemplateId']

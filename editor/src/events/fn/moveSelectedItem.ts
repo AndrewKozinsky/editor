@@ -1,11 +1,9 @@
 import articleActions from 'store/article/articleActions'
+import StoreArticleTypes from 'store/article/articleTypes'
 import articleManager from '../../articleManager/articleManager'
 import { getState } from 'utils/miscUtils'
 import EventDataTypes from '../EventDataTypes'
 import selectedItemUniversalWrapFn, { BottomBtnCallbackType } from './selectedItemUniversalWrapFn'
-import {useEffect, useState} from 'react'
-import useGetArticleSelectors from '../../store/article/articleSelectors'
-import StoreArticleTypes from '../../store/article/articleTypes'
 
 /**
  * Функция удаляет выделенный компонент или элемент если это возможно

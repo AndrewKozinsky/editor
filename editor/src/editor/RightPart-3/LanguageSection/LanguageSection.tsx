@@ -4,13 +4,12 @@ import { OuterOnChangeHandlerType } from 'common/formElements/outerOnChangeFn'
 import Wrapper from 'common/Wrapper/Wrapper'
 import Notice from 'common/textBlocks/Notice/Notice'
 import languageSectionMsg from 'messages/languageSectionMessages'
-import config from 'utils/config'
-import { getFromLocalStorage, setInLocalStorage } from 'utils/miscUtils'
 
 /* Переключатели языка интерфейса */
 export default function LanguageSection() {
     // Язык интерфейса
-    const lsLang = getFromLocalStorage(config.ls.editorLanguage)
+    // const lsLang = getFromLocalStorage(config.ls.editorLanguage)
+    const lsLang = 'rus'
     const [ language, setLanguage ] = useState(lsLang)
 
     const [showMessage, setShowMessage] = useState(false)
@@ -46,7 +45,7 @@ function useGetOnChangeHandler(
     return useCallback(function (fieldData: OuterOnChangeHandlerType.FieldsData) {
         const value = fieldData.fieldValue[0] as 'eng' | 'rus'
         setLanguage(value)
-        setInLocalStorage(config.ls.editorLanguage, value)
+        // setInLocalStorage(config.ls.editorLanguage, value)
 
         setShowMessage(true)
     }, [])

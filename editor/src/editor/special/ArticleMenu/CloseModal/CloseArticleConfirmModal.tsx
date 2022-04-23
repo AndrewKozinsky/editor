@@ -25,7 +25,7 @@ export default function CloseArticleConfirmModal() {
     const clearArticle = useCallback(function () {
         store.dispatch( articleActions.clearArticle() )
         dispatch(actions.modal.closeModal())
-        store.dispatch( actions.settings.setMainTab(0) )
+        store.dispatch( actions.settings.setMainTabOuter(0) )
     }, [])
 
     const bottomButtons = [

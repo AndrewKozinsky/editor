@@ -1,22 +1,22 @@
+import StoreSettingsTypes from '../settings/settingsTypes'
+
 const JSON5 = require('json5')
 import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import getMetaTemplateRequest from '../../requests/editor/metaTemplate/getMetaTemplateRequest'
 import FilesTreeType from '../../types/FilesTreeType'
 import StoreSitesTypes  from './sitesTypes'
 import { MiscTypes } from 'types/miscTypes'
-import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/miscUtils'
 import sitesRequest from 'requests/editor/sites/sitesRequest'
 import getSiteTemplatesRequest from 'requests/editor/siteTemplate/getSiteTemplatesRequest'
 import { getCompFolderRequest } from 'requests/editor/compFolders/getCompFolderRequest'
 import { getArtFolderRequest } from 'requests/editor/artFolders/getArtFolderRequest'
 import getComponentRequest from 'requests/editor/components/getComponentRequest'
-import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import { getOpenedFoldersIds } from 'editor/RightPart-1/FoldersList/FoldersList-func'
 import TempCompTypes from '../article/codeType/tempCompCodeType'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import ArticleTypes from '../article/codeType/articleCodeType'
 import getMetaTemplatesRequest from '../../requests/editor/metaTemplate/getMetaTemplatesRequest'
+import permanentDataActions from '../permanentData/permanentDataActions'
 
 
 const sitesActions = {
@@ -30,7 +30,7 @@ const sitesActions = {
             const response = await sitesRequest()
 
             if (!response || response.status !== 'success') {
-                dispatch( sitesActions.setCurrentSiteId(null) )
+                dispatch( sitesActions.setCurrentSiteIdOuter(null) )
                 return
             }
 
@@ -57,6 +57,16 @@ const sitesActions = {
         }
     },
 
+    // Установка id выбранного сайта (обёрточный экшен)
+    setCurrentSiteIdOuter(groupId: StoreSitesTypes.CurrentSiteId) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить id выбранной группы в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'groupId', propValue: groupId }))
+            // Установка темы интерфейса
+            dispatch( sitesActions.setCurrentSiteId( groupId ))
+        }
+    },
+
     // Установка id выбранного сайта
     setCurrentSiteId(payload: StoreSitesTypes.CurrentSiteId): StoreSitesTypes.SetCurrentSiteIdAction {
         return {
@@ -67,7 +77,17 @@ const sitesActions = {
 
     // ПРАВЫЕ ВКЛАДКИ ==================================================================================
 
-    // Установка id текущей основной вкладки справа
+    // Установка id текущей вкладки справа в Группе (обёрточный экшен)
+    setRightMainTabOuter(tabId: StoreSitesTypes.RightMainTab) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'groupPartTab', propValue: tabId }))
+            // Установка темы интерфейса
+            dispatch( sitesActions.setRightMainTab( tabId ))
+        }
+    },
+
+    // Установка id текущей вкладки справа в Группе
     setRightMainTab(payload: StoreSitesTypes.RightMainTab): StoreSitesTypes.SetRightMainTabAction {
         let rightMainTabNum = payload
         if (rightMainTabNum < 0 || rightMainTabNum > 4) rightMainTabNum = 0
@@ -112,6 +132,17 @@ const sitesActions = {
 
             // Установка шаблонов подключаемых файлов в Хранилище
             dispatch( sitesActions.setSiteTemplates(preparedTemplates) )
+        }
+    },
+
+    // Установка id выбранного шаблона сайта (обёрточный экшен)
+    setCurrentSiteTemplateIdOuter(groupId: StoreSitesTypes.CurrentSiteId, groupTemplateId: StoreSitesTypes.CurrentSiteTemplateId) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'groupTemplateId', propValue: groupTemplateId }))
+            // Установка темы интерфейса
+            dispatch( sitesActions.setCurrentSiteTemplateId( groupTemplateId ))
         }
     },
 
@@ -177,6 +208,17 @@ const sitesActions = {
         }
     },
 
+    // Установка id выбранного шаблона сайта (обёрточный экшен)
+    setCurrentMetaTemplateIdOuter(groupId: StoreSitesTypes.CurrentSiteId, groupMetaId: StoreSitesTypes.CurrentMetaTemplateId) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'metaTemplateId', propValue: groupMetaId }))
+            // Установка темы интерфейса
+            dispatch( sitesActions.setCurrentMetaTemplateId( groupMetaId ))
+        }
+    },
+
     // Установка id выбранного шаблона сайта
     setCurrentMetaTemplateId(payload: StoreSitesTypes.CurrentMetaTemplateId): StoreSitesTypes.SetCurrentMetaTemplateIdAction {
         return {
@@ -202,16 +244,16 @@ const sitesActions = {
             // Если есть папки
             if (foldersData && foldersData.content) {
                 // Получить id открытых папок
-                const openedFoldersIds = getOpenedFoldersIds('components')
-                if (openedFoldersIds) {
+                // const openedFoldersIds = getOpenedFoldersIds('components')
+                /*if (openedFoldersIds) {
                     // Открыть папки id которых перечислены в openedFoldersIds
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
-                }
+                }*/
 
                 // id последней выбранной папки или компонента из LocalStorage
-                const editorComponentId = getFromLocalStorage(config.ls.editorComponentId)
+                // const editorComponentId = getFromLocalStorage(config.ls.editorComponentId)
                 // Выделить элемент, который должен быть выделен
-                foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
+                // foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
@@ -244,14 +286,14 @@ const sitesActions = {
 
             if (foldersData && foldersData.content) {
                 const openedFoldersIds = getOpenedFoldersIds('articles')
-                if (openedFoldersIds) {
+                /*if (openedFoldersIds) {
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
-                }
+                }*/
 
                 // id последней выбранной папки или компонента из LocalStorage
-                const editorArticleId = getFromLocalStorage(config.ls.editorArticleId)
+                // const editorArticleId = getFromLocalStorage(config.ls.editorArticleId)
                 // Выделить элемент, который должен быть выделен
-                foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
+                // foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
@@ -276,12 +318,14 @@ const sitesActions = {
     requestComponentTemplate() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
+            const { currentSiteId } = getState().sites
+
             // id выбранного шаблона компонента, данные которого нужно скачать
             const { currentCompItemId } = getState().sites.componentSection
 
             // Если id компонента не передан, то обнулить данные компонента в Хранилище
             if (!currentCompItemId) {
-                dispatch( sitesActions.setCurrentComp(null, null) )
+                dispatch( sitesActions.setCurrentCompOuter(currentSiteId, null, null) )
                 return
             }
 
@@ -289,7 +333,7 @@ const sitesActions = {
             const response = await getComponentRequest(currentCompItemId)
 
             if (response.status !== 'success') {
-                dispatch( sitesActions.setCurrentComp(null, null) )
+                dispatch( sitesActions.setCurrentCompOuter(currentSiteId, null, null) )
                 return
             }
 
@@ -297,7 +341,7 @@ const sitesActions = {
 
             if (!responseData) {
                 // Зачем в Хранилище ставится id шаблона компонента и тип file?
-                dispatch( sitesActions.setCurrentComp(responseData.id, 'file') )
+                dispatch( sitesActions.setCurrentCompOuter(currentSiteId, responseData.id, 'file') )
                 return
             }
 
@@ -308,9 +352,29 @@ const sitesActions = {
             const compName = compDataParsed.elems[0].elemName
 
             // Установка данных шаблона компонента в Хранилище
-            dispatch( sitesActions.setCurrentComp(
-                responseData.id, 'file', compName, compData
+            dispatch( sitesActions.setCurrentCompOuter(
+                currentSiteId, responseData.id, 'file', compName, compData
             ))
+        }
+    },
+
+    // Установка id и типа выбранного шаблона компонента (шаблон или папка) (обёрточный экшен)
+    setCurrentCompOuter(
+        groupId: StoreSitesTypes.CurrentSiteId,
+        componentId: StoreSitesTypes.CurrentCompItemId,
+        componentType: StoreSitesTypes.CurrentCompItemType,
+        name?: string,
+        code?: string
+    ) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Поставить id выбранного компонента в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'componentId', propValue: componentId }))
+            // Поставить тип выбранного компонента (файл или папка) в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'componentType', propValue: componentType }))
+
+            // Установка текущего компонента
+            dispatch( sitesActions.setCurrentComp( componentId, componentType, name, code ))
         }
     },
 
@@ -337,12 +401,13 @@ const sitesActions = {
     // Загрузка с сервера статьи и установка в Хранилище
     requestArticle() {
         return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            const { currentSiteId } = getState().sites
 
             // id выбранной статьи, данные которой нужно скачать
             const { currentArtItemId } = getState().sites.articleSection
 
             // Если id статьи не передан, то обнулить данные статьи в Хранилище
-            if (!currentArtItemId) dispatch( sitesActions.setCurrentArt(null, null) )
+            if (!currentArtItemId) dispatch( sitesActions.setCurrentArtOuter(currentSiteId, null, null) )
 
             // Запрос и ответ от сервера
             const response = await getArticleRequest(currentArtItemId)
@@ -351,7 +416,8 @@ const sitesActions = {
             const articleData = response.data.articles[0]
 
             if (articleData) {
-                dispatch( sitesActions.setCurrentArt(
+                dispatch( sitesActions.setCurrentArtOuter(
+                    currentSiteId,
                     articleData.id,
                     'file',
                     articleData.name,
@@ -364,12 +430,35 @@ const sitesActions = {
         }
     },
 
+    // Установка id и типа выбранной статьи (статья или папка) (обёрточный экшен)
+    setCurrentArtOuter(
+        groupId: StoreSitesTypes.CurrentSiteId,
+        artId: null | FilesTreeType.ItemId,
+        artType: null | FilesTreeType.ItemType,
+        artName?: string,
+        artCode?: ArticleTypes.Article,
+        siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId,
+        metaTemplateId?: StoreSitesTypes.CurrentMetaTemplateId,
+        meta?: null | MetaType.Items
+    ) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+
+            // Поставить id выбранного компонента в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'articleId', propValue: artId }))
+            // Поставить тип выбранного компонента (файл или папка) в группе в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'articleType', propValue: artType }))
+
+            // Установка текущего компонента
+            dispatch( sitesActions.setCurrentArt( artId, artType, artName, artCode, siteTemplateId, metaTemplateId, meta ))
+        }
+    },
+
     // Установка id и типа выбранной статьи (статья или папка)
     setCurrentArt(
-        id: null | FilesTreeType.ItemId,
-        type: null | FilesTreeType.ItemType,
-        name?: string,
-        code?: ArticleTypes.Article,
+        artId: null | FilesTreeType.ItemId,
+        artType: null | FilesTreeType.ItemType,
+        artName?: string,
+        artCode?: ArticleTypes.Article,
         siteTemplateId?: StoreSitesTypes.CurrentSiteTemplateId,
         metaTemplateId?: StoreSitesTypes.CurrentMetaTemplateId,
         meta?: null | MetaType.Items
@@ -377,10 +466,10 @@ const sitesActions = {
         return {
             type: StoreSitesTypes.SET_CURRENT_ART,
             payload: {
-                id,
-                type,
-                name,
-                code,
+                id: artId,
+                type: artType,
+                name: artName,
+                code: artCode,
                 siteTemplateId,
                 metaTemplateId,
                 meta,

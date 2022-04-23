@@ -1,5 +1,3 @@
-import config from 'utils/config'
-import { getFromLocalStorage } from 'utils/miscUtils'
 import FCType from '../FCType'
 
 /**
@@ -15,7 +13,8 @@ export function getInitialShowCommonSuccess(formConfig: FCType.Config) {
  * @param {Object} formConfig — configuration form object
  */
 export function getInitialCommonSuccess(formConfig: FCType.Config) {
-    const lang = getFromLocalStorage(config.ls.editorLanguage)
+    // const lang = getFromLocalStorage(config.ls.editorLanguage)
+    const lang = 'rus'
 
     if (formConfig.commonSuccess) {
         return formConfig.commonSuccess

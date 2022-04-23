@@ -3,8 +3,6 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
-import config from 'utils/config'
-import { removeFromLocalStorage } from 'utils/miscUtils'
 import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 
 
@@ -47,9 +45,6 @@ export function clearArticle(this: typeof articleManager) {
  */
 export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
     if (!articleId) return
-
-    // Удалить данные про id открытой статьи из LocalStorage
-    removeFromLocalStorage(config.ls.editArticleId)
 
     // Очистить редактор от этой статьи
     this.clearArticle()

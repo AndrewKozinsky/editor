@@ -1,7 +1,5 @@
 import articleActions from 'store/article/articleActions'
-import { store } from 'store/rootReducer'
 import articleManager from '../../articleManager/articleManager'
-import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import { getState } from 'utils/miscUtils'
 import EventDataTypes from '../EventDataTypes'
 import selectedItemUniversalWrapFn, { BottomBtnCallbackType } from './selectedItemUniversalWrapFn'

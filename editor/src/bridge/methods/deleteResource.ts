@@ -5,8 +5,7 @@ import { deleteItem } from 'libs/DragFilesTree/StoreManage/manageState'
 import deleteArticleRequest from 'requests/editor/article/deleteArticleRequest'
 import deleteComponentRequest from 'requests/editor/components/deleteComponentRequest'
 import { store } from 'store/rootReducer'
-import config from 'utils/config'
-import { getState, setInLocalStorage } from 'utils/miscUtils'
+import { getState } from 'utils/miscUtils'
 import sitesActions from 'store/site/sitesActions'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/FoldersList/types'
@@ -116,14 +115,16 @@ function setFoldersInStore(category: FolderType, updatedFolders2: DragFilesTreeT
 
 // TODO Что делает эта функция?
 function clearDataFromStore(category: FolderType) {
+    const { currentSiteId } = getState().sites
+
     // Обнулить данные выделенного элемента в Хранилище
     if (category === 'components') {
         // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( sitesActions.setCurrentComp(null, null) )
+        store.dispatch( sitesActions.setCurrentCompOuter(currentSiteId, null, null) )
     }
     else if (category === 'articles') {
         // Убрать id выделенной папки или файла из Хранилища
-        store.dispatch( sitesActions.setCurrentArt(null, null) )
+        store.dispatch( sitesActions.setCurrentArtOuter(currentSiteId, null, null) )
     }
 }
 
@@ -140,10 +141,10 @@ function setOpenedFoldersIdInLS(
 
     // Поставить новый массив открытых папок в LocalStorage
     if (category === 'components') {
-        setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
+        // setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
     }
     else if (category === 'articles') {
-        setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
+        // setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
     }
 }
 

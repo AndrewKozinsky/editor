@@ -18,7 +18,7 @@ export function useCloseArticle() {
         if (isArticleSaved) {
             // Clear an article data in Store
             store.dispatch( articleActions.clearArticle() )
-            store.dispatch( actions.settings.setMainTab(0) )
+            store.dispatch( actions.settings.setMainTabOuter(0) )
         }
         else {
             // Show confirmation modal

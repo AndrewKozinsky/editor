@@ -1,6 +1,5 @@
 import React, { ReactElement, ReactNode, RefObject } from 'react'
 import makeClasses from './NameSection-classes'
-import {MiscTypes} from '../../../types/miscTypes'
 
 
 type NameSectionPropType = {

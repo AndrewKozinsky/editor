@@ -38,8 +38,10 @@ const deleteMetaTemplateModalConfig: FCType.Config = {
             // Скачать новый список шаблонов метаданных сайта и поставить в Хранилище
             store.dispatch(sitesActions.requestMetaTemplates())
 
+            const { currentSiteId } = getState().sites
+
             // Обнулить id выбранного шаблона метаданных сайта
-            store.dispatch(sitesActions.setCurrentMetaTemplateId(null))
+            store.dispatch(sitesActions.setCurrentMetaTemplateIdOuter(currentSiteId, null))
         }
     },
 }

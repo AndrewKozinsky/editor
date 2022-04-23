@@ -6,8 +6,7 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
-import { getFromLocalStorage, getState, setInLocalStorage } from 'utils/miscUtils'
-import config from 'utils/config'
+import { getState } from 'utils/miscUtils'
 import DragFilesTreeType from 'src/libs/DragFilesTree/types'
 import bridge from '../../../bridge/bridge'
 import StoreSitesTypes from 'store/site/sitesTypes'
@@ -16,7 +15,7 @@ import FilesTreeType from 'types/FilesTreeType'
 import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
 import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
 import {selectItem} from '../../../libs/DragFilesTree/StoreManage/manageState'
-import { store } from '../../../store/rootReducer'
+import { store } from 'store/rootReducer'
 
 
 /**
@@ -189,7 +188,7 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
 
         const addedCompId = serverResponse.data.components[0].id
         // Выделить добавленный компонент
-        store.dispatch(sitesActions.setCurrentComp(addedCompId, 'file'))
+        store.dispatch(sitesActions.setCurrentCompOuter(currentSiteId, addedCompId, 'file'))
 
         return addedCompId
     }
@@ -203,7 +202,7 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
 
         const addedArtId = serverResponse.data.articles[0].id
         // Выделить добавленную статью
-        store.dispatch(sitesActions.setCurrentArt(addedArtId, 'file'))
+        store.dispatch(sitesActions.setCurrentArtOuter(currentSiteId, addedArtId, 'file'))
 
         return addedArtId
     }
@@ -224,10 +223,10 @@ export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.I
     const ids = JSON.stringify(idArr)
 
     if (type === 'components') {
-        setInLocalStorage(config.ls.editorCompOpenedFolders, ids)
+        // setInLocalStorage(config.ls.editorCompOpenedFolders, ids)
     }
     else {
-        setInLocalStorage(config.ls.editorArtOpenedFolders, ids)
+        // setInLocalStorage(config.ls.editorArtOpenedFolders, ids)
     }
 }
 
@@ -235,10 +234,10 @@ export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.I
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersIds(type: FolderType) {
     if (type === 'components') {
-        return getFromLocalStorage(config.ls.editorCompOpenedFolders)
+        // return getFromLocalStorage(config.ls.editorCompOpenedFolders)
     }
     else if (type === 'articles') {
-        return getFromLocalStorage(config.ls.editorArtOpenedFolders)
+        // return getFromLocalStorage(config.ls.editorArtOpenedFolders)
     }
 }
 
@@ -248,11 +247,13 @@ export function useGetOnItemClick(type: FolderType) {
 
     // Поставить id элемента и его тип (папка или файл) в качестве выбранного элемента
     return useCallback(function (item: FilesTreeType.Item) {
+        const { currentSiteId } = getState().sites
+
         if (type === 'components') {
-            dispatch(sitesActions.setCurrentComp(item.id, item.type))
+            dispatch(sitesActions.setCurrentCompOuter(currentSiteId, item.id, item.type))
         }
         else if (type === 'articles') {
-            dispatch(sitesActions.setCurrentArt(item.id, item.type))
+            dispatch(sitesActions.setCurrentArtOuter(currentSiteId, item.id, item.type))
         }
     }, [dispatch])
 }
