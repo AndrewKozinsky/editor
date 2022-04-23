@@ -9,7 +9,6 @@ import selectedItemUniversalWrapFn, { BottomBtnCallbackType } from './selectedIt
  * @param {Object} stepConfig — конфигурация шага
  */
 export function deleteSelectedItemIfAllow(stepConfig: EventDataTypes.deleteSelectedItem) {
-
     const { history, historyCurrentIdx } = getState().article
     const historyItem = history[historyCurrentIdx]
 
@@ -41,7 +40,6 @@ export const deleteSelectedItem: BottomBtnCallbackType = (
     tempComps,
     fireEventArg
 ) => {
-
     // Убрать выделение с этого компонента потому что его хотят удалить
     dispatch(articleActions.setFlashedElement(
         'select', null, null, null

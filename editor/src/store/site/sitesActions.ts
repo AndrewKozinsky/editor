@@ -1,5 +1,3 @@
-import StoreSettingsTypes from '../settings/settingsTypes'
-
 const JSON5 = require('json5')
 import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
 import getMetaTemplateRequest from '../../requests/editor/metaTemplate/getMetaTemplateRequest'
@@ -17,6 +15,8 @@ import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import ArticleTypes from '../article/codeType/articleCodeType'
 import getMetaTemplatesRequest from '../../requests/editor/metaTemplate/getMetaTemplatesRequest'
 import permanentDataActions from '../permanentData/permanentDataActions'
+import { getState } from '../../utils/miscUtils'
+import { addOpenPropToFolders, selectItem } from '../../libs/DragFilesTree/StoreManage/manageState'
 
 
 const sitesActions = {
@@ -231,8 +231,10 @@ const sitesActions = {
     // ПАПКИ С КОМПОНЕНТАМИ ==================================================================================
 
     requestCompFolder() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+        return async function (dispatch: MiscTypes.AppDispatch, getStateThis: MiscTypes.GetState) {
             const { currentSiteId } = getState().sites
+
+            if (typeof currentSiteId !== 'number') return
 
             // Запрос к серверу на получение кода папки с компонентами
             const response = await getCompFolderRequest(currentSiteId)
@@ -244,16 +246,17 @@ const sitesActions = {
             // Если есть папки
             if (foldersData && foldersData.content) {
                 // Получить id открытых папок
-                // const openedFoldersIds = getOpenedFoldersIds('components')
-                /*if (openedFoldersIds) {
+                const openedFoldersIds = getOpenedFoldersIds('components')
+                if (openedFoldersIds) {
                     // Открыть папки id которых перечислены в openedFoldersIds
+                    //@ts-ignore
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
-                }*/
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorComponentId = getFromLocalStorage(config.ls.editorComponentId)
+                const editorComponentId = getState().sites.componentSection.currentCompItemId
                 // Выделить элемент, который должен быть выделен
-                // foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
+                foldersData.content = selectItem(foldersData.content, editorComponentId).newItems
             }
 
             // Установка папки с компонентами в Хранилище
@@ -275,8 +278,10 @@ const sitesActions = {
     // ПАПКИ СО СТАТЬЯМИ ==================================================================================
 
     requestArtFolder() {
-        return async function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+        return async function (dispatch: MiscTypes.AppDispatch, getStateThis: MiscTypes.GetState) {
             const { currentSiteId } = getState().sites
+
+            if (typeof currentSiteId !== 'number') return
 
             // Запрос к серверу на получение кода папки со статьями
             const response = await getArtFolderRequest(currentSiteId)
@@ -286,14 +291,15 @@ const sitesActions = {
 
             if (foldersData && foldersData.content) {
                 const openedFoldersIds = getOpenedFoldersIds('articles')
-                /*if (openedFoldersIds) {
+                if (openedFoldersIds) {
+                    //@ts-ignore
                     foldersData.content = addOpenPropToFolders(foldersData.content, openedFoldersIds)
-                }*/
+                }
 
                 // id последней выбранной папки или компонента из LocalStorage
-                // const editorArticleId = getFromLocalStorage(config.ls.editorArticleId)
+                const editorArticleId = getState().sites.articleSection.currentArtItemId
                 // Выделить элемент, который должен быть выделен
-                // foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
+                foldersData.content = selectItem(foldersData.content, editorArticleId).newItems
             }
 
             // Установка папки с компонентами в Хранилище

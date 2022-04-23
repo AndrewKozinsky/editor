@@ -16,6 +16,7 @@ import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
 import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
 import {selectItem} from '../../../libs/DragFilesTree/StoreManage/manageState'
 import { store } from 'store/rootReducer'
+import permanentDataActions from '../../../store/permanentData/permanentDataActions'
 
 
 /**
@@ -213,31 +214,42 @@ export async function afterAddingNewFile(type: FolderType, newArticleName?: stri
 
 /**
  * Функция запускаемая после раскрытия/скрытия любой папки.
- * После этого массив id открытых папок записывается в localstorage
+ * После этого массив id открытых папок записывается в Хранилище чтобы потом записаться в LocalStorage
  * чтобы при следующем запуске страницы эти папки бы отрисовывались открытыми.
  * @param {String} type — тип папок: с компонентами или со статьями
  * @param {Array} idArr — массив id раскрытых папок
  */
 export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.ItemIdArr) {
-    // Массив id открытых папок
-    const ids = JSON.stringify(idArr)
+    const { currentSiteId } = getState().sites
 
     if (type === 'components') {
-        // setInLocalStorage(config.ls.editorCompOpenedFolders, ids)
+        store.dispatch(
+            permanentDataActions.setGroup(
+                {groupId: currentSiteId, propName: 'compOpenedFolders', propValue: idArr}
+            )
+        )
     }
     else {
-        // setInLocalStorage(config.ls.editorArtOpenedFolders, ids)
+        store.dispatch(
+            permanentDataActions.setGroup(
+                {groupId: currentSiteId, propName: 'artOpenedFolders', propValue: idArr}
+            )
+        )
     }
 }
 
-/** Функция получает из localStorage id открытых папок и возвращает
+/** Функция получает из Хранилища ids открытых папок и возвращает
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersIds(type: FolderType) {
+    const { currentSiteId } = getState().sites
+    const { groups } = getState().permanentData
+    const groupSettings =  groups.find(group => group.groupId === currentSiteId)
+
     if (type === 'components') {
-        // return getFromLocalStorage(config.ls.editorCompOpenedFolders)
+        return groupSettings.compOpenedFolders
     }
     else if (type === 'articles') {
-        // return getFromLocalStorage(config.ls.editorArtOpenedFolders)
+        return groupSettings.artOpenedFolders
     }
 }
 

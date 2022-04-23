@@ -3,7 +3,7 @@ import {
     PressedKeysObj
 } from 'utils/getPressedKeys'
 import {getState} from 'utils/miscUtils'
-import fireEvent from '../../../../events/fireEvent'
+import fireEvent from '../../../../event/fireEvent'
 
 
 /**
@@ -48,20 +48,27 @@ export function deleteSelectedItem(e: KeyboardEvent, pressedKeys: PressedKeysObj
 
     const { selectedElem } = historyItem
 
-    // Удалить текстовый компонент можно только если нажать 4 клавиши
-    if (['textComponent', 'element', 'rootElement'].includes(selectedElem.tagType)) {
-        if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'backspace'])) {
+    if (['element', 'rootElement'].includes(selectedElem.tagType)) {
+        if (checkPressedKeys(pressedKeys, ['backspace'])) {
+            allowDeleting = true
+        }
+        else if (checkPressedKeys(pressedKeys, ['delete'])) {
+            allowDeleting = true
+        }
+        else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'backspace'])) {
             allowDeleting = true
         }
         else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'delete'])) {
             allowDeleting = true
         }
     }
-    else if (['element', 'rootElement'].includes(selectedElem.tagType)) {
-        if (checkPressedKeys(pressedKeys, ['backspace'])) {
+
+    // Удалить текстовый компонент можно только если нажать 4 клавиши
+    else if (selectedElem.tagType === 'textComponent') {
+        if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'backspace'])) {
             allowDeleting = true
         }
-        else if (checkPressedKeys(pressedKeys, ['delete'])) {
+        else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'delete'])) {
             allowDeleting = true
         }
     }

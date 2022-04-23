@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import fireEvent from '../../../../events/fireEvent'
+import fireEvent from '../../../../event/fireEvent'
 
 /**
  * The hook checks if I can make undo or redo history step

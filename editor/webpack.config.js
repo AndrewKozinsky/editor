@@ -76,19 +76,20 @@ function getResolve() {
         extensions: ['.tsx', '.ts', '.jsx', '.js', '.png', '.woff2'],
         modules: ['node_modules'],
         alias: {
-            src: path.resolve(__dirname, './src/'),
+            src:      path.resolve(__dirname, './src/'),
             articleManager: path.resolve(__dirname, './src/articleManager'),
-            common: path.resolve(__dirname, './src/common'),
-            editor: path.resolve(__dirname, './src/editor'),
+            common:   path.resolve(__dirname, './src/common'),
+            editor:   path.resolve(__dirname, './src/editor'),
             entrance: path.resolve(__dirname, './src/entrance'),
-            libs: path.resolve(__dirname, './src/libs'),
+            libs:     path.resolve(__dirname, './src/libs'),
             messages: path.resolve(__dirname, './src/messages'),
-            modules: path.resolve(__dirname, './src/modules'),
-            pages: path.resolve(__dirname, './src/pages'),
+            modules:  path.resolve(__dirname, './src/modules'),
+            pages:    path.resolve(__dirname, './src/pages'),
             requests: path.resolve(__dirname, './src/requests'),
-            store: path.resolve(__dirname, './src/store'),
-            types: path.resolve(__dirname, './src/types'),
-            utils: path.resolve(__dirname, './src/utils')
+            store:    path.resolve(__dirname, './src/store'),
+            types:    path.resolve(__dirname, './src/types'),
+            utils:    path.resolve(__dirname, './src/utils'),
+            event:    path.resolve(__dirname, './src/event'),
         }
     }
 }
@@ -112,7 +113,7 @@ function getDevServerSettings() {
 function getPlugins(isDev) {
     if (isDev) {
         return [
-            // Очиста папки с компилированными файлами перед помещением других
+            // Очистка папки с компилированными файлами перед помещением других
             new CleanWebpackPlugin(),
             // Формирование index.html
             new HtmlWebpackPlugin(getHtmlConfig())

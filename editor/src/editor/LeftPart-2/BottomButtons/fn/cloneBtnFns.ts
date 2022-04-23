@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import { CloneFnOptsType } from 'articleManager/methods/clone'
-import fireEvent from '../../../../events/fireEvent'
+import fireEvent from '../../../../event/fireEvent'
 
 /** Хук возвращает булево значение заблокирована ли кнопка «Копировать элемент» */
 export function useIsCloneDisabled() {
