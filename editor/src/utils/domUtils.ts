@@ -6,8 +6,12 @@ import articleManager from '../articleManager/articleManager'
  * @param {Object} event — объект события
  */
 export function isCtrlPressed(event: React.MouseEvent | KeyboardEvent) {
-    const isMac = navigator.platform.startsWith('Mac')
+    const isMac = isMacOS()
     return !isMac && event.ctrlKey || isMac && event.metaKey
+}
+
+export function isMacOS() {
+    return navigator.platform.startsWith('Mac')
 }
 
 /**

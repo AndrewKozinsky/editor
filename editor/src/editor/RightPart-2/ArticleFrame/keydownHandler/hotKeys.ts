@@ -166,22 +166,24 @@ export function upDownSelectedItem(e: KeyboardEvent, pressedKeys: PressedKeysObj
 
     const { selectedElem } = historyItem
 
-    if (['textComponent', 'element', 'rootElement'].includes(selectedElem.tagType)) {
-        if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'arrowUp'])) {
-            allowMoving = true
-            direction = 'up'
-        }
-        else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'arrowDown'])) {
-            allowMoving = true
-            direction = 'down'
-        }
-    }
-    else if (['element', 'rootElement'].includes(selectedElem.tagType)) {
+    if (['element', 'rootElement'].includes(selectedElem.tagType)) {
         if (checkPressedKeys(pressedKeys, ['cmd', 'arrowUp'])) {
             allowMoving = true
             direction = 'up'
         }
         else if (checkPressedKeys(pressedKeys, ['cmd', 'arrowDown'])) {
+            allowMoving = true
+            direction = 'down'
+        }
+    }
+
+    // Удалить текстовый компонент можно только если нажать 4 клавиши
+    else if (selectedElem.tagType === 'textComponent') {
+        if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'arrowUp'])) {
+            allowMoving = true
+            direction = 'up'
+        }
+        else if (checkPressedKeys(pressedKeys, ['shift', 'alt', 'cmd', 'arrowDown'])) {
             allowMoving = true
             direction = 'down'
         }

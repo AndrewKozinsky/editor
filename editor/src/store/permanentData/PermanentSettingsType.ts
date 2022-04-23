@@ -1,7 +1,7 @@
-// Тип данных настроек сохраняемых в LocalStorage
 import StoreSettingsTypes from '../settings/settingsTypes'
 import StoreSitesTypes from '../site/sitesTypes'
 
+// Тип данных настроек сохраняемых в LocalStorage
 export type PermanentSettingsType = {
     common: PermanentSettingsCommonType
     groups: PermanentSettingsGroupType[]
@@ -10,13 +10,12 @@ export type PermanentSettingsType = {
 
 // Тип данных группы
 export type PermanentSettingsCommonType = {
-    language: 'rus' | 'eng'  // Язык редактора
-    theme: StoreSettingsTypes.EditorTheme, // Тема интерфейса
-    mainTab: StoreSettingsTypes.MainTab,  // Номер активной главной вкладки
-    groupPartTab: StoreSitesTypes.RightMainTab, // Номер активной вкладки в Группе
-    settingsTab: StoreSettingsTypes.SettingsPanelTab,      // id активной вкладки в Настройках
-    helpTab: 'reg',              // Номер активной вкладки в Помощи (ПОЗЖЕ ЭТО ПЕРЕСМОТРИ!!!)
-    groupId: StoreSitesTypes.CurrentSiteId,  // id текущей группы
+    theme: StoreSettingsTypes.EditorTheme // Тема интерфейса
+    mainTab: StoreSettingsTypes.MainTab  // Номер активной главной вкладки
+    groupPartTab: StoreSitesTypes.RightMainTab // Номер активной вкладки в Группе
+    settingsTab: StoreSettingsTypes.SettingsPanelTab      // id активной вкладки в Настройках
+    helpTab: 'reg'              // Номер активной вкладки в Помощи (ПОЗЖЕ ЭТО ПЕРЕСМОТРИ!!!)
+    groupId: StoreSitesTypes.CurrentSiteId  // id текущей группы
 }
 
 // Тип данных группы

@@ -6,6 +6,24 @@ import permanentDataActions from '../permanentData/permanentDataActions'
 const settingsActions = {
 
     // Установка темы интерфейса (обёрточный экшен)
+    setEditorLangOuter(editorLang: StoreSettingsTypes.EditorLang) {
+        return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
+            // Поставить название темы интерфейса в Store.permanentData чтобы это сохранилось в LocalStorage
+            dispatch( permanentDataActions.setCommon({propName: 'language', propValue: editorLang }))
+            // Установка темы интерфейса
+            dispatch( settingsActions.setEditorLang( editorLang ))
+        }
+    },
+
+    // Установка темы интерфейса
+    setEditorLang(payload: StoreSettingsTypes.EditorLang): StoreSettingsTypes.SetEditorLangAction {
+        return {
+            type: StoreSettingsTypes.SETTINGS_SET_EDITOR_LANG,
+            payload
+        }
+    },
+
+    // Установка темы интерфейса (обёрточный экшен)
     setEditorThemeOuter(editorTheme: StoreSettingsTypes.EditorTheme) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
             // Поставить название темы интерфейса в Store.permanentData чтобы это сохранилось в LocalStorage

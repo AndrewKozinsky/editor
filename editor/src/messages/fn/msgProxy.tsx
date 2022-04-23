@@ -1,21 +1,23 @@
-import { ReactElement, ReactNode } from 'react'
-
-export type LangOptions = 'eng' | 'rus'
+import StoreSettingsTypes from 'store/settings/settingsTypes'
+import {setInLocalStorage} from '../../utils/miscUtils'
 
 type MessagesObjType = {
     [key: string]: {
-        [key in LangOptions]: any
+        [key in StoreSettingsTypes.EditorLang]: any
     }
 }
 
 type MsgType<MgsOrig extends MessagesObjType> = {
-    [Prop in keyof MgsOrig]: MgsOrig[Prop][LangOptions];
+    [Prop in keyof MgsOrig]: MgsOrig[Prop][StoreSettingsTypes.EditorLang];
 }
 
 function getMsgProxy<T extends MessagesObjType>(mgsOrigObj: T): MsgType<T>  {
-    const lsLang = localStorage.getItem('editorLanguage') as LangOptions
-    let lang = ['eng', 'rus'].includes(lsLang)
-        ? lsLang : 'eng'
+    let lang = localStorage.getItem('editorLanguage') as StoreSettingsTypes.EditorLang
+
+    if (!(['eng', 'rus'].includes(lang))) {
+        lang = 'rus'
+        setInLocalStorage('editorLanguage', 'rus')
+    }
 
     return new Proxy(mgsOrigObj, {
         get(target: T, prop: string) {

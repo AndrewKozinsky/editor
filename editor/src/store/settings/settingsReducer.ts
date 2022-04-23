@@ -1,6 +1,7 @@
 import StoreSettingsTypes from './settingsTypes'
 
 export type SettingsReducerType = {
+    editorLang: StoreSettingsTypes.EditorLang
     editorTheme: StoreSettingsTypes.EditorTheme
     entryAndEditorViewState: StoreSettingsTypes.EntryAndEditorViewState
     lastAddress: string
@@ -10,11 +11,13 @@ export type SettingsReducerType = {
 
 // Изначальные значения
 const initialState: SettingsReducerType = {
+    // Язык интерфейса
+    editorLang: 'rus',
     // Тема интерфейса: light или dark
     editorTheme: 'light',
     // Компоненты форм входа и редактор всегда отрисовываются.
     // Эта настройка задаёт какой компонент должен при отрисовке возвращать null.
-    // Что должно быть быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
+    // Что должно быть показано: формы входа (entry), плавный переход к формам входа (toEntry),
     // плавный пехоход к редактору (toEditor), редактор(editor)
     entryAndEditorViewState: null,
     // Адрес последней страницы на которой был пользователь. Отсчёт ведётся от страницы редактора. Напр.: /enter
@@ -24,6 +27,14 @@ const initialState: SettingsReducerType = {
     mainTab: 0,
     // Активная вкладка панели «Настройки»: user или editor
     settingsPanelTab: 'user'
+}
+
+// Установка языка интерфейса
+function setEditorLang(state: SettingsReducerType, action: StoreSettingsTypes.SetEditorLangAction): SettingsReducerType {
+    return {
+        ...state,
+        editorLang: action.payload
+    }
 }
 
 // Установка темы интерфейса
@@ -73,6 +84,8 @@ function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTy
 export default function settingsReducer(state = initialState, action: StoreSettingsTypes.SettingsAction): SettingsReducerType {
 
     switch (action.type) {
+        case StoreSettingsTypes.SETTINGS_SET_EDITOR_LANG:
+            return setEditorLang(state, action)
         case StoreSettingsTypes.SETTINGS_SET_EDITOR_THEME:
             return setEditorTheme(state, action)
         case StoreSettingsTypes.SETTINGS_SET_ENTRY_AND_EDITOR_VIEW_STATE:

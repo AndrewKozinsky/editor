@@ -9,6 +9,7 @@ import { getState } from 'utils/miscUtils'
 import sitesActions from 'store/site/sitesActions'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/FoldersList/types'
+import permanentDataActions from '../../store/permanentData/permanentDataActions'
 
 /**
  * Функция делает действия при удалении папки статей/компонентов или статью/компонент
@@ -128,23 +129,38 @@ function clearDataFromStore(category: FolderType) {
     }
 }
 
-// TODO Что делает эта функция?
+/**
+ * Функция сохраняет идентификаторы открытых папок в Хранилище чтобы затем сохранить в LocalStorage
+ * @param {String} category — категория: компоненты или статьи
+ * @param {String} type — тип: папка или файл
+ * @param {Array} updatedFolders — массив папок и файлов
+ */
 function setOpenedFoldersIdInLS(
     category: FolderType,
     type: 'file' | 'folder',
-    updatedFolders2: DragFilesTreeType.Items
+    updatedFolders: DragFilesTreeType.Items
 ) {
     if (type == 'file') return
 
+    const { currentSiteId } = getState().sites
+
     // Массив id открытых папок в LocalStorage
-    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(updatedFolders2)
+    const openedFoldersId = filesTreePublicMethods.getOpenedFoldersId(updatedFolders)
 
     // Поставить новый массив открытых папок в LocalStorage
     if (category === 'components') {
-        // setInLocalStorage(config.ls.editorCompOpenedFolders, openedFoldersId)
+        store.dispatch(
+            permanentDataActions.setGroup(
+                {groupId: currentSiteId, propName: 'compOpenedFolders', propValue: openedFoldersId}
+            )
+        )
     }
     else if (category === 'articles') {
-        // setInLocalStorage(config.ls.editorArtOpenedFolders, openedFoldersId)
+        store.dispatch(
+            permanentDataActions.setGroup(
+                {groupId: currentSiteId, propName: 'artOpenedFolders', propValue: openedFoldersId}
+            )
+        )
     }
 }
 

@@ -13,8 +13,17 @@ namespace StoreSettingsTypes {
     export type MainTab = number // 0 | 1 | 2
     // Активная вкладка панели «Настройки»: user или editor
     export type SettingsPanelTab = 'user' | 'editor'
+    // Язык интерфейса
+    export type EditorLang = 'rus' | 'eng'
 
     // Типы типа и тип экшена
+
+    // Установка темы интерфейса
+    export const SETTINGS_SET_EDITOR_LANG = 'SETTINGS_SET_EDITOR_LANG'
+    export type SetEditorLangAction = {
+        type: typeof SETTINGS_SET_EDITOR_LANG
+        payload: EditorLang
+    }
 
     // Установка темы интерфейса
     export const SETTINGS_SET_EDITOR_THEME = 'SETTINGS_SET_EDITOR_THEME'
@@ -53,6 +62,7 @@ namespace StoreSettingsTypes {
 
 
     export type SettingsAction =
+        | SetEditorLangAction
         | SetEditorThemeAction
         | SetEntryAndEditorViewStateAction
         | SetLastAddressAction
