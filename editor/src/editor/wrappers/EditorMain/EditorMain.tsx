@@ -4,7 +4,7 @@ import { useGetPageVisibility } from './EditorMain-func'
 import EditorPartProvider from 'editor/special/EditorPartProvider/EditorPartProvider'
 import SectionsTabs from 'editor/special/SectionsTabs/SectionsTabs'
 import Modal from 'common/modalEntities/Modal/Modal'
-import withErrorCatcher from '../../../common/ErrorCatcher/ErrorCatcher'
+import withErrorCatcher from 'common/ErrorCatcher/ErrorCatcher'
 
 
 /** Главная страница редактора. */

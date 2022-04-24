@@ -2,9 +2,7 @@ import {MiscTypes} from '../../types/miscTypes'
 import StoreArticleTypes from 'store/article/articleTypes'
 import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import {store} from 'store/rootReducer'
-import {
-    resizeFlashedElemsHandler,
-} from 'editor/RightPart-2/ArticleFrame/flashElements/useResizeFlashRects'
+import { resizeFlashedElemsHandler } from 'editor/RightPart-2/ArticleFrame/flashElements/useResizeFlashRects'
 import {updateDataInTextComp} from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import {getState} from 'utils/miscUtils'
 import {FireDataEventArg} from '../EventDataTypes'

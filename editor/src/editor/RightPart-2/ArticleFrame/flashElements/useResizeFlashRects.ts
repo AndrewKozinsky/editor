@@ -85,6 +85,12 @@ function getCalcRectCoords(
         if (!$selectRect) {
             $selectRect = $links.$body.querySelector('[data-em-select-rect]') as HTMLElement
         }
+        if (!$moveHoverRect) {
+            $moveHoverRect = $links.$body.querySelector('[data-em-move-hover-rect]') as HTMLElement
+        }
+        if (!$moveSelectRect) {
+            $moveSelectRect = $links.$body.querySelector('[data-em-move-select-rect]') as HTMLElement
+        }
 
         const rects: {type: FlashRectType, $rect: HTMLElement}[]  = [
             { type: 'hover', $rect: $hoverRect },

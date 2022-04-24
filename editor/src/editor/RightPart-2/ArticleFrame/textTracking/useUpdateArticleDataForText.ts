@@ -4,7 +4,7 @@ import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { getState } from 'utils/miscUtils'
 import { updateDataInTextComp } from './manageUpdatingDTextComp'
-import textManagerStore from '../../../../mobXStore/textManagerStore'
+import textManagerStore from './textManagerStore'
 import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import {useGetResizeHandler} from '../flashElements/useResizeFlashRects'
@@ -107,14 +107,23 @@ function textChangeHandler(e: any, resizeHandler: () => void) {
     if (e.type === 'paste') {
         e.preventDefault()
 
-        // Получить новый текст и
-        const newText = getPastedText(e)
+        // Получение объекта выделения
+        const { $window } = getState().article.$links
+        const selection = $window.getSelection()
 
-        // Вставить в textManagerStore
+        // Получить новый текст и новую позицию курсора
+        const { newText, newCursorPosition } = getPastedTextInfo(e, selection)
+
+        // Вставить новый текст в textManagerStore
         textManagerStore.setNewText(newText)
 
         // Поставить новый текст в данные и Реакт обновит текст компонента
         updateDataInTextComp('paste', $textComp)
+
+        // Поставить курсор на позицию, где он должен быть
+        setTimeout(() => {
+            selection.collapse($textComp.firstChild, newCursorPosition)
+        }, 10)
 
         setTimeout(resizeHandler, 10)
     }
@@ -140,21 +149,27 @@ function preventWrongKeys(e: any) {
 }
 
 /**
- * Функция возвращает текст, который должен быть после вставки другого текста
+ * Функция возвращает текст, который должен быть после вставки другого текста и новую позицию курсора
  * @param {Object} e — объект события
+ * @param {Object} selection — объект выделения
  */
-function getPastedText(e: any) {
+function getPastedTextInfo(e: any, selection: Selection) {
     //@ts-ignore
     // Вставляемый текст
     let paste = (e.clipboardData || window.clipboardData).getData('text')
 
     // Если в компоненте уже есть текст, то составить новую строку где будет совмещён существующий и новый текст
-    const { $window } = getState().article.$links
-    const selection = $window.getSelection()
     const { anchorOffset, focusOffset } = selection
 
-    const { newText } = textManagerStore
-    return newText.substring(0, anchorOffset) + paste + newText.substring(focusOffset)
+    const currentText = textManagerStore.newText
+
+    const newText = currentText.substring(0, anchorOffset) + paste + currentText.substring(focusOffset)
+    const newCursorPosition = anchorOffset + paste.length
+
+    return {
+        newText,
+        newCursorPosition
+    }
 }
 
 /** Функция создаёт новый объект истории чтобы в него писать данные текстового компонента. */

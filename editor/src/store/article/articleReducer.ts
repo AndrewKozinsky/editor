@@ -331,11 +331,19 @@ function createAndSetHistoryItem(
     }
 
     function createHistoryArr() {
-        const historyArrCopy =  [...state.history]
-        // Уменьшить длину массива до текущего значения,
-        // то есть если сделали несколько шагов назад и затем создали новый объект истории,
-        // то все шаги дальше будут удалены.
-        historyArrCopy.length = state.historyCurrentIdx + 1
+        let historyArrCopy =  [...state.history]
+
+        // Ограничить количество хранимых элементов в истории
+        if (historyArrCopy.length > 100) {
+            historyArrCopy = historyArrCopy.slice(-100)
+        }
+
+        // Если указатель на текущий idx элемента в истории меньше длины массива,
+        // то значит сделали несколько шагов назад и затем создали новый объект истории,
+        // Поэтому нужно удалить элементы находящиеся после текущего idx
+        if (historyArrCopy.length > state.historyCurrentIdx) {
+            historyArrCopy.length = state.historyCurrentIdx + 1
+        }
 
         historyArrCopy.push(
             createHistoryItem()

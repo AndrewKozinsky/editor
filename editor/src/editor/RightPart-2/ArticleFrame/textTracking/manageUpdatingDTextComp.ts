@@ -3,7 +3,7 @@ import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import { getState } from 'utils/miscUtils'
-import textManagerStore from '../../../../mobXStore/textManagerStore'
+import textManagerStore from './textManagerStore'
 
 
 /**
@@ -27,7 +27,9 @@ export function updateDataInTextComp(
 
     // Получение данных текстового компонента
     const currentHistoryItem = articleManager.getCurrentHistoryItem()
-    const dTextComp = articleManager.getComponent(currentHistoryItem.article.dComps, textManagerStore.textCompId) as ArticleTypes.SimpleTextComponent
+    const dTextComp = articleManager.getComponent(
+        currentHistoryItem.article.dComps, textManagerStore.textCompId
+    ) as ArticleTypes.SimpleTextComponent
 
     let newText = textManagerStore.newText
 
@@ -48,6 +50,7 @@ export function updateDataInTextComp(
         textManagerStore.setInitialText(newText)
         textManagerStore.setNewHistoryItemCreated(false)
 
+        // Если создали новый компонент и затем вставили текст, то там нет текстового узла, поэтому создать
         if (!$textComp.firstChild) {
             const newTextNode = document.createTextNode('')
             $textComp.appendChild(newTextNode)
