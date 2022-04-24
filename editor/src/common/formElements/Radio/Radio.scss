@@ -9,21 +9,30 @@ $CN: radio;
     opacity: 0;
 }
 
-// Вид label в зависимости от размера
-.#{$CN}-label {
+// Обёртка подписи
+.#{$CN}-label-wrapper {
     position: relative;
     display: block;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
     user-select: none;
     cursor: pointer;
     transition: opacity .3s;
     margin-left: 19px;
+
+    &:hover {
+        .#{$CN}__gray-text {
+            opacity: .7;
+        }
+    }
+}
+.#{$CN}-label {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
 }
 
 // Общие стили псевдофлагов
-.#{$CN}-label {
-    &:before, &:after {
+.#{$CN}-label-wrapper {
+    &::before, &::after {
         content: '';
         position: absolute;
         border-radius: 50%;
@@ -49,13 +58,13 @@ $CN: radio;
 }
 
 // Неотмеченный before
-.#{$CN}-input:not(checked) + .#{$CN}-label {
+.#{$CN}-input:not(:checked) + .#{$CN}-label-wrapper {
     &::before {
         background-color: var(--button-color-hover);
     }
 }
 // Отмеченный before
-.#{$CN}-input:checked + .#{$CN}-label {
+.#{$CN}-input:checked + .#{$CN}-label-wrapper {
     &::before {
         background-color: var(--accent-color);
     }
@@ -66,13 +75,13 @@ $CN: radio;
 }
 
 // Фокусировка
-.#{$CN}-input:focus + .#{$CN}-label:before {
+.#{$CN}-input:focus + .#{$CN}-label-wrapper::before {
     // Стандартная фокусировка
     @include focus
 }
 
 // Заблокированное поле
-.#{$CN}-input:disabled + .#{$CN}-label {
+.#{$CN}-input:disabled + .#{$CN}-label-wrapper {
     opacity: .5;
 }
 
@@ -83,5 +92,5 @@ $CN: radio;
     font-weight: normal;
     overflow-wrap: anywhere;
     opacity: .5;
-    padding: 0 0 0 20px;
+    transition: opacity .1s;
 }

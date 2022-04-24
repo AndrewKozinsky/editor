@@ -64,7 +64,7 @@ import {
     isArticleSave,
     canDeleteElem,
     canMoveItemToUpOrDown,
-    canClone,
+    canClone, canTagInsertInAnotherTag
 //     isElemIsRootByDElem,
 //     isParentElemHidden,
 //     hasItemAnotherItem,
@@ -159,6 +159,8 @@ class ArticleManager {
     // isParentElemHidden = isParentElemHidden
     // Имеет ли компонент/элемент внутри другой компонент/элемент
     // hasItemAnotherItem = hasItemAnotherItem
+    // Можно ли один тег ставить в другой
+    canTagInsertInAnotherTag = canTagInsertInAnotherTag
 
     // CREATE
     createArticle = createArticle

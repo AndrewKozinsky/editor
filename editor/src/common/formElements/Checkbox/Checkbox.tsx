@@ -50,16 +50,18 @@ export default function Checkbox(props: CheckboxPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: MiscTypes.ObjStringKey<any> = {
+    const labelWrapperAttribs: MiscTypes.ObjStringKey<any> = {
         htmlFor: id,
-        className: 'checkbox-label',
+        className: 'checkbox-label-wrapper',
     }
 
     return (
         <div>
             <input {...inputAttribs} />
-            <label {...labelAttribs}>{label}</label>
-            {grayText && <p className='checkbox__gray-text'>{grayText}</p>}
+            <label {...labelWrapperAttribs}>
+                <span className='checkbox-label'>{label}</span>
+                {grayText && <p className='checkbox__gray-text'>{grayText}</p>}
+            </label>
         </div>
     )
 }

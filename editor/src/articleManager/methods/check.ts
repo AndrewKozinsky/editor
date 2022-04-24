@@ -2,6 +2,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
+import {getTagDisplayType} from '../../utils/domUtils'
 
 
 /**
@@ -57,8 +58,13 @@ export function canComponentPutInElement(
     // Если не выделен целевой элемент и перемещаемый компонент, то нельзя вставить перемещаемый компонент
     if (targetCompCoords.dataElemId === null || moveCompId === null) return false
 
-    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
+    // Перемещаемый компонент
     const movedDComp = this.getComponent(dComps, moveCompId)
+
+    // Нельзя если нет перемещаемого компонента
+    if (!movedDComp) return false
+
+    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
     if (movedDComp && movedDComp.dCompType === 'component') {
         // Найти выделенный элемент внутри перемещаемого
         if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
@@ -74,7 +80,10 @@ export function canComponentPutInElement(
 
     // Получение данных целевого элемента
     const targetDComp = this.getComponent(dComps, targetCompCoords.dataCompId)
+
+    // Нельзя помещать компонент в текстовый компонент
     if (targetDComp.dCompType === 'simpleTextComponent') return false
+
     const targetDElem = this.getDElemInDComp(targetDComp, targetCompCoords.dataElemId)
 
     // Если html-элемент имеет вложенные html-элементы, то туда нельзя вставить перемещаемый компонент
@@ -86,6 +95,20 @@ export function canComponentPutInElement(
     const elemTagName = $elem?.tagName?.toLowerCase()
     if (['img', 'br', 'hr', 'meta', 'input', 'option'].includes(elemTagName)) {
         return false
+    }
+
+    // Шаблон перемещаемого (или создаваемого) компонента
+    if (movedDComp.dCompType === 'component') {
+        // Получение перемещаемого элемента
+        const $moveRootElem = this.get$componentByTComps(tComps, movedDComp.tCompId)
+
+        // Названия тегов перемещаемого и целевого элементов
+        const moveElemTag = $moveRootElem.tagName
+        const targetElemTag = $elem.tagName
+
+        // Проверить разрешено ли перемещаемый тег перенести в целевой
+        const canTagInsertInAnotherTag = this.canTagInsertInAnotherTag(moveElemTag, targetElemTag)
+        if (!canTagInsertInAnotherTag) return false
     }
 
     // В остальных случаях перемещаемый компонент можно поместить в выделенный элемент
@@ -400,3 +423,22 @@ export function canClone(
 
     return false
 }*/
+
+
+/**
+ * Можно ли один тег ставить в другой
+ * @param {String} movedTag — имя вставляемого тега
+ * @param {String} targetTag — имя целевого тега
+ */
+export function canTagInsertInAnotherTag(
+    this: typeof articleManager, movedTag: string, targetTag: string,
+) {
+    const movedTagDisplayType = getTagDisplayType(movedTag)
+    const targetTagDisplayType = getTagDisplayType(targetTag)
+
+    if (['inline', 'inline-block'].includes(targetTagDisplayType) && movedTagDisplayType === 'block') {
+        return false
+    }
+
+    return true
+}

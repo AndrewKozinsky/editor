@@ -31,23 +31,25 @@ export function updateDataInTextComp(
         currentHistoryItem.article.dComps, textManagerStore.textCompId
     ) as ArticleTypes.SimpleTextComponent
 
-    let newText = textManagerStore.newText
 
-    // Поставить в данные текстового компонента новый текст чтобы Реакт поставил его в HTML.
-    // Создать новый объект истории со ссылкой на копию текстового компонента
-    const compsAndMaxCompId = articleManager.updateTextInComponent(
-        currentHistoryItem.article, dTextComp, newText
-    )
+    if (type === 'common' || type === 'paste') {
+        // Поставить в данные текстового компонента новый текст чтобы Реакт поставил его в HTML.
+        // Создать новый объект истории со ссылкой на копию текстового компонента
+        const compsAndMaxCompId = articleManager.updateTextInComponent(
+            currentHistoryItem.article, dTextComp, textManagerStore.newText
+        )
 
-    // Обновить текущий объект истории
-    store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
+        // Обновить текущий объект истории
+        store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
+    }
+
 
     if (type === 'common') {
 
     }
     else if (type === 'paste') {
         // Обновить textManagerStore
-        textManagerStore.setInitialText(newText)
+        textManagerStore.setInitialText(textManagerStore.newText)
         textManagerStore.setNewHistoryItemCreated(false)
 
         // Если создали новый компонент и затем вставили текст, то там нет текстового узла, поэтому создать
@@ -59,6 +61,11 @@ export function updateDataInTextComp(
         $textComp.firstChild.textContent = textManagerStore.newText
     }
     else if (type === 'history') {
+        let newText = dTextComp.text
 
+        $textComp.firstChild.textContent = newText
+
+        textManagerStore.newText = newText
+        textManagerStore.setNewHistoryItemCreated(false)
     }
 }

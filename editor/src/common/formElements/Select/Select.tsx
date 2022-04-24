@@ -37,6 +37,7 @@ export default function Select(props: SelectPropType) {
     // Находится ли выпадающий список под фокусом
     const [isFocus, setIsFocus] = useState(false)
 
+
     // id для связи подписи и поля ввода
     const [id] = useState(getRandomId())
 

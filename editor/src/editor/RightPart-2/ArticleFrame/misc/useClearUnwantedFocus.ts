@@ -1,6 +1,8 @@
 import { useEffect } from 'react'
 import articleManager from 'articleManager/articleManager'
 import useGetArticleSelectors from 'store/article/articleSelectors'
+import StoreArticleTypes from 'store/article/articleTypes'
+import {getState} from 'utils/miscUtils'
 
 /**
  * Функция убирает фокус если выделен не текстовый компонент.
@@ -23,4 +25,39 @@ export function useClearUnwantedFocus() {
             }, 0)
         }
     }, [flashedElems])
+}
+
+/** Хук ставит обработчик на щелчок по статье. Если в данных нет выделенных элементов, то фокус убирается. */
+export function useBlurAfterClickOnWhiteSpace() {
+    const { $links } = useGetArticleSelectors()
+
+    useEffect(function () {
+        if (!$links || !$links.$document) return
+
+        $links.$document.addEventListener('click', () => {
+            blurAfterClickOnWhiteSpace($links.$window, $links.$document)
+        })
+    }, [$links])
+}
+
+/**
+ * Обработчик щелчка по статье. Убирает фокус если в данных статьи нет выделенных элементов.
+ * @param {Window} $window — window статьи
+ * @param {Document} $document — document статьи
+ */
+function blurAfterClickOnWhiteSpace($window: StoreArticleTypes.WindowLink, $document: StoreArticleTypes.DocumentLink) {
+    const { history, historyCurrentIdx } = getState().article
+    const historyItem = history[historyCurrentIdx]
+    const { selectedElem } = historyItem
+
+    if (!selectedElem.tagType) {
+        // Убрать фокус
+        const activeElement = $document.activeElement as HTMLElement
+        activeElement.blur()
+
+        // Убрать выделение с текста
+        const { $window } = getState().article.$links
+        const selection = $window.getSelection()
+        selection.empty()
+    }
 }

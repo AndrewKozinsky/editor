@@ -7,7 +7,10 @@ import useResizeFlashRects from './flashElements/useResizeFlashRects'
 import { useSetRootDivToIFrame } from './init/useSetRootDivToIFrame'
 import useSetIFrameElemsLinks from './init/useSetIFrameElemsLinks'
 import useSetServiceStyleToIFrame from './init/useSetServiceStyleToIFrame'
-import { useClearUnwantedFocus } from './misc/useClearUnwantedFocus'
+import {
+    useBlurAfterClickOnWhiteSpace,
+    useClearUnwantedFocus
+} from './misc/useClearUnwantedFocus'
 import useSetArticleDataInStore from './setArticleData/useSetArticleDataInStore'
 import {
     useSetSiteTemplate,
@@ -47,8 +50,10 @@ export default function ArticleFrame() {
     // Запрет действия по умолчанию при щелчке по ссылке
     usePreventDefaultLinkBehavior()
 
-    // Хук убирает фокусировку с текста если не выбран текстовый компонент
+    // Хук убирает фокусировку с текста если выбран не текстовый компонент
     useClearUnwantedFocus()
+    // Хук убирает фокусировку и выделение текста после щелчка по статье если ничего не выбрано
+    useBlurAfterClickOnWhiteSpace()
     // Хук следит за изменением выделенного элемента и прокручивает список слоёв чтобы он был виден в панели
     useScrollToSelectedLayerAfterClick()
 

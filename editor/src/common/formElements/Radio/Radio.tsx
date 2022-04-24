@@ -47,16 +47,19 @@ export default function Radio(props: RadioPropType) {
     if (disabled) inputAttribs.disabled = true
 
     // Атрибуты label
-    const labelAttribs: MiscTypes.ObjStringKey<any> = {
+    const labelWrapperAttribs: MiscTypes.ObjStringKey<any> = {
         htmlFor: id,
-        className: 'radio-label',
+        className: 'radio-label-wrapper',
     }
 
     return (
         <div>
             <input {...inputAttribs} />
-            <label {...labelAttribs}>{label}</label>
-            {grayText && <p className='radio__gray-text'>{grayText}</p>}
+            <label {...labelWrapperAttribs}>
+                <span className='radio-label'>{label}</span>
+                {grayText && <p className='radio__gray-text'>{grayText}</p>}
+            </label>
+
         </div>
     )
 }

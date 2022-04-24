@@ -380,6 +380,7 @@ function updateCurrentHistoryItem(
 ): ArticleReducerType {
     const historyArr = [...state.history]
 
+
     const updatedCurrentHistoryItem = {...historyArr[state.historyCurrentIdx]}
     updatedCurrentHistoryItem.article.dComps = action.payload.components
     historyArr[state.historyCurrentIdx] = updatedCurrentHistoryItem
