@@ -1,10 +1,19 @@
 // Данные для различных событий
 namespace EventDataTypes {
+
+    // ПРОЧЕЕ
+
     // Сделать шаг вперёд или назад по истории
     export type makeHistoryStep = {
         event: 'makeHistoryStep',
         direction: 'undo' | 'redo'
     }
+    // Закрытие статьи
+    export type closeArticle = {
+        event: 'closeArticle'
+    }
+
+    // РАБОТА С ВЫДЕЛЕННЫМ ЭЛЕМЕНТОМ
 
     // Удаление выделенного компонента или элемента
     export type deleteSelectedItem = {
@@ -39,6 +48,7 @@ namespace EventDataTypes {
 
 export type FireDataEventArg =
     EventDataTypes.makeHistoryStep |
+    EventDataTypes.closeArticle |
     EventDataTypes.deleteSelectedItem |
     EventDataTypes.changeSelectedItemVisibility |
     EventDataTypes.cloneSelectedItem |

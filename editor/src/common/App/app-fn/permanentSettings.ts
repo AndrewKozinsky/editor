@@ -52,7 +52,6 @@ export function useGetEditorSettingsFromLocalStorage() {
         else {
             dispatch( permanentDataActions.setRoot({
                 common: {
-                    language: 'rus',
                     theme: 'light',
                     mainTab: 0,
                     groupPartTab: 0,

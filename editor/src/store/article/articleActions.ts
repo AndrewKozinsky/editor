@@ -1,5 +1,3 @@
-import StoreSettingsTypes from '../settings/settingsTypes'
-
 const JSON5 = require('json5')
 import articleManager from '../../articleManager/articleManager'
 import MetaType from 'editor/RightPart-1/ArticleSection/ArtForm/Meta/MetaType'
@@ -17,6 +15,7 @@ import { isCursorInTheSameElem } from './article-func'
 import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import StoreSitesTypes from '../site/sitesTypes'
 import permanentDataActions from '../permanentData/permanentDataActions'
+import fireEvent from '../../event/fireEvent'
 
 
 const articleActions = {
@@ -70,7 +69,8 @@ const articleActions = {
             const response = await getArticleRequest(articleId)
 
             if (response.status !== 'success' || !response.data.articles[0]) {
-                articleManager.clearArticle()
+                // Закрыть статью
+                fireEvent({event: 'closeArticle'})
                 return
             }
 

@@ -24,8 +24,8 @@ import {
 } from './textTracking/useUpdateArticleDataForText'
 import { usePreventDefaultLinkBehavior } from './links/usePreventDefaultLinkBehavior'
 import { useCorrectArticleData } from './misc/correctArtData'
-import './ArticleFrame.scss'
 import useScrollToSelectedLayerAfterClick from './misc/useScrollToSelectedLayerAfterClick'
+import './ArticleFrame.scss'
 
 
 /* IFrame куда помещается статья */

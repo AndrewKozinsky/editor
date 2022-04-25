@@ -47,3 +47,20 @@ export function getTagDisplayType(tagName: string): null | 'inline' | 'inline-bl
 
     return null
 }
+
+/**
+ * Функция возвращает массив с названиями непарных тегов
+ */
+export function getUnpairedTags(): string[] {
+    return ['img', 'hr', 'br', 'b', 'i', 'meta', 'input']
+}
+
+/**
+ * Функция принимает название тега и возвращает его тип display
+ * @param {String} tagName — название тега
+ */
+export function isUnpairedTag(tagName: string) {
+    const tag = tagName.toLocaleLowerCase()
+
+    return getUnpairedTags().includes(tag)
+}

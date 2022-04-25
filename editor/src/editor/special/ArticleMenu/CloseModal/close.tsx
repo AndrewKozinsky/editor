@@ -5,7 +5,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetShowModal from 'utils/hooksUtils'
 import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
-import articleActions from 'store/article/articleActions'
+import fireEvent from 'event/fireEvent'
 
 /** Обработчик кнопки закрытия редактируемой статьи */
 export function useCloseArticle() {
@@ -13,11 +13,12 @@ export function useCloseArticle() {
     const openConfirmCloseModal = useGetShowModal(<CloseArticleConfirmModal />)
 
     return useCallback(function () {
-        const isArticleSaved  = articleManager.isArticleSave( historyStepWhenWasSave, historyCurrentIdx )
+        const isArticleSaved = articleManager.isArticleSave( historyStepWhenWasSave, historyCurrentIdx )
 
         if (isArticleSaved) {
-            // Clear an article data in Store
-            store.dispatch( articleActions.clearArticle() )
+            // Закрыть статью
+            fireEvent({event: 'closeArticle'})
+
             store.dispatch( actions.settings.setMainTabOuter(0) )
         }
         else {

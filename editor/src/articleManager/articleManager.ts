@@ -12,7 +12,6 @@ import {
 } from './methods/insert'
 import {
     saveArticle,
-    clearArticle,
     deleteArticle,
     setFocusInTextComponent,
 } from './methods/misc'
@@ -205,7 +204,6 @@ class ArticleManager {
     saveArticle = saveArticle
     deleteArticle = deleteArticle
     setFocusInTextComponent = setFocusInTextComponent
-    clearArticle = clearArticle
     getCorrectedArticle = getCorrectedArticle
 }
 

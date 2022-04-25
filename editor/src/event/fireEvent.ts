@@ -5,14 +5,25 @@ import { changeSelectedItemVisibilityIfAllow } from './fn/changeSelectedItemVisi
 import {cloneSelectedItemIfAllow} from './fn/cloneSelectedItem'
 import { upDownSelectedItemIfAllow } from './fn/upDownSelectedItem'
 import { moveSelectedItemIfAllow } from './fn/moveSelectedItem'
+import {closeArticle} from './fn/closeArticle'
 
 
 export default function fireEvent(eventData: FireDataEventArg) {
     switch (eventData.event) {
+
+        // ПРОЧЕЕ
+
         // Сделать шаг вперёд или назад по истории
         case 'makeHistoryStep':
             makeHistoryStep(eventData)
             break
+        // Закрытие статьи
+        case 'closeArticle':
+            closeArticle(eventData)
+            break
+
+        // РАБОТА С ВЫДЕЛЕННЫМ ЭЛЕМЕНТОМ
+
         // Удаление выделенного компонента или элемента
         case 'deleteSelectedItem':
             deleteSelectedItemIfAllow(eventData)

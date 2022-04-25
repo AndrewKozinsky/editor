@@ -3,6 +3,7 @@ import { store } from 'store/rootReducer'
 import articleActions from 'store/article/articleActions'
 import DragFilesTreeType from 'libs/DragFilesTree/types'
 import { getState } from 'utils/miscUtils'
+import fireEvent from '../../event/fireEvent'
 
 /**
  * Функция обновляет хеш версии папок шаблонов компонентов в статье,
@@ -49,7 +50,8 @@ export function clearEditableArticle(someArtId: DragFilesTreeType.FileItemId) {
     const editArticleId = getState().article.articleId
 
     if (editArticleId == someArtId) {
-        articleManager.clearArticle()
+        // Закрыть статью
+        fireEvent({event: 'closeArticle'})
     }
 }
 

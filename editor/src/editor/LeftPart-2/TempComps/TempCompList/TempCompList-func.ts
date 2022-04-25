@@ -4,10 +4,11 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
-import TempCompsTreeType from '../TempCompsTree/types'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
+import useGetPermanentDataSelectors from 'store/permanentData/permanentDataSelectors'
 import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import TempCompsTreeType from '../TempCompsTree/types'
 
 
 export function useIsInsideButtonAllowed() {
@@ -24,6 +25,7 @@ export function useIsInsideButtonAllowed() {
         }
 
         if (['element', 'rootElement'].includes(flashedElemCoords?.selectedElem?.tagType)) {
+            // В качестве id вставляемого (перемещаемого) компонента задан 0 потому что в статье его ещё нет.
             const newCompCanPutInElem = articleManager.canComponentPutInElement(
                 tempComps, article.dComps, flashedElemCoords.selectedElem, 0
             )
@@ -42,6 +44,7 @@ export function useIsInsideButtonAllowed() {
 export function useGetTempCompsFolders() {
     // Component templates folders and Component templates array
     const { tempCompsFolders, tempComps } = useGetArticleSelectors()
+    const { openCompFoldersIds } = useGetPermanentDataSelectors().edit
 
     const currentHistoryItem = articleManager.hooks.getCurrentHistoryItem()
 
@@ -52,9 +55,7 @@ export function useGetTempCompsFolders() {
         if (!tempCompsFolders) return
 
         // Get opened component template folders id array to open these folders
-        // const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] =
-        //     getFromLocalStorage(config.ls.editOpenCompFoldersIds) || []
-        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] = []
+        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] = openCompFoldersIds || []
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(

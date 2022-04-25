@@ -4,6 +4,7 @@ import articleActions from 'store/article/articleActions'
 import { store } from 'store/rootReducer'
 import articleManager from 'articleManager/articleManager'
 import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
+import fireEvent from '../../event/fireEvent'
 
 
 /**
@@ -33,12 +34,6 @@ export async function saveArticle(
     await updateArticleRequest(articleId, {content: historyItem.article})
 }
 
-
-/** Функция очищающая редактируемую статью */
-export function clearArticle(this: typeof articleManager) {
-    store.dispatch(articleActions.clearArticle())
-}
-
 /**
  * Функция удаляющая редактируемую статью
  * @param {String} articleId — article id which I have to save in a server
@@ -46,8 +41,8 @@ export function clearArticle(this: typeof articleManager) {
 export async function deleteArticle( this: typeof articleManager, articleId: null | number ) {
     if (!articleId) return
 
-    // Очистить редактор от этой статьи
-    this.clearArticle()
+    // Закрыть статью
+    fireEvent({event: 'closeArticle'})
 }
 
 /**

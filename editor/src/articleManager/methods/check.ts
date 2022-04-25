@@ -2,7 +2,7 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import articleManager from 'articleManager/articleManager'
 import ArticleTypes from 'store/article/codeType/articleCodeType'
 import StoreArticleTypes from 'store/article/articleTypes'
-import {getTagDisplayType} from '../../utils/domUtils'
+import {getTagDisplayType, isUnpairedTag} from 'utils/domUtils'
 
 
 /**
@@ -53,24 +53,10 @@ export function canComponentPutInElement(
     tComps: TempCompTypes.TempComps,
     dComps: ArticleTypes.Components,
     targetCompCoords: StoreArticleTypes.FlashedElem,
-    moveCompId: ArticleTypes.Id
+    moveCompId: ArticleTypes.Id // РЕКОМЕНДУЕТСЯ ВМЕСТО ID ПЕРЕМЕЩАЕМОГО КОМПОНЕНТА ЗАДАВАТЬ ID ШАБЛОНА КОМПОНЕНТА ПОТОМУ ЧТО ЭТОТ МЕТОД ИСПОЛЬЗУЕТСЯ ТАКЖЕ ДЛЯ ПРОВЕРКИ МОЖНО ЛИ ВСТАВИТЬ В ВЫДЕЛЕННЫЙ ЭЛЕМЕНТ ЕЩЁ НЕ СОЗДАННЫЙ КОМПОНЕНТ
 ) {
     // Если не выделен целевой элемент и перемещаемый компонент, то нельзя вставить перемещаемый компонент
     if (targetCompCoords.dataElemId === null || moveCompId === null) return false
-
-    // Перемещаемый компонент
-    const movedDComp = this.getComponent(dComps, moveCompId)
-
-    // Нельзя если нет перемещаемого компонента
-    if (!movedDComp) return false
-
-    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
-    if (movedDComp && movedDComp.dCompType === 'component') {
-        // Найти выделенный элемент внутри перемещаемого
-        if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
-            return false
-        }
-    }
 
     // Получение шаблона выделенного элемента
     const targetTElem = this.getTElemByDCompIdAndDElemId(
@@ -90,15 +76,17 @@ export function canComponentPutInElement(
     const has$ElemNested$Elements = this.has$ElemNested$Elements(tComps, targetDComp.tCompId, targetTElem.elemId)
     if (has$ElemNested$Elements) return false
 
-    // Если целевой элемент является одиночным тегом (<img />, например), то туда нельзя вставить перемещаемый компонент
     const $elem = this.get$elem(tComps, targetDComp.tCompId, targetDElem.tCompElemId)
-    const elemTagName = $elem?.tagName?.toLowerCase()
-    if (['img', 'br', 'hr', 'meta', 'input', 'option'].includes(elemTagName)) {
-        return false
-    }
+
+    // Если целевой элемент является одиночным тегом (<img />, например), то туда нельзя вставить перемещаемый компонент
+    if (isUnpairedTag($elem?.tagName)) return false
+
+
+    // Перемещаемый компонент
+    const movedDComp = this.getComponent(dComps, moveCompId)
 
     // Шаблон перемещаемого (или создаваемого) компонента
-    if (movedDComp.dCompType === 'component') {
+    if (movedDComp?.dCompType === 'component') {
         // Получение перемещаемого элемента
         const $moveRootElem = this.get$componentByTComps(tComps, movedDComp.tCompId)
 
@@ -109,6 +97,14 @@ export function canComponentPutInElement(
         // Проверить разрешено ли перемещаемый тег перенести в целевой
         const canTagInsertInAnotherTag = this.canTagInsertInAnotherTag(moveElemTag, targetElemTag)
         if (!canTagInsertInAnotherTag) return false
+    }
+
+    // Если выделенный элемент находится внутри перемещаемого компонента, то такое перемещение запрещено
+    if (movedDComp?.dCompType === 'component') {
+        // Найти выделенный элемент внутри перемещаемого
+        if (this.getItemInDComp(movedDComp, targetCompCoords.dataCompId, targetCompCoords.dataElemId)) {
+            return false
+        }
     }
 
     // В остальных случаях перемещаемый компонент можно поместить в выделенный элемент

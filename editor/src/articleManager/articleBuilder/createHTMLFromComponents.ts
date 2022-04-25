@@ -1,4 +1,5 @@
 import { HTMLObjArrType } from './htmlStringToObject'
+import {isUnpairedTag} from 'utils/domUtils'
 
 /**
  * The function gets html structure objects array and turns it to HTML-string
@@ -43,15 +44,13 @@ function formHtmlStrFromTextComponent(htmlObj: HTMLObjArrType.Tag): string {
  */
 function formHtmlStrFromTagObject(htmlObj: HTMLObjArrType.Tag): string {
 
-    const unpairedTags = ['img', 'hr', 'br', 'b', 'i', 'meta', 'input']
-
     const tagName = htmlObj.tag
     const attribs = htmlObj.attrs ? getAttribs(htmlObj.attrs) : ''
     const children = (htmlObj.children) ? createHTMLFromComponents(htmlObj.children) : ''
 
-    return unpairedTags.includes(tagName)
-        ? `<${tagName}${ attribs} />`
-        : `<${tagName}${ attribs}>${children}</${tagName}>`
+    return isUnpairedTag(tagName)
+        ? `<${tagName} ${ attribs} />`
+        : `<${tagName} ${ attribs}>${children}</${tagName}>`
 }
 
 

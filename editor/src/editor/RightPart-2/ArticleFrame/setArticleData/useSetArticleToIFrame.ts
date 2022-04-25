@@ -15,12 +15,10 @@ export default function useSetArticleToIFrame() {
     } = useGetArticleSelectors()
 
     useEffect(function () {
-        // Не отрисовывать статью если внутрь iFrame <body> не добавили корневой <div>.
-        // Или данные ещё не исправлены (соответствовали шаблонам компонентам)
-        if (!$links.$body?.firstChild || !isArtDataCorrect) return
+        // Ничего не делать если внутрь iFrame <body> не добавили корневой <div>.
+        if (!$links.$body?.firstChild) return
 
-        // Отрисовать статью если есть история
-        if (history?.length) {
+        if (isArtDataCorrect && history?.length) {
             const article = history[historyCurrentIdx].article
 
             // Создать JSX новой статьи и поставить в iFrame.
@@ -28,9 +26,7 @@ export default function useSetArticleToIFrame() {
                 articleManager.turnArticleDataToJSX(article, tempComps),
                 $links.$body.firstChild as Element
             )
-
         }
-        // Очистить статью если в истории ничего нет
         else {
             // Создать JSX новой статьи и поставить в iFrame.
             ReactDOM.render(

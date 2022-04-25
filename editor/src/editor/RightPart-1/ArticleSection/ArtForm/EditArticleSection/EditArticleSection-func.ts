@@ -7,6 +7,7 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleActions from 'store/article/articleActions'
 import settingsActions from 'store/settings/settingsActions'
 import articleManager from 'articleManager/articleManager'
+import fireEvent from '../../../../../event/fireEvent'
 
 
 /** Хук возвращает булево значение редактируется ли сейчас статья показываемая в форме */
@@ -33,7 +34,8 @@ export function useGetEditArticleFn() {
     return useCallback(function () {
         // Если другая статья редактируется, то закрыть её
         if (currentArticleId) {
-            articleManager.clearArticle()
+            // Закрыть статью
+            fireEvent({event: 'closeArticle'})
         }
 
         // Поставить id редактируемой статьи чтобы редактор начал загружать ресурсы и отрисовал статью.

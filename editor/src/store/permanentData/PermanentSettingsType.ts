@@ -1,5 +1,6 @@
 import StoreSettingsTypes from '../settings/settingsTypes'
 import StoreSitesTypes from '../site/sitesTypes'
+import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
 
 // Тип данных настроек сохраняемых в LocalStorage
 export type PermanentSettingsType = {
@@ -34,5 +35,5 @@ export type PermanentSettingsGroupType = {
 // Тип данных группы
 export type PermanentSettingsEditType = {
     articleId: null | number      // id редактируемой статьи
-    openCompFoldersIds: number[], // Массив идентификаторов открытых папок компонентов в редактируемой статье
+    openCompFoldersIds: TempCompsTreeType.FolderItemId[], // Массив идентификаторов открытых папок компонентов в редактируемой статье
 }

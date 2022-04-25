@@ -6,6 +6,7 @@ import deleteSiteRequest from 'requests/editor/sites/deleteSiteRequest'
 import articleManager from 'articleManager/articleManager'
 import { getState, removeFromLocalStorage } from 'utils/miscUtils'
 import siteSectionMsg from 'messages/groupSectionMessages'
+import fireEvent from '../../../../event/fireEvent'
 
 
 /** Объект конфигурации кнопки-формы удаления сайта */
@@ -36,7 +37,8 @@ function afterSuccessSiteDeleting() {
 
     // Очистить редактируемую статью если удалили сайт, к которому она относится
     if (deletedSiteId === articleSiteId) {
-        articleManager.clearArticle()
+        // Закрыть статью
+        fireEvent({event: 'closeArticle'})
     }
 
     // Закрыть модальное окно
