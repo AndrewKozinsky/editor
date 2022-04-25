@@ -1,16 +1,14 @@
 // Types
 import StoreSettingsTypes from './settingsTypes'
-import {MiscTypes} from '../../types/miscTypes'
-import permanentDataActions from '../permanentData/permanentDataActions'
+import {MiscTypes} from 'types/miscTypes'
+import localStorageProxyActions from '../localStorageProxy/localStorageProxyActions'
 
 const settingsActions = {
 
     // Установка темы интерфейса (обёрточный экшен)
     setEditorLangOuter(editorLang: StoreSettingsTypes.EditorLang) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить название темы интерфейса в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'language', propValue: editorLang }))
-            // Установка темы интерфейса
+            // Установка языка интерфейса
             dispatch( settingsActions.setEditorLang( editorLang ))
         }
     },
@@ -26,8 +24,8 @@ const settingsActions = {
     // Установка темы интерфейса (обёрточный экшен)
     setEditorThemeOuter(editorTheme: StoreSettingsTypes.EditorTheme) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить название темы интерфейса в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'theme', propValue: editorTheme }))
+            // Поставить название темы интерфейса в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setCommon({propName: 'theme', propValue: editorTheme }))
             // Установка темы интерфейса
             dispatch( settingsActions.setEditorTheme( editorTheme ))
         }
@@ -60,8 +58,8 @@ const settingsActions = {
     // Установка номера главной вкладки (обёрточный экшен)
     setMainTabOuter(mainTabId: StoreSettingsTypes.MainTab) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить id выбранной главной вкладки в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'mainTab', propValue: mainTabId }))
+            // Поставить id выбранной главной вкладки в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setCommon({propName: 'mainTab', propValue: mainTabId }))
             dispatch( settingsActions.setMainTab( mainTabId ))
         }
     },
@@ -80,8 +78,8 @@ const settingsActions = {
     // Активная вкладка панели «Настройки»: user или editor (обёрточный экшен)
     setSettingsPanelTabOuter(settingsPartTab: StoreSettingsTypes.SettingsPanelTab) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить id выбранной вкладки в Настройках в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'settingsTab', propValue: settingsPartTab }))
+            // Поставить id выбранной вкладки в Настройках в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setCommon({propName: 'settingsTab', propValue: settingsPartTab }))
             dispatch( settingsActions.setSettingsPanelTab( settingsPartTab ))
         }
     },

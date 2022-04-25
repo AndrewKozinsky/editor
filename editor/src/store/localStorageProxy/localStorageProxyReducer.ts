@@ -1,21 +1,21 @@
-import StorePermanentDataTypes from './permanentDataTypes'
-import {PermanentSettingsGroupType, PermanentSettingsType} from './PermanentSettingsType'
+import StoreLocalStorageProxyTypes from './localStorageProxyTypes'
+import {LocalStorageProxyGroupType, LocalStorageProxyType} from './localStorageProxyType'
 
 // Изначальные значения
-const initialState: null | PermanentSettingsType = null
+const initialState: null | LocalStorageProxyType = null
 
 
 // Установка полного объекта Постоянных Настроек
 function setRoot(
-    state: PermanentSettingsType, action: StorePermanentDataTypes.SetPermanentDataRootAction
-): PermanentSettingsType {
+    state: LocalStorageProxyType, action: StoreLocalStorageProxyTypes.SetPermanentDataRootAction
+): LocalStorageProxyType {
     return action.payload
 }
 
 // Изменение свойства из раздела common
 function setCommon(
-    state: PermanentSettingsType, action: StorePermanentDataTypes.SetPermanentDataCommonAction
-): PermanentSettingsType {
+    state: LocalStorageProxyType, action: StoreLocalStorageProxyTypes.SetPermanentDataCommonAction
+): LocalStorageProxyType {
 
     // Если изменили id текущей группы...
     if (action.payload.propName === 'groupId' && action.payload.propValue) {
@@ -49,7 +49,7 @@ function setCommon(
     }
 }
 
-function getEmptyGroupObj(groupId: any): PermanentSettingsGroupType {
+function getEmptyGroupObj(groupId: any): LocalStorageProxyGroupType {
     return {
         groupId: groupId,
         compOpenedFolders: [],
@@ -59,13 +59,14 @@ function getEmptyGroupObj(groupId: any): PermanentSettingsGroupType {
         componentId: null,
         componentType: null,
         articleId: null,
-        articleType: null
+        articleType: null,
+        tempCompsOpenFoldersIdsInArt: []
     }
 }
 
 function setGroup(
-    state: PermanentSettingsType, action: StorePermanentDataTypes.SetPermanentDataGroupAction
-): PermanentSettingsType {
+    state: LocalStorageProxyType, action: StoreLocalStorageProxyTypes.SetPermanentDataGroupAction
+): LocalStorageProxyType {
     // id выбранной группы
     const groupId = action.payload.groupId
 
@@ -90,25 +91,25 @@ function setGroup(
 }
 
 function setEdit(
-    state: PermanentSettingsType, action: StorePermanentDataTypes.SetPermanentDataEditAction
-): PermanentSettingsType {
+    state: LocalStorageProxyType, action: StoreLocalStorageProxyTypes.SetPermanentDataEditAction
+): LocalStorageProxyType {
     return {
         ...state,
         edit: {...state.edit, [action.payload.propName]: action.payload.propValue}
     }
 }
 
-// Редьюсер Store.permanentData
-export default function permanentDataReducer(state = initialState, action: StorePermanentDataTypes.SettingsAction): PermanentSettingsType {
+// Редьюсер Store.localStorageProxy
+export default function localStorageProxyReducer(state = initialState, action: StoreLocalStorageProxyTypes.SettingsAction): LocalStorageProxyType {
 
     switch (action.type) {
-        case StorePermanentDataTypes.SET_PERMANENT_DATA_ROOT:
+        case StoreLocalStorageProxyTypes.SET_PERMANENT_DATA_ROOT:
             return setRoot(state, action)
-        case StorePermanentDataTypes.SET_PERMANENT_DATA_COMMON:
+        case StoreLocalStorageProxyTypes.SET_PERMANENT_DATA_COMMON:
             return setCommon(state, action)
-        case StorePermanentDataTypes.SET_PERMANENT_DATA_GROUP:
+        case StoreLocalStorageProxyTypes.SET_PERMANENT_DATA_GROUP:
             return setGroup(state, action)
-        case StorePermanentDataTypes.SET_PERMANENT_DATA_EDIT:
+        case StoreLocalStorageProxyTypes.SET_PERMANENT_DATA_EDIT:
             return setEdit(state, action)
         default:
             // @ts-ignore

@@ -5,15 +5,15 @@ import useGetUserSelectors from 'store/user/userSelectors'
 import settingsActions from 'store/settings/settingsActions'
 import sitesActions from 'store/site/sitesActions'
 import articleActions from 'store/article/articleActions'
-import {MiscTypes} from '../../../types/miscTypes'
-import permanentDataActions from 'store/permanentData/permanentDataActions'
+import {MiscTypes} from 'types/miscTypes'
+import localStorageProxyActions from 'store/localStorageProxy/localStorageProxyActions'
 import {
-    PermanentSettingsCommonType,
-    PermanentSettingsType,
-    PermanentSettingsEditType,
-    PermanentSettingsGroupType
-} from 'store/permanentData/PermanentSettingsType'
-import useGetPermanentDataSelectors from 'store/permanentData/permanentDataSelectors'
+    LocalStorageProxyCommonType,
+    LocalStorageProxyType,
+    LocalStorageProxyEditType,
+    LocalStorageProxyGroupType
+} from 'store/localStorageProxy/localStorageProxyType'
+import useGetLocalStorageProxySelectors from 'store/localStorageProxy/localStorageProxySelectors'
 
 
 
@@ -24,7 +24,7 @@ import useGetPermanentDataSelectors from 'store/permanentData/permanentDataSelec
  */
 export function useSaveEditorSettingsInLocalStorage() {
     const { email } = useGetUserSelectors()
-    const settings = useGetPermanentDataSelectors()
+    const settings = useGetLocalStorageProxySelectors()
 
     useEffect(function () {
         if (!email) return
@@ -44,25 +44,24 @@ export function useGetEditorSettingsFromLocalStorage() {
         if (!email) return
 
         // Объект с настройками из LocalStorage
-        const settingsObj: PermanentSettingsType = getFromLocalStorage(email, null)
+        const settingsObj: LocalStorageProxyType = getFromLocalStorage(email, null)
 
         if (settingsObj) {
-            dispatch( permanentDataActions.setRoot(settingsObj) )
+            dispatch( localStorageProxyActions.setRoot(settingsObj) )
         }
         else {
-            dispatch( permanentDataActions.setRoot({
+            dispatch( localStorageProxyActions.setRoot({
                 common: {
                     theme: 'light',
                     mainTab: 0,
                     groupPartTab: 0,
                     settingsTab: 'user',
                     helpTab: 'reg',
-                    groupId: null
+                    groupId: null,
                 },
                 groups: [],
                 edit: {
                     articleId: null,
-                    openCompFoldersIds: []
                 }
             }) )
         }
@@ -72,19 +71,19 @@ export function useGetEditorSettingsFromLocalStorage() {
 
 export function useUpdateStoreDependsOnEditorSettingsAfterStartUp() {
     const dispatch = useDispatch()
-    const permanentData = useGetPermanentDataSelectors()
+    const localStorageProxy = useGetLocalStorageProxySelectors()
     const [settingsSet, setSettingsSet] = useState(false)
 
     useEffect(function () {
-        if (!permanentData || settingsSet) return
+        if (!localStorageProxy || settingsSet) return
 
         // Установка общих настроек
-        setCommonSettings(permanentData.common, dispatch)
+        setCommonSettings(localStorageProxy.common, dispatch)
 
         // Установка настроек групп
-        if (permanentData.common.groupId) {
-            const currentGroupSettings = permanentData.groups.find((group: PermanentSettingsGroupType) => {
-                return group.groupId === permanentData.common.groupId
+        if (localStorageProxy.common.groupId) {
+            const currentGroupSettings = localStorageProxy.groups.find((group: LocalStorageProxyGroupType) => {
+                return group.groupId === localStorageProxy.common.groupId
             })
 
             if (currentGroupSettings) {
@@ -93,10 +92,10 @@ export function useUpdateStoreDependsOnEditorSettingsAfterStartUp() {
         }
 
         // Установка настроек редактируемой статьи
-        setEditSettings(permanentData.edit, dispatch)
+        setEditSettings(localStorageProxy.edit, dispatch)
 
         setSettingsSet(true)
-    }, [permanentData])
+    }, [localStorageProxy])
 }
 
 /**
@@ -104,7 +103,7 @@ export function useUpdateStoreDependsOnEditorSettingsAfterStartUp() {
  * @param {Object} commonSettings — объект с общими настройками редактора.
  * @param {Object} dispatch — функция dispatch()
  */
-function setCommonSettings(commonSettings: PermanentSettingsCommonType, dispatch: MiscTypes.AppDispatch) {
+function setCommonSettings(commonSettings: LocalStorageProxyCommonType, dispatch: MiscTypes.AppDispatch) {
     dispatch( settingsActions.setMainTabOuter(commonSettings.mainTab) )
     dispatch( sitesActions.setRightMainTabOuter(commonSettings.groupPartTab) )
     dispatch( settingsActions.setEditorThemeOuter(commonSettings.theme) )
@@ -118,7 +117,7 @@ function setCommonSettings(commonSettings: PermanentSettingsCommonType, dispatch
  * @param {Object} dispatch — функция dispatch()
  */
 export function setGroupSettings(
-    groupSettings: PermanentSettingsGroupType,
+    groupSettings: LocalStorageProxyGroupType,
     dispatch: MiscTypes.AppDispatch
 ) {
     dispatch( sitesActions.setCurrentSiteTemplateIdOuter(groupSettings.groupId, groupSettings.groupTemplateId) )
@@ -132,7 +131,7 @@ export function setGroupSettings(
  * @param {Object} editSettings — объект с настройками редактируемой статьи.
  * @param {Object} dispatch — функция dispatch()
  */
-function setEditSettings(editSettings: PermanentSettingsEditType, dispatch: MiscTypes.AppDispatch) {
+function setEditSettings(editSettings: LocalStorageProxyEditType, dispatch: MiscTypes.AppDispatch) {
     dispatch( articleActions.setArticleIdOuter(editSettings.articleId) )
 }
 

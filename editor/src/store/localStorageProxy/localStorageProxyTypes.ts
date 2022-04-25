@@ -1,26 +1,26 @@
 import StoreSitesTypes from '../site/sitesTypes'
 import {
-    PermanentSettingsCommonType,
-    PermanentSettingsEditType,
-    PermanentSettingsGroupType,
-    PermanentSettingsType
-} from './PermanentSettingsType'
+    LocalStorageProxyCommonType,
+    LocalStorageProxyEditType,
+    LocalStorageProxyGroupType,
+    LocalStorageProxyType
+} from './LocalStorageProxyType'
 
-// Типы редьюсера Store.permanentData
-namespace StorePermanentDataTypes {
+// Типы редьюсера Store.localStorageProxy
+namespace StoreLocalStorageProxyTypes {
 
-    // Установка данных в Store.permanentData
+    // Установка данных в Store.localStorageProxy
     export const SET_PERMANENT_DATA_ROOT = 'SET_PERMANENT_DATA_ROOT'
     export type SetPermanentDataRootAction = {
         type: typeof SET_PERMANENT_DATA_ROOT
-        payload: PermanentSettingsType
+        payload: LocalStorageProxyType
     }
 
     export type SetPermanentDataCommonPayload = {
-        propName: keyof PermanentSettingsCommonType
+        propName: keyof LocalStorageProxyCommonType
         propValue: any
     }
-    // Установка данных для свойства common в Store.permanentData
+    // Установка данных для свойства common в Store.localStorageProxy
     export const SET_PERMANENT_DATA_COMMON = 'SET_PERMANENT_DATA_COMMON'
     export type SetPermanentDataCommonAction = {
         type: typeof SET_PERMANENT_DATA_COMMON
@@ -29,10 +29,10 @@ namespace StorePermanentDataTypes {
 
     export type SetPermanentDataGroupPayload = {
         groupId: StoreSitesTypes.CurrentSiteId,
-        propName: keyof PermanentSettingsGroupType
+        propName: keyof LocalStorageProxyGroupType
         propValue: any
     }
-    // Установка данных для свойства объекта из массива group в Store.permanentData
+    // Установка данных для свойства объекта из массива group в Store.localStorageProxy
     export const SET_PERMANENT_DATA_GROUP = 'SET_PERMANENT_DATA_GROUP'
     export type SetPermanentDataGroupAction = {
         type: typeof SET_PERMANENT_DATA_GROUP
@@ -40,10 +40,10 @@ namespace StorePermanentDataTypes {
     }
 
     export type SetPermanentDataEditPayload = {
-        propName: keyof PermanentSettingsEditType
+        propName: keyof LocalStorageProxyEditType
         propValue: any
     }
-    // Установка данных для свойства edit в Store.permanentData
+    // Установка данных для свойства edit в Store.localStorageProxy
     export const SET_PERMANENT_DATA_EDIT = 'SET_PERMANENT_DATA_EDIT'
     export type SetPermanentDataEditAction = {
         type: typeof SET_PERMANENT_DATA_EDIT
@@ -58,4 +58,4 @@ namespace StorePermanentDataTypes {
         | SetPermanentDataEditAction
 }
 
-export default StorePermanentDataTypes
+export default StoreLocalStorageProxyTypes

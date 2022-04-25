@@ -21,7 +21,7 @@ import {
     useSaveEditorSettingsInLocalStorage,
     useGetEditorSettingsFromLocalStorage,
     useUpdateStoreDependsOnEditorSettingsAfterStartUp
-} from './app-fn/permanentSettings'
+} from './app-fn/localStorageProxy'
 import useSetShortcutsHandler from './shortcuts/shortcutsHandler'
 import useGetClasses from './app-fn/App-classes'
 import { useManageFavicon } from './app-fn/useManageFavicon'

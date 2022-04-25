@@ -7,16 +7,16 @@ import TempCompTypes from 'store/article/codeType/tempCompCodeType'
 import createArticleRequest from 'requests/editor/article/createArticleRequest'
 import createComponentRequest from 'requests/editor/components/createComponentRequest'
 import { getState } from 'utils/miscUtils'
-import DragFilesTreeType from 'src/libs/DragFilesTree/types'
+import DragFilesTreeType from 'libs/DragFilesTree/types'
+import {selectItem} from 'libs/DragFilesTree/StoreManage/manageState'
 import bridge from '../../../bridge/bridge'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import { FolderType } from './types'
 import FilesTreeType from 'types/FilesTreeType'
 import compFoldersSectionMsg from 'messages/compFoldersSectionMessages'
 import artFoldersSectionMsg from 'messages/artFoldersSectionMessages'
-import {selectItem} from '../../../libs/DragFilesTree/StoreManage/manageState'
 import { store } from 'store/rootReducer'
-import permanentDataActions from '../../../store/permanentData/permanentDataActions'
+import localStorageProxyActions from 'store/localStorageProxy/localStorageProxyActions'
 
 
 /**
@@ -224,14 +224,14 @@ export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.I
 
     if (type === 'components') {
         store.dispatch(
-            permanentDataActions.setGroup(
+            localStorageProxyActions.setGroup(
                 {groupId: currentSiteId, propName: 'compOpenedFolders', propValue: idArr}
             )
         )
     }
     else {
         store.dispatch(
-            permanentDataActions.setGroup(
+            localStorageProxyActions.setGroup(
                 {groupId: currentSiteId, propName: 'artOpenedFolders', propValue: idArr}
             )
         )
@@ -242,7 +242,7 @@ export function afterCollapseFolder(type: FolderType, idArr: DragFilesTreeType.I
  *  чтобы при отрисовке компонента они были открытыми */
 export function getOpenedFoldersIds(type: FolderType) {
     const { currentSiteId } = getState().sites
-    const { groups } = getState().permanentData
+    const { groups } = getState().localStorageProxy
     const groupSettings =  groups.find(group => group.groupId === currentSiteId)
 
     if (type === 'components') {

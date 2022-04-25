@@ -72,7 +72,7 @@ function setMainTab(state: SettingsReducerType, action: StoreSettingsTypes.SetMa
 // Установка id вкладки в Настройках
 function setSettingsPanelTab(state: SettingsReducerType, action: StoreSettingsTypes.SetSettingsPanelTabAction): SettingsReducerType {
     // Поставить id вкладки в LocalStorage и получать это значение при отрытии приложения
-    // permanentSettingsStore.setCommonSetting('settingsTab', action.payload)
+    // localStorageProxyStore.setCommonSetting('settingsTab', action.payload)
 
     return {
         ...state,

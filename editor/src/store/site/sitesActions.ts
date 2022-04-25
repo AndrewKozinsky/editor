@@ -13,10 +13,10 @@ import { getOpenedFoldersIds } from 'editor/RightPart-1/FoldersList/FoldersList-
 import TempCompTypes from '../article/codeType/tempCompCodeType'
 import getArticleRequest from 'requests/editor/article/getArticleRequest'
 import ArticleTypes from '../article/codeType/articleCodeType'
-import getMetaTemplatesRequest from '../../requests/editor/metaTemplate/getMetaTemplatesRequest'
-import permanentDataActions from '../permanentData/permanentDataActions'
-import { getState } from '../../utils/miscUtils'
-import { addOpenPropToFolders, selectItem } from '../../libs/DragFilesTree/StoreManage/manageState'
+import getMetaTemplatesRequest from 'requests/editor/metaTemplate/getMetaTemplatesRequest'
+import localStorageProxyActions from '../localStorageProxy/localStorageProxyActions'
+import { getState } from 'utils/miscUtils'
+import { addOpenPropToFolders, selectItem } from 'libs/DragFilesTree/StoreManage/manageState'
 
 
 const sitesActions = {
@@ -60,8 +60,8 @@ const sitesActions = {
     // Установка id выбранного сайта (обёрточный экшен)
     setCurrentSiteIdOuter(groupId: StoreSitesTypes.CurrentSiteId) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить id выбранной группы в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'groupId', propValue: groupId }))
+            // Поставить id выбранной группы в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setCommon({propName: 'groupId', propValue: groupId }))
             // Установка темы интерфейса
             dispatch( sitesActions.setCurrentSiteId( groupId ))
         }
@@ -80,8 +80,8 @@ const sitesActions = {
     // Установка id текущей вкладки справа в Группе (обёрточный экшен)
     setRightMainTabOuter(tabId: StoreSitesTypes.RightMainTab) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setCommon({propName: 'groupPartTab', propValue: tabId }))
+            // Поставить id выбранной правой вкладки в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setCommon({propName: 'groupPartTab', propValue: tabId }))
             // Установка темы интерфейса
             dispatch( sitesActions.setRightMainTab( tabId ))
         }
@@ -139,8 +139,8 @@ const sitesActions = {
     setCurrentSiteTemplateIdOuter(groupId: StoreSitesTypes.CurrentSiteId, groupTemplateId: StoreSitesTypes.CurrentSiteTemplateId) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'groupTemplateId', propValue: groupTemplateId }))
+            // Поставить id выбранной правой вкладки в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'groupTemplateId', propValue: groupTemplateId }))
             // Установка темы интерфейса
             dispatch( sitesActions.setCurrentSiteTemplateId( groupTemplateId ))
         }
@@ -212,8 +212,8 @@ const sitesActions = {
     setCurrentMetaTemplateIdOuter(groupId: StoreSitesTypes.CurrentSiteId, groupMetaId: StoreSitesTypes.CurrentMetaTemplateId) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // Поставить id выбранной правой вкладки в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'metaTemplateId', propValue: groupMetaId }))
+            // Поставить id выбранной правой вкладки в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'metaTemplateId', propValue: groupMetaId }))
             // Установка темы интерфейса
             dispatch( sitesActions.setCurrentMetaTemplateId( groupMetaId ))
         }
@@ -374,10 +374,10 @@ const sitesActions = {
     ) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // Поставить id выбранного компонента в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'componentId', propValue: componentId }))
-            // Поставить тип выбранного компонента (файл или папка) в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'componentType', propValue: componentType }))
+            // Поставить id выбранного компонента в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'componentId', propValue: componentId }))
+            // Поставить тип выбранного компонента (файл или папка) в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'componentType', propValue: componentType }))
 
             // Установка текущего компонента
             dispatch( sitesActions.setCurrentComp( componentId, componentType, name, code ))
@@ -449,10 +449,10 @@ const sitesActions = {
     ) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
 
-            // Поставить id выбранного компонента в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'articleId', propValue: artId }))
-            // Поставить тип выбранного компонента (файл или папка) в группе в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setGroup({groupId: groupId, propName: 'articleType', propValue: artType }))
+            // Поставить id выбранного компонента в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'articleId', propValue: artId }))
+            // Поставить тип выбранного компонента (файл или папка) в группе в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setGroup({groupId: groupId, propName: 'articleType', propValue: artType }))
 
             // Установка текущего компонента
             dispatch( sitesActions.setCurrentArt( artId, artType, artName, artCode, siteTemplateId, metaTemplateId, meta ))

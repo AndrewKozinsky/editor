@@ -5,7 +5,7 @@ import { SitesReducerType } from 'store/site/sitesReducer'
 import { UserReducerType } from 'store/user/userReducer'
 import { AppStateType, store } from 'store/rootReducer'
 import { HelpReducerType } from 'store/help/helpReducer'
-import {PermanentSettingsType} from 'store/permanentData/PermanentSettingsType'
+import {LocalStorageProxyType} from 'store/localStorageProxy/localStorageProxyType'
 
 /**
  * Функция получает данные, которые нужно записать в localStorage.
@@ -109,7 +109,7 @@ export function getState() {
     const articleStore: ArticleReducerType = myStore.article
     const modalStore: ModalReducerType = myStore.modal
     const helpStore: HelpReducerType = myStore.help
-    const permanentDataStore: PermanentSettingsType = myStore.permanentData
+    const localStorageProxyStore: LocalStorageProxyType = myStore.localStorageProxy
 
     return {
         user: userStore,
@@ -118,6 +118,6 @@ export function getState() {
         article: articleStore,
         modal: modalStore,
         help: helpStore,
-        permanentData: permanentDataStore,
+        localStorageProxy: localStorageProxyStore,
     }
 }

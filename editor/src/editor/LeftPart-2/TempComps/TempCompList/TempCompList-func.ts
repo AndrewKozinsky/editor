@@ -6,7 +6,8 @@ import useGetArticleSelectors from 'store/article/articleSelectors'
 import articleManager from 'articleManager/articleManager'
 import componentsPanelMsg from 'messages/componentsPanelMessages'
 import articleActions from 'store/article/articleActions'
-import useGetPermanentDataSelectors from 'store/permanentData/permanentDataSelectors'
+import useGetLocalStorageProxySelectors from 'store/localStorageProxy/localStorageProxySelectors'
+import localStorageProxyActions from 'store/localStorageProxy/localStorageProxyActions'
 import { updateDataInTextComp } from 'editor/RightPart-2/ArticleFrame/textTracking/manageUpdatingDTextComp'
 import TempCompsTreeType from '../TempCompsTree/types'
 
@@ -43,8 +44,10 @@ export function useIsInsideButtonAllowed() {
  *  and returns updated array */
 export function useGetTempCompsFolders() {
     // Component templates folders and Component templates array
-    const { tempCompsFolders, tempComps } = useGetArticleSelectors()
-    const { openCompFoldersIds } = useGetPermanentDataSelectors().edit
+    const { tempCompsFolders, tempComps, siteId } = useGetArticleSelectors()
+
+    // Массив объектов с данными о выделенных частях редактора в группах хранимые в LocalStorage.
+    const localStorageProxyGroups = useGetLocalStorageProxySelectors().groups
 
     const currentHistoryItem = articleManager.hooks.getCurrentHistoryItem()
 
@@ -54,8 +57,13 @@ export function useGetTempCompsFolders() {
     useEffect(function () {
         if (!tempCompsFolders) return
 
-        // Get opened component template folders id array to open these folders
-        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] = openCompFoldersIds || []
+        // Массив объектов с данными о выделенных частях редактора в группах хранимые в LocalStorage.
+        const localStorageProxyGroup = localStorageProxyGroups.find(group => {
+            return group.groupId === siteId
+        })
+
+        // id открытых папок в панели компонентов
+        const openFoldersIdsArr: TempCompsTreeType.FolderItemId[] = localStorageProxyGroup.tempCompsOpenFoldersIdsInArt || []
 
         // Update component template array items
         const updatedFolders = prepareFoldersAndItemsStructure(
@@ -117,15 +125,16 @@ function prepareFoldersAndItemsStructure(
 
 /** The hook returns a function runs after component template folder was threw opened or collapsed */
 export function useGetAfterCollapseFolder() {
+    const { siteId } = useGetArticleSelectors()
     const dispatch = useDispatch()
 
     return useCallback(function (folders: TempCompsTreeType.Items, openIdArr: TempCompsTreeType.FolderItemId[]) {
         // Set a new folders structure list in the Store
         dispatch(articleActions.setTempCompFolders(folders))
 
-        // Save array of folder's id in the Local storage
-        // setInLocalStorage(config.ls.editOpenCompFoldersIds, openIdArr, true)
-    }, [])
+        // Save array of folder's id in the LocalStorage proxy
+        dispatch( localStorageProxyActions.setGroup({groupId: siteId, propName: 'tempCompsOpenFoldersIdsInArt', propValue: openIdArr}) )
+    }, [siteId])
 }
 
 

@@ -12,7 +12,7 @@ import settingsReducer from './settings/settingsReducer'
 import articleReducer from './article/articleReducer'
 import modalReducer from './modal/modalReducer'
 import helpReducer from './help/helpReducer'
-import permanentDataReducer from './permanentData/permanentDataReducer'
+import localStorageProxyReducer from './localStorageProxy/localStorageProxyReducer'
 
 
 // Корневой редьюсер
@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
     article: articleReducer,
     modal: modalReducer,
     help: helpReducer,
-    permanentData: permanentDataReducer,
+    localStorageProxy: localStorageProxyReducer,
 })
 
 export const store = createStore(

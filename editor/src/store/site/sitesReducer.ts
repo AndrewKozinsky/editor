@@ -87,11 +87,11 @@ function setSites(state: SitesReducerType, action: StoreSitesTypes.SetSitesActio
 function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCurrentSiteIdAction): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id сайта потому что не выбрана ни одна группа
-        // permanentSettingsStore.setCommonSetting('groupId', null)
+        // localStorageProxyStore.setCommonSetting('groupId', null)
     }
     else {
         // Поставить id группы в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        // permanentSettingsStore.setCommonSetting('groupId', action.payload)
+        // localStorageProxyStore.setCommonSetting('groupId', action.payload)
     }
 
     return {
@@ -105,7 +105,7 @@ function setCurrentSiteId(state: SitesReducerType, action: StoreSitesTypes.SetCu
 // Установка id текущей основной вкладки справа
 function setRightMainTab(state: SitesReducerType, action: StoreSitesTypes.SetRightMainTabAction): SitesReducerType {
     // Поставить номер правой вкладки в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-    // permanentSettingsStore.setCommonSetting('groupPartTab', action.payload)
+    // localStorageProxyStore.setCommonSetting('groupPartTab', action.payload)
 
     return {
         ...state,
@@ -132,11 +132,11 @@ function setCurrentSiteTemplateId(
 ): SitesReducerType {
     if (action.payload === null) {
         // Удалить из LocalStorage id подключаемых шаблонов потому что не выбран ни один подключаемый шаблон.
-        // permanentSettingsStore.setCommonSetting('groupId', null)
+        // localStorageProxyStore.setCommonSetting('groupId', null)
     }
     else {
         // Поставить id подключаемых шаблонов в LocalStorage чтобы при загрузке страницы ставить его в Хранилище
-        // permanentSettingsStore.setCommonSetting('groupId', action.payload)
+        // localStorageProxyStore.setCommonSetting('groupId', action.payload)
     }
 
     return {

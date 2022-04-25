@@ -5,8 +5,8 @@ import useGetSitesSelectors from 'store/site/sitesSelectors'
 import StoreSitesTypes from 'store/site/sitesTypes'
 import sitesActions from 'store/site/sitesActions'
 import { ItemsListPropType } from 'common/ItemsList/ItemsList'
-import {getState} from '../../utils/miscUtils'
-import { setGroupSettings } from '../../common/App/app-fn/permanentSettings'
+import {getState} from 'utils/miscUtils'
+import { setGroupSettings } from 'common/App/app-fn/localStorageProxy'
 
 
 // Хук скачивает с сервера массив сайтов и ставит в Хранилище
@@ -41,7 +41,7 @@ export function useGetSitesItemsListProps(): ItemsListPropType {
 
                     // Найти в Хранилище настройки этой группы.
                     // Это какой шаблон выделен и прочие настройки касающиеся выделенных элементов.
-                    const groupPermanentSettings = getState().permanentData.groups.find(group => {
+                    const groupPermanentSettings = getState().localStorageProxy.groups.find(group => {
                         return group.groupId === site.id
                     })
                     // Если настройки найдены

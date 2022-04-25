@@ -7,9 +7,9 @@ import deleteComponentRequest from 'requests/editor/components/deleteComponentRe
 import { store } from 'store/rootReducer'
 import { getState } from 'utils/miscUtils'
 import sitesActions from 'store/site/sitesActions'
+import localStorageProxyActions from 'store/localStorageProxy/localStorageProxyActions'
 import bridge from '../bridge'
 import { FolderType } from 'editor/RightPart-1/FoldersList/types'
-import permanentDataActions from '../../store/permanentData/permanentDataActions'
 
 /**
  * Функция делает действия при удалении папки статей/компонентов или статью/компонент
@@ -150,14 +150,14 @@ function setOpenedFoldersIdInLS(
     // Поставить новый массив открытых папок в LocalStorage
     if (category === 'components') {
         store.dispatch(
-            permanentDataActions.setGroup(
+            localStorageProxyActions.setGroup(
                 {groupId: currentSiteId, propName: 'compOpenedFolders', propValue: openedFoldersId}
             )
         )
     }
     else if (category === 'articles') {
         store.dispatch(
-            permanentDataActions.setGroup(
+            localStorageProxyActions.setGroup(
                 {groupId: currentSiteId, propName: 'artOpenedFolders', propValue: openedFoldersId}
             )
         )

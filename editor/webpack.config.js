@@ -109,14 +109,16 @@ function getDevServerSettings() {
     }
 }
 
-// Функция возращающая массив plugins
+// Функция возвращающая массив plugins
 function getPlugins(isDev) {
     if (isDev) {
         return [
             // Очистка папки с компилированными файлами перед помещением других
             new CleanWebpackPlugin(),
             // Формирование index.html
-            new HtmlWebpackPlugin(getHtmlConfig())
+            new HtmlWebpackPlugin(getHtmlConfig()),
+            // Передача в Реакт переменной окружения. По какой-то причине я не смог передать строку.
+            new webpack.DefinePlugin({ 'process.env.isDev': isDev })
         ]
     }
     else {

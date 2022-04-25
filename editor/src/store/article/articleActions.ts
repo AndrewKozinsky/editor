@@ -14,7 +14,7 @@ import SiteTemplateTypes from './codeType/siteTemplateCodeType'
 import { isCursorInTheSameElem } from './article-func'
 import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import StoreSitesTypes from '../site/sitesTypes'
-import permanentDataActions from '../permanentData/permanentDataActions'
+import localStorageProxyActions from '../localStorageProxy/localStorageProxyActions'
 import fireEvent from '../../event/fireEvent'
 
 
@@ -40,8 +40,8 @@ const articleActions = {
     // Установка id редактируемой статьи (обёрточный экшен)
     setArticleIdOuter(articleId: null | number) {
         return function (dispatch: MiscTypes.AppDispatch, getState: MiscTypes.GetState) {
-            // Поставить id выбранной главной вкладки в Store.permanentData чтобы это сохранилось в LocalStorage
-            dispatch( permanentDataActions.setEdit({propName: 'articleId', propValue: articleId }))
+            // Поставить id выбранной главной вкладки в Store.localStorageProxy чтобы это сохранилось в LocalStorage
+            dispatch( localStorageProxyActions.setEdit({propName: 'articleId', propValue: articleId }))
             dispatch( articleActions.setArticleId( articleId ))
         }
     },

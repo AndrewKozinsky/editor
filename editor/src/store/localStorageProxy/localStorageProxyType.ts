@@ -3,14 +3,14 @@ import StoreSitesTypes from '../site/sitesTypes'
 import TempCompsTreeType from '../../editor/LeftPart-2/TempComps/TempCompsTree/types'
 
 // Тип данных настроек сохраняемых в LocalStorage
-export type PermanentSettingsType = {
-    common: PermanentSettingsCommonType
-    groups: PermanentSettingsGroupType[]
-    edit: PermanentSettingsEditType
+export type LocalStorageProxyType = {
+    common: LocalStorageProxyCommonType
+    groups: LocalStorageProxyGroupType[]
+    edit: LocalStorageProxyEditType
 }
 
 // Тип данных группы
-export type PermanentSettingsCommonType = {
+export type LocalStorageProxyCommonType = {
     theme: StoreSettingsTypes.EditorTheme // Тема интерфейса
     mainTab: StoreSettingsTypes.MainTab  // Номер активной главной вкладки
     groupPartTab: StoreSitesTypes.RightMainTab // Номер активной вкладки в Группе
@@ -20,7 +20,7 @@ export type PermanentSettingsCommonType = {
 }
 
 // Тип данных группы
-export type PermanentSettingsGroupType = {
+export type LocalStorageProxyGroupType = {
     groupId: StoreSitesTypes.CurrentSiteId,  // id этой группы
     compOpenedFolders: number[]      // ids открытых папок в компонентах группы
     artOpenedFolders: number[]       // ids открытых папок в статьях группы
@@ -30,10 +30,10 @@ export type PermanentSettingsGroupType = {
     componentType: 'folder' | 'file' // Тип выбранного компонента: папка компонентов или компонент
     articleId: null | number         // id выбранной статьи
     articleType: 'folder' | 'file'   // Тип выбранного элемента: папка или статья
+    tempCompsOpenFoldersIdsInArt: TempCompsTreeType.FolderItemId[], // Массив идентификаторов открытых папок компонентов в редактируемой статье
 }
 
 // Тип данных группы
-export type PermanentSettingsEditType = {
+export type LocalStorageProxyEditType = {
     articleId: null | number      // id редактируемой статьи
-    openCompFoldersIds: TempCompsTreeType.FolderItemId[], // Массив идентификаторов открытых папок компонентов в редактируемой статье
 }
