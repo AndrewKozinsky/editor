@@ -74,6 +74,7 @@ export function useSetHandlersToTrackText() {
         // Поставить обработчик
         $links.$document.addEventListener('input', (e: any) => textChangeHandler(e, resizeHandler))
         $links.$document.addEventListener('paste', (e: any) => textChangeHandler(e, resizeHandler))
+        $links.$document.addEventListener('keydown', preventWrongKeys)
 
         // Set flag that handlers were set
         setHandlerWasSet(true)
@@ -88,9 +89,6 @@ export function useSetHandlersToTrackText() {
 function textChangeHandler(e: any, resizeHandler: () => void) {
     // Ничего не делать если не выбран текстовый компонент
     if (!textManagerStore.textCompId) return
-
-    // Не ставить символ в текстовое поле если нажали недопустимую клавишу
-    preventWrongKeys(e)
 
     // Ставить новый объект истории если требуется
     if (!textManagerStore.newHistoryItemCreated) {
@@ -157,6 +155,17 @@ function getPastedTextInfo(e: any, selection: Selection) {
     //@ts-ignore
     // Вставляемый текст
     let paste = (e.clipboardData || window.clipboardData).getData('text')
+
+    // Все множественные пробелы заменить на одиночные
+    paste = paste.replace( /\s\s+/g, ' ' )
+
+    // Если в начале строки или в конце есть пробелы, то заменить их на &nbsp; потому что иначе они не будут отображаться
+    if (paste.startsWith(' ')) {
+        paste = '\u00A0' + paste.slice(1)
+    }
+    if (paste.endsWith(' ')) {
+        paste = paste.slice(0, -1) + '\u00A0'
+    }
 
     // Если в компоненте уже есть текст, то составить новую строку где будет совмещён существующий и новый текст
     const { anchorOffset, focusOffset } = selection

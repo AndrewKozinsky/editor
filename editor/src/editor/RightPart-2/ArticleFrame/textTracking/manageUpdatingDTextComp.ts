@@ -40,7 +40,7 @@ export function updateDataInTextComp(
         )
 
         // Обновить текущий объект истории
-        store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId) )
+        store.dispatch( articleActions.updateCurrentHistoryItem(compsAndMaxCompId, true) )
     }
 
 

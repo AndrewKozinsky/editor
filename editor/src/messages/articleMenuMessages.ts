@@ -62,8 +62,8 @@ const articleMenuMessages = {
         rus: 'Удалить'
     },
     deleteModalText: {
-        eng: 'This article will be deleted without possibility of restoration',
-        rus: 'Эта статья будет удалена без возможности восстановления'
+        eng: 'This article will be deleted without possibility of restoration.',
+        rus: 'Эта статья будет удалена без возможности восстановления.'
     },
     delete: {
         eng: 'Delete',

@@ -159,20 +159,6 @@ export function canMakeHistoryStep(
 
 
 /**
- * The function checks if an article is saved
- * @param {Number} historyStepWhenWasSave — номер шага когда статья была сохранена.
- * @param historyCurrentIdx
- */
-export function isArticleSave(
-    this: typeof articleManager,
-    historyStepWhenWasSave: number,
-    historyCurrentIdx: number
-) {
-    return historyStepWhenWasSave === historyCurrentIdx
-}
-
-
-/**
  * Функция проверяет можно ли удалить компонент/элемент по переданным координатам
  * @param {Array} dComps — массив компонентов статьи
  * @param {Object} targetCompCoords — координаты компоненте который будут удалять

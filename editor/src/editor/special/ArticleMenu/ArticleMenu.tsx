@@ -5,7 +5,7 @@ import { useIsButtonVisible } from './ArticleMenu-func'
 import Button from 'common/formElements/Button/Button'
 import articleMenuMsg from 'messages/articleMenuMessages'
 import ArticleDataModal from './DataModal/ArticleDataModal'
-import { useIsSaveBtnDisabled, useSaveArticle } from './fn/save'
+import { useSaveArticle } from './fn/save'
 import { useCloseArticle } from './CloseModal/close'
 import useGetShowModal from 'utils/hooksUtils'
 import { useIsMarkupBtnDisabled } from './fn/markup'
@@ -13,6 +13,7 @@ import { ArticleMarkupModal } from './MarkupModal/ArticleMarkupModal'
 import { DeleteArticleConfirmModal } from './DeleteModal/DeleteArticleConfirmModal'
 import { useIsHistoryBtnDisabled, useMakeHistoryStep } from './fn/history'
 import { useIsDataBtnDisabled } from './fn/data'
+import useGetArticleSelectors from 'store/article/articleSelectors'
 
 
 /** Меню в статье */
@@ -34,6 +35,8 @@ export default function ArticleMenuButton() {
 
 /** Выпадающее меню статьи */
 function ArticleMenu() {
+    const { isArticleSaved } = useGetArticleSelectors()
+
     const CN = makeClasses()
 
     // Undo button
@@ -53,7 +56,6 @@ function ArticleMenu() {
     const showData = useGetShowModal(<ArticleDataModal />, 'full')
 
     // Save button functions
-    const isSaveBtnDisabled = useIsSaveBtnDisabled()
     const saveArticle = useSaveArticle()
 
     // Close article button
@@ -97,7 +99,7 @@ function ArticleMenu() {
                     text={articleMenuMsg.save}
                     icon='btnSignSave'
                     onClick={saveArticle}
-                    disabled={isSaveBtnDisabled}
+                    disabled={isArticleSaved}
                 />
                 <Button
                     text={articleMenuMsg.close}

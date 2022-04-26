@@ -97,7 +97,7 @@ function getChildren(elem: Element): HTMLObjArrType.Arr {
 function getText(elem: CharacterData): HTMLObjArrType.Text {
     let preparedString = elem.data
 
-    // Remove all multiple spaces
+    // Все множественные пробелы заменить на одиночные
     preparedString = preparedString.replace( /\s\s+/g, ' ' )
 
     return {

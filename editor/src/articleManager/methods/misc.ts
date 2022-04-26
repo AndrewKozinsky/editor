@@ -24,8 +24,8 @@ export async function saveArticle(
     // Поставить текст текстового компонента в данные если он выделен и его отредактировали
     updateDataInTextComp('common')
 
-    // Set current history step to historyStepWhenWasSave to know what step the article was saved
-    store.dispatch( articleActions.setHistoryStepWhenArticleWasSaved() )
+    // Поставить флаг, что статья сохранена на текущем шаге
+    store.dispatch( articleActions.setArticleIsSaved() )
 
     // Get current history item object
     const historyItem = this.getCurrentHistoryItem(historyArr, historyCurrentIdx)

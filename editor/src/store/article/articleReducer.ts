@@ -43,8 +43,8 @@ export type ArticleReducerType = {
     history: StoreArticleTypes.HistoryItems,
     // Current history point
     historyCurrentIdx: number
-    // A history step when the article was saved
-    historyStepWhenWasSave: number
+    // Сохранена ли статья
+    isArticleSaved: boolean
     // Данные скорректированы (данные статьи соответствуют шаблонам)?
     isArtDataCorrect: boolean
 }
@@ -109,8 +109,8 @@ const stateExample: ArticleReducerType = {
     ],
     // Current history point
     historyCurrentIdx: 0,
-    // A history step when the article was saved
-    historyStepWhenWasSave: 0,
+    // При открытии статья считается сохранённой
+    isArticleSaved: true,
     isArtDataCorrect: false
 }
 
@@ -141,8 +141,8 @@ const initialState: ArticleReducerType = {
     history: [],
     // Current history point
     historyCurrentIdx: 0,
-    // A history step when the article was saved
-    historyStepWhenWasSave: 0,
+    // При открытии статья считается сохранённой
+    isArticleSaved: true,
     isArtDataCorrect: false
 }
 
@@ -326,8 +326,8 @@ function createAndSetHistoryItem(
     return {
         ...state,
         history: historyArr,
-        historyStepWhenWasSave: getSaveStep(),
-        historyCurrentIdx: historyArr.length - 1
+        historyCurrentIdx: historyArr.length - 1,
+        isArticleSaved: false
     }
 
     function createHistoryArr() {
@@ -366,12 +366,6 @@ function createAndSetHistoryItem(
             moveSelectedComp: currentHistoryItem.moveSelectedComp,
         }
     }
-
-    function getSaveStep() {
-        return state.historyStepWhenWasSave > state.history.length
-            ? state.historyStepWhenWasSave - 1
-            : state.historyStepWhenWasSave
-    }
 }
 
 /** Редьюсер заменяет элемент в массиве истории статьи */
@@ -380,14 +374,16 @@ function updateCurrentHistoryItem(
 ): ArticleReducerType {
     const historyArr = [...state.history]
 
-
     const updatedCurrentHistoryItem = {...historyArr[state.historyCurrentIdx]}
-    updatedCurrentHistoryItem.article.dComps = action.payload.components
+    updatedCurrentHistoryItem.article.dComps = action.payload.itemDetails.components
     historyArr[state.historyCurrentIdx] = updatedCurrentHistoryItem
 
     return {
         ...state,
         history: historyArr,
+        // Если передали параметр action.payload.setIsArticleSaved в true, то поставить существующее значение.
+        // Если в false, то поставить false.
+        isArticleSaved: action.payload.setIsArticleSaved ? state.isArticleSaved : false
     }
 }
 
@@ -404,15 +400,15 @@ function makeHistoryStep(state: ArticleReducerType, action: StoreArticleTypes.Ma
 
     return {
         ...state,
-        historyCurrentIdx: newStepNum
+        historyCurrentIdx: newStepNum,
     }
 }
 
-// The function set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved
-function setHistoryStepWhenArticleWasSaved(state: ArticleReducerType, action: StoreArticleTypes.SetHistoryStepWhenArticleWasSavedAction): ArticleReducerType {
+// Функция ставит флаг, что в данный момент статья считается сохранённой
+function setArticleIsSaved(state: ArticleReducerType): ArticleReducerType {
     return {
         ...state,
-        historyStepWhenWasSave: state.historyCurrentIdx
+        isArticleSaved: true
     }
 }
 
@@ -468,8 +464,8 @@ export default function articleReducer(
             return updateCurrentHistoryItem(state, action)
         case StoreArticleTypes.MAKE_HISTORY_STEP:
             return makeHistoryStep(state, action)
-        case StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED:
-            return setHistoryStepWhenArticleWasSaved(state, action)
+        case StoreArticleTypes.SET_ARTICLE_IS_SAVED:
+            return setArticleIsSaved(state)
         case StoreArticleTypes.CLEAR_ARTICLE:
             return clearArticle(state)
         case StoreArticleTypes.SET_IS_ART_DATA_CORRECT:

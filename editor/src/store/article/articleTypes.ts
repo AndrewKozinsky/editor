@@ -154,7 +154,10 @@ namespace StoreArticleTypes {
     export const UPDATE_CURRENT_HISTORY_ITEM = 'UPDATE_CURRENT_HISTORY_ITEM'
     export type UpdateCurrentHistoryItemAction = {
         type: typeof UPDATE_CURRENT_HISTORY_ITEM
-        payload: StoreArticleTypes.CreateNewHistoryItem
+        payload: {
+            itemDetails: StoreArticleTypes.CreateNewHistoryItem,
+            setIsArticleSaved: boolean
+        }
     }
 
     // Action changes a current history step
@@ -165,9 +168,9 @@ namespace StoreArticleTypes {
     }
 
     // Action changes a current history step
-    export const SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED = 'SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED'
-    export type SetHistoryStepWhenArticleWasSavedAction = {
-        type: typeof SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
+    export const SET_ARTICLE_IS_SAVED = 'SET_ARTICLE_IS_SAVED'
+    export type setArticleIsSavedAction = {
+        type: typeof SET_ARTICLE_IS_SAVED
     }
 
     // Очистка статьи
@@ -199,7 +202,7 @@ namespace StoreArticleTypes {
         | CreateAndSetHistoryItemAction
         | UpdateCurrentHistoryItemAction
         | MakeHistoryStepAction
-        | SetHistoryStepWhenArticleWasSavedAction
+        | setArticleIsSavedAction
         | ClearArticleAction
         | SetIsArtDataCorrectAction
 }

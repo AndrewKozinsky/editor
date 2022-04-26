@@ -1,24 +1,30 @@
 import {useEffect, useState} from 'react'
 import useGetArticleSelectors from 'store/article/articleSelectors'
-import {addNewLoadingFile} from '../../../../libs/DragFilesTree/StoreManage/manageState'
 
 export default function useScrollToSelectedLayerAfterClick() {
-    const { $links } = useGetArticleSelectors()
+    const { $links, history } = useGetArticleSelectors()
+
     // Was mouse click handler set?
     const [handlerWasSet, setHandlerWasSet] = useState(false)
-    const $layersWrapper = document.getElementById('layersContentWrapper')
 
     useEffect(function () {
-        if (!$links.$document || handlerWasSet || !$layersWrapper) return
+        if (history.length && !handlerWasSet) {
+            // Обёртка слоёв
+            const $layersWrapper = document.getElementById('layersContentWrapper')
 
-        // Поставить обработчик
-        $links.$document.addEventListener('click', (e) => {
-            scrollToSelectedLayerAfterClick(e, $layersWrapper)
-        })
+            // Поставить обработчик
+            $links.$document.addEventListener('click', (e) => {
+                scrollToSelectedLayerAfterClick(e, $layersWrapper)
+            })
 
-        // Set flag that handlers were set
-        setHandlerWasSet(true)
-    }, [$links, $layersWrapper])
+            setHandlerWasSet(true)
+        }
+        // Если массив истории пуст, то значит статью закрыли. Поэтому нужно поставить
+        // флаг handlerWasSet в false чтобы когда новая обёртка слоёв появится поставить обработчик щелчков
+        else {
+            setHandlerWasSet(false)
+        }
+    }, [history])
 }
 
 /**
@@ -28,13 +34,14 @@ export default function useScrollToSelectedLayerAfterClick() {
  * @param {HTMLElement} $layersWrapper — обёртка всех слоёв
  */
 function scrollToSelectedLayerAfterClick(e: MouseEvent, $layersWrapper: undefined | HTMLElement) {
+    if (!$layersWrapper) return
 
     // Получить координаты относительно начала документа
     // верхней и нижней точки обёртки со слоями и половину видимой высоты обёртки слоёв (из панели Слоёв)
     const layersWrapperCoords = getLayersWrapperCoords($layersWrapper)
     if (!layersWrapperCoords) return
 
-    const {layersTop, layersBottom} = layersWrapperCoords
+    const { layersTop, layersBottom } = layersWrapperCoords
 
     // Получить координаты относительно начала документа верхней и нижней точки обёртки выделенного слоя + сам элемент слоя
     const {$selectedLayer, selectedElemTop, selectedElemBottom} = getSelectedElemCoords()

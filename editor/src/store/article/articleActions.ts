@@ -363,11 +363,15 @@ const articleActions = {
     /**
      * Замена последнего объекта истории на переданный
      * @param {Object} itemDetails — данные для обновления текущего элемента в массиве статей
+     * @param {Boolean} setIsArticleSaved — булево значение сообщающее нужно ли поставить флаг, что статья считается сохраненной после этих исправлений.
      */
-    updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem ) {
+    updateCurrentHistoryItem( itemDetails: StoreArticleTypes.CreateNewHistoryItem, setIsArticleSaved: boolean ) {
         return {
             type: StoreArticleTypes.UPDATE_CURRENT_HISTORY_ITEM,
-            payload: itemDetails
+            payload: {
+                itemDetails,
+                setIsArticleSaved
+            }
         }
     },
 
@@ -382,10 +386,10 @@ const articleActions = {
         }
     },
 
-    /** Action set current historyCurrentIdx value to historyStepWhenWasSave to know what step the article was saved */
-    setHistoryStepWhenArticleWasSaved() {
+    /** Экшен ставит флаг isArticleSaved в true чтобы зафиксировать, что на данном этапе статья считается сохранённой */
+    setArticleIsSaved() {
         return {
-            type: StoreArticleTypes.SET_HISTORY_STEP_WHEN_ARTICLE_WAS_SAVED
+            type: StoreArticleTypes.SET_ARTICLE_IS_SAVED
         }
     },
 

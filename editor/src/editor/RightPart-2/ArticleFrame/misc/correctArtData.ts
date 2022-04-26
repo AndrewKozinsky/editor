@@ -18,7 +18,7 @@ export function useCorrectArticleData() {
 
         // Получить новую версию статью с исправленными данными и заменить текущий объект истории
         const dataToUpdateHistoryStep = articleManager.getCorrectedArticle(article, tempComps)
-        dispatch( articleActions.updateCurrentHistoryItem(dataToUpdateHistoryStep) )
+        dispatch( articleActions.updateCurrentHistoryItem(dataToUpdateHistoryStep, true) )
 
         // Поставить, что данные статьи исправлены и можно их использовать
         dispatch(articleActions.setIsArtDataCorrect(true))

@@ -3,18 +3,15 @@ import { store } from 'store/rootReducer'
 import actions from 'store/rootAction'
 import useGetArticleSelectors from 'store/article/articleSelectors'
 import useGetShowModal from 'utils/hooksUtils'
-import articleManager from 'articleManager/articleManager'
 import CloseArticleConfirmModal from './CloseArticleConfirmModal'
 import fireEvent from 'event/fireEvent'
 
 /** Обработчик кнопки закрытия редактируемой статьи */
 export function useCloseArticle() {
-    const { historyStepWhenWasSave, historyCurrentIdx } = useGetArticleSelectors()
+    const { isArticleSaved } = useGetArticleSelectors()
     const openConfirmCloseModal = useGetShowModal(<CloseArticleConfirmModal />)
 
     return useCallback(function () {
-        const isArticleSaved = articleManager.isArticleSave( historyStepWhenWasSave, historyCurrentIdx )
-
         if (isArticleSaved) {
             // Закрыть статью
             fireEvent({event: 'closeArticle'})
@@ -26,5 +23,5 @@ export function useCloseArticle() {
             openConfirmCloseModal()
         }
 
-    }, [historyStepWhenWasSave, historyCurrentIdx])
+    }, [isArticleSaved])
 }

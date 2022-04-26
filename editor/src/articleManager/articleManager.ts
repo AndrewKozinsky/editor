@@ -60,7 +60,6 @@ import {
     canMoveCompMoveToLeftOrRight,
     has$ElemNested$Elements,
     canMakeHistoryStep,
-    isArticleSave,
     canDeleteElem,
     canMoveItemToUpOrDown,
     canClone, canTagInsertInAnotherTag
@@ -147,7 +146,6 @@ class ArticleManager {
     canComponentPutInElement = canComponentPutInElement
     has$ElemNested$Elements = has$ElemNested$Elements
     canMakeHistoryStep = canMakeHistoryStep
-    isArticleSave = isArticleSave
     canDeleteElem = canDeleteElem
     canMoveItemToUpOrDown = canMoveItemToUpOrDown
     // Можно ли компонент/элемент клонировать и вставить следом
