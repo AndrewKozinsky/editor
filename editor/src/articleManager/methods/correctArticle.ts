@@ -4,17 +4,20 @@ import StoreArticleTypes from 'store/article/articleTypes'
 import { createDeepCopy } from 'utils/miscUtils'
 import articleManager from '../articleManager'
 
+type maxCompIdType = { id: number }
 
 export default function getCorrectedArticle(
     article: ArticleTypes.Article, tComps: TempCompTypes.TempComps
 ): StoreArticleTypes.CreateNewHistoryItem {
     const refDComps: ArticleTypes.Components = []
 
-    iterateOverComponents(article, article.dComps, refDComps, tComps)
+    const maxCompId: maxCompIdType = {id: 1}
+
+    iterateOverComponents(article, article.dComps, refDComps, tComps, maxCompId)
 
     return {
         components: refDComps,
-        maxCompId: article.dMeta.dMaxCompId
+        maxCompId: maxCompId.id
     }
 }
 
@@ -26,12 +29,14 @@ export default function getCorrectedArticle(
  * @param {Array} originDComps — массив оригинальных компонентов
  * @param {Array} refDComps — массив эталонных компонентов
  * @param {Array} tComps — массив шаблонов компонентов
+ * @param {Object} maxCompId — максимальный id данных компонентов в статье
  */
 function iterateOverComponents(
     article: ArticleTypes.Article,
     originDComps: ArticleTypes.Components,
     refDComps: ArticleTypes.Components,
-    tComps: TempCompTypes.TempComps
+    tComps: TempCompTypes.TempComps,
+    maxCompId: maxCompIdType
 ) {
     for (let i = 0; i < originDComps.length; i++) {
         const dCompOrigin = originDComps[i]
@@ -43,10 +48,10 @@ function iterateOverComponents(
             if (!tComp) continue
 
             // Создание эталонной структуры данных, которая должна быть у текущего компонента
-            const refDComp = articleManager.createComponent(article, tComps, tComp.id).compData as  ArticleTypes.Component
+            const refDComp = articleManager.createComponent(maxCompId.id, tComps, tComp.id).compData as  ArticleTypes.Component
 
-            // Поставить dCompId из оригинального компонента
-            refDComp.dCompId = dCompOrigin.dCompId
+            // Поставить максимальный dCompId
+            refDComp.dCompId = maxCompId.id++
 
             // Объект, где хранится  максимальное id элемента данных эталонной структуры
             const maxElemId = {id: 1}
@@ -58,13 +63,16 @@ function iterateOverComponents(
             const matchElemsObj = makeMatchArr([dCompOrigin.dElems], [refDComp.dElems], tComp)
 
             // Сделать соответствие в тегах, атрибутах и детях элементов между оригинальными элементами и эталонными
-            synchronizeElems(matchElemsObj, article, tComps)
+            synchronizeElems(matchElemsObj, article, tComps, maxCompId)
 
             // Поставить новые данные в originDComps
             refDComps.push(refDComp)
         }
         else if (dCompOrigin.dCompType === 'simpleTextComponent') {
-            refDComps.push(dCompOrigin)
+            const textCompCopy = {...dCompOrigin}
+            textCompCopy.dCompId = maxCompId.id++
+
+            refDComps.push(textCompCopy)
         }
     }
 }
@@ -228,8 +236,14 @@ function makeMatchArr(originDElems: ArticleTypes.ComponentElems, refDElems: Arti
  * @param {MatchElemsObjType} matchElemsObj
  * @param {Object} article — данные статьи
  * @param {Array} tComps — массив шаблонов компонентов
+ * @param {Object} maxCompId — максимальный id данных компонентов в статье
  */
-function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleTypes.Article, tComps: TempCompTypes.TempComps) {
+function synchronizeElems(
+    matchElemsObj: MatchElemsObjType,
+    article: ArticleTypes.Article,
+    tComps: TempCompTypes.TempComps,
+    maxCompId: maxCompIdType
+) {
     for (let refTElemId in matchElemsObj) {
         const { originDElems, refDElems, tElem } = matchElemsObj[refTElemId]
 
@@ -261,7 +275,7 @@ function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleType
             // Исправить дочерние компоненты элемента
             if (originDElem.dCompElemChildren?.length) {
                 // Обойти дочерние компоненты элемента
-                iterateOverComponents(article, originDElem.dCompElemChildren, refDElem.dCompElemChildren, tComps)
+                iterateOverComponents(article, originDElem.dCompElemChildren, refDElem.dCompElemChildren, tComps, maxCompId)
             }
         }
     }

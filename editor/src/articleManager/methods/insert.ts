@@ -27,7 +27,7 @@ export function createCompAndSetInElem(
         newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
     }
     else {
-        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+        newCompResult = this.createComponent(article.dMeta.dMaxCompId, tempCompArr, tempCompId)
     }
 
     // Get element which I am going to set the new component
@@ -72,7 +72,7 @@ export function createCompAndSetItNearComp(
         newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
     }
     else {
-        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+        newCompResult = this.createComponent(article.dMeta.dMaxCompId, tempCompArr, tempCompId)
     }
 
     const parentArray = this.getCompParentArray(article.dComps, targetDataCompId)
@@ -122,7 +122,7 @@ export function createCompAndSetInRootOfArticle(
         newCompResult = this.createSimpleTextComponent('', article.dMeta.dMaxCompId + 1)
     }
     else {
-        newCompResult = this.createComponent(article, tempCompArr, tempCompId)
+        newCompResult = this.createComponent(article.dMeta.dMaxCompId, tempCompArr, tempCompId)
     }
 
     // Put the new component in the beginning OR to the end of the components array

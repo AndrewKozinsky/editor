@@ -28,18 +28,18 @@ type MetaObj = { maxCompId: number, maxElemId: number }
 
 /**
  * The function creates a new component data with passed tempCompId
- * @param {Object} article — объект статьи
+ * @param {Number} dMaxCompId — максимальный id статьи
  * @param {Array} tempCompArr — components templates array
  * @param {String} tempCompId — component template id
  */
 export function createComponent(
     this: typeof articleManager,
-    article: ArticleTypes.Article,
+    dMaxCompId: number,
     tempCompArr: TempCompTypes.TempComps,
     tempCompId: TempCompTypes.Id
 ): CreateNewCompResultType {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
-    const metaObj: MetaObj = { maxCompId: article.dMeta.dMaxCompId, maxElemId: 0 }
+    const metaObj: MetaObj = { maxCompId: dMaxCompId, maxElemId: 0 }
 
     const compData: ArticleTypes.Component = {
         dCompType: 'component',
