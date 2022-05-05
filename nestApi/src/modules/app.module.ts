@@ -1,7 +1,7 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common'
 import { join } from 'path'
-import ormconfig from '../ormconfig'
-import { SiteService } from './site/site.service'
+import ormconfig_loc from '../ormconfig_loc'
+import ormconfig_serv from '../ormconfig_serv'
 import { UserModule } from './user/user.module'
 import { SiteModule } from './site/site.module'
 import { TypeOrmModule } from '@nestjs/typeorm'
@@ -18,7 +18,7 @@ import { ArticleModule } from './article/article.module'
 
 @Module({
   imports: [
-      TypeOrmModule.forRoot(ormconfig),
+      TypeOrmModule.forRoot(ormconfig_loc),
       ServeStaticModule.forRoot({
           // String is pointing to /app/src/staticFiles
           rootPath: join(__dirname, '../../src', 'staticFiles'),

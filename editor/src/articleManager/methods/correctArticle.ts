@@ -48,16 +48,18 @@ function iterateOverComponents(
             if (!tComp) continue
 
             // Создание эталонной структуры данных, которая должна быть у текущего компонента
-            const refDComp = articleManager.createComponent(maxCompId.id, tComps, tComp.id).compData as  ArticleTypes.Component
+            const newCompResult = articleManager.createComponent(maxCompId.id, tComps, tComp.id)
+            const refDComp = newCompResult.compData as  ArticleTypes.Component
+            maxCompId.id = newCompResult.maxCompId
 
             // Поставить максимальный dCompId
-            refDComp.dCompId = maxCompId.id++
+            maxCompId.id++
 
-            // Объект, где хранится  максимальное id элемента данных эталонной структуры
+            // Объект, где хранится максимальное id элемента данных эталонной структуры
             const maxElemId = {id: 1}
 
             // Добавление в эталонный компонент повторяющиеся элементы исходя из данных оригинального компонента
-            addRepeatedElems([dCompOrigin.dElems], [refDComp.dElems], maxElemId)
+            addRepeatedElems([dCompOrigin.dElems], [refDComp.dElems], maxElemId, maxCompId)
 
             // Создать массив объектов с соответствием оригинального элемента и эталонного
             const matchElemsObj = makeMatchArr([dCompOrigin.dElems], [refDComp.dElems], tComp)
@@ -83,8 +85,9 @@ function iterateOverComponents(
  * @param {Array} originDElems — элементы оригинального компонента
  * @param {Array} refDElems — элементы эталонного компонента (который создался по актуальному шаблону)
  * @param {Number} maxElemId — максимальный id данных элемента
+ * @param {Object} maxCompId — максимальный id данных компонентов в статье
  */
-function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, maxElemId: {id: number}) {
+function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: ArticleTypes.ComponentElems, maxElemId: {id: number}, maxCompId: maxCompIdType) {
     // Перебор эталонного массива элементов
     for (let i = 0; i < refDElems.length; i++) {
         const refDElem = refDElems[i]
@@ -101,6 +104,10 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
         for (let j = 0; j < amountOfElems - 1; j++) {
             const refDElemCopy = createDeepCopy(refDElem)
             refDElemCopy.dCompElemId = maxElemId.id++
+
+            // Если скопировали элемент с текстовым компонентом, то в копии элемента будут текстовый компонент с одинаковым id данных.
+            // Функция ставит текстовому компоненту новый id данных.
+            updateCompIdInCopiedElem(refDElemCopy, maxCompId)
 
             // Добавить копию после текущего элемента
             refDElems.splice(i + j, 0, refDElemCopy)
@@ -174,9 +181,26 @@ function addRepeatedElems(originDElems: ArticleTypes.ComponentElems, refDElems: 
 
             const originDElemInnerElems = originDElem?.dCompElemInnerElems || []
 
-            addRepeatedElems(originDElemInnerElems, refDElem.dCompElemInnerElems, maxElemId)
+            addRepeatedElems(originDElemInnerElems, refDElem.dCompElemInnerElems, maxElemId, maxCompId)
         }
     }
+}
+
+/**
+ * Функция проходит по всем элементам переданного элемента и ищет текстовый компонент.
+ * Если находит, то задаёт ему новый id данных
+ * @param {Object} refDElem — данные элемента
+ * @param {Object} maxCompId — максимальный id данных компонентов в статье
+ */
+function updateCompIdInCopiedElem(refDElem: ArticleTypes.ComponentElem, maxCompId: maxCompIdType) {
+    articleManager.dElemsEnumeration([refDElem], (dElem) => {
+        if (!dElem.dCompElemChildren?.length) return
+
+        for (let i = 0; i < dElem.dCompElemChildren.length; i++) {
+            const dComp = dElem.dCompElemChildren[i]
+            dComp.dCompId = maxCompId.id++
+        }
+    })
 }
 
 

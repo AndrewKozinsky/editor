@@ -1,10 +1,10 @@
 import { ConnectionOptions } from 'typeorm'
 
-// Не комментируй файл потому что что после раскомментирования ломается entities и migrations
-const config: ConnectionOptions = {
+// Не комментируй файл потому что после раскомментирования ломается entities и migrations
+const config_serv: ConnectionOptions = {
     type: 'postgres',
-    host: 'editor-postgres',
-    port: 5432,
+    host: '194.93.0.199',
+    port: 4000,
     username: 'editor',
     password: 'dt52posQP00P',
     database: 'editor',
@@ -16,4 +16,4 @@ const config: ConnectionOptions = {
     }
 }
 
-export default config
+export default config_serv

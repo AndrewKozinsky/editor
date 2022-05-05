@@ -40,6 +40,7 @@ export function createComponent(
 ): CreateNewCompResultType {
     const tempComp = this.getTemplate(tempCompArr, tempCompId)
     const metaObj: MetaObj = { maxCompId: dMaxCompId, maxElemId: 0 }
+    // debugger
 
     const compData: ArticleTypes.Component = {
         dCompType: 'component',
