@@ -107,15 +107,7 @@ function createCompElements(
 
         elemData.dCompElemChildren = []
 
-        if (tElem.addTextComponent) {
-            const textComponent = createSimpleTextComponent(
-                // Предварительно заменить символы напоминающие пробел обычным пробелом
-                $child.innerText.replace( /\s\s+/g, ' ' ),
-                ++metaObj.maxCompId,
-            )
-
-            elemData.dCompElemChildren.push(textComponent.compData)
-        }
+        addTextComponent($child, tElem, metaObj, elemData)
 
         // Формирование массива вложенных элементов
         const dInnerElems = createCompElements([], $child.children, metaObj, tempComp)
@@ -131,12 +123,36 @@ function createCompElements(
         : null
 }
 
+/**
+ * Функция добавляет текстовый компонент в данные элемента при необходимости
+ * @param {HTMLElement} $child — html-элемент
+ * @param {Object} tElem — объект шаблона элемента
+ * @param {Object} metaObj — данные о максимальном id элемент и компонента
+ * @param {Object} elemData — данные элемента
+ */
+function addTextComponent($child: HTMLElement, tElem: TempCompTypes.Elem, metaObj: MetaObj, elemData: ArticleTypes.ComponentElem) {
+    // Текст элемента
+    // Предварительно заменить символы напоминающие пробел обычным пробелом
+    const elemInnerText = $child.innerText.replace( /\s\s+/g, ' ' )
+
+    // Если в шаблоне указано поставить текстовый компонент
+    // или в элементе из шаблона нет дочерних элементов, но есть текст
+    if (tElem.addTextComponent || $child.children.length === 0 && elemInnerText) {
+        const textComponent = createSimpleTextComponent(
+            elemInnerText,
+            ++metaObj.maxCompId,
+        )
+
+        elemData.dCompElemChildren.push(textComponent.compData)
+    }
+}
+
 
 /**
  * Функция формирует массив атрибутов элемента с пустыми значениями.
  * Если какие-то значения атрибутов помечены отмеченными по умолчанию, то они ставятся в этот массив
  * чтобы при создании нужные значения уже были проставлены
- * @param {Object} tElem — a template element object
+ * @param {Object} tElem — объект шаблона элемента
  */
 function createElemAttribs(tElem: TempCompTypes.Elem): null | ArticleTypes.Attribs {
     if (!tElem.elemAttrs) return null

@@ -254,6 +254,10 @@ function synchronizeElems(matchElemsObj: MatchElemsObjType, article: ArticleType
             // Если они есть у оригинального, то будут заполнены ими. Если нет, то пусть остаётся пустым.
             refDElem.dCompElemChildren = []
 
+            // Если в эталонном элементе есть вложенные элементы, то пропустить дальнейшее исполнение кода итерации
+            // чтобы не добавлять дочерние компоненты если они там есть.
+            if (refDElem.dCompElemInnerElems?.length) continue
+
             // Исправить дочерние компоненты элемента
             if (originDElem.dCompElemChildren?.length) {
                 // Обойти дочерние компоненты элемента
