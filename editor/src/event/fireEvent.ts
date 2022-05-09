@@ -6,6 +6,7 @@ import {cloneSelectedItemIfAllow} from './fn/cloneSelectedItem'
 import { upDownSelectedItemIfAllow } from './fn/upDownSelectedItem'
 import { moveSelectedItemIfAllow } from './fn/moveSelectedItem'
 import {closeArticle} from './fn/closeArticle'
+import { saveArticle } from './fn/saveArticle'
 
 
 export default function fireEvent(eventData: FireDataEventArg) {
@@ -20,6 +21,10 @@ export default function fireEvent(eventData: FireDataEventArg) {
         // Закрытие статьи
         case 'closeArticle':
             closeArticle(eventData)
+            break
+        // Закрытие статьи
+        case 'saveArticle':
+            saveArticle(eventData)
             break
 
         // РАБОТА С ВЫДЕЛЕННЫМ ЭЛЕМЕНТОМ

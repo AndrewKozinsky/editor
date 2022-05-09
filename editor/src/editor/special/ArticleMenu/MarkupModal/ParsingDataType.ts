@@ -66,7 +66,6 @@ export namespace ParsingDataComponents {
 
     // Simple Text component
     export type SimpleTextComponent = {
-        compId: number,
         compType: 'text'
         text: string,
     }

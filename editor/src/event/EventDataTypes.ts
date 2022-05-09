@@ -12,6 +12,10 @@ namespace EventDataTypes {
     export type closeArticle = {
         event: 'closeArticle'
     }
+    // Сохранение статьи
+    export type saveArticle = {
+        event: 'saveArticle'
+    }
 
     // РАБОТА С ВЫДЕЛЕННЫМ ЭЛЕМЕНТОМ
 
@@ -49,6 +53,7 @@ namespace EventDataTypes {
 export type FireDataEventArg =
     EventDataTypes.makeHistoryStep |
     EventDataTypes.closeArticle |
+    EventDataTypes.saveArticle |
     EventDataTypes.deleteSelectedItem |
     EventDataTypes.changeSelectedItemVisibility |
     EventDataTypes.cloneSelectedItem |

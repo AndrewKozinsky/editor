@@ -110,7 +110,6 @@ function getComponentsData(
             if (dComp.dCompLayer?.layerHidden) return
 
             components.push({
-                compId: dComp.dCompId,
                 compType: 'text',
                 text: dComp.text,
             })

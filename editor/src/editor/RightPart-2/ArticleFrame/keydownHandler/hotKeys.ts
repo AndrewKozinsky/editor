@@ -5,6 +5,22 @@ import {
 import {getState} from 'utils/miscUtils'
 import fireEvent from '../../../../event/fireEvent'
 
+/**
+ * Сохранение статьи
+ * @param {Object} e — объект события
+ * @param {Object} pressedKeys — объект с данными о нажатых клавишах
+ */
+export function saveArticle(e: KeyboardEvent, pressedKeys: PressedKeysObj) {
+
+    if (checkPressedKeys(pressedKeys, ['cmd', 's'])) {
+        e.preventDefault()
+
+        // Запустить событие сохранения статьи
+        fireEvent({
+            event: 'saveArticle',
+        })
+    }
+}
 
 /**
  * If you pressed Cmd + Z or Shift + Cmd + Z, then make undo or redo history step in article

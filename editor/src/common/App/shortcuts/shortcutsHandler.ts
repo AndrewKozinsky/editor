@@ -6,6 +6,7 @@ import {
     cloneSelectedItem,
     deleteSelectedItem,
     moveSelectedItem,
+    saveArticle,
     undoRedoArticleHistory,
     upDownSelectedItem
 } from 'editor/RightPart-2/ArticleFrame/keydownHandler/hotKeys'
@@ -37,6 +38,9 @@ function shortcutsHandler(e: KeyboardEvent) {
     closeModal(pressedKeys)
 
     if (getState().settings.mainTab === 1) {
+        // Сохранение статьи
+        saveArticle(e, pressedKeys)
+
         // Making undo or redo history step in article
         undoRedoArticleHistory(e, pressedKeys)
 

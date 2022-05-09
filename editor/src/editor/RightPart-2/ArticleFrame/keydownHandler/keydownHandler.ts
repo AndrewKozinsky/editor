@@ -6,7 +6,7 @@ import {
     changeSelectedItemVisibility,
     cloneSelectedItem,
     deleteSelectedItem,
-    moveSelectedItem,
+    moveSelectedItem, saveArticle,
     undoRedoArticleHistory,
     upDownSelectedItem
 } from './hotKeys'
@@ -32,6 +32,9 @@ function keydownHandler($document: StoreArticleTypes.DocumentLink) {
     return function (e: KeyboardEvent) {
         // Object of pressed keys
         const pressedKeys = getPressedKeys(e)
+
+        // Сохранение статьи
+        saveArticle(e, pressedKeys)
 
         // Making undo or redo history step in article
         undoRedoArticleHistory(e, pressedKeys)
