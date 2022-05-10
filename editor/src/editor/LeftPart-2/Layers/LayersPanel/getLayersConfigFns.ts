@@ -40,26 +40,6 @@ export function getTextComponentName(dTextComp: ArticleTypes.SimpleTextComponent
 }
 
 /**
- * Функция возвращает булево значение скрыт ли слой
- * @param {Array} tComps — массив шаблонов компонентов
- * @param {Object} dComp — данные компонента
- * @param {Object} dElem — данные элемента
- * @returns {boolean}
- */
-export function isHidden(
-    tComps: TempCompTypes.TempComps,
-    dComp: ArticleTypes.MixComponent,
-    dElem?: ArticleTypes.ComponentElem,
-): boolean {
-    if (dComp.dCompType === 'simpleTextComponent') {
-        return dComp.dCompLayer?.layerHidden
-    }
-    else {
-        return dElem.dCompElemLayer?.layerHidden
-    }
-}
-
-/**
  * Функция возвращает функцию-обработчик нажатия на кнопку скрытия/раскрытия слоя
  * @param {Object} historyItem — объект истории статьи
  * @param {Array} tComps — массив шаблонов компонентов
@@ -162,16 +142,18 @@ export function isFlashed(
  * В зависимости от наведения или нажатия и нажата ил CTRL компонент/элемент или подсвечиваются или выделяются.
  * @param {String} actionType — тип действий: наведение или щелчок
  * @param {String} itemType — тип компонента/элемента
- * @param {Number} dCompId — id данных компонента
+ * @param {Object} dComp — данные компонента
  * @param {Number} dElemId — id данных элементе
  * @param {Boolean} isRootElem — является ли элемент корневым
+ * @param {Boolean} isParentItemHidden — скрыт ли родительский слой
  */
 export function getMouseHandler(
     actionType: 'hover' | 'select',
     itemType: 'rootElement' | 'element' | 'textComponent',
-    dCompId: ArticleTypes.Id,
+    dComp: ArticleTypes.Component | ArticleTypes.SimpleTextComponent,
     dElemId: null | ArticleTypes.Id,
-    isRootElem: boolean
+    isRootElem: boolean,
+    isParentItemHidden: boolean
 ) {
     return function (e: React.MouseEvent) {
         // Тип действия изменяется в зависимости от того нажата ли клавиша CTRL
@@ -180,19 +162,25 @@ export function getMouseHandler(
         if (ctrlPressed) {
             if (isRootElem) {
                 const moveType = actionType === 'hover' ? 'moveHover' : 'moveSelect'
-                setFlashRectangle(moveType, 'rootElement', dCompId, dElemId)
+                setFlashRectangle(moveType, 'rootElement', dComp.dCompId, dElemId)
             }
 
             return
         }
 
         // Если щёлкнули по слою текстового компонента, то поставить фокус на текстовый компонент в статье
-        if (itemType === 'textComponent' && actionType === 'select') {
+        if (
+            dComp.dCompType === 'simpleTextComponent' &&
+            actionType === 'select' &&
+            !articleManager.isItemHidden(dComp) &&
+            !isParentItemHidden
+        ) {
             const $iFrameDoc = document.querySelector('iframe').contentWindow.document
-            articleManager.setFocusInTextComponent($iFrameDoc, dCompId)
+            articleManager.setFocusInTextComponent($iFrameDoc, dComp.dCompId)
         }
 
-        setFlashRectangle(actionType, itemType, dCompId, dElemId)
+
+        setFlashRectangle(actionType, itemType, dComp.dCompId, dElemId)
     }
 }
 

@@ -37,6 +37,11 @@ export function useTrackCompSelection() {
             textManagerStore.setInitialText(dTextComp.text)
             textManagerStore.setNewText(dTextComp.text)
 
+            // Ничего не делать если текстовый компонент скрыт или скрыт родительский элемент
+            if (articleManager.isItemHidden(dTextComp) || articleManager.isParentElemHidden(article.dComps, dTextComp, null, false, null)) {
+                return
+            }
+
             // Я столкнулся с проблемой когда при создании текстового компонента и написании туда текста он двоится.
             // Но если текст уже был написан ранее, то такого эффекта не возникает.
             // Как я считаю при создании текстового компонента туда помещается текстовый узел.

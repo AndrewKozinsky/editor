@@ -62,10 +62,12 @@ import {
     canMakeHistoryStep,
     canDeleteElem,
     canMoveItemToUpOrDown,
-    canClone, canTagInsertInAnotherTag
+    canClone,
+    canTagInsertInAnotherTag,
 //     isElemIsRootByDElem,
-//     isParentElemHidden,
+    isParentElemHidden,
 //     hasItemAnotherItem,
+    isItemHidden
 } from './methods/check'
 import {
     moveComponentToRoot,
@@ -153,11 +155,13 @@ class ArticleManager {
     // Проверка является ли элемент корневым
     // isElemIsRootByDElem = isElemIsRootByDElem
     // Проверка скрыт ли родительский компонент/элемент
-    // isParentElemHidden = isParentElemHidden
+    isParentElemHidden = isParentElemHidden
     // Имеет ли компонент/элемент внутри другой компонент/элемент
     // hasItemAnotherItem = hasItemAnotherItem
     // Можно ли один тег ставить в другой
     canTagInsertInAnotherTag = canTagInsertInAnotherTag
+    // Скрыт ли компонент или элемент
+    isItemHidden = isItemHidden
 
     // CREATE
     createArticle = createArticle

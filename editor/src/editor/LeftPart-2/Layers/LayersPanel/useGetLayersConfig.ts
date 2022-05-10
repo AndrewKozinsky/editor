@@ -10,8 +10,7 @@ import {
     getMouseHandler,
     getShowHideLayerHandler,
     getTextComponentName,
-    isFlashed,
-    isHidden
+    isFlashed
 } from './getLayersConfigFns'
 
 /** Хук возвращает массив с конфигурацией слоёв */
@@ -104,7 +103,7 @@ function getElemLayersConfig(
 ) {
     // Тип элемента: корневой или вложенный
     const itemType = isRootElem ? 'rootElement' : 'element'
-    const isThisLayerHidden = isHidden(tempComps, dComp, dElem)
+    const isThisLayerHidden = articleManager.isItemHidden(dComp, dElem)
 
     configArr.push(
         {
@@ -119,10 +118,10 @@ function getElemLayersConfig(
             moveSelected: isFlashed(historyItem, 'moveSelect', dComp, dElem),
             showHideHandler: getShowHideLayerHandler(historyItem, tempComps, dComp, dElem, isRootElem),
             onClickHandler: getMouseHandler(
-                'select', itemType, dComp.dCompId, dElem.dCompElemId, isRootElem
+                'select', itemType, dComp, dElem.dCompElemId, isRootElem, isParentItemHidden
             ),
             onMouseEnterHandler: getMouseHandler(
-                'hover', itemType, dComp.dCompId, dElem.dCompElemId, isRootElem
+                'hover', itemType, dComp, dElem.dCompElemId, isRootElem, isParentItemHidden
             ),
         }
     )
@@ -177,7 +176,7 @@ function getTextLayersConfig(
             type: 'text',
             name: getTextComponentName(dComp),
             parentLayerHidden: isParentItemHidden,
-            hidden: isHidden(tempComps, dComp),
+            hidden: articleManager.isItemHidden(dComp),
             offset,
             hovered: isFlashed(historyItem, 'hover', dComp),
             selected: isFlashed(historyItem, 'select', dComp),
@@ -185,10 +184,10 @@ function getTextLayersConfig(
             moveSelected: isFlashed(historyItem, 'moveSelect', dComp, null),
             showHideHandler: getShowHideLayerHandler(historyItem, tempComps, dComp, null, false),
             onClickHandler: getMouseHandler(
-                'select', 'textComponent', dComp.dCompId, null, true
+                'select', 'textComponent', dComp, null, true, isParentItemHidden
             ),
             onMouseEnterHandler: getMouseHandler(
-                'hover', 'textComponent', dComp.dCompId, null, true
+                'hover', 'textComponent', dComp, null, true, isParentItemHidden
             ),
         }
     )
