@@ -1,4 +1,5 @@
 import StoreSettingsTypes from './settingsTypes'
+import {store} from '../rootReducer'
 
 export type SettingsReducerType = {
     editorLang: StoreSettingsTypes.EditorLang
@@ -98,7 +99,8 @@ export default function settingsReducer(state = initialState, action: StoreSetti
             return setSettingsPanelTab(state, action)
         default:
             // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the settingsReducer')
             return state
     }
 }

@@ -1,4 +1,5 @@
 import StoreModalTypes from './modalTypes'
+import {store} from '../rootReducer'
 
 export type ModalReducerType = {
     isOpen: StoreModalTypes.IsOpen
@@ -41,7 +42,8 @@ export default function modalReducer(state = initialState, action: StoreModalTyp
             return closeModal(state, action)
         default:
             // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the modalReducer')
             return state
     }
 }

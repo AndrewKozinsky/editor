@@ -1,4 +1,5 @@
 import StoreUserTypes from './userTypes'
+import {store} from '../rootReducer'
 
 export type UserReducerType = {
     authTokenStatus: StoreUserTypes.AuthTokenStatusType
@@ -32,8 +33,8 @@ export default function userReducer( state = initialState, action: StoreUserType
         case StoreUserTypes.SET_USER_DATA:
             return setUserData(state, action)
         default:
-            // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the userReducer')
             return state
     }
 }

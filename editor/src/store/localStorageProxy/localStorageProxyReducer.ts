@@ -1,5 +1,6 @@
 import StoreLocalStorageProxyTypes from './localStorageProxyTypes'
 import {LocalStorageProxyGroupType, LocalStorageProxyType} from './localStorageProxyType'
+import {store} from '../rootReducer'
 
 // Изначальные значения
 const initialState: null | LocalStorageProxyType = null
@@ -113,7 +114,8 @@ export default function localStorageProxyReducer(state = initialState, action: S
             return setEdit(state, action)
         default:
             // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the localStorageProxyReducer')
             return state
     }
 }

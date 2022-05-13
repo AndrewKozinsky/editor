@@ -5,6 +5,7 @@ import ArticleTypes from './codeType/articleCodeType'
 import TempCompsTreeType from 'editor/LeftPart-2/TempComps/TempCompsTree/types'
 import articleManager from 'articleManager/articleManager'
 import StoreArticleTypes from './articleTypes'
+import {store} from '../rootReducer'
 
 export type ArticleReducerType = {
     articleId: null | number
@@ -472,7 +473,8 @@ export default function articleReducer(
             return setIsArtDataCorrect(state, action)
         default:
             // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the articleReducer')
             return state
     }
 }

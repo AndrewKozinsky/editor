@@ -1,4 +1,5 @@
 import StoreHelpTypes from './helpTypes'
+import {store} from '../rootReducer'
 
 export type HelpReducerType = {
     helpPanelTab: StoreHelpTypes.HelpPanelTab
@@ -25,8 +26,8 @@ export default function helpReducer(state = initialState, action: StoreHelpTypes
         case StoreHelpTypes.SET_HELP_PANEL_TAB:
             return setHelpPanelTab(state, action)
         default:
-            // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the helpReducer')
             return state
     }
 }

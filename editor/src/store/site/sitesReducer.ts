@@ -1,4 +1,5 @@
 import StoreSitesTypes from './sitesTypes'
+import {store} from '../rootReducer'
 
 export type SitesReducerType = {
     sites: StoreSitesTypes.SitesType
@@ -377,7 +378,8 @@ export default function sitesReducer(
 
         default:
             // @ts-ignore
-            const x: never = null
+            const _: never = action.type
+            // throw new Error('Errow in the sitesReducer')
             return state
     }
 }
