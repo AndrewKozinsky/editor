@@ -161,9 +161,6 @@ function getPastedTextInfo(e: any, selection: Selection) {
     // Вставляемый текст
     let paste = (e.clipboardData || window.clipboardData).getData('text')
 
-    // Все множественные пробелы заменить на одиночные
-    paste = paste.replace( /\s\s+/g, ' ' )
-
     // Если в начале строки или в конце есть пробелы, то заменить их на &nbsp; потому что иначе они не будут отображаться
     if (paste.startsWith(' ')) {
         paste = '\u00A0' + paste.slice(1)

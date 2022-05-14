@@ -58,7 +58,8 @@ export function updateDataInTextComp(
             $textComp.appendChild(newTextNode)
         }
 
-        $textComp.firstChild.textContent = textManagerStore.newText
+        // Оставь это закомментированным пока
+        // $textComp.firstChild.textContent = textManagerStore.newText
     }
     else if (type === 'history') {
         let newText = dTextComp.text

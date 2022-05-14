@@ -41,10 +41,18 @@ function handleTagObject(htmlObj: HTMLObjArrType.Tag, key: number) {
     // Подготовлю атрибуты
     let attribs = fixAttribs(htmlObj, tagName, key)
 
+    if (tagName === 'text-component' && 'text' in htmlObj.children[0]) {
+        // @ts-ignore
+        attribs.dangerouslySetInnerHTML = {
+            __html: htmlObj.children[0].text.replace( /\n/g, '<br />' )
+        }
+    }
+
     // Подготовлю детей
-    let children = (htmlObj.children)
+    let children = (htmlObj.children && tagName !== 'text-component')
             ? createJsxFromComponents(htmlObj.children)
             : null
+
 
     // Верну созданный компонент Реакта
     return React.createElement( tagName, attribs, children )
