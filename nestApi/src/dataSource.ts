@@ -2,7 +2,7 @@ import {DataSource} from 'typeorm'
 
 const isCompiled = __filename.endsWith('.js');
 
-export default new DataSource({
+const data = new DataSource({
     type: 'postgres',
     host: 'editor-postgres',
     port: 5432,
@@ -13,3 +13,5 @@ export default new DataSource({
     migrations: [isCompiled ? 'dist/migrations/*.js' : 'src/migrations/*.ts'],
     synchronize: false,
 })
+
+export default data
