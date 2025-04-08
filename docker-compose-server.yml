@@ -4,8 +4,8 @@ services:
     image: nginx:1.19.7-alpine
     container_name: editor-nginx
     environment:
-      - VIRTUAL_HOST=e.editorium.net
-      - LETSENCRYPT_HOST=e.editorium.net
+      - VIRTUAL_HOST=editor.andrewkozinsky.ru
+      - LETSENCRYPT_HOST=editor.andrewkozinsky.ru
     depends_on:
       - editor
       - nest
