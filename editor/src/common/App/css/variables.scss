@@ -1,0 +1,163 @@
+// Тестовый стиль
+* {
+    //transition: background-color .7s, background .7s, color .7s, fill .7s, stroke .7s;
+}
+
+:root {
+    // БАЗОВЫЕ ЦВЕТА
+    // Части базового цвета (фон редактора)
+    --base-h-part: 215; // Цветовой оттенок
+    --base-s-part: 10%;  // Насыщенность (тускло -> ярко)
+    --base-l-part: 94%; // Светимость (темно -> светло)
+
+    // Базовый цвет
+    --base-color-naked: var(--base-h-part), var(--base-s-part), var(--base-l-part);
+    --base-color: hsl(var(--base-color-naked));
+
+    // Части акцентного цвета
+    --accent-h-part: 215;
+    --accent-s-part: 100%;
+    --accent-l-part: 50%;
+
+    // Акцентный цвет
+    --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    // Акцентный цвет при наведении
+    --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 55%);
+
+    // Части цвета ошибки
+    --error-h-part: 354;
+    --error-s-part: 100%;
+    --error-l-part: 44%;
+
+    // Цвет ошибки
+    --error-color: hsl(var(--error-h-part), var(--error-s-part), var(--error-l-part));
+    // Акцентный цвет при наведении
+    --error-color-hover: hsl(var(--error-h-part), var(--error-s-part), 48%);
+
+
+    // Части цвета успеха
+    --success-h-part: 133;
+    --success-s-part: 87%;
+    --success-l-part: 42%;
+
+    // Цвет успеха
+    --success-color: hsl(var(--success-h-part), var(--success-s-part), var(--success-l-part));
+    // Цвет успеха при наведении
+    --success-color-hover: hsl(var(--success-h-part), var(--success-s-part), 48%);
+
+
+    // ЦВЕТА ТЕКСТА
+    // Цвет основного текста
+    --text-color-naked: var(--base-h-part), var(--base-s-part), 20%;
+    --text-color: hsl(var(--text-color-naked));
+    // Цвет текстозаполнителя
+    --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 55%);
+
+
+    // ЦВЕТА ССЫЛОК
+    // Цвет ссылки
+    --link-color: var(--accent-color);
+
+
+    // ЦВЕТА ЭЛЕМЕНТОВ
+    // Цвет кнопки
+    --button-color: hsl(var(--base-h-part), 10%, 85%);
+    // Наведение на кнопку
+    --button-color-hover: hsl(var(--base-h-part), 10%, 79%);
+
+    // Текстовое поле
+    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 100%);
+
+
+    // ЦВЕТА ФОНА
+    // Цвет фона: первый и второй
+    --bg-color: var(--base-color);
+    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 87%);
+
+
+    // РАЗНОЕ
+    // Цвет при фокусе
+    --focus-color: hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), .9);
+
+    // ЗАКРУГЛЕНИЯ
+    --radius: 2px;
+    --radius-2: 4px;
+}
+
+// Тёмная тема
+.dark-theme {
+    // БАЗОВЫЕ ЦВЕТА
+    // Части базового цвета (фон редактора)
+    --base-h-part: 218; // Цветовой оттенок
+    --base-s-part: 7%;  // Насыщенность (тускло -> ярко)
+    --base-l-part: 22%; // Светимость (темно -> светло)
+
+    // Базовый цвет
+    --base-color-naked: var(--base-h-part), var(--base-s-part), var(--base-l-part);
+    --base-color: hsl(var(--base-color-naked));
+
+    // Части акцентного цвета
+    --accent-h-part: 215;
+    --accent-s-part: 100%;
+    --accent-l-part: 50%;
+
+    // Акцентный цвет
+    --accent-color: hsl(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part));
+    // Акцентный цвет при наведении
+    --accent-color-hover: hsl(var(--accent-h-part), var(--accent-s-part), 45%);
+
+    // Части цвета ошибки
+    --error-h-part: 354;
+    --error-s-part: 100%;
+    --error-l-part: 48%;
+
+    // Цвет ошибки
+    --error-color: hsl(var(--error-h-part), var(--error-s-part), var(--error-l-part));
+    // Цвет ошибки при наведении
+    --error-color-hover: hsl(var(--error-h-part), var(--error-s-part), 44%);
+
+
+    // Части цвета успеха
+    --success-h-part: 133;
+    --success-s-part: 87%;
+    --success-l-part: 42%;
+
+    // Цвет успеха
+    --success-color: hsl(var(--success-h-part), var(--success-s-part), var(--success-l-part));
+    // Цвет успеха при наведении
+    --success-color-hover: hsl(var(--success-h-part), var(--success-s-part), 48%);
+
+
+    // ЦВЕТА ТЕКСТА
+    // Цвет основного текста
+    --text-color-naked: var(--base-h-part), var(--base-s-part), 100%;
+    --text-color: hsl(var(--text-color-naked));
+    // Цвет текстозаполнителя
+    --text-placeholder-color: hsl(var(--base-h-part), var(--base-s-part), 55%);
+
+
+    // ЦВЕТА ССЫЛОК
+    // Цвет ссылки
+    --link-color: var(--accent-color);
+
+
+    // ЦВЕТА ЭЛЕМЕНТОВ
+    // Цвет кнопки
+    --button-color: hsl(var(--base-h-part), 7%, 32%);
+    // Наведение на кнопку
+    --button-color-hover: hsl(var(--base-h-part), 7%, 37%);
+
+    // Текстовое поле
+    --text-input-color: hsl(var(--base-h-part), var(--base-s-part), 15%);
+
+
+    // ЦВЕТА ФОНА
+    // Цвет фона: первый и второй
+    --bg-color: var(--base-color);
+    --bg-color-2: hsl(var(--base-h-part), var(--base-s-part), 30%);
+
+
+    // РАЗНОЕ
+    // Цвет при фокусе
+    --focus-color: hsla(var(--accent-h-part), var(--accent-s-part), var(--accent-l-part), .9);
+}

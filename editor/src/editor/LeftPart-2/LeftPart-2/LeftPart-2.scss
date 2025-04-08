@@ -1,0 +1,33 @@
+$CN: left-part-2;
+
+.#{$CN} {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100px;
+}
+
+.#{$CN}__top {
+    flex-grow: 1;
+    display: grid;
+    grid-template-rows: 33% 33% 34%;
+    gap: 20px;
+    height: 100px;
+    padding: 1.5rem 1.5rem 5.5rem 2rem;
+}
+
+@media (min-height: 700px) {
+    .#{$CN}__top {
+        grid-template-rows: 36% 28% 36%;
+    }
+}
+
+@media (min-height: 900px) {
+    .#{$CN}__top {
+        grid-template-rows: 39% 22% 39%;
+    }
+}
+
+.#{$CN}__bottom {
+
+}

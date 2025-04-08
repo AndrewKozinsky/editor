@@ -1,0 +1,51 @@
+You must get in Docker container first:
+docker exec -it editor-nest sh
+
+Drop the database:
+node --require ts-node/register ./node_modules/typeorm/cli.js schema:drop --config=src/ormconfig.ts
+
+Generate migration files and save them in migration folder:
+node --require ts-node/register ./node_modules/typeorm/cli.js migration:generate --config=src/ormconfig.ts -n CreateSite
+
+Change database by a migration file
+node --require ts-node/register ./node_modules/typeorm/cli.js migration:run --config=src/ormconfig.ts
+
+
+
+// INSIDE POSTGRES DB
+Go to postgres container
+docker exec -it editor-postgres sh
+
+Switch to postgres user
+su postgres
+
+Start psql
+psql
+
+Show databases
+\l
+
+Create editor database
+create database editor;
+
+Users list
+\du
+
+Create user
+create user editor with encrypted password 'dt52posQP00P';
+
+Set all privilegis to editor user
+grant all privileges on database editor to editor;
+
+Go to my database
+\c editor
+
+Show all tables
+\dt
+
+Show table structure
+\d users
+
+
+// INSIDE NEST_API
+docker exec -it nest_api sh

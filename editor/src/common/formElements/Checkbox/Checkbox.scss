@@ -1,0 +1,87 @@
+@import "../../commonStyles/commonStyles";
+
+
+$CN: checkbox;
+
+// Оригинальный флаг
+.#{$CN}-input {
+    position: absolute;
+    opacity: 0;
+}
+
+// Обёртка подписи
+.#{$CN}-label-wrapper {
+    position: relative;
+    display: block;
+    user-select: none;
+    cursor: pointer;
+    transition: opacity .3s;
+    margin-left: 19px;
+
+    &:hover {
+        .#{$CN}__gray-text {
+            opacity: .7;
+        }
+    }
+}
+.#{$CN}-label {
+    display: block;
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+}
+
+// Общие стили псевдофлагов
+.#{$CN}-label-wrapper:before, .#{$CN}-label-wrapper:after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    left: -19px;
+    border-radius: var(--radius);
+}
+
+// Неотмеченный before
+.#{$CN}-label-wrapper::before {
+    top: 1px;
+    background-color: var(--button-color-hover);
+    transition: background-color .13s;
+}
+
+// Отмеченный before
+.#{$CN}-input:checked + .#{$CN}-label-wrapper::before {
+    background-color: var(--accent-color);
+}
+
+// Неотмеченный after
+.#{$CN}-label-wrapper::after {
+    top: -2px;
+    opacity: 0;
+    transition: top .1s, opacity .1s;
+    background-image: url('data:image/svg+xml;utf8,<svg width="14px" height="14px" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g fill="none" fillRule="evenodd" stroke-linecap="round" stroke-linejoin="round"><polyline stroke="rgb(0, 52, 108)" stroke-width="1.6" opacity="0.2" points="4 9 6 11 11 5"></polyline><polyline stroke="white" stroke-width="1.5" points="3.5 7.5 6 9.97900391 10.5 3.97900391"></polyline></g></svg>');
+}
+// Отмеченный after
+.#{$CN}-input:checked + .#{$CN}-label-wrapper::after {
+    opacity: 1;
+    top: 1px;
+}
+
+// Фокусировка
+.#{$CN}-input:focus + .#{$CN}-label-wrapper::before {
+    // Включение стандартной фокусировки
+    @include focus
+}
+
+// Заблокированное поле
+.#{$CN}-input:disabled + .#{$CN}-label-wrapper {
+    opacity: .5;
+}
+
+// Серый текст
+.#{$CN}__gray-text {
+    font-size: 1.3rem;
+    line-height: 1.3rem;
+    font-weight: normal;
+    overflow-wrap: anywhere;
+    opacity: .5;
+    transition: opacity .1s;
+}

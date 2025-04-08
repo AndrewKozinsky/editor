@@ -1,0 +1,30 @@
+$CN: code-check-info;
+
+.#{$CN} {}
+
+.#{$CN}__header {
+    font-weight: bold;
+    
+    & + * {
+        margin-top: 4px;
+    }
+}
+
+.#{$CN}__items-ul {
+    padding: 0 0 0 18px;
+}
+
+.#{$CN}__items-li {
+    list-style: disc;
+
+    &:not(:last-child) {
+        padding-bottom: 4px;
+    }
+}
+
+.#{$CN}__code {
+    font-family: 'Courier New', sans-serif;
+    font-size: 13px;
+    line-height: 19px;
+    overflow: auto;
+}

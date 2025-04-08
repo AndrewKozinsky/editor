@@ -1,0 +1,65 @@
+services:
+  # Nginx
+  nginx:
+    image: nginx:1.19.7-alpine
+    container_name: editor-nginx
+    depends_on:
+#      - editor
+      - nest
+      - postgres
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf.dev:/etc/nginx/nginx.conf
+
+  # Клиентская часть редактора
+  editor:
+    build:
+      context: ./editor
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - nest
+      - postgres
+    container_name: editor-editor
+    command: npm run dev
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./editor/src:/app/src
+
+  # API редактора (Nest)
+  nest:
+    build:
+      context: ./nestApi
+      dockerfile: Dockerfile.dev
+    container_name: editor-nest
+    command: npm run start:dev
+    restart: unless-stopped
+    environment:
+      - MODE=development
+      - PORT=3002
+    depends_on:
+      - postgres
+    volumes:
+      - ./nestApi/src:/app/src
+
+  # Postgres
+  # BD: editor
+  # User: editor
+  # Password: dt52posQP00P
+  postgres:
+    image: postgres:16.2
+    container_name: editor-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: dt52posQP00P
+      POSTGRES_USER: editor
+      POSTGRES_DB: editor
+    ports:
+      - "5432:5432"
+
+
+volumes:
+  dbdata6: {}
+  postgres:

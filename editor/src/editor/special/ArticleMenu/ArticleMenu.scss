@@ -1,0 +1,61 @@
+@import "../../../common/commonStyles/commonStyles";
+
+$CN: article-menu;
+
+.#{$CN}__outer-wrapper {
+    position: relative;
+    display: flex;
+
+    &:hover {
+        .#{$CN}__root {
+            display: flex;
+        }
+
+        .#{$CN}__root {
+            background-color: var(--bg-color);
+        }
+    }
+}
+
+.#{$CN}__main-button {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    cursor: pointer;
+    background-color: var(--bg-color-2);
+    padding: 0 10px;
+    border: none;
+
+    &:hover {
+        background-color: var(--bg-color);
+
+        svg {
+            fill-opacity: 1;
+        }
+    }
+
+    svg {
+        fill-opacity: .8;
+    }
+}
+
+
+.#{$CN}__root {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 100%;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 200px;
+    background-color: var(--bg-color);
+    padding: 15px;
+    border-radius: 0 0 var(--radius) var(--radius);
+    @include big-shadow;
+}
+.#{$CN}__section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

@@ -1,0 +1,123 @@
+$CN: layer;
+
+// Первая обёртка слоя
+.#{$CN} {
+    position: relative;
+    cursor: default;
+}
+.#{$CN}--hidden {
+    opacity: .4;
+}
+
+// Обёртка текста
+.#{$CN}__name-wrapper {
+    display: inline-block;
+    padding: 0 4px;
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+}
+
+.#{$CN}__name-wrapper--comp-hover {
+    background-color: var(--bg-color-2);
+    border-color: var(--bg-color-2);
+}
+.#{$CN}__name-wrapper--comp-select {
+    color: white;
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+.#{$CN}__name-wrapper--comp-move-hover {
+    background-color: var(--bg-color-2);
+    border-color: var(--bg-color-2);
+}
+.#{$CN}__name-wrapper--comp-move-select {
+    color: white;
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+}
+
+.#{$CN}__name-wrapper--elem-hover {
+    border-color: var(--bg-color-2);
+}
+.#{$CN}__name-wrapper--elem-select {
+    border-color: var(--accent-color);
+}
+
+
+// Текст
+.#{$CN}__text {
+    position: relative;
+    z-index: 1;
+    display: inline;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 300;
+    color: var(--text-placeholder-color);
+}
+.#{$CN}__text--bold {
+    font-weight: 500;
+    color: var(--text-color);
+}
+.#{$CN}__text--white {
+    color: white;
+}
+
+// Значок скрытого слоя
+.#{$CN}__hidden-layer-sign {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    fill: var(--text-color);
+}
+
+// Правая часть
+.#{$CN}:hover {
+    .#{$CN}__right-part {
+        display: block;
+    }
+}
+.#{$CN}__right-part {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    display: none;
+    background-color: var(--bg-color);
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -30px;
+        width: 30px;
+        height: 100%;
+        background: linear-gradient(90deg, hsla(215, 10%, 94%, 0) 0%, hsla(215, 10%, 94%, 1) 100%);
+    }
+}
+.#{$CN}__right-part--hover, .#{$CN}__right-part--move-hover {
+    background-color: var(--bg-color-2);
+
+    &:before {
+        background: linear-gradient(90deg, hsla(var(--base-h-part), var(--base-s-part), var(--base-l-part), 0) 0%, var(--bg-color-2) 100%);
+    }
+}
+
+// Кнопка глаза
+.#{$CN}__right-part-btn {
+    cursor: pointer;
+    padding: 4px 5px;
+    margin: 0;
+    border: none;
+    border-radius: var(--radius);
+
+    &:hover {
+        background-color: var(--bg-color-2);
+    }
+}
+
+// Значок на кнопке глаза
+.#{$CN}__right-part-btn-icon {
+    display: block;
+    fill: var(--text-color);
+}

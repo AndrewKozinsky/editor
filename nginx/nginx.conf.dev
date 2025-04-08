@@ -1,0 +1,26 @@
+events {}
+
+http {
+    include mime.types;
+
+    server {
+        listen 80;
+        server_name e.editorium.local;
+
+        location / {
+            proxy_pass http://editor:3000/;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection "upgrade";
+        }
+
+        location /api2 {
+            proxy_pass http://nest:3002;
+            rewrite ^\/api2\/(.*) /$1 break;
+        }
+
+        location /test {
+            return 200 'Hello from Test';
+        }
+    }
+}
