@@ -1,26 +1,29 @@
 services:
   # Nginx
-  nginx:
-    image: nginx:1.19.7-alpine
-    container_name: editor-nginx
-    environment:
-      - VIRTUAL_HOST=editor.andrewkozinsky.ru
-      - LETSENCRYPT_HOST=editor.andrewkozinsky.ru
-    depends_on:
-      - editor
-      - nest
-      - postgres
-    volumes:
-      - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
+#  nginx:
+#    image: nginx:1.19.7-alpine
+#    container_name: editor-nginx
+#    environment:
+#      - VIRTUAL_HOST=editor.andrewkozinsky.ru
+#      - LETSENCRYPT_HOST=editor.andrewkozinsky.ru
+#    depends_on:
+#      - editor
+#      - nest
+#      - postgres
+#    volumes:
+#      - ./nginx/nginx.conf.server:/etc/nginx/nginx.conf
 
   # Клиентская часть редактора
-  editor:
-    build:
-      context: ./editor
-      dockerfile: Dockerfile.prod
-    container_name: editor-editor
-    command: serve /app/dist -l 3000
-    restart: unless-stopped
+#  editor:
+#    build:
+#      context: ./editor
+#      dockerfile: Dockerfile.prod
+#    depends_on:
+#      - nest
+#      - postgres
+#    command: serve /app/dist -l 3000
+#    container_name: editor-editor
+#    restart: unless-stopped
 
   # API редактора (Nest)
   nest:
